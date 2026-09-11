@@ -58,7 +58,7 @@ Which will return a response similar to this:
   "runIds": [],
   "creatorToken": {
     "id": 53044,
-    "description": "ondrej.popelka@keboola.com"
+    "description": "john.doe@keboola.com"
   },
   "uploadParams": {
     "key": "exp-15/1134/files/2016/06/22/192726697.new_file2.csv",

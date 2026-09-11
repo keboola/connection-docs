@@ -56,7 +56,7 @@ docker run --volume=$("pwd"):/data quay.io/keboola/storage-api-cli:latest create
 Any of the above commands will import the contents of `new-table.csv` in the current directory into the newly
 created table. You should see an output similar to this one:
 
-    Authorized as: ondrej.popelka@keboola.com (Odinuv Sandbox)
+    Authorized as: john.doe@keboola.com (Sample Project)
     Bucket found ok
     Table create start
     Table create end
@@ -80,7 +80,7 @@ The above command will import the contents of the `new-data.csv` file into the e
 `--incremental` parameter is supplied, the table contents will be appended. If the parameter is not
 supplied, the table contents will be overwritten. You should see an output similar to this one:
 
-    Authorized as: ondrej.popelka@keboola.com (Tutorial)
+    Authorized as: john.doe@keboola.com (Tutorial)
     Table found ok
     Import start
     Import done in 17 secs.
@@ -107,6 +107,6 @@ docker run --volume=$("pwd"):/data quay.io/keboola/storage-api-cli:latest export
 The above command will export the table from Storage and save it as `old-data.csv` in
 the current directory. You should see an output similar to this one:
 
-    Authorized as: ondrej.popelka@keboola.com (Tutorial)
+    Authorized as: john.doe@keboola.com (Tutorial)
     Table found ok
     Export done in 17 secs.

@@ -106,7 +106,7 @@ configuration of the `keboola.ex-aws-s3` component. You will receive a response 
     "created": "2018-03-08T14:54:19+0100",
     "creatorToken": {
         "id": 27865,
-        "description": "ondrej.popelka@keboola.com"
+        "description": "john.doe@keboola.com"
     },
     "version": 5,
     "changeDescription": "Table first table edited",
@@ -171,7 +171,7 @@ configuration of the `keboola.ex-aws-s3` component. You will receive a response 
             "created": "2018-03-08T14:58:33+0100",
             "creatorToken": {
                 "id": 27865,
-                "description": "ondrej.popelka@keboola.com"
+                "description": "john.doe@keboola.com"
             },
             "changeDescription": "Table first table edited",
             "state": {
@@ -187,7 +187,7 @@ configuration of the `keboola.ex-aws-s3` component. You will receive a response 
         "created": "2018-03-08T23:27:37+0100",
         "creatorToken": {
             "id": 27865,
-            "description": "ondrej.popelka@keboola.com"
+            "description": "john.doe@keboola.com"
         },
         "changeDescription": "Table first table edited"
     }
@@ -323,7 +323,7 @@ A sample result for the AWS S3 extractor looks like this:
         "created": "2018-03-08T14:54:19+0100",
         "creatorToken": {
             "id": 27865,
-            "description": "ondrej.popelka@keboola.com"
+            "description": "john.doe@keboola.com"
         },
         "version": 4,
         "changeDescription": "Table first table edited",
@@ -346,7 +346,7 @@ A sample result for the AWS S3 extractor looks like this:
                 "created": "2018-03-08T14:58:33+0100",
                 "creatorToken": {
                     "id": 27865,
-                    "description": "ondrej.popelka@keboola.com"
+                    "description": "john.doe@keboola.com"
                 },
                 "changeDescription": "Table first table edited",
                 "state": {}
@@ -357,7 +357,7 @@ A sample result for the AWS S3 extractor looks like this:
             "created": "2018-03-08T15:21:28+0100",
             "creatorToken": {
                 "id": 27865,
-                "description": "ondrej.popelka@keboola.com"
+                "description": "john.doe@keboola.com"
             },
             "changeDescription": "Table first table edited"
         }
@@ -448,7 +448,7 @@ which would give you an output similar to the one below:
         "created": "2018-03-08T15:21:28+0100",
         "creatorToken": {
             "id": 27865,
-            "description": "ondrej.popelka@keboola.com"
+            "description": "john.doe@keboola.com"
         },
         "changeDescription": "Table first table edited",
         "isDeleted": false,
@@ -460,7 +460,7 @@ which would give you an output similar to the one below:
         "created": "2018-03-08T14:58:33+0100",
         "creatorToken": {
             "id": 27865,
-            "description": "ondrej.popelka@keboola.com"
+            "description": "john.doe@keboola.com"
         },
         "changeDescription": "Table first table added",
         "isDeleted": false,
@@ -472,7 +472,7 @@ which would give you an output similar to the one below:
         "created": "2018-03-08T14:55:50+0100",
         "creatorToken": {
             "id": 27865,
-            "description": "ondrej.popelka@keboola.com"
+            "description": "john.doe@keboola.com"
         },
         "changeDescription": "AWS Credentials edited",
         "isDeleted": false,
@@ -484,7 +484,7 @@ which would give you an output similar to the one below:
         "created": "2018-03-08T14:54:19+0100",
         "creatorToken": {
             "id": 27865,
-            "description": "ondrej.popelka@keboola.com"
+            "description": "john.doe@keboola.com"
         },
         "changeDescription": "",
         "isDeleted": false,

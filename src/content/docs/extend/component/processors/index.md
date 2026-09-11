@@ -45,7 +45,7 @@ for getting a configuration with ID `365111648` for the component called Email A
     "created": "2018-03-10T08:13:08+0100",
     "creatorToken": {
         "id": 27865,
-        "description": "ondrej.popelka@keboola.com"
+        "description": "john.doe@keboola.com"
     },
     "version": 3,
     "changeDescription": "Update name",
@@ -68,7 +68,7 @@ for getting a configuration with ID `365111648` for the component called Email A
         "created": "2018-03-10T08:16:54+0100",
         "creatorToken": {
             "id": 27865,
-            "description": "ondrej.popelka@keboola.com"
+            "description": "john.doe@keboola.com"
         },
         "changeDescription": "Update name"
     }
