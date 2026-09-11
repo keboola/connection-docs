@@ -13,8 +13,11 @@ It's just as comfortable in your own hands: one tool for every project from the 
 <!-- Source: keboola/cli README + docs. Mirrored into help docs; TODO: repo→docs sync mechanism (Jordan). -->
 
 :::note
-kbagent is a different tool from the legacy **Keboola as Code** CLI (`kbc`) documented on [developers.keboola.com/cli](https://developers.keboola.com/cli/). That tool is still supported for now; new command-line work should use kbagent.
-<!-- TODO(human-review, Jordan): confirm the legacy Keboola-as-Code CLI deprecation timeline and where to state it. -->
+**Looking for Keboola as Code (`kbc`)?** That is a different, older tool — it syncs a project into local
+definition files. It shares no commands, configuration or install path with kbagent, and it is not
+documented here. If you still use it, it lives at [keboola/keboola-as-code](https://github.com/keboola/keboola-as-code).
+
+Everything on this page is about kbagent, the current CLI.
 :::
 
 ## What you can do with it

@@ -38,7 +38,7 @@ If you are uploading the same tables and want to have historical records, this w
 
 When these parameters are set, **save** the configuration.
 
-If you want to add [processors](https://developers.keboola.com/extend/component/processors/) 
+If you want to add [processors](/extend/component/processors/) 
 to the files or tables before the input, you can specify these in the processor configuration window.
 
 ![Screenshot - New row configuration](/components/writers/storage/sftp/rowconfig.png) 
