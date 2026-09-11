@@ -113,8 +113,8 @@ If you want to process the above response, use the
 ## Endpoint
 The endpoint property is **required** and represents the URL of the resource. It can be either of the following:
 
-- URL fragment relative to the [`baseURL` property](/components/extractors/generic-extractor/configuration/api/#baseurl) of the API definition
-- Absolute URL from the domain specified in the [`baseURL` property](/components/extractors/generic-extractor/configuration/api/#baseurl) of the API definition
+- URL fragment relative to the [`baseURL` property](/components/extractors/generic-extractor/configuration/api/#base-url) of the API definition
+- Absolute URL from the domain specified in the [`baseURL` property](/components/extractors/generic-extractor/configuration/api/#base-url) of the API definition
 - Full absolute URL
 
 Assume the following [API definition](/components/extractors/generic-extractor/configuration/api/):
@@ -931,7 +931,7 @@ If you have an API response like this:
 ```
 
 and extract the `members` array with the
-[default settings](/components/extractors/generic-extractor/configuration/config/jobs/#an-object-with-nested-object), two tables will be
+[default settings](/components/extractors/generic-extractor/configuration/config/jobs/#object-with-nested-object), two tables will be
 produced. If you set the response filter to `"responseFilter": "tags"`, then the `tags` property of the `members`
 items will not be processed and will be stored as a [serialized](https://en.wikipedia.org/wiki/Serialization)
 JSON string. The following table will be extracted:
@@ -999,7 +999,7 @@ If you have the following API response:
 ```
 
 and extract the `members` array with the
-[default settings](/components/extractors/generic-extractor/configuration/config/jobs/#an-object-with-a-deeply-nested-object),
+[default settings](/components/extractors/generic-extractor/configuration/config/jobs/#object-with-a-deeply-nested-object),
 two tables will be produced and the `properties` object will be flattened into a sparse table.
 To avoid that, set the response filter to `"responseFilter": "contacts[].properties"`. This will
 leave the `properties` child of the `contacts` array of the `members` array unprocessed.
