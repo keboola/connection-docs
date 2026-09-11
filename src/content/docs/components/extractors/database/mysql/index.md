@@ -124,7 +124,7 @@ underlying [Debezium Schema Change Topic](https://debezium.io/documentation/refe
 
 ### Data Type Mapping
 
-MySQL data types are mapped to [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
+MySQL data types are mapped to [Keboola Base Types](/storage/tables/data-types/#base-types) as follows:
 
 | Source Type | Base Type | Note                                                                 |
 |-------------|-----------|----------------------------------------------------------------------|
@@ -558,7 +558,7 @@ There are two types of masks available:
 The connector masks the length of string columns in the output data. 
 The string is replaced with the specified number of  `*` characters.
 
-See the original [Debezium docs](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-column-mask-with-length-chars).
+See the original [Debezium docs](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-property-column-mask-with-length-chars).
 
 #### Hash Mask
 
@@ -570,7 +570,7 @@ Supported hash functions are described in the [MessageDigest section](https://do
 
 ***Note:** The hashing strategy version 2 is used to ensure fidelity across job runs and configurations.*
 
-See the original [Debezium docs](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-column-mask-hash).
+See the original [Debezium docs](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-property-column-mask-hash).
 
 ### Sync Options
 
