@@ -33,6 +33,8 @@ The full repo guide — stack, structure, commands, and conventions — lives in
   committed, to `public/<section>/` (that's where they render from).
   `scripts/screenshot.mjs` is a local-only helper (gitignored);
   `scripts/shoot.mjs` is **not** gitignored, so don't commit it.
+- **PR titles start with the Linear issue id** (`PRDCT-<id>: …`) so the PR
+  auto-links to its issue; the PR build enforces it. See AGENTS.md → Workflow.
 
 ## Docs authoring (house style)
 
