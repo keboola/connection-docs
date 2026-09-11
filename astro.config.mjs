@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import starlight from '@astrojs/starlight';
 import starlightImageZoom from 'starlight-image-zoom';
@@ -14,7 +15,13 @@ export default defineConfig({
     format: 'directory',
   },
   markdown: {
-    remarkPlugins: [beaconTransforms],
+    // Astro 7 renders Markdown with Sätteri by default, and Sätteri does not run
+    // remark plugins. beaconTransforms IS a remark plugin and produces the whole
+    // Beacon design (check grids, step cards, pseudo-H4s, bold-prefix asides) on
+    // every page — under Sätteri it would go silent with a green build. So we opt
+    // back into the remark/rehype pipeline explicitly instead of relying on the
+    // deprecated top-level `remarkPlugins` shorthand.
+    processor: unified({ remarkPlugins: [beaconTransforms] }),
   },
   integrations: [
     redirectFrom(),
