@@ -1,5 +1,6 @@
 ---
 title: Google Drive
+description: This data destination connector sends tables as CSV files into a single Google Drive account.
 slug: 'components/writers/storage/google-drive'
 redirect_from:
     - /writers/storage/google-drive/

@@ -1,5 +1,6 @@
 ---
 title: /data/out/files manifests
+description: An output file manifest sets options for transferring a file to Storage. The following example lists available manifest fields; all of them are optional.
 slug: 'extend/common-interface/manifest-files/out-files-manifests'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: AWS Signature
+description: Generic Extractor allows signing requests with AWS Signature Version 4. Signing is the process of adding authentication information to your requests.
 slug: 'components/extractors/generic-extractor/configuration/aws-signature'
 redirect_from:
     - /extend/generic-extractor/configuration/aws-signature/

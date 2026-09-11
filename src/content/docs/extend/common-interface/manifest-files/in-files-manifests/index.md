@@ -1,5 +1,6 @@
 ---
 title: /data/in/files manifests
+description: An input file manifest stores metadata about a downloaded file from Storage Files to the component’s working directory.
 slug: 'extend/common-interface/manifest-files/in-files-manifests'
 ---
 

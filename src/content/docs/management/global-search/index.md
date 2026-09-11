@@ -1,5 +1,6 @@
 ---
 title: Global Search
+description: Global Search is an enhancement of the existing search functionality within Keboola.
 slug: 'management/global-search'
 ---
 

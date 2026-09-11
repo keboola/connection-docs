@@ -1,5 +1,6 @@
 ---
 title: S3 Staging
+description: 'Download file data straight from AWS S3 — the s3 section added to input file manifests and the credentials it carries.'
 slug: 'extend/common-interface/manifest-files/in-files-s3-staging'
 ---
 

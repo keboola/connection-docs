@@ -1,5 +1,6 @@
 ---
 title: "Part 3: Writing Data"
+description: This section of our tutorial will walk you through the process of writing data from Keboola to a destination. This step is commonly referred to as reverse ETL.
 slug: 'tutorial/write'
 ---
 

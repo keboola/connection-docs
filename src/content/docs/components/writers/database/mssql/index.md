@@ -1,5 +1,6 @@
 ---
 title: SQL Server
+description: This data destination connector sends data to a Microsoft SQL Server database.
 slug: 'components/writers/database/mssql'
 redirect_from:
     - /writers/database/mssql/

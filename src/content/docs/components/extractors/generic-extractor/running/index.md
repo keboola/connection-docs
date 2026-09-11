@@ -1,5 +1,6 @@
 ---
 title: Running Generic Extractor
+description: Generic Extractor is normally run from within the Keboola user interface.
 slug: 'components/extractors/generic-extractor/running'
 redirect_from:
     - /extend/generic-extractor/running/

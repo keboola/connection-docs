@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting
+description: Debugging connection failures in remote workspaces is often complex because we lack access to the source code.
 slug: 'transformations/dbt/troubleshooting'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: ServiceNow Data Source Connector
+description: This data source connector fetches data from ServiceNow tables. It supports backfill mode and also incremental fetching.
 slug: 'components/extractors/other/servicenow'
 redirect_from:
     - /extractors/other/servicenow/

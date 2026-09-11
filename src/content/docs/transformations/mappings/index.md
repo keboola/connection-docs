@@ -1,5 +1,6 @@
 ---
 title: Input and Output Mapping
+description: To configure input and output mappings in the process of creating a transformation, go to our Getting Started tutorial.
 slug: 'transformations/mappings'
 ---
 

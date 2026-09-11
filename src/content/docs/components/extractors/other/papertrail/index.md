@@ -1,5 +1,6 @@
 ---
 title: Papertrail
+description: 'Import log events matching a search query from Papertrail — app, server, and network logs — into Storage.'
 slug: 'components/extractors/other/papertrail'
 redirect_from:
     - /extractors/other/papertrail/

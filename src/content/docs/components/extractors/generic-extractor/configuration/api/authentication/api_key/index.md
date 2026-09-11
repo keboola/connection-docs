@@ -1,5 +1,6 @@
 ---
 title: API Key Authentication
+description: API Key token authentication sends a token in either a header or query parameter of each API request.
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/api_key'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/api_key/

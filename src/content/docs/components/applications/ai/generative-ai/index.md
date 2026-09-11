@@ -1,5 +1,6 @@
 ---
 title: Generative AI
+description: The Generative AI application allows you to query both OpenAI and Azure OpenAI models using data from your Keboola project.
 slug: 'components/applications/ai/generative-ai'
 redirect_from:
     - /components/applications/ai/open-ai/

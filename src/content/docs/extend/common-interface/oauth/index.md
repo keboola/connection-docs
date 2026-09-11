@@ -1,5 +1,6 @@
 ---
 title: OAuth Interface Specification
+description: OAuth Broker API integration provides a safe way to retrieve stored authorizations.
 slug: 'extend/common-interface/oauth'
 ---
 

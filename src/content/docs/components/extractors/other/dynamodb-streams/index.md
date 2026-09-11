@@ -1,5 +1,6 @@
 ---
 title: DynamoDB Streams
+description: This data source connector downloads data from DynamoDB Streams. It supports back-fill mode and incremental fetching.
 slug: 'components/extractors/other/dynamodb-streams'
 redirect_from:
     - /extractors/other/dynamodb-streams/

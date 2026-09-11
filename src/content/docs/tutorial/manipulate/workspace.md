@@ -1,5 +1,6 @@
 ---
 title: Using a Workspace
+description: An integral aspect of creating a transformation is the development of the script itself. In Keboola, you can use SQL, Python, or R by default.
 slug: 'tutorial/manipulate/workspace'
 ---
 

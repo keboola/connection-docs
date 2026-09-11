@@ -1,5 +1,6 @@
 ---
 title: YourPass
+description: 'Import mobile wallet passes and their events from YourPass into Keboola Storage.'
 slug: 'components/extractors/other/yourpass'
 redirect_from:
     - /extractors/other/yourpass/

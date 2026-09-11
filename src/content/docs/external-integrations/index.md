@@ -1,5 +1,6 @@
 ---
 title: External Integrations
+description: "Keboola's external integration capabilities let you seamlessly extend the platform with your existing tools and workflows."
 slug: 'external-integrations'
 ---
 

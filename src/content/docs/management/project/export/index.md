@@ -1,5 +1,6 @@
 ---
 title: Data Takeout
+description: "Using the Data Takeout feature in Users & Settings, it is possible to export the entire contents of your project."
 slug: 'management/project/export'
 redirect_from:
   - /management/project-export/

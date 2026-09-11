@@ -1,5 +1,6 @@
 ---
 title: Keboola Storage
+description: This data destination connector loads single or multiple tables from your current project into a different Keboola project.
 slug: 'components/writers/storage/storage-api'
 redirect_from:
     - /writers/storage/storage-api/

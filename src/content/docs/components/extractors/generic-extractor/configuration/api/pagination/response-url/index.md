@@ -1,5 +1,6 @@
 ---
 title: Response URL Scroller
+description: The Response URL Scroller can be used with APIs that provide the URL of the next page in the response.
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/response-url'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/response-url/

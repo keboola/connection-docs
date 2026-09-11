@@ -1,5 +1,6 @@
 ---
 title: Keboola Model Context Protocol (MCP) Server
+description: Connect your MCP clients and AI assistants to your Keboola Project and give them the powers of a Keboola Expert user.
 slug: 'ai/mcp-server'
 redirect_from:
     - /external-integrations/mcp-server/

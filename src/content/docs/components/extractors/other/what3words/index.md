@@ -1,5 +1,6 @@
 ---
 title: What3words Augmentation
+description: This data source connector allows you to translate what3words addresses to coordinates and vice versa.
 slug: 'components/extractors/other/what3words'
 redirect_from:
     - /extractors/other/what3words/

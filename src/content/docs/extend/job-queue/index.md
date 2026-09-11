@@ -1,5 +1,6 @@
 ---
 title: Job Queue
+description: Job Queue is a core Keboola Service, which provides an interface for running Keboola components. Every component in Keboola is represented by a Docker image.
 slug: 'extend/job-queue'
 redirect_from:
     - /extend/docker-runner/

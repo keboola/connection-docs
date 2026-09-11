@@ -1,5 +1,6 @@
 ---
 title: Page Number Scroller
+description: 'Page through an API by page number — the Page Number scroller''s parameters, and when to use it instead of item offsets.'
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/pagenum'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/pagenum/

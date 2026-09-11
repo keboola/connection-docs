@@ -1,5 +1,6 @@
 ---
 title: Trigger Applications
+description: Triggers are applications that generate an action in a specified service.
 slug: 'components/applications/triggers'
 redirect_from:
     - /applications/triggers/

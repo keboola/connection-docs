@@ -1,5 +1,6 @@
 ---
 title: Google Analytics 4 (GA4)
+description: This data source connector allows you to integrate your Google Analytics 4 data into the Keboola environment.
 slug: 'components/extractors/marketing-sales/google-analytics'
 redirect_from:
     - /extractors/marketing-sales/google-analytics/

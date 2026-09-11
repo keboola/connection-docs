@@ -1,5 +1,6 @@
 ---
 title: Google Search Console
+description: This data source connector allows you to extract statistics and site data of domains linked to your Google account using the Google Search Console API.
 slug: 'components/extractors/other/google-search-console'
 redirect_from:
     - /extractors/other/google-search-console/

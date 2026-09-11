@@ -1,5 +1,6 @@
 ---
 title: Email Attachments
+description: This data source connector allows you to import data from email attachments to Keboola.
 slug: 'components/extractors/communication/email-attachments'
 redirect_from:
     - /extractors/communication/email-attachments/
