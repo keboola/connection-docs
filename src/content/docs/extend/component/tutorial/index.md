@@ -100,18 +100,20 @@ you can create a component, the most convenient way is to use one of our templat
 pip install cookiecutter
 ```
 
+<!-- VERIFY(owner): cookiecutter prompts verified against keboola/cookiecutter-python-component cookiecutter.json, 2026-09-02. template_variant is now __template_variant (computed, not prompted); component_short_description and component_long_description no longer exist as prompts. -->
 **Usage**
 
 1. Run ```bash
 cookiecutter gh:keboola/cookiecutter-python-component```
 2. Fill in requested parameters:
-    - `template_variant` - Where is your empty repository (Github, Bitbucket)
-    - `repository_url` - (OPT) URL of your repository, if filled in the template git repository is initialised and remote set to your repository.
+    - `repository_url` - (OPT) URL of your repository. If filled in, the template git repository is initialised and its remote set to your repository.
     - `component_name` - Name of your component
-    - `repository_folder_name` - (OPT) Name of the destination folder. By default normalized component name.
-    - `component_short_description` - (OPT) short description that will be pushed to Developer Portal. May be edited in `component_config/component_short_description.md` later.
-    - `component_long_description` - (OPT) long description that will be pushed to Developer Portal. May be edited in `component_config/component_long_description.md` later.
-3. Set up CI environment variables (see the [CI Setup section](## CI Setup))
+    - `dev_portal_vendor_name` - Your vendor ID in the Developer Portal
+    - `dev_portal_component_id` - The component ID to register. Defaults to the normalized component name.
+    - `repository_folder_name` - (OPT) Name of the destination folder. By default `component-<normalized component name>`.
+
+    Short and long descriptions are not prompted for — edit `component_config/component_short_description.md` and `component_config/component_long_description.md` in the generated repository.
+3. Set up CI environment variables (see [CI Setup](#ci-setup) below)
 4. Navigate to newly created folder and run `git push`. The CI pipeline (action) should be now executed. If you add a tag to the commit, component will be pushed to your Developer Portal.
 5. Modify the code in `src/component.py` and `src/configuration.py` as you like.
     - You can set the configuration parameters in `data/config.json`
