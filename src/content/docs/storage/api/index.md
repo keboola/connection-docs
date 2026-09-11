@@ -9,7 +9,7 @@ redirect_from:
 
 If you are new to Keboola, you should make yourself familiar with
 the [Storage component](/storage/) before you start using it.
-For a general introduction to working with Keboola APIs, see the [API Introduction](/overview/api/).
+For a general introduction to working with Keboola APIs, see the [API Introduction](/overview/#apis-and-service-endpoints).
 [Storage API](https://api.keboola.com/?service=storage) provides a number of functions. These are the most important ones:
 
 - [Component configurations](https://api.keboola.com/?service=storage#tag--Component-Configurations)

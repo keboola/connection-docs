@@ -52,7 +52,7 @@ When running the request with valid parameters, you should receive a response si
 }
 ```
 
-This means an [asynchronous job](/integrate/jobs/) for preparing the archive has been created.
+This means an [asynchronous job](/management/jobs/api/) for preparing the archive has been created.
 If curious, view the job progress under **Jobs** in Keboola.
 When the job finishes, you'll see a `stage_0.zip` file uploaded to your project.
 

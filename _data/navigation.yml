@@ -104,6 +104,9 @@ items:
       - url: /flows/flow-migration-guide/
         title: Migration Guide
 
+      - url: /flows/schedule-api/
+        title: Schedule via the API
+
   - url: /data-apps/
     title: Apps
     items:
@@ -808,6 +811,9 @@ items:
 
       - url: /management/jobs/
         title: Jobs
+        items:
+          - url: /management/jobs/api/
+            title: Jobs API
 
       - url: /management/notifications/
         title: Notifications
@@ -928,6 +934,11 @@ items:
             title: Configuration File
           - url: /extend/common-interface/environment/
             title: Environment
+          - url: /extend/common-interface/artifacts/
+            title: Artifacts
+            items:
+              - url: /extend/common-interface/artifacts/tutorial/
+                title: Tutorial
           - url: /extend/common-interface/manifest-files/
             title: Manifest Files
             items:
@@ -947,6 +958,8 @@ items:
                 title: OUT files
           - url: /extend/common-interface/oauth/
             title: OAuth2
+          - url: /extend/common-interface/encryption/
+            title: Encryption
           - url: /extend/common-interface/actions/
             title: Actions
           - url: /extend/common-interface/logging/

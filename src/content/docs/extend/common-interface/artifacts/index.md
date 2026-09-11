@@ -1,0 +1,136 @@
+---
+title: Artifacts
+slug: 'extend/common-interface/artifacts'
+description: "What artifacts are, the extra files a component produces or consumes, and how they pass between jobs in a project. Preview feature."
+redirect_from:
+    - /integrate/artifacts/
+---
+
+<!-- Reference-type page. Moved from developers.keboola.com/integrate/artifacts/ (PRDCT-582). Folder paths and the 1 GB limit verified against keboola/job-queue libs/artifacts (2026-06-22 audit, PRDCT-368). One correction from that audit applied: the shared-artifacts configuration key is `shared`, as in job-queue's Artifacts.php, not `orchestration`. -->
+
+*Note: This is a preview feature and as such may change considerably in the future.* Artifacts work only in
+projects with the `artifacts` feature enabled; ask [support](mailto:support@keboola.com) to enable it.
+<!-- The feature flag is code-confirmed: docker-bundle src/Docker/Runner.php checks in_array('artifacts', $tokenInfo['owner']['features']) before download and upload. VERIFY(owner): is "preview" still the right status (2026-09-09 review)? -->
+
+**Artifacts** are additional files that can be produced or consumed by a [component](/extend/component). 
+
+See [Tutorial](/extend/common-interface/artifacts/tutorial/) for step-by-step example.
+
+## Introduction
+In some cases it's useful if a component not only extracts, transforms or uploads data, but also generate some other output, metadata or other runtime-discovered data.
+These could be for example:
+- AI models
+- performance graphs of such models
+- status updates from long-running tasks
+- documentation
+- data quality checks from in-progress tasks
+
+These additional information can be stored in artifacts and processed by another component or 3rd party tool.
+
+## Storage
+Artifacts are stored in Keboola File Storage.
+
+## Types of artifacts
+There are three types of artifacts for now `runs`, `custom` and `shared`. 
+The type specifies which components will have access to the artifact or which artifacts to download for the component to process.
+Types are used in a configuration of a consumer component to specify which artifacts to download. 
+
+- **runs** - artifacts from previous runs of the same configuration
+
+- **custom** - artifacts from previous runs of a different configuration. The configuration which produced the artifacts will be defined in the consumer configuration (`config_id`, `component_id` and `branch_id` in the `filter` node)
+
+- **shared** - artifacts shared within an orchestration
+<!-- VERIFY(owner): do shared artifacts also work between tasks of a Conditional Flow (keboola.flow), or only within a Legacy Flow run? Not checkable from public sources (2026-09-09 review). -->
+
+`runs` and `custom` types are the same from the producer point of view. To produce a `shared` artifact, it has to be written into a `shared` folder. Read more in [File structure](#file-structure) section.
+
+## File structure
+Artifact is a unique set of files associated with a successful job, component and configuration.
+A component can either produce or consume artifacts or both.
+
+### Produce
+To produce an artifact, store one or more files in the following `output` directories. Subdirectories are also supported.
+- `/data/artifacts/out/current` to create an artifact of type `runs` / `custom`. 
+- `/data/artifacts/out/shared` to create an artifact of type `shared`, which can be accessed by any component within the same orchestration.
+
+After the component job is finished all files and directories inside `current` and `shared` folders will be compressed into an archive and uploaded to File Storage with corresponding tags as a `artifact`.
+
+### Consume
+To consume created artifacts you have to specify, in the configuration of a component, which artifacts (type) to download.
+ - `runs` to download artifacts produced by the same configuration and component. These will be stored in `/data/artifacts/in/runs/jobId-%job_id%/` directory.
+ - `custom` to download artifacts produced by another configuration or component. These will be stored in `/data/artifacts/in/custom/jobId-%job_id%/` directory.
+ - `shared` to download artifacts created within the same orchestration by any artifact producing component that has already finished. These will be stored in `/data/artifacts/in/shared/jobId-%job_id%/` directory.
+
+## Configuration
+Each type of artifact has its own node in the configuration, and each node has an `enabled` switch.
+Enable one type per job: the job runner downloads the first enabled type in the order `runs`, `custom`,
+`shared` and ignores the others.
+<!-- Source: keboola/artifacts src/Artifacts.php download() returns after the first enabled type (runs, then custom, then shared); docker-bundle src/Docker/Runner.php calls it once per job. Replaces the dev-site claim that all types can be used simultaneously (2026-09-09 review). -->
+
+### Runs
+ - **enabled** [true|false] - enable or disable download of this artifact type
+ - **filter** 
+   - **date_since** - only artifacts from jobs younger than this will be downloaded
+   - **limit** - maximum number of the latest jobs from which to download artifacts 
+
+### Custom
+- **enabled** [true|false] - enable or disable download of this artifact type
+- **filter**
+    - **branch_id**, **component_id**, **config_id**  - specify the configuration to download artifacts from
+    - **date_since** - only artifacts from jobs younger than this will be downloaded
+    - **limit** - maximum number of the latest jobs from which to download artifacts
+
+### Shared
+- **enabled** [true|false] - enable or disable download of this artifact type
+
+Full configuration example with all artifact types:
+
+```json
+{
+  "parameters": {},
+  "artifacts": {
+    "runs": {
+      "enabled": true,
+      "filter": {
+        "date_since": "-7 days",
+        "limit": 5
+      }
+    },
+    "custom": {
+      "enabled": false,
+      "filter": {
+        "component_id": "keboola.python-transformation-v2",
+        "config_id": "12345",
+        "branch_id": "default",
+        "date_since": "-7 days",
+        "limit": 5
+      }
+    },
+    "shared": {
+      "enabled": false
+    }
+  }
+}
+```
+
+## Artifacts life-cycle in a job
+Job runner checks if the project has enabled `artifacts` feature.
+Job runner checks the configuration of the component.
+If artifacts are enabled, it downloads artifacts to corresponding folders as configured (i.e. `runs`, `custom`, `shared`) and unzips them.
+
+Component process start and the component can:
+
+- access and process the downloaded artifacts in shared or custom directory
+
+- write  artifacts to `current` or `shared` directory
+
+Component finishes and job runner does:
+
+- archives the contents of `out/current` (and of `out/shared`, if the component wrote there)
+
+- tags the archive `artifact`, `branchId-…`, `componentId-…`, `configId-…` and `jobId-…`; a shared archive also gets `shared` and `orchestrationId-…`
+
+- uploads it to File Storage 
+
+## File size limit
+All the artifacts produced by a job shouldn’t be bigger than 1 GB.

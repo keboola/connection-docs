@@ -69,7 +69,7 @@ configuration section:
 }
 ```
 
-The `password` property is prefixed with the hash mark `#`, meaning the value will be [encrypted](/overview/encryption/) once
+The `password` property is prefixed with the hash mark `#`, meaning the value will be [encrypted](/extend/common-interface/encryption/) once
 you save the configuration.
 
 ### Endpoint Section

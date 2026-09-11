@@ -46,7 +46,7 @@ This section shows how the code generation process works from start to end:
 ## Generate Action
 There are two types of component actions: 
 
-- [Asynchronous, background](/integrate/jobs/) **run** actions
+- [Asynchronous, background](/management/jobs/api/) **run** actions
 - [Synchronous actions](/extend/common-interface/actions/) with limited execution time
 
 Code patterns do not implement the **run** action. They only implement the **generate** [synchronous action](/extend/common-interface/actions/).

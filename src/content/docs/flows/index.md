@@ -3,6 +3,8 @@ title: Conditional Flows
 slug: 'flows'
 redirect_from:
     - /flows/conditional-flows/
+    - /automate/
+    - /integrate/orchestrator/
 ---
 
 Flows allow you to build automated data pipelines with conditional logic, branching, retries, and robust error handling. You can define flows that react to the outcome of previous steps, dynamically control their next action, or even skip tasks entirely.
@@ -50,7 +52,7 @@ Select a task in the Builder to open its settings.
 
 - Failure handling is expressed through [conditions](#conditions) instead of a "Continue on Failure" toggle — you can branch on task or phase status (e.g., `if status == 'error' then ...`) to send notifications, run fallback logic, or end the flow. To let selected tasks fail while the rest of the phase must succeed, use the [Continue on Failure](#4-continue-on-failure) condition subject. See also [Retry](#retry) for automatic retries of failed tasks.
 
-- To modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**.
+- To modify the parameters sent to the underlying [API call](/management/jobs/api/#run-a-job), you can set **Task Parameters**.
 Select the task and click **Set advanced parameters**. When finished, click **Set**. A common use is
 overriding a [variable](/components/variables/#task-parameters-on-a-single-task) for that one task.
 
@@ -248,6 +250,8 @@ click **Set Up Schedule**. The dialog works in UTC and previews the next runs be
 **Triggers:** Set flows to automatically start when certain Storage tables are updated (ideal for managing dependencies across projects). Your projects will stay synchronized and run efficiently.
 
 *Note on Triggers: If table updates happen during the cool-down period, the trigger is suppressed, but the tables are marked as ready. Therefore, if all configured tables are updated during the cool-down period, the flow is not scheduled at that time — but once the cool-down expires and any table is updated (causing the trigger to be evaluated), the system recognizes that all tables are already up to date and runs the flow immediately.*
+
+To schedule any configuration, or a single configuration row, through the API, see [Schedule via the API](/flows/schedule-api/).
 
 ## Check Run History
 

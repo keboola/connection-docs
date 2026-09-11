@@ -9,10 +9,10 @@ redirect_from:
 
 
 **Variables** are placeholders used in [configurations](/storage/api/configurations/). Their value is 
-resolved at [job runtime](/integrate/jobs/). 
+resolved at [job runtime](/management/jobs/api/). 
 
 **Important:** Make sure you're familiar with the [Configuration API](/storage/api/configurations/) and 
-the [Job API](/integrate/jobs/) before reading on.
+the [Job API](/management/jobs/api/) before reading on.
 
 See [Tutorial](/components/variables/api/tutorial) for step-by-step example.
 

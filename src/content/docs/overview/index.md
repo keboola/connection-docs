@@ -1,6 +1,11 @@
 ---
 title: Keboola Overview
 slug: 'overview'
+description: "What Keboola is and how its parts fit together: deployment options, architecture, governance, extending the platform, and the terms you meet everywhere, including stacks, jobs, tokens and the APIs."
+redirect_from:
+    - /integrate/
+    - /overview/repositories/
+    - /overview/api/
 ---
 
 
@@ -159,10 +164,33 @@ A stack is an entirely independent, full instance of Keboola platform services. 
 multiple Keboola accounts.
 
 Each stack uses a different network with a different set of **dedicated** [IP addresses](/components/ip-addresses/). 
-Our [developer documentation](https://developers.keboola.com/overview/api/#stacks-and-endpoints) describes how to handle multiple stacks 
-when working with the API in more detail.
+How API endpoints follow the stack is described [below](#apis-and-service-endpoints).
 
 Single-tenant stacks are available for a single enterprise customer with a domain name in the form `connection.CUSTOMER_NAME.keboola.com`.
+
+### APIs and service endpoints
+Every Keboola service has a public API. The documentation portal at [api.keboola.com](https://api.keboola.com/) 
+covers the US Virginia AWS stack; every other stack has its own portal on the same pattern, and a token only 
+works against the portal of its own stack:
+
+| Stack | API documentation portal |
+|---|---|
+| US Virginia AWS | [api.keboola.com](https://api.keboola.com/) |
+| US Virginia GCP | [api.us-east4.gcp.keboola.com](https://api.us-east4.gcp.keboola.com/) |
+| EU Frankfurt AWS | [api.eu-central-1.keboola.com](https://api.eu-central-1.keboola.com/) |
+| EU Ireland Azure | [api.north-europe.azure.keboola.com](https://api.north-europe.azure.keboola.com/) |
+| EU Frankfurt GCP | [api.europe-west3.gcp.keboola.com](https://api.europe-west3.gcp.keboola.com/) |
+
+Most calls take a [Storage API token](/management/project/tokens/) in the `X-StorageApi-Token` header and 
+exchange JSON. Each service runs on its own host inside the stack, such as `queue.keboola.com` or 
+`encryption.eu-central-1.keboola.com`. Use the hosts of your own stack: a token-authenticated call to 
+another stack's host answers with an invalid-token error. 
+The authoritative list of service URLs for your stack is the [Storage API](https://api.keboola.com/?service=storage) 
+index call, `GET /v2/storage` (no token needed), in its `services` array. For tooling and AI agents, each portal also publishes a machine-readable index at 
+`https://api.<stack domain>/apis.json`. It lists the services the portal documents, not every service in the 
+stack, each with its `apiUrl` and a link to its OpenAPI specification; use `apiUrl` from the index as the base 
+URL rather than the `servers` inside the spec, and take `openApiSpecUrl` exactly as given. A [Postman collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest) 
+holds sample requests; for a worked call, see [running a job through the API](/management/jobs/api/).
 
 ### Jobs
 Most things in the Keboola platform are done using the batch approach; when you perform an action, a [job](/management/jobs/) is created and executed 
