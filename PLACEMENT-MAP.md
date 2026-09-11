@@ -1,0 +1,287 @@
+# PLACEMENT MAP — developers-docs → help.keboola.com (GitHub method)
+
+**Step A deliverable (read-only proposal). Nothing has been moved.**
+End-state: topic-integrated — former dev pages become normal peers in their topic
+sections; no dev grouping. Every old dev URL gets a 301 to its target.
+
+Coverage: **175/175** dev pages mapped (161 high / 13 med / 1 flag). Source: `devdocs/main` @429efb38.
+
+## NEW sections proposed
+| section | why |
+|---|---|
+| **Core concepts** (`/concepts/`) | Jordan (Jul-15): jobs, components-as-concept, multi-project are concepts, not features; today they hide under Management/Catalog. Start with `/concepts/jobs/` (+ api-basics if approved). |
+| ~~**Components › Development** (`/components/development/`)~~ **superseded** → **Extending Keboola** (`/extend/`) | Jordan approved `/extend/` as its own top-level section instead (#1046, merged 2026-07-29, commit `8504c9dd`). Dev `/extend/**` paths are preserved 1:1, so these are identity redirects across domains. |
+| **Storage › Storage API** (`/storage/api/`) | Storage owns its API reference + clients. |
+| ~~**CLI › Keboola as Code CLI** (`/cli/keboola-as-code/`)~~ **dropped** | David, 2026-09-02: the 59 legacy CLI pages are **not** ported into help. A move into the tool's own repository was proposed (keboola-as-code#2654) and **rejected by the repo owner on 2026-09-03**, so no documentation destination exists at all: the dev URLs 301 to the repository root, and the pages themselves survive only in developers-docs git history (deletion PR: keboola/developers-docs#417). Known loss, recorded deliberately: end-user installation instructions (brew tap, apt/rpm/apk with GPG keys, WinGet, Chocolatey, Scoop, MSI) exist nowhere else, and 21 of the CLI's 68 embedded help texts are empty — including all six `dbt` and all five `remote workspace` commands.|
+
+## Owner calls — topic homes (post-retirement, PRDCT-550)
+
+These no longer gate the dev-domain retirement: connection-docs#1120 merged the eight pages into their topic homes (Jobs API under Management › Jobs, Encryption and Artifacts under Common Interface, Scheduler API under Flows, the API overview folded into `/overview/`), so six of the seven calls are settled; only `/extend/job-queue/` remains, and it already sits under `/extend/`.
+| page | question |
+|---|---|
+| `/overview/api/` | split: stacks/intro → Core concepts vs per-service catalogue → api.keboola.com redirect. How much survives as a page? |
+| `/extend/job-queue/` | Components › Development vs Core concepts › Jobs (it's the run-components API). |
+| `/integrate/artifacts/` | Components › Development vs Storage › Files. |
+| `/automate/run-job` | Core concepts › Jobs vs Management › Jobs how-to. |
+| `/automate/set-schedule` | Flows vs Management (schedules are set on configs, not only flows). |
+| `/overview/encryption/` | Components › Development vs a future security/concepts home. |
+| `/integrate/jobs/` MERGE depth | keep as own concept page + cross-link `/management/jobs/`, or fold the two into one? Conflicting-facts check needed before any fold. |
+| **`/cli/**` — the 59 Keboola-as-Code pages** (new, 2026-08-19) | The `/cli/keboola-as-code/` home these rows target exists in no branch and no open PR: phase-1 (#1027) was closed, and #1015 gave `/cli/` to **kbagent** instead. Meanwhile `cli/index.md` still sends readers to the live `developers.keboola.com/cli/` for the legacy tool. So retiring the dev domain today drops 59 pages *and* breaks that pointer. Needs the KaC deprecation call (already flagged as `TODO(human-review, Jordan)` on the CLI page): port them under `/cli/keboola-as-code/`, or declare them end-of-life and 301 the lot to `/cli/`? |
+
+## Placement table
+
+| source | old URL | target section | target path | Diátaxis | conf | dedup |
+|---|---|---|---|---|---|---|
+| `404.md` | `/404.html` | — (site chrome, dies with dev site) | `—` | — | high | NOT MIGRATED — help has its own 404 |
+| `automate/index.md` | `/automate/` | — (landing dies) | `/flows/` | — | med | REDIRECT → /flows/ (automation home) — thin landing |
+| `automate/run-job.md` | `/automate/run-job/` | Management › Jobs | `/management/jobs/api/` | how-to | med | REDIRECT — MERGED (2026-09-09, #1120) into Jobs API › Run a job; duplicate of the same call |
+| `automate/run-orchestration.md` | `/automate/run-orchestration/` | Management › Jobs | `/management/jobs/api/` | how-to | med | REDIRECT — MERGED (2026-09-09, #1120) into Jobs API › Run a flow; false one-component claim corrected |
+| `automate/set-schedule.md` | `/automate/set-schedule/` | Flows | `/flows/schedule-api/` | how-to | med | MOVED + compressed (2026-09-09, #1120): 308 → 105 lines, one worked example, master-token claim → VERIFY |
+| `cli/commands/ci/index.md` | `/cli/commands/ci/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/ci/workflows/index.md` | `/cli/commands/ci/workflows/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/dbt/generate/env/index.md` | `/cli/commands/dbt/generate/env/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/dbt/generate/index.md` | `/cli/commands/dbt/generate/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/dbt/generate/profile/index.md` | `/cli/commands/dbt/generate/profile/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/dbt/generate/sources/index.md` | `/cli/commands/dbt/generate/sources/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/dbt/index.md` | `/cli/commands/dbt/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/dbt/init/index.md` | `/cli/commands/dbt/init/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/help/index.md` | `/cli/commands/help/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/index.md` | `/cli/commands/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/llm/export/index.md` | `/cli/commands/llm/export/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/llm/index.md` | `/cli/commands/llm/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/llm/init/index.md` | `/cli/commands/llm/init/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/local/create/config/index.md` | `/cli/commands/local/create/config/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/local/create/index.md` | `/cli/commands/local/create/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/local/create/row/index.md` | `/cli/commands/local/create/row/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/local/encrypt/index.md` | `/cli/commands/local/encrypt/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/local/fix-paths/index.md` | `/cli/commands/local/fix-paths/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/local/index.md` | `/cli/commands/local/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/local/persist/index.md` | `/cli/commands/local/persist/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/local/validate/config/index.md` | `/cli/commands/local/validate/config/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/local/validate/index.md` | `/cli/commands/local/validate/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/local/validate/row/index.md` | `/cli/commands/local/validate/row/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/local/validate/schema/index.md` | `/cli/commands/local/validate/schema/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/create/branch/index.md` | `/cli/commands/remote/create/branch/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/create/bucket/index.md` | `/cli/commands/remote/create/bucket/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/create/index.md` | `/cli/commands/remote/create/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/file/download/index.md` | `/cli/commands/remote/file/download/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/file/index.md` | `/cli/commands/remote/file/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/file/upload/index.md` | `/cli/commands/remote/file/upload/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/index.md` | `/cli/commands/remote/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/job/index.md` | `/cli/commands/remote/job/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/job/run/index.md` | `/cli/commands/remote/job/run/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/table/create/index.md` | `/cli/commands/remote/table/create/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/table/detail/index.md` | `/cli/commands/remote/table/detail/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/table/download/index.md` | `/cli/commands/remote/table/download/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/table/import/index.md` | `/cli/commands/remote/table/import/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/table/index.md` | `/cli/commands/remote/table/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/table/preview/index.md` | `/cli/commands/remote/table/preview/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/table/unload/index.md` | `/cli/commands/remote/table/unload/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/table/upload/index.md` | `/cli/commands/remote/table/upload/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/workspace/create/index.md` | `/cli/commands/remote/workspace/create/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/workspace/delete/index.md` | `/cli/commands/remote/workspace/delete/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/workspace/detail/index.md` | `/cli/commands/remote/workspace/detail/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/workspace/index.md` | `/cli/commands/remote/workspace/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/remote/workspace/list/index.md` | `/cli/commands/remote/workspace/list/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/status/index.md` | `/cli/commands/status/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/sync/diff/index.md` | `/cli/commands/sync/diff/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/sync/index.md` | `/cli/commands/sync/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/sync/init/index.md` | `/cli/commands/sync/init/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/sync/pull/index.md` | `/cli/commands/sync/pull/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/commands/sync/push/index.md` | `/cli/commands/sync/push/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/dbt/index.md` | `/cli/dbt/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/devops-use-cases/index.md` | `/cli/devops-use-cases/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/getting-started/index.md` | `/cli/getting-started/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/github-integration/index.md` | `/cli/github-integration/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/index.md` | `/cli/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/installation/index.md` | `/cli/installation/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `cli/structure/index.md` | `/cli/structure/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
+| `extend/common-interface/actions.md` | `/extend/common-interface/actions/` | Extending Keboola | `/extend/common-interface/actions/` | reference | high | — |
+| `extend/common-interface/config-file.md` | `/extend/common-interface/config-file/` | Extending Keboola | `/extend/common-interface/config-file/` | reference | high | — |
+| `extend/common-interface/development-branches.md` | `/extend/common-interface/development-branches/` | Extending Keboola | `/extend/common-interface/development-branches/` | reference | high | — |
+| `extend/common-interface/environment.md` | `/extend/common-interface/environment/` | Extending Keboola | `/extend/common-interface/environment/` | reference | high | — |
+| `extend/common-interface/folders.md` | `/extend/common-interface/folders/` | Extending Keboola | `/extend/common-interface/folders/` | reference | high | — |
+| `extend/common-interface/index.md` | `/extend/common-interface/` | Extending Keboola | `/extend/common-interface/` | reference | high | — |
+| `extend/common-interface/logging.md` | `/extend/common-interface/logging/` | Extending Keboola | `/extend/common-interface/logging/` | reference | high | — |
+| `extend/common-interface/manifest-files/in-files-abs-staging.md` | `/extend/common-interface/manifest-files/in-files-abs-staging/` | Extending Keboola | `/extend/common-interface/manifest-files/in-files-abs-staging/` | reference | high | — |
+| `extend/common-interface/manifest-files/in-files-manifests.md` | `/extend/common-interface/manifest-files/in-files-manifests/` | Extending Keboola | `/extend/common-interface/manifest-files/in-files-manifests/` | reference | high | — |
+| `extend/common-interface/manifest-files/in-files-s3-staging.md` | `/extend/common-interface/manifest-files/in-files-s3-staging/` | Extending Keboola | `/extend/common-interface/manifest-files/in-files-s3-staging/` | reference | high | — |
+| `extend/common-interface/manifest-files/in-tables-manifests.md` | `/extend/common-interface/manifest-files/in-tables-manifests/` | Extending Keboola | `/extend/common-interface/manifest-files/in-tables-manifests/` | reference | high | — |
+| `extend/common-interface/manifest-files/out-files-manifests.md` | `/extend/common-interface/manifest-files/out-files-manifests/` | Extending Keboola | `/extend/common-interface/manifest-files/out-files-manifests/` | reference | high | — |
+| `extend/common-interface/manifest-files/out-tables-manifests-native-types.md` | `/extend/common-interface/manifest-files/out-tables-manifests-native-types/` | Extending Keboola | `/extend/common-interface/manifest-files/out-tables-manifests-native-types/` | reference | high | — |
+| `extend/common-interface/manifest-files/out-tables-manifests.md` | `/extend/common-interface/manifest-files/out-tables-manifests/` | Extending Keboola | `/extend/common-interface/manifest-files/out-tables-manifests/` | reference | high | — |
+| `extend/common-interface/manifest-files.md` | `/extend/common-interface/manifest-files/` | Extending Keboola | `/extend/common-interface/manifest-files/` | reference | high | — |
+| `extend/common-interface/oauth.md` | `/extend/common-interface/oauth/` | Extending Keboola | `/extend/common-interface/oauth/` | reference | high | — |
+| `extend/component/code-patterns/index.md` | `/extend/component/code-patterns/` | Extending Keboola | `/extend/component/code-patterns/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/code-patterns/interface.md` | `/extend/component/code-patterns/interface/` | Extending Keboola | `/extend/component/code-patterns/interface/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/code-patterns/tutorial.md` | `/extend/component/code-patterns/tutorial/` | Extending Keboola | `/extend/component/code-patterns/tutorial/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/deployment/index.md` | `/extend/component/deployment/` | Extending Keboola | `/extend/component/deployment/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/implementation/index.md` | `/extend/component/implementation/` | Extending Keboola | `/extend/component/implementation/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/implementation/php.md` | `/extend/component/implementation/php/` | Extending Keboola | `/extend/component/implementation/php/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/implementation/python.md` | `/extend/component/implementation/python/` | Extending Keboola | `/extend/component/implementation/python/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/implementation/r.md` | `/extend/component/implementation/r/` | Extending Keboola | `/extend/component/implementation/r/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/index.md` | `/extend/component/` | Extending Keboola | `/extend/component/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/processors.md` | `/extend/component/processors/` | Extending Keboola | `/extend/component/processors/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/running/index.md` | `/extend/component/running/` | Extending Keboola | `/extend/component/running/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/tutorial/configuration.md` | `/extend/component/tutorial/configuration/` | Extending Keboola | `/extend/component/tutorial/configuration/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/tutorial/debugging.md` | `/extend/component/tutorial/debugging/` | Extending Keboola | `/extend/component/tutorial/debugging/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/tutorial/index.md` | `/extend/component/tutorial/` | Extending Keboola | `/extend/component/tutorial/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/tutorial/input-mapping.md` | `/extend/component/tutorial/input-mapping/` | Extending Keboola | `/extend/component/tutorial/input-mapping/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/tutorial/output-mapping.md` | `/extend/component/tutorial/output-mapping/` | Extending Keboola | `/extend/component/tutorial/output-mapping/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/tutorial/processors.md` | `/extend/component/tutorial/processors/` | Extending Keboola | `/extend/component/tutorial/processors/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/ui-options/configuration-schema.md` | `/extend/component/ui-options/configuration-schema/` | Extending Keboola | `/extend/component/ui-options/configuration-schema/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/ui-options/default-configuration/index.md` | `/extend/component/ui-options/default-configuration/` | Extending Keboola | `/extend/component/ui-options/default-configuration/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/ui-options/index.md` | `/extend/component/ui-options/` | Extending Keboola | `/extend/component/ui-options/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/ui-options/ui-examples/configuration-schema-examples.md` | `/extend/component/ui-options/configuration-schema/examples/` | Extending Keboola | `/extend/component/ui-options/configuration-schema/examples/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/component/ui-options/ui-examples/sync-action-examples.md` | `/extend/component/ui-options/configuration-schema/sync-action-examples/` | Extending Keboola | `/extend/component/ui-options/configuration-schema/sync-action-examples/` | mixed (tutorial+ref) | high | — — build-a-component tree |
+| `extend/generic-extractor/configuration/api/authentication/api_key.md` | `/extend/generic-extractor/configuration/api/authentication/api_key/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/authentication/api_key/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/authentication/basic.md` | `/extend/generic-extractor/configuration/api/authentication/basic/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/authentication/basic/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/authentication/bearer_token.md` | `/extend/generic-extractor/configuration/api/authentication/bearer_token/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/authentication/bearer_token/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/authentication/index.md` | `/extend/generic-extractor/configuration/api/authentication/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/authentication/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/authentication/login.md` | `/extend/generic-extractor/configuration/api/authentication/login/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/authentication/login/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/authentication/oauth10.md` | `/extend/generic-extractor/configuration/api/authentication/oauth10/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/authentication/oauth10/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/authentication/oauth20-login.md` | `/extend/generic-extractor/configuration/api/authentication/oauth20-login/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/authentication/oauth20-login/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/authentication/oauth20.md` | `/extend/generic-extractor/configuration/api/authentication/oauth20/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/authentication/oauth20/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/authentication/oauth_cc.md` | `/extend/generic-extractor/configuration/api/authentication/oauth_cc/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/authentication/oauth_cc/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/authentication/query.md` | `/extend/generic-extractor/configuration/api/authentication/query/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/authentication/query/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/index.md` | `/extend/generic-extractor/configuration/api/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/pagination/cursor.md` | `/extend/generic-extractor/configuration/api/pagination/cursor/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/pagination/cursor/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/pagination/index.md` | `/extend/generic-extractor/configuration/api/pagination/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/pagination/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/pagination/multiple.md` | `/extend/generic-extractor/configuration/api/pagination/multiple/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/pagination/multiple/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/pagination/offset.md` | `/extend/generic-extractor/configuration/api/pagination/offset/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/pagination/offset/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/pagination/pagenum.md` | `/extend/generic-extractor/configuration/api/pagination/pagenum/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/pagination/pagenum/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/pagination/response-param.md` | `/extend/generic-extractor/configuration/api/pagination/response-param/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/pagination/response-param/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/api/pagination/response-url.md` | `/extend/generic-extractor/configuration/api/pagination/response-url/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/api/pagination/response-url/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/aws-signature/index.md` | `/extend/generic-extractor/configuration/aws-signature/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/aws-signature/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/config/index.md` | `/extend/generic-extractor/configuration/config/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/config/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/config/jobs/children.md` | `/extend/generic-extractor/configuration/config/jobs/children/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/config/jobs/children/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/config/jobs/index.md` | `/extend/generic-extractor/configuration/config/jobs/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/config/jobs/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/config/mappings.md` | `/extend/generic-extractor/configuration/config/mappings/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/config/mappings/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/configuration.md` | `/extend/generic-extractor/configuration/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/iterations.md` | `/extend/generic-extractor/configuration/iterations/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/iterations/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/configuration/ssh-proxy/index.md` | `/extend/generic-extractor/configuration/ssh-proxy/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/configuration/ssh-proxy/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/functions.md` | `/extend/generic-extractor/functions/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/functions/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/incremental.md` | `/extend/generic-extractor/incremental/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/incremental/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/index.md` | `/extend/generic-extractor/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/map.md` | `/extend/generic-extractor/map/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/map/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/publish.md` | `/extend/generic-extractor/publish/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/publish/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/running.md` | `/extend/generic-extractor/running/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/running/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/tutorial/basic.md` | `/extend/generic-extractor/tutorial/basic/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/tutorial/basic/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/tutorial/index.md` | `/extend/generic-extractor/tutorial/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/tutorial/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/tutorial/jobs.md` | `/extend/generic-extractor/tutorial/jobs/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/tutorial/jobs/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/tutorial/json.md` | `/extend/generic-extractor/tutorial/json/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/tutorial/json/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/tutorial/mapping.md` | `/extend/generic-extractor/tutorial/mapping/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/tutorial/mapping/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/tutorial/pagination.md` | `/extend/generic-extractor/tutorial/pagination/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/tutorial/pagination/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-extractor/tutorial/rest.md` | `/extend/generic-extractor/tutorial/rest/` | Components › Data Source Connectors | `/components/extractors/generic-extractor/tutorial/rest/` | reference | high | — — GE is a component; lives with extractors |
+| `extend/generic-writer/configuration/configuration-examples.md` | `/extend/generic-writer/configuration-examples/` | Components › Data Destination Connectors | `/components/writers/generic-writer/configuration-examples/` | reference | high | — |
+| `extend/generic-writer/configuration/configuration.md` | `/extend/generic-writer/configuration/` | Components › Data Destination Connectors | `/components/writers/generic-writer/configuration/` | reference | high | — |
+| `extend/generic-writer/index.md` | `/extend/generic-writer/` | Components › Data Destination Connectors | `/components/writers/generic-writer/` | reference | high | — |
+| `extend/index.md` | `/extend/` | Extending Keboola | `/extend/` | explanation | high | — — section landing |
+| `extend/job-queue/index.md` | `/extend/job-queue/` | Extending Keboola | `/extend/job-queue/` | reference | med | identity, kept under /extend/ per #1046; Core concepts › Jobs remains an option for PRDCT-550 |
+| `extend/publish/checklist.md` | `/extend/publish/checklist/` | Extending Keboola | `/extend/publish/checklist/` | how-to | high | — — marketplace publishing |
+| `extend/publish/index.md` | `/extend/publish/` | Extending Keboola | `/extend/publish/` | how-to | high | — — marketplace publishing |
+| `index.md` | `/` | — (weave done: PR #1022) | `/` | explanation | high | MERGED → help home — home combined in #1022 |
+| `integrate/artifacts/index.md` | `/integrate/artifacts/` | Common Interface | `/extend/common-interface/artifacts/` | reference | med | MOVED (2026-09-09, #1120); config key orchestration→shared corrected per job-queue |
+| `integrate/artifacts/tutorial.md` | `/integrate/artifacts/tutorial/` | Common Interface | `/extend/common-interface/artifacts/tutorial/` | reference | med | MOVED (2026-09-09, #1120) |
+| `integrate/data-streams/index.md` | `/integrate/data-streams/` | Storage (weave done: PR #1023) | `/storage/data-streams/` | — | high | REDIRECT → /storage/data-streams/* — woven in #1023 |
+| `integrate/data-streams/overview/index.md` | `/integrate/data-streams/overview/` | Storage (weave done: PR #1023) | `/storage/data-streams/reference/` | — | high | REDIRECT → /storage/data-streams/* — woven in #1023 |
+| `integrate/data-streams/tutorial/index.md` | `/integrate/data-streams/tutorial/` | Storage (weave done: PR #1023) | `/storage/data-streams/tutorial/` | — | high | REDIRECT → /storage/data-streams/* — woven in #1023 |
+| `integrate/database/index.md` | `/integrate/database/` | Components (fold done: PR #1019) | `/components/extractors/database/` | how-to | high | REDIRECT → canonical — SSH-tunnel folded in #1019 |
+| `integrate/index.md` | `/integrate/` | — (landing dies) | `/overview/` | — | med | REDIRECT → /overview/ (or /storage/api/) — thin landing; content already on combined home |
+| `integrate/jobs/index.md` | `/integrate/jobs/` | Management › Jobs | `/management/jobs/api/` | explanation+reference | med | MOVED + curated (2026-09-09, #1120): API how-to and state semantics kept, field dump replaced by the swagger link; absorbs run-job and run-orchestration |
+| `integrate/mcp.md` | `/integrate/mcp/` | AI (merged: PR #1001) | `/ai/mcp-server/` | — | high | REDIRECT → /ai/mcp-server/ — MCP canonical on help |
+| `integrate/orchestrator/index.md` | `/integrate/orchestrator/` | — (empty stub) | `/flows/` | — | high | REDIRECT → /flows/ — dev page is an empty comment stub |
+| `integrate/storage/api/configurations.md` | `/integrate/storage/api/configurations/` | Storage › Storage API | `/storage/api/configurations/` | reference | high | — |
+| `integrate/storage/api/import-export.md` | `/integrate/storage/api/import-export/` | Storage › Storage API | `/storage/api/import-export/` | reference | high | — |
+| `integrate/storage/api/importer.md` | `/integrate/storage/api/importer/` | Storage › Storage API | `/storage/api/importer/` | reference | high | — |
+| `integrate/storage/api/index.md` | `/integrate/storage/api/` | Storage › Storage API | `/storage/api/` | reference | high | — |
+| `integrate/storage/api/tde-exporter.md` | `/integrate/storage/api/tde-exporter/` | Storage › Storage API | `/storage/api/tde-exporter/` | reference | high | — |
+| `integrate/storage/docker-cli-client.md` | `/integrate/storage/docker-cli-client/` | Storage › Storage API clients | `/storage/api/clients/docker-cli/` | reference | high | — — legacy CLI client |
+| `integrate/storage/index.md` | `/integrate/storage/` | Storage › Storage API | `/storage/api/` | explanation | high | MERGE — original call said fold into /storage/, but batch 1 (#1053) factually built the technical layer at /storage/api/ (+ clients/); the 301 must follow the content. #1053 needs `redirect_from: /integrate/storage/` on storage/api/index.md |
+| `integrate/storage/php-client.md` | `/integrate/storage/php-client/` | Storage › Storage API clients | `/storage/api/clients/php-client/` | reference | high | — |
+| `integrate/storage/python-client.md` | `/integrate/storage/python-client/` | Storage › Storage API clients | `/storage/api/clients/python-client/` | reference | high | — |
+| `integrate/storage/r-client.md` | `/integrate/storage/r-client/` | Storage › Storage API clients | `/storage/api/clients/r-client/` | reference | high | — |
+| `integrate/variables/index.md` | `/integrate/variables/` | Components › Variables | `/components/variables/api/` | reference | high | help variables page CANONICAL (UI concept) — dev page = keboola.variables API reference sub-page; section settled by owner (Matyáš 2026-08-04, Jordan 2026-08-05): variables are a base component, so Components, not Transformations — executed in #1051 |
+| `integrate/variables/tutorial.md` | `/integrate/variables/tutorial/` | Components › Variables | `/components/variables/api/tutorial/` | reference | high | help variables page CANONICAL (UI concept) — dev page = keboola.variables API reference sub-page; section settled by owner (Matyáš 2026-08-04, Jordan 2026-08-05) — executed in #1051 |
+| `overview/api/index.md` | `/overview/api/` | Keboola Overview | `/overview/` | explanation+index | flag | REDIRECT — MERGED (2026-09-09, connection-docs#1120): portals, token header, service index and apis.json folded into /overview/#apis-and-service-endpoints; catalogue and endpoint tables dropped (portal + GET /v2/storage are the source of truth) |
+| `overview/encryption.md` | `/overview/encryption/` | Common Interface | `/extend/common-interface/encryption/` | reference | med | MOVED (2026-09-09, #1120) unchanged; config-file/#encryption links here |
+| `overview/index.md` | `/overview/` | — (weave done: PR #1022) | `/overview/` | explanation | high | MERGED → /overview/ — overview combined in #1022 |
+| `overview/repositories.md` | `/overview/repositories/` | — (killed: PR #1022) | `/overview/` | — | high | REDIRECT → /overview/ — content folded into overview |
+
+
+## Aliases — Jekyll `redirect_from` paths the dev site still honours (26)
+
+Not pages: URL aliases the dev site serves through `jekyll-redirect-from`. Help already resolves every one through `redirect_from` on the canonical page (carried by the phase-1 script); they are listed so the contract — and `--live` on cutover day — covers them. Status `alias`.
+
+| source | old URL | target section | target path | Diátaxis | conf | dedup |
+|---|---|---|---|---|---|---|
+| `extend/component/running/index.md` | `/extend/common-interface/sandbox/` | alias | `/extend/component/running/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/index.md` | `/extend/custom-science/` | alias | `/extend/component/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/index.md` | `/extend/custom-science/development/` | alias | `/extend/component/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/implementation/php.md` | `/extend/custom-science/php/` | alias | `/extend/component/implementation/php/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/implementation/python.md` | `/extend/custom-science/python/` | alias | `/extend/component/implementation/python/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/tutorial/index.md` | `/extend/custom-science/quick-start/` | alias | `/extend/component/tutorial/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/implementation/r.md` | `/extend/custom-science/r/` | alias | `/extend/component/implementation/r/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/job-queue/index.md` | `/extend/docker-runner/` | alias | `/extend/job-queue/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/processors.md` | `/extend/docker-runner/processors/` | alias | `/extend/component/processors/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/index.md` | `/extend/docker/` | alias | `/extend/component/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/implementation/index.md` | `/extend/docker/images/` | alias | `/extend/component/implementation/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/tutorial/index.md` | `/extend/docker/quick-start/` | alias | `/extend/component/tutorial/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/running/index.md` | `/extend/docker/running/` | alias | `/extend/component/running/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/deployment/index.md` | `/extend/docker/tutorial/automated-build/` | alias | `/extend/component/deployment/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/generic-extractor/configuration/iterations.md` | `/extend/generic-extractor/iterations/` | alias | `/components/extractors/generic-extractor/configuration/iterations/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/generic-extractor/publish.md` | `/extend/generic-extractor/registration/` | alias | `/components/extractors/generic-extractor/publish/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/publish/index.md` | `/extend/registration/` | alias | `/extend/publish/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/publish/index.md` | `/extend/registration/checklist/` | alias | `/extend/publish/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/ui-options/configuration-schema.md` | `/extend/registration/configuration-schema/` | alias | `/extend/component/ui-options/configuration-schema/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/deployment/index.md` | `/extend/registration/deployment/` | alias | `/extend/component/deployment/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `extend/component/processors.md` | `/integrate/docker-runner/processors/` | alias | `/extend/component/processors/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `integrate/data-streams/index.md` | `/integrate/push-data/` | alias | `/storage/data-streams/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `integrate/data-streams/overview/index.md` | `/integrate/push-data/overview/` | alias | `/storage/data-streams/reference/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `integrate/data-streams/tutorial/index.md` | `/integrate/push-data/tutorial/` | alias | `/storage/data-streams/tutorial/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `integrate/storage/docker-cli-client.md` | `/integrate/storage/php-cli-client/` | alias | `/storage/api/clients/docker-cli/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `integrate/jobs/index.md` | `/overview/jobs/` | alias | `/management/jobs/api/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+## Cutover runbook — retiring developers.keboola.com (PRDCT-565)
+
+**End state:** the domain is a permanent 301 redirector, content lives on help, the repository is archived. DNS stays (383 files across the `keboola` org, six components in the registry and the outside web link the domain; a dead DNS would break all of it and pass no search signal).
+
+**Preconditions, each checkable from this repo:**
+1. connection-docs#1120 is on `main` — the last eight dev pages are merged into help, so every non-CLI dev URL resolves there.
+2. developers-docs#417 is merged — the 59 `/cli/**` pages are stubs pointing at the repository.
+3. `npm run build && node scripts/check-redirects.mjs --build` on `main` prints **0 lost**.
+
+**Edge rule — one CloudFront Function (viewer-request) on the distribution in front of `s3://developers.keboola.com` (us-east-1; the AWS account whose keys the developers-docs deploy workflow uses — its repo admins know which):**
+
+```js
+function handler(event) {
+  var req = event.request;
+  var uri = req.uri;
+  // help's /cli/ is kbagent, a different product: legacy Keboola-as-Code readers go to the repository
+  if (uri === '/cli' || uri.indexOf('/cli/') === 0) {
+    return { statusCode: 301, statusDescription: 'Moved Permanently',
+      headers: { location: { value: 'https://github.com/keboola/keboola-as-code' } } };
+  }
+  // Search Console verifies the dev property by fetching this file with a 200; keep serving it until the Change of Address is done
+  if (uri === '/google9cde6c6b9250e5a4.html') return req;
+  if (uri.slice(-11) === '/index.html') uri = uri.slice(0, -10);
+  if (uri === '/sitemap.xml') uri = '/sitemap-index.xml';
+  var keys = Object.keys(req.querystring);
+  var qs = keys.length ? '?' + keys.map(function (k) { return k + '=' + req.querystring[k].value; }).join('&') : '';
+  return { statusCode: 301, statusDescription: 'Moved Permanently',
+    headers: { location: { value: 'https://help.keboola.com' + uri + qs } } };
+}
+```
+
+Why a host-swap and not a per-path map at the edge: help already resolves every dev path — identity pages, or `redirect_from` stubs on the canonical page — so the map lives in exactly one place (this file → the TSV) and the edge stays dumb. `/cli/**` is the single carve-out (David Esner / Martin Vaško, 2026-09-03). Fragments survive a 301 client-side.
+
+**Second hop quality.** Help answers non-identity paths with meta-refresh pages today. Search engines handle 301 → meta-refresh, but a 301 → 301 chain is cleaner: `node scripts/check-redirects.mjs --vercel` prints the `redirects` block for `vercel.json` (`statusCode: 301`; the 59 off-site CLI rows are excluded because help's `/cli/` is kbagent and the edge answers `/cli/*` itself). Wire it in a separate PR, after checking Vercel's per-project redirect limit against the rule count it prints.
+
+**Cutover day:**
+1. Deploy the function, wait for propagation.
+2. `node scripts/check-redirects.mjs --live` — must print ✓ for every row: a 301 off the dev domain, landing on the contract target after following help's own redirects.
+3. Spot-check by hand: `/extend/component/tutorial/`, `/extend/docker/`, `/cli/commands/sync/pull/`, `/integrate/push-data/`, `/`, `/sitemap.xml`.
+4. Google Search Console: *Change of address* from the dev property to help. Both properties must stay verified, and Google verifies the dev one by fetching `google9cde6c6b9250e5a4.html` with a 200, so the function passes that one path through and the file stays in the bucket until the change of address is complete (Google recommends keeping the redirects for at least 180 days).
+5. developers-docs: disable `.github/workflows/main.yml`, replace the README with "moved to help.keboola.com", **archive** the repository. Keep the bucket until step 4 is done; then it can be emptied — nothing else serves from it.
+6. Watch 30 days: help 404s under `/extend|/integrate|/overview|/automate` (Vercel logs) — each one is a missing alias, fixed with a `redirect_from`. CloudFront request volume on the dev distribution is the only signal that would ever justify touching DNS.
+
+**Rollback:** remove the function. Until the bucket is emptied, the S3 content serves again with its own meta-refresh stubs.
