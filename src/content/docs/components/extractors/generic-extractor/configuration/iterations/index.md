@@ -6,6 +6,8 @@ redirect_from:
     - /extend/generic-extractor/iterations/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 The `iterations` section allows you to **execute a configuration multiple times, each time with different
 values**. The most typical use for `iterations` is extraction of the same data from multiple accounts.
@@ -70,7 +72,7 @@ is honoured.
 
 ## Examples
 
-### Iterating Parameters
+### Iterating parameters
 Suppose, you have an API which takes a URL parameter `account_id`, which restricts the returned data to a
 certain account. The following configuration executes the entire configuration for two accounts — `345` and `456`:
 
@@ -156,7 +158,7 @@ It looks as if the first execution is with `account_id=123`, but it is not the c
 will be executed only twice: the first time with `account_id=345` and the second time with `account_id=456`.
 See [example [EX112]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/112-iterations-params).
 
-### Iterating Headers
+### Iterating headers
 Suppose you have an API from which you want to extract data from two accounts (`JohnDoe` and `DoeJohn`). The
 API uses the [HTTP Basic Authentication](/components/extractors/generic-extractor/configuration/api/authentication/basic/) method, and in addition,
 each user has their own API token, which must be provided in the `X-Api-Token` header.

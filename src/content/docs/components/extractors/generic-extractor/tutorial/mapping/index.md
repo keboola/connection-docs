@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/tutorial/mapping/
 ---
 
+<!-- Tutorial-type page. Part of the Generic Extractor tutorial chain; nav order is the reading order. -->
+
 
 In the previous part of the tutorial, you [extracted the content of a MailChimp campaign](/components/extractors/generic-extractor/tutorial/jobs/). 
 Now, it's time to clean up the response.
@@ -215,7 +217,7 @@ Note that the `destination` value is arbitrary but must be a valid column name.
 The data type name (`content`) must match the value of the `dataType` property 
 as defined in some jobs.
 
-## Parent Reference
+## Parent reference
 The above mapping works, but it is missing the campaign ID, and you cannot
 match the content to some campaign records. Therefore, you must extract the campaign ID 
 from the context (i.e., the job parameter). This can be done using a special `user` mapping.
@@ -329,9 +331,9 @@ the extracted data later in [Transformations](/transformations/).
 However, if you intend to use your configuration regularly or want to make it into a component, 
 setting up a mapping is recommended.
 
-## Tips and Tricks
+## Tips and tricks
 
-### Key Containing a Dot Character
+### Key containing a dot character
 
 The key of the mapping supports dot notation to traverse into children. So, if the key contains a dot, you need to change the delimiter. See the following example: 
 
@@ -350,3 +352,5 @@ The key of the mapping supports dot notation to traverse into children. So, if t
 ```
 
 As you changed the delimiter from the default `.` to `/`, it's no longer parsed as two separate keys `created` and `date`, but rather just a single key `created.date`.
+
+**Next:** [Configuration reference →](/components/extractors/generic-extractor/configuration/)

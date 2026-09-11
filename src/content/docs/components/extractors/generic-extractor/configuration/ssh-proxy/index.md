@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/ssh-proxy/
 ---
 
+<!-- How-to-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 *To configure your first Generic Extractor, follow our [tutorial](/components/extractors/generic-extractor/tutorial/).*
 *Use [Parameter Map](/components/extractors/generic-extractor/map/) to help you navigate among various
@@ -33,7 +35,7 @@ to act as a gateway to your private network where your destination server reside
 
 Complete the following steps to set up an SSH proxy for Generic Extractor:
 
-### 1. Set Up SSH Proxy Server
+### 1. Set up SSH proxy server
 Here is a very basic [Dockerfile](https://docs.docker.com/engine/reference/builder/) example.
 All it does is run an sshd daemon and expose port 22. You can, of course, set this up in your system in
 a similar way without using Docker.
@@ -66,7 +68,7 @@ See the following pages for more information about setting up SSH on your server
 - [OpenSSH configuration](https://help.ubuntu.com/community/SSH/OpenSSH/Configuring)
 - [Dockerized SSH service](https://docs.docker.com/engine/examples/running_ssh_service/)
 
-### 2. Generate SSH Key Pair
+### 2. Generate SSH key pair
 Generate an SSH key pair and copy the public key to your **SSH proxy server**.
 Paste it to the **public.key** file, and then append it to the authorized_keys file.
 
@@ -75,7 +77,7 @@ mkdir ~/.ssh
 cat public.key >> ~/.ssh/authorized_keys
 ```
 
-### 3. Configure Generic Extractor SSH Proxy
+### 3. Configure Generic Extractor SSH proxy
 
 ```json
 {

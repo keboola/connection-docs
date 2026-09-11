@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth20-login/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 **Note** that this configuration option is not yet supported and the test endpoint button will not work.
 
@@ -40,7 +42,7 @@ for authentication of all the other API requests. A sample OAuth Login authentic
 }
 ```
 
-## Configuration Parameters
+## Configuration parameters
 The configuration parameters are identical to the [Login](/components/extractors/generic-extractor/configuration/api/authentication/login/) method.
 The difference, however, is in the [function context](/components/extractors/generic-extractor/functions/#oauth-20-login-authentication-context).
 The **login request** is assumed to require the OAuth2 authorization and its response must be in JSON format (plaintext is not supported).
@@ -48,7 +50,7 @@ The **login request** is assumed to require the OAuth2 authorization and its res
 ## Examples
 The following examples demonstrate how to use OAuth with a basic login request and Google API in Generic Extractor.
 
-### Basic Configuration
+### Basic configuration
 The following configuration shows how to set up an OAuth **login request**:
 
 ```json
@@ -131,7 +133,7 @@ and sent to other API requests (`/users`).
 
 See [example [EX105]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/105-oauth2-login).
 
-### Google API Configuration
+### Google API configuration
 The following example shows how to set up the OAuth authentication for Google APIs. The access token is refreshed with each API call.
 
 #### Generate access tokens
