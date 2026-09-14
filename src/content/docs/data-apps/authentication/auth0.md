@@ -1,13 +1,13 @@
 ---
 title: Auth0 OIDC
 slug: 'data-apps/authentication/auth0'
-description: "Protect a Keboola app with Auth0 sign-in: register a Regular Web Application in Auth0, add the app's callback URL, and pick Generic OIDC in Keboola."
+description: "Protect a Keboola app with Auth0 sign-in: register a Regular Web Application in Auth0, add the app's callback URL, and pick Auth0 in Keboola."
 redirect_from:
   - /components/data-apps/oidc/auth0/
   - /data-apps/oidc/auth0/
 ---
 
-Let people open your app through Auth0, with whatever connections your Auth0 tenant offers: username and password, social logins, or enterprise identity providers. You'll register the app in Auth0, tell it where to send users back after sign-in (the app's callback URL), and point the app at your tenant through Keboola's **Generic OIDC** option.
+Let people open your app through Auth0, with whatever connections your Auth0 tenant offers: username and password, social logins, or enterprise identity providers. You'll register the app in Auth0, tell it where to send users back after sign-in (the app's callback URL), and point the app at your tenant with Keboola's **Auth0** provider option.
 
 **Before you start**
 
@@ -26,7 +26,7 @@ Auth0 needs the app's callback URL, so create the app first.
 
    For example: `https://toy-store-sales-74016144.hub.europe-west3.gcp.keboola.com/_proxy/callback`
 
-   Don't see the **App URL** block yet? Deploy the app once with the default **Basic (Password)** authentication and come back; every deployed app shows the block on its configuration page.
+   The block is there from the moment the app exists; you don't have to deploy first.
 
 ![The app's configuration page with the App URL block: the URL prefix, the generated host, and a copy button](/data-apps/publish-config.png)
 
@@ -45,9 +45,10 @@ Keep this tab open; you'll come back to it in step 3.
 Back on the app's configuration page in Keboola:
 
 1. Under **Authentication**, set **Authentication Type** to **OIDC (Custom)**.
-2. In the **Provider** dropdown, select **Generic OIDC**.
-3. Paste the **Client ID** and **Client Secret**. Set **Issuer URL** to your tenant **Domain** with `https://` in front and a trailing slash, for example `https://acme.us.auth0.com/` (or a custom domain such as `https://login.acme.com/`).
-4. Click **Save**. If the app is already deployed, click **Redeploy App** so the change takes effect.
+2. In the **Provider** dropdown, select **Auth0**.
+3. Paste the **Client ID** and **Client secret**. Set **Issuer URL** to your tenant **Domain** with `https://` in front and a trailing slash, for example `https://acme.us.auth0.com/` (or a custom domain such as `https://login.acme.com/`). The field's example omits the slash, but Auth0's issuer ends with one; when in doubt, copy the `issuer` value from `https://<yourAuth0Domain>/.well-known/openid-configuration`.
+4. **Logout URL** is optional: `https://<yourAuth0Domain>/oidc/logout` also ends the Auth0 session when someone signs out of the app.
+5. Click **Save**. If the app is already deployed, click **Redeploy App** so the change takes effect.
 
 ## 4. Deploy and test
 
@@ -57,7 +58,7 @@ Back on the app's configuration page in Keboola:
 ## If sign-in fails
 
 - **"Callback URL mismatch"** on an Auth0 error page — the URL in **Allowed Callback URLs** differs from the app's callback URL. Fix it under **Settings → Application URIs**.
-- **Issuer or discovery error** when the app starts the sign-in — check the Issuer URL: `https://`, your Auth0 domain, and a trailing slash. Auth0's issuer always ends with `/`.
+- **Issuer mismatch or discovery error** when the app starts the sign-in — the **Issuer URL** must match the `issuer` in Auth0's discovery document character for character: `https://`, your Auth0 domain, trailing slash.
 - **Users of one connection can't sign in** — that connection isn't enabled for this application. Turn it on under the application's **Connections** tab.
 
 ---

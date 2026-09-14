@@ -27,7 +27,7 @@ Google needs the app's callback URL, so create the app first.
 
    For example: `https://toy-store-sales-74016144.hub.europe-west3.gcp.keboola.com/_proxy/callback`
 
-   Don't see the **App URL** block yet? Deploy the app once with the default **Basic (Password)** authentication and come back; every deployed app shows the block on its configuration page.
+   The block is there from the moment the app exists; you don't have to deploy first.
 
 ![The app's configuration page with the App URL block: the URL prefix, the generated host, and a copy button](/data-apps/publish-config.png)
 
@@ -53,7 +53,7 @@ Back on the app's configuration page in Keboola:
 
 1. Under **Authentication**, set **Authentication Type** to **OIDC (Custom)**.
 2. In the **Provider** dropdown, select **Google SSO**.
-3. Paste the **Client ID** and **Client Secret**, and set **Issuer URL** to `https://accounts.google.com`.
+3. Paste the **Client ID** and **Client secret**. There's no issuer field for this option; Keboola uses `https://accounts.google.com`.
 4. Click **Save**. If the app is already deployed, click **Redeploy App** so the change takes effect.
 
 ## 5. Deploy and test
@@ -68,7 +68,7 @@ Changed the redirect URI or the audience on Google's side later? No redeploy nee
 - **`Error 400: redirect_uri_mismatch`** — the URI in the OAuth client differs from the app's callback URL. Compare them character by character (scheme, host, `/_proxy/callback`, no trailing slash) and fix the client.
 - **"Access blocked: … has not completed the Google verification process"**, or a colleague can't get past Google — the audience is External and the app is still in **Testing**, so only listed **Test users** can sign in (up to 100). Add them on the **Audience** page, or click **Publish app**.
 - **Someone outside your organization can't sign in** — expected with the Internal audience. Switch to External on the **Audience** page if that's not what you want.
-- **`invalid_client`**, or a token error right after signing in — the Client ID or Client Secret in Keboola doesn't match the OAuth client. Paste them again, or add a new secret in Google Cloud and update the app.
+- **`invalid_client`**, or a token error right after signing in — the Client ID or Client secret in Keboola doesn't match the OAuth client. Paste them again, or add a new secret in Google Cloud and update the app.
 
 ---
 

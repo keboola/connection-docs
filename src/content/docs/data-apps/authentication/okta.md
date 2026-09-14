@@ -1,13 +1,13 @@
 ---
 title: Okta OIDC
 slug: 'data-apps/authentication/okta'
-description: "Protect a Keboola app with Okta sign-in: create an OIDC web app integration in Okta, register the app's callback URL, and pick Generic OIDC in Keboola."
+description: "Protect a Keboola app with Okta sign-in: create an OIDC web app integration in Okta, register the app's callback URL, and pick Okta in Keboola."
 redirect_from:
   - /components/data-apps/oidc/okta/
   - /data-apps/oidc/okta/
 ---
 
-Let people open your app with their Okta account. You'll create an app integration in Okta, tell it where to send users back after sign-in (the app's callback URL), and point the app at your Okta org through Keboola's **Generic OIDC** option.
+Let people open your app with their Okta account. You'll create an app integration in Okta, tell it where to send users back after sign-in (the app's callback URL), and point the app at your Okta org with Keboola's **Okta** provider option.
 
 **Before you start**
 
@@ -26,7 +26,7 @@ Okta needs the app's callback URL, so create the app first.
 
    For example: `https://toy-store-sales-74016144.hub.europe-west3.gcp.keboola.com/_proxy/callback`
 
-   Don't see the **App URL** block yet? Deploy the app once with the default **Basic (Password)** authentication and come back; every deployed app shows the block on its configuration page.
+   The block is there from the moment the app exists; you don't have to deploy first.
 
 ![The app's configuration page with the App URL block: the URL prefix, the generated host, and a copy button](/data-apps/publish-config.png)
 
@@ -46,9 +46,10 @@ Keep this tab open; you'll come back to it in step 3.
 Back on the app's configuration page in Keboola:
 
 1. Under **Authentication**, set **Authentication Type** to **OIDC (Custom)**.
-2. In the **Provider** dropdown, select **Generic OIDC**.
-3. Paste the **Client ID** and **Client Secret**. Set **Issuer URL** to `https://<yourOktaDomain>/oauth2/default`; your Okta domain is shown in the Admin Console when you click your name at the top right, for example `https://acme.okta.com/oauth2/default`. The `default` authorization server comes with the Integrator Free Plan and with API Access Management; if **Security → API → Authorization Servers** doesn't list it, use the org authorization server instead: `https://<yourOktaDomain>` with no path.
-4. Click **Save**. If the app is already deployed, click **Redeploy App** so the change takes effect.
+2. In the **Provider** dropdown, select **Okta**.
+3. Paste the **Client ID** and **Client secret**. Set **Domain/Org URL** to `https://<yourOktaDomain>/oauth2/default`; your Okta domain is shown in the Admin Console when you click your name at the top right, for example `https://acme.okta.com/oauth2/default`. The `default` authorization server comes with the Integrator Free Plan and with API Access Management; if **Security → API → Authorization Servers** doesn't list it, use the org authorization server instead: `https://<yourOktaDomain>` with no path.
+4. **Logout URL** is optional: `https://<yourOktaDomain>/login/signout` also ends the Okta session when someone signs out of the app.
+5. Click **Save**. If the app is already deployed, click **Redeploy App** so the change takes effect.
 
 ## 4. Deploy and test
 
@@ -59,7 +60,7 @@ Back on the app's configuration page in Keboola:
 
 - **"The 'redirect_uri' parameter must be a Login redirect URI in the client app settings"** — the URI in the integration differs from the app's callback URL. Fix **Sign-in redirect URIs** on the integration's **General** tab.
 - **"User is not assigned to the client application"** — the user, or their group, isn't assigned to the integration. Add them on the **Assignments** tab.
-- **Issuer or discovery error** when the app starts the sign-in — check the Issuer URL: `https://`, your Okta domain, `/oauth2/default`, no trailing slash. If your org has no `default` authorization server, use `https://<yourOktaDomain>` instead.
+- **Issuer or discovery error** when the app starts the sign-in — check **Domain/Org URL**: `https://`, your Okta domain, `/oauth2/default`, no trailing slash. If your org has no `default` authorization server, use `https://<yourOktaDomain>` instead.
 
 ---
 

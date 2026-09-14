@@ -16,14 +16,14 @@ Once an app is deployed, its URL is publicly available. Protect it so only the r
 
 - **None (Public Access)** — the app is public to anyone with the URL. You can still add your own authorization inside the app; for Streamlit, use the [Streamlit authenticator](https://github.com/mkhorasani/Streamlit-Authenticator) ([example](https://github.com/keboola/mkt-bi-ocr/blob/master/Select_Invoices.py)).
 - **Basic (Password)** — the **default** for new apps. Keboola generates a shared password; users enter it before the app opens. Once the app is deployed, the password is shown on the app's configuration page next to **Open App**, ready to copy — and when Kai builds an app, it shows the password as the last step.
-- **OIDC (Custom)** — users sign in with your identity provider (Auth0, Google Cloud, Microsoft Entra ID, Okta). Recommended for anything beyond a quick share.
+- **OIDC (Custom)** — users sign in with your identity provider (Google, Microsoft Entra ID, Okta, Auth0, or any other OIDC provider). Recommended for anything beyond a quick share.
 - **GitHub** — restrict access with GitHub OAuth by organization, team, repository, or allowed users.
 - **GitLab** — restrict access with GitLab OAuth by groups, projects, or roles.
 - **JumpCloud** — restrict access with JumpCloud OIDC, with optional role-based filtering.
 
 ## OIDC (single sign-on)
 
-OIDC lets users log into your app through your single sign-on (SSO) provider. Keboola has a ready-made option for Google (**Google SSO**) and for Microsoft Entra ID (**Azure OIDC**), plus a **Generic OIDC** option for any other OpenID Connect provider, Okta and Auth0 among them. Users sign in with the provider you configured; if an app has more than one provider, they first pick an **Authentication Provider**.
+OIDC lets users log into your app through your single sign-on (SSO) provider. Keboola has ready-made provider options for Google (**Google SSO**), Microsoft Entra ID (**Azure OIDC**), **Okta**, and **Auth0**, plus **Generic OIDC** for any other OpenID Connect provider. Users sign in with the provider you configured; if an app has more than one provider, they first pick an **Authentication Provider**.
 
 ![The app's sign-in page asking the user to select an authentication provider, one button per configured provider](/data-apps/auth-select-oidc-provider.png)
 
@@ -34,16 +34,17 @@ Every setup has the same shape: create the app in Keboola, register it with your
 - [Okta](/data-apps/authentication/okta/)
 - [Auth0](/data-apps/authentication/auth0/)
 
-Using another provider? Choose **Generic OIDC**, register a web application in the provider's console, and enter its issuer URL; the [Okta guide](/data-apps/authentication/okta/) walks through the same flow. Each app has its own callback URL, so register every app with the provider separately.
+Using another provider? Choose **Generic OIDC**, register a web application in the provider's console, and enter its **Issuer URL** (and, optionally, a **Logout URL**); the [Okta guide](/data-apps/authentication/okta/) walks through the same flow. Each app has its own callback URL, so register every app with the provider separately.
 
 ### Provider settings at a glance
 
-| Provider | Keboola provider option | Issuer URL |
+| Provider | Keboola provider option | What you enter besides Client ID and Client secret |
 |---|---|---|
-| **Google Cloud** | Google SSO | `https://accounts.google.com` |
-| **Microsoft Entra ID** | Azure OIDC | *(not used; enter the **Tenant ID** instead)* |
-| **Okta** | Generic OIDC | `https://<yourOktaDomain>/oauth2/default` |
-| **Auth0** | Generic OIDC | `https://<yourAuth0Domain>/` |
+| **Google Cloud** | Google SSO | Nothing; the issuer `https://accounts.google.com` is preset |
+| **Microsoft Entra ID** | Azure OIDC | **Tenant ID**; Keboola derives the issuer `https://login.microsoftonline.com/<tenant ID>/v2.0` |
+| **Okta** | Okta | **Domain/Org URL**: `https://<yourOktaDomain>/oauth2/default` |
+| **Auth0** | Auth0 | **Issuer URL**: `https://<yourAuth0Domain>/` |
+| Any other | Generic OIDC | **Issuer URL** from the provider; **Logout URL** optional |
 
 `<yourOktaDomain>` and `<yourAuth0Domain>` are your tenant hosts, for example `acme.okta.com` or `acme.us.auth0.com`. Okta orgs without the `default` authorization server use `https://<yourOktaDomain>` instead; see the [Okta guide](/data-apps/authentication/okta/).
 
