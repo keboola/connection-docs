@@ -171,7 +171,7 @@
 /integrate/storage/r-client/	/storage/api/clients/r-client/	moved
 /integrate/variables/	/components/variables/api/	moved
 /integrate/variables/tutorial/	/components/variables/api/tutorial/	moved
-/overview/api/	/overview/	redirect
+/overview/api/	/overview/apis/	redirect
 /overview/encryption/	/extend/common-interface/encryption/	moved
 /overview/	/overview/	redirect
 /overview/repositories/	/overview/	redirect
