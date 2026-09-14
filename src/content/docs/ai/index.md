@@ -27,6 +27,11 @@ A plugin marketplace for AI coding assistants that provides specialized agents, 
 Model Context Protocol server integration for seamless communication between AI agents and your data infrastructure on Keboola.
 [Learn more about MCP Server →](/ai/mcp-server/)
 
+### Semantic Layer
+
+Describe your data in business terms — datasets, metrics, relationships, glossary terms, and business rules — so AI assistants understand what your data means, not just how it is stored.
+[Learn more about the Semantic Layer →](/ai/semantic-layer/)
+
 ### Machine-readable API index
 
 Each stack publishes its API index at `https://api.<stack>/apis.json`; what it contains and how to use it is described under [APIs](/overview/#apis).
