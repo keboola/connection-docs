@@ -119,15 +119,6 @@ items:
         items:
           - url: /data-apps/authentication/
             title: Authentication
-            items:
-              - url: /data-apps/authentication/google-cloud-platform/
-                title: Google Cloud OIDC
-              - url: /data-apps/authentication/microsoft-entra-id/
-                title: Microsoft Entra ID OIDC
-              - url: /data-apps/authentication/okta/
-                title: Okta OIDC
-              - url: /data-apps/authentication/auth0/
-                title: Auth0 OIDC
           - url: /data-apps/publish-and-share/
             title: Publish and share
       - url: /data-apps/reference/
