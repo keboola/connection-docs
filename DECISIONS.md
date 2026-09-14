@@ -486,6 +486,54 @@ five-file configuration), the data app's settings, all links and the Next order.
 
 ---
 
+## 2026-09-14 — Time budgets come from word counts plus measured Kai wall time
+
+**Decision:** the hub says an hour and a half and carries `minutes="80"`; the steps carry 15 / 15 /
+5 / 15 / 15 / 5. The plan's target of a 45-minute full pass is not met and is not claimed.
+
+**Method (in place of a literal stopwatch):** words per page with comments and code removed, one
+tab's worth (about 60%) at 200 words per minute, plus the wall time Kai took in the 8–9 September
+runs: load 9 min (two prompts, jobs included), transform 4, ask 3 for two questions, app 6 to a
+running draft plus a deploy, flow 3 to build plus an 8-minute first run. Reading everything on every
+page is nearer 80 minutes; the building alone, Kai path, was about 30. Both numbers are on the hub,
+so the reader knows which one they are signing up for. Re-measure with a real reader when one is
+available; the ±20% tolerance in the plan applies to that measurement, not to this estimate.
+
+---
+
+## 2026-09-14 — Phase 2: media shot from the live pipeline, nothing staged
+
+**What was shot, and how:** 26 stills and two clips, all from project 264 as it stands after five
+scheduled mornings, with a logged-in Playwright session, as element captures without the top bar
+(no names, no project title). Load 01–08 from the real `Boolabean sales` and `Boolabean forecast`
+configurations; the base-URL capture (03) shows `https://help.keboola.com/getting-started/boolabean/`
+because the live configuration was switched to that value for one screenshot and switched back
+in the same script (both PUTs logged, restoration verified). Transform 00–10 from a temporary
+mapped copy of the transformation, created and deleted within a minute; 00 cropped to its header
+so a colleague's name in the list stays out. Automate 01 and 05–09 and check 09 from the live
+flow: the All Runs capture shows the five red scheduled runs, which is the example `check/`
+describes. The app grid is the draft preview's iframe, captured after opening the draft in the
+builder (the draft container booted itself); production still does not deploy.
+
+**Clips:** the hero, three acts on the compositor scene (rows verbatim from the CSVs, the question
+as poster, the grid as background), 32 s, 0.9 MB. The ask clip, a 104-second live recording of the
+Kai panel compressed to 44 s with the 50-second thinking stretch at 6x; the pointer lands on Kai's
+conclusion. Kai's answer on the recording day (14 Sept, forecast 14–20 Sept): only Brno flagged,
+Monday 72.3 and Tuesday 85.2 per person on a two-person roster, "warm and completely dry".
+
+**Not shot, and why:** the Sheets captures and clip (need Nikita's Google authorization); the flow
+builder's component picker and second-phase step (would mean starting a flow-creation flow, which
+the read-only capture session did not do; both images removed rather than shown with old names,
+the Add Task menu capture kept because it is theme-neutral). The load page's click-through steps now
+use the base-URL-with-folder convention Kai built, so the captures and the text agree.
+
+**Things learned the hard way:** `/private/tmp` scratch files older than three days are purged by
+macOS, which took the reference SQL and the run logs with it — the SQL was restored from the page
+itself. The fact-check fix from 09-09 (cold, dry is the band with no history) is visible in the
+grid: the dashes sit on cold, dry days.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were

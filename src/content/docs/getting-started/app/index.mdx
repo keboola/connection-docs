@@ -9,7 +9,7 @@ import PageMeta from '../../../../components/getting-started/PageMeta.astro';
 import Prereqs from '../../../../components/getting-started/Prereqs.astro';
 import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
-<PageMeta genre="Tutorial" minutes="10" />
+<PageMeta genre="Tutorial" minutes="15" />
 
 A chat answer reaches the person who asked. The manager of the Brno café does not want to ask; she
 wants to glance at next week on Monday morning and see which day is red. This step turns
@@ -106,7 +106,13 @@ to build one ([Build your first app with Kai](/data-apps/getting-started/)).
 
 4. Read the preview. Six rows, seven columns, one big number per cell, red where
    `short_handed` is true, and the caption's count matching the number of red cells. If it is
-   not that, say so in the same chat; the draft updates in place.
+   not that, say so in the same chat; the draft updates in place. This is what ours looked like,
+   on a week with two red days:
+
+   ![Screenshot - The grid in the draft preview: six cafés by seven days, two red cells](/getting-started/app/grid-preview.png)
+
+   {/* Draft preview iframe captured 2026-09-14 in project 264 (app-preview-capture.mjs, 2x). A dash
+   in a cell is an empty expected_units: the summer had no day in that band; see transform/. */}
 
 5. When the draft is right, click **Publish to production**. Then open the app's own page from
    **Apps**. In our project its status still read **Not Deployed** at that point, with a

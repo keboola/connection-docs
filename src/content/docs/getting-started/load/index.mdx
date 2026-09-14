@@ -11,7 +11,7 @@ import PageMeta from '../../../../components/getting-started/PageMeta.astro';
 import Prereqs from '../../../../components/getting-started/Prereqs.astro';
 import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
-<PageMeta genre="Tutorial" minutes="10" />
+<PageMeta genre="Tutorial" minutes="15" />
 
 Data arrives split across files that cannot answer a question on their own. Here it is five: a
 summer of sales, and four small tables that say what the sales mean (which café, which product,
@@ -36,7 +36,9 @@ processor and explicit column names, and that row opens in the code editor only:
 Editor button is disabled with the tooltip "Can't close the code editor, the configuration is not
 compatible. Revert your changes to allow switching back to the visual editor." (read live
 2026-09-09). Our own connector page (components/extractors/storage/http/index.md) now says "Add Row" too
-(checked 2026-09-09). Screenshots 01–07 still show the previous sample's configuration
+(checked 2026-09-09). 2026-09-14: the click-through steps use the base-URL-with-folder + bare-file-name
+convention because that is what Kai built and what the reshot captures show; both conventions
+work, and the 404 bullet explains the slash rule for either. Screenshots 01–07 still show the previous sample's configuration
 name; phase 2 reshoots them from the Boolabean configurations. */}
 
 ## The sample data
@@ -175,11 +177,11 @@ assumes you have seen where a configuration and its rows live.
    mode: the connector reference (components/extractors/storage/http/index.md) documents only
    Base URL + rows and needs the mode added. */}
 
-5. Open **Base URL and Connection Options** and set **Base URL** to the prefix shared by every
-   file this configuration downloads, then click **Save**:
+5. Open **Base URL and Connection Options** and set **Base URL** to the folder shared by every
+   file this configuration downloads, with its trailing slash, then click **Save**:
 
    ```
-   https://help.keboola.com
+   https://help.keboola.com/getting-started/boolabean/
    ```
 
    ![Screenshot - Set the base URL](/getting-started/load/03-base-url.png)
@@ -192,10 +194,10 @@ settings, sharing the configuration's base URL.
 6. In the **Rows** section, click **Add Row**, name it `stores`, and click **Create**. The row
    name becomes the Storage table name, so use exactly this spelling.
 
-7. Under **Download Settings**, set **Path** to the file, relative to the base URL:
+7. Under **Download Settings**, set **Path** to the file name, relative to the base URL:
 
    ```
-   /getting-started/boolabean/stores.csv
+   stores.csv
    ```
 
 8. Check the rest of the row and click **Save**:
@@ -214,10 +216,10 @@ settings, sharing the configuration's base URL.
 
    | Row name | Path |
    |---|---|
-   | `products` | `/getting-started/boolabean/products.csv` |
-   | `sales` | `/getting-started/boolabean/sales.csv` |
-   | `staffing` | `/getting-started/boolabean/staffing.csv` |
-   | `weather_daily` | `/getting-started/boolabean/weather_daily.csv` |
+   | `products` | `products.csv` |
+   | `sales` | `sales.csv` |
+   | `staffing` | `staffing.csv` |
+   | `weather_daily` | `weather_daily.csv` |
 
 10. Back on the configuration, click **Run Component** and confirm with **Run**. One run fetches
     all five rows; in **Jobs** it may fan out into a job per row under the one you started.
@@ -227,8 +229,9 @@ settings, sharing the configuration's base URL.
 **Add the forecast**
 
 11. Create a second configuration the same way (steps 1 to 5), named `Boolabean forecast`, with
-    the base URL `https://api.open-meteo.com`. Add one row named `forecast` and set its **Path** to
-    everything after the host in the forecast URL above, starting with `/v1/forecast?`. Save.
+    the base URL `https://api.open-meteo.com/v1/`. Add one row named `forecast` and set its
+    **Path** to everything after that in the forecast URL above, starting with
+    `forecast?latitude=`. Save.
 
 12. The visual form cannot skip the seven metadata lines and the blank line before the header, so
     this row is finished in JSON. Click **Code Editor** at the top of the row, replace the
@@ -290,10 +293,11 @@ to the tables by these names inside the transformation; it is those names the SQ
 
 ## If it goes wrong
 
-- **The job fails with a 404.** The path is wrong, or missing its leading slash. Base URL and path
-  are concatenated, so `https://help.keboola.com` + `/getting-started/boolabean/stores.csv` is
-  right, while a base URL with a trailing slash gives you a double slash. Open the full URL in a
-  browser to see whether the file is really there.
+- **The job fails with a 404.** Base URL and path are simply concatenated. With the base URL
+  ending in a slash and the path a bare file name, `https://help.keboola.com/getting-started/boolabean/`
+  + `stores.csv` is right; a slash on both sides gives a double slash and a slash on neither runs
+  the folder into the file name. Open the full URL in a browser to see whether the file is really
+  there.
 - **Every row arrives as one column.** The **Delimiter** setting does not match the file. These
   files are comma-separated.
 - **The first data row is missing, or columns are called `col_1`.** Wrong header option: set

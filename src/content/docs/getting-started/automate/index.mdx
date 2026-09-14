@@ -38,8 +38,10 @@ before Run flow is enabled; scheduling is Schedules tab > Create Schedule > Set 
 "Set Schedule" as /flows/ still says; the Notifications tab edits in place with
 Success/Errors/Processing cards and has no "Edit Notifications" button and no Warnings card,
 contrary to /management/notifications/. Create Flow opens a chooser ("Get your data connected!").
-Screenshots 01–09 show the previous sample's flow (phases renamed Extract/Transform/Load); phase 2
-reshoots them from "Boolabean morning outlook". */}
+2026-09-14: captures 01 and 05–09 reshot from "Boolabean morning outlook" (element captures, no top
+bar); 02 (the Add Task menu) kept from the previous shoot because it is theme-neutral; 03 (the
+component picker) and 04 (the second phase) removed rather than shown with the old names — a
+reshoot of the picker needs a flow-creation click, which the read-only capture session did not do. */}
 
 <Prereqs needs={['project']}>
   <li>
@@ -159,8 +161,6 @@ nobody gets told about is just a button.
    configurations. Pick **HTTP**, then the `Boolabean sales` configuration. It drops onto the
    canvas as a task inside a box labelled **Phase 1**.
 
-   ![Screenshot - Pick the component and configuration](/getting-started/automate/03-select-component.png)
-
 4. Hover **Phase 1** and click the **+** in the toolbar on its top edge, the one that adds a task
    *to this phase*. Pick **HTTP** again, then `Boolabean forecast`. The two connectors now sit side
    by side and will run at the same time.
@@ -169,10 +169,8 @@ nobody gets told about is just a button.
    `Boolabean staffing outlook` transformation there. Being in a later phase is what guarantees
    both tables have landed before the SQL runs.
 
-   ![Screenshot - A second phase](/getting-started/automate/04-second-phase.png)
-
-   *The captures on this page show a finished flow whose phases have been renamed. Yours start
-   life as **Phase 1**, **Phase 2**, … until you rename them.*
+   *The finished flow further down shows phases that have been renamed. Yours start life as
+   **Phase 1**, **Phase 2**, … until you rename them.*
 
 6. If you built the app, click the **+** below Phase 2 and add the `Staffing Outlook Grid` data
    app to the new phase; a data app is a component like the others and appears in the same picker.
