@@ -2,6 +2,8 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSy
 import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { sharedText } from '../components/getting-started/prereqs.mjs';
+
 /**
  * Astro integration that emits a raw-markdown copy of every docs page.
  *
@@ -31,6 +33,42 @@ function findMarkdownFiles(dir, files = []) {
 }
 
 /**
+ * Authoring comments never reach the published markdown.
+ *
+ * Both comment forms carry the same thing: provenance for whoever edits the
+ * page next — live-walk dates, job and configuration IDs from the demo
+ * project, exception IDs, VERIFY(owner) flags, notes about what is visible in
+ * a capture. That is internal (PRDCT-616), and the markdown twin is public and
+ * machine-read, so it is stripped here rather than translated. Rationale that
+ * outlives an edit belongs in DECISIONS.md, which is version-controlled and
+ * not served.
+ */
+function stripComments(body) {
+  return body
+    .replace(/\{\/\*[\s\S]*?\*\/\}/g, '')   // MDX  {/* … */}
+    .replace(/<!--[\s\S]*?-->/g, '');       // HTML <!-- … -->
+}
+
+/**
+ * Render <Prereqs needs={[…]}> as text.
+ *
+ * The component's own markup is dropped with every other component wrapper,
+ * which used to take the prerequisites with it: the twin told an agent to load
+ * data without mentioning that a project has to exist first. The wording comes
+ * from the same table the component renders (prereqs.mjs), so the two cannot
+ * drift.
+ */
+function prereqsToText(tag) {
+  const needs = tag.match(/needs=\{\[([^\]]*)\]\}/);
+  const keys = needs
+    ? needs[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean)
+    : ['project'];
+  const lines = keys.map(sharedText).filter(Boolean);
+  if (!lines.length) return [];
+  return ['', '**Before you start**', '', ...lines.map((l) => `- ${l}`), ''];
+}
+
+/**
  * Reduce an .mdx body to plain markdown.
  *
  * The raw-markdown copies exist so an agent can read a page as text, so MDX
@@ -45,14 +83,13 @@ function findMarkdownFiles(dir, files = []) {
  * otherwise turn ordinary prose into an indented code block.
  *
  * Components are matched on an uppercase initial, the JSX convention, so
- * lowercase HTML written inline in a page is left alone.
+ * lowercase HTML written inline in a page is left alone. Two of them carry
+ * meaning a reader needs and are rendered rather than dropped: a tab's
+ * `label`, and <Prereqs>.
  */
 function stripMdx(body) {
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
-  const withComments = withoutImports.replace(
-    /\{\/\*([\s\S]*?)\*\/\}/g,
-    (_, inner) => `<!--${inner}-->`,
-  );
+  const withoutComments = stripComments(withoutImports);
 
   const INDENT = '    ';
   const open = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*(?<!\/)>\s*$/;
@@ -62,8 +99,11 @@ function stripMdx(body) {
   let depth = 0;
   const out = [];
 
-  for (const line of withComments.split('\n')) {
-    if (selfClosing.test(line)) continue;
+  for (const line of withoutComments.split('\n')) {
+    if (selfClosing.test(line)) {
+      if (/^\s*<Prereqs\b/.test(line)) out.push(...prereqsToText(line));
+      continue;
+    }
     if (close.test(line)) {
       depth = Math.max(0, depth - 1);
       continue;
@@ -74,6 +114,9 @@ function stripMdx(body) {
       // variant is which.
       const label = line.match(/\blabel=["']([^"']+)["']/);
       if (label) out.push('', `**${label[1]}**`, '');
+      // <Prereqs needs={…}> with page-specific <li> children in its slot: the
+      // shared lines go in first, the children follow as the list they are.
+      if (/^\s*<Prereqs\b/.test(line)) out.push(...prereqsToText(line));
       depth += 1;
       continue;
     }
@@ -153,7 +196,8 @@ export default function pageMarkdown() {
 
           const isMdx = extname(file) === '.mdx';
           const raw = stripFrontmatter(content);
-          const body = (isMdx ? stripMdx(raw) : raw).trim();
+          // .md pages carry the same authoring notes as HTML comments.
+          const body = (isMdx ? stripMdx(raw) : stripComments(raw)).replace(/\n{3,}/g, '\n\n').trim();
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });

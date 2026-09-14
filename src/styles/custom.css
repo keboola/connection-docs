@@ -1232,6 +1232,33 @@ nav.sidebar {
   .sl-markdown-content .beacon-code-pair { grid-template-columns: 1fr; }
 }
 
+/* Getting Started: a UI capture and the request that does the same thing, side
+   by side. Stripe puts the code in a third column that follows the prose; that
+   needs a layout override, so the cheap version is a pair grid the author opts
+   into with <div class="gs-pair"> around exactly two blocks. */
+.sl-markdown-content .gs-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+  margin: 14px 0;
+}
+.sl-markdown-content .gs-pair > .expressive-code,
+.sl-markdown-content .gs-pair > pre,
+.sl-markdown-content .gs-pair > p,
+.sl-markdown-content .gs-pair > p > img,
+.sl-markdown-content .gs-pair > img {
+  margin: 0 !important;
+}
+.sl-markdown-content .gs-pair > p > img,
+.sl-markdown-content .gs-pair > img {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 8px;
+}
+@media (max-width: 720px) {
+  .sl-markdown-content .gs-pair { grid-template-columns: 1fr; }
+}
+
 /* Auto-migrated: bolded inline callouts (**Note:** …) */
 .sl-markdown-content > aside.starlight-aside--note,
 .sl-markdown-content > aside.starlight-aside--tip,

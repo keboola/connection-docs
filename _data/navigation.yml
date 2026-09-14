@@ -29,6 +29,9 @@ items:
   - url: /getting-started/
     title: Getting Started
     items:
+      - url: /getting-started/project/
+        title: Get a project
+
       - url: /getting-started/load/
         title: Get your data in
 
