@@ -19,6 +19,10 @@ documented here. If you still use it, it lives at [keboola/keboola-as-code](http
 
 Everything on this page is about kbagent, the current CLI.
 :::
+<!-- TODO(human-review, Jordan): the support status of Keboola as Code. This banner deliberately states
+     neither "still supported" nor "deprecated" — David Esner (Slack, 2026-09-03) asked that it name the
+     tool, say it is unrelated to kbagent, and link the repository, which it does; the deprecation position
+     is yours to confirm, as flagged in your review of #1094. -->
 
 ## What you can do with it
 
