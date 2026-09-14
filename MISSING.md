@@ -10,6 +10,8 @@ guide asserts without a verified source.
 
 | Gap | Why it matters | Where it belongs |
 |---|---|---|
+| CLI / API tab on the remaining task pages | `load/` has the three tabs; `transform/`, `ask/`, `app/` and `automate/` still carry the old two. Each needs its commands run against a live project before it ships (the pattern and the verification recipe are in DECISIONS.md, 2026-09-14). `check/` gets read-only commands (`job list`, `job detail`, `storage tables`) rather than tabs. | `src/content/docs/getting-started/*/index.mdx` |
+| Clips without the mascot | `outlook-tour.mp4` and `ask/kai-ask-staffing.mp4` were rendered with the octopus pointer, which Nikita asked to drop entirely in favour of plain motion (spotlight). Both need re-rendering from the same recordings once the compositor's mascot code is removed; the ask clip is also over budget (44 s / 1.85 MB against 30 s / 1 MB). | `public/getting-started/`, compositor |
 | No "check it worked" page | Verification is scattered across five pages, so a reader who lands mid-guide cannot tell whether their own run is healthy. Absent at PostHog and Firecrawl too — a place to be better than the field. | new page 7, `getting-started/check/` |
 | No page for the "AI answer" step | Michal asked for *"něco typu AI answer"*; today the closest thing is a closing section misfiled at the bottom of the automation page. | new page 4, `getting-started/ask/` |
 | ~~No landing page for the going-further tier~~ | Done 2026-09-02: `getting-started/going-further/` exists and carries `next-steps`. | — |

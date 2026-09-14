@@ -534,6 +534,70 @@ grid: the dashes sit on cold, dry days.
 
 ---
 
+## 2026-09-14 — Three tabs: Prompt · UI · CLI / API, and the hub goes dry
+
+**Decision:** task pages offer the same task three ways, in this order, with these exact labels:
+**Prompt** (paste into Kai) · **UI** (click by click) · **CLI / API** (`kbagent`, with the raw
+request beside it where there is no command). Starlight stores the reader's choice under the
+label *text*, so the three strings are a contract; it is written into `PathIntro.astro`'s header,
+and a page that spells one differently silently drops out of the sync.
+
+**Why:** Michal asked it directly on 2 September — "Mám tam nějaký prompt? Jak to zpracuje to
+CLI?" — and warned that without it "neztratila se nám podstata" ("kočičky"). Jordan had agreed
+the same mechanism on 5 August ("combined UI + API format"). Two independent asks, one answer.
+The third tab also ends the awkwardness of a guide that mentions the CLI only as a link.
+
+**Rollout:** one page per commit. `PathIntro` takes `tabs={3}`; the default stays the old two-tab
+wording until the last page is converted, so an unconverted page never advertises a tab it does
+not have. `load/` is first and is the stop point: the pattern goes to Michal before the rest
+follow.
+
+**Verified before shipping (load/, 2026-09-14, project 264, kbagent v0.93.1):** `config new
+--push --no-files` created a throwaway configuration; `config row-create` added rows with exactly
+the processors block on the page; `job run --wait` finished green (job 104214515); `storage
+tables --bucket-id` and `storage table-detail` read back 6 and 18 rows with their columns; the
+curl POST created a second throwaway configuration through the Storage API. Both configurations
+trashed and the bucket dropped the same minute. `npm run check:cli` passes against the repo's
+v0.76.1 reference, so every flag exists in both versions.
+
+---
+
+## 2026-09-14 — The hub is dry again, and Get a project is a page again
+
+**Decision:** the hub opens with the question, the clip and a table of the seven steps (what each
+produces, how long it takes). The café story is gone; the sample world is described once, on
+`load/`. **Get a project** returns to `/getting-started/project/`.
+
+**Why:** Michal, 2 September: "dataset je jen helping vehicle… není to nosné téma… já bych v tom
+byl sušší", and "já bych to už nedělal moc složitější". The merge of 9 September had made the hub
+230 lines that opened with two paragraphs of narrative. Get a project is also the only step with
+no prompt and no command, so as a hub section it broke the rule the rest of the arc now follows.
+Its URL had been a redirect to the hub anchor for five days; it is a real page again, and the nav,
+the shared `Prereqs` link and the two inbound links point back at it.
+
+**Also taken from Stripe** (Nikita, 14 September): a "Where to start instead" table at the foot of
+the hub — this guide, the kbagent CLI, the MCP server, and building an app with Kai. It is where
+Michal's "MCP a CLI jsou jen drivery a vehikly" lands without them becoming topics inside the
+guide. Not taken: the three-column layout with code following the prose (a custom Starlight layout
+override; the cheap substitute is the `.gs-pair` grid for a capture beside its request), and the
+by-business-type use-case grid (one guide, one dataset).
+
+---
+
+## 2026-09-14 — Authoring comments no longer ship to agents
+
+**Decision:** `page-markdown.mjs` strips `{/* … */}` and `<!-- … -->` from the `/<slug>/index.md`
+twins instead of publishing them, and renders `<Prereqs>` as text.
+
+**Why:** the twins are public and machine-read. They were carrying demo-project configuration IDs,
+job and exception IDs, capture notes and VERIFY flags — internal by PRDCT-616. Rationale that
+outlives an edit belongs here, in a file that is versioned and not served. The `<Prereqs>` half is
+the opposite failure: the component was dropped with the others, so the twin told an agent to load
+data without mentioning that a project has to exist first. The wording now comes from
+`prereqs.mjs`, which both the component and the integration import, so they cannot drift.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
