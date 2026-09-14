@@ -103,7 +103,17 @@ export const sidebar = [
         label: "Run & share",
         collapsed: true,
         items: [
-          { slug: "data-apps/authentication" },
+          {
+            label: "Authentication",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "data-apps/authentication" },
+              { slug: "data-apps/authentication/google-cloud-platform" },
+              { slug: "data-apps/authentication/microsoft-entra-id" },
+              { slug: "data-apps/authentication/okta" },
+              { slug: "data-apps/authentication/auth0" },
+            ],
+          },
           { slug: "data-apps/publish-and-share" },
         ],
       },

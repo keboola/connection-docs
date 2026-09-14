@@ -6,18 +6,6 @@ redirect_from:
   - /components/data-apps/authentication/
   - /data-apps/oidc/
   - /components/data-apps/oidc/
-  - /data-apps/oidc/auth0/
-  - /components/data-apps/oidc/auth0/
-  - /data-apps/authentication/auth0/
-  - /data-apps/oidc/google-cloud-platform/
-  - /components/data-apps/oidc/google-cloud-platform/
-  - /data-apps/authentication/google-cloud-platform/
-  - /data-apps/oidc/microsoft-entra-id/
-  - /components/data-apps/oidc/microsoft-entra-id/
-  - /data-apps/authentication/microsoft-entra-id/
-  - /data-apps/oidc/okta/
-  - /components/data-apps/oidc/okta/
-  - /data-apps/authentication/okta/
 ---
 
 Once an app is deployed, its URL is publicly available. Protect it so only the right people can open it, and choose the method that fits your audience. You set it in the app's configuration under **Authentication → Authentication Type**, which offers six options.
@@ -26,7 +14,7 @@ Once an app is deployed, its URL is publicly available. Protect it so only the r
 
 ## Authentication methods
 
-- **None (Public Access)** — the app is public to anyone with the URL. You can still add your own authorization inside the app; for Streamlit, use the [Streamlit authenticator](https://github.com/mkhorasani/Streamlit-Authenticator) ([example](https://github.com/KB-PS/mkt-bi-ocr/blob/master/Select_Invoices.py)).
+- **None (Public Access)** — the app is public to anyone with the URL. You can still add your own authorization inside the app; for Streamlit, use the [Streamlit authenticator](https://github.com/mkhorasani/Streamlit-Authenticator) ([example](https://github.com/keboola/mkt-bi-ocr/blob/master/Select_Invoices.py)).
 - **Basic (Password)** — the **default** for new apps. Keboola generates a shared password; users enter it before the app opens. Once the app is deployed, the password is shown on the app's configuration page next to **Open App**, ready to copy — and when Kai builds an app, it shows the password as the last step.
 - **OIDC (Custom)** — users sign in with your identity provider (Auth0, Google Cloud, Microsoft Entra ID, Okta). Recommended for anything beyond a quick share.
 - **GitHub** — restrict access with GitHub OAuth by organization, team, repository, or allowed users.
@@ -35,29 +23,29 @@ Once an app is deployed, its URL is publicly available. Protect it so only the r
 
 ## OIDC (single sign-on)
 
-OIDC lets users log into your app through your single sign-on (SSO) provider. Keboola supports Auth0, Google Cloud, Microsoft Entra ID, and Okta. When you open an OIDC-protected app, you pick an **Authentication Provider** and sign in.
+OIDC lets users log into your app through your single sign-on (SSO) provider. Keboola has a ready-made option for Google (**Google SSO**) and for Microsoft Entra ID (**Azure OIDC**), plus a **Generic OIDC** option for any other OpenID Connect provider, Okta and Auth0 among them. Users sign in with the provider you configured; if an app has more than one provider, they first pick an **Authentication Provider**.
 
-![Select OIDC provider](/data-apps/auth-select-oidc-provider.png)
+![The app's sign-in page asking the user to select an authentication provider, one button per configured provider](/data-apps/auth-select-oidc-provider.png)
 
-### Set up OIDC
+Every setup has the same shape: create the app in Keboola, register it with your provider using the app's [callback URL](#callback-url-format), paste the provider's credentials into the app's **Authentication** settings, and deploy. The clicks differ per provider, so follow the guide for yours:
 
-The flow is the same for every provider — only the provider option, issuer URL, and a few provider quirks differ (see the table below). You must register a callback URL for **each** app; credentials can't be reused across apps.
+- [Google Cloud](/data-apps/authentication/google-cloud-platform/) — a Google Workspace organization or any Google account
+- [Microsoft Entra ID](/data-apps/authentication/microsoft-entra-id/) — Microsoft work accounts, optionally limited to groups
+- [Okta](/data-apps/authentication/okta/)
+- [Auth0](/data-apps/authentication/auth0/)
 
-1. **Register the app with your identity provider.** Create an OIDC / OAuth 2.0 **web application** in the provider's console. You'll get a **Client ID** and **Client Secret**. Leave the callback URL for now — you don't have it until the Keboola app exists.
-2. **Create the app in Keboola.** Open **Apps**, click **+ Create App**, and [create the app manually](/data-apps/getting-started/#create-an-app-manually) — pick a stack, name the app, and click **Create App**. It opens on its own configuration page.
-3. **Set the authentication method.** On the configuration page, under **Authentication**, select **OIDC**, choose your provider option, and paste the **Client ID**, **Client Secret**, and **Issuer URL**. Click **Save**.
-4. **Add the callback URL to your provider.** Register the app's [callback URL](#callback-url-format) as the authorized redirect URI in the provider's console.
-5. **Deploy the app.** Set the app's **code source** — a Python/JS app runs from a connected **Git repository**; a Streamlit app can use inline **Code** or Git — then click **Deploy App** and complete the short wizard (backend size, inactivity timeout).
-6. **Test.** Open the app URL — you should be redirected to your provider to sign in, then land in the app.
+Using another provider? Choose **Generic OIDC**, register a web application in the provider's console, and enter its issuer URL; the [Okta guide](/data-apps/authentication/okta/) walks through the same flow. Each app has its own callback URL, so register every app with the provider separately.
 
-### Provider settings
+### Provider settings at a glance
 
-| Provider | Keboola provider option | Issuer URL | Notes |
-|---|---|---|---|
-| **Auth0** | Generic OIDC | `https://<yourDomain>.us.auth0.com/` | Register a regular web application. |
-| **Google Cloud** | Google SSO | `https://accounts.google.com` | On the **OAuth consent screen**, add `keboola.com` under **Authorized domains**. |
-| **Microsoft Entra ID** | Azure OIDC | *(from your tenant)* | Provide **Client ID**, **Client Secret**, and **Tenant ID**. To restrict by group, add a groups claim (**Manage → Token configuration → Add groups claim**; for large tenants, return only groups assigned to the app). |
-| **Okta** | Generic OIDC | `https://<yourOktaOrg>.okta.com/oauth2/default` | Register an **OIDC – OpenID Connect** web app. |
+| Provider | Keboola provider option | Issuer URL |
+|---|---|---|
+| **Google Cloud** | Google SSO | `https://accounts.google.com` |
+| **Microsoft Entra ID** | Azure OIDC | *(not used; enter the **Tenant ID** instead)* |
+| **Okta** | Generic OIDC | `https://<yourOktaDomain>/oauth2/default` |
+| **Auth0** | Generic OIDC | `https://<yourAuth0Domain>/` |
+
+`<yourOktaDomain>` and `<yourAuth0Domain>` are your tenant hosts, for example `acme.okta.com` or `acme.us.auth0.com`. Okta orgs without the `default` authorization server use `https://<yourOktaDomain>` instead; see the [Okta guide](/data-apps/authentication/okta/).
 
 ## GitHub authentication
 
@@ -163,7 +151,7 @@ https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback
 
 For example: `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`
 
-You can find your app's full URL after the first deployment in the app configuration.
+`<dataAppId>` stands for the whole host shown in the **App URL** block on the app's configuration page: the URL prefix, a hyphen, and the App ID (for example `toy-store-sales-74016144`). Take that host, add `https://` in front and `/_proxy/callback` at the end.
 
 ---
 
