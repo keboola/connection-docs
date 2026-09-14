@@ -88,6 +88,8 @@ If you need more information, please contact your CSM.
 
 **Types of backend sizes used for jobs**
 
+| Backend size                          | Specification                                   |
+|---------------------------------------|-------------------------------------------------|
 | SMALL (SQL)                           | Snowflake SMALL DWH or equivalent               |
 | MEDIUM (SQL)                          | Snowflake MEDIUM DWH                            |
 | LARGE (SQL)                           | Snowflake LARGE DWH                             |
@@ -97,6 +99,17 @@ If you need more information, please contact your CSM.
 | LARGE (Python,R, Components)          | 114 GB RAM, 14 CPU cores, 1TB SSD, dedicated    |
 | SMALL (dbt)                           | Snowflake SMALL DWH or equivalent               |
 | REMOTE (dbt)                          | Using user's remote DWH                         |
+
+#### Kai Agent
+
+[Kai](/kai/) has no fixed rate in the table above. Each time Kai finishes a reply, the
+charge is derived from what that reply actually cost to produce — the language model
+tokens it consumed and the infrastructure it ran on. A median conversation, counting
+every reply it takes to reach a result, costs about **1.1 PPUs**, and simple work —
+writing a query, exploring a project, creating a transformation — runs three to four
+conversations per PPU. See
+[Kai Pricing and Limits](/kai/pricing/) for typical figures per piece of work and for how Kai
+spend is tracked and capped.
 
 ### Storage Size
 The storage size is the sum of the sizes of the tables in your [table Storage](/storage/). 
