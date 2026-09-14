@@ -24,7 +24,7 @@ Storage and two connector configurations you can re-run.
 
 <Prereqs needs={['project', 'nothing']} />
 
-<PathIntro />
+<PathIntro tabs={3} />
 
 {/* Tutorial-type page. Rebuilt on the HTTP connector: CSV Import is deprecated and cannot take
 new configurations (verified live in project 264, 2026-08-04). Every label, default and dialog of
@@ -35,7 +35,15 @@ Key → Read Header / Set Header / Primary Key). The two configurations and thei
 processor and explicit column names, and that row opens in the code editor only: the Visual
 Editor button is disabled with the tooltip "Can't close the code editor, the configuration is not
 compatible. Revert your changes to allow switching back to the visual editor." (read live
-2026-09-09). Our own connector page (components/extractors/storage/http/index.md) now says "Add Row" too
+2026-09-09). CLI / API tab added 2026-09-14 and run live against project 264 with kbagent v0.93.1 (project
+alias docs-demo): `config new --push --no-files` created a throwaway configuration, `config
+row-create` added two rows with exactly the processors block shown, `job run --wait` finished
+(job 104214515, success), `storage tables --bucket-id` reported 6 and 18 rows and `storage
+table-detail` listed the columns; the curl POST created a second throwaway configuration. Both
+configurations were deleted and the bucket dropped the same minute. The repo's CLI reference is
+v0.76.1 and the CI gate checks flags against it, so every flag above exists in both.
+
+Our own connector page (components/extractors/storage/http/index.md) now says "Add Row" too
 (checked 2026-09-09). 2026-09-14: the click-through steps use the base-URL-with-folder + bare-file-name
 convention because that is what Kai built and what the reshot captures show; both conventions
 work, and the 404 bullet explains the slash rule for either. Screenshots 01–07 still show the previous sample's configuration
@@ -92,13 +100,13 @@ as it is.
 ## Set it up
 
 <Tabs syncKey="howto">
-<TabItem label="Do it with Kai">
+<TabItem label="Prompt">
 
 Setting up a data source connector is one of the things Kai does
 ([Integration Setup](/kai/use-cases/#integration-setup)). Open **Kai Agent** in the top bar and
 ask for the whole first configuration at once:
 
-```text
+```text title="Prompt"
 Load these five CSV files into Storage as one HTTP data source configuration called "Boolabean
 sales", one configuration row per file, each table named after its file:
 
@@ -117,7 +125,7 @@ each file itself, so the tables come out with the files' column names.
 **Check:** Kai reports five tables with 6, 18, 9,761, 552 and 552 rows, and the configuration's
 **Rows** list shows five entries. Then, in the same chat, the forecast:
 
-```text
+```text title="Prompt"
 Add a second HTTP data source configuration called "Boolabean forecast" that loads this one URL
 into a table called forecast:
 
@@ -138,11 +146,11 @@ in this wording. */}
 
 **Check:** a `forecast` table with **42** rows and the columns `location_id`, `time`,
 `temperature_2m_max` and `precipitation_sum`. If Kai built something else, delete it and switch to
-the **Do it yourself** tab. The extra minutes pay for themselves, because the rest of the guide
+the **UI** tab. The extra minutes pay for themselves, because the rest of the guide
 assumes you have seen where a configuration and its rows live.
 
 </TabItem>
-<TabItem label="Do it yourself">
+<TabItem label="UI">
 
 **Create the configuration**
 
@@ -258,6 +266,77 @@ settings, sharing the configuration's base URL.
     code editor, the configuration is not compatible*. That is expected.
 
 13. **Run Component** on this configuration as well.
+
+</TabItem>
+<TabItem label="CLI / API">
+
+Every click above is an API call underneath, and [kbagent](/cli/) is the same calls from a
+terminal. Connect it to your project once with `kbagent project add` (see
+[the CLI quickstart](/cli/getting-started/)); the examples below use `docs-demo` as the project
+alias and `$KBC_TOKEN` as a Storage API token.
+
+**Create the configuration**
+
+The configuration itself carries only the base URL. `--no-files` says "just create it remotely",
+and `--dry-run` shows the request and validates it against the component's schema without creating
+anything:
+
+```bash
+kbagent config new --project docs-demo --component-id keboola.ex-http --name "Boolabean sales" --push --no-files --configuration '{"parameters":{"baseUrl":"https://help.keboola.com/getting-started/boolabean/"}}'
+```
+
+It prints the new configuration ID; keep it for the next two commands. The same call as a raw
+request, if you would rather see it:
+
+```bash
+curl -X POST "https://connection.<your-stack>/v2/storage/components/keboola.ex-http/configs" -H "X-StorageApi-Token: $KBC_TOKEN" -F "name=Boolabean sales" -F 'configuration={"parameters":{"baseUrl":"https://help.keboola.com/getting-started/boolabean/"}}'
+```
+
+**Add the five tables**
+
+Each file is a row on that configuration. The row's JSON is the path, plus the processors that put
+the result in a table of the same name and read the column names from the file's header — the
+same three settings the UI tab fills in by hand:
+
+```bash
+kbagent config row-create --project docs-demo --component-id keboola.ex-http --config-id <config-id> --name stores --configuration '{"parameters":{"path":"stores.csv"},"processors":{"after":[{"definition":{"component":"keboola.processor-move-files"},"parameters":{"direction":"tables","folder":"stores"}},{"definition":{"component":"keboola.processor-create-manifest"},"parameters":{"delimiter":",","enclosure":"\"","incremental":false,"primary_key":[],"columns_from":"header"}},{"definition":{"component":"keboola.processor-skip-lines"},"parameters":{"lines":1}}]}}'
+```
+
+Repeat for `products`, `sales`, `staffing` and `weather_daily`, changing the name, the path and
+the folder together. Then run the configuration and wait for the job:
+
+```bash
+kbagent job run --project docs-demo --component-id keboola.ex-http --config-id <config-id> --wait
+```
+
+**Add the forecast**
+
+The same two commands. The difference is the row's processors: nine lines skipped instead of one,
+and the four column names given explicitly instead of read from a header.
+
+```bash
+kbagent config new --project docs-demo --component-id keboola.ex-http --name "Boolabean forecast" --push --no-files --configuration '{"parameters":{"baseUrl":"https://api.open-meteo.com/v1/"}}'
+```
+
+Put the row's JSON in a file — it is long, and `--configuration` takes `@file`:
+
+```bash
+kbagent config row-create --project docs-demo --component-id keboola.ex-http --config-id <forecast-config-id> --name forecast --configuration @forecast-row.json
+```
+
+```bash
+kbagent job run --project docs-demo --component-id keboola.ex-http --config-id <forecast-config-id> --wait
+```
+
+**Check:** the tables and their row counts, without leaving the terminal:
+
+```bash
+kbagent storage tables --project docs-demo
+```
+
+```bash
+kbagent storage table-detail --project docs-demo --table-id in.c-keboola-ex-http-<config-id>.sales
+```
 
 </TabItem>
 </Tabs>
