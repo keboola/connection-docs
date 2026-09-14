@@ -20,7 +20,7 @@ create in Storage and then activate through the Scheduler API.
   you created by hand does not. In projects with a protected default branch it has to be a production
   manager working on the default branch. Activation creates a further Storage token that the schedule
   runs under.
-- The hosts of your [stack](/overview/#apis). The examples use the US AWS
+- The hosts of your [stack](/overview/apis/). The examples use the US AWS
   stack: `connection.keboola.com` for Storage and `scheduler.keboola.com` for the Scheduler. On EU
   Frankfurt AWS they are `connection.eu-central-1.keboola.com` and `scheduler.eu-central-1.keboola.com`;
   the service index lists yours. A wrong host or token answers with `Invalid access token`.

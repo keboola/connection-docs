@@ -34,7 +34,7 @@ Describe your data in business terms — datasets, metrics, relationships, gloss
 
 ### Machine-readable API index
 
-Each stack publishes its API index at `https://api.<stack>/apis.json`; what it contains and how to use it is described under [APIs](/overview/#apis).
+Each stack publishes its API index at `https://api.<stack>/apis.json`; what it contains and how to use it is described under [APIs](/overview/apis/).
 
 ### AI Component Suggestions
 

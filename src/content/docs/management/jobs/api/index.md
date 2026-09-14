@@ -24,7 +24,7 @@ how much memory it may use; those limits are a safeguard, set by the component d
 
 - A [Storage API token](/management/project/tokens/), scoped to what the job needs; the token dialog
   in the first step shows how narrow it can be.
-- The Queue host of your [stack](/overview/#apis): `queue.keboola.com` on US AWS,
+- The Queue host of your [stack](/overview/apis/): `queue.keboola.com` on US AWS,
   `queue.eu-central-1.keboola.com` on EU Frankfurt AWS; the service index lists yours. A wrong host or
   token answers with `Invalid access token`.
 
@@ -62,7 +62,7 @@ curl --location --request POST 'https://queue.keboola.com/jobs' \
 }'
 ```
 
-Use the queue endpoint of your [stack](/overview/#apis); a wrong endpoint or
+Use the queue endpoint of your [stack](/overview/apis/); a wrong endpoint or
 token answers with `Invalid access token`. The response is the job object, still in the `created`
 state:
 

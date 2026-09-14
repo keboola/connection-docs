@@ -29,7 +29,7 @@ Rest assured, we're here to support you whenever needed. Reach out via email at 
 - [MCP Server](/ai/mcp-server)
 
 ## Reference
-- [API reference](/overview/#apis)
+- [API reference](/overview/apis/)
 - [Release notes](https://changelog.keboola.com/)
 
 ## Resources
