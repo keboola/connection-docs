@@ -970,6 +970,8 @@ items:
         items:
           - url: /extend/publish/checklist/
             title: Checklist
+      - url: /extend/development-project/
+        title: Development Project
 
   - url: /external-integrations/
     title: External Integrations

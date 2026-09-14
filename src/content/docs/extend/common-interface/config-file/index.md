@@ -114,7 +114,7 @@ As with configurations, the encrypted values must be prefixed with the hash sign
 you **have to encrypt values manually via the API** -- they will not be encrypted automatically when you store *Stack Parameters*!
 When using the [encryption API](https://api.keboola.com/?service=encryption#post-/encrypt), provide only the `componentId`
 parameter (using `projectId` or `configId` will make the cipher unusable).
-Also take care to use the correct [API URL](/overview/#apis-and-service-endpoints) to obtain
+Also take care to use the correct [API URL](/overview/#apis) to obtain
 ciphers for each region you need.
 
 ## State File

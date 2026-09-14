@@ -780,6 +780,7 @@ export const sidebar = [
           { slug: "extend/publish/checklist" },
         ],
       },
+      { slug: "extend/development-project" },
     ],
   },
   {

@@ -27,10 +27,9 @@ A plugin marketplace for AI coding assistants that provides specialized agents, 
 Model Context Protocol server integration for seamless communication between AI agents and your data infrastructure on Keboola.
 [Learn more about MCP Server →](/ai/mcp-server/)
 
-### Machine-Readable API Index
+### Machine-readable API index
 
-Every Keboola stack publishes a machine-readable index of its APIs at `https://api.<stack>/apis.json` (for example, [`https://api.keboola.com/apis.json`](https://api.keboola.com/apis.json)). The index lists each service with its base `apiUrl` and a link to its OpenAPI specification (`openApiSpecUrl`) — a convenient overview for agentic usage: AI agents, MCP servers, and other tooling that discovers Keboola's APIs programmatically.
-[View the API index →](https://api.keboola.com/apis.json)
+Each stack publishes its API index at `https://api.<stack>/apis.json`; what it contains and how to use it is described under [APIs](/overview/#apis).
 
 ### AI Component Suggestions
 

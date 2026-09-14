@@ -98,7 +98,7 @@ a [data folder and configuration file](/extend/common-interface/). The above men
 [Run Job API call](https://api.keboola.com/?service=job-queue#post-/jobs)
 is designed to do that.
 
-We recommend that you use the [API console or Postman](/overview/#apis-and-service-endpoints) to call the API.
+We recommend that you use the [API console or Postman](/overview/#apis) to call the API.
 A [collection of examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) of the
 Run Job API call in debug mode is available in Postman Docs.
 

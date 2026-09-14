@@ -61,13 +61,11 @@ containers; the component cannot be affected by other running components. It may
 to have no network access.
 
 ## API
-The [Job Queue API](https://api.keboola.com/?service=job-queue) has API calls to
-
-- run a [component](/extend/component/).
-- [encrypt values](/extend/common-interface/encryption/).
-- [prepare the data folder](/extend/component/running/#preparing-data-folder).
-- run [component actions](/extend/common-interface/actions/).
-- run a [component](/extend/component/) with a [specified Docker image tag](https://api.keboola.com/?service=job-queue#post-/jobs), usable for [testing images](/extend/component/deployment/#test-live-configurations).
+The [Job Queue API](https://api.keboola.com/?service=job-queue) runs components, optionally with a
+[specific Docker image tag](https://api.keboola.com/?service=job-queue) for [testing images](/extend/component/deployment/#test-live-configurations),
+prepares the [data folder](/extend/component/running/#preparing-data-folder) for debugging and runs
+[component actions](/extend/common-interface/actions/). How to create, poll and debug jobs through it is on the
+[Jobs API](/management/jobs/api/) page.
 
 ## Configuration
 Components executed by Job Queue store their configurations in
