@@ -20,6 +20,14 @@ The API for that is the [Queue API](https://api.keboola.com/?service=job-queue).
 terminates and lists jobs; the service itself is described in [Job Queue](/extend/job-queue/). Every component sets its own upper limits on how long a job may run and
 how much memory it may use; those limits are a safeguard, set by the component developer.
 
+## Before you start
+
+- A [Storage API token](/management/project/tokens/), scoped to what the job needs; the token dialog
+  in the first step shows how narrow it can be.
+- The Queue host of your [stack](/overview/#apis-and-service-endpoints): `queue.keboola.com` on US AWS,
+  `queue.eu-central-1.keboola.com` on EU Frankfurt AWS; the service index lists yours. A wrong host or
+  token answers with `Invalid access token`.
+
 ## Run a job
 
 You need a *component ID* and a *configuration ID*. The quickest way to read them off is the UI:
