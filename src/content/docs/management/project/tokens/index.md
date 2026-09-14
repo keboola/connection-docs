@@ -21,7 +21,7 @@ Normally, when you are using the user interface, your API token is exchanged aut
 the server backend. Therefore you need to work with tokens only when working with Keboola programmatically 
 (or if you need to limit a user's authorization to certain operations or data). 
 To learn more about all the available programmatic approaches, please follow our 
-[developers documentation](/overview/#apis-and-service-endpoints).
+[developers documentation](/overview/#apis).
 
 Tokens can be managed from the **Project Settings > API Tokens** page.
 
@@ -49,7 +49,7 @@ API tokens are created
 Automatically created tokens have the lowest possible permissions for their task and also set expiration if possible.
 These are the typical reasons to manually create a new API token:
 
-- You want to use the [APIs](/overview/#apis-and-service-endpoints); this includes all of the [Storage clients](/storage/api/).
+- You want to use the [APIs](/overview/#apis); this includes all of the [Storage clients](/storage/api/).
 - You need to limit access to certain data (for example, share a single table) or components.
 
 Although tokens cannot be used to directly log in to the Keboola user interface, they do allow executing almost all 
@@ -163,7 +163,7 @@ people can send data directly to your Keboola project instead of struggling with
 To revoke the access, simply delete or refresh the token.
 
 The token can then be used with the [Storage API](/storage/api/) 
-or [other APIs](/overview/#apis-and-service-endpoints). 
+or [other APIs](/overview/#apis). 
 
 ### Storage Console
 Typical usecase of sharing a token with someone is giving them a partial access to your project storage. The 
