@@ -1,7 +1,7 @@
 ---
 title: Auth0 OIDC
 slug: 'data-apps/authentication/auth0'
-description: Protect a Keboola app with Auth0 sign-in: register a Regular Web Application in Auth0, add the app's callback URL, and pick Generic OIDC in Keboola.
+description: "Protect a Keboola app with Auth0 sign-in: register a Regular Web Application in Auth0, add the app's callback URL, and pick Generic OIDC in Keboola."
 redirect_from:
   - /components/data-apps/oidc/auth0/
   - /data-apps/oidc/auth0/

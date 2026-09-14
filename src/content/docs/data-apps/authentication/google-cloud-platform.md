@@ -1,7 +1,7 @@
 ---
 title: Google Cloud OIDC
 slug: 'data-apps/authentication/google-cloud-platform'
-description: Protect a Keboola app with Google sign-in: create the OAuth client in Google Cloud, register the app's callback URL, and pick Google SSO in the app's authentication settings.
+description: "Protect a Keboola app with Google sign-in: create the OAuth client in Google Cloud, register the app's callback URL, and pick Google SSO in the app's authentication settings."
 redirect_from:
   - /components/data-apps/oidc/google-cloud-platform/
   - /data-apps/oidc/google-cloud-platform/

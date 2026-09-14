@@ -1,7 +1,7 @@
 ---
 title: Microsoft Entra ID OIDC
 slug: 'data-apps/authentication/microsoft-entra-id'
-description: Protect a Keboola app with Microsoft Entra ID (Azure AD) sign-in: register the app in Entra, add the callback URL and a client secret, optionally limit access to groups, and pick Azure OIDC in Keboola.
+description: "Protect a Keboola app with Microsoft Entra ID (Azure AD) sign-in: register the app in Entra, add the callback URL and a client secret, optionally limit access to groups, and pick Azure OIDC in Keboola."
 redirect_from:
   - /components/data-apps/oidc/microsoft-entra-id/
   - /data-apps/oidc/microsoft-entra-id/

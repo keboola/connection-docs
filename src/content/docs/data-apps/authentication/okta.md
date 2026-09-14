@@ -1,7 +1,7 @@
 ---
 title: Okta OIDC
 slug: 'data-apps/authentication/okta'
-description: Protect a Keboola app with Okta sign-in: create an OIDC web app integration in Okta, register the app's callback URL, and pick Generic OIDC in Keboola.
+description: "Protect a Keboola app with Okta sign-in: create an OIDC web app integration in Okta, register the app's callback URL, and pick Generic OIDC in Keboola."
 redirect_from:
   - /components/data-apps/oidc/okta/
   - /data-apps/oidc/okta/
