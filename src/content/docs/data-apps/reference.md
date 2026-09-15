@@ -101,6 +101,12 @@ Storage Access lets your app read from and write back to Keboola Storage tables 
 Storage Access works on both **Snowflake** and **BigQuery** backends. The SQL examples below use Snowflake identifier quoting (`"bucket"."table"`); on BigQuery, identifier quoting and table naming differ — see [BigQuery backend](#bigquery-backend).
 :::
 
+:::caution
+**Writing is currently unavailable on BigQuery.** Reading works as described, but `INSERT`, `UPDATE`, `DELETE` and `TRUNCATE` from an app fail with `Permission bigquery.tables.updateData denied`, however the writable tables are configured and no matter how often the app is redeployed. Snowflake is unaffected.
+
+Until this is fixed, a BigQuery app that must write to Storage should use the [Storage API](/storage/api/import-export/) — upload a file and import it into the table — which is a different path and works today. Note that an import is an asynchronous job (seconds, not milliseconds) and replaces or appends whole tables rather than updating individual rows.
+:::
+
 **Enable it:** in **Project Settings > Features**, activate **Storage Access**. Then, in the app's **Advanced Settings > Storage Access**, click **+ Add Writable Table** and select the buckets/tables the app may read and write (`SELECT`, `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`). All selected tables must exist before you deploy. Managing configs via the Storage API? The same selection is expressed under `storage.output.tables` with `"unload_strategy": "direct-grant"` per table.
 
 **Read data** with the [keboola-query-service](https://pypi.org/project/keboola-query-service/) client (also on npm as [@keboola/query-service](https://www.npmjs.com/package/@keboola/query-service)):
