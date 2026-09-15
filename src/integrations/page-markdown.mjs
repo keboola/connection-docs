@@ -16,18 +16,76 @@ import { fileURLToPath } from 'node:url';
  */
 
 /**
- * Recursively find all .md files in a directory.
+ * Recursively find all .md and .mdx files in a directory.
  */
 function findMarkdownFiles(dir, files = []) {
   for (const entry of readdirSync(dir)) {
     const full = join(dir, entry);
     if (statSync(full).isDirectory()) {
       findMarkdownFiles(full, files);
-    } else if (extname(full) === '.md') {
+    } else if (extname(full) === '.md' || extname(full) === '.mdx') {
       files.push(full);
     }
   }
   return files;
+}
+
+/**
+ * Reduce an .mdx body to plain markdown.
+ *
+ * The raw-markdown copies exist so an agent can read a page as text, so MDX
+ * machinery has to come out rather than ship verbatim: a stray
+ * `import ... from '@astrojs/starlight/components';` or a bare `<Tabs>` tag is
+ * noise at best and misleading at worst.
+ *
+ * Component wrappers are dropped and their children kept, which flattens a
+ * tabbed page into its sections one after another — the right shape for a
+ * reader who cannot click a tab. Children are also dedented by one level per
+ * wrapper, because MDX authors indent them and four leading spaces would
+ * otherwise turn ordinary prose into an indented code block.
+ *
+ * Components are matched on an uppercase initial, the JSX convention, so
+ * lowercase HTML written inline in a page is left alone.
+ */
+function stripMdx(body) {
+  const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
+  const withComments = withoutImports.replace(
+    /\{\/\*([\s\S]*?)\*\/\}/g,
+    (_, inner) => `<!--${inner}-->`,
+  );
+
+  const INDENT = '    ';
+  const open = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*(?<!\/)>\s*$/;
+  const selfClosing = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*\/>\s*$/;
+  const close = /^\s*<\/[A-Z][A-Za-z0-9]*\s*>\s*$/;
+
+  let depth = 0;
+  const out = [];
+
+  for (const line of withComments.split('\n')) {
+    if (selfClosing.test(line)) continue;
+    if (close.test(line)) {
+      depth = Math.max(0, depth - 1);
+      continue;
+    }
+    if (open.test(line)) {
+      // A tab or card carries its identity in `label`; without it the
+      // flattened sections run together and a reader cannot tell which
+      // variant is which.
+      const label = line.match(/\blabel=["']([^"']+)["']/);
+      if (label) out.push('', `**${label[1]}**`, '');
+      depth += 1;
+      continue;
+    }
+
+    let text = line;
+    for (let i = 0; i < depth && text.startsWith(INDENT); i += 1) {
+      text = text.slice(INDENT.length);
+    }
+    out.push(text);
+  }
+
+  return out.join('\n').replace(/\n{3,}/g, '\n\n');
 }
 
 /**
@@ -93,7 +151,9 @@ export default function pageMarkdown() {
             continue;
           }
 
-          const body = stripFrontmatter(content).trim();
+          const isMdx = extname(file) === '.mdx';
+          const raw = stripFrontmatter(content);
+          const body = (isMdx ? stripMdx(raw) : raw).trim();
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });

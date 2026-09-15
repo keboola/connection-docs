@@ -10,7 +10,7 @@ description: 'The most common kbagent CLI failures and their fixes — install a
 
 The failures you're most likely to hit with [kbagent](/cli/), each with its cause and fix. With `--json`, failures carry a stable machine-readable `code` — it's shown here where one applies, and the [full catalogue](https://github.com/keboola/cli/blob/main/docs/error-codes.md) lives in the CLI repo.
 
-`kbagent doctor` is the universal first step: it checks your config, connections, and version, and often names the problem outright. `kbagent doctor --fix` repairs what it safely can.
+`kbagent doctor` is the universal first step: it checks your config, connections, and version, and often names the problem outright. It reports what it finds; the fixes below are the manual follow-up.
 
 <!-- Reference-type page. Error codes + semantics verified against keboola/cli docs/error-codes.md (CI-gated catalogue) and the section's earlier source-level review (v0.66.1–v0.76.1). -->
 
@@ -120,7 +120,7 @@ kbagent changelog
 
 ## Still stuck?
 
-- `kbagent doctor --fix` — automated checks and safe repairs.
+- `kbagent doctor` — health checks on your config and project connectivity.
 - `kbagent context` — the full command reference for your installed version.
 - The [error-code catalogue](https://github.com/keboola/cli/blob/main/docs/error-codes.md) — every `--json` `code` with its meaning.
 - [Command reference](/cli/commands/) — flags and groups overview.
