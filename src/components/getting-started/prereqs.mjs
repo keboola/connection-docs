@@ -13,7 +13,7 @@ export const SHARED = {
   project:
     'A Keboola project. <a href="/getting-started/project/">Get a project</a> covers creating or joining one — the Free Plan covers this guide.',
   google:
-    'A Google account, only for the step that writes to a spreadsheet. The consent screen lives in your own account, so it is the one thing an assistant cannot click for you.',
+    'A Google account you can sign in with. The consent screen lives in your own account, so it is the one thing no assistant can click for you.',
   kai:
     'The <strong>Kai Agent</strong> button in the top bar. An organization admin switches the feature on; see <a href="/kai/getting-started/">Get started with Kai</a>.',
   nothing:

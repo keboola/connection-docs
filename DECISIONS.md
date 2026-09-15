@@ -673,6 +673,102 @@ byte-identical across all six pages.
 
 ---
 
+## 2026-09-15 — The side trips get the same tabs, and the three pages that do not
+
+The main path carries three tabs; the pages hanging off it still carried the shape the tabs
+replaced, a `:::tip[Do it with Kai]` box above a list of clicks. Two patterns for one thing in one
+section is the thing Nikita called mixed up, so the side trips now use the tabs too — and the
+pages where a path genuinely does not exist say so instead of pretending.
+
+**Three tabs, walked live in 264 and cleaned up the same minute.** `load/database/` gets the full
+set: the Kai box became the **Prompt** tab with its "never paste a password into the chat" warning
+intact, and the **CLI / API** tab is a configuration holding the sample credentials, one row per
+table, and a run — created, run, counted and deleted on 2026-09-15 (job 104350143; OPPORTUNITY
+639, ACCOUNT 275, USER 28, which is where the check numbers come from). `transform/workspace/`
+gets them too, and its CLI tab is the strongest of the three: `workspace create`, `load`, `query`,
+`detail`, `delete`, all run against the control table.
+
+Two things that walk taught the page, neither of them guessable. `workspace create` prints a
+private key once and says it cannot be retrieved later, so the page says it in a caution rather
+than letting a reader discover it after closing the terminal. And a query against a freshly
+loaded table fails — `Object 'STAFFING_OUTLOOK' does not exist or not authorized` — because
+Storage spells table names in lower case while Snowflake folds an unquoted name to upper case. The
+same query with the name quoted answers 42. It is the trap `ask/` already documents for columns,
+one level up.
+
+**Two tabs on `load/googlesheets/`**, matching `write/` and for the same reason: the consent screen
+and the Drive picker are dialogs in the reader's own Google account, so a terminal cannot start the
+task. Both pages now say that in the same words, and both say what `kbagent` *can* drive once the
+authorization exists.
+
+**No tabs on the branch tutorial, and the reason is a product fact.** `kbagent branch merge` does
+not merge — it prints the URL of the merge screen. The diff and the partial-merge checkboxes are
+where the decision gets made, so four of those six pages could not have an honest CLI tab. Instead
+the branch hub gained one short section saying what the CLI does (create, use, list, reset,
+delete, and `--branch` on read-only commands) and what it hands back to the browser.
+
+**No tabs on `ad-hoc/`.** Most of that page is the Google Cloud console — service accounts, IAM
+roles, a storage bucket — which is nobody's CLI and nobody's Kai. It needs a rewrite, not a tab,
+and it still calls workspaces sandboxes.
+
+**`project/`, `check/` and `going-further/` stay as they are.** Getting a project is a signup form,
+`check/` already has its terminal section, and `going-further/` routes rather than does.
+
+VERIFY(owner): `load/googlesheets/` still loads `level.csv`, the pre-Boolabean sample, so the
+section reads as two datasets. Swapping it means reshooting steps 5-12 against a live Google
+authorization, which needs Nikita's own account — the same blocker as the `write/` captures.
+
+---
+
+## 2026-09-15 — What the reviews caught on the side trips
+
+Both passes ran again on the three converted pages. They agreed on the blocker, and each found
+things the other did not.
+
+**The one worked query in the workspace tab selected columns that do not exist.** It asked for
+`cafe_name` and `forecast_date`; the table has `STORE_NAME` and `DATE`. My live run had used
+`SELECT COUNT(*)`, which names no columns, so the example was the one thing on the page nobody had
+executed. Fixed and re-run against the control table.
+
+Chasing it turned the casing note into something better than it was. I had written "Storage spells
+names in lower case, so quote them", which is half a rule. Measured, all four ways: the table is
+stored lower case and needs quotes, the columns are stored upper case and break when quoted lower
+case. The table was named by the output mapping, which keeps what you write; the columns came out
+of SQL that did not quote its aliases, so the backend upper-cased them. The page now carries the
+four rows and the reason, and the troubleshooting bullet covers both directions instead of sending
+a reader round in a circle.
+
+**Three product facts were wrong in the same tab.** `--read-only` defaults to *on*, the opposite
+of the dialog's unchecked box. The **Connect** button opens Snowflake's own Snowsight, not a
+Keboola console — and direct access needs a dedicated backend, which the free project this guide
+starts from does not have, so that step now routes to the SQL Editor. And the workspace picker's
+labels are "Snowflake SQL Workspace" and "Google BigQuery Workspace".
+
+**Two tabs did not stand alone.** `workspace create` prints the ID every later command needs, and
+the page never said to keep it. The database page kept its credentials inside the UI tab while the
+Prompt tab pointed at them, which contradicts "pick one tab and carry on" — they are their own
+section now, above the tabs, where all three paths can reach them.
+
+**Two sections spoke past the reader who chose Prompt.** "Check it worked" on the workspace page
+assumed a workspace, which the Prompt reader deliberately never made; it now says so first, the
+way `write/` does. The Sheets handoff told the reader to do "steps 5 to 9, both inside Google" —
+but two of those five are Keboola screens, and a reader who let Kai build the configuration was
+never told how to get to it. Both fixed.
+
+**Dropped the "reading this with an agent?" line.** The plan asked for it, but it landed on three
+side trips and no main-path page, and every page already has *View as Markdown* in its title bar.
+Either it goes on all twelve or on none; it is off for now.
+
+Everything else held: 118 factual claims confirmed, including all six live runs as they are stated,
+the three sample-database row counts against the repo's own CSVs, and the tab-label contract across
+all nine tabbed pages.
+
+Worth knowing separately: `_data/cli/command-reference.md` is generated from kbagent v0.76.1 while
+the installed CLI is v0.93.2, so the gate runs seventeen minor versions behind. It cost us a true
+sentence this week — `kbagent config restore` is real, and the gate rejected it.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
