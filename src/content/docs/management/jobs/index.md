@@ -17,7 +17,7 @@ All jobs are logged and their tracked history is virtually unlimited. Click on a
 - what tables were exported (read from your Storage by the job).
 - how many [credits](/management/project/limits/#project-power--time-credits) were used by running the job.
 - what events occurred during the job execution.
-- what exact parameters were used for the job (this might be useful when working with the [API](https://developers.keboola.com/integrate/jobs/#apis-for-working-with-jobs)).
+- what exact parameters were used for the job (this might be useful when working with the [API](/management/jobs/api/#working-with-the-jobs-api)).
 
 ![Screenshot - Jobs Detail](/management/jobs/jobs-detail.png)
 
@@ -57,15 +57,11 @@ Using the search box and advanced patterns you can easily find job based on vari
 | **Jobs from either HTTP data source or Google Sheets data destination connector** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets)` |
 | **All non-successful jobs from either HTTP or Google Sheets writer** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets) AND -status:success` |
   
-For more technical information about background jobs, see our 
-[Developers documentation](https://developers.keboola.com/integrate/jobs/).
+For the API side of jobs (create, poll, debug, the job object), see [Jobs API](/management/jobs/api/).
 
 ## Running Jobs
 Jobs are either run [manually from any configuration](/tutorial/) or automatically by the 
-[flow](/flows/) at a scheduled time. In either case, the typical life time of a job has the 
-following states:
-
-**waiting** --> **processing** --> **success**/**error**
+[flow](/flows/) at a scheduled time. In either case, a job moves from `created` or `waiting` through `processing` to a final state; the full list of states and what each one means is on the [Jobs API](/management/jobs/api/#job-status) page.
 
 Until a job is finished (i.e., it is waiting or processing), it can be terminated:
 
@@ -80,11 +76,7 @@ job to `347371952`. Terminating the parent job will automatically terminate the 
 Terminating the child job will probably cause the parent to terminate or fail.
 
 ## Waiting Jobs
-When a job is run, it is always put in the waiting state to wait for our **infrastructure** —
-[worker](https://developers.keboola.com/integrate/jobs/) to start executing it.
-This usually takes anywhere from several seconds to a couple of minutes at most. 
-
-There is one more reason for a job to be in the waiting state: **project parallelism limits**. 
+A job waits for reasons inside your project, above all the **project parallelism limits**. 
 Either the same configuration of the same component is already being executed, or the overall limit
 of concurrently running jobs within a project was exceeded. That means that a job will be in 
 the waiting state under the following conditions:
@@ -92,6 +84,8 @@ the waiting state under the following conditions:
 - If the total number of running jobs in the project is greater or equal to **10**.
 - If there is already a running job of the **same configuration**.
     - Unless it is a transformation job, in which case the same configuration is allowed to run, provided that it is executed by different [tokens](/management/project/tokens/).
+
+If the platform itself cannot start a job, for instance during an outage, the job stays in `created` rather than `waiting`; see [job states](/management/jobs/api/#job-status).
 
 ## Storage jobs
 

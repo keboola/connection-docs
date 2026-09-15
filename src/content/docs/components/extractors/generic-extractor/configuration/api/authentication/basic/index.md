@@ -35,7 +35,7 @@ A sample Basic authentication looks like this:
 ```
 
 The `username` and `password` fields are part of the [`config` section](/components/extractors/generic-extractor/configuration/config/). 
-They are also prefixed by the hash `#` character, which means they are stored [encrypted](/overview/encryption/). 
+They are also prefixed by the hash `#` character, which means they are stored [encrypted](/extend/common-interface/encryption/). 
 If the API expects something else than a username and password in the `Authorization` header, or if it requires 
 a custom authorization header, use the [Default Headers option](/components/extractors/generic-extractor/configuration/api/#headers).
 

@@ -1,6 +1,10 @@
 ---
 title: Keboola Overview
 slug: 'overview'
+description: "What Keboola is and how its parts fit together: deployment options, architecture, governance, extending the platform, and the terms you meet everywhere, including stacks, jobs, tokens and the APIs."
+redirect_from:
+    - /integrate/
+    - /overview/repositories/
 ---
 
 
@@ -159,8 +163,7 @@ A stack is an entirely independent, full instance of Keboola platform services. 
 multiple Keboola accounts.
 
 Each stack uses a different network with a different set of **dedicated** [IP addresses](/components/ip-addresses/). 
-Our [developer documentation](https://developers.keboola.com/overview/api/#stacks-and-endpoints) describes how to handle multiple stacks 
-when working with the API in more detail.
+How API endpoints follow the stack is described under [APIs](/overview/apis/).
 
 Single-tenant stacks are available for a single enterprise customer with a domain name in the form `connection.CUSTOMER_NAME.keboola.com`.
 
