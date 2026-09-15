@@ -685,7 +685,7 @@ leads to the following function context:
 }
 ```
 
-See the [basic example](#api-default-parameter) and a [more complicated example](#api-query-authentication).
+See the [basic example](#api-default-parameters) and a [more complicated example](#api-query-authentication).
 
 ### OAuth 2.0 Authentication Context
 The OAuth Authentication Context is used for the
