@@ -44,12 +44,12 @@ The documentation includes [several examples](https://github.com/keboola/generic
 ## Publishing Generic Extractor Configuration
 Each Generic Extractor configuration can be [published](/components/extractors/generic-extractor/publish/) as
 a new standalone component. However, for registration, configurations must be
-[converted to templates](/components/extractors/generic-extractor/publish/#submission).
+[converted to templates](/components/extractors/generic-extractor/publish/#publishing).
 
 Publishing your Generic Extractor configuration is **not required**. However, when published,
 it can be easily used in multiple projects. A great advantage of using templates is that they
 do not limit the configuration. You can always switch to JSON
-[free-form configuration](/components/extractors/generic-extractor/publish/#submission) when necessary.
+[free-form configuration](/components/extractors/generic-extractor/publish/#publishing) when necessary.
 
 Also, templates can be used only with published components based on Generic Extractor configurations.
 

@@ -9,7 +9,7 @@ redirect_from:
 ## Working with Data
 Keboola Table Storage (Tables) and Keboola File Storage (File Uploads) are heavily connected together.
 Keboola File Storage is technically a layer on top of the Amazon S3 service, and Keboola Table
-Storage is a layer on top of a [database backend](/storage/#backends).
+Storage is a layer on top of a [database backend](/storage/#storage-backend-types-and-features).
 
 To upload a table, take the following steps:
 

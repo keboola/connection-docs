@@ -15,7 +15,7 @@ have its documentation at hand. You also need the
 
 ## Configuration
 Generic Extractor configuration is written in [JSON format](/components/extractors/generic-extractor/tutorial/json/)
-and comprises [several sections](/components/extractors/generic-extractor/configuration/#configuration-sections) (a
+and comprises [several sections](/components/extractors/generic-extractor/configuration/#json-configuration-sections) (a
 [configuration map](/components/extractors/generic-extractor/map/) for navigation is available). 
 
 A [user interface](/components/extractors/generic-extractor/configuration/#user-interface) is available that can help you with the configuration
