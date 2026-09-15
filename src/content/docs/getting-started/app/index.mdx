@@ -1,0 +1,117 @@
+---
+title: 'Build the App'
+slug: 'getting-started/app'
+description: 'Turn the octopus atlas into a shareable map app with a "how close to me?" field, described to Kai in one sentence and published with one button.'
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+A spreadsheet answers the person who asked. An app answers everyone who is curious — including
+the half of the original question no table can settle: *how close to **your** coast does an
+octopus live?* This step turns `octopus_atlas` into a published map with a field for your own
+coordinates.
+Step 6 of the [Getting Started](/getting-started/) arc.
+
+**Two ways to do it** — the Kai tab below is the whole path here. Building an app by hand is its
+own topic with its own section; the second tab says where to go for it.
+
+{/* Tutorial-type page (step 6 of 7), NEW in the octopus rework (PRDCT-487, 2026-08-25). UI flow
+and labels are taken from data-apps/getting-started.md ("+ Create App", the "Describe what you
+want to build..." prompt screen, Confirmation required with Approve/Decline/Always allow, the
+Preview/Code split-screen builder, "Publish to Production", status Active, Open App, default auth
+Basic (Password)) — that page's Kai flow was walked live for its own screenshots. This page has
+NOT yet been walked live: the prompt, the app behavior, run timing and all screenshots pend the
+re-walk in project 264. VERIFY(owner): whether the Free Plan includes data apps — if it does not,
+this step needs the same "skippable" framing as the Google step; check /management/payg-project/
+during the live walk. */}
+
+## What you need
+
+- The table `octopus_atlas` in Storage, from [Transform Data](/getting-started/transform/) — or
+  fresher, from the flow that now rebuilds it on a schedule.
+
+## What a data app is
+
+A **data app** is a small web application that runs inside Keboola and reads your Storage tables
+— a map, a dashboard, an explorer — with its own URL you can send to anyone you choose to share
+it with. Like everything else in this guide it is a component: it can sit in a flow, and the
+[Apps section](/data-apps/) covers it in full.
+
+## Set it up
+
+<Tabs syncKey="howto">
+<TabItem label="Do it with Kai">
+
+Describing an app is a one-sentence job, and the Apps section has Kai wired in as the primary
+way to build one ([Build your first app with Kai](/data-apps/getting-started/)).
+
+1. Open **Apps** in the navigation and click **+ Create App**. You land on the
+   **Build web apps from your Keboola data** screen with a prompt field.
+
+2. Describe the app:
+
+   ```text
+   Build a data app from out.c-octopus-atlas.octopus_atlas: a world map of all 10,000 octopus
+   sightings colored by depth_zone, with sidebar filters for basin and display_name. Add two
+   number inputs for my latitude and longitude, and show the nearest recorded sighting to that
+   point — its display_name, distance in kilometers, depth_m and year.
+   ```
+
+3. Kai explores the table, then asks before it builds — a **Confirmation required** card with
+   **Approve** / **Decline** / **Always allow**. Approve, and watch the split-screen builder:
+   **Preview** on one side, **Code** on the other, updating as it works.
+
+4. When the draft looks right, click **Publish to Production**. The app deploys, its status
+   turns **Active**, and Kai hands you the app URL and a password — the default authentication
+   is **Basic (Password)**, so the map is not public until you decide who gets the link and the
+   password.
+
+5. Click **Open App**, type your coordinates, and the arc's question stops being rhetorical.
+   Here it is answering for Prague:
+
+<video autoplay loop muted playsinline poster="/getting-started/app/app-preview-poster.png">
+  <source src="/getting-started/app/app-preview.mp4" type="video/mp4" />
+</video>
+
+{/* Clip recorded live in project 264 on 2026-08-26 (scripts/record.mjs, clip id app-preview):
+typing 50.08 / 14.43 into the draft preview returns "Nearest Sighting: musky octopus, 495.1 km,
+1910" — the put-in-your-own-coordinates moment on camera. Post-produced with
+scripts/compositor.html (local, gitignored): pacing, chips, octopus pointer on the result card.
+Re-record against the published app after the deploy lands. */}
+
+**Check:** the map shows sightings on every continent's coastline; filtering by basin matches
+the counts Kai gave you in [step 5](/getting-started/automate/) — the North Atlantic is the
+crowded one — and the nearest-sighting panel updates when you change the coordinates. If the
+app came out different, tell Kai what to change in the same chat — **Make changes** — and
+publish again; the draft is editable until you like it.
+
+</TabItem>
+<TabItem label="Do it yourself">
+
+Building an app by hand means a Git repository and your own Streamlit or Python/JS code — a
+real development workflow, not a form. It has its own pages:
+[create an app manually](/data-apps/getting-started/#create-an-app-manually) for the UI flow,
+and [Build locally](/data-apps/build-locally/) for the repo-based workflow. Finish the arc with
+the Kai tab first; come back when the app you want is one the description field cannot hold.
+
+</TabItem>
+</Tabs>
+
+## If it goes wrong
+
+- **There is no Apps section in the navigation.** Not every project has data apps enabled; see
+  [What are apps](/data-apps/what-are-apps/) for availability, or ask your organization admin.
+- **The app builds but the map is empty.** The app is reading the wrong table — tell Kai the
+  full table ID, `out.c-octopus-atlas.octopus_atlas`, in the chat and republish.
+- **The nearest-sighting answer looks wrong.** Coordinates are easy to swap: latitude first
+  (positive = north), longitude second (positive = east). A minus sign on the wrong one puts
+  you in a different hemisphere — and the nearest octopus in a different ocean.
+
+## Going further
+
+- [Publish and share](/data-apps/publish-and-share/) — authentication options beyond the
+  default password, and who can reach the URL.
+- [Build locally](/data-apps/build-locally/) — the Git-based workflow once an app outgrows
+  its first description.
+
+**Next:** [Where to go next →](/getting-started/next-steps/)

@@ -7,7 +7,7 @@ redirect_from:
 
 
 
-*Go to our [Getting Started tutorial](/tutorial/manipulate/) to create your first transformation and learn how transformations 
+*Go to our [Getting Started tutorial](/getting-started/transform/) to create your first transformation and learn how transformations 
 are an integral part of the Keboola workflow.*
 
 **Transformations** allow you to manipulate data in your project. They are the tasks you want to perform
