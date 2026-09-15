@@ -22,7 +22,13 @@ have: next week's weather, fetched live from a public forecast API. The next pag
 **Where you are:** you have a project, and Storage is empty. **When you finish:** six tables in
 Storage and two connector configurations you can re-run.
 
-<Prereqs needs={['project', 'nothing']} />
+<Prereqs needs={['project', 'nothing']}>
+  <li>
+    For the <strong>CLI / API</strong> tab only:{' '}
+    <a href="/cli/getting-started/">kbagent</a> installed and connected to your project. The other
+    two tabs need nothing but the browser.
+  </li>
+</Prereqs>
 
 <PathIntro tabs={3} />
 
@@ -271,9 +277,15 @@ settings, sharing the configuration's base URL.
 <TabItem label="CLI / API">
 
 Every click above is an API call underneath, and [kbagent](/cli/) is the same calls from a
-terminal. Connect it to your project once with `kbagent project add` (see
-[the CLI quickstart](/cli/getting-started/)); the examples below use `docs-demo` as the project
-alias and `$KBC_TOKEN` as a Storage API token.
+terminal.
+
+**This tab needs two things the other two do not.** `kbagent`
+[installed](/cli/getting-started/) and pointed at your project once with `kbagent project add`,
+which stores the connection under an alias — the examples use `docs-demo`, substitute yours. And
+for the raw-request examples, two values you read off your own project: `<your-stack>` is the host
+you sign in at, the part after `https://` in the browser's address bar (for example
+`connection.europe-west3.gcp.keboola.com`), and `$KBC_TOKEN` is a Storage API token from
+**Users & Settings → API Tokens**.
 
 **Create the configuration**
 
@@ -318,7 +330,30 @@ and the four column names given explicitly instead of read from a header.
 kbagent config new --project docs-demo --component-id keboola.ex-http --name "Boolabean forecast" --push --no-files --configuration '{"parameters":{"baseUrl":"https://api.open-meteo.com/v1/"}}'
 ```
 
-Put the row's JSON in a file — it is long, and `--configuration` takes `@file`:
+The row's JSON is long, and `--configuration` takes `@file`, so put it in one:
+
+```json title="forecast-row.json"
+{
+  "parameters": {
+    "path": "forecast?latitude=50.0755,49.1928,49.8352,49.7475,49.5938,50.7663&longitude=14.4426,16.6083,18.2833,13.3776,17.2509,15.0562&daily=temperature_2m_max,precipitation_sum&timezone=Europe%2FPrague&format=csv"
+  },
+  "processors": {
+    "after": [
+      { "definition": { "component": "keboola.processor-move-files" },
+        "parameters": { "direction": "tables", "folder": "forecast" } },
+      { "definition": { "component": "keboola.processor-skip-lines" },
+        "parameters": { "lines": 9 } },
+      { "definition": { "component": "keboola.processor-create-manifest" },
+        "parameters": { "delimiter": ",", "enclosure": "\"", "incremental": false,
+          "primary_key": [],
+          "columns": ["location_id", "time", "temperature_2m_max", "precipitation_sum"] } }
+    ]
+  }
+}
+```
+
+Nine lines skipped, not eight: the header goes too, and `columns` names the four columns in its
+place, without the header's unit suffixes.
 
 ```bash
 kbagent config row-create --project docs-demo --component-id keboola.ex-http --config-id <forecast-config-id> --name forecast --configuration @forecast-row.json
@@ -328,10 +363,11 @@ kbagent config row-create --project docs-demo --component-id keboola.ex-http --c
 kbagent job run --project docs-demo --component-id keboola.ex-http --config-id <forecast-config-id> --wait
 ```
 
-**Check:** the tables and their row counts, without leaving the terminal:
+**Check:** the tables and their row counts, without leaving the terminal. Without `--bucket-id`
+it lists every table in the project, which is how you find the bucket the connector created:
 
 ```bash
-kbagent storage tables --project docs-demo
+kbagent storage tables --project docs-demo --bucket-id in.c-keboola-ex-http-<config-id>
 ```
 
 ```bash

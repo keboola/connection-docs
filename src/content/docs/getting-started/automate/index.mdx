@@ -133,7 +133,7 @@ if you took the spreadsheet side trip. Expect three approvals: the flow, the sch
 **Check:** the canvas shows **three separate phases**, not several tasks in one, with the two
 connectors side by side in the first. Each later phase needs the previous one's output, so the
 split is the whole point. If it came out as one phase, the fix is the one the numbered steps use:
-switch to the **Do it yourself** tab, where the **+** below a phase starts a new phase, and move
+switch to the **UI** tab, where the **+** below a phase starts a new phase, and move
 the later tasks there. Then open the flow's **Schedules** tab: the schedule Kai set is there, with
 its timezone, and can be paused with its toggle.
 
@@ -197,9 +197,9 @@ You now have three phases: the two loads, then the transformation, then the app.
 </TabItem>
 <TabItem label="CLI / API">
 
-A flow is a configuration like any other, and `kbagent` writes it from a YAML file. Run
-`kbagent flow schema --project docs-demo` once to see the full format with comments; the file
-below is the three phases of this guide.
+A flow is a configuration like any other, and `kbagent` writes it from a YAML file. Run `kbagent flow schema`
+once to see the full format with comments (add `--project <alias> --full` for the live JSON
+schema); the file below is the three phases of this guide.
 
 ```yaml title="flow.yaml"
 phases:
@@ -244,6 +244,12 @@ tasks:
 Two tasks in one phase is the parallelism: both connectors sit in `extract`, and the phase is done
 when both are. `goto: null` ends the flow.
 
+**Where the four IDs come from.** The three `configId` values for the connectors and the
+transformation were printed when you created them; `kbagent config list --project docs-demo
+--component-id keboola.ex-http` finds them again. The app's is the one identifier that is not the
+number you have been using: `kbagent data-app detail --project docs-demo --app-id <app-id>` prints
+the Storage configuration ID, and that is what a flow task takes.
+
 Check the file before it reaches the project, then create it:
 
 ```bash
@@ -253,6 +259,9 @@ kbagent flow validate --project docs-demo --file @flow.yaml
 ```bash
 kbagent flow new --project docs-demo --name "Boolabean morning outlook" --file @flow.yaml
 ```
+
+It prints the flow's configuration ID, which the next two commands take as `<flow-id>`;
+`kbagent config list --project docs-demo --component-id keboola.flow` finds it again.
 
 **The schedule** is a separate configuration, and one command upserts it:
 
@@ -296,6 +305,9 @@ components against the wrong inputs succeeds and produces nothing useful.
 
 ## Run it
 
+*Coming from the **CLI / API** tab? `job run --wait` already did this, and the schedule is already
+set. Read on for notifications, which have no command.*
+
 If **Run flow** is disabled, the Builder is still holding your changes as a draft: click **Save**
 first. That applies however the flow got built, including when Kai built it for you.
 
@@ -310,7 +322,7 @@ builds and starts a container.
 
 ## Set a schedule
 
-*Coming from the Kai tab? The schedule is already there; open the tab to see it, and skip to
+*Coming from the **Prompt** or **CLI / API** tab? The schedule is already there; open the tab to see it, and skip to
 notifications.*
 
 Open the flow's **Schedules** tab and click **Create Schedule**. The predefined intervals are

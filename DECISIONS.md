@@ -634,6 +634,45 @@ scheduler explicitly (`config delete --component-id keboola.scheduler`).
 
 ---
 
+## 2026-09-15 — What the two review passes caught on the three-tab conversion
+
+Both subagents (CLAUDE.md standing authorization) ran against the converted pages. Between them
+they found three blockers, and every one was in the new CLI path or in what an agent reads.
+
+**The markdown twin read as three jobs, not three choices.** `PathIntro` renders in HTML but was
+dropped from `/<slug>/index.md`, so an agent reading the twin saw "ask Kai to build it", "click
+through and build it", "build it from a terminal" as consecutive instructions — three HTTP
+configurations on one page if executed literally. The intro's wording now lives in
+`pathintro.mjs`, imported by both the component and the integration, and leads with "they are
+alternatives, not steps". The same pass fixed the `<Prereqs>` slot, which was shipping raw JSX
+(`The <code>staffing_outlook</code> table … from{' '}<a href="…">`) into the twin.
+
+**The CLI journey had two dead ends.** The forecast row's JSON was named as a file and never
+shown, and the flow's YAML needed a data-app *configuration* ID while the app page only ever
+produced the numeric app ID. Both are now in the pages, along with where every other `<config-id>`
+comes from.
+
+**`<your-stack>` and `$KBC_TOKEN` were never defined**, in a copy-paste command. The load page's
+CLI tab now says what they are and where to read them, and its prerequisites say plainly that this
+tab — unlike the other two — needs something installed.
+
+**The CLI tab was Snowflake-only on a guide that tells Free Plan readers they are on BigQuery.**
+`--component-id` is optional and defaults to the project's backend, so the commands now omit it.
+
+**`manual={false}` was hiding the third tab.** On `app/` it short-circuited the intro, so the page
+with three tabs told the reader there were two. It is an additional paragraph now, not a branch.
+
+**Two honesty fixes, both mine.** `app/` promised the status "turns Active, Open App appears" on a
+page whose own failure list says production has never come up here — it now says so where the
+reader meets it. And the same page compared "two red cells" in a capture with "four" in the check,
+sixteen lines apart, as if one week; the count is described as moving with the forecast.
+
+Everything else the passes raised was confirmed: 41 factual claims on the CLI tabs check out
+against the command reference, the Storage API pages and the CSVs, and the three tab labels are
+byte-identical across all six pages.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were

@@ -19,9 +19,14 @@
 // before — 8 approvals to the control run's 7. It is a review gate, not a way
 // to approve once, and the wording below says so.
 //
-// Every task page carries three tabs as of 2026-09-15, so `tabs={3}` is now the
-// only shape in use; the two-tab wording below is kept for one release in case a
-// page outside this section still uses the component, and goes when nothing does.
+// Every task page carries three tabs as of 2026-09-15; `write/` keeps two, so
+// both shapes exist. `manual={false}` is now an EXTRA paragraph rather than a
+// branch that replaces the intro: on app/ it used to win over `tabs={3}` and
+// hide the CLI tab from the reader entirely (guide test, 2026-09-15).
+//
+// The same wording in plain text lives in ./pathintro.mjs, because the markdown
+// twin has to carry the "these are alternatives" sentence too — without it an
+// agent reads the three flattened sections as three things to do in sequence.
 //
 // Usage:  <PathIntro tabs={3} />              — Prompt · UI · CLI / API
 //         <PathIntro />                       — legacy two-tab wording
@@ -32,26 +37,29 @@
 
 <div class="gs-pathintro">
   {
-    Astro.props.manual === false ? (
+    Astro.props.tabs === 3 ? (
       <p>
-        <strong>This page is a prompt.</strong> The first tab describes what you
-        want and Kai builds it. There is no click-by-click equivalent here — building this by hand
-        is a development workflow with its own section, and the second tab says where to go for it.
-      </p>
-    ) : Astro.props.tabs === 3 ? (
-      <p>
-        <strong>Three ways to do this, one page.</strong> <strong>Prompt</strong> is what you paste
-        into Kai; <strong>UI</strong> is the same task click by click, for when you want to see
-        where each setting lives; <strong>CLI / API</strong> is the same task from a terminal, with
-        the raw request beside it. Every tab reaches the same result — pick one and carry on. Your
-        choice follows you to the next page.
+        <strong>Three ways to do this, one page — they are alternatives, not steps.</strong>{' '}
+        <strong>Prompt</strong> is what you paste into Kai; <strong>UI</strong> is the same task
+        click by click, for when you want to see where each setting lives;{' '}
+        <strong>CLI / API</strong> is the same task from a terminal, with the raw request beside
+        it. Pick one tab and carry on — your choice follows you to the next page.
       </p>
     ) : (
       <p>
-        <strong>Two ways to do this, one page.</strong> The <strong>Do it with Kai</strong> tab is a
-        prompt you paste; the <strong>Do it yourself</strong> tab is the same task click by click,
-        for when you want to see where each setting lives. Either tab reaches the same result — pick
-        one and carry on.
+        <strong>Two ways to do this, one page — they are alternatives, not steps.</strong>{' '}
+        <strong>Prompt</strong> is what you paste into Kai; <strong>UI</strong> is the same task
+        click by click, for when you want to see where each setting lives. Either tab reaches the
+        same result.
+      </p>
+    )
+  }
+
+  {
+    Astro.props.manual === false && (
+      <p>
+        There is no click-by-click equivalent for building this: by hand it is a development
+        workflow with its own section, and the <strong>UI</strong> tab says where to go for it.
       </p>
     )
   }
@@ -79,7 +87,7 @@
   }
 
   <p class="gs-pathintro__recovery">
-    If Kai builds something other than what the page describes, say so in the
+    If a step builds something other than what this page describes, say so in the
     same chat — it edits what it made. Nothing here is one-way.
   </p>
 </div>

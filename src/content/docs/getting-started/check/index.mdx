@@ -99,7 +99,9 @@ run. The prompt is safe either way; the capability sentence is the unverified pa
 ## The same checks from a terminal
 
 Every number above has a read-only command behind it, which is the fastest way to answer "did last
-night's run work?" without opening the project:
+night's run work?" without opening the project. They need
+[kbagent](/cli/getting-started/) connected to your project — `docs-demo` below is a project alias,
+substitute yours:
 
 ```bash
 kbagent job list --project docs-demo --component-id keboola.flow --limit 5
@@ -127,7 +129,9 @@ them changes anything.
   not refreshed by it.
 - **The app phase fails and the rest succeeds.** A deploy builds and starts a container, and it
   can fail for reasons that have nothing to do with your data. The table is already rebuilt; open
-  the app's page and start it again from there. After several failed starts the platform disables
+  the app's page and start it again from there. The job's own error is usually uninformative —
+  [Put it in front of someone](/getting-started/app/#if-it-goes-wrong) shows how to read the
+  container's startup log, which is where the reason actually is. After several failed starts the platform disables
   the app (a banner says it failed to start automatically multiple times, and the button reads
   **Start App**), and the flow's app phase will keep failing until someone starts it by hand. If
   the error repeats, that is one for [Support](/management/support/) with the job link.
@@ -139,8 +143,9 @@ them changes anything.
   jobs they start do". management/project/limits/ has no orchestrator/flow row at all, and
   flows/index.md says only that each job consumes credits independently. Billing claim — removed
   here until an owner confirms it. */}
-- **Jobs queue instead of running.** Too many parallel tasks in one phase; Storage jobs are
-  typically capped at 10 in parallel. Split the phase.
+- **Jobs queue instead of running.** Too many parallel tasks in one phase. Ten concurrent
+  component jobs is the [recommended ceiling](/flows/); Support can adjust a project's limits.
+  Split the phase.
 
 Failures specific to one step stay on that step's page: loading problems on
 [Get your data in](/getting-started/load/), SQL and mapping problems on

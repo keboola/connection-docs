@@ -441,15 +441,23 @@ block does not use it. */}
 
 **Create it from the SQL**
 
-Put the block for your backend in a file, `staffing_outlook.sql`, then:
+The SQL is the same either way: copy the block for your backend from the **UI** tab above — the
+Snowflake one or the BigQuery one — into a file called `staffing_outlook.sql`. Then:
 
 ```bash
-kbagent transformation create --project docs-demo --name "Boolabean staffing outlook" --component-id keboola.snowflake-transformation --sql-file staffing_outlook.sql --created-table staffing_outlook
+kbagent transformation create --project docs-demo --name "Boolabean staffing outlook" --sql-file staffing_outlook.sql --created-table staffing_outlook
 ```
 
+Without `--component-id` this uses the project's own SQL backend, which is what you want. Name it
+explicitly (`keboola.snowflake-transformation` or `keboola.google-bigquery-transformation`) only if
+you have a reason to.
+
 `--created-table` is the output mapping: it maps the table the SQL creates to
-`out.c-<name-derived-bucket>.staffing_outlook`. Add `--dry-run` first if you want to see the
-configuration it would write.
+`out.c-<name-derived-bucket>.staffing_outlook`. Add `--dry-run` to see the configuration it would
+write before it writes it.
+
+It prints the new configuration ID; the next two commands need it. `kbagent config list --project
+docs-demo --component-id keboola.snowflake-transformation` finds it again later.
 
 **Add the input mapping**
 
@@ -485,6 +493,8 @@ configuration IDs to hand.
 kbagent job run --project docs-demo --component-id keboola.snowflake-transformation --config-id <config-id> --wait
 ```
 
+On a BigQuery project the component ID is `keboola.google-bigquery-transformation`.
+
 ```bash
 kbagent storage table-detail --project docs-demo --table-id out.c-Boolabean-staffing-outlook.staffing_outlook
 ```
@@ -498,8 +508,8 @@ was written.
 
 ## Run it and check the result
 
-*Coming from the Kai tab? The run already happened; the prompt asked for it. Skip to the row-count
-check below.*
+*Coming from the **Prompt** or **CLI / API** tab? The run already happened — the prompt asked for
+it, and `job run --wait` did it. Skip to the row-count check below.*
 
 Click **Run Transformation** and confirm with **Run**. That creates a background job which copies
 the input tables in, runs your SQL, and writes `staffing_outlook` back to Storage: the mapping
@@ -566,7 +576,7 @@ is for.
   exact names of its columns, and Snowflake upper-cases an alias you did not quote, so switching
   between quoted and unquoted aliases between runs is enough to trigger it. Either keep the alias
   style that created the table, or delete the table in Storage and run again. It happens when the
-  Kai tab created the table first and the hand-written query writes into it, and the other way
+  **Prompt** tab created the table first and the hand-written query writes into it, and the other way
   round.
 - **`Numeric value '' is not recognized`.** Tables loaded from CSV arrive as text columns unless
   you give them types, so an empty cell is `''` rather than `NULL`. The queries cast with `TRY_TO_`

@@ -125,15 +125,20 @@ to build one ([Build your first app with Kai](/data-apps/getting-started/)).
 5. When the draft is right, click **Publish to production**. Then open the app's own page from
    **Apps**. In our project its status still read **Not Deployed** at that point, with a
    **Deploy App** button, so publishing and starting are two steps: click **Deploy App**. A
-   deploy builds and starts a container, which takes a few minutes; when it finishes the status
+   deploy builds and starts a container, which takes a few minutes; when it succeeds the status
    turns **Active**, **Open App** appears, and the app asks for the password from its
    **Authentication** setting, **Basic** by default, so the grid is not public until you decide
    who gets the link and the password.
 
-**Check:** **Open App** shows the same grid as the preview did, and the caption's count equals
-both the number of red cells and the number of rows where `short_handed` is true in Storage
-(four, on the day this was written). A deploy that ends in **Failed** with nothing in **Terminal
-Logs** is not your grid's fault; see below.
+   **It did not succeed in our project**, and the reasons are worth knowing before you try: see
+   the failure list at the foot of this page. The draft preview is the part that has worked every
+   time.
+
+**Check:** the draft preview — or **Open App**, if the deploy succeeded for you — shows the grid,
+and its caption's count equals both the number of red cells and the number of rows where
+`short_handed` is true in Storage. That count moves with the forecast: the capture above was a
+week with two, an earlier week had four. A deploy that ends in **Failed** with nothing in
+**Terminal Logs** is not your grid's fault; see below.
 
 </TabItem>
 <TabItem label="UI">
@@ -142,7 +147,7 @@ Building an app by hand means a Git repository and your own Streamlit or Python/
 development workflow rather than a form. It has its own pages:
 [create an app manually](/data-apps/getting-started/#create-an-app-manually) for the UI flow, and
 [Build locally](/data-apps/build-locally/) for the repo-based workflow. Finish the guide with the
-Kai tab first; come back when the app you want is one the description field cannot hold.
+**Prompt** tab first; come back when the app you want is one the description field cannot hold.
 
 </TabItem>
 <TabItem label="CLI / API">
@@ -155,8 +160,11 @@ holds, waking one that has gone to sleep, and reading its log when it will not s
 kbagent data-app list --project docs-demo
 ```
 
-That prints each app with its numeric **app ID**, its state and its URL. With the ID, a deploy of
-the latest saved configuration is one command:
+That prints each app with its numeric **app ID**, its state and its URL. `kbagent data-app detail
+--project docs-demo --app-id <app-id>` adds the Storage **configuration ID** — a different
+identifier, and the one the flow on the next page needs for its third phase.
+
+With the app ID, a deploy of the latest saved configuration is one command:
 
 ```bash
 kbagent data-app deploy --project docs-demo --app-id <app-id> --wait
@@ -176,11 +184,16 @@ kbagent data-app logs --project docs-demo --app-id <app-id>
 ```
 
 ```bash
+kbagent data-app runs --project docs-demo --app-id <app-id>
+```
+
+```bash
 kbagent data-app password --project docs-demo --app-id <app-id>
 ```
 
-`start` wakes an app that auto-suspended, `logs` is the terminal output the app's own page shows,
-and `password` prints the Basic-auth password for the URL — the one thing to keep out of a
+`start` wakes an app that auto-suspended, `logs` is the app's own output, `runs` lists each
+start with the container's startup log — which is where a failed deploy actually explains itself —
+and `password` prints the Basic-auth password for the URL, the one thing to keep out of a
 screenshot or a chat.
 
 </TabItem>

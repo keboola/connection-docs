@@ -126,6 +126,11 @@ WHERE "short_handed" = TRUE
 ORDER BY "with_one_more" DESC;
 ```
 
+If those raise `invalid identifier`, your table has upper-case column names: Snowflake upper-cases
+an alias that was not quoted, and the **Prompt** path's Kai does not quote them. Either drop the
+quotes from the query or upper-case the names inside them — the
+[transform page](/getting-started/transform/#if-it-goes-wrong) explains why the two cases exist.
+
 Storage's own **Data Sample** tab answers the simpler half without a workspace at all: open
 `staffing_outlook`, sort by `expected_units_per_person` descending, and read the top rows.
 
@@ -145,8 +150,9 @@ short name only exists inside a transformation's input mapping.
 For a conversation rather than a single question, `kbagent kai chat -m "…"` returns a chat ID and
 `--chat-id` continues it.
 
-**Check:** the answer names the same café and day the **Prompt** tab's answer does, and the same
-count of flagged rows. If you would rather have the numbers than the prose,
+**Check:** the answer names a café and a day, and they are the ones the grid shows as most
+stretched — the same row the **Prompt** tab's answer is about, even though the two questions are
+worded differently. If you would rather have the numbers than the prose,
 `kbagent storage table-detail --project docs-demo --table-id out.c-Boolabean-staffing-outlook.staffing_outlook`
 gives you the shape of the table and
 [a workspace](/getting-started/transform/workspace/) gives you the SQL.
