@@ -1,0 +1,31 @@
+---
+// Cold-start block (a): genre, which guide the page belongs to, and an honest
+// time budget — so a reader arriving from a search engine knows within one line
+// what kind of page this is and what it will cost them.
+//
+// Deliberately carries NO ordinal ("step 3 of 7"): numbering breaks the moment
+// a page moves, and none of the twelve documentation sites surveyed uses it.
+// Reading order lives in the sidebar.
+//
+// Usage:  <PageMeta genre="Tutorial" minutes="10" />
+//         <PageMeta genre="How-to" minutes="5" guide="Going further" />
+
+interface Props {
+  /** Diátaxis type of this page. One page, one genre. */
+  genre: 'Tutorial' | 'How-to' | 'Reference' | 'Explanation';
+  /** Time budget in minutes. Measure it; do not guess. */
+  minutes: number | string;
+  /** Which guide this page belongs to. */
+  guide?: string;
+}
+
+const { genre, minutes, guide = 'Getting Started' } = Astro.props;
+---
+
+<p class="gs-pagemeta" data-genre={genre.toLowerCase()}>
+  <span class="gs-pagemeta__genre">{genre}</span>
+  <span class="gs-pagemeta__sep" aria-hidden="true">·</span>
+  <span class="gs-pagemeta__guide">{guide}</span>
+  <span class="gs-pagemeta__sep" aria-hidden="true">·</span>
+  <span class="gs-pagemeta__time">about {minutes} minutes</span>
+</p>

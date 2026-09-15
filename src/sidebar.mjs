@@ -37,20 +37,22 @@ export const sidebar = [
       { slug: "getting-started/project" },
       { slug: "getting-started/load" },
       { slug: "getting-started/transform" },
-      { slug: "getting-started/write" },
-      { slug: "getting-started/automate" },
+      { slug: "getting-started/ask" },
       { slug: "getting-started/app" },
-      { slug: "getting-started/next-steps" },
+      { slug: "getting-started/automate" },
+      { slug: "getting-started/check" },
       {
-        label: "Going Further",
+        label: "Going further",
         collapsed: true,
         items: [
+          { label: "Overview", slug: "getting-started/going-further" },
+          { slug: "getting-started/write" },
           { slug: "getting-started/load/googlesheets" },
           { slug: "getting-started/load/database" },
           { slug: "getting-started/transform/workspace" },
           { slug: "getting-started/ad-hoc" },
           {
-            label: "Development Branches",
+            label: "Development branches",
             collapsed: true,
             items: [
               { label: "Overview", slug: "getting-started/branches" },
