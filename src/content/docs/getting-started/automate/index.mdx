@@ -21,7 +21,7 @@ without you.
 **Where you are:** the pieces work individually, each run by hand. **When you finish:** one flow
 that runs them in order every morning and emails you when it breaks.
 
-<PathIntro yours="the notifications, which come after the tabs and are the same either way" />
+<PathIntro tabs={3} yours="the notifications, which come after the tabs and are the same either way" />
 
 {/* Tutorial-type page. 2026-09-09: dataset swapped to Boolabean; the flow was built live in
 project 264 by Kai from the prompt in the Kai tab (flow 01m23dcqs9j2gw0q9z8y25j9v2, 3 approvals:
@@ -41,7 +41,14 @@ contrary to /management/notifications/. Create Flow opens a chooser ("Get your d
 2026-09-14: captures 01 and 05–09 reshot from "Boolabean morning outlook" (element captures, no top
 bar); 02 (the Add Task menu) kept from the previous shoot because it is theme-neutral; 03 (the
 component picker) and 04 (the second phase) removed rather than shown with the old names — a
-reshoot of the picker needs a flow-creation click, which the read-only capture session did not do. */}
+reshoot of the picker needs a flow-creation click, which the read-only capture session did not do.
+
+CLI / API tab added 2026-09-15 and run live against project 264 (kbagent v0.93.1): `flow validate`
+accepted this YAML, `flow new --file` created a throwaway flow from it, and `flow schedule --cron
+'0 6 * * *' --timezone Europe/Prague --enabled` created and activated the scheduler configuration.
+The throwaway flow and its scheduler were both deleted the same minute (note that
+`flow schedule-remove` prompts for confirmation, so a scheduler can outlive the flow it points at
+if you abort). The flow's own run was not re-run from the CLI: the scheduled run does it daily. */}
 
 <Prereqs needs={['project']}>
   <li>
@@ -101,7 +108,7 @@ Builder in 264 and correct or flag. */}
 ## Set it up
 
 <Tabs syncKey="howto">
-<TabItem label="Do it with Kai">
+<TabItem label="Prompt">
 
 Building a pipeline out of configurations you already have is a documented Kai job
 ([Complex Workflows](/kai/use-cases/#complex-workflows)), and the Flows section has it wired in:
@@ -109,7 +116,7 @@ the **Create Flow** screen opens with a prompt field, and a flow that already ha
 **Modify with Kai** in its header. The same request works from **Kai Agent** in the top bar, which
 is where this one was run:
 
-```text
+```text title="Prompt"
 Create a flow called "Boolabean morning outlook" with three phases, in this order:
 1. Phase 1 runs the two HTTP data source configurations "Boolabean sales" and "Boolabean
    forecast" in parallel.
@@ -135,7 +142,7 @@ flow's own tab below; they are two clicks, and they are the part people forget e
 nobody gets told about is just a button.
 
 </TabItem>
-<TabItem label="Do it yourself">
+<TabItem label="UI">
 
 **Build the flow**
 
@@ -186,6 +193,86 @@ nobody gets told about is just a button.
 You now have three phases: the two loads, then the transformation, then the app.
 
 ![Screenshot - The saved flow](/getting-started/automate/05-flow-saved.png)
+
+</TabItem>
+<TabItem label="CLI / API">
+
+A flow is a configuration like any other, and `kbagent` writes it from a YAML file. Run
+`kbagent flow schema --project docs-demo` once to see the full format with comments; the file
+below is the three phases of this guide.
+
+```yaml title="flow.yaml"
+phases:
+  - id: "extract"
+    name: "Extract source data"
+    next:
+      - id: "default"
+        goto: "transform"
+  - id: "transform"
+    name: "Build staffing outlook"
+    next:
+      - id: "default"
+        goto: "redeploy"
+  - id: "redeploy"
+    name: "Redeploy data app"
+    next:
+      - id: "done"
+        goto: null
+tasks:
+  - id: "task-sales"
+    name: "Boolabean sales"
+    phase: "extract"
+    enabled: true
+    task: { type: job, componentId: "keboola.ex-http", configId: "<sales-config-id>", mode: run }
+  - id: "task-forecast"
+    name: "Boolabean forecast"
+    phase: "extract"
+    enabled: true
+    task: { type: job, componentId: "keboola.ex-http", configId: "<forecast-config-id>", mode: run }
+  - id: "task-outlook"
+    name: "Boolabean staffing outlook"
+    phase: "transform"
+    enabled: true
+    task: { type: job, componentId: "keboola.snowflake-transformation", configId: "<transformation-config-id>", mode: run }
+  - id: "task-app"
+    name: "Staffing Outlook Grid"
+    phase: "redeploy"
+    enabled: true
+    task: { type: job, componentId: "keboola.data-apps", configId: "<app-config-id>", mode: run }
+```
+
+Two tasks in one phase is the parallelism: both connectors sit in `extract`, and the phase is done
+when both are. `goto: null` ends the flow.
+
+Check the file before it reaches the project, then create it:
+
+```bash
+kbagent flow validate --project docs-demo --file @flow.yaml
+```
+
+```bash
+kbagent flow new --project docs-demo --name "Boolabean morning outlook" --file @flow.yaml
+```
+
+**The schedule** is a separate configuration, and one command upserts it:
+
+```bash
+kbagent flow schedule --project docs-demo --flow-id <flow-id> --cron '0 6 * * *' --timezone Europe/Prague --enabled
+```
+
+**Run it now** rather than waiting for six in the morning:
+
+```bash
+kbagent job run --project docs-demo --component-id keboola.flow --config-id <flow-id> --wait
+```
+
+**Check:** the run's own job and one job per task:
+
+```bash
+kbagent job list --project docs-demo --component-id keboola.flow --limit 5
+```
+
+Notifications have no command; they live in the flow's **Notifications** tab, below.
 
 </TabItem>
 </Tabs>

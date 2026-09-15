@@ -4,8 +4,10 @@ slug: 'getting-started/ask'
 description: 'Put the question to your own data: Kai reads the table you built and answers it in plain words, then answers the follow-up, and the same pipeline can be asked for as one prompt.'
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PageMeta from '../../../../components/getting-started/PageMeta.astro';
 import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
 <PageMeta genre="Tutorial" minutes="5" />
 
@@ -22,13 +24,19 @@ answered from your data, and a second answer you did not have to build anything 
   </li>
 </Prereqs>
 
+<PathIntro tabs={3} approvals={false} />
+
 {/* Tutorial-type page. Both prompts below were run live in project 264 on 2026-09-08 and
 2026-09-09 (boolabean-run, the staged runs' ask.txt and ask-followup/): the first as the
 fourth prompt of the staged runs, 0 approvals, 1.3–1.6 min; the second alone in a fresh chat, 0
 approvals. Kai's figures matched the table and the offline reference to the decimal. The
 "one prompt" paragraph reports the 2026-09-03 and 2026-09-08 observations recorded in DECISIONS.md.
-The previous clip (kai-ask-basin.mp4) came off with the old sample world; phase 2 records the new
-one from the live chat. */}
+The previous clip (kai-ask-basin.mp4) came off with the old sample world.
+
+Three tabs 2026-09-15. The CLI command was run live against project 264 (kbagent v0.93.1):
+`kai ask` answered in 22 s with the same café, day and flag count the chat gives — a markdown
+table plus a "next actions" block. The workspace SQL in the UI tab is the page's own query
+narrowed to the flagged rows; it is not a new claim, but it has not been run in a workspace. */}
 
 ## Reading is different from building
 
@@ -53,8 +61,11 @@ Tuesday 85.2 per person on a two-person roster, "warm and completely dry". */}
 
 ## Ask it
 
+<Tabs syncKey="howto">
+<TabItem label="Prompt">
+
 :::tip[The question the guide started with]
-```text
+```text title="Prompt"
 Using staffing_outlook: which café is short-handed on which day next week, and what in the
 forecast makes that day different from the rest of its week?
 ```
@@ -74,7 +85,7 @@ that is the table being right.
 
 An answer is a place to start, not to stop:
 
-```text
+```text title="Prompt"
 Using staffing_outlook: if one extra person joined the roster on every short-handed day, which
 of those days would still be over 67 expected units per person, and what would each day's
 figure become?
@@ -91,19 +102,64 @@ somewhere else: rounded before dividing, or read `short_handed` as text. The def
 uses are the columns your transformation already wrote, so point Kai at those (`expected_units`,
 `rostered_staff`, `expected_units_per_person`) rather than re-prompting blind.
 
-## No Kai in your project?
+</TabItem>
+<TabItem label="UI">
 
-The loading, the SQL and the flow each have a click-through path written out in full; this page
-and the app are the two that assume Kai. Run the same query yourself in a
-[workspace](/getting-started/transform/workspace/): it is plain SQL against the same table, and
-"one more person" is `expected_units / (rostered_staff + 1)`.
+There is no dialog for "answer this question" — reading a table by hand means querying it. Open a
+[workspace](/getting-started/transform/workspace/) on the same table and run the SQL yourself:
+
+```sql
+SELECT "store_name", "city", "date", "weekday", "expected_units", "rostered_staff",
+       "expected_units_per_person"
+FROM "staffing_outlook"
+WHERE "short_handed" = TRUE
+ORDER BY "expected_units_per_person" DESC;
+```
+
+The follow-up is the same query with one more person on the roster:
+
+```sql
+SELECT "store_name", "date",
+       ROUND("expected_units" / ("rostered_staff" + 1), 1) AS "with_one_more"
+FROM "staffing_outlook"
+WHERE "short_handed" = TRUE
+ORDER BY "with_one_more" DESC;
+```
+
+Storage's own **Data Sample** tab answers the simpler half without a workspace at all: open
+`staffing_outlook`, sort by `expected_units_per_person` descending, and read the top rows.
+
+</TabItem>
+<TabItem label="CLI / API">
+
+`kbagent kai ask` puts the same question from a terminal and prints the answer, tables and all. It
+is one shot: no chat to keep, nothing created.
+
+```bash
+kbagent kai ask --project docs-demo -m "Using out.c-Boolabean-staffing-outlook.staffing_outlook, which cafe and day has the highest expected units per person, and how many rows are flagged short_handed?"
+```
+
+Name the table by its full Storage ID rather than the short name the transformation used: the
+short name only exists inside a transformation's input mapping.
+
+For a conversation rather than a single question, `kbagent kai chat -m "…"` returns a chat ID and
+`--chat-id` continues it.
+
+**Check:** the answer names the same café and day the **Prompt** tab's answer does, and the same
+count of flagged rows. If you would rather have the numbers than the prose,
+`kbagent storage table-detail --project docs-demo --table-id out.c-Boolabean-staffing-outlook.staffing_outlook`
+gives you the shape of the table and
+[a workspace](/getting-started/transform/workspace/) gives you the SQL.
+
+</TabItem>
+</Tabs>
 
 ## The same request, as one prompt
 
 You built this one step at a time so every result stayed checkable. Once you have seen the
 pieces, the loading, the forecast and the joining are one request rather than three:
 
-```text
+```text title="Prompt"
 Load the five CSV files at https://help.keboola.com/getting-started/boolabean/ (stores,
 products, sales, staffing, weather_daily) into Storage as one HTTP data source configuration.
 Add a second HTTP configuration for the open-meteo forecast CSV for the six cafés. Then build a

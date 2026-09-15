@@ -19,13 +19,12 @@
 // before — 8 approvals to the control run's 7. It is a review gate, not a way
 // to approve once, and the wording below says so.
 //
-// While the section is being converted page by page, `tabs` says which world a
-// page is in: 2 = the old "Do it with Kai" / "Do it yourself" pair, 3 = Prompt ·
-// UI · CLI / API. The default stays 2 until the last page is converted, then it
-// flips and the prop goes away.
+// Every task page carries three tabs as of 2026-09-15, so `tabs={3}` is now the
+// only shape in use; the two-tab wording below is kept for one release in case a
+// page outside this section still uses the component, and goes when nothing does.
 //
-// Usage:  <PathIntro />                       — two tabs, Kai asks for approvals
-//         <PathIntro tabs={3} />              — Prompt · UI · CLI / API
+// Usage:  <PathIntro tabs={3} />              — Prompt · UI · CLI / API
+//         <PathIntro />                       — legacy two-tab wording
 //         <PathIntro approvals={false} />     — read-only pages, where it does not
 //         <PathIntro manual={false} />        — no click-by-click equivalent exists
 //         <PathIntro yours="the Google consent screen" />

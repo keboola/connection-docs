@@ -598,6 +598,42 @@ data without mentioning that a project has to exist first. The wording now comes
 
 ---
 
+## 2026-09-15 — The three tabs are on every task page, and the CLI found the app bug
+
+**Done:** `load/`, `transform/`, `ask/`, `app/` and `automate/` each carry **Prompt · UI ·
+CLI / API**; `check/` gets a read-only terminal section instead of tabs, because it is about
+reading state, not a task with three ways to do it; `write/` keeps two tabs (renamed to Prompt and
+UI so the reader's saved choice stays coherent) and says why it has no third: a browser consent
+screen cannot be driven from a terminal.
+
+**Every command was run against project 264 before it shipped** (kbagent v0.93.1, alias
+`docs-demo`), and everything it created was deleted the same minute:
+
+| page | verified | result |
+|---|---|---|
+| load | `config new --push --no-files`, `config row-create`, `job run --wait`, `storage tables`, `storage table-detail`, plus the curl POST | job 104214515 green, 6 and 18 rows |
+| transform | `transformation create --sql-file --created-table`, `transformation edit --storage @file`, `job run --wait`, `storage table-detail` | job 104346054 green, 42 rows |
+| ask | `kai ask -m "…"` | answered in 22 s with the same café, day and flag count as the chat |
+| app | `data-app list`, `data-app deploy --wait`, `data-app runs` | deploy failed — see below |
+| automate | `flow validate`, `flow new --file`, `flow schedule --cron --timezone --enabled` | flow and schedule created, both deleted |
+
+**What the CLI taught us that the UI would not.** `transformation create` leaves the input mapping
+empty, so the page needs a second command (`transformation edit --storage`) to add the five inputs
+— the UI tab's mapping section has no single-command equivalent, and pretending otherwise would
+have shipped a recipe that fails on the first run. And `data-app runs` prints the container's
+startup log, which finally explains the deploy failures the UI reported only as "Internal Server
+Error occurred": the 14 Sept run cloned the repo and died on `App must have keboola-config/nginx/
+directory`, and both 15 Sept runs died earlier, on `Authentication failed …/app-74021219.git`
+("Credentials are incorrect or have expired"). So publishing does carry the code; production fails
+because the app Kai generated has no nginx config outside dev mode, and because the managed Git
+credentials have since expired. Both belong in a bug report to the Apps team, with the run IDs.
+
+**One trap recorded for whoever does this next:** `flow schedule-remove` prompts for confirmation,
+so aborting it leaves a scheduler configuration pointing at a flow you then delete. Delete the
+scheduler explicitly (`config delete --component-id keboola.scheduler`).
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were

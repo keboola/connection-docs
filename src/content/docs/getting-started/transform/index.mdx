@@ -32,7 +32,13 @@ describes (project 264, job 103114885, 61 s): 42 rows, 42 distinct (store, date)
 short-handed, top row Brno / Tue 2026-09-08 / 84.4, identical to Kai's read-only-input version
 from the 2026-09-08 runs and to the offline reference. The BigQuery block is a translation and has
 NOT been run (decision 7 in the plan; no BigQuery project). Screenshots 00–10 still show the
-previous sample's names; phase 2 reshoots them. */}
+previous sample's names; phase 2 reshoots them.
+
+CLI / API tab added 2026-09-15 and run live against project 264 with kbagent v0.93.1: `transformation
+create --sql-file --created-table` built a throwaway transformation from the page's own SQL file, `transformation edit --storage @file` added the five inputs (create leaves the input mapping empty —
+that is why the second command exists), `job run --wait` finished green (job 104346054) and
+`storage table-detail` reported 42 rows. The throwaway transformation and its output bucket were
+deleted the same minute. */}
 
 <Prereqs needs={['project']}>
   <li>
@@ -43,7 +49,7 @@ previous sample's names; phase 2 reshoots them. */}
   </li>
 </Prereqs>
 
-<PathIntro />
+<PathIntro tabs={3} />
 
 The bucket names do not matter. What the SQL depends on is the **Table name** you give each table
 in the input mapping below: those must be exactly `sales`, `weather_daily`, `staffing`, `stores` and
@@ -99,13 +105,13 @@ contract customers choose theirs. Close the dialog and carry that word into whic
 ## Set it up
 
 <Tabs syncKey="howto">
-<TabItem label="Do it with Kai">
+<TabItem label="Prompt">
 
 Writing SQL transformations is Kai's home ground
 ([SQL Transformations](/kai/use-cases/#sql-transformations)), and it already has your table
 schemas in front of it. Open **Kai Agent** in the top bar and ask:
 
-```text
+```text title="Prompt"
 Build a Snowflake transformation called "Boolabean staffing outlook" with one output table,
 staffing_outlook. Storage columns arrive as text, so cast before you compare or average.
 
@@ -142,7 +148,7 @@ then casts everything it compares.
 
 Kai builds the transformation on **read-only input**: it reads the source tables by their full
 Storage names and leaves the input mapping empty, so you will not see one in its configuration. The
-mapping sections of this page describe the hand-built path; the result is the same table. Expect two
+mapping sections of the **UI** tab describe the hand-built path; the result is the same table. Expect two
 approvals, one for the transformation and one for the run.
 {/* Observed in all three 2026-09-08 runs: storage.input.tables empty, tables addressed as
 "KBC_EUW3_264"."in.c-keboola-ex-http-<id>"."sales". This closes the VERIFY(owner) that stood here
@@ -153,7 +159,7 @@ day. If the count differs, the joins differ: re-prompt, or fix the code in place
 depend only on the table name, so a close-enough table is fine.
 
 </TabItem>
-<TabItem label="Do it yourself">
+<TabItem label="UI">
 
 **Create the transformation**
 
@@ -425,6 +431,67 @@ the range variable and comparisons then fail with "STRUCT<...> vs STRING"). The 
 about `SELECT * EXCEPT (_timestamp)` still applies: _timestamp appears only on CLONE-staged inputs
 (transformations/mappings/index.md), and EXCEPT on an absent column is itself an error, so the
 block does not use it. */}
+
+</TabItem>
+<TabItem label="CLI / API">
+
+`kbagent` builds the same transformation from a SQL file. Connect it to your project once with
+`kbagent project add` (see [the CLI quickstart](/cli/getting-started/)); the examples use
+`docs-demo` as the project alias.
+
+**Create it from the SQL**
+
+Put the block for your backend in a file, `staffing_outlook.sql`, then:
+
+```bash
+kbagent transformation create --project docs-demo --name "Boolabean staffing outlook" --component-id keboola.snowflake-transformation --sql-file staffing_outlook.sql --created-table staffing_outlook
+```
+
+`--created-table` is the output mapping: it maps the table the SQL creates to
+`out.c-<name-derived-bucket>.staffing_outlook`. Add `--dry-run` first if you want to see the
+configuration it would write.
+
+**Add the input mapping**
+
+`transformation create` leaves the input mapping empty, and the SQL above reads its tables by the
+short names the mapping gives them, so the next command fills it in. `--storage` replaces
+`configuration.storage` wholesale, which means the file has to carry the output mapping too:
+
+```bash
+kbagent transformation edit --project docs-demo --config-id <config-id> --change-description "Add the five input tables" --storage @storage.json
+```
+
+```json title="storage.json"
+{
+  "input": { "tables": [
+    { "source": "in.c-keboola-ex-http-<sales-config-id>.sales",         "destination": "sales" },
+    { "source": "in.c-keboola-ex-http-<sales-config-id>.weather_daily", "destination": "weather_daily" },
+    { "source": "in.c-keboola-ex-http-<sales-config-id>.staffing",      "destination": "staffing" },
+    { "source": "in.c-keboola-ex-http-<sales-config-id>.stores",        "destination": "stores" },
+    { "source": "in.c-keboola-ex-http-<forecast-config-id>.forecast",   "destination": "forecast" }
+  ]},
+  "output": { "tables": [
+    { "source": "staffing_outlook", "destination": "out.c-Boolabean-staffing-outlook.staffing_outlook" }
+  ]}
+}
+```
+
+`kbagent storage buckets --project docs-demo` lists the bucket names if you do not have the two
+configuration IDs to hand.
+
+**Run it and read the result**
+
+```bash
+kbagent job run --project docs-demo --component-id keboola.snowflake-transformation --config-id <config-id> --wait
+```
+
+```bash
+kbagent storage table-detail --project docs-demo --table-id out.c-Boolabean-staffing-outlook.staffing_outlook
+```
+
+**Check:** the table detail reports **42 rows** and the ten columns. `kbagent transformation show
+--project docs-demo --config-id <config-id>` prints the block and code tree if you want to see what
+was written.
 
 </TabItem>
 </Tabs>

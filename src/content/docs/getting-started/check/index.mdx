@@ -21,7 +21,12 @@ Storage inventory from project. Numbers below are from the live builds in projec
 under one task), the transformation job took 33–61 s, and the first run of "Boolabean morning
 outlook" ended in error at phase 3 (data app deploy, "Internal Server Error occurred.") with
 phases 1 and 2 successful — which is the example the run-reading section describes. The 09-all-runs
-capture still shows the previous flow; phase 2 reshoots it. */}
+capture still shows the previous flow; phase 2 reshoots it.
+
+The terminal section was added 2026-09-15. `job list`, `job detail` and `storage tables` were run
+live against project 264 (kbagent v0.93.1) while verifying the other pages; all three are
+read-only. This page keeps no tabs on purpose: it is a how-to about reading state, not a task
+with three ways to do it. */}
 
 ## What you should have
 
@@ -82,13 +87,35 @@ duration and status. Expand a run to see its phases.
 - The **Schedules** tab shows a count, and a schedule can be toggled off without deleting it.
 
 :::tip[Let Kai read the run for you]
-```text
+```text title="Prompt"
 My flow run failed. Which task failed, and why?
 ```
-Kai reads the run's job logs, which is faster than expanding them one at a time.
+Kai reads the run's job logs, which is faster than expanding them one at a time. The same question
+from a terminal is `kbagent kai ask --project <alias> -m "…"`.
 {/* VERIFY(owner): kai/ documents reading *a* job log, not traversing every child job of a flow
 run. The prompt is safe either way; the capability sentence is the unverified part. */}
 :::
+
+## The same checks from a terminal
+
+Every number above has a read-only command behind it, which is the fastest way to answer "did last
+night's run work?" without opening the project:
+
+```bash
+kbagent job list --project docs-demo --component-id keboola.flow --limit 5
+```
+
+```bash
+kbagent job detail --project docs-demo --job-id <job-id>
+```
+
+```bash
+kbagent storage tables --project docs-demo --bucket-id out.c-Boolabean-staffing-outlook
+```
+
+The first prints the flow's recent runs with their status and duration, the second opens one of
+them — including which task failed — and the third is the row count that proves the join. None of
+them changes anything.
 
 ## The failures that actually happen
 
