@@ -1,5 +1,6 @@
 ---
 title: Debugging
+description: Because all components run in an isolated environment, it may be harder to debug them. There is no way to examine the component while it is running.
 slug: 'extend/component/tutorial/debugging'
 ---
 

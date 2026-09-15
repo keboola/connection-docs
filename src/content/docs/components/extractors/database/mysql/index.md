@@ -1,5 +1,6 @@
 ---
 title: MySQL
+description: MySQL is an open source database that enables the delivery of high-performance, scalable web-based, and embedded database applications.
 slug: 'components/extractors/database/mysql'
 ---
 

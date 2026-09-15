@@ -1,5 +1,6 @@
 ---
 title: UI Options
+description: Each component needs to specify how its user interface (UI) will look.
 slug: 'extend/component/ui-options'
 ---
 

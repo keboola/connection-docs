@@ -1,5 +1,6 @@
 ---
 title: Multi-Project Architecture Guide
+description: "Welcome to the Multi-Project Architecture Guide!"
 slug: 'tutorial/onboarding/architecture-guide'
 ---
 

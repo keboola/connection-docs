@@ -1,5 +1,6 @@
 ---
 title: Multiple Scrollers
+description: Setting the pagination method to multiple allows you to use multiple scrollers on a single API.
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/multiple'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/multiple/

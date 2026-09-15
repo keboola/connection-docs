@@ -1,5 +1,6 @@
 ---
 title: "Part 4: Flow Automation"
+description: 'Automate the pipeline you built — schedule the loading, transformation, and writing steps to run on their own.'
 slug: 'tutorial/automate'
 ---
 

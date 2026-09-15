@@ -1,5 +1,6 @@
 ---
 title: dbt CLI
+description: "Let's set up the local development with Keboola CLI."
 slug: 'transformations/dbt/cli'
 ---
 

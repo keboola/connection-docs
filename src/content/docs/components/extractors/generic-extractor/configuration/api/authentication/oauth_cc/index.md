@@ -1,5 +1,6 @@
 ---
 title: oAuth 2.0 Client Credentials Authentication
+description: oAuth 2.0 Client Credentials authentication performs the oAuth 2.0 clientcredentials flow.
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth_cc'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth_cc/

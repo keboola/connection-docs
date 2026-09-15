@@ -1,5 +1,6 @@
 ---
 title: Kai Use Cases & Examples
+description: Practical examples of what you can ask Kai to do.
 slug: 'kai/use-cases'
 ---
 

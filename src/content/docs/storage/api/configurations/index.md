@@ -1,5 +1,6 @@
 ---
 title: Component Configurations API
+description: Configurations are an important part of a Keboola project. Most operations are available in the UI.
 slug: 'storage/api/configurations'
 redirect_from:
     - /integrate/storage/api/configurations/

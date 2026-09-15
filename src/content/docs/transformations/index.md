@@ -1,5 +1,6 @@
 ---
 title: Transformations
+description: Go to our Getting Started tutorial to create your first transformation and learn how transformations are an integral part of the Keboola workflow.
 slug: 'transformations'
 redirect_from:
     - /manipulation/transformations/

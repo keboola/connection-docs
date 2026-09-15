@@ -1,5 +1,6 @@
 ---
 title: Generic Extractor Tutorial
+description: In this tutorial, we will guide you through configuring Generic Extractor for a new API. In our case, MailChimp — an email marketing service.
 slug: 'components/extractors/generic-extractor/tutorial'
 redirect_from:
     - /extend/generic-extractor/tutorial/

@@ -1,5 +1,6 @@
 ---
 title: /data/out/tables manifests with Native Types
+description: Native Types provide a structured way for components to define their handling of data types, referred to as “Native Types.”
 slug: 'extend/common-interface/manifest-files/out-tables-manifests-native-types'
 ---
 

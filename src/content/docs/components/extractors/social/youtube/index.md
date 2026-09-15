@@ -1,5 +1,6 @@
 ---
 title: YouTube Data API
+description: The YouTube Data API source connector uses the YouTube Data API to extract data about your YouTube channels or your YouTube activity.
 slug: 'components/extractors/social/youtube'
 redirect_from:
     - /extractors/social/youtube/

@@ -1,5 +1,6 @@
 ---
 title: Tables
+description: The Table Storage for your project is available under the Tables tab in the Storage section.
 slug: 'storage/tables'
 ---
 

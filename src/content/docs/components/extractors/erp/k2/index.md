@@ -1,5 +1,6 @@
 ---
 title: K2
+description: K2 is an ERP information system for managing production, inventory, financials, and more. This component fetches defined data objects from the K2 API.
 slug: 'components/extractors/erp/k2'
 ---
 
