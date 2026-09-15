@@ -464,20 +464,20 @@ See [example [EX119]](https://github.com/keboola/generic-extractor/tree/master/d
 
 ### Base URL Context
 The Base URL function context is used when setting the [`baseURL` for API](/components/extractors/generic-extractor/configuration/api/#base-url), and it
-contains [configuration attributes](/#function-contexts).
+contains [configuration attributes](/components/extractors/generic-extractor/functions/#function-contexts).
 
 See an [example](#api-base-url).
 
 ### Headers Context
 The Headers function context is used when setting the [`http.headers` for API](/components/extractors/generic-extractor/configuration/api/#headers)
 or the [`http.headers` in config](/components/extractors/generic-extractor/configuration/config/#http), and it contains
-[configuration attributes](/#function-contexts).
+[configuration attributes](/components/extractors/generic-extractor/functions/#function-contexts).
 
 See an [example](#headers).
 
 ### Parameters Context
 The Parameters function context is used when setting job [request parameters — `params`](/components/extractors/generic-extractor/configuration/config/jobs/#request-parameters).
-It contains [configuration attributes](/#function-contexts) plus the times of the current
+It contains [configuration attributes](/components/extractors/generic-extractor/functions/#function-contexts) plus the times of the current
 (`currentStart`) and previous (`previousStart`) run of Generic Extractor.
 The times are [Unix timestamps](https://en.wikipedia.org/wiki/Unix_time).
 If the extraction is run for the first time, `previousStart` is 0.
@@ -561,7 +561,7 @@ See an [example](#job-placeholders).
 
 ### User Data Context
 The User Data function context is used when setting the [`userData`](/components/extractors/generic-extractor/configuration/config/#user-data).
-The parameters context contains [configuration attributes](/#function-contexts) plus the times of the current (`currentStart`) and
+The parameters context contains [configuration attributes](/components/extractors/generic-extractor/functions/#function-contexts) plus the times of the current (`currentStart`) and
 previous (`previousStart`) run of Generic Extractor. The User Data Context is therefore
 same as the [Parameters Context](#parameters-context).
 
@@ -572,9 +572,9 @@ The Login Authentication function context is used in the
 [login authentication](/components/extractors/generic-extractor/configuration/api/authentication/login/) method.
 Functions are supported in both [`loginRequest`](/components/extractors/generic-extractor/configuration/api/authentication/login/#configuration-parameters)
 and [`apiRequest` ](/components/extractors/generic-extractor/configuration/api/authentication/login/#configuration-parameters) configurations.
-The `loginRequest` function context contains [configuration attributes](/#function-contexts).
+The `loginRequest` function context contains [configuration attributes](/components/extractors/generic-extractor/functions/#function-contexts).
 In the `apiRequest` context, the flattened reponse of the login request is available additionally
-to the [configuration attributes](/#function-contexts).
+to the [configuration attributes](/components/extractors/generic-extractor/functions/#function-contexts).
 The login authentication context is the same for both `params` and `headers`
 [login authentication configuration options](/components/extractors/generic-extractor/configuration/api/authentication/login/#configuration-parameters). If the
 login authentication request returns e.g.:
@@ -612,7 +612,7 @@ both login request and API request.
 ### Query Authentication Context
 The Query Authentication function context is used in the
 [query authentication](/components/extractors/generic-extractor/configuration/api/authentication/query/) method.
-The Query Authentication Context contains [configuration attributes](/#function-contexts) plus
+The Query Authentication Context contains [configuration attributes](/components/extractors/generic-extractor/functions/#function-contexts) plus
 a representation of the complete HTTP request to be sent (`request`) plus a key
 value list of query parameters of the HTTP request (`query`).
 
@@ -773,7 +773,7 @@ leads to the following function context:
 The `authorization` section of the configuration contains the
 [OAuth2 response](/components/extractors/generic-extractor/configuration/api/authentication/oauth20/). The function context contains
 the parsed and flattened response fields under the key `data`, provided that the response was sent in JSON format
-and that [`"format": "json"`](/components/extractors/generic-extractor/configuration/api/authentication/oauth20/#configuration) was set.
+and that [`"format": "json"`](/components/extractors/generic-extractor/configuration/api/authentication/oauth20/#configuration-parameters) was set.
 
 In the response above, these are the keys `data.status`, `data.access_token`, `data.foo.bar`. This is defined
 entirely by the behavior of the OAuth Service provider. If the response is a plaintext (usually directly a token),
