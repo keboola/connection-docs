@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/tutorial/jobs/
 ---
 
+<!-- Tutorial-type page. Part of the Generic Extractor tutorial chain; nav order is the reading order. -->
+
 
 On your way through the Generic Extractor tutorial, you have learned about
 
@@ -24,7 +26,7 @@ Moreover, each campaign has three **sub-resources**:
 and `/campaigns/{campaign_id}/send-checklist`. The `{campaign_id}` expression represents a placeholder 
 that a specific campaign ID should replace. To retrieve the sub-resource, use child jobs. 
 
-## Child Jobs
+## Child jobs
 
 In the 
 [previous part](/components/extractors/generic-extractor/tutorial/pagination/#running) of the tutorial, you created this job 
@@ -146,7 +148,7 @@ request. So, to join the two tables together in SQL, you would use the join cond
 
 However, you have to remember what table the `parent_id` column refers to.
 
-## Multiple Jobs
+## Multiple jobs
 You have probably noticed that the `jobs` and `children` properties are arrays. It means that you can retrieve multiple 
 endpoints in a single configuration. Let's pick the campaign `content` sub-resource too:
 
@@ -238,3 +240,5 @@ MailChimp API and giving us a lot of trouble, is best to be ignored. The answer 
 
 You might also have noticed some duplicate records in the table `in.c-ge-tutorial.campaigns__campaign_id__content` 
 along the way. You'll look into this as well.
+
+**Next:** [Mapping →](/components/extractors/generic-extractor/tutorial/mapping/)

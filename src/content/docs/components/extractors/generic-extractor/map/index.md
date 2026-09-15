@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/map/
 ---
 
+<!-- Explanation-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 *To configure your first Generic Extractor, follow our [tutorial](/components/extractors/generic-extractor/tutorial/).*
 
 Use the following sample configuration to navigate among various **configuration options**:
