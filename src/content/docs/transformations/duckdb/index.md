@@ -75,13 +75,6 @@ These actions are available from the transformation configuration page and are h
 
 ## Dynamic Backends
 
-<!-- VERIFY(martin.struzsky): backend type + credit rates below. The sizes on this page match the
-     "(Python, R, Components)" specs in /management/project/limits/ exactly (8 / 16 / 32 / ~114 GB),
-     and the data science backend was confirmed in Slack, but the credit values (0.2 / 0.4 / 0.6 / 2)
-     are inferred from that match rather than documented anywhere. Confirm before merging, then
-     delete this comment.
-     https://keboolaglobal.slack.com/archives/C8L5WP46P/p1789475081621059 -->
-
 DuckDB runs in-process on the **data science backend** — the same container infrastructure that runs
 Python and R transformations — not on a SQL data warehouse. Two things follow from this, and both
 affect cost:
@@ -91,19 +84,18 @@ affect cost:
 
 You can change the backend size to allocate more memory for your transformation. The following sizes are available:
 
-| Backend Size | Memory | Time credits (1 hour) | Recommended For |
-|---|---|---|---|
-| **XSmall** | 8 GB | 0.2 | Small datasets, testing |
-| **Small** *(default)* | 16 GB | 0.4 | Most use cases |
-| **Medium** | 32 GB | 0.6 | Large datasets (5 GB+) |
-| **Large** | 113.6 GB | 2 | Very large datasets (10 GB+) |
+| Backend Size | Memory | Recommended For |
+|---|---|---|
+| **XSmall** | 8 GB | Small datasets, testing |
+| **Small** *(default)* | 16 GB | Most use cases |
+| **Medium** | 32 GB | Large datasets (5 GB+) |
+| **Large** | 113.6 GB | Very large datasets (10 GB+) |
 
 Start with the **Small** backend and scale up as needed based on your dataset size and query complexity.
 
-The rates above are the **Data Science job / workspace** rows in
-[Project Limits](/management/project/limits/#project-power--time-credits), where the matching hardware
-specifications are listed under **(Python, R, Components)**. Do not use the **SQL job** rates to
-estimate DuckDB cost — those apply to Snowflake and BigQuery transformations.
+For the credit rate of each size, see the **Data Science job / workspace** rows in
+[Project Limits](/management/project/limits/#project-power--time-credits). Do not use the **SQL job**
+rates to estimate DuckDB cost — those apply to Snowflake and BigQuery transformations.
 
 ***Note:** Dynamic backends are not available if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).*
 
