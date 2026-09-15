@@ -769,6 +769,49 @@ sentence this week — `kbagent config restore` is real, and the gate rejected i
 
 ---
 
+## 2026-09-15 — The hero clip, taken apart frame by frame
+
+Nikita asked for two things on the clip: the highlighted moments look cut off, and the blue marker
+is redundant when something is already lit. A review pass over all 31 stills confirmed both and
+found more.
+
+**Every cut-out was placed as if its coordinates were a corner.** `spotAt` reads them as a centre
+and subtracts half the width and height, so all three tour stops sat half a row above their target.
+The Brno stop, the payoff of the whole clip, lit the café above it and left the cell it was
+captioning dimmed. The dash stop cut a line of text in half, bright above and dim below, which
+reads as a rendering fault. The stops now carry centres measured against the grid's own cell edges,
+and act 1 lights the whole file card rather than a token inside a line of monospace, which is what
+used to slice the characters either side of `S02`.
+
+**Three blue markers pointed at one thing.** The cut-out had a blue outline, a pulsing blue ring sat
+inside it, and the caption chip carried a blue dot. On the dash stop the ring physically covered the
+dash the caption exists to explain. All three are gone. The lit rectangle and the sentence do the
+pointing.
+
+**The caption parked on the payoff row in every beat.** It was pinned to the bottom, and the grid's
+last row is its bottom row, so the chip covered Brno in all three acts including the final frame. It
+now sits in whichever half the spotlight is not in.
+
+**The poster was two layers of text on top of each other.** Act 2 drew the question straight onto
+the live grid over a white wash rather than the dark scrim the other two acts use, so the question
+crossed the numbers behind it. That frame is the page's `poster`, which made it the first thing a
+reader sees. The question has its own panel now, over the same scrim as everything else.
+
+**The first frame gave away the ending.** Frame 0 was the finished grid, cross-dissolving into act
+1. It opens on the scrim now.
+
+**Four files on screen, five in every caption.** `products.csv` was missing. It is there now, with
+its real columns and its real first row: I had typed a plausible one from memory, and checking it
+against the file caught that both the column name and the values were invented. All five rows in
+act 1 are verbatim.
+
+**Not fixed, and it needs the owner.** The app capture is 966x744 and the grid's last row needs 765,
+so Brno is cut off by its own screenshot in every frame. The clip is cropped to 724 so the cut falls
+between two lines instead of through them, which reads as a crop rather than a fault, but the row is
+still short. A taller capture means unlocking the data app, and its password is not mine to handle.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were

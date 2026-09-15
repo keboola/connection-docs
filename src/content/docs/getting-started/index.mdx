@@ -18,7 +18,7 @@ Six café branches, a summer of sales, the rosters that served it and the weathe
 files, none of which answers alone. The sixth table is next week's forecast, fetched live from a
 public API that needs no account, which is why the answer is different every morning.
 
-<video autoplay loop muted playsinline poster="/getting-started/outlook-tour-poster.png" aria-label="Four raw CSV rows where a café is only a code, then the guide's question, then the finished grid: six cafés by seven days with two red cells, the caption saying two of 42 café-days are short-handed">
+<video autoplay loop muted playsinline poster="/getting-started/outlook-tour-poster.png" aria-label="Five raw CSV rows where a café is only a code, then the guide's question, then the finished grid: six cafés by seven days with two red cells, the caption saying two of 42 café-days are short-handed">
   <source src="/getting-started/outlook-tour.mp4" type="video/mp4" />
 </video>
 
@@ -29,13 +29,30 @@ The world is now described once, on load/. Timing: 80 = this page (5) + the seve
 (5+15+15+5+15+15+5); each step = reading one tab at 200 words/min plus the wall time Kai took in the
 2026-09-08/09 live runs. Building alone, prompt path, was about 30 minutes.
 
-Hero clip, three acts (compositor scene outlook-tour): four raw CSV rows verbatim from
+Hero clip, three acts (compositor scene outlook-tour): five raw CSV rows verbatim from
 public/getting-started/boolabean/*.csv (S02 is a code in sales.csv and Boolabean Zelný trh, Brno,
-in stores.csv); the question, held long enough to read — that frame is the poster; the app's draft
-preview captured 2026-09-14. Above the fold per Jordan 2026-08-21 ("reader can't tell what they'll get out of it").
-Re-rendered 2026-09-15 without the mascot: the guide is now a spotlight (a cut-out rectangle over
-the point being made, everything else dimmed) plus a caption chip, per Nikita 2026-09-14. 30.7 s,
-728 KB. */}
+in stores.csv; P01 is a code in sales.csv and Filter of the Day in products.csv); the question,
+held long enough to read — that frame is the poster; the app's draft preview captured 2026-09-14.
+Above the fold per Jordan 2026-08-21 ("reader can't tell what they'll get out of it"). Re-rendered
+2026-09-15 without the mascot: the guide is a spotlight (a cut-out rectangle over the point being
+made, everything else dimmed) plus a caption chip, per Nikita 2026-09-14. 30.7 s, 839 KB, 966x724.
+
+Re-rendered again the same day after a frame-by-frame review. What it fixed: every cut-out was
+placed as if its coordinates were a corner when the code reads them as a centre, so all three tour
+stops sliced the row they were revealing (the Brno stop lit the café above it); three blue markers
+pointed at one thing (an outline on the cut-out, a pulsing ring inside it, a dot on the chip) and
+the ring covered the very dash one caption explains, so all three are gone and the cut-out plus the
+chip do the pointing; the caption sat on the payoff row in every beat and now moves to whichever
+half the spotlight is not in; act 2 drew the question straight onto the grid over a white wash, so
+the poster frame was two layers of text on top of each other, and it now has its own panel over the
+same dark scrim the other acts use; frame 0 was the finished grid cross-dissolving into act 1,
+giving the ending away, and now opens on the scrim; act 1 showed four files while every caption
+said five, so products.csv joined it.
+
+Known and not fixed: the app capture is 966x744 and the grid's last row needs 765, so Brno, the row
+the clip is about, is cut by its own screenshot. The frame is cropped to 724 so the cut falls
+between two lines rather than through the glyphs. A taller capture needs the data app unlocked,
+which needs its password. VERIFY(owner). */}
 
 ## What you get
 
