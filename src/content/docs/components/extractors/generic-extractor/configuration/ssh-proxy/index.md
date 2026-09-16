@@ -59,7 +59,7 @@ CMD    ["/usr/sbin/sshd", "-D"]
 This server should be in the same private network where your destination server resides. It should be accessible publicly from the internet via SSH.
 The default port for SSH is 22, but you can choose a different port.
 
-We highly recommend to allow access only from the [Keboola IP address ranges](/extractors/ip-addresses/).
+We highly recommend to allow access only from the [Keboola IP address ranges](/components/ip-addresses/).
 
 See the following pages for more information about setting up SSH on your server:
 

@@ -812,6 +812,37 @@ still short. A taller capture means unlocking the data app, and its password is 
 
 ---
 
+## 2026-09-16 — The broken-link PR already exists, so this is two links instead
+
+The link check has been reporting one blocker since the rebuild started, `/extend/component/running/`
+pointing at `/integrate/jobs/`. Chasing it properly turned up 29 broken internal links across the
+site, all landing on three dev-docs paths that were never migrated: `/integrate/jobs/`,
+`/overview/encryption/` and `/overview/api/`.
+
+The developers-docs retirement branch already decides where each one belongs, in its
+`redirect_to` frontmatter: jobs to `/management/jobs/api/`, encryption to
+`/extend/common-interface/encryption/`, the API overview to `/overview/apis/`. None of those three
+pages exists on help yet, which is why every inbound link is broken.
+
+**PR #1120 creates all three, and repoints the links.** Its diff drops 50 lines carrying the old
+paths and adds 67 with the new ones, and it touches every single page that carries one of the 29.
+A second pull request would have collided with it on every file and fixed nothing that is not
+already fixed there. #1094 then flips the remaining dev-domain absolute links once #1120 lands;
+that PR states the merge order itself.
+
+What was left that nobody else owns: two links that resolve only through a redirect, both created by
+this branch retiring the `/tutorial/` slugs. They now point at the real page.
+
+| was | now |
+|---|---|
+| `/tutorial/onboarding/architecture-guide/` in `catalog/multi-project/` | `/overview/onboarding/architecture-guide/` |
+| `/extractors/ip-addresses/` in the generic extractor's SSH proxy page | `/components/ip-addresses/` |
+
+A third one, in `storage/api/tde-exporter/`, is left alone on purpose: #1120 edits that file, and
+two branches rewriting the same line is how a merge conflict gets made for no gain.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
