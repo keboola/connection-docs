@@ -1,0 +1,124 @@
+---
+title: 'Getting started with Keboola'
+slug: 'getting-started'
+description: 'Build one working, scheduled pipeline: load six tables, join them with SQL, ask the result a question, publish it as an app, and have it rebuild itself every morning.'
+redirect_from:
+  - /tutorial/
+---
+
+import PageMeta from '../../../components/getting-started/PageMeta.astro';
+
+<PageMeta genre="Tutorial" minutes="80" />
+
+This guide builds one pipeline end to end and answers one question with it:
+
+> **Which day next week will leave a café short-handed?**
+
+Six café branches, a summer of sales, the rosters that served it and the weather each day: five
+files, none of which answers alone. The sixth table is next week's forecast, fetched live from a
+public API that needs no account, which is why the answer is different every morning.
+
+<video autoplay loop muted playsinline poster="/getting-started/outlook-tour-poster.png" aria-label="Five raw CSV rows where a café is only a code, then the guide's question, then the finished grid: six cafés by seven days with two red cells, the caption saying two of 42 café-days are short-handed">
+  <source src="/getting-started/outlook-tour.mp4" type="video/mp4" />
+</video>
+
+{/* Tutorial-hub page: the arc index. "Get a project" moved back to its own page 2026-09-14 (see
+that page's comment and DECISIONS.md), and the café story that used to open this page is gone:
+Michal, 2026-09-02, "dataset je jen helping vehicle… není to nosné téma… já bych v tom byl sušší".
+The world is now described once, on load/. Timing: 80 = this page (5) + the seven steps
+(5+15+15+5+15+15+5); each step = reading one tab at 200 words/min plus the wall time Kai took in the
+2026-09-08/09 live runs. Building alone, prompt path, was about 30 minutes.
+
+Hero clip, three acts (compositor scene outlook-tour): five raw CSV rows verbatim from
+public/getting-started/boolabean/*.csv (S02 is a code in sales.csv and Boolabean Zelný trh, Brno,
+in stores.csv; P01 is a code in sales.csv and Filter of the Day in products.csv); the question,
+held long enough to read — that frame is the poster; the app's draft preview captured 2026-09-14.
+Above the fold per Jordan 2026-08-21 ("reader can't tell what they'll get out of it"). Re-rendered
+2026-09-15 without the mascot: the guide is a spotlight (a cut-out rectangle over the point being
+made, everything else dimmed) plus a caption chip, per Nikita 2026-09-14. 30.7 s, 839 KB, 966x724.
+
+Re-rendered again the same day after a frame-by-frame review. What it fixed: every cut-out was
+placed as if its coordinates were a corner when the code reads them as a centre, so all three tour
+stops sliced the row they were revealing (the Brno stop lit the café above it); three blue markers
+pointed at one thing (an outline on the cut-out, a pulsing ring inside it, a dot on the chip) and
+the ring covered the very dash one caption explains, so all three are gone and the cut-out plus the
+chip do the pointing; the caption sat on the payoff row in every beat and now moves to whichever
+half the spotlight is not in; act 2 drew the question straight onto the grid over a white wash, so
+the poster frame was two layers of text on top of each other, and it now has its own panel over the
+same dark scrim the other acts use; frame 0 was the finished grid cross-dissolving into act 1,
+giving the ending away, and now opens on the scrim; act 1 showed four files while every caption
+said five, so products.csv joined it.
+
+Known and not fixed: the app capture is 966x744 and the grid's last row needs 765, so Brno, the row
+the clip is about, is cut by its own screenshot. The frame is cropped to 724 so the cut falls
+between two lines rather than through the glyphs. A taller capture needs the data app unlocked,
+which needs its password. VERIFY(owner). */}
+
+## What you get
+
+| Step | What happens | Keboola calls it | Minutes |
+|---|---|---|---|
+| [Get a project](/getting-started/project/) | a place for everything below to live | a **project** | 5 |
+| [Get your data in](/getting-started/load/) | five CSV files and a live forecast become six tables | a **data source connector** | 15 |
+| [Transform data](/getting-started/transform/) | SQL joins them into one table: a café, a day, the demand to expect, the crew rostered, a flag | a **transformation** | 15 |
+| [Ask a question and get an answer](/getting-started/ask/) | the question, answered out of that table in plain words | **Kai** reading your data | 5 |
+| [Put it in front of someone](/getting-started/app/) | a grid of six cafés by seven days, red where it will hurt | a **data app** | 15 |
+| [Make it run every morning](/getting-started/automate/) | all of it re-runs on the new forecast and tells you if it breaks | a **flow** | 15 |
+| [Check it worked](/getting-started/check/) | what Storage and Jobs should show, and the failures that happen | — | 5 |
+
+Everything happens in the browser; nothing needs installing, and a
+[free project](https://connection.us-east4.gcp.keboola.com/wizard) covers all of it. Read the
+steps in order, or land on any one of them: each says where you should be, what it needs, and how
+to tell it worked. The **Next** control at the foot of every page follows this order.
+
+## How every page works
+
+Every page with a task on it offers that task three ways, and your choice follows you from page
+to page:
+
+- **Prompt** — paste it into **Kai**, the assistant in the project's top bar, and watch it build.
+  Kai asks before it changes anything: one approval per object it creates, while questions that
+  only read do not ask. An organization admin switches the feature on; see
+  [Get started with Kai](/kai/getting-started/).
+- **UI** — the same task click by click, for when you want to see where each setting lives.
+- **CLI / API** — the same task from a terminal with [kbagent](/cli/), and the raw request beside
+  it where there is no command for it.
+
+Where one of the three cannot do the job, the page says so rather than showing an empty tab. A
+signup form, a Google consent screen and a branch merge are all decisions a browser has to make.
+
+Nothing here is one-way: if a step builds something other than what the page describes, say so in
+the same Kai chat, or edit the configuration by hand.
+
+## Where to start instead
+
+This guide is the browser path. Three others start from the same place:
+
+| Quickstart | Description |
+|---|---|
+| [This guide](/getting-started/project/) | Build a scheduled pipeline and a data app in the browser, prompt first. |
+| [kbagent CLI](/cli/getting-started/) | The same operations from a terminal, scriptable and agent-friendly. |
+| [MCP server](/ai/mcp-server/) | Connect your own AI assistant or IDE to a Keboola project. |
+| [Build an app with Kai](/data-apps/getting-started/) | Go straight to a data app on data you already have. |
+
+## Going further
+
+Optional side trips, once the main path makes sense. None of them are needed to finish the guide:
+
+- **[Send a table to Google Sheets](/getting-started/write/)** delivers the result to where people
+  read it. It needs a Google account you can authorize.
+- **[Load from Google Sheets](/getting-started/load/googlesheets/)** and
+  **[from a database](/getting-started/load/database/)** load from a source that needs credentials
+  rather than from a public URL.
+- **[Use a workspace](/getting-started/transform/workspace/)** is where you develop and test SQL
+  against a copy of your data before committing it to a transformation.
+- **[Ad-hoc data analysis](/getting-started/ad-hoc/)** explores data in a Python or R notebook
+  instead of building a pipeline.
+- **[Development branches](/getting-started/branches/)** change a running project safely: make the
+  change, review the diff, then merge.
+
+## If you are planning a rollout, not learning the tool
+
+This guide is for one person building one pipeline. For introducing Keboola to a team, with
+project architecture, a data model, naming conventions and governance, start with
+[Platform Onboarding](/overview/onboarding/) instead.

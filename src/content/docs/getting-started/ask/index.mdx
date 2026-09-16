@@ -1,0 +1,203 @@
+---
+title: 'Ask a question and get an answer'
+slug: 'getting-started/ask'
+description: 'Put the question to your own data: Kai reads the table you built and answers it in plain words, then answers the follow-up, and the same pipeline can be asked for as one prompt.'
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
+
+<PageMeta genre="Tutorial" minutes="5" />
+
+You built the table to answer something. Nobody has said the answer out loud yet. This page does,
+out of your own project rather than out of a page.
+
+**Where you are:** `staffing_outlook` is in Storage. **When you finish:** the guide's question
+answered from your data, and a second answer you did not have to build anything new to get.
+
+<Prereqs needs={['project', 'kai']}>
+  <li>
+    The <code>staffing_outlook</code> table in Storage, from{' '}
+    <a href="/getting-started/transform/">Transform data</a>.
+  </li>
+</Prereqs>
+
+<PathIntro tabs={3} approvals={false} />
+
+{/* Tutorial-type page. Both prompts below were run live in project 264 on 2026-09-08 and
+2026-09-09 (boolabean-run, the staged runs' ask.txt and ask-followup/): the first as the
+fourth prompt of the staged runs, 0 approvals, 1.3–1.6 min; the second alone in a fresh chat, 0
+approvals. Kai's figures matched the table and the offline reference to the decimal. The
+"one prompt" paragraph reports the 2026-09-03 and 2026-09-08 observations recorded in DECISIONS.md.
+The previous clip (kai-ask-basin.mp4) came off with the old sample world.
+
+Three tabs 2026-09-15. The CLI command was run live against project 264 (kbagent v0.93.1):
+`kai ask` answered in 22 s with the same café, day and flag count the chat gives — a markdown
+table plus a "next actions" block. The workspace SQL in the UI tab is the page's own query
+narrowed to the flagged rows; it is not a new claim, but it has not been run in a workspace. */}
+
+## Reading is different from building
+
+Everywhere else in this guide Kai stood in for your clicking. Here it reads what you built.
+Querying a table and calculating a metric is
+[Data Exploration](/kai/use-cases/#data-exploration), and it needs nothing set up. Nothing on this
+page changes the project either: reading is what Kai's read-only tools do, and those are allowed
+without asking by default. Expect an answer rather than an approval dialog, unless this project's
+[tool permissions](/kai/settings/#tool-permissions) have been set to ask.
+
+This is the whole interaction, the pointer marking where the reasoning lands:
+
+<video autoplay loop muted playsinline poster="/getting-started/ask/kai-ask-staffing-poster.png" aria-label="The Kai panel beside the staffing_outlook table: the question is typed and sent, Kai reads the schema and queries the rows, a seven-day table appears with two red days, and the conclusion names dry, warm days on the thinnest roster">
+  <source src="/getting-started/ask/kai-ask-staffing.mp4" type="video/mp4" />
+</video>
+
+{/* Clip recorded live in project 264 on 2026-09-14 (1280x800, trimmed to start with the panel
+open); post-produced with the docs-clip compositor: the 50-second thinking stretch runs at 9x,
+chips name the read-only nature and the two red days, and a spotlight lands on Kai's conclusion.
+Re-rendered 2026-09-15 without the mascot (Nikita, 2026-09-14). Kai's answer that day: only Brno
+flagged, Monday 72.3 and Tuesday 85.2 per person on a two-person roster, "warm and completely dry".
+
+2026-09-16: the top bar was in shot the whole way through, carrying the organization name, the
+project name, the branch name and the signed-in avatar, which is exactly what PRDCT-616 is about
+and what the 26 stills already avoid. All four are masked now, adaptively rather than with a solid
+fill, so the masked strip follows the clip's own dimming instead of glaring white through it. The
+Kai Agent button is deliberately left in: it is product UI, not project data, and the page tells
+the reader to look for it there. The blank first second is trimmed. 35.4 s, 741 KB, 1152x720; the
+poster is a frame of the masked clip.
+
+Known: the caption chips still carry the blue dot, and the answer still gets a blue highlight box.
+Both are composited into the frames and the source screen recording is gone, so removing them means
+re-recording the Kai session. Same for the length, which is 35 s against the skill's 30 s
+guideline: shortening it properly is a pacing decision at record time, not a trim.
+VERIFY(owner). */}
+
+## Ask it
+
+<Tabs syncKey="howto">
+<TabItem label="Prompt">
+
+:::tip[The question the guide started with]
+```text title="Prompt"
+Using staffing_outlook: which café is short-handed on which day next week, and what in the
+forecast makes that day different from the rest of its week?
+```
+
+**Check:** Kai names the flagged café-days (the rows where `short_handed` is true) and, for each,
+says what the forecast does on that day that it does not do on the days around it. The pattern to
+look for in its answer is the one the guide was built on: the flagged days are the ones where a
+thin roster meets a warm, dry forecast, while the days that stay safe are wetter, cooler, or better
+staffed. Kai should say that in its own words, with the temperatures and rain figures from the
+table.
+:::
+
+The answer changes with the forecast. On the day this page was written, two cafés were flagged on
+the same two days, both at the start of the week, and Kai put it as *"a thin start-of-week roster
+colliding with warm, dry weather"*. In a wet week Kai will tell you nobody is short-handed, and
+that is the table being right.
+
+An answer is a place to start, not to stop:
+
+```text title="Prompt"
+Using staffing_outlook: if one extra person joined the roster on every short-handed day, which
+of those days would still be over 67 expected units per person, and what would each day's
+figure become?
+```
+
+**Check:** Kai recomputes the per-person figure for every flagged row with one more person and
+lists the before and after. On the day this was written the answer was *none of them*: one extra
+person brought every flagged day well under the line. That is the kind of thing nobody can see in
+five separate files, and it took one question because the pipeline had already put the roster next
+to the demand.
+
+**If the numbers come out different**, Kai wrote its own SQL and may have drawn the lines
+somewhere else: rounded before dividing, or read `short_handed` as text. The definitions this guide
+uses are the columns your transformation already wrote, so point Kai at those (`expected_units`,
+`rostered_staff`, `expected_units_per_person`) rather than re-prompting blind.
+
+</TabItem>
+<TabItem label="UI">
+
+There is no dialog for "answer this question" — reading a table by hand means querying it. Open a
+[workspace](/getting-started/transform/workspace/) on the same table and run the SQL yourself:
+
+```sql
+SELECT "store_name", "city", "date", "weekday", "expected_units", "rostered_staff",
+       "expected_units_per_person"
+FROM "staffing_outlook"
+WHERE "short_handed" = TRUE
+ORDER BY "expected_units_per_person" DESC;
+```
+
+The follow-up is the same query with one more person on the roster:
+
+```sql
+SELECT "store_name", "date",
+       ROUND("expected_units" / ("rostered_staff" + 1), 1) AS "with_one_more"
+FROM "staffing_outlook"
+WHERE "short_handed" = TRUE
+ORDER BY "with_one_more" DESC;
+```
+
+If those raise `invalid identifier`, your table has upper-case column names: Snowflake upper-cases
+an alias that was not quoted, and the **Prompt** path's Kai does not quote them. Either drop the
+quotes from the query or upper-case the names inside them — the
+[transform page](/getting-started/transform/#if-it-goes-wrong) explains why the two cases exist.
+
+Storage's own **Data Sample** tab answers the simpler half without a workspace at all: open
+`staffing_outlook`, sort by `expected_units_per_person` descending, and read the top rows.
+
+</TabItem>
+<TabItem label="CLI / API">
+
+`kbagent kai ask` puts the same question from a terminal and prints the answer, tables and all. It
+is one shot: no chat to keep, nothing created.
+
+```bash
+kbagent kai ask --project docs-demo -m "Using out.c-Boolabean-staffing-outlook.staffing_outlook, which cafe and day has the highest expected units per person, and how many rows are flagged short_handed?"
+```
+
+Name the table by its full Storage ID rather than the short name the transformation used: the
+short name only exists inside a transformation's input mapping.
+
+For a conversation rather than a single question, `kbagent kai chat -m "…"` returns a chat ID and
+`--chat-id` continues it.
+
+**Check:** the answer names a café and a day, and they are the ones the grid shows as most
+stretched — the same row the **Prompt** tab's answer is about, even though the two questions are
+worded differently. If you would rather have the numbers than the prose,
+`kbagent storage table-detail --project docs-demo --table-id out.c-Boolabean-staffing-outlook.staffing_outlook`
+gives you the shape of the table and
+[a workspace](/getting-started/transform/workspace/) gives you the SQL.
+
+</TabItem>
+</Tabs>
+
+## The same request, as one prompt
+
+You built this one step at a time so every result stayed checkable. Once you have seen the
+pieces, the loading, the forecast and the joining are one request rather than three:
+
+```text title="Prompt"
+Load the five CSV files at https://help.keboola.com/getting-started/boolabean/ (stores,
+products, sales, staffing, weather_daily) into Storage as one HTTP data source configuration.
+Add a second HTTP configuration for the open-meteo forecast CSV for the six cafés. Then build a
+transformation that joins them into staffing_outlook, one row per café per forecast day with
+expected units per rostered person and a short_handed flag over 67, and tell me which café and
+day come out most stretched.
+```
+
+Two things to know before you paste it. Kai still asks you to approve each object it creates, so a
+prompt this size is a dozen approvals rather than one. And on a request with several parts Kai
+tends to answer *"I'll tackle this in stages"*, do the first stage, and stop until you say
+*continue*; in our runs the same work as four separate prompts in one chat needed no nudging at
+all. The one-prompt version works. It is a shortcut for the second time, not a replacement for
+having seen the pieces once.
+{/* Measured: 2026-09-03 and 2026-09-08, a four-part prompt stopped after stage one both times;
+the four-prompt version ran to the end in 14 minutes with 12 approvals and 0 nudges (DECISIONS.md,
+2026-09-08). The exact one-prompt wording above has not itself been run since the dataset
+changed; its parts are the four prompts that have, and the approvals count is theirs. */}
+
+The part of the question still open is *who else needs to see this*. A chat answer reaches the
+person who asked. The next page turns the table into a grid anyone can open.

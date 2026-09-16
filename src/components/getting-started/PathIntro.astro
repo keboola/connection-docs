@@ -1,0 +1,93 @@
+---
+// The tab convention, stated once, on every page that has tabs.
+//
+// Three ways, not two. Michal asked the question directly on 2 September —
+// "Mám tam nějaký prompt? Jak to zpracuje to CLI?" — and Jordan had agreed the
+// same mechanism on 5 August ("combined UI + API format"). A page that shows
+// only the prompt and the clicks answers neither.
+//
+// TAB LABEL CONTRACT — these three strings, byte for byte, on every page:
+//
+//     Prompt        UI        CLI / API
+//
+// Starlight's <Tabs syncKey="howto"> remembers the reader's choice in
+// localStorage under the *label text*, so a page that spells a label
+// differently silently drops out of the sync and resets the reader.
+//
+// Plan mode, measured on 2026-09-08 (two staged runs in project 264): it adds
+// one approval of a written plan and then asks for every change exactly as
+// before — 8 approvals to the control run's 7. It is a review gate, not a way
+// to approve once, and the wording below says so.
+//
+// Every task page carries three tabs as of 2026-09-15; `write/` keeps two, so
+// both shapes exist. `manual={false}` is now an EXTRA paragraph rather than a
+// branch that replaces the intro: on app/ it used to win over `tabs={3}` and
+// hide the CLI tab from the reader entirely (guide test, 2026-09-15).
+//
+// The same wording in plain text lives in ./pathintro.mjs, because the markdown
+// twin has to carry the "these are alternatives" sentence too — without it an
+// agent reads the three flattened sections as three things to do in sequence.
+//
+// Usage:  <PathIntro tabs={3} />              — Prompt · UI · CLI / API
+//         <PathIntro />                       — legacy two-tab wording
+//         <PathIntro approvals={false} />     — read-only pages, where it does not
+//         <PathIntro manual={false} />        — no click-by-click equivalent exists
+//         <PathIntro yours="the Google consent screen" />
+---
+
+<div class="gs-pathintro">
+  {
+    Astro.props.tabs === 3 ? (
+      <p>
+        <strong>Three ways to do this, one page — they are alternatives, not steps.</strong>{' '}
+        <strong>Prompt</strong> is what you paste into Kai; <strong>UI</strong> is the same task
+        click by click, for when you want to see where each setting lives;{' '}
+        <strong>CLI / API</strong> is the same task from a terminal, with the raw request beside
+        it. Pick one tab and carry on — your choice follows you to the next page.
+      </p>
+    ) : (
+      <p>
+        <strong>Two ways to do this, one page — they are alternatives, not steps.</strong>{' '}
+        <strong>Prompt</strong> is what you paste into Kai; <strong>UI</strong> is the same task
+        click by click, for when you want to see where each setting lives. Either tab reaches the
+        same result.
+      </p>
+    )
+  }
+
+  {
+    Astro.props.manual === false && (
+      <p>
+        There is no click-by-click equivalent for building this: by hand it is a development
+        workflow with its own section, and the <strong>UI</strong> tab says where to go for it.
+      </p>
+    )
+  }
+
+  {
+    Astro.props.approvals !== false && (
+      <p>
+        Kai asks before it changes anything: expect one approval dialog per object it creates,
+        showing the exact configuration it is about to write. Questions that only read do not ask.
+        If confirming each one gets tiring, pre-approve tools in{' '}
+        <a href="/kai/settings/#tool-permissions">tool permissions</a>. The chat's{' '}
+        <strong>plan mode</strong> button is a different thing: Kai writes the steps down and asks
+        you to approve the plan before it starts — and then still asks for each change. Use it when
+        you want to read the plan first, not to save clicks.
+      </p>
+    )
+  }
+
+  {
+    Astro.props.yours && (
+      <p>
+        One thing stays yours either way: {Astro.props.yours}.
+      </p>
+    )
+  }
+
+  <p class="gs-pathintro__recovery">
+    If a step builds something other than what this page describes, say so in the
+    same chat — it edits what it made. Nothing here is one-way.
+  </p>
+</div>
