@@ -1153,6 +1153,12 @@ nav.sidebar {
   color: var(--fg-2);
   margin: 0 0 10px;
 }
+/* The `hidden` attribute only gets `display: none` from the UA stylesheet, so
+   any author `display` below silently defeats it — without this the thank-you
+   state rendered with the thumbs still sitting above it. Attribute + class
+   outranks the bare class rules, so no !important is needed. */
+.b-feedback [hidden] { display: none; }
+
 .b-feedback-buttons { display: flex; gap: 8px; }
 .b-feedback-btn {
   min-width: 84px;

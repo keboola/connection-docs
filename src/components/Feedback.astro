@@ -86,10 +86,50 @@
     return `kbc-fb:${location.pathname}`;
   }
 
-  function initFeedback() {
+  /**
+   * Is there a backend to talk to?
+   *
+   * `/api/feedback` only exists on a Vercel deployment. On a static deploy —
+   * the S3 sync in .github/workflows/main.yml still produces one — the widget
+   * would render and POST into a 404. Probe once per session and fail CLOSED,
+   * mirroring the Kai availability gate in AskKaiDrawer.astro.
+   */
+  const FB_FLAG = 'kbc-feedback-enabled';
+
+  async function backendAvailable(): Promise<boolean> {
+    let cached: string | null = null;
+    try {
+      cached = sessionStorage.getItem(FB_FLAG);
+    } catch {}
+    if (cached !== null) return cached === 'true';
+
+    try {
+      const res = await fetch(`${apiBase}/api/feedback`);
+      const enabled = res.ok && Boolean((await res.json())?.enabled);
+      // A static deploy stays static, so cache either verdict and stop probing
+      // on every navigation.
+      try {
+        sessionStorage.setItem(FB_FLAG, String(enabled));
+      } catch {}
+      return enabled;
+    } catch {
+      // Network blip rather than a missing backend — stay hidden for now, but
+      // don't cache it, so a later navigation probes again.
+      return false;
+    }
+  }
+
+  async function initFeedback() {
     const root = document.querySelector<HTMLElement>('[data-feedback]');
     if (!root || root.dataset.fbReady === '1') return;
     root.dataset.fbReady = '1';
+
+    // Stays `hidden` from the markup unless a backend answers, so there is no
+    // flash of a widget that then disappears.
+    if (!(await backendAvailable())) return;
+    // A navigation may have swapped the document while the probe was in
+    // flight; this root is detached and a fresh one has already initialised.
+    if (!root.isConnected) return;
 
     const verdictsWrap = root.querySelector<HTMLElement>('[data-fb-verdicts]')!;
     const followup = root.querySelector<HTMLFormElement>('[data-fb-followup]')!;
@@ -192,13 +232,19 @@
     followup.addEventListener('submit', (e) => {
       e.preventDefault();
       if (!verdict || !reason) return;
-      // Fire-and-forget; the user gets their thank-you regardless of the result.
+      // Fire-and-forget; the user gets their thank-you regardless of the
+      // result. Log at debug level so a field failure is at least findable —
+      // silence made an ingest error and a network error indistinguishable.
       fetch(`${apiBase}/api/feedback`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: payload(),
         keepalive: true,
-      }).catch(() => {});
+      })
+        .then((res) => {
+          if (!res.ok) console.debug('[feedback] submit returned HTTP', res.status);
+        })
+        .catch((err) => console.debug('[feedback] submit failed:', err));
       markDone();
     });
 
@@ -213,9 +259,17 @@
         );
       } catch {}
     }
+    // `pagehide` covers a real unload. Astro view-transition navigations don't
+    // fire it, so `astro:before-swap` flushes too — and detaches both, because
+    // the swap brings a fresh widget that registers its own pair. Without the
+    // removal each navigation would leave a live listener behind holding this
+    // closure's verdict, and they would all fire on the eventual unload.
+    function onBeforeSwap() {
+      flushOnLeave();
+      window.removeEventListener('pagehide', flushOnLeave);
+    }
     window.addEventListener('pagehide', flushOnLeave);
-    // Astro view-transition navigations don't fire pagehide — flush before swap.
-    document.addEventListener('astro:before-swap', flushOnLeave, { once: true });
+    document.addEventListener('astro:before-swap', onBeforeSwap, { once: true });
   }
 
   document.addEventListener('astro:page-load', initFeedback);

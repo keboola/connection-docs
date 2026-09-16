@@ -8,9 +8,21 @@
  * widget, and a stub mode when the ingestion env isn't configured yet (so the
  * site can ship before the stream exists).
  *
+ * Submissions that carry a written comment are additionally filed as GitHub
+ * issues, so docs feedback lands where the docs are worked on rather than in a
+ * separate database. A bare thumb is never filed: the widget is on all ~366
+ * pages, and one issue per click would bury the repository. Bare thumbs (and
+ * the beacon-captured abandoned ones) still reach the ingest endpoint below.
+ *
  * Optional env (set in the Vercel project):
  *   FEEDBACK_INGEST_URL     ingestion endpoint (e.g. a Keboola Data Stream URL)
  *   FEEDBACK_INGEST_TOKEN   optional bearer token for that endpoint
+ *   FEEDBACK_GITHUB_TOKEN   token with Issues: write on FEEDBACK_GITHUB_REPO.
+ *                           Use a fine-grained PAT scoped to that one repo —
+ *                           this endpoint is reachable by anyone.
+ *   FEEDBACK_GITHUB_REPO    owner/repo to file into (default keboola/connection-docs)
+ *
+ * With neither configured the handler stays in stub mode (logs + 204).
  *
  * Request:  POST { verdict: 'up'|'down', reason?, comment?, path, title?,
  *                  abandoned?, hp? }
@@ -24,6 +36,23 @@ export const config = { runtime: 'nodejs' };
 
 const INGEST_URL = (process.env.FEEDBACK_INGEST_URL || '').trim();
 const INGEST_TOKEN = (process.env.FEEDBACK_INGEST_TOKEN || '').trim();
+const GITHUB_TOKEN = (process.env.FEEDBACK_GITHUB_TOKEN || '').trim();
+const GITHUB_REPO = (process.env.FEEDBACK_GITHUB_REPO || 'keboola/connection-docs').trim();
+
+const SITE_ORIGIN = 'https://help.keboola.com';
+
+/** Reason values rendered for humans; keys mirror ALLOWED_REASONS. */
+const REASON_TEXT: Record<string, string> = {
+  accurate: 'Accurate',
+  'solved-problem': 'Solved my problem',
+  'easy-to-understand': 'Easy to understand',
+  'helped-decide': 'Helped me decide to use the product',
+  inaccurate: 'Inaccurate',
+  'hard-to-understand': 'Hard to understand',
+  'missing-info': 'Missing information',
+  'didnt-solve': "Didn't solve my problem",
+  'another-reason': 'Another reason',
+};
 
 // Keep in sync with the reasons offered in Feedback.astro. Unknown reasons are
 // dropped rather than rejected, so tweaking the UI never 400s a submission.
@@ -118,11 +147,84 @@ function buildRecord(body: FeedbackBody, req: VercelRequest): FeedbackRecord | n
   };
 }
 
+/**
+ * File a submission as a GitHub issue.
+ *
+ * Only called when the reader actually wrote something — that free text is the
+ * part a maintainer can act on, and it is the only part worth a notification.
+ *
+ * The issue body deliberately omits `user_agent`, `referrer` and `locale`.
+ * They are useful in a private analytics table but this repository is public,
+ * and together they are mildly fingerprinting for no reviewer benefit.
+ */
+async function createIssue(record: FeedbackRecord): Promise<void> {
+  const pageTitle = record.title || record.path;
+  const verdict = record.verdict === 'up' ? '👍' : '👎';
+  const reason = REASON_TEXT[record.reason] || record.reason;
+
+  // Blank entries are paragraph breaks and have to survive, so the optional
+  // reason line is pushed conditionally rather than filtered out afterwards.
+  // A list rather than bare lines: consecutive single newlines only render as
+  // breaks where a flavour enables hard wrapping, and this body is also read
+  // through the API and in notification emails.
+  const lines: string[] = [
+    `- **Page:** [${record.path}](${SITE_ORIGIN}${record.path})`,
+    `- **Verdict:** ${verdict} ${record.verdict === 'up' ? 'Helpful' : 'Not helpful'}`,
+  ];
+  if (reason) lines.push(`- **Reason:** ${reason}`);
+  lines.push(
+    '',
+    '**Comment:**',
+    '',
+    // Quote the reader's text so no markdown in it can restructure the issue.
+    record.comment
+      .split('\n')
+      .map((line) => `> ${line}`)
+      .join('\n'),
+    '',
+    '---',
+    'Submitted from the docs feedback widget. Anonymous — there is no way to',
+    `reply to the author, so treat this as a one-way report. (${record.ts})`,
+  );
+  const body = lines.join('\n');
+
+  const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/issues`, {
+    method: 'POST',
+    headers: {
+      accept: 'application/vnd.github+json',
+      authorization: `Bearer ${GITHUB_TOKEN}`,
+      'content-type': 'application/json',
+      'x-github-api-version': '2022-11-28',
+    },
+    body: JSON.stringify({
+      title: `Docs feedback: ${pageTitle}`.slice(0, 250),
+      body,
+      labels: ['docs-feedback', record.verdict === 'up' ? 'feedback:up' : 'feedback:down'],
+    }),
+  });
+
+  if (!res.ok) {
+    // 410 means Issues are disabled on the repo — the one failure worth naming,
+    // because it is a settings toggle rather than a bug.
+    const hint = res.status === 410 ? ' (Issues disabled on the repository?)' : '';
+    throw new Error(`feedback issue create failed: HTTP ${res.status}${hint}`);
+  }
+}
+
 /** Forward the record to the ingestion endpoint. No-op (stub) when unconfigured. */
 async function ingest(record: FeedbackRecord): Promise<void> {
+  // A written comment goes to GitHub as an issue; everything else is a counter
+  // and belongs in the stream only. The two paths are independent, so a repo
+  // with Issues still off doesn't stop the stream from collecting.
+  if (GITHUB_TOKEN && record.comment) {
+    await createIssue(record);
+  }
+
   if (!INGEST_URL) {
-    // Stub mode: nothing wired up yet. Log so it's visible in Vercel and return.
-    console.log('[feedback] (stub, no FEEDBACK_INGEST_URL)', JSON.stringify(record));
+    if (!GITHUB_TOKEN) {
+      // Stub mode: nothing wired up at all. Log so it's visible in Vercel.
+      console.log('[feedback] (stub, no ingest configured)', JSON.stringify(record));
+    }
     return;
   }
   const headers: Record<string, string> = { 'content-type': 'application/json' };
