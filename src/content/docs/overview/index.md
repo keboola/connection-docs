@@ -1,6 +1,8 @@
 ---
 title: Keboola Overview
 slug: 'overview'
+redirect_from:
+    - /overview/repositories/
 ---
 
 
@@ -42,11 +44,11 @@ to gather data from various sources. They can connect to APIs of external servic
 [Storage](/storage/) is the central component in Keboola responsible for data management and access. It comprises two sections: 
 
 - [File Storage](/storage/files/), with all raw files uploaded to your project, and
-- [Table Storage](https://help.keboola.com/storage/tables/), where all data tables are organized into buckets, further categorized into in and out stages.
+- [Table Storage](/storage/tables/), where all data tables are organized into buckets, further categorized into in and out stages.
 
 This component acts as a middle layer that works with various [backend](/transformations/#backends) database systems like 
 [Snowflake](https://www.snowflake.com/), [BigQuery](https://cloud.google.com/bigquery/),
-[and others](https://help.keboola.com/transformations/#backends). It provides a key Storage API for working with data, 
+[and others](/transformations/#backends). It provides a key Storage API for working with data, 
 making it easier to connect with other parts of the system and third-party applications.
 
 ### Transformations & Workspaces
@@ -104,6 +106,16 @@ attributed to specific departments, teams, use cases, and users, offering detail
 ### Identity and Access management
 Manage user accounts in your organization, controlling their access to specific Keboola projects and datasets. Simplify data sharing within your 
 organization, keep track of individual access rights, and promote clear visibility of data access.
+
+## Working with Keboola Programmatically
+Everything you can do in the Keboola UI can also be done **programmatically through the API** of the corresponding component. All components publish their API documentation at [api.keboola.com](https://api.keboola.com/), and most are open source on [GitHub](https://github.com/keboola/)—so there are virtually endless possibilities for what you can build on top of Keboola. For a general introduction, see the [API reference](https://developers.keboola.com/overview/api/); to drive Keboola in natural language, use the [MCP Server](/ai/mcp-server/).
+
+Components share a common structure, so once you've worked through one, you've seen them all:
+
+- **Configuration** — every component stores its configuration in [Storage](/storage/), managed through the Storage Component Configurations API. A stored configuration can be referenced whenever the component runs.
+- **Jobs** — each component is executed by a `/run` API call that queues an asynchronous [job](/management/jobs/), accepting either a reference to a stored configuration or a full configuration inline. Jobs can be scheduled and chained through [Flows](/flows/).
+
+Some components additionally expose [synchronous actions](https://developers.keboola.com/extend/common-interface/actions/), and the [Developer Portal API](https://api.keboola.com/?service=developer-portal) lists every component available in Keboola, including its metadata.
 
 ## Extending the Platform 
 The Keboola platform, as an open environment consisting of many built-in interoperating components (Storage, transformations, data source connectors, etc.), 
