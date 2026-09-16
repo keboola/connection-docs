@@ -1,0 +1,134 @@
+---
+/**
+ * AnchorCopy.astro
+ *
+ * Click a heading to copy a link to it, the way Stripe's docs do — the whole
+ * heading is the target, not just the chain icon, which is a 16px hit area.
+ *
+ * Mounted once per page from Footer.astro. Styles live in custom.css
+ * (`.kbc-copied`), per the repo rule that all CSS goes in one file.
+ *
+ * Every listener is delegated to `document` and bound exactly once: Astro's
+ * ClientRouter swaps the document on navigation, so anything bound to
+ * individual headings would stop working after the first in-site click, and
+ * this script itself may re-run after a swap.
+ */
+---
+
+<script>
+  if (!(window as any).__kbcAnchorCopy) {
+    (window as any).__kbcAnchorCopy = true;
+
+    const LIVE_ID = 'kbc-anchor-live';
+    const TOAST_MS = 1400;
+    let hideTimer: ReturnType<typeof setTimeout>;
+
+    /** Screen readers get the result from here; the toast is decorative. */
+    function liveRegion(): HTMLElement {
+      let el = document.getElementById(LIVE_ID);
+      if (!el) {
+        el = document.createElement('span');
+        el.id = LIVE_ID;
+        el.setAttribute('role', 'status');
+        el.setAttribute('aria-live', 'polite');
+        el.style.cssText =
+          'position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap';
+        document.body.appendChild(el);
+      }
+      return el;
+    }
+
+    async function copy(text: string): Promise<boolean> {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+      } catch {
+        /* fall through to the textarea path */
+      }
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;top:0;left:-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        ta.remove();
+        return ok;
+      } catch {
+        return false;
+      }
+    }
+
+    function showToast(anchor: HTMLElement, msg: string, ok: boolean) {
+      document.querySelectorAll('.kbc-copied').forEach((n) => n.remove());
+      clearTimeout(hideTimer);
+
+      const toast = document.createElement('span');
+      toast.className = 'kbc-copied' + (ok ? '' : ' kbc-copied--err');
+      toast.textContent = msg;
+      toast.setAttribute('aria-hidden', 'true');
+      anchor.appendChild(toast);
+
+      requestAnimationFrame(() => toast.classList.add('is-in'));
+      hideTimer = setTimeout(() => {
+        toast.classList.remove('is-in');
+        setTimeout(() => toast.remove(), 200);
+      }, TOAST_MS);
+    }
+
+    /** True when the click ended a drag-select rather than asking for a link. */
+    function hasSelectionIn(wrapper: Element): boolean {
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed || sel.rangeCount === 0) return false;
+      if (String(sel).trim() === '') return false;
+      for (let i = 0; i < sel.rangeCount; i += 1) {
+        if (sel.getRangeAt(i).intersectsNode(wrapper)) return true;
+      }
+      return false;
+    }
+
+    document.addEventListener('click', async (e) => {
+      const target = e.target as HTMLElement | null;
+      const wrapper = target?.closest('.sl-heading-wrapper');
+      if (!wrapper) return;
+
+      // Never hijack a real link or control that happens to sit in a heading.
+      const interactive = target?.closest('a, button, input, select, textarea, [role="button"]');
+      if (interactive && !interactive.classList.contains('sl-anchor-link')) return;
+
+      // Modified clicks keep their native meaning (open in a new tab, etc).
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+
+      if (hasSelectionIn(wrapper)) return;
+
+      const anchor = wrapper.querySelector<HTMLAnchorElement>('a.sl-anchor-link');
+      const href = anchor?.getAttribute('href');
+      if (!anchor || !href) return;
+
+      e.preventDefault();
+
+      const url = new URL(href, location.href).href;
+      const ok = await copy(url);
+
+      // Move the address bar to the heading without adding a history entry.
+      if (history.replaceState) history.replaceState(null, '', url);
+      else location.hash = href;
+
+      liveRegion().textContent = ok ? 'Link copied to clipboard' : 'Could not copy link';
+      showToast(anchor, ok ? 'Copied!' : 'Press Ctrl+C', ok);
+    });
+
+    // Enter on the focused anchor goes through the same path as a click.
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return;
+      const active = document.activeElement;
+      if (active instanceof HTMLElement && active.classList.contains('sl-anchor-link')) {
+        e.preventDefault();
+        active.click();
+      }
+    });
+  }
+</script>
