@@ -11,6 +11,10 @@ import { fileURLToPath } from 'node:url';
  * plain markdown at `https://help.keboola.com/<slug>/index.md` — for the
  * "View as Markdown" page action and for LLMs/agents ingesting the docs.
  *
+ * It also writes `<outDir>/llms.txt` — the index that makes those per-page
+ * markdown copies discoverable. Without it an agent has to already know a slug
+ * to find anything; the raw pages were being emitted with no entry point.
+ *
  * Runs in the `astro:build:done` hook, after all pages have been built.
  * Follows the same pattern as redirect-from.mjs.
  */
@@ -114,10 +118,69 @@ function stripFrontmatter(content) {
   return content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
 }
 
+/**
+ * Build the llms.txt index from the pages we just emitted.
+ *
+ * Grouped by top-level slug segment, and each group is titled with that
+ * section's own root page ("storage" -> "Storage") rather than a slug
+ * prettified by hand, so the index and the nav cannot drift apart.
+ */
+function buildLlmsTxt(site, siteTitle, pages) {
+  const byTitle = new Map(pages.map((p) => [p.slug, p.title]));
+  const url = (slug) => new URL(slug ? `/${slug}/` : '/', site).href;
+
+  const sections = new Map();
+  for (const page of pages) {
+    const key = page.slug.split('/')[0] ?? '';
+    if (!sections.has(key)) sections.set(key, []);
+    sections.get(key).push(page);
+  }
+
+  const lines = [
+    `# ${siteTitle}`,
+    '',
+    '> Product documentation for Keboola, the data platform: loading and storing data,',
+    '> transformations, flows, data apps, AI features, and extending the platform with',
+    '> your own components.',
+    '',
+    'Every page below is also available as plain markdown by appending `index.md` to its',
+    'URL — for example `https://help.keboola.com/storage/index.md`.',
+    '',
+  ];
+
+  const root = sections.get('') ?? [];
+  sections.delete('');
+  if (root.length) {
+    lines.push('## Home', '');
+    for (const p of root) lines.push(entry(p, url));
+    lines.push('');
+  }
+
+  for (const key of [...sections.keys()].sort()) {
+    const group = sections.get(key).sort((a, b) => a.slug.localeCompare(b.slug));
+    lines.push(`## ${byTitle.get(key) ?? key}`, '');
+    for (const p of group) lines.push(entry(p, url));
+    lines.push('');
+  }
+
+  return lines.join('\n');
+}
+
+function entry(page, url) {
+  const suffix = page.description ? `: ${page.description}` : '';
+  return `- [${page.title}](${url(page.slug)})${suffix}`;
+}
+
 export default function pageMarkdown() {
+  let site;
+  let siteTitle = 'Keboola User Documentation';
+
   return {
     name: 'page-markdown',
     hooks: {
+      'astro:config:done': ({ config }) => {
+        site = config.site;
+      },
       'astro:build:done': async ({ dir, logger }) => {
         const outDir = fileURLToPath(dir);
 
@@ -132,6 +195,7 @@ export default function pageMarkdown() {
 
         let written = 0;
         let skipped = 0;
+        const index = [];
 
         for (const file of findMarkdownFiles(contentDir)) {
           const content = readFileSync(file, 'utf-8');
@@ -159,9 +223,24 @@ export default function pageMarkdown() {
           mkdirSync(mdDir, { recursive: true });
           writeFileSync(mdFile, md);
           written++;
+
+          // A folded or literal block scalar (`>`/`|`) is not a one-liner, and
+          // the scalar-only frontmatter parser above would hand back the
+          // indicator rather than the text.
+          const description =
+            fm.description && !/^[>|]/.test(fm.description) ? fm.description : '';
+          index.push({ slug: fm.slug, title: fm.title ?? fm.slug, description });
         }
 
         logger.info(`Emitted ${written} raw-markdown pages (${skipped} skipped)`);
+
+        if (site) {
+          index.sort((a, b) => a.slug.localeCompare(b.slug));
+          writeFileSync(join(outDir, 'llms.txt'), buildLlmsTxt(site, siteTitle, index));
+          logger.info(`Wrote llms.txt indexing ${index.length} pages`);
+        } else {
+          logger.warn('No `site` configured — skipping llms.txt');
+        }
       },
     },
   };

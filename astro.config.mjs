@@ -56,6 +56,11 @@ export default defineConfig({
         SocialIcons: './src/components/SocialIcons.astro',
       },
       pagination: true,
+      // Feeds the "Updated <date>" line that PageTitle.astro already renders.
+      // Starlight reads it from each file's last commit, so the build needs
+      // real git history — see fetch-depth in .github/workflows/*.yml. A
+      // shallow clone makes every page report the same date.
+      lastUpdated: true,
       editLink: {
         baseUrl: 'https://github.com/keboola/connection-docs/edit/main/',
       },
