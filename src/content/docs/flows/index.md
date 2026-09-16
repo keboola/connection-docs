@@ -42,32 +42,19 @@ You can also set up parallelization **within a component** (configuration), dire
 
 ### Control Task Execution
 
-![Task Parameters](/flows/task-parameters.png)
+Select a task in the Builder to open its settings.
+
+![Task settings for a selected task: Component Enabled, Retry After Failure, Delay Before Start, and Continue on Failure shown as Handled via Conditions](/flows/task-settings.png)
 
 - If you need to temporarily skip something, disable the task. The task will then be excluded from the flow.
 
-- Failure handling is expressed through [conditions](#conditions) instead of a "Continue on Failure" toggle — you can branch on task or phase status (e.g., `if status == 'error' then ...`) to send notifications, run fallback logic, or end the flow. See also [Retry](#retry) for automatic retries of failed tasks.
+- Failure handling is expressed through [conditions](#conditions) instead of a "Continue on Failure" toggle — you can branch on task or phase status (e.g., `if status == 'error' then ...`) to send notifications, run fallback logic, or end the flow. To let selected tasks fail while the rest of the phase must succeed, use the [Continue on Failure](#4-continue-on-failure) condition subject. See also [Retry](#retry) for automatic retries of failed tasks.
 
 - To modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**.
-Select the task and click **Set advanced parameters**. When finished, click **Set**.
+Select the task and click **Set advanced parameters**. When finished, click **Set**. A common use is
+overriding a [variable](/components/variables/#task-parameters-on-a-single-task) for that one task.
 
-***Example of the advanced parameter:** changing a variable in transformation:*
-
-```json
-{
-  "componentId": "keboola.snowflake-transformation",
-  "configId": "0123abc",
-  "mode": "run",
-  "variableValuesData": {
-    "values": [
-      {
-        "name": "variables_name",
-        "value": 12345
-      }
-    ]
-  }
-}
-```
+![The Task Parameters editor, pre-filled with the task's type, mode, componentId, and configId](/flows/task-parameters-modal.png)
 
 ## Conditions
 
@@ -80,6 +67,8 @@ Control the flow of execution based on conditions like:
 - **Date and time logic** (e.g. run only on Mondays, last day of the month).
 - **Number of Output Tables** - control the flow based on how many output tables a task produces.
 - **Duration of Task** - condition to trigger actions depending on how long a task runs. This is useful for detecting anomalies (e.g., unusually short or long runtimes).
+
+Each of these can be evaluated for a single task, a whole phase, all or any task in a phase, or any task in the whole flow - see [What the Condition Compares](#3-what-the-condition-compares-subject).
 
 Evaluation proceeds from top to bottom, and once a condition is true, the remaining conditions are ignored - even if others would also evaluate to be true.
 
@@ -98,159 +87,83 @@ You can use logical operators (AND) and (OR) to combine multiple statements with
 
 ![](/flows/conditional-flows-condition.png)
 
-## Variables
+### 3. What the Condition Compares (Subject)
 
-Variables in Flows let you store and reuse values - like dates, task results, or custom inputs - throughout your flow. You can use them to make decisions, control flow logic, or pass dynamic values between tasks. The sections below walk through how to set up and use variables from the UI; each step also shows the JSON shape generated behind the scenes for template authors and API users.
+Every statement starts with a **subject** - the thing the flow looks at. The picker offers two tabs: **Phases / Tasks** and **Variables** (see [Using Variables in Conditions](/components/variables/#using-variables-in-conditions)).
 
-### Adding a Variable
+In the **Phases / Tasks** tab you can choose:
 
-1. In a phase, click the **+** icon and choose **Set Variable**. The Set Variable panel opens on the right.
-2. Enter a **Variable Name** — this is the identifier other tasks will use to reference the value.
-3. Choose a **Variable Type** — either [Static Value](#static-value) or [Dynamic Value](#dynamic-value).
+| Subject | What it evaluates |
+| --- | --- |
+| **Any Task in the Flow** | A flow-level row above the phase list. The statement passes when **at least one** already finished task anywhere in the flow matches. |
+| ***phase* > Whole Phase Status** | The resulting status of the whole phase. |
+| ***phase* > All Tasks in Phase** | Passes only when **every** task in that phase matches. |
+| ***phase* > Any Task in Phase** | Passes when **at least one** task in that phase matches. |
+| ***phase* > Continue on Failure** | Passes when **every** task in that phase succeeded, except the tasks you explicitly allow to fail. See [Continue on Failure](#4-continue-on-failure). |
+| ***phase* > *task*** | A single field from that task's job result (browse the result tree, as with [Dynamic Value](/components/variables/#dynamic-value) variables). |
 
-### Static Value
+For the aggregated subjects (*Any Task in the Flow*, *All Tasks in Phase*, *Any Task in Phase*), the field is picked from a short list that applies to any task: **Job Status**, **Job Duration**, **Error Message**, **Count of output tables**, **Sum of imported rows**, and **Min of imported rows**.
 
-A **Static Value** is a fixed text or number you enter directly. Useful for thresholds, IDs, or labels that don't change between runs.
-
-![Set Variable panel with Static Value selected](/flows/conditional-flows-variables-static-set.png)
-
-**JSON equivalent** (useful when authoring a flow as a template or via the API):
-
-```json
-{
-  "type": "variable",
-  "name": "max_duration",
-  "value": 3600
-}
-```
-
-### Dynamic Value
-
-A **Dynamic Value** is computed at run time from a task result, an earlier phase, or a built-in function (see [Date & Time function](#date--time-function) below). When you pick this type, the value picker lets you browse the outputs of tasks that ran earlier in the flow. You can pick any field from the job's result tree — for example `result.output.tables`, `result.artifacts`, `result.images`, `result.configVersion`, `result.errorMessage`, and many more.
-
-![Set Variable panel in Conditional Flow](/flows/conditional-flows-variables-set.png)
-
-If a task produces **multiple output tables**, the picker also offers aggregations across all of them: **Sum**, **Minimum**, **Maximum**, and **Average** of a numeric field. For example, `Sum of importedRowsCount` returns the total number of rows imported by an HTTP data source across every output table.
-
-![Dynamic Value picker showing task result tree with aggregations](/flows/conditional-flows-variables-picker.png)
+When you pick a specific phase or task, you can only reference phases that run **before** the condition (plus the condition's own phase). *Any Task in the Flow* needs no phase at all, so it also covers tasks in parallel branches that already finished - not just the ones directly upstream.
 
 :::caution
-**Aggregations are not functions.** The Sum / Minimum / Maximum / Average options are not built-in functions — the `function` enum only accepts `COUNT` and `DATE`. The picker implements each aggregation as a [JMESPath](https://jmespath.org/) expression placed in the task `value` field rather than a `function` block. When authoring a flow via the API or as a template, write the aggregation directly in `value`:
-
-- **Sum** → `sum(job.result.output.tables[].importedRowsCount)`
-- **Minimum** → `min(job.result.output.tables[].importedRowsCount)`
-- **Maximum** → `max(job.result.output.tables[].importedRowsCount)`
-- **Average** → `avg(job.result.output.tables[].importedRowsCount)`
+A condition can only ever look at tasks that have **already finished** at the moment it is evaluated. *Any Task in the Flow* therefore silently ignores tasks in phases that have not run yet - it never waits for them.
 :::
 
-**JSON equivalent** — behind the scenes the aggregation is stored as a `source` definition. For example, `Sum of importedRowsCount` can be expressed as a JMESPath aggregation in the task `value`. Note that the picker tree displays paths rooted at `result.*` (for example `result.output.tables`), while the generated `value` expression is rooted at `job.result.*`:
+The typical use case for *Any Task in the Flow* is a single flow-level error branch - *"if any task in the flow ended with an error, send a notification"* - instead of repeating an *Any Task in Phase* statement for every phase.
+
+**JSON equivalent** (useful when authoring a flow as a template or via the API) - the aggregated subjects wrap the inner statement, which uses `*` as the task:
 
 ```json
 {
-  "type": "variable",
-  "name": "total_imported_rows",
-  "source": {
-    "type": "task",
-    "task": "extract-data",
-    "value": "sum(job.result.output.tables[].importedRowsCount)"
-  }
+  "type": "operator",
+  "operator": "ANY_TASKS_IN_ANY_PHASE",
+  "operands": [
+    {
+      "type": "operator",
+      "operator": "EQUALS",
+      "operands": [
+        { "type": "task", "task": "*", "value": "job.status" },
+        { "type": "const", "value": "error" }
+      ]
+    }
+  ]
 }
 ```
 
-`COUNT` and `DATE` are the only functions exposed via the `function` block (see [Date & Time function](#date--time-function) below); they take their inputs as `operands`. `COUNT` counts the items a JMESPath expression returns — for example, the number of output tables a task produced:
+The per-phase variants use the same shape with the `ANY_TASKS_IN_PHASE` or `ALL_TASKS_IN_PHASE` operator plus a `"phase": "<phase-id>"` property.
+
+### 4. Continue on Failure
+
+**Continue on Failure** is a subject of its own, picked per phase next to *All Tasks in Phase* and *Any Task in Phase*. It expresses *"these tasks may fail, all the others must succeed"* - the equivalent of the **Continue on Failure** toggle known from [Legacy Flows](/flows/flows-legacy/).
+
+After selecting it, pick the tasks that are allowed to fail in the **All tasks of the phase must succeed, except** selector. The statement then passes when every other task in the phase finished successfully; a task blocks the branch only if it did **not** succeed **and** is not on the list. Leave the list empty to require that the whole phase succeeds.
+
+The condition is summarized as *All tasks in Extract Data succeeded / except My GitHub*.
+
+:::tip
+Use this subject instead of combining an *All Tasks in Phase* statement with per-task *failed* statements using **OR**. Such a combination passes as soon as one of the tolerated tasks fails - even when a task that had to succeed failed as well.
+:::
+
+**JSON equivalent** - the operator takes no `operands`, because the statuses are fixed. It carries the ids of the tolerated tasks instead:
 
 ```json
 {
-  "type": "variable",
-  "name": "table_count",
-  "source": {
-    "type": "function",
-    "function": "COUNT",
-    "operands": [
-      {
-        "type": "task",
-        "task": "extract-data",
-        "value": "job.result.output.tables"
-      }
-    ]
-  }
+  "type": "operator",
+  "operator": "CONTINUE_ON_FAILURE",
+  "phase": "8888",
+  "tasks": ["456", "789"]
 }
 ```
 
-The `value` field accepts [JMESPath](https://jmespath.org/) expressions, so you can filter and extract specific items from the task result instead of just walking the tree. For example, picking the name of a particular output table by its ID:
+Task ids that no longer belong to the phase (for example a deleted or disabled task) are ignored, so the condition keeps working when the phase's tasks change.
 
-```json
-{
-  "type": "task",
-  "task": "97288",
-  "value": "job.result.output.tables[?id=='out.c-test.example'][].name | [0]"
-}
-```
+## Variables
 
-### Date & Time function
-
-Returns the date/time formatted according to the specified format string, available formats:
-[https://www.php.net/manual/en/datetime.format.php](https://www.php.net/manual/en/datetime.format.php).
-
-This example returns the full textual representation of the current month, such as "July" or "August".
-
-```json
-{
- "type": "function",
- "function": "DATE",
- "operands": [
-   {
-     "type": "const",
-     "value": "F"
-   }
- ]
-}
-```
-
-**Example of creating a variable with the current timestamp:**
-
-```json
-{
- "id": "set-timestamp",
- "name": "Set Timestamp Variable",
- "phase": "init",
- "task": {
-   "type": "variable",
-   "name": "current_timestamp",
-   "source": {
-     "type": "function",
-     "function": "DATE",
-     "operands": [
-       {
-         "type": "const",
-         "value": "U"
-       }
-     ]
-   }
- }
-}
-```
-
-### Using Variables in Conditions
-
-Once a variable has been set in an earlier phase, any later **Condition** can compare its value against a constant, against another variable, or against a task result.
-
-1. In the IF row, click the value picker and choose a variable, a task result, or a phase result from an earlier phase.
-2. Choose an operator (Greater than, Equals, Contains, …).
-3. Provide a comparison value — a constant, or another value picked from the tree.
-4. Set the THEN and ELSE actions: **Continue To** an existing phase, or end the flow.
-
-Only the first matching IF condition is executed; subsequent IFs in the same Conditions block are skipped.
-
-![IF/THEN/ELSE condition referencing a task result](/flows/conditional-flows-variables-condition.png)
-
-See also the [Conditions](#conditions) section above for the full list of operators and condition types.
-
-### How Variables Reach Component Jobs
-
-When a phase runs a component (a job task), the variables you set earlier in the flow are merged into the component's own variables. A flow variable replaces a component variable **only if both have the same name** — flow variables whose names the component does not declare are silently ignored. This means: to let a flow drive a value inside a component, declare a variable with the matching name in the component's configuration; the flow will fill it in when the job runs.
-
-For finer control on a specific job task, an advanced `variableOverrides` field on the task can restrict which flow variables are merged in.
+A flow can define its own variables — static, or computed at run time from a task result — and use
+them in conditions or pass them into the components it runs. See
+[Variables](/components/variables/) for both flow variables and the configuration variables they can
+drive.
 
 ## Retry
 
@@ -287,15 +200,52 @@ You can also create the notification inside of condition as a New Phase, name it
 
 ![](/flows/conditional-flows-notification-2.png)
 
+## Run the Flow
+
+Click **Run flow** in the flow header to run the whole flow. The arrow next to the button offers the partial runs below. All of them use the **saved** configuration, so save or reset your changes first.
+
+### Run selected tasks
+
+Use this when only a part of the flow needs to run — for example after fixing one transformation, without waiting for the extractors again.
+
+1. Open the **Builder** tab and choose **Run selected tasks** from the **Run flow** button.
+2. Click the tasks you want to run. The canvas is read-only while selecting; each phase shows how many of its tasks are selected and offers **Select all tasks in this phase** and **Select this phase and everything after it**.
+3. Click **Run tasks**. **Cancel** or `Esc` leaves the mode without running anything.
+
+![Builder in selection mode: the "Run selected tasks — 2 of 7 tasks selected" panel with Cancel and Run Tasks, two highlighted phases and a dimmed one](/flows/run-selected-tasks.png)
+
+What runs:
+
+- Only the selected tasks. **Conditions are ignored** — the selected phases run one after another, including phases in different branches of a condition, and a phase several branches lead into runs only once. Phases with nothing selected are skipped.
+- Tasks selected within one phase still run in parallel, as they do in a normal run.
+- Disabled tasks and tasks with a missing, invalid, or deleted configuration cannot be selected.
+- A failed task does not stop the run — every selected task runs, and the flow's status is the status of its last phase, so check the individual tasks in the run.
+
+### Re-run failed tasks
+
+After a failed run, **Re-run failed tasks** appears in the same **Run flow** button, and on the flow's job detail in **Jobs**. Tasks that already finished successfully are skipped and their results reused; the rest re-run with the current flow configuration.
+
+### Run a single phase or task
+
+Hovering over a phase or a task reveals a **run** icon that runs just that phase or task in isolation — no other phase is entered and no conditions are evaluated.
+
 ## Schedule and Automate
 
-Click on **Set Schedule** in your flow and select when you want the flow to run. You can select predefined intervals or set your own. Another option is to use triggers to initiate the run.
+Open the **Schedules** tab in your flow and click **Create Schedule**. A flow can have several
+schedules; they work independently, and the flow runs when any one of them triggers. Each schedule
+has its own toggle, so you can turn one off without deleting it.
+
+![The Schedules tab with the Create Schedule button and one existing schedule](/flows/schedules-tab.png)
+
+A schedule is either **Date & Time** or **Triggered**. For Date & Time, pick one of the predefined
+intervals (every 15 minutes, every hour, once a day, once a week, end of month) or set your own, then
+click **Set Up Schedule**. The dialog works in UTC and previews the next runs before you commit.
+
+![The Create Schedule dialog: schedule type, predefined intervals, a custom interval, and the Set Up Schedule button](/flows/create-schedule.png)
 
 **Scheduling:** Commonly, flows are set to run at specific times. To avoid busy periods in a shared environment, consider scheduling slightly off-peak for smoother execution.
 
 **Triggers:** Set flows to automatically start when certain Storage tables are updated (ideal for managing dependencies across projects). Your projects will stay synchronized and run efficiently.
-
-![Set Schedule](/flows/set-schedule.png)
 
 *Note on Triggers: If table updates happen during the cool-down period, the trigger is suppressed, but the tables are marked as ready. Therefore, if all configured tables are updated during the cool-down period, the flow is not scheduled at that time — but once the cool-down expires and any table is updated (causing the trigger to be evaluated), the system recognizes that all tables are already up to date and runs the flow immediately.*
 

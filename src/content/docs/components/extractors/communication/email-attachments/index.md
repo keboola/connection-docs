@@ -55,5 +55,5 @@ There may be a delay between the time the email is sent, received, and picked up
 ![Screenshot - Job Detail](/components/extractors/communication/email-attachments/email-attachments-2.png)
 
 ***Note:** When multiple valid emails are received between the data source connector runs, they are imported into separate tables 
-(`data1` -- `dataN`). If this is not desired, time the sending of the emails and configure the connector flow 
+(`data`, `data1`, `data2`, …). If this is not desired, time the sending of the emails and configure the connector flow 
 to make sure only one email is processed at a time.*

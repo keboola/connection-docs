@@ -47,7 +47,7 @@ Four summary cards are displayed at the top:
 ![Project Consumption](/management/telemetry/telemetry-dashboards/project-consumption.png)
 
 ## Organization Usage
-The Organization Usage dashboard shows consumption across all projects in your organization. It is available to organizations with an active contract. This content is also available as the [Organization Usage tab](#ac-organization-usage) within the Activity Center.
+The Organization Usage dashboard shows consumption across all projects in your organization. It is available to organizations with an active contract. This content is also available as the [Organization Usage tab](#organization-usage-activity-center) within the Activity Center.
 
 ### KPIs
 Four KPI cards compare current usage against contract limits:
@@ -117,7 +117,7 @@ All five tabs share the following controls:
 
 ![Activity Center Header](/management/telemetry/telemetry-dashboards/ac-header.png)
 
-### Organization Usage {#ac-organization-usage}
+### Organization Usage (Activity Center)
 This tab is identical in content and functionality to the standalone [Organization Usage](#organization-usage) dashboard described above — KPIs with contract limits, Active Contract Consumption, Consumption charts, Top Projects and Components, and Configuration Health. Please refer to that section for a detailed description of each visual.
 
 ![Activity Center Organization Usage](/management/telemetry/telemetry-dashboards/ac-org-usage.png)

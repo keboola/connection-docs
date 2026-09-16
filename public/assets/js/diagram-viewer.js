@@ -346,7 +346,7 @@
     container.appendChild(tooltip);
 
     requestAnimationFrame(function() {
-      canvasWrap.style.top = toolbar.offsetHeight + 'px';
+      syncCanvasSize();
     });
 
     // ── SVG setup ──
@@ -396,6 +396,17 @@
     function getVisibleRelationships(visibleIds) {
       var s = {}; visibleIds.forEach(function(id) { s[id] = true; });
       return state.relationships.filter(function(r) { return s[r.from] && s[r.to]; });
+    }
+
+    // Keep the canvas below the toolbar and give the SVG an explicit pixel
+    // height. `height="100%"` does not resolve against .dv-canvas-wrap (its
+    // height comes from the top/bottom offsets, not a specified height), so the
+    // SVG would fall back to the 150px default for replaced elements and
+    // fitToScreen() would scale the diagram to fit that 150px box instead of
+    // the real canvas.
+    function syncCanvasSize() {
+      canvasWrap.style.top = toolbar.offsetHeight + 'px';
+      if (svgEl) svgEl.attr('height', canvasWrap.clientHeight + 'px');
     }
 
     function fitToScreen() {
@@ -635,7 +646,7 @@
         fsBtn.title = 'Toggle fullscreen';
       }
       requestAnimationFrame(function() {
-        canvasWrap.style.top = toolbar.offsetHeight + 'px';
+        syncCanvasSize();
         setTimeout(function() { fitToScreen(); }, 100);
       });
     }
@@ -704,7 +715,7 @@
     // ── Init ──
     runLayout(false);
     requestAnimationFrame(function() {
-      canvasWrap.style.top = toolbar.offsetHeight + 'px';
+      syncCanvasSize();
       setTimeout(function() { fitToScreen(); }, 100);
     });
   }

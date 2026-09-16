@@ -114,3 +114,21 @@ SELECT
 There are two types of user-defined functions in BigQuery: persistent and temporary. Persistent UDFs are stored in a dataset and can be used by any user with access to the dataset. Temporary UDFs are only available during the session in which they are created.
 
 Because BQ transformations always run in a new session (and new dataset), you can only use temporary UDFs. To create a temporary UDF, use the `CREATE TEMP FUNCTION` statement. You can find more information about UDFs in the [BigQuery documentation](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions).
+
+## Bucket Objects for Read-Only Input Mapping
+
+For more information on how a **read-only input mapping** works, visit the [link](/transformations/mappings/#read-only-input-mapping).
+
+Buckets in BigQuery are represented by datasets. A bucket's dataset name is derived from its ID by replacing the dots and dashes with underscores; for example, the bucket `in.c-main` is the dataset `in_c_main`. You can list all available datasets by querying `INFORMATION_SCHEMA.SCHEMATA` or by browsing them in the BigQuery console.
+
+Reference a table using its fully qualified name in backticks, for example `` `in_c_main`.`users` ``.
+
+Alias tables are materialized as database VIEWs and are accessible via read-only input mappings — including filtered aliases and aliases from linked buckets.
+
+For a linked bucket, the dataset lives in another project. To access it, qualify the table with the source project's ID. For example, say your bucket `in.c-customers` is linked from bucket `in.c-crm-extractor` in project 123. You then need to reference the table like this: `` `<project-123-id>`.`in_c_crm_extractor`.`my-table` ``.
+
+When developing the transformation code, it's easiest to create a workspace with **read-only input mappings** enabled and look directly in the workspace to find the correct project and dataset names.
+
+### Read-Only Input Mapping in Development Branches
+
+In a [development branch](/components/branches/), a bucket's dataset is prefixed with the branch ID: the bucket `in.c-main` is `in_c_main` in production (the default branch) and `1234_in_c_main` in branch `1234`. A dev-branch transformation reads its own branch datasets and the production ones (other branches are not accessible); a default-branch transformation reads only production datasets.

@@ -468,7 +468,7 @@ tables:
 
   - id: kbc_mcp_event
     mode: project
-    description: "This table captures [MCP](/ai/mcp-server/) (Model Context Protocol) interaction events -- every tool call made against a Keboola project through an MCP server. This includes calls from external MCP clients (e.g., Claude Desktop, Cursor) as well as Keboola's internal AI agents such as [Kai](/ai/kai-assistant/) and AI Chat. Each row represents a single tool invocation with its input arguments, outcome (success or error), duration, and the context of the caller."
+    description: "This table captures [MCP](/ai/mcp-server/) (Model Context Protocol) interaction events -- every tool call made against a Keboola project through an MCP server. This includes calls from external MCP clients (e.g., Claude Desktop, Cursor) as well as Keboola's internal AI agents such as [Kai](/kai/) and AI Chat. Each row represents a single tool invocation with its input arguments, outcome (success or error), duration, and the context of the caller."
     is_full_load: false
     columns:
       - name: kbc_mcp_event_id
@@ -1378,7 +1378,7 @@ tables:
 
   - id: kbc_job_input_table
     mode: activity_center
-    description: "This table shows data about all input tables of the job."
+    description: "**DEPRECATED** – This table is being removed without a direct replacement. \n\nThis table shows data about all input tables of the job."
     is_full_load: false
     columns:
       - name: kbc_job_id
@@ -1407,7 +1407,7 @@ tables:
 
   - id: kbc_job_output_table
     mode: activity_center
-    description: "This table shows data about all output tables of the job."
+    description: "**DEPRECATED** – This table is being removed without a direct replacement. \n\nThis table shows data about all output tables of the job."
     is_full_load: false
     columns:
       - name: kbc_job_id
@@ -1662,9 +1662,9 @@ tables:
         description: "Name of the token"
         example: "`orchestration trigger`"
       - name: kbc_data_app_id
-        fk: kbc_data_app
+        fk: kbc_non_sql_workspace
         description: "Foreign key to the Keboola app"
-        example: "`123_kbc-us-east-1_keboola.data-apps-945672`"
+        example: "`123_kbc-us-east-1_keboola.data-apps_945672`"
 
   - id: kbc_table_metadata
     mode: activity_center
@@ -1819,7 +1819,7 @@ tables:
 
   - id: kbc_transformation_input
     mode: activity_center
-    description: "This table shows data about inputs of [transformations](/transformations/)."
+    description: "**DEPRECATED** – This table is being removed without a direct replacement. \n\nThis table shows data about inputs of [transformations](/transformations/)."
     is_full_load: true
     columns:
       - name: kbc_transformation_input_id
@@ -1855,7 +1855,7 @@ tables:
 
   - id: kbc_transformation_input_column
     mode: activity_center
-    description: "This table shows data about input columns of [transformations](/transformations/). Available only for non-clone mappings."
+    description: "**DEPRECATED** – This table is being removed without a direct replacement. \n\nThis table shows data about input columns of [transformations](/transformations/). Available only for non-clone mappings."
     is_full_load: true
     columns:
       - name: kbc_transformation_input_column_id
@@ -1885,7 +1885,7 @@ tables:
 
   - id: kbc_transformation_output
     mode: activity_center
-    description: "This table shows data about outputs of the [transformations](/transformations/)."
+    description: "**DEPRECATED** – This table is being removed without a direct replacement. \n\nThis table shows data about outputs of the [transformations](/transformations/)."
     is_full_load: true
     columns:
       - name: kbc_transformation_output_id
@@ -2278,8 +2278,8 @@ tables:
         description: "Unique Keboola workspace event identifier"
         example: "`7236030887_kbc-us-east-1`"
       - name: kbc_workspace_id
-        fk: kbc_workspace
-        description: "Foreign key to the Keboola workspace"
+        fk: kbc_sql_workspace
+        description: "Foreign key to the Keboola SQL workspace (`kbc_sql_workspace.kbc_sql_workspace_id`)"
         example: "`985088171_kbc-us-east-1`"
       - name: kbc_project_id
         fk: kbc_project
@@ -2340,13 +2340,13 @@ tables:
 
   - id: kbc_data_app
     mode: project
-    description: "This table lists the [apps](/data-apps/)."
+    description: "**DEPRECATED** – This table is being replaced by `kbc_non_sql_workspace`. \n\nThis table lists the [apps](/data-apps/)."
     is_full_load: false
     columns:
       - name: kbc_data_app_id
         pk: true
         description: "Unique identifier for the application"
-        example: "`123_kbc-us-east-1_keboola.data-apps-945672`"
+        example: "`123_kbc-us-east-1_keboola.data-apps_945672`"
       - name: kbc_project_id
         fk: kbc_project
         description: "Foreign key to the Keboola project"
@@ -2391,9 +2391,9 @@ tables:
         description: "Foreign key to the Keboola project"
         example: "`580_kbc-us-east-1`"
       - name: kbc_data_app_id
-        fk: kbc_data_app
+        fk: kbc_non_sql_workspace
         description: "Foreign key to the Keboola app"
-        example: "`123_kbc-us-east-1_keboola.data-apps-945672`"
+        example: "`123_kbc-us-east-1_keboola.data-apps_945672`"
       - name: data_app_id_num
         description: "Numerical ID for the application"
         example: "`945672`"
@@ -2586,6 +2586,26 @@ relationships:
     label: "has sql workspaces"
     type: one-to-many
   - from: kbc_project
+    to: kbc_non_sql_workspace
+    label: "has non-sql workspaces"
+    type: one-to-many
+  - from: kbc_project
+    to: kbc_non_sql_workspace_run
+    label: "has non-sql workspace runs"
+    type: one-to-many
+  - from: kbc_non_sql_workspace
+    to: kbc_non_sql_workspace_run
+    label: "has runs"
+    type: one-to-many
+  - from: kbc_non_sql_workspace
+    to: kbc_table_event
+    label: "has events"
+    type: one-to-many
+  - from: kbc_non_sql_workspace
+    to: kbc_data_app_params_event
+    label: "has events"
+    type: one-to-many
+  - from: kbc_project
     to: kbc_workspace_event
     label: "has workspace events"
     type: one-to-many
@@ -2673,6 +2693,14 @@ relationships:
     to: kbc_data_app
     label: "has app"
     type: one-to-many
+  - from: kbc_component_configuration
+    to: kbc_sql_workspace
+    label: "has sql workspace"
+    type: one-to-many
+  - from: kbc_component_configuration
+    to: kbc_non_sql_workspace
+    label: "has non-sql workspace"
+    type: one-to-many
 
   # Flow phase -> task
   - from: kbc_flow_phase
@@ -2756,6 +2784,18 @@ relationships:
   - from: kbc_token
     to: kbc_sql_workspace
     label: "creates sql workspaces"
+    type: one-to-many
+  - from: kbc_token
+    to: kbc_non_sql_workspace
+    label: "creates non-sql workspaces"
+    type: one-to-many
+  - from: kbc_sql_workspace
+    to: kbc_workspace_event
+    label: "has events"
+    type: one-to-many
+  - from: kbc_non_sql_workspace
+    to: kbc_workspace_event
+    label: "has events"
     type: one-to-many
   - from: kbc_token
     to: kbc_trigger

@@ -46,7 +46,7 @@ from the data source and may not be the best choice for the data destination.
 When you are done configuring the columns, don't forget to **save** the settings.
 
 ### Load Settings
-At the top of the page, you can specify the target table name and additional load options. There are three main loading options --- **Full Load**, **Automatic Incremental Load**, and **Manual Incremental Load**.
+At the top of the page, you can specify the target table name and additional load options. There are three main loading options — **Full Load**, **Automatic Incremental Load**, and **Manual Incremental Load**.
 
 ![Screenshot - Main page](/components/writers/database/exasol/load_settings.png)
 

@@ -159,8 +159,8 @@ and **New Files Only** to create a configuration that incrementally loads all ne
  - **Add Row Number Column**: A new column `s3_row_filename` is added to the table and will contain the row number in each 
  of the downloaded files.
 
-The data source connector also supports [Advanced mode](/components/#advanced-mode), all supported
+The data source connector also supports [Debug mode](/components/#debug-mode), all supported
 parameters are described in the [GitHub repository](https://github.com/keboola/aws-s3-extractor).
 
 ## Limitations
-All files stored in [AWS Glacier](https://aws.amazon.com/glacier/) are ignored.
+All files stored in [AWS Glacier](https://aws.amazon.com/s3/glacier/) are ignored.

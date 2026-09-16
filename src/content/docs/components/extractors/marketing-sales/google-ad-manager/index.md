@@ -22,12 +22,12 @@ Once the authorization is set up, click **Save** to save the authorization param
 new report.
 
 ## Report Configuration
-It is recommended to first create a report on the Google Ad Manager report page to test wether all dimension and metric combinations 
+It is recommended to first create a report on the Google Ad Manager report page to test whether all dimension and metric combinations 
 are available for the given report type, as well as the date ranges matching the dimensions (e.g., WEEK dimension must have 
 one or more week sun-sat. If a date range of mon-fri is given, it will result in an error).
 
 After you create a valid report on the Google Ad Manager report page, go to the 
-[API docs](https://developers.google.com/ad-manager/api/reference/v202105/ReportService.ReportQuery#dimensions)
+[API docs](https://developers.google.com/ad-manager/api/reference/v202602/ReportService.ReportQuery#dimensions)
 to find the proper names of the dimensions and metrics for the API.
 E.g., CTR in the Ad exchange report type is AD_EXCHANGE_CTR in the API. 
 

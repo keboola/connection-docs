@@ -36,7 +36,7 @@ Then create a [service account](https://cloud.google.com/bigquery/docs/authentic
 of the Google BigQuery data source connector, and create a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
 
 ***Note:** If setting up the Google BigQuery connector seems too complicated to you, export the query results to Google Sheets and
-[load them from Google Sheets](/tutorial/load/googlesheets/). Or, export them to a CSV file and [load them from local files](/tutorial/load/#manually-loading-data).*
+[load them from Google Sheets](/tutorial/load/googlesheets/). Or, export them to a CSV file and [load them from local files](/tutorial/load/#manual-data-loading).*
 
 ### Prepare
 Before you start, have a Google service account and a Google Storage bucket ready.
@@ -208,7 +208,7 @@ There are a number of ways how to get the data from Eurostat -- e.g., you can do
 or XLS format. To avoid downloading the (possibly) lengthy data set to your hard drive, Eurostat provides a
 [REST API](https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-migrating/json)
 for downloading the data. This could be processed using the
-[Generic Extractor](/components/extractors/other/generic/). However, the data is provided in
+[Generic Extractor](/components/extractors/generic-extractor/). However, the data is provided in
 [JSON-stat](https://json-stat.org/) format, which contains tables encoded using the
 [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order) method. Even though it is possible
 to import them to Keboola, it would be necessary to do additional processing to obtain plain tables.
