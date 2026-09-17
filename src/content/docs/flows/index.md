@@ -54,27 +54,10 @@ Select a task in the Builder to open its settings.
 - Failure handling is expressed through [conditions](#conditions) instead of a "Continue on Failure" toggle — you can branch on task or phase status (e.g., `if status == 'error' then ...`) to send notifications, run fallback logic, or end the flow. To let selected tasks fail while the rest of the phase must succeed, use the [Continue on Failure](#4-continue-on-failure) condition subject. See also [Retry](#retry) for automatic retries of failed tasks.
 
 - To modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**.
-Select the task and click **Set advanced parameters**. When finished, click **Set**.
+Select the task and click **Set advanced parameters**. When finished, click **Set**. A common use is
+overriding a [variable](/components/variables/#task-parameters-on-a-single-task) for that one task.
 
 ![The Task Parameters editor, pre-filled with the task's type, mode, componentId, and configId](/flows/task-parameters-modal.png)
-
-***Example of the advanced parameter:** changing a variable in transformation:*
-
-```json
-{
-  "componentId": "keboola.snowflake-transformation",
-  "configId": "0123abc",
-  "mode": "run",
-  "variableValuesData": {
-    "values": [
-      {
-        "name": "variables_name",
-        "value": 12345
-      }
-    ]
-  }
-}
-```
 
 ## Conditions
 
@@ -112,7 +95,7 @@ You can use logical operators (AND) and (OR) to combine multiple statements with
 
 ### 3. What the Condition Compares (Subject)
 
-Every statement starts with a **subject** - the thing the flow looks at. The picker offers two tabs: **Phases / Tasks** and **Variables** (see [Using Variables in Conditions](#using-variables-in-conditions)).
+Every statement starts with a **subject** - the thing the flow looks at. The picker offers two tabs: **Phases / Tasks** and **Variables** (see [Using Variables in Conditions](/components/variables/#using-variables-in-conditions)).
 
 In the **Phases / Tasks** tab you can choose:
 
@@ -123,7 +106,7 @@ In the **Phases / Tasks** tab you can choose:
 | ***phase* > All Tasks in Phase** | Passes only when **every** task in that phase matches. |
 | ***phase* > Any Task in Phase** | Passes when **at least one** task in that phase matches. |
 | ***phase* > Continue on Failure** | Passes when **every** task in that phase succeeded, except the tasks you explicitly allow to fail. See [Continue on Failure](#4-continue-on-failure). |
-| ***phase* > *task*** | A single field from that task's job result (browse the result tree, as with [Dynamic Value](#dynamic-value) variables). |
+| ***phase* > *task*** | A single field from that task's job result (browse the result tree, as with [Dynamic Value](/components/variables/#dynamic-value) variables). |
 
 For the aggregated subjects (*Any Task in the Flow*, *All Tasks in Phase*, *Any Task in Phase*), the field is picked from a short list that applies to any task: **Job Status**, **Job Duration**, **Error Message**, **Count of output tables**, **Sum of imported rows**, and **Min of imported rows**.
 
@@ -185,7 +168,7 @@ Task ids that no longer belong to the phase (for example a deleted or disabled t
 
 Variables let you store and reuse values — like dates, task results, or custom inputs — throughout your flow. Add one in a phase with the **+** icon → **Variable**; a variable holds either a **Static Value** (fixed text or number) or a **Dynamic Value** computed at run time from a task result, a phase, or a built-in function. Later conditions can then compare the variable's value, and component jobs receive flow variables that match their own variable names.
 
-For the full guide — static and dynamic values, JMESPath aggregations, the `COUNT` and `DATE` functions, and how variables reach component jobs — see [Flow Variables](/flows/variables/).
+For the full guide — static and dynamic values, JMESPath aggregations, the `COUNT` and `DATE` functions, and how variables reach component jobs — see [Flow Variables](/flows/variables/). For the configuration variables that flow variables can drive, see [Variables](/components/variables/).
 
 ## Retry
 

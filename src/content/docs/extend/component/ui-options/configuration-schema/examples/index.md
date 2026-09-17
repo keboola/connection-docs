@@ -146,6 +146,30 @@ Allowed options: mode, placeholder, autofocus, lineNumbers lint
 Available modes: `text/x-sfsql`, `text/x-sql`, `text/x-plsql`, `text/x-python`, `text/x-julia`, `text/x-rsrc`, `application/json`
 JSON mode supports encryption. Default mode is `application/json` . You should set type base on mode (string or object).
 
+A JSON-mode editor stores the parsed JSON, so keys prefixed with `#` inside the field are
+[encrypted](/overview/encryption/) on save. The UI states this in a note below the editor. If the field does not hold
+Keboola configuration (a vendor query filter, a request payload template), that note advertises something the component
+cannot use — the platform would encrypt the key and the component would receive the ciphertext. Hide the note with
+`options.encryption_hint: false`:
+
+```json
+{
+  "filters": {
+    "type": "object",
+    "title": "Filters",
+    "format": "editor",
+    "options": {
+      "editor": {
+        "mode": "application/json"
+      },
+      "encryption_hint": false
+    }
+  }
+}
+```
+
+The option only affects the note. Encryption itself is unchanged: a `#`-prefixed key is still encrypted on save.
+
 **JsonSchema examples:**
 
 ```json

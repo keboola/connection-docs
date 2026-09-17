@@ -18,8 +18,6 @@ This walkthrough takes you from nothing to browsing a real project with [kbagent
 
 Pick your operating system:
 
-{/* VERIFY(owner: Padak): provisional canon — install script marked Recommended on macOS/Linux (matches the landing page and README), uv as the alternative. Flip the labels if uv-first is preferred. */}
-
 <Tabs syncKey="os">
   <TabItem label="macOS">
     **Recommended** — the prebuilt wheel via the install script:
@@ -48,11 +46,36 @@ Pick your operating system:
     ```
   </TabItem>
   <TabItem label="Windows">
-    **Recommended** — [uv](https://docs.astral.sh/uv/) in PowerShell, the one supported native path on Windows (install uv first if you don't have it):
+    The `curl … | sh` one-liner **cannot run on Windows**. Windows has shipped `curl.exe` since Windows 10 1803, but it has no `sh`, so the command fails with `'sh' is not recognized` in both `cmd` and PowerShell. Installing Git for Windows does not fix that. Its installer only puts `C:\Program Files\Git\cmd` on `PATH`, while `sh.exe` lives in `usr\bin`.
+
+    **Recommended**: PowerShell, no POSIX shell needed. This fetches the same wheel the install script would have:
 
     ```powershell
-    uv tool install "git+https://github.com/keboola/cli"
+    winget install --id astral-sh.uv -e
+    $ver = (Invoke-RestMethod "https://api.github.com/repos/keboola/cli/releases/latest").tag_name.TrimStart('v')
+    uv tool install --force "keboola-cli[server] @ https://github.com/keboola/cli/releases/download/v$ver/keboola_cli-$ver-py3-none-any.whl"
+    uv tool update-shell
     ```
+
+    Skip the first line if you already have [uv](https://docs.astral.sh/uv/). That line installs uv itself. The whole block works in the in-box Windows PowerShell 5.1, so you don't need PowerShell 7.
+
+    The second line calls the GitHub API without a token. If you are rate-limited or behind a proxy that blocks it, `$ver` comes back empty and the third line asks uv for a URL that does not exist, which surfaces as a 404. Check with `echo $ver`. If it is empty, read the version off the [releases page](https://github.com/keboola/cli/releases/latest) and set it by hand, e.g. `$ver = "0.91.0"`.
+
+    Then **open a new shell**. `uv tool update-shell` edits the persisted `PATH`, and the session you ran it in will not see the change.
+
+    Two alternatives:
+
+    - **Already have Git for Windows?** Run the documented script through its bash:
+
+      ```powershell
+      & "C:\Program Files\Git\bin\bash.exe" -lc "curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh"
+      ```
+
+    - **No Python on the machine?** Every release ships a self-contained build. Download `keboola-cli2_<version>_windows_amd64.zip` from the [releases page](https://github.com/keboola/cli/releases/latest), unpack it, and put the folder on `PATH`. It carries its own interpreter and needs neither Python nor uv.
+
+    :::caution[Not via a package manager]
+    There is no WinGet package for kbagent itself, and the Chocolatey package lags far behind the current release. Use one of the three paths above.
+    :::
   </TabItem>
 </Tabs>
 
@@ -62,9 +85,13 @@ Confirm it's on your `PATH` (all platforms):
 
 ```console
 $ kbagent --version
-kbagent v0.66.0
+kbagent v0.91.0
 ```
-{/* Verified locally 2026-07-13 (macOS): kbagent v0.66.0 via uv. Windows/PowerShell uv path + install.sh being bash-only confirmed by Padak (review, v0.66.1). */}
+{/* Verified locally 2026-07-13 (macOS) via uv; version sample tracks the vendored command reference. Windows block (winget uv + release wheel + `uv tool update-shell`, Git-bash and self-contained-zip alternatives, no WinGet package, stale Chocolatey) copied from the "Windows" section of keboola/cli's README, which is the source of truth for it. */}
+
+:::note
+On macOS and Linux the install script does not touch the `PATH` of the shell that ran it. If `kbagent: command not found` comes back right afterwards, the install worked and your `PATH` has not caught up. Run `source $HOME/.local/bin/env`, or open a new terminal.
+:::
 
 :::tip
 On any platform you can also run kbagent through [uvx](https://docs.astral.sh/uv/) without installing (`uvx --from 'git+https://github.com/keboola/cli' kbagent …`) — handy for a one-off or in CI.
@@ -72,22 +99,56 @@ On any platform you can also run kbagent through [uvx](https://docs.astral.sh/uv
 
 ## Step 2 — Connect your project
 
-For one project you need a Storage API token and your stack URL. To create the token, open your project in the browser and go to **Project Settings → API Tokens → New Token**: give it a description, pick **Full Access** (you can scope it down later), and click **Create** — then copy the token right away, it's shown only once.
+Register a project with the CLI so you (or your agent) can reach it. There are two ways in: sign in through the browser, or hand kbagent a Storage API token.
 
-![The New Token form in Keboola Project Settings: a description field, an Expires In selector, and Full Access selected for both Files and Components & Buckets, with the Create button in the corner](/cli/token-create.png)
-{/* Screenshot: live capture of /admin/projects/264/tokens-settings/new-token, demo project 264, 2026-07-24. */}
+### Sign in through the browser
+
+At your own keyboard, this is the shortest route. It needs no token.
+
+First sign in to the stack:
 
 ```bash
-kbagent project add --project prod \
-  --url https://connection.keboola.com --token YOUR_TOKEN
+kbagent auth login --stack https://connection.keboola.com
 ```
 
-`prod` is an **alias** you pick — you'll use it with `--project` later, or set it as the default with `kbagent project use prod`.
+That opens a browser, and you finish the sign-in there. On a machine with no browser it prints a code you type into a page on another device instead.
 
-A Storage API token is enough for browsing. Some commands need an admin (master) token — `token create` requires the `canManageTokens` permission, and creating branches or workspaces needs admin privileges. Token types and scoping options are covered in [API tokens](/management/project/tokens/).
+Then pick which projects to register locally:
+
+```bash
+kbagent auth register-projects
+```
+
+It shows a picker of every project the account can reach and registers the ones you choose. Add `--all` to register all of them without the picker.
+
+Both commands need a real terminal. There is no headless path through `auth login`.
+
+### Or register one project with a token
+
+```bash
+kbagent project add --project prod --url https://connection.keboola.com --token YOUR_TOKEN
+```
+
+`project add` is the static-token route. It reads the token from `--token`, or from `KBC_TOKEN` if you'd rather keep it off the command line. With neither, it prompts with hidden input, so the value never lands in your shell history. That prompt needs a TTY an agent's tool-run shell does not have.
+
+Swap the URL for your own stack. `prod` is an **alias** you pick. You use it with `--project` later, or set it as the default with `kbagent project use prod`. Add as many projects as you want.
+
+You sign in once per machine. Every tool reads the same local config, so a project you connected here is already there in Claude Code, Cursor, VS Code and the rest. `kbagent project list` shows what is registered, and its `Auth` column says `session` or `static` per project.
+
+### When you need a token
+
+CI, containers, cron, and anything else running unattended need a Storage API token, because `auth login` cannot run there. A few features need a static token rather than a browser session too: Kai, data apps, the semantic layer, streams, and the Python SDK.
+
+**These docs cannot create a token for you.** Open your project in the Keboola UI and go to **Settings → Developer settings → Agentic CLI**. That page builds the exact `kbagent project add` command for your project and your stack, and it can include a read-only token in it. Copy it from there.
+
+If you don't see **Agentic CLI** in your project's settings, create the token yourself under **Settings → API Tokens** and pass it as `--token`. [API tokens](/management/project/tokens/) covers that screen.
+
+{/* Step 2's static-token half mirrors the Agentic CLI surface in the product UI (Settings → Developer settings → Agentic CLI): the same `kbagent project add --project <name> --url <stack>` and the read-only token that page can put into the command. That page is feature-flagged, hence the API Tokens fallback. Browser-login half (`auth login` + `auth register-projects`, `--all`, the device-code path, the `Auth` column, no headless path) and the static-token-only features (Kai, data apps, semantic layer, streams, Python SDK) from keboola/cli docs/auth.md on main. */}
+
+A Storage API token is enough for browsing. Some commands need an admin (master) token, e.g. creating branches or workspaces needs admin privileges. Token types and scoping options are covered in [API tokens](/management/project/tokens/).
 
 :::caution
-kbagent only talks to your Keboola stack, but the config directory stores project credentials — treat it as sensitive, and never paste tokens into shared terminals or commit them.
+kbagent only talks to your Keboola stack, but the config directory stores project credentials. Treat it as sensitive, and never paste tokens into shared terminals or commit them.
 :::
 
 ## Step 3 — Verify the connection
@@ -134,7 +195,7 @@ kbagent search "shopify"
 
 ## Connect more projects
 
-**Several projects** — register each with its own Storage token (`project add`), or bulk-onboard with a Manage API token:
+**Several projects** — register each one with `project add`, or bulk-onboard with a Manage API token:
 
 ```bash
 KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
