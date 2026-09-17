@@ -17,7 +17,7 @@ What your AI client can call through the [Keboola MCP Server](/ai/mcp-server/), 
 | **Components & Transformations** | Create, edit, and launch them with natural language. |
 | **Storage** | Browse, edit, and document buckets, tables, and columns. |
 | **SQL** | Run and manage SQL queries. |
-| **Semantic layer** | Explore the project's semantic models and validate queries against them. |
+| **Semantic layer** | Explore the project's semantic models and validate queries against them. See [Semantic Layer](/ai/semantic-layer/). |
 | **Jobs** | Start, monitor, and debug execution flows. |
 | **Flows** | Create and manage flows (including conditional flows) that orchestrate components. |
 | **Data Apps** | Create, deploy, and manage Streamlit and Python/JS data apps. |

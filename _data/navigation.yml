@@ -867,6 +867,9 @@ items:
           - url: /ai/mcp-server/self-hosted/
             title: Run It Yourself
 
+      - url: /ai/semantic-layer/
+        title: Semantic Layer
+
   - url: /extend/
     title: Extending Keboola
     items:

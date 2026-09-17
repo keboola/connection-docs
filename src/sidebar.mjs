@@ -669,6 +669,7 @@ export const sidebar = [
           { slug: "ai/mcp-server/self-hosted" },
         ],
       },
+      { slug: "ai/semantic-layer" },
     ],
   },
   {
