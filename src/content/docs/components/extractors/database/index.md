@@ -55,7 +55,7 @@ database, which is quite similar to SQL databases and also supports the [advance
 
 - [MongoDB connector](/components/extractors/database/mongodb/) for the [MongoDB](https://www.mongodb.com/) database and the [CosmosDB for MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction).
 - [CosmosDB connector](/components/extractors/database/cosmosdb/) for the [CosmosDB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api).
-- [Azure Storage Table connector](/components/extractors/database/cosmosdb/) for the [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) and the [Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
+- [Azure Storage Table connector](/components/extractors/database/azure-storage-table/) for the [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) and the [Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
 
 ## Connecting to Database
 
