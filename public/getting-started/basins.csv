@@ -1,0 +1,14 @@
+basin,min_lat,max_lat,min_lon,max_lon
+Arctic Ocean,66,90,-180,180
+Southern Ocean,-90,-60,-180,180
+Mediterranean & Black Sea,30,48,-6,42
+North Atlantic,0,30,-100,20
+North Atlantic,30,66,-100,-6
+North Atlantic,48,66,-6,42
+Indian Ocean,-60,30,20,100
+Indian Ocean,-60,0,100,146
+North Pacific,0,66,100,180
+North Pacific,0,66,-180,-100
+South Pacific,-60,0,146,180
+South Pacific,-60,0,-180,-70
+South Atlantic,-60,0,-70,20

@@ -3,61 +3,65 @@
 
 export const sidebar = [
   { label: "Home", slug: "index" },
-  { slug: "overview" },
   {
-    label: "Getting Started Tutorial",
+    label: "Keboola Overview",
     collapsed: true,
     items: [
-      { label: "Overview", slug: "tutorial" },
+      { label: "Overview", slug: "overview" },
       {
-        label: "Part 1: Loading Data",
+        label: "Platform Onboarding",
         collapsed: true,
         items: [
-          { label: "Overview", slug: "tutorial/load" },
-          { slug: "tutorial/load/googlesheets" },
-          { slug: "tutorial/load/database" },
-        ],
-      },
-      {
-        label: "Part 2: Data Manipulation",
-        collapsed: true,
-        items: [
-          { label: "Overview", slug: "tutorial/manipulate" },
-          { slug: "tutorial/manipulate/workspace" },
-        ],
-      },
-      { slug: "tutorial/write" },
-      { slug: "tutorial/automate" },
-      { slug: "tutorial/ad-hoc" },
-      {
-        label: "Part 6: Development Branches",
-        collapsed: true,
-        items: [
-          { label: "Overview", slug: "tutorial/branches" },
-          { slug: "tutorial/branches/prepare-tables" },
-          { slug: "tutorial/branches/prepare-files" },
-          { slug: "tutorial/branches/tables-in-branch" },
-          { slug: "tutorial/branches/files-in-branch" },
-          { slug: "tutorial/branches/project-diff" },
-          { slug: "tutorial/branches/merge-to-production" },
-        ],
-      },
-      {
-        label: "Keboola Platform Onboarding",
-        collapsed: true,
-        items: [
-          { label: "Overview", slug: "tutorial/onboarding" },
-          { slug: "tutorial/onboarding/usage-blueprint" },
+          { label: "Overview", slug: "overview/onboarding" },
+          { slug: "overview/onboarding/usage-blueprint" },
           {
             label: "Multi-Project Architecture",
             collapsed: true,
             items: [
-              { label: "Overview", slug: "tutorial/onboarding/architecture-guide" },
-              { slug: "tutorial/onboarding/architecture-guide/bdm-guide" },
+              { label: "Overview", slug: "overview/onboarding/architecture-guide" },
+              { slug: "overview/onboarding/architecture-guide/bdm-guide" },
             ],
           },
-          { slug: "tutorial/onboarding/cheat-sheet" },
-          { slug: "tutorial/onboarding/governance-guide" },
+          { slug: "overview/onboarding/cheat-sheet" },
+          { slug: "overview/onboarding/governance-guide" },
+        ],
+      },
+      { slug: "overview/google-data-policy" },
+    ],
+  },
+  {
+    label: "Getting Started",
+    collapsed: true,
+    items: [
+      { label: "Overview", slug: "getting-started" },
+      { slug: "getting-started/project" },
+      { slug: "getting-started/load" },
+      { slug: "getting-started/transform" },
+      { slug: "getting-started/write" },
+      { slug: "getting-started/automate" },
+      { slug: "getting-started/app" },
+      { slug: "getting-started/next-steps" },
+      {
+        label: "Going Further",
+        collapsed: true,
+        items: [
+          { slug: "getting-started/load/googlesheets" },
+          { slug: "getting-started/load/database" },
+          { slug: "getting-started/transform/workspace" },
+          { slug: "getting-started/ad-hoc" },
+          {
+            label: "Development Branches",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "getting-started/branches" },
+              { slug: "getting-started/branches/prepare-tables" },
+              { slug: "getting-started/branches/prepare-files" },
+              { slug: "getting-started/branches/tables-in-branch" },
+              { slug: "getting-started/branches/files-in-branch" },
+              { slug: "getting-started/branches/project-diff" },
+              { slug: "getting-started/branches/merge-to-production" },
+            ],
+          },
         ],
       },
     ],
