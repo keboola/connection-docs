@@ -122,11 +122,11 @@ The rows are fetched from the source table, including the last fetched value. Th
 ideal to set the ordering column as a primary key so you don't receive duplicated rows in
 the Storage table. You can clear the stored value if you need to fetch the entire table.
 
-This incremental fetching feature is related to [**incremental loading**](/storage/tables/#incremental-loading).
+This incremental fetching feature is related to [**incremental loading**](/storage/tables/incremental-loading/).
 While not required, it is recommended to turn on incremental loading when fetching data incrementally; otherwise,
 the table in Storage will contain only newly added rows. This may sound like a good idea when you want to
 process only the newly added rows. In that case, however, you should do so using
-[**incremental processing**](/storage/tables/#incremental-processing). The advantage of using incremental processing
+[**incremental processing**](/storage/tables/incremental-loading/#incremental-processing). The advantage of using incremental processing
 over having only newly added rows in a Storage table is that the table contains all loaded data, and it is not necessary
 to synchronize extraction and processing.
 

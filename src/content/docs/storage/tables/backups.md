@@ -1,6 +1,7 @@
 ---
 title: Backups and Restorations
 slug: 'storage/tables/backups'
+description: Back up and restore Storage tables — time-travel restore on the Snowflake backend and table snapshots on all backends.
 ---
 
 
@@ -9,6 +10,7 @@ There are two methods available for backing up and restoring data:
 
 1. Time travel restore – available only for the Snowflake backend
 2. Snapshots – available for all backends
+<!-- TODO(human-review): confirm time travel is still Snowflake-only and where the project's time-travel retention limit is documented. -->
 
 ![Screenshot - Storage Backups](/storage/tables/snap-restore.png)
 

@@ -1,6 +1,7 @@
 ---
 title: Snowflake Secure Data Sharing
 slug: 'storage/byodb/snowflake-secure-data-sharing'
+description: Share Snowflake data with a Keboola BYODB account via Snowflake Secure Data Sharing — producer and consumer workflows for creating and consuming shares.
 ---
 
 :::caution

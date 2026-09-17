@@ -43,7 +43,7 @@ be part of the TDE file. When configuring the data types, use the *Preview* icon
 
 As optional last steps in table configuration, you can configure the name of the TDE file (useful for uploading to Dropbox or Google Drive)
 and *Table data filter*. The table data filter allows you to set a simple filter for one column or
-take advantage of [Incremental processing](/storage/tables/#incremental-processing) by writing only
+take advantage of [Incremental processing](/storage/tables/incremental-loading/#incremental-processing) by writing only
 recently modified data.
 
 ![Screenshot - Table Configuration Additional Settings](/components/writers/bi-tools/tableau/tableau-4.png)
