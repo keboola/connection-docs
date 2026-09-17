@@ -75,6 +75,13 @@ These actions are available from the transformation configuration page and are h
 
 ## Dynamic Backends
 
+DuckDB runs in-process on the **data science backend** — the same container infrastructure that runs
+Python and R transformations — not on a SQL data warehouse. Two things follow from this, and both
+affect cost:
+
+- A DuckDB job is billed as a **Data Science job**, not as a SQL job, even though you write SQL in it.
+- The backend size sets the memory of that container, not the size of a warehouse.
+
 You can change the backend size to allocate more memory for your transformation. The following sizes are available:
 
 | Backend Size | Memory | Recommended For |
@@ -85,6 +92,10 @@ You can change the backend size to allocate more memory for your transformation.
 | **Large** | 113.6 GB | Very large datasets (10 GB+) |
 
 Start with the **Small** backend and scale up as needed based on your dataset size and query complexity.
+
+For the credit rate of each size, see the **Data Science job / workspace** rows in
+[Project Limits](/management/project/limits/#project-power--time-credits). Do not use the **SQL job**
+rates to estimate DuckDB cost — those apply to Snowflake and BigQuery transformations.
 
 ***Note:** Dynamic backends are not available if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).*
 
@@ -348,7 +359,7 @@ FROM "pipeline_stages";
 **Choose DuckDB for:**
 - Ad-hoc analysis and small to medium datasets
 - Rapid prototyping of transformations
-- Projects with limited budgets
+- Projects with limited budgets — DuckDB bills at data science rates, far below SQL warehouse rates (see [Dynamic Backends](#dynamic-backends))
 - Datasets under a few terabytes
 - Development and testing
 
