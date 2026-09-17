@@ -1,5 +1,6 @@
 ---
 title: Business Data Model Guide
+description: "Welcome to the Business Data Model (BDM) Guide!"
 slug: 'tutorial/onboarding/architecture-guide/bdm-guide'
 ---
 

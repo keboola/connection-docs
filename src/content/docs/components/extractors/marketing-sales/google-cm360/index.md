@@ -1,5 +1,6 @@
 ---
 title: Google Campaign Manager 360
+description: Google Campaign Manager 360 orchestrates digital advertising campaigns, offering precise ad placements across multiple channels.
 slug: 'components/extractors/marketing-sales/google-cm360'
 ---
 

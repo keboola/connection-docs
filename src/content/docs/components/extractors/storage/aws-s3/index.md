@@ -1,5 +1,6 @@
 ---
 title: AWS S3
+description: This data source connector loads a single or multiple CSV files from a single or multiple AWS S3 buckets and stores them in multiple tables in Keboola Storage.
 slug: 'components/extractors/storage/aws-s3'
 redirect_from:
     - /extractors/other/aws-s3/

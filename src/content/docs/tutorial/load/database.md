@@ -1,5 +1,6 @@
 ---
 title: Loading Data from Database
+description: So far, you have learned to load data into Keboola manually and via a Google Sheets data source connector.
 slug: 'tutorial/load/database'
 ---
 

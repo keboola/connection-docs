@@ -1,5 +1,6 @@
 ---
 title: Sync Action UI Elements Examples
+description: Some UI elements use sync actions to get some values dynamically from the component code. This section provides a list of the elements currently supported.
 slug: 'extend/component/ui-options/configuration-schema/sync-action-examples'
 
 ---

@@ -1,5 +1,6 @@
 ---
 title: PostgreSQL
+description: This data destination connector sends data to a PostgreSQL database.
 slug: 'components/writers/database/postgresql'
 redirect_from:
     - /writers/database/postgresql/

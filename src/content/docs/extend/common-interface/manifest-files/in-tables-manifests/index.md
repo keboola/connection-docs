@@ -1,5 +1,6 @@
 ---
 title: /data/in/tables manifests
+description: An input table manifest stores metadata about a downloaded table from Storage Tables to the component’s working directory.
 slug: 'extend/common-interface/manifest-files/in-tables-manifests'
 ---
 

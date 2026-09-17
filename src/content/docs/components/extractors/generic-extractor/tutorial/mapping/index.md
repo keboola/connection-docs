@@ -1,5 +1,6 @@
 ---
 title: Mapping Tutorial
+description: "In the previous part of the tutorial, you extracted the content of a MailChimp campaign. Now, it's time to clean up the response."
 slug: 'components/extractors/generic-extractor/tutorial/mapping'
 redirect_from:
     - /extend/generic-extractor/tutorial/mapping/

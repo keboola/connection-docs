@@ -1,5 +1,6 @@
 ---
 title: Basic Configuration
+description: Before configuring Generic Extractor, you should have a basic understanding of REST API and JSON format.
 slug: 'components/extractors/generic-extractor/tutorial/basic'
 redirect_from:
     - /extend/generic-extractor/tutorial/basic/

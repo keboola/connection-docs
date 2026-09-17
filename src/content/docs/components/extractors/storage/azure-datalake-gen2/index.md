@@ -1,5 +1,6 @@
 ---
 title: Azure Datalake Gen 2
+description: This data source connector loads a single or multiple CSV files from a filesystem in Azure Datalake Gen2 and stores them in tables in Keboola Storage.
 slug: 'components/extractors/storage/azure-datalake-gen2'
 redirect_from:
     - /extractors/other/azure-datalake-gen2/

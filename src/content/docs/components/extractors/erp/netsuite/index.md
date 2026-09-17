@@ -1,5 +1,6 @@
 ---
 title: NetSuite
+description: The data source for NetSuite enables users to download data from NetSuite using the SuiteAnalytics Connect Service.
 slug: 'components/extractors/erp/netsuite'
 ---
 

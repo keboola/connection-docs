@@ -1,5 +1,6 @@
 ---
 title: Slack
+description: The Slack data source connector uses the Slack API to fetch data from Slack and to bring it to Keboola.
 slug: 'components/extractors/communication/slack'
 redirect_from:
     - /extractors/communication/slack/

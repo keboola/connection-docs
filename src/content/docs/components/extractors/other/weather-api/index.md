@@ -1,5 +1,6 @@
 ---
 title: Weather API
+description: Weather API is a free service that offers information on forecasted, real-time, and historical weather, including marine weather.
 slug: 'components/extractors/other/weather-api'
 ---
 

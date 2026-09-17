@@ -1,5 +1,6 @@
 ---
 title: Project Limits
+description: Each Keboola standard project has two kinds of limits.
 slug: 'management/project/limits'
 description: Business and platform limits of a Keboola project - time credits (PPU) per job type, storage size, and platform quotas.
 redirect_from:

@@ -1,5 +1,6 @@
 ---
 title: Relational Sync Data Source Connectors for SQL Databases
+description: Each data source connector (extractor) from an SQL database allows you to extract data from selected tables or results from arbitrary SQL queries.
 slug: 'components/extractors/database/sqldb'
 redirect_from:
     - /extractors/database/sqldb/

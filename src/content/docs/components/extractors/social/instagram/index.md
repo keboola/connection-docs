@@ -1,5 +1,6 @@
 ---
 title: Instagram
+description: 'Extract Instagram media objects, comments, insights, and metrics through the Instagram Graph API.'
 slug: 'components/extractors/social/instagram'
 redirect_from:
     - /extractors/social/instagram/
