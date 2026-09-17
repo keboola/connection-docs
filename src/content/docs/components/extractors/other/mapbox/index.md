@@ -50,7 +50,7 @@ For more information on the Matrix API, see the official [Matrix API documentati
 | Parameter | Description |
 |---|---|
 | Routing profile | Profile for calculating duration or distance |
-| Source coordinates columns | Names of columns with in the input table with [decimal degree](https://en.wikipedia.org/wiki/Decimal_degrees) coordinates |
+| Source coordinates columns | Names of columns in the input table with [decimal degree](https://en.wikipedia.org/wiki/Decimal_degrees) coordinates |
 | Destination coordinates column | Column containing up to 24 longitude, latitude coordinates separated by semicolons, e.g., 14.538, 50.053; 13.538, 49.053 |
 | Annotations | Choose duration, distance, or both |
 | Destination table name (optional) | Name of the output table, defaults to configuration ID + endpoint name if not specified | 
