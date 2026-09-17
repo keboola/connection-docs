@@ -1,6 +1,7 @@
 ---
 title: Conditional Flows
 slug: 'flows'
+description: Build automated pipelines with Conditional Flows — phases and parallel tasks, IF/THEN conditions, variables, retries, delays, notifications, schedules, and run history.
 redirect_from:
     - /flows/conditional-flows/
 ---
@@ -13,7 +14,9 @@ Flows allow you to build automated data pipelines with conditional logic, branch
 
 ## Access Flows
 
-Navigate to **Conditional Flows > Create Flow**. You'll land directly in the Builder where you can start creating your first flow. Use the plus icon (+) to add different types of actions such as components, conditions, variables, notifications, and more — all of which are explained in detail later in this documentation.
+Navigate to **Conditional Flows > Create Flow**. You'll land directly in the **Builder** tab, where you can start creating your first flow; the other tabs — **All Runs**, **Schedules**, **Notifications**, and **Versions** — cover monitoring and automation and are explained later in this documentation.
+
+Use the plus icon (+) on the canvas to add a task to a phase. The **Add Task** menu offers three task types: **Component**, **Notification**, and **Variable**. Conditions are not tasks — they control which phase runs next and are configured on the transitions between phases. <!-- TODO(human-review): confirm how conditions are added in the Builder (on the phase transition?) — the Add Task menu does not include them. -->
 
 ## Build the Flow
 
@@ -23,10 +26,10 @@ Navigate to **Conditional Flows > Create Flow**. You'll land directly in the Bui
 - **Tasks within a phase** run in parallel.
 - **After all tasks in a phase complete**, based on conditions it is determined which phase will be executed next.
 - You can define **multiple condition rules** - only the first matched condition is executed.
-- **How to end a flow:** You can stop a flow at any point using the End Flow option in the ELSE path of a conditional condition. This is especially useful when none of your IF conditions are met and you want to avoid continuing to another phase.
+- **How to end a flow:** You can stop a flow at any point using the End Flow option in the ELSE path of a conditional condition. This is especially useful when none of your IF conditions are met and you want to avoid continuing to another phase. <!-- TODO(human-review): confirm the "End Flow in the ELSE path" mechanism and its exact UI label. -->
 
 :::caution
-If too many tasks are scheduled in a single phase, you may exceed the available [Storage job](/storage/jobs/) slots, causing delays in your flow's execution. Limiting the number of concurrent component jobs to 10 is recommended. The Keboola Support team can help you adjust parallel limits.
+If too many tasks are scheduled in a single phase, you may exceed the available [Storage job](/storage/jobs/) slots, causing delays in your flow's execution. Limiting the number of concurrent component jobs to 10 is recommended. The Keboola Support team can help you adjust parallel limits. <!-- TODO(human-review): confirm the 10-parallel Storage-job guidance and default cap. -->
 :::
 
 ### Execute Tasks in Parallel
@@ -69,6 +72,9 @@ Control the flow of execution based on conditions like:
 - **Duration of Task** - condition to trigger actions depending on how long a task runs. This is useful for detecting anomalies (e.g., unusually short or long runtimes).
 
 Each of these can be evaluated for a single task, a whole phase, all or any task in a phase, or any task in the whole flow - see [What the Condition Compares](#3-what-the-condition-compares-subject).
+
+<!-- TODO(human-review): confirm this condition-type list (status / variable values / date-time / output-table count / task duration) against the current condition builder. -->
+
 
 Evaluation proceeds from top to bottom, and once a condition is true, the remaining conditions are ignored - even if others would also evaluate to be true.
 
@@ -160,16 +166,15 @@ Task ids that no longer belong to the phase (for example a deleted or disabled t
 
 ## Variables
 
-A flow can define its own variables — static, or computed at run time from a task result — and use
-them in conditions or pass them into the components it runs. See
-[Variables](/components/variables/) for both flow variables and the configuration variables they can
-drive.
+Variables let you store and reuse values — like dates, task results, or custom inputs — throughout your flow. Add one in a phase with the **+** icon → **Variable**; a variable holds either a **Static Value** (fixed text or number) or a **Dynamic Value** computed at run time from a task result, a phase, or a built-in function. Later conditions can then compare the variable's value, and component jobs receive flow variables that match their own variable names.
+
+For the full guide — static and dynamic values, JMESPath aggregations, the `COUNT` and `DATE` functions, and how variables reach component jobs — see [Flow Variables](/flows/variables/). For the configuration variables that flow variables can drive, see [Variables](/components/variables/).
 
 ## Retry
 
 You can retry failed tasks automatically and optionally choose to retry based on specific failure messages.
 
-By default, the system retries up to 3 times with a 10-second delay between attempts. Both the number of attempts and the delay can be customized to fit your workflow.
+By default, the system retries up to 3 times with a 10-second delay between attempts. Both the number of attempts and the delay can be customized to fit your workflow. <!-- TODO(human-review): confirm the retry defaults (3 attempts, 10-second delay). -->
 
 To access the retry settings, click on task to open the configuration.
 
