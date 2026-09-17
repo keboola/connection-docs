@@ -12,10 +12,6 @@ It's just as comfortable in your own hands: one tool for every project from the 
 
 <!-- Source: keboola/cli README + docs. Mirrored into help docs; TODO: repo→docs sync mechanism (Jordan). -->
 
-:::caution[Beta]
-kbagent is in beta. Commands and output formats may still change.
-:::
-
 :::note
 kbagent is a different tool from the legacy **Keboola as Code** CLI (`kbc`) documented on [developers.keboola.com/cli](https://developers.keboola.com/cli/). That tool is still supported for now; new command-line work should use kbagent.
 <!-- TODO(human-review, Jordan): confirm the legacy Keboola-as-Code CLI deprecation timeline and where to state it. -->
@@ -35,12 +31,21 @@ kbagent is a different tool from the legacy **Keboola as Code** CLI (`kbc`) docu
 
 ## In one minute
 
+Install it (recommended on macOS/Linux; Windows has its own path under [Get started](/cli/getting-started/)):
+
 ```bash
-# install (recommended on macOS/Linux; Windows → Get started)
 curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
-# connect a project
-kbagent project add --project prod --url https://connection.keboola.com --token YOUR_TOKEN
-# explore
+```
+
+Connect your projects. A browser opens, and you finish the sign-in there:
+
+```bash
+kbagent auth login --stack https://connection.keboola.com --register-projects
+```
+
+Then explore:
+
+```bash
 kbagent doctor
 kbagent job list --limit 5
 kbagent search "customer_id"
@@ -50,7 +55,7 @@ A minute in, `doctor` has confirmed the connection, you've seen your last five j
 
 ## Why a CLI (and not just the UI)?
 
-The UI is great for one project, one change at a time. kbagent is for the things the UI makes hard: doing the same thing across **many projects at once**, putting your configuration **under version control**, wiring Keboola into **CI/CD**, and letting an **AI agent** do the work while you keep approval of anything destructive. It talks only to your Keboola stacks, stores its connections locally, and never needs a browser.
+The UI is great for one project, one change at a time. kbagent is for the things the UI makes hard: doing the same thing across **many projects at once**, putting your configuration **under version control**, wiring Keboola into **CI/CD**, and letting an **AI agent** do the work while you keep approval of anything destructive. It talks only to your Keboola stacks and stores its connections locally. Signing in opens a browser once; after that every command runs in your terminal, and a Storage API token skips the browser entirely.
 
 ## This section
 
@@ -59,7 +64,7 @@ The pages read in order, from first run to deep reference:
 1. **[Get started](/cli/getting-started/)** — install (macOS / Linux / Windows), connect a project, run your first commands.
 2. **[How it works](/cli/concepts/)** — the connection model, multi-project, dev branches, GitOps sync, and the safety firewall.
 3. **[How-to guides](/cli/workflows/)** — task recipes: onboard an org, dev-branch workflow, GitOps sync, audits, CI/CD tokens, encryption.
-4. **[Use with AI agents](/cli/for-agents/)** — the Claude Code plugin, `kbagent context`, and sandboxing an agent.
+4. **[Use with AI agents](/cli/for-agents/)** — the kbagent plugin and its setup in each AI client, `kbagent context`, and sandboxing an agent.
 5. **[Command reference](/cli/commands/)** — every command group, global flags, JSON output, and error codes.
 6. **[Web UI](/cli/web-ui/)** — the optional local browser dashboard.
 

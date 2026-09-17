@@ -1183,6 +1183,13 @@ nav.sidebar {
   background: var(--bg-2);
 }
 
+/* Standalone screenshots need more room than a run of text. Scoped to images that
+   are alone in their paragraph, so table icons (in <td>) and inline images are
+   untouched. */
+.sl-markdown-content p:has(> starlight-image-zoom-zoomable:only-child):not(:where(.not-content *)) {
+  margin-block: 2rem;
+}
+
 /* Mobile / tablet */
 @media (max-width: 50rem) {
   .b-title-icon { width: 32px; height: 32px; font-size: 18px; }
