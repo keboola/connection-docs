@@ -261,19 +261,16 @@ If you receive the error `The stub received bad data.`, you have to modify the `
 This is a known [bug in Docker](https://github.com/docker/for-win/issues/1306), see [the workaround](https://github.com/Azure/azure-cli/issues/4843).
 
 ## Running Transformations
-Both R and Python transformations are implemented as Docker components. They can be run
-locally as well. Use the [Run Job API call in debug mode](/extend/component/running/#preparing-data-folder) to obtain the data directory.
-In the [API call](https://api.keboola.com/?service=job-queue#post-/jobs), specify the full
-configuration (using the `configData` node). See [examples](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb)
-for both R and Python transformations.
 
-To run R transformations, use:
+R and Python transformations are implemented as components, so everything on this page applies
+to them too: use the [Run Job API call in debug mode](/extend/component/running/#preparing-data-folder)
+to obtain the data directory, and specify the full configuration through the `configData` node of
+the [Run Job API call](https://api.keboola.com/?service=job-queue#post-/jobs).
 
-    docker run --volume=/user/johndoe/data/:/data --memory=4000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-123 [quay.io/keboola/r-transformation](https://quay.io/repository/keboola/r-transformation):latest
-
-To run [Python transformations](https://quay.io/repository/keboola/python-transformation), use:
-
-    docker run --volume=/user/johndoe/data/:/data --memory=4000m --net=bridge -e KBC_RUNID=123456789 -e KBC_PROJECTID=123 -e KBC_DATADIR=/data/ -e KBC_CONFIGID=test-123 quay.io/keboola/python-transformation:latest
-
-The transformation will run automatically and produce results. If you want to get into
-the container interactively, use the `--entrypoint` parameter.
+<!-- VERIFY(owner): the two `docker run` recipes that stood here pulled
+     quay.io/keboola/{r,python}-transformation:latest. Verified 2026-09-02: both images were last
+     tagged in 2021 (python 1.6.1, 23 Aug 2021; r 2.1.0, 09 Sep 2021), keboola/python-transformation-v2
+     was archived on 2026-08-06, and no public successor repository is reachable — so a reader
+     following them would have pulled a five-year-old image that is not what the platform runs.
+     Removed rather than updated because the current image coordinates are not public.
+     Restore with live coordinates if they should be documented. -->

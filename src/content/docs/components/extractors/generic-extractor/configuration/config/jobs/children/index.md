@@ -244,7 +244,7 @@ user__user-id:
 |234|Jane Doe|St Mary Mead|UK|High Street|234|
 
 Notice that the table representing child resources contains all the responses
-merged into a single table; the [usual merging rules](/components/extractors/generic-extractor/configuration/config/jobs/#merging-response) apply.
+merged into a single table; the [usual merging rules](/components/extractors/generic-extractor/configuration/config/jobs/#merging-responses) apply.
 
 Also notice that a new column — `parent_id` was added, containing the **placeholder value** used
 to retrieve the resource. The `parent_id` column is not always named `parent_id`.
