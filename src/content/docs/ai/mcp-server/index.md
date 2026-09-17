@@ -249,7 +249,7 @@ Don't worry about remembering command names — your AI client handles that. Jus
 - **Components & Transformations** – Create, edit, and launch them with natural language.  
 - **Storage** – Browse, edit, and document buckets, tables, and columns.  
 - **SQL** – Run and manage SQL queries.  
-- **Semantic layer** – Explore the project's semantic models and validate queries against them.  
+- **Semantic layer** – Explore the project's semantic models and validate queries against them. See [Semantic Layer](/ai/semantic-layer/).  
 - **Jobs** – Start, monitor, and debug execution flows.  
 - **Flows** – Create and manage flows (including conditional flows) that orchestrate your components.  
 - **Data Apps** – Create, deploy, and manage Streamlit and Python/JS data apps.  
@@ -301,13 +301,13 @@ The following tools are classified as read-only (they do not modify data). The l
 |----------|-------|
 | Components | `get_configs`, `get_components`, `get_config_examples`, `run_sync_action` |
 | Flows | `get_flows`, `get_flow_examples`, `get_flow_schema` |
-| Storage | `get_buckets`, `get_tables` |
+| Storage | `get_buckets`, `get_shared_buckets`, `get_tables` |
 | SQL | `query_data` |
 | Semantic | `get_semantic_context`, `get_semantic_schema`, `search_semantic_context`, `validate_semantic_query` |
 | Data Apps | `get_data_apps` |
 | Jobs | `get_jobs` |
 | Search | `search`, `find_component_id` |
-| Project | `get_project_info` |
+| Project | `get_accessible_projects`, `get_project_info`, `set_project_scope` |
 | Documentation | `docs_query` |
 
 ### Examples
@@ -436,7 +436,7 @@ The primary way to run the server locally without Docker is by using `uv` or `uv
    * `KBC_STORAGE_API_URL`: Your Keboola instance API URL (e.g., `https://connection.keboola.com` or `https://connection.YOUR_REGION.keboola.com`).
    * `KBC_BRANCH_ID` (optional): a development branch ID to scope operations to; defaults to the production branch.
 
-   Refer to the [Keboola Tokens](/management/project/tokens/) and [Keboola workspace manipulation](/getting-started/transform/workspace/) for detailed instructions on obtaining these values.
+   Refer to the [Keboola Tokens](/management/project/tokens/) and [Keboola workspace manipulation](/workspace/create/) for detailed instructions on obtaining these values.
 
    **1.1. Additional Setup for BigQuery Users**  
    If your Keboola project uses BigQuery as its backend, you will also need to set up the `GOOGLE_APPLICATION_CREDENTIALS` environment variable. This variable should point to the JSON file containing your Google Cloud service account key that has the necessary permissions to access your BigQuery data.
@@ -579,7 +579,7 @@ For detailed instructions and SDKs for building your own MCP client, refer to th
 
 ## Advanced Setup Options
 These methods are for developers or specific use cases (e.g., testing, contributing to the MCP server).
-Prefer a terminal or want to give an agent sandboxed, multi-project control? See the [kbagent CLI](/cli/) — it can also call MCP tools via `kbagent tool`. For dev environments or contributing to the MCP Server, check out the [MCP GitHub repo](https://github.com/keboola/mcp-server).
+Prefer a terminal or want to give an agent sandboxed, multi-project control? See the [kbagent CLI](/cli/). For dev environments or contributing to the MCP Server, check out the [MCP GitHub repo](https://github.com/keboola/mcp-server).
 
 
 ## Support and Feedback

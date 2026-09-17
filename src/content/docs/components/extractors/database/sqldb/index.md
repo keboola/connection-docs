@@ -3,6 +3,8 @@ title: Relational Sync Data Source Connectors for SQL Databases
 slug: 'components/extractors/database/sqldb'
 redirect_from:
     - /extractors/database/sqldb/
+    - /tutorial/load/database/
+    - /getting-started/load/database/
 
 ---
 
@@ -21,7 +23,7 @@ in the section [Server Specific Notes](#server-specific-notes).
 Before you start configuring your SQL data source connector, consider [setting up an SSH tunnel](/components/extractors/database/#connecting-to-database) to secure your connection to your internal database and 
 avoid exposing your database server to the Internet.
 
-***Note:** Our [tutorial](/getting-started/load/database/) also includes a quick introduction to extracting data from the Snowflake Database Server.*
+***Note:** No database of your own to point this at? [Try it with our sample database](#try-it-with-our-sample-database) below.*
 
 ## Initial Setup
 After you [create a configuration](/components/#creating-component-configuration), the first step is to configure database credentials using the **Set Up Credentials First** button:
@@ -43,6 +45,39 @@ Each table may also be extracted individually or disabled so that it is not extr
 Existing credentials can be changed using the **Database Credentials** link.
 
 ![Screenshot - Table list](/components/extractors/database/sqldb/sqldb-4.png)
+
+### Try it with our sample database
+
+You do not need database credentials from anyone to walk the setup above — Keboola hosts a sample
+Snowflake database for exactly this. Create a **Snowflake** data source configuration and enter:
+
+| Field | Value |
+|---|---|
+| Host Name | `kebooladev.snowflakecomputing.com` |
+| Username, Password, Database, Schema | `HELP_TUTORIAL` |
+| Warehouse | `DEV` |
+
+Click **Test Connection and Load Available Sources**, then select the `OPPORTUNITY`, `ACCOUNT` and
+`USER` tables and click **Save and Run Configuration**. Running the connector creates a background
+job which connects to the database, executes the queries, and stores the results as three new
+tables in [Storage](/storage/). The procedure is identical for every database connector Keboola
+supports, which is the reason to walk it once by hand.
+
+:::tip[Do it with Kai]
+Database connectors are configured the same way as any other data source
+([Integration Setup](/kai/use-cases/#integration-setup)). Open **Kai Agent** in the top bar and say
+what you want connected, not what your credentials are:
+
+```text
+Set up a Snowflake data source connector against our sample database and load the OPPORTUNITY,
+ACCOUNT and USER tables into Storage.
+```
+
+**Never paste a password into the chat.** Kai prompts you for credentials through a secure form
+instead — that is its documented behavior, and
+[Kai's own guidance](/kai/getting-started/#tips-for-new-users) says the same. The values to type
+into that form are the sample ones above.
+:::
 
 ## Modify Configuration
 If you want to modify the table extraction setup, click on the corresponding row. You'll get to the table detail view:

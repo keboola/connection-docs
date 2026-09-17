@@ -20,7 +20,7 @@ It is a straightforward approach suitable for most use cases, allowing for [time
 All connectors are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and 
 offer an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). 
 
-Basic configuration is covered in the [Tutorial - Loading Data from Database](/getting-started/load/database/). 
+Basic configuration is covered in [Initial Setup](/components/extractors/database/sqldb/#initial-setup). 
 
 ## MySQL Log-Based CDC
 

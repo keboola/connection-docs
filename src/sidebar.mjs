@@ -41,29 +41,6 @@ export const sidebar = [
       { slug: "getting-started/automate" },
       { slug: "getting-started/app" },
       { slug: "getting-started/next-steps" },
-      {
-        label: "Going Further",
-        collapsed: true,
-        items: [
-          { slug: "getting-started/load/googlesheets" },
-          { slug: "getting-started/load/database" },
-          { slug: "getting-started/transform/workspace" },
-          { slug: "getting-started/ad-hoc" },
-          {
-            label: "Development Branches",
-            collapsed: true,
-            items: [
-              { label: "Overview", slug: "getting-started/branches" },
-              { slug: "getting-started/branches/prepare-tables" },
-              { slug: "getting-started/branches/prepare-files" },
-              { slug: "getting-started/branches/tables-in-branch" },
-              { slug: "getting-started/branches/files-in-branch" },
-              { slug: "getting-started/branches/project-diff" },
-              { slug: "getting-started/branches/merge-to-production" },
-            ],
-          },
-        ],
-      },
     ],
   },
   {
@@ -481,6 +458,19 @@ export const sidebar = [
         items: [
           { label: "Overview", slug: "components/branches" },
           { slug: "components/branches/merge-requests" },
+          {
+            label: "Branches Tutorial",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "components/branches/tutorial" },
+              { slug: "components/branches/tutorial/prepare-tables" },
+              { slug: "components/branches/tutorial/prepare-files" },
+              { slug: "components/branches/tutorial/tables-in-branch" },
+              { slug: "components/branches/tutorial/files-in-branch" },
+              { slug: "components/branches/tutorial/project-diff" },
+              { slug: "components/branches/tutorial/merge-to-production" },
+            ],
+          },
         ],
       },
       { slug: "components/ip-addresses" },
@@ -608,6 +598,8 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "workspace" },
       { slug: "workspace/snowflake-workspaces-access-changes" },
+      { slug: "workspace/create" },
+      { slug: "workspace/ad-hoc-analysis" },
       { slug: "workspace/sql-editor" },
       {
         label: "Keboola JDBC Driver",
@@ -665,6 +657,7 @@ export const sidebar = [
       { label: "Overview", slug: "ai" },
       { slug: "ai/ai-kit" },
       { slug: "ai/mcp-server" },
+      { slug: "ai/semantic-layer" },
     ],
   },
   {

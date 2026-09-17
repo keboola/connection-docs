@@ -111,7 +111,7 @@ Two things. The second one is worth settling now rather than halfway through ste
 
   Not having Kai does not block the build: every step's clicking path is written out in full.
   The one place you will miss it is step 5's closing question, which only Kai answers — you can
-  run the same aggregate in a [workspace](/getting-started/transform/workspace/) instead.
+  run the same aggregate in a [workspace](/workspace/create/) instead.
 
 ## If it goes wrong
 

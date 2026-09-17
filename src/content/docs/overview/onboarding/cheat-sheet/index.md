@@ -133,7 +133,7 @@ Listing columns enhances your query's safety and readability, ensuring you're cl
 
 :::tip[Safe Development Practices]
 Use development branches for any changes or new additions to ensure a controlled and safe development environment. This method keeps your work organized and
-secure. For more on development branches, see this [guide](/getting-started/branches/).
+secure. For more on development branches, see this [guide](/components/branches/tutorial/).
 :::
 
 ## Automating Your Flow
