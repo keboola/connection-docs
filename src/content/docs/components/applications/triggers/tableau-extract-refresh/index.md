@@ -1,5 +1,6 @@
 ---
 title: Tableau Extract Refresh Trigger
+description: Trigger Tableau extract refresh tasks for data sources and workbooks from a Keboola flow, including poll mode and the one-session-per-token limit.
 slug: 'components/applications/triggers/tableau-extract-refresh'
 ---
 
@@ -99,7 +100,9 @@ Tableau allows only one active session per Personal Access Token. From the [Tabl
 
 > Users can't request concurrent Tableau Cloud sessions with a PAT. Signing in again with the same PAT, whether at the same site or a different site, will terminate the previous session and result in an authentication error.
 
-If two configurations share one PAT and their runs overlap, the second sign-in terminates the first job's session. That first job has already triggered its extract refresh, so the refresh itself proceeds normally in Tableau and nothing there looks wrong. Only the Keboola job fails, on its next status check:
+If two configurations share one PAT and their runs overlap, the second sign-in terminates the first job's session. What that costs the first job depends on when it happens.
+
+If every refresh had already been triggered, those refreshes proceed normally in Tableau and nothing there looks wrong. Only the Keboola job fails, on its next status check:
 
 ```
 Failed to get job status for 'My Datasource': Failed Sign In Error:
@@ -107,9 +110,11 @@ Failed to get job status for 'My Datasource': Failed Sign In Error:
 		Invalid authentication credentials were provided.
 ```
 
-With **Poll mode** set to Yes, the component logs this as a warning, waits 60 seconds and checks again using the same terminated session. It does not sign in again, so the job normally keeps polling until the platform stops it at the one-hour container timeout. The full hour counts as job runtime and is billed as [time credits](/management/project/limits/#project-power--time-credits). Less often the same terminated session surfaces straight away, as a `Tableau authentication failed` job error a few minutes in.
+With **Poll mode** set to Yes, the component logs this as a warning, waits 60 seconds and checks again using the same terminated session. It does not sign in again, so the job keeps polling until the platform stops it at the default one-hour run timeout. The full hour counts as job runtime and is billed as [time credits](/management/project/limits/#project-power--time-credits).
 
-A `401002` on its own does not prove a token collision, since Tableau also returns it for credentials that are wrong or expired. It points to one when the job had already signed in successfully and only started failing partway through.
+If the session is lost earlier, while the component is still validating targets or working through them one at a time, the targets it has not reached yet never receive a refresh request. The job fails with `Tableau authentication failed` within a few minutes, and only some of the extracts refresh, or none of them do.
+
+A `401002` on its own does not prove a token collision. Tableau returns it for a token that is wrong or expired, and it has also turned out to be a credential problem on the Tableau side, such as the data source's own database login. It points to a collision when the job had already signed in successfully and only started failing partway through.
 
 ### Keeping configurations apart
 
