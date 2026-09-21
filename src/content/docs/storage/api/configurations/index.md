@@ -271,7 +271,7 @@ job, the actual executions are still completely isolated. I.e., there is no way 
 the second row starts, and the inputs for the second row are read only after the first row finishes processing.
 
 What is considered 'first' and 'second' -- i.e. the order of rows -- is defined by the order of items in the `rows` array.
-See [below](#modifying-a-configuration) for an example of modifying the row order.
+See [below](#modifying-configuration) for an example of modifying the row order.
 
 Theoretically, configuration rows are supported for every component as long as the effective configuration matches what
 the component expects. Configuration rows can be used to split the configuration into a common part (typically credentials) and an
@@ -305,7 +305,7 @@ Here, the most common operations done with configurations are described in examp
 To obtain configuration details, use the [List Configs call](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/components/-componentId-/configs),
 which will return all the configuration details. This means
 
-- the configuration itself (`configuration`) --- [section on configuration](#modifying-a-configuration) follows;
+- the configuration itself (`configuration`) --- [section on configuration](#modifying-configuration) follows;
 - configuration rows (`rows`) --- additional data of the configuration; and
 - configuration state (`state`) --- [component state](/extend/common-interface/config-file/#state-file).
 
@@ -427,7 +427,7 @@ configuration row is modified to:
 }
 ```
 
-The rules for updating a configuration row are the same as for [updating a configuration](#modifying-a-configuration). Also note that
+The rules for updating a configuration row are the same as for [updating a configuration](#modifying-configuration). Also note that
 a configuration row is never evaluated alone, it is always merged with the root `configuration`. If the same properties are defined
 in the root `configuration` and row `configuration`, the values from the row are used. There is also an
 [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb) of how to reset the row
