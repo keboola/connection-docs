@@ -60,8 +60,9 @@ tables from the input mapping are taken, modified, and produced into the tables 
 
 A backend is the engine running the transformation script. It is a database server
 ([Snowflake](https://www.snowflake.com/),
-[BigQuery](https://cloud.google.com/bigquery),
-[DuckDB](https://duckdb.org/)),
+[BigQuery](https://cloud.google.com/bigquery)),
+an in-process database engine
+([DuckDB](https://duckdb.org/)),
 or a language interpreter 
 ([Python](https://www.python.org/about/),
 [R](https://www.r-project.org/about.html)).

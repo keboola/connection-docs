@@ -94,6 +94,8 @@ To speed it up, you can change the backend size in the configuration. Python tra
 ![Screenshot - Backend size configuration](/transformations/python-plain/backend-size.png)
 
 Scaling up the backend size allocates more resources to speed up your transformation, which impacts [time credits consumption](/management/project/limits/#project-power--time-credits).
+Python transformations run on the data science backend, so they are billed at the
+**Data Science job / workspace** rates, not the SQL job rates.
 
 ***Note:** Dynamic backends are not available to you if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).*
 
