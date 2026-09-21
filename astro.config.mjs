@@ -59,13 +59,19 @@ export default defineConfig({
         SocialIcons: './src/components/SocialIcons.astro',
       },
       pagination: true,
-      // Feeds the "Updated <date>" line that PageTitle.astro already renders.
-      // Starlight reads it from each file's last commit, so the build needs
-      // real git history — see fetch-depth in .github/workflows/*.yml. Under
-      // a shallow clone the lookup throws, Starlight catches it and the page
-      // renders no date, so the symptom is a MISSING "Updated" line on most
-      // pages — not one shared date across them.
-      lastUpdated: true,
+      // lastUpdated is deliberately OFF. PageTitle.astro renders an
+      // "Updated <date>" line when Starlight supplies one, and Starlight takes
+      // that date from each file's last commit — so it needs real git history.
+      // Turning it on was tried and reverted: the production build on Vercel
+      // clones shallow, Starlight's getLastUpdated catches the lookup error and
+      // returns undefined, and the line renders on no page at all. Verified on
+      // the preview for PR #1132.
+      //
+      // To switch it on, the build must first have full history. Vercel has no
+      // documented clone-depth setting, so that means a `git fetch --unshallow`
+      // ahead of `astro build` (vercel.json `buildCommand`, or the project's
+      // build command) — confirm it on a preview before re-adding this, and
+      // restore `fetch-depth: 0` in .github/workflows/*.yml at the same time.
       editLink: {
         baseUrl: 'https://github.com/keboola/connection-docs/edit/main/',
       },
