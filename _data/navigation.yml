@@ -4,6 +4,9 @@ items:
 
   - url: /overview/
     title: Keboola Overview
+    items:
+      - url: /overview/api/
+        title: Our APIs
 
   - url: /tutorial/
     title: Getting Started Tutorial
@@ -694,14 +697,17 @@ items:
             title: API Importer
           - url: /storage/api/tde-exporter/
             title: TDE Exporter
-          - url: /storage/api/clients/python-client/
-            title: Python client
-          - url: /storage/api/clients/r-client/
-            title: R client
-          - url: /storage/api/clients/php-client/
-            title: PHP client
-          - url: /storage/api/clients/docker-cli/
-            title: Docker CLI client
+          - url: /storage/api/clients/
+            title: API Clients
+            items:
+              - url: /storage/api/clients/python-client/
+                title: Python client
+              - url: /storage/api/clients/r-client/
+                title: R client
+              - url: /storage/api/clients/php-client/
+                title: PHP client
+              - url: /storage/api/clients/docker-cli/
+                title: Docker CLI client
 
   - url: /transformations/
     title: Transformations
@@ -955,6 +961,10 @@ items:
             title: Development branches
       - url: /extend/job-queue/
         title: Job Queue
+      - url: /extend/jobs/
+        title: Component Jobs
+      - url: /extend/encryption/
+        title: Encryption
       - url: /extend/publish/
         title: Publishing Component
         items:
