@@ -266,15 +266,16 @@ simply copy&paste it into a [Transformation](/getting-started/transform/).
 
 The above tutorial is done in the [Python language](https://www.python.org/) using the
 [Jupyter Notebook](https://jupyter.org/). The same can be done in the
-[R language](https://www.r-project.org/) using [RStudio](https://posit.co/products/open-source/rstudio/).
-For more information about workspaces (including disk and memory limits), see the
-[corresponding documentation](/workspace/).
+[R language](https://www.r-project.org/): [Workspaces](/workspace/) covers which environment each
+scripting language gets, along with the disk and memory limits.
 
-<!-- VERIFY(owner): is RStudio still an offered workspace type? workspace/index.md:24-26 gives
-JupyterLab with the matching kernel for both Python and R, and "rstudio" otherwise survives only as
-a sandbox-type enum — in _data/telemetry_tables.yml and, rendered on a published page, in
-components/extractors/other/telemetry-data/telemetry-data.md. If it is retired, this pairing needs
-rewriting as a whole rather than swapping the R half. -->
+<!-- The R half of this pairing used to name RStudio. /workspace/ is the page that owns workspace
+types and it says scripting languages get JupyterLab with the matching kernel, naming no separate
+R environment, so this sentence no longer names a tool and points there instead. "rstudio" survives
+elsewhere only as a sandbox-type enum value, in _data/telemetry_tables.yml and on the rendered
+telemetry-data page, which is a data dictionary rather than a statement about what the UI offers.
+Whether RStudio is retired outright is still the workspace owner's call; this page no longer
+depends on the answer. -->
 
 ## Final Note
 This is the end of our stroll around Keboola. On our walk, we missed quite a few things:
