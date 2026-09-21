@@ -51,7 +51,7 @@ function findMarkdownFiles(dir, files = []) {
  * Components are matched on an uppercase initial, the JSX convention, so
  * lowercase HTML written inline in a page is left alone.
  */
-function stripMdx(body) {
+export function stripMdx(body) {
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
   const withComments = withoutImports.replace(
     /\{\/\*([\s\S]*?)\*\/\}/g,
@@ -96,7 +96,7 @@ function stripMdx(body) {
  * Parse YAML frontmatter from a markdown file's content.
  * Extracts only scalar fields (we need `slug` and `title`).
  */
-function parseFrontmatter(content) {
+export function parseFrontmatter(content) {
   const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) return {};
 
@@ -114,7 +114,7 @@ function parseFrontmatter(content) {
 /**
  * Strip the frontmatter block from a markdown file's content.
  */
-function stripFrontmatter(content) {
+export function stripFrontmatter(content) {
   return content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
 }
 

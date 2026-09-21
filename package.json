@@ -10,7 +10,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "gen:sidebar": "node scripts/convert-nav.mjs",
-    "check:cli": "node scripts/check-cli-reference.mjs"
+    "check:cli": "node scripts/check-cli-reference.mjs",
+    "export:vault": "node scripts/export-vault.mjs --clean",
+    "chunk:docs": "node scripts/chunk-docs.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.2",

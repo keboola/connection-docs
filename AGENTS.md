@@ -16,6 +16,8 @@ npm install
 npm run dev        # dev server at http://localhost:4321 (hot reload)
 npm run build      # production build → dist/
 npm run gen:sidebar  # regenerate src/sidebar.mjs from _data/navigation.yml
+npm run export:vault # Obsidian vault of the docs → _graph/vault/ (gitignored)
+npm run chunk:docs   # embedding chunks → _graph/chunks.jsonl (gitignored)
 ```
 
 - Node.js 22+.
@@ -42,6 +44,9 @@ scripts/
   convert-nav.mjs # builds src/sidebar.mjs from _data/navigation.yml
   audit-phase2.mjs# read-only link/image/heading/table audit
   check-cli-reference.mjs  # CI gate: docs `kbagent` usage vs _data/cli/command-reference.md
+  export-vault.mjs # docs → Obsidian vault (wikilinks, nav parents, orphan report) into _graph/
+  chunk-docs.mjs  # docs → embedding-ready section chunks (jsonl/csv) into _graph/
+  lib/docs-corpus.mjs  # shared loader for the two above (pages + nav + link resolver)
   migrate.mjs, switchover.mjs  # legacy Jekyll→Astro migration — DO NOT RUN: no dry-run,
                       # no confirmation, and it deletes every page whose Jekyll source is
                       # gone from the repo root — which today is all of them
