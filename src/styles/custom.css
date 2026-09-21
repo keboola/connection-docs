@@ -71,7 +71,12 @@
 
   /* blue-500 on #fff is 3.27:1 — 15px body text needs 4.5:1 (WCAG 2.1 AA).
      blue-700 is 6.29:1. --link-hover must move too, or hover ends up LIGHTER
-     than the resting state: blue-600 is 4.53:1, blue-800 is 8.81:1. */
+     than the resting state: blue-600 is 4.53:1, blue-800 is 8.81:1.
+     --link is also used on the tinted aside backgrounds (.starlight-aside a),
+     so those were checked too rather than assuming the white-page number
+     carries: light note/tip/caution/danger = 5.62 / 5.86 / 5.74 / 5.11:1, and
+     dark (blue-450 over the 12% tints on #101114) = 5.91 / 5.68 / 5.67 / 6.42:1.
+     All pass AA; re-check these if a tint or either --link value moves. */
   --link: var(--kbc-blue-700);
   --link-hover: var(--kbc-blue-800);
 
@@ -120,10 +125,11 @@
      font-size is keyed to --sl-text-hN. Leaving these at Starlight's defaults
      (h2 = 35px) meant the wrapper and the heading disagreed, which is what
      mis-sized the anchor icon and its gap. Keep the two in sync.
-     h5 and --sl-text-2xl are deliberately NOT set: h5 has no element override
-     (wrapper and element already agree), and the only consumer of 2xl is
-     .link-title, handled explicitly in the Prev/Next rules below. */
-  --sl-text-h1: 32px;
+     h1, h5 and --sl-text-2xl are deliberately NOT set: neither h1 nor h5 has an
+     element override, so wrapper and element already agree and pinning the
+     token would only shrink body-level headings (Starlight's h1 is 35px/42px);
+     the only consumer of 2xl is .link-title, handled explicitly in the
+     Prev/Next rules below. */
   --sl-text-h2: 22px;
   --sl-text-h3: 16px;
   --sl-text-h4: 14px;
@@ -736,6 +742,14 @@ nav.sidebar {
 .sl-markdown-content .sl-heading-wrapper > a.sl-anchor-link {
   cursor: pointer;
   position: relative;   /* the toast anchors to the link, so it needs no JS positioning */
+}
+/* Starlight's @media (hover:hover) rule drops .sl-anchor-link to opacity 0
+   unless the wrapper is hovered or the link is focused, and opacity applies to
+   the subtree — so the toast living inside the link would blank out the moment
+   the pointer left the heading. AnchorCopy adds this class for the lifetime of
+   the toast. Unlayered, so it beats Starlight's layered rule. */
+.sl-markdown-content .sl-heading-wrapper > a.sl-anchor-link.kbc-anchor-pinned {
+  opacity: 1;
 }
 
 .kbc-copied {
@@ -2376,13 +2390,20 @@ nav.sidebar {
 
 /* ───────── Print ───────── */
 /* print.css ships `.print\:hidden { display: none }` inside @media print, but
-   Page.css loads after it and carries `.pagination-links { display: grid }` at
-   equal specificity — so the Prev/Next cards print anyway. The header and the
-   Kai button carry no print class at all. */
+   Page.css loads after it, so any rule in THIS file that sets `display` on a
+   tagged element wins on source order at equal specificity — that is how the
+   Prev/Next cards ended up printing. Restore the class rather than naming the
+   casualties: Starlight already tags .pagination-links, .sidebar,
+   .right-sidebar-container and the header's right group, and the next rule we
+   add would silently break one of them again. */
 @media print {
-  .pagination-links,
-  header.header,
-  .ak-header-kai {
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* The header carries no print class of its own (and neither does the Kai
+     button, which AskKaiDrawer injects inside it). */
+  header.header {
     display: none !important;
   }
 }

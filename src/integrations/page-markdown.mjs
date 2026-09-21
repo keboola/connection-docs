@@ -131,7 +131,7 @@ function buildLlmsTxt(site, siteTitle, pages) {
 
   const sections = new Map();
   for (const page of pages) {
-    const key = page.slug.split('/')[0] ?? '';
+    const key = page.slug.split('/')[0];
     if (!sections.has(key)) sections.set(key, []);
     sections.get(key).push(page);
   }
@@ -156,8 +156,9 @@ function buildLlmsTxt(site, siteTitle, pages) {
     lines.push('');
   }
 
+  // `pages` arrives sorted by slug, so each group is already in order.
   for (const key of [...sections.keys()].sort()) {
-    const group = sections.get(key).sort((a, b) => a.slug.localeCompare(b.slug));
+    const group = sections.get(key);
     lines.push(`## ${byTitle.get(key) ?? key}`, '');
     for (const p of group) lines.push(entry(p, url));
     lines.push('');
@@ -166,14 +167,21 @@ function buildLlmsTxt(site, siteTitle, pages) {
   return lines.join('\n');
 }
 
+/**
+ * One index line. The label is escaped because an unescaped `]` in a title
+ * closes the link early and spills the rest into the URL position; the
+ * description is flattened because the scalar frontmatter parser can hand back
+ * a value with stray whitespace, and a newline would end the entry mid-line.
+ */
 function entry(page, url) {
-  const suffix = page.description ? `: ${page.description}` : '';
-  return `- [${page.title}](${url(page.slug)})${suffix}`;
+  const label = String(page.title).replace(/([[\]])/g, '\\$1');
+  const description = page.description ? String(page.description).replace(/\s+/g, ' ').trim() : '';
+  const suffix = description ? `: ${description}` : '';
+  return `- [${label}](${url(page.slug)})${suffix}`;
 }
 
-export default function pageMarkdown() {
+export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' } = {}) {
   let site;
-  let siteTitle = 'Keboola User Documentation';
 
   return {
     name: 'page-markdown',
@@ -205,6 +213,16 @@ export default function pageMarkdown() {
           // canonical URL worth mirroring.
           if (fm.slug === undefined || fm.slug === '404') continue;
 
+          // Index before the collision guard below: a page that loses the race
+          // for its index.md is still published as HTML, and leaving it out of
+          // llms.txt would make it exactly as undiscoverable as having no index
+          // at all. A folded or literal block scalar (`>`/`|`) is not a
+          // one-liner, and the scalar-only frontmatter parser above would hand
+          // back the indicator rather than the text.
+          const description =
+            fm.description && !/^[>|]/.test(fm.description) ? fm.description : '';
+          index.push({ slug: fm.slug, title: fm.title ?? fm.slug, description });
+
           const mdDir = fm.slug ? join(outDir, fm.slug) : outDir;
           const mdFile = join(mdDir, 'index.md');
 
@@ -223,13 +241,6 @@ export default function pageMarkdown() {
           mkdirSync(mdDir, { recursive: true });
           writeFileSync(mdFile, md);
           written++;
-
-          // A folded or literal block scalar (`>`/`|`) is not a one-liner, and
-          // the scalar-only frontmatter parser above would hand back the
-          // indicator rather than the text.
-          const description =
-            fm.description && !/^[>|]/.test(fm.description) ? fm.description : '';
-          index.push({ slug: fm.slug, title: fm.title ?? fm.slug, description });
         }
 
         logger.info(`Emitted ${written} raw-markdown pages (${skipped} skipped)`);

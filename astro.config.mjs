@@ -7,6 +7,9 @@ import redirectFrom from './src/integrations/redirect-from.mjs';
 import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
 
+/* Shared so the llms.txt heading cannot drift from the site's own title. */
+const SITE_TITLE = 'Keboola User Documentation';
+
 export default defineConfig({
   site: 'https://help.keboola.com',
   trailingSlash: 'always',
@@ -18,9 +21,9 @@ export default defineConfig({
   },
   integrations: [
     redirectFrom(),
-    pageMarkdown(),
+    pageMarkdown({ siteTitle: SITE_TITLE }),
     starlight({
-      title: 'Keboola User Documentation',
+      title: SITE_TITLE,
       favicon: '/favicon.ico',
       // We ship our own 404 (src/pages/404.astro) so it can drop the doc-page
       // chrome and host the InkDash game. Without this, Starlight's built-in
@@ -58,8 +61,10 @@ export default defineConfig({
       pagination: true,
       // Feeds the "Updated <date>" line that PageTitle.astro already renders.
       // Starlight reads it from each file's last commit, so the build needs
-      // real git history — see fetch-depth in .github/workflows/*.yml. A
-      // shallow clone makes every page report the same date.
+      // real git history — see fetch-depth in .github/workflows/*.yml. Under
+      // a shallow clone the lookup throws, Starlight catches it and the page
+      // renders no date, so the symptom is a MISSING "Updated" line on most
+      // pages — not one shared date across them.
       lastUpdated: true,
       editLink: {
         baseUrl: 'https://github.com/keboola/connection-docs/edit/main/',

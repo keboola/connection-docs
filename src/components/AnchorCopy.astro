@@ -62,8 +62,21 @@
       }
     }
 
+    /**
+     * The toast hangs off the anchor so it needs no JS positioning, but
+     * Starlight keeps `.sl-anchor-link` at opacity 0 unless the heading is
+     * hovered or the link is focused — and opacity applies to the subtree, so
+     * an unpinned anchor takes the toast down with it the moment the pointer
+     * leaves the heading. `.kbc-anchor-pinned` holds the anchor visible for as
+     * long as its toast is on screen (see custom.css).
+     */
+    function unpinAnchors() {
+      document.querySelectorAll('.kbc-anchor-pinned').forEach((n) => n.classList.remove('kbc-anchor-pinned'));
+    }
+
     function showToast(anchor: HTMLElement, msg: string, ok: boolean) {
       document.querySelectorAll('.kbc-copied').forEach((n) => n.remove());
+      unpinAnchors();
       clearTimeout(hideTimer);
 
       const toast = document.createElement('span');
@@ -71,11 +84,15 @@
       toast.textContent = msg;
       toast.setAttribute('aria-hidden', 'true');
       anchor.appendChild(toast);
+      anchor.classList.add('kbc-anchor-pinned');
 
       requestAnimationFrame(() => toast.classList.add('is-in'));
       hideTimer = setTimeout(() => {
         toast.classList.remove('is-in');
-        setTimeout(() => toast.remove(), 200);
+        setTimeout(() => {
+          toast.remove();
+          anchor.classList.remove('kbc-anchor-pinned');
+        }, 200);
       }, TOAST_MS);
     }
 
@@ -92,7 +109,9 @@
 
     document.addEventListener('click', async (e) => {
       const target = e.target as HTMLElement | null;
-      const wrapper = target?.closest('.sl-heading-wrapper');
+      // Scoped to match the stylesheet: outside .sl-markdown-content the
+      // cursor, anchor positioning and toast rules don't apply.
+      const wrapper = target?.closest('.sl-markdown-content .sl-heading-wrapper');
       if (!wrapper) return;
 
       // Never hijack a real link or control that happens to sit in a heading.
@@ -114,8 +133,7 @@
       const ok = await copy(url);
 
       // Move the address bar to the heading without adding a history entry.
-      if (history.replaceState) history.replaceState(null, '', url);
-      else location.hash = href;
+      history.replaceState(null, '', url);
 
       liveRegion().textContent = ok ? 'Link copied to clipboard' : 'Could not copy link';
       showToast(anchor, ok ? 'Copied!' : 'Press Ctrl+C', ok);
@@ -124,6 +142,10 @@
     // Enter on the focused anchor goes through the same path as a click.
     document.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter') return;
+      // Same rule as the click path: a modified Enter keeps its native meaning
+      // (Cmd/Ctrl+Enter opens a new tab, Shift+Enter a new window). Without
+      // this, click() would replay it as an unmodified click and copy instead.
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       const active = document.activeElement;
       if (active instanceof HTMLElement && active.classList.contains('sl-anchor-link')) {
         e.preventDefault();

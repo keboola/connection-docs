@@ -13,9 +13,13 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v4
         with:
-          # Starlight's lastUpdated reads each page's last commit date. The
-          # default shallow checkout has one commit, which would stamp every
-          # page with the same date.
+          # Starlight's lastUpdated reads each page's last commit date, and
+          # silently drops the date for any file missing from the git log
+          # (getLastUpdated catches the lookup error and returns undefined).
+          # Under the default shallow checkout only the files touched by that
+          # one commit get a date; every other page renders no "Updated" line
+          # at all. The check is that EVERY page carries one, not that the
+          # dates differ.
           fetch-depth: 0
       - name: "Setup Node.js"
         uses: actions/setup-node@v4
