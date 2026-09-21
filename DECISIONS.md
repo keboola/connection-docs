@@ -843,6 +843,32 @@ two branches rewriting the same line is how a merge conflict gets made for no ga
 
 ---
 
+## 2026-09-21 — The Kai allowance sentence went stale on schedule
+
+The reviewer bot, run when #1116 came out of draft, flagged one thing that was not simply "a human
+should look at this": a time-critical VERIFY on `project/` dated 15 September. That date has passed.
+
+The flag was right. `kai/pricing.md` says Kai's message counter was replaced by PPU credits on
+15 September 2026. `kai/getting-started.md` still opens its Rate Limits section with "Kai is free
+during the public beta period" and still gives 150 turns a month, 50 on Pay As You Go. Both pages
+are live. A reader comparing them cannot tell what Kai costs.
+
+This guide's own sentence said "there is also a monthly message allowance, and it is smaller on Pay
+As You Go", which was the beta counter described in the present tense. It now names neither a
+mechanism nor a number, says only that Kai's work counts against the project and that an admin can
+cap it, and links to the page that owns the rules. That way the guide stays true whichever of the
+two Kai pages is the stale one.
+
+Which of them is stale is not mine to decide, and the repo's guardrail is not to document pricing.
+Carried as VERIFY(Kai team) on the page, and it is the one open flag on this PR that is wrong on a
+published site rather than merely unconfirmed.
+
+The bot's other three concerns are the expected ones and need no change: new rendering components
+and a modified build integration are always escalated, and `app/` documents a production deploy
+that failed every time in testing, which the page already says where the reader meets it.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were

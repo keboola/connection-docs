@@ -96,11 +96,19 @@ consider stating the boundary on kai/index.md. */}
 Open **Storage** and you can see the project's bucket list. Empty is fine; that is what you are
 about to change. And **Kai Agent** opens a chat panel when you click it. If the button is missing,
 or clicking it asks you to switch the feature on, that is the feature gate: an organization admin
-does it, and a non-admin needs them or Support. There is also a monthly message allowance, and it
-is smaller on Pay As You Go.
-{/* VERIFY(owner), time-critical: kai/getting-started.md still states a monthly turn allowance
-(150, 50 on PAYG) while kai/pricing.md says the counter is replaced by PPU credits from
-15 September 2026. This sentence is true today and may be wrong next week. */}
+does it, and a non-admin needs them or Support. What Kai does also counts against the project, and
+an organization admin can cap how much it spends; [Kai pricing and limits](/kai/pricing/) holds the
+current rules.
+{/* This sentence used to read "there is also a monthly message allowance, and it is smaller on Pay
+As You Go", which described the beta's turn counter. kai/pricing.md says that counter was replaced
+by PPU credits on 15 September 2026, and that date has now passed, so the sentence names neither a
+mechanism nor a number and points at the page that owns both.
+
+VERIFY(Kai team), live and wrong on the site today: kai/getting-started.md's "Rate Limits" section
+still opens "Kai is free during the public beta period" and still states 150 turns per month, 50 on
+Pay As You Go. kai/pricing.md says both were replaced on 15 September 2026. Two published pages
+contradict each other on what a reader will be charged; this guide no longer depends on either.
+Raised from the reviewer bot's time-critical flag on PR #1116, 2026-09-21. */}
 
 Not having Kai does not block the build: the loading, the SQL and the flow each carry a UI path and
 a CLI path in full.
