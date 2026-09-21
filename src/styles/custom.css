@@ -69,8 +69,16 @@
   --border-1: var(--kbc-grey-150);
   --border-2: var(--kbc-grey-200);
 
-  --link: var(--kbc-blue-500);
-  --link-hover: var(--kbc-blue-600);
+  /* blue-500 on #fff is 3.27:1 — 15px body text needs 4.5:1 (WCAG 2.1 AA).
+     blue-700 is 6.29:1. --link-hover must move too, or hover ends up LIGHTER
+     than the resting state: blue-600 is 4.53:1, blue-800 is 8.81:1.
+     --link is also used on the tinted aside backgrounds (.starlight-aside a),
+     so those were checked too rather than assuming the white-page number
+     carries: light note/tip/caution/danger = 5.62 / 5.86 / 5.74 / 5.11:1, and
+     dark (blue-450 over the 12% tints on #101114) = 5.91 / 5.68 / 5.67 / 6.42:1.
+     All pass AA; re-check these if a tint or either --link value moves. */
+  --link: var(--kbc-blue-700);
+  --link-hover: var(--kbc-blue-800);
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
@@ -111,6 +119,20 @@
   --sl-sidebar-width: 18rem;
 
   --sl-text-base: 0.9375rem; /* 15px */
+
+  /* Headings are restyled below as ELEMENTS (.sl-markdown-content h2 etc), but
+     Starlight wraps each heading in .sl-heading-wrapper.level-hN whose
+     font-size is keyed to --sl-text-hN. Leaving these at Starlight's defaults
+     (h2 = 35px) meant the wrapper and the heading disagreed, which is what
+     mis-sized the anchor icon and its gap. Keep the two in sync.
+     h1, h5 and --sl-text-2xl are deliberately NOT set: neither h1 nor h5 has an
+     element override, so wrapper and element already agree and pinning the
+     token would only shrink body-level headings (Starlight's h1 is 35px/42px);
+     the only consumer of 2xl is .link-title, handled explicitly in the
+     Prev/Next rules below. */
+  --sl-text-h2: 22px;
+  --sl-text-h3: 16px;
+  --sl-text-h4: 14px;
   --sl-line-height: 1.6;
   --sl-content-gap-y: 0.6rem;
 }
@@ -490,15 +512,19 @@ nav.sidebar {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-.content h1#_top,
-.content h1[id]:first-of-type {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: clamp(28px, 4vw, 38px);
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  color: var(--fg-1);
-}
+/* The page title is <h1 id="_top" class="b-title">, rendered by
+   src/components/PageTitle.astro. It sits outside .sl-markdown-content and
+   carries none of Starlight's scoped classes, so --sl-text-h1 never reaches it.
+   The rule that used to live here targeted `.content h1#_top` — nothing on this
+   site has class="content" (0 matches in the live DOM), so it never applied and
+   the title has been rendering at the browser default, 2em/32px. That size is
+   kept for now, deliberately. The design it was meant to produce was:
+       font-family: var(--font-sans); font-weight: 600;
+       font-size: clamp(28px, 4vw, 38px);
+       letter-spacing: -0.02em; line-height: 1.1;
+   Restoring it is a visible change on every page and is a separate decision.
+   Only the line-height is corrected now, via .content-panel h1 below. */
+.content-panel h1 { line-height: 1.25; }
 
 .b-lede {
   margin: 0 0 22px;
@@ -692,27 +718,78 @@ nav.sidebar {
   padding-top: 0;
   border-top: none;
 }
-.sl-markdown-content h2 a.sl-anchor-link,
-.sl-markdown-content h3 a.sl-anchor-link {
-  color: var(--fg-4);
-  opacity: 0;
-  font-size: 12px;
-  text-decoration: none;
-  transition: opacity 0.15s, color 0.15s;
-}
-.sl-markdown-content h2:hover a.sl-anchor-link,
-.sl-markdown-content h3:hover a.sl-anchor-link {
-  opacity: 0.6;
-}
-.sl-markdown-content h2 a.sl-anchor-link:hover,
-.sl-markdown-content h3 a.sl-anchor-link:hover { color: var(--link); }
+/* Starlight renders the anchor as a SIBLING of the heading inside
+   .sl-heading-wrapper, not a descendant — the `h2 a.sl-anchor-link` rules that
+   used to be here matched 0 elements. Do NOT add opacity rules: Starlight
+   already ships @media (hover:hover) { .sl-anchor-link { opacity: 0 } }, which
+   is what keeps the icons visible on touch devices. */
+.sl-markdown-content .sl-heading-wrapper > a.sl-anchor-link { color: var(--fg-4); }
+.sl-markdown-content .sl-heading-wrapper > a.sl-anchor-link:hover { color: var(--link); }
 
 /* Push the heading anchor (chain) icon farther right so it sits clearly to
    the side of the heading instead of colliding with the last word. Starlight
    renders the link as a sibling of the heading and controls the text→icon
    spacing via --sl-anchor-icon-gap on the wrapper (default 0.25em). */
 .sl-markdown-content .sl-heading-wrapper {
-  --sl-anchor-icon-gap: 0.5em;
+  --sl-anchor-icon-size: 0.75em;
+  --sl-anchor-icon-gap: 0.4em;
+}
+
+/* Copy-link-on-click (src/components/AnchorCopy.astro). The whole heading is
+   the click target, but the text keeps the I-beam cursor so the "you can
+   select this" affordance survives — only the icon reads as a control. */
+.sl-markdown-content .sl-heading-wrapper { cursor: text; }
+.sl-markdown-content .sl-heading-wrapper > a.sl-anchor-link {
+  cursor: pointer;
+  position: relative;   /* the toast anchors to the link, so it needs no JS positioning */
+}
+/* Starlight's @media (hover:hover) rule drops .sl-anchor-link to opacity 0
+   unless the wrapper is hovered or the link is focused, and opacity applies to
+   the subtree — so the toast living inside the link would blank out the moment
+   the pointer left the heading. AnchorCopy adds this class for the lifetime of
+   the toast. Unlayered, so it beats Starlight's layered rule. */
+.sl-markdown-content .sl-heading-wrapper > a.sl-anchor-link.kbc-anchor-pinned {
+  opacity: 1;
+}
+
+.kbc-copied {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 6px);
+  transform: translate(-50%, 4px);
+  z-index: 20;
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: var(--fg-1);
+  color: var(--bg-1);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.kbc-copied.is-in { opacity: 1; transform: translate(-50%, 0); }
+.kbc-copied--err { background: #a8232c; color: #fff; }
+
+/* Pointer up toward the icon. */
+.kbc-copied::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-bottom-color: var(--fg-1);
+}
+.kbc-copied--err::after { border-bottom-color: #a8232c; }
+
+@media (prefers-reduced-motion: reduce) {
+  .kbc-copied { transition: none; }
 }
 
 .sl-markdown-content h3 {
@@ -1064,15 +1141,20 @@ nav.sidebar {
   padding-left: 16px;
   list-style: none;
 }
+/* Real DOM is .right-sidebar-panel > div > starlight-toc > nav > ul, so the
+   descendant combinator is required — `> nav > ul` matches nothing. Each nested
+   <ul> used to paint its own rail at left:0, giving 5 disconnected fragments.
+   1px pairs with the 2px active marker below, which sits ON the rail. */
 .right-sidebar-panel ul::before {
   content: '';
   position: absolute;
   top: 4px;
   bottom: 4px;
   left: 0;
-  width: 2px;
+  width: 1px;
   background: var(--border-1);
 }
+.right-sidebar-panel ul ul::before { display: none; }
 .right-sidebar-panel ul li { padding-left: 0; margin: 0; }
 .right-sidebar-panel a {
   display: block;
@@ -1091,15 +1173,19 @@ nav.sidebar {
   font-weight: 600;
   border-left: none;
 }
+/* The dot was centred on the <a> box. On wrapped entries that box is 52px tall,
+   so the marker floated between the two lines instead of marking the first one.
+   A 5px dot also protrudes past the rail. Bar on the rail, aligned to line 1.
+   Starlight sets --depth inline on the <a>; each level indents 16px. */
 .right-sidebar-panel a[aria-current='true']::before {
   content: '';
   position: absolute;
-  left: -19px;
-  top: 50%;
+  left: calc(-16px - var(--depth, 0) * 16px);
+  top: 16px;                /* 6px padding-top + half the 20px line box */
   transform: translateY(-50%);
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
+  width: 2px;
+  height: 20px;
+  border-radius: 1px;
   background: var(--kbc-blue-500);
 }
 :root[data-theme='dark'] .right-sidebar-panel a[aria-current='true'] {
@@ -1125,24 +1211,37 @@ nav.sidebar {
   text-decoration: none;
 }
 .pagination-links a:hover { border-color: var(--border-2); }
-.pagination-links a > span:first-child {
+/* DOM is <a><svg/><span>Previous<span class="link-title">Home</span></span></a>.
+   The <a>'s first child is the <svg>, so `> span:first-child` matched nothing and
+   the 11px eyebrow never rendered; `:last-child` hit the same span that holds the
+   label, so it came out 14px/600 near-black with no hierarchy. */
+.pagination-links a > span {
+  display: block;
   font-size: 11px;
   font-weight: 600;
   color: var(--fg-4);
   text-transform: uppercase;
   letter-spacing: 1px;
-  display: block;
 }
-.pagination-links a > span:last-child {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--fg-1);
+/* .link-title is keyed to --sl-text-2xl (24px) — larger than the page's own H2.
+   Set it here rather than moving the shared 2xl scale token. */
+.pagination-links a > span > .link-title {
+  display: block;
   margin-top: 4px;
-  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--fg-1);
 }
+/* The arrow carries an inline --sl-icon-size: 1.5rem, so it renders at 24px
+   beside an 11px label. */
+.pagination-links a svg { width: 16px; height: 16px; }
 
 /* "Was this page helpful?" feedback widget — Stripe-style, below page content.
-   Borderless: just a hairline divider separating it from the article. */
+   Borderless: just a hairline divider separating it from the article.
+   Rendered by src/components/Feedback.astro, mounted once from Footer.astro —
+   grep there before touching anything here. */
 .b-feedback {
   margin-top: 40px;
   padding-top: 24px;
@@ -1275,9 +1374,16 @@ nav.sidebar {
 }
 
 /* ───────── Misc ───────── */
+/* WCAG 2.2 SC 1.4.11 requires 3:1 for focus indicators. A 40% alpha ring
+   composites to 1.58:1 on white and 1.87:1 on #101114 — both fail, on every
+   focusable element on every page. Solid brand tokens instead of an invented
+   hex: blue-700 is 6.29:1 on white, blue-450 is 6.78:1 on #101114. */
 *:focus-visible {
-  outline: 2px solid rgba(31, 143, 255, 0.4);
+  outline: 2px solid var(--kbc-blue-700);
   outline-offset: 2px;
+}
+:root[data-theme='dark'] *:focus-visible {
+  outline-color: var(--kbc-blue-450);
 }
 .sl-markdown-content img:not(:where(.not-content *)) {
   border-radius: 8px;
@@ -1295,8 +1401,6 @@ nav.sidebar {
 /* Mobile / tablet */
 @media (max-width: 50rem) {
   .b-title-icon { width: 32px; height: 32px; font-size: 18px; }
-  .content h1#_top,
-  .content h1[id]:first-of-type { font-size: 28px; }
   .pagination-links { grid-template-columns: 1fr; }
 }
 
@@ -2381,4 +2485,24 @@ nav.sidebar {
 .notfound-partners {
   font-size: 13.5px;
   color: var(--sl-color-gray-3);
+}
+
+/* ───────── Print ───────── */
+/* print.css ships `.print\:hidden { display: none }` inside @media print, but
+   Page.css loads after it, so any rule in THIS file that sets `display` on a
+   tagged element wins on source order at equal specificity — that is how the
+   Prev/Next cards ended up printing. Restore the class rather than naming the
+   casualties: Starlight already tags .pagination-links, .sidebar,
+   .right-sidebar-container and the header's right group, and the next rule we
+   add would silently break one of them again. */
+@media print {
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* The header carries no print class of its own (and neither does the Kai
+     button, which AskKaiDrawer injects inside it). */
+  header.header {
+    display: none !important;
+  }
 }

@@ -3,15 +3,17 @@
  * Footer.astro
  *
  * Override of Starlight's Footer that wraps the default footer markup and
- * also renders the global AskKaiDrawer once per page (it's a `<dialog>` and
- * needs to live in the body, not the head).
+ * also renders the page-global helpers once per page: AskKaiDrawer (it's a
+ * `<dialog>` and needs to live in the body, not the head) and AnchorCopy.
  */
 import Default from '@astrojs/starlight/components/Footer.astro';
 import AskKaiDrawer from './AskKaiDrawer.astro';
 import Feedback from './Feedback.astro';
 import SearchPersistFix from './SearchPersistFix.astro';
+import AnchorCopy from './AnchorCopy.astro';
 ---
 <Feedback />
 <Default><slot /></Default>
 <AskKaiDrawer />
 <SearchPersistFix />
+<AnchorCopy />
