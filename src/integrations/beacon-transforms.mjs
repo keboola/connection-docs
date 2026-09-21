@@ -676,11 +676,16 @@ function transformFigureCaptions(tree) {
     const alt = (img.alt ?? '').replace(/"/g, '&quot;');
     const url = (img.url ?? '').replace(/"/g, '&quot;');
     const caption = m[1].trim();
+    // This builds the <img> by hand, so it has to carry over the intrinsic
+    // size that image-dimensions.mjs attached — otherwise figures would be the
+    // one place on the site that still ships an unsized image.
+    const { width, height } = img.data?.hProperties ?? {};
+    const size = width != null && height != null ? ` width="${width}" height="${height}"` : '';
     const figureHtml = {
       type: 'html',
       value:
         `<figure class="beacon-figure">` +
-        `<img src="${url}" alt="${alt}" />` +
+        `<img src="${url}" alt="${alt}"${size} />` +
         `<figcaption>${caption}</figcaption>` +
         `</figure>`,
     };

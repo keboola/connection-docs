@@ -6,6 +6,7 @@ import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
 import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
+import imageDimensions from './src/integrations/image-dimensions.mjs';
 
 /* Shared so the llms.txt heading cannot drift from the site's own title. */
 const SITE_TITLE = 'Keboola User Documentation';
@@ -17,7 +18,10 @@ export default defineConfig({
     format: 'directory',
   },
   markdown: {
-    remarkPlugins: [beaconTransforms],
+    // imageDimensions runs first: beaconTransforms turns some images into raw
+    // HTML, and reads the dimensions this attaches. Passed uncalled — unified
+    // invokes the plugin itself to get the transformer; all options default.
+    remarkPlugins: [imageDimensions, beaconTransforms],
   },
   integrations: [
     redirectFrom(),
