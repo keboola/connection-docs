@@ -111,7 +111,7 @@ The following configuration is equivalent to the above one:
 }
 ```
 
-This is useful when using [User Defined functions](/components/extractors/generic-extractor/user-functions/)
+This is useful when using [User Defined functions](/components/extractors/generic-extractor/functions/)
 -->
 
 **Note:** It is technically possible to define a child job without using `placeholders` configuration
