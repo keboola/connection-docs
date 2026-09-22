@@ -91,9 +91,12 @@ project budget and per-user limits count free and paid usage the same way, so Ka
 when a limit is reached even if the allowance still has credits left.
 :::
 
-Kai does not display the remaining allowance balance yet. Until it is used up, the Kai spend
-you see in the dashboards below is what the allowance is covering — bear in mind that those
-dashboards are per project, while the allowance is shared across the organization.
+Kai does not display the remaining allowance balance yet. What the allowance covers is
+visible as unbilled credits in both the
+[Project Consumption](/management/telemetry/telemetry-dashboards/#project-consumption) and
+[Organization Usage](/management/telemetry/telemetry-dashboards/#organization-usage)
+dashboards, so you can follow how much of it you have drawn. The organization-level view is
+the one that matches the scope the allowance is shared at.
 
 ## Tracking Kai project spend
 
