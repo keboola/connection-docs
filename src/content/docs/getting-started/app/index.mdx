@@ -16,8 +16,9 @@ wants to glance at next week on Monday morning and see which day is red. This st
 `staffing_outlook` into a published grid app: six cafés down, seven days across, a number in every
 cell and a red cell where it will hurt.
 
-**Where you are:** `staffing_outlook` exists in Storage. **When you finish:** an app with its own
-URL and a password, so you decide who sees it.
+**Where you are:** `staffing_outlook` exists in Storage. **When you finish:** the grid, running as
+an app you can open and refine. Publishing it to production gives it a URL and a password, and that
+last step did not succeed in our project: see step 5.
 
 <PathIntro tabs={3} manual={false} yours="deciding who gets the URL and the password" />
 
@@ -34,6 +35,22 @@ production. Total 5 min 44 s to a running draft. The production configuration: n
 Outlook Grid", Authentication Basic (password), code in a Keboola-managed private Git repository
 (branch main), backend Python / JS, size XSmall, auto sleep 15 minutes, URL prefix
 "<prefix>-74021219.hub.europe-west3.gcp.keboola.com".
+
+Re-checked read-only on 2026-09-22, and one half has changed. The 09-22 container run
+(01a0c74d-9a1c-7b2c-94d2-005cfee2a2ad, 04:09) CLONED successfully — "Saving git commit hash to
+state: f9cab9f7" — and then failed on the missing keboola-config/nginx directory. So the managed Git
+credentials are working again; the runs that failed on "Authentication failed" are 09-20 and 09-21
+(and job 105560409, quoted below, is the 09-21 one). The nginx gap is the durable cause and the one
+the bug report should lead with. Both are kept in the failure list because a reader can still meet
+either. So the page keeps sending the reader to the
+draft preview as the finishing line. Step 5 now states the missing dialog BEFORE the click rather
+than after it, which is the lesson from Michal's OIDC walk-through: he pressed Publish, got no
+feedback, and could not tell whether he had missed a step.
+
+The Apps section itself is being reworked in parallel on PRDCT-692 / AJDA-3380 (data-apps/**,
+including a new operate.md and troubleshooting.md). This page only links there; the contradiction
+between data-apps/getting-started.md's "turns Active" and what happens here belongs to that work,
+not to this branch.
 
 VERIFY(owner), load-bearing: what "Publish to production" does. Clicking it (twice, 2026-09-09)
 produced no dialog, no new configuration version and no deploy job; the production app stayed "Not
@@ -69,6 +86,11 @@ reference and are read-only or idempotent; they have not been run here. */}
     <a href="/getting-started/transform/">Transform data</a>.
   </li>
 </Prereqs>
+
+Arriving here from the Apps announcement rather than from the previous page? The prompt below
+names this guide's table *and its columns*, so with a table of your own you adapt both, and the
+checks further down describe our data rather than yours. If you would rather start from nothing,
+[Build your first app with Kai](/data-apps/getting-started/) does that without a tutorial dataset.
 
 ## What a data app is
 
@@ -122,17 +144,20 @@ to build one ([Build your first app with Kai](/data-apps/getting-started/)).
    {/* Draft preview iframe captured 2026-09-14 in project 264 (app-preview-capture.mjs, 2x). A dash
    in a cell is an empty expected_units: the summer had no day in that band; see transform/. */}
 
-5. When the draft is right, click **Publish to production**. Then open the app's own page from
-   **Apps**. In our project its status still read **Not Deployed** at that point, with a
-   **Deploy App** button, so publishing and starting are two steps: click **Deploy App**. A
-   deploy builds and starts a container, which takes a few minutes; when it succeeds the status
-   turns **Active**, **Open App** appears, and the app asks for the password from its
-   **Authentication** setting, **Basic** by default, so the grid is not public until you decide
-   who gets the link and the password.
+5. When the draft is right, click **Publish to production**. Expect no confirmation dialog: in our
+   project the button produced no dialog and no job, which is disconcerting the first time and is
+   not a sign you missed a step.
 
-   **It did not succeed in our project**, and the reasons are worth knowing before you try: see
-   the failure list at the foot of this page. The draft preview is the part that has worked every
-   time.
+   Then open the app's own page from **Apps**. Its status will most likely read **Not Deployed**,
+   with a **Deploy App** button, so publishing and starting are two separate steps: click **Deploy
+   App**. A deploy builds and starts a container, which takes a few minutes. When it succeeds the
+   status turns **Active**, **Open App** appears, and the app asks for the password from its
+   **Authentication** setting, **Basic** by default, so the grid is not public until you decide who
+   gets the link and the password.
+
+   **It has not succeeded in our project yet**, and the reasons are worth knowing before you try:
+   see the failure list at the foot of this page. The draft preview is the part that has worked
+   every time, and it is enough to finish this guide.
 
 **Check:** the draft preview — or **Open App**, if the deploy succeeded for you — shows the grid,
 and its caption's count equals both the number of red cells and the number of rows where
@@ -234,5 +259,11 @@ screenshot or a chat.
 
 - [Publish and share](/data-apps/publish-and-share/): authentication options beyond the default
   password, and who can reach the URL.
+- [Authentication](/data-apps/authentication/): the **Authentication** setting decides who can open
+  the app. **Basic (Password)** is the default and the shared password above. Every other gate,
+  whether OIDC with Auth0, Google Cloud, Microsoft Entra ID or Okta, or the GitHub, GitLab and
+  JumpCloud options, needs a client you register in that provider's own console. That part is always
+  yours: neither Kai nor `kbagent` performs it, and `kbagent data-app create --auth` offers only
+  `password` or `public`.
 - [Build locally](/data-apps/build-locally/): the Git-based workflow once an app outgrows its
   first description.

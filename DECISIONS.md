@@ -991,6 +991,58 @@ always carry whoever last touched the configuration.
 
 ---
 
+## 2026-09-22 — The app step for launch week, and the boundary with the Apps rework
+
+Three changes on `getting-started/app/`, all from the usability test.
+
+The first is the one Michal actually hit. He pressed **Publish to production** and nothing visible
+happened, so he could not tell whether the button had worked or he had missed a step. The page
+already documented that, but after the click. It now says it before: expect no dialog, then go to
+**Apps** and press **Deploy App**. The honesty did not change; its position did.
+
+The second is a cold landing. Readers arriving from the Apps announcement will not have the six
+previous pages behind them, so one sentence says the page works with their own table if they swap
+the name in the prompt.
+
+The third is the authorization boundary, and it is the one that finally closes rather than hedges.
+Product said it on the call, in as many words: setting up an OAuth provider "will never be
+possible" for an agent. The CLI agrees by construction, since `kbagent data-app create --auth`
+accepts only `password` or `public`. Two independent sources, so the page states it plainly instead
+of carrying it as a conservative reading.
+
+Re-checked the deploy read-only the same day, and the fact-check caught that "same two causes" was
+lazy. The 09-22 run cloned successfully and failed only on the missing nginx directory; the
+authentication failures are 09-20 and 09-21. So the managed Git credentials are working again and
+the nginx gap is the durable cause. Both stay in the failure list, because a reader can still meet
+either, but the bug report should lead with nginx.
+
+The fact-check also caught four things the rewrite itself introduced or sharpened:
+
+- The cold-landing sentence said swap the table name and read the rest as written. The prompt
+  hard-codes seven column names, so a reader with their own table would have handed Kai six columns
+  that do not exist. It now says to adapt the columns too, and offers the from-scratch Apps page as
+  the better route.
+- The page opened by promising "an app with its own URL and a password" while step 5 now ends on the
+  draft preview. The promise now matches: the grid you can open and refine, with the URL and
+  password coming from a publish step that did not succeed here.
+- `check/`'s summary table called the app "the grid anyone can open", which contradicts both the
+  password gate and the fact that the deploy has never succeeded. It now says "behind the password
+  you set".
+- Naming four OIDC providers read as the whole set of sign-in gates. There are six methods;
+  GitHub, GitLab and JumpCloud also need a client registered in the provider's console. The bullet
+  now says every gate other than Basic does.
+
+**Scope boundary.** Two other sessions are reworking the Apps section right now, on
+`PRDCT-692-apps-launch-polish` and the `AJDA-3380` branches, adding `operate.md` and
+`troubleshooting.md` and rewriting `authentication.mdx`. Their branches touch no file under
+`getting-started/`, and this branch touches no file under `data-apps/`, which I verified by diffing
+both ways before continuing. The contradiction between `data-apps/getting-started.md` promising the
+app "turns Active" and what this page observed is therefore theirs to resolve, not something to
+route or fix from here. This page links to `/data-apps/authentication/` by page, not by anchor, so
+their restructuring cannot break it.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
