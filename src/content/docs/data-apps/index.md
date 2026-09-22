@@ -23,8 +23,8 @@ Dashboards and reports, internal tools, data narratives, configurators, and agen
 
 ## Two ways to build
 
-- **[Build with Kai](/data-apps/getting-started/)** — describe the app in plain language and Kai reads your data, builds a live draft you preview and refine, and publishes when you're ready. No coding needed — the walkthrough takes about 10 minutes. The same **Create App** screen also offers [manual creation](/data-apps/getting-started/#create-an-app-manually) if you'd rather configure the app yourself.
-- **[Build locally](/data-apps/build-locally/)** — develop with your own tools and Git account, use the [AI Kit](/ai/ai-kit/) coding-assistant plugins, and sync the app to your project. For developers who want full control — that page covers how Python/JS development works day to day.
+- **[Build with Kai](/data-apps/getting-started/)** — describe the app in plain language and Kai reads your data, builds a live draft you preview and refine, and publishes when you're ready. No coding needed — the walkthrough takes about 10 minutes. The same **Create App** screen also offers [manual creation](/data-apps/getting-started/#create-an-app-manually) if you'd rather configure the app yourself. **You need:** a Keboola project. Nothing else.
+- **[Build locally](/data-apps/build-locally/)** — develop with your own tools and Git account, use the [AI Kit](/ai/ai-kit/) coding-assistant plugins, and sync the app to your project. For developers who want full control — that page covers how Python/JS development works day to day. **You need:** a Git account and somewhere to host the repository; about half an hour the first time.
 
 The difference underneath is where the code lives: a repository Keboola manages for Kai, or one you host yourself. [Two ways to run an app](/data-apps/what-are-apps/#two-ways-to-run-an-app) explains what each gives you.
 

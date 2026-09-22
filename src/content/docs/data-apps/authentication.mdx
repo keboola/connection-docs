@@ -37,6 +37,10 @@ Once an app is deployed, its URL is publicly available. Protect it so only the r
 
 ## OIDC (single sign-on)
 
+:::note[Do you actually need OIDC?]
+Only set this up if people must sign in with their **company accounts** — so that access follows your directory, and someone who leaves the company loses it. Everything else is cheaper: **Basic (Password)** shares one password and needs nothing outside Keboola, and **GitHub**, **GitLab** or **JumpCloud** restrict access by organization or team with far less setup. OIDC is the only method that needs admin rights in a console outside Keboola.
+:::
+
 OIDC lets users log into your app through your single sign-on (SSO) provider. Keboola has ready-made provider options for Google (**Google SSO**), Microsoft Entra ID (**Azure OIDC**), **Okta**, and **Auth0**, plus **Generic OIDC** for any other OpenID Connect provider. Users sign in with the provider you configured; if an app has more than one provider, they first pick an **Authentication Provider**.
 
 ![The app's sign-in page asking the user to select an authentication provider, one button per configured provider](/data-apps/auth-select-oidc-provider.png)
@@ -101,6 +105,7 @@ Pick your provider:
     - `invalid_client`, or a token error right after signing in — the Client ID or Client secret in Keboola doesn't match the OAuth client. Paste them again, or add a new secret in Google Cloud and update the app.
 
     Changed the redirect URI or the audience on Google's side later? No redeploy needed; Google says such changes take from a few minutes to a few hours to apply.
+    *Console steps walked through on 2026-09-22.*
   </TabItem>
   <TabItem label="Microsoft Entra ID">
     Let people sign in with their Microsoft work account.
@@ -132,6 +137,7 @@ Pick your provider:
     - `AADSTS50011: The redirect URI … does not match` — the redirect URI in the registration differs from the app's callback URL. Fix it under **Manage → Authentication**.
     - `AADSTS7000215: Invalid client secret provided` — you pasted the secret's **Secret ID** instead of its **Value**, or the secret expired. Create a new one and update the app.
     - `AADSTS50105: … is not assigned to a role for the application` — you required assignment and this user isn't assigned. Add them under **Enterprise apps → your app → Users and groups**.
+    *Console steps last walked through on 2026-09-14; the Entra admin center changes often, so check the menu names as you go.*
   </TabItem>
   <TabItem label="Okta">
     Let people sign in with their Okta account.
@@ -156,6 +162,7 @@ Pick your provider:
     - "The 'redirect_uri' parameter must be a Login redirect URI in the client app settings" — the URI in the integration differs from the app's callback URL. Fix **Sign-in redirect URIs** on the integration's **General** tab.
     - "User is not assigned to the client application" — the user, or their group, isn't assigned to the integration. Add them on the **Assignments** tab.
     - Issuer or discovery error when the app starts the sign-in — check **Domain/Org URL**: `https://`, your Okta domain, `/oauth2/default`, no trailing slash. If your org has no `default` authorization server, use `https://<yourOktaDomain>` instead.
+    *Console steps last walked through on 2026-09-14; check the menu names as you go.*
   </TabItem>
   <TabItem label="Auth0">
     Let people sign in through Auth0, with whatever connections your tenant offers: username and password, social logins, or enterprise identity providers.
@@ -179,6 +186,7 @@ Pick your provider:
     - "Callback URL mismatch" on an Auth0 error page — the URL in **Allowed Callback URLs** differs from the app's callback URL. Fix it under **Settings → Application URIs**.
     - Issuer mismatch or discovery error when the app starts the sign-in — the **Issuer URL** must match the `issuer` in Auth0's discovery document character for character: `https://`, your Auth0 domain, trailing slash.
     - Users of one connection can't sign in — that connection isn't enabled for this application. Turn it on under the application's **Connections** tab.
+    *Console steps last walked through on 2026-09-14; check the menu names as you go.*
   </TabItem>
   <TabItem label="Another provider">
     Any OpenID Connect provider works through the **Generic OIDC** option.
