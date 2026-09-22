@@ -37,7 +37,7 @@ This is not a flaw — it is how Keboola ensures stability and data consistency 
 
 ## Job States and Billing
 
-Every job passes through the states listed on the [Jobs API](/management/jobs/api/#job-status) page; for billing, two of them matter:
+Every job passes through the states listed on the [Jobs API](/extend/jobs/#job-status) page; for billing, two of them matter:
 
 **How billing relates to job state:**
 - Jobs in the **waiting** state are not billed at the job level. A job only consumes [credits](/management/project/limits/#project-power--time-credits) once it starts **processing**.

@@ -639,14 +639,7 @@ export const sidebar = [
       { label: "Overview", slug: "management" },
       { slug: "management/support" },
       { slug: "management/account" },
-      {
-        label: "Jobs",
-        collapsed: true,
-        items: [
-          { label: "Overview", slug: "management/jobs" },
-          { slug: "management/jobs/api" },
-        ],
-      },
+      { slug: "management/jobs" },
       { slug: "management/notifications" },
       {
         label: "Project",
@@ -780,7 +773,6 @@ export const sidebar = [
             ],
           },
           { slug: "extend/common-interface/oauth" },
-          { slug: "extend/common-interface/encryption" },
           { slug: "extend/common-interface/actions" },
           { slug: "extend/common-interface/logging" },
           { slug: "extend/common-interface/development-branches" },

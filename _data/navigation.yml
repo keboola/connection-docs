@@ -817,9 +817,6 @@ items:
 
       - url: /management/jobs/
         title: Jobs
-        items:
-          - url: /management/jobs/api/
-            title: Jobs API
 
       - url: /management/notifications/
         title: Notifications
@@ -964,8 +961,6 @@ items:
                 title: OUT files
           - url: /extend/common-interface/oauth/
             title: OAuth2
-          - url: /extend/common-interface/encryption/
-            title: Encryption
           - url: /extend/common-interface/actions/
             title: Actions
           - url: /extend/common-interface/logging/

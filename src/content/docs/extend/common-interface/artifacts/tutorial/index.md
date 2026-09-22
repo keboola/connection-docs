@@ -102,7 +102,7 @@ with open("/data/artifacts/out/current/myartifact1", "w") as file:
     --data-urlencode 'name=Artifacts upload & download' \
     --data-urlencode 'description=Test Artifacts upload & download'
     ```
-1. Run the configuration (in the UI, or through the [Jobs API](/management/jobs/api/#run-a-job)) and open its job log. The first run prints `[]`: there are no previous runs to download from yet. Run it again and the log lists `/data/artifacts/in/runs/jobId-<first job id>/myartifact1`.
+1. Run the configuration (in the UI, or through the [Jobs API](/extend/jobs/#run-a-job)) and open its job log. The first run prints `[]`: there are no previous runs to download from yet. Run it again and the log lists `/data/artifacts/in/runs/jobId-<first job id>/myartifact1`.
 
 ### 3. Consume artifacts from different component
 Similar to previous example we will create a configuration of Python Transformation component. 

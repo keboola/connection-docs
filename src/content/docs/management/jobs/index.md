@@ -61,7 +61,7 @@ For the API side of jobs (create, poll, debug, the job object), see [Jobs API](/
 
 ## Running Jobs
 Jobs are either run [manually from any configuration](/tutorial/) or automatically by the 
-[flow](/flows/) at a scheduled time. In either case, a job moves from `created` or `waiting` through `processing` to a final state; the full list of states and what each one means is on the [Jobs API](/management/jobs/api/#job-status) page.
+[flow](/flows/) at a scheduled time. In either case, a job moves from `created` or `waiting` through `processing` to a final state; the full list of states and what each one means is on the [Jobs API](/extend/jobs/#job-status) page.
 
 Until a job is finished (i.e., it is waiting or processing), it can be terminated:
 
@@ -85,7 +85,7 @@ the waiting state under the following conditions:
 - If there is already a running job of the **same configuration**.
     - Unless it is a transformation job, in which case the same configuration is allowed to run, provided that it is executed by different [tokens](/management/project/tokens/).
 
-If the platform itself cannot start a job, for instance during an outage, the job stays in `created` rather than `waiting`; see [job states](/management/jobs/api/#job-status).
+If the platform itself cannot start a job, for instance during an outage, the job stays in `created` rather than `waiting`; see [job states](/extend/jobs/#job-status).
 
 ## Storage jobs
 
