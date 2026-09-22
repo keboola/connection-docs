@@ -47,7 +47,7 @@ The flow is the same everywhere: open the app in Keboola, register it with your 
 
 Your provider needs the app's callback URL, so start in Keboola.
 
-1. In your Keboola project, open **Apps** and click the app. It doesn't matter whether Kai built it or you created it yourself, and Kai keeps these settings when it changes the app later. No app yet? [Create one manually](/data-apps/getting-started/#create-an-app-manually) first; it opens on its configuration page.
+1. In your Keboola project, open **Apps** and click the app. It doesn't matter whether Kai built it or you created it yourself. No app yet? [Create one manually](/data-apps/getting-started/#create-an-app-manually) first; it opens on its configuration page.
 2. Scroll to the **App URL** block. It shows the app's host as a URL prefix plus a generated part, for example `toy-store-sales` and `-74016144.hub.europe-west3.gcp.keboola.com`. Your callback URL is `https://`, that whole host, and `/_proxy/callback`:
 
    ```
@@ -60,7 +60,7 @@ Your provider needs the app's callback URL, so start in Keboola.
 
 The block sits on the app's **Overview** tab, below **Authentication**:
 
-![The app's configuration page with the App URL block: the URL prefix, the generated host, and a copy button](/data-apps/publish-config.png)
+![The app's Overview tab: Description, Authentication, and Git Repository cards, then the App URL block, with the App Info panel on the right](/data-apps/build-in-ui-config.png)
 
 Keep this tab open. You now have the callback URL; each app has its own, so register every app with your provider separately.
 
@@ -78,7 +78,7 @@ Pick your provider:
 
     1. If the page shows **Get started**, the project has no consent screen yet. Click it and fill in the wizard: **App name** and **User support email**, the **Audience** (**Internal** or **External**, see above), a contact email, then **Create**. If you see **Branding**, **Audience**, and **Clients** in the left menu instead, the consent screen already exists; carry on.
     2. Open [**Branding**](https://console.cloud.google.com/auth/branding). Under **Authorized domains**, add `keboola.com`, the domain your App URL belongs to, and save. Without it, Google refuses the redirect URI in the next step.
-    3. Check [**Audience**](https://console.cloud.google.com/auth/audience): **Internal** for your organization only, **External** for any Google account. Leave the **Test users** list and **Publish app** alone. For the sign-in scopes Keboola uses, Google applies neither: an External app lets any Google account in while still in Testing. Publishing only matters if you want your logo on the consent screen, and then Google asks for branding details and a verification review.
+    3. Check [**Audience**](https://console.cloud.google.com/auth/audience): **Internal** for your organization only, **External** for any Google account. Leave the **Test users** list and **Publish app** alone. For the sign-in scopes Keboola uses, Google applies neither: an External app lets any Google account in while still in Testing. Publishing only matters if you want your app name and logo shown on the consent screen, and then Google asks for branding details and a verification review.
 
     You now have: a consent screen with `keboola.com` authorized and the audience you want.
 
@@ -95,10 +95,12 @@ Pick your provider:
 
     **If sign-in fails:**
 
-    - **Access blocked: This app's request is invalid**, with `Error 400: redirect_uri_mismatch` — the URI in the OAuth client differs from the app's callback URL. Open **Request details** on that page: it shows the `redirect_uri` Google received. Compare it with the **App URL** block character by character (a stray space or a missing character is the usual cause) and fix the client. No redeploy needed; Google says such changes take from a few minutes to a few hours to apply.
+    - **Access blocked: This app's request is invalid**, with `Error 400: redirect_uri_mismatch` — the URI in the OAuth client differs from the app's callback URL. Open **Request details** on that page: it shows the `redirect_uri` Google received. Compare it with the **App URL** block character by character (a stray space or a missing character is the usual cause) and fix the client.
     - Someone outside your organization can't sign in — expected with the Internal audience. Switch to External on the **Audience** page if that's not what you want.
     - Someone outside your organization *can* sign in — the audience is External. For the scopes Keboola uses, Google doesn't limit an External app to its test users, even in Testing. Switch to Internal.
     - `invalid_client`, or a token error right after signing in — the Client ID or Client secret in Keboola doesn't match the OAuth client. Paste them again, or add a new secret in Google Cloud and update the app.
+
+    Changed the redirect URI or the audience on Google's side later? No redeploy needed; Google says such changes take from a few minutes to a few hours to apply.
   </TabItem>
   <TabItem label="Microsoft Entra ID">
     Let people sign in with their Microsoft work account.
@@ -194,7 +196,7 @@ Pick your provider:
 
 1. A new app: set its code source and click **Deploy App**; the short wizard asks for the backend size and an inactivity timeout (details: [Create an app manually](/data-apps/getting-started/#create-an-app-manually)). Just testing sign-in? A **Streamlit** app with a one-line inline script is the quickest thing to deploy. An app that's already running needs **Redeploy App** for the new authentication to take effect; a stopped one, **Start App**.
 2. When the status turns **Active**, click **Open App**. Your provider asks you to sign in, then sends you into the app.
-3. Test with the accounts that matter, each in a fresh private window: one that should get in, one that shouldn't. A browser that's already signed in to the provider skips the sign-in screen and hides the result.
+3. Test with the accounts that matter, each in a fresh private window: one that should get in, one that shouldn't. Once you're in, the app's own session cookie keeps you signed in, so a second try in the same window proves nothing.
 
 ### Provider settings at a glance
 
