@@ -1,14 +1,14 @@
 ---
 title: Kai Pricing and Limits
 slug: 'kai/pricing'
-description: How Kai consumes PPU credits, where to track project spend, and how Organization Admins set project and per-user limits.
+description: How Kai consumes PPU credits, the free allowance for new organizations, where to track project spend, and how Organization Admins set project and per-user limits.
 ---
 
 
-:::note[Kai becomes generally available on 15 September 2026]
-Kai was free during beta, with a limit of 150 messages. From 15 September 2026 it
-consumes PPU credits from your project power, and the message counter is replaced by
-the limits described below.
+:::note[Kai became generally available on 15 September 2026]
+Kai was free during its public beta, with a limit of 150 messages. Since 15 September 2026
+it consumes PPU credits from your project power, and the message counter has been replaced
+by the limits described below.
 
 Nothing changes in your contract, and no new line appears on your invoice. If you have
 questions about what this means for your project's consumption, contact your Customer
@@ -19,6 +19,9 @@ Kai consumes **[PPU credits](/management/project/limits/#project-power--time-cre
 (project power units), the same credits that run your
 transformations, extractors, and data apps. Your contract rate applies to Kai exactly
 as it applies to a transformation hour.
+
+New organizations start with a
+[free allowance of 300 PPU](#free-allowance-for-new-organizations).
 
 Organization Admins can [set up limits for your team](#setting-limits) to cap how much Kai can spend.
 
@@ -59,15 +62,39 @@ conversations per PPU.
 These are medians, not a price list. A longer or more involved run of the same piece of work
 costs more, so treat the figures as indicative and expect your own numbers to vary.
 
-## Tracking Kai project spend
+## Free allowance for new organizations
 
-### Kai Project Consumption
+Every organization created on or after **21 September 2026, 10:45 UTC** starts with a
+one-time **300 PPU** of free Kai usage, granted automatically. It covers everything Kai
+charges for. Once it runs out, Kai consumes PPU credits as described above.
 
-Kai spend appears in the
-[Project Consumption dashboard](/management/telemetry/telemetry-dashboards/#project-consumption)
-as its own **usage category**, next to your extractors, transformations, and data apps.
-That is where you see what Kai actually costs, and how it trends over time. The dashboard
-is available to everyone with access to the project.
+- **Shared** — all projects and users in the organization draw from the same 300 PPU.
+- **No expiry** — it does not reset each month, and creating another project does not add more.
+- **New organizations only** — including an additional organization of an existing customer.
+  Organizations created earlier do not qualify, even if they start using Kai later.
+- **Multi-tenant stacks** — on a single-tenant stack, ask your Customer Success Manager what
+  applies to you.
+- **Where to see it** — usage covered by the allowance shows as unbilled credits in the
+  [consumption dashboards](#consumption-dashboards). Kai does not show the remaining
+  balance yet.
+
+:::note[Spend limits still apply]
+Free usage counts towards the monthly project budget and per-user
+[spend limits](#setting-limits) exactly like paid usage.
+:::
+
+## Tracking Kai spend
+
+### Consumption dashboards
+
+Kai spend appears as its own **usage category**, next to your extractors, transformations,
+and data apps, in both consumption dashboards. That is where you see what Kai actually
+costs and how it trends over time.
+
+- [**Project Consumption**](/management/telemetry/telemetry-dashboards/#project-consumption)
+  — a single project, available to everyone with access to it.
+- [**Organization Usage**](/management/telemetry/telemetry-dashboards/#organization-usage)
+  — every project in the organization, available to organizations with an active contract.
 
 ### User Usage in Chat
 
