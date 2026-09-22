@@ -1,7 +1,7 @@
 ---
 title: Kai Pricing and Limits
 slug: 'kai/pricing'
-description: How Kai consumes PPU credits, where to track project spend, and how Organization Admins set project and per-user limits.
+description: How Kai consumes PPU credits, where to track project spend, how Organization Admins set project and per-user limits, and the free allowance new organizations receive.
 ---
 
 
@@ -21,6 +21,9 @@ transformations, extractors, and data apps. Your contract rate applies to Kai ex
 as it applies to a transformation hour.
 
 Organization Admins can [set up limits for your team](#setting-limits) to cap how much Kai can spend.
+Every project starts with a [default monthly budget](#default-project-budget), and organizations created
+after Kai's general availability get a [one-time free allowance](#free-allowance-for-new-organizations)
+before any Kai usage is charged.
 
 ## How Kai is billed
 
@@ -120,6 +123,18 @@ To set the project budget:
 
 Usage counts from the start of each calendar month, and the budget resets with it.
 
+#### Default project budget
+
+A project whose Organization Admins have not set a budget yet still has one: the default
+monthly project budget is **300 PPU**. It is a safety net against unexpected spend, not a
+free quota — usage under it is billed at your contract rate like any other Kai usage.
+Organization Admins can raise or lower it at any time; entering **0** turns Kai off for
+the whole project.
+
+The default budget is separate from the [free allowance for new
+organizations](#free-allowance-for-new-organizations): the budget limits how much Kai can
+spend in a month, the allowance decides how much of that spend is free.
+
 ### Setting per-user limits
 
 The **default per-user limit** applies to everyone who does not have their own, and you
@@ -130,3 +145,27 @@ default for everyone, or set a limit to **0** to remove that user's access to Ka
 the reset button next to a limit to put that user back on the default.
 
 ![Per-user limits in the user table](/kai/kai-per-user-limit.png)
+
+## Free allowance for new organizations
+
+Every Keboola organization created on or after **21 September 2026** receives a one-time
+**300 PPU** Kai allowance. Kai usage draws from the allowance first; once it is used up,
+further usage consumes your project power as described above.
+
+- **One allowance per organization.** It is shared by all projects and all users in the
+  organization. Creating another project does not add to it.
+- **No expiry, no reset.** The allowance does not renew monthly and does not run out on a
+  date — only when it is spent.
+- **New organizations only.** Organizations created before 21 September 2026 do not
+  receive an allowance, even if they start using Kai later. A new organization of an
+  existing customer does qualify.
+- **Automatic.** Nothing needs to be requested or activated; the allowance is granted
+  before the organization's first Kai usage.
+- **Not invoiced.** Usage covered by the allowance is classified as free usage and
+  excluded from your invoice. Only usage above it is billed.
+- **The last operation is kept whole.** If 1 PPU remains and a reply costs 3 PPU, the
+  whole reply is free and the next one is charged.
+
+The allowance does not replace the [project budget](#hierarchy-of-limits) or per-user
+limits: free usage counts towards them in the same way as paid usage, so a project can
+reach its monthly budget while allowance still remains.

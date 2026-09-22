@@ -123,7 +123,9 @@ every reply it takes to reach a result, costs about **1.1 PPUs**, and simple wor
 writing a query, exploring a project, creating a transformation — runs three to four
 conversations per PPU. See
 [Kai Pricing and Limits](/kai/pricing/) for typical figures per piece of work and for how Kai
-spend is tracked and capped.
+spend is tracked and capped. Each project has a default monthly Kai budget of 300 PPUs,
+adjustable by Organization Admins, and organizations created on or after 21 September 2026
+receive a one-time [300 PPU free allowance](/kai/pricing/#free-allowance-for-new-organizations).
 
 ### Storage Size
 The storage size is the sum of the sizes of the tables in your [table Storage](/storage/). 
