@@ -7,6 +7,13 @@ redirect_from:
 ---
 
 
+:::caution[These Google Cloud steps describe an older console]
+The screenshots below were taken in 2019 and Google has redesigned the console since. Read them as
+a list of *what to create* — a service account with three roles, a JSON key, a storage bucket — and
+find each one by name in the console you have, not by matching the pictures. Google's own
+documentation is linked at each step.
+:::
+
 After you have loaded your tables, either [from a URL](/getting-started/load/) or
 [using a data source connector](/getting-started/load/database/), [manipulated the data](/getting-started/transform/) in SQL,
 written it [into Google Sheets](/getting-started/write/), and
@@ -111,7 +118,12 @@ Then set the service account key:
 
 Open the downloaded key you have created above in a text editor, copy & paste it in the input field, click **Submit** and then **Save**.
 
-![Screenshot - Service Account Copy](/getting-started/ad-hoc/ex-bigquery-6.png)
+<!-- The screenshot that stood here (ex-bigquery-6.png, committed 2019-04-11) showed a real Google
+service-account JSON: project_id, private_key_id, the PEM private_key body and client_email. It was
+deleted on 2026-09-22 rather than masked, because its only content was a pasted secret and the
+sentence above already says what to paste. The key itself was confirmed inactive on 2026-08-27 and
+that escalation is closed; do not re-raise it. The masked twin of this file still exists at the old
+path in PR #1100. See DECISIONS.md. -->
 
 Fill the bucket you have created above:
 

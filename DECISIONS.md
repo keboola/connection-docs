@@ -908,6 +908,38 @@ the recorder now: no blind clicks on ancestors of text, only on the element itse
 
 ---
 
+## 2026-09-22 — PRDCT-616 never reached the renamed paths
+
+The screenshot scrub masked 44 images in August. It edited `public/tutorial/**`. This section had
+already moved to `public/getting-started/**` on 3 August, three weeks earlier, so the mask missed
+every copy the guide actually serves. Checked by hash, not by eye: all 44 files on this branch were
+byte-identical to the unmasked originals.
+
+Forty-three now carry the masked blobs from `af990ae2`, each verified to hash exactly to its
+counterpart. They were applied from the local object store, because GitHub was unreachable at the
+time and the branch was already fetched.
+
+The forty-fourth, `ad-hoc/ex-bigquery-6.png`, is deleted instead. Its only content was a pasted
+Google service-account JSON with a private key in it, and the step above it already tells the
+reader what to paste. Masking an image whose entire subject is a secret leaves an image of nothing.
+The key was confirmed inactive on 2026-08-27 and that escalation is closed; this is not a re-raise
+and the key is not reproduced anywhere.
+
+**What this does not fix.** PR #1100 is still open, with zero reviews, and `main` does not carry the
+mask. Production therefore still serves the unmasked original at the old path: a HEAD request for
+`help.keboola.com/tutorial/ad-hoc/ex-bigquery-6.png` returns 200 and 211,051 bytes, which is the
+pre-mask size. That is a merge, not an edit, and it belongs to whoever reviews #1100.
+
+Merge order matters now. If this chain lands first, #1100 needs a rebase because its files moved
+underneath it. If #1100 lands first, the content is identical on both sides and the rename merges
+cleanly.
+
+The `ad-hoc/` page also gained a caution saying its Google Cloud steps describe the 2019 console:
+read them as a list of what to create, not what to click. That is the third-party rule from the
+usability test, applied where the drift is widest.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
