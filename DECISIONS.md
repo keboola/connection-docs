@@ -940,6 +940,26 @@ usability test, applied where the drift is widest.
 
 ---
 
+## 2026-09-22 — The sweep, and what it did not find
+
+Every remaining image in the section went through contact sheets: 55 files outside the two
+directories the scrub covers, plus a strip of the top 56 pixels of every screenshot that could
+plausibly carry a header. Three more turned up with the organization, project, branch and avatar in
+frame, all on the Sheets writer page, and all three are cropped to start at the breadcrumb.
+
+What the sweep did not find is worth recording too, so nobody repeats it. The flow and Storage
+screens carry internal job labels and scheduler IDs, not people. The Storage list views show
+component names in "Recently Updated By", not colleagues. The notifications screen says "Choose from
+your colleagues or enter an email address" as interface text, with no address in it. Those are
+fine and should stay.
+
+Three unreferenced files went at the same time. A fourth, `automate/automate1.png`, looked
+unreferenced from inside Getting Started and is not: the legacy Flows page still uses it. It was
+restored before the commit. Checking `src/content/docs/` as a whole rather than the section is the
+lesson.
+
+---
+
 ## 2026-09-22 — The PII the scrub never listed, and the first use of the third-party rule
 
 Reading every image in the section turned up sixteen files carrying something that should not
