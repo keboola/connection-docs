@@ -21,9 +21,8 @@ transformations, extractors, and data apps. Your contract rate applies to Kai ex
 as it applies to a transformation hour.
 
 Organization Admins can [set up limits for your team](#setting-limits) to cap how much Kai can spend.
-Every project starts with a [default monthly budget](#default-project-budget), and organizations created
-after Kai's general availability get a [one-time free allowance](#free-allowance-for-new-organizations)
-before any Kai usage is charged.
+Every project starts with a [default monthly budget](#default-project-budget), and every new organization
+gets a [one-time free allowance](#free-allowance-for-new-organizations) before any Kai usage is charged.
 
 ## How Kai is billed
 
