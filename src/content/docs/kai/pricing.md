@@ -65,48 +65,36 @@ costs more, so treat the figures as indicative and expect your own numbers to va
 ## Free allowance for new organizations
 
 Every organization created on or after **21 September 2026, 10:45 UTC** starts with a
-one-time **300 PPU** of free Kai usage. Keboola grants it automatically — there is nothing
-to claim and nothing to switch on.
+one-time **300 PPU** of free Kai usage, granted automatically. It covers everything Kai
+charges for. Once it runs out, Kai consumes PPU credits as described above.
 
-- The 300 PPU is **shared** across all projects and users in the organization.
-- It **does not expire** and **does not reset** each month. Creating another project does
-  not add more.
-- Each new organization gets its own allowance, including an additional organization of an
-  existing customer. Organizations created before that moment do not qualify, even if they
-  start using Kai later.
-- The allowance runs on Keboola's multi-tenant stacks. If your organization is on a
-  single-tenant stack, ask your Customer Success Manager what applies to you.
-
-Kai draws from the allowance first, for everything it charges for: the replies it finishes,
-the background work that titles your chats and suggests follow-ups, and the one-time charge
-for a chat's execution environment. Once the allowance runs out, Kai consumes PPU credits
-from your project power as described above.
-
-The last piece of work stays whole. If 1 PPU of the allowance is left and an operation costs
-3 PPU, all 3 PPU are free, and billing starts with the operation after it.
+- **Shared** — all projects and users in the organization draw from the same 300 PPU.
+- **No expiry** — it does not reset each month, and creating another project does not add more.
+- **New organizations only** — including an additional organization of an existing customer.
+  Organizations created earlier do not qualify, even if they start using Kai later.
+- **Multi-tenant stacks** — on a single-tenant stack, ask your Customer Success Manager what
+  applies to you.
+- **Where to see it** — usage covered by the allowance shows as unbilled credits in the
+  [consumption dashboards](#consumption-dashboards). Kai does not show the remaining
+  balance yet.
 
 :::note[Spend limits still apply]
-The free allowance is not an exemption from [spend limits](#setting-limits). The monthly
-project budget and per-user limits count free and paid usage the same way, so Kai stops
-when a limit is reached even if the allowance still has credits left.
+Free usage counts towards the monthly project budget and per-user
+[spend limits](#setting-limits) exactly like paid usage.
 :::
 
-Kai does not display the remaining allowance balance yet. What the allowance covers is
-visible as unbilled credits in both the
-[Project Consumption](/management/telemetry/telemetry-dashboards/#project-consumption) and
-[Organization Usage](/management/telemetry/telemetry-dashboards/#organization-usage)
-dashboards, so you can follow how much of it you have drawn. The organization-level view is
-the one that matches the scope the allowance is shared at.
+## Tracking Kai spend
 
-## Tracking Kai project spend
+### Consumption dashboards
 
-### Kai Project Consumption
+Kai spend appears as its own **usage category**, next to your extractors, transformations,
+and data apps, in both consumption dashboards. That is where you see what Kai actually
+costs and how it trends over time.
 
-Kai spend appears in the
-[Project Consumption dashboard](/management/telemetry/telemetry-dashboards/#project-consumption)
-as its own **usage category**, next to your extractors, transformations, and data apps.
-That is where you see what Kai actually costs, and how it trends over time. The dashboard
-is available to everyone with access to the project.
+- [**Project Consumption**](/management/telemetry/telemetry-dashboards/#project-consumption)
+  — a single project, available to everyone with access to it.
+- [**Organization Usage**](/management/telemetry/telemetry-dashboards/#organization-usage)
+  — every project in the organization, available to organizations with an active contract.
 
 ### User Usage in Chat
 
