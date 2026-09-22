@@ -1043,6 +1043,49 @@ their restructuring cannot break it.
 
 ---
 
+## 2026-09-22 — What the guide test found after the screenshots came out
+
+Cold read of the four rewritten pages. No blockers: every step still reaches its Check line, every
+remaining image exists, and no page references a deleted file. The two Google hand-offs came out as
+the strongest part of the rewrite, because they say the reader is leaving Keboola, what they will
+be looking at, which account to pick, and what they will see on return.
+
+Seven things were worth fixing.
+
+**Step 5 told the reader what not to expect and never what success is.** It also merged two
+different facts into one clause: no dialog is designed behaviour, no deploy job is the defect. A
+reader could not separate them. The step now says the missing dialog is normal, names the positive
+confirmation (the app is listed under **Apps** with a page of its own), and puts the absent job in
+its own parenthesis as the platform failure. "Most likely read Not Deployed" lost its hedge.
+
+**Two steps on `write/` leaned entirely on pictures that are gone.** Step 4 said "authorize the
+account" and named no control; it now names the section and the button. Step 12 said to click the
+spreadsheet name without saying where it appears, which matters because the Prompt-tab guard routes
+readers straight there without ever opening the configuration; it now names the **Sheets** section.
+
+**The write page's numbering argued against its own tabs.** Steps 1 to 6 are shared, 7 to 10 belong
+to the UI tab, 11 and 12 are shared again. Flattened into the markdown twin that reads as one run of
+twelve, so an agent could run the prompt and then also walk the wizard, creating the sheet twice.
+The existing guard sat after the UI steps. A second guard now sits before them, and it survives into
+the twin.
+
+**Three smaller ones.** The Sheets UI tab never named the configuration while the Prompt tab used
+`Level from Sheets` twice, so a reader crossing tabs met a name they were never given. Step 8 kept
+the what and dropped the why when the button names went; the rationale is back, with the consequence
+of under-granting. And "Open the **Connect** menu ... **Connect** signs you in" used one word for
+the menu and an item inside it, which the deleted capture used to settle.
+
+**One prerequisite was softened.** The cold lander added earlier met a Prereqs item demanding
+`staffing_outlook` from a page they had skipped, then a line later was told it did not matter. The
+item now says any table with a few numeric columns works.
+
+Left alone deliberately: `transform/workspace.mdx` step 7 ends in a link rather than a click for a
+free-project reader, which predates this work and is already flagged there; and `Boolabean staffing
+outlook` naming both the transformation and the destination spreadsheet, which is a dataset naming
+choice rather than a defect.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were

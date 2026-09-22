@@ -82,8 +82,10 @@ reference and are read-only or idempotent; they have not been run here. */}
     skip, and the flow on the next page simply has two phases instead of three.
   </li>
   <li>
-    The <code>staffing_outlook</code> table in Storage, from{' '}
-    <a href="/getting-started/transform/">Transform data</a>.
+    A table in Storage to build from. Following the guide, that is{' '}
+    <code>staffing_outlook</code> from <a href="/getting-started/transform/">Transform data</a>;
+    arriving on your own, any table with a few numeric columns works, and the note below says what
+    to adapt.
   </li>
 </Prereqs>
 
@@ -144,11 +146,12 @@ to build one ([Build your first app with Kai](/data-apps/getting-started/)).
    {/* Draft preview iframe captured 2026-09-14 in project 264 (app-preview-capture.mjs, 2x). A dash
    in a cell is an empty expected_units: the summer had no day in that band; see transform/. */}
 
-5. When the draft is right, click **Publish to production**. Expect no confirmation dialog: in our
-   project the button produced no dialog and no job, which is disconcerting the first time and is
-   not a sign you missed a step.
+5. When the draft is right, click **Publish to production**. No confirmation dialog appears, which
+   is normal. What tells you it worked is the app itself: it is now listed under **Apps** with a
+   page of its own. (In our project the click also started no deploy job, which is the platform
+   failure this page documents, not something you did.)
 
-   Then open the app's own page from **Apps**. Its status will most likely read **Not Deployed**,
+   Open that page. Its status reads **Not Deployed**,
    with a **Deploy App** button, so publishing and starting are two separate steps: click **Deploy
    App**. A deploy builds and starts a container, which takes a few minutes. When it succeeds the
    status turns **Active**, **Open App** appears, and the app asks for the password from its
