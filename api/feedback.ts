@@ -3,7 +3,7 @@
  * forwards it to a Keboola ingestion endpoint (intended to be a Data Stream
  * that lands each submission as a row in a Storage table).
  *
- * Mirrors api/chat.ts conventions: plain JSON handler, permissive CORS, a GET
+ * Mirrors api/chat.ts conventions: plain JSON handler, a GET
  * `{ enabled }` probe so the static frontend can decide whether to render the
  * widget, and a stub mode when the ingestion env isn't configured yet (so the
  * site can ship before the stream exists).
@@ -98,8 +98,35 @@ interface FeedbackRecord {
   ts: string;
 }
 
-function setCors(res: VercelResponse) {
-  res.setHeader('access-control-allow-origin', '*');
+/**
+ * Origins allowed to call this endpoint from a browser.
+ *
+ * In a production or preview build the widget requests `/api/feedback` with an
+ * empty apiBase, i.e. same-origin, and same-origin requests are not subject to
+ * CORS at all — so a wildcard grants access to nobody who needs it, and to
+ * every third-party page that does not. That is a free spam vector: any site
+ * could POST feedback using its visitors' browsers and IPs.
+ *
+ * The only cross-origin caller is `astro dev`, where Feedback.astro points
+ * apiBase at the scratch beacon deployment. Hence localhost and this project's
+ * own Vercel hostnames, rather than all of vercel.app — anyone can deploy
+ * there.
+ *
+ * CORS is a browser control and stops none of this from curl, so the honeypot,
+ * length caps and reason allow-list in buildRecord() remain the real defence.
+ * This just removes the free half.
+ */
+const ALLOWED_ORIGIN =
+  /^https:\/\/help\.keboola\.com$|^https:\/\/(?:connection-docs|keboola-docs-beacon)[a-z0-9-]*\.vercel\.app$|^http:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/;
+
+function setCors(req: VercelRequest, res: VercelResponse) {
+  const origin = typeof req.headers.origin === 'string' ? req.headers.origin : '';
+  if (origin && ALLOWED_ORIGIN.test(origin)) {
+    res.setHeader('access-control-allow-origin', origin);
+    // The response now varies by origin; without this a shared cache could
+    // hand one origin's allow header to another.
+    res.setHeader('vary', 'origin');
+  }
   res.setHeader('access-control-allow-headers', 'content-type');
   res.setHeader('access-control-allow-methods', 'POST, OPTIONS');
 }
@@ -243,7 +270,7 @@ async function ingest(record: FeedbackRecord): Promise<void> {
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'OPTIONS') {
     res.statusCode = 204;
-    setCors(res);
+    setCors(req, res);
     res.setHeader('access-control-max-age', '86400');
     res.end();
     return;
@@ -253,7 +280,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'GET') {
     res.statusCode = 200;
     res.setHeader('content-type', 'application/json');
-    setCors(res);
+    setCors(req, res);
     res.setHeader('cache-control', 'no-store');
     // Enabled even in stub mode: the widget still works (submissions are logged
     // server-side) and starts collecting the moment the stream env is set.
@@ -268,7 +295,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  setCors(res);
+  setCors(req, res);
 
   let body: FeedbackBody;
   try {
