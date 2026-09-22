@@ -1,7 +1,7 @@
 ---
 title: Kai Pricing and Limits
 slug: 'kai/pricing'
-description: How Kai consumes PPU credits, where to track project spend, and how Organization Admins set project and per-user limits.
+description: How Kai consumes PPU credits, the free allowance for new organizations, where to track project spend, and how Organization Admins set project and per-user limits.
 ---
 
 
@@ -19,6 +19,9 @@ Kai consumes **[PPU credits](/management/project/limits/#project-power--time-cre
 (project power units), the same credits that run your
 transformations, extractors, and data apps. Your contract rate applies to Kai exactly
 as it applies to a transformation hour.
+
+Organizations created from 21 September 2026 onwards start with a
+[free allowance of 300 PPU](#free-allowance-for-new-organizations).
 
 Organization Admins can [set up limits for your team](#setting-limits) to cap how much Kai can spend.
 
@@ -58,6 +61,39 @@ conversations per PPU.
 
 These are medians, not a price list. A longer or more involved run of the same piece of work
 costs more, so treat the figures as indicative and expect your own numbers to vary.
+
+## Free allowance for new organizations
+
+Every organization created on or after **21 September 2026, 10:45 UTC** starts with a
+one-time **300 PPU** of free Kai usage. Keboola grants it automatically — there is nothing
+to claim and nothing to switch on.
+
+- The 300 PPU is **shared** across all projects and users in the organization.
+- It **does not expire** and **does not reset** each month. Creating another project does
+  not add more.
+- Each new organization gets its own allowance, including an additional organization of an
+  existing customer. Organizations created before that moment do not qualify, even if they
+  start using Kai later.
+- The allowance runs on Keboola's multi-tenant stacks. If your organization is on a
+  single-tenant stack, ask your Customer Success Manager what applies to you.
+
+Kai draws from the allowance first, for everything it charges for: the replies it finishes,
+the background work that titles your chats and suggests follow-ups, and the one-time charge
+for a chat's execution environment. Once the allowance runs out, Kai consumes PPU credits
+from your project power as described above.
+
+The last piece of work stays whole. If 1 PPU of the allowance is left and an operation costs
+3 PPU, all 3 PPU are free, and billing starts with the operation after it.
+
+:::note[Spend limits still apply]
+The free allowance is not an exemption from [spend limits](#setting-limits). The monthly
+project budget and per-user limits count free and paid usage the same way, so Kai stops
+when a limit is reached even if the allowance still has credits left.
+:::
+
+Kai does not display the remaining allowance balance yet. Until it is used up, the Kai spend
+you see in the dashboards below is what the allowance is covering — bear in mind that those
+dashboards are per project, while the allowance is shared across the organization.
 
 ## Tracking Kai project spend
 
