@@ -85,22 +85,31 @@ like this one can be [parallelized internally](/flows/#execute-tasks-in-parallel
 you will see that one task fan out into a job per row.
 
 To add a second task to a phase that already has one, hover the phase and click the **+** in the
-small toolbar that appears on its top edge. It opens the same **Add Task** menu as an empty canvas
-(**Component**, **Notification**, **Variable**), scoped to that phase. Do not confuse it with the
+small toolbar that appears on its top edge. It opens an **Add Task** menu scoped to that phase
+(**Component**, **Notification**, **Variable**). The **+** on the line *between* phases opens a
+longer one that also offers **Conditions**, because a condition sits between phases rather than
+inside one. Do not confuse it with the
 **+** *below* a phase, which starts a new phase instead. That toolbar belongs to the phase; the one
 that appears on the card itself is the task's, and carries **Run task** and its settings.
 {/* Walked live in project 264 on 2026-08-19 in the previous tutorial flow builder: the phase's
 own + is tooltipped "Open menu" and opens ADD TASK with Component / Notification / Variable.
-Nothing was saved. The pre-migration page said to drag the second task into the "Step 1" box;
+Re-walked 2026-09-22 on the Boolabean morning outlook flow, both controls: the phase toolbar's +
+(tooltip "Open menu", beside "Delete Phase") opens exactly those three; the standalone + node on the
+line between phases (also "Open menu") opens Component / Conditions / Notification / Variable.
+Neither menu has a "Build with Kai" entry in this project. Nothing was saved. The first version of
+this day's edit put the four-item list on the toolbar +, which had not been exercised; the
+fact-checker caught it against the retired still, which shows the toolbar's three. The pre-migration page said to drag the second task into the "Step 1" box;
 that is Legacy Flow Builder language (see /flows/flows-legacy/) and does not apply here. */}
 
 Flows can also branch on what happened: retry a task, take a different path on failure, end early.
 That is [conditions](/flows/#conditions), and you need none of it yet.
 
-{/* VERIFY(owner): live check 2026-09-02 in project 264 confirmed **Modify with Kai** in the flow
-header (it is not only a data-app control). NOT confirmed, and asserted below: that **Build with
-Kai** appears in the Add Task menu, and whether that menu offers three items (Component /
-Notification / Variable — the only thing observed live, 2026-08-19) or four. Also unverified:
+{/* Live check 2026-09-02 in project 264 confirmed **Modify with Kai** in the flow header (it is
+not only a data-app control). The Add Task menu question is closed for both controls on a populated
+flow (see the walk note above); no Build with Kai in either, so the "in some projects Build with
+Kai" clause that stood below was removed rather than left as an unverified promise. Still open:
+which of the two menus an EMPTY canvas opens by itself in step 2 — settling that means creating a
+flow. VERIFY(owner): Also unverified:
 /kai/use-cases/#complex-workflows is cited for "assembling existing configurations into a flow",
 but that page documents building pipelines from scratch, which is a different job. Walk the
 Builder in 264 and correct or flag. */}
@@ -158,11 +167,17 @@ nobody gets told about is just a button.
    Yourself is unverified — confirming means creating a flow object in 264; check during the
    fresh-project walk. */}
 
-2. You land in the **Builder** on an empty canvas, with an **Add Task** menu already open:
-   **Component**, **Notification**, **Variable**, and in some projects **Build with Kai**. Choose
+2. You land in the **Builder** on an empty canvas, with an **Add Task** menu already open. Choose
    **Component**.
 
-   ![Screenshot - The Add Task menu](/getting-started/automate/02-add-task.png)
+   ![Hovering the plus above the first phase shows an Open menu tooltip; clicking it opens the Add Task menu with Component, Conditions, Notification and Variable; choosing Component opens the component picker with a search box and the project's components listed](/getting-started/automate/add-task.gif)
+
+   {/* GIF, 2026-09-22, replaces the 02-add-task.png still. It shows the standalone + above the
+   first phase: the tooltip that hover reveals, its four-item menu, and the picker that Component
+   opens. The retired still showed the phase toolbar's three-item menu instead; the two controls
+   differ by Conditions. Captured from the live Boolabean morning outlook
+   flow in 264 as five states, cropped below the top bar so no organization, project or branch name
+   is in frame; 860x390, 40 KB, five real frames after gifsicle. Nothing was saved in the flow. */}
 
 3. A component picker opens, listing what the project has, grouped by component with each one's
    configurations. Pick **HTTP**, then the `Boolabean sales` configuration. It drops onto the

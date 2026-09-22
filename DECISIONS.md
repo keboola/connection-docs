@@ -869,6 +869,45 @@ that failed every time in testing, which the page already says where the reader 
 
 ---
 
+## 2026-09-22 — Two behaviour GIFs from 264, and the rule for when a GIF earns its place
+
+Nikita asked for GIFs like the ones on the Kai page, with the condition that each one make sense
+rather than decorate. Studying what the repo already has settled the pattern: the Kai one is a
+designed motion graphic at 2.5 MB, the MCP one a 9.5 MB screen recording, and the six on the
+component UI-options pages are what to copy — cropped to one control, a handful of states, under
+250 KB, placed under the thing they explain.
+
+The rule that came out of it: a GIF earns its place when the reader cannot click the real thing and
+a still cannot carry it. On this section that means hover-revealed UI, which is exactly two places.
+
+**automate/ gets `add-task.gif`.** The plus that opens the Add Task menu only shows its tooltip on
+hover, the menu is a state, and the component picker is a third. Five frames from the live flow,
+860x430, 42 KB. It replaces the still of the menu. The walk also found that there are two Add
+Task menus, and my first edit conflated them: the phase toolbar's + offers Component,
+Notification, Variable, which is what the page had always said, while the standalone + between
+phases adds Conditions. I had put the four-item list on the toolbar control I never clicked; the
+fact-check caught it against the retired still, which shows the toolbar's three. The page now
+names both. Neither menu has a Build with Kai entry in this project, so that unverified clause is
+gone, and the empty-canvas menu of step 2 stays flagged because settling it means creating a flow.
+
+**load/ gets `forecast-row-code-editor.gif`.** The Visual Editor button is disabled on the forecast
+row and says why only on hover. Two frames, 18 KB. The smaller win of the two, and it is placed
+under the sentence that quotes the note rather than anywhere prominent.
+
+**The hub's tab-sync GIF** from the day before is the third, and the only one that needed no
+project at all.
+
+Masking is by framing: every frame is a crop that starts below the top bar, so the organization,
+project and branch names never enter a frame. The picker frame shows component names and
+configuration counts, which are product surface, not people.
+
+One slip worth recording: a fragile click meant to dismiss a "Latest update" popover hit the
+top bar's New Development Branch button instead and opened its dialog. Nothing was typed and the
+create button stayed disabled; `kbagent branch list` afterwards shows only Main. The lesson is in
+the recorder now: no blind clicks on ancestors of text, only on the element itself.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
