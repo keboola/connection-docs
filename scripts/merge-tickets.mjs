@@ -29,6 +29,8 @@ const KEY = /SUPPORT-(\d{4,6})/i;
 const JUNK_TEAM = /Eng Test/i;
 const JUNK_TITLE = /^(?:SUPPORT-\d+\s*)?(?:[a-z]{4,12}|test\b.*|title|2 balónky|testy.*)$/i;
 const NOISE_PREFIX = /^(?:re|fw|fwd)\s*:\s*/i;
+const COMPONENT_ID = /\b(?:kds-team|keboola|fisa|[a-z0-9-]+)\.(ex|wr|app|processor)-([a-z0-9-]+)/gi;
+const KIND = { ex: 'extractor', wr: 'writer', app: 'application', processor: 'processor' };
 
 function normalise(raw, file) {
   const title0 = String(raw.title ?? '').trim();
@@ -37,12 +39,15 @@ function normalise(raw, file) {
   let title = title0.replace(KEY, '').replace(/^[\s:–-]+/, '').trim();
   title = title.replace(NOISE_PREFIX, '').replace(NOISE_PREFIX, '').trim();
   const text = String(raw.description ?? raw.text ?? '').replace(/\s+/g, ' ').trim();
+  // "kds-team.ex-netsuite" says nothing to an embedding model; "netsuite extractor" does.
+  const expanded = `${title} ${text}`.replace(COMPONENT_ID, (_, kind, name) =>
+    `${name.replace(/-/g, ' ')} ${KIND[kind]}`);
   const source = file.includes('linear') ? 'linear' : file.includes('jira') ? 'jira-feed' : 'other';
   return {
     id,
     title,
     text,
-    embed_text: text ? `${title}\n\n${text}` : title,
+    embed_text: expanded.trim(),
     source,
     created_at: raw.created_at ?? raw.createdAt ?? null,
     team: raw.team ?? null,
