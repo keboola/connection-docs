@@ -8,7 +8,7 @@ Once an app is deployed, everything you do with it starts on its page under **Ap
 
 ## Read the app's state
 
-The header shows the app's status and the one or two actions that make sense for it: **Deploy App** for an app that has never run, **Start App** for a stopped one, **Open App** and **Redeploy App** for a running one, and **Modify with Kai** on apps Kai built. The **⋯** menu holds the rest: **Copy app**, **Automate** (add it to a flow), **Debug mode**, **Delete app**.
+The header shows the app's status and the one or two actions that make sense for it: **Deploy App** for an app that has never run, **Start App** for a stopped one, **Open App** and **Redeploy App** for a running one, and **Modify with Kai** on apps Kai built. The **⋯** menu holds the rest: **Suspend app**, **Copy app**, **Automate** (add it to a flow), **Debug mode**, **Delete app**.
 
 The tabs below the header split the app's life into views: **Overview** (description, authentication, code source, App URL), **Advanced Settings** (environment variables and secrets, theme, data mappings), **All Runs** (every start attempt), **Terminal Logs** (stdout and stderr while it runs), **Versions** (every configuration change), and **Drafts** while Kai has a draft open. The **App Info** panel on the right shows the backend version and size, the auto-sleep timeout, the owner, and the App ID.
 
@@ -28,7 +28,7 @@ Secrets deserve one note: after you save one, the field shows an encrypted value
 ## Stop, start, sleep
 
 - **Sleeping** is automatic. After the inactivity timeout (five minutes to 24 hours, set in the deploy wizard) the app suspends; the next visit wakes it and shows a short **waking up** page. You pay only for time the app is awake or waiting to suspend.
-- **Stopping** is deliberate: **⋯ → Suspend App** stops the container and takes the URL offline while keeping the configuration. **Start App** brings it back with the same settings.
+- **Stopping** is deliberate: **⋯ → Suspend app** stops the container and takes the URL offline while keeping the configuration. Keboola asks you to confirm. **Start App** brings it back with the same settings.
 - **Redeploy App** restarts a running app with the current configuration and, for apps on your own repository, the current branch head.
 
 Sleep and wake behaviour in detail, including the wakeup error page: [Sleep and resume](/data-apps/reference/#sleep-and-resume).
