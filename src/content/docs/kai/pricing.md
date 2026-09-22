@@ -20,7 +20,7 @@ Kai consumes **[PPU credits](/management/project/limits/#project-power--time-cre
 transformations, extractors, and data apps. Your contract rate applies to Kai exactly
 as it applies to a transformation hour.
 
-Organizations created from 21 September 2026 onwards start with a
+New organizations start with a
 [free allowance of 300 PPU](#free-allowance-for-new-organizations).
 
 Organization Admins can [set up limits for your team](#setting-limits) to cap how much Kai can spend.

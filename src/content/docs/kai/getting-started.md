@@ -234,14 +234,25 @@ it works.
 
 ## Usage and Limits
 
-Kai consumes **[PPU credits](/kai/pricing/)** — the same project power that runs your
-transformations, extractors, and data apps. There is no message quota; a median
-conversation costs about **1.1 PPU**. Organizations created from 21 September 2026 onwards
-start with a [free allowance of 300 PPU](/kai/pricing/#free-allowance-for-new-organizations).
+On contracted plans, Kai consumes **[PPU credits](/kai/pricing/)** — the same project
+power that runs your transformations, extractors, and data apps — rather than a monthly
+message quota. A median conversation costs about **1.1 PPU**. New organizations start with
+a [free allowance of 300 PPU](/kai/pricing/#free-allowance-for-new-organizations).
 
 Organization Admins cap Kai spend with a monthly project budget and per-user limits in
 **Settings → Kai Agent → Kai spend limits**. An indicator appears in your chat panel at 80%
 of your limit, and when a limit is reached, Kai stops and tells you which one applied.
+
+[Pay-as-you-go projects](/management/payg-project/) are not on this model yet. They keep a
+monthly Kai message limit per user until usage-based billing reaches PAYG.
+
+<!-- VERIFY(david@keboola.com): the PAYG carve-out above. keboola/ui#8531 (AI-3818, Martin
+Vaško, 2026-09-07) made resolveMonthlyMessages return null for non-PAYG only — "PAYG keeps
+its interim cap until AI-3104 ships" — and AI-3104 (PAYG / Stripe) is On hold under the
+"PAYG (deprioritised for now)" milestone, so the cap is still live. The number is not
+stated here on purpose: this page previously claimed 50 messages per user per month and
+nothing I could reach confirms that figure. Confirm the number, or whether PAYG should be
+described at all, and this comment can go. -->
 
 For what a PPU buys, where to track spend, and how to set the limits, see
 [Kai Pricing and Limits](/kai/pricing/).
