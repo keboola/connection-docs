@@ -94,7 +94,7 @@ Keboola runs your app from a **Git repository** you point it at. Develop locally
 
 1. In your project, create a **Python/JS app** (**Apps → + Create App → Python / JS**).
 2. On the app's configuration page, open **Git Repository** and set the **Project URL**. For a private repo, switch on **Private** and add a **Username** and **Access Token**, or an **SSH Private Key**.
-3. Set the **Branch**; **Reload Branches** refreshes the list. There's nothing to point at a start file — `keboola-config/supervisord/services/*.conf` is what starts your app.
+3. Set the **Branch**. The button beside it reads **Load Branches** until a repository is configured and **Reload Branches** afterwards. There's nothing to point at a start file — `keboola-config/supervisord/services/*.conf` is what starts your app.
 4. Click **Deploy App** and complete the short wizard (backend size, inactivity timeout). Keboola clones the repo, runs `setup.sh`, and starts your processes. When the status turns **Active**, click **Open App**. Push changes and **Redeploy** to ship them.
 
 ![The Python/JS app configuration page: Authentication, a Git Repository section with Project URL and Load Branches, and the App Info panel showing the Python / JS backend](/data-apps/python-js-config.png)
