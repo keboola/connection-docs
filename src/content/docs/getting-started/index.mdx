@@ -29,6 +29,16 @@ The world is now described once, on load/. Timing: 80 = this page (5) + the seve
 (5+15+15+5+15+15+5); each step = reading one tab at 200 words/min plus the wall time Kai took in the
 2026-09-08/09 live runs. Building alone, prompt path, was about 30 minutes.
 
+The tab-sync GIF follows the pattern the component docs already use for UI behaviour
+(public/extend/component/ui-options/ui-examples/*.gif): cropped to just the region that carries the
+point, a handful of states rather than smooth motion, and small. Built 2026-09-22 from the local
+preview of this branch, so it needs no project and shows no project data. Five states captured at
+1000x384 (the sidebar's current-page highlight on the left, the tab strip on the right), held by
+repeating frames at 5 fps, then palettegen at 96 colours and `gifsicle -O3 --lossy=40`, which
+collapses the repeats back to five real frames: 104 KB, 7.2 s. The two big GIFs in this repo
+(kai/Capabilities.gif at 2.5 MB, ai/mcp-server's at 9.5 MB) are the pattern NOT to copy on a page
+this size.
+
 Hero clip, three acts (compositor scene outlook-tour): five raw CSV rows verbatim from
 public/getting-started/boolabean/*.csv (S02 is a code in sales.csv and Boolabean Zelný trh, Brno,
 in stores.csv; P01 is a code in sales.csv and Filter of the Day in products.csv); the question,
@@ -83,6 +93,10 @@ to page:
 - **UI** — the same task click by click, for when you want to see where each setting lives.
 - **CLI / API** — the same task from a terminal with [kbagent](/cli/), and the raw request beside
   it where there is no command for it.
+
+Pick a tab once and every page after it opens on the same one:
+
+![Choosing the CLI / API tab on one page, then opening the next page in the guide, which is already showing its CLI / API tab](/getting-started/tab-sync.gif)
 
 Where one of the three cannot do the job, the page says so rather than showing an empty tab. A
 signup form, a Google consent screen and a branch merge are all decisions a browser has to make.
