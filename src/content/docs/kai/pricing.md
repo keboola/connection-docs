@@ -5,10 +5,10 @@ description: How Kai consumes PPU credits, the free allowance for new organizati
 ---
 
 
-:::note[Kai becomes generally available on 15 September 2026]
-Kai was free during beta, with a limit of 150 messages. From 15 September 2026 it
-consumes PPU credits from your project power, and the message counter is replaced by
-the limits described below.
+:::note[Kai became generally available on 15 September 2026]
+Kai was free during its public beta, with a limit of 150 messages. Since 15 September 2026
+it consumes PPU credits from your project power, and the message counter has been replaced
+by the limits described below.
 
 Nothing changes in your contract, and no new line appears on your invoice. If you have
 questions about what this means for your project's consumption, contact your Customer

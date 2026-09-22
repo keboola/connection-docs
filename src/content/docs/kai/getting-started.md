@@ -7,7 +7,7 @@ slug: 'kai/getting-started'
 
 ## Access
 
-Kai is now in **Public Beta** and available to all users in supported stacks.
+Kai is **generally available** to all users in supported stacks.
 
 ### Enabling Kai
 
@@ -232,15 +232,19 @@ it works.
 - **Ask for explanations** — `"Explain this SQL query step by step"`
 - **Don't type secrets in chat** — Kai uses secure forms for credentials. When setting up extractors or connections, tell Kai what you need and it will prompt you through secure configuration interfaces
 
-## Rate Limits
+## Usage and Limits
 
-**Kai is free during the public beta period.**
+Kai consumes **[PPU credits](/kai/pricing/)** — the same project power that runs your
+transformations, extractors, and data apps. There is no message quota; a median
+conversation costs about **1.1 PPU**. Organizations created from 21 September 2026 onwards
+start with a [free allowance of 300 PPU](/kai/pricing/#free-allowance-for-new-organizations).
 
-Each user receives **150 turns (messages) per month per project** on contracted plans. The limit resets at the beginning of each calendar month.
+Organization Admins cap Kai spend with a monthly project budget and per-user limits in
+**Settings → Kai Agent → Kai spend limits**. An indicator appears in your chat panel at 80%
+of your limit, and when a limit is reached, Kai stops and tells you which one applied.
 
-- **Pay-As-You-Go (PAYG) plans** have a lower limit of **50 messages per user per month**
-- Your current usage is displayed in the chat interface
-- Need more? [Contact Keboola Support](mailto:support@keboola.com) to discuss custom limits for your project
+For what a PPU buys, where to track spend, and how to set the limits, see
+[Kai Pricing and Limits](/kai/pricing/).
 
 ## Troubleshooting
 
