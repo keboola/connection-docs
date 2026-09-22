@@ -114,6 +114,11 @@ type into that form are the ones in **The sample database** above.
 
    ![Screenshot - Credentials](/getting-started/load/db-picture5.png)
 
+   Once it saves, the **Password** field shows a long value that is not what you typed. That is
+   expected: Keboola encrypts the field on save and keeps only the cipher, so nothing reads the
+   original back out, not the form and not the API. You will see the same thing anywhere a field's
+   name starts with `#`, including the JSON in the **CLI / API** tab.
+
 7. Under **Select sources**, pick `OPPORTUNITY`, `ACCOUNT` and `USER`.
 
    ![Screenshot - Select sources](/getting-started/load/db-picture6.png)
@@ -123,10 +128,8 @@ type into that form are the ones in **The sample database** above.
 
    ![Screenshot - Tables selected](/getting-started/load/db-picture7.png)
 
-**Advanced Mode** is where incremental fetch, incremental load and hand-written SQL live. This
-walk does not need them.
-
-![Screenshot - Advanced mode](/getting-started/load/db-picture8.png)
+**Advanced Mode**, top right of the configuration page, is where incremental fetch, incremental
+load and hand-written SQL live. This walk does not need them.
 
 </TabItem>
 <TabItem label="CLI / API">

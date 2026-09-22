@@ -347,7 +347,9 @@ Every identifier is double-quoted because Snowflake upper-cases unquoted ones. Q
 aliases too is what gives the table lower-case column names; keep to one convention, because a
 table that already exists remembers the case of its columns (see the check below).
 
-![Screenshot - The configured transformation](/getting-started/transform/07-configured.png)
+Back on the transformation's own page, the **Queries** section now holds your code in Block 1:
+
+![Screenshot of the transformation page: the Queries section with the SQL in Block 1, above the input and output mapping](/getting-started/transform/07-configured.png)
 
 **If your project uses BigQuery**
 
@@ -556,7 +558,9 @@ The table list also has a **Recently Updated By** column, naming the transformat
 backend (`Boolabean staffing outlook / Snowflake SQL` here), the fastest way to answer "where did
 this table come from?" months later.
 
-![Screenshot - The new table in Storage](/getting-started/transform/10-table-in-storage.png)
+In **Storage**, the table list shows it:
+
+![Screenshot of the Storage table list with staffing_outlook and its Recently Updated By column naming the transformation](/getting-started/transform/10-table-in-storage.png)
 
 Running the transformation again rebuilds the table; it is safe to re-run while you are
 experimenting. Tomorrow's forecast gives you tomorrow's table, which is what the scheduling page

@@ -1086,6 +1086,39 @@ choice rather than a defect.
 
 ---
 
+## 2026-09-22 — The rest of the test's lessons, turned into edits
+
+Two of Michal's seven had no edit against them yet.
+
+**The secret that came back different.** He saved a password, saw a long unfamiliar value in the
+field, and read it as a bug. It is encryption. The database side trip now says so at the moment it
+happens, in step 6, and names the general rule: any field whose name starts with `#` behaves this
+way, including the JSON in the CLI tab. Warning after the surprise is not warning.
+
+**Kai and provider authorization.** Two flags hedged this as "the conservative reading" because
+`kai/use-cases.md` advertises setting up a generic extractor "with pagination and OAuth
+authentication". That is configuring a connector's auth, not granting it, and the distinction is now
+settled twice over: product said on the call that an agent needs an OAuth provider and it will never
+be possible, and `kbagent data-app create --auth` accepts only `password` or `public`. One flag
+closed on `write/`, and the unverified "and so does Kai" clause came out of the Sheets side trip
+rather than staying as a claim nobody had checked.
+
+**Three images that a reader could not place.** The configured transformation and the new Storage
+table both sat with no sentence saying where the reader was; each now opens with one, and both alt
+texts moved to the house format that says what is shown rather than labelling the file. The third,
+Advanced Mode on the database page, was decorative by the step's own admission, so it went and the
+sentence gained "top right of the configuration page" instead.
+
+**The 250 KB image budget, measured rather than assumed.** Four files exceed it: 371, 277, 263 and
+253 KB. All four are 2x retina captures, which the same GitHub guidance that sets the budget also
+requires. Downscaling the two widest from 2800 to 2000 pixels made them *larger*, 328 and 305 KB,
+because the originals are already better compressed than ffmpeg's encoder manages, and no dedicated
+optimizer is installed here. So they stay. Degrading real captures to hit a number borrowed from a
+site whose images are half the resolution would trade something a reader can see for something only
+a linter can. Worth revisiting if `pngquant` or `oxipng` ever lands in the toolchain.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were

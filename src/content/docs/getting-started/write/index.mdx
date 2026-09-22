@@ -63,11 +63,13 @@ flow.
 Google Sheets is the easiest destination to try. The
 [full catalogue](/components/writers/) covers databases, BI tools, and cloud storage.
 
-{/* VERIFY(owner): "the OAuth consent screen is not something Kai can click through" is the
-conservative reading, not a documented limit — kai/use-cases.md advertises setting up a generic
-extractor "with pagination and OAuth authentication", which is about configuring auth, not granting
-it. Same caveat on load/googlesheets.md. Worth documenting on kai/ what Kai can and cannot do
-around authorizations. */}
+{/* Closed 2026-09-22. This was hedged as "the conservative reading" because kai/use-cases.md
+advertises setting up a generic extractor "with pagination and OAuth authentication". That is about
+*configuring* a connector's auth, not *granting* it, and the distinction is now settled from two
+directions: product said on the 22 Sept call that an agent needs an OAuth provider and "it will
+never be possible", and the CLI agrees by construction — `kbagent data-app create --auth` accepts
+only `password` or `public` (_data/cli/command-reference.md:726). The page states it plainly now.
+Still worth saying once on /kai/ where the boundary belongs, which is that section's call. */}
 
 ## Configure the destination
 
