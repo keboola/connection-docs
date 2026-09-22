@@ -1,5 +1,6 @@
 ---
 title: IMAP Query Syntax
+lastUpdated: 2026-06-19
 slug: 'components/extractors/communication/email-imap/query-syntax'
 ---
 

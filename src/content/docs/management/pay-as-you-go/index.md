@@ -1,5 +1,6 @@
 ---
 title: Pay As You Go (Free Plan)
+lastUpdated: 2026-02-19
 slug: 'management/payg-project'
 ---
 

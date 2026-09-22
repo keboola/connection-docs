@@ -1,5 +1,6 @@
 ---
 title: Project Deletion
+lastUpdated: 2026-06-03
 slug: 'management/project/delete'
 redirect_from:
   - /management/project-delete/

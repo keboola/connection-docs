@@ -1,5 +1,6 @@
 ---
 title: ServiceNow Data Source Connector
+lastUpdated: 2024-02-28
 slug: 'components/extractors/other/servicenow'
 redirect_from:
     - /extractors/other/servicenow/

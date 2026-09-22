@@ -1,5 +1,6 @@
 ---
 title: Keboola Model Context Protocol (MCP) Server
+lastUpdated: 2026-08-28
 slug: 'ai/mcp-server'
 redirect_from:
     - /external-integrations/mcp-server/

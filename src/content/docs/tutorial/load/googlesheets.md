@@ -1,5 +1,6 @@
 ---
 title: Loading Data from Google Sheets
+lastUpdated: 2023-12-23
 slug: 'tutorial/load/googlesheets'
 ---
 

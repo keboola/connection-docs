@@ -1,5 +1,6 @@
 ---
 title: Snowflake to DuckDB Migration
+lastUpdated: 2026-08-04
 slug: 'transformations/duckdb/snowflake-migration'
 ---
 

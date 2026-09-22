@@ -1,5 +1,6 @@
 ---
 title: How to Connect BigQuery
+lastUpdated: 2026-06-15
 slug: 'storage/byobq'
 ---
 

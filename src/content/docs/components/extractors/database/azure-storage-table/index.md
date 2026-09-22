@@ -1,5 +1,6 @@
 ---
 title: Azure Storage Table
+lastUpdated: 2024-02-29
 slug: 'components/extractors/database/azure-storage-table'
 ---
 

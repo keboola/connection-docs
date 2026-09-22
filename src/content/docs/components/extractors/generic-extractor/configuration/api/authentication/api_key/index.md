@@ -1,5 +1,6 @@
 ---
 title: API Key Authentication
+lastUpdated: 2026-08-05
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/api_key'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/api_key/

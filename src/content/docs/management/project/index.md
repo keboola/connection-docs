@@ -1,5 +1,6 @@
 ---
 title: Project Settings
+lastUpdated: 2025-06-11
 slug: 'management/project'
 ---
 

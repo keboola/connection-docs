@@ -1,5 +1,6 @@
 ---
 title: GoodData Reports
+lastUpdated: 2024-02-29
 slug: 'components/extractors/marketing-sales/gooddata-reports'
 redirect_from:
     - /extractors/marketing-sales/gooddata-reports/

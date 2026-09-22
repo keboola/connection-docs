@@ -1,5 +1,6 @@
 ---
 title: Development Branches
+lastUpdated: 2026-07-22
 slug: 'components/branches'
 ---
 

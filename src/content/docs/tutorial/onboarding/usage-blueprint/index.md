@@ -1,5 +1,6 @@
 ---
 title: Keboola Platform Usage Blueprint
+lastUpdated: 2026-06-03
 slug: 'tutorial/onboarding/usage-blueprint'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Logging Specification
+lastUpdated: 2026-08-04
 slug: 'extend/common-interface/logging'
 ---
 

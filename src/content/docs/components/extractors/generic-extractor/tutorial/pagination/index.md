@@ -1,5 +1,6 @@
 ---
 title: Pagination Tutorial
+lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/tutorial/pagination'
 redirect_from:
     - /extend/generic-extractor/tutorial/pagination/

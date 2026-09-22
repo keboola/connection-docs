@@ -1,5 +1,6 @@
 ---
 title: Azure Event Hub
+lastUpdated: 2026-06-19
 slug: 'components/writers/other/azure-event-hub'
 redirect_from:
     - /writers/other/azure-event-hub/

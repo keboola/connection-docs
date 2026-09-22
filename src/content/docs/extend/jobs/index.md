@@ -1,5 +1,6 @@
 ---
 title: Component Jobs
+lastUpdated: 2026-09-16
 slug: 'extend/jobs'
 description: Reference for asynchronous component jobs — the job object and its properties, status transitions, run modes and runtime configuration, and how to run, poll and debug jobs through the Queue API.
 redirect_from:

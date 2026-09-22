@@ -1,5 +1,6 @@
 ---
 title: API Tokens
+lastUpdated: 2026-09-16
 slug: 'management/project/tokens'
 redirect_from:
   - /storage/tokens/

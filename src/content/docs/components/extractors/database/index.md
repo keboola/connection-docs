@@ -1,5 +1,6 @@
 ---
 title: Database Data Source Connectors
+lastUpdated: 2026-08-04
 slug: 'components/extractors/database'
 redirect_from:
   - /extractors/database/

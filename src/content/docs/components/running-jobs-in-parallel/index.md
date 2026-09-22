@@ -1,5 +1,6 @@
 ---
 title: Running Jobs in Parallel
+lastUpdated: 2026-08-04
 slug: 'components/running-jobs-in-parallel'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Mapping Tutorial
+lastUpdated: 2026-08-05
 slug: 'components/extractors/generic-extractor/tutorial/mapping'
 redirect_from:
     - /extend/generic-extractor/tutorial/mapping/

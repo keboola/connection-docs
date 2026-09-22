@@ -1,5 +1,6 @@
 ---
 title: Mapbox
+lastUpdated: 2024-01-16
 slug: 'components/extractors/other/mapbox'
 ---
 

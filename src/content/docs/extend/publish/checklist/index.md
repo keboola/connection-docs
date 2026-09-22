@@ -1,5 +1,6 @@
 ---
 title: Checklist
+lastUpdated: 2026-09-16
 slug: 'extend/publish/checklist'
 ---
 

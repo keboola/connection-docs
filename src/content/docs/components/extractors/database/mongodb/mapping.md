@@ -1,5 +1,6 @@
 ---
 title: Mapping Examples
+lastUpdated: 2024-04-23
 slug: 'components/extractors/database/mongodb/mapping'
 redirect_from:
     - /extractors/database/mongodb/mapping/

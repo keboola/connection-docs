@@ -1,5 +1,6 @@
 ---
 title: Backups and Restorations
+lastUpdated: 2024-02-28
 slug: 'storage/tables/backups'
 ---
 

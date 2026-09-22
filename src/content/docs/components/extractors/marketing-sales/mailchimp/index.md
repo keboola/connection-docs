@@ -1,5 +1,6 @@
 ---
 title: Mailchimp
+lastUpdated: 2026-08-05
 slug: 'components/extractors/marketing-sales/mailchimp'
 redirect_from:
     - /extractors/marketing-sales/mailchimp/

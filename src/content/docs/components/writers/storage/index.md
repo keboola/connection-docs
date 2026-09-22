@@ -1,5 +1,6 @@
 ---
 title: Storage Data Destination Connectors
+lastUpdated: 2026-08-04
 slug: 'components/writers/storage'
 redirect_from:
     - /writers/storage/

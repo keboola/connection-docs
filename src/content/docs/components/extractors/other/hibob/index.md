@@ -1,5 +1,6 @@
 ---
 title: HiBob
+lastUpdated: 2024-02-29
 slug: 'components/extractors/other/hibob'
 ---
 

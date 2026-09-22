@@ -1,5 +1,6 @@
 ---
 title: Storage Jobs
+lastUpdated: 2026-08-07
 slug: 'storage/jobs'
 description: The low-level record of data loaded to and unloaded from Table Storage — how to open the Storage → Jobs view, read a job's detail, and use it to diagnose write concurrency.
 ---

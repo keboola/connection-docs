@@ -1,5 +1,6 @@
 ---
 title: Google Data Usage Policy
+lastUpdated: 2026-08-04
 slug: 'overview/google-data-policy'
 ---
 

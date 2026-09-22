@@ -1,5 +1,6 @@
 ---
 title: Jobs Tutorial
+lastUpdated: 2026-08-05
 slug: 'components/extractors/generic-extractor/tutorial/jobs'
 redirect_from:
     - /extend/generic-extractor/tutorial/jobs/

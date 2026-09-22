@@ -1,5 +1,6 @@
 ---
 title: "Part 6: Development Branches"
+lastUpdated: 2026-06-03
 slug: 'tutorial/branches'
 ---
 

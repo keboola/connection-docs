@@ -1,5 +1,6 @@
 ---
 title: Email Attachments
+lastUpdated: 2026-06-19
 slug: 'components/extractors/communication/email-attachments'
 redirect_from:
     - /extractors/communication/email-attachments/

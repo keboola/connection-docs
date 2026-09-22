@@ -1,5 +1,6 @@
 ---
 title: Semantic Layer
+lastUpdated: 2026-09-07
 slug: 'ai/semantic-layer'
 description: Describe your data in business terms — datasets, metrics, relationships, glossary terms, and business rules — so AI assistants understand what your data means.
 ---

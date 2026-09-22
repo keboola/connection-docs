@@ -1,5 +1,6 @@
 ---
 title: Bucket Exposure
+lastUpdated: 2026-06-03
 slug: 'storage/bucket-exposure'
 ---
 

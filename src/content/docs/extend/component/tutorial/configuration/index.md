@@ -1,5 +1,6 @@
 ---
 title: Configuration
+lastUpdated: 2026-08-04
 slug: 'extend/component/tutorial/configuration'
 ---
 

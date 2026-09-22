@@ -1,5 +1,6 @@
 ---
 title: AWS Cost Usage Reports
+lastUpdated: 2024-10-22
 slug: 'components/extractors/other/aws-cu-reports'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Google Drive
+lastUpdated: 2026-02-19
 slug: 'components/writers/storage/google-drive'
 redirect_from:
     - /writers/storage/google-drive/

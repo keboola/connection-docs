@@ -1,5 +1,6 @@
 ---
 title: Prepare File Manipulating Configurations
+lastUpdated: 2026-03-18
 slug: 'tutorial/branches/prepare-files'
 ---
 

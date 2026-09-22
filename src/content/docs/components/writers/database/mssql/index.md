@@ -1,5 +1,6 @@
 ---
 title: SQL Server
+lastUpdated: 2026-08-04
 slug: 'components/writers/database/mssql'
 redirect_from:
     - /writers/database/mssql/

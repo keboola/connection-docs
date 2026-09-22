@@ -1,5 +1,6 @@
 ---
 title: DBeaver Installation Guide
+lastUpdated: 2026-06-30
 slug: 'workspace/jdbc-driver/dbeaver'
 description: Install the Keboola JDBC driver in DBeaver and connect to a Keboola project.
 ---

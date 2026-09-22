@@ -1,5 +1,6 @@
 ---
 title: Geocoding Augmentation
+lastUpdated: 2024-04-04
 slug: 'components/extractors/other/geocoding-augmentation'
 redirect_from:
     - /extractors/other/geocoding-augmentation/

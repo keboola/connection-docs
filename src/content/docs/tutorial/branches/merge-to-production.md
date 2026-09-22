@@ -1,5 +1,6 @@
 ---
 title: Merge to Production
+lastUpdated: 2024-02-29
 slug: 'tutorial/branches/merge-to-production'
 ---
 

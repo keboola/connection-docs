@@ -1,5 +1,6 @@
 ---
 title: Keboola Overview
+lastUpdated: 2026-09-16
 slug: 'overview'
 ---
 

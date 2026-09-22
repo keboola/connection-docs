@@ -1,5 +1,6 @@
 ---
 title: SFTP
+lastUpdated: 2026-06-19
 slug: 'components/writers/storage/sftp'
 redirect_from:
     - /writers/storage/sftp/

@@ -1,5 +1,6 @@
 ---
 title: Data Streams Reference
+lastUpdated: 2026-08-03
 slug: 'storage/data-streams/reference'
 redirect_from:
     - /integrate/data-streams/overview/

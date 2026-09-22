@@ -1,5 +1,6 @@
 ---
 title: Publish Generic Extractor
+lastUpdated: 2026-09-16
 slug: 'components/extractors/generic-extractor/publish'
 redirect_from:
     - /extend/generic-extractor/publish/
