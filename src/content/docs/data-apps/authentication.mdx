@@ -38,21 +38,21 @@ Once an app is deployed, its URL is publicly available. Protect it so only the r
 ## OIDC (single sign-on)
 
 :::note[Do you actually need OIDC?]
-Only set this up if people must sign in with their **company accounts** — so that access follows your directory, and someone who leaves the company loses it. Everything else is cheaper: **Basic (Password)** shares one password and needs nothing outside Keboola, and **GitHub**, **GitLab** or **JumpCloud** restrict access by organization or team with far less setup. OIDC is the only method that needs admin rights in a console outside Keboola.
+Only set this up if people must sign in with their **company accounts** — so that access follows your directory, and someone who leaves the company loses it. **Basic (Password)** is the only method that needs nothing outside Keboola: it shares one password and you're done. **GitHub**, **GitLab** and **JumpCloud** also restrict access by organization or team, and they still need an OAuth app in that provider's console, but no consent screen and no audience decision — noticeably less work than OIDC.
 :::
 
 OIDC lets users log into your app through your single sign-on (SSO) provider. Keboola has ready-made provider options for Google (**Google SSO**), Microsoft Entra ID (**Azure OIDC**), **Okta**, and **Auth0**, plus **Generic OIDC** for any other OpenID Connect provider. Users sign in with the provider you configured; if an app has more than one provider, they first pick an **Authentication Provider**.
 
 ![The app's sign-in page asking the user to select an authentication provider, one button per configured provider](/data-apps/auth-select-oidc-provider.png)
 
-The flow is the same everywhere: open the app in Keboola, register it with your provider using the app's callback URL, paste the provider's credentials into the app's **Authentication** settings, and deploy. It's a few minutes of clicking in two browser tabs, and it needs admin rights in the provider's console: for Google, the **Owner** or **OAuth Config Editor** role on a Google Cloud project; for the others, the right to register applications in your tenant. Kai and kbagent can't do this part for you.
+The flow is the same everywhere: open the app in Keboola, register it with your provider using the app's callback URL, paste the provider's credentials into the app's **Authentication** settings, and deploy. Expect about 15 minutes of clicking in two browser tabs, and longer the first time in a Google Cloud project that has no consent screen yet. It needs admin rights in the provider's console: for Google, the **Owner** or **OAuth Config Editor** role on a Google Cloud project; for the others, the right to register applications in your tenant. Kai and kbagent can't do this part for you.
 
 ### Step 1 — Open the app and copy its callback URL
 
 Your provider needs the app's callback URL, so start in Keboola.
 
 1. In your Keboola project, open **Apps** and click the app. It doesn't matter whether Kai built it or you created it yourself. No app yet? [Create one manually](/data-apps/getting-started/#create-an-app-manually) first; it opens on its configuration page.
-2. Scroll to the **App URL** block. It shows the app's host as a URL prefix plus a generated part, for example `toy-store-sales` and `-74016144.hub.europe-west3.gcp.keboola.com`. Your callback URL is `https://`, that whole host, and `/_proxy/callback`:
+2. On the app's **Overview** tab, scroll to the **App URL** block. It shows the app's host as a URL prefix plus a generated part, for example `toy-store-sales` and `-74016144.hub.europe-west3.gcp.keboola.com`. Click the block's copy button — it gives you the app's URL, **not** the callback URL. Paste it where you need it and add `/_proxy/callback` to the end:
 
    ```
    https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback
@@ -62,7 +62,7 @@ Your provider needs the app's callback URL, so start in Keboola.
 
    The block is there from the moment the app exists; you don't have to deploy first.
 
-The block sits on the app's **Overview** tab, below **Authentication**:
+The block sits below **Authentication**:
 
 ![The app's Overview tab: Description, Authentication, and Git Repository cards, then the App URL block, with the App Info panel on the right](/data-apps/build-in-ui-config.png)
 
@@ -76,13 +76,16 @@ Pick your provider:
   <TabItem label="Google Cloud">
     Let people sign in with their Google account.
 
-    **Before you start.** The OAuth client lives in a Google Cloud project, not in the Google Workspace admin console, so you need a project where you can manage the consent screen and OAuth clients: the **Owner** role, or the **OAuth Config Editor** role. Decide who should get in, too. With the sign-in scopes Keboola requests, an **Internal** audience limits sign-in to your Google Workspace organization (the project must belong to that organization), and an **External** audience lets in anyone with a Google account.
+    **Before you start.** The OAuth client lives in a Google Cloud project, not in the Google Workspace admin console, so you need a project where you can manage the consent screen and OAuth clients: the **Owner** role, or the **OAuth Config Editor** role. Decide who should get in, too. With the sign-in scopes Keboola requests (`openid`, `email`, `profile`), an **Internal** audience limits sign-in to your Google Workspace organization (the project must belong to that organization), and an **External** audience lets in anyone with a Google account.
 
     **Set up the consent screen.** Google keeps it under **Google Auth Platform**; open it directly at [console.cloud.google.com/auth/overview](https://console.cloud.google.com/auth/overview) and pick your project.
 
     1. If the page shows **Get started**, the project has no consent screen yet. Click it and fill in the wizard: **App name** and **User support email**, the **Audience** (**Internal** or **External**, see above), a contact email, then **Create**. If you see **Branding**, **Audience**, and **Clients** in the left menu instead, the consent screen already exists; carry on.
-    2. Open [**Branding**](https://console.cloud.google.com/auth/branding). Under **Authorized domains**, add `keboola.com`, the domain your App URL belongs to, and save. Without it, Google refuses the redirect URI in the next step.
+    2. Open [**Branding**](https://console.cloud.google.com/auth/branding). Under **Authorized domains**, add `keboola.com`, the domain your App URL belongs to, and save. Without it, Google refuses the redirect URI in the next step. (Google shows **Authorized domains** on projects with an **External** audience; on an **Internal** one it may restrict domains for you — if you don't see the field, carry on to the next step.)
+    {/* TODO(human-review, Nikita): open Branding on an Internal-audience project and confirm whether Authorized domains is shown. If it is always there, drop the parenthesis. guide-tester MAJOR 4, 2026-09-22. */}
     3. Check [**Audience**](https://console.cloud.google.com/auth/audience): **Internal** for your organization only, **External** for any Google account. Leave the **Test users** list and **Publish app** alone. For the sign-in scopes Keboola uses, Google applies neither: an External app lets any Google account in while still in Testing. Publishing only matters if you want your app name and logo shown on the consent screen, and then Google asks for branding details and a verification review.
+
+    4. Know what the audience buys you: it is the only access control Google SSO offers here. Anyone in the audience you chose can open the app — there is no group or user filter, and Keboola takes only a Client ID and secret for this provider. To narrow it further, use Microsoft Entra ID or Okta, which do have assignment, or check the signed-in user inside the app itself.
 
     You now have: a consent screen with `keboola.com` authorized and the audience you want.
 
@@ -206,6 +209,8 @@ Pick your provider:
 2. When the status turns **Active**, click **Open App**. Your provider asks you to sign in, then sends you into the app.
 3. Test with the accounts that matter, each in a fresh private window: one that should get in, one that shouldn't. Once you're in, the app's own session cookie keeps you signed in, so a second try in the same window proves nothing.
 
+   Know what a correct rejection looks like before you read it as a fault. With Google and an **Internal** audience, an account from outside your organization is stopped by Google with a message that the app is restricted to its organization — that is the app working. Do **not** switch the audience to **External** to make that message go away; it opens the app to every Google account there is. The reverse is the quiet failure: if an outside account lands in the app, your audience is External and the app is public to anyone signed in to Google.
+
 ### Provider settings at a glance
 
 | Provider | Keboola provider option | What you enter besides Client ID and Client secret |
@@ -243,7 +248,7 @@ Restrict access to your app using GitHub OAuth. Users authenticate via their Git
 ### Setup instructions
 
 1. Go to your GitHub account **Settings > Developer Settings > OAuth Apps** and create a new OAuth App.
-2. Set the **Authorization callback URL** to: `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
+2. Set the **Authorization callback URL** to: the app's callback URL — `https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback`, the whole host from the **App URL** block plus `/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
 3. Copy the **Client ID** and **Client Secret** from the created OAuth App.
 4. In your Keboola app configuration, select **GitHub** as the authentication method.
 5. Paste the **Client ID** and **Client Secret**.
@@ -274,7 +279,7 @@ Restrict access to your app using GitLab OAuth. Users authenticate via their Git
 ### Setup instructions
 
 1. Go to your GitLab instance **Settings > Applications** and create a new application.
-2. Set the **Redirect URI** to: `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
+2. Set the **Redirect URI** to: the app's callback URL — `https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback`, the whole host from the **App URL** block plus `/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
 3. Ensure the `openid`, `profile`, and `email` scopes are selected. If you use group or project restrictions, also select `read_api`.
 4. Copy the **Application ID** and **Secret**.
 5. In your Keboola app configuration, select **GitLab** as the authentication method.
@@ -305,7 +310,7 @@ Restrict access to your app using JumpCloud OIDC. Users authenticate via their J
 
 1. In the **JumpCloud Admin Console**, go to **SSO** and create a new application (or use an existing one).
 2. Configure the application as an **OIDC** application.
-3. Set the **Redirect URI** to: `https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
+3. Set the **Redirect URI** to: the app's callback URL — `https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback`, the whole host from the **App URL** block plus `/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
 4. Copy the **Client ID** and **Client Secret** from the SSO tab.
 5. In your Keboola app configuration, select **JumpCloud** as the authentication method.
 6. Paste the **Client ID**, **Client Secret**, **Issuer URL**, and **Logout URL**.
@@ -317,12 +322,12 @@ Restrict access to your app using JumpCloud OIDC. Users authenticate via their J
 All authentication methods that use OAuth or OIDC require a callback URL. The format is always:
 
 ```
-https://<dataAppId>.hub.<keboolaConnectionHost>/_proxy/callback
+https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback
 ```
 
 For example: `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`
 
-`<dataAppId>` stands for the whole host shown in the **App URL** block on the app's configuration page: the URL prefix, a hyphen, and the App ID (for example `toy-store-sales-74016144`). Take that host, add `https://` in front and `/_proxy/callback` at the end.
+`<url-prefix>-<app-id>.hub.<stack-host>` is the whole host shown in the **App URL** block on the app's configuration page: the URL prefix, a hyphen, and the App ID (
 
 ---
 
