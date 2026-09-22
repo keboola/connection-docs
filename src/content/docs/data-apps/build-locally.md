@@ -48,113 +48,23 @@ Using a bundler such as Vite or Next.js? **Build the frontend locally and commit
 
 ## What the repository must contain
 
-Keboola runs your code in a managed container: nginx in front, supervisord starting your processes. Two files tell it how, and they live at fixed paths in a `keboola-config/` folder at the repository root:
+Keboola runs your code in a managed container: nginx in front, supervisord starting your processes. Your repository tells them how through a `keboola-config/` folder at its root. The layout is fixed. The [app-building skill](https://github.com/keboola/ai-kit/tree/main/plugins/dataapp-developer/skills/dataapp-development) ships it ready-made in three templates (`python-app`, `nodejs-app`, `python-node-app`) and explains every line in `references/python-js-apps.md`; the checklist below is what those files have to do.
 
-- `keboola-config/nginx/sites/*.conf` — at least one nginx server block listening on port **8888**, proxying to the port your app listens on.
-- `keboola-config/supervisord/services/*.conf` — at least one supervisord program that starts your app.
+- **`keboola-config/nginx/sites/*.conf`** — at least one nginx server block that listens on port **8888** and proxies to the port your app listens on. 8888 is fixed and already taken by nginx; your app can use any port from 1024 up and has to bind `127.0.0.1` (or all interfaces).
+- **`keboola-config/supervisord/services/*.conf`** — at least one `[program:]` entry that starts your app: full script paths under `/app`, `directory=` set, Python commands prefixed with `uv run`, logs to `/dev/stdout` and `/dev/stderr` so they reach the **Terminal Logs** tab. No `[program:nginx]`; the image runs nginx itself.
+- **`keboola-config/setup.sh`** — runs once before the app starts; install dependencies here (`uv sync` for Python, `npm install --omit=dev` for Node) and commit the file executable. Bare `pip install` is blocked in the image.
+- **A dependency manifest** where `setup.sh` runs: `pyproject.toml` for Python, `package.json` for Node.
+- **A root route that accepts POST as well as GET.** Keboola sends a POST to `/` to check the app is up; a GET-only route answers `Cannot POST /` or "Method Not Allowed". Flask: `methods=["GET", "POST"]`; Express: `app.all('/')`; Streamlit handles it on its own.
 
-Alongside them, your repository needs whatever your dependency installer reads: `pyproject.toml` for Python with uv, `package.json` for Node. Without it the install step fails and the deploy stops.
+Bundling a frontend with Vite or Next.js? Build it locally and commit the output. Keboola installs dependencies before the start; it doesn't run your build.
 
-Two more files are optional:
-
-- `keboola-config/setup.sh` — runs once before the app starts. Install dependencies here. Almost every app needs it.
-- `run.sh` at the repository root — replaces the default startup entirely. You almost never want this.
-
-The folder names and port 8888 are fixed; the `.conf` filenames are yours. `default.conf` and `app.conf` below are just the names the templates use, and you can add more of each: a Python backend plus a JS frontend, for example, is two supervisord programs.
-
-Port 8888 is where the proxy sends traffic, and nothing else is reachable from outside. Your own app can listen on any port from 1024 up, except 8888 itself, which nginx already holds. The container doesn't run as root, so privileged ports below 1024 are blocked.
-
-The app-building skill ships ready-made templates (`python-app`, `nodejs-app`, `python-node-app`) with this folder filled in.
-
-### nginx
-
-Its only job is to forward traffic to your app:
-
-```nginx
-# keboola-config/nginx/sites/default.conf
-server {
-    listen 8888;
-    server_name _;
-
-    location / {
-        proxy_pass http://127.0.0.1:5000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
-```
-
-The `proxy_pass` port must match the port your app actually listens on: Flask defaults to 5000, Express to 3000, uvicorn (FastAPI) to 8000. In a split app, Keboola's own convention is Python on 8050 and the Node frontend on 3000.
-
-Bind your app to `127.0.0.1` or all interfaces. nginx proxies to `127.0.0.1`, so an app listening only on an external interface is unreachable.
-
-Two things need extra directives in that `location` block.
-
-**Streaming** (Server-Sent Events, long responses). By default nginx collects the whole response before forwarding it, so the output arrives in one lump at the end:
-
-```nginx
-proxy_buffering off;
-proxy_cache off;
-proxy_request_buffering off;
-```
-
-**WebSockets.** Without the upgrade handshake the page loads and then never updates:
-
-```nginx
-proxy_http_version 1.1;
-proxy_set_header Upgrade $http_upgrade;
-proxy_set_header Connection "upgrade";
-proxy_read_timeout 86400;
-```
-
-### supervisord
-
-One `[program:]` entry per process. Several processes can share one file or live in separate files; the split template uses `backend.conf` and `frontend.conf`.
-
-```ini
-# keboola-config/supervisord/services/app.conf
-[program:app]
-command=uv run python /app/app.py
-directory=/app
-autostart=true
-autorestart=true
-stdout_logfile=/dev/stdout
-stdout_logfile_maxbytes=0
-stderr_logfile=/dev/stderr
-stderr_logfile_maxbytes=0
-```
-
-Your repository is checked out at `/app`. Give script paths in full (`/app/app.py`, `/app/server.js`) and set `directory=` to the folder the command runs in — that's what makes module-style commands such as `uv run uvicorn main:app --host 127.0.0.1 --port 8050` resolve. Python commands need the `uv run` prefix; for Node the command is simply `command=node /app/server.js`.
-
-Don't add a `[program:nginx]` entry: the base image starts nginx itself, and a second one fails.
-
-Logging to `/dev/stdout` and `/dev/stderr` is what puts your output in the app's **Terminal Logs** tab.
-
-### setup.sh
+Check the repository before you deploy:
 
 ```bash
-#!/bin/bash
-set -Eeuo pipefail
-cd /app && uv sync
+kbagent data-app validate-repo --git-repo https://github.com/<owner>/<repo> --type python-js
 ```
 
-For Node:
-
-```bash
-#!/bin/bash
-set -Eeuo pipefail
-cd /app && npm install --omit=dev
-```
-
-Commit the file with the executable bit (`chmod +x keboola-config/setup.sh`), or it won't run.
-
-Python dependencies are installed with [uv](https://docs.astral.sh/uv/) from `pyproject.toml`, not with `pip`. The base image blocks bare `pip install`, which surfaces as an `externally-managed-environment` error.
-
-### One thing your app must handle
-
-Keboola sends a **POST request to `/`** to check that the app is up. A root route that only accepts GET answers it with `Cannot POST /`, "Method Not Allowed", or a blank page on first open. In Flask, add `methods=["GET", "POST"]`; in Express, use `app.all('/')`. Streamlit handles this on its own.
+It reports every missing or misplaced file against this contract.
 
 ## Develop with an AI coding tool
 
@@ -195,7 +105,13 @@ Apps read Keboola data through Input Mapping, the Storage API, or Storage Access
 
 ## If the app doesn't start
 
-The deployment job's event log holds the container output, and the **Terminal Logs** tab shows stdout and stderr while the app runs. The usual causes:
+The deployment job's event log holds the container output. While the app runs, its stdout and stderr are on the **Terminal Logs** tab, or one command away:
+
+```bash
+kbagent data-app logs --project <alias> --app-id <app id>
+```
+
+The usual causes:
 
 | What you see | Why | Fix |
 |---|---|---|
@@ -203,8 +119,8 @@ The deployment job's event log holds the container output, and the **Terminal Lo
 | `externally-managed-environment` | `pip install` somewhere in `setup.sh` | Use `uv sync` and list dependencies in `pyproject.toml` |
 | The app restarts in a loop | A relative path in the supervisord config, a missing `uv run` prefix, a `setup.sh` without the executable bit, or a `[program:nginx]` entry | Use absolute `/app/...` paths, prefix Python with `uv run`, `chmod +x` the script, drop the nginx program |
 | It works locally, not in Keboola | The `proxy_pass` port doesn't match the port the app listens on | Make them match |
-| A streaming response arrives all at once | nginx buffers the whole response | Turn off buffering and caching in that location block |
-| The page loads but never updates | The WebSocket handshake never completes | Add the upgrade directives to the location block |
+| A streaming response arrives all at once | nginx buffers the whole response | `proxy_buffering off; proxy_cache off; proxy_request_buffering off;` in that location block |
+| The page loads but never updates | The WebSocket handshake never completes | Add the WebSocket upgrade directives to that location block; the skill's nginx snippet has them |
 | An environment variable is undefined | The secret isn't in the app configuration | Add it; see [Secrets](/data-apps/reference/#secrets) for how names become variables |
 | The deploy fails while installing dependencies | No `pyproject.toml` or `package.json` where `setup.sh` looks | Commit the manifest at the path `setup.sh` runs in |
 | The deploy succeeds, the app answers nothing | The app binds an interface nginx can't reach | Listen on `127.0.0.1` or all interfaces, not only an external one |
