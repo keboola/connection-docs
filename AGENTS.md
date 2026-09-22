@@ -18,6 +18,7 @@ npm run build      # production build → dist/
 npm run gen:sidebar  # regenerate src/sidebar.mjs from _data/navigation.yml
 npm run export:vault # Obsidian vault of the docs → _graph/vault/ (gitignored)
 npm run chunk:docs   # embedding chunks → _graph/chunks.jsonl (gitignored)
+python scripts/gap-analysis.py --backend tfidf  # docs-vs-support-tickets gap report → _graph/ (see script header)
 ```
 
 - Node.js 22+.
@@ -47,6 +48,8 @@ scripts/
   export-vault.mjs # docs → Obsidian vault (wikilinks, nav parents, orphan report) into _graph/
   chunk-docs.mjs  # docs → embedding-ready section chunks (jsonl/csv) into _graph/
   lib/docs-corpus.mjs  # shared loader for the two above (pages + nav + link resolver)
+  merge-tickets.mjs  # normalise support-ticket dumps (_graph/tickets-*.jsonl) into _graph/tickets.jsonl
+  gap-analysis.py    # embed chunks + tickets, cluster, report doc gaps (deps: requirements-analysis.txt)
   migrate.mjs, switchover.mjs  # legacy Jekyll→Astro migration — DO NOT RUN: no dry-run,
                       # no confirmation, and it deletes every page whose Jekyll source is
                       # gone from the repo root — which today is all of them

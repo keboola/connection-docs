@@ -1,0 +1,12 @@
+# python deps for scripts/gap-analysis.py
+# core (tfidf backend works with just these)
+numpy
+scikit-learn
+pandas
+# clustering + map (optional; falls back to KMeans/PCA without them)
+umap-learn
+hdbscan
+plotly
+# real embeddings (optional; needs model download from huggingface.co)
+sentence-transformers
+einops   # required by nomic-ai/nomic-embed-text-v1.5
