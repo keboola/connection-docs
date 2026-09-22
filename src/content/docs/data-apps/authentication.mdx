@@ -76,9 +76,9 @@ Pick your provider:
 
     **Set up the consent screen.** Google keeps it under **Google Auth Platform**; open it directly at [console.cloud.google.com/auth/overview](https://console.cloud.google.com/auth/overview) and pick your project.
 
-    1. If the page shows **Get started**, the project has no consent screen yet. Click it and fill in the wizard: **App name** and **User support email**, the **Audience** (**Internal** or **External**, see above), a contact email, then **Create**. If you see **Branding**, **Audience**, and **Clients** in the left menu instead, the consent screen already exists; carry on.
-    2. Open [**Branding**](https://console.cloud.google.com/auth/branding). Under **Authorized domains**, add `keboola.com`, the domain your App URL belongs to, and save. Without it, Google refuses the redirect URI in the next step.
-    3. Check [**Audience**](https://console.cloud.google.com/auth/audience): **Internal** for your organization only, **External** for any Google account. Leave the **Test users** list and **Publish app** alone. For the sign-in scopes Keboola uses, Google applies neither: an External app lets any Google account in while still in Testing. Publishing only matters if you want your app name and logo shown on the consent screen, and then Google asks for branding details and a verification review.
+    1. If the page says **Google Auth Platform not configured yet** and offers **Get started**, the project has no consent screen yet. Click it and fill in the wizard: **App name** and **User support email**, the **Audience** (**Internal** or **External**, see above), a contact email, then tick the User Data Policy box and click **Create**. If the page shows your app's details instead, the consent screen already exists; carry on. (**Branding**, **Audience** and **Clients** sit in the left menu either way, so they don't tell you which case you're in.)
+    2. Optional: open [**Branding**](https://console.cloud.google.com/auth/branding) and add `keboola.com` under **Authorized domains**. Google adds it for you when you save the redirect URI in the next step ("The domains of the URIs you add below will be automatically added to your OAuth consent screen as authorized domains"), so this is only worth doing if you want it in place beforehand.
+    3. Check [**Audience**](https://console.cloud.google.com/auth/audience). An **Internal** app shows only its user type; an **External** one also shows **Publishing status**, an **OAuth user cap** and a **Test users** list. Ignore all three. Google's own text there says that while the status is Testing "only test users are able to access the app", and that is not true for a Keboola app: the proxy asks for the `openid`, `email` and `profile` scopes only, and Google exempts exactly that set from the test-user rule, so an External app lets any Google account in whether or not you publish it. Publishing only matters if you want your app name and logo shown on the consent screen, and then Google asks for branding details and a verification review.
 
     You now have: a consent screen with `keboola.com` authorized and the audience you want.
 
@@ -91,7 +91,7 @@ Pick your provider:
 
     You now have: a Client ID and a Client secret.
 
-    **Back in Keboola.** On the app's configuration page, under **Authentication**, set **Authentication Type** to **OIDC (Custom)**, select **Google SSO** in the **Provider** dropdown, paste the **Client ID** and **Client secret** (this option has no issuer field), and click **Save**. After saving, the secret field shows an encrypted value starting with `KBC::ProjectSecureGKMS::`. That's your secret stored encrypted, not a replacement; to change it later, paste a new value over it.
+    **Back in Keboola.** On the app's configuration page, under **Authentication**, set **Authentication Type** to **OIDC (Custom)**, select **Google SSO** in the **Provider** dropdown, paste the **Client ID** and **Client secret** (this option has no issuer field), and click **Save**. After saving, the secret field is masked. Reveal it with the eye icon and you'll see an encrypted value starting with `KBC::ProjectSecureGKMS::` rather than what you pasted — that's your secret stored encrypted, not a replacement. To change it later, paste a new value over it.
 
     **If sign-in fails:**
 
@@ -194,9 +194,9 @@ Pick your provider:
 
 ### Step 3 — Deploy and test
 
-1. A new app: set its code source and click **Deploy App**; the short wizard asks for the backend size and an inactivity timeout (details: [Create an app manually](/data-apps/getting-started/#create-an-app-manually)). Just testing sign-in? A **Streamlit** app with a one-line inline script is the quickest thing to deploy. An app that's already running needs **Redeploy App** for the new authentication to take effect; a stopped one, **Start App**.
-2. When the status turns **Active**, click **Open App**. Your provider asks you to sign in, then sends you into the app.
-3. Test with the accounts that matter, each in a fresh private window: one that should get in, one that shouldn't. Once you're in, the app's own session cookie keeps you signed in, so a second try in the same window proves nothing.
+1. A new app: set its code source and click **Deploy App**; the short wizard asks for the backend version, the backend size and an inactivity timeout (details: [Create an app manually](/data-apps/getting-started/#create-an-app-manually)). Just testing sign-in? A **Streamlit** app with a one-line inline script is the quickest thing to deploy. An app that's already running needs **Redeploy App** for the new authentication to take effect; a stopped one, **Start App**.
+2. When the status turns **Active**, click **Open App**. Your provider asks you to sign in and, the first time, to allow the app to see your name and email address; then it sends you into the app. If the page still says the app is stopped right after a deploy, reload it — the status catches up a moment later.
+3. Test with the accounts that matter: one that should get in, one that shouldn't. Once you're in, the app's own session cookie keeps you signed in, so a second try in the same window proves nothing — use a fresh private window, or open `https://<your-app-url>/_proxy/sign_out` to end the app session and start over.
 
 ### Provider settings at a glance
 
