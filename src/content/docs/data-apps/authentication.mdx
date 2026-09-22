@@ -41,13 +41,13 @@ OIDC lets users log into your app through your single sign-on (SSO) provider. Ke
 
 ![The app's sign-in page asking the user to select an authentication provider, one button per configured provider](/data-apps/auth-select-oidc-provider.png)
 
-The flow is the same everywhere: create the app in Keboola, register it with your provider using the app's callback URL, paste the provider's credentials into the app's **Authentication** settings, and deploy.
+The flow is the same everywhere: open the app in Keboola, register it with your provider using the app's callback URL, paste the provider's credentials into the app's **Authentication** settings, and deploy. It's a few minutes of clicking in two browser tabs, and it needs admin rights in the provider's console: for Google, the **Owner** or **OAuth Config Editor** role on a Google Cloud project; for the others, the right to register applications in your tenant. Kai and kbagent can't do this part for you.
 
-### Step 1 — Create the app and copy its callback URL
+### Step 1 — Open the app and copy its callback URL
 
-Your provider needs the app's callback URL, so create the app first.
+Your provider needs the app's callback URL, so start in Keboola.
 
-1. In your Keboola project, open **Apps**, click **+ Create App**, and [create the app manually](/data-apps/getting-started/#create-an-app-manually). The app opens on its configuration page. (Adding sign-in to an existing app? Open its configuration instead.)
+1. In your Keboola project, open **Apps** and click the app. It doesn't matter whether Kai built it or you created it yourself, and Kai keeps these settings when it changes the app later. No app yet? [Create one manually](/data-apps/getting-started/#create-an-app-manually) first; it opens on its configuration page.
 2. Scroll to the **App URL** block. It shows the app's host as a URL prefix plus a generated part, for example `toy-store-sales` and `-74016144.hub.europe-west3.gcp.keboola.com`. Your callback URL is `https://`, that whole host, and `/_proxy/callback`:
 
    ```
@@ -58,9 +58,11 @@ Your provider needs the app's callback URL, so create the app first.
 
    The block is there from the moment the app exists; you don't have to deploy first.
 
+The block sits on the app's **Overview** tab, below **Authentication**:
+
 ![The app's configuration page with the App URL block: the URL prefix, the generated host, and a copy button](/data-apps/publish-config.png)
 
-Keep this tab open. Each app has its own callback URL, so register every app with your provider separately.
+Keep this tab open. You now have the callback URL; each app has its own, so register every app with your provider separately.
 
 ### Step 2 — Set up your identity provider
 
@@ -70,32 +72,33 @@ Pick your provider:
   <TabItem label="Google Cloud">
     Let people sign in with their Google account.
 
-    **Before you start** — you need a Google Cloud project where you can manage the consent screen and OAuth clients: the project **Owner** role, or the **OAuth Config Editor** role. Decide who should get in, too. To limit sign-in to your Google Workspace organization, the Google Cloud project must belong to that organization and you pick the **Internal** audience below. Otherwise the audience is **External**: any Google account can sign in once you publish the app.
+    **Before you start.** The OAuth client lives in a Google Cloud project, not in the Google Workspace admin console, so you need a project where you can manage the consent screen and OAuth clients: the **Owner** role, or the **OAuth Config Editor** role. Decide who should get in, too. With the sign-in scopes Keboola requests, an **Internal** audience limits sign-in to your Google Workspace organization (the project must belong to that organization), and an **External** audience lets in anyone with a Google account.
 
-    **Set up the consent screen:**
+    **Set up the consent screen.** Google keeps it under **Google Auth Platform**; open it directly at [console.cloud.google.com/auth/overview](https://console.cloud.google.com/auth/overview) and pick your project.
 
-    1. Open the [Google Cloud console](https://console.cloud.google.com/), select your project, and open **Google Auth Platform** (search for it in the console's top bar).
-    2. First time in this project? Click **Get started** and fill in the wizard: **App name** and **User support email**, the **Audience** (**Internal** for your Google Workspace organization only, **External** for any Google account), and a contact email, then click **Create**.
-    3. Open **Branding**. Under **Authorized domains**, add `keboola.com`, the domain your App URL belongs to, and save. If Google refuses the redirect URI in the next step, it's because the domain is missing here.
-    4. Chose **External**? Open **Audience** and add yourself and your testers under **Test users** (up to 100), or click **Publish app** to let anyone with a Google account sign in. Until you do one of these, Google turns everyone else away.
+    1. If the page shows **Get started**, the project has no consent screen yet. Click it and fill in the wizard: **App name** and **User support email**, the **Audience** (**Internal** or **External**, see above), a contact email, then **Create**. If you see **Branding**, **Audience**, and **Clients** in the left menu instead, the consent screen already exists; carry on.
+    2. Open [**Branding**](https://console.cloud.google.com/auth/branding). Under **Authorized domains**, add `keboola.com`, the domain your App URL belongs to, and save. Without it, Google refuses the redirect URI in the next step.
+    3. Check [**Audience**](https://console.cloud.google.com/auth/audience): **Internal** for your organization only, **External** for any Google account. Leave the **Test users** list and **Publish app** alone. For the sign-in scopes Keboola uses, Google applies neither: an External app lets any Google account in while still in Testing. Publishing only matters if you want your logo on the consent screen, and then Google asks for branding details and a verification review.
+
+    You now have: a consent screen with `keboola.com` authorized and the audience you want.
 
     **Create the OAuth client:**
 
-    1. Open **Clients** and click **Create client**.
+    1. Open [**Clients**](https://console.cloud.google.com/auth/clients) and click **Create client**.
     2. Set **Application type** to **Web application** and give the client a name, for example `Keboola app - Toy store sales`.
-    3. Under **Authorized redirect URIs**, click **Add URI** and paste the callback URL from step 1. It has to match exactly: `https`, the full host, and `/_proxy/callback` with no trailing slash.
+    3. Under **Authorized redirect URIs**, click **Add URI** and paste the callback URL from step 1, for example `https://toy-store-sales-74016144.hub.europe-west3.gcp.keboola.com/_proxy/callback`. It has to match exactly: `https`, the full host, `/_proxy/callback`, no trailing slash, no stray spaces.
     4. Click **Create**. Copy the **Client ID** and the **Client secret** now; Google shows the secret only at creation. If you lose it, open the client and click **Add Secret**.
 
-    **Back in Keboola** — on the app's configuration page, under **Authentication**, set **Authentication Type** to **OIDC (Custom)**, select **Google SSO** in the **Provider** dropdown, and paste the **Client ID** and **Client secret**. There's no issuer field for this option; Keboola uses `https://accounts.google.com`. Click **Save**.
+    You now have: a Client ID and a Client secret.
+
+    **Back in Keboola.** On the app's configuration page, under **Authentication**, set **Authentication Type** to **OIDC (Custom)**, select **Google SSO** in the **Provider** dropdown, paste the **Client ID** and **Client secret** (this option has no issuer field), and click **Save**. After saving, the secret field shows an encrypted value starting with `KBC::ProjectSecureGKMS::`. That's your secret stored encrypted, not a replacement; to change it later, paste a new value over it.
 
     **If sign-in fails:**
 
-    - `Error 400: redirect_uri_mismatch` — the URI in the OAuth client differs from the app's callback URL. Compare them character by character (scheme, host, `/_proxy/callback`, no trailing slash) and fix the client.
-    - "Access blocked: … has not completed the Google verification process", or a colleague can't get past Google — the audience is External and the app is still in **Testing**, so only listed **Test users** can sign in. Add them on the **Audience** page, or click **Publish app**.
+    - **Access blocked: This app's request is invalid**, with `Error 400: redirect_uri_mismatch` — the URI in the OAuth client differs from the app's callback URL. Open **Request details** on that page: it shows the `redirect_uri` Google received. Compare it with the **App URL** block character by character (a stray space or a missing character is the usual cause) and fix the client. No redeploy needed; Google says such changes take from a few minutes to a few hours to apply.
     - Someone outside your organization can't sign in — expected with the Internal audience. Switch to External on the **Audience** page if that's not what you want.
+    - Someone outside your organization *can* sign in — the audience is External. For the scopes Keboola uses, Google doesn't limit an External app to its test users, even in Testing. Switch to Internal.
     - `invalid_client`, or a token error right after signing in — the Client ID or Client secret in Keboola doesn't match the OAuth client. Paste them again, or add a new secret in Google Cloud and update the app.
-
-    Changed the redirect URI or the audience on Google's side later? No redeploy needed; Google says such changes take from a few minutes to a few hours to apply.
   </TabItem>
   <TabItem label="Microsoft Entra ID">
     Let people sign in with their Microsoft work account.
@@ -115,6 +118,8 @@ Pick your provider:
     1. Under **Manage**, open **Certificates & secrets** and click **New client secret**.
     2. Enter a description, pick an expiry, and click **Add**.
     3. Copy the secret's **Value** right away; Entra hides it once you leave the page. Note the expiry, too: before it passes, create a new secret and update the app's authentication settings, or sign-in stops working.
+
+    You now have: an Application (client) ID, a Directory (tenant) ID, and a client secret Value.
 
     **Optional — restrict who can sign in.** Out of the box, anyone in your tenant can open the app. To let in only specific people or groups, go to **Entra ID → Enterprise apps**, open your app, and under **Manage → Properties** set **Assignment required?** to **Yes**. Then, under **Manage → Users and groups**, click **Add user/group** and pick who may sign in. Assigning groups, rather than single users, needs a Microsoft Entra ID P1 or P2 license. Everyone else now gets `AADSTS50105` at sign-in.
 
@@ -140,6 +145,8 @@ Pick your provider:
     5. Under **Assignments**, decide who can sign in: **Allow everyone in your organization to access** or **Limit access to selected groups** (or skip the assignment for now and add people later).
     6. Click **Save**. On the **General** tab, under **Client Credentials**, copy the **Client ID** and the **Client secret**.
 
+    You now have: a Client ID and a Client secret, and Okta knows your callback URL.
+
     **Back in Keboola** — on the app's configuration page, under **Authentication**, set **Authentication Type** to **OIDC (Custom)**, select **Okta** in the **Provider** dropdown, and paste the **Client ID** and **Client secret**. Set **Domain/Org URL** to `https://<yourOktaDomain>/oauth2/default`; your Okta domain is shown in the Admin Console when you click your name at the top right, for example `https://acme.okta.com/oauth2/default`. The `default` authorization server comes with the Integrator Free Plan and with API Access Management; if **Security → API → Authorization Servers** doesn't list it, use the org authorization server instead: `https://<yourOktaDomain>` with no path. **Logout URL** is optional: `https://<yourOktaDomain>/login/signout` also ends the Okta session when someone signs out of the app. Click **Save**.
 
     **If sign-in fails:**
@@ -160,6 +167,8 @@ Pick your provider:
     3. Open the **Settings** tab. Under **Basic Information**, copy the **Domain**, **Client ID**, and **Client Secret**.
     4. Scroll down to **Application URIs** and paste the callback URL from step 1 into **Allowed Callback URLs**.
     5. Click **Save Changes** at the bottom of the page.
+
+    You now have: your tenant Domain, a Client ID, and a Client Secret.
 
     **Back in Keboola** — on the app's configuration page, under **Authentication**, set **Authentication Type** to **OIDC (Custom)**, select **Auth0** in the **Provider** dropdown, and paste the **Client ID** and **Client secret**. Set **Issuer URL** to your tenant **Domain** with `https://` in front and a trailing slash, for example `https://acme.us.auth0.com/` (or a custom domain such as `https://login.acme.com/`). The field's example omits the slash, but Auth0's issuer ends with one; when in doubt, copy the `issuer` value from `https://<yourAuth0Domain>/.well-known/openid-configuration`. **Logout URL** is optional: `https://<yourAuth0Domain>/oidc/logout` also ends the Auth0 session when someone signs out of the app. Click **Save**.
 
@@ -183,10 +192,9 @@ Pick your provider:
 
 ### Step 3 — Deploy and test
 
-1. Set the app's code source and click **Deploy App**; the short wizard asks for the backend size and an inactivity timeout. (Details: [Create an app manually](/data-apps/getting-started/#create-an-app-manually). Just testing sign-in? A **Streamlit** app with a one-line inline script is the quickest thing to deploy.)
+1. A new app: set its code source and click **Deploy App**; the short wizard asks for the backend size and an inactivity timeout (details: [Create an app manually](/data-apps/getting-started/#create-an-app-manually)). Just testing sign-in? A **Streamlit** app with a one-line inline script is the quickest thing to deploy. An app that's already running needs **Redeploy App** for the new authentication to take effect; a stopped one, **Start App**.
 2. When the status turns **Active**, click **Open App**. Your provider asks you to sign in, then sends you into the app.
-
-Changing the authentication settings of an app that's already deployed? Click **Redeploy App** so the change takes effect.
+3. Test with the accounts that matter, each in a fresh private window: one that should get in, one that shouldn't. A browser that's already signed in to the provider skips the sign-in screen and hides the result.
 
 ### Provider settings at a glance
 
