@@ -112,6 +112,8 @@ export const sidebar = [
         items: [
           { slug: "data-apps/authentication" },
           { slug: "data-apps/publish-and-share" },
+          { slug: "data-apps/operate" },
+          { slug: "data-apps/troubleshooting" },
         ],
       },
       { slug: "data-apps/reference" },

@@ -38,9 +38,24 @@ How development actually works — code, configuration, data access, deployment 
 
 Have an existing **Streamlit** app? Streamlit remains supported; its documentation lives in the [Streamlit apps](/data-apps/streamlit/) section.
 
-## Where Kai fits
+## Two ways to run an app
 
-Kai can build, edit, and run apps for you. Throughout these docs, "build with Kai" is the recommended path for most users — it removes the low-level setup you'd otherwise do by hand. Developers who want full control can still build locally; see [Build locally](/data-apps/build-locally/).
+Every app runs from a Git repository. Where that repository lives decides how you work on the app, so pick the path when you create it.
+
+**Kai and a Keboola-managed repository.** When Kai creates an app, Keboola also creates a private Git repository for it on your stack (`git.<stack>.keboola.com/keboola/app-<id>.git`) and Kai commits to it. That's what makes the rest of the Kai experience possible: the live preview, drafts you refine before publishing, and **Modify with Kai** later on. You never touch Git; you describe changes and approve them. This is the recommended path for most people, and the one [Build your first app with Kai](/data-apps/getting-started/) walks through.
+
+**Your own repository.** Point the app at a repository you host, on GitHub, GitLab, or any Git server, and Keboola clones it on every deploy. You develop wherever you like, with your own editor, your own review process, and coding assistants such as Claude Code using the [app-building skill](/data-apps/build-locally/#develop-with-an-ai-coding-tool). Kai can't edit code it doesn't host, so the Kai builder and its live preview aren't part of this path; you push a change and click **Redeploy**. Your repository has to follow a small [layout contract](/data-apps/build-locally/) so Keboola knows how to start it. [Build locally](/data-apps/build-locally/) covers it end to end, including the terminal path with `kbagent`.
+
+Everything after the code is the same on both paths: the same runtime, the same [authentication](/data-apps/authentication/) options, the same App URL, the same deploy, redeploy, sleep, and logs.
+
+| | Kai and a managed repository | Your own repository |
+|---|---|---|
+| Who writes the code | Kai, from your description | You, or your coding assistant |
+| Where it lives | A private repo on your Keboola stack | GitHub, GitLab, or any Git server |
+| Changing the app | Tell Kai, preview the draft, publish | Push, then **Redeploy** |
+| Live preview and drafts | Yes | No |
+| Layout rules for the repo | Handled by Kai | The `keboola-config/` contract |
+| Best for | Dashboards, internal tools, getting something in front of people fast | Existing code, teams with a review process, custom stacks |
 
 ---
 
