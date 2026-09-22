@@ -17,7 +17,7 @@ All jobs are logged and their tracked history is virtually unlimited. Click on a
 - what tables were exported (read from your Storage by the job).
 - how many [credits](/management/project/limits/#project-power--time-credits) were used by running the job.
 - what events occurred during the job execution.
-- what exact parameters were used for the job (this might be useful when working with the [API](/management/jobs/api/#working-with-the-jobs-api)).
+- what exact parameters were used for the job (this might be useful when working with the [API](/extend/jobs/#working-with-the-jobs-api)).
 
 ![Screenshot - Jobs Detail](/management/jobs/jobs-detail.png)
 
@@ -57,7 +57,7 @@ Using the search box and advanced patterns you can easily find job based on vari
 | **Jobs from either HTTP data source or Google Sheets data destination connector** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets)` |
 | **All non-successful jobs from either HTTP or Google Sheets writer** | `params.component:(keboola.ex-http OR keboola.wr-google-sheets) AND -status:success` |
   
-For the API side of jobs (create, poll, debug, the job object), see [Jobs API](/management/jobs/api/).
+For the API side of jobs (create, poll, debug, the job object), see [Jobs API](/extend/jobs/).
 
 ## Running Jobs
 Jobs are either run [manually from any configuration](/tutorial/) or automatically by the 

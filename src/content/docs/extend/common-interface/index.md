@@ -17,7 +17,7 @@ Optionally, you can use
 * [actions](/extend/common-interface/actions/) for quick synchronous tasks,
 * [artifacts](/extend/common-interface/artifacts/) to pass extra files between jobs (preview feature).
 
-Sensitive configuration values are protected by [encryption](/extend/common-interface/encryption/), and third-party
+Sensitive configuration values are protected by [encryption](/extend/encryption/), and third-party
 access by [OAuth2 authorization](/extend/common-interface/oauth/).
 
 To quickly get the picture, have a look a [random sample data folder](/extend/data.zip).

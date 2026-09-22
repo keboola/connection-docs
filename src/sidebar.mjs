@@ -8,7 +8,7 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "overview" },
-      { slug: "overview/apis" },
+      { slug: "overview/api" },
     ],
   },
   {
@@ -547,10 +547,17 @@ export const sidebar = [
           { slug: "storage/api/import-export" },
           { slug: "storage/api/importer" },
           { slug: "storage/api/tde-exporter" },
-          { slug: "storage/api/clients/python-client" },
-          { slug: "storage/api/clients/r-client" },
-          { slug: "storage/api/clients/php-client" },
-          { slug: "storage/api/clients/docker-cli" },
+          {
+            label: "API Clients",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "storage/api/clients" },
+              { slug: "storage/api/clients/python-client" },
+              { slug: "storage/api/clients/r-client" },
+              { slug: "storage/api/clients/php-client" },
+              { slug: "storage/api/clients/docker-cli" },
+            ],
+          },
         ],
       },
     ],
@@ -780,6 +787,8 @@ export const sidebar = [
         ],
       },
       { slug: "extend/job-queue" },
+      { slug: "extend/jobs" },
+      { slug: "extend/encryption" },
       {
         label: "Publishing Component",
         collapsed: true,
