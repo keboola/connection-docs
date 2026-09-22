@@ -101,9 +101,12 @@ around authorizations. */}
 
    ![Screenshot - Sign in with Google](/getting-started/write/writing5.png)
 
-6. Click **Allow**.
-
-   ![Screenshot - Grant access](/getting-started/write/writing6.png)
+6. Google takes over here: it asks which account to use and what Keboola may reach in it, then
+   hands you back. Pick the account whose Drive should hold the spreadsheet and grant the access it
+   asks for. Google changes this screen's wording and buttons from time to time, so follow what it
+   says rather than a script from us; [Google's own help](https://support.google.com/accounts/answer/3466521)
+   covers the permission prompt. When the window closes, the configuration's **Authorization** card
+   names the account it is now authorized by.
 
 The authorization belongs to this configuration. Keboola stores component secrets as
 [encrypted configuration parameters](https://developers.keboola.com/overview/encryption/); there
@@ -191,9 +194,7 @@ settings, steps 9 and 10), since everything Kai set is editable there.
 11. Click **Run Component**.
 
 12. When the job finishes, click the spreadsheet name, `Boolabean staffing outlook`, to open it in
-    Google Drive.
-
-    ![Screenshot - Open the spreadsheet](/getting-started/write/writing11.png)
+    Google Sheets.
 
 The sheet should hold every row of `staffing_outlook`: 42 rows, one per café per forecast day,
 with the columns that did not exist in any of the files you started with, `expected_units`,

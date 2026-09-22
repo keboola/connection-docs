@@ -51,9 +51,9 @@ same blocker as the /getting-started/write/ captures. Flagged rather than half-c
 
 You need a spreadsheet in Drive to load from. Open
 [Google Sheets](https://www.google.com/sheets/about/), start a blank one, then use **File → Import**
-to upload [level.csv](/getting-started/level.csv). Twenty-eight rows, two columns.
-
-![Screenshot - The sample data in Google Sheets](/getting-started/load/google-sheets-spreadsheet.png)
+to import [level.csv](/getting-started/level.csv) into it, and name the file `Level`. Twenty-eight
+rows, two columns. Google's help covers [importing a CSV into Sheets](https://support.google.com/docs/answer/40608)
+if the menu has moved since we wrote this.
 
 Treat it as a table a colleague shared with you.
 
@@ -109,22 +109,18 @@ inside it. The connector asks for them in that order, and so does Kai.
 
    ![Screenshot - Sign in with Google](/getting-started/load/sign-in-with-google.png)
 
-6. Click **Allow**.
-
-   ![Screenshot - Grant access](/getting-started/load/allow.png)
+6. Google takes over: it asks which account to use and what Keboola may reach in it. Pick the
+   account holding the spreadsheet you just made and grant the access it asks for. Google's wording
+   and buttons change from time to time, so follow the screen rather than a script from us.
 
 7. Now choose the Drive files to import.
 
    ![Screenshot - Select Drive files](/getting-started/load/select-files.png)
 
-8. Step 5 authorized Keboola to reach the account; this step grants access to spreadsheets
-   specifically. Click **Select all**, then **Continue**.
+8. Google asks a second time, now about which files Keboola may see. Allow it for your
+   spreadsheets and continue.
 
-   ![Screenshot - Grant access to spreadsheets](/getting-started/load/access-to-spreadsheets.png)
-
-9. Find your **Level** spreadsheet, select it, and click **Select**.
-
-   ![Screenshot - Find the spreadsheet](/getting-started/load/find-spreadsheet.png)
+9. Google's file picker opens. Find the `Level` spreadsheet and choose it.
 
 10. Keboola reads the sheets inside that spreadsheet and offers them.
 

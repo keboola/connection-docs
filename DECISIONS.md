@@ -940,6 +940,37 @@ usability test, applied where the drift is widest.
 
 ---
 
+## 2026-09-22 — The PII the scrub never listed, and the first use of the third-party rule
+
+Reading every image in the section turned up sixteen files carrying something that should not
+ship, none of them in the scrub's list. Four could be saved by cropping, ten could not.
+
+**Cropped, then checked by eye rather than by filter.** `load/source-intro-0.png` and
+`load/db-picture1.png` repeated a colleague's name down a Last Change column; both are now just the
+Components header and the Add Component button, which is all their steps point at.
+`load/select-files.png` had "Authorized by" and an address above the card it was meant to show; it
+starts at the card now. `write/01-find-destination.png` carried the top bar; it starts below it.
+
+**Deleted.** Five screens belong to Google, three of them with a colleague's address in frame. Three
+workspace captures are list views with a name in the Last Change, Last Use or Versions column. One
+is the Connect dialog with a live Snowflake host, user, database and schema, stale as well since it
+shows password auth where the workspace now issues a key pair. One more, `write/writing11.png`, had
+an unmasked top bar and contradicted its own step: the text says the click opens the spreadsheet,
+the picture showed a Keboola page.
+
+**The Google steps are the first use of the rule the usability test produced.** Michal lost time on
+a Google screen whose button had moved since our guide was written. So those steps now say what to
+do and why, and link Google's own help, instead of naming buttons we do not control and shipping a
+picture of them. Three deletions and three rewrites, on two pages. What Keboola itself shows still
+gets a screenshot; that part is ours and it is verifiable.
+
+This is the conflict between "deletions are owner-only" and "never publish colleagues' names or
+internal identifiers" resolved in favour of the second. The ledger rows and this entry are the
+owner's visibility, and none of it is recoverable by reshooting the same frames: a list view will
+always carry whoever last touched the configuration.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were

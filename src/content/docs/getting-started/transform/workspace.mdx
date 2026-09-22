@@ -53,8 +53,13 @@ config with "No input tables found ... may not have input mapping defined" — w
 gap /getting-started/transform/ documents, since transformation create leaves the input mapping
 empty.
 
-Screenshots workspaces1-7 are the legacy captures, kept as UI locators (the wizard's shape is
+Screenshots workspaces1-3 are the legacy captures, kept as UI locators (the wizard's shape is
 unchanged); they are not from the Boolabean walk, so no step here quotes a number out of them.
+workspaces4-7 were removed on 2026-09-22: 4, 5 and 6 are list views carrying a colleague's name in
+the Last Change / Last Use / Versions columns, and 7 is the Connect dialog showing a live Snowflake
+host, user, database and schema. 7 was also stale, describing password auth where the workspace now
+uses a key pair. Steps 4 to 6 read fine without them; step 7's two routes are already spelled out in
+the text. Reshooting them means a filtered or element capture from 264, not a full list view.
 
 Fact-check 2026-09-15 corrected three things in step 2, step 7 and the CLI tab: the picker labels
 are "Snowflake SQL Workspace" / "Google BigQuery Workspace" per /workspace/sql-editor/; the
@@ -135,24 +140,17 @@ in a live chat. If Kai does create workspaces, this tab should say so instead. *
    the workspace sees everything in Storage without copying anything. Leave it off to follow the
    steps below.
 
-4. A job creates the workspace, and it appears in the list when that job finishes.
-
-   ![Screenshot - The creation job](/getting-started/transform/workspaces4.png)
+4. A job creates the workspace. In the **Workspaces** list it shows as *Creating* until that job
+   finishes, then as ready.
 
 5. Click the workspace name to open it.
-
-   ![Screenshot - Workspace detail](/getting-started/transform/workspaces5.png)
 
 6. Set the **table input mapping**, exactly as a transformation does, then click **Load Data**.
    The tables are copied as they are at that moment; click **Load Data** again to refresh them.
 
-   ![Screenshot - Set the input mapping](/getting-started/transform/workspaces6.png)
-
 7. Open the **Connect** menu. On a Snowflake backend it offers two ways in: **Connect** signs you
    in to Snowflake's own Snowsight interface, and the key-pair credentials beside it are for your
    own database client.
-
-   ![Screenshot - Connect to the workspace](/getting-started/transform/workspaces7.png)
 
    Both of those need a project with a dedicated Snowflake backend. On the shared backend that
    Pay As You Go and multi-tenant projects use — which includes the free project this guide starts
