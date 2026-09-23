@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/config/jobs/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 *If new to Generic Extractor, learn about [jobs in our tutorial](/components/extractors/generic-extractor/tutorial/jobs/) first.*
 *Use [Parameter Map](/components/extractors/generic-extractor/map/) to help you navigate among various
@@ -57,7 +59,7 @@ way. Each response is processed in the following steps:
 3. Flatten the object structure into one or more tables.
 4. Create the required tables in Storage and load data into them.
 
-## Merging Responses
+## Merging responses
 The first two steps are the responsibility of [Jobs](/components/extractors/generic-extractor/configuration/config/jobs/)
 resulting in an array of objects. Generic Extractor then tries to find a common super-set of
 properties of all objects, for example, with the following response:
@@ -125,23 +127,23 @@ Assume the following [API definition](/components/extractors/generic-extractor/c
 }
 ```
 
-### Relative URL Fragment
+### Relative URL fragment
 The relative endpoint **must not start** with a slash; so, with
 `endpoint` set to  `campaign`, the final resource URL would be
 `https://example.com/3.0/campaign`.
 
-### Absolute Domain URL
+### Absolute domain URL
 The absolute endpoint **must start** with a slash. So, with `/endpoint`
 set to `campaign`, the final resource URL would be `https://example.com/campaign`.
 This means that the path part specified in the `baseURL` is ignored and fully
 replaced by the value specified in `endpoint`.
 
-### Absolute Full URL
+### Absolute full URL
 The full absolute URL must start with a protocol. So, with the endpoint set to
 `https://eu.example.com/campaign`, this would be the final resource URL
 and the path specified in the `baseURL` is completely ignored.
 
-### Specifying Endpoint
+### Specifying endpoint
 The following table summarizes possible outcomes:
 
 |`baseURL`|`endpoint`|actual URL|
@@ -165,7 +167,7 @@ Also, closely follow the target API specification regarding trailing slashes. Fo
 both `https://example.com/3.0/campaign` and `https://example.com/3.0/campaign/` URLs may
 be accepted and valid. For other APIs, however, only one version may be supported.
 
-## Request Parameters
+## Request parameters
 The `params` section defines [request parameters](/components/extractors/generic-extractor/tutorial/rest). They
 may be optional or required, depending on the target API specification. The `params` section is
 an object with arbitrary properties (or, more precisely, parameters understood by the target
@@ -255,7 +257,7 @@ or, in a more readable [URLDecoded](https://urldecode.org/) form:
 
 Also, the `Content-Type: application/x-www-form-urlencoded` HTTP header will be added to the request.
 
-## Data Type
+## Data type
 The `dataType` parameter assigns a name to the object(s) obtained from the endpoint.
 Setting it is optional. If not set, a name will be generated automatically from the `endpoint`
 value and parent jobs.
@@ -283,7 +285,7 @@ for example, in a situation where two API endpoints return the same resource:
 In the above case, only a single `tickets` table will be produced in the output bucket. It
 will contain records from both API endpoints.
 
-## Data Field
+## Data field
 The `dataField` parameter is used to determine what part of the API **response** will be
 extracted. The following rules apply by default:
 
@@ -318,7 +320,7 @@ as an object with the `path` property. For instance, these two configurations ar
     ]
 ```
 
-### Data Field Delimiter
+### Data field delimiter
 The path to the response property is by default expected to be dot separated. That is — a path
 `members.active` refers to the property `active` nested inside the property `members`. If you need to refer to a
 property containing a dot, you have to change the data field path delimiter to some other character. This can be
@@ -354,7 +356,7 @@ inside the property `members.active` you have to use:
 The `delimiter` character is completely arbitrary but must be something that is not used in the property names in the response.
 See [example [EX120]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/120-datafield-separator).
 
-## Response Filter
+## Response filter
 The `responseFilter` option allows you to skip parts of the API response from processing. This can
 be useful in these cases:
 
@@ -685,7 +687,7 @@ The following table will be extracted:
 
 See [example [EX009]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/009-nested-array).
 
-## Examples with Complicated Objects
+## Examples with complicated objects
 The above examples show how simple objects are extracted from different objects. Generic
 Extractor can also extract objects with non-scalar properties. The default
 [JSON to CSV mapping](/components/extractors/generic-extractor/configuration/config/mappings/) flattens nested objects and produces secondary tables from nested arrays.
@@ -908,7 +910,7 @@ auto-generated key to the parent *Users* table. Also notice that the
 
 See [example [EX012]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/012-deeply-nested-object).
 
-## Response Filter Examples
+## Response filter examples
 
 ### Skip flattening
 If you have an API response like this:
@@ -1038,7 +1040,7 @@ See [example [EX014]](https://github.com/keboola/generic-extractor/tree/master/d
 <!--
 TODO: Un-comment this when this is fixed: https://github.com/keboola/generic-extractor/issues/59
 
-### Skip Boolean conversion
+### Skip boolean conversion
 If you have an API response like this:
 
 ```json
@@ -1308,7 +1310,7 @@ You will obtain a table similar to the one below:
 
 See [example [EX020]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/020-setting-delimiter-complex).
 
-## Examples with HTTP Methods and Parameters
+## Examples with HTTP methods and parameters
 
 ### Request parameters
 Assume that you have an API with the endpoint `users` which requires the

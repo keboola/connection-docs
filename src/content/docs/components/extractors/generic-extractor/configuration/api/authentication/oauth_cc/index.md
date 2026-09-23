@@ -5,13 +5,15 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth_cc/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 oAuth 2.0 Client Credentials authentication performs the [oAuth 2.0 client_credentials flow](https://auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow).
 
 This method is available through the UI and is implemented via the [Login](/components/extractors/generic-extractor/configuration/api/authentication/login/) method.
 
 ![img.png](/components/extractors/generic-extractor/configuration/api/authentication/oauth_cc.png)
 
-### Configuration Parameters
+### Configuration parameters
 
 - `Login Request type`
   - `Basic Auth`: The client_id and client_secret are sent in the Authorization header as a Basic authorization, e.g. `Authorization: Basic base64(client_id:client_secret)`.
