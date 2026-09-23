@@ -1,12 +1,12 @@
 ---
 title: Build an app with an AI agent
 slug: 'data-apps/build-with-an-agent'
-description: 'Build and deploy a Keboola app from Claude Code or Claude Desktop with the dataapp-developer plugin and kbagent: set up the agent, describe the app, then check its URL, password and logs.'
+description: 'Build and deploy a Keboola app from Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT app with the dataapp-developer plugin and kbagent: set up the agent, describe the app, then check its URL, password and logs.'
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-{/* Claude Code flow verified live on 2026-09-23 in project 264 (europe-west3): Claude Code 2.1.280, kbagent 0.94.0, dataapp-developer 1.6.1 from marketplace keboola-claude-kit 1.14.0. One prompt produced a running app (App ID 74021867) in about 11 minutes, including the Storage workaround below. Claude Desktop tab: VERIFY(Nikita), live run pending. */}
+{/* Claude Code flow verified live on 2026-09-23 in project 264 (europe-west3): Claude Code 2.1.280, kbagent 0.94.0, dataapp-developer 1.6.1 from marketplace keboola-claude-kit 1.14.0. One prompt produced a running app (App ID 74021867) in about 11 minutes, including the Storage workaround below. Claude Desktop tab: Keboola MCP connector confirmed on 2026-09-23 (scoped to project 264, admin); plugin install done by Nikita, build prompt not yet run. Cursor, VS Code and ChatGPT app tabs: install routes from cli/for-agents (tested 2026-08-26 for kbagent); VERIFY the dataapp-developer install and the build flow in each. */}
 
 An AI agent on your computer can build a Keboola app from one prompt. With the `dataapp-developer` plugin from Keboola's [AI Kit](/ai/ai-kit/), it reads your data, writes the code, creates the app with a Git repository that Keboola manages, pushes the code there and deploys it. You end up with a running app at its own URL, and the code in a repository you can keep changing.
 
@@ -16,7 +16,7 @@ To build inside Keboola instead, [Kai](/data-apps/getting-started/) does the sam
 
 - A Keboola project with the data the app should show.
 - [kbagent](/cli/), connected to that project. The agent runs it to create, deploy and inspect the app. Creating the push token for the app's repository needs admin rights in the project.
-- Claude Code or Claude Desktop. Using another client? See [Other clients](#other-clients).
+- An AI client: Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT app. Using another agent? See [Other agents](#other-agents).
 
 The agent can't set up single sign-on for the app. `kbagent data-app create` offers a shared password or a public app, and a new app gets the password. You can switch it to SSO later under [Authentication](/data-apps/authentication/).
 
@@ -31,9 +31,7 @@ The agent can't set up single sign-on for the app. `kbagent data-app create` off
        /plugin install dataapp-developer@keboola-claude-kit
        ```
 
-    The plugin gives the agent a skill with Keboola's app layout, Storage access and deployment rules, plus app templates. The agent pushes the code with Git, so Git has to be installed.
-
-    `/mcp` may list a `keboola` server from this plugin that fails to connect. You can ignore it. If you already connected your own Keboola MCP server, the agent asks whether to use it or kbagent; this page follows kbagent.
+    The plugin gives the agent a skill with Keboola's app layout, Storage access and deployment rules, plus app templates.
 
     {/* plugin.json 1.6.1 declares the server as type "sse" at https://mcp.us-east4.gcp.keboola.com/mcp, which answers HTTP 405 (`claude mcp list`, 2026-09-23). Claude Code hides it when a claude.ai connector has the same URL. Not yet reported upstream; remove this paragraph once fixed. */}
   </TabItem>
@@ -42,7 +40,32 @@ The agent can't set up single sign-on for the app. `kbagent data-app create` off
     1. Connect Keboola's MCP server for your stack, as in [Using with Claude Desktop](/ai/mcp-server/#using-with-claude-desktop).
     2. Open **Customise → Plugins → Add → Add from marketplace**, paste `keboola/ai-kit`, and add `dataapp-developer`. The same route installs the `kbagent` plugin; see [kbagent with AI agents](/cli/for-agents/#claude-desktop).
   </TabItem>
+  <TabItem label="Cursor">
+    {/* VERIFY(Nikita): route from cli/for-agents#cursor, tested 2026-08-26 for kbagent only. Confirm dataapp-developer shows in the same list and that the agent builds the app with kbagent. */}
+    1. Install kbagent and connect your project in a terminal, as in [First, in a terminal](/cli/for-agents/#first-in-a-terminal).
+    2. Add the AI Kit marketplace as in [Cursor](/cli/for-agents/#cursor), with the full URL `https://github.com/keboola/ai-kit`. Under **Keboola Ai Kit**, add both `kbagent` and `dataapp-developer`.
+  </TabItem>
+  <TabItem label="VS Code">
+    {/* VERIFY(Nikita): route from cli/for-agents#vs-code, tested 2026-08-26 for kbagent only. Confirm dataapp-developer shows in the picker and that Copilot builds the app with kbagent. */}
+    1. Install kbagent and connect your project in a terminal, as in [First, in a terminal](/cli/for-agents/#first-in-a-terminal).
+    2. Install the plugins from source as in [VS Code](/cli/for-agents/#vs-code): run **Chat: Install Plugin from Source**, paste `https://github.com/keboola/ai-kit`, confirm the Trust prompt, and pick `kbagent`. Do the same for `dataapp-developer`.
+  </TabItem>
+  <TabItem label="ChatGPT app">
+    {/* VERIFY(Nikita): route from cli/for-agents#chatgpt-app, tested 2026-08-26 for kbagent only. `codex plugin add` needs a current Codex CLI; the one bundled in Codex.app 0.131.0-alpha.9 has only `codex plugin marketplace`. */}
+    1. Install kbagent and connect your project in a terminal, as in [First, in a terminal](/cli/for-agents/#first-in-a-terminal).
+    2. Turn on **Developer mode** and add the marketplace as in [ChatGPT app](/cli/for-agents/#chatgpt-app), then install `kbagent` and `dataapp-developer` from the **Personal** tab. From a shell, that's:
+
+       ```bash
+       codex plugin marketplace add https://github.com/keboola/ai-kit
+       codex plugin add kbagent@keboola-claude-kit
+       codex plugin add dataapp-developer@keboola-claude-kit
+       ```
+  </TabItem>
 </Tabs>
+
+In Claude Code, Cursor, VS Code and the ChatGPT app, the skill picks its route from what it finds. With kbagent on the `PATH` it follows this page. If a Keboola MCP server is connected too, the agent asks which one to use; pick kbagent. The agent pushes the code with Git, so Git has to be installed.
+
+The plugin also lists a `keboola` MCP server of its own that fails to connect. You can ignore it.
 
 ## Describe the app
 
@@ -102,11 +125,11 @@ Ask the agent for the change. It edits the code, pushes it to the same repositor
 
 Stopping and waking the app, secrets, settings and deleting are in [Operate and update an app](/data-apps/operate/). kbagent has no commands for drafts or copying an app, and `kbagent data-app deploy --config-version` runs an older configuration for one deploy without restoring it. Drafts, copying and a real [rollback](/data-apps/operate/#see-what-changed-and-go-back) happen in the Keboola UI.
 
-## Other clients
+## Other agents
 
-Cursor, VS Code and the ChatGPT app install AI Kit plugins as well. Each client's route is in [kbagent with AI agents](/cli/for-agents/#set-up-your-client), and `dataapp-developer` is in the same marketplace as `kbagent`. The flow on this page was tested in Claude Code.
+Any agent that can run shell commands can drive kbagent with the commands on this page. For the push, it has to hand Git the token without a prompt, for example through a credential helper, because an agent's shell can't answer one. Have it load kbagent's full command reference with `kbagent context` first ([the context reference](/cli/for-agents/#the-context-reference)). If the agent can't install plugins, give it the skill as files: the folder is [on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/dataapp-developer/skills/dataapp-development), with the app templates and reference guides the skill points to.
 
-{/* VERIFY(Nikita): dataapp-developer install not yet run in Cursor, VS Code or the ChatGPT app (after 1.10). */}
+The flow on this page was run end to end in Claude Code.
 
 ---
 
