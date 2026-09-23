@@ -3,6 +3,7 @@ title: Database Data Source Connectors
 slug: 'components/extractors/database'
 redirect_from:
   - /extractors/database/
+  - /integrate/database/
 
 ---
 
