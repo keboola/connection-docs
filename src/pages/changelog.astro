@@ -1,0 +1,65 @@
+---
+/**
+ * changelog.astro — /changelog/, the newest platform changes without leaving
+ * the docs.
+ *
+ * A real Astro page rather than a `docs` collection entry, on the same footing
+ * as 404.astro: it needs data fetched at build time (the Ghost RSS feed of
+ * changelog.keboola.com), which a Markdown file cannot do. <StarlightPage>
+ * keeps the sidebar and the site chrome.
+ *
+ * Build-time only: the list is as fresh as the last deploy, which happens on
+ * every push to main. That is days behind the source at worst, and the source
+ * is one click away at the top of the page. If the feed cannot be fetched the
+ * page still builds, with the link and a one-line notice instead of the list.
+ *
+ * `hideMeta` for the same reason as on the 404: the page-head chrome includes
+ * "View as Markdown", which points at <slug>/index.md, and that file is only
+ * emitted for collection pages.
+ */
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { fetchChangelog, CHANGELOG_URL, CHANGELOG_RSS_URL } from '../lib/changelog-feed.mjs';
+
+const LIMIT = 15;
+const feed = await fetchChangelog({ limit: LIMIT });
+if (!feed.ok) console.warn(`[changelog] feed unavailable at build time (${feed.error}); rendering the link-only fallback.`);
+
+const fmt = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'Changelog',
+    description: 'What changed in the Keboola platform, newest first — the latest entries from changelog.keboola.com.',
+    tableOfContents: false,
+    hideMeta: true,
+    editUrl: false,
+  }}
+  headings={[]}
+  prev={false}
+  next={false}
+>
+  <p>
+    The latest changes to the platform, newest first. The full history lives at
+    <a href={CHANGELOG_URL}>changelog.keboola.com</a>; to be told about new entries,
+    subscribe to the <a href={CHANGELOG_RSS_URL}>RSS feed</a>.
+  </p>
+
+  {feed.ok ? (
+    <ul>
+      {feed.items.map((item) => (
+        <li>
+          <time datetime={item.date.toISOString().slice(0, 10)}>{fmt.format(item.date)}</time>
+          {' — '}
+          <a href={item.link}>{item.title}</a>
+          {item.description && <><br />{item.description}</>}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p>
+      The feed could not be read when this page was built. The entries are on
+      <a href={CHANGELOG_URL}>changelog.keboola.com</a>.
+    </p>
+  )}
+</StarlightPage>

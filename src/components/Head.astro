@@ -21,6 +21,10 @@ import { ClientRouter } from 'astro:transitions';
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
 />
+{/* Feed autodiscovery: lets a reader (or a reader's RSS client) subscribe to the
+    platform changelog from any docs page. The feed itself is Ghost's, on
+    changelog.keboola.com; /changelog/ mirrors its newest entries. */}
+<link rel="alternate" type="application/rss+xml" title="Keboola Platform Changelog" href="https://changelog.keboola.com/rss/" />
 <Default {...Astro.props}><slot /></Default>
 <ClientRouter fallback="swap" />
 <script is:inline>
