@@ -323,7 +323,9 @@ Restrict access to your app using JumpCloud OIDC. Users authenticate via their J
 
 ## Callback URL format
 
-All authentication methods that use OAuth or OIDC require a callback URL. The format is always:
+Every method that uses OAuth or OIDC needs a callback URL, and the app's configuration gives you the finished value: the **Callback URL** field under **Authentication**, with a copy button. Copy it rather than typing it. A single wrong character is the most common reason sign-in fails, and the provider reports it as a redirect mismatch rather than as a typo.
+
+The rest of this section is for reading a URL you already have, or for a stack where the field hasn't appeared yet.
 
 ```
 https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback
@@ -331,9 +333,7 @@ https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback
 
 For example: `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`
 
-`<url-prefix>-<app-id>.hub.<stack-host>` is the whole host shown in the **App URL** block on the app's configuration page: the URL prefix, a hyphen, and the App ID (for example `toy-store-sales-74016144`). An app created without a URL prefix drops the hyphenated part and uses `https://<app-id>.hub.<stack-host>/_proxy/callback`.
-
-You don't have to assemble any of this by hand. The **Callback URL** field under **Authentication** shows the finished value with a copy button, for every method that needs one.
+`<url-prefix>-<app-id>.hub.<stack-host>` is the whole host shown in the **App URL** block on the app's configuration page: the URL prefix, a hyphen, and the App ID, for example `toy-store-sales-74016144`. An app created without a URL prefix has no hyphenated part, so its callback URL is `https://<app-id>.hub.<stack-host>/_proxy/callback`.
 
 ---
 
