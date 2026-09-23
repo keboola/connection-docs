@@ -112,34 +112,34 @@ Pick your provider:
   <TabItem label="Microsoft Entra ID">
     Let people sign in with their Microsoft work account.
 
-    **Before you start** — you need permission to register applications in your tenant; the **Application Developer** role is enough for the registration itself. Restricting who can sign in needs **Cloud Application Administrator** or higher.
+    **Before you start** — you need permission to register applications in your tenant; the **Application Developer** role is enough for the registration itself. Restricting who can sign in needs **Cloud Application Administrator**, **Application Administrator**, or ownership of the app's service principal.
 
     **Register the app:**
 
     1. Sign in to the [Microsoft Entra admin center](https://entra.microsoft.com/) and go to **Entra ID → App registrations → New registration**.
     2. Enter a **Name** your users will recognize.
-    3. Under **Supported account types**, keep **Single tenant only** (the option names your tenant): only users and guests of your tenant can sign in.
+    3. Under **Supported account types**, keep the single-tenant option, which names your tenant: **Single tenant only**, or **Accounts in this organizational directory only** in older portal builds. Only users and guests of your tenant can sign in.
     4. Under **Redirect URI (optional)**, choose **Web** and paste the callback URL from step 1.
     5. Click **Register**. The app's **Overview** page opens. Copy the **Application (client) ID** and the **Directory (tenant) ID**; Keboola needs both.
 
     **Create a client secret:**
 
     1. Under **Manage**, open **Certificates & secrets** and click **New client secret**.
-    2. Enter a description, pick an expiry, and click **Add**.
+    2. Enter a description, pick an expiry, and click **Add**. Microsoft caps the lifetime at 24 months and recommends under 12.
     3. Copy the secret's **Value** right away; Entra hides it once you leave the page. Note the expiry, too: before it passes, create a new secret and update the app's authentication settings, or sign-in stops working.
 
     You now have: an Application (client) ID, a Directory (tenant) ID, and a client secret Value.
 
-    **Optional — restrict who can sign in.** Out of the box, anyone in your tenant can open the app. To let in only specific people or groups, go to **Entra ID → Enterprise apps**, open your app, and under **Manage → Properties** set **Assignment required?** to **Yes**. Then, under **Manage → Users and groups**, click **Add user/group** and pick who may sign in. Assigning groups, rather than single users, needs a Microsoft Entra ID P1 or P2 license. Everyone else now gets `AADSTS50105` at sign-in.
+    **Optional — restrict who can sign in.** Out of the box, anyone in your tenant can open the app. To let in only specific people or groups, go to **Entra ID → Enterprise apps**, open your app, and under **Manage → Properties** set **Assignment required?** to **Yes**. Then, under **Manage → Users and groups**, click **Add user/group**, pick who may sign in, leave **Select a role** on its default, and click **Assign**. Nothing is saved until you do. Assigning groups, rather than single users, needs a Microsoft Entra ID P1 or P2 license. Everyone else now gets `AADSTS50105` at sign-in, with one exception that will mislead you: the requirement doesn't apply to Global Administrators, so test with an ordinary account rather than your own.
 
     **Back in Keboola** — on the app's configuration page, under **Authentication**, set **Authentication Type** to **OIDC (Custom)**, select **Azure OIDC** in the **Provider** dropdown, and paste the **Client ID**, **Client secret**, and **Tenant ID**. Keboola builds the issuer from the tenant ID (`https://login.microsoftonline.com/<tenant ID>/v2.0`). Click **Save**.
 
     **If sign-in fails:**
 
     - `AADSTS50011: The redirect URI … does not match` — the redirect URI in the registration differs from the app's callback URL. Fix it under **Manage → Authentication**.
-    - `AADSTS7000215: Invalid client secret provided` — you pasted the secret's **Secret ID** instead of its **Value**, or the secret expired. Create a new one and update the app.
+    - `AADSTS7000215: Invalid client secret is provided` — the secret expired, or you pasted the secret's **Secret ID** instead of its **Value**. Create a new one and update the app.
     - `AADSTS50105: … is not assigned to a role for the application` — you required assignment and this user isn't assigned. Add them under **Enterprise apps → your app → Users and groups**.
-    *Console steps last walked through on 2026-09-14; the Entra admin center changes often, so check the menu names as you go.*
+    *Checked against Microsoft's documentation on 2026-09-23. Not yet walked through a live tenant, and the Entra admin center changes often, so check the menu names as you go.*
   </TabItem>
   <TabItem label="Okta">
     Let people sign in with their Okta account.
@@ -148,23 +148,24 @@ Pick your provider:
 
     **Create the app integration:**
 
-    1. In the Okta Admin Console, go to **Applications → Applications** (in newer orgs the menu is called **Applications and Resources**) and click **Create App Integration**.
+    1. In the Okta Admin Console, go to **Applications and Resources → Applications** (**Applications → Applications** in Classic Engine orgs) and click **Create App Integration**. If Okta asks which experience to use, choose **Classic experience**.
     2. Choose **OIDC - OpenID Connect** as the **Sign-in method** and **Web Application** as the **Application type**, then click **Next**.
     3. Enter an **App integration name**, for example `Keboola app - Toy store sales`.
-    4. Under **Sign-in redirect URIs**, replace the default value with the callback URL from step 1. You can remove the default **Sign-out redirect URIs** entry.
+    4. Under **Sign-in redirect URIs**, enter the callback URL from step 1. Leave an entry under **Sign-out redirect URIs** if you plan to set a **Logout URL** in Keboola later; Okta only returns people to a URI registered there.
     5. Under **Assignments**, decide who can sign in: **Allow everyone in your organization to access** or **Limit access to selected groups** (or skip the assignment for now and add people later).
     6. Click **Save**. On the **General** tab, under **Client Credentials**, copy the **Client ID** and the **Client secret**.
 
     You now have: a Client ID and a Client secret, and Okta knows your callback URL.
 
-    **Back in Keboola** — on the app's configuration page, under **Authentication**, set **Authentication Type** to **OIDC (Custom)**, select **Okta** in the **Provider** dropdown, and paste the **Client ID** and **Client secret**. Set **Domain/Org URL** to `https://<yourOktaDomain>/oauth2/default`; your Okta domain is shown in the Admin Console when you click your name at the top right, for example `https://acme.okta.com/oauth2/default`. The `default` authorization server comes with the Integrator Free Plan and with API Access Management; if **Security → API → Authorization Servers** doesn't list it, use the org authorization server instead: `https://<yourOktaDomain>` with no path. **Logout URL** is optional: `https://<yourOktaDomain>/login/signout` also ends the Okta session when someone signs out of the app. Click **Save**.
+    **Back in Keboola** — on the app's configuration page, under **Authentication**, set **Authentication Type** to **OIDC (Custom)**, select **Okta** in the **Provider** dropdown, and paste the **Client ID** and **Client secret**. Set **Domain/Org URL** to the issuer of the authorization server you want to use; your Okta domain is shown in the Admin Console when you click your name at the top right. For plain single sign-on, Okta points you at the **org authorization server**, whose issuer is the bare domain with no path, for example `https://acme.okta.com`. Custom authorization servers need API Access Management, a paid add-on in production orgs. If your org has one, its issuer is `https://acme.okta.com/oauth2/default`, which is also what the field's example shows, and you can check under **Security → API → Authorization Servers**. One trap on an Integrator Free Plan org: the `default` server there ships **without an access policy**, and every token request fails until you add one. Open **Security → API → default → Access Policies** and add a policy that applies to your app. **Logout URL** is optional: use the `end_session_endpoint` from the discovery document of whichever server you chose, at `https://<yourOktaDomain>/oauth2/default/.well-known/openid-configuration` or `https://<yourOktaDomain>/.well-known/openid-configuration` for the org server. Okta returns people to a URI registered under **Sign-out redirect URIs**, so keep one there that matches. Click **Save**.
 
     **If sign-in fails:**
 
     - "The 'redirect_uri' parameter must be a Login redirect URI in the client app settings" — the URI in the integration differs from the app's callback URL. Fix **Sign-in redirect URIs** on the integration's **General** tab.
     - "User is not assigned to the client application" — the user, or their group, isn't assigned to the integration. Add them on the **Assignments** tab.
-    - Issuer or discovery error when the app starts the sign-in — check **Domain/Org URL**: `https://`, your Okta domain, `/oauth2/default`, no trailing slash. If your org has no `default` authorization server, use `https://<yourOktaDomain>` instead.
-    *Console steps last walked through on 2026-09-14; check the menu names as you go.*
+    - Issuer or discovery error when the app starts the sign-in — check **Domain/Org URL** against the `issuer` in that server's discovery document, character for character, with no trailing slash. If sign-in reaches Okta and then fails on a free-plan org, check that the `default` authorization server has an access policy.
+
+    *Checked against Okta's documentation on 2026-09-23. Not yet walked through a live org, so check the menu names as you go.*
   </TabItem>
   <TabItem label="Auth0">
     Let people sign in through Auth0, with whatever connections your tenant offers: username and password, social logins, or enterprise identity providers.
@@ -176,19 +177,19 @@ Pick your provider:
     1. In the [Auth0 Dashboard](https://manage.auth0.com/), go to **Applications → Applications** and click **Create Application**.
     2. Name it, choose **Regular Web Applications**, and click **Create**.
     3. Open the **Settings** tab. Under **Basic Information**, copy the **Domain**, **Client ID**, and **Client Secret**.
-    4. Scroll down to **Application URIs** and paste the callback URL from step 1 into **Allowed Callback URLs**.
+    4. Scroll down to **Application URIs** and paste the callback URL from step 1 into **Allowed Callback URLs**. If you plan to set a **Logout URL** in Keboola, add the app's URL to **Allowed Logout URLs** in the same block; Auth0 refuses any post-logout redirect that isn't registered there.
     5. Click **Save Changes** at the bottom of the page.
 
     You now have: your tenant Domain, a Client ID, and a Client Secret.
 
-    **Back in Keboola** — on the app's configuration page, under **Authentication**, set **Authentication Type** to **OIDC (Custom)**, select **Auth0** in the **Provider** dropdown, and paste the **Client ID** and **Client secret**. Set **Issuer URL** to your tenant **Domain** with `https://` in front and a trailing slash, for example `https://acme.us.auth0.com/` (or a custom domain such as `https://login.acme.com/`). The field's example omits the slash, but Auth0's issuer ends with one; when in doubt, copy the `issuer` value from `https://<yourAuth0Domain>/.well-known/openid-configuration`. **Logout URL** is optional: `https://<yourAuth0Domain>/oidc/logout` also ends the Auth0 session when someone signs out of the app. Click **Save**.
+    **Back in Keboola** — on the app's configuration page, under **Authentication**, set **Authentication Type** to **OIDC (Custom)**, select **Auth0** in the **Provider** dropdown, and paste the **Client ID** and **Client secret**. Set **Issuer URL** to the `issuer` value from your tenant's discovery document, at `https://<the domain your users sign in through>/.well-known/openid-configuration`. That's your custom domain if you have one, otherwise the **Domain** from step 3, and the two produce different issuers. Copy it character for character. Auth0 issuers normally end in a slash, for example `https://acme.us.auth0.com/` or `https://login.acme.com/`, while the field's own example omits it. **Logout URL** is optional: `https://<yourAuth0Domain>/oidc/logout` also ends the Auth0 session when someone signs out of the app. Click **Save**.
 
     **If sign-in fails:**
 
-    - "Callback URL mismatch" on an Auth0 error page — the URL in **Allowed Callback URLs** differs from the app's callback URL. Fix it under **Settings → Application URIs**.
+    - "Callback URL Mismatch" on an Auth0 error page, with a line reading "{URL} is not in the list of allowed callback URLs" — the URL in **Allowed Callback URLs** differs from the app's callback URL. Fix it under **Settings → Application URIs**.
     - Issuer mismatch or discovery error when the app starts the sign-in — the **Issuer URL** must match the `issuer` in Auth0's discovery document character for character: `https://`, your Auth0 domain, trailing slash.
     - Users of one connection can't sign in — that connection isn't enabled for this application. Turn it on under the application's **Connections** tab.
-    *Console steps last walked through on 2026-09-14; check the menu names as you go.*
+    *Checked against Auth0's documentation on 2026-09-23. Not yet walked through a live tenant, so check the menu names as you go.*
   </TabItem>
   <TabItem label="Another provider">
     Any OpenID Connect provider works through the **Generic OIDC** option.
