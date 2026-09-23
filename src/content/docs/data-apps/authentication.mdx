@@ -52,7 +52,9 @@ The flow is the same everywhere: open the app in Keboola, register it with your 
 Your provider needs the app's callback URL, so start in Keboola.
 
 1. In your Keboola project, open **Apps** and click the app. It doesn't matter whether Kai built it or you created it yourself. No app yet? [Create one manually](/data-apps/getting-started/#create-an-app-manually) first; it opens on its configuration page.
-2. On the app's **Overview** tab, scroll to the **App URL** block. It shows the app's host as a URL prefix plus a generated part, for example `toy-store-sales` and `-74016144.hub.europe-west3.gcp.keboola.com`. Click the block's copy button — it gives you the app's URL, **not** the callback URL. Paste it where you need it and add `/_proxy/callback` to the end:
+2. Under **Authentication**, find the read-only **Callback URL** field and click its copy button. That is the exact value your provider needs. It appears for OIDC, GitHub, GitLab and JumpCloud, and not for None or Basic, which need no callback.
+
+   No such field? Build the URL yourself from the **App URL** block on the **Overview** tab. That block shows the app's host as a URL prefix plus a generated part, for example `toy-store-sales` and `-74016144.hub.europe-west3.gcp.keboola.com`, and its copy button gives you the app's URL rather than the callback URL. Add `/_proxy/callback` to the end:
 
    ```
    https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback
@@ -60,7 +62,9 @@ Your provider needs the app's callback URL, so start in Keboola.
 
    For example: `https://toy-store-sales-74016144.hub.europe-west3.gcp.keboola.com/_proxy/callback`
 
-   The block is there from the moment the app exists; you don't have to deploy first.
+   An app created without a URL prefix has no hyphenated part, so its callback URL is `https://<app-id>.hub.<stack-host>/_proxy/callback`.
+
+   Either way, the value exists from the moment the app does; you don't have to deploy first.
 
 The block sits below **Authentication**:
 
@@ -248,7 +252,7 @@ Restrict access to your app using GitHub OAuth. Users authenticate via their Git
 ### Setup instructions
 
 1. Go to your GitHub account **Settings > Developer Settings > OAuth Apps** and create a new OAuth App.
-2. Set the **Authorization callback URL** to: the app's callback URL — `https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback`, the whole host from the **App URL** block plus `/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
+2. Set the **Authorization callback URL** to the app's callback URL. Copy it from the **Callback URL** field under **Authentication**, or build it as `https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
 3. Copy the **Client ID** and **Client Secret** from the created OAuth App.
 4. In your Keboola app configuration, select **GitHub** as the authentication method.
 5. Paste the **Client ID** and **Client Secret**.
@@ -279,7 +283,7 @@ Restrict access to your app using GitLab OAuth. Users authenticate via their Git
 ### Setup instructions
 
 1. Go to your GitLab instance **Settings > Applications** and create a new application.
-2. Set the **Redirect URI** to: the app's callback URL — `https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback`, the whole host from the **App URL** block plus `/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
+2. Set the **Redirect URI** to the app's callback URL. Copy it from the **Callback URL** field under **Authentication**, or build it as `https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
 3. Ensure the `openid`, `profile`, and `email` scopes are selected. If you use group or project restrictions, also select `read_api`.
 4. Copy the **Application ID** and **Secret**.
 5. In your Keboola app configuration, select **GitLab** as the authentication method.
@@ -310,7 +314,7 @@ Restrict access to your app using JumpCloud OIDC. Users authenticate via their J
 
 1. In the **JumpCloud Admin Console**, go to **SSO** and create a new application (or use an existing one).
 2. Configure the application as an **OIDC** application.
-3. Set the **Redirect URI** to: the app's callback URL — `https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback`, the whole host from the **App URL** block plus `/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
+3. Set the **Redirect URI** to the app's callback URL. Copy it from the **Callback URL** field under **Authentication**, or build it as `https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback` (e.g., `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`).
 4. Copy the **Client ID** and **Client Secret** from the SSO tab.
 5. In your Keboola app configuration, select **JumpCloud** as the authentication method.
 6. Paste the **Client ID**, **Client Secret**, **Issuer URL**, and **Logout URL**.
@@ -327,7 +331,9 @@ https://<url-prefix>-<app-id>.hub.<stack-host>/_proxy/callback
 
 For example: `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/callback`
 
-`<url-prefix>-<app-id>.hub.<stack-host>` is the whole host shown in the **App URL** block on the app's configuration page: the URL prefix, a hyphen, and the App ID (
+`<url-prefix>-<app-id>.hub.<stack-host>` is the whole host shown in the **App URL** block on the app's configuration page: the URL prefix, a hyphen, and the App ID (for example `toy-store-sales-74016144`). An app created without a URL prefix drops the hyphenated part and uses `https://<app-id>.hub.<stack-host>/_proxy/callback`.
+
+You don't have to assemble any of this by hand. The **Callback URL** field under **Authentication** shows the finished value with a copy button, for every method that needs one.
 
 ---
 
