@@ -70,6 +70,8 @@ charges for. Once it runs out, Kai consumes PPU credits as described above.
 
 - **Shared** — all projects and users in the organization draw from the same 300 PPU.
 - **No expiry** — it does not reset each month, and creating another project does not add more.
+- **Never cut off part-way** — a reply that starts on the allowance finishes on it. If 1 PPU
+  is left and the reply costs 3 PPU, all 3 are free, and charging starts with the next reply.
 - **New organizations only** — including an additional organization of an existing customer.
   Organizations created earlier do not qualify, even if they start using Kai later.
 - **Multi-tenant stacks** — on a single-tenant stack, ask your Customer Success Manager what
@@ -128,6 +130,9 @@ The project budget is the outer boundary. Every user's limit sits inside it.
 Kai stops for a user who hits their per-user limit. Kai stops for everyone once the
 project budget runs out, even for users below their own limit. Kai tells you which limit
 you reached.
+
+A reply that has already started is never cut off part-way. Kai finishes it and stops at
+the next one, so hitting a limit never costs you work in progress.
 
 :::note[Limits do not have to add up]
 Ten users with a 10 PPU limit each under a 40 PPU project budget is a valid setup: the

@@ -241,7 +241,8 @@ a [free allowance of 300 PPU](/kai/pricing/#free-allowance-for-new-organizations
 
 Organization Admins cap Kai spend with a monthly project budget and per-user limits in
 **Settings → Kai Agent → Kai spend limits**. An indicator appears in your chat panel at 80%
-of your limit, and when a limit is reached, Kai stops and tells you which one applied.
+of your limit, and when a limit is reached, Kai stops and tells you which one applied. A
+reply that has already started always finishes, so a limit never cuts off work in progress.
 
 [Pay-as-you-go projects](/management/payg-project/) are not on this model yet. They keep a
 monthly Kai message limit per user until usage-based billing reaches PAYG.
