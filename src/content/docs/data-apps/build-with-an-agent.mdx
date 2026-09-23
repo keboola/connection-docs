@@ -63,7 +63,9 @@ The agent can't set up single sign-on for the app. `kbagent data-app create` off
   </TabItem>
 </Tabs>
 
-In Claude Code, Cursor, VS Code and the ChatGPT app, the skill picks its route from what it finds. With kbagent on the `PATH` it follows this page. If a Keboola MCP server is connected too, the agent asks which one to use; pick kbagent. The agent pushes the code with Git, so Git has to be installed.
+In Claude Code, Cursor, VS Code and the ChatGPT app, the skill picks its route from what it finds. With kbagent on the `PATH` it follows this page. If a Keboola MCP server is connected too, the agent asks which route to use. The MCP route builds a draft that you preview before anything goes live, and the workspace bug below doesn't affect it; the commands on this page are the kbagent route. Either way, the agent pushes the code with Git, so Git has to be installed.
+
+{/* MCP route observed 2026-09-23 in a Claude Code session with the claude.ai Keboola connector (project 264): the agent asked "Keboola MCP (Recommended)" or "kbagent CLI"; MCP created prod app 74021869 (managed repo, parameters.dataApp.git written, not deployed until approved) and draft 74021870 (dev mode, branch orders-per-day, git user kai), which got its workspace. */}
 
 The plugin also lists a `keboola` MCP server of its own that fails to connect. You can ignore it.
 
@@ -102,7 +104,7 @@ An app created with a managed repository isn't deployed yet, because its reposit
 
 - The agent finishes with the app's URL.
 - The app asks for its password. The agent usually can't show it, because `kbagent data-app password` needs a Manage API token. Open **Apps** from the left navigation and then your app: once it's deployed, the password is next to **Open App** (see [Authentication](/data-apps/authentication/)).
-- If the app opens without data, read its log with `kbagent data-app logs --project <alias> --app-id <id>`. If it doesn't start at all, `kbagent data-app runs --project <alias> --app-id <id>` shows why. [Troubleshooting](/data-apps/troubleshooting/) lists the common causes.
+- If the app opens without data, read its log with `kbagent data-app logs --project <alias> --app-id <id>`. If it doesn't start at all, `kbagent data-app runs --project <alias> --app-id <id>` shows why. [Troubleshooting](/data-apps/troubleshooting/) lists the common causes, including `Promise.withResolvers is not a function` from a too-new `@keboola/api-client`.
 
 ### If the app can't read Storage
 
