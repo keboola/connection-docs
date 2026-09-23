@@ -1,5 +1,6 @@
 ---
 title: Checklist
+description: This checklist is used for the last check of the component before sending the publish request. See Publish Component tutorial for details.
 slug: 'extend/publish/checklist'
 ---
 

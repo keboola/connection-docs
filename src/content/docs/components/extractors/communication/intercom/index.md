@@ -1,5 +1,6 @@
 ---
 title: Intercom
+description: This data source connector fetches data from Intercom.
 slug: 'components/extractors/communication/intercom'
 redirect_from:
     - /extractors/communication/intercom/

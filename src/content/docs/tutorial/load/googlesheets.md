@@ -1,5 +1,6 @@
 ---
 title: Loading Data from Google Sheets
+description: In the previous step, you learned how to quickly load data into Keboola using manual import.
 slug: 'tutorial/load/googlesheets'
 ---
 

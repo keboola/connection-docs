@@ -1,5 +1,6 @@
 ---
 title: AWS S3
+description: This data destination connector allows you to write CSV files into a single AWS S3 bucket.
 slug: 'components/writers/storage/aws-s3'
 redirect_from:
     - /writers/storage/aws-s3/

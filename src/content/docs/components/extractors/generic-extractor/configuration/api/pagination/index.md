@@ -1,5 +1,6 @@
 ---
 title: Pagination
+description: If new to Generic Extractor, learn about pagination in our tutorial first. Use Parameter Map to help you navigate among various configuration options.
 slug: 'components/extractors/generic-extractor/configuration/api/pagination'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/

@@ -1,5 +1,6 @@
 ---
 title: Google Sheets
+description: This data destination connector sends tables as worksheets into a single Google Sheets account.
 slug: 'components/writers/storage/google-sheets'
 redirect_from:
     - /writers/storage/google-sheets/

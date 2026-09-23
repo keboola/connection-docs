@@ -1,5 +1,6 @@
 ---
 title: Data Destination Connectors
+description: 'Data destination connectors deliver processed data out of Keboola into the systems where it gets used — what types exist and how to work with them.'
 slug: 'components/writers'
 redirect_from:
     - /writers/

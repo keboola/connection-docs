@@ -1,5 +1,6 @@
 ---
 title: Components
+description: 'Extend Keboola with your own component — the CSV-in, CSV-out data interface it shares with transformations, and what you need to build one.'
 slug: 'extend/component'
 redirect_from:
     - /extend/docker/

@@ -1,5 +1,6 @@
 ---
 title: Babelforce
+description: This data source connector uses the Babelforce REST API to import data from Babelforce, a cloud call center platform.
 slug: 'components/extractors/marketing-sales/babelforce'
 redirect_from:
     - /extractors/marketing-sales/babelforce/

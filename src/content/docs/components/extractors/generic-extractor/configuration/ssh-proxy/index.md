@@ -1,5 +1,6 @@
 ---
 title: SSH Proxy Configuration
+description: 'Reach an API inside a private network through an SSH proxy — setting up the gateway server and pointing Generic Extractor at it.'
 slug: 'components/extractors/generic-extractor/configuration/ssh-proxy'
 redirect_from:
     - /extend/generic-extractor/configuration/ssh-proxy/
