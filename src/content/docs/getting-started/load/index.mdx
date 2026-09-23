@@ -309,7 +309,7 @@ It prints the new configuration ID; keep it for the next two commands. The same 
 request, if you would rather see it:
 
 ```bash
-curl -X POST "https://connection.<your-stack>/v2/storage/components/keboola.ex-http/configs" -H "X-StorageApi-Token: $KBC_TOKEN" -F "name=Boolabean sales" -F 'configuration={"parameters":{"baseUrl":"https://help.keboola.com/getting-started/boolabean/"}}'
+curl -X POST "https://<your-stack>/v2/storage/components/keboola.ex-http/configs" -H "X-StorageApi-Token: $KBC_TOKEN" -F "name=Boolabean sales" -F 'configuration={"parameters":{"baseUrl":"https://help.keboola.com/getting-started/boolabean/"}}'
 ```
 
 **Add the five tables**

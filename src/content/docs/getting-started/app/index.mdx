@@ -42,7 +42,9 @@ state: f9cab9f7" — and then failed on the missing keboola-config/nginx directo
 credentials are working again; the runs that failed on "Authentication failed" are 09-20 and 09-21
 (and job 105560409, quoted below, is the 09-21 one). The nginx gap is the durable cause and the one
 the bug report should lead with. Both are kept in the failure list because a reader can still meet
-either. So the page keeps sending the reader to the
+either. Re-checked 2026-09-23: the 04:07 UTC run (01a0cc72-9400-76da-b211-3e7d2afee913) failed on
+the credentials again, StartupProbeFailed with "Credentials are incorrect or have expired", so
+"working again" held for one day and both causes are live. So the page keeps sending the reader to the
 draft preview as the finishing line. Step 5 now states the missing dialog BEFORE the click rather
 than after it, which is the lesson from Michal's OIDC walk-through: he pressed Publish, got no
 feedback, and could not tell whether he had missed a step.
