@@ -36,22 +36,29 @@ The agent can't set up single sign-on for the app. `kbagent data-app create` off
     {/* plugin.json 1.6.1 declares the server as type "sse" at https://mcp.us-east4.gcp.keboola.com/mcp, which answers HTTP 405 (`claude mcp list`, 2026-09-23). Claude Code hides it when a claude.ai connector has the same URL. Not yet reported upstream; remove this paragraph once fixed. */}
   </TabItem>
   <TabItem label="Claude Desktop">
-    {/* VERIFY(Nikita): live run pending. The skill sends Claude Desktop down its MCP-only path (deployment-paths.md, Path A: no shell access to the project, Python/JS only if the runner can use Git). If that holds, the kbagent prerequisite and the kbagent commands below don't apply here, and this tab needs its own flow. Also confirm the name of the dataapp-developer card. */}
+    {/* VERIFY(Michal Ševčík): not yet run in the Desktop chat (the 2026-09-23 "Desktop" run was a Claude Code session in the Code tab). Check: (1) the name of the dataapp-developer card, (2) whether the agent can run kbagent here or goes MCP-only, as the skill's Path A says, (3) the prompt below, end to end. The Keboola MCP connector itself was confirmed on 2026-09-23 (project 264). */}
     1. Connect Keboola's MCP server for your stack, as in [Using with Claude Desktop](/ai/mcp-server/#using-with-claude-desktop).
     2. Open **Customise → Plugins → Add → Add from marketplace**, paste `keboola/ai-kit`, and add `dataapp-developer`. The same route installs the `kbagent` plugin; see [kbagent with AI agents](/cli/for-agents/#claude-desktop).
+    3. Start a new chat and paste the prompt from [Describe the app](#describe-the-app). The skill prefers the MCP route in Claude Desktop, described in [The MCP route](#the-mcp-route); if it also finds kbagent, it asks which one to use. Without a way to push to Git, it builds a Streamlit app instead.
   </TabItem>
   <TabItem label="Cursor">
-    {/* VERIFY(Nikita): route from cli/for-agents#cursor, tested 2026-08-26 for kbagent only. Confirm dataapp-developer shows in the same list and that the agent builds the app with kbagent. */}
+    {/* VERIFY(Michal Ševčík): install route from cli/for-agents#cursor, tested 2026-08-26 for kbagent only. Check: (1) dataapp-developer appears under Keboola Ai Kit, (2) the chat mode that runs terminal commands and how Cursor asks to approve them, (3) with the MCP deeplink added, the agent asks kbagent or MCP, (4) the prompt below, end to end. */}
     1. Install kbagent and connect your project in a terminal, as in [First, in a terminal](/cli/for-agents/#first-in-a-terminal).
     2. Add the AI Kit marketplace as in [Cursor](/cli/for-agents/#cursor), with the full URL `https://github.com/keboola/ai-kit`. Under **Keboola Ai Kit**, add both `kbagent` and `dataapp-developer`.
+    3. Optional: to build through the MCP route instead, add Keboola's MCP server for your stack, as in [Using with Cursor](/ai/mcp-server/#using-with-cursor).
+    4. Open the chat in agent mode and paste the prompt from [Describe the app](#describe-the-app). Approve the terminal commands it asks to run.
   </TabItem>
   <TabItem label="VS Code">
-    {/* VERIFY(Nikita): route from cli/for-agents#vs-code, tested 2026-08-26 for kbagent only. Confirm dataapp-developer shows in the picker and that Copilot builds the app with kbagent. */}
+    {/* VERIFY(Michal Ševčík): install route from cli/for-agents#vs-code, tested 2026-08-26 for kbagent only. Check: (1) whether the picker offers dataapp-developer and takes one plugin per run, (2) the agent mode label and the approval prompt for terminal commands, (3) which Copilot plan the flow needs, (4) the prompt below, end to end. */}
+    VS Code runs the agent through GitHub Copilot, so you need the Copilot extension with agent mode.
+
     1. Install kbagent and connect your project in a terminal, as in [First, in a terminal](/cli/for-agents/#first-in-a-terminal).
     2. Install the plugins from source as in [VS Code](/cli/for-agents/#vs-code): run **Chat: Install Plugin from Source**, paste `https://github.com/keboola/ai-kit`, confirm the Trust prompt, and pick `kbagent`. Do the same for `dataapp-developer`.
+    3. Optional: to build through the MCP route instead, add Keboola's MCP server, as in [Using with VS Code](/ai/mcp-server/#using-with-vs-code).
+    4. Open the Chat view (`⌃⌘I`, or `Ctrl+Alt+I` on Windows), switch to agent mode, and paste the prompt from [Describe the app](#describe-the-app). Approve the terminal commands it asks to run.
   </TabItem>
   <TabItem label="ChatGPT app">
-    {/* VERIFY(Nikita): route from cli/for-agents#chatgpt-app, tested 2026-08-26 for kbagent only. `codex plugin add` needs a current Codex CLI; the one bundled in Codex.app 0.131.0-alpha.9 has only `codex plugin marketplace`. */}
+    {/* VERIFY(Michal Ševčík): install route from cli/for-agents#chatgpt-app, tested 2026-08-26 for kbagent only. Check: (1) the app's name and version (ChatGPT or Codex), (2) the Personal tab lists dataapp-developer, (3) whether Settings → Connectors in this app is the MCP route from ai/mcp-server#using-with-chatgpt, (4) the prompt below, end to end. `codex plugin add` needs a current Codex CLI; the one bundled in Codex.app 0.131.0-alpha.9 has only `codex plugin marketplace`. */}
     1. Install kbagent and connect your project in a terminal, as in [First, in a terminal](/cli/for-agents/#first-in-a-terminal).
     2. Turn on **Developer mode** and add the marketplace as in [ChatGPT app](/cli/for-agents/#chatgpt-app), then install `kbagent` and `dataapp-developer` from the **Personal** tab. From a shell, that's:
 
@@ -60,12 +67,15 @@ The agent can't set up single sign-on for the app. `kbagent data-app create` off
        codex plugin add kbagent@keboola-claude-kit
        codex plugin add dataapp-developer@keboola-claude-kit
        ```
+
+    3. Optional: to build through the MCP route instead, add Keboola's MCP server as a connector, as in [Using with ChatGPT](/ai/mcp-server/#using-with-chatgpt).
+    4. Start a new chat and paste the prompt from [Describe the app](#describe-the-app). Approve the commands it asks to run.
   </TabItem>
 </Tabs>
 
-In Claude Code, Cursor, VS Code and the ChatGPT app, the skill picks its route from what it finds. With kbagent on the `PATH` it follows this page. If a Keboola MCP server is connected too, the agent asks which route to use. The MCP route builds a draft that you preview before anything goes live, and the workspace bug below doesn't affect it; the commands on this page are the kbagent route. Either way, the agent pushes the code with Git, so Git has to be installed.
+In Claude Code, Cursor, VS Code and the ChatGPT app, the skill picks its route from what it finds. With kbagent on the `PATH` it follows this page. If a Keboola MCP server is connected too, the agent may ask which route to use; [The MCP route](#the-mcp-route) explains the other one. The commands on this page are the kbagent route. Either way, the agent pushes the code with Git, so Git has to be installed.
 
-{/* MCP route observed 2026-09-23 in a Claude Code session with the claude.ai Keboola connector (project 264): the agent asked "Keboola MCP (Recommended)" or "kbagent CLI"; MCP created prod app 74021869 (managed repo, parameters.dataApp.git written, not deployed until approved) and draft 74021870 (dev mode, branch orders-per-day, git user kai), which got its workspace. */}
+{/* The route question was seen in Claude Code only; VERIFY(Michal Ševčík) whether Cursor, VS Code and the ChatGPT app ask it too (the skill detects MCP by Claude-style tool names). MCP route observed 2026-09-23 in a Claude Code session with the claude.ai Keboola connector (project 264): the agent asked "Keboola MCP (Recommended)" or "kbagent CLI"; MCP created prod app 74021869 (managed repo, parameters.dataApp.git written, not deployed until approved) and draft 74021870 (dev mode, branch orders-per-day, git user kai), which got its workspace. */}
 
 The plugin also lists a `keboola` MCP server of its own that fails to connect. You can ignore it.
 
@@ -100,6 +110,15 @@ kbagent data-app deploy --project <alias> --app-id <id> --wait
 
 An app created with a managed repository isn't deployed yet, because its repository is still empty. By default it gets password sign-in, the `tiny` size, sleep after 15 minutes without visitors, and access to Storage.
 
+### The MCP route
+
+Through the Keboola MCP server, the agent doesn't run kbagent. It calls the server's app tools instead, such as `modify_python_js_data_app`, `create_python_js_data_app_git_credential` and `deploy_data_app`:
+
+- It creates the app with a Keboola-managed repository, and a draft of it next to the production app.
+- The draft runs in development mode at its own URL, so you preview the app before anything goes live. If the repository has a `keboola-config/supervisord-dev/` program, the draft reloads each push within seconds; otherwise the agent redeploys it.
+- The production app stays undeployed until you approve the draft. Then the agent merges the draft into production and deploys it.
+- The repository block is in the configuration from the start, so [the workspace bug](#if-the-app-cant-read-storage) doesn't apply.
+
 ## Check the app
 
 - The agent finishes with the app's URL.
@@ -131,7 +150,7 @@ Stopping and waking the app, secrets, settings and deleting are in [Operate and 
 
 Any agent that can run shell commands can drive kbagent with the commands on this page. For the push, it has to hand Git the token without a prompt, for example through a credential helper, because an agent's shell can't answer one. Have it load kbagent's full command reference with `kbagent context` first ([the context reference](/cli/for-agents/#the-context-reference)). If the agent can't install plugins, give it the skill as files: the folder is [on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/dataapp-developer/skills/dataapp-development), with the app templates and reference guides the skill points to.
 
-The flow on this page was run end to end in Claude Code.
+{/* Claude Code, 2026-09-23: the kbagent route ran end to end (App ID 74021867); the MCP route ran up to the draft preview (prod 74021869 left undeployed, draft 74021870 reloaded a push and loaded 36,043 orders). The merge, prod deploy and draft cleanup (TOOLS.md, modify_python_js_data_app scenario A) were not run. The other tabs are pending review (VERIFY). */}
 
 ---
 
