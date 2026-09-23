@@ -3,7 +3,7 @@ title: kbagent with AI agents
 slug: 'cli/for-agents'
 sidebar:
   label: Use with AI Agents
-description: 'Give an AI coding agent safe control of Keboola with kbagent: the plugin and /keboola subagent, per-client setup for Claude Code, Claude Desktop, Cursor, VS Code and the ChatGPT app, read-only sandboxing, the conversation ID, and the kbagent context reference.'
+description: 'Give an AI coding agent safe control of Keboola with kbagent: the plugin and /keboola subagent, per-client setup for Claude Code, Claude Desktop, Cursor, VS Code and the ChatGPT app, the app-building plugin, read-only sandboxing, the conversation ID, and the kbagent context reference.'
 ---
 
 
@@ -125,6 +125,12 @@ No AI client involved: [install the CLI](/cli/getting-started/), [connect your p
 
 <!-- Per-client routes (marketplace form accepted, slash-command availability, `/kbagent:setup` outcome, Claude Desktop's Customise → Plugins path and "kbagent" card, Cursor's Import from GitHub full-URL requirement and its [invalid_argument] Error, VS Code's "Chat: Install Plugin from Source" palette entry, the ChatGPT app's Developer mode and Personal tab) tested against live clients on 2026-08-26; the same routes are what the Keboola UI shows on Settings → Developer settings → Agentic CLI. Devin is hidden from that surface, so it gets no per-client route here. -->
 
+### Add the app-building plugin
+
+To build Keboola apps, install **`dataapp-developer`** as well. It ships from the same marketplace, so it takes the same route as `kbagent`: in Claude Code, run `/plugin install dataapp-developer@keboola-claude-kit`; in the other clients, pick `dataapp-developer` from the same plugin list. [Build an app with an AI agent](/data-apps/build-with-an-agent/) goes from there to a deployed app.
+
+<!-- Claude Code route verified 2026-09-23 (claude plugin install dataapp-developer@keboola-claude-kit, plugin 1.6.1). VERIFY(Nikita): Claude Desktop, Cursor, VS Code and the ChatGPT app list the same marketplace as for kbagent, but installing dataapp-developer there has not been run yet. -->
+
 ## The `context` reference
 
 Any agent — plugin or not — should start by loading the full command reference:
@@ -161,7 +167,7 @@ export KBAGENT_CONVERSATION_ID="<unique-id>"
 
 - **kbagent** — the agent's hands on your projects from the terminal, with sandboxing.
 - **[MCP server](/ai/mcp-server/)** — direct tool calls over MCP.
-- **[AI Kit](/ai/ai-kit/)** — coding-assistant plugins for building Keboola components and apps.
+- **[AI Kit](/ai/ai-kit/)** — coding-assistant plugins for building Keboola components and apps. To build an app with one, see [Build an app with an AI agent](/data-apps/build-with-an-agent/).
 - **[Kai](/kai/)** — the in-product assistant; `kbagent kai ask -m "why did last night's load fail?"` puts the same assistant in your shell *(beta)*.
 
 <!-- The /keboola → keboola-expert subagent description was confirmed by Padak against source (review, v0.66.1), when the marketplace was still `keboola-agent-cli`. The `keboola-claude-kit` install string is not covered by that review; it comes from keboola/ai-kit's .claude-plugin/marketplace.json, read 2026-08-26. -->

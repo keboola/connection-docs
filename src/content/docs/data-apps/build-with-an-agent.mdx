@@ -1,0 +1,113 @@
+---
+title: Build an app with an AI agent
+slug: 'data-apps/build-with-an-agent'
+description: 'Build and deploy a Keboola app from Claude Code or Claude Desktop with the dataapp-developer plugin and kbagent: set up the agent, describe the app, then check its URL, password and logs.'
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+{/* Claude Code flow verified live on 2026-09-23 in project 264 (europe-west3): Claude Code 2.1.280, kbagent 0.94.0, dataapp-developer 1.6.1 from marketplace keboola-claude-kit 1.14.0. One prompt produced a running app (App ID 74021867) in about 11 minutes, including the Storage workaround below. Claude Desktop tab: VERIFY(Nikita), live run pending. */}
+
+An AI agent on your computer can build a Keboola app from one prompt. With the `dataapp-developer` plugin from Keboola's [AI Kit](/ai/ai-kit/), it reads your data, writes the code, creates the app with a Git repository that Keboola manages, pushes the code there and deploys it. You end up with a running app at its own URL, and the code in a repository you can keep changing.
+
+To build inside Keboola instead, [Kai](/data-apps/getting-started/) does the same from the **Create App** screen, with a live preview. To write the code yourself in your own repository, see [Build an app locally](/data-apps/build-locally/).
+
+## Before you start
+
+- A Keboola project with the data the app should show.
+- [kbagent](/cli/), connected to that project. The agent runs it to create, deploy and inspect the app. Creating the push token for the app's repository needs admin rights in the project.
+- Claude Code or Claude Desktop. Using another client? See [Other clients](#other-clients).
+
+The agent can't set up single sign-on for the app. `kbagent data-app create` offers a shared password or a public app, and a new app gets the password. You can switch it to SSO later under [Authentication](/data-apps/authentication/).
+
+## Set up the agent
+
+<Tabs syncKey="ai-client">
+  <TabItem label="Claude Code">
+    1. Install kbagent, connect your project and add the `kbagent` plugin. [kbagent with AI agents](/cli/for-agents/#claude-code) has the steps; `/kbagent:setup` with your stack's URL installs the CLI and signs you in.
+    2. Add the app-building plugin from the same marketplace:
+
+       ```
+       /plugin install dataapp-developer@keboola-claude-kit
+       ```
+
+    The plugin gives the agent a skill with Keboola's app layout, Storage access and deployment rules, plus app templates. The agent pushes the code with Git, so Git has to be installed.
+
+    `/mcp` may list a `keboola` server from this plugin that fails to connect. You can ignore it. If you already connected your own Keboola MCP server, the agent asks whether to use it or kbagent; this page follows kbagent.
+
+    {/* plugin.json 1.6.1 declares the server as type "sse" at https://mcp.us-east4.gcp.keboola.com/mcp, which answers HTTP 405 (`claude mcp list`, 2026-09-23). Claude Code hides it when a claude.ai connector has the same URL. Not yet reported upstream; remove this paragraph once fixed. */}
+  </TabItem>
+  <TabItem label="Claude Desktop">
+    {/* VERIFY(Nikita): live run pending. The skill sends Claude Desktop down its MCP-only path (deployment-paths.md, Path A: no shell access to the project, Python/JS only if the runner can use Git). If that holds, the kbagent prerequisite and the kbagent commands below don't apply here, and this tab needs its own flow. Also confirm the name of the dataapp-developer card. */}
+    1. Connect Keboola's MCP server for your stack, as in [Using with Claude Desktop](/ai/mcp-server/#using-with-claude-desktop).
+    2. Open **Customise → Plugins → Add → Add from marketplace**, paste `keboola/ai-kit`, and add `dataapp-developer`. The same route installs the `kbagent` plugin; see [kbagent with AI agents](/cli/for-agents/#claude-desktop).
+  </TabItem>
+</Tabs>
+
+## Describe the app
+
+Say what the app shows, which data it uses and where the code goes, and ask for a new, deployed app. Without the word *new*, the skill prefers changing an app that already exists. For example:
+
+```text
+Build a Keboola app that shows the number of orders per day as a line chart,
+from the orders table in my project. Put the code in a new Keboola-managed Git
+repository, deploy the app, and give me its URL.
+```
+
+The agent reads the skill, finds the table and queries a sample before it writes any code. Name a framework if it matters to you; for a dashboard, the skill defaults to Node.js with Chart.js. Claude Code asks you to approve each command it runs unless you've allowed them. To use your own GitHub repository instead, put its URL in the prompt; the repository then has to follow the layout in [Build an app locally](/data-apps/build-locally/).
+
+These are the commands the agent runs on the managed-repository route, and you can run them yourself. `<alias>` is your project's name in kbagent; `kbagent project list` shows it in the **Alias** column. `create` prints the app ID and the config ID, and `git-repo` prints the HTTPS URL of the repository.
+
+```bash
+# Create the app with an empty Keboola-managed repository
+kbagent data-app create --project <alias> --name "Orders per day" --slug orders-per-day --use-managed-git-repo
+
+# Get the repository URL and a push token (the token is shown only once)
+kbagent data-app git-repo --project <alias> --app-id <id>
+kbagent data-app git-credentials-create --project <alias> --app-id <id> --type http_token --permissions readWrite --yes
+
+# Push the code to main; when Git asks, use any username and the token as the password
+git push <https-url> main
+
+# Deploy and wait until the app runs
+kbagent data-app deploy --project <alias> --app-id <id> --wait
+```
+
+An app created with a managed repository isn't deployed yet, because its repository is still empty. By default it gets password sign-in, the `tiny` size, sleep after 15 minutes without visitors, and access to Storage.
+
+## Check the app
+
+- The agent finishes with the app's URL.
+- The app asks for its password. The agent usually can't show it, because `kbagent data-app password` needs a Manage API token. Open **Apps** from the left navigation and then your app: once it's deployed, the password is next to **Open App** (see [Authentication](/data-apps/authentication/)).
+- If the app opens without data, read its log with `kbagent data-app logs --project <alias> --app-id <id>`. If it doesn't start at all, `kbagent data-app runs --project <alias> --app-id <id>` shows why. [Troubleshooting](/data-apps/troubleshooting/) lists the common causes.
+
+### If the app can't read Storage
+
+Until [keboola/cli#765](https://github.com/keboola/cli/pull/765) ships (kbagent 0.94.0 and earlier), an app created with `--use-managed-git-repo` gets no workspace, however often you redeploy it with kbagent. It runs, but its code finds no `WORKSPACE_ID`. An app built from the plugin's Node.js template logs `Missing env vars: WORKSPACE_ID (or KBC_WORKSPACE_MANIFEST_PATH)`.
+
+The app's configuration is missing its repository block. Add it, before the first deploy or after it, and deploy:
+
+```bash
+kbagent config update --project <alias> --component-id keboola.data-apps --config-id <config-id> --merge --configuration '{"parameters":{"dataApp":{"git":{"repository":"<https-url>","branch":"main","private":true}}}}'
+kbagent data-app deploy --project <alias> --app-id <id> --wait
+```
+
+If you no longer have the config ID from `create`, `kbagent --json data-app detail --project <alias> --app-id <id>` shows it as `config_id`. After the fix ships, `deploy` adds the block itself.
+
+{/* Reproduced 2026-09-23 on App ID 74021867: deploys ran without WORKSPACE_ID; config update (version 5) plus deploy loaded the data. Tracked as CLI-15. Remove this section once keboola/cli#765 is released, and the matching troubleshooting row. */}
+
+## Change the app later
+
+Ask the agent for the change. It edits the code, pushes it to the same repository and runs `kbagent data-app deploy --wait` again; the app restarts on each deploy. In a new session, the agent gets the repository URL from `kbagent data-app git-repo` and a fresh push token from `git-credentials-create`. To edit the code yourself, clone the repository from that URL with a push token.
+
+Stopping and waking the app, secrets, settings and deleting are in [Operate and update an app](/data-apps/operate/). kbagent has no commands for drafts or copying an app, and `kbagent data-app deploy --config-version` runs an older configuration for one deploy without restoring it. Drafts, copying and a real [rollback](/data-apps/operate/#see-what-changed-and-go-back) happen in the Keboola UI.
+
+## Other clients
+
+Cursor, VS Code and the ChatGPT app install AI Kit plugins as well. Each client's route is in [kbagent with AI agents](/cli/for-agents/#set-up-your-client), and `dataapp-developer` is in the same marketplace as `kbagent`. The flow on this page was tested in Claude Code.
+
+{/* VERIFY(Nikita): dataapp-developer install not yet run in Cursor, VS Code or the ChatGPT app (after 1.10). */}
+
+---
+
+**Next:** [Operate and update an app →](/data-apps/operate/)

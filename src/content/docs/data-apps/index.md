@@ -21,12 +21,14 @@ For the full explanation — how apps fit into the platform and how they're isol
 
 Dashboards and reports, internal tools, data narratives, configurators, and agent-facing services — see [what you can build](/data-apps/what-are-apps/#what-you-can-build) for the full picture. Dashboards are just the start: **[Beyond dashboards](#beyond-dashboards)** below shows the range.
 
-## Two ways to build
+## Three ways to build
 
 - **[Build with Kai](/data-apps/getting-started/)** — describe the app in plain language and Kai reads your data, builds a live draft you preview and refine, and publishes when you're ready. No coding needed — the walkthrough takes about 10 minutes. The same **Create App** screen also offers [manual creation](/data-apps/getting-started/#create-an-app-manually) if you'd rather configure the app yourself. **You need:** a Keboola project. Nothing else.
-- **[Build locally](/data-apps/build-locally/)** — develop with your own tools and Git account, use the [AI Kit](/ai/ai-kit/) coding-assistant plugins, and sync the app to your project. For developers who want full control — that page covers how Python/JS development works day to day. **You need:** a Git account and somewhere to host the repository; about half an hour the first time.
+- **[Build locally](/data-apps/build-locally/)** — develop with your own tools and Git account, and sync the app to your project. For developers who want full control — that page covers how Python/JS development works day to day. **You need:** a Git account and somewhere to host the repository; about half an hour the first time.
+- **[Build with an AI agent](/data-apps/build-with-an-agent/)** — ask Claude Code or Claude Desktop for the app in one prompt. With Keboola's `dataapp-developer` plugin and [kbagent](/cli/), the agent reads your data, writes the code, creates the app in a Keboola-managed repository and deploys it. **You need:** kbagent connected to your project and one of those clients.
+  <!-- VERIFY(Nikita): Claude Desktop may take the MCP-only path without kbagent; adjust after the Desktop run. -->
 
-Both routes end up in a Git repository, either one Keboola manages for the app or one you host. [Two ways to run an app](/data-apps/what-are-apps/#two-ways-to-run-an-app) explains what each gives you, including why the Kai builder appears on one and not the other.
+On all three routes, a Python/JS app ends up in a Git repository, either one Keboola manages for the app or one you host. [Two ways to run an app](/data-apps/what-are-apps/#two-ways-to-run-an-app) explains what each gives you, including why the Kai builder appears on one and not the other.
 
 ## Run and share
 

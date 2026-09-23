@@ -33,7 +33,9 @@ After installation, enable the plugins you need:
 
 `keboola-claude-kit` is the marketplace name this repository publishes, and the one to install Keboola plugins from.
 
-<!-- Plugin list, names and versions read from keboola/ai-kit .claude-plugin/marketplace.json on 2026-08-26: component-developer 3.3.2, dataapp-developer 1.5.1, kbagent 0.91.0, keboola-cli 1.1.1, keboola-git 1.0.1, powerbi-to-sl 1.0.0, sl-toolkit 3.0.0. There is no `developer` plugin. -->
+Those are Claude Code commands. Claude Desktop, Cursor, VS Code and the ChatGPT app add the marketplace through their own screens; [kbagent with AI agents](/cli/for-agents/#set-up-your-client) has the route for each, and any plugin below installs the same way.
+
+<!-- Plugin list, names and versions read from keboola/ai-kit .claude-plugin/marketplace.json on 2026-09-23 (marketplace 1.14.0, commit 58fb482): component-developer 3.3.2, dataapp-developer 1.6.1, kbagent 0.94.0, keboola-cli 1.1.1, keboola-git 1.1.0, powerbi-to-sl 1.0.0, sl-toolkit 3.0.0. There is no `developer` plugin. -->
 
 ## Available Plugins
 
@@ -97,11 +99,11 @@ The `powerbi-to-sl` plugin migrates an existing Microsoft Power BI semantic mode
 
 ### Data App Developer Plugin
 
-The Data App Developer Plugin is a specialized toolkit for building production-ready Streamlit data apps for Keboola deployment. It features a systematic validate, build, and verify workflow that ensures features work correctly the first time.
+The Data App Developer Plugin teaches an AI client to build, deploy and debug Keboola apps, both Python/JS and Streamlit. Its main skill, `dataapp-development`, covers choosing the app type, the repository layout, Storage access, authentication, styling and deployment. The agent works through either the Keboola MCP Server or kbagent, one of them per session. For the whole flow from one prompt to a deployed app, see [Build an app with an AI agent](/data-apps/build-with-an-agent/).
 
 **Workflow:**
 
-The plugin enforces a three-phase development workflow. In the **Validate** phase, it checks table schemas and queries sample data using the Keboola MCP Server to verify assumptions before writing code. In the **Build** phase, it implements features following SQL-first architecture patterns that push computation to the database. In the **Verify** phase, it tests the app in a browser and captures screenshots using Playwright MCP to prove everything works.
+The plugin enforces a three-phase development workflow. In the **Validate** phase, it checks table schemas and queries sample data through the Keboola MCP Server or kbagent to verify assumptions before writing code. In the **Build** phase, it implements features following SQL-first architecture patterns that push computation to the database. In the **Verify** phase, it tests the app in a browser and captures screenshots using Playwright MCP to prove everything works.
 
 **Key Features:**
 
