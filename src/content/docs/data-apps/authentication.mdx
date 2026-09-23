@@ -91,7 +91,7 @@ Pick your provider:
 
     You now have: a Client ID and a Client secret.
 
-    **Back in Keboola.** On the app's configuration page, under **Authentication**, set **Authentication Type** to **OIDC (Custom)**, select **Google SSO** in the **Provider** dropdown, paste the **Client ID** and **Client secret** (this option has no issuer field), and click **Save**. After saving, the secret field is masked. Reveal it with the eye icon and you'll see an encrypted value starting with `KBC::ProjectSecureGKMS::` rather than what you pasted — that's your secret stored encrypted, not a replacement. To change it later, paste a new value over it.
+    **Back in Keboola.** On the app's configuration page, under **Authentication**, set **Authentication Type** to **OIDC (Custom)**, select **Google SSO** in the **Provider** dropdown, paste the **Client ID** and **Client secret** (this option has no issuer field), and click **Save**. After saving, the secret field is masked. Reveal it with the eye icon and you'll see an encrypted value starting with `KBC::ProjectSecure` rather than what you pasted. That is your secret stored [encrypted](/extend/encryption/), not a replacement; the rest of the prefix depends on which cloud your stack runs on. To change it later, paste a new value over it.
 
     **If sign-in fails:**
 
