@@ -162,7 +162,7 @@ to build one ([Build your first app with Kai](/data-apps/getting-started/)).
    see the failure list at the foot of this page. The draft preview is the part that has worked
    every time, and it is enough to finish this guide.
 
-**Check:** the draft preview — or **Open App**, if the deploy succeeded for you — shows the grid,
+**Check:** the draft preview (or **Open App**, if the deploy succeeded for you) shows the grid,
 and its caption's count equals both the number of red cells and the number of rows where
 `short_handed` is true in Storage. That count moves with the forecast: the capture above was a
 week with two, an earlier week had four. A deploy that ends in **Failed** with nothing in
@@ -180,8 +180,8 @@ development workflow rather than a form. It has its own pages:
 </TabItem>
 <TabItem label="CLI / API">
 
-The app itself is written by Kai in the builder — there is no command that turns a paragraph into a
-grid. What `kbagent` does is the part you repeat: listing apps, deploying the version Storage
+The app itself is written by Kai in the builder. No command turns a paragraph into a grid.
+What `kbagent` does is the part you repeat: listing apps, deploying the version Storage
 holds, waking one that has gone to sleep, and reading its log when it will not start.
 
 ```bash
@@ -189,7 +189,7 @@ kbagent data-app list --project docs-demo
 ```
 
 That prints each app with its numeric **app ID**, its state and its URL. `kbagent data-app detail
---project docs-demo --app-id <app-id>` adds the Storage **configuration ID** — a different
+--project docs-demo --app-id <app-id>` adds the Storage **configuration ID**, a different
 identifier, and the one the flow on the next page needs for its third phase.
 
 With the app ID, a deploy of the latest saved configuration is one command:
@@ -201,7 +201,7 @@ kbagent data-app deploy --project docs-demo --app-id <app-id> --wait
 `--wait` blocks until the container is running or the deploy fails. This is the same call the
 flow's third phase makes on the next page, which is why a broken app turns a scheduled run red.
 
-Three more worth knowing:
+Four more worth knowing:
 
 ```bash
 kbagent data-app start --project docs-demo --app-id <app-id>
@@ -220,7 +220,7 @@ kbagent data-app password --project docs-demo --app-id <app-id>
 ```
 
 `start` wakes an app that auto-suspended, `logs` is the app's own output, `runs` lists each
-start with the container's startup log — which is where a failed deploy actually explains itself —
+start with the container's startup log, which is where a failed deploy actually explains itself,
 and `password` prints the Basic-auth password for the URL, the one thing to keep out of a
 screenshot or a chat.
 
@@ -237,16 +237,16 @@ screenshot or a chat.
   means, and the app should not decide again.
 - **The deploy of the production app fails, and Terminal Logs says the app is not running.** The
   draft ran, so the code works; the production container did not come up. The job's own error is
-  usually just *Internal Server Error occurred*, which says nothing — the reason is in the
+  usually just *Internal Server Error occurred*, which says nothing. The reason is in the
   container's startup log, and the fastest way to read it is
   `kbagent data-app runs --project <alias> --app-id <app-id>`. Two causes have shown up in this
   project, and neither is your grid:
 
-  - `App must have keboola-config/nginx/ directory` — the repository Kai wrote has no nginx
+  - `App must have keboola-config/nginx/ directory`: the repository Kai wrote has no nginx
     configuration, which a Python/JS app needs in production. The draft does not, because it runs
     in dev mode.
   - `Authentication failed for https://git.<stack>/keboola/app-<id>.git` with *Credentials are
-    incorrect or have expired* — the app's managed Git credentials have expired, so the container
+    incorrect or have expired*: the app's managed Git credentials have expired, so the container
     cannot clone its own code.
 
   After several failures the platform disables the app: a banner says it failed to start

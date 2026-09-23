@@ -153,8 +153,8 @@ in a live chat. If Kai does create workspaces, this tab should say so instead. *
    credentials for a database client of your own.
 
    Both of those need a project with a dedicated Snowflake backend. On the shared backend that
-   Pay As You Go and multi-tenant projects use — which includes the free project this guide starts
-   from — there is no direct connection, and the [SQL Editor](/workspace/sql-editor/) is the way
+   Pay As You Go and multi-tenant projects use, which includes the free project this guide starts
+   from, there is no direct connection, and the [SQL Editor](/workspace/sql-editor/) is the way
    in: it runs the same queries against the same workspace, in the browser, on Snowflake and
    BigQuery alike.
 
@@ -163,7 +163,7 @@ in a live chat. If Kai does create workspaces, this tab should say so instead. *
 
 Every click above is an API call underneath, and [kbagent](/cli/) is the same calls from a
 terminal. It needs to be [installed](/cli/getting-started/) and pointed at your project once with
-`kbagent project add`, which stores the connection under an alias — the examples use `docs-demo`,
+`kbagent project add`, which stores the connection under an alias. The examples use `docs-demo`,
 substitute yours.
 
 **Create the workspace**
@@ -175,7 +175,7 @@ kbagent workspace create --project docs-demo --name "Boolabean SQL"
 It prints the workspace ID; keep it, because every command below takes it. The backend is taken
 from the project unless you pass `--backend`.
 
-Read-only access to all of Storage — the checkbox in the UI tab's step 3 — is **on** here, the
+Read-only access to all of Storage, the checkbox in the UI tab's step 3, is **on** here, the
 other way round from the dialog. That is the `--read-only` default; `--no-read-only` turns it off.
 It does not stop you loading tables or writing in your own schema: it decides whether the
 workspace can also see the rest of Storage without copying it.
@@ -208,7 +208,7 @@ this table the two halves disagree, and both halves of the disagreement are load
 
 | You write | What happens |
 |---|---|
-| `FROM staffing_outlook` | fails — looks for `STAFFING_OUTLOOK`, the table is stored lower case |
+| `FROM staffing_outlook` | fails; looks for `STAFFING_OUTLOOK`, the table is stored lower case |
 | `FROM "staffing_outlook"` | works |
 | `SELECT "store_name"` | fails with `invalid identifier`, the column is stored upper case |
 | `SELECT STORE_NAME` or `SELECT "STORE_NAME"` | works |
@@ -235,7 +235,7 @@ kbagent workspace delete --project docs-demo --workspace-id <workspace-id>
 `kbagent workspace from-transformation --project docs-demo --component-id … --config-id …` is the
 shortcut for the other direction: it builds a workspace loaded with exactly what a transformation reads. It needs
 that configuration to have an input mapping, and one created by `kbagent transformation create`
-does not have one yet — see [Transform data](/getting-started/transform/).
+does not have one yet; see [Transform data](/getting-started/transform/).
 
 </TabItem>
 </Tabs>
@@ -243,7 +243,7 @@ does not have one yet — see [Transform data](/getting-started/transform/).
 ## Check it worked
 
 *Coming from the **Prompt** tab? You have no workspace to check. Your answer arrived with the SQL
-that produced it, which is what the other two tabs spend a workspace getting to — you are done.*
+that produced it, which is what the other two tabs spend a workspace getting to. You are done.*
 
 Your query returns rows, and the same query returns the same rows after a reload: the copy does
 not move under you. The workspace itself shows up in **Workspaces**, and from a terminal in

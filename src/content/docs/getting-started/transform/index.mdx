@@ -443,8 +443,8 @@ block does not use it. */}
 
 **Create it from the SQL**
 
-The SQL is the same either way: copy the block for your backend from the **UI** tab above — the
-Snowflake one or the BigQuery one — into a file called `staffing_outlook.sql`. Then:
+The SQL is the same either way: copy the block for your backend from the **UI** tab above, the
+Snowflake one or the BigQuery one, into a file called `staffing_outlook.sql`. Then:
 
 ```bash
 kbagent transformation create --project docs-demo --name "Boolabean staffing outlook" --sql-file staffing_outlook.sql --created-table staffing_outlook
@@ -510,7 +510,7 @@ was written.
 
 ## Run it and check the result
 
-*Coming from the **Prompt** or **CLI / API** tab? The run already happened — the prompt asked for
+*Coming from the **Prompt** or **CLI / API** tab? The run already happened: the prompt asked for
 it, and `job run --wait` did it. Skip to the row-count check below.*
 
 Click **Run Transformation** and confirm with **Run**. That creates a background job which copies

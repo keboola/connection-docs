@@ -26,14 +26,14 @@ export function pathIntroText({ tabs = 2, manual, approvals, yours } = {}) {
 
   if (tabs === 3) {
     out.push(
-      '**Three ways to do this, one page — they are alternatives, not steps.** The sections ' +
+      '**Three ways to do this, one page. They are alternatives, not steps.** The sections ' +
         'below (**Prompt**, **UI**, **CLI / API**) each reach the same result: **Prompt** is what ' +
         'you paste into Kai, **UI** is the same task click by click, **CLI / API** is the same ' +
         'task from a terminal. Do one of them, not all three.',
     );
   } else {
     out.push(
-      '**Two ways to do this, one page — they are alternatives, not steps.** **Prompt** is what ' +
+      '**Two ways to do this, one page. They are alternatives, not steps.** **Prompt** is what ' +
         'you paste into Kai; **UI** is the same task click by click. Do one of them, not both.',
     );
   }
@@ -55,7 +55,7 @@ export function pathIntroText({ tabs = 2, manual, approvals, yours } = {}) {
   if (yours) out.push(`One thing stays yours either way: ${yours}.`);
 
   out.push(
-    'If a step builds something other than what this page describes, say so in the same chat — ' +
+    'If a step builds something other than what this page describes, say so in the same chat; ' +
       'it edits what it made. Nothing here is one-way.',
   );
 

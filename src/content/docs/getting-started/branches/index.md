@@ -17,20 +17,20 @@ First, learn how development branches [work in general](/components/branches/).
 In this tutorial, we will guide you through the process of creating and using a development branch. You will configure 
 various components that demonstrate the different aspects of branches.
 
-* Part 1 -- Preparing production configurations:
+* Part 1, preparing production configurations:
   * [Preparing table manipulating configurations](/getting-started/branches/prepare-tables/)
   * [Preparing file manipulating configurations](/getting-started/branches/prepare-files/)
-* Part 2 -- Working in a branch: 
+* Part 2, working in a branch: 
   * [Working with tables in a branch](/getting-started/branches/tables-in-branch)
   * [Working with files in a branch](/getting-started/branches/files-in-branch)
-* Part 3 -- Merging branches:
+* Part 3, merging branches:
   * [Project diff](/getting-started/branches/project-diff/)
   * [Merge to production](/getting-started/branches/merge-to-production/)
 
 ## From a terminal
 
 [kbagent](/cli/) drives a branch from the shell, with one gap in the middle. The examples name
-the project by the alias `kbagent project add` stored for it, `docs-demo` here — substitute yours:
+the project by the alias `kbagent project add` stored for it, `docs-demo` here. Substitute yours:
 
 ```bash
 kbagent branch create --project docs-demo --name "Try the new transformation"

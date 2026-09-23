@@ -12,7 +12,7 @@ In this part of our tutorial about development branches, you will prepare [compo
 that manipulate tables and buckets in [Storage](/storage/). We will use those configurations in the following sections 
 to see how branches work. 
 
-You can create a configuration of any component in a branch, and the following steps are not strictly necessary -- you
+You can create a configuration of any component in a branch, and the following steps are not strictly necessary; you
 can use branches in a completely empty project. However, the tutorial follows the typical scenario when you are using 
 branches in a non-empty project.
 
@@ -64,7 +64,7 @@ CREATE TABLE "top_prices" AS SELECT * FROM "bitcoin_price" ORDER BY PRICE DESC L
 ![Finished transformation](/getting-started/branches/figures/transformation-prod-set-up.png)
 
 Save the transformation and run it. Then verify that there is a new table `out.c-bitcoin.top_prices` containing 
-five values from the source data -- dates and amounts from when bitcoin had the most value.
+five values from the source data: dates and amounts from when bitcoin had the most value.
 
 ![New table](/getting-started/branches/figures/snflk-new-table.png)
 

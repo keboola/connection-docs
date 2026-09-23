@@ -136,7 +136,7 @@ load and hand-written SQL live. This walk does not need them.
 
 Every click above is an API call underneath, and [kbagent](/cli/) is the same calls from a
 terminal. It needs to be [installed](/cli/getting-started/) and pointed at your project once with
-`kbagent project add`, which stores the connection under an alias — the examples use `docs-demo`,
+`kbagent project add`, which stores the connection under an alias. The examples use `docs-demo`,
 substitute yours.
 
 **The connection**
@@ -196,7 +196,7 @@ kbagent config row-create --project docs-demo --component-id keboola.ex-db-snowf
 ```
 
 Repeat for `OPPORTUNITY` and `USER`, changing the name, the source table and the output table
-together. `outputTable` is the one the UI decides for you — here you choose the bucket, so you
+together. `outputTable` is the one the UI decides for you. Here you choose the bucket, so you
 know its name in advance.
 
 **Run it**

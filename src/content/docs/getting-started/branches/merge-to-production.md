@@ -1,7 +1,7 @@
 ---
 title: 'Merge to production'
 slug: 'getting-started/branches/merge-to-production'
-description: 'Merge a development branch back into production — all at once or configuration by configuration — and verify the result.'
+description: 'Merge a development branch back into production, all at once or configuration by configuration, and verify the result.'
 redirect_from:
   - /tutorial/branches/merge-to-production/
 ---
@@ -13,8 +13,8 @@ back to production.
 
 There are two ways to merge your changes to production, depending on whether you want to merge them all or just their subset: 
 
-- **Full merge** -- merge all changes at once. You tested all of them together and know they work. 
-- **Partial merge** -- merge just a subset of the changes and keep working on the rest. Keep in mind that while useful, this should not be used as your standard workflow. You cannot be sure that the subset of changes actually works without the rest. It is safer to prepare and test the changes in full, merge them, and then start a new branch for the next part of the changes. 
+- **Full merge**: merge all changes at once. You tested all of them together and know they work. 
+- **Partial merge**: merge just a subset of the changes and keep working on the rest. Keep in mind that while useful, this should not be used as your standard workflow. You cannot be sure that the subset of changes actually works without the rest. It is safer to prepare and test the changes in full, merge them, and then start a new branch for the next part of the changes. 
 
 Because you have made two isolated changes (the bitcoin Snowflake transformation, and the Python file manipulating
 transformation), you now have a good opportunity to test both approaches.  

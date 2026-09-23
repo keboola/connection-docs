@@ -9,7 +9,7 @@ redirect_from:
 
 :::caution[These Google Cloud steps describe an older console]
 The screenshots below were taken in 2019 and Google has redesigned the console since. Read them as
-a list of *what to create* — a service account with three roles, a JSON key, a storage bucket — and
+a list of *what to create* (a service account with three roles, a JSON key, a storage bucket) and
 find each one by name in the console you have, not by matching the pictures. Google's own
 documentation is linked at each step.
 :::
@@ -42,7 +42,7 @@ checker running here is a false positive, not a dead link. -->
 The easiest way to access the data is via
 [Google Public Data](https://cloud.google.com/bigquery/public-data/), which contains a dataset called
 [Bureau of Labor Statistics](https://console.cloud.google.com/marketplace/product/bls-public-data/bureau-of-labor-statistics)
-data — the `bigquery-public-data.bls` dataset.
+data, the `bigquery-public-data.bls` dataset.
 
 Google Public Data can be queried using [BigQuery](https://cloud.google.com/bigquery/) and brought into Keboola
 with the help of our BigQuery data source connector. Open the table in
@@ -231,7 +231,7 @@ you can do the same with the EU unemployment data. Available at [Eurostat](https
 dataset is called
 [`tgs00010`](https://ec.europa.eu/eurostat/databrowser/product/view/tgs00010?lang=en).
 
-There are a number of ways how to get the data from Eurostat -- e.g., you can download it in TSV
+There are a number of ways how to get the data from Eurostat; for example, you can download it in TSV
 or XLS format. To avoid downloading the (possibly) lengthy data set to your hard drive, Eurostat provides a
 [REST API](https://ec.europa.eu/eurostat/web/user-guides/data-browser/api-data-access/api-migrating/json)
 for downloading the data. This could be processed using the
@@ -240,7 +240,7 @@ for downloading the data. This could be processed using the
 [row-major](https://en.wikipedia.org/wiki/Row-_and_column-major_order) method. Even though it is possible
 to import them to Keboola, it would be necessary to do additional processing to obtain plain tables.
 
-To save time, use a tool designed for that -- [pyjstat](https://pypi.org/project/pyjstat/). It is a Python library which can read
+To save time, use a tool designed for that: [pyjstat](https://pypi.org/project/pyjstat/). It is a Python library which can read
 JSON-stat data directly into a [Pandas data frame](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html).
 Although this library is not installed by default in the Jupyter Sandbox environment, nothing prevents you from installing it.
 

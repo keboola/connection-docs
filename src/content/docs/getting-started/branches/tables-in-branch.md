@@ -38,7 +38,7 @@ The new branch will appear right below the name of your production project.
 
 ## Change Transformation
 
-Let's start with the easier task -- changing the transformation so that it returns the top 10 rows instead of 
+Let's start with the easier task: changing the transformation so that it returns the top 10 rows instead of 
 the top 5. In your branch, navigate to **Transformations**. You can see the previously created `Bitcoin` transformation.
 It is, however, only a copy living in the branch. You can verify that you are working with the branch copy by checking 
 whether the page header has yellow accent and shows the branch name.
@@ -70,7 +70,7 @@ Navigate to the transformation and run it. Examine the **Mapping** section in th
 
 Notice how the **Input** section shows the data loaded from the `bitcoin_price` table, even though you did not run the data source connector in this branch. When a branch version of a table does not exist, Keboola uses the production version as a fall back. 
 
-Also notice that **Output** shows the small yellow branch icon, and the name of the bucket is prefixed with a number -- 
+Also notice that **Output** shows the small yellow branch icon, and the name of the bucket is prefixed with a number,
 `1835-bitcoin`. When you run a component in a branch and the component wants to write to Storage, the outputs do not 
 overwrite production data. Instead a **duplicate bucket prefixed with branch ID** is automatically created. Examine 
 the table and check that it indeed has 10 values as it should.
@@ -127,7 +127,7 @@ You'll be loading the data from the table `bitcoin_transactions`, so you need to
 ![Input mapping from branch data](/getting-started/branches/figures/transformation-branch-input-mapping.png)
 
 Notice the branch icon next to the table name. You're referring to the branch version of the table. Don't be alarmed by 
-the UI saying that the table does not exist -- it exists only in the branch so far. The UI will be improved in future versions.
+the UI saying that the table does not exist; it exists only in the branch so far. The UI will be improved in future versions.
 
 ![Missing table in input mapping](/getting-started/branches/figures/transformation-branch-input-mapping-missing.png)
 

@@ -100,7 +100,7 @@ run. The prompt is safe either way; the capability sentence is the unverified pa
 
 Every number above has a read-only command behind it, which is the fastest way to answer "did last
 night's run work?" without opening the project. They need
-[kbagent](/cli/getting-started/) connected to your project — `docs-demo` below is a project alias,
+[kbagent](/cli/getting-started/) connected to your project. `docs-demo` below is a project alias,
 substitute yours:
 
 ```bash
@@ -116,7 +116,7 @@ kbagent storage tables --project docs-demo --bucket-id out.c-Boolabean-staffing-
 ```
 
 The first prints the flow's recent runs with their status and duration, the second opens one of
-them — including which task failed — and the third is the row count that proves the join. None of
+them, including which task failed, and the third is the row count that proves the join. None of
 them changes anything.
 
 ## The failures that actually happen
@@ -129,7 +129,7 @@ them changes anything.
   not refreshed by it.
 - **The app phase fails and the rest succeeds.** A deploy builds and starts a container, and it
   can fail for reasons that have nothing to do with your data. The table is already rebuilt; open
-  the app's page and start it again from there. The job's own error is usually uninformative —
+  the app's page and start it again from there. The job's own error is usually uninformative.
   [Put it in front of someone](/getting-started/app/#if-it-goes-wrong) shows how to read the
   container's startup log, which is where the reason actually is. After several failed starts the platform disables
   the app (a banner says it failed to start automatically multiple times, and the button reads

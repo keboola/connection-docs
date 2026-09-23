@@ -42,7 +42,7 @@ Here is the finished transformation.
 ![Screenshot - Python transformation overview](/getting-started/branches/figures/python-prod-overview.png)
 
 ## Run Transformation
-Now run the component. After the job is finished, go to **Storage -- Files**, where you can see 
+Now run the component. After the job is finished, go to the **Files** tab in **Storage**, where you can see 
 the file `demoFile.txt` generated.
 
 ![Screenshot - Generated File](/getting-started/branches/figures/07-generated-file.png)

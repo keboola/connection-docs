@@ -97,7 +97,7 @@ the same two days, both at the start of the week, and Kai put it as *"a thin sta
 colliding with warm, dry weather"*. In a wet week Kai will tell you nobody is short-handed, and
 that is the table being right.
 
-An answer is a place to start, not to stop:
+The same table answers what-if questions too:
 
 ```text title="Prompt"
 Using staffing_outlook: if one extra person joined the roster on every short-handed day, which
@@ -119,7 +119,7 @@ uses are the columns your transformation already wrote, so point Kai at those (`
 </TabItem>
 <TabItem label="UI">
 
-There is no dialog for "answer this question" — reading a table by hand means querying it. Open a
+There is no dialog for "answer this question". Reading a table by hand means querying it. Open a
 [workspace](/getting-started/transform/workspace/) on the same table and run the SQL yourself:
 
 ```sql
@@ -142,7 +142,7 @@ ORDER BY "with_one_more" DESC;
 
 If those raise `invalid identifier`, your table has upper-case column names: Snowflake upper-cases
 an alias that was not quoted, and the **Prompt** path's Kai does not quote them. Either drop the
-quotes from the query or upper-case the names inside them — the
+quotes from the query or upper-case the names inside them. The
 [transform page](/getting-started/transform/#if-it-goes-wrong) explains why the two cases exist.
 
 Storage's own **Data Sample** tab answers the simpler half without a workspace at all: open
@@ -165,7 +165,7 @@ For a conversation rather than a single question, `kbagent kai chat -m "…"` re
 `--chat-id` continues it.
 
 **Check:** the answer names a café and a day, and they are the ones the grid shows as most
-stretched — the same row the **Prompt** tab's answer is about, even though the two questions are
+stretched, the same row the **Prompt** tab's answer is about, even though the two questions are
 worded differently. If you would rather have the numbers than the prose,
 `kbagent storage table-detail --project docs-demo --table-id out.c-Boolabean-staffing-outlook.staffing_outlook`
 gives you the shape of the table and
@@ -192,8 +192,8 @@ Two things to know before you paste it. Kai still asks you to approve each objec
 prompt this size is a dozen approvals rather than one. And on a request with several parts Kai
 tends to answer *"I'll tackle this in stages"*, do the first stage, and stop until you say
 *continue*; in our runs the same work as four separate prompts in one chat needed no nudging at
-all. The one-prompt version works. It is a shortcut for the second time, not a replacement for
-having seen the pieces once.
+all. The one-prompt version works, and it is the faster route once you have already seen the
+pieces separately.
 {/* Measured: 2026-09-03 and 2026-09-08, a four-part prompt stopped after stage one both times;
 the four-prompt version ran to the end in 14 minutes with 12 approvals and 0 nudges (DECISIONS.md,
 2026-09-08). The exact one-prompt wording above has not itself been run since the dataset

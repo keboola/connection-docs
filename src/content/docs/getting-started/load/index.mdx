@@ -289,7 +289,7 @@ terminal.
 
 **This tab needs two things the other two do not.** `kbagent`
 [installed](/cli/getting-started/) and pointed at your project once with `kbagent project add`,
-which stores the connection under an alias — the examples use `docs-demo`, substitute yours. And
+which stores the connection under an alias. The examples use `docs-demo`, substitute yours. And
 for the raw-request examples, two values you read off your own project: `<your-stack>` is the host
 you sign in at, the part after `https://` in the browser's address bar (for example
 `connection.europe-west3.gcp.keboola.com`), and `$KBC_TOKEN` is a Storage API token from
@@ -315,7 +315,7 @@ curl -X POST "https://connection.<your-stack>/v2/storage/components/keboola.ex-h
 **Add the five tables**
 
 Each file is a row on that configuration. The row's JSON is the path, plus the processors that put
-the result in a table of the same name and read the column names from the file's header — the
+the result in a table of the same name and read the column names from the file's header: the
 same three settings the UI tab fills in by hand:
 
 ```bash
