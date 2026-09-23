@@ -90,6 +90,7 @@ export const sidebar = [
       { label: "Overview", slug: "flows" },
       { slug: "flows/flows-legacy" },
       { slug: "flows/flow-migration-guide" },
+      { slug: "flows/schedule-api" },
     ],
   },
   {
@@ -750,6 +751,14 @@ export const sidebar = [
           { slug: "extend/common-interface/config-file" },
           { slug: "extend/common-interface/environment" },
           {
+            label: "Artifacts",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "extend/common-interface/artifacts" },
+              { slug: "extend/common-interface/artifacts/tutorial" },
+            ],
+          },
+          {
             label: "Manifest Files",
             collapsed: true,
             items: [
@@ -780,6 +789,7 @@ export const sidebar = [
           { slug: "extend/publish/checklist" },
         ],
       },
+      { slug: "extend/development-project" },
     ],
   },
   {
