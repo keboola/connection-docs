@@ -37,20 +37,63 @@ function walk(dir, test) {
 const htmlFiles = walk(DIST, (f) => f.endsWith('.html') && !f.includes('/pagefind/'));
 const route = (f) => '/' + relative(DIST, f).replace(/index\.html$/, '').replace(/\.html$/, '');
 
-// Resolve whether an internal absolute path exists in the build output.
-function resolves(p) {
+// Build-output candidates that could serve an internal absolute path.
+function candidates(p) {
   p = p.split('#')[0].split('?')[0];
-  if (!p) return true;
-  const cands = [
+  if (!p) return [];
+  return [
     join(DIST, p),
     join(DIST, p, 'index.html'),
     join(DIST, p.replace(/\/$/, '') + '.html'),
     join(DIST, p.replace(/\/$/, '') + '/index.html'),
   ];
-  return cands.some(existsSync);
 }
 
-const findings = { brokenLinks: [], missingImages: [], jekyllSmell: [], multiH1: [], extCount: 0 };
+// Resolve whether an internal absolute path exists in the build output.
+function resolves(p) {
+  const cands = candidates(p);
+  return cands.length === 0 || cands.some(existsSync);
+}
+
+// Resolve to the HTML file that serves the path, or null. A bare directory
+// exists but cannot be read, so only file candidates count here.
+function resolveFile(p) {
+  return candidates(p).find((f) => existsSync(f) && statSync(f).isFile()) ?? null;
+}
+
+// Element ids per built page, for validating link fragments. Parsed from the
+// <body> only, same as the link scan, and memoised — pages are read many times.
+const idCache = new Map();
+function idsOf(file) {
+  if (!idCache.has(file)) {
+    const raw = readFileSync(file, 'utf8');
+    const bi = raw.search(/<body[\s>]/i);
+    const body = bi >= 0 ? raw.slice(bi) : raw;
+    idCache.set(file, {
+      ids: new Set([...body.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1])),
+      // a redirect_from stub has no headings at all, so any anchor into it is dead
+      isStub: /http-equiv="refresh"/i.test(raw),
+    });
+  }
+  return idCache.get(file);
+}
+
+// `_top` and Starlight's own scaffolding ids are synthetic, not authored anchors.
+const realAnchor = (frag) => frag && frag !== '_top' && !frag.startsWith('starlight__');
+
+function checkAnchor(page, url, targetFile, frag) {
+  const { ids, isStub } = idsOf(targetFile);
+  if (ids.has(decodeURIComponent(frag))) return;
+  findings.brokenAnchors.push({
+    page,
+    url,
+    kind: isStub ? 'anchor-on-redirect-stub' : 'missing-anchor',
+  });
+}
+
+const findings = {
+  brokenLinks: [], brokenAnchors: [], missingImages: [], jekyllSmell: [], multiH1: [], extCount: 0,
+};
 
 const ATTR = /(?:href|src)\s*=\s*["']([^"']+)["']/gi;
 
@@ -72,7 +115,13 @@ for (const file of htmlFiles) {
     const url = m[1].trim();
     const isImg = m[0].toLowerCase().startsWith('src');
 
-    if (/^(mailto:|tel:|javascript:|data:|#)/i.test(url)) continue;
+    if (/^#/.test(url)) {
+      // same-page anchor: validate against this page's own ids
+      const frag = url.slice(1);
+      if (realAnchor(frag)) checkAnchor(r, url, file, frag);
+      continue;
+    }
+    if (/^(mailto:|tel:|javascript:|data:)/i.test(url)) continue;
     if (/^https?:\/\//i.test(url)) {
       findings.extCount++;
       // old-docs / Jekyll smell: absolute links back to the legacy docs host
@@ -94,6 +143,14 @@ for (const file of htmlFiles) {
       } else {
         findings.brokenLinks.push({ page: r, url });
       }
+      continue;
+    }
+
+    // the path resolves — now check the fragment, if any, against the target page
+    const frag = url.split('#')[1];
+    if (!isImg && realAnchor(frag)) {
+      const target = resolveFile(url);
+      if (target) checkAnchor(r, url, target, frag);
     }
   }
 }
@@ -138,12 +195,14 @@ const dump = (title, arr, fmt) => {
 };
 
 dump('BROKEN INTERNAL LINKS', findings.brokenLinks, (x) => `${x.page}  →  ${x.url}`);
+dump('BROKEN LINK ANCHORS', findings.brokenAnchors, (x) => `[${x.kind}] ${x.page}  →  ${x.url}`);
 dump('MISSING IMAGES', findings.missingImages, (x) => `${x.page}  →  ${x.url}`);
 dump('JEKYLL / OLD-DOCS LINK SMELLS', findings.jekyllSmell, (x) => `[${x.kind}] ${x.page}  →  ${x.url}`);
 dump('MULTIPLE <h1> PER PAGE', findings.multiH1, (x) => `${x.page}  (${x.count} h1)`);
 dump('UNCLOSED CODE FENCES (source)', fenceIssues, (x) => `${x.file}  (${x.fences} fences)`);
 dump('MALFORMED TABLES (source)', tableIssues, (x) => `${x.file}:${x.line}  header=${x.header} sep=${x.sep}`);
 
-const total = findings.brokenLinks.length + findings.missingImages.length +
-  findings.jekyllSmell.length + findings.multiH1.length + fenceIssues.length + tableIssues.length;
+const total = findings.brokenLinks.length + findings.brokenAnchors.length +
+  findings.missingImages.length + findings.jekyllSmell.length + findings.multiH1.length +
+  fenceIssues.length + tableIssues.length;
 console.log(head(`TOTAL ISSUES: ${total}`));
