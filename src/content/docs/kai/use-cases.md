@@ -81,6 +81,27 @@ Kai reads actual job logs, checks configurations, and traces data lineage to pro
 "Generate descriptions for all tables in the customer_data bucket."
 ```
 
+## Semantic Layer
+
+**Build a model:**
+```
+"Build a semantic model from the curated tables in the out.c-sales bucket."
+```
+
+**Add a metric:**
+```
+"Add a net revenue metric to the sales model: gross revenue minus refunds and discounts."
+```
+
+**Share it:**
+```
+"Share the sales semantic model read-only with our finance project."
+```
+
+Kai explores your tables, drafts the definitions, and validates them before asking for your
+approval to write anything. See [Semantic Layer](/ai/semantic-layer/) for what a model contains
+and for the other ways to build one.
+
 ## Data Exploration
 
 **Project overview:**

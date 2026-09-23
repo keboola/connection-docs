@@ -3,7 +3,14 @@
 
 export const sidebar = [
   { label: "Home", slug: "index" },
-  { slug: "overview" },
+  {
+    label: "Keboola Overview",
+    collapsed: true,
+    items: [
+      { label: "Overview", slug: "overview" },
+      { slug: "overview/api" },
+    ],
+  },
   {
     label: "Getting Started Tutorial",
     collapsed: true,
@@ -539,10 +546,17 @@ export const sidebar = [
           { slug: "storage/api/import-export" },
           { slug: "storage/api/importer" },
           { slug: "storage/api/tde-exporter" },
-          { slug: "storage/api/clients/python-client" },
-          { slug: "storage/api/clients/r-client" },
-          { slug: "storage/api/clients/php-client" },
-          { slug: "storage/api/clients/docker-cli" },
+          {
+            label: "API Clients",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "storage/api/clients" },
+              { slug: "storage/api/clients/python-client" },
+              { slug: "storage/api/clients/r-client" },
+              { slug: "storage/api/clients/php-client" },
+              { slug: "storage/api/clients/docker-cli" },
+            ],
+          },
         ],
       },
     ],
@@ -661,6 +675,7 @@ export const sidebar = [
       { label: "Overview", slug: "ai" },
       { slug: "ai/ai-kit" },
       { slug: "ai/mcp-server" },
+      { slug: "ai/semantic-layer" },
     ],
   },
   {
@@ -755,6 +770,8 @@ export const sidebar = [
         ],
       },
       { slug: "extend/job-queue" },
+      { slug: "extend/jobs" },
+      { slug: "extend/encryption" },
       {
         label: "Publishing Component",
         collapsed: true,

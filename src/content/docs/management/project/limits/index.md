@@ -1,6 +1,7 @@
 ---
 title: Project Limits
 slug: 'management/project/limits'
+description: Business and platform limits of a Keboola project - time credits (PPU) per job type, storage size, and platform quotas.
 redirect_from:
   - /management/limits/
 ---
@@ -43,13 +44,26 @@ Measured in milliseconds, presented in hours (1 hour = 3,600 seconds). Every job
 based on 
 
 - elapsed time of the job (in seconds), 
-- types of jobs (workspace, SQL, Python, and R transformations), and 
+- types of jobs (workspaces, SQL, Python, R, DuckDB, and dbt transformations), and 
 - backend performance: XSmall, Small, Medium, Large.
 
 Types:
 - **KBC** - Generic type of PPU used in the projects.
 - **SQL** - PPU used for SQL transformation jobs, in case the customer is using [BYODB](/storage/byodb) and has a separate product for SQL jobs.
 - **CDC** - PPU used for CDC extractor jobs, in case the customer is using [CDC](/components/extractors/database/#change-data-capture-cdc) and has a separate product for CDC jobs.
+
+**Which job type does your work bill as?**
+
+| What you run                                                              | Billed as                           |
+|---------------------------------------------------------------------------|-------------------------------------|
+| Snowflake or BigQuery transformation, SQL workspace, Query Service (JDBC) | SQL job / workspace / Query service |
+| Python, R, or DuckDB transformation; Python or R (JupyterLab) workspace   | Data Science job / workspace        |
+| dbt transformation                                                        | dbt job                             |
+| Data app                                                                  | DataApps                            |
+| Data source component                                                     | Data source job                     |
+| Data destination component                                                | Data destination job                |
+
+The other job types in the table below are named for the feature that produces them.
 
 Below you will find an overview of time credits consumed by individual Keboola job types. 
 If you need more information, please contact your CSM.
@@ -93,10 +107,10 @@ If you need more information, please contact your CSM.
 | SMALL (SQL)                           | Snowflake SMALL DWH or equivalent               |
 | MEDIUM (SQL)                          | Snowflake MEDIUM DWH                            |
 | LARGE (SQL)                           | Snowflake LARGE DWH                             |
-| XSMALL (Python,R, Components)         | 8 GB RAM, 1 CPU cores, 150GB SSD, shared        |
-| SMALL (Python,R, Components, DataApp) | 16 GB RAM, 2 CPU cores, 150GB SSD, shared       |
-| MEDIUM (Python,R, Components)         | 32 GB RAM, 4 CPU cores, 150GB SSD, shared       |
-| LARGE (Python,R, Components)          | 114 GB RAM, 14 CPU cores, 1TB SSD, dedicated    |
+| XSMALL (Python, R, DuckDB, Components)         | 8 GB RAM, 1 CPU cores, 150GB SSD, shared     |
+| SMALL (Python, R, DuckDB, Components, DataApp) | 16 GB RAM, 2 CPU cores, 150GB SSD, shared    |
+| MEDIUM (Python, R, DuckDB, Components)         | 32 GB RAM, 4 CPU cores, 150GB SSD, shared    |
+| LARGE (Python, R, DuckDB, Components)          | 114 GB RAM, 14 CPU cores, 1TB SSD, dedicated |
 | SMALL (dbt)                           | Snowflake SMALL DWH or equivalent               |
 | REMOTE (dbt)                          | Using user's remote DWH                         |
 
@@ -107,7 +121,9 @@ charge is derived from what that reply actually cost to produce — the language
 tokens it consumed and the infrastructure it ran on. A median conversation, counting
 every reply it takes to reach a result, costs about **1.1 PPUs**, and simple work —
 writing a query, exploring a project, creating a transformation — runs three to four
-conversations per PPU. See
+conversations per PPU. New organizations start with a one-time
+[free allowance](/kai/pricing/#free-allowance-for-new-organizations) of 300 PPU for Kai,
+shared across all their projects. See
 [Kai Pricing and Limits](/kai/pricing/) for typical figures per piece of work and for how Kai
 spend is tracked and capped.
 
