@@ -1,0 +1,8 @@
+# help.keboola.com — Keboola product documentation.
+# Crawling is welcome, including by AI agents: every page is also served as
+# plain markdown at <page-url>index.md, and llms.txt indexes all of them.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://help.keboola.com/sitemap-index.xml

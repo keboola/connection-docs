@@ -14,6 +14,10 @@ import { pathIntroText } from '../components/getting-started/pathintro.mjs';
  * plain markdown at `https://help.keboola.com/<slug>/index.md` — for the
  * "View as Markdown" page action and for LLMs/agents ingesting the docs.
  *
+ * It also writes `<outDir>/llms.txt` — the index that makes those per-page
+ * markdown copies discoverable. Without it an agent has to already know a slug
+ * to find anything; the raw pages were being emitted with no entry point.
+ *
  * Runs in the `astro:build:done` hook, after all pages have been built.
  * Follows the same pattern as redirect-from.mjs.
  */
@@ -214,10 +218,77 @@ function stripFrontmatter(content) {
   return content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
 }
 
-export default function pageMarkdown() {
+/**
+ * Build the llms.txt index from the pages we just emitted.
+ *
+ * Grouped by top-level slug segment, and each group is titled with that
+ * section's own root page ("storage" -> "Storage") rather than a slug
+ * prettified by hand, so the index and the nav cannot drift apart.
+ */
+function buildLlmsTxt(site, siteTitle, pages) {
+  const byTitle = new Map(pages.map((p) => [p.slug, p.title]));
+  const url = (slug) => new URL(slug ? `/${slug}/` : '/', site).href;
+
+  const sections = new Map();
+  for (const page of pages) {
+    const key = page.slug.split('/')[0];
+    if (!sections.has(key)) sections.set(key, []);
+    sections.get(key).push(page);
+  }
+
+  const lines = [
+    `# ${siteTitle}`,
+    '',
+    '> Product documentation for Keboola, the data platform: loading and storing data,',
+    '> transformations, flows, data apps, AI features, and extending the platform with',
+    '> your own components.',
+    '',
+    'Every page below is also available as plain markdown by appending `index.md` to its',
+    'URL — for example `https://help.keboola.com/storage/index.md`.',
+    '',
+  ];
+
+  const root = sections.get('') ?? [];
+  sections.delete('');
+  if (root.length) {
+    lines.push('## Home', '');
+    for (const p of root) lines.push(entry(p, url));
+    lines.push('');
+  }
+
+  // `pages` arrives sorted by slug, so each group is already in order.
+  for (const key of [...sections.keys()].sort()) {
+    const group = sections.get(key);
+    lines.push(`## ${byTitle.get(key) ?? key}`, '');
+    for (const p of group) lines.push(entry(p, url));
+    lines.push('');
+  }
+
+  return lines.join('\n');
+}
+
+/**
+ * One index line. The label is escaped because an unescaped `]` in a title
+ * closes the link early and spills the rest into the URL position; the
+ * description is flattened because the scalar frontmatter parser can hand back
+ * a value with stray whitespace, and a newline would end the entry mid-line.
+ */
+function entry(page, url) {
+  const label = String(page.title).replace(/([[\]])/g, '\\$1');
+  const description = page.description ? String(page.description).replace(/\s+/g, ' ').trim() : '';
+  const suffix = description ? `: ${description}` : '';
+  return `- [${label}](${url(page.slug)})${suffix}`;
+}
+
+export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' } = {}) {
+  let site;
+
   return {
     name: 'page-markdown',
     hooks: {
+      'astro:config:done': ({ config }) => {
+        site = config.site;
+      },
       'astro:build:done': async ({ dir, logger }) => {
         const outDir = fileURLToPath(dir);
 
@@ -232,6 +303,7 @@ export default function pageMarkdown() {
 
         let written = 0;
         let skipped = 0;
+        const index = [];
 
         for (const file of findMarkdownFiles(contentDir)) {
           const content = readFileSync(file, 'utf-8');
@@ -240,6 +312,16 @@ export default function pageMarkdown() {
           // Pages without a slug aren't published; the 404 page has no
           // canonical URL worth mirroring.
           if (fm.slug === undefined || fm.slug === '404') continue;
+
+          // Index before the collision guard below: a page that loses the race
+          // for its index.md is still published as HTML, and leaving it out of
+          // llms.txt would make it exactly as undiscoverable as having no index
+          // at all. A folded or literal block scalar (`>`/`|`) is not a
+          // one-liner, and the scalar-only frontmatter parser above would hand
+          // back the indicator rather than the text.
+          const description =
+            fm.description && !/^[>|]/.test(fm.description) ? fm.description : '';
+          index.push({ slug: fm.slug, title: fm.title ?? fm.slug, description });
 
           const mdDir = fm.slug ? join(outDir, fm.slug) : outDir;
           const mdFile = join(mdDir, 'index.md');
@@ -263,6 +345,14 @@ export default function pageMarkdown() {
         }
 
         logger.info(`Emitted ${written} raw-markdown pages (${skipped} skipped)`);
+
+        if (site) {
+          index.sort((a, b) => a.slug.localeCompare(b.slug));
+          writeFileSync(join(outDir, 'llms.txt'), buildLlmsTxt(site, siteTitle, index));
+          logger.info(`Wrote llms.txt indexing ${index.length} pages`);
+        } else {
+          logger.warn('No `site` configured — skipping llms.txt');
+        }
       },
     },
   };

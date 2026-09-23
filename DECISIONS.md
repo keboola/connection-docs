@@ -1119,6 +1119,31 @@ a linter can. Worth revisiting if `pngquant` or `oxipng` ever lands in the toolc
 
 ---
 
+## 2026-09-23 — Merged main, and it paid for itself
+
+The PR's base was changed from the stacked branch to `main`, which had moved 91 commits ahead, so
+it stopped merging. Three files conflicted and each wanted a different treatment.
+
+`_data/navigation.yml` was the only one needing judgement. Main still carries the whole `/tutorial/`
+tree, which this branch retires in favour of `/getting-started/`, and main had added "Our APIs" under
+Overview, which this branch never saw. Both decisions are kept: the tutorial entry stays gone, the
+APIs entry comes in. `src/sidebar.mjs` was not merged at all — it is generated, so it was regenerated
+from the resolved source. `src/styles/custom.css` turned out not to be a real conflict: this branch
+appended the Getting Started blocks, main appended print rules, and neither touches the other.
+
+The merge was worth more than it cost. Broken internal links across the site went from 29 to 0 and
+total audit issues from 116 to 59, because main brought the pages those links had been waiting on.
+The command reference is now generated from kbagent v0.91.0 rather than v0.76.1, so the gate stops
+running fifteen minor versions behind — which was an open complaint here two days ago.
+
+It also closed a deferral. Two links pointed at `developers.keboola.com` for encryption and the API
+overview, left there deliberately because help had no equivalent page and retargeting would have
+created broken links. Both pages now exist, at `/extend/encryption/` and `/overview/api/`, though not
+at the slugs #1120 had planned. The links point inward now, and the section has no dev-domain links
+left at all.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
