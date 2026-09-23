@@ -121,7 +121,9 @@ charge is derived from what that reply actually cost to produce — the language
 tokens it consumed and the infrastructure it ran on. A median conversation, counting
 every reply it takes to reach a result, costs about **1.1 PPUs**, and simple work —
 writing a query, exploring a project, creating a transformation — runs three to four
-conversations per PPU. See
+conversations per PPU. New organizations start with a one-time
+[free allowance](/kai/pricing/#free-allowance-for-new-organizations) of 300 PPU for Kai,
+shared across all their projects. See
 [Kai Pricing and Limits](/kai/pricing/) for typical figures per piece of work and for how Kai
 spend is tracked and capped.
 
