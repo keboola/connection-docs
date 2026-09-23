@@ -101,11 +101,13 @@ Prefer to set the app up yourself, without the chat? Manual creation lives on th
 
 ![The app's configuration page: the Overview tab with Authentication and a Git Repository section, plus the App Info panel showing backend version, size, auto-sleep, and App ID](/data-apps/build-in-ui-config.png)
 
-6. Click **Deploy App**. A short wizard asks for the **backend size** and an **inactivity timeout**, then deploys the app. (The same wizard runs on **Redeploy**.)
+6. Click **Deploy App**. A short wizard asks for the **backend version**, the **backend size** and an **inactivity timeout**, then deploys the app. (The same wizard runs on **Redeploy**.)
 
 ![The deploy/redeploy wizard: backend size and inactivity timeout](/data-apps/deploy-timeout-backedsize.png)
 
 7. When the status turns **Active**, click **Open App** to open it at its public URL. Use **Redeploy** to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
+
+From here on, the app is something you run rather than something you build: [Operate and update an app](/data-apps/operate/) covers shipping changes, secrets, sleeping and versions.
 
 ---
 

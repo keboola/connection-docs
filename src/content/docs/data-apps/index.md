@@ -26,11 +26,11 @@ Dashboards and reports, internal tools, data narratives, configurators, and agen
 - **[Build with Kai](/data-apps/getting-started/)** — describe the app in plain language and Kai reads your data, builds a live draft you preview and refine, and publishes when you're ready. No coding needed — the walkthrough takes about 10 minutes. The same **Create App** screen also offers [manual creation](/data-apps/getting-started/#create-an-app-manually) if you'd rather configure the app yourself.
 - **[Build locally](/data-apps/build-locally/)** — develop with your own tools and Git account, use the [AI Kit](/ai/ai-kit/) coding-assistant plugins, and sync the app to your project. For developers who want full control — that page covers how Python/JS development works day to day.
 
-The difference underneath is where the code lives: a repository Keboola manages for Kai, or one you host yourself. [Two ways to run an app](/data-apps/what-are-apps/#two-ways-to-run-an-app) explains what each gives you.
+Both routes end up in a Git repository, either one Keboola manages for the app or one you host. [Two ways to run an app](/data-apps/what-are-apps/#two-ways-to-run-an-app) explains what each gives you, including why the Kai builder appears on one and not the other.
 
 ## Run and share
 
-Every app has its own settings page in **Apps**: who can open it ([Authentication](/data-apps/authentication/) — public, password, or your company SSO), its URL and how to [publish and share](/data-apps/publish-and-share/) it, and operational settings like backend size and auto-sleep ([Reference](/data-apps/reference/)). Deploying and redeploying is one click; logs are right on the app's detail.
+Every app has its own settings page in **Apps**: who can open it ([Authentication](/data-apps/authentication/) — public, password, or your company SSO), its URL and how to [publish and share](/data-apps/publish-and-share/) it, and operational settings like backend size and auto-sleep ([Reference](/data-apps/reference/)). Deploying and redeploying is one click; logs are right on the app's detail. Once it's live, [Operate and update an app](/data-apps/operate/) covers the day-to-day work and [Troubleshooting](/data-apps/troubleshooting/) covers the days it goes wrong.
 
 ## Beyond dashboards
 

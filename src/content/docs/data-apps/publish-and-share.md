@@ -25,10 +25,10 @@ Share the app URL — found on the app's **Overview** tab (the **App URL** block
 
 ## Manage a deployed app
 
-From the app's header you can **Modify with Kai**, **Open App**, and **Start App** / **Redeploy App** depending on its state. The **⋯** menu holds the rest — **Copy app**, **Automate** (add it to a flow), **Debug mode**, and **Delete app**. See [App actions](/data-apps/reference/#app-actions) in the reference.
+From the app's header you can **Modify with Kai**, **Open App**, and **Start App** / **Redeploy App** depending on its state. The **⋯** menu holds the rest: **Suspend app**, **Copy app**, **Automate** (add it to a flow), **Debug mode**, and **Delete app**. [Operate and update an app](/data-apps/operate/) walks through each one; [App actions](/data-apps/reference/#app-actions) in the reference lists them.
 
 ![The app header with Modify with Kai / Open App / Start App and the ⋯ menu open showing Copy app, Automate, Debug mode, and Delete app](/data-apps/app-actions-menu.png)
 
 ---
 
-**Next:** [Apps reference →](/data-apps/reference/)
+**Next:** [Operate and update an app →](/data-apps/operate/)
