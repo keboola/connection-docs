@@ -1142,6 +1142,61 @@ created broken links. Both pages now exist, at `/extend/encryption/` and `/overv
 at the slugs #1120 had planned. The links point inward now, and the section has no dev-domain links
 left at all.
 
+## 2026-09-23 — The hub opens like a course, and the question becomes its goal
+
+**Decided by:** Nikita (23 Sep 2026), as the section's owner. Michal's rules of 2 September
+(dry; structure from user needs; MCP and CLI are vehicles, not chapters) are kept and named in the
+PR. Two of Jordan's decisions of 21 August change and carry VERIFY(Jordan), below.
+
+**What was wrong.** Every task page opens the same four ways (genre and time, a state sentence,
+prerequisites, a verification block) and the hub was the one page that did none of it. The reader
+met the question as the first line, then 74 words, then the table. Nikita's reading, on 23
+September: no sense of why the section exists, what the sample is, or what one learns; the question
+"sounds strange and as if it were not needed at all". Michal's test on 22 September had already
+shown a reader who skips introductions and reads steps; a hub that is all puzzle and no map serves
+neither reader.
+
+**Evidence.** The openings of Google Data Analytics on Coursera and of the DeepLearning.AI short
+courses run in one order: why, in a sentence or two; what you will be able to do, as verbs; the
+outline; prerequisites. The introduction is a 3-minute lesson in a course whose lessons run from 1 to
+10 minutes. Diátaxis on tutorials: "Confidence can only be built up layer by layer, and is easily
+shaken"; its predecessor, the Divio documentation system, on the same page type: "if your student
+has to do strange and incomprehensible things for two pages before they even see a result, that's
+much too long."
+
+**Decision.** The hub opens with one dry paragraph of what Keboola is for, its five verbs being the
+five task pages; then the clip; then the state block the other pages carry; then the sample in
+three sentences with the question as the concrete goal every step works toward; then the
+free-project sentence; then the table, whose "What happens" column is now "What you'll be able to
+do" and reads as capabilities. No new list: the outcomes live in the table the reader already
+looks at, per Michal's "nedělal bych to složitější". The intro grows from 74 to about 200 words, and the hub stays inside its
+five minutes.
+
+**What the checks changed.** The first draft's fourth verb was "put the answer in front of
+someone"; the app page ends at a private draft, because publishing has not succeeded in 264, so the
+hub says "turn the answer into an app" and its description no longer says "publish". "A free
+project covers all of it" became "is enough to begin", with the three open questions in a
+VERIFY(owner) note, and its link moved from the wizard to Get a project. "Nothing needs installing"
+is scoped to the browser paths, with kbagent named for the command-line way, because that is the
+path an agent reads. Fact-checker and guide-tester, 2026-09-23.
+
+**The question stays.** It is the only concrete promise the guide makes, and Jordan's rule that it
+be "answerable without reading" holds: the clip's poster answers it. What changes is its place,
+from headline to goal, after the reader knows what a café has to do with anything.
+
+**The clip changes in commit 2** (`hub-demo`, replacing `outlook-tour`): six beats, two real
+questions to the table with Kai's answers, the app prompt field, the grid, the Apps list, a closing
+chip pointing at the seven steps. That drops the three-act "files, question, grid" structure Jordan
+asked to preserve, and moves the poster from the question frame to the answer frame.
+**VERIFY(Jordan)** on both; the fallback if he keeps the first act is a 4-second prefix from the
+outlook-tour cards and one fewer beat.
+
+**Not done here, on purpose.** A "build an app from Claude Code or Cursor via MCP" path: no section
+documents one, the production deploy has failed in 264 for nine days (StartupProbeFailed, expired
+managed Git credentials, last seen 2026-09-23 04:07 UTC), and Apps owns the surface (PRDCT-692).
+MISSING carries it. `data-apps/getting-started.md` still promises a live app in ten minutes; that
+page's owner has the contradiction in the PR body.
+
 ---
 
 ## Open — carried as VERIFY(owner) flags in the pages
