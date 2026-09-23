@@ -134,6 +134,10 @@ you reached.
 A reply that has already started is never cut off part-way. Kai finishes it and stops at
 the next one, so hitting a limit never costs you work in progress.
 
+This means a project can land slightly over its budget. With 1 PPU left of a 40 PPU budget,
+a reply that costs 3 PPU still runs to the end, and the project finishes the month on
+42 PPU. The overspend is never more than the replies that were already running.
+
 :::note[Limits do not have to add up]
 Ten users with a 10 PPU limit each under a 40 PPU project budget is a valid setup: the
 budget is what the project can spend in total, not a sum of the individual limits.
