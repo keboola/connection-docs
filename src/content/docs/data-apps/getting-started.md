@@ -103,7 +103,7 @@ Prefer to set the app up yourself, without the chat? Manual creation lives on th
 
 6. Click **Deploy App**. A short wizard asks for the **backend version**, the **backend size** and an **inactivity timeout**, then deploys the app. (The same wizard runs on **Redeploy**.)
 
-![The deploy/redeploy wizard: backend size and inactivity timeout](/data-apps/deploy-timeout-backedsize.png)
+![The deploy/redeploy wizard: backend version, backend size and inactivity timeout](/data-apps/deploy-timeout-backedsize.png)
 
 7. When the status turns **Active**, click **Open App** to open it at its public URL. Use **Redeploy** to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
 

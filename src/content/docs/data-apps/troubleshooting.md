@@ -40,14 +40,14 @@ Most app problems fall into a handful of patterns. Find where the evidence is fi
 | The page loads but never updates | The WebSocket handshake isn't upgraded. | Add the WebSocket upgrade directives to that `location` block; the skill's [nginx reference](https://github.com/keboola/ai-kit/blob/main/plugins/dataapp-developer/skills/dataapp-development/references/python-js-apps.md) has the snippet. |
 | An environment variable is undefined | The secret isn't in the app's configuration, or you're using the wrong name. | Add it; `#my-key` becomes `MY_KEY`. See [Secrets](/data-apps/reference/#secrets). |
 | A bundled frontend serves stale or missing files | The build output isn't committed. | Build locally and commit the output; Keboola installs dependencies, it doesn't run your build. |
-| The app loads, but every query comes back empty, and the logs look clean | Storage Access is off, so Keboola never injects `WORKSPACE_ID`, `QUERY_SERVICE_URL` and `KBC_WORKSPACE_MANIFEST_PATH`. The app deploys and reports running while serving no data. | Turn on Storage Access for the app and redeploy. See [Data access](/data-apps/reference/#data-access). |
+| The app loads, but every query comes back empty, and the logs look clean | Storage Access is off, so Keboola never injects `WORKSPACE_ID`, `QUERY_SERVICE_URL` and `KBC_WORKSPACE_MANIFEST_PATH`. The app deploys and reports running while serving no data. | Turn on **Storage Access** for the app and redeploy. It also has to be enabled for the project first, under **Project Settings > Features**. See [Data access](/data-apps/reference/#data-access). |
 | A Streamlit app shows an error in the browser, but the logs are empty | Streamlit renders uncaught exceptions in the page and doesn't write them to stderr. | Wrap your entry point so exceptions are logged to stderr before Streamlit shows them. |
 
 ## Sign-in problems
 
 - **Basic (Password):** the password is on the app's configuration page next to **Open App** once the app is deployed.
 - **OIDC:** the Google, Entra, Okta and Auth0 tabs on [Authentication](/data-apps/authentication/) each end with an "If sign-in fails" list covering that provider's error texts, redirect-URI mismatches, and audience settings.
-- **GitHub, GitLab, JumpCloud:** each has its own required fields, listed in its section of [Authentication](/data-apps/authentication/). A sign-in that fails immediately is usually an organization or group restriction rather than a wrong credential.
+- **GitHub, GitLab, JumpCloud:** each has its own required fields and its own optional restrictions, which are the first thing to check when the right person is turned away. GitHub filters by organization, team, repository and allowed users; GitLab by group, project and allowed roles; JumpCloud by allowed roles. All three are in their sections of [Authentication](/data-apps/authentication/).
 - **Nobody can get in after you changed the authentication settings:** the change takes effect on the next start. Click **Redeploy App** (running app) or **Start App** (stopped app).
 
 ## Sleeping and waking

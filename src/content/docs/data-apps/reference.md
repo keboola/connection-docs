@@ -181,9 +181,16 @@ Manage a deployed app from its actions menu.
 
 - **Deploy App** — starts the app. Once the deployment job finishes, open the app's public URL with **Open App**.
 - **Open App** — opens a new window with your app.
-- **Redeploy** — apply changes made in the app configuration (they take effect only after a redeploy).
-- **Suspend App** — stops the app. The container stops and the URL is no longer available, but the configuration is kept.
-- **Delete App** — stops the deployment and deletes its configuration.
+- **Redeploy App** — apply changes made in the app configuration (they take effect only after a redeploy).
+- **Start App** — brings a stopped app back with the same settings.
+- **Modify with Kai** — opens the Builder, on apps Kai built.
+- **Suspend app** — stops the app. The container stops and the app no longer serves, but the configuration is kept.
+- **Copy app** — duplicates the configuration into a new app.
+- **Automate** — adds the app to a flow.
+- **Debug mode** — runs the app with extra diagnostics.
+- **Delete app** — stops the deployment and deletes its configuration.
+
+Which of these the header and the **⋯** menu offer depends on the app's state. [Operate and update an app](/data-apps/operate/) walks through them in the order you meet them.
 
 ## Sleep and resume
 
@@ -201,7 +208,7 @@ If something goes wrong, a **wakeup error** page appears; click **Show More** fo
 
 ![Wakeup error](/data-apps/proxy-error-wakeing-up.png)
 
-When you **Deploy** or **Redeploy**, a wizard prompts for the backend size and the auto-sleep timeout (five minutes to 24 hours; default five minutes).
+When you **Deploy** or **Redeploy**, a wizard prompts for the backend version, the backend size and the auto-sleep timeout (five minutes to 24 hours; default five minutes).
 
 ![Deploy timeout and backend size](/data-apps/deploy-timeout-backedsize.png)
 
