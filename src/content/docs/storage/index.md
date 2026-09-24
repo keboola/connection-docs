@@ -1,6 +1,7 @@
 ---
 title: Storage
 slug: 'storage'
+description: Keboola Storage — tables, files, and configurations on Snowflake or BigQuery backends, and the multi-tenant, Keboola-managed, and bring-your-own-database backend types.
 ---
 
 
@@ -10,7 +11,7 @@ slug: 'storage'
 As the central [Keboola subsystem](/overview/), Storage manages everything related to **storing** data and **accessing** it.
 It is implemented as a layer on top of database engines that we use as our backends
 ([Snowflake](https://www.snowflake.com/), [BigQuery](https://cloud.google.com/bigquery)).
-By default all new [Pay As You Go projects](/management/payg-project/) use the BigQuery backend. If you are a contract customer, you can select which backend you want to use.
+By default all new [Pay As You Go projects](/management/payg-project/) use the BigQuery backend. If you are a contract customer, you can select which backend you want to use. <!-- TODO(human-review): confirm PAYG still defaults to BigQuery, and the MT/KBDB/BYODB backend-type claims below (incl. the MT Snowflake workspace restriction). -->
 
 As with all other Keboola components, everything that can be done through the UI can be also done programmatically
 via the [Storage API](https://api.keboola.com/?service=storage).

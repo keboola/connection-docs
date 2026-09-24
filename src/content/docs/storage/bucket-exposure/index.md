@@ -1,12 +1,14 @@
 ---
 title: Bucket Exposure
 slug: 'storage/bucket-exposure'
+description: Bucket Exposure shares live Keboola bucket data directly into consumers' Google BigQuery environments — no exports or copies; when to use it and how to set it up.
 ---
 
 :::caution
 Important: This feature is currently available in BETA and only for BigQuery projects.
 Contact Keboola support to have it enabled for your project.
 :::
+<!-- TODO(human-review): confirm Bucket Exposure is still BETA and BigQuery-only. -->
 
 
 

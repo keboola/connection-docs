@@ -1,13 +1,14 @@
 ---
 title: Files
 slug: 'storage/files'
+description: File Storage in Keboola — uploading files with tags and retention options, public and non-public download links, sliced files, and file size limits.
 redirect_from:
     - /storage/file-uploads/
 ---
 
 
 
-The *File Storage* is available in the **Files** section of Storage and contains all raw files uploaded to your project.
+The *File Storage* is available in the **Files** tab of Storage and contains all raw files uploaded to your project.
 It also contains files with data exported from tables. These are created when you request to export a table from *Table Storage*. The *File Storage* serves two main purposes:
 
 1. Files can be used to store an arbitrary file.
@@ -69,6 +70,7 @@ This can happen for some [exported or imported tables](/storage/tables/uploads/)
 Merging a sliced file requires a [substantial effort](https://developers.keboola.com/integrate/storage/api/import-export/#working-with-sliced-files).
 
 ## Limits
+<!-- TODO(human-review): confirm the 2 GB upload limit and the 15-day default file expiry. -->
 The maximum allowed size of an uploaded file is currently 2 GB (2,048,000,000 bytes exactly). 
 This applies to both file and table uploads. 
 The actual table size may be bigger, because the table is uploaded as a compressed file. 

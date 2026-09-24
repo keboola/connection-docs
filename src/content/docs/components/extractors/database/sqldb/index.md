@@ -50,10 +50,10 @@ If you want to modify the table extraction setup, click on the corresponding row
 ![Screenshot - Table Detail](/components/extractors/database/sqldb/sqldb-5.png)
 
 You can modify the source table, limit the extraction to specific columns, or change the destination table name in
-[Storage](/storage/). The table detail also allows you to define a [**primary key**](/storage/tables/#primary-keys)
-and [**incremental loading**](/storage/tables/#incremental-loading).
-We highly recommend you define a **primary key** where possible. [Primary keys](/storage/tables/#primary-keys) substantially
-speed up the data loads and further table processing. Also, [incremental loading](/storage/tables/#incremental-loading) should be used when possible, which considerably speeds up the data loads.
+[Storage](/storage/). The table detail also allows you to define a [**primary key**](/storage/tables/incremental-loading/#primary-keys)
+and [**incremental loading**](/storage/tables/incremental-loading/).
+We highly recommend you define a **primary key** where possible. [Primary keys](/storage/tables/incremental-loading/#primary-keys) substantially
+speed up the data loads and further table processing. Also, [incremental loading](/storage/tables/incremental-loading/) should be used when possible, which considerably speeds up the data loads.
 Both options require knowledge of the source table, so don't turn them on blindly.
 
 ### Advanced Mode
