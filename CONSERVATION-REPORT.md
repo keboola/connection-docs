@@ -108,3 +108,13 @@ input rows, `06` the single output row, `07` the Queries/Blocks panel where the
 code lives (the SQL itself stays transcribed in fenced blocks on the page, not
 in an image). `05` was never referenced by any page — the numbering simply
 skips it; no file is owed.
+
+`public/getting-started/outlook-tour.mp4` and `outlook-tour-poster.png` were
+**removed 2026-09-23**, replaced on the hub by `hub-demo.mp4` and its poster.
+Nothing the clip carried is lost: its five file cards are the sample paragraph
+on `load/`, its question frame is the goal sentence on the hub, and its closing
+grid is the fourth and sixth beat of the new clip, from the same
+`app/grid-preview.png`. The reason is in DECISIONS.md (2026-09-23): the hub now
+opens with what the guide is for, so the clip shows the results rather than the
+ingredients. Jordan's 21 Aug decisions on the three acts and on the poster carry
+VERIFY(Jordan) there.

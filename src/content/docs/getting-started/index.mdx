@@ -15,8 +15,8 @@ Keboola is where you bring it together, shape it with SQL, ask it questions in p
 the answer into an app, and have the pipeline rerun by itself every morning. This guide does each
 of those once, on a small sample, so you can do them on your own data.
 
-<video autoplay loop muted playsinline poster="/getting-started/outlook-tour-poster.png" aria-label="Five raw CSV rows where a café is only a code, then the guide's question, then the finished grid: six cafés by seven days with two red cells, the caption saying two of 42 café-days are short-handed">
-  <source src="/getting-started/outlook-tour.mp4" type="video/mp4" />
+<video autoplay loop muted playsinline poster="/getting-started/hub-demo-poster.png" aria-label="Two questions typed into Kai and answered from the staffing table, the paragraph that describes the app, the finished grid of six cafés by seven days with red cells where a café is short-handed, the project's list of apps, and a closing line pointing at the seven steps below">
+  <source src="/getting-started/hub-demo.mp4" type="video/mp4" />
 </video>
 
 {/* Reordered 2026-09-23 (Nikita): the hub opens the way a course does. A "why" paragraph, the clip,
@@ -24,8 +24,8 @@ the state block every task page already carries, the sample with the question as
 then the table with its column renamed from "What happens" to "What you'll be able to do". Before
 this the question was the first line and the reader had 74 words of context before the table; the
 guide test and the Coursera / DeepLearning.AI openings both put outcomes before the puzzle. The clip
-is still the three-act outlook-tour until hub-demo lands (commit 2); two of Jordan's 21 Aug
-decisions (three acts; question frame as poster) change with it, VERIFY(Jordan). DECISIONS.md
+is hub-demo since commit 2; two of Jordan's 21 Aug decisions (three acts; question frame as
+poster) changed with it, VERIFY(Jordan). DECISIONS.md
 2026-09-23.
 
 Tutorial-hub page: the arc index. "Get a project" moved back to its own page 2026-09-14 (see
@@ -45,30 +45,19 @@ collapses the repeats back to five real frames: 104 KB, 7.2 s. The two big GIFs 
 (kai/Capabilities.gif at 2.5 MB, ai/mcp-server's at 9.5 MB) are the pattern NOT to copy on a page
 this size.
 
-Hero clip, three acts (compositor scene outlook-tour): five raw CSV rows verbatim from
-public/getting-started/boolabean/*.csv (S02 is a code in sales.csv and Boolabean Zelný trh, Brno,
-in stores.csv; P01 is a code in sales.csv and Filter of the Day in products.csv); the question,
-held long enough to read — that frame is the poster; the app's draft preview captured 2026-09-14.
-Above the fold per Jordan 2026-08-21 ("reader can't tell what they'll get out of it"). Re-rendered
-2026-09-15 without the mascot: the guide is a spotlight (a cut-out rectangle over the point being
-made, everything else dimmed) plus a caption chip, per Nikita 2026-09-14. 30.7 s, 839 KB, 966x724.
-
-Re-rendered again the same day after a frame-by-frame review. What it fixed: every cut-out was
-placed as if its coordinates were a corner when the code reads them as a centre, so all three tour
-stops sliced the row they were revealing (the Brno stop lit the café above it); three blue markers
-pointed at one thing (an outline on the cut-out, a pulsing ring inside it, a dot on the chip) and
-the ring covered the very dash one caption explains, so all three are gone and the cut-out plus the
-chip do the pointing; the caption sat on the payoff row in every beat and now moves to whichever
-half the spotlight is not in; act 2 drew the question straight onto the grid over a white wash, so
-the poster frame was two layers of text on top of each other, and it now has its own panel over the
-same dark scrim the other acts use; frame 0 was the finished grid cross-dissolving into act 1,
-giving the ending away, and now opens on the scrim; act 1 showed four files while every caption
-said five, so products.csv joined it.
-
-Known and not fixed: the app capture is 966x744 and the grid's last row needs 765, so Brno, the row
-the clip is about, is cut by its own screenshot. The frame is cropped to 724 so the cut falls
-between two lines rather than through the glyphs. A taller capture needs the data app unlocked,
-which needs its password. VERIFY(owner). */}
+Hero clip hub-demo (2026-09-23, replacing outlook-tour): six one-stop compositor scenes recorded
+separately and concatenated, 26 s, 558 KB, canvas 1280x800. Beats: Kai answering "which café is
+short-handed" (headline and table), Kai answering the what-if "one extra person" (table with the
+With +1 column), the Create App screen with the guide's own prompt in the field and not sent, the
+app's draft-preview grid (app/grid-preview.png, 14 Sep, fitted to the canvas), the project's Apps
+list cropped to the Name column, and the grid again dimmed under the closing line. Everything shot
+in 264 on 23 Sep at 2x, cropped below the top bar and away from the chat history and the Last
+Change column, so no name, avatar or e-mail is in frame; the two Kai questions are read-only and
+the prompt was never sent, so the shoot created nothing. Kai's dates and figures are that day's;
+the page says the answer moves. Poster = the grid frame with its caption, which is the answer to
+the question. Known and not fixed from the 14 Sep capture: the grid's last row, Brno, is cut by its
+own screenshot; a taller capture needs the data app unlocked, which needs its password.
+VERIFY(owner). */}
 
 **Where you are:** you have heard of Keboola and have nothing set up. **When you finish:** a
 scheduled pipeline and a data app, in a project you created or joined.
