@@ -38,6 +38,10 @@ const htmlFiles = walk(DIST, (f) => f.endsWith('.html') && !f.includes('/pagefin
 const route = (f) => '/' + relative(DIST, f).replace(/index\.html$/, '').replace(/\.html$/, '');
 
 // Resolve whether an internal absolute path exists in the build output.
+// Every candidate must be a FILE — a page directory outlives its index.html
+// because the page's images sit in it, so `dist/<route>/` still exists after the
+// page stops being built and a bare existsSync reads that dead route as healthy.
+const isFile = (f) => { try { return statSync(f).isFile(); } catch { return false; } };
 function resolves(p) {
   p = p.split('#')[0].split('?')[0];
   if (!p) return true;
@@ -47,7 +51,7 @@ function resolves(p) {
     join(DIST, p.replace(/\/$/, '') + '.html'),
     join(DIST, p.replace(/\/$/, '') + '/index.html'),
   ];
-  return cands.some(existsSync);
+  return cands.some(isFile);
 }
 
 const findings = { brokenLinks: [], missingImages: [], jekyllSmell: [], multiH1: [], extCount: 0 };
