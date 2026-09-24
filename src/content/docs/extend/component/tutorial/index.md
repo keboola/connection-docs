@@ -32,7 +32,7 @@ you should also receive access to a development Keboola project.
 ![Screenshot -- Join a vendor](/extend/component/tutorial/join-vendor.png)
 
 In order to create a **new vendor**, a Keboola administrator has to approve your request, and you will
-receive a [development project](https://developers.keboola.com/#development-project) in Keboola. In addition to that, you need to provide us
+receive a [development project](/extend/development-project/) in Keboola. In addition to that, you need to provide us
 with a channel for receiving internal errors from your components. Anything supported
 by [Papertrail notifications](https://help.papertrailapp.com/kb/how-it-works/alerts#supported-services)
 is available, though e-mail or a Slack channel is most commonly used.
