@@ -30,7 +30,7 @@ Fill in the following parameters:
 - **Table Name** (table) - [REQ] DynamoDB Table Name
 - **Attributes** (attributes) - [OPT] Comma separated list of attributes
 
-![Screenshot - DynamoDB Streams Confguration](/components/extractors/other/dynamodb-streams/dynamodb-streams.png)
+![Screenshot - DynamoDB Streams Configuration](/components/extractors/other/dynamodb-streams/dynamodb-streams.png)
 
 When done, **save** the configuration. 
 

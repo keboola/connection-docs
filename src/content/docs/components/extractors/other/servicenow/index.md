@@ -33,7 +33,7 @@ The user is authenticated using:
  - **Sysparm Fields** (sysparm_fields) - [OPT] Using this parameter you can limit fetched fields. Please use comma separation.
  - **Increment** (increment) - [OPT] Set this parameter to true if you want to do incremental load.
 
-![Screenshot - DynamoDB Streams Configuration](/components/extractors/other/servicenow/servicenow_tables_1.png)
+![Screenshot - ServiceNow Configuration](/components/extractors/other/servicenow/servicenow_tables_1.png)
 
 When done, **save** the configuration. 
 

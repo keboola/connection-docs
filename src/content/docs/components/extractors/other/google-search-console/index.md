@@ -16,7 +16,10 @@ endpoint.
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Google Search Console** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization).
+Then authorize the configuration using one of the supported methods:
+
+- **OAuth** -- click **Authorize Account** to [authorize the configuration](/components/#authorization) with your Google account.
+- **Service Account** -- enable **Use Service Account** and paste the service account JSON credentials into the provided field. This method is useful for automated or headless scenarios.
 
 ![Screenshot - Component Config](/components/extractors/other/google-search-console/auth.png)
 
@@ -32,6 +35,7 @@ To extract a search analytics report, select the "Search analytics" endpoint.
 ![Screenshot - Search analytics Config](/components/extractors/other/google-search-console/row_config.png)
 
 - Fill in the domain to extract data from; if the domain has data across all URL variations under the domain, enter it as sc-domain:domainname.com. It should not contain "https://www." before the domain name.
+- Optionally, specify a **Type** to filter results by search type: `web`, `image`, `video`, `news`, `discover`, or `googleNews`.
 - Fill in the dimensions you wish to extract data from. Possible dimensions are country, device, page, query, and searchAppearance (searchAppearance cannot be combined with other fields).
 - Select a date range to extract data from, either set dynamic date ranges, such as last week or last month or a custom date range where you specify a date from and date to. Custom dates can be filled in with the following:
     - Relative dates like: '1 min ago', '2 weeks ago', '3 months, 1 week and 1 day ago', 'in 2 days', 'tomorrow'.
@@ -46,6 +50,7 @@ To extract a search analytics report, select the "Search analytics" endpoint.
 ![Screenshot - Search analytics Config](/components/extractors/other/google-search-console/filter1.png)
 
 - To create a new filter within a filter group, click the **Add Filter** button and specify the dimension, operator, and expression.
+- Optionally, enable **Include fresh data** to include preliminary data that may change later. See [Google's documentation on fresh data in Search Console](https://developers.google.com/search/blog/2019/09/search-performance-fresh-data) for details.
 
 When using filters, make sure to use the Incremental load option. Otherwise, there are possibilities for duplicate data.
 
@@ -63,7 +68,7 @@ Click **Save** and run the configuration.
 
 ### Sitemaps Endpoint
 
-To extract a search analytics report, select the "Sitemaps" endpoint.
+To extract a sitemaps report, select the "Sitemaps" endpoint.
 
 ![Screenshot - Sitemaps Config](/components/extractors/other/google-search-console/row_config_sitemaps.png)
 

@@ -46,7 +46,7 @@ Now fill in the extraction configuration parameters:
 **Note** that when checked, the `Maximum date` parameter is ignored.
 - **Minimum date** -- lowest report date to download. When `New files only` is checked, this applies only on the first run, reset the state to backfill. 
 Date in `YYYY-MM-DD` format or a string, i.e., `5 days ago`, `1 month ago`, `yesterday`, etc. If left empty, all records will be downloaded. 
-- **Maximum date** -- lowest report date to download. When `New files only` is checked, this applies only on the first run, reset the state to backfill. 
+- **Maximum date** -- highest report date to download.
 Date in `YYYY-MM-DD` format or a string, i.e., `5 days ago`, `1 month ago`, `yesterday`, etc. If left empty, all records will be downloaded. 
 - **Report prefix** -- the prefix as you set up in the AWS CUR config. 
 In the S3 bucket, this is path to your report. E.g., `my-report` or `some/long/prefix/my_report`. 
