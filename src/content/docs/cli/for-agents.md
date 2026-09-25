@@ -129,7 +129,7 @@ No AI client involved: [install the CLI](/cli/getting-started/), [connect your p
 
 To build Keboola apps, install **`dataapp-developer`** as well. It ships from the same marketplace, so it takes the same route as `kbagent`: in Claude Code, run `/plugin install dataapp-developer@keboola-claude-kit`; in the other clients, pick `dataapp-developer` from the same plugin list. [Build an app with an AI agent](/data-apps/build-with-an-agent/) goes from there to a deployed app.
 
-<!-- Claude Code route verified 2026-09-23 (claude plugin install dataapp-developer@keboola-claude-kit, plugin 1.6.1). VERIFY(Nikita): Claude Desktop, Cursor, VS Code and the ChatGPT app list the same marketplace as for kbagent, but installing dataapp-developer there has not been run yet. -->
+<!-- Claude Code route verified 2026-09-23 (claude plugin install dataapp-developer@keboola-claude-kit, plugin 1.6.1); the ChatGPT app's shell form verified 2026-09-25 on Codex CLI 0.157.0 (codex plugin add dataapp-developer@keboola-claude-kit, plugin 1.6.3). VERIFY(Nikita): Claude Desktop, Cursor, VS Code and the ChatGPT app list the same marketplace as for kbagent, but installing dataapp-developer there has not been run yet. -->
 
 ## The `context` reference
 

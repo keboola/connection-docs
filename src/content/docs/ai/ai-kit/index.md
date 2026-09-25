@@ -35,7 +35,7 @@ After installation, enable the plugins you need:
 
 Those are Claude Code commands. Claude Desktop, Cursor, VS Code and the ChatGPT app add the marketplace through their own screens; [kbagent with AI agents](/cli/for-agents/#set-up-your-client) has the route for each, and any plugin below installs the same way.
 
-<!-- Plugin list, names and versions read from keboola/ai-kit .claude-plugin/marketplace.json on 2026-09-23 (marketplace 1.14.0, commit 58fb482): component-developer 3.3.2, dataapp-developer 1.6.1, kbagent 0.94.0, keboola-cli 1.1.1, keboola-git 1.1.0, powerbi-to-sl 1.0.0, sl-toolkit 3.0.0. There is no `developer` plugin. -->
+<!-- Plugin list, names and versions read from keboola/ai-kit .claude-plugin/marketplace.json on 2026-09-25 (marketplace 1.14.0, commit e2c0b62): component-developer 3.3.2, dataapp-developer 1.6.3, kbagent 0.94.0, keboola-cli 1.1.1, keboola-git 1.1.0, powerbi-to-sl 1.0.0, sl-toolkit 3.0.0. There is no `developer` plugin. -->
 
 ## Available Plugins
 
