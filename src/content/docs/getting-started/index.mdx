@@ -7,6 +7,7 @@ redirect_from:
 ---
 
 import PageMeta from '../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../components/getting-started/Prereqs.astro';
 
 <PageMeta genre="Tutorial" minutes="80" />
 
@@ -68,12 +69,22 @@ anything alone, and the moves are the same on your own tables. Every step works 
 question: **Which day next week will leave a café short-handed?** By the fifth page a grid answers
 it, and the answer changes every morning with the forecast.
 
-Everything here can be done in the browser with nothing installed; the command-line way on each
-page needs [kbagent](/cli/getting-started/). A [free project](/getting-started/project/) is enough
-to begin.
+<Prereqs needs={[]}>
+  <li>
+    <strong>An email address</strong> to create your project on the first page, or an invite to
+    your company's project.
+  </li>
+  <li>
+    <strong>A browser.</strong> Every step also has a Prompt way and a terminal way;{' '}
+    <a href="#how-every-page-works">How every page works</a> says what those need.
+  </li>
+</Prereqs>
 
-{/* VERIFY(owner): "a free project is enough to begin" is the most the section can back. Three
-things stay open and the wording avoids them: whether the Free Plan includes data apps
+{/* The box replaced a sentence on 2026-09-24 ("Everything here can be done in the browser with
+nothing installed; the command-line way on each page needs kbagent. A free project is enough to
+begin."), because Nikita asked for the concrete things a reader needs rather than prose about them.
+VERIFY(owner): the hub makes no Free Plan promise now; the box asks only for a project. Three
+things stay open, and Get a project is where they would be answered: whether the Free Plan includes data apps
 (app/index.mdx), whether Kai is on the Free Plan's fixed stack, us-east4 (every live run here was
 on europe-west3, and project/index.mdx says Kai "is not on every stack"), and whether 60 runtime
 minutes a month survive a daily flow whose recorded phases took 121 + 41 + 282 s

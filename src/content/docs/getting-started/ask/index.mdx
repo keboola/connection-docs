@@ -17,11 +17,20 @@ out of your own project rather than out of a page.
 **Where you are:** `staffing_outlook` is in Storage. **When you finish:** the guide's question
 answered from your data, and a second answer you did not have to build anything new to get.
 
-<Prereqs needs={['project', 'kai']}>
+<Prereqs needs={['project']} tabs={3}>
   <li>
-    The <code>staffing_outlook</code> table in Storage, from{' '}
+    <strong>The <code>staffing_outlook</code> table</strong> in Storage, from{' '}
     <a href="/getting-started/transform/">Transform data</a>.
   </li>
+  <span slot="ui">
+    a <a href="/getting-started/transform/workspace/">workspace</a> loaded with{' '}
+    <code>staffing_outlook</code>, to run the SQL below in.
+  </span>
+  <span slot="cli">
+    <a href="/cli/getting-started/">kbagent</a>, connected with a static master token.{' '}
+    <code>kbagent kai ask</code> sends your question to Kai, which a browser sign-in or a custom
+    token cannot reach.
+  </span>
 </Prereqs>
 
 <PathIntro tabs={3} approvals={false} />

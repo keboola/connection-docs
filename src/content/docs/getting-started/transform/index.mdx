@@ -40,18 +40,19 @@ that is why the second command exists), `job run --wait` finished green (job 104
 `storage table-detail` reported 42 rows. The throwaway transformation and its output bucket were
 deleted the same minute. */}
 
-<Prereqs needs={['project']}>
+<Prereqs needs={['project']} tabs={3}>
   <li>
-    Six tables in Storage from <a href="/getting-started/load/">Get your data in</a>:
-    <code>stores</code>, <code>products</code>, <code>sales</code>, <code>staffing</code> and{' '}
-    <code>weather_daily</code> in one bucket, <code>forecast</code> in another. The bucket names
-    contain configuration IDs, so yours will not match the screenshots.
+    <strong>The five tables it reads,</strong> in Storage from{' '}
+    <a href="/getting-started/load/">Get your data in</a>: <code>stores</code>, <code>sales</code>,{' '}
+    <code>staffing</code> and <code>weather_daily</code> in one bucket, <code>forecast</code> in
+    another.
   </li>
 </Prereqs>
 
 <PathIntro tabs={3} />
 
-The bucket names do not matter. What the SQL depends on is the **Table name** you give each table
+The bucket names do not matter, and they contain configuration IDs, so yours will not match the
+screenshots. What the SQL depends on is the **Table name** you give each table
 in the input mapping below: those must be exactly `sales`, `weather_daily`, `staffing`, `stores` and
 `forecast`, or you have to edit the queries to match. (`products` is not needed for this table.)
 

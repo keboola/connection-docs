@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSy
 import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { sharedText } from '../components/getting-started/prereqs.mjs';
+import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/getting-started/prereqs.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
 
 /**
@@ -109,8 +109,17 @@ function prereqsToText(tag) {
     ? needs[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean)
     : ['project'];
   const lines = keys.map(sharedText).filter(Boolean);
-  if (!lines.length) return [];
-  return ['', '**Before you start**', '', ...lines.map((l) => `- ${l}`), ''];
+  // The "You need" heading prints even with no shared items: the page's own
+  // <li> children follow it (project/ has only those).
+  return ['', '**Before you start**', '', `${PREREQ_LABELS.needs}:`, '', ...lines.map((l) => `- ${l}`)];
+}
+
+/** The second list of <Prereqs>, one line per tab, printed after the page's own items. */
+function prereqsTabsToText(tag, overrides = {}) {
+  const tabs = tag.match(/tabs=\{(\d)\}/);
+  const count = tabs ? Number(tabs[1]) : 0;
+  if (!count) return [''];
+  return ['', `${PREREQ_LABELS.tabs}:`, '', ...tabsText(count, overrides).map((l) => `- ${l}`), ''];
 }
 
 /**
@@ -143,12 +152,14 @@ function stripMdx(body) {
 
   let depth = 0;
   let inPrereqs = false;
+  let prereqsTag = '';
+  let prereqsTabs = {};
   const slot = [];
   const out = [];
 
   for (const line of withoutComments.split('\n')) {
     if (selfClosing.test(line)) {
-      if (/^\s*<Prereqs\b/.test(line)) out.push(...prereqsToText(line));
+      if (/^\s*<Prereqs\b/.test(line)) out.push(...prereqsToText(line), ...prereqsTabsToText(line));
       if (/^\s*<PathIntro\b/.test(line)) {
         out.push('', ...pathIntroText(tagProps(line)).map((p) => p + '\n'));
       }
@@ -156,7 +167,11 @@ function stripMdx(body) {
     }
     if (close.test(line)) {
       depth = Math.max(0, depth - 1);
-      if (/^\s*<\/Prereqs>/.test(line)) inPrereqs = false;
+      if (/^\s*<\/Prereqs>/.test(line)) {
+        out.push(...prereqsTabsToText(prereqsTag, prereqsTabs));
+        inPrereqs = false;
+        prereqsTabs = {};
+      }
       continue;
     }
     if (open.test(line)) {
@@ -167,7 +182,7 @@ function stripMdx(body) {
       if (label) out.push('', `**${label[1]}**`, '');
       // <Prereqs needs={…}> with page-specific <li> children in its slot: the
       // shared lines go in first, the children follow as the list they are.
-      if (/^\s*<Prereqs\b/.test(line)) { out.push(...prereqsToText(line)); inPrereqs = true; }
+      if (/^\s*<Prereqs\b/.test(line)) { out.push(...prereqsToText(line)); inPrereqs = true; prereqsTag = line; }
       depth += 1;
       continue;
     }
@@ -177,8 +192,15 @@ function stripMdx(body) {
       text = text.slice(INDENT.length);
     }
     if (inPrereqs) {
-      // the slot holds raw <li> JSX; buffer until the item closes, then flatten
+      // the slot holds raw <li> JSX, or a tab's own line as <span slot="…">;
+      // buffer until the item closes, then flatten
       slot.push(text);
+      const tabLine = slot.join(' ').match(/^\s*<span slot="(prompt|ui|cli)">([\s\S]*)<\/span>\s*$/);
+      if (tabLine) {
+        prereqsTabs[tabLine[1]] = inlineToMarkdown(tabLine[2]);
+        slot.length = 0;
+        continue;
+      }
       if (/<\/li>/.test(text)) {
         const item = inlineToMarkdown(slot.join(' '));
         if (item) out.push(item.startsWith('- ') ? item : `- ${item}`);

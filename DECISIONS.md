@@ -1197,6 +1197,31 @@ managed Git credentials, last seen 2026-09-23 04:07 UTC), and Apps owns the surf
 MISSING carries it. `data-apps/getting-started.md` still promises a live app in ten minutes; that
 page's owner has the contradiction in the PR body.
 
+## 2026-09-25 — "Before you start" lists things, and each tab says what it needs
+
+**Asked by:** Nikita, 24 Sep: the block was "scattered", and he wanted "the concrete things I need
+to start".
+
+**What was wrong.** Eleven boxes of different shapes: some items were things, some were
+explanations or reassurance. On `load/` the box said "Nothing else. No installs" and then asked for
+kbagent. Kai was listed on 2 of the 9 pages whose Prompt tab needs it; kbagent on 3 of 8 pages with
+a CLI / API tab.
+
+**Decision.** Two lists in one box. "You need": the things, one per item, the thing first and then
+where to get it. "Depending on the tab you use": a line per tab. The default lines live in
+`prereqs.mjs`; a page whose tab needs something else overrides that line with a named slot, because
+the first version, one global line per tab, was false on three pages. The fact-checker and the
+guide-tester caught it: the UI tab of `ask/` needs a workspace, the UI tab of `app/` is a Git
+repository and your own code, `app/`'s Prompt tab is Kai under Apps → Create App, creating a
+workspace needs an admin token, and `kbagent kai ask` needs a static master token (browser sign-in
+and custom tokens cannot reach Kai; `kai preflight` checks "master token + AI Agent Chat"). The hub
+lists only what starting needs (an email address or an invite, and a browser) and points at "How
+every page works" for the tabs, since the hub has no tabs and explains them further down.
+
+**Checked by** the new `checker` agent (lens 3: can a newcomer list what they need in ten seconds),
+the fact-checker and the guide-tester. The markdown twin renders both lists, with the per-page
+overrides, so an agent reading `/index.md` sees the same checklist.
+
 ---
 
 ## Open — carried as VERIFY(owner) flags in the pages

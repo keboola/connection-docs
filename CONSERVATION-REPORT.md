@@ -118,3 +118,22 @@ grid is the fourth and sixth beat of the new clip, from the same
 opens with what the guide is for, so the clip shows the results rather than the
 ingredients. Jordan's 21 Aug decisions on the three acts and on the poster carry
 VERIFY(Jordan) there.
+
+**"Before you start" rewritten as two lists, 2026-09-25.** Nothing a reader needs was dropped;
+three sentences moved and one was retired:
+
+- `load/`, "Nothing else. No installs, no credentials, no files to download." It contradicted the
+  kbagent line under it. Kept as a thing, "Nothing to download: the connector fetches the sample
+  files from a public URL, and the forecast API needs no account"; "no installs" is now the UI tab
+  line on every page.
+- `project/`, the same sentence. Retired: the box there lists an email address or an invite, and a
+  page with no tabs has nothing to install.
+- `app/`, "Whether the Free Plan includes data apps is not settled in our own docs". Moved into a
+  `VERIFY(owner)` author comment beside the box; the question stays in the DECISIONS Open table,
+  and the reader keeps the action (no Apps, skip the page).
+- `transform/`, "The bucket names contain configuration IDs, so yours will not match the
+  screenshots." Moved into the body paragraph that already says the bucket names do not matter.
+- The three hand-written "For the CLI / API tab only: kbagent…" items on `load/`,
+  `load/database` and `transform/workspace` are replaced by the shared tab lines.
+- The hub's sentence "Everything here can be done in the browser… A free project is enough to
+  begin." is replaced by the box, which points at "How every page works" for the tab needs.
