@@ -38,7 +38,8 @@ const items = needs.filter((k) => SHARED[k]);
 const tabLines = [];
 for (const t of TABS.slice(0, tabs)) {
   const own = Astro.slots.has(t.key) ? await Astro.slots.render(t.key) : null;
-  tabLines.push({ label: t.label, html: own ?? t.html });
+  // MDX wraps a slot's multi-line text in <p>, which breaks the line after the label
+  tabLines.push({ label: t.label, html: own ? own.replace(/<\/?p>/g, '') : t.html });
 }
 ---
 
