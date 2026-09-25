@@ -1222,6 +1222,23 @@ every page works" for the tabs, since the hub has no tabs and explains them furt
 the fact-checker and the guide-tester. The markdown twin renders both lists, with the per-page
 overrides, so an agent reading `/index.md` sees the same checklist.
 
+## 2026-09-25 — The hub clip is bright
+
+**Asked by:** Nikita, 24 Sep: the clip was "somehow dark" and he did not like it at all.
+
+**Measured, not eyeballed.** The 09-23 cut averaged a luma of 71 of 255 (minimum 55) against 229 for
+the screenshots it was made from; its poster was 54. The compositor's spotlight dims everything
+outside the highlight with a 66 % navy scrim, and scene mode turned a veil on from frame 0. I had
+read the contact sheet myself and passed it, which is why a checker agent now measures clips.
+
+**Decision.** A `bright` look in the compositor: no scrim, a 3 px blue outline marks the point, and
+the camera eases in only where that keeps the content clear of the caption and the frame edge.
+Captions go from 17 to 22 px so they read at 13.75 px on the page. The grid's highlight moves from
+the caption box to the two red Brno cells, which is what "red where it will hurt" names. The Apps
+list now comes before the grid, so the clip ends on the result. Result: 24.3 s, 671 KB, luma mean
+223, minimum 221, poster 222. The docs-clip skill's checklist carries the brightness budget now
+(mean at least 200, no frame under 180).
+
 ---
 
 ## Open — carried as VERIFY(owner) flags in the pages
