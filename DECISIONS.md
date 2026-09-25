@@ -1235,9 +1235,20 @@ read the contact sheet myself and passed it, which is why a checker agent now me
 the camera eases in only where that keeps the content clear of the caption and the frame edge.
 Captions go from 17 to 22 px so they read at 13.75 px on the page. The grid's highlight moves from
 the caption box to the two red Brno cells, which is what "red where it will hurt" names. The Apps
-list now comes before the grid, so the clip ends on the result. Result: 24.3 s, 671 KB, luma mean
-223, minimum 221, poster 222. The docs-clip skill's checklist carries the brightness budget now
-(mean at least 200, no frame under 180).
+list now comes before the grid, so the clip ends on the result. The docs-clip skill's checklist
+carries the brightness budget now (mean at least 200, no frame under 180).
+
+**The checker's review changed the second cut.** Captions were up for 2.2 to 2.8 s, so the holds
+grew and every caption now stays more than 3 s. The camera move pushed the what-if question out of
+frame, so there is no camera move. "Different apps, built the same way" was a fact the hub never
+states, and the list mixes Streamlit and Python/JS apps, so that beat now carries the hub's own
+words, "Go straight to a data app on data you already have". The chat's input box showed a blue
+border under the caption that read as a second outline, so the Kai frames stop above it. The grid's
+screenshot slices the Brno row, and Nikita had called that out on 15 Sep; a taller capture needs the
+app running, which its deploy prevents, so the grid is cut between two lines of text, the outline
+holds only the red figures, and the poster is Kai's one-line answer instead of the grid. Third cut:
+27.1 s, 579 KB, luma mean 223, minimum 221; poster 132 KB, luma 220. The poster change is a second
+reason to show Jordan the VERIFY above.
 
 ---
 
