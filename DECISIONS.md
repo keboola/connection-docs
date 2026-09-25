@@ -1226,7 +1226,7 @@ overrides, so an agent reading `/index.md` sees the same checklist.
 
 **Asked by:** Nikita, 24 Sep: the clip was "somehow dark" and he did not like it at all.
 
-**Measured, not eyeballed.** The 09-23 cut averaged a luma of 71 of 255 (minimum 55) against 229 for
+**What the numbers showed.** The 09-23 cut averaged a luma of 71 of 255 (minimum 55) against 229 for
 the screenshots it was made from; its poster was 54. The compositor's spotlight dims everything
 outside the highlight with a 66 % navy scrim, and scene mode turned a veil on from frame 0. I had
 read the contact sheet myself and passed it, which is why a checker agent now measures clips.

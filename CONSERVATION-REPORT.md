@@ -119,8 +119,8 @@ opens with what the guide is for, so the clip shows the results rather than the
 ingredients. Jordan's 21 Aug decisions on the three acts and on the poster carry
 VERIFY(Jordan) there.
 
-**"Before you start" rewritten as two lists, 2026-09-25.** Nothing a reader needs was dropped;
-three sentences moved and one was retired:
+**"Before you start" rewritten as two lists, 2026-09-25.** Nothing a reader needs was dropped. One
+sentence was retired; the rest moved or became items in the new lists:
 
 - `load/`, "Nothing else. No installs, no credentials, no files to download." It contradicted the
   kbagent line under it. Kept as a thing, "Nothing to download: the connector fetches the sample

@@ -23,7 +23,7 @@ export const SHARED = {
   project:
     '<strong>A Keboola project.</strong> No project yet? <a href="/getting-started/project/">Get a project</a>.',
   google:
-    '<strong>A Google account</strong> you can sign in with. Approving Keboola\'s access there is a click no assistant can make.',
+    '<strong>A Google account</strong> you can sign in with. Google asks the account\'s owner to approve Keboola\'s access, and an assistant cannot do that step.',
 };
 
 /**
