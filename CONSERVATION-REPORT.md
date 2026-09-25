@@ -123,9 +123,10 @@ VERIFY(Jordan) there.
 sentence was retired; the rest moved or became items in the new lists:
 
 - `load/`, "Nothing else. No installs, no credentials, no files to download." It contradicted the
-  kbagent line under it. Kept as a thing, "Nothing to download: the connector fetches the sample
-  files from a public URL, and the forecast API needs no account"; "no installs" is now the UI tab
-  line on every page.
+  kbagent line under it. Retired from the box: "no installs" is the UI tab line on every page, and
+  the page body already says the forecast API needs no account and no key. The body sentence "The
+  sixth table is not a file you download" read as if the five CSVs were, so it now says the sixth
+  table does not come from a file.
 - `project/`, the same sentence. Retired: the box there lists an email address or an invite, and a
   page with no tabs has nothing to install.
 - `app/`, "Whether the Free Plan includes data apps is not settled in our own docs". Moved into a

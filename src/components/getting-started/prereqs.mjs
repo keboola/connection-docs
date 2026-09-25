@@ -23,7 +23,7 @@ export const SHARED = {
   project:
     '<strong>A Keboola project.</strong> No project yet? <a href="/getting-started/project/">Get a project</a>.',
   google:
-    '<strong>A Google account</strong> you can sign in with. Google asks the account\'s owner to approve Keboola\'s access, and an assistant cannot do that step.',
+    '<strong>A Google account</strong> you can sign in with, to approve Keboola\'s access.',
 };
 
 /**
@@ -39,7 +39,7 @@ export const TABS = [
     html: 'Kai, the <strong>Kai Agent</strong> button in the project\'s top bar, on supported stacks. The first time, an organization admin switches it on; see <a href="/kai/getting-started/">Get started with Kai</a>.' },
   { key: 'ui', label: 'UI tab', html: 'only a browser.' },
   { key: 'cli', label: 'CLI / API tab',
-    html: '<a href="/cli/getting-started/">kbagent</a>, connected to your project with write access. A read-only token is not enough.' },
+    html: '<a href="/cli/getting-started/">kbagent</a>, connected to your project with write access.' },
 ];
 
 /** Reduce one HTML item to the markdown the twin prints. */

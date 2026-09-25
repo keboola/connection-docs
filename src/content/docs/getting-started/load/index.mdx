@@ -22,12 +22,7 @@ have: next week's weather, fetched live from a public forecast API. The next pag
 **Where you are:** you have a project, and Storage is empty. **When you finish:** six tables in
 Storage and two connector configurations you can re-run.
 
-<Prereqs needs={['project']} tabs={3}>
-  <li>
-    <strong>Nothing to download.</strong> The connector fetches the sample files from a public URL,
-    and the forecast API needs no account.
-  </li>
-</Prereqs>
+<Prereqs needs={['project']} tabs={3} />
 
 <PathIntro tabs={3} />
 
@@ -73,7 +68,7 @@ Each table is half a story. A sales row names its café as `S02` and its product
 roster knows how many people were on shift but not what they sold; the weather table knows it
 rained but not what that did to the queue.
 
-The sixth table is not a file you download. [Open-Meteo](https://open-meteo.com/) publishes a
+The sixth table does not come from a file. [Open-Meteo](https://open-meteo.com/) publishes a
 free forecast API with no account and no key, and one request returns the next seven days for all
 six cafés at once as CSV:
 
