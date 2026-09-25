@@ -40,11 +40,6 @@ Each stack publishes its API index at `https://api.<stack>/apis.json`; what it c
 
 Allows users to get AI suggestions when searching for a component. To activate the feature, go to Project Settings → Features → AI Component Suggestions.
 
-### AI Rules
-
-The AI Rules section allows users to define specific instructions for AI functionality within Keboola platform.
-[Learn more about AI Rules →](/management/project/ai-rules/)
-
 ### AI-Generated Descriptions
 Automatically generates a description using AI.
 [Learn more about AI-Generated Descriptions →](/overview/#ai-assistance)

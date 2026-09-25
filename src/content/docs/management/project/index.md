@@ -1,6 +1,8 @@
 ---
 title: Project Settings
 slug: 'management/project'
+redirect_from:
+  - /management/project/ai-rules/
 ---
 
 
@@ -40,8 +42,5 @@ If you need to setup your Keboola CLI, simply follow the instructions displayed 
 ### 5 Features
 The Features section in the Keboola UI is used to toggle project-specific feature flags. It allows project admins to enable or disable experimental, beta, or advanced platform capabilities that are not generally available by default. 
 
-### 6 AI Rules
-The AI Rules section allows users to define specific instructions for AI functionality within Keboola platform. For more details go to [AI Rules](/management/project/ai-rules).
-
-### 7 MCP Server
+### 6 MCP Server
 MCP Server section contains step-by-step instructions that will help you easily set up a connection between your AI Agent and Keboola platform to operate your data using just prompts. For more details go to [MCP Server](/ai/mcp-server).
