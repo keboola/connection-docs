@@ -163,6 +163,11 @@ Every click above is an API call underneath, and [kbagent](/cli/) is the same ca
 terminal. It needs to be [installed](/cli/getting-started/) and pointed at your project once with
 `kbagent project add`, which stores the connection under an alias. The examples use `docs-demo`,
 substitute yours. Creating a workspace needs an admin (master) token.
+{/* VERIFY(owner): the admin-token requirement comes from our own cli/getting-started.mdx:148 and
+cli/troubleshooting.md:42. The fact-checker (2026-09-25) found no master-token check in the CLI's
+workspace service and a Storage API 403 that names only write access and the read-only role, so a
+token with write access may be enough. An admin token works either way, which is why the page
+recommends it until someone confirms. */}
 
 **Create the workspace**
 

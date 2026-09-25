@@ -27,7 +27,8 @@ answered from your data, and a second answer you did not have to build anything 
     <code>staffing_outlook</code>, where you run the SQL below.
   </span>
   <span slot="cli">
-    <a href="/cli/getting-started/">kbagent</a>, connected with an admin (master) token.
+    <a href="/cli/getting-started/">kbagent</a>, connected through <code>kbagent project add</code>{' '}
+    with an admin (master) token.
   </span>
 </Prereqs>
 
@@ -159,8 +160,9 @@ Storage's own **Data Sample** tab answers the simpler half without a workspace a
 <TabItem label="CLI / API">
 
 `kbagent kai ask` puts the same question from a terminal and prints the answer, tables and all. It
-is one shot: no chat to keep, nothing created. Kai answers only an admin (master) token, not a
-browser sign-in or a custom token.
+is one shot: no chat to keep, nothing created. It needs kbagent connected through
+`kbagent project add` with an admin (master) token; a connection made with `kbagent auth login`
+does not reach Kai.
 
 ```bash
 kbagent kai ask --project docs-demo -m "Using out.c-Boolabean-staffing-outlook.staffing_outlook, which cafe and day has the highest expected units per person, and how many rows are flagged short_handed?"
