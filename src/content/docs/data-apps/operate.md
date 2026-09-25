@@ -6,7 +6,7 @@ description: "Day-to-day work on a deployed Keboola app: read its state, ship a 
 
 Once an app is deployed, everything you do with it starts on its page under **Apps**. This page walks through the routine tasks; [Apps reference](/data-apps/reference/) has the full list of settings and actions.
 
-Deploying, starting, stopping, deleting and setting secrets also work from a terminal with `kbagent`; drafts, copying and rollback are UI-only. The `kbagent` commands below all take `--project <alias>`, the name you gave the project when you [connected it](/cli/concepts/#connections-and-config), and `--app-id`, the numeric **App ID** from the **App Info** panel.
+Deploying, starting, stopping, deleting and setting secrets also work from a terminal with `kbagent`; kbagent has no draft or app-copy commands. `kbagent data-app deploy --config-version` deploys an older configuration once but doesn't restore it, so a real rollback is UI-only too. The `kbagent` commands below all take `--project <alias>`, the name you gave the project when you [connected it](/cli/concepts/#connections-and-config), and `--app-id`, the numeric **App ID** from the **App Info** panel.
 
 ## Read the app's state
 
