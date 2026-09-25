@@ -127,6 +127,10 @@ items:
             title: Authentication
           - url: /data-apps/publish-and-share/
             title: Publish and share
+          - url: /data-apps/operate/
+            title: Operate and update
+          - url: /data-apps/troubleshooting/
+            title: Troubleshooting
       - url: /data-apps/reference/
         title: Reference
       - url: /data-apps/streamlit/
