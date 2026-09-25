@@ -2,6 +2,9 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSy
 import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { sharedText } from '../components/getting-started/prereqs.mjs';
+import { pathIntroText } from '../components/getting-started/pathintro.mjs';
+
 /**
  * Astro integration that emits a raw-markdown copy of every docs page.
  *
@@ -35,6 +38,82 @@ function findMarkdownFiles(dir, files = []) {
 }
 
 /**
+ * Authoring comments never reach the published markdown.
+ *
+ * Both comment forms carry the same thing: provenance for whoever edits the
+ * page next — live-walk dates, job and configuration IDs from the demo
+ * project, exception IDs, VERIFY(owner) flags, notes about what is visible in
+ * a capture. That is internal (PRDCT-616), and the markdown twin is public and
+ * machine-read, so it is stripped here rather than translated. Rationale that
+ * outlives an edit belongs in DECISIONS.md, which is version-controlled and
+ * not served.
+ */
+function stripComments(body) {
+  return body
+    .replace(/\{\/\*[\s\S]*?\*\/\}/g, '')   // MDX  {/* … */}
+    .replace(/<!--[\s\S]*?-->/g, '');       // HTML <!-- … -->
+}
+
+/**
+ * Read the props off a component tag, for the two components whose text a
+ * reader of the twin actually needs.
+ */
+function tagProps(tag) {
+  const props = {};
+  for (const m of tag.matchAll(/(\w+)=\{([^}]*)\}/g)) {
+    const raw = m[2].trim();
+    if (raw === 'true' || raw === 'false') props[m[1]] = raw === 'true';
+    else if (/^\d+$/.test(raw)) props[m[1]] = Number(raw);
+    else props[m[1]] = raw;
+  }
+  for (const m of tag.matchAll(/(\w+)="([^"]*)"/g)) props[m[1]] = m[2];
+  if (/<\w+\s[^>]*\b(\w+)(?=\s|\/>|>)/.test(tag)) {
+    // bare boolean props (`<PathIntro manual />`) are not used here, but treat
+    // a lone name as true rather than dropping it
+    for (const m of tag.matchAll(/\s(\w+)(?=\s|\/?>)/g)) if (!(m[1] in props)) props[m[1]] = true;
+  }
+  return props;
+}
+
+/**
+ * Inline JSX and HTML a page writes by hand, as markdown.
+ *
+ * The <li> children a page passes into <Prereqs> come through the slot as raw
+ * source — `<code>x</code>` and `from{' '}<a href="/y/">Y</a>` — which is
+ * unreadable in the twin and, worse, hides the one prerequisite the page cared
+ * enough to spell out.
+ */
+function inlineToMarkdown(line) {
+  return line
+    .replace(/\{'\s*'\}/g, ' ')
+    .replace(/<a href="([^"]+)">([^<]*)<\/a>/g, '$2 ($1)')
+    .replace(/<\/?(code|strong|em|b|i)>/g, (m) => (m.includes('code') ? '`' : '**'))
+    .replace(/<li>\s*/g, '- ')
+    .replace(/\s*<\/li>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Render <Prereqs needs={[…]}> as text.
+ *
+ * The component's own markup is dropped with every other component wrapper,
+ * which used to take the prerequisites with it: the twin told an agent to load
+ * data without mentioning that a project has to exist first. The wording comes
+ * from the same table the component renders (prereqs.mjs), so the two cannot
+ * drift.
+ */
+function prereqsToText(tag) {
+  const needs = tag.match(/needs=\{\[([^\]]*)\]\}/);
+  const keys = needs
+    ? needs[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean)
+    : ['project'];
+  const lines = keys.map(sharedText).filter(Boolean);
+  if (!lines.length) return [];
+  return ['', '**Before you start**', '', ...lines.map((l) => `- ${l}`), ''];
+}
+
+/**
  * Reduce an .mdx body to plain markdown.
  *
  * The raw-markdown copies exist so an agent can read a page as text, so MDX
@@ -49,14 +128,13 @@ function findMarkdownFiles(dir, files = []) {
  * otherwise turn ordinary prose into an indented code block.
  *
  * Components are matched on an uppercase initial, the JSX convention, so
- * lowercase HTML written inline in a page is left alone.
+ * lowercase HTML written inline in a page is left alone. Two of them carry
+ * meaning a reader needs and are rendered rather than dropped: a tab's
+ * `label`, and <Prereqs>.
  */
 function stripMdx(body) {
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
-  const withComments = withoutImports.replace(
-    /\{\/\*([\s\S]*?)\*\/\}/g,
-    (_, inner) => `<!--${inner}-->`,
-  );
+  const withoutComments = stripComments(withoutImports);
 
   const INDENT = '    ';
   const open = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*(?<!\/)>\s*$/;
@@ -64,12 +142,21 @@ function stripMdx(body) {
   const close = /^\s*<\/[A-Z][A-Za-z0-9]*\s*>\s*$/;
 
   let depth = 0;
+  let inPrereqs = false;
+  const slot = [];
   const out = [];
 
-  for (const line of withComments.split('\n')) {
-    if (selfClosing.test(line)) continue;
+  for (const line of withoutComments.split('\n')) {
+    if (selfClosing.test(line)) {
+      if (/^\s*<Prereqs\b/.test(line)) out.push(...prereqsToText(line));
+      if (/^\s*<PathIntro\b/.test(line)) {
+        out.push('', ...pathIntroText(tagProps(line)).map((p) => p + '\n'));
+      }
+      continue;
+    }
     if (close.test(line)) {
       depth = Math.max(0, depth - 1);
+      if (/^\s*<\/Prereqs>/.test(line)) inPrereqs = false;
       continue;
     }
     if (open.test(line)) {
@@ -78,6 +165,9 @@ function stripMdx(body) {
       // variant is which.
       const label = line.match(/\blabel=["']([^"']+)["']/);
       if (label) out.push('', `**${label[1]}**`, '');
+      // <Prereqs needs={…}> with page-specific <li> children in its slot: the
+      // shared lines go in first, the children follow as the list they are.
+      if (/^\s*<Prereqs\b/.test(line)) { out.push(...prereqsToText(line)); inPrereqs = true; }
       depth += 1;
       continue;
     }
@@ -85,6 +175,16 @@ function stripMdx(body) {
     let text = line;
     for (let i = 0; i < depth && text.startsWith(INDENT); i += 1) {
       text = text.slice(INDENT.length);
+    }
+    if (inPrereqs) {
+      // the slot holds raw <li> JSX; buffer until the item closes, then flatten
+      slot.push(text);
+      if (/<\/li>/.test(text)) {
+        const item = inlineToMarkdown(slot.join(' '));
+        if (item) out.push(item.startsWith('- ') ? item : `- ${item}`);
+        slot.length = 0;
+      }
+      continue;
     }
     out.push(text);
   }
@@ -235,7 +335,8 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
 
           const isMdx = extname(file) === '.mdx';
           const raw = stripFrontmatter(content);
-          const body = (isMdx ? stripMdx(raw) : raw).trim();
+          // .md pages carry the same authoring notes as HTML comments.
+          const body = (isMdx ? stripMdx(raw) : stripComments(raw)).replace(/\n{3,}/g, '\n\n').trim();
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });
