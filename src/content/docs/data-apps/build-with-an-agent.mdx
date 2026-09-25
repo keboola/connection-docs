@@ -14,7 +14,8 @@ To build inside Keboola instead, [Kai](/data-apps/getting-started/) does the sam
 
 ## Before you start
 
-- A Keboola project with the data the app should show.
+- A Keboola project. No project yet? The [Getting Started tutorial](/tutorial/#prerequisites) links a free one.
+- The data the app should show, as a table in Storage. No data yet? [Upload a sample CSV](/tutorial/load/#manual-data-loading) in a few minutes, or bring in your own with a [data source connector](/components/extractors/).
 - [kbagent](/cli/), connected to that project. Creating the push token for the app's repository needs admin rights in the project.
 - Git, which pushes the app's code.
 - An AI client: Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT app. You can also skip the agent and use the **Terminal** tab below, or [another agent](#other-agents).
@@ -135,7 +136,7 @@ the app, check that it loads its data, and give me its URL and its page in
 Keboola (<Keboola URL>/admin/projects/<project-id>/data-apps/<config-id>).
 ```
 
-Paste the prompt as it is; the agent fills in the page link itself. It reads the skill, finds the table and queries a sample before it writes any code. If kbagent knows more than one project, replace "the project kbagent is connected to" with its alias. Name a framework too if it matters to you. To use your own GitHub repository instead, put its URL in the prompt; the repository then has to follow the layout in [Build an app locally](/data-apps/build-locally/).
+Swap the orders table and the chart for your own data and keep the rest as it is; the agent fills in the page link itself. It reads the skill, finds the table and queries a sample before it writes any code. If kbagent knows more than one project, replace "the project kbagent is connected to" with its alias. Name a framework too if it matters to you. To use your own GitHub repository instead, put its URL in the prompt; the repository then has to follow the layout in [Build an app locally](/data-apps/build-locally/).
 
 If the agent can reach Keboola more than one way, it may ask which to use, or offer to sign you in to an MCP server. To follow this page, pick kbagent and decline that sign-in. An MCP sign-in can reach other projects, and the agent may build wherever it finds the data first; that's why the prompt names both kbagent and the project. The plugin's own MCP server is fixed to the US GCP stack (`us-east4`): Claude Code can't connect to it, while Cursor and Codex ask you to sign in. [The MCP route](#the-mcp-route) describes the other way in.
 
@@ -154,6 +155,7 @@ Through a Keboola MCP server, the agent doesn't run kbagent. It calls the server
 
 - The agent finishes with the app's URL and its page in Keboola.
 - The app asks for its password, which is on that page next to **Open App**.
+- To let other people open it, see [Publish and share](/data-apps/publish-and-share/).
 - If the app opens without data, ask the agent to read the app's log. [Troubleshooting](/data-apps/troubleshooting/) lists the common causes, including `Promise.withResolvers is not a function` from a too-new `@keboola/api-client`.
 
 ### If the app can't read Storage
