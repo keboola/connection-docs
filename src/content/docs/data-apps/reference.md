@@ -55,7 +55,7 @@ When deploying an app, you select a **backend version** — the runtime image �
 - **Backend version** (`1.6.1`): the release of the base image that runs your app.
 - **Python / Node / Bun versions**: the interpreters available to your code.
 
-Python/JS apps bring their own dependencies from the repository — `requirements.txt` for Python, `package.json` for Node — installed on deploy. There is no pre-installed package list to depend on.
+Python/JS apps bring their own dependencies from the repository, installed on deploy by the repo's own `keboola-config/setup.sh`: `pyproject.toml` for Python with [uv](https://docs.astral.sh/uv/), `package.json` for Node. There is no pre-installed package list to depend on. See [Build an app locally](/data-apps/build-locally/#what-the-repository-must-contain).
 
 Building a **Streamlit** app? Its backend versions, supported Python variants, and the pre-installed package list live in the [Streamlit section](/data-apps/streamlit/#backend-versions).
 
