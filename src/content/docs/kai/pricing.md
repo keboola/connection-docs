@@ -1,5 +1,6 @@
 ---
 title: Kai Pricing and Limits
+lastUpdated: 2026-09-22
 slug: 'kai/pricing'
 description: How Kai consumes PPU credits, the free allowance for new organizations, where to track project spend, and how Organization Admins set project and per-user limits.
 ---

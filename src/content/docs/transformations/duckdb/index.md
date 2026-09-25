@@ -1,5 +1,6 @@
 ---
 title: DuckDB Transformation
+lastUpdated: 2026-09-15
 slug: 'transformations/duckdb'
 ---
 

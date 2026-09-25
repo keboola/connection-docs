@@ -1,5 +1,6 @@
 ---
 title: Data Catalog
+lastUpdated: 2026-08-04
 slug: 'catalog'
 redirect_from:
   - /storage/buckets/sharing/

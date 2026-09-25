@@ -1,5 +1,6 @@
 ---
 title: Keboola Storage
+lastUpdated: 2024-10-31
 slug: 'components/writers/storage/storage-api'
 redirect_from:
     - /writers/storage/storage-api/

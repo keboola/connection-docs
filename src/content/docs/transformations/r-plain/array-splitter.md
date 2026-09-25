@@ -1,5 +1,6 @@
 ---
 title: Array Splitting
+lastUpdated: 2025-07-04
 slug: 'transformations/r-plain/array-splitter'
 redirect_from:
     - /manipulation/transformations/r/array-splitter/

@@ -1,5 +1,6 @@
 ---
 title: Transformations
+lastUpdated: 2026-09-15
 slug: 'transformations'
 redirect_from:
     - /manipulation/transformations/

@@ -1,5 +1,6 @@
 ---
 title: Columns and primary key of report configuration presets
+lastUpdated: 2026-06-03
 slug: 'components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk'
 redirect_from:
     - /extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/

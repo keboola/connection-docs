@@ -1,5 +1,6 @@
 ---
 title: Data Streams Tutorial
+lastUpdated: 2026-08-03
 slug: 'storage/data-streams/tutorial'
 redirect_from:
     - /integrate/data-streams/tutorial/

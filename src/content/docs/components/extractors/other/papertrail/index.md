@@ -1,5 +1,6 @@
 ---
 title: Papertrail
+lastUpdated: 2026-08-05
 slug: 'components/extractors/other/papertrail'
 redirect_from:
     - /extractors/other/papertrail/

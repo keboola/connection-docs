@@ -1,5 +1,6 @@
 ---
 title: Migrate a Streamlit app to Python/JS
+lastUpdated: 2026-07-27
 slug: 'data-apps/streamlit/migrate-to-python-js'
 description: 'Move an existing Streamlit app to the Python/JS stack with Kai — one click starts a guided migration that rebuilds the UI in React and moves queries server-side, leaving the original untouched until you publish.'
 ---

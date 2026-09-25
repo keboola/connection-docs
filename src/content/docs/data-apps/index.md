@@ -1,5 +1,6 @@
 ---
 title: Apps
+lastUpdated: 2026-07-27
 slug: 'data-apps'
 description: 'Build and run Python/JS apps on your governed data in Keboola — what apps are, how to build them with Kai or locally, how to run and share them, and real examples.'
 redirect_from:

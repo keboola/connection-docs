@@ -1,5 +1,6 @@
 ---
 title: Job Queue
+lastUpdated: 2026-09-16
 slug: 'extend/job-queue'
 redirect_from:
     - /extend/docker-runner/

@@ -1,5 +1,6 @@
 ---
 title: "Part 1: Loading Data"
+lastUpdated: 2024-08-28
 slug: 'tutorial/load'
 ---
 

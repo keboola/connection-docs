@@ -1,5 +1,6 @@
 ---
 title: Orchestration Trigger
+lastUpdated: 2026-06-03
 slug: 'components/applications/triggers/orchestration-trigger-queue-v2'
 ---
 

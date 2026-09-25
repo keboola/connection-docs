@@ -1,5 +1,6 @@
 ---
 title: Variables Through the API
+lastUpdated: 2026-09-16
 slug: 'components/variables/api'
 description: Define, override, and resolve configuration variables through the API, and drive them from a flow.
 redirect_from:

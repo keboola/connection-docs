@@ -1,5 +1,6 @@
 ---
 title: NetSuite
+lastUpdated: 2026-06-19
 slug: 'components/extractors/erp/netsuite'
 ---
 

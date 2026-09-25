@@ -1,5 +1,6 @@
 ---
 title: Child Jobs
+lastUpdated: 2026-09-16
 slug: 'components/extractors/generic-extractor/configuration/config/jobs/children'
 redirect_from:
     - /extend/generic-extractor/configuration/config/jobs/children/

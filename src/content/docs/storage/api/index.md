@@ -1,5 +1,6 @@
 ---
 title: Storage API
+lastUpdated: 2026-08-19
 slug: 'storage/api'
 redirect_from:
     - /integrate/storage/

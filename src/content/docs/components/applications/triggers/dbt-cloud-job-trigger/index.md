@@ -1,5 +1,6 @@
 ---
 title: dbt Cloud Job Trigger
+lastUpdated: 2026-08-05
 slug: 'components/applications/triggers/dbt-cloud-job-trigger'
 ---
 

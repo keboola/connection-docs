@@ -1,5 +1,6 @@
 ---
 title: Facebook Pages
+lastUpdated: 2026-08-04
 slug: 'components/extractors/social/facebook'
 redirect_from:
     - /extractors/social/facebook/

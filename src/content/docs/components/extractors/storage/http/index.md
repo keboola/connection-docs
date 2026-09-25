@@ -1,5 +1,6 @@
 ---
 title: HTTP
+lastUpdated: 2026-08-05
 slug: 'components/extractors/storage/http'
 redirect_from:
     - /extractors/storage/http/

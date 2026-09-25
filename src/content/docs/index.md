@@ -1,5 +1,6 @@
 ---
 title: Keboola User Documentation
+lastUpdated: 2026-09-16
 slug: ''
 ---
 

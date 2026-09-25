@@ -1,5 +1,6 @@
 ---
 title: Shared Code
+lastUpdated: 2026-08-08
 slug: 'transformations/shared-code'
 description: Share pieces of transformation code between otherwise unrelated transformations, in the UI and through the API.
 ---

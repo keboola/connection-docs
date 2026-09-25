@@ -1,5 +1,6 @@
 ---
 title: AWS Signature
+lastUpdated: 2026-08-25
 slug: 'components/extractors/generic-extractor/configuration/aws-signature'
 redirect_from:
     - /extend/generic-extractor/configuration/aws-signature/

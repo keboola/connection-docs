@@ -1,5 +1,6 @@
 ---
 title: Snowflake
+lastUpdated: 2026-08-04
 slug: 'components/writers/database/snowflake'
 redirect_from:
     - /writers/database/snowflake/

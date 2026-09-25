@@ -1,5 +1,6 @@
 ---
 title: Basic Configuration
+lastUpdated: 2026-09-16
 slug: 'components/extractors/generic-extractor/tutorial/basic'
 redirect_from:
     - /extend/generic-extractor/tutorial/basic/

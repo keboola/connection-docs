@@ -1,5 +1,6 @@
 ---
 title: Google Drive Sheets
+lastUpdated: 2026-02-25
 slug: 'components/extractors/storage/google-drive'
 redirect_from:
     - /extractors/storage/google-drive/

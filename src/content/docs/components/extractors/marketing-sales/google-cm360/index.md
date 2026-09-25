@@ -1,5 +1,6 @@
 ---
 title: Google Campaign Manager 360
+lastUpdated: 2026-06-19
 slug: 'components/extractors/marketing-sales/google-cm360'
 ---
 

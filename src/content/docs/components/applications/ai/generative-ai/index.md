@@ -1,5 +1,6 @@
 ---
 title: Generative AI
+lastUpdated: 2026-08-05
 slug: 'components/applications/ai/generative-ai'
 redirect_from:
     - /components/applications/ai/open-ai/

@@ -1,5 +1,6 @@
 ---
 title: Generic Writer
+lastUpdated: 2026-09-16
 slug: 'components/writers/generic-writer'
 redirect_from:
     - /extend/generic-writer/

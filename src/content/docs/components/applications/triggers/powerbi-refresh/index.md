@@ -1,5 +1,6 @@
 ---
 title: Power BI Refresh
+lastUpdated: 2026-08-05
 slug: 'components/applications/triggers/powerbi-refresh'
 ---
 

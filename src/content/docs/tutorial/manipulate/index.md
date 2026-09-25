@@ -1,5 +1,6 @@
 ---
 title: "Part 2: Data Manipulation"
+lastUpdated: 2026-08-04
 slug: 'tutorial/manipulate'
 ---
 

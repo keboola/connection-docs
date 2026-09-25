@@ -1,5 +1,6 @@
 ---
 title: Mapping
+lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/configuration/config/mappings'
 redirect_from:
     - /extend/generic-extractor/configuration/config/mappings/

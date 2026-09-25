@@ -1,5 +1,6 @@
 ---
 title: Sync Action UI Elements Examples
+lastUpdated: 2026-07-27
 slug: 'extend/component/ui-options/configuration-schema/sync-action-examples'
 
 ---

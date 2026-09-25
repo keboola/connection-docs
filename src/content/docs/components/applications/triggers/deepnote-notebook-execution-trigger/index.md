@@ -1,5 +1,6 @@
 ---
 title: Deepnote Notebook Execution Trigger
+lastUpdated: 2026-02-19
 slug: 'components/applications/triggers/deepnote-notebook-execution-trigger'
 ---
 

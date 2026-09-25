@@ -1,5 +1,6 @@
 ---
 title: Generic Writer Configuration Examples
+lastUpdated: 2026-08-05
 slug: 'components/writers/generic-writer/configuration-examples'
 redirect_from:
     - /extend/generic-writer/configuration-examples/

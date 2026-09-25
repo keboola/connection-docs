@@ -1,5 +1,6 @@
 ---
 title: Incremental Loading
+lastUpdated: 2026-09-02
 slug: 'components/extractors/generic-extractor/incremental'
 redirect_from:
     - /extend/generic-extractor/incremental/

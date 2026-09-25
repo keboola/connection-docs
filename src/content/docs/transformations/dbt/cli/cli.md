@@ -1,5 +1,6 @@
 ---
 title: dbt CLI
+lastUpdated: 2026-06-22
 slug: 'transformations/dbt/cli'
 ---
 

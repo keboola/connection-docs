@@ -1,5 +1,6 @@
 ---
 title: Available Metrics
+lastUpdated: 2022-02-15
 slug: 'components/extractors/marketing-sales/adform-dsp-reports/available-metrics'
 ---
 

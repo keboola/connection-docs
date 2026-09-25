@@ -1,5 +1,6 @@
 ---
 title: Jobs
+lastUpdated: 2026-09-02
 slug: 'components/extractors/generic-extractor/configuration/config/jobs'
 redirect_from:
     - /extend/generic-extractor/configuration/config/jobs/

@@ -1,5 +1,6 @@
 ---
 title: Conditional Flows
+lastUpdated: 2026-09-16
 slug: 'flows'
 redirect_from:
     - /flows/conditional-flows/

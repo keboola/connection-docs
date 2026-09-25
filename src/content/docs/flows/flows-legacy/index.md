@@ -1,5 +1,6 @@
 ---
 title: Legacy Flows
+lastUpdated: 2026-09-16
 slug: 'flows/flows-legacy'
 redirect_from:
     - /orchestrator/
