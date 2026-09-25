@@ -17,11 +17,19 @@ out of your own project rather than out of a page.
 **Where you are:** `staffing_outlook` is in Storage. **When you finish:** the guide's question
 answered from your data, and a second answer you did not have to build anything new to get.
 
-<Prereqs needs={['project', 'kai']}>
+<Prereqs needs={['project']} tabs={3}>
   <li>
-    The <code>staffing_outlook</code> table in Storage, from{' '}
+    <strong>The <code>staffing_outlook</code> table</strong> in Storage, from{' '}
     <a href="/getting-started/transform/">Transform data</a>.
   </li>
+  <span slot="ui">
+    a <a href="/getting-started/transform/workspace/">workspace</a> loaded with{' '}
+    <code>staffing_outlook</code>, where you run the SQL below.
+  </span>
+  <span slot="cli">
+    <a href="/cli/getting-started/">kbagent</a>, connected through <code>kbagent project add</code>{' '}
+    with an admin (master) token.
+  </span>
 </Prereqs>
 
 <PathIntro tabs={3} approvals={false} />
@@ -152,7 +160,9 @@ Storage's own **Data Sample** tab answers the simpler half without a workspace a
 <TabItem label="CLI / API">
 
 `kbagent kai ask` puts the same question from a terminal and prints the answer, tables and all. It
-is one shot: no chat to keep, nothing created.
+is one shot: no chat to keep, nothing created. It needs kbagent connected through
+`kbagent project add` with an admin (master) token; a connection made with `kbagent auth login`
+does not reach Kai.
 
 ```bash
 kbagent kai ask --project docs-demo -m "Using out.c-Boolabean-staffing-outlook.staffing_outlook, which cafe and day has the highest expected units per person, and how many rows are flagged short_handed?"

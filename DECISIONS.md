@@ -1142,6 +1142,114 @@ created broken links. Both pages now exist, at `/extend/encryption/` and `/overv
 at the slugs #1120 had planned. The links point inward now, and the section has no dev-domain links
 left at all.
 
+## 2026-09-23 — The hub opens like a course, and the question becomes its goal
+
+**Decided by:** Nikita (23 Sep 2026), as the section's owner. Michal's rules of 2 September
+(dry; structure from user needs; MCP and CLI are vehicles, not chapters) are kept and named in the
+PR. Two of Jordan's decisions of 21 August change and carry VERIFY(Jordan), below.
+
+**What was wrong.** Every task page opens the same four ways (genre and time, a state sentence,
+prerequisites, a verification block) and the hub was the one page that did none of it. The reader
+met the question as the first line, then 74 words, then the table. Nikita's reading, on 23
+September: no sense of why the section exists, what the sample is, or what one learns; the question
+"sounds strange and as if it were not needed at all". Michal's test on 22 September had already
+shown a reader who skips introductions and reads steps; a hub that is all puzzle and no map serves
+neither reader.
+
+**Evidence.** The openings of Google Data Analytics on Coursera and of the DeepLearning.AI short
+courses run in one order: why, in a sentence or two; what you will be able to do, as verbs; the
+outline; prerequisites. The introduction is a 3-minute lesson in a course whose lessons run from 1 to
+10 minutes. Diátaxis on tutorials: "Confidence can only be built up layer by layer, and is easily
+shaken"; its predecessor, the Divio documentation system, on the same page type: "if your student
+has to do strange and incomprehensible things for two pages before they even see a result, that's
+much too long."
+
+**Decision.** The hub opens with one dry paragraph of what Keboola is for, its five verbs being the
+five task pages; then the clip; then the state block the other pages carry; then the sample in
+three sentences with the question as the concrete goal every step works toward; then the
+free-project sentence; then the table, whose "What happens" column is now "What you'll be able to
+do" and reads as capabilities. No new list: the outcomes live in the table the reader already
+looks at, per Michal's "nedělal bych to složitější". The intro grows from 74 to about 200 words, and the hub stays inside its
+five minutes.
+
+**What the checks changed.** The first draft's fourth verb was "put the answer in front of
+someone"; the app page ends at a private draft, because publishing has not succeeded in 264, so the
+hub says "turn the answer into an app" and its description no longer says "publish". "A free
+project covers all of it" became "is enough to begin", with the three open questions in a
+VERIFY(owner) note, and its link moved from the wizard to Get a project. "Nothing needs installing"
+is scoped to the browser paths, with kbagent named for the command-line way, because that is the
+path an agent reads. Fact-checker and guide-tester, 2026-09-23.
+
+**The question stays.** It is the only concrete promise the guide makes, and Jordan's rule that it
+be "answerable without reading" holds: the clip's poster answers it. What changes is its place,
+from headline to goal, after the reader knows what a café has to do with anything.
+
+**The clip changes in commit 2** (`hub-demo`, replacing `outlook-tour`): six beats, two real
+questions to the table with Kai's answers, the app prompt field, the grid, the Apps list, a closing
+chip pointing at the seven steps. That drops the three-act "files, question, grid" structure Jordan
+asked to preserve, and moves the poster from the question frame to the answer frame.
+**VERIFY(Jordan)** on both; the fallback if he keeps the first act is a 4-second prefix from the
+outlook-tour cards and one fewer beat.
+
+**Not done here, on purpose.** A "build an app from Claude Code or Cursor via MCP" path: no section
+documents one, the production deploy has failed in 264 for nine days (StartupProbeFailed, expired
+managed Git credentials, last seen 2026-09-23 04:07 UTC), and Apps owns the surface (PRDCT-692).
+MISSING carries it. `data-apps/getting-started.md` still promises a live app in ten minutes; that
+page's owner has the contradiction in the PR body.
+
+## 2026-09-25 — "Before you start" lists things, and each tab says what it needs
+
+**Asked by:** Nikita, 24 Sep: the block was "scattered", and he wanted "the concrete things I need
+to start".
+
+**What was wrong.** Eleven boxes of different shapes: some items were things, some were
+explanations or reassurance. On `load/` the box said "Nothing else. No installs" and then asked for
+kbagent. Kai was listed on 2 of the 9 pages whose Prompt tab needs it; kbagent on 3 of 8 pages with
+a CLI / API tab.
+
+**Decision.** Two lists in one box. "You need": the things, one per item, the thing first and then
+where to get it. "Depending on the tab you use": a line per tab. The default lines live in
+`prereqs.mjs`; a page whose tab needs something else overrides that line with a named slot, because
+the first version, one global line per tab, was false on three pages. The fact-checker and the
+guide-tester caught it: the UI tab of `ask/` needs a workspace, the UI tab of `app/` is a Git
+repository and your own code, `app/`'s Prompt tab is Kai under Apps → Create App, creating a
+workspace needs an admin token, and `kbagent kai ask` needs a static master token (browser sign-in
+and custom tokens cannot reach Kai; `kai preflight` checks "master token + AI Agent Chat"). The hub
+lists only what starting needs (an email address or an invite, and a browser) and points at "How
+every page works" for the tabs, since the hub has no tabs and explains them further down.
+
+**Checked by** the new `checker` agent (lens 3: can a newcomer list what they need in ten seconds),
+the fact-checker and the guide-tester. The markdown twin renders both lists, with the per-page
+overrides, so an agent reading `/index.md` sees the same checklist.
+
+## 2026-09-25 — The hub clip is bright
+
+**Asked by:** Nikita, 24 Sep: the clip was "somehow dark" and he did not like it at all.
+
+**What the numbers showed.** The 09-23 cut averaged a luma of 71 of 255 (minimum 55) against 229 for
+the screenshots it was made from; its poster was 54. The compositor's spotlight dims everything
+outside the highlight with a 66 % navy scrim, and scene mode turned a veil on from frame 0. I had
+read the contact sheet myself and passed it, which is why a checker agent now measures clips.
+
+**Decision.** A `bright` look in the compositor: no scrim, a 3 px blue outline marks the point, and
+the camera eases in only where that keeps the content clear of the caption and the frame edge.
+Captions go from 17 to 22 px so they read at 13.75 px on the page. The grid's highlight moves from
+the caption box to the two red Brno cells, which is what "red where it will hurt" names. The Apps
+list now comes before the grid, so the clip ends on the result. The docs-clip skill's checklist
+carries the brightness budget now (mean at least 200, no frame under 180).
+
+**The checker's review changed the second cut.** Captions were up for 2.2 to 2.8 s, so the holds
+grew and every caption now stays more than 3 s. The camera move pushed the what-if question out of
+frame, so there is no camera move. "Different apps, built the same way" was a fact the hub never
+states, and the list mixes Streamlit and Python/JS apps, so that beat now carries the hub's own
+words, "Go straight to a data app on data you already have". The chat's input box showed a blue
+border under the caption that read as a second outline, so the Kai frames stop above it. The grid's
+screenshot slices the Brno row, and Nikita had called that out on 15 Sep; a taller capture needs the
+app running, which its deploy prevents, so the grid is cut between two lines of text, the outline
+holds only the red figures, and the poster is Kai's one-line answer instead of the grid. Third cut:
+27.1 s, 579 KB, luma mean 223, minimum 221; poster 132 KB, luma 220. The poster change is a second
+reason to show Jordan the VERIFY above.
+
 ---
 
 ## Open — carried as VERIFY(owner) flags in the pages

@@ -50,18 +50,23 @@ The throwaway flow and its scheduler were both deleted the same minute (note tha
 `flow schedule-remove` prompts for confirmation, so a scheduler can outlive the flow it points at
 if you abort). The flow's own run was not re-run from the CLI: the scheduled run does it daily. */}
 
-<Prereqs needs={['project']}>
+<Prereqs needs={['project']} tabs={3}>
   <li>
-    The two connector configurations from <a href="/getting-started/load/">Get your data in</a>.
+    <strong>The two connector configurations</strong> from{' '}
+    <a href="/getting-started/load/">Get your data in</a>.
   </li>
   <li>
-    The transformation from <a href="/getting-started/transform/">Transform data</a>.
+    <strong>The transformation</strong> from <a href="/getting-started/transform/">Transform data</a>.
   </li>
   <li>
-    Optionally the app from <a href="/getting-started/app/">Put it in front of someone</a> and the
-    destination from <a href="/getting-started/write/">Send a table to Google Sheets</a>. Without
-    them the flow has two phases instead of three, which is still a real pipeline.
+    <strong>Optional:</strong> the app from <a href="/getting-started/app/">Put it in front of
+    someone</a> and the destination from <a href="/getting-started/write/">Send a table to Google
+    Sheets</a>. The flow runs without them.
   </li>
+  <span slot="cli">
+    <a href="/cli/getting-started/">kbagent</a>, connected with write access, and the app from{' '}
+    <a href="/getting-started/app/">Put it in front of someone</a>.
+  </span>
 </Prereqs>
 
 ## Phases and tasks

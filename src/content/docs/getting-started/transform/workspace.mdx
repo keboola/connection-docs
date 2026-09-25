@@ -19,16 +19,14 @@ schema, holding a copy of the Storage tables you ask for, where a wrong query co
 **Where you are:** you have tables in Storage and a query you are not sure about. **When you
 finish:** the same query, tested against real rows, ready to paste into a transformation.
 
-<Prereqs needs={['project']}>
+<Prereqs needs={['project']} tabs={3}>
   <li>
-    At least one table in Storage: <code>staffing_outlook</code> from{' '}
+    <strong>A table in Storage,</strong> such as <code>staffing_outlook</code> from{' '}
     <a href="/getting-started/transform/">Transform data</a> if you are following the guide.
   </li>
-  <li>
-    For the <strong>CLI / API</strong> tab only:{' '}
-    <a href="/cli/getting-started/">kbagent</a> installed and connected to your project. The other
-    two tabs need nothing but the browser.
-  </li>
+  <span slot="cli">
+    <a href="/cli/getting-started/">kbagent</a>, connected with an admin (master) token.
+  </span>
 </Prereqs>
 
 <PathIntro tabs={3} approvals={false} />
@@ -164,7 +162,12 @@ in a live chat. If Kai does create workspaces, this tab should say so instead. *
 Every click above is an API call underneath, and [kbagent](/cli/) is the same calls from a
 terminal. It needs to be [installed](/cli/getting-started/) and pointed at your project once with
 `kbagent project add`, which stores the connection under an alias. The examples use `docs-demo`,
-substitute yours.
+substitute yours. Creating a workspace needs an admin (master) token.
+{/* VERIFY(owner): the admin-token requirement comes from our own cli/getting-started.mdx:148 and
+cli/troubleshooting.md:42. The fact-checker (2026-09-25) found no master-token check in the CLI's
+workspace service and a Storage API 403 that names only write access and the read-only role, so a
+token with write access may be enough. An admin token works either way, which is why the page
+recommends it until someone confirms. */}
 
 **Create the workspace**
 

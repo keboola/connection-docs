@@ -22,13 +22,7 @@ have: next week's weather, fetched live from a public forecast API. The next pag
 **Where you are:** you have a project, and Storage is empty. **When you finish:** six tables in
 Storage and two connector configurations you can re-run.
 
-<Prereqs needs={['project', 'nothing']}>
-  <li>
-    For the <strong>CLI / API</strong> tab only:{' '}
-    <a href="/cli/getting-started/">kbagent</a> installed and connected to your project. The other
-    two tabs need nothing but the browser.
-  </li>
-</Prereqs>
+<Prereqs needs={['project']} tabs={3} />
 
 <PathIntro tabs={3} />
 
@@ -74,7 +68,7 @@ Each table is half a story. A sales row names its café as `S02` and its product
 roster knows how many people were on shift but not what they sold; the weather table knows it
 rained but not what that did to the queue.
 
-The sixth table is not a file you download. [Open-Meteo](https://open-meteo.com/) publishes a
+The sixth table is not one of the sample files. [Open-Meteo](https://open-meteo.com/) publishes a
 free forecast API with no account and no key, and one request returns the next seven days for all
 six cafés at once as CSV:
 
@@ -309,7 +303,7 @@ It prints the new configuration ID; keep it for the next two commands. The same 
 request, if you would rather see it:
 
 ```bash
-curl -X POST "https://connection.<your-stack>/v2/storage/components/keboola.ex-http/configs" -H "X-StorageApi-Token: $KBC_TOKEN" -F "name=Boolabean sales" -F 'configuration={"parameters":{"baseUrl":"https://help.keboola.com/getting-started/boolabean/"}}'
+curl -X POST "https://<your-stack>/v2/storage/components/keboola.ex-http/configs" -H "X-StorageApi-Token: $KBC_TOKEN" -F "name=Boolabean sales" -F 'configuration={"parameters":{"baseUrl":"https://help.keboola.com/getting-started/boolabean/"}}'
 ```
 
 **Add the five tables**

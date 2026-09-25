@@ -108,3 +108,33 @@ input rows, `06` the single output row, `07` the Queries/Blocks panel where the
 code lives (the SQL itself stays transcribed in fenced blocks on the page, not
 in an image). `05` was never referenced by any page — the numbering simply
 skips it; no file is owed.
+
+`public/getting-started/outlook-tour.mp4` and `outlook-tour-poster.png` were
+**removed 2026-09-23**, replaced on the hub by `hub-demo.mp4` and its poster.
+Nothing the clip carried is lost: its five file cards are the sample paragraph
+on `load/`, its question frame is the goal sentence on the hub, and its closing
+grid is the fourth and sixth beat of the new clip, from the same
+`app/grid-preview.png`. The reason is in DECISIONS.md (2026-09-23): the hub now
+opens with what the guide is for, so the clip shows the results rather than the
+ingredients. Jordan's 21 Aug decisions on the three acts and on the poster carry
+VERIFY(Jordan) there.
+
+**"Before you start" rewritten as two lists, 2026-09-25.** Nothing a reader needs was dropped. One
+sentence was retired; the rest moved or became items in the new lists:
+
+- `load/`, "Nothing else. No installs, no credentials, no files to download." It contradicted the
+  kbagent line under it. Retired from the box: "no installs" is the UI tab line on every page, and
+  the page body already says the forecast API needs no account and no key. The body sentence "The
+  sixth table is not a file you download" read as if the five CSVs were, so it now says the sixth
+  table does not come from a file.
+- `project/`, the same sentence. Retired: the box there lists an email address or an invite, and a
+  page with no tabs has nothing to install.
+- `app/`, "Whether the Free Plan includes data apps is not settled in our own docs". Moved into a
+  `VERIFY(owner)` author comment beside the box; the question stays in the DECISIONS Open table,
+  and the reader keeps the action (no Apps, skip the page).
+- `transform/`, "The bucket names contain configuration IDs, so yours will not match the
+  screenshots." Moved into the body paragraph that already says the bucket names do not matter.
+- The three hand-written "For the CLI / API tab only: kbagent…" items on `load/`,
+  `load/database` and `transform/workspace` are replaced by the shared tab lines.
+- The hub's sentence "Everything here can be done in the browser… A free project is enough to
+  begin." is replaced by the box, which points at "How every page works" for the tab needs.

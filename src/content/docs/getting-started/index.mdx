@@ -1,28 +1,35 @@
 ---
 title: 'Getting started with Keboola'
 slug: 'getting-started'
-description: 'Build one working, scheduled pipeline: load six tables, join them with SQL, ask the result a question, publish it as an app, and have it rebuild itself every morning.'
+description: 'Build one working, scheduled pipeline: load six tables, join them with SQL, ask the result a question, turn it into an app, and have it rebuild itself every morning.'
 redirect_from:
   - /tutorial/
 ---
 
 import PageMeta from '../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../components/getting-started/Prereqs.astro';
 
 <PageMeta genre="Tutorial" minutes="80" />
 
-This guide builds one pipeline end to end and answers one question with it:
+Your data lives in more places than one: files, a spreadsheet someone keeps, an API, a database.
+Keboola is where you bring it together, shape it with SQL, ask it questions in plain language, turn
+the answer into an app, and have the pipeline rerun by itself every morning. This guide does each
+of those once, on a small sample, so you can do them on your own data.
 
-> **Which day next week will leave a café short-handed?**
-
-Six café branches, a summer of sales, the rosters that served it and the weather each day: five
-files, none of which answers alone. The sixth table is next week's forecast, fetched live from a
-public API that needs no account, which is why the answer is different every morning.
-
-<video autoplay loop muted playsinline poster="/getting-started/outlook-tour-poster.png" aria-label="Five raw CSV rows where a café is only a code, then the guide's question, then the finished grid: six cafés by seven days with two red cells, the caption saying two of 42 café-days are short-handed">
-  <source src="/getting-started/outlook-tour.mp4" type="video/mp4" />
+<video autoplay loop muted playsinline poster="/getting-started/hub-demo-poster.png" aria-label="Two questions typed into Kai and answered from the staffing table, the paragraph that describes an app, the project's list of apps, and the finished grid of six cafés by seven days with the two short-handed cells outlined, then a closing line pointing at the seven steps below">
+  <source src="/getting-started/hub-demo.mp4" type="video/mp4" />
 </video>
 
-{/* Tutorial-hub page: the arc index. "Get a project" moved back to its own page 2026-09-14 (see
+{/* Reordered 2026-09-23 (Nikita): the hub opens the way a course does. A "why" paragraph, the clip,
+the state block every task page already carries, the sample with the question as the course's goal,
+then the table with its column renamed from "What happens" to "What you'll be able to do". Before
+this the question was the first line and the reader had 74 words of context before the table; the
+guide test and the Coursera / DeepLearning.AI openings both put outcomes before the puzzle. The clip
+is hub-demo since commit 2; two of Jordan's 21 Aug decisions (three acts; question frame as
+poster) changed with it, VERIFY(Jordan). DECISIONS.md
+2026-09-23.
+
+Tutorial-hub page: the arc index. "Get a project" moved back to its own page 2026-09-14 (see
 that page's comment and DECISIONS.md), and the café story that used to open this page is gone:
 Michal, 2026-09-02, "dataset je jen helping vehicle… není to nosné téma… já bych v tom byl sušší".
 The world is now described once, on load/. Timing: 80 = this page (5) + the seven steps
@@ -39,47 +46,73 @@ collapses the repeats back to five real frames: 104 KB, 7.2 s. The two big GIFs 
 (kai/Capabilities.gif at 2.5 MB, ai/mcp-server's at 9.5 MB) are the pattern NOT to copy on a page
 this size.
 
-Hero clip, three acts (compositor scene outlook-tour): five raw CSV rows verbatim from
-public/getting-started/boolabean/*.csv (S02 is a code in sales.csv and Boolabean Zelný trh, Brno,
-in stores.csv; P01 is a code in sales.csv and Filter of the Day in products.csv); the question,
-held long enough to read — that frame is the poster; the app's draft preview captured 2026-09-14.
-Above the fold per Jordan 2026-08-21 ("reader can't tell what they'll get out of it"). Re-rendered
-2026-09-15 without the mascot: the guide is a spotlight (a cut-out rectangle over the point being
-made, everything else dimmed) plus a caption chip, per Nikita 2026-09-14. 30.7 s, 839 KB, 966x724.
+Hero clip hub-demo, third cut 2026-09-25 (first cut 2026-09-23, replacing outlook-tour). Nikita
+found the first cut dark, and it was: a scrim dimmed everything around each highlight, so the clip
+averaged a luma of 71 of 255 against 229 for its screenshots. Now five compositor scenes in the
+`bright` look, no scrim and no camera move (on three of four beats the move pushed text under the
+caption or out of frame), joined with 0.35 s crossfades: 27.1 s, 579 KB, luma mean 223 and never
+under 221, each caption up for more than 3 s. Beats: Kai answering "which café is short-handed"
+(headline outlined, the flagged rows clear of the caption), Kai answering the what-if "one extra
+person" (answer and table outlined), the Create App screen with the guide's own prompt in the field
+and not sent, the project's Apps list cut after five rows under the hub's own words "Go straight to
+a data app on data you already have", and the draft-preview grid (app/grid-preview.png, 14 Sep)
+with the two red Brno figures outlined, then the closing line. Captions are 22 px on a 1280 canvas,
+13.75 px at the page's ~800 px width. Everything shot in 264 on 23 Sep at 2x, cropped below the top
+bar, above the chat's input box and away from the chat history and the Last Change column, so no
+name, avatar or e-mail is in frame; the two Kai questions are read-only and the prompt was never
+sent, so the shoot created nothing. Kai's dates and figures are that day's (23 Sep's forecast,
+28-29 Sep), the grid is the week of 14 Sep, and the page says the answer moves. Poster = Kai's
+one-line answer with the table under it. Known and not fixed: the grid's own screenshot slices the
+Brno row, so the clip cuts it between two lines of text, above the sliced one, and the poster is not
+the grid; a taller capture needs the data app running and unlocked, which its broken deploy
+prevents. VERIFY(owner). */}
 
-Re-rendered again the same day after a frame-by-frame review. What it fixed: every cut-out was
-placed as if its coordinates were a corner when the code reads them as a centre, so all three tour
-stops sliced the row they were revealing (the Brno stop lit the café above it); three blue markers
-pointed at one thing (an outline on the cut-out, a pulsing ring inside it, a dot on the chip) and
-the ring covered the very dash one caption explains, so all three are gone and the cut-out plus the
-chip do the pointing; the caption sat on the payoff row in every beat and now moves to whichever
-half the spotlight is not in; act 2 drew the question straight onto the grid over a white wash, so
-the poster frame was two layers of text on top of each other, and it now has its own panel over the
-same dark scrim the other acts use; frame 0 was the finished grid cross-dissolving into act 1,
-giving the ending away, and now opens on the scrim; act 1 showed four files while every caption
-said five, so products.csv joined it.
+**Where you are:** you have heard of Keboola and have nothing set up. **When you finish:** a
+scheduled pipeline and a data app, in a project you created or joined.
 
-Known and not fixed: the app capture is 966x744 and the grid's last row needs 765, so Brno, the row
-the clip is about, is cut by its own screenshot. The frame is cropped to 724 so the cut falls
-between two lines rather than through the glyphs. A taller capture needs the data app unlocked,
-which needs its password. VERIFY(owner). */}
+The sample is six café branches: five files with a summer of sales, the rosters that served it and
+the weather, plus next week's forecast from a public API that needs no account. No file answers
+anything alone, and the moves are the same on your own tables. Every step works toward one
+question: **Which day next week will leave a café short-handed?** By the fifth page a grid answers
+it, and the answer changes every morning with the forecast.
+
+<Prereqs needs={[]}>
+  <li>
+    <strong>An email address</strong> to create your project on the first page, or an invite to
+    your company's project.
+  </li>
+  <li>
+    <strong>A browser.</strong> Every step also has a Prompt way and a terminal way;{' '}
+    <a href="#how-every-page-works">How every page works</a> says what those need.
+  </li>
+</Prereqs>
+
+{/* The box replaced a sentence on 2026-09-24 ("Everything here can be done in the browser with
+nothing installed; the command-line way on each page needs kbagent. A free project is enough to
+begin."), because Nikita asked for the concrete things a reader needs rather than prose about them.
+VERIFY(owner): the hub makes no Free Plan promise now; the box asks only for a project. Three
+things stay open, and Get a project is where they would be answered: whether the Free Plan includes data apps
+(app/index.mdx), whether Kai is on the Free Plan's fixed stack, us-east4 (every live run here was
+on europe-west3, and project/index.mdx says Kai "is not on every stack"), and whether 60 runtime
+minutes a month survive a daily flow whose recorded phases took 121 + 41 + 282 s
+(management/pay-as-you-go/). The sentence used to say "covers all of it" and linked the wizard; it
+links Get a project now, so a reader meets the invite and SSO advice before a sign-up form.
+Fact-checker and guide-tester, 2026-09-23. */}
 
 ## What you get
 
-| Step | What happens | Keboola calls it | Minutes |
+| Step | What you'll be able to do | Keboola calls it | Minutes |
 |---|---|---|---|
-| [Get a project](/getting-started/project/) | a place for everything below to live | a **project** | 5 |
-| [Get your data in](/getting-started/load/) | five CSV files and a live forecast become six tables | a **data source connector** | 15 |
-| [Transform data](/getting-started/transform/) | SQL joins them into one table: a café, a day, the demand to expect, the crew rostered, a flag | a **transformation** | 15 |
-| [Ask a question and get an answer](/getting-started/ask/) | the question, answered out of that table in plain words | **Kai** reading your data | 5 |
-| [Put it in front of someone](/getting-started/app/) | a grid of six cafés by seven days, red where it will hurt | a **data app** | 15 |
-| [Make it run every morning](/getting-started/automate/) | all of it re-runs on the new forecast and tells you if it breaks | a **flow** | 15 |
-| [Check it worked](/getting-started/check/) | what Storage and Jobs should show, and the failures that happen | — | 5 |
+| [Get a project](/getting-started/project/) | create or join a project, the place everything below lives in | a **project** | 5 |
+| [Get your data in](/getting-started/load/) | load five files and a live API into six tables, from configurations you can re-run | a **data source connector** | 15 |
+| [Transform data](/getting-started/transform/) | join five of them with SQL into one table: a café, a day, the demand to expect, the crew rostered, a flag | a **transformation** | 15 |
+| [Ask a question and get an answer](/getting-started/ask/) | ask that table a question in plain words and get an answer that says why | **Kai** reading your data | 5 |
+| [Put it in front of someone](/getting-started/app/) | describe an app in a paragraph and get a grid: six cafés by seven days, red where it will hurt | a **data app** | 15 |
+| [Make it run every morning](/getting-started/automate/) | schedule all of it to re-run on the new forecast, and hear about it if it breaks | a **flow** | 15 |
+| [Check it worked](/getting-started/check/) | read what Storage and Jobs should show, and recognise the failures that happen | — | 5 |
 
-Everything happens in the browser; nothing needs installing, and a
-[free project](https://connection.us-east4.gcp.keboola.com/wizard) covers all of it. Read the
-steps in order, or land on any one of them: each says where you should be, what it needs, and how
-to tell it worked. The **Next** control at the foot of every page follows this order.
+Read the steps in order, or land on any one of them: each says where you should be, what it needs,
+and how to tell it worked. The **Next** control at the foot of every page follows this order.
 
 ## How every page works
 

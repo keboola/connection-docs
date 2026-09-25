@@ -4,33 +4,60 @@
 // Hand-written prerequisite lists drift within a release cycle — Cloudflare
 // renders its prerequisites partial 4,087 times across 1,966 pages for exactly
 // this reason. At our scale one component does, but the principle is the same:
-// change the wording in prereqs.mjs, not on nine pages.
+// change the wording in prereqs.mjs, not on eleven pages.
 //
-// The `needs` prop names the shared prerequisites by key; anything page-specific
-// goes in the default slot as extra <li> items. The wording itself lives in
-// ./prereqs.mjs so the markdown twin (page-markdown.mjs) can render it too.
+// Two lists. "You need": the shared items named by `needs`, then anything
+// page-specific passed as <li> children in the slot. "Depending on the tab you
+// use": one line per tab, from `tabs`. The wording lives in ./prereqs.mjs so
+// the markdown twin (page-markdown.mjs) renders the same lists.
 //
-// Usage:  <Prereqs needs={['project']} />
-//         <Prereqs needs={['project', 'google']}>
-//           <li>The table <code>x</code> in Storage, from the previous page.</li>
+// A tab whose default line is wrong for this page gets its own, as a named
+// slot: <span slot="prompt|ui|cli">…</span>. The label ("UI tab:") stays here.
+//
+// Usage:  <Prereqs needs={['project']} tabs={3} />
+//         <Prereqs needs={['project', 'google']} tabs={2}>
+//           <li><strong>The table <code>x</code></strong> from the previous page.</li>
 //         </Prereqs>
+//         <Prereqs needs={['project']} tabs={3}>
+//           <span slot="ui">a workspace loaded with that table.</span>
+//         </Prereqs>
+//         <Prereqs needs={[]}>  (a page with no tabs and no shared items)
 
-import { SHARED } from './prereqs.mjs';
+import { LABELS, SHARED, TABS } from './prereqs.mjs';
 
 interface Props {
-  /** Shared prerequisites, in the order they should appear. */
-  needs?: Array<'project' | 'google' | 'kai' | 'nothing'>;
+  /** Shared "You need" items, in the order they should appear. */
+  needs?: Array<'project' | 'google'>;
+  /** How many tabs the page offers: 3 (Prompt, UI, CLI / API), 2 (Prompt, UI) or 0. */
+  tabs?: 0 | 2 | 3;
 }
 
-const { needs = ['project'] } = Astro.props;
+const { needs = ['project'], tabs = 0 } = Astro.props;
 
 const items = needs.filter((k) => SHARED[k]);
+const tabLines = [];
+for (const t of TABS.slice(0, tabs)) {
+  const own = Astro.slots.has(t.key) ? await Astro.slots.render(t.key) : null;
+  // MDX wraps a slot's multi-line text in <p>, which breaks the line after the label
+  tabLines.push({ label: t.label, html: own ? own.replace(/<\/?p>/g, '') : t.html });
+}
 ---
 
 <div class="gs-prereqs">
   <p class="gs-prereqs__label">Before you start</p>
+  <p class="gs-prereqs__group">{LABELS.needs}</p>
   <ul class="gs-prereqs__list">
     {items.map((key) => <li set:html={SHARED[key]} />)}
     <slot />
   </ul>
+  {tabLines.length > 0 && (
+    <Fragment>
+      <p class="gs-prereqs__group">{LABELS.tabs}</p>
+      <ul class="gs-prereqs__list">
+        {tabLines.map((t) => (
+          <li><strong>{t.label}:</strong> <Fragment set:html={t.html} /></li>
+        ))}
+      </ul>
+    </Fragment>
+  )}
 </div>
