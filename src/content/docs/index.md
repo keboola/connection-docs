@@ -30,7 +30,7 @@ Rest assured, we're here to support you whenever needed. Reach out via email at 
 
 ## Reference
 - [API reference](/overview/api/)
-- [Release notes](https://changelog.keboola.com/)
+- [Changelog](/changelog/)
 
 ## Resources
 - [keboolastatus.com](https://keboolastatus.com/) – get Keboola status updates (we recommend subscribing to the feed)
