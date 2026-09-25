@@ -1,7 +1,7 @@
 ---
 title: Build an app with an AI agent
 slug: 'data-apps/build-with-an-agent'
-description: 'Build and deploy a Keboola app from Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT app with the dataapp-developer plugin and kbagent: set up the agent, describe the app, then check its URL, password and logs.'
+description: 'Build and deploy a Keboola app from Claude Code, Claude Desktop, Cursor, VS Code, the ChatGPT app or a terminal with the dataapp-developer plugin and kbagent: what you get by default, setting up your client, the prompt, and checking the app.'
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -14,19 +14,21 @@ To build inside Keboola instead, [Kai](/data-apps/getting-started/) does the sam
 
 ## Before you start
 
-- A Keboola project. No project yet? The [Getting Started tutorial](/tutorial/#prerequisites) links a free one.
-- The data the app should show, as a table in Storage. No data yet? [Upload a sample CSV](/tutorial/load/#manual-data-loading) in a few minutes, or bring in your own with a [data source connector](/components/extractors/).
+- A Keboola project. No project yet? [Create a free one](https://connection.us-east4.gcp.keboola.com/wizard).
+- The data the app should show, as a table in Storage. No data yet? Download the sample [opportunity.csv](/tutorial/opportunity.csv) and load it as in [Manual Data Loading](/tutorial/load/#manual-data-loading), which takes a few minutes and gives you the table `in.c-csv-import.opportunity`; [Describe the app](#describe-the-app) has a prompt for it. For your own data, use a [data source connector](/components/extractors/).
 - [kbagent](/cli/), connected to that project. Creating the push token for the app's repository needs admin rights in the project.
 - Git, which pushes the app's code.
 - An AI client: Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT app. You can also skip the agent and use the **Terminal** tab below, or [another agent](#other-agents).
 
 ## What you get by default
 
-Unless the prompt says otherwise, a dashboard comes out as a Python/JS app built with Node.js and Chart.js, with its code in a new Keboola-managed Git repository. The app runs at the `tiny` size, sleeps after 15 minutes without visitors, gets access to your Storage data (on the kbagent route only after the fix in [If the app can't read Storage](#if-the-app-cant-read-storage)), and sits behind a shared password.
+Unless the prompt says otherwise, a dashboard comes out as a Python/JS app built with Node.js and Chart.js, with its code in a new Keboola-managed Git repository. The app runs at the `tiny` size, sleeps after 15 minutes without visitors, gets access to your Storage data (on the kbagent route only once the repository block is added, see [If the app can't read Storage](#if-the-app-cant-read-storage)), and sits behind a shared password.
 
 The agent usually can't show you that password, because `kbagent data-app password` needs a Manage API token. The password is on the app's page in Keboola, next to **Open App**: open **Apps** from the left navigation and then your app. The prompt below asks the agent for a direct link to that page.
 
 To make the app public, say so in the prompt. Anyone with its URL can then open it and see the data it shows. Changing an existing app's sign-in, including to single sign-on, belongs in its [Authentication](/data-apps/authentication/) settings.
+
+{/* "Say so in the prompt": kbagent data-app create offers --auth public (0.95.0 help); no run has asked for a public app yet, VERIFY(Nikita). */}
 
 {/* Defaults from the kbagent create dry run (2026-09-23) and the skill's app-type choice (choosing-app-type.md: Node.js + static frontend is the dashboard default; Streamlit for Python-only teams and quick prototypes). The page URL pattern is the ui-detail link the Keboola MCP server returns for a data app. The password location follows authentication.mdx; VERIFY(Michal Ševčík): the MCP link title says to click OPEN DATA APP to see it, so confirm where it shows. Asking an agent to remove the password of an existing app (2026-09-25) set auth_required to false and redeployed, yet the proxy still asked for the password 6.5 minutes later; VERIFY(Michal Ševčík) whether that takes effect later or needs the UI. */}
 
@@ -136,9 +138,20 @@ the app, check that it loads its data, and give me its URL and its page in
 Keboola (<Keboola URL>/admin/projects/<project-id>/data-apps/<config-id>).
 ```
 
-Swap the orders table and the chart for your own data and keep the rest as it is; the agent fills in the page link itself. It reads the skill, finds the table and queries a sample before it writes any code. If kbagent knows more than one project, replace "the project kbagent is connected to" with its alias. Name a framework too if it matters to you. To use your own GitHub repository instead, put its URL in the prompt; the repository then has to follow the layout in [Build an app locally](/data-apps/build-locally/).
+Swap the orders table and the chart for your own data and keep the rest as it is; the agent fills in the page link itself. With the sample data from [Before you start](#before-you-start), use this one:
 
-If the agent can reach Keboola more than one way, it may ask which to use, or offer to sign you in to an MCP server. To follow this page, pick kbagent and decline that sign-in. An MCP sign-in can reach other projects, and the agent may build wherever it finds the data first; that's why the prompt names both kbagent and the project. The plugin's own MCP server is fixed to the US GCP stack (`us-east4`): Claude Code can't connect to it, while Cursor and Codex ask you to sign in. [The MCP route](#the-mcp-route) describes the other way in.
+```text
+Build a Keboola app using kbagent, not an MCP server, in the project kbagent
+is connected to. It shows the number of opportunities created per month as a
+line chart, from the in.c-csv-import.opportunity table (CreatedDate column).
+Put the code in a new Keboola-managed Git repository, deploy the app, check
+that it loads its data, and give me its URL and its page in Keboola
+(<Keboola URL>/admin/projects/<project-id>/data-apps/<config-id>).
+```
+
+{/* The sample prompt fits public/tutorial/opportunity.csv (639 rows, CreatedDate from 2015) loaded as in.c-csv-import.opportunity by tutorial/load; VERIFY(Nikita) one run with it. The free project link is the same wizard URL the tutorial's Prerequisites use (200 on 2026-09-25). */} It reads the skill, finds the table and queries a sample before it writes any code. If kbagent knows more than one project, replace "the project kbagent is connected to" with its alias. Name a framework too if it matters to you. To use your own GitHub repository instead, put its URL in the prompt; the repository then has to follow the layout in [Build an app locally](/data-apps/build-locally/).
+
+If the agent can reach Keboola more than one way, it may ask which to use, or offer to sign you in to an MCP server. Outside Claude Desktop, pick kbagent to follow this page and decline that sign-in. An MCP sign-in can reach other projects, and the agent may build wherever it finds the data first; that's why the prompt names both kbagent and the project. The plugin's own MCP server is fixed to the US GCP stack (`us-east4`): Claude Code can't connect to it, Cursor offers a sign-in, and the ChatGPT app's Codex engine reports that it needs one. [The MCP route](#the-mcp-route) describes the other way in.
 
 {/* The route question: Claude Code, 2026-09-23 ("Keboola MCP (Recommended)" or "kbagent CLI", project 264), and Cursor, 2026-09-25 (Michal Ševčík: kbagent, the plugin's MCP server and his own MCP server, all offered). With "using kbagent" in the prompt, his Cursor agent signed in to an MCP server named keboola (which of the two is not visible) and built a draft in a project on us-east4, not in his kbagent project. "Check that it loads its data" is there because the 2026-09-23 Claude Code agent found the missing workspace only by reading the logs. MCP route in Claude Code: prod app 74021869 (managed repo, parameters.dataApp.git written, not deployed until approved) and draft 74021870 (dev mode, branch orders-per-day, git user kai), which got its workspace. */}
 
@@ -148,6 +161,8 @@ Through a Keboola MCP server, the agent doesn't run kbagent. It calls the server
 
 - It creates the app with a Keboola-managed repository, and a draft of it next to the production app.
 - The draft runs in development mode at its own URL, so you preview the app before anything goes live. If the repository has a `keboola-config/supervisord-dev/` program, the draft reloads each push within seconds; otherwise the agent redeploys it. A draft can't be public, even if you asked for a public app.
+
+{/* Draft never public: dataapp-developer references/authentication.md ("never on a draft"), keboola/mcp-server TOOLS.md ("rejected on drafts"), and Keboola rejecting it in Michal Ševčík's Cursor run (2026-09-25). */}
 - The production app stays undeployed until you approve the draft. Then the agent merges the draft into production and deploys it.
 - The repository block is in the configuration from the start, so [the workspace bug](#if-the-app-cant-read-storage) doesn't apply.
 
@@ -162,21 +177,23 @@ Through a Keboola MCP server, the agent doesn't run kbagent. It calls the server
 
 Until [keboola/cli#765](https://github.com/keboola/cli/pull/765) ships (still the case in kbagent 0.95.0), an app created with `--use-managed-git-repo` gets no workspace, however often you redeploy it with kbagent. It runs, but its code finds no `WORKSPACE_ID`. An app built from the plugin's Node.js template logs `Missing env vars: WORKSPACE_ID (or KBC_WORKSPACE_MANIFEST_PATH)`. Checking `runtime.workspace.enabled` in the configuration doesn't catch it, because that flag is already on.
 
+{/* The flag: App ID 74021867's configuration had runtime.workspace.enabled true while the app ran without WORKSPACE_ID (2026-09-23). */}
+
 The app's configuration is missing its repository block. The prompt above asks the agent to check that the app loads its data, so it should notice and add the block; kbagent's rules make it ask you to confirm that change first. If it doesn't notice, ask it to. By hand, it's step 5 of the **Terminal** tab, followed by another `kbagent data-app deploy`. If you no longer have the config ID from `create`, `kbagent --json data-app detail --project <alias> --app-id <id>` shows it as `config_id`. After the fix ships, `deploy` adds the block itself.
 
-{/* The data check, 2026-09-25, Codex CLI 0.157.0 with kbagent 0.95.0 and dataapp-developer 1.6.3 in project 264 (App ID 74022065): the agent found the missing git block after deploying, prepared the config update as a dry run and asked before applying it ("The kbagent safe-write instructions require your confirmation"). After the yes it set the block, deployed config version 5, the log said "Loaded 1244 daily order counts from Keboola.", and it returned both the app URL and the page link built from the prompt's pattern. On 2026-09-23 the Claude Code agent found it by reading the logs. The same Codex run hit `Repository not found` on its first push until it cleared Git's cached credential helper. */}
+{/* The data check, 2026-09-25, Codex CLI 0.157.0 with the kbagent CLI 0.95.0, the kbagent plugin 0.94.0 and dataapp-developer 1.6.3 in project 264 (App ID 74022065): the agent found the missing git block after deploying, prepared the config update as a dry run and asked before applying it ("The kbagent safe-write instructions require your confirmation"). After the yes it set the block, deployed config version 5, the log said "Loaded 1244 daily order counts from Keboola.", and it returned both the app URL and the page link built from the prompt's pattern. On 2026-09-23 the Claude Code agent found it by reading the logs. The same Codex run hit `Repository not found` on its first push until it cleared Git's cached credential helper. */}
 
 {/* Reproduced 2026-09-23 on App ID 74021867: deploys ran without WORKSPACE_ID; config update (version 5) plus deploy loaded the data. Tracked as CLI-15. keboola/cli#765 still open at the v0.95.0 release (2026-09-24). Remove this section, Terminal step 5 and the matching troubleshooting row once it is released. */}
 
 ## Change the app later
 
-Ask the agent for the change. It pushes to the same repository and deploys again, and the app restarts on each deploy. To edit the code yourself, clone the repository from `kbagent data-app git-repo` with a fresh token from `git-credentials-create`.
+Ask the agent for the change. It pushes to the same repository and deploys again, and the app restarts on each deploy. To edit the code yourself, clone the repository from `kbagent data-app git-repo` with a fresh token from `git-credentials-create`, clearing Git's credential helper as for the push: `git -c credential.helper= clone <https-url>`.
 
 Stopping and waking the app, secrets, settings and deleting are in [Operate and update an app](/data-apps/operate/). kbagent has no commands for drafts or copying an app, and `kbagent data-app deploy --config-version` runs an older configuration for one deploy without restoring it. Drafts, copying and a real [rollback](/data-apps/operate/#see-what-changed-and-go-back) happen in the Keboola UI.
 
 ## Other agents
 
-Any agent that can run shell commands can follow the **Terminal** tab. For the push, it has to hand Git the token without a prompt, because an agent's shell can't answer one, and keep the token out of the push URL, where it would end up in the shell history. A one-off credential helper does both, with the token in an environment variable:
+Any agent that can run shell commands can follow the **Terminal** tab. For the push, it has to hand Git the token without a prompt, because an agent's shell can't answer one, and keep the token out of the push URL, where it would end up in the shell history. A one-off credential helper does both, with the token in an exported environment variable, `GIT_PUSH_TOKEN`:
 
 ```bash
 git -c credential.helper= -c credential.helper='!f() { echo username=kbagent; echo "password=$GIT_PUSH_TOKEN"; }; f' push <https-url> HEAD:main
