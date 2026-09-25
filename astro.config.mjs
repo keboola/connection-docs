@@ -6,6 +6,7 @@ import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
 import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
+import imageDimensions from './src/integrations/image-dimensions.mjs';
 
 /* Shared so the llms.txt heading cannot drift from the site's own title. */
 const SITE_TITLE = 'Keboola User Documentation';
@@ -17,7 +18,10 @@ export default defineConfig({
     format: 'directory',
   },
   markdown: {
-    remarkPlugins: [beaconTransforms],
+    // imageDimensions runs first: beaconTransforms turns some images into raw
+    // HTML, and reads the dimensions this attaches. Passed uncalled — unified
+    // invokes the plugin itself to get the transformer; all options default.
+    remarkPlugins: [imageDimensions, beaconTransforms],
   },
   integrations: [
     redirectFrom(),
@@ -67,11 +71,25 @@ export default defineConfig({
       // returns undefined, and the line renders on no page at all. Verified on
       // the preview for PR #1132.
       //
-      // To switch it on, the build must first have full history. Vercel has no
+      // Switching it on needs full history in the build first. Vercel has no
       // documented clone-depth setting, so that means a `git fetch --unshallow`
-      // ahead of `astro build` (vercel.json `buildCommand`, or the project's
-      // build command) — confirm it on a preview before re-adding this, and
-      // restore `fetch-depth: 0` in .github/workflows/*.yml at the same time.
+      // before `astro build`.
+      //
+      // That was ALREADY TRIED, from the `prebuild` npm script, and the preview
+      // still showed no dates — see the revert of 8166dcea. The mechanism
+      // itself is fine (locally it deepens a shallow clone and puts a date on
+      // 366 of 366 pages), so before trying again, find out which of these it
+      // is by searching a Vercel build log for `[unshallow]`:
+      //
+      //   present, "done"            -> the clone WAS deepened; cause is elsewhere
+      //   present, "could not deepen"-> the build step has no usable credential
+      //   absent                     -> prebuild never ran, i.e. Vercel's build
+      //                                 command is not `npm run build`; a
+      //                                 `buildCommand` in vercel.json is then
+      //                                 the lever, not prebuild
+      //
+      // Whichever way it comes back, restore `fetch-depth: 0` in
+      // .github/workflows/*.yml at the same time if prebuild is not doing it.
       editLink: {
         baseUrl: 'https://github.com/keboola/connection-docs/edit/main/',
       },
