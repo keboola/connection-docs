@@ -107,6 +107,9 @@ items:
       - url: /flows/flow-migration-guide/
         title: Migration Guide
 
+      - url: /flows/schedule-api/
+        title: Schedule via the API
+
   - url: /data-apps/
     title: Apps
     items:
@@ -124,6 +127,10 @@ items:
             title: Authentication
           - url: /data-apps/publish-and-share/
             title: Publish and share
+          - url: /data-apps/operate/
+            title: Operate and update
+          - url: /data-apps/troubleshooting/
+            title: Troubleshooting
       - url: /data-apps/reference/
         title: Reference
       - url: /data-apps/streamlit/
@@ -934,6 +941,11 @@ items:
             title: Configuration File
           - url: /extend/common-interface/environment/
             title: Environment
+          - url: /extend/common-interface/artifacts/
+            title: Artifacts
+            items:
+              - url: /extend/common-interface/artifacts/tutorial/
+                title: Tutorial
           - url: /extend/common-interface/manifest-files/
             title: Manifest Files
             items:
@@ -970,6 +982,8 @@ items:
         items:
           - url: /extend/publish/checklist/
             title: Checklist
+      - url: /extend/development-project/
+        title: Development Project
 
   - url: /external-integrations/
     title: External Integrations
