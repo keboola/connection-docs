@@ -1,0 +1,276 @@
+---
+/**
+ * Feedback.astro
+ *
+ * Stripe-style "Was this page helpful?" widget, rendered once per docs page
+ * (via the Footer override). Three progressive steps:
+ *   1. 👍 / 👎
+ *   2. a heading + vertical radio list of reasons (Submit disabled until picked)
+ *   3. selecting a reason reveals an optional comment box inline under it
+ * On submit the form is replaced by a borderless thank-you line.
+ *
+ * A thumb-without-submit is still captured on page leave via
+ * navigator.sendBeacon so the core signal isn't lost. Submissions POST to
+ * /api/feedback. All styling lives in custom.css (no <style> here). The client
+ * script (re)initialises on astro:page-load to survive view transitions.
+ */
+---
+
+<section class="b-feedback" data-feedback hidden>
+  <p class="b-feedback-q">Was this page helpful?</p>
+
+  <div class="b-feedback-buttons" data-fb-verdicts>
+    <button type="button" class="b-feedback-btn" data-fb-verdict="up" aria-pressed="false">
+      👍 Yes
+    </button>
+    <button type="button" class="b-feedback-btn" data-fb-verdict="down" aria-pressed="false">
+      👎 No
+    </button>
+  </div>
+
+  <form class="b-feedback-followup" data-fb-followup hidden>
+    <p class="b-feedback-followup-q" data-fb-followup-q></p>
+    <div class="b-feedback-options" data-fb-options></div>
+    <!-- Comment box; moved inline under the selected option by the script. -->
+    <div class="b-feedback-comment-wrap" data-fb-comment-wrap hidden>
+      <label class="b-feedback-comment-label">
+        <span class="b-feedback-sr">Additional comments</span>
+        <textarea
+          class="b-feedback-comment"
+          data-fb-comment
+          rows="3"
+          maxlength="1000"
+          placeholder="(Optional) Try to be as specific and detailed as possible!"
+        ></textarea>
+      </label>
+    </div>
+    <!-- Honeypot: hidden from humans; bots that fill it get dropped server-side. -->
+    <input
+      type="text"
+      class="b-feedback-hp"
+      data-fb-hp
+      tabindex="-1"
+      autocomplete="off"
+      aria-hidden="true"
+    />
+    <button type="submit" class="b-feedback-submit" data-fb-submit disabled>Submit</button>
+  </form>
+
+  <p class="b-feedback-thanks" data-fb-thanks hidden>
+    Thank you for helping improve Keboola's documentation!
+  </p>
+</section>
+
+<script>
+  // [value, label, description] — description omitted for "Another reason".
+  const REASONS = {
+    up: [
+      ['accurate', 'Accurate', 'Accurately describes the product or feature.'],
+      ['solved-problem', 'Solved my problem', 'Helped me resolve an issue.'],
+      ['easy-to-understand', 'Easy to understand', 'Easy to follow and comprehend.'],
+      ['helped-decide', 'Helped me decide to use the product', 'Convinced me to adopt the product or feature.'],
+      ['another-reason', 'Another reason', ''],
+    ],
+    down: [
+      ['inaccurate', 'Inaccurate', "Doesn't accurately describe the product or feature."],
+      ['hard-to-understand', 'Hard to understand', 'Hard to follow or comprehend.'],
+      ['missing-info', 'Missing information', "Doesn't have the information I need."],
+      ['didnt-solve', "Didn't solve my problem", "Didn't help me resolve my issue."],
+      ['another-reason', 'Another reason', ''],
+    ],
+  } as const;
+
+  const apiBase = import.meta.env.DEV ? 'https://keboola-docs-beacon.vercel.app' : '';
+
+  function storageKey() {
+    return `kbc-fb:${location.pathname}`;
+  }
+
+  /**
+   * Is there a backend to talk to?
+   *
+   * `/api/feedback` only exists on a Vercel deployment. On a static deploy —
+   * the S3 sync in .github/workflows/main.yml still produces one — the widget
+   * would render and POST into a 404. Probe once per session and fail CLOSED,
+   * mirroring the Kai availability gate in AskKaiDrawer.astro.
+   */
+  const FB_FLAG = 'kbc-feedback-enabled';
+
+  async function backendAvailable(): Promise<boolean> {
+    let cached: string | null = null;
+    try {
+      cached = sessionStorage.getItem(FB_FLAG);
+    } catch {}
+    if (cached !== null) return cached === 'true';
+
+    try {
+      const res = await fetch(`${apiBase}/api/feedback`);
+      const enabled = res.ok && Boolean((await res.json())?.enabled);
+      // A static deploy stays static, so cache either verdict and stop probing
+      // on every navigation.
+      try {
+        sessionStorage.setItem(FB_FLAG, String(enabled));
+      } catch {}
+      return enabled;
+    } catch {
+      // Network blip rather than a missing backend — stay hidden for now, but
+      // don't cache it, so a later navigation probes again.
+      return false;
+    }
+  }
+
+  async function initFeedback() {
+    const root = document.querySelector<HTMLElement>('[data-feedback]');
+    if (!root || root.dataset.fbReady === '1') return;
+    root.dataset.fbReady = '1';
+
+    // Stays `hidden` from the markup unless a backend answers, so there is no
+    // flash of a widget that then disappears.
+    if (!(await backendAvailable())) return;
+    // A navigation may have swapped the document while the probe was in
+    // flight; this root is detached and a fresh one has already initialised.
+    if (!root.isConnected) return;
+
+    const verdictsWrap = root.querySelector<HTMLElement>('[data-fb-verdicts]')!;
+    const followup = root.querySelector<HTMLFormElement>('[data-fb-followup]')!;
+    const followupQ = root.querySelector<HTMLElement>('[data-fb-followup-q]')!;
+    const optionsWrap = root.querySelector<HTMLElement>('[data-fb-options]')!;
+    const commentWrap = root.querySelector<HTMLElement>('[data-fb-comment-wrap]')!;
+    const comment = root.querySelector<HTMLTextAreaElement>('[data-fb-comment]')!;
+    const honeypot = root.querySelector<HTMLInputElement>('[data-fb-hp]')!;
+    const submitBtn = root.querySelector<HTMLButtonElement>('[data-fb-submit]')!;
+    const thanks = root.querySelector<HTMLElement>('[data-fb-thanks]')!;
+
+    let verdict: 'up' | 'down' | null = null;
+    let reason = '';
+    let submitted = false;
+
+    // Already gave feedback on this page → show the thank-you, skip the form.
+    let seen = false;
+    try {
+      seen = localStorage.getItem(storageKey()) === '1';
+    } catch {}
+    if (seen) {
+      verdictsWrap.hidden = true;
+      thanks.hidden = false;
+      root.hidden = false;
+      return;
+    }
+    root.hidden = false;
+
+    function payload(extra: Record<string, unknown> = {}) {
+      return JSON.stringify({
+        verdict,
+        reason,
+        comment: comment.value.trim(),
+        path: location.pathname,
+        title: document.title,
+        hp: honeypot.value,
+        ...extra,
+      });
+    }
+
+    function markDone() {
+      submitted = true;
+      followup.hidden = true;
+      verdictsWrap.hidden = true;
+      thanks.hidden = false;
+      try {
+        localStorage.setItem(storageKey(), '1');
+      } catch {}
+    }
+
+    function selectReason(value: string, optionEl: HTMLElement) {
+      reason = value;
+      submitBtn.disabled = false;
+      // Reveal the comment box directly under the chosen option (Stripe-style).
+      optionEl.insertAdjacentElement('afterend', commentWrap);
+      commentWrap.hidden = false;
+      comment.focus();
+    }
+
+    function selectVerdict(v: 'up' | 'down') {
+      verdict = v;
+      reason = '';
+      submitBtn.disabled = true;
+      commentWrap.hidden = true;
+      verdictsWrap
+        .querySelectorAll<HTMLButtonElement>('[data-fb-verdict]')
+        .forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.fbVerdict === v)));
+
+      followupQ.textContent = v === 'up' ? 'What did you like?' : 'What could be better?';
+      optionsWrap.innerHTML = '';
+      for (const [value, label, desc] of REASONS[v]) {
+        const id = `fb-r-${value}`;
+        const option = document.createElement('div');
+        option.className = 'b-feedback-option';
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'fb-reason';
+        input.id = id;
+        input.value = value;
+        input.className = 'b-feedback-radio';
+        const lbl = document.createElement('label');
+        lbl.className = 'b-feedback-option-text';
+        lbl.htmlFor = id;
+        lbl.innerHTML =
+          `<span class="b-feedback-option-label"></span>` +
+          (desc ? `<span class="b-feedback-option-desc"></span>` : '');
+        lbl.querySelector('.b-feedback-option-label')!.textContent = label;
+        if (desc) lbl.querySelector('.b-feedback-option-desc')!.textContent = desc;
+        input.addEventListener('change', () => selectReason(value, option));
+        option.append(input, lbl);
+        optionsWrap.appendChild(option);
+      }
+      followup.hidden = false;
+    }
+
+    verdictsWrap.querySelectorAll<HTMLButtonElement>('[data-fb-verdict]').forEach((btn) => {
+      btn.addEventListener('click', () => selectVerdict(btn.dataset.fbVerdict as 'up' | 'down'));
+    });
+
+    followup.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!verdict || !reason) return;
+      // Fire-and-forget; the user gets their thank-you regardless of the
+      // result. Log at debug level so a field failure is at least findable —
+      // silence made an ingest error and a network error indistinguishable.
+      fetch(`${apiBase}/api/feedback`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: payload(),
+        keepalive: true,
+      })
+        .then((res) => {
+          if (!res.ok) console.debug('[feedback] submit returned HTTP', res.status);
+        })
+        .catch((err) => console.debug('[feedback] submit failed:', err));
+      markDone();
+    });
+
+    // Thumb clicked but never submitted → capture the verdict on the way out.
+    function flushOnLeave() {
+      if (!verdict || submitted) return;
+      submitted = true; // guard against double-send
+      try {
+        navigator.sendBeacon(
+          `${apiBase}/api/feedback`,
+          new Blob([payload({ abandoned: true })], { type: 'application/json' }),
+        );
+      } catch {}
+    }
+    // `pagehide` covers a real unload. Astro view-transition navigations don't
+    // fire it, so `astro:before-swap` flushes too — and detaches both, because
+    // the swap brings a fresh widget that registers its own pair. Without the
+    // removal each navigation would leave a live listener behind holding this
+    // closure's verdict, and they would all fire on the eventual unload.
+    function onBeforeSwap() {
+      flushOnLeave();
+      window.removeEventListener('pagehide', flushOnLeave);
+    }
+    window.addEventListener('pagehide', flushOnLeave);
+    document.addEventListener('astro:before-swap', onBeforeSwap, { once: true });
+  }
+
+  document.addEventListener('astro:page-load', initFeedback);
+</script>
