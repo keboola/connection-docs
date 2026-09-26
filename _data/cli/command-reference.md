@@ -1,6 +1,6 @@
 # kbagent command reference
 
-Generated from kbagent v0.91.0 by `scripts/gen_command_reference.py`.
+Generated from kbagent v0.95.0 by `scripts/gen_command_reference.py`.
 Derived from the CLI's own command tree -- do not edit by hand.
 
 ## Global options
@@ -16,6 +16,7 @@ Available on every command:
 | `--config-dir` `<str>` |  | Override config directory path. |
 | `--deny-writes` |  | Session-only firewall: block write, destructive, AND admin operations (the wide net -- project add/remove/edit, org setup, storage writes and deletes, etc.). Merges with any persisted policy. |
 | `--deny-destructive` |  | Session-only firewall: block ONLY data-destructive operations (storage delete-table/delete-bucket/delete-column, job terminate, branch delete, etc.). Admin ops like 'project remove' and 'org setup' are NOT blocked -- use --deny-writes for the wide net. |
+| `--conversation-id` `<str>` |  | Conversation/session ID sent as the X-Conversation-ID header on every API request (platform observability). Equivalent to setting KBAGENT_CONVERSATION_ID, and takes precedence over it. Exists because agent harnesses do not persist shell state between tool calls, so a standalone `export` cannot set it -- and prefixing every command with `export ...` stops the command matching a `Bash(kbagent ...)` permission allow-rule. |
 | `--allow-env-manage-token` |  | Read KBC_MANAGE_API_TOKEN from the environment. Without this flag the env var is ignored (with a warning) and an interactive TTY prompt is required. Default-deny since 0.29.0; closes the AI-exfiltration risk where subprocesses inherit the manage token. |
 | `--install-completion` |  | Install completion for the current shell. |
 | `--show-completion` |  | Show completion for the current shell, to copy it or customize the installation. |
@@ -128,6 +129,18 @@ Add a new Keboola project connection.
 | `--project` `<str>` | yes | Human-friendly name for this project |
 | `--url` `<str>` |  | Keboola stack URL |
 | `--token` `<str>` |  | Storage API token (also via KBC_TOKEN env var) |
+
+### `kbagent project create`
+
+Create a brand-new Keboola project -- no account, no token needed.
+
+| Option | Required | Description |
+|---|---|---|
+| `--url` `<str>` | yes | Keboola stack URL to create the project on (required -- never guessed) |
+| `--project` `<str>` |  | Local alias for the new project (default: from its name) |
+| `--name` `<str>` |  | Name for the new Keboola project |
+| `--backend` `<snowflake|bigquery>` |  | Storage backend (default: the stack's own default) |
+| `--sync-backend-init` |  | Wait for the storage backend to be initialized before answering, instead of letting the stack finish it in the background |
 
 ### `kbagent project list`
 
@@ -452,7 +465,7 @@ Show detailed information about a specific component.
 | Option | Required | Description |
 |---|---|---|
 | `--component-id` `<str>` | yes | Component ID (e.g. keboola.ex-db-snowflake) |
-| `--project` `<str>` |  | Project alias (uses first available if not set) |
+| `--project` `<str>` |  | Project alias (defaults to the pinned default project) |
 
 ### `kbagent component sync-action`
 
@@ -504,7 +517,7 @@ Show sample configuration JSON examples for a component.
 | Option | Required | Description |
 |---|---|---|
 | `--component-id` `<str>` | yes | Component ID (e.g. keboola.ex-google-drive) |
-| `--project` `<str>` |  | Project alias (uses first available if not set) |
+| `--project` `<str>` |  | Project alias (defaults to the pinned default project) |
 | `--row` |  | Show row configuration examples only |
 
 ### `kbagent config search`
@@ -1773,7 +1786,7 @@ Ask the Keboola documentation a natural language question.
 | Option | Required | Description |
 |---|---|---|
 | `question` (positional) | yes | |
-| `--project` `<str>` |  | Project alias (uses first available if not set) |
+| `--project` `<str>` |  | Project alias (defaults to the pinned default project) |
 
 ## `transformation`
 
@@ -1935,6 +1948,16 @@ Remove all schedules bound to a flow (deletes keboola.scheduler configs).
 | `--dry-run` |  | List the scheduler configs that would be removed without executing |
 | `--yes` / `-y` |  | Skip confirmation prompt |
 
+### `kbagent flow triggers`
+
+Show every trigger kbagent can see for a flow (cron + table triggers).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--flow-id` `<str>` | yes | Flow configuration ID |
+| `--branch` `<int>` |  | Dev branch ID. Narrows the CRON half only -- the Storage triggers route is production-only and has no branch-scoped variant. |
+
 ## `schedule`
 
 Discover and audit cron schedules across projects (keboola.scheduler)
@@ -2081,7 +2104,7 @@ Delete a development branch.
 
 ### `kbagent branch merge`
 
-Get the KBC UI merge URL for a development branch.
+[DEPRECATED] Get the KBC UI merge URL for a development branch.
 
 | Option | Required | Description |
 |---|---|---|
@@ -2130,6 +2153,151 @@ Delete a branch metadata entry by its numeric ID.
 | `--metadata-id` `<int>` | yes | Numeric ID of the metadata entry (from metadata-list) |
 | `--yes` / `-y` |  | Skip confirmation prompt |
 | `--branch` `<str>` |  | Branch ID or "default" for the main branch |
+
+## `merge-request`
+
+Merge requests: merge a development branch into production with review (Branches 2.0, non-SOX)
+
+### `kbagent merge-request list`
+
+List the project's merge requests, newest first.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--state` `<str>` |  | Show only merge requests in this state (client-side filter). Accepted: approved, canceled, closed, development, in_development, in_merge, in_review, merged, published, rejected |
+
+### `kbagent merge-request detail`
+
+Show one merge request: readiness, blockers, reviewers, change log, conflicts.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+| `--activity-log` |  | Include the merge request's activity log |
+
+### `kbagent merge-request conflicts`
+
+List the configurations changed on both sides (computed live by the backend).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+
+### `kbagent merge-request diff`
+
+Three-way diff of one conflicting configuration, classified per path.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+| `--component-id` `<str>` | yes | Component ID |
+| `--config-id` `<str>` | yes | Configuration ID |
+| `--format` `<str>` |  | short (long values elided) | full (print every value whole) |
+| `--output` `<path>` |  | Write the resolution candidate (your branch's content, ready to edit) to this file; hand it back with `merge-request resolve --resolved @FILE` |
+
+### `kbagent merge-request create`
+
+Open a merge request from a development branch into production.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--title` `<str>` | yes | Merge request title |
+| `--branch` `<int>` |  | Source dev branch ID (default: the active branch set via `branch use`) |
+| `--description` `<str>` |  | Description (on update: an empty string clears it) |
+| `--reviewer-id` `<int>` |  | Reviewer user ID (repeatable; ids from `project member-list`). On update the given set REPLACES the current reviewers -- it never appends |
+| `--external-id` `<str>` |  | Free-form correlation id, e.g. a ticket (max 255 chars) |
+
+### `kbagent merge-request update`
+
+Change a merge request's title, description, reviewers or external id.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+| `--title` `<str>` |  | Merge request title |
+| `--description` `<str>` |  | Description (on update: an empty string clears it) |
+| `--reviewer-id` `<int>` |  | Reviewer user ID (repeatable; ids from `project member-list`). On update the given set REPLACES the current reviewers -- it never appends |
+| `--external-id` `<str>` |  | Free-form correlation id, e.g. a ticket (max 255 chars) |
+
+### `kbagent merge-request request-review`
+
+Send the merge request for review (destructive: it moves the MR toward production).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+
+### `kbagent merge-request approve`
+
+Add your approval (destructive: the last approval is what a merge waits for).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+
+### `kbagent merge-request request-changes`
+
+Send the merge request back to development; existing approvals are removed.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+| `--reason` `<str>` |  | Why (max 1000 characters) |
+
+### `kbagent merge-request auto-merge`
+
+Arm or disarm automatic merging of this merge request (destructive).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+| `--strategy` `<str>` | yes | immediately | scheduled | none. `immediately` and `scheduled` ARM: once the merge request is approved, the backend merges it into production on its own -- no `merge` call involved. `none` disarms |
+| `--at` `<str>` |  | When to auto-merge (ISO 8601); required with --strategy scheduled |
+| `--yes` / `-y` |  | Skip confirmation prompt |
+
+### `kbagent merge-request merge`
+
+Merge the merge request into production and delete its source branch.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+| `--yes` / `-y` |  | Skip confirmation prompt |
+
+### `kbagent merge-request resolve`
+
+Resolve one conflicting configuration (destructive: it removes a merge blocker).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+| `--component-id` `<str>` | yes | Component ID |
+| `--config-id` `<str>` | yes | Configuration ID |
+| `--take` `<str>` |  | ours (keep your branch's content) | theirs (adopt production's) | delete. Mutually exclusive with --resolved |
+| `--resolved` `<str>` |  | A hand-authored resolution: JSON inline, @file, or - for stdin. Start from `merge-request diff --output FILE`; the body must carry name, description, isDisabled, configuration and rows (rebase REPLACES the whole configuration) |
+| `--change-description` `<str>` |  | Version message for the rebased configuration |
 
 ## `workspace`
 
@@ -2538,7 +2706,7 @@ Add a metric to a semantic-layer model.
 
 ### `kbagent semantic-layer add dataset`
 
-Add a dataset (FQN derived from tableId).
+Add a dataset (FQN read from the table's Storage location).
 
 | Option | Required | Description |
 |---|---|---|
@@ -2550,6 +2718,7 @@ Add a dataset (FQN derived from tableId).
 | `--grain` `<str>` |  | Grain description |
 | `--primary-key` `<str>` |  | Repeat for multi-col PK |
 | `--deep-fields` |  | Fetch storage schema and synthesise fields[] with role heuristics. |
+| `--fqn` `<str>` |  | Store this fqn verbatim instead of reading the table's warehouse location from Storage, e.g. '"DB"."out.c-bucket"."table"'. |
 
 ### `kbagent semantic-layer add relationship`
 
