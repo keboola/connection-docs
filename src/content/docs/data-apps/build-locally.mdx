@@ -8,6 +8,7 @@ redirect_from:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import Prereqs from '../../../components/Prereqs.astro';
 
 {/* 2026-09-29: "Build an app with an AI agent" (PR #1143) merged into this page after review (PRDCT-693); the old URL redirects here. Agent flow verified live on 2026-09-23 in project 264 (europe-west3) with Claude Code 2.1.280, kbagent 0.94.0 and dataapp-developer 1.6.1 from marketplace keboola-claude-kit 1.14.0 (App ID 74021867, about 11 minutes, including the Storage workaround below), and on 2026-09-25 with Codex CLI 0.157.0 (App ID 74022065). Michal Ševčík's Cursor review (2026-09-25): agent mode is the default, the route question appears, a prompt that names kbagent reads better, the password is the main friction. The example prompt was then revised to name kbagent and ask for a data check and the page link, and revised again to name the project and rule out MCP, after his run built in another project through an MCP sign-in; VERIFY(Michal Ševčík) that wording in Cursor. Claude Desktop, VS Code and the ChatGPT app screens: VERIFY the dataapp-developer install and the build flow. */}
 
@@ -20,14 +21,32 @@ There are two ways to do it:
 
 To build inside Keboola instead, [Kai](/data-apps/getting-started/) does the same from the **Create App** screen, with a live preview. For what the Python/JS stack can do (frameworks, full-stack, APIs for agents), see [What are Keboola apps](/data-apps/what-are-apps/#the-stack-pythonjs).
 
-## Before you start
+<Prereqs id="before-you-start" needs={['project']} groupLabel="Depending on how you build">
+  <li>
+    <strong>A table in Storage</strong> with the data the app should show. No data yet? Download
+    the sample <a href="/tutorial/opportunity.csv">opportunity.csv</a> and load it as in{' '}
+    <a href="/tutorial/load/#manual-data-loading">Manual Data Loading</a>, which takes a few
+    minutes and gives you the table <code>in.c-csv-import.opportunity</code>;{' '}
+    <a href="#describe-the-app">Describe the app</a> has a prompt for it. For your own data, use a{' '}
+    <a href="/components/extractors/">data source connector</a>.
+  </li>
+  <li><strong>Git,</strong> which pushes the app's code.</li>
+  <li slot="group">
+    <strong>With an AI agent:</strong> Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT
+    app, and <a href="/cli/">kbagent</a> connected to that project. Connecting kbagent asks for
+    your stack URL, the part of your project's address before `/admin`; for a free project from
+    the link above, it's `https://connection.us-east4.gcp.keboola.com`.
+    Creating the push token for the app's repository needs admin rights in the project. Using
+    another agent? See <a href="#other-agents">Other agents</a>.
+  </li>
+  <li slot="group">
+    <strong>By hand:</strong> your local development tools. From a terminal, you also need
+    kbagent, connected as above, and admin rights in the project for the push token; for your own
+    repository, a Git account where you host it.
+  </li>
+</Prereqs>
 
-- A Keboola project. No project yet? [Create a free one](https://connection.us-east4.gcp.keboola.com/wizard).
-- The data the app should show, as a table in Storage. No data yet? Download the sample [opportunity.csv](/tutorial/opportunity.csv) and load it as in [Manual Data Loading](/tutorial/load/#manual-data-loading), which takes a few minutes and gives you the table `in.c-csv-import.opportunity`; [Describe the app](#describe-the-app) has a prompt for it. For your own data, use a [data source connector](/components/extractors/).
-- Git, which pushes the app's code.
-- For the agent and the terminal: [kbagent](/cli/), connected to that project. Connecting asks for your stack URL, the part of your project's address before `/admin`; for a free project from the link above, it's `https://connection.us-east4.gcp.keboola.com`. Creating the push token for the app's repository needs admin rights in the project.
-- For the agent: Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT app. Using another agent? See [Other agents](#other-agents).
-- For building by hand: your local development tools, and for your own repository a Git account where you host it.
+{/* VERIFY(Jordan): whether the Free Plan includes apps; the "Create a free one" link in the box assumes it does. */}
 
 <span id="develop-with-an-ai-coding-tool"></span>
 
@@ -70,7 +89,7 @@ To make the app public, say so in the prompt. Anyone with its URL can then open 
   </TabItem>
   <TabItem label="Cursor">
     {/* Reviewed by Michal Ševčík, 2026-09-25: agent mode is Cursor's default; with the page's first prompt the agent asked which way to reach Keboola (kbagent or one of two MCP servers), with a prompt naming kbagent it offered an MCP sign-in and built a draft in a project on us-east4. VERIFY(Michal Ševčík): dataapp-developer under Keboola Ai Kit, and a run that stays on kbagent end to end. */}
-    1. Install kbagent and connect your project in a terminal, as in [First, in a terminal](/cli/for-agents/#first-in-a-terminal).
+    1. Install kbagent and connect your project in a terminal, as in [First, in a terminal](/cli/for-agents/#first-in-a-terminal), using [your stack URL](#before-you-start).
     2. Add the AI Kit marketplace as in [Cursor](/cli/for-agents/#cursor), with the full URL `https://github.com/keboola/ai-kit`. Under **Keboola Ai Kit**, add both `kbagent` and `dataapp-developer`.
     3. Paste the prompt from [Describe the app](#describe-the-app) into Cursor's chat. Approve the terminal commands it asks to run.
 
@@ -80,13 +99,13 @@ To make the app public, say so in the prompt. Anyone with its URL can then open 
     {/* VERIFY(Michal Ševčík): install route from cli/for-agents#vs-code, tested 2026-08-26 for kbagent only. Check: (1) whether the picker offers dataapp-developer and takes one plugin per run, (2) whether agent mode has to be switched on and how the approval prompt for terminal commands looks, (3) which Copilot plan the flow needs, (4) the prompt below, end to end. */}
     VS Code runs the agent through GitHub Copilot, so you need the Copilot extension with agent mode.
 
-    1. Install kbagent and connect your project in a terminal, as in [First, in a terminal](/cli/for-agents/#first-in-a-terminal).
+    1. Install kbagent and connect your project in a terminal, as in [First, in a terminal](/cli/for-agents/#first-in-a-terminal), using [your stack URL](#before-you-start).
     2. Install the plugins from source as in [VS Code](/cli/for-agents/#vs-code): run **Chat: Install Plugin from Source**, paste `https://github.com/keboola/ai-kit`, confirm the Trust prompt, and pick `kbagent`. Do the same for `dataapp-developer`.
     3. Open the Chat view (`⌃⌘I`, or `Ctrl+Alt+I` on Windows), switch to agent mode, and paste the prompt from [Describe the app](#describe-the-app). Approve the terminal commands it asks to run.
   </TabItem>
   <TabItem label="ChatGPT app">
     {/* VERIFY(Michal Ševčík): install route from cli/for-agents#chatgpt-app, tested 2026-08-26 for kbagent only. Check: (1) the app's name and version (ChatGPT or Codex), (2) the Personal tab lists dataapp-developer, (3) the prompt below, end to end. `codex plugin add` needs a current Codex CLI; the one bundled in Codex.app 0.131.0-alpha.9 has only `codex plugin marketplace`. The three shell commands were run on Codex CLI 0.157.0 on 2026-09-25 (kbagent 0.94.0, dataapp-developer 1.6.3 installed), and `codex exec` with the page's prompt stayed on kbagent end to end (App ID 74022065, running with its data, URL and page link returned). */}
-    1. Install kbagent and connect your project in a terminal, as in [First, in a terminal](/cli/for-agents/#first-in-a-terminal).
+    1. Install kbagent and connect your project in a terminal, as in [First, in a terminal](/cli/for-agents/#first-in-a-terminal), using [your stack URL](#before-you-start).
     2. Turn on **Developer mode** and add the marketplace as in [ChatGPT app](/cli/for-agents/#chatgpt-app), then install `kbagent` and `dataapp-developer` from the **Personal** tab. From a shell, that's:
 
        ```bash
@@ -209,7 +228,7 @@ The repository also needs a small `keboola-config/` folder that tells Keboola ho
 
 kbagent creates the app with a Keboola-managed repository, and you push your code there.
 
-1. [Install kbagent](/cli/getting-started/) and [connect your project](/cli/getting-started/#step-2--connect-your-project). Then `kbagent project list` shows three values you need: your project's name in kbagent (**Alias**, `<alias>` below), its **Project ID** (`<project-id>`) and its **Stack URL** (`<Keboola URL>`).
+1. [Install kbagent](/cli/getting-started/) and [connect your project](/cli/getting-started/#step-2--connect-your-project) with [your stack URL](#before-you-start). Then `kbagent project list` shows three values you need: your project's name in kbagent (**Alias**, `<alias>` below), its **Project ID** (`<project-id>`) and its **Stack URL** (`<Keboola URL>`).
 2. Create the app. It prints the **App ID** (`<id>` below) and the **Config ID** (`<config-id>`), and doesn't deploy yet, because the new repository is empty:
 
    ```bash

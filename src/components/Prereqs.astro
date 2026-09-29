@@ -1,0 +1,86 @@
+---
+// The prerequisites box, rendered from one place on every page that has one.
+//
+// Hand-written prerequisite lists drift within a release cycle — Cloudflare
+// renders its prerequisites partial 4,087 times across 1,966 pages for exactly
+// this reason. At our scale one component does, but the principle is the same:
+// change the wording in prereqs.mjs, not on eleven pages.
+//
+// Up to three lists under the "Before you start" label:
+//   "You need": the shared items named by `needs`, then anything page-specific
+//     passed as <li> children in the default slot.
+//   a second list under the page's own `groupLabel`, for a page with two ways
+//     through it; its items are <li slot="group"> children.
+//   "Depending on the tab you use": one line per tab, from `tabs`. A tab whose
+//     default line is wrong for this page gets its own, as a named slot:
+//     <span slot="prompt|ui|cli">…</span>. The label ("UI tab:") stays here.
+// The wording lives in ./prereqs.mjs so the markdown twin (page-markdown.mjs)
+// renders the same lists.
+//
+// Usage:  <Prereqs needs={['project']} tabs={3} />
+//         <Prereqs needs={['project', 'google']} tabs={2}>
+//           <li><strong>The table <code>x</code></strong> from the previous page.</li>
+//         </Prereqs>
+//         <Prereqs id="before-you-start" needs={['project']} groupLabel="Depending on how you build">
+//           <li><strong>Git,</strong> which pushes the app's code.</li>
+//           <li slot="group"><strong>With an AI agent:</strong> …</li>
+//         </Prereqs>
+//         <Prereqs needs={[]}>  (only the page's own items)
+//
+// Keep the opening tag on one line: the markdown twin reads its props line by line.
+
+import { LABELS, SHARED, TABS } from './prereqs.mjs';
+
+interface Props {
+  /** Shared "You need" items, in the order they should appear. */
+  needs?: Array<'project' | 'google' | 'kai'>;
+  /** How many tabs the page offers: 3 (Prompt, UI, CLI / API), 2 (Prompt, UI) or 0. */
+  tabs?: 0 | 2 | 3;
+  /** Anchor for the box when the page links to it. Leave it out on a page with several boxes. */
+  id?: string;
+  /**
+   * Label of the second list, whose items are the <li slot="group"> children.
+   * Not called `group`: in MDX a named slot arrives as a prop of the same name
+   * (astro/jsx-runtime transformSlots) and would overwrite it.
+   */
+  groupLabel?: string;
+}
+
+const { needs = ['project'], tabs = 0, id, groupLabel } = Astro.props;
+
+const items = needs.filter((k) => SHARED[k]);
+const hasGroup = Boolean(groupLabel) && Astro.slots.has('group');
+const tabLines = [];
+for (const t of TABS.slice(0, tabs)) {
+  const own = Astro.slots.has(t.key) ? await Astro.slots.render(t.key) : null;
+  // MDX wraps a slot's multi-line text in <p>, which breaks the line after the label
+  tabLines.push({ label: t.label, html: own ? own.replace(/<\/?p>/g, '') : t.html });
+}
+---
+
+<div class="prereqs" id={id}>
+  <p class="prereqs__label">{LABELS.box}</p>
+  <p class="prereqs__group">{LABELS.needs}</p>
+  <ul class="prereqs__list">
+    {items.map((key) => <li set:html={SHARED[key]} />)}
+    <slot />
+  </ul>
+  {hasGroup && (
+    <Fragment>
+      <p class="prereqs__group">{groupLabel}</p>
+      <ul class="prereqs__list">
+        <slot name="group" />
+      </ul>
+    </Fragment>
+  )}
+  {tabLines.length > 0 && (
+    <Fragment>
+      <p class="prereqs__group">{LABELS.tabs}</p>
+      <ul class="prereqs__list">
+        {tabLines.map((t) => (
+          <li><strong>{t.label}:</strong> <Fragment set:html={t.html} /></li>
+        ))}
+      </ul>
+    </Fragment>
+  )}
+</div>

@@ -21,6 +21,7 @@ redirect_from:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import Prereqs from '../../../components/Prereqs.astro';
 
 Once an app is deployed, its URL is publicly available. Protect it so only the right people can open it, and choose the method that fits your audience. You set it in the app's configuration under **Authentication → Authentication Type**, which offers six options.
 
@@ -80,7 +81,20 @@ Pick your provider:
   <TabItem label="Google Cloud">
     Let people sign in with their Google account.
 
-    **Before you start.** The OAuth client lives in a Google Cloud project, not in the Google Workspace admin console, so you need a project where you can manage the consent screen and OAuth clients: the **Owner** role, or the **OAuth Config Editor** role. Decide who should get in, too. With the sign-in scopes Keboola requests (`openid`, `email`, `profile`), an **Internal** audience limits sign-in to your Google Workspace organization (the project must belong to that organization), and an **External** audience lets in anyone with a Google account.
+    <Prereqs needs={[]}>
+      <li>
+        <strong>A Google Cloud project</strong> where you can manage the consent screen and OAuth
+        clients: the <strong>Owner</strong> role, or the <strong>OAuth Config Editor</strong> role.
+        The OAuth client lives in the Google Cloud project, not in the Google Workspace admin console.
+      </li>
+      <li>
+        <strong>A decision on who should get in.</strong> With the sign-in scopes Keboola requests
+        (<code>openid</code>, <code>email</code>, <code>profile</code>), an <strong>Internal</strong>{' '}
+        audience limits sign-in to your Google Workspace organization (the project must belong to
+        that organization), and an <strong>External</strong> audience lets in anyone with a Google
+        account.
+      </li>
+    </Prereqs>
 
     **Set up the consent screen.** Google keeps it under **Google Auth Platform**; open it directly at [console.cloud.google.com/auth/overview](https://console.cloud.google.com/auth/overview) and pick your project.
 
@@ -116,7 +130,16 @@ Pick your provider:
   <TabItem label="Microsoft Entra ID">
     Let people sign in with their Microsoft work account.
 
-    **Before you start** — you need permission to register applications in your tenant; the **Application Developer** role is enough for the registration itself. Restricting who can sign in needs **Cloud Application Administrator**, **Application Administrator**, or ownership of the app's service principal.
+    <Prereqs needs={[]}>
+      <li>
+        <strong>Permission to register applications</strong> in your tenant. The{' '}
+        <strong>Application Developer</strong> role is enough for the registration itself.
+      </li>
+      <li>
+        <strong>The Cloud Application Administrator or Application Administrator role</strong>, or
+        ownership of the app's service principal, if you want to restrict who can sign in.
+      </li>
+    </Prereqs>
 
     **Register the app:**
 
@@ -148,7 +171,12 @@ Pick your provider:
   <TabItem label="Okta">
     Let people sign in with their Okta account.
 
-    **Before you start** — you need admin access to your Okta org (the **Application Administrator** or **Super Administrator** role) to create app integrations.
+    <Prereqs needs={[]}>
+      <li>
+        <strong>Admin access to your Okta org</strong> (the <strong>Application Administrator</strong>{' '}
+        or <strong>Super Administrator</strong> role), to create app integrations.
+      </li>
+    </Prereqs>
 
     **Create the app integration:**
 
@@ -174,7 +202,9 @@ Pick your provider:
   <TabItem label="Auth0">
     Let people sign in through Auth0, with whatever connections your tenant offers: username and password, social logins, or enterprise identity providers.
 
-    **Before you start** — you need the **Admin** role on your Auth0 tenant; the Editor roles can't create applications.
+    <Prereqs needs={[]}>
+      <li><strong>The Admin role</strong> on your Auth0 tenant; the Editor roles can't create applications.</li>
+    </Prereqs>
 
     **Register the application:**
 
@@ -190,7 +220,7 @@ Pick your provider:
 
     **If sign-in fails:**
 
-    - "Callback URL Mismatch" on an Auth0 error page, with a line reading "{URL} is not in the list of allowed callback URLs" — the URL in **Allowed Callback URLs** differs from the app's callback URL. Fix it under **Settings → Application URIs**.
+    - "Callback URL Mismatch" on an Auth0 error page, with a line reading "`{URL}` is not in the list of allowed callback URLs" — the URL in **Allowed Callback URLs** differs from the app's callback URL. Fix it under **Settings → Application URIs**.
     - Issuer mismatch or discovery error when the app starts the sign-in — the **Issuer URL** must match the `issuer` in Auth0's discovery document character for character: `https://`, your Auth0 domain, trailing slash.
     - Users of one connection can't sign in — that connection isn't enabled for this application. Turn it on under the application's **Connections** tab.
     *Checked against Auth0's documentation on 2026-09-23. Not yet walked through a live tenant, so check the menu names as you go.*

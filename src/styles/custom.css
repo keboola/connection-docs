@@ -2388,6 +2388,40 @@ nav.sidebar {
   color: var(--sl-color-gray-3);
 }
 
+/* ───────── Prerequisites box (src/components/Prereqs.astro) ───────── */
+/* "Before you start", then "You need" and up to two more lists. One component
+   renders every prerequisites block on the site, so the look cannot drift from
+   page to page. Spacing as tuned on the Getting Started branch (PR #1144). */
+.prereqs {
+  margin: 0 0 1.5rem;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-gray-7, var(--sl-color-gray-6));
+}
+.prereqs__label {
+  margin: 0 0 0.4rem;
+  font-size: var(--sl-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sl-color-gray-2);
+}
+.prereqs__list {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+.prereqs__list > li + li { margin-top: 0.3rem; }
+/* MDX wraps a multi-line <li> in <p>; without this those items sit further apart than the rest */
+.prereqs__list > li > p { margin: 0; }
+.prereqs__group {
+  margin: 0.7rem 0 0.25rem;
+  font-size: var(--sl-text-sm);
+  font-weight: 600;
+  color: var(--sl-color-white);
+}
+.prereqs__label + .prereqs__group { margin-top: 0; }
+
 /* ───────── Print ───────── */
 /* print.css ships `.print\:hidden { display: none }` inside @media print, but
    Page.css loads after it, so any rule in THIS file that sets `display` on a
