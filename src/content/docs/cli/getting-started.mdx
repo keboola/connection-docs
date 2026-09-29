@@ -137,13 +137,13 @@ You sign in once per machine. Every tool reads the same local config, so a proje
 
 ### When you need a token
 
-CI, containers, cron, and anything else running unattended need a Storage API token, because `auth login` cannot run there. A few features need a static token rather than a browser session too: Kai, data apps, the semantic layer, streams, and the Python SDK.
+CI, containers, cron, and anything else running unattended need a Storage API token, because `auth login` cannot run there. Kai and the Python SDK still need a static token rather than a browser session. Since kbagent 0.94.0, a browser session covers data apps and streams too.
 
 **These docs cannot create a token for you.** Open your project in the Keboola UI and go to **Settings → Developer settings → Agentic CLI**. That page builds the exact `kbagent project add` command for your project and your stack, and it can include a read-only token in it. Copy it from there.
 
 If you don't see **Agentic CLI** in your project's settings, create the token yourself under **Settings → API Tokens** and pass it as `--token`. [API tokens](/management/project/tokens/) covers that screen.
 
-{/* Step 2's static-token half mirrors the Agentic CLI surface in the product UI (Settings → Developer settings → Agentic CLI): the same `kbagent project add --project <name> --url <stack>` and the read-only token that page can put into the command. That page is feature-flagged, hence the API Tokens fallback. Browser-login half (`auth login` + `auth register-projects`, `--all`, the device-code path, the `Auth` column, no headless path) and the static-token-only features (Kai, data apps, semantic layer, streams, Python SDK) from keboola/cli docs/auth.md on main. */}
+{/* Step 2's static-token half mirrors the Agentic CLI surface in the product UI (Settings → Developer settings → Agentic CLI): the same `kbagent project add --project <name> --url <stack>` and the read-only token that page can put into the command. That page is feature-flagged, hence the API Tokens fallback. Browser-login half (`auth login` + `auth register-projects`, `--all`, the device-code path, the `Auth` column, no headless path) and the static-token-only features from keboola/cli docs/auth.md on main; narrowed to Kai and the Python SDK (plus one semantic-layer command) by the v0.94.0 release notes, keboola/cli#759. */}
 
 A Storage API token is enough for browsing. Some commands need an admin (master) token, e.g. creating branches or workspaces needs admin privileges. Token types and scoping options are covered in [API tokens](/management/project/tokens/).
 

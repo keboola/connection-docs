@@ -17,8 +17,10 @@ Apps go well beyond dashboards — the same steps produce internal tools, data n
 - At least one table in **Storage** — Kai reads your data directly, so it works with whatever you already have.
 - A few minutes.
 
-:::tip[Get your agent started right away]
-Building with Claude Code, Cursor, or Copilot? Grab the skill and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace. The download is the complete skill folder: the skill itself, ready-made app templates (Python, Node.js, full-stack, Streamlit), and reference guides your agent can draw on.
+:::tip[Building with an AI agent?]
+[Build an app with an AI agent](/data-apps/build-with-an-agent/) sets up Claude Code or Claude Desktop with Keboola's plugins and walks through one prompt to a deployed app. To add the skill to an agent by hand, the download is a copy of the skill folder: the skill itself, ready-made app templates (Python, Node.js, full-stack, Streamlit), and reference guides your agent can draw on.
+
+<!-- VERIFY(Michal Ševčík): the zip is a 2026-07-09 snapshot of the skill and lacks references/python-js-prod-and-drafts.md from dataapp-developer 1.6.1. Refresh it or link to keboola/ai-kit instead. -->
 
 <a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.zip" download="keboola-dataapp-development-skill.zip">⬇ Download the app-building skill (with templates)</a>
 :::

@@ -10,8 +10,10 @@ Build an app in your own environment when you want full control over the code, y
 
 For what the Python/JS stack can do (frameworks, full-stack, APIs for agents), see [What are Keboola apps](/data-apps/what-are-apps/#the-stack-pythonjs).
 
-:::tip[Get your agent started right away]
-Building with Claude Code, Cursor, or Copilot? Grab the skill and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace. The download is the complete skill folder: the skill itself, ready-made app templates (Python, Node.js, full-stack, Streamlit), and reference guides your agent can draw on.
+:::tip[Building with an AI agent?]
+[Build an app with an AI agent](/data-apps/build-with-an-agent/) sets up Claude Code or Claude Desktop with Keboola's plugins and walks through one prompt to a deployed app. To add the skill to an agent by hand, the download is a copy of the skill folder: the skill itself, ready-made app templates (Python, Node.js, full-stack, Streamlit), and reference guides your agent can draw on.
+
+<!-- VERIFY(Michal Ševčík): the zip is a 2026-07-09 snapshot of the skill and lacks references/python-js-prod-and-drafts.md from dataapp-developer 1.6.1. Refresh it or link to keboola/ai-kit instead. -->
 
 <a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.zip" download="keboola-dataapp-development-skill.zip">⬇ Download the app-building skill (with templates)</a>
 :::
@@ -45,14 +47,9 @@ app.get("/api/rows", async (req, res) => {
 
 ## Develop with an AI coding tool
 
-You can build the app with an AI coding assistant (Claude Code, Cursor, or Copilot). When you create a Python/JS app, Keboola offers a ready-made **skill file** — **Download Skill** or **View on GitHub** — that teaches your assistant the correct app structure, deployment config, and Keboola APIs, so you get working code with fewer errors. The app's **Overview** also links it as **AI Skill for Building**.
+To have an AI agent write the code, create the app and deploy it, follow [Build an app with an AI agent](/data-apps/build-with-an-agent/). It covers the plugin install for Claude Code and Claude Desktop, what to put in the prompt, and the `kbagent` commands the agent runs.
 
-The full skill folder — the skill plus app templates and reference guides — is also [browsable on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/dataapp-developer/skills/dataapp-development). For the full toolkit — including the **Data App Developer plugin** with its validate → build → verify workflow — install [AI Kit](/ai/ai-kit/) in your assistant:
-
-```bash
-/plugin marketplace add keboola/ai-kit
-/plugin install dataapp-developer
-```
+When you create a Python/JS app, Keboola also offers the skill as a file, **Download Skill** or **View on GitHub**, and the app's **Overview** links it as **AI Skill for Building**. The full skill folder, with app templates and reference guides, is [on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/dataapp-developer/skills/dataapp-development).
 
 ![The Create Python / JS App dialog, with a "Build Apps faster with AI" panel offering Download Skill and View on GitHub](/data-apps/python-js-ai-skill.png)
 

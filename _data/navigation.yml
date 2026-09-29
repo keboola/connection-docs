@@ -121,6 +121,8 @@ items:
             title: With Kai
           - url: /data-apps/build-locally/
             title: Locally
+          - url: /data-apps/build-with-an-agent/
+            title: With an AI agent
       - title: Run & share
         items:
           - url: /data-apps/authentication/
