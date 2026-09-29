@@ -68,6 +68,6 @@ specification and leaves quite some freedom for implementation. Also, there are 
 OAuth — 1.0 and 2.0. They are completely incompatible (both the authentication steps and the exchanged fields differ).
 Generic Extractor supports both [OAuth 1.0](/components/extractors/generic-extractor/configuration/api/authentication/oauth10/)
 and  [OAuth 2.0](/components/extractors/generic-extractor/configuration/api/authentication/oauth20/). If you are developing a new component using Generic Extractor
-[templates](/components/extractors/generic-extractor/publish/#submission) and want to use and test OAuth authentication,
+[templates](/components/extractors/generic-extractor/publish/#publishing) and want to use and test OAuth authentication,
 [inject the necessary credentials](/extend/common-interface/oauth/#credentials-injection) simply by passing them
 in the configuration's `authorization` property.

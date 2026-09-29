@@ -32,10 +32,9 @@ Model Context Protocol server integration for seamless communication between AI 
 Describe your data in business terms — datasets, metrics, relationships, glossary terms, and business rules — so AI assistants understand what your data means, not just how it is stored.
 [Learn more about the Semantic Layer →](/ai/semantic-layer/)
 
-### Machine-Readable API Index
+### Machine-readable API index
 
-Every Keboola stack publishes a machine-readable index of its APIs at `https://api.<stack>/apis.json` (for example, [`https://api.keboola.com/apis.json`](https://api.keboola.com/apis.json)). The index lists each service with its base `apiUrl` and a link to its OpenAPI specification (`openApiSpecUrl`) — a convenient overview for agentic usage: AI agents, MCP servers, and other tooling that discovers Keboola's APIs programmatically.
-[View the API index →](https://api.keboola.com/apis.json)
+Each stack publishes its API index at `https://api.<stack>/apis.json`; what it contains and how to use it is described under [APIs](/overview/api/).
 
 ### AI Component Suggestions
 

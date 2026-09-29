@@ -43,7 +43,7 @@ Apart from the properties listed below, the `config` section can contain any num
 other properties which are not used by Generic Extractor itself, but may be referenced
 from within [functions](/components/extractors/generic-extractor/functions/).
 
-The keys prefixed by the hash character `#` are [automatically encrypted](/overview/encryption/) when the
+The keys prefixed by the hash character `#` are [automatically encrypted](/extend/encryption/) when the
 configuration is saved. It is advisable to store sensitive information in such fields. Note, however, they
 are not automatic aliases to un-encrypted fields. That means that when using a `#password` field, you
 must always refer to it as `#password` (for instance, in [functions](/components/extractors/generic-extractor/functions)).
@@ -61,7 +61,7 @@ the extractor is [published](/components/extractors/generic-extractor/publish/) 
 [Default Bucket](/extend/common-interface/folders/#default-bucket) option.
 
 The following configuration will make Generic Extractor put all extracted tables in the `ge-tutorial` bucket
-(the names of the tables are defined by the [`dataType`](/components/extractors/generic-extractor/configuration/config/jobs/#dataType) setting):
+(the names of the tables are defined by the [`dataType`](/components/extractors/generic-extractor/configuration/config/jobs/#data-type) setting):
 
 ```json
 {
