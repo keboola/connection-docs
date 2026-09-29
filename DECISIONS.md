@@ -1276,11 +1276,19 @@ is (Jordan: "explain Kai upfront"); step 3 says "you approve each change", which
 works already states; the app on the last slide is the draft preview.
 
 **Made with** `explainer.html` in the docs-clip rig, recorded through `record-composite.mjs --page`:
-29.6 s, 396 KB, luma mean 227, never under 226; captions 17.5 and 13.75 px on the page; every step
+29.6 s, 394 KB, luma mean 227, never under 225; captions 17.5 and 13.75 px on the page; every step
 and closing phrase up at least 3 s; the clip fades to its empty first frame, so the loop is seamless;
-poster 91 KB. The checker and the fact-checker read the first cut: the prompt in quotes had never
+poster 99.5 KB. The checker and the fact-checker read the first cut: the prompt in quotes had never
 run, Kai was never introduced, the closing phrases were up 2.3 s, and the grid card faded over
-Brno's row; all four are fixed. The screenshot clip's structure was already under VERIFY(Jordan)
+Brno's row; all four are fixed. The checker's second pass found step 2 typing itself out, which
+shifted centred text while it was being read, so it now appears whole. The guide-tester found step
+2 naming "the most stretched café" before the hub introduces the cafés, and the screen calling the
+app ready where the aria-label said draft; step 2 now asks which café will be short-handed next
+week, the hub's own question, and step 4 and the aria-label both say draft. It also suggested the
+course table's order (Kai transforms, then the question) and a fifth dot for the schedule. Declined:
+Nikita gave four steps in this order, and the schedule is the third closing phrase. The final
+checker pass is PASS; its one open minor is Brno's row, which still meets the card edge without its
+weather line (MISSING). The screenshot clip's structure was already under VERIFY(Jordan)
 (three acts, poster); this is a third structure, so the flag stands and Jordan sees it in the PR.
 
 ---
