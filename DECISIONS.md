@@ -1265,17 +1265,23 @@ beside "Want an answer from your data? / a data app? / a pipeline that reruns ev
 through the guide and try it yourself." Poster: the whole line with its four captions, so the page
 explains Keboola before the clip plays.
 
-**What the clip does not say, and why.** Not "in five seconds": a question takes Kai 22 s to 1.5 min,
-an app draft 5 to 6 min, the pipeline in one go about 14 min with a dozen approvals. It says "one
-prompt" instead. Not that the same prompt builds the app: the verified one-prompt block on `ask/`
-loads, joins and answers, and the app is a separate one-paragraph description, which is what step 4
-says. Not "interactive": the example grid has no filters. Step 3 says "you approve each change",
-which How every page works already states.
+**What the clip does not say, and why.** Not "in five seconds": a question takes Kai 22 s from the
+terminal and 1.3 to 1.6 min in the chat, an app draft 5 to 6 min, and load, forecast, transform and
+question as four prompts in one chat took 14.4 min with 12 approvals. It says "one prompt"
+instead, and describes the one-prompt block on `ask/` without quoting it, because that block ran
+end to end only on the earlier dataset and its current wording has not been rerun. Not that the
+same prompt builds the app: the block loads, joins and answers, and the app is a paragraph you write,
+which is what step 4 says. Not "interactive": the example grid has no filters. Step 2 says what Kai
+is (Jordan: "explain Kai upfront"); step 3 says "you approve each change", which How every page
+works already states; the app on the last slide is the draft preview.
 
 **Made with** `explainer.html` in the docs-clip rig, recorded through `record-composite.mjs --page`:
-27.1 s, 389 KB, luma mean 227, never under 226; captions 17.5 and 13.75 px on the page; poster 85 KB.
-The screenshot clip's structure was already under VERIFY(Jordan) (three acts, poster); this is a
-third structure, so the flag stands and Jordan sees it in the PR.
+29.6 s, 396 KB, luma mean 227, never under 226; captions 17.5 and 13.75 px on the page; every step
+and closing phrase up at least 3 s; the clip fades to its empty first frame, so the loop is seamless;
+poster 91 KB. The checker and the fact-checker read the first cut: the prompt in quotes had never
+run, Kai was never introduced, the closing phrases were up 2.3 s, and the grid card faded over
+Brno's row; all four are fixed. The screenshot clip's structure was already under VERIFY(Jordan)
+(three acts, poster); this is a third structure, so the flag stands and Jordan sees it in the PR.
 
 ---
 
