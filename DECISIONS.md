@@ -1250,6 +1250,33 @@ holds only the red figures, and the poster is Kai's one-line answer instead of t
 27.1 s, 579 KB, luma mean 223, minimum 221; poster 132 KB, luma 220. The poster change is a second
 reason to show Jordan the VERIFY above.
 
+## 2026-09-29 — The hub clip explains Keboola as a line of four dots
+
+**Asked by:** Nikita, 29 Sep: on the first page, show quickly how Keboola works, with the data
+already loaded, and that analysis is a prompt away; show the pipeline in words or signs rather than
+screenshots, one step at a time, then the finished app and a question ("Want [analysis / an app /
+…]? Go through the guide and try it yourself"). He then asked for the pipeline as a line that draws
+itself, a new dot per step with a caption saying what it does.
+
+**Decision.** `hub-explainer.mp4` replaces the screenshot clip. Slide one: a line draws left to
+right; four numbered dots appear in turn with "Load your data", "Ask Kai", "Kai builds it" and "The
+app is ready", each with one line saying what it does. Slide two: the finished app (the draft grid)
+beside "Want an answer from your data? / a data app? / a pipeline that reruns every morning? Go
+through the guide and try it yourself." Poster: the whole line with its four captions, so the page
+explains Keboola before the clip plays.
+
+**What the clip does not say, and why.** Not "in five seconds": a question takes Kai 22 s to 1.5 min,
+an app draft 5 to 6 min, the pipeline in one go about 14 min with a dozen approvals. It says "one
+prompt" instead. Not that the same prompt builds the app: the verified one-prompt block on `ask/`
+loads, joins and answers, and the app is a separate one-paragraph description, which is what step 4
+says. Not "interactive": the example grid has no filters. Step 3 says "you approve each change",
+which How every page works already states.
+
+**Made with** `explainer.html` in the docs-clip rig, recorded through `record-composite.mjs --page`:
+27.1 s, 389 KB, luma mean 227, never under 226; captions 17.5 and 13.75 px on the page; poster 85 KB.
+The screenshot clip's structure was already under VERIFY(Jordan) (three acts, poster); this is a
+third structure, so the flag stands and Jordan sees it in the PR.
+
 ---
 
 ## Open — carried as VERIFY(owner) flags in the pages

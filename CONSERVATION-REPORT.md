@@ -138,3 +138,9 @@ sentence was retired; the rest moved or became items in the new lists:
   `load/database` and `transform/workspace` are replaced by the shared tab lines.
 - The hub's sentence "Everything here can be done in the browser… A free project is enough to
   begin." is replaced by the box, which points at "How every page works" for the tab needs.
+
+`public/getting-started/hub-demo.mp4` and `hub-demo-poster.png` were **removed 2026-09-29**,
+replaced on the hub by `hub-explainer.mp4` and its poster. The screenshots of Kai's two answers and
+of the Apps list lived only in that clip and go with it; Kai's answers are still on `ask/`, in text
+and in its own clip. `app/grid-preview.png` stays and is reused on the explainer's last slide. No
+page text changed.
