@@ -76,7 +76,11 @@ When you're happy with the draft, click **Publish to Production**. Kai merges th
 
 ![The published app: the configuration page showing Active status, next to Kai's final message with the App URL, the generated password, and an Open App button](/data-apps/getting-started-deployed.png)
 
-By default the app is protected with **Basic (Password)** authentication — the generated password also sits on the app's configuration page, ready to copy. To change who can access it (public, a password, SSO, GitHub, and more), see [Authentication](/data-apps/authentication/).
+By default the app is protected with **Basic (Password)** authentication. The generated password is also on the app's configuration page: click **Open App** in the page header and copy it from the dialog.
+
+{/* The Open App dialog (App address, Password, each with a copy button) was seen on 2026-09-29 on a running app built with kbagent (project 264, App ID 74021867). VERIFY(Nikita): the same on apps Kai built or created in the UI. */}
+
+To change who can access it (public, a password, SSO, GitHub, and more), see [Authentication](/data-apps/authentication/).
 
 Open the URL, enter the password, and your app is live — running on your governed data, served from its own address:
 
@@ -114,7 +118,7 @@ Prefer to set the app up yourself, without the chat? Manual creation lives on th
 
 ![The deploy/redeploy wizard: backend version, backend size and inactivity timeout](/data-apps/deploy-timeout-backedsize.png)
 
-7. When the status turns **Active**, click **Open App** to open it at its public URL. Use **Redeploy** to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
+7. When the status turns **Active**, click **Open App**. For an app behind a password, copy the password from the dialog, then click **Open app** in it to open the app at its public URL. Use **Redeploy** to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
 
 From here on, the app is something you run rather than something you build: [Operate and update an app](/data-apps/operate/) covers shipping changes, secrets, sleeping and versions.
 

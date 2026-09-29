@@ -105,9 +105,9 @@ function prereqsTabsToText(tag, overrides = {}) {
  * otherwise turn ordinary prose into an indented code block.
  *
  * Components are matched on an uppercase initial, the JSX convention, so
- * lowercase HTML written inline in a page is left alone. Two of them carry
+ * lowercase HTML written inline in a page is left alone. Three of them carry
  * meaning a reader needs and are rendered rather than dropped: a tab's
- * `label`, and <Prereqs>.
+ * `label`, <Prereqs>, and <StageStrip>, which prints as a numbered list.
  */
 function stripMdx(body) {
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
@@ -122,6 +122,8 @@ function stripMdx(body) {
   const close = /^\s*<\/[A-Z][A-Za-z0-9]*\s*>\s*$/;
 
   let depth = 0;
+  let inStrip = false;
+  let stripN = 0;
   let inPrereqs = false;
   let prereqsTag = '';
   let prereqsTabs = {};
@@ -136,6 +138,7 @@ function stripMdx(body) {
     }
     if (close.test(line)) {
       depth = Math.max(0, depth - 1);
+      if (/^\s*<\/StageStrip>/.test(line)) { inStrip = false; out.push(''); }
       if (/^\s*<\/Prereqs>/.test(line)) {
         out.push(...prereqsGroupToText(prereqsTag, groupItems), ...prereqsTabsToText(prereqsTag, prereqsTabs));
         inPrereqs = false;
@@ -153,6 +156,7 @@ function stripMdx(body) {
       // <Prereqs needs={…}> with page-specific <li> children in its slots: the
       // shared lines go in first, the children follow as the lists they are.
       if (/^\s*<Prereqs\b/.test(line)) { out.push(...prereqsToText(line)); inPrereqs = true; prereqsTag = line; }
+      if (/^\s*<StageStrip\b/.test(line)) { inStrip = true; stripN = 0; }
       depth += 1;
       continue;
     }
@@ -160,6 +164,16 @@ function stripMdx(body) {
     let text = line;
     for (let i = 0; i < depth && text.startsWith(INDENT); i += 1) {
       text = text.slice(INDENT.length);
+    }
+    if (inStrip) {
+      // one <li> per stage: flatten it, number it, and end the bold title with a period
+      slot.push(text);
+      if (/<\/li>/.test(text)) {
+        const item = inlineToMarkdown(slot.join(' ')).replace(/^- /, '');
+        slot.length = 0;
+        if (item) out.push(`${++stripN}. ${item.replace(/^\*\*(.+?)\*\*\s*/, '**$1.** ')}`);
+      }
+      continue;
     }
     if (inPrereqs) {
       // the slots hold raw <li> JSX, or a tab's own line as <span slot="…">;

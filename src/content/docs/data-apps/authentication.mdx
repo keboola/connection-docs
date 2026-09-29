@@ -30,7 +30,7 @@ Once an app is deployed, its URL is publicly available. Protect it so only the r
 ## Authentication methods
 
 - **None (Public Access)** — the app is public to anyone with the URL. You can still add your own authorization inside the app; for Streamlit, use the [Streamlit authenticator](https://github.com/mkhorasani/Streamlit-Authenticator) ([example](https://github.com/keboola/mkt-bi-ocr/blob/master/Select_Invoices.py)).
-- **Basic (Password)** — the **default** for new apps. Keboola generates a shared password; users enter it before the app opens. Once the app is deployed, the password is shown on the app's configuration page next to **Open App**, ready to copy — and when Kai builds an app, it shows the password as the last step.
+- **Basic (Password)** — the **default** for new apps. Keboola generates a shared password; users enter it before the app opens. Once the app is deployed, click **Open App** on its configuration page: the dialog has the app's address and the password, each with a copy button. When Kai builds an app, it shows the password as the last step.
 - **OIDC (Custom)** — users sign in with your identity provider (Google, Microsoft Entra ID, Okta, Auth0, or any other OIDC provider). Recommended for anything beyond a quick share.
 - **GitHub** — restrict access with GitHub OAuth by organization, team, repository, or allowed users.
 - **GitLab** — restrict access with GitLab OAuth by groups, projects, or roles.
