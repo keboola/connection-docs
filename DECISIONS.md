@@ -1293,6 +1293,122 @@ weather line (MISSING). The screenshot clip's structure was already under VERIFY
 
 ---
 
+## 2026-09-29 — Getting Started loses 43% of its words to cards, strips and folds
+
+**Asked by:** David Esner, Slack, 29 Sep, on the #1144 preview: too wordy, "strašně moc textu",
+nobody has the attention span; he likes the prompts and the Prompt · UI · CLI split and would
+release it after one more pass with "co nejméně textu, co nejvíc krátkých odrážek". His screenshot
+was load/: the Before you start box, the three PathIntro paragraphs under it, then the sample data.
+Nikita agreed and asked for pictures, screens, icons and diagrams instead of text, and questioned
+the hub's "about 80 minutes".
+
+**Decision.** A form pass on the hub and the seven steps; facts, prompts, clicks and commands stay.
+
+- A course line (`CourseLine.astro`, `course.mjs`): seven numbered dots, the hub clip's picture.
+  Vertical on the hub, where it replaces the four-column steps table; a bar at the top of each step.
+  PageMeta carried no step numbers since 2026-09-02 because numbering breaks when a page moves;
+  the order now lives in one list, so a move is one edit and the numbers follow it.
+- "Where you are → When you finish" is the first row of the Before you start box (`from`/`to`
+  slots), two cards with an arrow; the hub keeps its own strip (`FromTo.astro`) in its 23.09 place.
+- PathIntro went from three paragraphs (179 words on every task page) to two lines. The approvals,
+  tool permissions and plan mode paragraph moved to the hub, "Approvals and plan mode", which every
+  page links. The twin keeps the full "alternatives, not steps; do one of them" wording.
+- Diagrams: load/'s sample tables are cards (`SampleData.astro`, counts in `sample.mjs`); the
+  connector, the mapping model, the four parts of the query, a data app and the flow's phases are
+  strips (`FlowStrip.astro`). The hub's "Where to start instead" table is four link cards.
+- Folds: every "If it goes wrong" item is a `<details>` with the symptom as its summary, and so are
+  the explanations most readers can skip (the forecast URL, the half-open bands, why the transform
+  prompt is long, the Free Plan limits, adding tasks by hand, schedule options). The twin prints the
+  summary in bold and the content after it.
+- Time: no per-page minutes. The hub says "about 30 minutes with Kai, plus sign-up and reading": Kai's wall
+  time in the 2026-09-08/09 runs (load 9, transform 4, ask 3, app 6, flow 3 + an 8-minute first
+  run). "About 80 minutes" was that plus reading one tab at 200 words a minute, and read as a reason
+  not to start. Nikita chose the one honest number, re-measured. The re-measurement did not happen
+  on 29 Sep: a script that clicks Kai's approvals unattended was refused, so the number rests on
+  the recorded runs until Nikita decides how to time it. VERIFY(Nikita).
+
+**Measured** on the rendered pages (visible words: hidden tabs and closed folds do not count;
+code blocks excluded), before on the #1144 preview at 046410c3, after on the local build:
+
+| Page | Prompt path, words | Before the tabs | Page height |
+|---|---|---|---|
+| hub | 905 → 772 |  | 4041 → 3952 px |
+| project | 719 → 516 |  | 2533 → 2490 px |
+| load | 1600 → 766 | 893 → 476 | 6134 → 4945 px |
+| transform | 2145 → 921 | 1030 → 523 | 7694 → 5963 px |
+| ask | 823 → 559 | 442 → 374 | 3604 → 3484 px |
+| app | 1597 → 938 | 702 → 481 | 5030 → 4125 px |
+| automate | 1778 → 1024 | 830 → 502 | 6577 → 5715 px |
+| check | 1179 → 634 |  | 4063 → 3437 px |
+| **total** | **10746 → 6130, −43%** | | **−14%** |
+
+The plan's targets were half the words and no more than 120 words before the tabs; neither is met.
+What is left above the tabs is the cold-landing block (where you are, what you need, what each tab
+needs) and the one explanation each step needs before its task. Cutting further would start cutting
+Michal's rule that every page survives a cold landing.
+
+**Seen in the product while preparing the timing run** (read-only, project 264, 29 Sep): the Kai
+panel now has a **Mode** menu, Standard or Lite ("Lite answers quick questions for a fraction of the
+cost. Standard builds and changes things."), which the guide does not mention; and in Nikita's
+account a new chat opened with **plan mode** already on. Whether that is the default for a new user
+is not known. VERIFY(Kai team).
+
+**Reviewed.** The fact-checker found no changed number but five qualifiers the cut had separated
+from their claims; all five are back: the Free Plan limits beside "enough for everything in this
+guide", the forecast path in load/'s UI step 11 (it had pointed at a folded URL), the wet-week
+exception beside the transform and ask checks, app/'s "This is a private draft", and "five of them"
+plus `products` and the input-mapping names on transform/. It also caught the twin generator
+stripping indentation inside code blocks, so automate/'s flow.yaml no longer parsed as YAML; that
+was older than this pass and is fixed in page-markdown.mjs (all 66 Getting Started code blocks now
+match their source). The time line says "plus sign-up and reading", since sign-up is neither.
+
+The guide-tester found it followable by a human and by an agent, with fixes: ask/'s CLI check
+pointed at the grid a page later (it now names the top row of the table); app/'s twin said the
+three tabs reach the same result, though only Prompt builds the app (PathIntro's `manual={false}`
+line says so now, on the page and in the twin); flow.yaml needed the BigQuery component ID and the
+no-app variant; every Prompt box scrolled sideways (they wrap now, one line per paragraph in the
+source, the words unchanged, which also mends the two quoted names split across lines); automate/'s
+"Run it" told only CLI readers the run had happened; the intros repeated the lede, and three are cut
+to their "why"; transform/ said plainly that code never touches Storage, which Kai's read-only
+build contradicts, so the bullet and the Prompt tab now say both. Three twin defects are fixed in
+page-markdown.mjs: an empty "You need:", tab labels that looked like fold titles (tabs are
+`###` headings now and a rule closes the group, which also changes the twins of cli/getting-started
+and data-apps/authentication), and list items that lost their indentation because wrappers were
+dedented by a fixed 4 spaces instead of what their author wrote (83 code blocks across all MDX pages
+match their source). Declined: cutting the hub's "why" paragraph where it repeats the lede, because
+Nikita set that paragraph on 23 Sep. The course dots are `--kbc-blue-600`, where white numerals pass
+4.5:1, and the bar hides its names by the column's width (a container query), as the docs-stage-strip
+skill asks of its StageStrip.
+
+The checker's first pass was FIX. Its blocker: re-wrapping the prompts had joined automate/'s
+"Then give the flow a schedule … Then run the flow once now" onto item 3, so a reader told to leave
+the app phase out would drop the schedule and the run with it; the line is its own paragraph again,
+the words unchanged (no other prompt had a line like it). Also fixed: the long bullets on transform/,
+automate/ and check/ cut to a clause or two; the flow strip starts with the schedule, which is what
+starts the flow; tab headings in the twin sit one level below the section that holds the tabs, so
+data-apps/authentication's providers are `####` under "Step 2"; app/'s tab note no longer calls the
+three tabs the same task; the hub's "Three others" sits above three cards now (the "This guide" card
+went, the course line above it is the guide). And `transform/mapping.png` showed a colleague's name in
+its Versions panel ("by …", PRDCT-616) right under the new strip: those words are covered with the
+panel's own colour, nothing else in the capture changed. The CONSERVATION-REPORT table for this pass
+still lists four transform/ cuts that its correction line restores: the file could only be appended
+to in this session, so the correction stands below the table.
+
+The checker's second pass is PASS. Its minors went in after it: five more bullets cut to a clause or
+two; the four-box strips stack by the column's width (a container query), because between about 800
+and 990 px their fourth box dropped to a row of its own; check/ and automate/ name an automatic run
+the way 09-all-runs.png shows it, `Schedule for <flow ID> Scheduler`, not *scheduled run*; and a
+ledger line for the transform/ phrases the second cut reworded. The twin generator changes two
+twins outside Getting Started, cli/getting-started and data-apps/authentication, whose tab headings
+now nest under their section.
+
+**Not in this pass:** new screenshots (load 01–07 still show the previous configuration name; the
+app cannot be reshot while its deploy fails), and the side trips (write, ad-hoc, branches,
+load/googlesheets, load/database, transform/workspace), which only lost their minutes and got the
+shorter shared blocks through the components.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were

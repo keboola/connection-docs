@@ -1,28 +1,35 @@
 ---
-// Cold-start block (c): prerequisites, rendered from one place.
+// Cold-start block (c): where you are, where you will be, and what you need,
+// rendered from one place.
 //
 // Hand-written prerequisite lists drift within a release cycle — Cloudflare
 // renders its prerequisites partial 4,087 times across 1,966 pages for exactly
 // this reason. At our scale one component does, but the principle is the same:
 // change the wording in prereqs.mjs, not on eleven pages.
 //
-// Two lists. "You need": the shared items named by `needs`, then anything
-// page-specific passed as <li> children in the slot. "Depending on the tab you
-// use": one line per tab, from `tabs`. The wording lives in ./prereqs.mjs so
-// the markdown twin (page-markdown.mjs) renders the same lists.
+// Three parts, top to bottom:
+//   1. "Where you are" → "When you finish", two cards with an arrow, from the
+//      named slots `from` and `to`. They used to be a bold-label paragraph above
+//      the box; one block reads faster than a paragraph plus a box (2026-09-29).
+//   2. "You need": the shared items named by `needs`, then anything
+//      page-specific passed as <li> children in the slot.
+//   3. "What each tab needs": one card per tab, from `tabs`.
+// The wording lives in ./prereqs.mjs so the markdown twin (page-markdown.mjs)
+// renders the same lists.
 //
 // A tab whose default line is wrong for this page gets its own, as a named
-// slot: <span slot="prompt|ui|cli">…</span>. The label ("UI tab:") stays here.
+// slot: <span slot="prompt|ui|cli">…</span>. The label stays here.
 //
-// Usage:  <Prereqs needs={['project']} tabs={3} />
+// Usage:  <Prereqs needs={['project']} tabs={3}>
+//           <span slot="from">a project with empty Storage.</span>
+//           <span slot="to">six tables in Storage.</span>
+//         </Prereqs>
 //         <Prereqs needs={['project', 'google']} tabs={2}>
 //           <li><strong>The table <code>x</code></strong> from the previous page.</li>
 //         </Prereqs>
-//         <Prereqs needs={['project']} tabs={3}>
-//           <span slot="ui">a workspace loaded with that table.</span>
-//         </Prereqs>
 //         <Prereqs needs={[]}>  (a page with no tabs and no shared items)
 
+import { Icon } from '@astrojs/starlight/components';
 import { LABELS, SHARED, TABS } from './prereqs.mjs';
 
 interface Props {
@@ -34,30 +41,75 @@ interface Props {
 
 const { needs = ['project'], tabs = 0 } = Astro.props;
 
+// MDX wraps a slot's multi-line text in <p>, which breaks the line after the label
+const slotHtml = async (name: string) =>
+  Astro.slots.has(name) ? (await Astro.slots.render(name)).replace(/<\/?p>/g, '') : null;
+
+const from = await slotHtml('from');
+const to = await slotHtml('to');
 const items = needs.filter((k) => SHARED[k]);
 const tabLines = [];
 for (const t of TABS.slice(0, tabs)) {
-  const own = Astro.slots.has(t.key) ? await Astro.slots.render(t.key) : null;
-  // MDX wraps a slot's multi-line text in <p>, which breaks the line after the label
-  tabLines.push({ label: t.label, html: own ? own.replace(/<\/?p>/g, '') : t.html });
+  const own = await slotHtml(t.key);
+  tabLines.push({ key: t.key, label: t.label, html: own ?? t.html });
 }
+// Rendered once here rather than with <slot />, so a page that passes only the
+// named slots does not get an empty "You need" heading
+const ownItems = Astro.slots.has('default') ? (await Astro.slots.render('default')).trim() : '';
 ---
 
 <div class="gs-prereqs">
   <p class="gs-prereqs__label">Before you start</p>
-  <p class="gs-prereqs__group">{LABELS.needs}</p>
-  <ul class="gs-prereqs__list">
-    {items.map((key) => <li set:html={SHARED[key]} />)}
-    <slot />
-  </ul>
-  {tabLines.length > 0 && (
-    <Fragment>
-      <p class="gs-prereqs__group">{LABELS.tabs}</p>
-      <ul class="gs-prereqs__list">
-        {tabLines.map((t) => (
-          <li><strong>{t.label}:</strong> <Fragment set:html={t.html} /></li>
-        ))}
-      </ul>
-    </Fragment>
-  )}
+  {
+    (from || to) && (
+      <div class="gs-fromto">
+        {from && (
+          <p class="gs-fromto__card">
+            <span class="gs-fromto__label">{LABELS.from}</span>
+            <span set:html={from} />
+          </p>
+        )}
+        {from && to && <span class="gs-fromto__arrow" aria-hidden="true">→</span>}
+        {to && (
+          <p class="gs-fromto__card gs-fromto__card--to">
+            <span class="gs-fromto__label">{LABELS.to}</span>
+            <span set:html={to} />
+          </p>
+        )}
+      </div>
+    )
+  }
+  {
+    (items.length > 0 || ownItems) && (
+      <Fragment>
+        <p class="gs-prereqs__group">{LABELS.needs}</p>
+        <ul class="gs-prereqs__list">
+          {items.map((key) => <li set:html={SHARED[key]} />)}
+          <Fragment set:html={ownItems} />
+        </ul>
+      </Fragment>
+    )
+  }
+  {
+    tabLines.length > 0 && (
+      <Fragment>
+        <p class="gs-prereqs__group">{LABELS.tabs}</p>
+        <div class="not-content">
+        <ul class="gs-prereqs__tabs">
+          {tabLines.map((t) => (
+            <li class="gs-prereqs__tab">
+              <span class="gs-prereqs__tabname">
+                {t.key === 'prompt' && <Icon name="comment" size="1.1em" />}
+                {t.key === 'ui' && <Icon name="laptop" size="1.1em" />}
+                {t.key === 'cli' && <span class="gs-prereqs__glyph" aria-hidden="true">&gt;_</span>}
+                {t.label}
+              </span>
+              <span set:html={t.html} />
+            </li>
+          ))}
+        </ul>
+        </div>
+      </Fragment>
+    )
+  }
 </div>

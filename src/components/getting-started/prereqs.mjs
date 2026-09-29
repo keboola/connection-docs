@@ -14,8 +14,10 @@
 // page rather than on the two or three that happened to say so.
 
 export const LABELS = {
+  from: 'Where you are',
+  to: 'When you finish',
   needs: 'You need',
-  tabs: 'Depending on the tab you use',
+  tabs: 'What each tab needs',
 };
 
 /** Shared "You need" items, by the key a page passes in `needs`. HTML. */
@@ -34,10 +36,14 @@ export const SHARED = {
  * (2026-09-25: the UI tab of ask/ needs a workspace, of app/ a Git repository;
  * Kai from a terminal needs a master token).
  */
+//
+// 2026-09-29: shortened for the card row (David Esner's "strašně moc textu");
+// the facts are the same: the button, supported stacks only, an organization
+// admin turns it on once.
 export const TABS = [
   { key: 'prompt', label: 'Prompt tab',
-    html: 'Kai, the <strong>Kai Agent</strong> button in the project\'s top bar, on supported stacks. The first time, an organization admin switches it on; see <a href="/kai/getting-started/">Get started with Kai</a>.' },
-  { key: 'ui', label: 'UI tab', html: 'only a browser.' },
+    html: 'Kai, the <strong>Kai Agent</strong> button in the top bar, on supported stacks. An organization admin turns it on once: <a href="/kai/getting-started/">Get started with Kai</a>.' },
+  { key: 'ui', label: 'UI tab', html: 'a browser.' },
   { key: 'cli', label: 'CLI / API tab',
     html: '<a href="/cli/getting-started/">kbagent</a>, connected to your project with write access.' },
 ];

@@ -7,9 +7,12 @@ redirect_from:
 ---
 
 import PageMeta from '../../../components/getting-started/PageMeta.astro';
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 import Prereqs from '../../../components/getting-started/Prereqs.astro';
+import CourseLine from '../../../components/getting-started/CourseLine.astro';
+import FromTo from '../../../components/getting-started/FromTo.astro';
 
-<PageMeta genre="Tutorial" minutes="80" />
+<PageMeta genre="Tutorial" time="about 30 minutes with Kai, plus sign-up and reading" />
 
 Your data lives in more places than one: files, a spreadsheet someone keeps, an API, a database.
 Keboola is where you bring it together, shape it with SQL, ask it questions in plain language, turn
@@ -32,9 +35,15 @@ acts; question frame as poster) changed with the clips since 09-23, VERIFY(Jorda
 Tutorial-hub page: the arc index. "Get a project" moved back to its own page 2026-09-14 (see
 that page's comment and DECISIONS.md), and the café story that used to open this page is gone:
 Michal, 2026-09-02, "dataset je jen helping vehicle… není to nosné téma… já bych v tom byl sušší".
-The world is now described once, on load/. Timing: 80 = this page (5) + the seven steps
-(5+15+15+5+15+15+5); each step = reading one tab at 200 words/min plus the wall time Kai took in the
-2026-09-08/09 live runs. Building alone, prompt path, was about 30 minutes.
+The world is now described once, on load/. Timing, since 2026-09-29 (Nikita): one number, the
+time Kai takes to build the pipeline from the Prompt tabs, with "plus sign-up and reading" said
+next to it. It
+replaced "about 80 minutes" (this page 5 + the seven steps 5+15+15+5+15+15+5, reading one tab at
+200 words/min plus Kai's wall time), which read as a reason not to start, and the per-step minutes.
+The 30 is Kai's wall time per step in the 2026-09-08/09 runs: load 9, transform 4, ask 3, app 6,
+flow 3 + an 8-minute first run. A fresh timed run was planned for 2026-09-29 and did not happen:
+an unattended script that clicks Kai's approvals was refused, so it waits for Nikita to decide how
+to re-measure. VERIFY(Nikita).
 
 The tab-sync GIF follows the pattern the component docs already use for UI behaviour
 (public/extend/component/ui-options/ui-examples/*.gif): cropped to just the region that carries the
@@ -67,14 +76,12 @@ whole line with its four captions, 99.5 KB. The app card is app/grid-preview.png
 under Brno's weekday line, above the line its own screenshot slices. A taller capture needs the
 data app running, which its broken deploy prevents. VERIFY(owner). */}
 
-**Where you are:** you have heard of Keboola and have nothing set up. **When you finish:** a
-scheduled pipeline and a data app, in a project you created or joined.
+<FromTo from="you have heard of Keboola and have nothing set up." to="a scheduled pipeline and a data app, in a project you created or joined." />
 
-The sample is six café branches: five files with a summer of sales, the rosters that served it and
-the weather, plus next week's forecast from a public API that needs no account. No file answers
-anything alone, and the moves are the same on your own tables. Every step works toward one
-question: **Which day next week will leave a café short-handed?** By the fifth page a grid answers
-it, and the answer changes every morning with the forecast.
+The sample is six cafés: five files (a summer of sales, the rosters, the weather) and next week's
+forecast from a public API that needs no account. The moves are the same on your own tables. Every
+step works toward one question: **Which day next week will leave a café short-handed?** By the
+fifth page a grid answers it, and the answer changes every morning with the forecast.
 
 <Prereqs needs={[]}>
   <li>
@@ -101,68 +108,69 @@ Fact-checker and guide-tester, 2026-09-23. */}
 
 ## What you get
 
-| Step | What you'll be able to do | Keboola calls it | Minutes |
-|---|---|---|---|
-| [Get a project](/getting-started/project/) | create or join a project, the place everything below lives in | a **project** | 5 |
-| [Get your data in](/getting-started/load/) | load five files and a live API into six tables, from configurations you can re-run | a **data source connector** | 15 |
-| [Transform data](/getting-started/transform/) | join five of them with SQL into one table: a café, a day, the demand to expect, the crew rostered, a flag | a **transformation** | 15 |
-| [Ask a question and get an answer](/getting-started/ask/) | ask that table a question in plain words and get an answer that says why | **Kai** reading your data | 5 |
-| [Put it in front of someone](/getting-started/app/) | describe an app in a paragraph and get a grid: six cafés by seven days, red where it will hurt | a **data app** | 15 |
-| [Make it run every morning](/getting-started/automate/) | schedule all of it to re-run on the new forecast, and hear about it if it breaks | a **flow** | 15 |
-| [Check it worked](/getting-started/check/) | read what Storage and Jobs should show, and recognise the failures that happen | — | 5 |
+<CourseLine layout="list" />
 
-Read the steps in order, or land on any one of them: each says where you should be, what it needs,
-and how to tell it worked. The **Next** control at the foot of every page follows this order.
+Read the steps in order, or land on any one of them: each page says where you should be, what it
+needs, and how to tell it worked.
 
 ## How every page works
 
-Every page with a task on it offers that task three ways, and your choice follows you from page
-to page:
+Every page with a task on it offers that task three ways:
 
-- **Prompt**: paste it into **Kai**, the assistant in the project's top bar, and watch it build.
-  Kai asks before it changes anything: one approval per object it creates, while questions that
-  only read do not ask. An organization admin switches the feature on; see
-  [Get started with Kai](/kai/getting-started/).
-- **UI**: the same task click by click, for when you want to see where each setting lives.
-- **CLI / API**: the same task from a terminal with [kbagent](/cli/), and the raw request beside
-  it where there is no command for it.
+- **Prompt**: paste it into **Kai**, the assistant in the project's top bar, and watch it build. An
+  organization admin switches Kai on once; see [Get started with Kai](/kai/getting-started/).
+- **UI**: the same task click by click, to see where each setting lives.
+- **CLI / API**: the same task from a terminal with [kbagent](/cli/), with the raw request where
+  there is no command for it.
 
 Pick a tab once and every page after it opens on the same one:
 
 ![Choosing the CLI / API tab on one page, then opening the next page in the guide, which is already showing its CLI / API tab](/getting-started/tab-sync.gif)
 
-Where one of the three cannot do the job, the page says so rather than showing an empty tab. A
-signup form, a Google consent screen and a branch merge are all decisions a browser has to make.
+Where one of the three cannot do the job (a signup form, a Google consent screen, a branch merge),
+the page says so rather than showing an empty tab.
 
-Nothing here is one-way: if a step builds something other than what the page describes, say so in
-the same Kai chat, or edit the configuration by hand.
+### Approvals and plan mode
+
+{/* Moved here from PathIntro.astro on 2026-09-29: the component printed this on every task page
+(179 words each, the block in David Esner's screenshot). Every page links here now. */}
+
+**Kai asks before it changes anything:** one approval dialog per object it creates, showing the
+exact configuration it is about to write. Questions that only read do not ask.
+
+<details>
+<summary>Fewer approvals, plan mode, and undoing a step</summary>
+
+- **If confirming each one gets tiring,** pre-approve tools in
+  [tool permissions](/kai/settings/#tool-permissions).
+- **Plan mode is a different thing.** With the chat's **plan mode** button, Kai writes the steps
+  down and asks you to approve the plan before it starts, and then still asks for each change. Use
+  it when you want to read the plan first, not to save clicks.
+- **Nothing here is one-way.** If a step builds something other than the page describes, say so in
+  the same Kai chat, or edit the configuration by hand.
+
+</details>
 
 ## Where to start instead
 
-This guide is the browser path. Three others start from the same place:
+This guide is the browser path, prompt first. Three others start from the same place:
 
-| Quickstart | Description |
-|---|---|
-| [This guide](/getting-started/project/) | Build a scheduled pipeline and a data app in the browser, prompt first. |
-| [kbagent CLI](/cli/getting-started/) | The same operations from a terminal, scriptable and agent-friendly. |
-| [MCP server](/ai/mcp-server/) | Connect your own AI assistant or IDE to a Keboola project. |
-| [Build an app with Kai](/data-apps/getting-started/) | Go straight to a data app on data you already have. |
+<CardGrid>
+<LinkCard title="kbagent CLI" href="/cli/getting-started/" description="The same operations from a terminal, scriptable and agent-friendly." />
+<LinkCard title="MCP server" href="/ai/mcp-server/" description="Connect your own AI assistant or IDE to a Keboola project." />
+<LinkCard title="Build an app with Kai" href="/data-apps/getting-started/" description="Go straight to a data app on data you already have." />
+</CardGrid>
 
 ## Going further
 
-Optional side trips, once the main path makes sense. None of them are needed to finish the guide:
+Optional side trips, none of them needed to finish the guide:
 
-- **[Send a table to Google Sheets](/getting-started/write/)** delivers the result to where people
-  read it. It needs a Google account you can authorize.
-- **[Load from Google Sheets](/getting-started/load/googlesheets/)** and
-  **[from a database](/getting-started/load/database/)** load from a source that needs credentials
-  rather than from a public URL.
-- **[Use a workspace](/getting-started/transform/workspace/)** is where you develop and test SQL
-  against a copy of your data before committing it to a transformation.
-- **[Ad-hoc data analysis](/getting-started/ad-hoc/)** explores data in a Python or R notebook
-  instead of building a pipeline.
-- **[Development branches](/getting-started/branches/)** change a running project safely: make the
-  change, review the diff, then merge.
+- **[Send a table to Google Sheets](/getting-started/write/)**: the result where people read it.
+- **[Load from Google Sheets](/getting-started/load/googlesheets/)** or
+  **[from a database](/getting-started/load/database/)**: sources behind credentials.
+- **[Use a workspace](/getting-started/transform/workspace/)**: test SQL on a copy of the data first.
+- **[Ad-hoc data analysis](/getting-started/ad-hoc/)**: a Python or R notebook instead of a pipeline.
+- **[Development branches](/getting-started/branches/)**: change a running project safely.
 
 ## If you are planning a rollout, not learning the tool
 

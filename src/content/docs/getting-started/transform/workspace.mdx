@@ -11,7 +11,7 @@ import PageMeta from '../../../../components/getting-started/PageMeta.astro';
 import Prereqs from '../../../../components/getting-started/Prereqs.astro';
 import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
-<PageMeta genre="How-to" minutes="10" guide="Going further" />
+<PageMeta genre="How-to" guide="Going further" />
 
 A transformation is SQL you have finished writing. A **workspace** is where you write it: your own
 schema, holding a copy of the Storage tables you ask for, where a wrong query costs you nothing.
@@ -93,9 +93,8 @@ Most of the time you do not need a workspace. You want one because you want to t
 your data, and [Kai does that](/kai/use-cases/#data-exploration) without creating anything: open
 **Kai Agent** in the top bar and ask the question you would have written the query for.
 
-```text title="Prompt"
-Using out.c-Boolabean-staffing-outlook.staffing_outlook, which café and which day has the highest
-expected_units_per_person? Show me the SQL you ran.
+```text title="Prompt" wrap
+Using out.c-Boolabean-staffing-outlook.staffing_outlook, which café and which day has the highest expected_units_per_person? Show me the SQL you ran.
 ```
 
 Asking for the SQL matters. The answer is the thing you were developing, and it is what you paste

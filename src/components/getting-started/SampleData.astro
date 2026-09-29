@@ -1,0 +1,36 @@
+---
+// The sample tables as cards: name, row count, what the table holds, and the
+// file behind it. Replaces a paragraph and a three-column table on load/
+// (David Esner, 2026-09-29: "strašně moc textu"). The live forecast gets its
+// own card, marked as the one source that is not a file.
+//
+// The data lives in ./sample.mjs, which the markdown twin reads too.
+// Styles: .gs-data in custom.css.
+
+import { SAMPLE_TABLES, FORECAST } from './sample.mjs';
+---
+
+<div class="not-content">
+<ul class="gs-data" aria-label="The sample tables">
+  {
+    SAMPLE_TABLES.map((t) => (
+      <li class="gs-data__card">
+        <span class="gs-data__head">
+          <span class="gs-data__kind" aria-hidden="true">CSV</span>
+          <a class="gs-data__name" href={t.file}><code>{t.name}</code></a>
+        </span>
+        <span class="gs-data__rows">{t.rows} rows</span>
+        <span class="gs-data__what">{t.what}</span>
+      </li>
+    ))
+  }
+  <li class="gs-data__card gs-data__card--live">
+    <span class="gs-data__head">
+      <span class="gs-data__kind" aria-hidden="true">API</span>
+      <a class="gs-data__name" href={FORECAST.href}><code>{FORECAST.name}</code></a>
+    </span>
+    <span class="gs-data__rows">{FORECAST.rows} rows</span>
+    <span class="gs-data__what">{FORECAST.what}</span>
+  </li>
+</ul>
+</div>

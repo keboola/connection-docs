@@ -2425,7 +2425,8 @@ nav.sidebar {
 
 /* ---------------------------------------------------------------------------
    Getting Started — cold-start blocks
-   Components: src/components/getting-started/{PageMeta,Prereqs,PathIntro}.astro
+   Components: src/components/getting-started/{PageMeta,Prereqs,PathIntro,CourseLine,
+   SampleData,FlowStrip}.astro
    All four blocks exist so a page survives being landed on cold from a search
    engine (decision of 2026-09-02, see DECISIONS.md). Styles live here per
    AGENTS.md — never as <style> blocks in the components.
@@ -2484,6 +2485,303 @@ nav.sidebar {
 .gs-pathintro { margin: 0 0 1.5rem; }
 .gs-pathintro > p { margin: 0 0 0.6rem; }
 .gs-pathintro__recovery { color: var(--sl-color-gray-2); }
+
+/* (c, top row) where you are → when you finish, inside the prerequisites box */
+.gs-fromto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0.6rem;
+  margin: 0.2rem 0 0.35rem;
+}
+.gs-fromto__card {
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-bg);
+  font-size: var(--sl-text-sm);
+  line-height: 1.45;
+}
+.gs-fromto__card--to { border-color: var(--sl-color-accent); }
+.gs-fromto--standalone { margin: 1.25rem 0 1.5rem; }
+.gs-fromto__label {
+  display: block;
+  font-size: var(--sl-text-xs);
+  font-weight: 600;
+  color: var(--sl-color-gray-3);
+}
+.gs-fromto__card--to .gs-fromto__label { color: var(--sl-color-text-accent); }
+.gs-fromto__arrow {
+  align-self: center;
+  font-size: 1.25rem;
+  color: var(--sl-color-gray-3);
+}
+@media (max-width: 40rem) {
+  .gs-fromto { grid-template-columns: minmax(0, 1fr); }
+  .gs-fromto__arrow { justify-self: center; transform: rotate(90deg); line-height: 1; }
+}
+
+/* (c, bottom row) what each tab needs: one row per tab, the tab's name on the left */
+.gs-prereqs__tabs {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.gs-prereqs__tab {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-bg);
+  font-size: var(--sl-text-sm);
+  line-height: 1.45;
+}
+.gs-prereqs__tab a { color: var(--sl-color-text-accent); text-decoration: underline; }
+.gs-prereqs__tab strong { font-weight: 600; color: var(--sl-color-white); }
+.gs-prereqs__tabname {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: var(--sl-color-white);
+  white-space: nowrap;
+}
+.gs-prereqs__glyph {
+  font-family: var(--sl-font-mono, monospace);
+  font-size: 0.8em;
+  font-weight: 700;
+  color: var(--sl-color-text-accent);
+}
+.gs-prereqs__tabname svg { flex: none; color: var(--sl-color-text-accent); }
+@media (max-width: 40rem) {
+  .gs-prereqs__tab { grid-template-columns: minmax(0, 1fr); gap: 0.1rem; }
+}
+
+/* (d) the course as a line of dots: a bar at the top of a step, a list on the hub */
+/* Dots and line are --kbc-blue-600, where white numerals pass 4.5:1 (the StageStrip rule). The bar
+   is a container: between 800 and 1400 px the sidebar leaves the column narrow, so the names hide
+   by the column's width, not the window's. */
+.gs-course--bar { margin: 0 0 1.25rem; container-type: inline-size; }
+.gs-course--bar ol {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.gs-course--bar .gs-course__step {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+}
+/* the segment from this dot to the next one */
+.gs-course--bar .gs-course__step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 0.7rem;
+  left: calc(50% + 0.8rem);
+  right: calc(-50% + 0.8rem);
+  height: 2px;
+  background: var(--sl-color-gray-5);
+}
+.gs-course--bar .gs-course__step.is-done::after { background: var(--kbc-blue-600); }
+.gs-course--bar a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+  color: var(--sl-color-gray-3);
+}
+.gs-course__dot {
+  display: inline-grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--sl-color-gray-4);
+  background: var(--sl-color-bg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--sl-color-gray-3);
+}
+.gs-course--bar .is-done .gs-course__dot,
+.gs-course--bar .is-current .gs-course__dot {
+  border-color: var(--kbc-blue-600);
+  background: var(--kbc-blue-600);
+  color: #fff;
+}
+.gs-course--bar .is-current .gs-course__dot { box-shadow: 0 0 0 4px var(--sl-color-accent-low); }
+.gs-course__name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--sl-text-xs);
+}
+.gs-course--bar .is-current .gs-course__name {
+  font-weight: 600;
+  color: var(--sl-color-text-accent);
+}
+.gs-course--bar a:hover .gs-course__name { color: var(--sl-color-white); }
+@container (max-width: 36rem) {
+  .gs-course__step:not(.is-current) .gs-course__name { visibility: hidden; }
+  .gs-course__step.is-current .gs-course__name { overflow: visible; }
+}
+
+.gs-course--list {
+  margin: 1rem 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+.gs-course--list .gs-course__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.85rem;
+  padding-bottom: 1.1rem;
+}
+.gs-course--list .gs-course__step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: 2rem;
+  bottom: 0;
+  left: calc(1rem - 1px);
+  width: 2px;
+  background: var(--sl-color-accent-low);
+}
+.gs-course--list .gs-course__dot {
+  width: 2rem;
+  height: 2rem;
+  border-color: var(--kbc-blue-600);
+  background: var(--kbc-blue-600);
+  color: #fff;
+  font-size: 0.9rem;
+}
+.gs-course__title {
+  font-weight: 600;
+  color: var(--sl-color-white);
+}
+.gs-course__title:hover { color: var(--sl-color-text-accent); }
+.gs-course__outcome {
+  margin: 0.1rem 0 0;
+  color: var(--sl-color-gray-2);
+  line-height: 1.5;
+}
+.sl-markdown-content .gs-course__body p + p,
+.gs-course__term {
+  margin: 0.2rem 0 0;
+  font-size: var(--sl-text-xs);
+  color: var(--sl-color-gray-3);
+}
+.gs-course__term strong { color: var(--sl-color-gray-2); font-weight: 600; }
+
+/* (e) the sample tables as cards */
+.gs-data {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 1rem 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+.gs-data__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-bg);
+  font-size: var(--sl-text-sm);
+  line-height: 1.4;
+}
+.gs-data__card--live { border-color: var(--sl-color-accent); }
+@media (max-width: 40rem) {
+  .gs-data { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.gs-data__head {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.1rem;
+}
+.gs-data__kind {
+  padding: 0.05rem 0.35rem;
+  border-radius: 0.3rem;
+  background: var(--sl-color-gray-6);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--sl-color-gray-2);
+}
+.gs-data__card--live .gs-data__kind {
+  background: var(--sl-color-accent-low);
+  color: var(--sl-color-text-accent);
+}
+.gs-data__name { text-decoration: none; color: var(--sl-color-text-accent); }
+.gs-data__name code {
+  padding: 0;
+  background: none;
+  font-weight: 600;
+  color: inherit;
+}
+.gs-data__name:hover code { text-decoration: underline; }
+.gs-data__rows { font-weight: 600; color: var(--sl-color-white); }
+.gs-data__what { color: var(--sl-color-gray-2); }
+
+/* (f) a process as boxes with arrows */
+.gs-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.4rem 1.6rem;
+  margin: 1rem 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+.gs-flow__step {
+  position: relative;
+  flex: 1 1 9rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-bg);
+  font-size: var(--sl-text-sm);
+  line-height: 1.4;
+}
+.gs-flow__step:last-child { border-color: var(--sl-color-accent); }
+.gs-flow__step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  top: 50%;
+  right: -1.25rem;
+  transform: translateY(-50%);
+  color: var(--sl-color-gray-3);
+}
+.gs-flow-wrap { container-type: inline-size; }
+@container (max-width: 44rem) {
+  .gs-flow { flex-direction: column; gap: 1.4rem; }
+  .gs-flow__step { flex-basis: auto; }
+  .gs-flow__step:not(:last-child)::after {
+    top: auto;
+    right: auto;
+    bottom: -1.3rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(90deg);
+  }
+}
+
+/* (g) folds: what most readers can skip */
+.sl-markdown-content details { margin-block: 0.75rem; }
+.sl-markdown-content details > :last-child { margin-bottom: 0.25rem; }
 
 /* ───────── Print ───────── */
 /* print.css ships `.print\:hidden { display: none }` inside @media print, but

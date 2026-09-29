@@ -10,19 +10,21 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PageMeta from '../../../../components/getting-started/PageMeta.astro';
 import Prereqs from '../../../../components/getting-started/Prereqs.astro';
 import PathIntro from '../../../../components/getting-started/PathIntro.astro';
+import CourseLine from '../../../../components/getting-started/CourseLine.astro';
+import SampleData from '../../../../components/getting-started/SampleData.astro';
+import FlowStrip from '../../../../components/getting-started/FlowStrip.astro';
 
-<PageMeta genre="Tutorial" minutes="15" />
+<PageMeta genre="Tutorial" />
 
-Data arrives split across files that cannot answer a question on their own. Here it is five: a
-summer of sales, and four small tables that say what the sales mean (which café, which product,
-who was on shift, what the weather was). Apart, the sales file can plot a summer but cannot say
-what any day *was*. This page gets all five into Storage, then adds the one table you do not
-have: next week's weather, fetched live from a public forecast API. The next page joins them.
+<CourseLine current="load" />
 
-**Where you are:** you have a project, and Storage is empty. **When you finish:** six tables in
-Storage and two connector configurations you can re-run.
+Data arrives split across files that cannot answer a question on their own; the next page joins
+them.
 
-<Prereqs needs={['project']} tabs={3} />
+<Prereqs needs={['project']} tabs={3}>
+  <span slot="from">a project with empty Storage.</span>
+  <span slot="to">six tables in Storage and two connector configurations you can re-run.</span>
+</Prereqs>
 
 <PathIntro tabs={3} />
 
@@ -49,53 +51,45 @@ convention because that is what Kai built and what the reshot captures show; bot
 work, and the 404 bullet explains the slash rule for either. Screenshots 01–07 still show the previous sample's configuration
 name; phase 2 reshoots them from the Boolabean configurations. */}
 
+{/* 2026-09-29, David Esner ("strašně moc textu") and Nikita: the sample and the connector are
+cards and a strip now, and the forecast URL's anatomy is folded. Cut, not moved: the sentence on
+what the sales file cannot say alone, and the "half a story" examples (S02, P07, the rain that
+did not say what it did to the queue). CONSERVATION-REPORT.md, 2026-09-29. */}
+
 ## The sample data
 
-Five tables about a fictional café chain, Boolabean: six cafés in six Czech cities, an 18-item
-menu, one summer of sales, the roster for every café and day, and the weather each café had that
-day. The chain, the sales and the rosters are invented for this guide, with a summer of weather to
-match. Only the forecast is real, and it is live.
+A fictional café chain, Boolabean: invented sales, rosters and weather, and one real forecast,
+fetched live. Each table is half a story; the next page joins them.
 
-| Table | File | Rows |
-|---|---|---|
-| stores | [`/getting-started/boolabean/stores.csv`](/getting-started/boolabean/stores.csv) | 6 |
-| products | [`/getting-started/boolabean/products.csv`](/getting-started/boolabean/products.csv) | 18 |
-| sales | [`/getting-started/boolabean/sales.csv`](/getting-started/boolabean/sales.csv) | 9,761 |
-| staffing | [`/getting-started/boolabean/staffing.csv`](/getting-started/boolabean/staffing.csv) | 552 |
-| weather_daily | [`/getting-started/boolabean/weather_daily.csv`](/getting-started/boolabean/weather_daily.csv) | 552 |
+<SampleData />
 
-Each table is half a story. A sales row names its café as `S02` and its product as `P07`; the
-roster knows how many people were on shift but not what they sold; the weather table knows it
-rained but not what that did to the queue.
+<details>
+<summary>What the forecast URL asks for</summary>
 
-The sixth table is not one of the sample files. [Open-Meteo](https://open-meteo.com/) publishes a
-free forecast API with no account and no key, and one request returns the next seven days for all
-six cafés at once as CSV:
+[Open-Meteo](https://open-meteo.com/) is free, with no account and no key. One request returns the
+next seven days for all six cafés at once, as CSV:
 
 ```text
 https://api.open-meteo.com/v1/forecast?latitude=50.0755,49.1928,49.8352,49.7475,49.5938,50.7663&longitude=14.4426,16.6083,18.2833,13.3776,17.2509,15.0562&daily=temperature_2m_max,precipitation_sum&timezone=Europe%2FPrague&format=csv
 ```
 
 The six coordinate pairs are the cafés in `store_id` order, so `location_id` 0 in the answer is
-`S01` and 5 is `S06`. The file has a shape the connector has to be told about: seven lines of
-metadata about the locations, a blank line, and then the real header row. Loaded as it comes, it
-is 42 rows: seven days for six cafés.
+`S01` and 5 is `S06`. The connector has to be told about the file's shape: seven lines of metadata
+about the locations and a blank line come before the real header row. Loaded as it comes, it is 42
+rows: seven days for six cafés.
+
+</details>
 
 ## How loading works
 
-Data gets into Keboola through **data source connectors**, components that fetch from a source on
-demand or on a schedule. There are [hundreds of them](/components/extractors/): databases, APIs,
-ad platforms, cloud drives. They differ in how they authenticate and what they can fetch, but they
-all end the same way: rows in a Storage table.
+<FlowStrip steps="A file at a URL|The HTTP connector: one configuration, a row per file|A table in Storage" label="How a file becomes a table" />
 
-You will use the **HTTP** connector, which downloads CSV files from a URL. It is the simplest one
-that still behaves like a real connector: it can be re-run, scheduled, and dropped into a flow,
-which is what [Make it run every morning](/getting-started/automate/) depends on.
-
-One configuration can fetch **many** files, so the five sample files go into a single
-configuration with five rows. The forecast gets a configuration of its own, because it lives on a
-different host and because the flow will want to refresh it every morning while the history stays
-as it is.
+- **Data source connectors** fetch data into Storage tables, on demand or on a schedule. There are
+  [hundreds of them](/components/extractors/), and all of them end in a table.
+- **HTTP** downloads CSV files from a URL, and can be re-run, scheduled and put in a flow,
+  which [Make it run every morning](/getting-started/automate/) depends on.
+- **Two configurations:** the five files share one, a row each. The forecast gets its own: it lives
+  on another host, and the flow refreshes it every morning.
 
 ## Set it up
 
@@ -106,9 +100,8 @@ Setting up a data source connector is one of the things Kai does
 ([Integration Setup](/kai/use-cases/#integration-setup)). Open **Kai Agent** in the top bar and
 ask for the whole first configuration at once:
 
-```text title="Prompt"
-Load these five CSV files into Storage as one HTTP data source configuration called "Boolabean
-sales", one configuration row per file, each table named after its file:
+```text title="Prompt" wrap
+Load these five CSV files into Storage as one HTTP data source configuration called "Boolabean sales", one configuration row per file, each table named after its file:
 
 https://help.keboola.com/getting-started/boolabean/stores.csv
 https://help.keboola.com/getting-started/boolabean/products.csv
@@ -119,35 +112,30 @@ https://help.keboola.com/getting-started/boolabean/weather_daily.csv
 Run it, then tell me the row count of each of the five tables.
 ```
 
-Expect seven approval dialogs: the configuration, one per row, and the run. Kai reads the header of
-each file itself, so the tables come out with the files' column names.
+**Expect seven approvals:** the configuration, one per row, and the run. Kai reads each file's
+header itself, so the tables get the files' column names.
 
 **Check:** Kai reports five tables with 6, 18, 9,761, 552 and 552 rows, and the configuration's
 **Rows** list shows five entries. Then, in the same chat, the forecast:
 
-```text title="Prompt"
-Add a second HTTP data source configuration called "Boolabean forecast" that loads this one URL
-into a table called forecast:
+```text title="Prompt" wrap
+Add a second HTTP data source configuration called "Boolabean forecast" that loads this one URL into a table called forecast:
 
 https://api.open-meteo.com/v1/forecast?latitude=50.0755,49.1928,49.8352,49.7475,49.5938,50.7663&longitude=14.4426,16.6083,18.2833,13.3776,17.2509,15.0562&daily=temperature_2m_max,precipitation_sum&timezone=Europe%2FPrague&format=csv
 
-It is open-meteo's CSV export: seven lines of metadata, a blank line, then the header row, then
-42 data rows. Load only the data rows and name the columns location_id, time,
-temperature_2m_max and precipitation_sum. Run it, then tell me how many rows the forecast table
-has.
+It is open-meteo's CSV export: seven lines of metadata, a blank line, then the header row, then 42 data rows. Load only the data rows and name the columns location_id, time, temperature_2m_max and precipitation_sum. Run it, then tell me how many rows the forecast table has.
 ```
 
-Kai inspects the file, skips the nine leading lines and names the four columns as asked, rather
-than keeping the header's `temperature_2m_max (°C)`. Three approvals this time.
+**Expect three approvals.** Kai skips the nine leading lines and names the four columns as asked,
+rather than keeping the header's `temperature_2m_max (°C)`.
 {/* Guide test 2026-09-09: the live run's prompt said "skip the first eight lines" and described the
 columns in words; Kai read the file and chose 9 + explicit names on its own. The prompt now asks
 for that outcome directly so a literal reader's Kai does not load the header as data. Not re-run
 in this wording. */}
 
 **Check:** a `forecast` table with **42** rows and the columns `location_id`, `time`,
-`temperature_2m_max` and `precipitation_sum`. If Kai built something else, delete it and switch to
-the **UI** tab. The extra minutes pay for themselves, because the rest of the guide
-assumes you have seen where a configuration and its rows live.
+`temperature_2m_max` and `precipitation_sum`. If Kai built something else, delete it and use the
+**UI** tab: the rest of the guide assumes you have seen where a configuration and its rows live.
 
 </TabItem>
 <TabItem label="UI">
@@ -237,9 +225,12 @@ settings, sharing the configuration's base URL.
 **Add the forecast**
 
 11. Create a second configuration the same way (steps 1 to 5), named `Boolabean forecast`, with
-    the base URL `https://api.open-meteo.com/v1/`. Add one row named `forecast` and set its
-    **Path** to everything after that in the forecast URL above, starting with
-    `forecast?latitude=`. Save.
+    the base URL `https://api.open-meteo.com/v1/`. Add one row named `forecast`, set its **Path**
+    to the rest of the forecast URL, and save:
+
+    ```
+    forecast?latitude=50.0755,49.1928,49.8352,49.7475,49.5938,50.7663&longitude=14.4426,16.6083,18.2833,13.3776,17.2509,15.0562&daily=temperature_2m_max,precipitation_sum&timezone=Europe%2FPrague&format=csv
+    ```
 
 12. The visual form cannot skip the seven metadata lines and the blank line before the header, so
     this row is finished in JSON. Click **Code Editor** at the top of the row, replace the
@@ -381,63 +372,95 @@ kbagent storage table-detail --project docs-demo --table-id in.c-keboola-ex-http
 
 ## Check it worked
 
-Watch it in **Jobs**. The rows of the first configuration are fetched in turn, so expect a couple
-of minutes for all five; the forecast takes seconds.
-
-Then open **Storage**. Data lives in **buckets**, and each bucket holds tables. Each connector
-configuration created a bucket of its own, named after the component plus the configuration's
-ID, like `keboola-ex-http-01m20b1fwj3px5x6bzzckeb81a`, shown with an **IN** badge. One holds
-`stores`, `products`, `sales`, `staffing` and `weather_daily`; the other holds `forecast`.
+Open **Storage**. Each configuration made a bucket of its own, with an **IN** badge: one holds the
+five sample tables, the other `forecast`.
 
 ![Screenshot - The tables in Storage](/getting-started/load/06-storage-tables.png)
 
-Click a table and open its **Data Sample** tab to see the real contents. `sales` should have 9,761
-rows with the columns `date`, `store_id`, `product_id`, `units` and `revenue_czk`; `stores` 6,
-`products` 18, `staffing` and `weather_daily` 552 each; `forecast` 42, with seven distinct dates
-and `location_id` running 0 to 5. If that matches, this step is done.
+- `sales` has **9,761** rows; `stores` 6, `products` 18, `staffing` and `weather_daily` 552 each.
+- `forecast` has **42** rows: seven dates, `location_id` 0 to 5.
+- Every column arrived as text. The connector does not guess types, so the next page casts them.
 
 ![Screenshot - Table detail with data sample](/getting-started/load/07-table-detail.png)
 
-One thing to notice in the sample: every column, `units` and `temp_max_c` included, arrived as
-text. The connector does not guess types, and Storage keeps what it was given. The next page casts
-them before it does arithmetic, and that is why.
+<details>
+<summary>Your bucket names will differ, and what else to look at</summary>
 
-:::note[Your bucket names will differ]
-The bucket name contains the configuration's own ID, so yours will not match the screenshots
-exactly, and that is fine. The **Rows** list shows where each row lands, and the next step refers
-to the tables by these names inside the transformation; it is those names the SQL depends on.
-:::
+A bucket is named after the component plus the configuration's ID, like
+`keboola-ex-http-01m20b1fwj3px5x6bzzckeb81a`, so yours will not match the screenshots, and that is
+fine. The next step refers to the tables by their names inside the transformation; it is those
+names the SQL depends on.
+
+Click a table and open its **Data Sample** tab to see the real contents: `sales` has the columns
+`date`, `store_id`, `product_id`, `units` and `revenue_czk`. In **Jobs**, the five rows of the first
+configuration are fetched in turn, so expect a couple of minutes for all five; the forecast takes
+seconds.
+
+</details>
 
 ## If it goes wrong
 
-- **The job fails with a 404.** Base URL and path are simply concatenated. With the base URL
-  ending in a slash and the path a bare file name, `https://help.keboola.com/getting-started/boolabean/`
-  + `stores.csv` is right; a slash on both sides gives a double slash and a slash on neither runs
-  the folder into the file name. Open the full URL in a browser to see whether the file is really
-  there.
-- **Every row arrives as one column.** The **Delimiter** setting does not match the file. These
-  files are comma-separated.
-- **The first data row is missing, or columns are called `col_1`.** Wrong header option: set
-  **Read Header** back to *Read the header from the file(s) header*.
-- **The table is empty but the job succeeded.** The URL returned an HTML error page instead of a
-  CSV. Open it in a browser to see what actually comes back.
-- **The forecast has 43 rows, and one of them says `time` in the `time` column.** The skip count
-  is one short and the header was loaded as data. It should be 9 with named columns, or 8 with
-  *Read the header* and the header's own names, unit suffixes included.
-- **You want the five files fetched at the same time.** Raise **Parallel jobs** on the
-  configuration; the connector then processes its rows concurrently.
-- **You would rather have Kai read the job.** It has the log and the tables in front of it:
-  `Read the last HTTP connector job and tell me what failed, then show me a sample of sales.`
+<details>
+<summary>The job fails with a 404</summary>
+
+Base URL and path are concatenated. With the base URL ending in a slash and the path a bare
+file name, `https://help.keboola.com/getting-started/boolabean/` + `stores.csv` is right; a slash on
+both sides gives a double slash, and a slash on neither runs the folder into the file name. Open the
+full URL in a browser to see whether the file is really there.
+
+</details>
+
+<details>
+<summary>Every row arrives as one column</summary>
+
+The **Delimiter** setting does not match the file. These files are comma-separated.
+
+</details>
+
+<details>
+<summary>The first data row is missing, or the columns are called <code>col_1</code></summary>
+
+Wrong header option: set **Read Header** back to *Read the header from the file(s) header*.
+
+</details>
+
+<details>
+<summary>The table is empty, but the job succeeded</summary>
+
+The URL returned an HTML error page instead of a CSV. Open it in a browser to see what actually
+comes back.
+
+</details>
+
+<details>
+<summary>The forecast has 43 rows, and one of them says <code>time</code> in the <code>time</code> column</summary>
+
+The skip count is one short and the header was loaded as data. It should be 9 with named columns,
+or 8 with *Read the header* and the header's own names, unit suffixes included.
+
+</details>
+
+<details>
+<summary>You want the five files fetched at the same time</summary>
+
+Raise **Parallel jobs** on the configuration; the connector then processes its rows concurrently.
+
+</details>
+
+<details>
+<summary>You would rather have Kai read the job</summary>
+
+It has the log and the tables in front of it:
+`Read the last HTTP connector job and tell me what failed, then show me a sample of sales.`
+
+</details>
 
 ## Going further
 
-Which way you load depends on how far along the project is. A public URL is the quickest way to
-get real data into a project you just created, which is why a proof of concept usually starts
-there. Production data rarely sits on one. It is behind credentials, in a database or a SaaS
-account, and it keeps changing, so the run you kicked off by hand becomes one that repeats on a
-schedule. Both side trips are this same step against a source you have to authorize first.
+A public URL is the quickest way to real data in a new project. Production data sits behind
+credentials and keeps changing; both side trips are this step against a source you authorize first.
 
-- [Load from Google Sheets](/getting-started/load/googlesheets/) is a small reference table pulled
-  from a spreadsheet you own, with an authorized account instead of a public URL.
-- [Load from a database](/getting-started/load/database/) is the pattern every database connector
+- [Load from Google Sheets](/getting-started/load/googlesheets/): a small reference table from a
+  spreadsheet you own.
+- [Load from a database](/getting-started/load/database/): the pattern every database connector
   follows.

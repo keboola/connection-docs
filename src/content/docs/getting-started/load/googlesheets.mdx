@@ -11,7 +11,7 @@ import PageMeta from '../../../../components/getting-started/PageMeta.astro';
 import Prereqs from '../../../../components/getting-started/Prereqs.astro';
 import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
-<PageMeta genre="How-to" minutes="10" guide="Going further" />
+<PageMeta genre="How-to" guide="Going further" />
 
 A side trip from [Get your data in](/getting-started/load/): the same kind of load, from a
 spreadsheet you own. Drive is where small reference tables get shared between teams, and the only
@@ -66,7 +66,7 @@ Kai can create the configuration
 ([integration setup](/kai/use-cases/#integration-setup)) but not authorize it. Open **Kai Agent**
 in the top bar:
 
-```text title="Prompt"
+```text title="Prompt" wrap
 Create a Google Sheets data source configuration called "Level from Sheets".
 ```
 
@@ -76,9 +76,8 @@ choose the *spreadsheet* you just made.
 
 Once the spreadsheet is selected, hand it back:
 
-```text title="Prompt"
-In "Level from Sheets", select the sheet inside that spreadsheet, run the configuration, and tell
-me what table it created and how many rows it has.
+```text title="Prompt" wrap
+In "Level from Sheets", select the sheet inside that spreadsheet, run the configuration, and tell me what table it created and how many rows it has.
 ```
 
 Watch the wording in both prompts. The *spreadsheet* is the file in Drive; the *sheet* is the tab

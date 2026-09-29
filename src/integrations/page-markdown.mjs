@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/getting-started/prereqs.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
+import { courseListText, courseBarText } from '../components/getting-started/course.mjs';
+import { sampleText } from '../components/getting-started/sample.mjs';
 
 /**
  * Astro integration that emits a raw-markdown copy of every docs page.
@@ -103,15 +105,18 @@ function inlineToMarkdown(line) {
  * from the same table the component renders (prereqs.mjs), so the two cannot
  * drift.
  */
-function prereqsToText(tag) {
+function prereqsToText(tag, { mayHaveOwn = false } = {}) {
   const needs = tag.match(/needs=\{\[([^\]]*)\]\}/);
   const keys = needs
     ? needs[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean)
     : ['project'];
   const lines = keys.map(sharedText).filter(Boolean);
-  // The "You need" heading prints even with no shared items: the page's own
-  // <li> children follow it (project/ has only those).
-  return ['', '**Before you start**', '', `${PREREQ_LABELS.needs}:`, '', ...lines.map((l) => `- ${l}`)];
+  // The "You need" heading prints when something can follow it: shared items,
+  // or the page's own <li> children (project/ has only those). An open tag
+  // that ends up with no items takes the heading back out at its close tag
+  // (check/ passes needs={[]} and only the from/to slots).
+  const heading = lines.length || mayHaveOwn ? [`${PREREQ_LABELS.needs}:`, ''] : [];
+  return ['', '**Before you start**', '', ...heading, ...lines.map((l) => `- ${l}`)];
 }
 
 /** The second list of <Prereqs>, one line per tab, printed after the page's own items. */
@@ -132,9 +137,13 @@ function prereqsTabsToText(tag, overrides = {}) {
  *
  * Component wrappers are dropped and their children kept, which flattens a
  * tabbed page into its sections one after another — the right shape for a
- * reader who cannot click a tab. Children are also dedented by one level per
- * wrapper, because MDX authors indent them and four leading spaces would
- * otherwise turn ordinary prose into an indented code block.
+ * reader who cannot click a tab. Each tab's label becomes a heading, and a
+ * rule closes the group, so what follows the tabs does not read as part of
+ * the last one. Children are also dedented by the indentation their author
+ * actually gave them inside the wrapper (measured on the first child line),
+ * because four leading spaces would otherwise turn ordinary prose into an
+ * indented code block; children written flush left keep their own list and
+ * code indentation (2026-09-29: load/'s steps 10-13 lost theirs).
  *
  * Components are matched on an uppercase initial, the JSX convention, so
  * lowercase HTML written inline in a page is left alone. Two of them carry
@@ -143,34 +152,93 @@ function prereqsTabsToText(tag, overrides = {}) {
  */
 function stripMdx(body) {
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
-  const withoutComments = stripComments(withoutImports);
+  // <details> is how a page folds away what most readers can skip; the twin
+  // has no folding, so the summary becomes a bold line and the rest follows
+  const withoutComments = stripComments(withoutImports)
+    .replace(/^[ \t]*<details[^>]*>[ \t]*$/gm, '')
+    .replace(/^[ \t]*<\/details>[ \t]*$/gm, '')
+    .replace(/^[ \t]*<summary>([\s\S]*?)<\/summary>[ \t]*$/gm, (m, t) => `**${t.trim().replace(/<\/?code>/g, '`')}**`);
 
-  const INDENT = '    ';
   const open = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*(?<!\/)>\s*$/;
   const selfClosing = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*\/>\s*$/;
   const close = /^\s*<\/[A-Z][A-Za-z0-9]*\s*>\s*$/;
 
-  let depth = 0;
+  const indents = [];   // extra indentation of each open wrapper's children
+  const stripOf = () => indents.reduce((a, b) => a + b, 0);
+  const lead = (l) => l.length - l.trimStart().length;
   let inPrereqs = false;
+  let prereqsItems = 0;
+  let lastHeading = 2;  // level of the latest markdown heading outside code
+  let tabsLevel = 3;    // tab labels sit one level below the section that holds the tabs
   let prereqsTag = '';
   let prereqsTabs = {};
+  let prereqsState = {};
+  let prereqsStart = -1;
   const slot = [];
   const out = [];
 
-  for (const line of withoutComments.split('\n')) {
+  // Inside a fenced code block the code's own indentation is content: YAML
+  // nests by it. Such a line loses only what its opening fence lost to the
+  // wrapper dedent, and is never read as a component tag. (2026-09-29: the
+  // flow.yaml on automate/ lost every 4-space level and no longer parsed.)
+  let fence = null;
+
+  const lines = withoutComments.split('\n');
+  for (let n = 0; n < lines.length; n += 1) {
+    const line = lines[n];
+    if (fence) {
+      const text = fence.strip && line.startsWith(' '.repeat(fence.strip)) ? line.slice(fence.strip) : line;
+      const closer = line.match(/^\s*(`{3,}|~{3,})\s*$/);
+      if (closer && closer[1][0] === fence.marker[0] && closer[1].length >= fence.marker.length) fence = null;
+      out.push(text);
+      continue;
+    }
     if (selfClosing.test(line)) {
       if (/^\s*<Prereqs\b/.test(line)) out.push(...prereqsToText(line), ...prereqsTabsToText(line));
       if (/^\s*<PathIntro\b/.test(line)) {
         out.push('', ...pathIntroText(tagProps(line)).map((p) => p + '\n'));
       }
+      // The Getting Started pictures carry text a reader needs: where a step
+      // sits in the course, the sample tables, a process drawn as boxes, a card
+      // that links somewhere. Each comes from the same data as the component.
+      if (/^\s*<CourseLine\b/.test(line)) {
+        const props = tagProps(line);
+        const text = props.layout === 'list' ? courseListText() : courseBarText(props.current);
+        out.push('', ...text, '');
+      }
+      if (/^\s*<SampleData\b/.test(line)) out.push('', ...sampleText(), '');
+      if (/^\s*<FromTo\b/.test(line)) {
+        const { from, to } = tagProps(line);
+        out.push('', `**${PREREQ_LABELS.from}:** ${from} **${PREREQ_LABELS.to}:** ${to}`, '');
+      }
+      if (/^\s*<FlowStrip\b/.test(line)) {
+        const steps = String(tagProps(line).steps ?? '').split('|').map((x) => x.trim()).filter(Boolean);
+        if (steps.length) out.push('', steps.join(' → '), '');
+      }
+      if (/^\s*<LinkCard\b/.test(line)) {
+        const { title, href, description } = tagProps(line);
+        if (title && href) out.push(`- [${title}](${href})${description ? `: ${description}` : ''}`);
+      }
       continue;
     }
     if (close.test(line)) {
-      depth = Math.max(0, depth - 1);
+      indents.pop();
+      if (/^\s*<\/Tabs>/.test(line)) out.push('', '---', '');
       if (/^\s*<\/Prereqs>/.test(line)) {
+        if (!prereqsItems && out[prereqsStart + 3] === `${PREREQ_LABELS.needs}:`) out.splice(prereqsStart + 3, 2);
         out.push(...prereqsTabsToText(prereqsTag, prereqsTabs));
+        // "Where you are" and "When you finish" arrive in the slot but read
+        // first, straight under the box's heading, as they do on the page
+        const state = [
+          prereqsState.from && `**${PREREQ_LABELS.from}:** ${prereqsState.from}`,
+          prereqsState.to && `**${PREREQ_LABELS.to}:** ${prereqsState.to}`,
+        ].filter(Boolean);
+        if (state.length && prereqsStart >= 0) out.splice(prereqsStart + 2, 0, '', state.join(' '));
         inPrereqs = false;
         prereqsTabs = {};
+        prereqsState = {};
+        prereqsStart = -1;
+        prereqsItems = 0;
       }
       continue;
     }
@@ -179,35 +247,52 @@ function stripMdx(body) {
       // flattened sections run together and a reader cannot tell which
       // variant is which.
       const label = line.match(/\blabel=["']([^"']+)["']/);
-      if (label) out.push('', `**${label[1]}**`, '');
+      if (/^\s*<Tabs\b/.test(line)) tabsLevel = Math.min(6, lastHeading + 1);
+      if (label) out.push('', /^\s*<TabItem\b/.test(line) ? `${'#'.repeat(tabsLevel)} ${label[1]}` : `**${label[1]}**`, '');
       // <Prereqs needs={…}> with page-specific <li> children in its slot: the
       // shared lines go in first, the children follow as the list they are.
-      if (/^\s*<Prereqs\b/.test(line)) { out.push(...prereqsToText(line)); inPrereqs = true; prereqsTag = line; }
-      depth += 1;
+      if (/^\s*<Prereqs\b/.test(line)) {
+        prereqsStart = out.length;
+        const head = prereqsToText(line, { mayHaveOwn: true });
+        prereqsItems = head.filter((l) => l.startsWith('- ')).length;
+        out.push(...head);
+        inPrereqs = true;
+        prereqsTag = line;
+      }
+      // how far this wrapper's author indented its children: the first
+      // non-blank line inside it, relative to the tag itself
+      let k = n + 1;
+      while (k < lines.length && !lines[k].trim()) k += 1;
+      const child = k < lines.length && !close.test(lines[k]) ? lead(lines[k]) - lead(line) : 0;
+      indents.push(Math.max(0, child));
       continue;
     }
 
-    let text = line;
-    for (let i = 0; i < depth && text.startsWith(INDENT); i += 1) {
-      text = text.slice(INDENT.length);
-    }
+    const strip = Math.min(stripOf(), lead(line));
+    const text = line.slice(strip);
+    const opener = line.match(/^\s*(`{3,}|~{3,})/);
+    if (opener) fence = { marker: opener[1], strip: line.length - text.length };
     if (inPrereqs) {
       // the slot holds raw <li> JSX, or a tab's own line as <span slot="…">;
       // buffer until the item closes, then flatten
       slot.push(text);
-      const tabLine = slot.join(' ').match(/^\s*<span slot="(prompt|ui|cli)">([\s\S]*)<\/span>\s*$/);
+      const tabLine = slot.join(' ').match(/^\s*<span slot="(prompt|ui|cli|from|to)">([\s\S]*)<\/span>\s*$/);
       if (tabLine) {
-        prereqsTabs[tabLine[1]] = inlineToMarkdown(tabLine[2]);
+        const key = tabLine[1];
+        if (key === 'from' || key === 'to') prereqsState[key] = inlineToMarkdown(tabLine[2]);
+        else prereqsTabs[key] = inlineToMarkdown(tabLine[2]);
         slot.length = 0;
         continue;
       }
       if (/<\/li>/.test(text)) {
         const item = inlineToMarkdown(slot.join(' '));
-        if (item) out.push(item.startsWith('- ') ? item : `- ${item}`);
+        if (item) { out.push(item.startsWith('- ') ? item : `- ${item}`); prereqsItems += 1; }
         slot.length = 0;
       }
       continue;
     }
+    const heading = text.match(/^(#{2,6})\s/);
+    if (heading) lastHeading = heading[1].length;
     out.push(text);
   }
 

@@ -144,3 +144,42 @@ replaced on the hub by `hub-explainer.mp4` and its poster. The screenshots of Ka
 of the Apps list lived only in that clip and go with it; Kai's answers are still on `ask/`, in text
 and in its own clip. `app/grid-preview.png` stays and is reused on the explainer's last slide. No
 page text changed.
+
+
+## 2026-09-29 — Getting Started text pass (David Esner's "too wordy"; DECISIONS.md, same date)
+
+Moved, so not lost: PathIntro's approvals, tool permissions and plan mode paragraph → the hub,
+"Approvals and plan mode". Each step's "Where you are / When you finish" paragraph → the first row
+of its Before you start box. load/'s sample-data table → cards (`sample.mjs`), its forecast-URL
+explanation → a fold. transform/'s bucket-names and "which SQL" paragraphs → bullets; the band
+definitions and the half-open paragraph → a fold. Every "If it goes wrong" item on the eight pages →
+a fold, word for word. The hub's steps table → the course line (`course.mjs`), outcomes shortened.
+
+Cut, with no new home (flavour or repetition, no fact lost):
+
+| Page | Cut | Why it can go |
+|---|---|---|
+| all GS pages | "about N minutes" in PageMeta; the hub's Minutes column and "about 80 minutes" | Nikita, 29 Sep: estimates, not measurements; the hub keeps one measured number |
+| load/ | "Apart, the sales file can plot a summer but cannot say what any day was." and the S02 / P07 / rain examples of "half a story" | the intro and "each table is half a story" carry the point |
+| load/ | "The extra minutes pay for themselves" (Prompt tab); "which is why a proof of concept usually starts there" and "the run you kicked off by hand becomes one that repeats on a schedule" (Going further); "they differ in how they sign in and what they fetch" | the instruction stays, the persuasion goes |
+| transform/ | "That is the safeguard … data lineage"; "contract customers choose theirs. Close the dialog and carry that word into your tab."; "(`products` is not needed)" | the mapping bullet and the tabs say it |
+| ask/ | "Everywhere else in this guide Kai stood in for your clicking." | the bullet says Kai reads here |
+| app/ | "does not want to ask" (Brno manager); "and the shared password above" (Going further) | trimmed sentences, same meaning |
+| automate/ | "That is the whole model, and it makes the ordering obvious …" (the three-phase reasoning, now the strip); "Each later phase needs the previous one's output, so the split is the whole point"; "Kai set the schedule because the prompt asked for it"; "A flow nobody gets told about is just a button"; "on a scheduled production flow that is the one setting nobody should skip" | the strip and the Errors sentence carry it |
+| check/ | "a duration chart over time"; "Both inputs are fixed, so the count is too, and it catches both directions of failure"; the Schedules-count bullet | the schedule toggle lives on automate/ |
+| hub | "The **Next** control at the foot of every page follows this order."; "It needs a Google account you can authorize" (Going further) | the course line shows the order; write/'s own box names the Google account |
+
+Correction, same day, after the fact-check: four transform/ cuts in the table above were restored,
+so only "Close the dialog and carry that word into your tab" stays cut there: "It is also how
+Keboola tracks lineage", "contract customers choose theirs", "(`products` is not needed for this
+table)" and "give them exactly these names in the input mapping, or edit the queries to match". The
+hub's time line says "plus sign-up and reading".
+
+Also cut on 29 Sep, after the checker: the hub's "This guide" link card under "Where to start
+instead" (it linked Get a project, which the course line above it already starts with). Masked, not
+cut: a colleague's name in `transform/mapping.png` (PRDCT-616).
+
+Later the same day the transform/ bullets were cut again, so three phrases quoted in the correction
+above ("(`products` is not needed for this table)", "give them exactly these names", "It is also
+how") are now worded differently; the facts behind them are still on the page: `products` is not
+read, the input-mapping names must match the SQL, and mappings are how Keboola tracks lineage.
