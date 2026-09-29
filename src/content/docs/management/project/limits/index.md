@@ -95,10 +95,14 @@ If you need more information, please contact your CSM.
 | **Data Gateway job**                  | 1 GB out                | **0.2**               |
 | **AppStore Apps**                     | 1 hour                  | **1**                 |
 | **DataApps**                          |                         |                       |
-| XSmall                                | 1 hour                  | **0.1**               |
-| Small                                 | 1 hour                  | **0.2**               |
-| Medium                                | 1 hour                  | **0.5**               |
-| Large                                 | 1 hour                  | **1**                 |
+| Python/JS, XSmall                     | 1 hour                  | **0.3**               |
+| Python/JS, Small                      | 1 hour                  | **0.6**               |
+| Python/JS, Medium                     | 1 hour                  | **1.2**               |
+| Python/JS, Large                      | 1 hour                  | **2.4**               |
+| Streamlit, XSmall                     | 1 hour                  | **0.1**               |
+| Streamlit, Small                      | 1 hour                  | **0.2**               |
+| Streamlit, Medium                     | 1 hour                  | **0.5**               |
+| Streamlit, Large                      | 1 hour                  | **1**                 |
 
 **Types of backend sizes used for jobs**
 

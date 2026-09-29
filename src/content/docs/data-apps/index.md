@@ -11,7 +11,7 @@ Apps let you build interactive applications — dashboards, tools, internal apps
 
 ## What a Keboola app is
 
-A Keboola app is a **Python/JS application hosted by your project**. It runs next to your data and gets its own URL you can share. Apps sleep when idle and wake on the first visit, so they cost nothing while nobody is looking. There's no infrastructure to manage and nothing is copied to an outside service — the app reads Storage through the project's own permissions.
+A Keboola app is a **Python/JS application hosted by your project**. It runs next to your data and gets its own URL you can share. Apps sleep when idle and wake on the first visit, so they cost nothing while nobody is looking. While an app is awake, it uses time credits at an hourly rate that depends on its backend size; see [Project Limits](/management/project/limits/#project-power--time-credits) for the rates. There's no infrastructure to manage and nothing is copied to an outside service — the app reads Storage through the project's own permissions.
 
 You can put an app in front of anyone: your team (behind [authentication](/data-apps/authentication/)), a client, or the public. And an app isn't limited to human visitors — it can expose an API or an MCP server so other agents and services can call it.
 
