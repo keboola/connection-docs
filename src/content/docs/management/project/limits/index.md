@@ -104,6 +104,10 @@ If you need more information, please contact your CSM.
 | Streamlit, Medium                     | 1 hour                  | **0.5**               |
 | Streamlit, Large                      | 1 hour                  | **1**                 |
 
+The Python/JS rates apply from October 15, 2026. Until then, Python/JS apps use the same rates as Streamlit apps.
+
+<!-- VERIFY(Miro): the effective date, and whether existing Python/JS apps switch on it too. TODO(human-review, Nikita): remove this note after October 15, 2026. -->
+
 **Types of backend sizes used for jobs**
 
 | Backend size                          | Specification                                   |
