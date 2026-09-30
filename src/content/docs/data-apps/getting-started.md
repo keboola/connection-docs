@@ -18,7 +18,7 @@ Apps go well beyond dashboards — the same steps produce internal tools, data n
 - A few minutes.
 
 :::tip[Building with an AI agent?]
-[Build an app with an AI agent](/data-apps/build-with-an-agent/) sets up Claude Code or Claude Desktop with Keboola's plugins and walks through one prompt to a deployed app. To add the skill to an agent by hand, the download is a copy of the skill folder: the skill itself, ready-made app templates (Python, Node.js, full-stack, Streamlit), and reference guides your agent can draw on.
+[Build an app locally](/data-apps/build-locally/#with-an-ai-agent) sets up Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT app with Keboola's plugins and walks through one prompt to a deployed app. To add the skill to an agent by hand, the download is a copy of the skill folder: the skill itself, ready-made app templates (Python, Node.js, full-stack, Streamlit), and reference guides your agent can draw on.
 
 <!-- VERIFY(Michal Ševčík): the zip is a 2026-07-09 snapshot of the skill and lacks references/python-js-prod-and-drafts.md from dataapp-developer 1.6.1. Refresh it or link to keboola/ai-kit instead. -->
 

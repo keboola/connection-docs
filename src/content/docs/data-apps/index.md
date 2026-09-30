@@ -21,14 +21,13 @@ For the full explanation — how apps fit into the platform and how they're isol
 
 Dashboards and reports, internal tools, data narratives, configurators, and agent-facing services — see [what you can build](/data-apps/what-are-apps/#what-you-can-build) for the full picture. Dashboards are just the start: **[Beyond dashboards](#beyond-dashboards)** below shows the range.
 
-## Three ways to build
+## Two ways to build
 
-- **[Build with Kai](/data-apps/getting-started/)** — describe the app in plain language and Kai reads your data, builds a live draft you preview and refine, and publishes when you're ready. No coding needed — the walkthrough takes about 10 minutes. The same **Create App** screen also offers [manual creation](/data-apps/getting-started/#create-an-app-manually) if you'd rather configure the app yourself. **You need:** a Keboola project. Nothing else.
-- **[Build locally](/data-apps/build-locally/)** — develop with your own tools and Git account, and sync the app to your project. For developers who want full control — that page covers how Python/JS development works day to day. **You need:** a Git account and somewhere to host the repository; about half an hour the first time.
-- **[Build with an AI agent](/data-apps/build-with-an-agent/)** — ask Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT app for the app in one prompt. With Keboola's `dataapp-developer` plugin and [kbagent](/cli/), the agent reads your data, writes the code, creates the app in a Keboola-managed repository and deploys it. **You need:** kbagent connected to your project and one of those clients.
-  <!-- VERIFY(Nikita): run end to end in Claude Code only. Claude Desktop may take the MCP-only path without kbagent; Cursor, VS Code and the ChatGPT app not run yet. -->
+- **[Build with Kai](/data-apps/getting-started/)**: describe the app in plain language and Kai reads your data, builds a live draft you preview and refine, and publishes when you're ready. No coding needed; the walkthrough takes about 10 minutes. The same **Create App** screen also offers [manual creation](/data-apps/getting-started/#create-an-app-manually) if you'd rather configure the app yourself. **You need:** a Keboola project. Nothing else.
+- **[Build locally](/data-apps/build-locally/)**: build on your own computer, for developers who want full control. [With an AI agent](/data-apps/build-locally/#with-an-ai-agent), you ask Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT app for the app in one prompt, and with Keboola's `dataapp-developer` plugin and [kbagent](/cli/) it reads your data, writes the code, creates the app and deploys it. [By hand](/data-apps/build-locally/#by-hand), you write the code and create the app from a terminal or connect your own repository. **You need:** for the agent, kbagent connected to your project and one of those clients; by hand, kbagent or a Git account and somewhere to host the repository, and about half an hour the first time.
+  <!-- VERIFY(Nikita): the agent route ran end to end in Claude Code and the Codex CLI only. Claude Desktop may take the MCP-only path without kbagent; Cursor, VS Code and the ChatGPT app screens not run yet. -->
 
-On all three routes, a Python/JS app ends up in a Git repository, either one Keboola manages for the app or one you host. [Two ways to run an app](/data-apps/what-are-apps/#two-ways-to-run-an-app) explains what each gives you, including why the Kai builder appears on one and not the other.
+On both routes, a Python/JS app ends up in a Git repository, either one Keboola manages for the app or one you host. [Two ways to run an app](/data-apps/what-are-apps/#two-ways-to-run-an-app) explains what each gives you, including why the Kai builder appears on one and not the other.
 
 ## Run and share
 

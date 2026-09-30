@@ -99,7 +99,7 @@ The `powerbi-to-sl` plugin migrates an existing Microsoft Power BI semantic mode
 
 ### Data App Developer Plugin
 
-The Data App Developer Plugin teaches an AI client to build, deploy and debug Keboola apps, both Python/JS and Streamlit. Its main skill, `dataapp-development`, covers choosing the app type, the repository layout, Storage access, authentication, styling and deployment. The agent works through either the Keboola MCP Server or kbagent, one of them per session. For the whole flow from one prompt to a deployed app, see [Build an app with an AI agent](/data-apps/build-with-an-agent/).
+The Data App Developer Plugin teaches an AI client to build, deploy and debug Keboola apps, both Python/JS and Streamlit. Its main skill, `dataapp-development`, covers choosing the app type, the repository layout, Storage access, authentication, styling and deployment. The agent works through either the Keboola MCP Server or kbagent, one of them per session. For the whole flow from one prompt to a deployed app, see [Build an app locally](/data-apps/build-locally/#with-an-ai-agent).
 
 **Workflow:**
 
