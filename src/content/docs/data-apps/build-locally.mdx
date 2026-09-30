@@ -161,7 +161,7 @@ Through a Keboola MCP server, the agent doesn't run kbagent. It calls the server
 ### Check the app
 
 - The agent finishes with the app's URL and its page in Keboola.
-- The app asks for its password. On the app's page in Keboola, click **Open App**, copy the password from the dialog, then click **Open app** in it.
+- The app asks for its password. On the app's page in Keboola, click **Open App**. The dialog has the app's address and its password, each with a copy button. Copy the password, then click **Open app** in the dialog.
 
 ![The Open app dialog on an app's page in Keboola: the App address and the Password, hidden, each with a copy button, above an Open app button](/data-apps/open-app-dialog.png)
 
@@ -169,7 +169,7 @@ Through a Keboola MCP server, the agent doesn't run kbagent. It calls the server
 - On [the MCP route](#the-mcp-route), you preview a draft at its own URL first. The production app gets **Open App** once you approve the draft and the agent deploys it.
 - To let other people open it, see [Publish and share](/data-apps/publish-and-share/).
 
-{/* Password location checked 2026-09-29 in project 264 on App ID 74021867, started for the check and stopped after: Open App opens a dialog with App address and Password (hidden, each with a copy button); a stopped app's page shows no password (its Open App dialog was not opened), and its Authentication section names only the method, Basic (Password). VERIFY(Nikita): not checked on a sleeping app. The MCP-route bullet restates The MCP route section above and operate.md (Open App on a running app, Deploy App on one that never ran). VERIFY(Nikita): where a draft's password shows was not checked. */}
+{/* Password location checked 2026-09-29 in project 264 on App ID 74021867, started for the check and stopped after: Open App opens a dialog with App address and Password (hidden, each with a copy button); a stopped app's page shows no password (its Open App dialog was not opened), and its Authentication section names only the method, Basic (Password). VERIFY(Nikita): not checked on a sleeping app. VERIFY(Nikita): seen on europe-west3 only; the UI bundles read between 22 and 29 Sep still had an older App Credentials modal (Host, Password, an Open App button), so check the labels on us-east4, where free projects live. The MCP-route bullet restates The MCP route section above and operate.md (Open App on a running app, Deploy App on one that never ran). VERIFY(Nikita): where a draft's password shows was not checked. */}
 
 ### What you get by default
 
