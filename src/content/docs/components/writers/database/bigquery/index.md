@@ -1,5 +1,6 @@
 ---
 title: Google BigQuery
+lastUpdated: 2024-02-29
 slug: 'components/writers/database/bigquery'
 redirect_from:
     - /writers/database/bigquery/

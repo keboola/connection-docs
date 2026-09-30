@@ -1,5 +1,6 @@
 ---
 title: Shoptet Permalink
+lastUpdated: 2026-06-19
 slug: 'components/extractors/marketing-sales/shoptet'
 redirect_from:
     - /extractors/marketing-sales/shoptet/

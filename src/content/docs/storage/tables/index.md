@@ -1,5 +1,6 @@
 ---
 title: Tables
+lastUpdated: 2026-08-04
 slug: 'storage/tables'
 ---
 

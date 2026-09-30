@@ -1,5 +1,6 @@
 ---
 title: Google Search Console
+lastUpdated: 2024-11-18
 slug: 'components/extractors/other/google-search-console'
 redirect_from:
     - /extractors/other/google-search-console/

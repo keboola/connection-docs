@@ -1,5 +1,6 @@
 ---
 title: Migration Guide
+lastUpdated: 2026-07-30
 slug: 'flows/flow-migration-guide'
 ---
 

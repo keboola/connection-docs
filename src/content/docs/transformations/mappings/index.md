@@ -1,5 +1,6 @@
 ---
 title: Input and Output Mapping
+lastUpdated: 2026-09-02
 slug: 'transformations/mappings'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: GoodData
+lastUpdated: 2026-08-04
 slug: 'components/writers/bi-tools/gooddata'
 redirect_from:
     - /writers/bi-tools/gooddata/

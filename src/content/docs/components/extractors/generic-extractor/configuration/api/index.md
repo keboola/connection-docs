@@ -1,5 +1,6 @@
 ---
 title: API Configuration
+lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/configuration/api'
 redirect_from:
     - /extend/generic-extractor/configuration/api/

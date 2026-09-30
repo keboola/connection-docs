@@ -1,5 +1,6 @@
 ---
 title: Other Data Source Connectors
+lastUpdated: 2026-08-05
 slug: 'components/extractors/other'
 redirect_from:
     - /extractors/other/

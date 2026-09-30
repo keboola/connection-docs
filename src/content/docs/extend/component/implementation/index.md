@@ -1,5 +1,6 @@
 ---
 title: Implementation Notes
+lastUpdated: 2026-08-04
 slug: 'extend/component/implementation'
 redirect_from:
     - /extend/docker/images/

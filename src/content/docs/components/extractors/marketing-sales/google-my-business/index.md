@@ -1,5 +1,6 @@
 ---
 title: Google My Business
+lastUpdated: 2024-02-28
 slug: 'components/extractors/marketing-sales/google-my-business'
 redirect_from:
     - /extractors/marketing-sales/google-my-business/

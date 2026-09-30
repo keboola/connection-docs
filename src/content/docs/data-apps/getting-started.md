@@ -1,5 +1,6 @@
 ---
 title: Build your first app with Kai
+lastUpdated: 2026-07-27
 slug: 'data-apps/getting-started'
 description: Build and publish a Keboola app in about 10 minutes — describe it to Kai, preview the live draft, publish to production. Plus prompting tips, the approval model, and manual creation.
 redirect_from:

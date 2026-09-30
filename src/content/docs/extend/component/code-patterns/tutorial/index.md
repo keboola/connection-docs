@@ -1,5 +1,6 @@
 ---
 title: Code Pattern Quick Start
+lastUpdated: 2026-09-16
 slug: 'extend/component/code-patterns/tutorial'
 ---
 

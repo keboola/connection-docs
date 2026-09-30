@@ -1,5 +1,6 @@
 ---
 title: Snowflake Workspaces Access Changes
+lastUpdated: 2026-08-04
 slug: 'workspace/snowflake-workspaces-access-changes'
 redirect_from:
   - /transformations/workspace/snowflake-workspaces-access-changes/

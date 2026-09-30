@@ -1,5 +1,6 @@
 ---
 title: Telemetry Data
+lastUpdated: 2026-08-04
 slug: 'components/extractors/other/telemetry-data'
 redirect_from:
     - /extractors/other/telemetry-data/

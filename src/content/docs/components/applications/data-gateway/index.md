@@ -1,5 +1,6 @@
 ---
 title: Data Gateway
+lastUpdated: 2026-07-17
 slug: 'components/applications/data-gateway'
 redirect_from:
     - /applications/data-gateway/

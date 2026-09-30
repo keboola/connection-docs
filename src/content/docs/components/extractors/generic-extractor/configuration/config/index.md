@@ -1,5 +1,6 @@
 ---
 title: Extraction Configuration
+lastUpdated: 2026-09-16
 slug: 'components/extractors/generic-extractor/configuration/config'
 redirect_from:
     - /extend/generic-extractor/configuration/config/

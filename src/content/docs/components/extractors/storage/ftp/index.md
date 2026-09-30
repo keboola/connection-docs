@@ -1,5 +1,6 @@
 ---
 title: FTP 
+lastUpdated: 2026-06-19
 slug: 'components/extractors/storage/ftp'
 redirect_from:
     - /extractors/storage/ftp/

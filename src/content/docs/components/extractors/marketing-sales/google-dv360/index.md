@@ -1,5 +1,6 @@
 ---
 title: Google Display & Video 360
+lastUpdated: 2024-01-09
 slug: 'components/extractors/marketing-sales/google-dv360'
 ---
 

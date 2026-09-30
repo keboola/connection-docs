@@ -1,5 +1,6 @@
 ---
 title: PHP Implementation Notes
+lastUpdated: 2026-07-27
 slug: 'extend/component/implementation/php'
 redirect_from:
     - /extend/custom-science/php/

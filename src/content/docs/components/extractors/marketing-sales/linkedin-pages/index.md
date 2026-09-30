@@ -1,5 +1,6 @@
 ---
 title: LinkedIn Pages 
+lastUpdated: 2024-02-28
 slug: 'components/extractors/marketing-sales/linkedin-pages'
 redirect_from:
     - /extractors/marketing-sales/linkedin-pages/

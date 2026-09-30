@@ -1,5 +1,6 @@
 ---
 title: Python Implementation Notes
+lastUpdated: 2026-08-04
 slug: 'extend/component/implementation/python'
 redirect_from:
     - /extend/custom-science/python/

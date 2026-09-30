@@ -1,5 +1,6 @@
 ---
 title: Oracle Transformation
+lastUpdated: 2021-03-26
 slug: 'transformations/oracle'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: OneDrive Excel Sheets
+lastUpdated: 2024-09-25
 slug: 'components/extractors/storage/onedrive-excel-sheets'
 redirect_from:
     - /components/extractors/storage/onedrive/

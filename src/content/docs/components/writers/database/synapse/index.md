@@ -1,5 +1,6 @@
 ---
 title: Synapse
+lastUpdated: 2026-08-04
 slug: 'components/writers/database/synapse'
 redirect_from:
     - /writers/database/synapse/

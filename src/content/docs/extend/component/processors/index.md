@@ -1,5 +1,6 @@
 ---
 title: Processors
+lastUpdated: 2026-09-02
 slug: 'extend/component/processors'
 redirect_from:
     - /integrate/docker-runner/processors/

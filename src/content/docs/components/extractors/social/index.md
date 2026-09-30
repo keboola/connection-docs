@@ -1,5 +1,6 @@
 ---
 title: Social Data Source Connectors
+lastUpdated: 2026-06-22
 slug: 'components/extractors/social'
 redirect_from:
     - /extractors/social/

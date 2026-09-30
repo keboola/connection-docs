@@ -1,5 +1,6 @@
 ---
 title: Basic Authentication
+lastUpdated: 2026-09-16
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/basic'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/basic/

@@ -1,5 +1,6 @@
 ---
 title: JSON Introduction
+lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/tutorial/json'
 redirect_from:
     - /extend/generic-extractor/tutorial/json/

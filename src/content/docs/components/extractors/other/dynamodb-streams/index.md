@@ -1,5 +1,6 @@
 ---
 title: DynamoDB Streams
+lastUpdated: 2024-02-28
 slug: 'components/extractors/other/dynamodb-streams'
 redirect_from:
     - /extractors/other/dynamodb-streams/

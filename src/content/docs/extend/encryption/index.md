@@ -1,5 +1,6 @@
 ---
 title: Encryption
+lastUpdated: 2026-09-16
 slug: 'extend/encryption'
 description: How Keboola encrypts sensitive configuration values, what the `#` key prefix does, and which cipher each combination of Encryption API parameters produces.
 redirect_from:

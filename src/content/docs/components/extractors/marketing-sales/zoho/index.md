@@ -1,5 +1,6 @@
 ---
 title: Zoho
+lastUpdated: 2026-06-19
 slug: 'components/extractors/marketing-sales/zoho'
 ---
 

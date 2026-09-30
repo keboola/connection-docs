@@ -1,5 +1,6 @@
 ---
 title: Build an app locally
+lastUpdated: 2026-07-27
 slug: 'data-apps/build-locally'
 description: How Python/JS app development works — the scaffold, server-side data access, the dev loop, and syncing your own repository to a Keboola project.
 redirect_from:

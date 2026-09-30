@@ -1,5 +1,6 @@
 ---
 title: Query Authentication
+lastUpdated: 2026-08-05
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/query'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/query/

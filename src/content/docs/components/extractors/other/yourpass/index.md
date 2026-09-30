@@ -1,5 +1,6 @@
 ---
 title: YourPass
+lastUpdated: 2024-02-28
 slug: 'components/extractors/other/yourpass'
 redirect_from:
     - /extractors/other/yourpass/

@@ -1,5 +1,6 @@
 ---
 title: n8n Integration
+lastUpdated: 2026-09-16
 slug: 'external-integrations/n8n'
 ---
 

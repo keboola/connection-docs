@@ -1,5 +1,6 @@
 ---
 title: Default Configuration
+lastUpdated: 2026-07-27
 slug: 'extend/component/ui-options/default-configuration'
 ---
 

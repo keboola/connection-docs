@@ -1,5 +1,6 @@
 ---
 title: Apps reference
+lastUpdated: 2026-07-27
 slug: 'data-apps/reference'
 description: Per-app settings, environment variables, data access, backend versions, and limits for Keboola apps.
 redirect_from:

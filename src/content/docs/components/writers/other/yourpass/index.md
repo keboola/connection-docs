@@ -1,5 +1,6 @@
 ---
 title: YourPass
+lastUpdated: 2026-06-19
 slug: 'components/writers/other/yourpass'
 redirect_from:
     - /writers/other/yourpass/

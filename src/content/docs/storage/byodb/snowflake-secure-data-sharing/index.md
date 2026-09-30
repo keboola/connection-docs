@@ -1,5 +1,6 @@
 ---
 title: Snowflake Secure Data Sharing
+lastUpdated: 2026-06-22
 slug: 'storage/byodb/snowflake-secure-data-sharing'
 ---
 

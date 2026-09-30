@@ -1,5 +1,6 @@
 ---
 title: Storage API Importer
+lastUpdated: 2026-08-25
 slug: 'storage/api/importer'
 redirect_from:
     - /integrate/storage/api/importer/

@@ -1,5 +1,6 @@
 ---
 title: Jobs
+lastUpdated: 2026-09-21
 slug: 'management/jobs'
 description: Track component jobs in Keboola — the jobs log and search syntax, the job lifecycle and states, waiting and parallelism limits, and how to terminate a running job.
 ---

@@ -1,5 +1,6 @@
 ---
 title: Google Ad Manager 
+lastUpdated: 2026-06-19
 slug: 'components/extractors/marketing-sales/google-ad-manager'
 redirect_from:
     - /extractors/marketing-sales/google-ad-manager/

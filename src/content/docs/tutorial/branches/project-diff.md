@@ -1,5 +1,6 @@
 ---
 title: Project Diff
+lastUpdated: 2026-08-04
 slug: 'tutorial/branches/project-diff'
 ---
 

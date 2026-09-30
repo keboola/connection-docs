@@ -1,5 +1,6 @@
 ---
 title: Dark Sky
+lastUpdated: 2026-08-05
 slug: 'components/extractors/other/dark-sky'
 redirect_from:
     - /extractors/other/dark-sky/

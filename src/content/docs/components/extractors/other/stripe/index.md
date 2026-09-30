@@ -1,5 +1,6 @@
 ---
 title: Stripe
+lastUpdated: 2026-08-05
 slug: 'components/extractors/other/stripe'
 redirect_from:
     - /extractors/other/stripe/

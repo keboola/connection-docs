@@ -1,5 +1,6 @@
 ---
 title: Gmail Messages
+lastUpdated: 2026-06-19
 slug: 'components/extractors/communication/gmail'
 redirect_from:
     - /extractors/communication/gmail/

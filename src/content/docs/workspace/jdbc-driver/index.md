@@ -1,5 +1,6 @@
 ---
 title: Keboola JDBC Driver
+lastUpdated: 2026-06-30
 slug: 'workspace/jdbc-driver'
 description: Connect DBeaver, DataGrip, Tableau, or any JDBC client to your Keboola project and query your data with standard SQL.
 ---

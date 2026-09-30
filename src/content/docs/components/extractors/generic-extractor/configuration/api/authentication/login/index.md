@@ -1,5 +1,6 @@
 ---
 title: Login
+lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/login'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/login/

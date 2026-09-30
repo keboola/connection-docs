@@ -1,5 +1,6 @@
 ---
 title: Data Takeout
+lastUpdated: 2026-08-04
 slug: 'management/project/export'
 redirect_from:
   - /management/project-export/

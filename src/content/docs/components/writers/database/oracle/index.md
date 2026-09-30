@@ -1,5 +1,6 @@
 ---
 title: Oracle
+lastUpdated: 2026-08-04
 slug: 'components/writers/database/oracle'
 redirect_from:
     - /writers/database/oracle/

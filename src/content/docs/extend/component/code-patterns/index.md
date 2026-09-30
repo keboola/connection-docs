@@ -1,5 +1,6 @@
 ---
 title: Code Patterns
+lastUpdated: 2026-08-04
 slug: 'extend/component/code-patterns'
 ---
 

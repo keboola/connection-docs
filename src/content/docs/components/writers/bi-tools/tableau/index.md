@@ -1,5 +1,6 @@
 ---
 title: Tableau TDE
+lastUpdated: 2026-08-04
 slug: 'components/writers/bi-tools/tableau'
 redirect_from:
     - /writers/bi-tools/tableau/

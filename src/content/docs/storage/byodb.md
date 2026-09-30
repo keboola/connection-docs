@@ -1,5 +1,6 @@
 ---
 title: Bring Your Own Database (BYODB)
+lastUpdated: 2026-02-19
 slug: 'storage/byodb'
 ---
 

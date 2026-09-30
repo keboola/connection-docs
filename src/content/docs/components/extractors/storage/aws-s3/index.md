@@ -1,5 +1,6 @@
 ---
 title: AWS S3
+lastUpdated: 2026-06-19
 slug: 'components/extractors/storage/aws-s3'
 redirect_from:
     - /extractors/other/aws-s3/

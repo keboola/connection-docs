@@ -1,5 +1,6 @@
 ---
 title: Components
+lastUpdated: 2026-09-16
 slug: 'components'
 redirect_from:
     - /storage/configurations/

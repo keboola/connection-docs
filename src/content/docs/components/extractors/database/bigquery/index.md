@@ -1,5 +1,6 @@
 ---
 title: Google BigQuery
+lastUpdated: 2026-08-04
 slug: 'components/extractors/database/bigquery'
 redirect_from:
     - /extractors/database/bigquery/

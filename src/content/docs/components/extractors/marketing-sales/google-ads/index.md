@@ -1,5 +1,6 @@
 ---
 title: Google Ads
+lastUpdated: 2026-08-04
 slug: 'components/extractors/marketing-sales/google-ads'
 redirect_from:
     - /extractors/marketing-sales/google-adwords-reports/

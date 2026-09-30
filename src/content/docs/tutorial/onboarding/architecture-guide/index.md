@@ -1,5 +1,6 @@
 ---
 title: Multi-Project Architecture Guide
+lastUpdated: 2026-08-07
 slug: 'tutorial/onboarding/architecture-guide'
 ---
 

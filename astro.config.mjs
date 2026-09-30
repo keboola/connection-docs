@@ -57,21 +57,23 @@ export default defineConfig({
         Footer: './src/components/Footer.astro',
         // Adds a header link to the Keboola API reference (api.keboola.com).
         SocialIcons: './src/components/SocialIcons.astro',
+        // Empty: PageTitle.astro already shows the date in the page's meta row,
+        // and Starlight would print it a second time in the footer.
+        LastUpdated: './src/components/LastUpdated.astro',
       },
       pagination: true,
-      // lastUpdated is deliberately OFF. PageTitle.astro renders an
-      // "Updated <date>" line when Starlight supplies one, and Starlight takes
-      // that date from each file's last commit — so it needs real git history.
-      // Turning it on was tried and reverted: the production build on Vercel
-      // clones shallow, Starlight's getLastUpdated catches the lookup error and
-      // returns undefined, and the line renders on no page at all. Verified on
-      // the preview for PR #1132.
+      // The date PageTitle.astro renders as "Updated <date>". Every page carries
+      // it in frontmatter, written by scripts/gen-last-updated.mjs — Starlight
+      // prefers that over git and never shells out for it.
       //
-      // To switch it on, the build must first have full history. Vercel has no
-      // documented clone-depth setting, so that means a `git fetch --unshallow`
-      // ahead of `astro build` (vercel.json `buildCommand`, or the project's
-      // build command) — confirm it on a preview before re-adding this, and
-      // restore `fetch-depth: 0` in .github/workflows/*.yml at the same time.
+      // It has to be precomputed. Starlight's own lookup runs `git log` during
+      // the build, and on Vercel that fails on every page: a probe deployed to
+      // a preview found `.git` present and `git --version` working, but every
+      // other git command failing, `rev-parse --git-dir` included. It is not a
+      // shallow clone — `git fetch --unshallow` and publishing `safe.directory`
+      // both changed nothing (PR #1134, four preview deploys). The workflow
+      // .github/workflows/sync-last-updated.yml refreshes the dates weekly.
+      lastUpdated: true,
       editLink: {
         baseUrl: 'https://github.com/keboola/connection-docs/edit/main/',
       },

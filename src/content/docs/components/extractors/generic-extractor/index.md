@@ -1,5 +1,6 @@
 ---
 title: Generic Extractor
+lastUpdated: 2026-09-02
 slug: 'components/extractors/generic-extractor'
 redirect_from:
     - /extend/generic-extractor/

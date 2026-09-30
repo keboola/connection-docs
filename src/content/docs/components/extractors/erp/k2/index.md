@@ -1,5 +1,6 @@
 ---
 title: K2
+lastUpdated: 2026-06-19
 slug: 'components/extractors/erp/k2'
 ---
 

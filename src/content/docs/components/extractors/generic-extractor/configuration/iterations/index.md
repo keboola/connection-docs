@@ -1,5 +1,6 @@
 ---
 title: Iterations
+lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/configuration/iterations'
 redirect_from:
     - /extend/generic-extractor/configuration/iterations/

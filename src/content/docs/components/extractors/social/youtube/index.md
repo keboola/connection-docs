@@ -1,5 +1,6 @@
 ---
 title: YouTube Data API
+lastUpdated: 2026-08-05
 slug: 'components/extractors/social/youtube'
 redirect_from:
     - /extractors/social/youtube/

@@ -1,5 +1,6 @@
 ---
 title: "Cheat Sheet: Best Practices"
+lastUpdated: 2026-08-08
 slug: 'tutorial/onboarding/cheat-sheet'
 ---
 

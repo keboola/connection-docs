@@ -1,5 +1,6 @@
 ---
 title: Generic Writer Configuration
+lastUpdated: 2026-08-25
 slug: 'components/writers/generic-writer/configuration'
 redirect_from:
     - /extend/generic-writer/configuration/

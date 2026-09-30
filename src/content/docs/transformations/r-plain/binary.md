@@ -1,5 +1,6 @@
 ---
 title: Using Binary Files
+lastUpdated: 2025-07-04
 slug: 'transformations/r-plain/binary'
 redirect_from:
     - /manipulation/transformations/r/binary/

@@ -1,5 +1,6 @@
 ---
 title: Kai Best Practices
+lastUpdated: 2026-09-01
 slug: 'kai/best-practices'
 ---
 

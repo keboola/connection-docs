@@ -1,5 +1,6 @@
 ---
 title: Management
+lastUpdated: 2026-08-04
 slug: 'management'
 redirect_from:
   - /tutorial/management/

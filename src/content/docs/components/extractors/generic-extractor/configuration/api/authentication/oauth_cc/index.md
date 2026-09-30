@@ -1,5 +1,6 @@
 ---
 title: oAuth 2.0 Client Credentials Authentication
+lastUpdated: 2026-08-05
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth_cc'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth_cc/
