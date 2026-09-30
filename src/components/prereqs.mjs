@@ -6,15 +6,13 @@
 // page whose prerequisites are invisible there is a page an agent will
 // happily start without a project.
 //
-// The box has up to three lists (Nikita, 2026-09-24: "I want to see the
-// concrete things I need to start"). "You need" holds the things themselves,
+// The box has up to three lists. "You need" holds the things themselves,
 // one per item, the thing first and then where to get it. A page with two
 // ways through it (build-locally: with an agent or by hand) adds a second
 // list under its own label. "Depending on the tab you use" says what each tab
 // of a Prompt / UI / CLI page needs.
 //
-// Moved here from src/components/getting-started/ (PR #1144) so every section
-// uses the same box. The `project` item links the Free Plan sign-up because
+// TODO: the `project` item links the Free Plan sign-up because
 // /getting-started/project/ is not on main yet; once it is, point the item
 // there ("Get a project"), and every page that uses the box follows.
 
@@ -33,6 +31,9 @@ const KAI_WHERE =
 export const SHARED = {
   project:
     '<strong>A Keboola project.</strong> No project yet? <a href="https://connection.us-east4.gcp.keboola.com/wizard">Create a free one</a>.',
+  // for a page that needs Kai, listed before `kai`; no sign-up link, because
+  // whether the Free Plan includes apps is still open
+  projectWithKai: '<strong>A Keboola project</strong> on a stack where Kai is available.',
   google:
     '<strong>A Google account</strong> you can sign in with, to approve Keboola\'s access.',
   kai: `<strong>Kai</strong>, ${KAI_WHERE}`,
@@ -42,9 +43,9 @@ export const SHARED = {
  * What each tab needs, in tab order. A page passes `tabs={3}` for Prompt, UI
  * and CLI / API, or `tabs={2}` for Prompt and UI. `html` is the default line;
  * a page whose tab needs something else overrides it with a named slot,
- * `<span slot="ui">…</span>`, because one global line was false on some pages
- * (2026-09-25: the UI tab of ask/ needs a workspace, of app/ a Git repository;
- * Kai from a terminal needs a master token).
+ * `<span slot="ui">…</span>`, because one line can't fit every page: one UI
+ * tab needs a workspace, another a Git repository, and Kai from a terminal
+ * needs a master token.
  */
 export const TABS = [
   { key: 'prompt', label: 'Prompt tab', html: `Kai, ${KAI_WHERE}` },

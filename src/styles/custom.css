@@ -2391,7 +2391,7 @@ nav.sidebar {
 /* ───────── Prerequisites box (src/components/Prereqs.astro) ───────── */
 /* "Before you start", then "You need" and up to two more lists. One component
    renders every prerequisites block on the site, so the look cannot drift from
-   page to page. Spacing as tuned on the Getting Started branch (PR #1144). */
+   page to page. */
 .prereqs {
   margin: 0 0 1.5rem;
   padding: 0.85rem 1.1rem;
@@ -2423,7 +2423,7 @@ nav.sidebar {
 .prereqs__label + .prereqs__group { margin-top: 0; }
 
 /* ───────── Stage strip (src/components/StageStrip.astro) ───────── */
-/* Numbered dots on a line, as on the Getting Started hub poster. Horizontal while
+/* Numbered dots on a line, one per stage. Horizontal while
    the content column is wide, vertical with the text beside the dots when it is
    not: a container query, because between 800 and 1400 px the sidebar leaves the
    column about 450 px wide. Dots and line in --kbc-blue-600, where white numerals

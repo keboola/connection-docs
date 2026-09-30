@@ -1,10 +1,8 @@
 ---
 // The prerequisites box, rendered from one place on every page that has one.
 //
-// Hand-written prerequisite lists drift within a release cycle — Cloudflare
-// renders its prerequisites partial 4,087 times across 1,966 pages for exactly
-// this reason. At our scale one component does, but the principle is the same:
-// change the wording in prereqs.mjs, not on eleven pages.
+// Hand-written prerequisite lists drift apart from page to page, so the
+// wording lives in prereqs.mjs and changes there, once.
 //
 // Up to three lists under the "Before you start" label:
 //   "You need": the shared items named by `needs`, then anything page-specific
@@ -33,7 +31,7 @@ import { LABELS, SHARED, TABS } from './prereqs.mjs';
 
 interface Props {
   /** Shared "You need" items, in the order they should appear. */
-  needs?: Array<'project' | 'google' | 'kai'>;
+  needs?: Array<'project' | 'projectWithKai' | 'google' | 'kai'>;
   /** How many tabs the page offers: 3 (Prompt, UI, CLI / API), 2 (Prompt, UI) or 0. */
   tabs?: 0 | 2 | 3;
   /** Anchor for the box when the page links to it. Leave it out on a page with several boxes. */

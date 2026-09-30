@@ -108,6 +108,8 @@ function prereqsTabsToText(tag, overrides = {}) {
  * lowercase HTML written inline in a page is left alone. Three of them carry
  * meaning a reader needs and are rendered rather than dropped: a tab's
  * `label`, <Prereqs>, and <StageStrip>, which prints as a numbered list.
+ * MDX comments become HTML comments, except inside those two lists, where
+ * they are dropped.
  */
 function stripMdx(body) {
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
@@ -117,6 +119,9 @@ function stripMdx(body) {
   );
 
   const INDENT = '    ';
+  // Comments inside <Prereqs> and <StageStrip> are dropped: a markdown list
+  // can't hold them, and glued to the next item they'd hide its slot="group".
+  const COMMENT = /<!--[\s\S]*?-->/g;
   const open = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*(?<!\/)>\s*$/;
   const selfClosing = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*\/>\s*$/;
   const close = /^\s*<\/[A-Z][A-Za-z0-9]*\s*>\s*$/;
@@ -138,12 +143,13 @@ function stripMdx(body) {
     }
     if (close.test(line)) {
       depth = Math.max(0, depth - 1);
-      if (/^\s*<\/StageStrip>/.test(line)) { inStrip = false; out.push(''); }
+      if (/^\s*<\/StageStrip>/.test(line)) { inStrip = false; slot.length = 0; out.push(''); }
       if (/^\s*<\/Prereqs>/.test(line)) {
         out.push(...prereqsGroupToText(prereqsTag, groupItems), ...prereqsTabsToText(prereqsTag, prereqsTabs));
         inPrereqs = false;
         prereqsTabs = {};
         groupItems.length = 0;
+        slot.length = 0;
       }
       continue;
     }
@@ -169,7 +175,7 @@ function stripMdx(body) {
       // one <li> per stage: flatten it, number it, and end the bold title with a period
       slot.push(text);
       if (/<\/li>/.test(text)) {
-        const item = inlineToMarkdown(slot.join(' ')).replace(/^- /, '');
+        const item = inlineToMarkdown(slot.join(' ').replace(COMMENT, '')).replace(/^- /, '');
         slot.length = 0;
         if (item) out.push(`${++stripN}. ${item.replace(/^\*\*(.+?)\*\*\s*/, '**$1.** ')}`);
       }
@@ -179,7 +185,7 @@ function stripMdx(body) {
       // the slots hold raw <li> JSX, or a tab's own line as <span slot="…">;
       // buffer until the item closes, then flatten
       slot.push(text);
-      const joined = slot.join(' ');
+      const joined = slot.join(' ').replace(COMMENT, '');
       const tabLine = joined.match(/^\s*<span slot="(prompt|ui|cli)">([\s\S]*)<\/span>\s*$/);
       if (tabLine) {
         prereqsTabs[tabLine[1]] = inlineToMarkdown(tabLine[2]);
