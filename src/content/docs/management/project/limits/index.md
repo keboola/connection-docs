@@ -125,7 +125,7 @@ The Python/JS rates apply from October 15, 2026. Until then, Python/JS apps use 
 <span id="apps-backend-sizes"></span>
 **Backend sizes for Apps**
 
-You pick the size in the app's **Backend Size** setting. The time credits for each size are in the [Apps rows](#apps) above.
+You pick the size in the **Backend Size** field of the deploy wizard, each time you deploy or start the app. The time credits for each size are in the [Apps rows](#apps) above.
 
 | Backend size | Specification                                  |
 |--------------|------------------------------------------------|
