@@ -390,7 +390,7 @@ production-quality SQL and managing data consistency themselves. Typical use cas
 
 #### Supported Backends
 Direct Mode output mapping is available for any component that uses a **Snowflake** or **BigQuery** workspace,
-including [transformations](/transformations/), [data apps](/components/data-apps/), and
+including [transformations](/transformations/), [data apps](/data-apps/), and
 [workspaces](/workspace/) — both standalone Snowflake/BigQuery workspaces and workspaces opened in the
 [SQL Editor](/workspace/sql-editor/).
 
