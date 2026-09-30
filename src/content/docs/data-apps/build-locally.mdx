@@ -140,9 +140,9 @@ Through a Keboola MCP server, the agent doesn't run kbagent. It calls the server
 
 ### What you get by default
 
-Unless the prompt says otherwise, a dashboard comes out as a Python/JS app built with Node.js and Chart.js, with its code in a new Keboola-managed Git repository. The app runs at the XSmall size, sleeps after 15 minutes without visitors, gets access to your Storage data and sits behind a shared password. On the kbagent route, Storage access works only once the repository block is added; see [If the app can't read Storage](#if-the-app-cant-read-storage).
+Unless the prompt says otherwise, a dashboard comes out as a Python/JS app built with Node.js and Chart.js, with its code in a new Keboola-managed Git repository. The app runs at the XSmall size, sleeps after 15 minutes without visitors, gets access to your Storage data and sits behind a shared password. On the kbagent route, the app can read Storage only once the repository block is added; see [If the app can't read Storage](#if-the-app-cant-read-storage).
 
-The agent usually can't show you that password, because `kbagent data-app password` needs a Manage API token. The password is on the app's page in Keboola, next to **Open App**: open **Apps** from the left navigation and then your app. The example prompt in [Describe the app](#describe-the-app) asks the agent for a direct link to that page.
+The agent usually can't show you that password, because `kbagent data-app password` needs a Manage API token. To find the app's page, open **Apps** from the left navigation and then your app. The example prompt in [Describe the app](#describe-the-app) asks the agent for a direct link to that page.
 
 To make the app public, say so in the prompt. Anyone with its URL can then open it and see the data it shows. Changing an existing app's sign-in, including to single sign-on, belongs in its [Authentication](/data-apps/authentication/) settings.
 
