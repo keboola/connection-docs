@@ -116,11 +116,25 @@ The Python/JS rates apply from October 15, 2026. Until then, Python/JS apps use 
 | MEDIUM (SQL)                          | Snowflake MEDIUM DWH                            |
 | LARGE (SQL)                           | Snowflake LARGE DWH                             |
 | XSMALL (Python, R, DuckDB, Components)         | 8 GB RAM, 1 CPU cores, 150GB SSD, shared     |
-| SMALL (Python, R, DuckDB, Components, Apps) | 16 GB RAM, 2 CPU cores, 150GB SSD, shared    |
+| SMALL (Python, R, DuckDB, Components)         | 16 GB RAM, 2 CPU cores, 150GB SSD, shared    |
 | MEDIUM (Python, R, DuckDB, Components)         | 32 GB RAM, 4 CPU cores, 150GB SSD, shared    |
 | LARGE (Python, R, DuckDB, Components)          | 114 GB RAM, 14 CPU cores, 1TB SSD, dedicated |
 | SMALL (dbt)                           | Snowflake SMALL DWH or equivalent               |
 | REMOTE (dbt)                          | Using user's remote DWH                         |
+
+<span id="apps-backend-sizes"></span>
+**Backend sizes for Apps**
+
+You pick the size in the app's **Backend Size** setting. The time credits for each size are in the [Apps rows](#apps) above.
+
+| Backend size | Specification                                  |
+|--------------|------------------------------------------------|
+| XSMALL       | 8 GB RAM, 1 CPU core, 1 TB SSD, shared         |
+| SMALL        | 16 GB RAM, 2 CPU cores, 1 TB SSD, shared       |
+| MEDIUM       | 32 GB RAM, 4 CPU cores, 1 TB SSD, shared       |
+| LARGE        | 114 GB RAM, 14 CPU cores, 1 TB SSD, dedicated  |
+
+<!-- Sizes from the Backend Size picker in the Apps UI, sent by Miro Cillik on 2026-09-30. VERIFY(Miro): on 2026-09-29 he said Apps pods are moving to dynamic resource allocation ("up to 8 GB" instead of fixed CPU and memory); confirm whether this table should say "up to" once that ships. -->
 
 #### Kai Agent
 
