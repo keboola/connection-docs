@@ -21,7 +21,7 @@ Each app has its own configuration.
 | Authentication | Who can open the app — None, Basic, OIDC, GitHub, GitLab, or JumpCloud. See [Authentication](/data-apps/authentication/). |
 | Code Source | Where the app's code comes from — inline **Code** or a **Git Repository**. |
 | Backend version | The runtime image (Python version and, for Streamlit, the Streamlit version). See [Backend versions](#backend-versions). |
-| Backend size | The compute allocated to the app (for example XSmall, Small); chosen on deploy. |
+| Backend size | The compute allocated to the app (for example XSmall, Small); chosen on deploy. The hourly rate in time credits depends on the size and the framework. See [Project Limits](/management/project/limits/#project-power--time-credits). |
 | Auto-sleep | The inactivity timeout before the app suspends. See [Sleep and resume](#sleep-and-resume). |
 | URL | The address where the app is served. |
 | Versioning | Draft vs production versions of the app, on the **Versions** tab. |
