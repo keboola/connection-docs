@@ -1,5 +1,6 @@
 ---
 title: Response Parameter Scroller
+description: The Response Parameter Scroller can be used with APIs that provide a certain kind of value in the response which must be used in the next request.
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/response-param'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/response-param/

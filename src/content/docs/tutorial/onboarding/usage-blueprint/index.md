@@ -1,5 +1,6 @@
 ---
 title: Keboola Platform Usage Blueprint
+description: Keboola organization admin is a role with permissions to.
 slug: 'tutorial/onboarding/usage-blueprint'
 ---
 

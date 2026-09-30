@@ -1,5 +1,6 @@
 ---
 title: Default Configuration
+description: To make configuring a component easier for users, you can provide a default configuration for it.
 slug: 'extend/component/ui-options/default-configuration'
 ---
 

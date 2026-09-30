@@ -1,5 +1,6 @@
 ---
 title: OAuth 2.0 Authentication
+description: OAuth 2.0 Authentication is one of two OAuth methods and is supported only for components registered in the developer portal.
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth20'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth20/

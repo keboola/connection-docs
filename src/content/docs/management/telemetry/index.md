@@ -1,5 +1,6 @@
 ---
 title: Telemetry
+description: In Keboola, customers are provided with three levels of detail for telemetry data and two ways to use the data.
 slug: 'management/telemetry'
 ---
 

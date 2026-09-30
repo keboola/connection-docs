@@ -1,5 +1,6 @@
 ---
 title: External Datasets
+description: 'Make data already in your own warehouse visible in Keboola with External Datasets — requires BYODB to be enabled first.'
 slug: 'storage/byodb/external-buckets'
 ---
 

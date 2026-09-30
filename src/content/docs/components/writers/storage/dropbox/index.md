@@ -1,5 +1,6 @@
 ---
 title: Dropbox
+description: This data destination connector sends tables as CSV or other files into a single Dropbox account.
 slug: 'components/writers/storage/dropbox'
 redirect_from:
     - /writers/storage/dropbox/

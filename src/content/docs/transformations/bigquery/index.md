@@ -1,5 +1,6 @@
 ---
 title: Google BigQuery Transformation
+description: BigQuery offers a range of features.
 slug: 'transformations/bigquery'
 ---
 

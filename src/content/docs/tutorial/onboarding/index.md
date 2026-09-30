@@ -1,5 +1,6 @@
 ---
 title: Keboola Platform Onboarding
+description: 'Move from a proof of concept or the free tier to production Keboola — what to set up, in what order.'
 slug: 'tutorial/onboarding'
 ---
 

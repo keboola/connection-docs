@@ -1,5 +1,6 @@
 ---
 title: Publish Component
+description: As described in the architecture overview, Keboola consists of many different components.
 slug: 'extend/publish'
 redirect_from:
     - /extend/registration/checklist/

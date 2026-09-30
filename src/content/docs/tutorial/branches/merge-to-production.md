@@ -1,5 +1,6 @@
 ---
 title: Merge to Production
+description: After you have checked your changes in the branch, you can merge the branch back to production.
 slug: 'tutorial/branches/merge-to-production'
 ---
 

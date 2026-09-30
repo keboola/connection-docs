@@ -1,5 +1,6 @@
 ---
 title: Logging Specification
+description: There are two main, mutually exclusive, ways in which your component can display events Keboola end-users.
 slug: 'extend/common-interface/logging'
 ---
 

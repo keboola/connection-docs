@@ -1,5 +1,6 @@
 ---
 title: Google Ads
+description: This data source connector allows you to import data from Google Ads. If you do not have a Google Ads manager account, follow this guide to set it up.
 slug: 'components/extractors/marketing-sales/google-ads'
 redirect_from:
     - /extractors/marketing-sales/google-adwords-reports/

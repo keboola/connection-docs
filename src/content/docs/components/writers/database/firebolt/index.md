@@ -1,5 +1,6 @@
 ---
 title: Firebolt
+description: This data destination connector sends data to a Firebolt database.
 slug: 'components/writers/database/firebolt'
 redirect_from:
     - /writers/database/firebolt/

@@ -1,5 +1,6 @@
 ---
 title: Available Dimensions
+description: 'Every dimension available in Adform DSP reports, and the API call that returns the current list.'
 slug: 'components/extractors/marketing-sales/adform-dsp-reports/available-dimensions'
 redirect_from:
     - /extractors/marketing-sales/adform-dsp-reports/available-dimensions/

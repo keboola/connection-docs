@@ -1,5 +1,6 @@
 ---
 title: Storage PHP Client Library
+description: The Storage API PHP client library is a portable command line client providing the most complete Storage API implementation.
 slug: 'storage/api/clients/php-client'
 redirect_from:
     - /integrate/storage/php-client/

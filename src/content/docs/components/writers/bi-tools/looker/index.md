@@ -1,5 +1,6 @@
 ---
 title: Looker
+description: This data destination connector pushes data to your Looker instance where it creates a new LookML project.
 slug: 'components/writers/bi-tools/looker'
 redirect_from:
     - /writers/bi-tools/looker/

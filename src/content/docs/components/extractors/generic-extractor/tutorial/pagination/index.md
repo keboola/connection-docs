@@ -1,5 +1,6 @@
 ---
 title: Pagination Tutorial
+description: Pagination breaks a result with a large number of items into separate pages and is used very commonly in many API calls.
 slug: 'components/extractors/generic-extractor/tutorial/pagination'
 redirect_from:
     - /extend/generic-extractor/tutorial/pagination/

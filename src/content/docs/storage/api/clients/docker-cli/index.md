@@ -1,5 +1,6 @@
 ---
 title: Storage Docker CLI Client
+description: The Storage API Docker command line interface (CLI) client is a portable command line client which provides a simple implementation of Storage API.
 slug: 'storage/api/clients/docker-cli'
 redirect_from:
     - /integrate/storage/docker-cli-client/

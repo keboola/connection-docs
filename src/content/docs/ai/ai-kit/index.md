@@ -1,5 +1,6 @@
 ---
 title: AI Kit
+description: AI Kit is a plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development.
 slug: 'ai/ai-kit'
 ---
 

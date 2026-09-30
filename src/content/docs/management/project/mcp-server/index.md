@@ -1,5 +1,6 @@
 ---
 title: MCP Server
+description: 'Connect MCP clients such as Cursor, Claude, Windsurf, or VS Code to your Keboola project so an AI assistant can work with your data.'
 slug: 'management/project/mcp-server'
 ---
 

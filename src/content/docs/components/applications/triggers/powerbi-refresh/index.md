@@ -1,5 +1,6 @@
 ---
 title: Power BI Refresh
+description: The Power BI Refresh application automatically triggers dataset refreshes in your Power BI workspace.
 slug: 'components/applications/triggers/powerbi-refresh'
 ---
 

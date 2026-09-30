@@ -1,5 +1,6 @@
 ---
 title: Working with Tables in Branch
+description: So far, you have prepared table and file manipulating configurations in production.
 slug: 'tutorial/branches/tables-in-branch'
 ---
 

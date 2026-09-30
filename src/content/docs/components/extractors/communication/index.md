@@ -1,5 +1,6 @@
 ---
 title: Communication Data Source Connectors
+description: 'Data source connectors for communication tools — email, calendars, chat, and support systems into Storage.'
 slug: 'components/extractors/communication'
 redirect_from:
     - /extractors/communication/

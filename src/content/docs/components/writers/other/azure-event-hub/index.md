@@ -1,5 +1,6 @@
 ---
 title: Azure Event Hub
+description: This data destination connector allows you to publish events to the Azure Event Hubs.
 slug: 'components/writers/other/azure-event-hub'
 redirect_from:
     - /writers/other/azure-event-hub/

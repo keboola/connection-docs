@@ -1,5 +1,6 @@
 ---
 title: ABS Staging
+description: 'Download file data straight from Azure Blob Storage — the abs section added to input file manifests and the credentials it carries.'
 slug: 'extend/common-interface/manifest-files/in-files-abs-staging'
 ---
 

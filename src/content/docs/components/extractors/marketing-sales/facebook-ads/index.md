@@ -1,5 +1,6 @@
 ---
 title: Facebook Ads
+description: This data source connector uses the Facebook Marketing API to extract Facebook Ad Account ads (including adsets, campaigns), as well as ads insights.
 slug: 'components/extractors/marketing-sales/facebook-ads'
 redirect_from:
     - /extractors/marketing-sales/facebook-ads/

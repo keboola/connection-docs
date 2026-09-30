@@ -1,5 +1,6 @@
 ---
 title: Keboola Governance Guide
+description: 'Govern your Keboola usage — monitor operating costs, enforce the rules set in your usage blueprint, and keep access under control.'
 slug: 'tutorial/onboarding/governance-guide'
 ---
 

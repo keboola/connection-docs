@@ -1,5 +1,6 @@
 ---
 title: Running Components
+description: One of the great advantages of dockerized components is that the components always run in the same environment defined by the Docker image.
 slug: 'extend/component/running'
 redirect_from:
     - /extend/docker/running/

@@ -1,5 +1,6 @@
 ---
 title: "Part 2: Data Manipulation"
+description: 'Transform the tables you loaded — write your first SQL transformation over the account, opportunity, level, and user tables.'
 slug: 'tutorial/manipulate'
 ---
 

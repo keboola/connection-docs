@@ -1,5 +1,6 @@
 ---
 title: Mapping
+description: If you are new to Generic Extractor, learn about mapping in our tutorial first. Use the Parameter Map to help you navigate among various configuration options.
 slug: 'components/extractors/generic-extractor/configuration/config/mappings'
 redirect_from:
     - /extend/generic-extractor/configuration/config/mappings/

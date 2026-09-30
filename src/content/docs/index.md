@@ -1,5 +1,6 @@
 ---
 title: Keboola User Documentation
+description: 'Step-by-step guides and reference for the Keboola platform — load data, transform it, automate pipelines, and deliver results to where they are used.'
 slug: ''
 ---
 

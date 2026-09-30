@@ -1,5 +1,6 @@
 ---
 title: Keboola Getting Started Tutorial
+description: 'Learn Keboola end to end — extract data from your sources, transform it, store it, deliver it onward, and automate the whole pipeline.'
 slug: 'tutorial'
 redirect_from:
   - /getting-started/

@@ -1,5 +1,6 @@
 ---
 title: Google BigQuery
+description: This data destination connector sends data to a Google BigQuery dataset.
 slug: 'components/writers/database/bigquery'
 redirect_from:
     - /writers/database/bigquery/

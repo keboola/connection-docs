@@ -1,5 +1,6 @@
 ---
 title: JSON Introduction
+description: JSON (JavaScript Object Notation) is an easy-to-work-with format for describing structured data.
 slug: 'components/extractors/generic-extractor/tutorial/json'
 redirect_from:
     - /extend/generic-extractor/tutorial/json/

@@ -1,5 +1,6 @@
 ---
 title: Data Source Connectors
+description: Data source connectors (formerly known as extractors) are Keboola components used for importing data from external sources into Keboola.
 slug: 'components/extractors'
 redirect_from:
     - /extractors/

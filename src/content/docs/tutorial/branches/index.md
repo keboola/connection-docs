@@ -1,5 +1,6 @@
 ---
 title: "Part 6: Development Branches"
+description: 'Change component configurations safely in a development branch, without touching running configurations or automated pipelines.'
 slug: 'tutorial/branches'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Exasol Cluster Starter
+description: The Exasol Cluster starter is used for starting and stopping Exasol Cloud clusters.
 slug: 'components/applications/triggers/exasol-cluster-starter'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Development Branches
+description: If you already know how development branches work in general and want to create and start using your first branch, go to our Getting Started tutorial.
 slug: 'components/branches'
 ---
 

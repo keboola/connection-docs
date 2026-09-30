@@ -1,5 +1,6 @@
 ---
 title: Cursor Scroller
+description: The Cursor Scroller can be used with an API which expects the client to maintain a cursor (pointer) to the last obtained item.
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/cursor'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/cursor/
