@@ -1,0 +1,40 @@
+---
+// Numbered dots on a line, the picture the Getting Started hub clip draws
+// (public/getting-started/hub-explainer-poster.png), for a how-to whose reader
+// walks through 3 to 6 stages. The dot-and-segment technique is CourseLine's
+// (src/components/getting-started/CourseLine.astro, PR #1144); that component
+// draws the course from its own data, this one takes a page's stages as children:
+//
+//   <StageStrip label="Building by hand from a terminal, in four stages" caption="From a terminal">
+//     <li><strong><a href="#app-structure">Write the code</a></strong> A standard web app, plus a small configuration folder.</li>
+//     ...
+//   </StageStrip>
+//
+// One <li> per stage: the title in <strong> first (linked to the stage's heading
+// when it has one), then 12 words or fewer. Keep the opening tag and each <li> on
+// one line: the markdown twin (page-markdown.mjs) reads them line by line and
+// prints the stages as a numbered list. Styles: .stage-strip in custom.css; the
+// strip turns vertical when the content column is narrow (a container query).
+
+interface Props {
+  /** Accessible name of the list; the markdown twin prints it in bold as the strip's heading. */
+  label?: string;
+  /** A short visible caption above the dots, for a strip that follows one of several routes. */
+  caption?: string;
+}
+
+const { label, caption } = Astro.props;
+const raw = Astro.slots.has('default') ? await Astro.slots.render('default') : '';
+// MDX wraps a multi-line <li> in <p>. The title is the item's first <strong>,
+// tagged with a class because :first-child ignores text nodes (CLAUDE.md).
+const html = raw
+  .replace(/<\/?p>/g, '')
+  .replace(/(<li(?:\s[^>]*)?>)\s*<strong>/g, '$1<strong class="stage-strip__title">');
+const stages = (html.match(/<li\b/g) || []).length;
+if (stages < 3 || stages > 6) console.warn(`StageStrip: ${stages} stages; a strip reads best with 3 to 6`);
+---
+
+<div class="stage-strip not-content">
+  {caption && <p class="stage-strip__caption">{caption}</p>}
+  <ol class="stage-strip__list" role="list" aria-label={label} set:html={html} />
+</div>
