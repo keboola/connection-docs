@@ -11,7 +11,7 @@ Apps let you build interactive applications — dashboards, tools, internal apps
 
 ## What a Keboola app is
 
-A Keboola app is a **Python/JS application hosted by your project**. It runs next to your data and gets its own URL you can share. Apps sleep when idle and wake on the first visit, so they cost nothing while nobody is looking. There's no infrastructure to manage and nothing is copied to an outside service — the app reads Storage through the project's own permissions.
+A Keboola app is a **Python/JS application hosted by your project**. It runs next to your data and gets its own URL you can share. Apps sleep when idle and wake on the first visit, and a sleeping app costs nothing. While an app is awake, including the idle wait before it sleeps, it uses time credits at an hourly rate set by its framework (Python/JS or Streamlit) and backend size; [Project Limits](/management/project/limits/#project-power--time-credits) lists the rates. There's no infrastructure to manage and nothing is copied to an outside service — the app reads Storage through the project's own permissions.
 
 You can put an app in front of anyone: your team (behind [authentication](/data-apps/authentication/)), a client, or the public. And an app isn't limited to human visitors — it can expose an API or an MCP server so other agents and services can call it.
 
@@ -21,14 +21,18 @@ For the full explanation — how apps fit into the platform and how they're isol
 
 Dashboards and reports, internal tools, data narratives, configurators, and agent-facing services — see [what you can build](/data-apps/what-are-apps/#what-you-can-build) for the full picture. Dashboards are just the start: **[Beyond dashboards](#beyond-dashboards)** below shows the range.
 
-## Two ways to build
+## Three ways to build
 
-- **[Build with Kai](/data-apps/getting-started/)** — describe the app in plain language and Kai reads your data, builds a live draft you preview and refine, and publishes when you're ready. No coding needed — the walkthrough takes about 10 minutes. The same **Create App** screen also offers [manual creation](/data-apps/getting-started/#create-an-app-manually) if you'd rather configure the app yourself.
-- **[Build locally](/data-apps/build-locally/)** — develop with your own tools and Git account, use the [AI Kit](/ai/ai-kit/) coding-assistant plugins, and sync the app to your project. For developers who want full control — that page covers how Python/JS development works day to day.
+- **[Build with Kai](/data-apps/getting-started/)** — describe the app in plain language and Kai reads your data, builds a live draft you preview and refine, and publishes when you're ready. No coding needed — the walkthrough takes about 10 minutes. The same **Create App** screen also offers [manual creation](/data-apps/getting-started/#create-an-app-manually) if you'd rather configure the app yourself. **You need:** a Keboola project. Nothing else.
+- **[Build locally](/data-apps/build-locally/)** — develop with your own tools and Git account, and sync the app to your project. For developers who want full control — that page covers how Python/JS development works day to day. **You need:** a Git account and somewhere to host the repository; about half an hour the first time.
+- **[Build with an AI agent](/data-apps/build-with-an-agent/)** — ask Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT app for the app in one prompt. With Keboola's `dataapp-developer` plugin and [kbagent](/cli/), the agent reads your data, writes the code, creates the app in a Keboola-managed repository and deploys it. **You need:** kbagent connected to your project and one of those clients.
+  <!-- VERIFY(Nikita): run end to end in Claude Code only. Claude Desktop may take the MCP-only path without kbagent; Cursor, VS Code and the ChatGPT app not run yet. -->
+
+On all three routes, a Python/JS app ends up in a Git repository, either one Keboola manages for the app or one you host. [Two ways to run an app](/data-apps/what-are-apps/#two-ways-to-run-an-app) explains what each gives you, including why the Kai builder appears on one and not the other.
 
 ## Run and share
 
-Every app has its own settings page in **Apps**: who can open it ([Authentication](/data-apps/authentication/) — public, password, or your company SSO), its URL and how to [publish and share](/data-apps/publish-and-share/) it, and operational settings like backend size and auto-sleep ([Reference](/data-apps/reference/)). Deploying and redeploying is one click; logs are right on the app's detail.
+Every app has its own settings page in **Apps**: who can open it ([Authentication](/data-apps/authentication/) — public, password, or your company SSO), its URL and how to [publish and share](/data-apps/publish-and-share/) it, and operational settings like backend size and auto-sleep ([Reference](/data-apps/reference/)). Deploying and redeploying is one click; logs are right on the app's detail. Once it's live, [Operate and update an app](/data-apps/operate/) covers the day-to-day work and [Troubleshooting](/data-apps/troubleshooting/) covers the days it goes wrong.
 
 ## Beyond dashboards
 

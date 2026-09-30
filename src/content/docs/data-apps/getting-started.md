@@ -17,8 +17,10 @@ Apps go well beyond dashboards — the same steps produce internal tools, data n
 - At least one table in **Storage** — Kai reads your data directly, so it works with whatever you already have.
 - A few minutes.
 
-:::tip[Get your agent started right away]
-Building with Claude Code, Cursor, or Copilot? Grab the skill and add it to your agent — or install the full [AI Kit](/ai/ai-kit/) plugin marketplace. The download is the complete skill folder: the skill itself, ready-made app templates (Python, Node.js, full-stack, Streamlit), and reference guides your agent can draw on.
+:::tip[Building with an AI agent?]
+[Build an app with an AI agent](/data-apps/build-with-an-agent/) sets up Claude Code or Claude Desktop with Keboola's plugins and walks through one prompt to a deployed app. To add the skill to an agent by hand, the download is a copy of the skill folder: the skill itself, ready-made app templates (Python, Node.js, full-stack, Streamlit), and reference guides your agent can draw on.
+
+<!-- VERIFY(Michal Ševčík): the zip is a 2026-07-09 snapshot of the skill and lacks references/python-js-prod-and-drafts.md from dataapp-developer 1.6.1. Refresh it or link to keboola/ai-kit instead. -->
 
 <a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.zip" download="keboola-dataapp-development-skill.zip">⬇ Download the app-building skill (with templates)</a>
 :::
@@ -101,11 +103,13 @@ Prefer to set the app up yourself, without the chat? Manual creation lives on th
 
 ![The app's configuration page: the Overview tab with Authentication and a Git Repository section, plus the App Info panel showing backend version, size, auto-sleep, and App ID](/data-apps/build-in-ui-config.png)
 
-6. Click **Deploy App**. A short wizard asks for the **backend size** and an **inactivity timeout**, then deploys the app. (The same wizard runs on **Redeploy**.)
+6. Click **Deploy App**. A short wizard asks for the **backend version**, the **backend size** and an **inactivity timeout**, then deploys the app. (The same wizard runs on **Redeploy**.)
 
-![The deploy/redeploy wizard: backend size and inactivity timeout](/data-apps/deploy-timeout-backedsize.png)
+![The deploy/redeploy wizard: backend version, backend size and inactivity timeout](/data-apps/deploy-timeout-backedsize.png)
 
 7. When the status turns **Active**, click **Open App** to open it at its public URL. Use **Redeploy** to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
+
+From here on, the app is something you run rather than something you build: [Operate and update an app](/data-apps/operate/) covers shipping changes, secrets, sleeping and versions.
 
 ---
 
