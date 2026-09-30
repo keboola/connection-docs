@@ -24,7 +24,7 @@ To build inside Keboola instead, [Kai](/data-apps/getting-started/) does the sam
 
 <Prereqs id="before-you-start" needs={['project']} groupLabel="Depending on how you build">
   <li>
-    <strong>A table in Storage</strong> with the data the app should show. No data yet? Download
+    <strong>A table in Storage</strong> with the data you want the app to show. No data yet? Download
     the sample <a href="/tutorial/opportunity.csv">opportunity.csv</a> and load it as in{' '}
     <a href="/tutorial/load/#manual-data-loading">Manual Data Loading</a>, which takes a few
     minutes and gives you the table <code>in.c-csv-import.opportunity</code>;{' '}
@@ -61,16 +61,6 @@ With the `dataapp-developer` plugin from Keboola's [AI Kit](/ai/ai-kit/), the ag
   <li><strong>The agent builds it</strong> It reads your data, writes code and deploys; you approve its commands.</li>
   <li><strong><a href="#check-the-app">Check the app</a></strong> On its page in Keboola, Open App has the URL and password.</li>
 </StageStrip>
-
-### What you get by default
-
-Unless the prompt says otherwise, a dashboard comes out as a Python/JS app built with Node.js and Chart.js, with its code in a new Keboola-managed Git repository. The app runs at the `tiny` size, sleeps after 15 minutes without visitors, gets access to your Storage data (on the kbagent route only once the repository block is added, see [If the app can't read Storage](#if-the-app-cant-read-storage)), and sits behind a shared password.
-
-The agent usually can't show you that password, because `kbagent data-app password` needs a Manage API token. The password is on the app's page in Keboola: open **Apps** from the left navigation, then your app, and click **Open App**. The dialog has the app's address and its password, each with a copy button. The prompt below asks the agent for a direct link to that page.
-
-To make the app public, say so in the prompt. Anyone with its URL can then open it and see the data it shows. Changing an existing app's sign-in, including to single sign-on, belongs in its [Authentication](/data-apps/authentication/) settings.
-
-{/* "Say so in the prompt": kbagent data-app create offers --auth public (0.95.0 help); no run has asked for a public app yet, VERIFY(Nikita). Defaults from the kbagent create dry run (2026-09-23) and the skill's app-type choice (choosing-app-type.md: Node.js + static frontend is the dashboard default; Streamlit for Python-only teams and quick prototypes). The page URL pattern is the ui-detail link the Keboola MCP server returns for a data app. Password location checked 2026-09-29 in project 264 on App ID 74021867, started for the check and stopped after: Open App opens a dialog with App address and Password (hidden, each with a copy button); a stopped app's page shows no password (its Open App dialog was not opened), and its Authentication section names only the method, Basic (Password). VERIFY(Nikita): not checked on a sleeping app. Asking an agent to remove the password of an existing app (2026-09-25) set auth_required to false and redeployed, yet the proxy still asked for the password 6.5 minutes later; VERIFY(Michal Ševčík) whether that takes effect later or needs the UI. */}
 
 ### Set up your client
 
@@ -179,7 +169,17 @@ Through a Keboola MCP server, the agent doesn't run kbagent. It calls the server
 - On [the MCP route](#the-mcp-route), you preview a draft at its own URL first. The production app gets **Open App** once you approve the draft and the agent deploys it.
 - To let other people open it, see [Publish and share](/data-apps/publish-and-share/).
 
-{/* The MCP-route bullet restates The MCP route section above and operate.md (Open App on a running app, Deploy App on one that never ran). VERIFY(Nikita): where a draft's password shows was not checked. */}
+{/* Password location checked 2026-09-29 in project 264 on App ID 74021867, started for the check and stopped after: Open App opens a dialog with App address and Password (hidden, each with a copy button); a stopped app's page shows no password (its Open App dialog was not opened), and its Authentication section names only the method, Basic (Password). VERIFY(Nikita): not checked on a sleeping app. The MCP-route bullet restates The MCP route section above and operate.md (Open App on a running app, Deploy App on one that never ran). VERIFY(Nikita): where a draft's password shows was not checked. */}
+
+### What you get by default
+
+Unless the prompt says otherwise, a dashboard comes out as a Python/JS app built with Node.js and Chart.js, with its code in a new Keboola-managed Git repository. The app runs at the XSmall size, sleeps after 15 minutes without visitors, gets access to your Storage data and sits behind a shared password. On the kbagent route, the app can read Storage only once the repository block is added; see [If the app can't read Storage](#if-the-app-cant-read-storage).
+
+The agent usually can't show you that password, because `kbagent data-app password` needs a Manage API token. To find the app's page, open **Apps** from the left navigation and then your app. The example prompt in [Describe the app](#describe-the-app) asks the agent for a direct link to that page.
+
+To make the app public, say so in the prompt. Anyone with its URL can then open it and see the data it shows. Changing an existing app's sign-in, including to single sign-on, belongs in its [Authentication](/data-apps/authentication/) settings.
+
+{/* "Say so in the prompt": kbagent data-app create offers --auth public (0.95.0 help); no run has asked for a public app yet, VERIFY(Nikita). Defaults from the kbagent create dry run (2026-09-23; it printed the size as `tiny`, which the UI and Miro Cillik's review on PR #1146 call XSmall) and the skill's app-type choice (choosing-app-type.md: Node.js + static frontend is the dashboard default; Streamlit for Python-only teams and quick prototypes). The page URL pattern is the ui-detail link the Keboola MCP server returns for a data app. Asking an agent to remove the password of an existing app (2026-09-25) set auth_required to false and redeployed, yet the proxy still asked for the password 6.5 minutes later; VERIFY(Michal Ševčík) whether that takes effect later or needs the UI. */}
 
 ### Other agents
 
