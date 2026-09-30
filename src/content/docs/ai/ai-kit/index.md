@@ -5,11 +5,11 @@ slug: 'ai/ai-kit'
 
 
 
-AI Kit is a plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development. It helps developers build Keboola components, data apps, and maintain code quality using AI-powered tools.
+AI Kit is a plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development. It helps developers build Keboola components and apps, and maintain code quality using AI-powered tools.
 
 AI Kit is designed for developers who use AI coding assistants like Claude Code to work with Keboola projects. It provides seven plugins that cover different aspects of Keboola development, from building production-ready components and data applications to driving your projects from the terminal and modelling your semantic layer.
 
-The toolkit includes specialized AI agents that understand Keboola's architecture, best practices, and development patterns. These agents can help you create new components from scratch, implement configuration schemas, build data apps, review a project for SQL and security problems, and automate common development workflows.
+The toolkit includes specialized AI agents that understand Keboola's architecture, best practices, and development patterns. These agents can help you create new components from scratch, implement configuration schemas, build apps, review a project for SQL and security problems, and automate common development workflows.
 
 ## Installation
 
@@ -81,7 +81,7 @@ The Keboola CLI Plugin is a project management and review toolkit built on the o
 
 ### Keboola Git Plugin
 
-The Keboola Git Plugin works with Keboola-managed Git (Forgejo) repositories for Python/JS data apps, which can host their source in Keboola rather than GitHub. It provisions repositories, mints push credentials, and copies source between GitHub and Keboola git through the kbagent CLI. It also carries the 15 MB push cap and the build-at-deploy workaround it forces.
+The Keboola Git Plugin works with Keboola-managed Git (Forgejo) repositories for Python/JS apps, which can host their source in Keboola rather than GitHub. It provisions repositories, mints push credentials, and copies source between GitHub and Keboola git through the kbagent CLI. It also carries the 15 MB push cap and the build-at-deploy workaround it forces.
 
 [View Keboola Git Plugin Documentation on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/keboola-git)
 
@@ -124,11 +124,11 @@ The agent will automatically validate the schema, query distinct values, create 
 
 ## Best Practices
 
-When using AI Kit, start with the appropriate plugin for your task. Use the Component Developer Plugin when building new Keboola components or adding features to existing ones, the Data App Developer Plugin when creating or modifying data apps, the kbagent Plugin to drive your projects from the terminal, and the Semantic Layer Toolkit when modelling metrics.
+When using AI Kit, start with the appropriate plugin for your task. Use the Component Developer Plugin when building new Keboola components or adding features to existing ones, the Data App Developer Plugin when creating or modifying apps, the kbagent Plugin to drive your projects from the terminal, and the Semantic Layer Toolkit when modelling metrics.
 
 For component development, always follow the two-PR workflow strategy: create a base PR with the cookiecutter-generated structure, then a separate implementation PR with your custom logic. This prevents premature CI/CD triggers.
 
-For data app development, always validate your data assumptions before writing code. The validate-build-verify workflow eliminates debugging cycles by catching issues early.
+For app development, always validate your data assumptions before writing code. The validate-build-verify workflow eliminates debugging cycles by catching issues early.
 
 ## Resources
 

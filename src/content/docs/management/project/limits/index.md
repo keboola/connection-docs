@@ -59,7 +59,7 @@ Types:
 | Snowflake or BigQuery transformation, SQL workspace, Query Service (JDBC) | SQL job / workspace / Query service |
 | Python, R, or DuckDB transformation; Python or R (JupyterLab) workspace   | Data Science job / workspace        |
 | dbt transformation                                                        | dbt job                             |
-| Data app                                                                  | Apps                                |
+| App                                                                       | Apps                                |
 | Data source component                                                     | Data source job                     |
 | Data destination component                                                | Data destination job                |
 
