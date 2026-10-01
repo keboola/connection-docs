@@ -7,7 +7,7 @@ slug: 'ai/ai-kit'
 
 AI Kit is a plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development. It helps developers build Keboola components and apps, and maintain code quality using AI-powered tools.
 
-AI Kit is designed for developers who use AI coding assistants like Claude Code to work with Keboola projects. It provides seven plugins that cover different aspects of Keboola development, from building production-ready components and data applications to driving your projects from the terminal and modelling your semantic layer.
+AI Kit is designed for developers who use AI coding assistants like Claude Code to work with Keboola projects. It provides seven plugins that cover different aspects of Keboola development, from building production-ready components and apps to driving your projects from the terminal and modelling your semantic layer.
 
 The toolkit includes specialized AI agents that understand Keboola's architecture, best practices, and development patterns. These agents can help you create new components from scratch, implement configuration schemas, build apps, review a project for SQL and security problems, and automate common development workflows.
 
