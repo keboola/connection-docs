@@ -220,6 +220,7 @@ What runs:
 
 - Only the selected tasks. **Conditions are ignored** — the selected phases run one after another, including phases in different branches of a condition, and a phase several branches lead into runs only once. Phases with nothing selected are skipped.
 - Tasks selected within one phase still run in parallel, as they do in a normal run.
+- Notification tasks: if selected, they send their notification regardless of the condition.
 - Disabled tasks and tasks with a missing, invalid, or deleted configuration cannot be selected.
 - A failed task does not stop the run — every selected task runs, and the flow's status is the status of its last phase, so check the individual tasks in the run.
 
