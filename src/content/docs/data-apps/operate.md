@@ -10,6 +10,8 @@ Deploying, starting, stopping, deleting and setting secrets also work from a ter
 
 ## Read the app's state
 
+<!-- VERIFY(Michal Ševčík): on 2026-09-29 a Python/JS app built with kbagent (project 264, App ID 74021867) showed Edit with Kai in the header, running and stopped, and Duplicate with Kai, Automate, Debug mode and Delete app in the ⋯ menu while stopped, not Modify with Kai and Copy app. The 2026-07-10 screenshots of the Kai-built app 74016144 show Modify with Kai and Copy app. Renamed since, or does it depend on who built the app? The stopped app also showed Open App next to Start App. -->
+
 The header shows the app's status and the one or two actions that make sense for it: **Deploy App** for an app that has never run, **Start App** for a stopped one, **Open App** and **Redeploy App** for a running one, and **Modify with Kai** on apps Kai built. The **⋯** menu holds the rest, and its contents depend on the state too: **Copy app**, **Automate** (add it to a flow), **Debug mode** and **Delete app** are always there, with **Suspend app** on a running app.
 
 The tabs below the header split the app's life into views: **Overview** (the app's settings and its App URL), **Advanced Settings** (environment variables and secrets, theme, data mappings), **All Runs** (every start attempt), **Terminal Logs** (stdout and stderr while it runs), **Versions** (the configuration history), and **Drafts** while Kai has a draft open. The **App Info** panel on the right shows the backend version and size, the auto-sleep timeout, the last change, the owner, and the App ID.
@@ -33,7 +35,7 @@ From a terminal: `kbagent data-app secrets-set --project <alias> --app-id <id> -
 
 ## Stop, start, sleep
 
-- **Sleeping** is automatic. After the inactivity timeout (five minutes to 24 hours, set in the deploy wizard) the app suspends; the next visit wakes it and shows a short **waking up** page. You pay only for time the app is awake or waiting to suspend.
+- **Sleeping** is automatic. After the inactivity timeout (five minutes to 30 days, set in the deploy wizard) the app suspends; the next visit wakes it and shows a short **waking up** page. You pay only for time the app is awake or waiting to suspend.
 - **Stopping** is deliberate: **⋯ → Suspend app** stops the container and keeps the configuration, so the app stops serving until you bring it back with **Start App**. Use this when an app should be off for days; sleeping already covers being idle overnight.
 - **Redeploy App** restarts a running app with the current configuration and, for apps on your own repository, the current branch head.
 
