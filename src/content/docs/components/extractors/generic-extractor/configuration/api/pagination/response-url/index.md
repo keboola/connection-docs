@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/response-url/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 The Response URL Scroller can be used with APIs that provide the URL of the 
 next page in the response. This scroller is suitable for APIs supporting the 
@@ -22,7 +24,7 @@ next page in the response. This scroller is suitable for APIs supporting the
 }
 ```
 
-## Configuration Parameters
+## Configuration parameters
 The following configuration parameters are supported for the `response.url` pagination method:
 
 - `urlKey` (optional, string) — path in the response to the field which contains the URL of the next request; 
@@ -39,7 +41,7 @@ the default value is `.`.
 
 See the [examples below](#examples).
 
-### Stopping Condition
+### Stopping condition
 The pagination ends **when the value of the `urlKey` parameter is empty** — the key is not present at all, is null,
 is an empty string or is `false`. Be careful when configuring the `urlKey` parameter. If you, for example, misspell the
 key name, the extraction will not go beyond the first page. 
@@ -48,7 +50,7 @@ key name, the extraction will not go beyond the first page.
 ## Examples
 This section provides three API pagination examples where the Response URL Scroller is used.
 
-### Basic Configuration
+### Basic configuration
 To configure pagination for an API that supports the [JSON API specification](https://jsonapi.org/format/#fetching-pagination),
 use the configuration below:
 
@@ -84,7 +86,7 @@ If the URL is *relative* (`users?page=2`), it is appended to the endpoint URL.
 
 See [example [EX054]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/054-pagination-response-url-basic).
 
-### Merging Parameters
+### Merging parameters
 To pass additional parameters to each of the page URLs, use the `includeParams` parameter:
 
 ```json
@@ -142,7 +144,7 @@ would probably break the paging.
 
 See [example [EX055]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/055-pagination-response-url-params).
 
-### Overriding Parameters
+### Overriding parameters
 Sometimes the API does not pass the entire URL, but only the [query string](/components/extractors/generic-extractor/tutorial/rest/#url)
 parameters which should be used for querying the next page.
 
