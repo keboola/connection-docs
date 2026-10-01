@@ -25,9 +25,7 @@ Share the app URL — found on the app's **Overview** tab (the **App URL** block
 
 ## Manage a deployed app
 
-<!-- VERIFY(Michal Ševčík): on 2026-09-29 a Python/JS app built with kbagent (project 264, App ID 74021867) showed Edit with Kai in the header, running and stopped, and Duplicate with Kai, Automate, Debug mode and Delete app in the ⋯ menu while stopped, not Modify with Kai and Copy app. The 2026-07-10 screenshots of the Kai-built app 74016144 show Modify with Kai and Copy app. Renamed since, or does it depend on who built the app? -->
-
-From the app's header you can **Modify with Kai**, **Open App**, and **Start** / **Redeploy** depending on its state. The **⋯** menu holds the rest: **Copy app**, **Automate** (add it to a flow), **Debug mode** and **Delete app**, plus **Suspend app** while the app is running. [Operate and update an app](/data-apps/operate/) walks through each one.
+From the app's header you can **Open App** and **Start** or **Redeploy**, depending on its state, and **Edit with Kai** on a Python/JS app with a [Keboola-managed repository](/data-apps/what-are-apps/#two-ways-to-run-an-app) if you can edit the app and Kai can build apps in the project. The **⋯** menu holds the rest: **Duplicate with Kai** (**Copy app** on apps without a Keboola-managed repository), **Automate** (add it to a flow), **Debug mode** and **Delete app**, plus **Suspend app** while the app is running. [Operate and update an app](/data-apps/operate/) walks through each one.
 
 ![A stopped app's header with Modify with Kai and Open App, and the ⋯ menu open: Copy app, Automate, Debug mode and Delete app](/data-apps/app-actions-menu.png)
 

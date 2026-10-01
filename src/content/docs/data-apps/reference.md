@@ -183,16 +183,16 @@ Manage an app from the header and the **⋯** menu on its page.
 - **Open App** — opens your app in a new window. On a running app behind a password, it shows a dialog first, with the app's address and the password, each with a copy button; the dialog's **Open app** button opens the app.
 - **Redeploy** — apply changes made in the app configuration (they take effect only after a redeploy).
 - **Start** — starts a stopped or sleeping app with its current configuration.
-- **Modify with Kai** — opens the Builder, on apps Kai built.
+- **Edit with Kai** — opens the Builder, where Kai changes the app in a draft. Shown on Python/JS apps with a Keboola-managed repository, to users who can edit the app, when Kai can build apps in the project.
+- **Migrate to Python/JS with Kai** — on Streamlit apps, asks Kai to migrate the app to Python/JS. Shown to users who can edit the app, when Kai can build apps in the project and the stack offers Python/JS apps. [Migrate to Python/JS](/data-apps/streamlit/migrate-to-python-js/) walks through it.
 - **Suspend app** — stops the app. The container stops and the app no longer serves, but the configuration is kept.
-- **Copy app** — duplicates the configuration into a new app.
+- **Duplicate with Kai** — on apps with a Keboola-managed repository, opens a new Kai chat and asks Kai to copy the app. The request tells Kai to say what carries over and to wait for your confirmation.
+- **Copy app** — on all other apps, copies the configuration into a new app.
 - **Automate** — adds the app to a flow.
 - **Debug mode** — runs the app with extra diagnostics.
 - **Delete app** — stops the deployment and deletes its configuration.
 
-<!-- VERIFY(Michal Ševčík): on 2026-09-29 a Python/JS app built with kbagent (project 264, App ID 74021867) showed Edit with Kai in the header, running and stopped, and Duplicate with Kai, Automate, Debug mode and Delete app in the ⋯ menu while stopped, not Modify with Kai and Copy app. The 2026-07-10 screenshots of the Kai-built app 74016144 show Modify with Kai and Copy app. Renamed since, or does it depend on who built the app? The Open App dialog was seen on the same app while it ran; VERIFY(Nikita) that apps Kai built show it too. -->
-
-Which of these the header and the **⋯** menu offer depends on the app's state. [Operate and update an app](/data-apps/operate/) walks through them in the order you meet them.
+Which of these the header and the **⋯** menu offer depends on the app's state and where its code lives, on your role in the project, and on whether Kai can build apps there. [Operate and update an app](/data-apps/operate/) walks through them in the order you meet them.
 
 ## Sleep and resume
 

@@ -10,17 +10,17 @@ Deploying, starting, stopping, deleting and setting secrets also work from a ter
 
 ## Read the app's state
 
-<!-- VERIFY(Michal Ševčík): on 2026-09-29 a Python/JS app built with kbagent (project 264, App ID 74021867) showed Edit with Kai in the header, running and stopped, and Duplicate with Kai, Automate, Debug mode and Delete app in the ⋯ menu while stopped, not Modify with Kai and Copy app. The 2026-07-10 screenshots of the Kai-built app 74016144 show Modify with Kai and Copy app. Renamed since, or does it depend on who built the app? The stopped app also showed Open App next to Start App. -->
-
-The header shows the app's status and the actions that make sense for it: **Deploy** for an app that has never run, **Start** for a stopped or sleeping one, **Redeploy** for a running one, **Open App** once the app has been deployed, and **Modify with Kai** on apps Kai built. The **⋯** menu holds the rest, and its contents depend on the state too: **Copy app**, **Automate** (add it to a flow), **Debug mode** and **Delete app** are always there, with **Suspend app** on a running app.
+The header shows the app's status and the actions that make sense for it: **Deploy** for an app that has never run, **Start** for a stopped or sleeping one, **Redeploy** for a running one, and **Open App** once the app has been deployed. A Python/JS app with a [Keboola-managed repository](/data-apps/what-are-apps/#two-ways-to-run-an-app) also gets **Edit with Kai** if you can edit the app and [Kai can build apps](/kai/getting-started/#enabling-kai) in the project. The **⋯** menu holds the rest: **Duplicate with Kai** (**Copy app** on apps without a Keboola-managed repository), **Automate** (add it to a flow), **Debug mode** and **Delete app**, plus **Suspend app** while the app is running.
 
 The tabs below the header split the app's life into views: **Overview** (the app's settings and its App URL), **Advanced Settings** (environment variables and secrets, theme, data mappings), **All Runs** (every start attempt), **Terminal Logs** (stdout and stderr while it runs), **Versions** (the configuration history), and **Drafts** while Kai has a draft open. The **App Info** panel on the right shows the backend version and size, the auto-sleep timeout, the last change, the owner, and the App ID.
+
+The **Overview** also tells you which kind of repository the app has. An app with a Keboola-managed repository says "The code of this app is stored in a Keboola-managed Git repository" there; any other app has a **Git Repository** or **Code Source** section in its place.
 
 ## Ship a code change
 
 How depends on where the code lives; see [Two ways to run an app](/data-apps/what-are-apps/#two-ways-to-run-an-app).
 
-- **Kai built the app.** Click **Modify with Kai** and describe the change. Kai works in a draft with its own live preview; when you're happy, publish it to production. The production app keeps serving the old version until you do. Details: [Build your first app with Kai](/data-apps/getting-started/#how-drafts-become-production).
+- **A Keboola-managed repository.** Every app the Kai builder creates has one. Click **Edit with Kai** and describe the change. Kai works in a draft with its own live preview; when you're happy, publish it to production. The production app keeps serving the old version until you do. Details: [Build your first app with Kai](/data-apps/getting-started/#how-drafts-become-production). Without Kai, push to the managed repository yourself ([Change the app later](/data-apps/build-locally/#change-the-app-later) shows how), then redeploy as in the next bullet.
 - **Your own repository.** Push to the branch set under **Git Repository** on the app's page, then click **Redeploy** (**Start** if the app is sleeping or stopped). Keboola clones that branch again, runs your repository's `keboola-config/setup.sh` if it has one, and starts the new version. Push alone changes nothing. The app can report **stopped** for a moment while it restarts, so give it a reload before you worry.
 
 <!-- VERIFY(Nikita): in the 2026-10-01 UI build, Start and Redeploy send the same request (patchApp with desiredState running, restartIfRunning and the saved configVersion). Not yet tried on a sleeping app after a push: does Start clone the branch again, or reuse the setup from the last deploy? The same applies to build-locally's "Sync to your project" step 4. -->
@@ -53,7 +53,8 @@ Code changes are tracked separately from configuration: for a Kai-built app they
 
 ## Copy, automate, delete
 
-- **Copy app** duplicates the configuration into a new app, so you can try a change without touching the one people use.
+- **Duplicate with Kai** has Kai copy an app with a Keboola-managed repository, so you can try a change without touching the one people use. It opens a new Kai chat and asks Kai to copy the app. The request tells Kai to check whether a copy is possible, to say what carries over and what you'll have to set up again, and to make the copy only once you confirm. Only Kai can copy these apps, so the item is disabled when Kai isn't available.
+- **Copy app** does the same for any other app by copying its configuration into a new app. If the app runs from your own repository, the copy deploys the same branch, so switch the copy to a branch of its own before you push experiments.
 - **Automate** adds the app to a flow, for example to redeploy it after the data it reads has been refreshed.
 - **Delete app** stops the app and deletes its configuration. The App URL stops working immediately; there is no undo. The terminal equivalent, `kbagent data-app delete`, says the same thing in its own words: cascade, irreversible.
 
