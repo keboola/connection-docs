@@ -35,7 +35,7 @@ From a terminal: `kbagent data-app secrets-set --project <alias> --app-id <id> -
 
 ## Stop, start, sleep
 
-- **Sleeping** is automatic. After the inactivity timeout (five minutes to 24 hours, set in the deploy wizard) the app suspends; the next visit wakes it and shows a short **waking up** page. You pay only for time the app is awake or waiting to suspend.
+- **Sleeping** is automatic. After the inactivity timeout (five minutes to 30 days, set in the deploy wizard) the app suspends; the next visit wakes it and shows a short **waking up** page. You pay only for time the app is awake or waiting to suspend.
 - **Stopping** is deliberate: **⋯ → Suspend app** stops the container and keeps the configuration, so the app stops serving until you bring it back with **Start App**. Use this when an app should be off for days; sleeping already covers being idle overnight.
 - **Redeploy App** restarts a running app with the current configuration and, for apps on your own repository, the current branch head.
 

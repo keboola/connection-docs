@@ -210,7 +210,7 @@ If something goes wrong, a **wakeup error** page appears; click **Show More** fo
 
 ![Wakeup error](/data-apps/proxy-error-wakeing-up.png)
 
-When you **Deploy** or **Redeploy**, a wizard prompts for the backend version, the backend size and the auto-sleep timeout (five minutes to 24 hours; default five minutes).
+When you **Deploy** or **Redeploy**, a wizard prompts for the backend version, the backend size and the auto-sleep timeout (five minutes to 30 days; default 15 minutes).
 
 ![Deploy timeout and backend size](/data-apps/deploy-timeout-backedsize.png)
 
