@@ -59,7 +59,7 @@ Types:
 | Snowflake or BigQuery transformation, SQL workspace, Query Service (JDBC) | SQL job / workspace / Query service |
 | Python, R, or DuckDB transformation; Python or R (JupyterLab) workspace   | Data Science job / workspace        |
 | dbt transformation                                                        | dbt job                             |
-| Data app                                                                  | DataApps                            |
+| Data app                                                                  | Apps                                |
 | Data source component                                                     | Data source job                     |
 | Data destination component                                                | Data destination job                |
 
@@ -94,11 +94,19 @@ If you need more information, please contact your CSM.
 | Large                                 | 1 hour                  | **32**                |
 | **Data Gateway job**                  | 1 GB out                | **0.2**               |
 | **AppStore Apps**                     | 1 hour                  | **1**                 |
-| **DataApps**                          |                         |                       |
-| XSmall                                | 1 hour                  | **0.1**               |
-| Small                                 | 1 hour                  | **0.2**               |
-| Medium                                | 1 hour                  | **0.5**               |
-| Large                                 | 1 hour                  | **1**                 |
+| <span id="apps"></span>**Apps**       |                         |                       |
+| Python/JS, XSmall                     | 1 hour                  | **0.3**               |
+| Python/JS, Small                      | 1 hour                  | **0.6**               |
+| Python/JS, Medium                     | 1 hour                  | **1.2**               |
+| Python/JS, Large                      | 1 hour                  | **2.4**               |
+| Streamlit, XSmall                     | 1 hour                  | **0.1**               |
+| Streamlit, Small                      | 1 hour                  | **0.2**               |
+| Streamlit, Medium                     | 1 hour                  | **0.5**               |
+| Streamlit, Large                      | 1 hour                  | **1**                 |
+
+The Python/JS rates apply from October 15, 2026. Until then, Python/JS apps use the same rates as Streamlit apps.
+
+<!-- VERIFY(Miro): the effective date, and whether existing Python/JS apps switch on it too. TODO(human-review, Nikita): remove this note after October 15, 2026. -->
 
 **Types of backend sizes used for jobs**
 
@@ -108,7 +116,7 @@ If you need more information, please contact your CSM.
 | MEDIUM (SQL)                          | Snowflake MEDIUM DWH                            |
 | LARGE (SQL)                           | Snowflake LARGE DWH                             |
 | XSMALL (Python, R, DuckDB, Components)         | 8 GB RAM, 1 CPU cores, 150GB SSD, shared     |
-| SMALL (Python, R, DuckDB, Components, DataApp) | 16 GB RAM, 2 CPU cores, 150GB SSD, shared    |
+| SMALL (Python, R, DuckDB, Components, Apps) | 16 GB RAM, 2 CPU cores, 150GB SSD, shared    |
 | MEDIUM (Python, R, DuckDB, Components)         | 32 GB RAM, 4 CPU cores, 150GB SSD, shared    |
 | LARGE (Python, R, DuckDB, Components)          | 114 GB RAM, 14 CPU cores, 1TB SSD, dedicated |
 | SMALL (dbt)                           | Snowflake SMALL DWH or equivalent               |
