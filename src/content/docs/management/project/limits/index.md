@@ -59,7 +59,7 @@ Types:
 | Snowflake or BigQuery transformation, SQL workspace, Query Service (JDBC) | SQL job / workspace / Query service |
 | Python, R, or DuckDB transformation; Python or R (JupyterLab) workspace   | Data Science job / workspace        |
 | dbt transformation                                                        | dbt job                             |
-| Data app                                                                  | Apps                                |
+| App                                                                       | Apps                                |
 | Data source component                                                     | Data source job                     |
 | Data destination component                                                | Data destination job                |
 
@@ -116,11 +116,25 @@ The Python/JS rates apply from October 15, 2026. Until then, Python/JS apps use 
 | MEDIUM (SQL)                          | Snowflake MEDIUM DWH                            |
 | LARGE (SQL)                           | Snowflake LARGE DWH                             |
 | XSMALL (Python, R, DuckDB, Components)         | 8 GB RAM, 1 CPU cores, 150GB SSD, shared     |
-| SMALL (Python, R, DuckDB, Components, Apps) | 16 GB RAM, 2 CPU cores, 150GB SSD, shared    |
+| SMALL (Python, R, DuckDB, Components)         | 16 GB RAM, 2 CPU cores, 150GB SSD, shared    |
 | MEDIUM (Python, R, DuckDB, Components)         | 32 GB RAM, 4 CPU cores, 150GB SSD, shared    |
 | LARGE (Python, R, DuckDB, Components)          | 114 GB RAM, 14 CPU cores, 1TB SSD, dedicated |
 | SMALL (dbt)                           | Snowflake SMALL DWH or equivalent               |
 | REMOTE (dbt)                          | Using user's remote DWH                         |
+
+<span id="apps-backend-sizes"></span>
+**Backend sizes for Apps**
+
+You pick the size in the **Backend Size** field of the deploy wizard, each time you deploy or start the app. The time credits for each size are in the [Apps rows](#apps) above.
+
+| Backend size | Specification                                  |
+|--------------|------------------------------------------------|
+| XSmall       | 8 GB RAM, 1 CPU core, 1 TB SSD, shared         |
+| Small        | 16 GB RAM, 2 CPU cores, 1 TB SSD, shared       |
+| Medium       | 32 GB RAM, 4 CPU cores, 1 TB SSD, shared       |
+| Large        | 114 GB RAM, 14 CPU cores, 1 TB SSD, dedicated  |
+
+<!-- VERIFY(Miro): if Apps pods move to dynamic resource allocation ("up to 8 GB"), should this table say "up to"? -->
 
 #### Kai Agent
 

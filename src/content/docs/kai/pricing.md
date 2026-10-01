@@ -17,7 +17,7 @@ Success Manager.
 
 Kai consumes **[PPU credits](/management/project/limits/#project-power--time-credits)**
 (project power units), the same credits that run your
-transformations, extractors, and data apps. Your contract rate applies to Kai exactly
+transformations, extractors, and apps. Your contract rate applies to Kai exactly
 as it applies to a transformation hour.
 
 New organizations start with a
@@ -31,7 +31,7 @@ Kai is billed for the work it does. Every time Kai finishes a reply, the PPU cha
 derived from what that reply actually cost to produce — the language model tokens it
 consumed and the infrastructure it ran on.
 
-A short question costs less than a full data app build, in the same way that a
+A short question costs less than a full app build, in the same way that a
 five-minute query costs less than an hour of warehouse time.
 
 You are not charged for opening the chat panel, for typing, or for a reply Kai
@@ -44,7 +44,7 @@ every reply it took to get to the result — measured across Kai usage in mid-20
 
 | Piece of work | Typical cost (PPU) | Per 1 PPU |
 |---------------|--------------------|-----------|
-| Build or modify a data app | 4.3 | 0.2 |
+| Build or modify an app | 4.3 | 0.2 |
 | Diagnose a failed job or pipeline | 1.4 | 0.7 |
 | Answer an analytical question about your data | 1.2 | 0.8 |
 | Debug and fix a broken transformation | 1.2 | 0.9 |
@@ -90,7 +90,7 @@ Free usage counts towards the monthly project budget and per-user
 ### Consumption dashboards
 
 Kai spend appears as its own **usage category**, next to your extractors, transformations,
-and data apps, in both consumption dashboards. That is where you see what Kai actually
+and apps, in both consumption dashboards. That is where you see what Kai actually
 costs and how it trends over time.
 
 - [**Project Consumption**](/management/telemetry/telemetry-dashboards/#project-consumption)

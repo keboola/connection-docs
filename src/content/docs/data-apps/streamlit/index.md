@@ -218,7 +218,7 @@ In your app configuration, switch to the raw JSON editor and add a `config.toml`
 }
 ```
 
-The data app runtime extracts that string at startup and merges it into Streamlit's runtime config in this order, with later values winning:
+The app runtime extracts that string at startup and merges it into Streamlit's runtime config in this order, with later values winning:
 
 1. Streamlit's built-in defaults
 2. Keboola's runtime defaults (sets `[server] address = "0.0.0.0"` and `[browser] gatherUsageStats = false`)
