@@ -65,7 +65,7 @@ You can also update requirements.txt in the UI:
 After uploading your requirements.txt:
 
 1. Toggle the "Freeze versions"  option in the UI
-2. Click "Start App" to propagate this change
+2. Click "Deploy", "Redeploy" or "Start", whichever the app's header shows, to propagate this change
 
 ![Freeze Version Toggle](/data-apps/streamlit/lock-freeze-version-toggle.png)
 
@@ -80,8 +80,8 @@ This action will:
 
 To update the requirements for your app:
 
-1. Start the app
-2. Enable the "Update packages dependencies" toggle
+1. Click "Redeploy" or "Start" in the app's header
+2. In the wizard, expand "Deploy settings" and enable the "Update packages dependencies" toggle
 
 ![Update Dependencies](/data-apps/streamlit/lock-update-dependencies.png)
 

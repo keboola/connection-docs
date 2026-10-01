@@ -109,15 +109,15 @@ Prefer to set the app up yourself, without the chat? Manual creation lives on th
 2. Under **or create manually**, choose a stack — **Python / JS** (custom apps, production UIs) or **Streamlit** (existing Streamlit apps; basic Python).
 3. Name the app and click **Create App**. It opens on its own configuration page, marked **Not Deployed**.
 4. Set the **code source** and the **Authentication** method. A **Python / JS** app runs from a **Git repository** — connect one (there's no inline-code option for Python/JS). A **Streamlit** app can use inline **Code** or a Git repository.
-5. Configure the rest of the app's settings — backend size, auto-sleep, and more; see [Reference](/data-apps/reference/) for the full list.
+5. Configure the rest of the app's settings; see [Reference](/data-apps/reference/) for the full list. The backend size and the inactivity timeout come next, in the deploy wizard.
 
 ![The app's configuration page: the Overview tab with Authentication and a Git Repository section, plus the App Info panel showing backend version, size, auto-sleep, and App ID](/data-apps/build-in-ui-config.png)
 
-6. Click **Deploy App**. A short wizard asks for the **backend version**, the **backend size** and an **inactivity timeout**, then deploys the app. (The same wizard runs on **Redeploy**.)
+6. Click **Deploy**. A short wizard asks for the **backend version**, the **backend size** (not on [pay-as-you-go](/management/payg-project/) projects) and an **inactivity timeout**, then deploys the app. (**Redeploy** and **Start** open the same wizard, with these fields in a collapsed **Deploy settings** section.)
 
 ![The deploy/redeploy wizard: backend version, backend size and inactivity timeout](/data-apps/deploy-timeout-backedsize.png)
 
-7. When the status turns **Active**, click **Open App**. For an app behind a password, copy the password from the dialog, then click **Open app** in it to open the app at its public URL. Use **Redeploy** to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
+7. When the status turns **Active**, click **Open App**. For an app behind a password, copy the password from the dialog, then click **Open app** in it to open the app at its public URL. Use **Redeploy** (**Start** if the app is sleeping or stopped) to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
 
 From here on, the app is something you run rather than something you build: [Operate and update an app](/data-apps/operate/) covers shipping changes, secrets, sleeping and versions.
 

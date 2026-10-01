@@ -175,14 +175,14 @@ The Terminal Log tab provides an **almost real-time** view of the application's 
 
 ## App actions
 
-Manage a deployed app from its actions menu.
+Manage an app from the header and the **⋯** menu on its page.
 
 ![Actions menu](/data-apps/manage-redeploy.png)
 
-- **Deploy App** — starts the app. Once the deployment job finishes, open the app's public URL with **Open App**.
+- **Deploy** — starts an app that has never run. Once the deployment job finishes, open the app's public URL with **Open App**.
 - **Open App** — opens your app in a new window. On a running app behind a password, it shows a dialog first, with the app's address and the password, each with a copy button; the dialog's **Open app** button opens the app.
-- **Redeploy App** — apply changes made in the app configuration (they take effect only after a redeploy).
-- **Start App** — brings a stopped app back with the same settings.
+- **Redeploy** — apply changes made in the app configuration (they take effect only after a redeploy).
+- **Start** — starts a stopped or sleeping app with its current configuration.
 - **Modify with Kai** — opens the Builder, on apps Kai built.
 - **Suspend app** — stops the app. The container stops and the app no longer serves, but the configuration is kept.
 - **Copy app** — duplicates the configuration into a new app.
@@ -210,7 +210,7 @@ If something goes wrong, a **wakeup error** page appears; click **Show More** fo
 
 ![Wakeup error](/data-apps/proxy-error-wakeing-up.png)
 
-When you **Deploy** or **Redeploy**, a wizard prompts for the backend version, the backend size and the auto-sleep timeout (five minutes to 30 days; default 15 minutes).
+When you **Deploy**, a wizard prompts for the backend version, the backend size and the auto-sleep timeout (five minutes to 30 days; default 15 minutes). **Redeploy** and **Start** open the same wizard with the app's current values in a collapsed **Deploy settings** section; expand it to change them. [Pay-as-you-go](/management/payg-project/) projects have no backend size field.
 
 ![Deploy timeout and backend size](/data-apps/deploy-timeout-backedsize.png)
 
