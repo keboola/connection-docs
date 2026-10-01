@@ -145,6 +145,8 @@ You pick the size in the **Backend Size** field of the deploy wizard, each time 
 
 <!-- VERIFY(Miro): if Apps pods move to dynamic resource allocation ("up to 8 GB"), should this table say "up to"? -->
 
+<!-- VERIFY(Miro): the picker's Large label says "1TB dedicated", without "SSD". Does the Large backend have an SSD? -->
+
 #### Kai Agent
 
 [Kai](/kai/) has no fixed rate in the tables above. Each time Kai finishes a reply, the
