@@ -1,7 +1,7 @@
 ---
 title: Project Limits
 slug: 'management/project/limits'
-description: Business and platform limits of a Keboola project - time credits (PPU) per job type, storage size, and platform quotas.
+description: Business and platform limits of a Keboola project - time credits (PPU) per job type, Apps pricing, storage size, and platform quotas.
 redirect_from:
   - /management/limits/
 ---
@@ -63,7 +63,7 @@ Types:
 | Data source component                                                     | Data source job                     |
 | Data destination component                                                | Data destination job                |
 
-The other job types in the table below are named for the feature that produces them.
+The other job types in the table below are named for the feature that produces them. Apps have their own rates, under [Apps pricing](#apps-pricing).
 
 Below you will find an overview of time credits consumed by individual Keboola job types. 
 If you need more information, please contact your CSM.
@@ -94,19 +94,6 @@ If you need more information, please contact your CSM.
 | Large                                 | 1 hour                  | **32**                |
 | **Data Gateway job**                  | 1 GB out                | **0.2**               |
 | **AppStore Apps**                     | 1 hour                  | **1**                 |
-| <span id="apps"></span>**Apps**       |                         |                       |
-| Python/JS, XSmall                     | 1 hour                  | **0.3**               |
-| Python/JS, Small                      | 1 hour                  | **0.6**               |
-| Python/JS, Medium                     | 1 hour                  | **1.2**               |
-| Python/JS, Large                      | 1 hour                  | **2.4**               |
-| Streamlit, XSmall                     | 1 hour                  | **0.1**               |
-| Streamlit, Small                      | 1 hour                  | **0.2**               |
-| Streamlit, Medium                     | 1 hour                  | **0.5**               |
-| Streamlit, Large                      | 1 hour                  | **1**                 |
-
-The Python/JS rates apply from October 15, 2026. Until then, Python/JS apps use the same rates as Streamlit apps.
-
-<!-- VERIFY(Miro): the effective date, and whether existing Python/JS apps switch on it too. TODO(human-review, Nikita): remove this note after October 15, 2026. -->
 
 **Types of backend sizes used for jobs**
 
@@ -122,23 +109,45 @@ The Python/JS rates apply from October 15, 2026. Until then, Python/JS apps use 
 | SMALL (dbt)                           | Snowflake SMALL DWH or equivalent               |
 | REMOTE (dbt)                          | Using user's remote DWH                         |
 
+#### <span data-pagefind-weight="6">Apps pricing</span>
+
+<!-- The weight lifts this heading in site search for "apps pricing"; 6 keeps it below page titles such as Kai Pricing and Limits. -->
+
+<span id="apps"></span>
+An app uses time credits while it's awake, including the idle wait before it sleeps, at an hourly rate set by its framework and backend size. A sleeping app uses none.
+
+| Framework and backend size | Time credits per hour |
+|----------------------------|-----------------------|
+| Python/JS, XSmall          | **0.3**               |
+| Python/JS, Small           | **0.6**               |
+| Python/JS, Medium          | **1.2**               |
+| Python/JS, Large           | **2.4**               |
+| Streamlit, XSmall          | **0.1**               |
+| Streamlit, Small           | **0.2**               |
+| Streamlit, Medium          | **0.5**               |
+| Streamlit, Large           | **1**                 |
+
+The Python/JS rates apply from October 15, 2026. Until then, Python/JS apps use the same rates as Streamlit apps.
+
+<!-- VERIFY(Miro): the effective date, and whether existing Python/JS apps switch on it too. TODO(human-review, Nikita): remove this note after October 15, 2026. -->
+
 <span id="apps-backend-sizes"></span>
 **Backend sizes for Apps**
 
-You pick the size in the **Backend Size** field of the deploy wizard, each time you deploy or start the app. The time credits for each size are in the [Apps rows](#apps) above.
+You pick the size in the **Backend Size** field of the deploy wizard, each time you deploy or start the app. The time credits for each size are in the table above.
 
 | Backend size | Specification                                  |
 |--------------|------------------------------------------------|
-| XSMALL       | 8 GB RAM, 1 CPU core, 1 TB SSD, shared         |
-| SMALL        | 16 GB RAM, 2 CPU cores, 1 TB SSD, shared       |
-| MEDIUM       | 32 GB RAM, 4 CPU cores, 1 TB SSD, shared       |
-| LARGE        | 114 GB RAM, 14 CPU cores, 1 TB SSD, dedicated  |
+| XSmall       | 8 GB RAM, 1 CPU core, 1 TB SSD, shared         |
+| Small        | 16 GB RAM, 2 CPU cores, 1 TB SSD, shared       |
+| Medium       | 32 GB RAM, 4 CPU cores, 1 TB SSD, shared       |
+| Large        | 114 GB RAM, 14 CPU cores, 1 TB SSD, dedicated  |
 
-<!-- Sizes from the Backend Size picker in the Apps UI, sent by Miro Cillik on 2026-09-30. VERIFY(Miro): on 2026-09-29 he said Apps pods are moving to dynamic resource allocation ("up to 8 GB" instead of fixed CPU and memory); confirm whether this table should say "up to" once that ships. -->
+<!-- VERIFY(Miro): if Apps pods move to dynamic resource allocation ("up to 8 GB"), should this table say "up to"? -->
 
 #### Kai Agent
 
-[Kai](/kai/) has no fixed rate in the table above. Each time Kai finishes a reply, the
+[Kai](/kai/) has no fixed rate in the tables above. Each time Kai finishes a reply, the
 charge is derived from what that reply actually cost to produce — the language model
 tokens it consumed and the infrastructure it ran on. A median conversation, counting
 every reply it takes to reach a result, costs about **1.1 PPUs**, and simple work —
