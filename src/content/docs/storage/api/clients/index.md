@@ -12,7 +12,7 @@ import/export jobs for you, so you do not have to manage CSV staging by hand.
 
 | Client | Use it when |
 | --- | --- |
-| [Python client](/storage/api/clients/python-client/) | You are writing Python — in a transformation, a data app, or your own tooling. This is the client to reach for by default. |
+| [Python client](/storage/api/clients/python-client/) | You are writing Python — in a transformation, an app, or your own tooling. This is the client to reach for by default. |
 | [PHP client](/storage/api/clients/php-client/) | You are writing PHP, or you need the most complete API coverage. |
 | [Docker CLI client](/storage/api/clients/docker-cli/) | You want to import or export from a shell script and have Docker available, without installing a language runtime. |
 | [R client](/storage/api/clients/r-client/) | You are working in R. Note this client is in limited maintenance — prefer the Python or PHP client for new work. |
