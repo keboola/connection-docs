@@ -2,6 +2,8 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSy
 import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
+
 /**
  * Astro integration that emits a raw-markdown copy of every docs page.
  *
@@ -35,6 +37,60 @@ function findMarkdownFiles(dir, files = []) {
 }
 
 /**
+ * Inline JSX and HTML a page writes by hand, as markdown.
+ *
+ * The <li> children a page passes into <Prereqs> come through the slot as raw
+ * source — `<code>x</code>` and `from{' '}<a href="/y/">Y</a>` — which is
+ * unreadable in the twin and, worse, hides the one prerequisite the page cared
+ * enough to spell out.
+ */
+function inlineToMarkdown(line) {
+  return line
+    .replace(/\{'\s*'\}/g, ' ')
+    .replace(/<a href="([^"]+)">([^<]*)<\/a>/g, '$2 ($1)')
+    .replace(/<\/?(code|strong|em|b|i)>/g, (m) => (m.includes('code') ? '`' : '**'))
+    .replace(/<li(?:\s[^>]*)?>\s*/g, '- ')
+    .replace(/\s*<\/li>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Render <Prereqs needs={[…]}> as text.
+ *
+ * The component's own markup is dropped with every other component wrapper,
+ * which would take the prerequisites with it: the twin would tell an agent to
+ * load data without mentioning that a project has to exist first. The wording
+ * comes from the same table the component renders (prereqs.mjs), so the two
+ * cannot drift.
+ */
+function prereqsToText(tag) {
+  const needs = tag.match(/needs=\{\[([^\]]*)\]\}/);
+  const keys = needs
+    ? needs[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean)
+    : ['project'];
+  const lines = keys.map(sharedText).filter(Boolean);
+  // The "You need" heading prints even with no shared items: the page's own
+  // <li> children follow it.
+  return ['', `**${PREREQ_LABELS.box}**`, '', `${PREREQ_LABELS.needs}:`, '', ...lines.map((l) => `- ${l}`)];
+}
+
+/** The second list of <Prereqs>, under the page's own `groupLabel`. */
+function prereqsGroupToText(tag, items) {
+  const label = tag.match(/\bgroupLabel="([^"]*)"/);
+  if (!label || !items.length) return [];
+  return ['', `${label[1]}:`, '', ...items];
+}
+
+/** The tab list of <Prereqs>, one line per tab, printed after the page's own items. */
+function prereqsTabsToText(tag, overrides = {}) {
+  const tabs = tag.match(/tabs=\{(\d)\}/);
+  const count = tabs ? Number(tabs[1]) : 0;
+  if (!count) return [''];
+  return ['', `${PREREQ_LABELS.tabs}:`, '', ...tabsText(count, overrides).map((l) => `- ${l}`), ''];
+}
+
+/**
  * Reduce an .mdx body to plain markdown.
  *
  * The raw-markdown copies exist so an agent can read a page as text, so MDX
@@ -49,7 +105,11 @@ function findMarkdownFiles(dir, files = []) {
  * otherwise turn ordinary prose into an indented code block.
  *
  * Components are matched on an uppercase initial, the JSX convention, so
- * lowercase HTML written inline in a page is left alone.
+ * lowercase HTML written inline in a page is left alone. Three of them carry
+ * meaning a reader needs and are rendered rather than dropped: a tab's
+ * `label`, <Prereqs>, and <StageStrip>, which prints as a numbered list.
+ * MDX comments become HTML comments, except inside those two lists, where
+ * they are dropped.
  */
 function stripMdx(body) {
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
@@ -59,17 +119,38 @@ function stripMdx(body) {
   );
 
   const INDENT = '    ';
+  // Comments inside <Prereqs> and <StageStrip> are dropped: a markdown list
+  // can't hold them, and glued to the next item they'd hide its slot="group".
+  const COMMENT = /<!--[\s\S]*?-->/g;
   const open = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*(?<!\/)>\s*$/;
   const selfClosing = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*\/>\s*$/;
   const close = /^\s*<\/[A-Z][A-Za-z0-9]*\s*>\s*$/;
 
   let depth = 0;
+  let inStrip = false;
+  let stripN = 0;
+  let inPrereqs = false;
+  let prereqsTag = '';
+  let prereqsTabs = {};
+  const groupItems = [];
+  const slot = [];
   const out = [];
 
   for (const line of withComments.split('\n')) {
-    if (selfClosing.test(line)) continue;
+    if (selfClosing.test(line)) {
+      if (/^\s*<Prereqs\b/.test(line)) out.push(...prereqsToText(line), ...prereqsTabsToText(line));
+      continue;
+    }
     if (close.test(line)) {
       depth = Math.max(0, depth - 1);
+      if (/^\s*<\/StageStrip>/.test(line)) { inStrip = false; slot.length = 0; out.push(''); }
+      if (/^\s*<\/Prereqs>/.test(line)) {
+        out.push(...prereqsGroupToText(prereqsTag, groupItems), ...prereqsTabsToText(prereqsTag, prereqsTabs));
+        inPrereqs = false;
+        prereqsTabs = {};
+        groupItems.length = 0;
+        slot.length = 0;
+      }
       continue;
     }
     if (open.test(line)) {
@@ -78,6 +159,10 @@ function stripMdx(body) {
       // variant is which.
       const label = line.match(/\blabel=["']([^"']+)["']/);
       if (label) out.push('', `**${label[1]}**`, '');
+      // <Prereqs needs={…}> with page-specific <li> children in its slots: the
+      // shared lines go in first, the children follow as the lists they are.
+      if (/^\s*<Prereqs\b/.test(line)) { out.push(...prereqsToText(line)); inPrereqs = true; prereqsTag = line; }
+      if (/^\s*<StageStrip\b/.test(line)) { inStrip = true; stripN = 0; }
       depth += 1;
       continue;
     }
@@ -85,6 +170,35 @@ function stripMdx(body) {
     let text = line;
     for (let i = 0; i < depth && text.startsWith(INDENT); i += 1) {
       text = text.slice(INDENT.length);
+    }
+    if (inStrip) {
+      // one <li> per stage: flatten it, number it, and end the bold title with a period
+      slot.push(text);
+      if (/<\/li>/.test(text)) {
+        const item = inlineToMarkdown(slot.join(' ').replace(COMMENT, '')).replace(/^- /, '');
+        slot.length = 0;
+        if (item) out.push(`${++stripN}. ${item.replace(/^\*\*(.+?)\*\*\s*/, '**$1.** ')}`);
+      }
+      continue;
+    }
+    if (inPrereqs) {
+      // the slots hold raw <li> JSX, or a tab's own line as <span slot="…">;
+      // buffer until the item closes, then flatten
+      slot.push(text);
+      const joined = slot.join(' ').replace(COMMENT, '');
+      const tabLine = joined.match(/^\s*<span slot="(prompt|ui|cli)">([\s\S]*)<\/span>\s*$/);
+      if (tabLine) {
+        prereqsTabs[tabLine[1]] = inlineToMarkdown(tabLine[2]);
+        slot.length = 0;
+        continue;
+      }
+      if (/<\/li>/.test(text)) {
+        const item = inlineToMarkdown(joined);
+        // <li slot="group"> items belong to the second list, printed at </Prereqs>
+        if (item) (/^\s*<li\s+slot="group"/.test(joined) ? groupItems : out).push(item.startsWith('- ') ? item : `- ${item}`);
+        slot.length = 0;
+      }
+      continue;
     }
     out.push(text);
   }
