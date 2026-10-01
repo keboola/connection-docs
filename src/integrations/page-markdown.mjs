@@ -140,7 +140,7 @@ function buildLlmsTxt(site, siteTitle, pages) {
     `# ${siteTitle}`,
     '',
     '> Product documentation for Keboola, the data platform: loading and storing data,',
-    '> transformations, flows, data apps, AI features, and extending the platform with',
+    '> transformations, flows, apps, AI features, and extending the platform with',
     '> your own components.',
     '',
     'Every page below is also available as plain markdown by appending `index.md` to its',
