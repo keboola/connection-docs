@@ -109,9 +109,9 @@ If you need more information, please contact your CSM.
 | SMALL (dbt)                           | Snowflake SMALL DWH or equivalent               |
 | REMOTE (dbt)                          | Using user's remote DWH                         |
 
-#### <span data-pagefind-weight="6">Apps pricing</span>
+#### <span data-pagefind-weight="5">Apps pricing</span>
 
-<!-- The weight lifts this heading in site search for "apps pricing"; 6 keeps it below page titles such as Kai Pricing and Limits. -->
+<!-- The weight lifts this heading in site search, so a search for "apps pricing" finds this section. -->
 
 <span id="apps"></span>
 An app uses time credits while it's awake, including the idle wait before it sleeps, at an hourly rate set by its framework and backend size. A sleeping app uses none.
