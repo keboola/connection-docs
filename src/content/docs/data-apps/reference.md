@@ -199,7 +199,7 @@ Which of these the header and the **⋮** menu offer depends on the app's state 
 The Suspend/Resume feature saves resources by putting your app to sleep after a period of inactivity.
 
 - **Activity monitoring** — the app watches for HTTP requests and active WebSocket connections. If none occur for the configured period, it suspends. An inactive browser tab can still cause background activity; Chrome's Memory Saver can help prevent this.
-- **Automatic resumption** — the next request wakes the app. The first request after waking may take slightly longer.
+- **Automatic resumption** — the next request wakes the app, except after repeated failed starts (see below). The first request after waking may take slightly longer.
 - **Cost efficiency** — you're billed only for the time the app was active or waiting to suspend.
 
 If you open the URL of a sleeping app, it triggers wakeup and shows a **waking up** page.
@@ -209,6 +209,8 @@ If you open the URL of a sleeping app, it triggers wakeup and shows a **waking u
 If something goes wrong, a **wakeup error** page appears; click **Show More** for details.
 
 ![Wakeup error](/data-apps/proxy-error-wakeing-up.png)
+
+If the app fails to start several times in a row, Keboola stops retrying, and visits no longer wake it. Its URL shows a page headed **This app is not running** instead, which tells visitors to contact the app's maintainer. The app's page in Keboola warns that it "was disabled because it failed to start automatically multiple times". It stays off until someone fixes the cause and starts it by hand with **Start** or `kbagent data-app deploy`; [Troubleshooting](/data-apps/troubleshooting/#sleeping-and-waking) explains how to find the cause.
 
 When you **Deploy**, a wizard prompts for the backend version, the backend size and the auto-sleep timeout (five minutes to 30 days; default 15 minutes). **Redeploy** opens the same wizard with the app's current values in a collapsed **Deploy settings** section; expand it to change them. **Start** starts a stopped or sleeping app right away with those saved values and opens the wizard only when Kai has undeployed drafts of the app. [Pay-as-you-go](/management/payg-project/) projects have no backend size field.
 
