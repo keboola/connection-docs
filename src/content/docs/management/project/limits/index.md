@@ -129,12 +129,12 @@ You pick the size in the **Backend Size** field of the deploy wizard, each time 
 
 | Backend size | Specification                                  |
 |--------------|------------------------------------------------|
-| XSMALL       | 8 GB RAM, 1 CPU core, 1 TB SSD, shared         |
-| SMALL        | 16 GB RAM, 2 CPU cores, 1 TB SSD, shared       |
-| MEDIUM       | 32 GB RAM, 4 CPU cores, 1 TB SSD, shared       |
-| LARGE        | 114 GB RAM, 14 CPU cores, 1 TB SSD, dedicated  |
+| XSmall       | 8 GB RAM, 1 CPU core, 1 TB SSD, shared         |
+| Small        | 16 GB RAM, 2 CPU cores, 1 TB SSD, shared       |
+| Medium       | 32 GB RAM, 4 CPU cores, 1 TB SSD, shared       |
+| Large        | 114 GB RAM, 14 CPU cores, 1 TB SSD, dedicated  |
 
-<!-- Sizes from the Backend Size picker in the Apps UI, sent by Miro Cillik on 2026-09-30. VERIFY(Miro): on 2026-09-29 he said Apps pods are moving to dynamic resource allocation ("up to 8 GB" instead of fixed CPU and memory); confirm whether this table should say "up to" once that ships. -->
+<!-- VERIFY(Miro): if Apps pods move to dynamic resource allocation ("up to 8 GB"), should this table say "up to"? -->
 
 #### Kai Agent
 
