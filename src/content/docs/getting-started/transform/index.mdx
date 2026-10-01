@@ -59,7 +59,7 @@ tab", nothing else; CONSERVATION-REPORT.md, 2026-09-29. */}
 
 <FlowStrip steps="Tables in Storage|Input mapping copies them in, under the names your SQL uses|Your SQL runs in a temporary schema|Output mapping writes back only the tables you name" label="How a transformation reads and writes Storage" />
 
-![Screenshot - How mapping works](/getting-started/transform/mapping.png)
+![Screenshot - A new BigQuery transformation, Boolabean staffing outlook: empty Table Input Mapping and Table Output Mapping sections with their add buttons, above an empty Queries section offering Create Multiple Queries](/getting-started/transform/mapping.png)
 
 - **Mappings decide what goes in and out.** [Input mapping](/transformations/mappings/#input-mapping)
   copies in what you list (Kai's builds read it in place);
@@ -104,7 +104,7 @@ Writing SQL transformations is Kai's home ground
 schemas in front of it. Open **Kai Agent** in the top bar and ask:
 
 ```text title="Prompt" wrap
-Build a Snowflake transformation called "Boolabean staffing outlook" with one output table, staffing_outlook. Storage columns arrive as text, so cast before you compare or average.
+Build an SQL transformation called "Boolabean staffing outlook" with one output table, staffing_outlook. Storage columns arrive as text, so cast before you compare or average.
 
 1. Daily demand: from sales, sum units per store per date, and join weather_daily on store_id and date.
 2. Weather bands: temperature under 18, 18 to under 23, 23 to under 28, and 28 and over, each split into dry (rain under 0.5 mm) and wet (0.5 mm or more). Use half-open ranges so no day lands in two bands. Average the daily units per store per band.
@@ -115,8 +115,17 @@ Build a Snowflake transformation called "Boolabean staffing outlook" with one ou
 Run it, then tell me how many rows staffing_outlook has and which store and day come out most stretched.
 ```
 
-On a BigQuery project, say "BigQuery transformation" in the first line. Keep the column list in
-point 5 as written: the later pages type those names into their prompts and checks.
+Kai writes it in your project's own SQL dialect; on our Free Plan project that was BigQuery. Keep
+the column list in point 5 as written: the later pages type those names into their prompts and
+checks.
+{/* 2026-10-01 (Michal Jeřábek): the prompt no longer names Snowflake, since most new projects are
+Free Plan BigQuery on us-east4. Run that day in Free Plan project 6375 in this exact wording, in a
+fresh chat: Kai built a Google BigQuery transformation (SAFE_CAST throughout, the four bands
+half-open, tables read by full name with an empty input mapping), two approvals, 42 rows, and named
+Zelný trh on Monday and Tuesday at 85.2 as most stretched, which matches an offline computation
+from the same files and forecast. DECISIONS.md 2026-10-01. VERIFY(owner): this wording has not
+run on a Snowflake project; the Snowflake runs (264, 2026-09-08/09) used a prompt that named
+Snowflake. */}
 {/* Guide test 2026-09-09: the live run's prompt described the columns in words and Kai chose
 these exact names on its own, upper-cased because it did not quote its aliases (Snowflake schema
 STORE_NAME … SHORT_HANDED). The list was added so a reader's Kai lands on the same names; it has
@@ -134,7 +143,8 @@ set of columns, and the check below will not match. The half-open sentence matte
 cast sentence second: Kai samples the tables first to see the date format and the text values, and
 then casts everything it compares.
 
-The mapping sections of the **UI** tab describe the hand-built path; the result is the same table.
+The mapping sections of the **UI** tab describe the hand-built path; it gives the same rows and
+figures, though Kai picks its own column types and writes the weekday out in full.
 
 </details>
 
@@ -142,9 +152,17 @@ The mapping sections of the **UI** tab describe the hand-built path; the result 
 "KBC_EUW3_264"."in.c-keboola-ex-http-<id>"."sales". This closes the VERIFY(owner) that stood here
 since 5 Aug; see DECISIONS.md 2026-09-08. */}
 
+The chat links what Kai made, so that is where to find it afterwards: the transformation, and the
+job that ran it.
+
+![Screenshot - The Kai chat after the transformation prompt: Transformation created, Boolabean staffing outlook, Google BigQuery; Job succeeded; then Kai's answer, 42 rows with Boolabean Zelný trh in Brno the most stretched on two days, three short-handed rows in all, and a closing line that it will confirm once the job has written the table](/getting-started/transform/kai-transform.png)
+
 **Check:** Kai reports `staffing_outlook` with **42 rows** and names the most stretched café and
-day. If the count differs, the joins differ: re-prompt, or fix the code in place. Later steps
-depend only on the table name, so a close-enough table is fine.
+day. It may answer from a test run of its query while the job is still running, as in the
+screenshot; the job's card in the chat says **Job succeeded** once the table is written. If the count differs, the joins
+differ: re-prompt, or fix the code in place. Later steps need only that table, at
+`out.c-Boolabean-staffing-outlook.staffing_outlook` where Kai puts it, so a close-enough table is
+fine; if yours landed in another bucket, use its ID in their prompts.
 
 </TabItem>
 <TabItem label="UI">
@@ -164,7 +182,9 @@ depend only on the table name, so a close-enough table is fine.
    say "Transformations: are limited to SQL, Python, and R", and transformations/dbt/index.md,
    which says new PAYG projects get dbt activated by default. The repo never labels dbt Beta.
    Three pages disagree; the dialog is what a reader sees, so this sentence defers to it, but the
-   PAYG limits list needs an owner ruling. Offered in the dialog is not proof it runs. */}
+   PAYG limits list needs an owner ruling. Offered in the dialog is not proof it runs. Seen again in
+   Free Plan project 6375 on 2026-10-01: Google BigQuery, Python, R, DuckDB (Beta) and dbt Core
+   (Beta), which is the dialog in screenshot 01. */}
 
    Pick the SQL transformation your project offers, and use the matching query block below.
 
@@ -185,7 +205,7 @@ depend only on the table name, so a close-enough table is fine.
    multi-select, so tick `weather_daily`, `staffing`, `stores` and `forecast` too. It keeps a
    count of what you have chosen, and it does not mind that `forecast` sits in a different bucket.
 
-   ![Screenshot - Selecting source tables](/getting-started/transform/03-input-source.png)
+   ![Screenshot - The Input Mapping dialog: Source says 5 TABLES SELECTED, above Changed in Last and the Add Input button](/getting-started/transform/03-input-source.png)
 
 3. Click **Add Input**. Each table arrives with its **Input Table** name taken from the source
    table: `sales`, `weather_daily`, `staffing`, `stores`, `forecast`.
@@ -196,7 +216,7 @@ depend only on the table name, so a close-enough table is fine.
 
 You should end up with five inputs, listed as **Source Table → Input Table**:
 
-![Screenshot - The finished input mapping](/getting-started/transform/04-input-mapping.png)
+![Screenshot - Table Input Mapping with five rows, each source table in its keboola-ex-http bucket mapped to an input table of the same name: sales, weather_daily, staffing, stores and forecast](/getting-started/transform/04-input-mapping.png)
 
 Input mapping has more to it: incremental processing with **Changed in Last**, column filters,
 data filters. None of it is needed here; see
@@ -211,44 +231,58 @@ data filters. None of it is needed here; see
    Storage and is a [private beta](/transformations/mappings/#direct-mode-output-mapping).
    {/* VERIFY(owner): transformations/mappings/index.md says Direct Mode is a private beta that
    Support has to enable, yet the toggle was visible in a brand-new Free Plan project (6211,
-   2026-08-19) with no such request. Either that gate has changed or the mappings page is stale. */}
+   2026-08-19) with no such request. Either that gate has changed or the mappings page is stale.
+   Seen again in Free Plan project 6375 on 2026-10-01, with the UPPERCASE suggestion of step 2,
+   which a BigQuery project shows too. */}
 
 2. Name the table `staffing_outlook`. This is the name of a table your SQL will create; it does
    not exist yet. The field is labelled **Table name**, or **Which table should we save?** in
    Guided Mode. If the dialog warns you about case-sensitivity and suggests an UPPERCASE name,
    ignore the suggestion here and match your SQL exactly: the query blocks below create
    `staffing_outlook` in lower case, and the name has to be the one the query actually creates.
+   If the **Prompt** tab already built `staffing_outlook`, delete that table in **Storage** before
+   your first run: Kai's columns differ from this query's in type or in case, and the write can
+   fail.
 
-3. **Destination** is filled in for you from the transformation's name:
-   `out.c-Boolabean-staffing-outlook.staffing_outlook`, that is the `out` stage, a bucket named
-   after the transformation, and the table.
-   {/* VERIFY(owner): the bucket ID with a capital B is the one Kai's build created through the
-   API (DECISIONS.md 2026-09-08). Whether the Guided Mode auto-fill keeps the transformation
-   name's capital or lower-cases it was not read live; bucket IDs are case-sensitive and three
-   other pages type this ID, so one look at the auto-filled field settles it. */} Neither the bucket nor the table exists yet; both are
-   created the first time the transformation runs.
+3. **Destination** fills itself in from the transformation's name, in lower case:
+   `out.c-boolabean-staffing-outlook.staffing_outlook`, that is the `out` stage, a bucket named
+   after the transformation, and the table. Keep it. If you ran the **Prompt** tab first, that
+   bucket already exists as `out.c-Boolabean-staffing-outlook` and the destination points into it,
+   which is how the screenshots show it; otherwise the bucket and the table are created the first
+   time the transformation runs. The later pages write the table ID with a capital B, the way
+   Kai's build names the bucket; if yours is in lower case, use your own ID in their prompts and
+   commands.
+   {/* Read live 2026-10-01 in Free Plan project 6375, on a temporary copy built through this tab
+   (input mapping, output mapping and the BigQuery block, saved but never run, then deleted into
+   Trash; screenshots mapping, 03, 04 and 07 come from it): the Guided Mode auto-fill lower-cases
+   the transformation's name. A GET of /v2/storage/buckets/out.c-boolabean-staffing-outlook
+   returned Kai's bucket, out.c-Boolabean-staffing-outlook, and the output row showed it as
+   Boolabean-staffing-outlook, so the lookup ignores case. Not exercised: a run that creates the
+   bucket from the lower-case ID, and so whether a bucket created that way keeps the lower case;
+   the page therefore tells a hand-building reader to use their own table ID later, since
+   BigQuery dataset names are case-sensitive even where Storage lookups are not. This replaces
+   the VERIFY that stood here since 2026-09-08. */}
 
-   ![Screenshot - The finished output mapping](/getting-started/transform/06-output-mapping.png)
+   ![Screenshot - Table Output Mapping with one row: staffing_outlook, written to the OUT bucket Boolabean-staffing-outlook as staffing_outlook](/getting-started/transform/06-output-mapping.png)
 
 **Write the queries**
 
-In the empty **Queries** section, click **Create Multiple Queries**. Your SQL lives in a *code*
-inside a *block*: you get `Block 1` holding one code. Paste the SQL for **your project's backend**
-and save.
+In the empty **Queries** section, click **Create Multiple Queries**. It opens an **All Queries**
+editor that holds every block and code at once, with the structure marked by comment lines:
+`/* ===== BLOCK: Block 1 ===== */`, then `/* ===== CODE: Code ===== */`, then a
+`-- Your code goes here` line. Replace that line with the SQL for **your project's backend** from
+the blocks below, leave the markers alone, since they are what keeps the blocks apart, and save.
 
-You may get an editor for that one code, where you can also name it; call it `Staffing outlook`.
-You may instead get a single **All Queries** editor holding every block and code at once, with the
-structure marked by comment lines like `/* ===== BLOCK: Block 1 ===== */`; there, replace the
-`-- Your code goes here` line and leave those markers alone, since they are what keeps the blocks
-apart.
-{/* VERIFY(owner): the All Queries editor was what opened in project 6211 on 2026-08-19, and
-neither it nor its BLOCK/CODE comment markers are documented anywhere else in the repo. It may be
-the same thing as the Edit Code control named below rather than a project-dependent variant; worth
-one look before this wording settles. */}
-
-Later you can add another code to the same block with **New Code**, or a whole second block with
-**New Code Block**; that is how a longer transformation gets organized. Once there is code, the
-**Queries** header offers **Copy Code** and **Edit Code**.
+Your SQL now lives in a *code* named `Code` inside `Block 1`. Click the code to open it on its own;
+the pencil next to its name renames it, to `Staffing outlook` for example. Later you can add
+another code to the same block with **New Code**, or a whole second block with **New Code Block**;
+that is how a longer transformation gets organized. Once there is code, the **Queries** header
+offers **Copy Code** and **Edit Code**.
+{/* Seen in Free Plan projects 6211 (2026-08-19) and 6375 (2026-10-01): Create Multiple Queries
+opens the All Queries editor with these three lines, and clicking the saved code opens a
+"Block 1 > Code" editor with a rename pencil, Copy Code and Save. The page used to offer that
+single-code editor as an alternative to All Queries; it is what opening a code shows. This closes
+the VERIFY that stood here since 2026-08-19. */}
 
 **If your project uses Snowflake**
 
@@ -335,10 +369,6 @@ Every identifier is double-quoted because Snowflake upper-cases unquoted ones. Q
 aliases too is what gives the table lower-case column names; keep to one convention, because a
 table that already exists remembers the case of its columns (see the check below).
 
-Back on the transformation's own page, the **Queries** section now holds your code in Block 1:
-
-![Screenshot of the transformation page: the Queries section with the SQL in Block 1, above the input and output mapping](/getting-started/transform/07-configured.png)
-
 **If your project uses BigQuery**
 
 [BigQuery](/transformations/bigquery/) does not quote identifiers this way. Backticks are
@@ -412,15 +442,27 @@ LEFT JOIN roster r ON r.store_id = f.store_id AND r.weekday = f.weekday
 ORDER BY f.d, st.store_name;
 ```
 
-{/* VERIFY(owner): the BigQuery block is a translation of the verified Snowflake block and has not
-been run: there is no BigQuery project available to this work (plan decision 7). Points to check
-on a real run: `date` and `time` as column names inside SAFE_CAST (backticked here on purpose),
+{/* Run 2026-10-01 in Free Plan project 6375 (BigQuery) as a read-only query through Kai: the block
+minus its CREATE TABLE line, identical to the page except the five table names, which Kai qualified
+(`in_c_keboola_ex_http_<config-id>`.`sales` and so on; executed SQL diffed against the page). It
+returned 42 rows with the same three short-handed café-days as the Kai-built table, Vinohrady
+2026-10-01 at 73 and Zelný trh 2026-10-05 and 2026-10-06 at 85.2, and weekday as Mon/Tue. Later
+the same day a copy was built through this tab, with the five-table input mapping and this block
+pasted into All Queries (saved text equal to the block), for screenshots mapping, 03, 04 and 07; it
+was deleted unrun, because its output would have replaced Kai's typed staffing_outlook. So the
+CREATE TABLE wrapper and the short names through an input mapping have still not run on BigQuery
+(MISSING.md). The points that were open before the run: `date` and `time` as column names inside SAFE_CAST (backticked here on purpose),
 FORMAT_DATE('%a') returning Mon/Tue like Snowflake's DAYNAME, and that every column is qualified
 (the 2026-08-19 lesson from project 6211: a bare column name that matches a table name resolves to
 the range variable and comparisons then fail with "STRUCT<...> vs STRING"). The 2026-08-25 note
 about `SELECT * EXCEPT (_timestamp)` still applies: _timestamp appears only on CLONE-staged inputs
 (transformations/mappings/index.md), and EXCEPT on an absent column is itself an error, so the
 block does not use it. */}
+
+Back on the transformation's page after you save, **Queries** shows your SQL as the one code in
+**Block 1**:
+
+![Screenshot - The transformation page after saving: Table Output Mapping with staffing_outlook, then Queries with Copy Code and Edit Code, and Block 1 holding one code named Code](/getting-started/transform/07-configured.png)
 
 </TabItem>
 <TabItem label="CLI / API">
@@ -447,7 +489,8 @@ you have a reason to.
 write before it writes it.
 
 It prints the new configuration ID; the next two commands need it. `kbagent config list --project
-docs-demo --component-id keboola.snowflake-transformation` finds it again later.
+docs-demo --component-id keboola.google-bigquery-transformation` finds it again later
+(`keboola.snowflake-transformation` on a Snowflake project).
 
 **Add the input mapping**
 
@@ -480,10 +523,10 @@ configuration IDs to hand.
 **Run it and read the result**
 
 ```bash
-kbagent job run --project docs-demo --component-id keboola.snowflake-transformation --config-id <config-id> --wait
+kbagent job run --project docs-demo --component-id keboola.google-bigquery-transformation --config-id <config-id> --wait
 ```
 
-On a BigQuery project the component ID is `keboola.google-bigquery-transformation`.
+On a Snowflake project the component ID is `keboola.snowflake-transformation`.
 
 ```bash
 kbagent storage table-detail --project docs-demo --table-id out.c-Boolabean-staffing-outlook.staffing_outlook
@@ -501,27 +544,31 @@ was written.
 *Coming from the **Prompt** or **CLI / API** tab? The run already happened: the prompt asked for
 it, and `job run --wait` did it. Skip to the checks below.*
 
-Click **Run Transformation** and confirm with **Run**. The job copies the inputs in, runs your SQL
-and writes `staffing_outlook` back to Storage. It takes about a minute, and a green **Success**
-means it worked; the notification's **Show job** link and **Jobs** both lead to it.
+Click **Run Transformation** and confirm with **Run**. The job copies in what the input mapping
+lists, runs your SQL and writes `staffing_outlook` back to Storage. It takes about a minute, and a
+green **Success** means it worked; the notification's **Show job** link and **Jobs** both lead to
+it. The job below is Kai's build, which reads its tables in place, so its **Mapping** says
+**Input: No tables**.
 
 ![Screenshot - Running the transformation](/getting-started/transform/08-run.png)
 
 ![Screenshot - Successful job](/getting-started/transform/09-job-success.png)
 
-Then open **Storage**: a new bucket `out.c-Boolabean-staffing-outlook`, listed as
-`Boolabean-staffing-outlook` with an **OUT** badge, holds `staffing_outlook` with **42 rows and 10
-columns**.
+Then open **Storage**: a new bucket `out.c-Boolabean-staffing-outlook` (in lower case if the UI
+tab created it), listed without its `out.c-` prefix and with an **OUT** badge, holds
+`staffing_outlook` with **42 rows and 10 columns**.
 
-![Screenshot of the Storage table list with staffing_outlook and its Recently Updated By column naming the transformation](/getting-started/transform/10-table-in-storage.png)
+![Screenshot - The Storage table list with staffing_outlook and its Recently Updated By column naming the transformation](/getting-started/transform/10-table-in-storage.png)
 
 - **42 rows**, six cafés times seven forecast days. More means an input has duplicate rows; fewer
   means a join dropped a café or a day, most often because `location_id` did not map onto a
   `store_id`.
 - **No two rows share a café and a date.** Sort the **Data Sample** tab by `store_name`: each café
   shows seven different dates.
-- **`short_handed` is true on a few rows,** not all and rarely none (a cool, wet week can flag
-  nothing). The top row by `expected_units_per_person` is the café and day the next page asks about.
+- **`short_handed` is true on a few rows** in a warm week. The sample's history is one summer, so
+  a week under 18 °C flags nothing, and cold, dry days leave most cafés without an
+  `expected_units` (see below). The top row by `expected_units_per_person` is the café and day the
+  next page asks about.
 
 <details>
 <summary>The ten columns, upper-case names, and empty cells</summary>
@@ -533,14 +580,16 @@ an alias that is not quoted, and the names are the same names.
 
 An empty `expected_units` on a row is not an error: it means the summer never had a day in that
 café's band, so there is no history to average. In this sample that band is *cold and dry*: five of
-the six cafés had no dry day under 18 °C all summer.
+the six cafés had no dry day under 18 °C all summer. And on a day under 18 °C no café's history
+comes to more than 65.5 units a person, below the 67 that flags a day, so a cold week has no
+short-handed rows at all.
 
-How many rows are flagged depends on the forecast; our week had four.
+How many rows are flagged depends on the forecast; the week in our screenshots had three.
 
 The table list's **Recently Updated By** column names the transformation and its backend
-(`Boolabean staffing outlook / Snowflake SQL` here): the fastest way to answer "where did this
+(`Boolabean staffing outlook` over *Google BigQuery* in the screenshot above): the fastest way to answer "where did this
 table come from?" months later. Running the transformation again rebuilds the table, so it is safe
-to re-run while you experiment, and tomorrow's forecast gives you tomorrow's table, which is what
+to re-run while you experiment, and next week's forecast gives you next week's table, which is what
 the scheduling page is for.
 
 </details>

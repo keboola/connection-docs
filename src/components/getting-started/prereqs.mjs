@@ -39,10 +39,11 @@ export const SHARED = {
 //
 // 2026-09-29: shortened for the card row (David Esner's "strašně moc textu");
 // the facts are the same: the button, supported stacks only, an organization
-// admin turns it on once.
+// admin turns it on once. 2026-10-01: a new Free Plan project (6375) had Kai
+// from its first login, so the line says that first.
 export const TABS = [
   { key: 'prompt', label: 'Prompt tab',
-    html: 'Kai, the <strong>Kai Agent</strong> button in the top bar, on supported stacks. An organization admin turns it on once: <a href="/kai/getting-started/">Get started with Kai</a>.' },
+    html: 'Kai, the <strong>Kai Agent</strong> button in the top bar, on supported stacks. A new Free Plan project has it from the start; elsewhere an organization admin turns it on once: <a href="/kai/getting-started/">Get started with Kai</a>.' },
   { key: 'ui', label: 'UI tab', html: 'a browser.' },
   { key: 'cli', label: 'CLI / API tab',
     html: '<a href="/cli/getting-started/">kbagent</a>, connected to your project with write access.' },

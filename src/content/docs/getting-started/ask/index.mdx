@@ -53,34 +53,20 @@ narrowed to the flagged rows; it is not a new claim, but it has not been run in 
 - **Here Kai reads what you built** instead of building for you. Querying a table and calculating a
   metric is [Data Exploration](/kai/use-cases/#data-exploration), and it needs nothing set up.
 - **Nothing on this page changes the project.** Kai's read-only tools run without asking by
-  default, so expect an answer, not an approval dialog, unless this project's
+  default, so expect an answer, not an approval card, unless this project's
   [tool permissions](/kai/settings/#tool-permissions) are set to ask.
 
-The whole interaction, the pointer marking where the reasoning lands:
+The question and Kai's answer in a Free Plan project, in the week the screenshots in this guide
+come from:
 
-<video autoplay loop muted playsinline poster="/getting-started/ask/kai-ask-staffing-poster.png" aria-label="The Kai panel beside the staffing_outlook table: the question is typed and sent, Kai reads the schema and queries the rows, a seven-day table appears with two red days, and the conclusion names dry, warm days on the thinnest roster">
-  <source src="/getting-started/ask/kai-ask-staffing.mp4" type="video/mp4" />
-</video>
+![Screenshot - The Kai chat with the question about staffing_outlook and the start of Kai's answer: Vinohrady in Prague is short-handed on Thursday, its warmest day, and Zelný trh in Brno on Monday and Tuesday, where the forecast is much like the rest of its week and the roster is two people instead of three](/getting-started/ask/kai-ask.png)
 
-{/* Clip recorded live in project 264 on 2026-09-14 (1280x800, trimmed to start with the panel
-open); post-produced with the docs-clip compositor: the 50-second thinking stretch runs at 9x,
-chips name the read-only nature and the two red days, and a spotlight lands on Kai's conclusion.
-Re-rendered 2026-09-15 without the mascot (Nikita, 2026-09-14). Kai's answer that day: only Brno
-flagged, Monday 72.3 and Tuesday 85.2 per person on a two-person roster, "warm and completely dry".
-
-2026-09-16: the top bar was in shot the whole way through, carrying the organization name, the
-project name, the branch name and the signed-in avatar, which is exactly what PRDCT-616 is about
-and what the 26 stills already avoid. All four are masked now, adaptively rather than with a solid
-fill, so the masked strip follows the clip's own dimming instead of glaring white through it. The
-Kai Agent button is deliberately left in: it is product UI, not project data, and the page tells
-the reader to look for it there. The blank first second is trimmed. 35.4 s, 741 KB, 1152x720; the
-poster is a frame of the masked clip.
-
-Known: the caption chips still carry the blue dot, and the answer still gets a blue highlight box.
-Both are composited into the frames and the source screen recording is gone, so removing them means
-re-recording the Kai session. Same for the length, which is 35 s against the skill's 30 s
-guideline: shortening it properly is a pacing decision at record time, not a trim.
-VERIFY(owner). */}
+{/* 2026-10-01, Free Plan project 6375 (us-east4, BigQuery): the Prompt tab's first question in a
+fresh chat, answered in 63 s (sent 13:40:16, answered 13:41:19 UTC) with no approvals and an inline chart below the frame. Captured from
+the expanded Kai panel with the chat history hidden; nothing in frame names the project or a
+person. It replaces kai-ask-staffing.mp4 (project 264, 2026-09-14), which showed another week
+(only Brno flagged) and still carried the pointer Nikita asked to drop; Michal Jeřábek (30.09)
+asked for every image from one week. CONSERVATION-REPORT.md has the clip's removal. */}
 
 ## Ask it
 
@@ -93,10 +79,11 @@ Using staffing_outlook: which café is short-handed on which day next week, and 
 ```
 
 **Check:** Kai names the flagged café-days (the rows where `short_handed` is true) and, for each,
-what the forecast does that day that it does not do on the days around it. Look for the pattern
-the guide was built on, in Kai's own words and with the table's figures: a thin roster meets a
-warm, dry forecast, while the safe days are wetter, cooler, or better staffed. In a wet week Kai
-will tell you nobody is short-handed, and that is the table being right.
+what sets that day apart from the rest of its week, with the table's figures. Usually it is a warm,
+dry forecast on a thin roster. When the forecast is much the same all week, Kai names the roster as
+the difference instead. In a week under 18 °C Kai will tell you nobody is short-handed, and that is
+the table being right: the sample's history is one summer, and on a cold day it never puts more
+than 65.5 units on one person.
 :::
 
 The same table answers what-if questions too:
@@ -106,17 +93,18 @@ Using staffing_outlook: if one extra person joined the roster on every short-han
 ```
 
 **Check:** Kai recomputes the per-person figure for every flagged row with one more person and
-lists the before and after.
+lists the before and after. In a week with nothing flagged there is nothing to recompute.
 
 <details>
 <summary>What Kai answered on the day this was written</summary>
 
-The answer changes with the forecast. On the day this page was written, two cafés were flagged on
-the same two days, both at the start of the week, and Kai put it as *"a thin start-of-week roster
-colliding with warm, dry weather"*.
+The answer changes with the forecast. In the week of the screenshots, 1 to 7 October 2026, three
+café-days were flagged: Vinohrady on Thursday, its warmest day, and Zelný trh on Monday and
+Tuesday, where Kai noticed that the forecast was much like its other days' and the roster was
+two people instead of three, *"a roster fix, not a forecast surprise"*.
 
-The follow-up's answer that day was *none of them*: one extra person brought every flagged day
-well under the line. That is the kind of thing nobody can see in five separate files, and it took
+The follow-up's answer that week was *none of them*: one extra person brought the three days to
+54.8, 56.8 and 56.8 expected units per person. That is the kind of thing nobody can see in five separate files, and it took
 one question because the pipeline had already put the roster next to the demand.
 
 </details>
@@ -135,7 +123,10 @@ already wrote, so point Kai at those (`expected_units`, `rostered_staff`,
 <TabItem label="UI">
 
 There is no dialog for "answer this question". Reading a table by hand means querying it. Open a
-[workspace](/getting-started/transform/workspace/) on the same table and run the SQL yourself:
+[workspace](/getting-started/transform/workspace/) on the same table and run the SQL yourself, in
+your project's dialect.
+
+**If your project uses Snowflake**
 
 ```sql
 SELECT "store_name", "city", "date", "weekday", "expected_units", "rostered_staff",
@@ -159,6 +150,34 @@ If those raise `invalid identifier`, your table has upper-case column names: Sno
 an alias that was not quoted, and the **Prompt** path's Kai does not quote them. Either drop the
 quotes from the query or upper-case the names inside them. The
 [transform page](/getting-started/transform/#if-it-goes-wrong) explains why the two cases exist.
+
+**If your project uses BigQuery**
+
+BigQuery reads double quotes as text rather than as names, so the same two queries go without
+them, with `date` in backticks as on the transform page:
+
+```sql
+SELECT store_name, city, `date`, weekday, expected_units, rostered_staff,
+       expected_units_per_person
+FROM staffing_outlook
+WHERE short_handed = TRUE
+ORDER BY expected_units_per_person DESC;
+```
+
+```sql
+SELECT store_name, `date`,
+       ROUND(expected_units / (rostered_staff + 1), 1) AS with_one_more
+FROM staffing_outlook
+WHERE short_handed = TRUE
+ORDER BY with_one_more DESC;
+```
+
+{/* Both run 2026-10-01 in Free Plan project 6375 (BigQuery) as read-only queries through Kai,
+identical to the blocks above except the table name, which Kai qualified as
+`out_c_Boolabean_staffing_outlook`.`staffing_outlook` (executed SQL diffed against the page): three
+rows, Zelný trh 2026-10-06 and 2026-10-05 at 85.2 and Vinohrady 2026-10-01 at 73.04; then 56.8,
+56.8 and 54.8. The table Kai's transformation writes on BigQuery is typed (BOOL, NUMERIC, INTEGER,
+DATE), which is why no casts are needed. Not run inside a workspace. */}
 
 Storage's own **Data Sample** tab answers the simpler half without a workspace at all: open
 `staffing_outlook`, sort by `expected_units_per_person` descending, and read the top rows.
@@ -201,7 +220,7 @@ Load the five CSV files at https://help.keboola.com/getting-started/boolabean/ (
 
 Two things to know before you paste it:
 
-- **It is still a dozen approvals, not one.** Kai asks before each object it creates.
+- **It is still a dozen approvals, not one.** Kai asks before each change it makes.
 - **Kai tends to stop after the first part,** answering *"I'll tackle this in stages"* and waiting
   for *continue*. In our runs the same work as four prompts in one chat needed no nudging.
 

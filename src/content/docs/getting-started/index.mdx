@@ -1,7 +1,7 @@
 ---
 title: 'Getting started with Keboola'
 slug: 'getting-started'
-description: 'Build one working, scheduled pipeline: load six tables, join them with SQL, ask the result a question, turn it into an app, and have it rebuild itself every morning.'
+description: 'Build one working, scheduled pipeline: load six tables, join them with SQL, ask the result a question, turn it into an app, and have it rebuild itself every week.'
 redirect_from:
   - /tutorial/
 ---
@@ -15,11 +15,12 @@ import FromTo from '../../../components/getting-started/FromTo.astro';
 <PageMeta genre="Tutorial" time="about 30 minutes with Kai, plus sign-up and reading" />
 
 Your data lives in more places than one: files, a spreadsheet someone keeps, an API, a database.
-Keboola is where you bring it together, shape it with SQL, ask it questions in plain language, turn
-the answer into an app, and have the pipeline rerun by itself every morning. This guide does each
-of those once, on a small sample, so you can do them on your own data.
+Keboola is where you bring it together and shape it with SQL. Kai, its AI assistant, answers
+questions about it in plain language; the answer becomes an app, and the pipeline reruns by itself
+every week. This guide does each of those once, on a small sample, so you can do them on your own
+data.
 
-<video autoplay loop muted playsinline poster="/getting-started/hub-explainer-poster.png" aria-label="How Keboola works, as four dots on a line: load your data with a connector; ask Kai, the assistant in your project, where one prompt asks it to join the tables and say which café will be short-handed next week; Kai joins and transforms the data while you approve each change; the app is ready: you describe it in one paragraph and Kai builds a draft you can open. Then that draft, a grid of six cafés by seven days, and the question: want an answer from your data, a data app, or a pipeline that reruns every morning? Go through the guide and try it yourself.">
+<video autoplay loop muted playsinline poster="/getting-started/hub-explainer-poster.png" aria-label="How Keboola works, as four numbered dots on a line: load your data, ask Kai, Kai builds it, the app is ready. Then the app this guide builds, a grid of six cafés by seven days with three red cells, and the line: Go through the guide and try it yourself.">
   <source src="/getting-started/hub-explainer.mp4" type="video/mp4" />
 </video>
 
@@ -41,9 +42,13 @@ next to it. It
 replaced "about 80 minutes" (this page 5 + the seven steps 5+15+15+5+15+15+5, reading one tab at
 200 words/min plus Kai's wall time), which read as a reason not to start, and the per-step minutes.
 The 30 is Kai's wall time per step in the 2026-09-08/09 runs: load 9, transform 4, ask 3, app 6,
-flow 3 + an 8-minute first run. A fresh timed run was planned for 2026-09-29 and did not happen:
-an unattended script that clicks Kai's approvals was refused, so it waits for Nikita to decide how
-to re-measure. VERIFY(Nikita).
+flow 3 + an 8-minute first run. Re-measured 2026-10-01 in Free Plan project 6375, with Claude
+driving the browser at Nikita's request and reading each approval card before approving it: load
+10.9 (both prompts), transform 4.7, ask 1.3, app 4.5 to the first preview, flow 5.6 including its
+3.4-minute first run, 27 minutes in all. The app's one-message fix and the optional publish added 4
+and 6. The flow was rebuilt that evening with two phases (no app phase); that prompt took about 7.5
+minutes including a 5.6-minute run, two of them queue wait, which makes about 29. The 30 stands.
+DECISIONS.md 2026-10-01.
 
 The tab-sync GIF follows the pattern the component docs already use for UI behaviour
 (public/extend/component/ui-options/ui-examples/*.gif): cropped to just the region that carries the
@@ -73,20 +78,27 @@ is avoided: the grid has no filters. Made with explainer.html in the docs-clip r
 28 and 22 px on the canvas, 17.5 and 13.75 px on the page; each step and each closing phrase stays
 up at least 3 s, and the clip fades to its empty first frame so the loop has no jump. Poster = the
 whole line with its four captions, 99.5 KB. The app card is app/grid-preview.png (14 Sep), cut just
-under Brno's weekday line, above the line its own screenshot slices. A taller capture needs the
-data app running, which its broken deploy prevents. VERIFY(owner). */}
+under Brno's weekday line, above the line its own screenshot slices.
+
+Cut to 10 s on 2026-10-01 for Michal Jeřábek (30.09, "úvodní klip max 10 s"), from
+explainer-short.html in the docs-clip rig: the four dots carry their titles only, about 1.35 s
+each, then 2.5 s of the app and one line, and the clip fades to its empty first frame. That breaks
+the docs-clip rule of three seconds per caption on purpose; the step texts are in the course line
+under the clip. The card is the Free Plan grid (app/grid-preview.png, project 6375, 2026-10-01,
+three red cells), the same week as the run's other screenshots. 10.0 s, 193 KB, luma mean 229, never
+under 227; the poster is the whole line at 5.6 s. DECISIONS.md 2026-10-01. */}
 
 <FromTo from="you have heard of Keboola and have nothing set up." to="a scheduled pipeline and a data app, in a project you created or joined." />
 
 The sample is six cafés: five files (a summer of sales, the rosters, the weather) and next week's
 forecast from a public API that needs no account. The moves are the same on your own tables. Every
 step works toward one question: **Which day next week will leave a café short-handed?** By the
-fifth page a grid answers it, and the answer changes every morning with the forecast.
+fifth page a grid answers it, and every Monday the answer is rebuilt on the new forecast.
 
 <Prereqs needs={[]}>
   <li>
-    <strong>An email address</strong> to create your project on the first page, or an invite to
-    your company's project.
+    <strong>An email address</strong> to create a free project on the first page, or an invite
+    to your company's project. A free project is enough; we ran this guide's Prompt path on one.
   </li>
   <li>
     <strong>A browser.</strong> Every step also has a Prompt way and a terminal way;{' '}
@@ -97,12 +109,11 @@ fifth page a grid answers it, and the answer changes every morning with the fore
 {/* The box replaced a sentence on 2026-09-24 ("Everything here can be done in the browser with
 nothing installed; the command-line way on each page needs kbagent. A free project is enough to
 begin."), because Nikita asked for the concrete things a reader needs rather than prose about them.
-VERIFY(owner): the hub makes no Free Plan promise now; the box asks only for a project. Three
-things stay open, and Get a project is where they would be answered: whether the Free Plan includes data apps
-(app/index.mdx), whether Kai is on the Free Plan's fixed stack, us-east4 (every live run here was
-on europe-west3, and project/index.mdx says Kai "is not on every stack"), and whether 60 runtime
-minutes a month survive a daily flow whose recorded phases took 121 + 41 + 282 s
-(management/pay-as-you-go/). The sentence used to say "covers all of it" and linked the wizard; it
+The three Free Plan questions that stood here are answered by the 2026-10-01 run in project 6375
+(us-east4): the Free Plan includes data apps (built, published and deployed), Kai is on its stack
+from the first login, and the weekly flow uses about three runtime minutes a run, which is why the
+schedule is weekly (automate/ has the box). So the first item now says the guide's Prompt path ran
+on a Free Plan project (the UI and CLI tabs were not rerun there). The sentence used to say "covers all of it" and linked the wizard; it
 links Get a project now, so a reader meets the invite and SSO advice before a sign-up form.
 Fact-checker and guide-tester, 2026-09-23. */}
 
@@ -117,8 +128,9 @@ needs, and how to tell it worked.
 
 Every page with a task on it offers that task three ways:
 
-- **Prompt**: paste it into **Kai**, the assistant in the project's top bar, and watch it build. An
-  organization admin switches Kai on once; see [Get started with Kai](/kai/getting-started/).
+- **Prompt**: paste it into **Kai**, the assistant in the project's top bar, and watch it build. A
+  new Free Plan project has Kai from the start; elsewhere an organization admin switches it on
+  once; see [Get started with Kai](/kai/getting-started/).
 - **UI**: the same task click by click, to see where each setting lives.
 - **CLI / API**: the same task from a terminal with [kbagent](/cli/), with the raw request where
   there is no command for it.
@@ -135,19 +147,30 @@ the page says so rather than showing an empty tab.
 {/* Moved here from PathIntro.astro on 2026-09-29: the component printed this on every task page
 (179 words each, the block in David Esner's screenshot). Every page links here now. */}
 
-**Kai asks before it changes anything:** one approval dialog per object it creates, showing the
-exact configuration it is about to write. Questions that only read do not ask.
+**In the chat, Kai asks before each change it makes:** an approval card shows exactly what it is
+about to write or run, with **Approve**, **Decline** and **Always allow**. Questions that only read
+do not ask, and neither do tools set to **Always allow**; a new account has two write tools set
+that way, both for data apps. The Apps builder asks less: it builds a draft of the app, code and
+preview included, without asking, and when you publish it asks twice, once for the app's access to
+Storage and once to deploy it.
 
 <details>
 <summary>Fewer approvals, plan mode, and undoing a step</summary>
 
 - **If confirming each one gets tiring,** pre-approve tools in
-  [tool permissions](/kai/settings/#tool-permissions).
-- **Plan mode is a different thing.** With the chat's **plan mode** button, Kai writes the steps
-  down and asks you to approve the plan before it starts, and then still asks for each change. Use
-  it when you want to read the plan first, not to save clicks.
-- **Nothing here is one-way.** If a step builds something other than the page describes, say so in
-  the same Kai chat, or edit the configuration by hand.
+  [tool permissions](/kai/settings/#tool-permissions): the gear in the Kai panel, then **Tools**.
+- **Plan mode is a different thing.** With **Plan mode** from the **+** menu in the chat's message
+  field, Kai writes the steps down and asks you to approve the plan before it starts, and then
+  still asks for each change. Use it when you want to read the plan first, not to save clicks.
+- **Most of it can be undone.** If a step builds something other than the page describes, say so
+  in the same Kai chat, or edit the configuration by hand. Every configuration Kai creates or
+  changes keeps a **Versions** tab, and **Restore this version** on an earlier row takes it back;
+  **Delete configuration** removes one you do not want, into **Trash**. Restoring a version changes
+  the configuration only: tables a job already wrote stay as they are. The weekly schedule is a
+  configuration of its own, outside the flow's versions, and an app's versions record its
+  settings, not the code Kai wrote.
+
+  ![Screenshot - The Versions tab of the Boolabean sales configuration: one version per change Kai made, from Configuration created to the fifth row added, with the Restore this version tooltip on an earlier row](/getting-started/kai-undo-versions.png)
 
 </details>
 

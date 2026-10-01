@@ -27,7 +27,7 @@ export const COURSE = [
   { key: 'app', short: 'App', title: 'Put it in front of someone',
     outcome: 'Describe an app in a paragraph and get a grid: six cafés by seven days.',
     term: 'a data app' },
-  { key: 'automate', short: 'Schedule', title: 'Make it run every morning',
+  { key: 'automate', short: 'Schedule', title: 'Make it run every week',
     outcome: 'Schedule it all to re-run on the new forecast, and hear about it if it breaks.',
     term: 'a flow' },
   { key: 'check', short: 'Check', title: 'Check it worked',

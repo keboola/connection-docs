@@ -1,7 +1,7 @@
 ---
-title: 'Make it run every morning'
+title: 'Make it run every week'
 slug: 'getting-started/automate'
-description: 'Wire your two connectors, the transformation and the app into a single flow, run the two loads in parallel, give it a 06:00 schedule, and get notified when it fails.'
+description: 'Wire your two connectors and the transformation into a single flow, run the two loads in parallel, give it a Monday 06:00 schedule, and get notified when it fails.'
 redirect_from:
   - /tutorial/automate/
 ---
@@ -17,9 +17,16 @@ import FlowStrip from '../../../../components/getting-started/FlowStrip.astro';
 
 <CourseLine current="automate" />
 
-Your table is true this morning because you ran every step by hand; tomorrow the forecast moves on
-and the table does not. A **flow** runs your configurations in order, on a schedule, so the outlook
-is rebuilt before the first café opens.
+Your table is true today because you ran every step by hand; next week the forecast has moved on
+and the table has not. A **flow** runs your configurations in order, on a schedule, so every Monday
+the outlook for the week ahead is rebuilt before the first café opens.
+
+{/* Weekly since 2026-10-01 (Michal Jeřábek, 30.09; Nikita): the daily flow took 8.5 to 10.6 min a
+run in project 264, and a Free Plan project gets 60 job-runtime minutes a month, so a daily schedule
+ran the allowance out in about a week. A weekly run also fits the question better: on Monday, which
+day of the coming week will be short-handed. The cost box at the end takes its numbers from the
+Free Plan run of 2026-10-01 (below); Set Your Own's Week, its weekday picker and its time-zone
+button were read live in project 6375 the same day. */}
 
 {/* Tutorial-type page. 2026-09-09: dataset swapped to Boolabean; the flow was built live in
 project 264 by Kai from the prompt in the Kai tab (flow 01m23dcqs9j2gw0q9z8y25j9v2, 3 approvals:
@@ -46,11 +53,35 @@ accepted this YAML, `flow new --file` created a throwaway flow from it, and `flo
 '0 6 * * *' --timezone Europe/Prague --enabled` created and activated the scheduler configuration.
 The throwaway flow and its scheduler were both deleted the same minute (note that
 `flow schedule-remove` prompts for confirmation, so a scheduler can outlive the flow it points at
-if you abort). The flow's own run was not re-run from the CLI: the scheduled run does it daily. */}
+if you abort). The flow's own run was not re-run from the CLI: 264's scheduled run did it daily
+then.
+
+2026-10-01, Free Plan project 6375 (us-east4, BigQuery): the Prompt tab's prompt in a fresh chat,
+the app named by its real name (Staffing Outlook); the page's prompt and YAML named it too until
+the app phase was dropped that evening. Kai built a conditional flow
+(01m3vwjwgtzsgga3bfnshdnzwv) with the phases "Extract sources", "Transform" and "Redeploy data
+app", the two HTTP tasks side by side in the first; three approvals (the flow, the schedule as
+"0 6 * * 1" Europe/Prague, the run). The run (job 57156748) took 205 s: phase 1 128 s (the sales
+configuration 120 s with its five rows, the forecast 20 s), phase 2 40 s (the transformation job
+32 s), phase 3 24 s (keboola.data-apps 19 s, success, where 264's had failed every day). The
+navigation in 6375 lists only Conditional Flows. 01 and 06 were taken there that day; 06 is the
+Create Schedule dialog filled in and closed without saving.
+
+Two phases since the evening of 2026-10-01. The plan (Nikita, 30.09) was to drop the app phase once
+the app proved to read fresh data without a restart, and the app built in the run does: its
+server's /api/grid route runs the BigQuery query on every request (code read in the builder's Code
+tab). Ruling 1 of the day kept the phase anyway; the checker flagged it against the plan, and
+Nikita chose to drop it and rebuild. The three-phase flow and its schedule went to Trash, and the
+two-phase prompt on this page ran in a fresh chat: flow 01m3we5c5k6n9qy8ysrfq40e2x, phases "Extract
+data" (both HTTP tasks) and "Staffing outlook" (the transformation), schedule
+01m3we5tts9ntcnvk89m79b0dk ("0 6 * * 1", Europe/Prague, enabled), three approvals. Its run (job
+57179177) took 338 s: phase 1 273 s, phase 2 53 s (the transformation job 45 s). The jobs of phase
+1 were created at 19:13:57 UTC and started at 19:16:11, so about two minutes of the run was queue
+wait. kai-flow.png, 05, 07, 08, add-task.gif and check/09 come from that flow. */}
 
 <Prereqs needs={['project']} tabs={3}>
   <span slot="from">the pieces work individually, each run by hand.</span>
-  <span slot="to">one flow that runs them in order every morning and emails you when it breaks.</span>
+  <span slot="to">one flow that runs them in order every Monday morning and emails you when it breaks.</span>
   <li>
     <strong>The two connector configurations</strong> from{' '}
     <a href="/getting-started/load/">Get your data in</a>.
@@ -59,13 +90,11 @@ if you abort). The flow's own run was not re-run from the CLI: the scheduled run
     <strong>The transformation</strong> from <a href="/getting-started/transform/">Transform data</a>.
   </li>
   <li>
-    <strong>Optional:</strong> the app from <a href="/getting-started/app/">Put it in front of
-    someone</a> and the destination from <a href="/getting-started/write/">Send a table to Google
-    Sheets</a>. The flow runs without them.
+    <strong>Optional:</strong> the destination from <a href="/getting-started/write/">Send a table
+    to Google Sheets</a>. The flow runs without it.
   </li>
   <span slot="cli">
-    <a href="/cli/getting-started/">kbagent</a>, connected with write access, and the app from{' '}
-    <a href="/getting-started/app/">Put it in front of someone</a>.
+    <a href="/cli/getting-started/">kbagent</a>, connected with write access.
   </span>
 </Prereqs>
 
@@ -73,14 +102,21 @@ if you abort). The flow's own run was not re-run from the CLI: the scheduled run
 
 ## Phases and tasks
 
-<FlowStrip steps="Every day at 06:00, Europe/Prague, the schedule starts the flow|Phase 1: both HTTP connectors, at the same time|Phase 2: the transformation, which needs both tables|Phase 3: redeploy the app, which reads that table" label="The flow this page builds" />
+<FlowStrip steps="Every Monday at 06:00, Europe/Prague, the schedule starts the flow|Phase 1: both HTTP connectors, at the same time|Phase 2: the transformation, which needs both tables" label="The flow this page builds" />
 
-- **Tasks inside one phase run in parallel.** A task is a configuration to run, a notification to
-  send, or a variable to set.
+- **Configurations in one phase run in parallel.** A task can also send a notification or set a
+  variable; those run first, one after another.
+  {/* keboola.flow configurationSchema, public /v2/storage component index, read 2026-10-01:
+  "Within each phase, tasks execute in this order: notification tasks first (sequentially), then
+  variable tasks (sequentially), finally job tasks (in parallel)." flows/index.md says every task
+  in a phase runs in parallel (MISSING.md). */}
 - **Phases run one after another**, and the flow moves on only when a phase is finished. Things
   that can happen at the same time share a phase; things that depend on each other get their own.
-- If you took the [spreadsheet side trip](/getting-started/write/), its destination goes in phase
-  3 too, for the same reason as the app.
+- **The app is not in the flow.** Ours reads `staffing_outlook` each time someone opens it, so it
+  shows whatever the last run wrote; the **Prompt** tab of
+  [Put it in front of someone](/getting-started/app/) has the question that checks yours.
+- If you took the [spreadsheet side trip](/getting-started/write/), its destination goes in a third
+  phase: it sends the table, so it runs after the transformation.
 
 <details>
 <summary>Adding tasks and phases by hand, and what else a flow can do</summary>
@@ -93,7 +129,7 @@ inside one. Do not confuse it with the **+** *below* a phase, which starts a new
 That toolbar belongs to the phase; the one that appears on the card itself is the task's, and
 carries **Run task** and its settings.
 
-Inside the sales configuration the five files are already fetched by one job. Row-based components
+Inside the sales configuration the five files are already fetched by one task. Row-based components
 like this one can be [parallelized internally](/flows/#execute-tasks-in-parallel), and in **Jobs**
 you will see that one task fan out into a job per row.
 
@@ -133,20 +169,24 @@ section has Kai wired in too: **Create Flow** opens with a prompt field, and a f
 has tasks offers **Modify with Kai** in its header.
 
 ```text title="Prompt" wrap
-Create a flow called "Boolabean morning outlook" with three phases, in this order:
+Create a flow called "Boolabean morning outlook" with two phases, in this order:
 1. Phase 1 runs the two HTTP data source configurations "Boolabean sales" and "Boolabean forecast" in parallel.
 2. Phase 2 runs the transformation "Boolabean staffing outlook".
-3. Phase 3 redeploys the data app "Staffing Outlook Grid" so it shows the new table.
 
-Then give the flow a schedule: every day at 06:00 Europe/Prague. Then run the flow once now and tell me whether every phase succeeded and how long the run took.
+Then give the flow a schedule: every Monday at 06:00 Europe/Prague. Then run the flow once now and tell me whether every phase succeeded and how long the run took.
 ```
 
-**Expect three approvals:** the flow, the schedule, the run. Use your app's own name in the third
-phase, leave the phase out if you skipped the app, and add
-`and the "Boolabean outlook to Sheets" destination` to it if you took the spreadsheet side trip.
+**Expect three approvals:** the flow, the schedule, the run. If you took the spreadsheet side trip,
+change "two phases" to "three phases" and add a third line: `3. Phase 3 runs the data destination
+configuration "Boolabean outlook to Sheets".`
 
-**Check:** the canvas shows **three separate phases**, with the two connectors side by side in the
-first. If it came out as one phase, switch to the **UI** tab, where the **+** below a phase starts a
+![Screenshot - The two-phase flow prompt in the Kai chat, then Flow created, Flow updated and Job succeeded for Boolabean morning outlook, each a link, and Kai's note that the flow runs every Monday at 06:00 Europe/Prague and is running once now](/getting-started/automate/kai-flow.png)
+
+In the chat, the schedule's card reads **Flow updated**, and the run's card says **Job succeeded**
+once the run has ended; Kai then reports how each phase went.
+
+**Check:** the canvas shows **two separate phases** (three with the spreadsheet destination), with
+the two connectors side by side in the first. If it came out as one phase, switch to the **UI** tab, where the **+** below a phase starts a
 new phase, and move the later tasks there. The flow's **Schedules** tab shows the schedule Kai set,
 with its timezone and a toggle to pause it.
 
@@ -158,10 +198,10 @@ forget exists.
 
 **Build the flow**
 
-1. Open **Flows** in the navigation. In projects that have both kinds the section is titled
-   **Conditional Flows**, which is what these screenshots show. Click **Create Flow**; on the
-   screen that opens, take **Build It Yourself**. The prompt field above it is the Kai path from
-   the other tab. Name the flow `Boolabean morning outlook` and add a description.
+1. Open **Conditional Flows** in the navigation (older projects may call it **Flows**). Click
+   **Create Flow**; on the screen that opens, click **Create Flow** under **Build It Yourself**.
+   The prompt field above it is the Kai path from the other tab. Name the flow
+   `Boolabean morning outlook` and add a description.
 
    ![Screenshot - Create a flow](/getting-started/automate/01-create-flow.png)
 
@@ -170,17 +210,19 @@ forget exists.
    Yourself is unverified — confirming means creating a flow object in 264; check during the
    fresh-project walk. */}
 
-2. You land in the **Builder** on an empty canvas, with an **Add Task** menu already open. Choose
-   **Component**.
+2. You land in the **Builder** on an empty canvas. Open the **Add Task** menu, if it is not open
+   already, and choose **Component**. Here it is on a flow that already has phases:
 
-   ![Hovering the plus above the first phase shows an Open menu tooltip; clicking it opens the Add Task menu with Component, Conditions, Notification and Variable; choosing Component opens the component picker with a search box and the project's components listed](/getting-started/automate/add-task.gif)
+   ![Hovering the plus above the first phase shows an Open menu tooltip; clicking it opens the Add Task menu with Component, Conditions, Notification and Variable; choosing Component opens the Select Component picker with a search box and the project's components, HTTP first](/getting-started/automate/add-task.gif)
 
    {/* GIF, 2026-09-22, replaces the 02-add-task.png still. It shows the standalone + above the
    first phase: the tooltip that hover reveals, its four-item menu, and the picker that Component
    opens. The retired still showed the phase toolbar's three-item menu instead; the two controls
-   differ by Conditions. Captured from the live Boolabean morning outlook
-   flow in 264 as five states, cropped below the top bar so no organization, project or branch name
-   is in frame; 860x390, 40 KB, five real frames after gifsicle. Nothing was saved in the flow. */}
+   differ by Conditions. Reshot 2026-10-01 from the two-phase flow in Free Plan project 6375 (the
+   264 version showed a Snowflake SQL task): five states, cropped below the tabs so no
+   organization, project or branch name is in frame; 960x510, 73 KB, 7.8 s. Nothing was added or
+   saved (the flow stayed at version 1). The picker lists Data App among the components, which
+   answers how it shows data apps. */}
 
 3. A component picker opens, listing what the project has, grouped by component with each one's
    configurations. Pick **HTTP**, then the `Boolabean sales` configuration. It drops onto the
@@ -197,42 +239,34 @@ forget exists.
    *The finished flow further down shows phases that have been renamed. Yours start life as
    **Phase 1**, **Phase 2**, … until you rename them.*
 
-6. If you built the app, click the **+** below Phase 2 and add the `Staffing Outlook Grid` data
-   app to the new phase; a data app is a component like the others and appears in the same picker.
-   If you took the [spreadsheet side trip](/getting-started/write/), its destination goes into
-   this phase too.
-   {/* VERIFY(owner): the data app task was added by Kai through the API in the live build; how
-   the component picker groups data apps (under Apps, or by component name) was not walked. The
-   task exists in the flow as keboola.data-apps / 01m23crd87d02y8gd0q8499x67. */}
+6. If you took the [spreadsheet side trip](/getting-started/write/), click the **+** below Phase 2,
+   pick **Google Sheets** (*Data Destination*), then `Boolabean outlook to Sheets`, so it sends the
+   table after the transformation has rebuilt it.
 
 7. Click **Save**. The Builder keeps your changes as a draft until you do. **Save** and **Reset**
    only appear while there are unsaved changes, and **Run flow** stays disabled until you save.
 
-You now have three phases: the two loads, then the transformation, then the app.
+You now have two phases, the two loads and then the transformation, plus the destination's phase
+if you took the side trip.
 
-![Screenshot - The saved flow](/getting-started/automate/05-flow-saved.png)
+![Screenshot - The saved flow in the Builder: the phase Extract data with Boolabean forecast and Boolabean sales side by side, then the phase Staffing outlook with the Google BigQuery transformation](/getting-started/automate/05-flow-saved.png)
 
 </TabItem>
 <TabItem label="CLI / API">
 
 A flow is a configuration like any other, and `kbagent` writes it from a YAML file. Run `kbagent flow schema`
 once to see the full format with comments (add `--project <alias> --full` for the live JSON
-schema); the file below is the three phases of this guide.
+schema); the file below is the two phases of this guide.
 
 ```yaml title="flow.yaml"
 phases:
   - id: "extract"
-    name: "Extract source data"
+    name: "Extract data"
     next:
       - id: "default"
         goto: "transform"
   - id: "transform"
-    name: "Build staffing outlook"
-    next:
-      - id: "default"
-        goto: "redeploy"
-  - id: "redeploy"
-    name: "Redeploy data app"
+    name: "Staffing outlook"
     next:
       - id: "done"
         goto: null
@@ -251,24 +285,19 @@ tasks:
     name: "Boolabean staffing outlook"
     phase: "transform"
     enabled: true
-    task: { type: job, componentId: "keboola.snowflake-transformation", configId: "<transformation-config-id>", mode: run }
-  - id: "task-app"
-    name: "Staffing Outlook Grid"
-    phase: "redeploy"
-    enabled: true
-    task: { type: job, componentId: "keboola.data-apps", configId: "<app-config-id>", mode: run }
+    task: { type: job, componentId: "keboola.google-bigquery-transformation", configId: "<transformation-config-id>", mode: run }
 ```
 
 Two tasks in one phase is the parallelism: both connectors sit in `extract`, and the phase is done
-when both are. `goto: null` ends the flow. On a BigQuery project the transformation's
-`componentId` is `keboola.google-bigquery-transformation`. Without the app, delete the `redeploy`
-phase and the `task-app` task, and set the `transform` phase's `goto` to `null`.
+when both are. `goto: null` ends the flow. On a Snowflake project the transformation's
+`componentId` is `keboola.snowflake-transformation`. With the spreadsheet side trip, add a third
+phase the same way, with a task for `keboola.wr-google-sheets` and its configuration ID, and point
+the `transform` phase's `goto` at it.
 
-**Where the four IDs come from.** The three `configId` values for the connectors and the
-transformation were printed when you created them; `kbagent config list --project docs-demo
---component-id keboola.ex-http` finds them again. The app's is the one identifier that is not the
-number you have been using: `kbagent data-app detail --project docs-demo --app-id <app-id>` prints
-the Storage configuration ID, and that is what a flow task takes.
+**Where the three IDs come from.** The `configId` values for the connectors and the transformation
+were printed when you created them. `kbagent config list --project docs-demo --component-id
+keboola.ex-http` finds the two connectors again, and the same command with the transformation's
+`componentId` finds the transformation.
 
 Check the file before it reaches the project, then create it:
 
@@ -286,10 +315,10 @@ It prints the flow's configuration ID, which the next two commands take as `<flo
 **The schedule** is a separate configuration, and one command upserts it:
 
 ```bash
-kbagent flow schedule --project docs-demo --flow-id <flow-id> --cron '0 6 * * *' --timezone Europe/Prague --enabled
+kbagent flow schedule --project docs-demo --flow-id <flow-id> --cron '0 6 * * 1' --timezone Europe/Prague --enabled
 ```
 
-**Run it now** rather than waiting for six in the morning:
+**Run it now** rather than waiting for Monday morning:
 
 ```bash
 kbagent job run --project docs-demo --component-id keboola.flow --config-id <flow-id> --wait
@@ -319,8 +348,9 @@ Flows that behaviour comes from [conditions](/flows/#conditions) rather than a t
 <details>
 <summary>If you took the connector side trips</summary>
 
-If you also added the Google Sheets or database connector, put them in the first phase alongside
-the two HTTP configurations; that is the same parallelism, with a third source. Then make the
+If you also loaded data from [Google Sheets](/getting-started/load/googlesheets/) or
+[a database](/getting-started/load/database/), put those data source configurations in the first
+phase alongside the two HTTP ones; that is the same parallelism, with a third source. Then make the
 transformation read from the tables those connectors produce, since they land in their own
 buckets: on a hand-built transformation, repoint its **input mapping**; on a Kai-built one there
 is no input mapping, so re-prompt Kai to include the new tables. A flow that runs the right
@@ -339,31 +369,32 @@ it, `job run --wait` did it) and the schedule is set. Read on for notifications.
   and while the run is in progress the header offers **Terminate flow**.
 - **Jobs** shows which step failed, because every task creates its own job; the flow's **All Runs**
   tab shows each run with its phases.
-- Expect the loads to take a couple of minutes and the transformation under one; the app phase is
-  slowest, because a deploy builds and starts a container.
+- In our Free Plan project the whole run took 5 min 38 s: 4 min 33 s for the loads, about two
+  minutes of which the jobs waited in the queue, and 53 seconds for the transformation.
 
 ## Set a schedule
 
 *Coming from the **Prompt** or **CLI / API** tab? The schedule is already there; open the tab to
 see it, and skip to notifications.*
 
-Open the flow's **Schedules** tab and click **Create Schedule**. For a fixed hour use **Set Your
-Own** and set 06:00, before the first café opens, then click **Set Up Schedule**.
+Open the flow's **Schedules** tab and click **Create Schedule**. Under **Set Your Own**, set
+**Every** to **Week**, **on** to **Monday** and **at** to `06` : `00`, before the first café opens.
+The dialog starts in UTC: next to **Timezone**, click **UTC** and pick your own zone (**My
+Timezone** heads the list), check the **Schedule Preview**, then click **Set Up Schedule**.
 
-![Screenshot - Create a schedule](/getting-started/automate/06-create-schedule.png)
+![Screenshot - The Create Schedule dialog set to every week on Monday at 06:00 with the time zone Europe/Prague, and a preview listing the next five Mondays at 06:00](/getting-started/automate/06-create-schedule.png)
 
-![Screenshot - The schedule](/getting-started/automate/07-schedule-set.png)
+![Screenshot - The flow's Schedules tab with one Date and Time schedule, At 06:00, only on Monday (Europe/Prague), and its toggle switched on](/getting-started/automate/07-schedule-set.png)
 
-- **Check the timezone the list displays.** A schedule set by hand may show in UTC, and 06:00 UTC
-  is 08:00 in Prague in summer.
+- **Mind the time zone.** Left on UTC, 06:00 is 08:00 in Prague in summer.
 - **The toggle pauses it** without deleting it.
 
 <details>
 <summary>Other intervals, several schedules, and table triggers</summary>
 
 The predefined intervals are **Every 15 minutes**, **Every hour**, **Once a day**, **Once a week**
-and **End of month**; **Set Your Own** covers every day, week or month at an hour and minute you
-pick. A flow can hold **several** schedules: they work independently, the flow runs whenever any
+and **End of month**; **Set Your Own** covers every hour, day, week, month or year, at the hours and
+minutes you pick. A flow can hold **several** schedules: they work independently, the flow runs whenever any
 of them fires, and the tab shows a count. If you share a stack with other projects, scheduling
 slightly off the hour avoids the busiest moments. A schedule can also be driven by a table changing
 rather than a clock; see [Schedule and Automate](/flows/#schedule-and-automate).
@@ -384,7 +415,7 @@ edit it in place; there are three cards:
 Each takes **Email** addresses (pick colleagues or type any address) or a **Webhook** URL. Fill in
 **Errors** at minimum.
 
-![Screenshot - Notifications](/getting-started/automate/08-notifications.png)
+![Screenshot - The flow's Notifications tab with its three cards, Success, Errors and Processing, each with Email and Webhook tabs and no recipients yet](/getting-started/automate/08-notifications.png)
 
 <details>
 <summary>Different alerts for different failures</summary>
@@ -400,8 +431,49 @@ are enough here.
 
 - The **Schedules** tab shows a count, and the flow's **All Runs** tab a run: your name against a
   manual run, `Schedule for <flow ID> Scheduler` against an automatic one.
-- **A red run can still have done most of its work:** when the app phase fails, the data phases
-  before it have already rebuilt `staffing_outlook`. [Check it worked](/getting-started/check/) shows
-  how to read the run.
-- Tomorrow morning there will be a second run you did not start, on a forecast that has moved by a
-  day.
+- **A red run can still have done most of its work:** phases run in order, so when a later one
+  fails, the ones before it are done. [Check it worked](/getting-started/check/) shows how to read
+  the run.
+- Next Monday there will be a second run you did not start, on a forecast that has moved by a
+  week.
+
+:::note[What the weekly run costs, and how to stop it]
+Only the jobs that do the work count as runtime: the five file jobs, the forecast and the
+transformation, not the flow's own job or the containers that only hold others, and not the time
+a job waits to start ([Pay As You Go](/management/payg-project/),
+[job types](/extend/jobs/#job-type)). They came to about 4 minutes in the run on this page and 2½
+in an earlier one. Once a week that is 10 to 20 minutes a month; every day it
+would be 75 or more. The Free Plan's allowance is up to 60 minutes a month, capped at what the
+project used the month before, so a month that needs more than the one before, such as one with
+five Mondays, can run short.
+
+The flow does not restart the app, which is fine for an app that reads `staffing_outlook` when
+someone opens it, as ours does. We could not confirm whether an app's own running time counts against
+the minutes. If it does, each day someone opens the app adds at least 15 minutes, because it runs
+until **Auto Sleep** stops it, and one look a week comes to 60 to 75 minutes a month.
+
+To pause the run, switch off the toggle on the flow's **Schedules** tab. To stop it for good,
+point at the schedule's row and click **Delete Schedule**, then delete the flow with **Delete
+flow** in its **⋯** menu; the configurations it ran stay.
+:::
+
+{/* Measured 2026-10-01 in Free Plan project 6375, two runs, counting standard jobs only:
+extend/jobs/ says only `standard` jobs "do actual work, consume billable time", that a
+`container` (here the sales configuration's parent job) only holds the row jobs, and that waiting
+time is not billed. Morning, three phases (job 57156748, 205 s): the five row jobs 100 s, the
+forecast 20 s, the transformation 32 s (the data app's 19 s left out with the phase), 152 s, 2.5
+min. Evening, two phases (job 57179177, 338 s): the five row jobs 126 s, the forecast 49 s, the
+transformation 45 s, 220 s, 3.7 min; the two minutes the jobs waited to start are not in their
+durations. Hence "about 2½ and 4". Flow jobs consume no minutes per management/pay-as-you-go/.
+Monthly at 4 to 5 Mondays: 10 to 18 min, "10 to 20" on the page; daily at 30 runs: 76 min and up. The app's "60 to 75" is
+15 minutes to Auto Sleep times 4 or 5 weeks. Project Consumption still said "not synced yet" that
+evening and Billing answered 403 ("Activate your account..."), so the metering itself was not read.
+VERIFY(owner): whether a running data app counts against the Free Plan minutes. The app built in
+the run reads the table live (its /api/grid route runs the BigQuery query on every request), which
+is why the flow has no app phase since that evening (DECISIONS.md 2026-10-01). A reader's app is
+generated anew and may cache, hence the question app/ gives. Labels read live: Delete Schedule and
+Edit Schedule are buttons on the schedule row, read after pointing at it (07 shows the row without
+them), and Copy flow / Debug mode / Delete flow are in the flow's menu. VERIFY(owner): whether
+Delete flow also removes the flow's schedules; the box deletes the schedule first so it does not
+matter. That the configurations stay was exercised that evening: the old flow and its schedule
+went to Trash and the new flow ran the same three configurations. No prices, per CLAUDE.md. */}

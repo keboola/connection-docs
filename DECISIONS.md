@@ -1409,6 +1409,146 @@ shorter shared blocks through the components.
 
 ---
 
+## 2026-10-01 — The guide on a real Free Plan project
+
+**Asked by:** Michal Jeřábek, Slack, 30 Sep: the best Getting Started so far, but not to merge until
+it has run where newcomers land, a free Pay As You Go project on BigQuery in us-east4 (his figure:
+53 % of new projects in 90 days). His list: run it there with prompts that do not say Snowflake and
+SQL that fits the dialect; look at the failing app; schedule weekly, with a box on what it costs and
+how to switch it off; reshoot the images in that project, all from one week; on the Prompt path show
+the prompt in the chat and what Kai created, where to find it and how to undo it; fix the hub's
+"Kai always asks"; a hero clip of ten seconds at most. Nikita, 1 Oct: run the Prompt path yourself,
+keep the schedule on, do the edits.
+
+**The run.** Free Plan project 6375 (`payAsYouGoBigQuery`, us-east4), signed up by Nikita that
+morning. Claude drove a headed browser on Nikita's session, read every approval card and clicked
+**Approve** only on what the page's step creates, never **Always allow**, and logged times, jobs and
+objects through read-only Storage and Queue API calls. The prompts went in word for word with two
+exceptions: the five CSV URLs pointed at the branch preview, because
+`help.keboola.com/getting-started/boolabean/` answers 404 until this PR merges, and the flow prompt
+named the app by the name Kai gave it, as the page tells the reader to.
+
+| Page | What the page said | What happened |
+|---|---|---|
+| load/ | 7 + 3 approvals; 6, 18, 9,761, 552, 552; forecast 42 | the same; Kai hands the chat back while the job runs and returns with the counts by itself; load job 327 s |
+| transform/ | 2 approvals, 42 rows | the same; Kai chose BigQuery from the neutral prompt, and its answer equals an offline computation |
+| ask/ | an answer, no approvals | 63 s and 12 s; for Brno Kai said the forecast is not the difference, the roster is |
+| app/ | one card before the code; the deploy has never worked | no card while building; the first preview had no red cells (`short_handed` reached the app as `1` or empty), fixed by one message; Publish to production asked twice and the app came up Active |
+| automate/ | 3 approvals, three phases, a schedule with a toggle | the same; the run took 205 s against 510 to 636 s in 264, the app phase 19 s, success. Rebuilt that evening with two phases (ruling 1): 3 approvals, 338 s, of which about two minutes was queue wait |
+
+Kai's wall time was 27 minutes (load 10.9, transform 4.7, ask 1.3, app 4.5 to the first preview,
+flow 5.6 with its run), plus 4 for the app fix and 6 for the optional publish, so the hub's 30
+stands. Kai's usage button went from 0 to 9 of 50 messages and from 300 to 274.9 PPU of free
+allowance. A survey ("That was your first run with the AI Assistant...") opened after the first
+runs and was closed unanswered.
+
+**What changed on the pages.**
+
+- **hub:** the approvals paragraph says what the run showed (the chat asks per change unless a tool
+  is on **Always allow**, and a new account has two write tools set that way, both for data apps;
+  the builder builds a draft without asking and asks twice when you publish); the undo fold names
+  **Versions** and **Restore this version**, with a screenshot, and what they do not undo (tables
+  already written, the schedule, an app's code); plan mode is in the **+** menu; Kai is named before
+  the clip, and a new Free Plan project has it from the start; the box says the guide's Prompt path
+  ran on a Free Plan project; the timing VERIFY is closed.
+- **project/:** 50 GB of Storage, the new project's own limit, instead of 250, with a VERIFY on both
+  pages; **Conditional Flows** and **Apps** in the navigation; Kai there from the start on Free; the
+  allowance capped at last month's usage, in the PAYG page's words.
+- **load/:** the hand-back while the job runs, about six minutes; weekly; the forecast step's chat
+  as a screenshot; 06 shows the bucket with all five tables.
+- **transform/:** the prompt's VERIFY closed; the chat with what Kai created, and to wait for its
+  confirmation; the BigQuery block run as a query; three flagged rows; what a week under 18 °C
+  looks like; the UI tab's destination auto-fills in lower case and Storage finds the bucket under
+  either spelling; **Create Multiple Queries** opens **All Queries** with its markers, and opening
+  a code renames it; running both tabs needs Kai's table deleted first.
+- **ask/:** a still replaces the clip; the check accepts the roster answer; the fold's answer is the
+  screenshots' week; a BigQuery variant of the two workspace queries, run.
+- **app/:** steps 1, 3, 4 and 5, the check, the box and the failure folds rewritten from the run;
+  PathIntro without its approvals line, which the builder contradicts; a fix message to copy; cold
+  weeks (no red cells, empty cells) in the check and two folds; the **Deploy** buttons named;
+  **Start** as the live label.
+- **automate/:** **Conditional Flows**; **Create Flow** under **Build It Yourself**; two phases,
+  with no app phase (ruling 1); the run's timings; the schedule with its time zone; the cost box,
+  which says about 2½ to 4 billed job minutes a run and 10 to 20 a month (extend/jobs/: only
+  `standard` jobs are billed, not containers or waiting) and that the app's own running time may
+  count; app/ asks whether the app reads the table live.
+- **check/:** three flags; the run's timings; **Conditional Flows**; the **Conditions** rows; cold
+  weeks; the "grid is unchanged" fold now says the flow does not restart the app, and the "app
+  phase fails" fold is gone with the phase.
+
+**Images.** Twenty-three captures replaced in 6375 under their old names (nineteen in the
+morning run, four more for the transform UI tab that evening), `load/04` cropped, the Add Task GIF
+reshot, six new ones for the Prompt path, the ask clip removed. All from the forecast week of 1 to 7 October. The account name, which
+is a personal email, was greyed out in the page before each capture. The builder chat's "Seed draft
+branch" step, which prints the Git remote with a credential, is in none of them, and the app's own
+host is greyed out in `app/kai-builder.png`. Kept from 264: `load/03` (the base URL card, nothing
+project-specific in it) and `load/04` (cropped to the row's settings, so its side panel of 264's
+daily scheduled runs is gone) and `load/forecast-row-code-editor.gif` (the forecast row's
+greyed-out Visual Editor, nothing project-specific). `automate/kai-flow.png`, `05`, `07`, `08`,
+`add-task.gif` (five states, nothing saved) and `check/09` were reshot from the two-phase flow
+that evening. The
+transform UI tab's `mapping.png`, `03`, `04` and `07` were reshot that evening from a copy built
+through the tab (input mapping, output mapping, the BigQuery block pasted into **All Queries**),
+which was saved, never run, and deleted into Trash; Kai's transformation and its table were not
+touched (version 1, last import 14:09 UTC). `load/06` was reshot at a taller window so all five
+tables show.
+
+**The clip.** `hub-explainer.mp4` is the 10-second cut: four dots with their titles, then the Free
+Plan grid and one line. That breaks the three-seconds-per-caption rule on purpose; the step texts
+are in the course line. 10.0 s, 193 KB, luma mean 229, never under 227.
+
+**Rulings made without asking, and what each costs if wrong.**
+
+1. ~~The flow keeps its third phase.~~ Reversed the same evening. The plan (30.09) said to drop
+   the app phase once the app proved to read fresh data, and it does: its `/api/grid` route queries
+   BigQuery on every request (code read in the builder's **Code** tab). The checker flagged the
+   ruling against the plan; Nikita chose to drop the phase and rebuild. The three-phase flow and
+   its schedule went to Trash, and the two-phase prompt ran in a fresh chat (flow
+   `01m3we5c5k6n9qy8ysrfq40e2x`, schedule `0 6 * * 1` Europe/Prague, three approvals, run 338 s).
+   The first automatic run is still Monday 5 October at 06:00 Prague. Cost: a reader whose app
+   reads the table only at start-up and is kept awake through the Monday run sees last week until
+   it restarts; app/ gives the question to ask and the fix, and check/ the symptom.
+2. ~~The prompts stay as run, with the app named as Kai named it.~~ Moot since ruling 1 was
+   reversed: no prompt after app/ names the app. The prompts on the pages are the ones that ran.
+3. ~~No mapped copy of the transformation in 6375 for the remaining UI shots.~~ Superseded the same
+   day after the checker's review: a mapped copy was built and shot but never run, because a run
+   would collide with the Kai-built typed table (weekday Mon against Monday, `rostered_staff`
+   FLOAT64 against INTEGER). Cost: the `CREATE TABLE` wrapper with an input mapping is still unrun.
+4. No prices, only minutes, with `management/pay-as-you-go/` as the source of the 60 and of the
+   rule that flow jobs use none. Cost: none.
+5. Cold weeks are described, not fixed. The sample's history is June to August, so under 18 °C
+   nothing is flagged (the highest cold-band figure is 65.5 a person) and on dry cold days five of
+   six cafés have no history. The pages now say so; adding cold-weather history to the sample is
+   Nikita's call. Cost: from about mid-October to April a reader's grid is mostly quiet.
+6. ~~One story about the third phase.~~ Moot since ruling 1 was reversed: the flow has no app
+   phase, and automate/ and check/ both say the app must read the table when it is opened.
+7. ~~The flow prompt names the app `Staffing Outlook`.~~ Moot: the two-phase prompt names no app.
+8. `transform/kai-transform.png` starts at Kai's work, not at the prompt, which is the code block
+   right above it; the other four Kai images show the prompt. Cost: one image short of Michal's
+   "prompt in the chat".
+
+**Still open.** Whether a running app counts against the Free Plan minutes (Project Consumption said
+"not synced yet" that evening; Billing answered 403). The schedule's first automatic run, Monday 5
+October at 06:00 Prague, left on at Nikita's request. 50 GB against the 250 GB of
+`management/pay-as-you-go/`, now a VERIFY on both pages. The BigQuery block's `CREATE TABLE`
+wrapper and input mapping. Cold-weather history for the sample. What the builder's **Deploy**
+buttons do (not clicked). Four checks the plan named that did not run in 6375: the neutral
+transform prompt on a Snowflake project, the CLI / API tabs, the BigQuery `CREATE TABLE` through an
+input mapping, and ask/'s BigQuery queries inside a workspace. The sign-up path from the reader's
+own AI assistant (the MCP server's `create_project`): prepared on project/ as a hidden draft under
+`VERIFY(MCP team, DMD-1939)`, because no public stack has agent provisioning enabled yet; the
+question for the MCP team is Nikita's to send. From the plan, for Nikita: in project 264, drop
+the old flow's app phase or fix its app (the previous session switched its schedule off), and confirm
+in the queue that no 06:00 job ran there on 2 October. A risk for Monday 5 October: the scheduled
+run in 6375 loads the five CSVs from the branch preview host, because help.keboola.com answers 404
+until this PR merges; if that preview is gone by then, phase 1 fails, and after the merge the
+configuration's base URL should move to help.keboola.com. The cost box's minutes follow
+extend/jobs/ (only `standard` jobs are billed), read after the third review: about 2½ and 4
+minutes in the two runs, 10 to 20 a month weekly; read Project Consumption in 6375 after Monday's
+run to see what was actually metered. #1116 and #1144 stay drafts until Michal says otherwise.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
@@ -1418,7 +1558,7 @@ still block rebuild work.
 | Question | Where flagged | Blocks |
 |---|---|---|
 | Can Kai create a project? | `index.mdx` (Get a project) | page 1's Kai coverage |
-| Does the Free Plan include data apps? | `app/index.mdx` | whether the app step needs "skippable" framing |
+| ~~Does the Free Plan include data apps?~~ | closed 2026-10-01 | **Yes.** Built, published and deployed in Free Plan project 6375 (see the entry above). |
 | ~~Does a "plan mode" exist, and what is it called?~~ | closed 2026-09-02 | **Yes.** The chat composer has a button labelled "Enable plan mode", next to "Disable follow mode". Kai drafts a plan and you approve once. Now recommended in the section ahead of "Always allow". Still owed: a description on the `kai/` pages, which document neither mode. |
 | ~~Can Kai set a schedule and notifications?~~ | half closed 2026-09-09 | **Schedule: yes.** Asked for "every day at 06:00 Europe/Prague", Kai created a Scheduler configuration (`0 6 * * *`, Europe/Prague, enabled) for the flow it had just built. **Notifications: not tested**; the page keeps them manual. |
 | ~~Has the consolidated one-prompt block ever run end to end?~~ | closed 2026-09-02 | **Yes** — run live in project 264: 14 minutes, 11 approvals, 10,000 rows in and out. The block now lives on `ask/`. Transcript in PR #1110. |
@@ -1428,6 +1568,6 @@ still block rebuild work.
 | Does `/kai/use-cases/#complex-workflows` cover assembling *existing* configurations into a flow? | `automate/index.mdx` | whether that citation stands — the page documents building pipelines from scratch |
 | ~~Does Kai really build transformations on read-only input, and does that need bucket-ID-qualified table names?~~ | closed 2026-09-08 | **Yes, and yes.** The live transformation in project 264 has an empty input mapping and reads `"KBC_EUW3_264"."in.c-keboola-ex-http-01m20b1fwj3px5x6bzzckeb81a"."sales"` by full name — see the 2026-09-08 entry above. |
 | Can Kai traverse every child job of a flow run, or only read one job log? | `check/index.mdx` | one sentence; the prompt is safe either way |
-| Do flow jobs themselves consume credits? | `check/index.mdx` | removed from the page until confirmed — no row for it in `management/project/limits/` |
+| Do flow jobs themselves consume credits? | half closed 2026-10-01 | **No, on the Free Plan.** `management/pay-as-you-go/`: "The only exceptions are Flow/Orchestration jobs, which do not consume any minutes." `automate/`'s cost box counts the jobs inside the flow. Still open: contract plans (`check/` keeps its VERIFY), and whether a running data app counts on the Free Plan. |
 | **Time-critical:** `kai/pricing.md` says that from **15 September 2026** Kai moves to PPU credits and the message counter is "replaced" — but `kai/getting-started.md` still states 150 turns/month (50 on PAYG), and the section inherits that number | `index.mdx` (Get a project) | the allowance sentence, in 12 days |
 | On a BigQuery project — the Free Plan default — is there a browser SQL path at all? | `transform/workspace.md` | the Kai-free fallback, and the hub's "nothing needs installing" promise |

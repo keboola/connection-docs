@@ -27,8 +27,8 @@ Storage inventory from project. Numbers below are from the live builds in projec
 2026-09-08/09: the Boolabean sales configuration fans out into one job per row (six ex-http jobs
 under one task), the transformation job took 33–61 s, and the first run of "Boolabean morning
 outlook" ended in error at phase 3 (data app deploy, "Internal Server Error occurred.") with
-phases 1 and 2 successful — which is the example the run-reading section describes. The 09-all-runs
-capture still shows the previous flow; phase 2 reshoots it.
+phases 1 and 2 successful, which was the run-reading section's example until 2026-10-01. 09-all-runs
+was reshot that day from the two-phase flow's successful run in Free Plan project 6375.
 
 The terminal section was added 2026-09-15. `job list`, `job detail` and `storage tables` were run
 live against project 264 (kbagent v0.93.1) while verifying the other pages; all three are
@@ -42,7 +42,7 @@ with three ways to do it. */}
 | Two HTTP configurations | bring the five files and the live forecast into the project | **Components** |
 | SQL transformation | joins five of the six tables into `staffing_outlook` | **Transformations** |
 | Data app | the grid | **Apps** |
-| Flow | runs all of it, in order, every morning | **Flows** |
+| Flow | runs the loads and the transformation, in order, every Monday morning | **Conditional Flows** |
 
 In **Storage**: two `in.c-` buckets named after the connector and the configuration ID
 (`keboola-ex-http-…`), and one `out.c-Boolabean-staffing-outlook` bucket.
@@ -55,7 +55,8 @@ In **Storage**: two `in.c-` buckets named after the connector and the configurat
   load on, or a café listed twice in `stores`. The joins cannot multiply rows on their own.
 - **Fewer:** a join dropped rows, such as a `location_id` that did not map onto a `store_id`, or a
   forecast with fewer than seven days.
-- **Ten columns,** and `short_handed` true on a **few** rows: never all of them, rarely none.
+- **Ten columns,** and `short_handed` true on a **few** rows in a warm week, never on all of them.
+  A week under 18 °C flags none (see below).
 
 <details>
 <summary>Which columns may be empty, and which may not</summary>
@@ -66,8 +67,9 @@ come from straight lookups. `expected_units` and `expected_units_per_person` can
 row, and that is not an error: it means the summer never had a day in that café's weather band, so
 there is no history to average. In this sample the band with no history is *cold and dry*: five of
 the six cafés never saw a dry day under 18 °C all summer, while cold, wet days happened everywhere.
-Our week had four `short_handed` rows, and a cool, wet week can flag nothing, in which case the
-grid is right to be all quiet.
+The week in our screenshots had three `short_handed` rows. A week under 18 °C flags none, because
+no café's cold-day history comes to more than 65.5 units a person, and if it is also dry, most rows
+have no `expected_units` at all; the grid is right to be quiet then.
 
 So the failure signals are the extremes: a lookup column empty on any row means a join matched
 nothing, and `expected_units` empty on *every* row means the two band expressions in the SQL no
@@ -78,14 +80,16 @@ longer match each other.
 ## Reading a flow run
 
 The flow's **All Runs** tab lists every run: who or what started it (your name, or
-`Schedule for <flow ID> Scheduler` for a scheduled run), duration and status. Expand a run to see its phases.
+`Schedule for <flow ID> Scheduler` for a scheduled run), duration and status. Expand a run to see its phases;
+the **Conditions** rows marked **Matched** between them are the flow moving on to the next phase.
 
-![Screenshot - All runs](/getting-started/check/09-all-runs.png)
+![Screenshot - The flow's All Runs tab with one run expanded: Extract data 4 min 33 sec, Conditions Matched, Staffing outlook 53 sec, all Success, 5 min 38 sec in total](/getting-started/check/09-all-runs.png)
 
-- **Success** is the goal: a few minutes end to end, about two for the loads, under one for the
-  transformation, most of it for the app deploy.
+- **Success** is the goal: a few minutes end to end. Ours, in a Free Plan project, took 5 min 38
+  s: 4 min 33 s for the loads, about two minutes of which the jobs waited in the queue, and 53
+  seconds for the transformation.
 - **Error is not all lost.** Phases run in order, so the earlier ones finished and their tables
-  are updated; our first run failed at the app phase with `staffing_outlook` already rebuilt.
+  are updated: if the transformation fails, the loads have still brought in the new forecast.
 - **More jobs than tasks is normal:** one per task, a **Conditional Flows phase** job per phase, a
   **Conditional Flows** job for the run, and one per row for a row-based connector (six lines for
   the five-file configuration).
@@ -102,8 +106,8 @@ run. The prompt is safe either way; the capability sentence is the unverified pa
 
 ## The same checks from a terminal
 
-Every number above has a read-only command behind it, which is the fastest way to answer "did last
-night's run work?" without opening the project. They need
+Every number above has a read-only command behind it, which is the fastest way to answer "did
+Monday's run work?" without opening the project. They need
 [kbagent](/cli/getting-started/) connected to your project. `docs-demo` below is a project alias,
 substitute yours:
 
@@ -135,23 +139,13 @@ phase, not the same one.
 <details>
 <summary>Every task succeeds, but the grid is unchanged</summary>
 
-The app phase is missing from the flow, or the app was never deployed after it was published, so
-it still serves the old table. Read the run detail top to bottom: the phases run in the order
-shown, and an app that is not in the flow is not refreshed by it.
-
-</details>
-
-<details>
-<summary>The app phase fails, and the rest succeeds</summary>
-
-A deploy builds and starts a container, and it can fail for reasons that have nothing to do with
-your data. The table is already rebuilt; open the app's page and start it again from there. The
-job's own error is usually uninformative.
-[Put it in front of someone](/getting-started/app/#if-it-goes-wrong) shows how to read the
-container's startup log, which is where the reason actually is. After several failed starts the
-platform disables the app (a banner says it failed to start automatically multiple times, and the
-button reads **Start App**), and the flow's app phase will keep failing until someone starts it by
-hand. If the error repeats, that is one for [Support](/management/support/) with the job link.
+Reload the page first: a tab opened before Monday's run still shows last week. The flow does not
+restart the app, so after that the app shows the new table if it reads `staffing_outlook` when
+someone opens it, as ours does, or once it has slept and started again. If yours read the table
+only when it started and was kept awake, click **Edit with Kai** on the app's page, ask Kai to make
+it read the table on every request, and click **Publish to production** so the live app gets the
+change. If the grid still shows last week, check that the transformation is in the flow: without
+it the run rebuilds nothing.
 
 </details>
 
@@ -165,19 +159,25 @@ Duplicate input rows: see the one number above.
 <details>
 <summary>The scheduled run never happens</summary>
 
-The schedule was saved but the flow is disabled, or the project is out of runtime credits.
+The schedule's toggle is off, the flow is disabled, or the project has used up its runtime
+minutes.
 {/* VERIFY(owner): the arc previously stated "flow jobs themselves consume none; the component
   jobs they start do". management/project/limits/ has no orchestrator/flow row at all, and
   flows/index.md says only that each job consumes credits independently. Billing claim — removed
-  here until an owner confirms it. */}
+  here until an owner confirms it. For the Free Plan, management/pay-as-you-go/ now says it
+  outright ("Flow/Orchestration jobs ... do not consume any minutes"), and automate/'s cost box
+  relies on that. extend/jobs/ says only `standard` jobs consume billable time, which would cover
+  contract plans too; billing wording is the owner's call, so the flag stays. "Minutes" since 2026-10-01, matching
+  automate/. */}
 
 </details>
 
 <details>
 <summary>Jobs queue instead of running</summary>
 
-Too many parallel tasks in one phase. Ten concurrent component jobs is the
-[recommended ceiling](/flows/); Support can adjust a project's limits. Split the phase.
+A short wait before the jobs start needs no fix: ours waited about two minutes with two tasks in
+the phase. If the wait grows with every task you add, split the phase: ten concurrent component jobs
+is the [recommended ceiling](/flows/), and Support can adjust a project's limits.
 
 </details>
 

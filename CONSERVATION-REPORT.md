@@ -183,3 +183,61 @@ Later the same day the transform/ bullets were cut again, so three phrases quote
 above ("(`products` is not needed for this table)", "give them exactly these names", "It is also
 how") are now worded differently; the facts behind them are still on the page: `products` is not
 read, the input-mapping names must match the SQL, and mappings are how Keboola tracks lineage.
+
+## 2026-10-01 — The Free Plan run
+
+Michal Jeřábek's review (30 Sep) and the run in Free Plan project 6375 replaced these. Each has a
+new home or a reason:
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| ask/ | `kai-ask-staffing.mp4` and its poster (project 264's week, only Brno flagged, with the pointer) | `ask/kai-ask.png`, the same question answered in 6375; which café, which day and why are in the Check and the folded answer |
+| ask/ | "two cafés were flagged on the same two days ... *a thin start-of-week roster colliding with warm, dry weather*" | the fold now gives the screenshots' week (three café-days) in Kai's words; the old quote described a week no image shows |
+| hub | the 29.6-s `hub-explainer.mp4`, a caption per step and a closing question | the 10-s cut keeps the four step titles and the closing line; the step texts are in the course line under the clip |
+| app/ | step 3: "asks once before it writes code: a **Confirmation required** card", and the quote "This is a private draft that updates live as Kai builds" | not what the builder did in 6375 (no card until Publish); steps 3 and 5 now say when it asks |
+| app/ | step 5: "no dialog appears", **Deploy App** on a **Not Deployed** page, "It has not succeeded in our project yet"; the box's "Publishing it to production has not worked in our project yet" | superseded: Publish to production asks twice and the app came up Active; the failure fold keeps 264's two causes |
+| automate/ | "Expect the loads to take a couple of minutes ...; the app phase is slowest" | the run's own figures (128, 40, 24 s); 264's are in DECISIONS.md 2026-09-09 |
+| check/ | "most of it for the app deploy"; "Our week had four" | the run's figures; three flags in the screenshots' week |
+| project/ | "250 GB of Storage" | 50 GB, the new project's own limit (DECISIONS.md 2026-10-01) |
+| hub | "The Apps builder ... asks once before it writes code" (the first rewrite, the same morning) | replaced by what the run showed |
+
+Nothing else was cut. Nineteen screenshots were replaced in place under the same file names; six
+are new.
+
+The reviewers' fix pass the same evening (fact-checker, guide-tester, checker) replaced these:
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| hub | "Nothing here is one-way." | "Most of it can be undone.", followed by what Versions does not undo (tables already written, the schedule, an app's code) |
+| hub | "asks before it changes the published app" | "when you publish it asks twice"; the merge into main happened without a card |
+| transform/ | "You may get an editor for that one code, where you can also name it; call it `Staffing outlook`." | opening a saved code shows that editor and its rename pencil; **Create Multiple Queries** opened **All Queries** in both Free Plan projects |
+| transform/ | "Later steps depend only on the table name" | later steps use the full table ID, so the Check names it |
+| transform/, check/ | "rarely none (a cool, wet week can flag nothing)" | under 18 °C nothing is flagged; a mild wet week still flags Brno, so "wet" was wrong |
+| ask/ | "In a wet week Kai will tell you nobody is short-handed" | the same correction, as a week under 18 °C |
+| app/ | "most of it the preview starting" | the container start was not timed; the five minutes stay |
+| app/ | "click **Create app** to get back to it" | the list and its **Create app** button were seen; the click was not made |
+| automate/ | "The app does not need that restart ..., because it reads `staffing_outlook` each time someone opens it" | true of the app built in the run only; the box now says how to ask about yours |
+| load/ | "the rest of the guide assumes you have seen where a configuration and its rows live" | kept as the reason the UI tab helps, next to "say so in the same chat" as the first recovery |
+| load/ | `06-storage-tables.png` cut after two of five tables | the same page at a taller window, all five tables |
+| task pages (PathIntro) | "Nothing here is one-way" | "Most of it can be undone", the hub's wording; the hub fold says what cannot |
+| app/ | "It should compare true and false, not `1` or text" (written in this pass) | the working app converts the text it gets, so the test now says to turn whatever arrives into true or false |
+| app/ | "nothing is published until step 5" | step 3 already says nothing is published until you say so |
+| transform/ | "the result is the same table" | "the same rows and figures, though Kai picks its own column types" |
+| transform/ | "Storage found the same bucket under both spellings in our project, so keep what the field gives you. Neither the bucket nor the table exists yet" | the lookup fact moved to the comment; the step now says which case applies to whom and to use your own table ID later |
+| load/ | `04-row-settings.png`'s side panel (264's daily scheduled runs) | cropped off; the row's settings are what the step needs |
+
+The flow lost its app phase the same evening (DECISIONS.md 2026-10-01, ruling 1, reversed at
+Nikita's decision). What went with it:
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| automate/ | the prompt's line "Phase 3 redeploys the data app ... so it shows the new table" and the strip's "Phase 3: redeploy the app" | the app reads the table on every request; a bullet says the app is not in the flow, and the box says how to check yours |
+| automate/ | UI step 6, adding the data app to a third phase | step 6 now adds the Sheets destination there, which the old step also covered |
+| automate/ | the YAML's `redeploy` phase and `task-app` task, "Without the app, delete the `redeploy` phase…", and how to find the app's configuration ID | not needed without the phase; app/'s CLI tab still shows how to get the configuration ID |
+| automate/ | the cost box's paragraph on the third phase restarting the app | replaced by how to ask whether your app reads the table live, and the open question on app running time |
+| check/ | the fold "The app phase fails, and the rest succeeds" | no app phase; app/'s deploy fold keeps the disabled-app banner and **Start** |
+| app/ | "Kai also names the app, and not always the same way… The flow on the next page asks for it by name" | the flow no longer needs the name; the step says where to read it |
+| automate/, check/ | the run's own figures of the morning (128, 40, 24 s; 3 min 25 s) | the two-phase run's (4 min 33 s, 53 s; 5 min 38 s); the morning's are in DECISIONS.md and the automate/ comment |
+| check/ | "in an older project our first run failed at the app phase with `staffing_outlook` already rebuilt" | no app phase; the bullet now gives the transformation failing after the loads |
+| automate/ | the cost box's "between 2½ and 6 minutes a run, depending mostly on how long they waited to start" and "10 to 30 minutes a month" | extend/jobs/ bills only `standard` jobs and not waiting time: about 2½ and 4 minutes, 10 to 20 a month |
+| app/ | CLI tab: the configuration ID as "the one a flow task takes", and "A flow task that deploys the app makes the same call, so a broken app would turn a scheduled run red" | the guide's flow has no app task any more |

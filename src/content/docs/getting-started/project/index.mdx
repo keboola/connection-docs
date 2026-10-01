@@ -36,25 +36,55 @@ on 2026-08-04: the nav reads Dashboard / Flows / Storage / Apps / Components / W
 Transformations / Data Catalog / Jobs, and Kai appears as "Kai Agent" with a Beta pill. Free Plan
 limits are sourced from /management/payg-project/. The sign-up wizard is deliberately NOT walked —
 creating accounts is out of scope for automated verification — so those three lines rest on the Pay
-As You Go page. */}
+As You Go page.
+
+2026-10-01, a brand-new Free Plan project (6375, us-east4, BigQuery, signed up by Nikita): the
+navigation reads Dashboard / Conditional Flows / Storage / Apps / Components / Workspaces /
+Transformations / Semantic Layer (Beta) / Jobs / Trash; Kai Agent is in the top bar from the start,
+with no Beta pill and a "Kai is free for you right now" banner. The Storage API's own limits for
+that project say storage.dataSizeBytes = 50000000000, so the Storage line below says 50 GB, against
+the 250 GB that management/pay-as-you-go/ still states (raised in DECISIONS.md 2026-10-01).
+VERIFY(owner): which limit is right. The 50 GB was read while Billing still answered 403 "Activate
+your account", so whether activation changes it is unknown; the PAYG page carries the same flag.
+The whole Prompt path of the guide ran there, data app deploy included; the UI and CLI tabs did not,
+apart from the transform UI tab's screens, built on a copy that never ran. */}
 
 ## Get a project
 
 Three ways in, quickest first:
 
 1. **Free Plan:** [sign up and create a free project](https://connection.us-east4.gcp.keboola.com/wizard)
-   right now. It is enough for everything in this guide: 250 GB of Storage and up to 60 minutes of
-   job runtime a month.
+   right now, with 50 GB of Storage and up to 60 minutes of job runtime a month. That is enough
+   for this guide; we ran its Prompt path end to end on one.
 2. **Join an existing project:** ask an admin of your company's Keboola organization to invite you,
    from **Users & Settings → Invite User** in the project.
 3. **Talk to us:** for a trial of a full project with a chosen stack and no Free Plan limits,
    [contact Keboola](https://www.keboola.com/contact).
 
+{/* PREPARED, NOT PUBLISHED (Nikita, 2026-10-01, after a suggestion from Michal the designer): a
+fourth way in, from the reader's own AI assistant. It goes into the list above as item 4 only after
+someone has walked it on a stack where it works. Draft:
+
+4. **From your own AI assistant:** connect the [Keboola MCP server](/ai/mcp-server/) to your
+   assistant without any Keboola credentials and ask it to create a project. It creates one and
+   gives you a confirmation link; opening the link and signing in makes the project yours. Until
+   then the project is temporary.
+
+VERIFY(MCP team, DMD-1939): the keboola/mcp-server README, section "Starting without a Keboola
+account", documents the create_project tool in bootstrap mode (the server started with only
+KBC_STORAGE_API_URL and no token) and says it "needs a stack with agent provisioning enabled;
+elsewhere the tool reports that it is not available". On 2026-10-01 no public stack listed such a
+feature in /v2/storage (us-east4, europe-west3, connection.keboola.com, eu-central-1, Azure
+north-europe). Which stack gets it, when, and who owns it is the question for DMD-1939. Kai inside
+the product still cannot create a project (the VERIFY further down); this path belongs to the MCP
+server. MISSING.md has the row. */}
+
 <details>
 <summary>The Free Plan's limits, and what a project and a stack are</summary>
 
-The free allowance tracks your previous month's usage, and the Free Plan gives you one project and
-no choice of stack.
+The free minutes each month are capped at what the project used the month before (a project that
+used 30 minutes gets 30 free the next month), and the Free Plan gives you one project and no
+choice of stack.
 {/* VERIFY(owner): /management/payg-project/ says the monthly allowance is "limited to the
    actual usage from the previous month" but never states what a project gets in its first month.
    Worth stating on that page. */}
@@ -70,15 +100,16 @@ The list is in the [platform overview](/overview/#stacks).
 
 ## Find your way around
 
-After signing in you land on the project dashboard. Five places matter for this guide:
+After signing in you land on the project dashboard. Six places matter for this guide:
 
 - **Components**: every data source connector, data destination connector and application you can
   add; how data gets in and out.
 - **Transformations**: the code that reshapes your data, in SQL, Python, R or dbt. The
   **Create Transformation** dialog lists what this project can run.
 - **Storage**: every table and file, organized into buckets.
-- **Flows**: what runs, in what order, on what schedule. Projects that have both kinds call it
-  **Conditional Flows**.
+- **Conditional Flows**: what runs, in what order, on what schedule. Older projects may call it
+  **Flows**.
+- **Apps**: the data apps you build and publish.
 - **Jobs**: the log of everything that has run, successfully or not.
 
 <details>
@@ -90,8 +121,9 @@ Its tabs cover **Tables & Buckets**, **Files**, **Data Streams**, **Storage Jobs
 </details>
 
 :::tip[Ask Kai to orient you]
-Look for **Kai Agent** in the top bar. It has to be enabled first and it is not on every stack, so
-see [Get started with Kai](/kai/getting-started/) if you cannot find it. On a project you inherit
+Look for **Kai Agent** in the top bar. A new Free Plan project has it from the start; elsewhere it
+may have to be enabled first, and it is not on every stack, so see
+[Get started with Kai](/kai/getting-started/) if you cannot find it. On a project you inherit
 rather than create, the first question is usually
 ([Data Exploration](/kai/use-cases/#data-exploration)):
 
@@ -122,7 +154,10 @@ VERIFY(Kai team), live and wrong on the site today: kai/getting-started.md's "Ra
 still opens "Kai is free during the public beta period" and still states 150 turns per month, 50 on
 Pay As You Go. kai/pricing.md says both were replaced on 15 September 2026. Two published pages
 contradict each other on what a reader will be charged; this guide no longer depends on either.
-Raised from the reviewer bot's time-critical flag on PR #1116, 2026-09-21. */}
+Raised from the reviewer bot's time-critical flag on PR #1116, 2026-09-21. Seen in Free Plan
+project 6375 on 2026-10-01: the chat's usage button reads "Kai usage — context window N%, messages
+N of 50, free allowance 300 PPU left", so the message counter and the PPU allowance both still
+show, which neither page describes. */}
 
 Not having Kai does not block the build: the loading, the SQL and the flow each carry a UI path and
 a CLI path in full.
