@@ -177,7 +177,7 @@ The **Terminal Logs** tab provides an **almost real-time** view of the applicati
 
 Manage an app from the header and the **⋮** (More actions) menu on its page.
 
-![Actions menu](/data-apps/manage-redeploy.png)
+![A stopped app's header with Open App and the ⋯ menu open over the Start button: Duplicate with Kai, Automate, Debug mode and Delete app](/data-apps/app-actions-menu.png)
 
 - **Deploy** — starts an app that has never run. Once the deployment job finishes, open the app with **Open**.
 - **Open** — on any app that has been deployed, opens the **Open app** dialog, whatever the app's authentication. The dialog shows the app's address with a copy button, then the hidden password with its own copy button. An app without a password gets a line saying why instead. The dialog's **Open app** button opens the app in a new tab.
@@ -212,7 +212,7 @@ If something goes wrong, a **wakeup error** page appears; click **Show More** fo
 
 When you **Deploy**, a wizard prompts for the backend version, the backend size and the auto-sleep timeout (five minutes to 30 days; default 15 minutes). **Redeploy** opens the same wizard with the app's current values in a collapsed **Deploy settings** section; expand it to change them. **Start** starts a stopped or sleeping app right away with those saved values and opens the wizard only when Kai has undeployed drafts of the app. [Pay-as-you-go](/management/payg-project/) projects have no backend size field.
 
-![Deploy timeout and backend size](/data-apps/deploy-timeout-backedsize.png)
+![The Redeploy wizard of a running app, with the Deploy settings section collapsed to its summary: 1.18.0 · XSmall · Sleeps after 15 minutes](/data-apps/redeploy-wizard.png)
 
 ## Debugging app deployment
 

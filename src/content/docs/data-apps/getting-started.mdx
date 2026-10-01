@@ -109,11 +109,11 @@ Prefer to set the app up yourself, without the chat? Manual creation lives on th
 4. Set the **code source** and the **Authentication** method. A **Python / JS** app runs from a **Git repository** — connect one (there's no inline-code option for Python/JS). A **Streamlit** app can use inline **Code** or a Git repository.
 5. Configure the rest of the app's settings; see [Reference](/data-apps/reference/) for the full list. The backend size and the inactivity timeout come next, in the deploy wizard.
 
-![The app's configuration page: the Overview tab with Authentication and a Git Repository section, plus the App Info panel showing backend version, size, auto-sleep, and App ID](/data-apps/build-in-ui-config.png)
+![A new Python/JS app's Overview tab, marked Not Deployed, with Deploy in the header: the App access card with the App URL and Authentication, the Git Repository card with keboola/titanic-python-app connected, and the App Info panel](/data-apps/build-in-ui-config.png)
 
-6. Click **Deploy**. A short wizard asks for the **backend version**, the **backend size** (not on [pay-as-you-go](/management/payg-project/) projects) and an **inactivity timeout**, then deploys the app. (**Redeploy** opens the same wizard, with these fields in a collapsed **Deploy settings** section. **Start** starts a stopped or sleeping app right away with its saved settings and opens the wizard only when Kai has undeployed drafts of the app.)
+6. Click **Deploy**. A short wizard asks for the **backend version**, the **backend size** (not on [pay-as-you-go](/management/payg-project/) projects) and an **inactivity timeout**; click **Deploy** in the wizard to deploy the app. (**Redeploy** opens the same wizard, with these fields in a collapsed **Deploy settings** section. **Start** starts a stopped or sleeping app right away with its saved settings and opens the wizard only when Kai has undeployed drafts of the app.)
 
-![The deploy/redeploy wizard: backend version, backend size and inactivity timeout](/data-apps/deploy-timeout-backedsize.png)
+![The Deploy wizard of an app that has never run: the Backend version, Backend size and Inactivity timeout fields (1.6.3, XSmall, 15 minutes), and the Deploy button](/data-apps/deploy-wizard.png)
 
 7. When the status turns **Active**, click **Open** in the page header. The dialog shows the app's address and, for an app behind a password, the password to copy. Click **Open app** in it to open the app at its public URL. Use **Redeploy** (**Start** if the app is sleeping or stopped) to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
 
