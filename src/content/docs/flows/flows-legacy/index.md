@@ -1,6 +1,7 @@
 ---
 title: Legacy Flows
 slug: 'flows/flows-legacy'
+description: The Legacy Flow Builder — a sequential flow runner being replaced by Conditional Flows — how to build, schedule, and monitor legacy flows, and the planned migration.
 redirect_from:
     - /orchestrator/
     - /orchestrator/design/
