@@ -68,4 +68,4 @@ freeze waiting for the locks to be released. This will be recorded in the connec
     Table "account" is locked by 1 transactions, waiting for them to finish
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
-[incremental processing](/storage/tables/#incremental-processing).
+[incremental processing](/storage/tables/incremental-loading/#incremental-processing).

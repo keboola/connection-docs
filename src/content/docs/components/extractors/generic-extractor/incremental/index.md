@@ -12,7 +12,7 @@ Extracting data incrementally is universally beneficial — it **speeds up the e
 
 ## Options
 After you have incrementally extracted data from an API, the data must be 
-[incrementally loaded](/storage/tables/#incremental-loading)
+[incrementally loaded](/storage/tables/incremental-loading/)
 into Storage. To do that, simply set `"incrementalOutput": true` in the `config` section. 
 
 There are, however, a number of implications in the incremental loads. It essentially boils downs to the following use cases, 
