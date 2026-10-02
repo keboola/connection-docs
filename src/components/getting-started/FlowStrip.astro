@@ -1,0 +1,30 @@
+---
+// A process in three or four boxes with arrows between them, for the "how it
+// works" sections that used to be three paragraphs.
+//
+// Usage:  <FlowStrip steps="A URL|The HTTP connector, one row per file|A table in Storage" />
+//
+// `steps` is one string split on "|", so the markdown twin can read it off the
+// tag (page-markdown.mjs prints it joined with arrows). `code` in backticks
+// renders as code. Styles: .gs-flow in custom.css.
+
+interface Props {
+  steps: string;
+  /** Accessible name for the whole strip. */
+  label?: string;
+}
+
+const { steps, label } = Astro.props;
+const escape = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const items = steps
+  .split('|')
+  .map((s) => s.trim())
+  .filter(Boolean)
+  .map((s) => escape(s).replace(/`([^`]+)`/g, '<code>$1</code>'));
+---
+
+<div class="gs-flow-wrap not-content">
+  <ol class="gs-flow" aria-label={label}>
+    {items.map((html) => <li class="gs-flow__step" set:html={html} />)}
+  </ol>
+</div>

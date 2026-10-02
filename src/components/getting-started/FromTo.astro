@@ -1,0 +1,33 @@
+---
+// "Where you are" → "When you finish" as two cards with an arrow, outside the
+// prerequisites box. The hub needs it on its own: its order is why → clip →
+// state → sample → what you need → steps (Nikita, 2026-09-23), so the state
+// cannot move into the box there. Every step page carries the same two cards
+// inside <Prereqs> instead, through its `from` and `to` slots.
+//
+// Usage:  <FromTo from="nothing exists yet." to="a project you can sign in to." />
+//
+// Plain text only, so the markdown twin can read both props off the tag
+// (page-markdown.mjs). Styles: .gs-fromto in custom.css.
+
+import { LABELS } from './prereqs.mjs';
+
+interface Props {
+  from: string;
+  to: string;
+}
+
+const { from, to } = Astro.props;
+---
+
+<div class="gs-fromto gs-fromto--standalone">
+  <p class="gs-fromto__card">
+    <span class="gs-fromto__label">{LABELS.from}</span>
+    {from}
+  </p>
+  <span class="gs-fromto__arrow" aria-hidden="true">→</span>
+  <p class="gs-fromto__card gs-fromto__card--to">
+    <span class="gs-fromto__label">{LABELS.to}</span>
+    {to}
+  </p>
+</div>
