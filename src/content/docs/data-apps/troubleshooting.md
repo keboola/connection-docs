@@ -50,7 +50,7 @@ Most app problems fall into a handful of patterns. Find where the evidence is fi
 
 ## Sign-in problems
 
-- **Basic (Password):** the password is on the app's configuration page next to **Open App** once the app is deployed.
+- **Basic (Password):** once the app is deployed, click **Open App** on its configuration page and copy the password from the dialog.
 - **OIDC:** the Google, Entra, Okta and Auth0 tabs on [Authentication](/data-apps/authentication/) each end with an "If sign-in fails" list covering that provider's error texts, redirect-URI mismatches, and audience settings.
 - **GitHub, GitLab, JumpCloud:** each has its own required fields and its own optional restrictions, which are the first thing to check when the right person is turned away. GitHub filters by organization, team, repository and allowed users; GitLab by group, project and allowed roles; JumpCloud by allowed roles. All three are in their sections of [Authentication](/data-apps/authentication/).
 - **Nobody can get in after you changed the authentication settings:** the change takes effect on the next start. Click **Redeploy App** (running app) or **Start App** (stopped app).
