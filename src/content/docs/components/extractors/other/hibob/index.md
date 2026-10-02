@@ -25,7 +25,7 @@ Once you have acquired these credentials, you can proceed with the configuration
 1. [Create a new configuration](/components/#creating-component-configuration) for the HiBob connector.
 2. In the authorization section, enter the Service User ID and Service User Token.
 3. Select which endpoints you want to fetch.
-4. You have the option to set the `Human readable` parameter, which makes the API return object names instead of IDs.
+4. You have the option to set the `Human readable` parameter, which makes the API return object names instead of IDs. This option only affects the employees table.
 5. In the Destination settings, you can choose between `Full Load` and `Incremental Load`.
 If full load is used, the destination table will be overwritten with every run. If incremental load is used, data will be upserted into the destination table.
 

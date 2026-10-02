@@ -13,7 +13,7 @@ The YourPass data source connector uses the [YourPass API](https://doc.yourpass.
 to Keboola.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **YourPasss** connector.
+[Create a new configuration](/components/#creating-component-configuration) of the **YourPass** connector.
 
 ### Authorization Configuration
 
@@ -47,6 +47,6 @@ Select one of the following two load types:
 - `Full Load` -- overwrites the destination table each time.
 
 You can set the primary keys by clicking the button **Add Primary Key Column** and adding multiple keys if required.
-You can delete primary keys by clicking the button **Delete Primary Key Column**. Just make sure to delete the output tale 
+You can delete primary keys by clicking the button **Delete Primary Key Column**. Just make sure to delete the output table 
 in the storage before deleting primary keys, as the output table always expects the list of primary keys to stay constant.
 
