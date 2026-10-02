@@ -137,7 +137,7 @@ You sign in once per machine. Every tool reads the same local config, so a proje
 
 ### When you need a token
 
-CI, containers, cron, and anything else running unattended need a Storage API token, because `auth login` cannot run there. Kai and the Python SDK still need a static token rather than a browser session. Since kbagent 0.94.0, a browser session covers data apps and streams too.
+CI, containers, cron, and anything else running unattended need a Storage API token, because `auth login` cannot run there. Kai and the Python SDK still need a static token rather than a browser session. Since kbagent 0.94.0, a browser session covers apps and streams too.
 
 **These docs cannot create a token for you.** Open your project in the Keboola UI and go to **Settings → Developer settings → Agentic CLI**. That page builds the exact `kbagent project add` command for your project and your stack, and it can include a read-only token in it. Copy it from there.
 
