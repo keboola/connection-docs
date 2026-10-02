@@ -91,6 +91,15 @@ function prereqsTabsToText(tag, overrides = {}) {
 }
 
 /**
+ * Drop the <span data-pagefind-…> wrappers a page adds to tune site search.
+ * A reader of the twin gets nothing from them, and in a heading they print as
+ * raw HTML: `#### <span data-pagefind-weight="5">Apps pricing</span>`.
+ */
+function stripSearchMarkup(text) {
+  return text.replace(/<span\b(?=[^>]*\bdata-pagefind-)[^>]*>([\s\S]*?)<\/span>/g, '$1');
+}
+
+/**
  * Reduce an .mdx body to plain markdown.
  *
  * The raw-markdown copies exist so an agent can read a page as text, so MDX
@@ -349,7 +358,7 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
 
           const isMdx = extname(file) === '.mdx';
           const raw = stripFrontmatter(content);
-          const body = (isMdx ? stripMdx(raw) : raw).trim();
+          const body = stripSearchMarkup(isMdx ? stripMdx(raw) : raw).trim();
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });
