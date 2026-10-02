@@ -1547,6 +1547,49 @@ extend/jobs/ (only `standard` jobs are billed), read after the third review: abo
 minutes in the two runs, 10 to 20 a month weekly; read Project Consumption in 6375 after Monday's
 run to see what was actually metered. #1116 and #1144 stay drafts until Michal says otherwise.
 
+
+## 2026-10-02 — Page titles in Keboola's words
+
+**Asked by:** Nikita, 2 Oct: "Put it in front of someone" says nothing, and the titles should be
+in Keboola's own words, so that a reader can find the same feature later in the product and in
+the docs. The ask/ title is Nikita's pick from three options, after the reviewers' round.
+
+| Page | Was | Now |
+|---|---|---|
+| project/ | Get a project | Create or join a project |
+| load/ | Get your data in | Load data into Storage |
+| transform/ | Transform data | (kept: Jordan's title of 21 Aug, and already the product's word) |
+| ask/ | Ask a question and get an answer | Explore your data |
+| app/ | Put it in front of someone | Build an app |
+| automate/ | Make it run every week | Build and schedule a weekly flow |
+| check/ | Check it worked | Check Storage and Jobs |
+
+The words are the product's: **Storage** and **Jobs** are navigation items; **app**, not "data
+app", because the product says Apps, Create app and Open App, and the Apps docs renamed "Data
+Apps" to "Apps" on 2026-04-01 (AJDA-2544; "Data App" survives as the component's name in the flow's
+task picker and in `kbagent data-app`); **flow** is Create Flow and Run flow under Conditional
+Flows; "Explore" follows Kai's own name for this use case, Data Exploration. "Ask Kai about your
+data" was tried first and dropped: the docs site's own assistant is called "Ask Kai" and cannot
+see the reader's project, and the page's UI tab is SQL in a workspace, not Kai.
+
+The sidebar takes these from each page's frontmatter title (`convert-nav.mjs` ignores `title:` on
+single pages); `_data/navigation.yml` was changed too so it stays in step. check/'s next link and
+write/'s previous link are labelled Going further in their frontmatter, so the footer after check/
+no longer says "Next: Overview" while the sidebar keeps the site's Overview convention. The
+course line (`course.mjs`) has the same titles and the short labels Project, Load, Transform,
+Explore, App, Flow and Check; its "In Keboola:" term is gone where the title already names the
+thing. Link texts that used a title were changed on every page, including `components/extractors/`
+and the Pay As You Go page, which now points at the hub. The hub's tab-sync GIF was re-recorded
+from the build, because its sidebar showed the old titles. On automate/ "Get told when it breaks"
+is "Set up notifications", the name of the tab; project/'s section is "Choose a way in". The
+"Check it worked" sections inside pages stay: they name a step of the page, not a feature. Slugs
+and URLs do not change.
+
+**How this sits with the rule of 2 Sep:** "Tool names survive as tab labels and as their own
+reference sections in a separate 'going further' tier, never as chapters of the guide." The tools
+that rule meant are the ways of driving Keboola (CLI, MCP, Kai's prompt). None of the new titles
+names one; the product words in them (Storage, app, flow, Jobs) are what the reader gets.
+
 ---
 
 ## Open — carried as VERIFY(owner) flags in the pages

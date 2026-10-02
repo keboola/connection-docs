@@ -56,7 +56,10 @@ point, a handful of states rather than smooth motion, and small. Built 2026-09-2
 preview of this branch, so it needs no project and shows no project data. Five states captured at
 1000x384 (the sidebar's current-page highlight on the left, the tab strip on the right), held by
 repeating frames at 5 fps, then palettegen at 96 colours and `gifsicle -O3 --lossy=40`, which
-collapses the repeats back to five real frames: 104 KB, 7.2 s. The two big GIFs in this repo
+collapses the repeats back to five real frames: 104 KB, 7.2 s. Re-recorded 2026-10-02, because its
+sidebar still showed the old page titles: three states from the local build at a 1280-px window
+(load/ on Prompt, the same page on CLI / API, transform/ already on CLI / API), cropped to the
+content column's width, with no drawn pointer; 1056x384, 165 KB, 7.6 s. The two big GIFs in this repo
 (kai/Capabilities.gif at 2.5 MB, ai/mcp-server's at 9.5 MB) are the pattern NOT to copy on a page
 this size.
 
@@ -88,7 +91,7 @@ under the clip. The card is the Free Plan grid (app/grid-preview.png, project 63
 three red cells), the same week as the run's other screenshots. 10.0 s, 193 KB, luma mean 229, never
 under 227; the poster is the whole line at 5.6 s. DECISIONS.md 2026-10-01. */}
 
-<FromTo from="you have heard of Keboola and have nothing set up." to="a scheduled pipeline and a data app, in a project you created or joined." />
+<FromTo from="you have heard of Keboola and have nothing set up." to="a scheduled pipeline and an app, in a project you created or joined." />
 
 The sample is six cafés: five files (a summer of sales, the rosters, the weather) and next week's
 forecast from a public API that needs no account. The moves are the same on your own tables. Every
@@ -150,7 +153,7 @@ the page says so rather than showing an empty tab.
 **In the chat, Kai asks before each change it makes:** an approval card shows exactly what it is
 about to write or run, with **Approve**, **Decline** and **Always allow**. Questions that only read
 do not ask, and neither do tools set to **Always allow**; a new account has two write tools set
-that way, both for data apps. The Apps builder asks less: it builds a draft of the app, code and
+that way, both for apps. The Apps builder asks less: it builds a draft of the app, code and
 preview included, without asking, and when you publish it asks twice, once for the app's access to
 Storage and once to deploy it.
 
@@ -181,7 +184,7 @@ This guide is the browser path, prompt first. Three others start from the same p
 <CardGrid>
 <LinkCard title="kbagent CLI" href="/cli/getting-started/" description="The same operations from a terminal, scriptable and agent-friendly." />
 <LinkCard title="MCP server" href="/ai/mcp-server/" description="Connect your own AI assistant or IDE to a Keboola project." />
-<LinkCard title="Build an app with Kai" href="/data-apps/getting-started/" description="Go straight to a data app on data you already have." />
+<LinkCard title="Build your first app with Kai" href="/data-apps/getting-started/" description="Go straight to an app on data you already have." />
 </CardGrid>
 
 ## Going further

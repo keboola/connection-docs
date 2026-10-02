@@ -23,7 +23,7 @@ export const LABELS = {
 /** Shared "You need" items, by the key a page passes in `needs`. HTML. */
 export const SHARED = {
   project:
-    '<strong>A Keboola project.</strong> No project yet? <a href="/getting-started/project/">Get a project</a>.',
+    '<strong>A Keboola project.</strong> No project yet? <a href="/getting-started/project/">Create or join a project</a>.',
   google:
     '<strong>A Google account</strong> you can sign in with, to approve Keboola\'s access.',
 };

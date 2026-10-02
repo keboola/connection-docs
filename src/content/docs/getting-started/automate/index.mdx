@@ -1,5 +1,5 @@
 ---
-title: 'Make it run every week'
+title: 'Build and schedule a weekly flow'
 slug: 'getting-started/automate'
 description: 'Wire your two connectors and the transformation into a single flow, run the two loads in parallel, give it a Monday 06:00 schedule, and get notified when it fails.'
 redirect_from:
@@ -84,7 +84,7 @@ wait. kai-flow.png, 05, 07, 08, add-task.gif and check/09 come from that flow. *
   <span slot="to">one flow that runs them in order every Monday morning and emails you when it breaks.</span>
   <li>
     <strong>The two connector configurations</strong> from{' '}
-    <a href="/getting-started/load/">Get your data in</a>.
+    <a href="/getting-started/load/">Load data into Storage</a>.
   </li>
   <li>
     <strong>The transformation</strong> from <a href="/getting-started/transform/">Transform data</a>.
@@ -114,7 +114,7 @@ wait. kai-flow.png, 05, 07, 08, add-task.gif and check/09 come from that flow. *
   that can happen at the same time share a phase; things that depend on each other get their own.
 - **The app is not in the flow.** Ours reads `staffing_outlook` each time someone opens it, so it
   shows whatever the last run wrote; the **Prompt** tab of
-  [Put it in front of someone](/getting-started/app/) has the question that checks yours.
+  [Build an app](/getting-started/app/) has the question that checks yours.
 - If you took the [spreadsheet side trip](/getting-started/write/), its destination goes in a third
   phase: it sends the table, so it runs after the transformation.
 
@@ -401,7 +401,7 @@ rather than a clock; see [Schedule and Automate](/flows/#schedule-and-automate).
 
 </details>
 
-## Get told when it breaks
+## Set up notifications
 
 A pipeline that fails silently is worse than a manual one. Open the flow's **Notifications** tab and
 edit it in place; there are three cards:
@@ -432,7 +432,7 @@ are enough here.
 - The **Schedules** tab shows a count, and the flow's **All Runs** tab a run: your name against a
   manual run, `Schedule for <flow ID> Scheduler` against an automatic one.
 - **A red run can still have done most of its work:** phases run in order, so when a later one
-  fails, the ones before it are done. [Check it worked](/getting-started/check/) shows how to read
+  fails, the ones before it are done. [Check Storage and Jobs](/getting-started/check/) shows how to read
   the run.
 - Next Monday there will be a second run you did not start, on a forecast that has moved by a
   week.

@@ -33,25 +33,25 @@ items:
     title: Getting Started
     items:
       - url: /getting-started/project/
-        title: Get a project
+        title: Create or join a project
 
       - url: /getting-started/load/
-        title: Get your data in
+        title: Load data into Storage
 
       - url: /getting-started/transform/
         title: Transform data
 
       - url: /getting-started/ask/
-        title: Ask a question and get an answer
+        title: Explore your data
 
       - url: /getting-started/app/
-        title: Put it in front of someone
+        title: Build an app
 
       - url: /getting-started/automate/
-        title: Make it run every week
+        title: Build and schedule a weekly flow
 
       - url: /getting-started/check/
-        title: Check it worked
+        title: Check Storage and Jobs
 
       - url: /getting-started/going-further/
         title: Going further

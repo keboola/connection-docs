@@ -1,7 +1,8 @@
 ---
-title: 'Check it worked'
+title: 'Check Storage and Jobs'
 slug: 'getting-started/check'
 description: 'What should be in Storage and Jobs once the pipeline runs, how to read a flow run, and the failures that actually happen.'
+next: 'Going further'
 ---
 
 import PageMeta from '../../../../components/getting-started/PageMeta.astro';
@@ -41,7 +42,7 @@ with three ways to do it. */}
 |---|---|---|
 | Two HTTP configurations | bring the five files and the live forecast into the project | **Components** |
 | SQL transformation | joins five of the six tables into `staffing_outlook` | **Transformations** |
-| Data app | the grid | **Apps** |
+| App | the grid | **Apps** |
 | Flow | runs the loads and the transformation, in order, every Monday morning | **Conditional Flows** |
 
 In **Storage**: two `in.c-` buckets named after the connector and the configuration ID
@@ -181,7 +182,7 @@ is the [recommended ceiling](/flows/), and Support can adjust a project's limits
 
 </details>
 
-Failures specific to one step stay on its page: loading on [Get your data in](/getting-started/load/),
+Failures specific to one step stay on its page: loading on [Load data into Storage](/getting-started/load/),
 SQL and mapping on [Transform data](/getting-started/transform/), delivery on
 [Send a table to Google Sheets](/getting-started/write/), and apps on
-[Put it in front of someone](/getting-started/app/).
+[Build an app](/getting-started/app/).
