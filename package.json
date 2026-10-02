@@ -21,7 +21,7 @@
     "starlight-image-zoom": "^0.14"
   },
   "devDependencies": {
-    "@vercel/node": "^5.8.4",
-    "js-yaml": "^4.2.0"
+    "@vercel/node": "^5.10.2",
+    "js-yaml": "^4.3.2"
   }
 }
