@@ -1,0 +1,170 @@
+---
+title: 'Load from Google Sheets'
+slug: 'getting-started/load/googlesheets'
+description: 'Load a table from a spreadsheet you own, with an authorized Google account instead of a public URL.'
+redirect_from:
+  - /tutorial/load/googlesheets/
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
+
+<PageMeta genre="How-to" minutes="10" guide="Going further" />
+
+A side trip from [Get your data in](/getting-started/load/): the same kind of load, from a
+spreadsheet you own. Drive is where small reference tables get shared between teams, and the only
+real difference is the authorization: this connector needs an account, not a public URL.
+
+**Where you are:** you can load a public file already. **When you finish:** a Storage table built
+from a spreadsheet, refreshed whenever the connector runs.
+
+<Prereqs needs={['project', 'google']}>
+  <li>
+    A spreadsheet in that account to load from. <a href="#prepare-a-spreadsheet">Prepare a
+    spreadsheet</a> below makes one out of a sample file.
+  </li>
+</Prereqs>
+
+<PathIntro tabs={2} />
+
+Two tabs here, not the three the main path uses: the consent screen and the Drive file picker are
+browser dialogs in your own Google account, so a terminal cannot start this task. Once the
+configuration exists and is authorized, [kbagent](/cli/) drives it like any other component,
+`config row-create` to add a sheet and `job run --wait` to load it.
+
+{/* How-to page, side trip off /getting-started/load/. Converted to tabs 2026-09-15 with the rest
+of the section; the ":::tip[Do it with Kai — after you authorize]" box it used to carry is now the
+Prompt tab, unchanged in substance.
+
+Two tabs, matching /getting-started/write/, and for the same reason: OAuth. The kbagent commands
+named above were not run against this page — doing so writes into a real Drive account — they are
+the same two commands the CLI tab on /getting-started/load/ proves.
+
+VERIFY(owner): this side trip still uses level.csv, the pre-Boolabean sample (28 rows of names and
+a size band). The main path is Boolabean now, so the section reads as two datasets. Swapping it
+means reshooting steps 5-12 with a live Google authorization, which needs Nikita's account — the
+same blocker as the /getting-started/write/ captures. Flagged rather than half-changed. */}
+
+## Prepare a spreadsheet
+
+You need a spreadsheet in Drive to load from. Open
+[Google Sheets](https://www.google.com/sheets/about/), start a blank one, then use **File → Import**
+to import [level.csv](/getting-started/level.csv) into it, and name the file `Level`. Twenty-eight
+rows, two columns. Google's help covers [importing a CSV into Sheets](https://support.google.com/docs/answer/40608)
+if the menu has moved since we wrote this.
+
+Treat it as a table a colleague shared with you.
+
+## Set it up
+
+<Tabs syncKey="howto">
+<TabItem label="Prompt">
+
+Kai can create the configuration
+([integration setup](/kai/use-cases/#integration-setup)) but not authorize it. Open **Kai Agent**
+in the top bar:
+
+```text title="Prompt"
+Create a Google Sheets data source configuration called "Level from Sheets".
+```
+
+Then do the authorization and the file picking yourself, steps 5 to 9 in the **UI** tab. Both
+happen inside Google rather than Keboola: the consent screen, and the Drive picker where you
+choose the *spreadsheet* you just made.
+
+Once the spreadsheet is selected, hand it back:
+
+```text title="Prompt"
+In "Level from Sheets", select the sheet inside that spreadsheet, run the configuration, and tell
+me what table it created and how many rows it has.
+```
+
+Watch the wording in both prompts. The *spreadsheet* is the file in Drive; the *sheet* is the tab
+inside it. The connector asks for them in that order.
+
+</TabItem>
+<TabItem label="UI">
+
+1. Go to **Components** and click **Add Component**.
+
+   ![Screenshot - Components](/getting-started/load/source-intro-0.png)
+
+2. Search for the **Google Sheets** data source and open it.
+
+   ![Screenshot - Find the Google Sheets data source](/getting-started/load/source-intro.png)
+
+3. Click **Connect To My Data**. **Use With Demo Data** next to it loads a dataset Keboola
+   prepared, which most connectors offer and which is not what you want here.
+
+4. Name the configuration `Level from Sheets`, describe it, and click **Create Configuration**.
+   The **Prompt** tab uses the same name, so either path leaves you in the same place.
+
+   ![Screenshot - Create the configuration](/getting-started/load/google-sheets-create.png)
+
+   Every component can hold several [configurations](/components/), which is how one project
+   extracts from two different Google accounts.
+
+5. Click **Sign in with Google** to authorize the connector.
+
+   ![Screenshot - Sign in with Google](/getting-started/load/sign-in-with-google.png)
+
+6. Google takes over: it asks which account to use and what Keboola may reach in it. Pick the
+   account holding the spreadsheet you just made and grant the access it asks for. Google's wording
+   and buttons change from time to time, so follow the screen rather than a script from us.
+
+7. Now choose the Drive files to import.
+
+   ![Screenshot - Select Drive files](/getting-started/load/select-files.png)
+
+8. Google asks a second time. Step 6 let Keboola reach the account at all; this prompt is
+   narrower, about which files it may see. Allow it for your spreadsheets and continue, because
+   under-granting here leaves the picker in the next step empty.
+
+9. Google's file picker opens. Find the `Level` spreadsheet and choose it.
+
+10. Keboola reads the sheets inside that spreadsheet and offers them.
+
+11. Select the sheet and click **Save and Run Configuration**.
+
+    ![Screenshot - Save and run](/getting-started/load/save-and-run.png)
+
+12. The connector creates its own output bucket and table. Click the table name to see what
+    arrived, or go to **Storage**.
+
+    ![Screenshot - The table in Storage](/getting-started/load/storage.png)
+
+</TabItem>
+</Tabs>
+
+## Check it worked
+
+The new table holds 28 rows, the ones you uploaded into the spreadsheet, with the column names
+from its first row.
+
+{/* VERIFY(owner): the four bullets below are written from how the connector behaves, not from a
+walk — reproducing them needs an authorized Drive account, the same blocker as the captures. Worth
+one pass by someone signed in: that re-authorizing keeps the file selection, that the picker only
+lists the authorized account's files, and that a sheet whose first row is not treated as a header
+arrives with columns named 1, 2, 3. The "and so does Kai" clause that stood above was dropped on
+2026-09-22 rather than left unverified: the connector's order is evidenced by steps 9 and 11, Kai's
+never was. */}
+
+## If it goes wrong
+
+- **The job fails on permissions.** The authorization was revoked or expired in the Google
+  account. Re-authorize the configuration; the file selection survives.
+- **The spreadsheet is not in the picker.** It belongs to a different Google account from the one
+  you authorized. Authorize that account, or share the file with this one.
+- **The table arrives with one row of data and a header called `1`, `2`, `3`.** The sheet's first
+  row was not treated as a header. Check the sheet settings in the configuration.
+- **Nothing happens after selecting the sheet.** Selecting saves the configuration; loading is a
+  separate run. Click **Run Component**.
+
+## Going further
+
+- [Load from a database](/getting-started/load/database/) is the other side trip: a source that
+  needs credentials rather than a consent screen.
+- [Send a table to Google Sheets](/getting-started/write/) goes the other way, out of Storage into
+  a spreadsheet.

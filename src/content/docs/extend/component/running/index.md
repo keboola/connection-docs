@@ -103,7 +103,7 @@ A [collection of examples](https://documenter.getpostman.com/view/3086797/kbc-sa
 Run Job API call in debug mode is available in Postman Docs.
 
 ### Prepare
-[Create a table](/tutorial/load/) in Keboola Storage.
+[Create a table](/getting-started/load/) in Keboola Storage.
 In the following example, the table is stored in the `in.c-main` bucket and is called `sample`. The table ID is
 therefore `in.c-main.sample`. You also need a [Storage API token](/storage/tokens/).
 
