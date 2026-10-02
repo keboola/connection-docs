@@ -50,7 +50,61 @@ function resolves(p) {
   return cands.some(existsSync);
 }
 
-const findings = { brokenLinks: [], missingImages: [], jekyllSmell: [], multiH1: [], extCount: 0 };
+// Locate the built HTML file behind an internal path, or null.
+function distFile(p) {
+  p = p.split('#')[0].split('?')[0];
+  if (!p) return null;
+  const cands = [
+    join(DIST, p),
+    join(DIST, p, 'index.html'),
+    join(DIST, p.replace(/\/$/, '') + '.html'),
+    join(DIST, p.replace(/\/$/, '') + '/index.html'),
+  ];
+  return cands.find((c) => existsSync(c) && c.endsWith('.html')) ?? null;
+}
+
+// Every id a page exposes, so a link's #fragment can be checked against the
+// anchors that actually exist. Cached: one page is linked from many others.
+const idCache = new Map();
+function idsFor(p, hops = 0) {
+  if (idCache.has(p)) return idCache.get(p);
+  const f = distFile(p);
+  let ids = null; // null = page not built; the broken-link check owns that case
+  if (f) {
+    const body = readFileSync(f, 'utf8');
+    // redirect_from emits meta-refresh stubs, which carry no ids of their own.
+    // A fragment linked through one belongs to the destination, so follow it —
+    // otherwise every link through a redirect would look broken.
+    const hop = body.match(/<meta\s+http-equiv=["']refresh["']\s+content=["'][^"']*url=([^"']+)["']/i);
+    if (hop && hops < 5) {
+      ids = idsFor(hop[1].split('#')[0], hops + 1);
+    } else {
+      ids = new Set([...body.matchAll(/\sid=["']([^"']+)["']/g)].map((m) => m[1]));
+    }
+  }
+  idCache.set(p, ids);
+  return ids;
+}
+
+const findings = { brokenLinks: [], brokenFragments: [], missingImages: [], jekyllSmell: [], multiH1: [], extCount: 0 };
+
+// A link's #fragment must name an id on the page it points at. Paths are
+// checked above; this catches the other half — a rename that leaves the path
+// valid and the anchor dangling, which is how a link silently starts landing
+// at the top of a long reference page instead of its section.
+function checkFragment(fromRoute, targetPath, url) {
+  const hash = url.indexOf('#');
+  if (hash < 0) return;
+  const frag = url.slice(hash + 1);
+  if (!frag || frag === '_top') return;
+  let decoded = frag;
+  try { decoded = decodeURIComponent(frag); } catch { /* keep raw */ }
+  const ids = idsFor(targetPath);
+  if (!ids) return; // unbuilt target — already reported as a broken link
+  if (!ids.has(decoded) && !ids.has(frag)) {
+    findings.brokenFragments.push({ page: fromRoute, url });
+  }
+}
 
 const ATTR = /(?:href|src)\s*=\s*["']([^"']+)["']/gi;
 
@@ -72,7 +126,8 @@ for (const file of htmlFiles) {
     const url = m[1].trim();
     const isImg = m[0].toLowerCase().startsWith('src');
 
-    if (/^(mailto:|tel:|javascript:|data:|#)/i.test(url)) continue;
+    if (url.startsWith('#')) { checkFragment(r, r, url); continue; }
+    if (/^(mailto:|tel:|javascript:|data:)/i.test(url)) continue;
     if (/^https?:\/\//i.test(url)) {
       findings.extCount++;
       // old-docs / Jekyll smell: absolute links back to the legacy docs host
@@ -94,6 +149,8 @@ for (const file of htmlFiles) {
       } else {
         findings.brokenLinks.push({ page: r, url });
       }
+    } else if (!isImg && url.includes('#') && !url.startsWith('/_astro/')) {
+      checkFragment(r, url.split('#')[0], url);
     }
   }
 }
@@ -138,12 +195,13 @@ const dump = (title, arr, fmt) => {
 };
 
 dump('BROKEN INTERNAL LINKS', findings.brokenLinks, (x) => `${x.page}  →  ${x.url}`);
+dump('BROKEN LINK FRAGMENTS', findings.brokenFragments, (x) => `${x.page}  →  ${x.url}`);
 dump('MISSING IMAGES', findings.missingImages, (x) => `${x.page}  →  ${x.url}`);
 dump('JEKYLL / OLD-DOCS LINK SMELLS', findings.jekyllSmell, (x) => `[${x.kind}] ${x.page}  →  ${x.url}`);
 dump('MULTIPLE <h1> PER PAGE', findings.multiH1, (x) => `${x.page}  (${x.count} h1)`);
 dump('UNCLOSED CODE FENCES (source)', fenceIssues, (x) => `${x.file}  (${x.fences} fences)`);
 dump('MALFORMED TABLES (source)', tableIssues, (x) => `${x.file}:${x.line}  header=${x.header} sep=${x.sep}`);
 
-const total = findings.brokenLinks.length + findings.missingImages.length +
+const total = findings.brokenLinks.length + findings.brokenFragments.length + findings.missingImages.length +
   findings.jekyllSmell.length + findings.multiH1.length + fenceIssues.length + tableIssues.length;
 console.log(head(`TOTAL ISSUES: ${total}`));
