@@ -19,7 +19,7 @@ A [Python client library](https://github.com/keboola/kai-client) is also availab
 
 ### AI Kit
 
-A plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development. It includes plugins for code quality and security analysis, building Keboola Python components, and creating Streamlit data apps.
+A plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development. It includes plugins for code quality and security analysis, building Keboola Python components, and creating Streamlit apps.
 [Learn more about AI Kit →](/ai/ai-kit/)
 
 ### MCP Server

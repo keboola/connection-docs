@@ -25,7 +25,7 @@ kbagent prints the local URL (default `http://127.0.0.1:8001/`) — open it in y
 
 ## Dashboard
 
-The home screen summarizes the active project — connected projects, agent tasks, Doctor issues, recent jobs — with an "ask the local AI" box and suggested next steps. That AI box makes this a local AI dashboard over everything kbagent can see: ask about your projects right there, no browser tab to Keboola needed. The left rail groups everything the CLI can do: **Manage** (projects, branches, doctor), **Browse** (configs, components, storage, jobs, search), **Develop** (SQL workspaces, flows, schedules, data apps), **Insights** (lineage, semantic layer), and **AI / Tools**.
+The home screen summarizes the active project — connected projects, agent tasks, Doctor issues, recent jobs — with an "ask the local AI" box and suggested next steps. That AI box makes this a local AI dashboard over everything kbagent can see: ask about your projects right there, no browser tab to Keboola needed. The left rail groups everything the CLI can do: **Manage** (projects, branches, doctor), **Browse** (configs, components, storage, jobs, search), **Develop** (SQL workspaces, flows, schedules, apps), **Insights** (lineage, semantic layer), and **AI / Tools**.
 
 ![The kbagent Web UI dashboard for project docs-demo: summary tiles (projects connected, agent tasks, Doctor issues, recent jobs), an ask-the-AI box, scheduled agents, and suggested next steps, with the full left navigation](/cli/webui-dashboard.png)
 
