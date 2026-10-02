@@ -1635,6 +1635,18 @@ clicking" (the UI) and "the one you have been using" (the Prompt tabs); check/ l
 pages before the spreadsheet side trip; write/'s description no longer assumes the reader just
 built the table.
 
+A second commit the same day holds the additions that bring new facts to ad-hoc/, so that they can
+be dropped on their own (CLAUDE.md keeps form and accuracy apart; the link retargets and the TDE
+wording in the first commit stay with the link fixes Nikita asked for). ad-hoc/'s **You need** item
+asks for a Google Cloud project with billing enabled, because the bucket needs it: Google's
+free-tier page says a free tier needs a billing account. The BigQuery section says so next to the
+free 1 TB of queries instead of "without enabling billing". The caution adds that organizations
+created on or after 3 May 2024 block service account keys by default, which an organization policy
+administrator can lift, and the note at the start of Exploring Data says to create a Python
+workspace instead of the sandbox, without its stale "will be updated soon". The fact-checker raised
+the billing, the guide test the key policy and the workspace line, and the checker asked for the
+split; Google's own pages confirm both Google facts.
+
 **Not changed in this pass, for Nikita:** generic "Getting Started tutorial" or "tutorial" links
 that land in the guide (flows-legacy, transformations, mappings, storage, storage/buckets, the sqldb
 connector, `components/branches/`); the BigQuery connector's "Getting Started Tutorial", which opens

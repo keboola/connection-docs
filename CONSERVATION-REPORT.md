@@ -275,4 +275,13 @@ The fact-checker, guide-tester and checker rounds the same day added these, all 
 | check/ | "delivery on Send a table to Google Sheets, and apps on Build an app", in the old order | apps first, then the spreadsheet delivery as the side trip it is |
 | write/ | the description "Send the table you just built out of Keboola" | "Send a Storage table out of Keboola": the page is reached from anywhere, and its **Where you are** already says the table is in Storage |
 
+A second commit the same day holds the additions that bring new facts to ad-hoc/, so they can be
+dropped on their own (the link retargets and the TDE wording above stay with the requested link
+fixes):
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| ad-hoc/ | "Querying public data is free up to 1 TB a month without enabling billing; past that you need to enable billing." | "free up to 1 TB a month, but the storage bucket below needs a project with billing enabled all the same: Google's free tier needs a billing account" (Google's free-tier page). The **You need** item asks for billing too |
+| ad-hoc/ | "The following part of the tutorial will be updated soon. Please be aware that sandboxes now exist only in their legacy form" | "The following part of the tutorial still shows sandboxes, which now exist only in their legacy form", then "To follow along today, create a Python workspace instead": the promise was never kept, and the page says what to do |
+
 Nothing went to MISSING.md: no removed sentence was the only place a fact lived.

@@ -23,8 +23,8 @@ from a public BigQuery dataset and the other fetched with a library you installe
 
 <Prereqs needs={['project']}>
   <li>
-    <strong>A Google Cloud project</strong> in which you can create a service account with three
-    roles, its JSON key and a storage bucket.
+    <strong>A Google Cloud project with billing enabled,</strong> in which you can create a service
+    account with three roles, its JSON key and a storage bucket.
   </li>
   <li>
     <strong>A basic understanding of <a href="https://www.python.org/">Python</a>.</strong>
@@ -35,7 +35,9 @@ from a public BigQuery dataset and the other fetched with a library you installe
 The screenshots below were taken in 2019 and Google has redesigned the console since. Read them as
 a list of *what to create* (a service account with three roles, a JSON key, a storage bucket) and
 find each one by name in the console you have, not by matching the pictures. Google's own
-documentation is linked at each step.
+documentation is linked at each step. Google Cloud organizations created on or after 3 May 2024
+[block service account keys by default](https://docs.cloud.google.com/resource-manager/docs/manage-baseline-constraints);
+an organization policy administrator can allow them.
 
 The Keboola steps in [Exploring Data](#exploring-data) are out of date too; the note at the start
 of that section says what replaced them.
@@ -66,8 +68,9 @@ and use the **Preview** tab to see the rows.
 
 ## Using BigQuery Connector
 To work with Google BigQuery, create an account. Querying public data is
-[free up to 1 TB a month](https://cloud.google.com/bigquery/public-data) without enabling billing;
-past that you need to [enable billing](https://cloud.google.com/billing/docs/how-to/modify-project).
+[free up to 1 TB a month](https://cloud.google.com/bigquery/public-data), but the storage bucket
+below needs a project with [billing enabled](https://cloud.google.com/billing/docs/how-to/modify-project)
+all the same: Google's free tier needs a billing account.
 
 Then create a [service account](https://cloud.google.com/iam/docs/service-accounts-create) for authentication 
 of the Google BigQuery data source connector, and create a Google Cloud Storage bucket as a temporary storage for off-loading the data from BigQuery.
@@ -187,7 +190,8 @@ Once the job is finished, click on the names of the tables to inspect their cont
 ## Exploring Data
 
 :::caution
-**Important:** The following part of the tutorial will be updated soon. Please be aware that sandboxes now exist only in their legacy form and have been replaced by workspaces.
+**Important:** The following part of the tutorial still shows sandboxes, which now exist only in their legacy form and have been replaced by workspaces.
+To follow along today, create a Python [workspace](/workspace/) instead.
 :::
 
 To explore the data, go to [**Workspaces**](/workspace/).
