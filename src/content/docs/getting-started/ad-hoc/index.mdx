@@ -4,27 +4,42 @@ slug: 'getting-started/ad-hoc'
 description: "Explore arbitrary data in a Python workspace: bring in a public BigQuery dataset, plot it in a Jupyter notebook, and install your own libraries."
 redirect_from:
   - /tutorial/ad-hoc/
+next: 'Development branches'
 ---
 
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
 
-:::caution[These Google Cloud steps describe an older console]
+<PageMeta genre="How-to" guide="Going further" />
+
+A side trip from [Getting started with Keboola](/getting-started/) for exploring data in a
+notebook. You load a public dataset into Storage, work on it in Python with any code you like, and
+install the libraries you need along the way. The examples use Python; the same can be done in R.
+
+**Where you are:** you have a Keboola project and nothing else from the guide; this page brings its
+own data.
+**When you finish:** US and EU unemployment rates plotted in a Jupyter notebook, one series loaded
+from a public BigQuery dataset and the other fetched with a library you installed yourself.
+
+<Prereqs needs={['project']}>
+  <li>
+    <strong>A Google Cloud project</strong> in which you can create a service account with three
+    roles, its JSON key and a storage bucket.
+  </li>
+  <li>
+    <strong>A basic understanding of <a href="https://www.python.org/">Python</a>.</strong>
+  </li>
+</Prereqs>
+
+:::caution[Parts of this page are out of date]
 The screenshots below were taken in 2019 and Google has redesigned the console since. Read them as
 a list of *what to create* (a service account with three roles, a JSON key, a storage bucket) and
 find each one by name in the console you have, not by matching the pictures. Google's own
 documentation is linked at each step.
+
+The Keboola steps in [Exploring Data](#exploring-data) are out of date too; the note at the start
+of that section says what replaced them.
 :::
-
-After you have loaded your tables, either [from a URL](/getting-started/load/) or
-[using a data source connector](/getting-started/load/database/), [manipulated the data](/getting-started/transform/) in SQL,
-written it [into Google Sheets](/getting-started/write/), and
-set everything to run [automatically](/getting-started/automate/), let's take a look at some additional Keboola 
-features related to doing ad-hoc analysis.
-
-This part of the tutorial shows how to work with arbitrary data in Python
-in a completely unrestricted way. Although our examples use the Python language,
-the very same can be achieved using R.
-
-Before you start, you should have a basic understanding of the [Python language](https://www.python.org/).
 
 
 
@@ -33,11 +48,11 @@ Let's say you want to experiment with the US unemployment data. It is provided b
 [U.S. Bureau of Labor Statistics](https://www.bls.gov/cps/tables.htm) (BLS), and the dataset [A-10](https://www.bls.gov/web/empsit/cpseea10.htm)
 contains unemployment rates by month.
 
-<!-- Both bls.gov links opened in a real browser on 2026-08-19 and are live: /cps/tables.htm serves
+{/* Both bls.gov links opened in a real browser on 2026-08-19 and are live: /cps/tables.htm serves
 "CPS Tables", /web/empsit/cpseea10.htm serves "A-10. Unemployment rates by age, sex, and marital
 status, seasonally adjusted". They answer 403 to curl from the same host even with full browser
 headers, so BLS filters on request fingerprint, not on IP — a 403 on these two from any link
-checker running here is a false positive, not a dead link. -->
+checker running here is a false positive, not a dead link. */}
 
 The easiest way to access the data is via
 [Google Public Data](https://cloud.google.com/bigquery/public-data/), which contains a dataset called
@@ -118,12 +133,12 @@ Then set the service account key:
 
 Open the downloaded key you have created above in a text editor, copy & paste it in the input field, click **Submit** and then **Save**.
 
-<!-- The screenshot that stood here (ex-bigquery-6.png, committed 2019-04-11) showed a real Google
+{/* The screenshot that stood here (ex-bigquery-6.png, committed 2019-04-11) showed a real Google
 service-account JSON: project_id, private_key_id, the PEM private_key body and client_email. It was
 deleted on 2026-09-22 rather than masked, because its only content was a pasted secret and the
 sentence above already says what to paste. The key itself was confirmed inactive on 2026-08-27 and
 that escalation is closed; do not re-raise it. The masked twin of this file still exists at the old
-path in PR #1100. See DECISIONS.md. -->
+path in PR #1100. See DECISIONS.md. */}
 
 Fill the bucket you have created above:
 
@@ -274,25 +289,26 @@ plt.show()
 
 ## Wrap Up
 You have just learnt to do a completely ad-hoc analysis of various data sets. If you need to run the above code regularly,
-simply copy&paste it into a [Transformation](/getting-started/transform/).
+simply copy&paste it into a [Python transformation](/transformations/python-plain/).
 
 The above tutorial is done in the [Python language](https://www.python.org/) using the
 [Jupyter Notebook](https://jupyter.org/). The same can be done in the
 [R language](https://www.r-project.org/): [Workspaces](/workspace/) covers which environment each
 scripting language gets, along with the disk and memory limits.
 
-<!-- The R half of this pairing used to name RStudio. /workspace/ is the page that owns workspace
+{/* The R half of this pairing used to name RStudio. /workspace/ is the page that owns workspace
 types and it says scripting languages get JupyterLab with the matching kernel, naming no separate
 R environment, so this sentence no longer names a tool and points there instead. "rstudio" survives
 elsewhere only as a sandbox-type enum value, in _data/telemetry_tables.yml and on the rendered
 telemetry-data page, which is a data dictionary rather than a statement about what the UI offers.
 Whether RStudio is retired outright is still the workspace owner's call; this page no longer
-depends on the answer. -->
+depends on the answer. */}
 
-## Final Note
-This is the end of our stroll around Keboola. On our walk, we missed quite a few things:
-Applications, Python and R transformations, Snowflake features, to name a few.
-However, teaching you everything was not really the point of this tutorial.
-We wanted to show you how Keboola can help in connecting different systems together.
+## Going further
 
-[Return to the beginning](/getting-started/) or [contact us](/management/support/).
+- The other side trips are on [Going further](/getting-started/going-further/), with what to read
+  next, sorted by what you want to do.
+- [Getting started with Keboola](/getting-started/) is the guide itself, which ends with a
+  scheduled pipeline and an app in your project.
+- [Keboola Support](/management/support/) says how to get help, starting with the **Support**
+  form behind the button at the bottom right of your project.

@@ -1590,6 +1590,67 @@ reference sections in a separate 'going further' tier, never as chapters of the 
 that rule meant are the ways of driving Keboola (CLI, MCP, Kai's prompt). None of the new titles
 names one; the product words in them (Storage, app, flow, Jobs) are what the reader gets.
 
+
+## 2026-10-02: The leftovers outside the retitle
+
+**Asked by:** Nikita, 2 Oct, after a guide test found pages outside the retitle that still
+described the guide in its old order or linked it by old names.
+
+The home page's summary follows the hub now: load data into Storage, transform it with SQL into one
+table, ask Kai about that table, build an app on it, schedule a flow that rebuilds the table every
+week. It used to list "deliver the result", which has been a side trip since 2 September, and
+named neither Kai nor the app. Kai is explained where it is first named ("the AI assistant inside
+your Keboola project"), because this docs site has a Kai of its own, a chat about the docs behind
+the header's Kai button and the Ask Kai drawer: the same mix-up that dropped "Ask Kai about your
+data" as a title (entry above). The 30 minutes are the hub's, on the hub's condition (the prompt
+each step gives you for Kai) and with its "plus sign-up and reading". overview/'s one-line pointer
+says the same outcome and time. The home page's seven dashes are commas and colons now.
+
+ad-hoc/ opens and ends as a side trip, in the form Load from Google Sheets and Load from a database
+use: a line saying where it branches off, **Where you are** and **When you finish**, a **You need**
+box, and a closing **Going further** list. It used to open with the old order (load, transform,
+Google Sheets, automate) and close the whole tutorial ("the end of our stroll around Keboola"). The
+box needs MDX, so the page is `index.mdx` now, with the `PageMeta` line the other side trips carry
+(How-to, Going further) and its three authoring comments in MDX form. The caution box, under the
+**You need** box and titled "Parts of this page are out of date", points to the note at the start
+of Exploring Data instead of repeating that sandboxes are legacy. The steps between are as they
+were, and whether the page stays at all is still the RStudio row in the table below.
+
+Link texts name the page they open. The five database connector pages say Load from a database,
+and branches/ lists its parts by their titles. TDE Exporter's link goes to Tableau TDE instead of
+the Google Sheets side trip that its old `/tutorial/write/` target redirects to, and the sentence
+now says the exporter is that connector in the UI and can also run on its own through the API: the
+Storage API index lists `tde-exporter` itself as Tableau TDE, a writer. ad-hoc's Wrap Up links
+Python Transformation instead of the SQL page, and going-further's `variables` link skips its
+redirect stub. Development branches is sentence case in its page title and first line, as it
+already was in the sidebar, on the hub and on Going further. The footer links next to it said
+Overview, the sidebar's label for a group's landing page, so ad-hoc/'s `next:` and
+prepare-tables/'s `prev:` name the page, as check/'s and write/'s do (entry above), and project/'s
+`prev:` names the hub the same way. Inside the guide, only merge-to-production's Next, which leaves
+for `/kai/`, still says Overview.
+
+The same kinds, found by the guide test and fixed here: going-further/ loses "the arc" and "this
+tier", and two lines that each assumed one path through the guide, "Everything you just did by
+clicking" (the UI) and "the one you have been using" (the Prompt tabs); check/ lists the step
+pages before the spreadsheet side trip; write/'s description no longer assumes the reader just
+built the table.
+
+**Not changed in this pass, for Nikita:** generic "Getting Started tutorial" or "tutorial" links
+that land in the guide (flows-legacy, transformations, mappings, storage, storage/buckets, the sqldb
+connector, `components/branches/`); the BigQuery connector's "Getting Started Tutorial", which opens
+ad-hoc/, and the storage connectors page's "Tutorial" and the extractors index's "sample data source
+connector", which open Load from Google Sheets; "new R transformation" on
+`transformations/r-plain/plots`, which opens the SQL page; "Keboola workspace manipulation" on the
+MCP page; "manually from any configuration" on `management/jobs/`, which opens the hub; the home
+page's "Data governance", which opens account administration; "the **Tableau** connector" on the
+Tableau TDE page; app/'s prompt "Build a data app", which ran as written and would need a rerun;
+footers labelled Overview at the edges of sidebar sections (overview/api/ into the hub,
+merge-to-production into `/kai/`): the built site has 68 "Next: Overview" and 67 "Previous:
+Overview", so they want one fix in `convert-nav.mjs` or the `Footer.astro` override rather than
+frontmatter page by page; merge-to-production's "You Did It! 🎉" ending; the title case of
+`components/branches/` ("Development Branches") and of the home page's headings; the dashes in
+overview/'s other paragraphs.
+
 ---
 
 ## Open — carried as VERIFY(owner) flags in the pages
@@ -1606,7 +1667,7 @@ still block rebuild work.
 | ~~Can Kai set a schedule and notifications?~~ | half closed 2026-09-09 | **Schedule: yes.** Asked for "every day at 06:00 Europe/Prague", Kai created a Scheduler configuration (`0 6 * * *`, Europe/Prague, enabled) for the flow it had just built. **Notifications: not tested**; the page keeps them manual. |
 | ~~Has the consolidated one-prompt block ever run end to end?~~ | closed 2026-09-02 | **Yes** — run live in project 264: 14 minutes, 11 approvals, 10,000 rows in and out. The block now lives on `ask/`. Transcript in PR #1110. |
 | Is the monthly Kai allowance per project or per organization? | `index.mdx` (Get a project) | the pricing guardrail wording |
-| Is RStudio still an offered workspace type? | `ad-hoc/index.md` | the ad-hoc page's fate |
+| Is RStudio still an offered workspace type? | `ad-hoc/index.mdx` | the ad-hoc page's fate |
 | Does the Kai **Add Task** menu offer three items or four (is **Build with Kai** in it)? | `automate/index.mdx` | the Kai tab's first instruction. Live check 2026-09-02 confirmed **Modify with Kai** in the flow header; the menu itself did not open to automation |
 | Does `/kai/use-cases/#complex-workflows` cover assembling *existing* configurations into a flow? | `automate/index.mdx` | whether that citation stands — the page documents building pipelines from scratch |
 | ~~Does Kai really build transformations on read-only input, and does that need bucket-ID-qualified table names?~~ | closed 2026-09-08 | **Yes, and yes.** The live transformation in project 264 has an empty input mapping and reads `"KBC_EUW3_264"."in.c-keboola-ex-http-01m20b1fwj3px5x6bzzckeb81a"."sales"` by full name — see the 2026-09-08 entry above. |

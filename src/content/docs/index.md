@@ -3,7 +3,7 @@ title: Keboola User Documentation
 slug: ''
 ---
 
-Welcome to the Keboola documentation—a comprehensive resource offering step-by-step guidance and reference information to help users
+Welcome to the Keboola documentation, a comprehensive resource offering step-by-step guidance and reference information to help users
 seamlessly navigate the platform. Whether you're a newcomer or an experienced user, this documentation is your go-to companion for mastering
 the ins and outs of Keboola.
 
@@ -11,14 +11,17 @@ the ins and outs of Keboola.
 
 ## Where to Start
 
-**New to Keboola?** Work through [Getting Started](/getting-started/). In about 30 minutes you
-build a real pipeline — load data, transform it with SQL, deliver the result, and put it on a
-schedule. It starts by [getting you a project](/getting-started/project/), free.
+**New to Keboola?** Work through [Getting Started](/getting-started/). You load data into Storage,
+transform it with SQL into one table, ask Kai (the AI assistant inside your Keboola project) about
+that table, build an app on it, and schedule a flow that rebuilds the table every week. Each of
+those steps has a prompt to paste into Kai; if you use them, the guide takes about 30 minutes,
+plus sign-up and reading. It starts with [Create or join a project](/getting-started/project/),
+and a free project is enough.
 
 Prefer to understand the pieces first? The [platform overview](/overview/) explains what the
 components are, how Storage works, and what a stack is.
 
-**Rolling Keboola out to a team?** Start with [Platform Onboarding](/overview/onboarding/) —
+**Rolling Keboola out to a team?** Start with [Platform Onboarding](/overview/onboarding/):
 usage blueprint, project architecture, data model, and governance.
 
 **Working with an AI assistant?** [Kai](/kai/) is built into the project, the
@@ -43,11 +46,11 @@ or use the [support form](/management/support/) inside your project.
 - [Release notes](https://changelog.keboola.com/)
 
 ## Resources
-- [keboolastatus.com](https://keboolastatus.com/) – get Keboola status updates (we recommend subscribing to the feed)
-- [www.keboola.com](https://www.keboola.com/) – our main web page
-- [blog.keboola.com](https://blog.keboola.com/) – something to read for data analysts
-- [500.keboola.com](https://500.keboola.com/) – something to read for tech geeks
-- [developers.keboola.com](https://developers.keboola.com) – documentation for extending or integrating Keboola
+- [keboolastatus.com](https://keboolastatus.com/): get Keboola status updates (we recommend subscribing to the feed)
+- [www.keboola.com](https://www.keboola.com/): our main web page
+- [blog.keboola.com](https://blog.keboola.com/): something to read for data analysts
+- [500.keboola.com](https://500.keboola.com/): something to read for tech geeks
+- [developers.keboola.com](https://developers.keboola.com): documentation for extending or integrating Keboola
 
 ## We Highly Appreciate Your Input!
 Feel free to use the support form within your Keboola project to share feedback, request new features or components,

@@ -241,3 +241,38 @@ Nikita's decision). What went with it:
 | check/ | "in an older project our first run failed at the app phase with `staffing_outlook` already rebuilt" | no app phase; the bullet now gives the transformation failing after the loads |
 | automate/ | the cost box's "between 2½ and 6 minutes a run, depending mostly on how long they waited to start" and "10 to 30 minutes a month" | extend/jobs/ bills only `standard` jobs and not waiting time: about 2½ and 4 minutes, 10 to 20 a month |
 | app/ | CLI tab: the configuration ID as "the one a flow task takes", and "A flow task that deploys the app makes the same call, so a broken app would turn a scheduled run red" | the guide's flow has no app task any more |
+
+## 2026-10-02: Leftovers outside the retitle
+
+After the retitle (DECISIONS.md, same date) a guide test found pages that still described the guide
+in its old order or linked it by old names. What went:
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| home (`index.md`) | "load data, transform it with SQL, deliver the result, and put it on a schedule. It starts by getting you a project, free." | the hub's order, with Kai and the app: load data into Storage, transform it with SQL into one table, ask Kai about that table, build an app on it, schedule a flow that rebuilds the table every week. Delivery is the Send a table to Google Sheets side trip, listed on the hub and on Going further; "free" is now "a free project is enough" |
+| ad-hoc/ | the opening "After you have loaded your tables, either from a URL or using a data source connector, manipulated the data in SQL, written it into Google Sheets, and set everything to run automatically, let's take a look at some additional Keboola features related to doing ad-hoc analysis." | dropped: the page uses none of those steps, and the hub gives the guide's order. The new opening says where the side trip branches off and what it does |
+| ad-hoc/ | "This part of the tutorial shows how to work with arbitrary data in Python in a completely unrestricted way. Although our examples use the Python language, the very same can be achieved using R." and "Before you start, you should have a basic understanding of the Python language." | the new opening ("any code you like", "The examples use Python; the same can be done in R") and the **You need** box, whose last item is a basic understanding of Python |
+| ad-hoc/ | `## Final Note`: "This is the end of our stroll around Keboola. On our walk, we missed quite a few things: Applications, Python and R transformations, Snowflake features, to name a few. However, teaching you everything was not really the point of this tutorial. We wanted to show you how Keboola can help in connecting different systems together." | dropped as the end of a tutorial the page no longer ends. What it listed has homes: Applications, the component category the 2018 text meant, is its own section under Components (`/components/applications/`); the Wrap Up links Python Transformation and Workspaces for R; Going further's **Pick your next thing** covers SQL, Python, R and dbt transformations. The hub says what the guide is for |
+| ad-hoc/ | the links "Return to the beginning" and "contact us" | the new **Going further** list, as Getting started with Keboola and Keboola Support |
+| ad-hoc/ | the caution box as the page's first block, titled "These Google Cloud steps describe an older console" | under the opening and the **You need** box, titled "Parts of this page are out of date": the same Google paragraph, then a line pointing to the note at the start of Exploring Data, which already says that sandboxes are legacy |
+| ad-hoc/ | `index.md`, with three `<!-- -->` authoring comments | `index.mdx`, for the `PageMeta` line and the `Prereqs` box the other side trips have; the comments are `{/* */}` with the same text |
+| going-further/ | "Two worked examples sit in this tier"; "what it does beyond the arc" | "Two of the side trips above are worked examples"; "beyond this guide" |
+| `components/extractors/database/` index, mysql, ms-sql, oracle, postgresql | the link texts "Tutorial - Loading Data with Database Extractor", "Tutorial - Loading Data from Database" and "Loading Data with Database data source connector" | the target's title, Load from a database |
+| storage/api/tde-exporter/ | "This component is normally a part of the [Tableau Writer](/getting-started/write/), but it can also be used as a standalone component.", whose link opened the Google Sheets side trip (its old target `/tutorial/write/` redirects there) | "In the UI, this component is the [Tableau TDE](/components/writers/bi-tools/tableau/) data destination connector. Through the API you can also run it on its own, with a stored configuration or a custom one sent in the request.": the Storage API index lists `tde-exporter` itself as Tableau TDE, a writer, and the page's own Running the Component section covers both kinds of configuration. In the next paragraph, `the *Storage* --- *File uploads* section` is "the *Files* section of *Storage*", the name `storage/files/` gives it |
+| ad-hoc/ | "[Transformation](/getting-started/transform/)" in the Wrap Up, the SQL page, for Python code | "[Python transformation](/transformations/python-plain/)" |
+| branches/ | the title "Development Branches"; the footers "Next: Overview" on ad-hoc/ and "Previous: Overview" on prepare-tables/, both opening that page | "Development branches", as the sidebar, the hub and Going further have it; the two footers name the page through `next:` and `prev:` in their frontmatter |
+| branches/ | "The feature Development Branches allows you to modify"; the link texts "Preparing table manipulating configurations", "Preparing file manipulating configurations", "Working with tables in a branch", "Working with files in a branch" and "Project diff" | "Development branches let you modify"; each link now says its page's title (Prepare the table configurations, Prepare the file configurations, Work with tables in a branch, Work with files in a branch, Review the project diff) |
+
+The fact-checker, guide-tester and checker rounds the same day added these, all of the same kinds:
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| project/ | the footer "Previous: Overview", which opens the hub | "Previous: Getting started with Keboola", through `prev:` in its frontmatter |
+| going-further/ | "Everything you just did by clicking can be done by an AI assistant instead." | "An AI assistant can carry out most of this guide's steps for you", because the guide is prompt first and the hub names what no assistant can do (a signup form, a Google consent screen, a branch merge) |
+| going-further/ | "the one you have been using through this guide's **Prompt** tabs" | "the one this guide's **Prompt** tabs use", which holds for a reader on the UI or CLI tabs too |
+| going-further/ | the `variables` link to `/transformations/variables/`, a redirect stub | `/components/variables/`, the page the stub forwards to |
+| overview/ | "a running pipeline in about 30 minutes" | "a scheduled pipeline and an app, in about 30 minutes with Kai, plus sign-up and reading", the hub's outcome and time |
+| check/ | "delivery on Send a table to Google Sheets, and apps on Build an app", in the old order | apps first, then the spreadsheet delivery as the side trip it is |
+| write/ | the description "Send the table you just built out of Keboola" | "Send a Storage table out of Keboola": the page is reached from anywhere, and its **Where you are** already says the table is in Storage |
+
+Nothing went to MISSING.md: no removed sentence was the only place a fact lived.
