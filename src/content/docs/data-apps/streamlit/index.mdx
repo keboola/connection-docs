@@ -35,23 +35,25 @@ Ready to move an app to the current stack? See [Migrate a Streamlit app to Pytho
 
 ### Create your first Streamlit app
 
-1. **Navigate to Apps** in your Keboola project.
-2. Click the **+** button to create a new app.
-3. Enter a **custom prefix** for your app's URL.
-4. Select **Streamlit** as the technology stack.
-5. Choose a deployment method (Code or Git repository).
+1. In your Keboola project, open **Apps** and click **Create app**. In a project with no apps yet, skip this click: the Apps page itself has the link from step 2.
+2. At the bottom of the page, click **Create a Streamlit app**. On a single-tenant stack the page may still show one card per app type instead; click **Create Streamlit app** on the **Streamlit App** card. Where Streamlit is the only option, **Create app** opens the dialog straight away. {/* VERIFY(Jordan): the single-tenant layout and the Streamlit-only stack are known from the UI code of 2 Oct only. */}
+3. Replace the prefilled **New App** with a name; a description and a folder are optional. Click **Create app**, and the app's page opens.
+4. On the **Overview** tab, the **App access** card shows the app's address. The URL prefix comes from the name. To change it, edit **App URL** (up to 50 characters) and click **Save**; the new address takes effect with the next deploy.
 
-![Custom URL prefix](/data-apps/streamlit/custom-data-app-url.png)
+   ![The App access card on the Overview tab: App URL with the editable prefix, the fixed part of the address and a copy button, then the collapsed Authentication section](/data-apps/streamlit/custom-data-app-url.png)
+
+5. In the **Code Source** card, choose a deployment method, **Git Repository** or **Code**, and set it up as [Deployment methods](#deployment-methods) describes.
+6. Click **Deploy** in the app's header, then **Deploy** in the wizard. A new app asks visitors for a password, which the **App access** card shows after the first deploy. [Authentication](/data-apps/authentication/) covers the other options.
 
 ### Deployment methods
 
-There are two ways to deploy a Streamlit app: Code and Git repository.
+There are two ways to deploy a Streamlit app: Code and Git repository. They exclude each other: saving Git settings removes the app's code, packages and Freeze Version setting, and saving code or packages removes the Git settings.
 
 #### Code
 
-For simple use cases where your Streamlit code fits on one page, paste the code directly into a text area. This deployment type is ideal for simple apps or for testing.
+For simple use cases where your Streamlit code fits on one page, keep the code in the app itself. In the **Code Source** card, select **Code**, click **Add Code**, paste the code into the editor, click **Save** and close the editor. Once the app has code, the card shows a preview; expand the card if it's collapsed, then click the preview to edit the code. This deployment type is ideal for simple apps or for testing.
 
-![Code deployment](/data-apps/streamlit/development-type-code.png)
+![The Code Source card with Code selected: the Git Repository and Code options, and a preview of the app's code below them](/data-apps/streamlit/development-type-code.png)
 
 For example, paste [Streamlit's "Uber pickups in NYC" tutorial app](https://docs.streamlit.io/library/get-started/create-an-app#lets-put-it-all-together):
 
@@ -86,15 +88,15 @@ st.map(data)
 
 You can also override Streamlit defaults like file upload size or browser settings without committing a `.streamlit/config.toml` file - see [Streamlit configuration](#streamlit-configuration) below.
 
-To use additional Python packages that are not already included in the [base image](#base-image), enter them into the `Packages` field.
+To use additional Python packages that are not already included in the [base image](#base-image), add them in the **Packages** card below **Code Source**: type a package name and pick the **Add package** entry for it. Each change is saved right away. The card is there only while **Code** is selected. To add the packages from a `requirements.txt` file, click **Upload File**; see [Lock package versions](/data-apps/streamlit/lock-version/#1-create-and-upload-requirementstxt).
 
-![Packages](/data-apps/streamlit/packages.png)
+![The Packages card: Upload File, the Freeze Version switch, and the package field with the Default Packages chip and an Add packages placeholder](/data-apps/streamlit/packages.png)
 
 #### Git repository
 
-If you have a complex application, push your app sources into GitHub and link the repository in this section. Provide the Project URL, choose the right branch, and finally, select your main entrypoint file.
+If you have a complex application, push your app sources into GitHub and link the repository: in the **Code Source** card, select **Git Repository**. Enter the **Project URL**, click **Load branches** and choose the branch, then select your main entrypoint file in **Main File Path** (default `streamlit_app.py`) and click **Save**.
 
-![Git repository](/data-apps/streamlit/git-repository-public.png)
+![The Code Source card with Git Repository selected: an empty Project URL field, the Private switch off, and Load branches](/data-apps/streamlit/git-repository-public.png)
 
 If you are using a private repository, you have two options to authenticate:
 - With your GitHub username and personal access token
@@ -102,13 +104,13 @@ If you are using a private repository, you have two options to authenticate:
 
 Follow these steps to authenticate using your GitHub username and personal access token:
 
-1. Generate a personal access token on GitHub by going to your GitHub account settings, selecting **Developer settings > Personal access tokens**, and clicking **Generate new token**. Ensure the token has the necessary permissions to access the repository.
-2. In Keboola, navigate to the **App Repository** in your app configuration, check the `Private` option, and enter your GitHub username and the personal access token you generated in step 1.
-3. Click **Save** to authenticate with the private repository.
+1. Generate a personal access token on GitHub by going to your GitHub account settings, selecting **Developer settings > Personal access tokens**, and clicking **Generate new token**. A classic token needs the `repo` scope; the **How to set up GitHub authentication** note, which appears once you turn on **Private**, walks you through it.
+2. In Keboola, select **Git Repository** in the app's **Code Source** card, enter the **Project URL**, turn on **Private**, and enter your GitHub username and the personal access token you generated in step 1 in **Username** and **Access Token**.
+3. Click **Load branches**, choose the branch and the main file, and click **Save**.
 
-To authenticate using your SSH private key, follow the instructions in the [GitHub manual](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent). After generating your key, enter your SSH private key into the appropriate configuration field and click **Save**.
+To authenticate using your SSH private key, follow the instructions in the [GitHub manual](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent). Add the public key to GitHub, either to your account or as a deploy key of the repository. The form has no passphrase field, so create the key without a passphrase. Then, in the **Code Source** card, enter the **Project URL**, turn on **Private**, paste the private key into **SSH Private Key**, click **Load branches**, choose the branch and the main file, and click **Save**. If you also fill in **Username** and **Access Token**, the SSH key wins and they are ignored. {/* VERIFY(Jordan): which Project URL form an SSH key needs (https:// or git@github.com:); the UI passes both through, and the Custom Python component uses a key only with git@ or ssh:// URLs. */}
 
-![Private repository SSH](/data-apps/streamlit/git-repository-private-ssh.png)
+![The Code Source card with Git Repository selected and Private on: the How to set up GitHub authentication note, the Username and Access Token fields, SSH Private Key, and Load branches](/data-apps/streamlit/git-repository-private-ssh.png)
 
 ## Secrets
 
@@ -172,7 +174,7 @@ For example: `Python 3.13 + Streamlit 1.51` prefixed by the image release number
 
 ### Pre-installed packages
 
-All backend versions ship with the same set of pre-installed packages regardless of the Python variant. These are available immediately without adding them to the `Packages` field or `requirements.txt`:
+All backend versions ship with the same set of pre-installed packages regardless of the Python variant. These are available immediately without adding them to the **Packages** card or `requirements.txt`:
 
 - `streamlit`
 - `pandas`
@@ -190,12 +192,12 @@ All backend versions ship with the same set of pre-installed packages regardless
 - `streamlit_authenticator` (pinned to 0.3.1)
 - `toml`
 
-To add packages beyond this list, specify them in the **Packages** field (for code deployment) or in a `requirements.txt` file (for Git repository deployment).
+To add packages beyond this list, specify them in the **Packages** card (for code deployment) or in a `requirements.txt` file (for Git repository deployment).
 
 ## Theming
-To configure theming in your app, you can select from predefined themes or create a custom theme. Predefined themes include `Keboola`, `Light Red`, `Light Purple`, `Light Blue`, `Dark Green`, `Dark Amber`, and `Dark Orange`. Each theme has a specified primary color, background color, secondary background color, text color, and font. Users choosing `Custom` can manually set these values.
+To configure theming in your app, open the app's **Advanced Settings** tab, pick a palette in the **Theme** card's **Color Palette** list and click **Save**. You can select from predefined themes or create a custom theme. Predefined themes include `Keboola`, `Light Red`, `Light Purple`, `Light Blue`, `Dark Green`, `Dark Amber`, and `Dark Orange`. Each theme has a specified primary color, background color, secondary background color, text color, and font. A Streamlit app created in the UI starts with `Keboola`. `Streamlit Default` sets no theme, so the app uses Streamlit's own, or the `[theme]` from your repository's `.streamlit/config.toml`. Users choosing `Custom` can manually set these values.
 
-![Predefined themes](/data-apps/streamlit/theming-predefined.png)
+![The Theme card on the Advanced Settings tab with the Color Palette list open: Keboola (selected), Streamlit Default, Light Red, Light Purple, Light Blue, Dark Green, Dark Amber, Dark Orange and Custom](/data-apps/streamlit/theming-predefined.png)
 
 For `Custom`, users can select colors using the color pickers and choose the desired font from a list. For the exact color values of each predefined theme, see the [predefined theme reference](#predefined-theme-reference) at the bottom of this page.
 
@@ -249,7 +251,7 @@ gatherUsageStats = false
 > **Note on theming:** the **Theming** UI reads and rewrites the same `config.toml` field. Non-theme sections you set here (e.g. `[server]`, `[browser]`) are preserved when you save changes through the Theming UI. However, the Theming UI overwrites the `[theme]` section on save, so prefer the Theming UI when a value is available there - and use this raw JSON path for theme keys it doesn't expose.
 
 ## Base image
-When the app is deployed, the code you provide is injected into the Streamlit base Docker image. You select a **backend version** when deploying; each version defines the Python version, Streamlit version, and a set of pre-installed packages you can use without adding them to the `Packages` field.
+When the app is deployed, the code you provide is injected into the Streamlit base Docker image. You select a **backend version** when deploying; each version defines the Python version, Streamlit version, and a set of pre-installed packages you can use without adding them to the **Packages** card.
 
 For the list of backend versions, supported Python versions, and the full pre-installed package list, see [Backend versions](#backend-versions) below.
 

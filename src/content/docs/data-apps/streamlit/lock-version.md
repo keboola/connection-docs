@@ -47,18 +47,25 @@ When your app is ready for deployment, you have two options to create your requi
 - **Manual creation:** Write the requirements.txt file manually, specifying exact versions for each package
 - **Using pip freeze:** Generate the file automatically using `pip freeze > requirements.txt` in your local environment
 
-You can then upload this file directly through the Keboola UI:
+You can then upload this file through the Keboola UI. On the app's "Overview" tab, click "Upload File" in the "Packages" card (the card shows while "Code" is selected in "Code Source"), then drag the file into the dialog or click "Select File". The dialog takes a `.txt` file of up to 1 MB:
 
-![Upload Requirements](/data-apps/streamlit/lock-upload-requirements.png)
+![The Upload requirements.txt File dialog: a drop zone with Select File and a 1 MB limit, and a Save Packages button that stays disabled until you pick a file](/data-apps/streamlit/lock-upload-requirements.png)
 
-You can also update requirements.txt in the UI:
+Once you pick the file, the dialog shows its content under "Uploaded Packages", where you can still edit it, and asks how to combine it with the packages the app already has:
 
-![Update Requirements](/data-apps/streamlit/lock-update-requirements.png)
+- "Replace", the default, makes the file's packages the app's only packages.
+- "Update" adds the file's packages and keeps the app's other packages. For a package in both, the file's line wins.
+
+![The same dialog after picking requirements.txt: Merge Strategy with Replace selected, the file's three pinned packages under Uploaded Packages, and Save Packages](/data-apps/streamlit/lock-update-requirements.png)
+
+Click "Save Packages" to put them in the "Packages" card.
 
 **Important notes:**
 - If a package has a specific version defined, that exact version will be installed
 - If no version is specified, the latest version will be installed
-- You can edit the requirements.txt content directly in the UI before uploading if needed
+- "Save Packages" skips comments, option lines such as `-r requirements.in`, and `name @ url` references
+- It also drops every line that starts with `http` or `git+`, which includes packages such as `httpx`
+- With "Update", it drops such packages from the app's current list as well; add them back in the "Packages" card
 
 #### 2. Enable version freezing
 
