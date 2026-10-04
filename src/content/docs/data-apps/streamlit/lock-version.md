@@ -72,9 +72,9 @@ Click "Save Packages" to put them in the "Packages" card.
 After uploading your requirements.txt:
 
 1. Turn on the "Freeze Version" toggle in the "Packages" card
-2. Click "Deploy", "Redeploy" or "Start", whichever the app's header shows, then the button of the same name in the wizard, to propagate this change
+2. Click "Deploy", "Redeploy" or "Start", whichever the app's header shows, to propagate this change. "Start" starts a stopped or sleeping app right away with its saved settings. "Deploy" and "Redeploy" open a wizard; click its button of the same name.
 
-   ![The Start wizard of a stopped Streamlit app, with Deploy settings collapsed to 1.18.0 · XSmall · Sleeps after 15 minutes](/data-apps/streamlit/lock-start-data-app.png)
+   ![The Redeploy wizard of a running Streamlit app, with Deploy settings collapsed to 1.18.0 · XSmall · Sleeps after 15 minutes](/data-apps/redeploy-wizard.png)
 
 This action will:
 - Execute a pip freeze command in the app
@@ -94,9 +94,9 @@ To update the requirements for your app:
 
    ![The Redeploy wizard with Deploy settings expanded: Backend version, Backend size, Inactivity timeout and the Update packages dependencies switch (off)](/data-apps/streamlit/lock-update-dependencies.png)
 
-3. Click the wizard's "Redeploy" or "Start" button
+3. Click the wizard's "Redeploy" button
 
-If the toggle isn't there, "Freeze Version" is off or the app hasn't started with it yet. Turn it on in the "Packages" card, click "Deploy", "Redeploy" or "Start" once as in [Enable version freezing](#2-enable-version-freezing). When the app is running, reload the page and open the wizard again.
+"Start" opens no wizard, so the toggle is only in the "Redeploy" wizard. If the toggle isn't there, "Freeze Version" is off or the app hasn't started with it yet. Turn it on in the "Packages" card, click "Deploy", "Redeploy" or "Start" once as in [Enable version freezing](#2-enable-version-freezing). When the app is running, reload the page and click "Redeploy" again.
 
 When this option is enabled:
 - All package dependencies will be updated to their latest versions (if no version is explicitly defined)
