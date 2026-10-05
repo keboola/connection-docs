@@ -15,21 +15,9 @@ Parallelism defines the **maximum number of row jobs that may run at the same ti
 
 **Parallelism is an upper limit, not a guarantee.** The actual number of concurrently running jobs may be lower than your configured value. Jobs that cannot start immediately are placed into a **waiting** state — this is normal behavior, not an error.
 
-The default and minimum value is **1**: rows run one after another, each in its own job. The former **Parallel jobs: Off** option was removed in June 2026; see the [changelog announcement](https://changelog.keboola.com/parallelism-enabled-by-default-across-all-stacks/).
+The default and minimum value is **1**: rows run one after another, each in its own job.
 
 **Example:** A configuration has five rows and parallelism set to 2. The rows are processed in three consecutive sets — (2 + 2 + 1) — with the jobs in each set running in parallel.
-
-## One Job per Row
-
-Since June 2026, every configuration row runs as its own job, even at parallelism 1. Before that, all rows of a configuration ran inside a single job.
-
-**What you get:**
-- **A failing row no longer stops the rest of the run.** The remaining rows still run, and the job summary lists every row that failed with its error, not just the first one.
-- **Each row is visible on its own.** Every row is a separate job you can open, inspect, and retry.
-
-**What it costs:**
-- Each row job adds some startup overhead. At parallelism 1, most multi-row configurations therefore run slower than they did when all rows ran in one job.
-- Raising parallelism recovers that time. A value of around **3 to 4** typically brings a configuration back to its previous runtime. Whether this costs more depends on the component; see [Job States and Billing](#job-states-and-billing).
 
 ## Why Actual Concurrency May Be Lower
 
@@ -55,10 +43,6 @@ Every job passes through the states listed on the [Jobs API](/extend/jobs/#job-s
 - Jobs in the **waiting** state are not billed at the job level. A job only consumes [credits](/management/project/limits/#project-power--time-credits) once it starts **processing**.
 - Jobs in the **processing** state are billed based on compute resources consumed.
 
-**How billing relates to parallelism:**
-- **Data destination connectors and most apps** are billed on data volume, not runtime (see [time credits](/management/project/limits/#project-power--time-credits)). Raising parallelism makes them faster without increasing cost.
-- **Data source connectors** are billed on active runtime. The per-row startup overhead shows up in credits, and each parallel row job is billed separately, so raising parallelism to get the runtime back also increases credit consumption. For large configurations, contact [Keboola Support](/management/support/) before changing it.
-
 **Important — container runtime billing:** Some components run inside a container that orchestrates multiple child jobs. In these cases, the parent container may continue running and accumulating runtime costs even while individual child jobs are in the waiting state. Setting very high parallelism in a container-based component does not pause the container while jobs queue — the container remains active throughout.
 
 ## Example Scenario
@@ -78,7 +62,6 @@ If you expected exactly 10 simultaneous extractions, you may see slower-than-ant
 
 ## Best Practices
 
-- **Check configurations still on the default.** If a multi-row configuration has been slower since June 2026, it is most likely running at the default parallelism of 1. For data destination connectors and apps, raise it — it costs nothing and runs get faster. For data source connectors, raise it if you need the runtime back, but expect credit consumption to rise.
 - **Use higher parallelism only for independent workloads.** Rows that don't share state or write to the same table benefit most from parallel execution.
 - **Be careful with shared destinations.** Data destination connectors writing to the same table cause lock contention. Reducing parallelism may actually improve overall throughput in these cases.
 - **Watch out for API rate limits.** For data source connectors hitting external APIs, parallel requests can exhaust rate limits quickly. Check the API documentation for your source and choose a moderate parallelism setting.
