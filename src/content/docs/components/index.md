@@ -249,7 +249,7 @@ configuration.*
 All components (usually data source and destination connectors) that support configuration rows now have the option to set job parallelism at the configuration level.
 This means you can control the speed of an extraction or writing process and specify which scenarios you want to speed up.
 
-This setting is optional, with the default option being **Parallel jobs: Off**.
+Each row runs as its own job. The default (and minimum) parallelism is **1**, which runs the rows one after another; the former **Parallel jobs: Off** option is no longer available.
 
 **Example:** If your configuration has five rows and you set the parallelism to 2, the five jobs will be processed in three consecutive sets (2 + 2 + 1). The jobs within each set will run in parallel.
 
