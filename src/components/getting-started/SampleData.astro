@@ -17,7 +17,7 @@ import { SAMPLE_TABLES, FORECAST } from './sample.mjs';
       <li class="gs-data__card">
         <span class="gs-data__head">
           <span class="gs-data__kind" aria-hidden="true">CSV</span>
-          <a class="gs-data__name" href={t.file}><code>{t.name}</code></a>
+          <a class="gs-data__name" href={t.file} download><code>{t.name}</code></a>
         </span>
         <span class="gs-data__rows">{t.rows} rows</span>
         <span class="gs-data__what">{t.what}</span>

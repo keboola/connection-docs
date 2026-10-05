@@ -93,8 +93,9 @@ choice of stack.
 A project is a self-contained workspace with its own data storage, configurations, users and
 billing. Nothing leaks between projects unless you deliberately share it through the
 [Data Catalog](/catalog/). Each project lives on one **stack**, a full instance of Keboola in one
-cloud region; you do not pick one here, because self-serve projects are created on a fixed stack.
-The list is in the [platform overview](/overview/#stacks).
+cloud region. You do not pick one here: Free Plan projects are always created on Google Cloud
+**us-east4**, at `https://connection.us-east4.gcp.keboola.com`. The list of stacks is in the
+[platform overview](/overview/#stacks).
 
 </details>
 
@@ -175,8 +176,14 @@ address.
 <details>
 <summary>You sign in and see no project</summary>
 
-You are on the wrong stack, or your invite is still pending. Confirm the exact URL with whoever
-invited you.
+You are on the wrong stack, or your invite is still pending. The **Login** button on keboola.com
+opens a sign-in page whose stack picker starts on **AWS · United States · us-east-1**. A Free Plan
+project is under **Google Cloud · United States · us-east4**, so pick that one, or open
+`https://connection.us-east4.gcp.keboola.com` directly, and sign in with the account you signed up
+with. For a project you were invited to, confirm the exact URL with whoever invited you.
+{/* Login page read 2026-10-05 (connection.keboola.com/admin/): the picker's default is AWS United
+   States us-east-1; Google Cloud → United States → us-east4 carries the PAY AS YOU GO tag.
+   keboola.com: Try Now → us-east4 wizard, Login → connection.keboola.com. */}
 
 </details>
 
