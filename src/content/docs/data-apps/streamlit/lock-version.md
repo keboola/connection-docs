@@ -27,7 +27,7 @@ Locking package versions is essential for:
 
 Choose the deployment method that matches how you deploy your app:
 
-- **[Code deployment](#code-deployment)** — upload or create `requirements.txt` in the Keboola UI, then enable the "Freeze versions" toggle.
+- **[Code deployment](#code-deployment)** — upload or create `requirements.txt` in the Keboola UI, then enable the "Freeze Version" toggle.
 - **[Git repository deployment](#git-repository-deployment)** — set up a virtual environment, install packages, and generate `requirements.txt` with `pip freeze`.
 
 ## Code deployment
@@ -64,17 +64,19 @@ You can also update requirements.txt in the UI:
 
 After uploading your requirements.txt:
 
-1. Toggle the "Freeze versions"  option in the UI
-2. Click "Deploy", "Redeploy" or "Start", whichever the app's header shows, to propagate this change
+1. Turn on the "Freeze Version" toggle in the "Packages" card
+2. Click "Deploy", "Redeploy" or "Start", whichever the app's header shows, then the button of the same name in the wizard, to propagate this change
 
-![Freeze Version Toggle](/data-apps/streamlit/lock-freeze-version-toggle.png)
+   ![The Start wizard of a stopped Streamlit app, with Deploy settings collapsed to 1.18.0 · XSmall · Sleeps after 15 minutes](/data-apps/streamlit/lock-start-data-app.png)
 
 This action will:
 - Execute a pip freeze command in the app
 - Store the frozen dependencies in the app state
 - Use these frozen versions for future redeploys and app wake-ups
 
-![Start Data App](/data-apps/streamlit/lock-start-data-app.png)
+Once the app has started with frozen versions, the "Packages" card links to them:
+
+![The Packages card after the first start with Freeze Version on: the toggle is on, and a Click Here link opens the packages and versions from the app's requirements.txt](/data-apps/streamlit/lock-freeze-version-toggle.png)
 
 #### 3. Updating package dependencies
 
@@ -83,7 +85,11 @@ To update the requirements for your app:
 1. Click "Redeploy" in the app's header (if it shows "Start" instead, the app isn't running: click "Start" and wait until it runs)
 2. In the wizard, expand "Deploy settings" and enable the "Update packages dependencies" toggle
 
-![Update Dependencies](/data-apps/streamlit/lock-update-dependencies.png)
+   ![The Redeploy wizard with Deploy settings expanded: Backend version, Backend size, Inactivity timeout and the Update packages dependencies switch (off)](/data-apps/streamlit/lock-update-dependencies.png)
+
+3. Click the wizard's "Redeploy" or "Start" button
+
+If the toggle isn't there, "Freeze Version" is off or the app hasn't started with it yet. Turn it on in the "Packages" card, click "Deploy", "Redeploy" or "Start" once as in [Enable version freezing](#2-enable-version-freezing). When the app is running, reload the page and open the wizard again.
 
 When this option is enabled:
 - All package dependencies will be updated to their latest versions (if no version is explicitly defined)

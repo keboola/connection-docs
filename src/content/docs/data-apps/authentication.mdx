@@ -30,7 +30,7 @@ Once an app is deployed, its URL is publicly available. Protect it so only the r
 ## Authentication methods
 
 - **None (Public Access)** — the app is public to anyone with the URL. You can still add your own authorization inside the app; for Streamlit, use the [Streamlit authenticator](https://github.com/mkhorasani/Streamlit-Authenticator) ([example](https://github.com/keboola/mkt-bi-ocr/blob/master/Select_Invoices.py)).
-- **Basic (Password)** — the **default** for new apps. Keboola generates a shared password; users enter it before the app opens. Once the app is deployed, click **Open** in the header of its configuration page: the dialog has the app's address and the password, each with a copy button. When Kai builds an app, it shows the password as the last step.
+- **Basic (Password)** — the **default** for new apps. Keboola generates a shared password; users enter it before the app opens. Once the app is deployed, copy the password from the **Password** field in the **App access** card on its **Overview** tab, or click **Open** in the header of its configuration page: the dialog has the app's address and the password, each with a copy button. When Kai builds an app, it shows the password as the last step.
 - **OIDC (Custom)** — users sign in with your identity provider (Google, Microsoft Entra ID, Okta, Auth0, or any other OIDC provider). Recommended for anything beyond a quick share.
 - **GitHub** — restrict access with GitHub OAuth by organization, team, repository, or allowed users.
 - **GitLab** — restrict access with GitLab OAuth by groups, projects, or roles.
@@ -67,9 +67,9 @@ Your provider needs the app's callback URL, so start in Keboola.
 
    Either way, the value exists from the moment the app does; you don't have to deploy first.
 
-The block sits below **Authentication**:
+The block sits in the **App access** card, above **Authentication**. On an app that has never run, the card also shows a notice such as **Not deployed yet**, which you can ignore here:
 
-![The app's Overview tab: Description, Authentication, and Git Repository cards, then the App URL block, with the App Info panel on the right](/data-apps/build-in-ui-config.png)
+![A new app's Overview tab: Description, then the App access card with a Not deployed yet notice, the App URL block and Authentication set to Basic (Password), then the Git Repository card, with the App Info panel on the right](/data-apps/build-in-ui-config.png)
 
 Keep this tab open. You now have the callback URL; each app has its own, so register every app with your provider separately.
 
