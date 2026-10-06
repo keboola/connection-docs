@@ -20,7 +20,7 @@ There are two ways to do it:
 - [With an AI agent](#with-an-ai-agent): an agent on your computer reads your data, writes the code, creates the app and deploys it from one prompt.
 - [By hand](#by-hand): you write the code and create the app yourself, from a terminal with kbagent or from the Keboola UI with your own repository.
 
-To build inside Keboola instead, [Kai](/data-apps/getting-started/) does the same from the **Create App** screen, with a live preview. For what the Python/JS stack can do (frameworks, full-stack, APIs for agents), see [What are Keboola apps](/data-apps/what-are-apps/#the-stack-pythonjs).
+To build inside Keboola instead, [Kai](/data-apps/getting-started/) does the same from the **Create app** screen, with a live preview. For what the Python/JS stack can do (frameworks, full-stack, APIs for agents), see [What are Keboola apps](/data-apps/what-are-apps/#the-stack-pythonjs).
 
 <Prereqs id="before-you-start" needs={['project']} groupLabel="Depending on how you build">
   <li>
@@ -288,14 +288,14 @@ The password is on the app's page, `<Keboola URL>/admin/projects/<project-id>/da
 
 To run the app from a **Git repository** you host, develop locally, push, and connect the repository in the UI:
 
-1. In your project, create a **Python/JS app** (**Apps → + Create App → Python / JS**).
-2. On the app's configuration page, open **Git Repository** and set the **Project URL**. For a private repo, toggle **Private** and add your credentials.
-3. Pick the **branch** (**Load Branches**).
+1. In your project, create a **Python/JS app**: **Apps → Create app → Deploy from your own Git repository** (see [Create an app manually](/data-apps/getting-started/#create-an-app-manually)).
+2. On the app's configuration page, open **Git Repository** and set the **Project URL**; for a private repo, toggle **Private** and add your credentials. Skip what you already gave when you created the app.
+3. Pick the **branch** (**Load branches**) and save.
 4. Click **Deploy**. Keboola clones the repo, installs dependencies, and runs it. Push changes, then click **Redeploy** (**Start** if the app is sleeping or stopped) to ship them.
 
 ![The Python/JS app configuration page: Authentication, a Git Repository section with Project URL and Load Branches, and the App Info panel showing the Python / JS backend](/data-apps/python-js-config.png)
 
-{/* The Git Repository form has no entrypoint field (verified in the live UI, project 264, 2026-09-14); the page used to say it did. The button reads Load Branches before a repository is configured and Reload Branches after. */}
+{/* The Git Repository form has no entrypoint field (verified in the live UI, project 264, 2026-09-14); the page used to say it did. Per the UI code of 2026-10-01, the button reads Load branches until branches are loaded or a branch is saved, and Reload branches after. */}
 
 ## How development works
 
