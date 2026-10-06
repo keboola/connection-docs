@@ -177,7 +177,7 @@ The **Terminal Logs** tab provides an **almost real-time** view of the applicati
 
 Manage an app from the header and the **⋮** (More actions) menu on its page.
 
-![A stopped app's header with Open App and the ⋮ menu open over the Start button: Duplicate with Kai, Automate, Debug mode and Delete app](/data-apps/app-actions-menu.png)
+![A stopped app's header with Open and the ⋮ menu open over the Start button: Duplicate with Kai, Automate, Debug mode and Delete app](/data-apps/app-actions-menu.png)
 
 - **Deploy** — starts an app that has never run. Once the deployment job finishes, open the app with **Open**.
 - **Open** — on any app that has been deployed, opens the **Open app** dialog, whatever the app's authentication. The dialog shows the app's address with a copy button, then the hidden password with its own copy button. An app without a password gets a line saying why instead. The dialog's **Open app** button opens the app in a new tab.
