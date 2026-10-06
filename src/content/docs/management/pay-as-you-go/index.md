@@ -10,7 +10,7 @@ You can now start working with Keboola for free. Simply [sign up](https://connec
 ## Free Plan Limits
 Free Plan projects have the following limits:
 
-- **Stack**: no option to choose a stack. Read more about stacks [here](/overview/#stacks).
+- **Stack**: no option to choose a stack. Free Plan projects always live on Google Cloud **us-east4**, at `https://connection.us-east4.gcp.keboola.com`. To sign in later, open that address, or pick **Google Cloud · United States · us-east4** in the stack picker on the sign-in page; it starts on AWS us-east-1, where a Free Plan account has no project. Read more about stacks [here](/overview/#stacks).
 - **Single project:** each account is limited to one project, so it is not feasible for [multi-project architecture](/catalog/multi-project/).
 - **Data Catalog:** sharing & grouping data using the [data catalog](/catalog/) is not available. 
 - **Transformations:** are limited to SQL, Python, and R.

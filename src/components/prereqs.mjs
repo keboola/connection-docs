@@ -30,7 +30,7 @@ const KAI_WHERE =
 /** Shared "You need" items, by the key a page passes in `needs`. HTML. */
 export const SHARED = {
   project:
-    '<strong>A Keboola project.</strong> No project yet? <a href="https://connection.us-east4.gcp.keboola.com/wizard">Create a free one</a>.',
+    '<strong>A Keboola project.</strong> No project yet? <a href="https://connection.us-east4.gcp.keboola.com/wizard">Create a free one</a>. A free project lives on the Google Cloud us-east4 stack; sign in to it later at <a href="https://connection.us-east4.gcp.keboola.com">connection.us-east4.gcp.keboola.com</a>.',
   // for a page that needs Kai, listed before `kai`; no sign-up link, because
   // whether the Free Plan includes apps is still open
   projectWithKai: '<strong>A Keboola project</strong> on a stack where Kai is available.',
