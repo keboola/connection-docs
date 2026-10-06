@@ -19,7 +19,7 @@ Keboola provisions and runs the app for you — there's no server to set up.
 - **Dashboards** — track metrics, replace a BI seat for an internal view.
 - **Internal tools** — forms, approvals, and workflows that read and write back to your data.
 - **Data narratives** — scrollable, explained stories built from your data.
-- **Anything interactive** — configurators, simulators, and more.
+- **Anything interactive** — configurators, simulators, and more. [Beyond dashboards](/data-apps/#beyond-dashboards) shows three real ones, with screenshots and live links.
 - **Agent-facing services** — an app can expose an API or an MCP server so other agents and services call it, not just human visitors (a Python/JS capability).
 
 ![A Keboola Python/JS app — a Shopify Store Monitor dashboard with KPI tiles, revenue and orders charts, and product/vendor tables — running on the project's governed data](/data-apps/app-dashboard.png)
