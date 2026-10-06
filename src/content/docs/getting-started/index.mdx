@@ -20,7 +20,7 @@ questions about it in plain language; the answer becomes an app, and the pipelin
 every week. This guide does each of those once, on a small sample, so you can do them on your own
 data.
 
-<video autoplay loop muted playsinline poster="/getting-started/hub-explainer-poster.png" aria-label="How Keboola works, as four numbered dots on a line: load your data, ask Kai, Kai builds it, the app is ready. Then the app this guide builds, a grid of six cafés by seven days with three red cells, and the line: Go through the guide and try it yourself.">
+<video autoplay loop muted playsinline poster="/getting-started/hub-explainer-poster.png" aria-label="How Keboola works, as four numbered dots on a line: load your data, ask Kai, Kai builds it, the app is ready. Then the app this guide builds, a grid of six cafés by seven days with three red cells, beside the words: Want to build an app like this one? An interactive dashboard? A what-if simulator? Go through the guide and try it yourself.">
   <source src="/getting-started/hub-explainer.mp4" type="video/mp4" />
 </video>
 
@@ -89,14 +89,35 @@ each, then 2.5 s of the app and one line, and the clip fades to its empty first 
 the docs-clip rule of three seconds per caption on purpose; the step texts are in the course line
 under the clip. The card is the Free Plan grid (app/grid-preview.png, project 6375, 2026-10-01,
 three red cells), the same week as the run's other screenshots. 10.0 s, 193 KB, luma mean 229, never
-under 227; the poster is the whole line at 5.6 s. DECISIONS.md 2026-10-01. */}
+under 227; the poster is the whole line at 5.6 s. DECISIONS.md 2026-10-01.
+
+Remade 2026-10-06 for Jordan, who found the clip long. Built in Remotion
+(~/docs-ops/remotion/hub-explainer), 1280x800 at 30 fps, in the look of Keboola's design system as
+Nikita asked (@keboola/design 13: Inter, slate text, Keboola blue #2563eb on #f9fafb, a white card
+with a #e5e7eb edge). The line draws faster than the 10-01 cut, a dot every 0.67 s (Nikita wanted
+it about 1.5 times slower than a first try at 0.43 s), so the whole line is up from 3.0 to 3.9 s.
+The second slide is the old one, the guide's grid with the closing line, plus "Want to build" over
+a phrase that changes every 1.7 s: an app like this one, an interactive dashboard, a what-if
+simulator, the apps, dashboards and something interactive Jordan asked for. The last two are kinds
+from What are apps' "What you can build", and the sentence after the sample names them. The 29.6-s
+version had a changing phrase too ("Want …", 3 s each); 1.7 s breaks the docs-clip rule of three
+seconds per caption on purpose, like the dots since 10-01. Cut on the way: "an approval form" (no
+app built on 10-06 showed one) and "a data story" (four phrases left 1.2 s each). A first cut
+showed three apps Kai built in 264 that day; Nikita rejected it the same evening: one screen, the
+app this guide builds, and only the phrase changes. 10.0 s, 201 KB, luma mean 228, never under
+227, in limited range like the earlier clips (Remotion writes full range, so the encode converts).
+The video is 713 px wide in a 1280-px window, not the 800 the numbers above assumed, so canvas
+sizes shrink by 0.56: the 40-px lines read at 22 px, the closing line (26 px) at 14.5, the step
+titles (30 px) at 16.7. The poster is the whole line at 3.3 s. DECISIONS.md 2026-10-06. */}
 
 <FromTo from="you have heard of Keboola and have nothing set up." to="a scheduled pipeline and an app, in a project you created or joined." />
 
 The sample is six cafés: five files (a summer of sales, the rosters, the weather) and next week's
 forecast from a public API that needs no account. The moves are the same on your own tables. Every
 step works toward one question: **Which day next week will leave a café short-handed?** By the
-fifth page a grid answers it, and every Monday the answer is rebuilt on the new forecast.
+fifth page a grid answers it, and every Monday the answer is rebuilt on the new forecast. The grid
+is one kind of app; Kai builds interactive dashboards and what-if simulators the same way, from a
+description you write ([What you can build](/data-apps/what-are-apps/#what-you-can-build)).
 
 <Prereqs needs={[]}>
   <li>
