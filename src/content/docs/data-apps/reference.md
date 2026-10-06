@@ -21,7 +21,7 @@ Each app has its own configuration.
 | Authentication | Who can open the app — None, Basic, OIDC, GitHub, GitLab, or JumpCloud. See [Authentication](/data-apps/authentication/). |
 | Code Source | Where the app's code comes from — inline **Code** or a **Git Repository**. |
 | Backend version | The runtime image (Python version and, for Streamlit, the Streamlit version). See [Backend versions](#backend-versions). |
-| Backend size | The compute allocated to the app (for example XSmall, Small); chosen on deploy. The hourly rate in time credits depends on the size and the framework. See the [Apps rates](/management/project/limits/#apps) and [backend sizes](/management/project/limits/#apps-backend-sizes). |
+| Backend size | The compute allocated to the app (for example XSmall, Small); chosen on deploy. The hourly rate in time credits depends on the size and the framework. See [Apps pricing](/management/project/limits/#apps-pricing) and the [backend sizes](/management/project/limits/#apps-backend-sizes). |
 | Auto-sleep | The inactivity timeout before the app suspends. See [Sleep and resume](#sleep-and-resume). |
 | URL | The address where the app is served. |
 | Versioning | Draft vs production versions of the app, on the **Versions** tab. |
@@ -180,7 +180,7 @@ Manage a deployed app from its actions menu.
 ![Actions menu](/data-apps/manage-redeploy.png)
 
 - **Deploy App** — starts the app. Once the deployment job finishes, open the app's public URL with **Open App**.
-- **Open App** — opens a new window with your app.
+- **Open App** — opens your app in a new window. On a running app behind a password, it shows a dialog first, with the app's address and the password, each with a copy button; the dialog's **Open app** button opens the app.
 - **Redeploy App** — apply changes made in the app configuration (they take effect only after a redeploy).
 - **Start App** — brings a stopped app back with the same settings.
 - **Modify with Kai** — opens the Builder, on apps Kai built.
@@ -189,6 +189,8 @@ Manage a deployed app from its actions menu.
 - **Automate** — adds the app to a flow.
 - **Debug mode** — runs the app with extra diagnostics.
 - **Delete app** — stops the deployment and deletes its configuration.
+
+<!-- VERIFY(Michal Ševčík): on 2026-09-29 a Python/JS app built with kbagent (project 264, App ID 74021867) showed Edit with Kai in the header, running and stopped, and Duplicate with Kai, Automate, Debug mode and Delete app in the ⋯ menu while stopped, not Modify with Kai and Copy app. The 2026-07-10 screenshots of the Kai-built app 74016144 show Modify with Kai and Copy app. Renamed since, or does it depend on who built the app? The Open App dialog was seen on the same app while it ran; VERIFY(Nikita) that apps Kai built show it too. -->
 
 Which of these the header and the **⋯** menu offer depends on the app's state. [Operate and update an app](/data-apps/operate/) walks through them in the order you meet them.
 
