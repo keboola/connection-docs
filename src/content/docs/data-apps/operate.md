@@ -38,10 +38,13 @@ From a terminal: `kbagent data-app secrets-set --project <alias> --app-id <id> -
 ## Stop, start, sleep
 
 - **Sleeping** is automatic. After the inactivity timeout (five minutes to 30 days, set in the deploy wizard) the app suspends; the next visit wakes it and shows a short **waking up** page. You pay only for time the app is awake or waiting to suspend.
+- **Repeated failed starts** are the exception. If the app fails to start several times in a row, Keboola stops retrying, and visits no longer wake it. Fix the cause, then start the app with **Start** or `kbagent data-app deploy`; [Troubleshooting](/data-apps/troubleshooting/#sleeping-and-waking) has the steps.
 - **Pausing** is deliberate: **⋮ → Pause app**, confirmed with **Pause now**, puts a running app to sleep right away, before its inactivity timeout runs out. Its page then says **Stopped**, with **Start** in the header, while the Apps list says **Sleeping**. It keeps the configuration and, like any sleeping app, wakes on the next visit or when you click **Start**. Use it when nobody needs the app for a while, so you don't pay for the rest of the timeout.
 - **Redeploy** restarts a running app with the current configuration and, for apps on your own repository, the current branch head.
 
-From a terminal: `kbagent data-app stop`, which does what **Pause app** does, and `kbagent data-app start`, both with `--project` and `--app-id`.
+<!-- VERIFY(Miro): after repeated failed starts, does a manual start turn waking on visits back on? -->
+
+From a terminal: `kbagent data-app stop`, which does what **Pause app** does, and `kbagent data-app start`, both with `--project` and `--app-id`. `start` keeps the configuration version the app was last deployed with, so after a fix use `kbagent data-app deploy` instead.
 
 Sleep and wake behaviour in detail, including the wakeup error page: [Sleep and resume](/data-apps/reference/#sleep-and-resume).
 

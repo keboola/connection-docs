@@ -24,11 +24,13 @@ Most app problems fall into a handful of patterns. Find where the evidence is fi
 
 | What you see | Why | Fix |
 |---|---|---|
-| **Data App is not running** right after a deploy, the run lasted about a second, and the log says `App must have keboola-config/nginx/ directory` (or `supervisord/`) | The repository lacks the `keboola-config/` folder, or part of it, so the container exits at once. This is the most common start failure we measure on customer stacks. | Add the folder; the app-building skill's [reference](https://github.com/keboola/ai-kit/blob/main/plugins/dataapp-developer/skills/dataapp-development/references/python-js-apps.md) lists what goes in it and explains every line. Then check the repository before deploying again: `kbagent data-app validate-repo --git-repo https://github.com/<owner>/<repo> --git-branch main --type python-js`. |
+| **This app is not running** (see [Sleeping and waking](#sleeping-and-waking)) right after a deploy, the run lasted about a second, and the log says `App must have keboola-config/nginx/ directory` (or `supervisord/`) | The repository lacks the `keboola-config/` folder, or part of it, so the container exits at once. This is the most common start failure we measure on customer stacks. | Add the folder; the app-building skill's [reference](https://github.com/keboola/ai-kit/blob/main/plugins/dataapp-developer/skills/dataapp-development/references/python-js-apps.md) lists what goes in it and explains every line. Then check the repository before deploying again: `kbagent data-app validate-repo --git-repo https://github.com/<owner>/<repo> --git-branch main --type python-js`. |
 | `fatal: Authentication failed` in the job log | Keboola couldn't clone the repository: the access token or SSH key for a private repository is missing, wrong, or expired. | Open **Git Repository** on the app, update **Username** and **Access Token** or the **SSH Private Key**, and redeploy. For a Keboola-managed repository this shouldn't happen; redeploy, and if it repeats, report it with the job ID. |
 | The app starts and stops in a loop | The supervisord program can't start the process: a relative path where a full `/app/...` path is needed, a Python command without `uv run`, a `setup.sh` committed without the executable bit, or a `[program:nginx]` entry the image already provides. | Fix the config; the skill's [reference](https://github.com/keboola/ai-kit/blob/main/plugins/dataapp-developer/skills/dataapp-development/references/python-js-apps.md) spells out each rule and the reasoning behind it. |
 | The install step fails | No `pyproject.toml` or `package.json` where `setup.sh` runs, or `pip install` in `setup.sh`; the image blocks bare `pip` (`externally-managed-environment`). | Commit the manifest; use `uv sync` or `npm install --omit=dev`. |
 | The deploy job fails on a package conflict | Two dependencies want incompatible versions, or an unpinned package moved. | Pin versions. Streamlit apps: [Lock package versions](/data-apps/streamlit/lock-version/). |
+
+<!-- VERIFY(Miro): does one failed deploy (first row) turn waking off at once, or only after several failed starts in a row? -->
 
 ## The app runs but misbehaves
 
@@ -58,6 +60,12 @@ Most app problems fall into a handful of patterns. Find where the evidence is fi
 ## Sleeping and waking
 
 An idle app suspends after its inactivity timeout. The next visit wakes it and shows a **waking up** page for a moment; if waking fails, a **wakeup error** page appears with a **Show More** link to the reason. Details and the timeout setting: [Sleep and resume](/data-apps/reference/#sleep-and-resume).
+
+If visitors get a page headed **This app is not running** instead (the browser tab says Application Disabled), the app has failed to start several times in a row. Keboola has stopped retrying, and visits no longer wake it. The app's page in Keboola says the same in a warning: "The app was disabled because it failed to start automatically multiple times."
+
+To bring it back, fix whatever makes it fail, then start it by hand. For an app Kai built, Kai can do both: the Builder shows a warning too, with a **Fix with Kai** button. The button asks Kai to read the app's logs and recent runs, tell you what it found before changing anything, then deploy the fix and start the app.
+
+Otherwise, find the cause yourself. On the app's **All Runs** tab, open a failed run to see the reason and the startup log. From a terminal, `kbagent data-app runs --project <alias> --app-id <app id>` lists recent runs with each failure's reason; put `--json` before `data-app` to get their startup logs as well. [The app doesn't start](#the-app-doesnt-start) lists the usual causes. Once it's fixed, start the app with **Start** on its page, or `kbagent data-app deploy --project <alias> --app-id <app id> --wait` from a terminal.
 
 ---
 
