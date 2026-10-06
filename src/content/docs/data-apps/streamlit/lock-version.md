@@ -80,7 +80,7 @@ This action will:
 
 To update the requirements for your app:
 
-1. Click "Redeploy" or "Start" in the app's header
+1. Click "Redeploy" in the app's header (if it shows "Start" instead, the app isn't running: click "Start" and wait until it runs)
 2. In the wizard, expand "Deploy settings" and enable the "Update packages dependencies" toggle
 
 ![Update Dependencies](/data-apps/streamlit/lock-update-dependencies.png)
