@@ -6,6 +6,7 @@ import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
 import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
+import externalLinks from './src/integrations/external-links.mjs';
 
 /* Shared so the llms.txt heading cannot drift from the site's own title. */
 const SITE_TITLE = 'Keboola User Documentation';
@@ -18,6 +19,8 @@ export default defineConfig({
   },
   markdown: {
     remarkPlugins: [beaconTransforms],
+    // Links that leave help.keboola.com open in a new tab; see the plugin's header.
+    rehypePlugins: [externalLinks],
   },
   integrations: [
     redirectFrom(),
