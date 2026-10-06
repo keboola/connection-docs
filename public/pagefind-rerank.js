@@ -10,11 +10,15 @@
  *
  * What: re-exports the real Pagefind API unchanged, except search() and
  * debouncedSearch(), which reorder the results:
+ *   0. pages that list the query in their `search_keywords` frontmatter,
+ *      for when two pages fit and an editor picked one ("mcp"),
  *   1. pages whose title is exactly the query ("limits" → "Limits"),
  *   2. pages whose title has every query word,
  *   3. pages where the title and URL together have every word
  *      ("app authentication" → /data-apps/authentication/),
- *   4. everything else, in Pagefind's order.
+ *   4. everything else, in Pagefind's order, except that among Pagefind's
+ *      first 30, pages whose title or URL has some of the words move up,
+ *      rarer words counting more ("create app" → the Apps pages).
  * Inside each group, shallower pages come first, so a section hub beats its
  * sub-pages, then shorter titles, then Pagefind's order. The home page is left
  * out: its title "Keboola User Documentation" would win "users".
@@ -39,16 +43,20 @@ const MAX_QUERY_WORDS = 4;
 // queries people type but on every page, so a title like "Keboola Overview"
 // shouldn't win "keboola cli".
 const STOP_WORDS = new Set(
-  'keboola a an and are can do does for from how i in is it my of on or the to what when where why with'.split(' '),
+  'keboola a an and are can do does for from how i in is it my of on or the to what when where why with'.split(
+    ' ',
+  ),
 );
 
-const words = (s) =>
+// keepStopWords is for the exact-title check, so "What are Keboola apps" is
+// an exact match for that title and not for "Apps".
+const words = (s, { keepStopWords = false } = {}) =>
   s
     .toLowerCase()
     .replace(/[^\p{L}\p{N}\s-]/gu, ' ')
     .split(/[\s-]+/)
     // single letters stay: "R" is a language here
-    .filter((w) => w && !STOP_WORDS.has(w))
+    .filter((w) => w && (keepStopWords || !STOP_WORDS.has(w)))
     // fold plurals: "apps" → "app", "branches" → "branch", "policies" → "policy"
     .map((w) =>
       w
@@ -62,50 +70,84 @@ const loadPages = () =>
   (pages ??= fetch(new URL('./pagefind-titles.json', import.meta.url))
     .then((response) => (response.ok ? response.json() : []))
     .catch(() => [])
-    .then(
-      (rows) =>
-        new Map(
-          rows.map(([id, title, url]) => {
-            const segments = url.split('/').filter(Boolean);
-            if (!segments.length) return [id, null];
-            const titleWords = new Set(words(title));
-            return [
-              id,
-              {
-                titleWords,
-                urlWords: new Set([...titleWords, ...words(segments.join(' '))]),
-                depth: segments.length,
-              },
-            ];
-          }),
-        ),
-    ));
+    .then((rows) => {
+      const byId = new Map(
+        rows.map(([id, title, url, keywords = '']) => {
+          const segments = url.split('/').filter(Boolean);
+          if (!segments.length) return [id, null];
+          const titleWords = new Set(words(title));
+          const allTitleWords = new Set(words(title, { keepStopWords: true }));
+          return [
+            id,
+            {
+              titleWords,
+              allTitleWords,
+              keywords: keywords
+                .split('|')
+                .map((phrase) => new Set(words(phrase)))
+                .filter((phrase) => phrase.size),
+              urlWords: new Set([...titleWords, ...words(segments.join(' '))]),
+              depth: segments.length,
+            },
+          ];
+        }),
+      );
+      // How many pages name each word in their title or URL, for weighting
+      // partial matches: "variables" says more than "data".
+      const pageCount = new Map();
+      for (const page of byId.values()) {
+        for (const w of page?.urlWords ?? []) pageCount.set(w, (pageCount.get(w) ?? 0) + 1);
+      }
+      return { byId, pageCount, total: byId.size };
+    }));
+
+// Partial title/URL matches only reorder Pagefind's first results; further
+// down, a shared word is more often a coincidence than a hint.
+const PARTIAL_DEPTH = 30;
 
 async function rerank(response, term) {
   const queryWords = [...new Set(words(term || ''))];
+  const allQueryWords = new Set(words(term || '', { keepStopWords: true }));
   if (!response?.results?.length || !queryWords.length || queryWords.length > MAX_QUERY_WORDS) {
     return response;
   }
-  const byId = await loadPages();
+  const { byId, pageCount, total } = await loadPages();
   if (!byId.size) return response;
+  const weight = (w) => Math.log(total / (pageCount.get(w) ?? total));
 
   const ranked = response.results.map((result, index) => {
     const page = byId.get(result.id);
     const tier = !page
       ? 0
-      : queryWords.every((w) => page.titleWords.has(w))
-        ? page.titleWords.size === queryWords.length
-          ? 3
-          : 2
-        : queryWords.every((w) => page.urlWords.has(w))
-          ? 1
-          : 0;
-    return { result, index, tier, depth: page?.depth ?? 0, titleLength: page?.titleWords.size ?? 0 };
+      : page.keywords.some(
+            (phrase) => phrase.size === queryWords.length && queryWords.every((w) => phrase.has(w)),
+          )
+        ? 4
+        : queryWords.every((w) => page.titleWords.has(w))
+          ? page.allTitleWords.size === allQueryWords.size &&
+            [...allQueryWords].every((w) => page.allTitleWords.has(w))
+            ? 3
+            : 2
+          : queryWords.every((w) => page.urlWords.has(w))
+            ? 1
+            : 0;
+    const partial =
+      tier || !page || index >= PARTIAL_DEPTH
+        ? 0
+        : queryWords.reduce((sum, w) => sum + (page.urlWords.has(w) ? weight(w) : 0), 0);
+    return {
+      result,
+      index,
+      tier,
+      partial,
+      depth: page?.depth ?? 0,
+      titleLength: page?.titleWords.size ?? 0,
+    };
   });
   ranked.sort(
     (a, b) =>
       b.tier - a.tier ||
-      (a.tier ? a.depth - b.depth || a.titleLength - b.titleLength : 0) ||
+      (a.tier ? a.depth - b.depth || a.titleLength - b.titleLength : b.partial - a.partial) ||
       a.index - b.index,
   );
   return { ...response, results: ranked.map((r) => r.result) };

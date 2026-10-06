@@ -5,7 +5,9 @@ import { fileURLToPath } from 'node:url';
 
 /**
  * Astro integration that writes dist/pagefind-titles.json: one
- * [resultId, title, url] row per page in the Pagefind index.
+ * [resultId, title, url, keywords] row per page in the Pagefind index.
+ * `keywords` is the page's `search_keywords` frontmatter, "|"-joined, which
+ * PageTitle.astro passes through as Pagefind metadata.
  *
  * public/pagefind-rerank.js reads it to move title matches to the top of the
  * search results without downloading a fragment per result. The ids are
@@ -32,7 +34,12 @@ export default function pagefindTitles() {
           // Fragments are gzipped JSON behind a "pagefind_dcd" signature.
           const raw = gunzipSync(readFileSync(join(fragmentDir, file))).toString('utf8');
           const fragment = JSON.parse(raw.slice(raw.indexOf('{')));
-          rows.push([file.replace(/\.pf_fragment$/, ''), fragment.meta?.title ?? '', fragment.url]);
+          rows.push([
+            file.replace(/\.pf_fragment$/, ''),
+            fragment.meta?.title ?? '',
+            fragment.url,
+            fragment.meta?.keywords ?? '',
+          ]);
         }
         writeFileSync(join(outDir, 'pagefind-titles.json'), JSON.stringify(rows));
         logger.info(`wrote pagefind-titles.json (${rows.length} pages)`);

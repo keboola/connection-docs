@@ -1,6 +1,7 @@
 ---
 title: CLI
 slug: 'cli'
+search_keywords: [kbagent]
 description: 'kbagent, the Keboola command-line interface — an AI-friendly CLI to manage projects, configs, jobs, storage, flows, and dev branches across your whole organization, driven by you or your coding agent.'
 ---
 
