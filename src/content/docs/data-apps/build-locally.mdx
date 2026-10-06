@@ -290,12 +290,13 @@ To run the app from a **Git repository** you host, develop locally, push, and co
 
 1. In your project, create a **Python/JS app**: **Apps → Create app → Deploy from your own Git repository** (see [Create an app manually](/data-apps/getting-started/#create-an-app-manually)).
 2. On the app's configuration page, open **Git Repository** and set the **Project URL**; for a private repo, toggle **Private** and add your credentials. Skip what you already gave when you created the app.
-3. Pick the **branch** (**Load branches**) and save.
+3. Click **Load branches**, choose the branch in the **Branch** field and save. Once the branches have loaded, the button reads **Reload branches**.
+
+   ![The Git Repository card: Project URL set to a GitHub repository, the Private switch off, and Branch set to main next to the Reload branches button](/data-apps/python-js-config.png)
+
 4. Click **Deploy**. Keboola clones the repo, installs dependencies, and runs it. Push changes, then click **Redeploy** (**Start** if the app is sleeping or stopped) to ship them.
 
-![The Python/JS app configuration page: Authentication, a Git Repository section with Project URL and Load Branches, and the App Info panel showing the Python / JS backend](/data-apps/python-js-config.png)
-
-{/* The Git Repository form has no entrypoint field (verified in the live UI, project 264, 2026-09-14); the page used to say it did. Per the UI code of 2026-10-01, the button reads Load branches until branches are loaded or a branch is saved, and Reload branches after. */}
+{/* The Git Repository form has no entrypoint field (verified in the live UI, project 264, 2026-09-14); the page used to say it did. Per the UI code of 2026-10-01, the button reads Load branches until branches are loaded or a branch is saved, and Reload branches after. VERIFY(Nikita): that an app created with a Repository URL and no branch shows Load branches, and that it turns into Reload branches once the branches load, comes from that code only; on 2026-10-06 no app in project 264's production branch had a repository without a branch (kbagent config list). The screenshot is docs-manual-app (App ID 74022487, own GitHub repository, never deployed) in project 264, taken 2026-10-06 on build bundle.BeQYTX6g.js; the card loaded collapsed and was expanded for the shot. */}
 
 ## How development works
 
