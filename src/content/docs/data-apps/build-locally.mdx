@@ -59,7 +59,7 @@ With the `dataapp-developer` plugin from Keboola's [AI Kit](/ai/ai-kit/), the ag
   <li><strong><a href="#set-up-your-client">Set up your client</a></strong> Connect your project and add the app-building plugin.</li>
   <li><strong><a href="#describe-the-app">Describe the app</a></strong> One prompt: what it shows, which data, where the code goes.</li>
   <li><strong>The agent builds it</strong> It reads your data, writes code and deploys; you approve its commands.</li>
-  <li><strong><a href="#check-the-app">Check the app</a></strong> On its page in Keboola, Open App has the URL and password.</li>
+  <li><strong><a href="#check-the-app">Check the app</a></strong> On its page in Keboola, click Open in the header for the URL and password.</li>
 </StageStrip>
 
 ### Set up your client
@@ -161,15 +161,15 @@ Through a Keboola MCP server, the agent doesn't run kbagent. It calls the server
 ### Check the app
 
 - The agent finishes with the app's URL and its page in Keboola.
-- The app asks for its password. On the app's page in Keboola, click **Open App**. The dialog has the app's address and its password, each with a copy button. Copy the password, then click **Open app** in the dialog.
+- The app asks for its password. On the app's page in Keboola, click **Open** in the page header. The dialog has the app's address and its password, each with a copy button. Copy the password, then click **Open app** in the dialog.
 
 ![The Open app dialog on an app's page in Keboola: the App address and the Password, hidden, each with a copy button, above an Open app button](/data-apps/open-app-dialog.png)
 
 - If the app opens without data, ask the agent to read the app's log. [Troubleshooting](/data-apps/troubleshooting/) lists the common causes, including `Promise.withResolvers is not a function` from a too-new `@keboola/api-client`.
-- On [the MCP route](#the-mcp-route), you preview a draft at its own URL first. The production app gets **Open App** once you approve the draft and the agent deploys it.
+- On [the MCP route](#the-mcp-route), you preview a draft at its own URL first. The production app gets **Open** once you approve the draft and the agent deploys it.
 - To let other people open it, see [Publish and share](/data-apps/publish-and-share/).
 
-{/* Password location checked 2026-09-29 in project 264 on App ID 74021867, started for the check and stopped after: Open App opens a dialog with App address and Password (hidden, each with a copy button); a stopped app's page shows no password (its Open App dialog was not opened), and its Authentication section names only the method, Basic (Password). VERIFY(Nikita): not checked on a sleeping app. VERIFY(Nikita): seen on europe-west3 only. Older UI builds, from 25 Aug and 14 Sep, had an App Credentials modal instead (Host, Password, an Open App button), and only a logged-in page shows which build a stack loads, so check the labels on us-east4, where free projects live. The MCP-route bullet restates The MCP route section above and operate.md (Open App on a running app, Deploy App on one that never ran). VERIFY(Nikita): where a draft's password shows was not checked. */}
+{/* Password location checked 2026-09-29 in project 264 on App ID 74021867, started for the check and stopped after: Open App opens a dialog with App address and Password (hidden, each with a copy button); a stopped app's page shows no password (its Open App dialog was not opened), and its Authentication section names only the method, Basic (Password). VERIFY(Nikita): not checked on a sleeping app. VERIFY(Nikita): seen on europe-west3 only. Older UI builds, from 25 Aug and 14 Sep, had an App Credentials modal instead (Host, Password, an Open App button), and only a logged-in page shows which build a stack loads, so check the labels on us-east4, where free projects live. The MCP-route bullet restates The MCP route section above and operate.md (Open once the app has been deployed, Deploy on one that never ran). VERIFY(Nikita): where a draft's password shows was not checked. */}
 
 ### What you get by default
 
@@ -219,7 +219,7 @@ Write the code yourself, then create the app from a terminal with kbagent, which
   <li><strong><a href="#app-structure">Write the code</a></strong> A standard web app, plus a small configuration folder.</li>
   <li><strong><a href="#from-a-terminal">Create the app</a></strong> kbagent creates it with a Keboola-managed repository.</li>
   <li><strong>Push the code</strong> Commit and push it to the app's repository.</li>
-  <li><strong>Deploy and open</strong> Deploy, then click Open App on its page for the password.</li>
+  <li><strong>Deploy and open</strong> Deploy, then click Open in its page header for the password.</li>
 </StageStrip>
 
 ### App structure
@@ -282,7 +282,7 @@ kbagent creates the app with a Keboola-managed repository, and you push your cod
    kbagent data-app detail --project <alias> --app-id <id>
    ```
 
-The password is on the app's page, `<Keboola URL>/admin/projects/<project-id>/data-apps/<config-id>`: click **Open App** and copy it from the dialog. With a Manage API token, `kbagent data-app password --project <alias> --app-id <id>` prints it too. If the app opens without data, `kbagent data-app logs --project <alias> --app-id <id>` shows its log; if it doesn't start at all, `kbagent data-app runs --project <alias> --app-id <id>` shows why.
+The password is on the app's page, `<Keboola URL>/admin/projects/<project-id>/data-apps/<config-id>`: click **Open** in the page header and copy it from the dialog. With a Manage API token, `kbagent data-app password --project <alias> --app-id <id>` prints it too. If the app opens without data, `kbagent data-app logs --project <alias> --app-id <id>` shows its log; if it doesn't start at all, `kbagent data-app runs --project <alias> --app-id <id>` shows why.
 
 ### Sync to your project
 

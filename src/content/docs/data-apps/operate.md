@@ -10,7 +10,7 @@ Deploying, starting, stopping, deleting and setting secrets also work from a ter
 
 ## Read the app's state
 
-The header shows the app's status and the actions that make sense for it: **Deploy** for an app that has never run, **Start** for a stopped or sleeping one, **Redeploy** for a running one, and **Open App** once the app has been deployed. A Python/JS app with a [Keboola-managed repository](/data-apps/what-are-apps/#two-ways-to-run-an-app) also gets **Edit with Kai** if you can edit the app and [Kai can build apps](/kai/getting-started/#enabling-kai) in the project. The **⋯** menu holds the rest: **Duplicate with Kai** (**Copy app** on apps without a Keboola-managed repository), **Automate** (add it to a flow), **Debug mode** and **Delete app**, plus **Suspend app** while the app is running.
+The header shows the app's status and the actions that make sense for it: **Deploy** for an app that has never run, **Start** for a stopped or sleeping one, **Redeploy** for a running one, and **Open** once the app has been deployed. A Python/JS app with a [Keboola-managed repository](/data-apps/what-are-apps/#two-ways-to-run-an-app) also gets **Edit with Kai** if you can edit the app and [Kai can build apps](/kai/getting-started/#enabling-kai) in the project. The **⋮** (More actions) menu holds the rest: **Duplicate with Kai** (**Copy app** on apps without a Keboola-managed repository), **Automate** (start it on a schedule), **Debug mode** and **Delete app**, plus **Pause app** while the app is running (**Cancel start** while it's starting).
 
 The tabs below the header split the app's life into views: **Overview** (the app's settings and its App URL), **Advanced Settings** (environment variables and secrets, theme, data mappings), **All Runs** (every start attempt), **Terminal Logs** (stdout and stderr while it runs), **Versions** (the configuration history), and **Drafts** while Kai has a draft open. The **App Info** panel on the right shows the backend version and size, the auto-sleep timeout, the last change, the owner, and the App ID.
 
@@ -38,10 +38,10 @@ From a terminal: `kbagent data-app secrets-set --project <alias> --app-id <id> -
 ## Stop, start, sleep
 
 - **Sleeping** is automatic. After the inactivity timeout (five minutes to 30 days, set in the deploy wizard) the app suspends; the next visit wakes it and shows a short **waking up** page. You pay only for time the app is awake or waiting to suspend.
-- **Stopping** is deliberate: **⋯ → Suspend app** stops the container and keeps the configuration, so the app stops serving until you bring it back with **Start**. Use this when an app should be off for days; sleeping already covers being idle overnight.
+- **Pausing** is deliberate: **⋮ → Pause app**, confirmed with **Pause now**, puts a running app to sleep right away, before its inactivity timeout runs out. Its page then says **Stopped**, with **Start** in the header, while the Apps list says **Sleeping**. It keeps the configuration and, like any sleeping app, wakes on the next visit or when you click **Start**. Use it when nobody needs the app for a while, so you don't pay for the rest of the timeout.
 - **Redeploy** restarts a running app with the current configuration and, for apps on your own repository, the current branch head.
 
-From a terminal: `kbagent data-app stop` and `kbagent data-app start`, both with `--project` and `--app-id`.
+From a terminal: `kbagent data-app stop`, which does what **Pause app** does, and `kbagent data-app start`, both with `--project` and `--app-id`.
 
 Sleep and wake behaviour in detail, including the wakeup error page: [Sleep and resume](/data-apps/reference/#sleep-and-resume).
 
@@ -55,7 +55,7 @@ Code changes are tracked separately from configuration: for a Kai-built app they
 
 - **Duplicate with Kai** has Kai copy an app with a Keboola-managed repository, so you can try a change without touching the one people use. It opens a new Kai chat and asks Kai to copy the app. The request tells Kai to check whether a copy is possible, to say what carries over and what you'll have to set up again, and to make the copy only once you confirm. Only Kai can copy these apps, so the item is disabled when Kai isn't available.
 - **Copy app** does the same for any other app by copying its configuration into a new app. If the app runs from your own repository, the copy deploys the same branch, so switch the copy to a branch of its own before you push experiments.
-- **Automate** adds the app to a flow, for example to redeploy it after the data it reads has been refreshed.
+- **Automate** creates a flow that starts the app on a schedule. In its dialog, name the flow (leave the name blank for "Scheduled" plus the app's name), pick the schedule and click **Automate**. The schedule is preset to **Once per hour**, which wakes a sleeping app every hour. For a time of day you choose, pick **Custom schedule**; times follow the timezone shown next to **Schedule**, UTC unless you change it. A started app still goes back to sleep after its inactivity timeout if nobody opens it. The new flow has the app as its only task and is listed with your other [flows](/flows/). Only the **Admin** and **Share** [roles](/management/project/users/#user-roles) see **Automate**.
 - **Delete app** stops the app and deletes its configuration. The App URL stops working immediately; there is no undo. The terminal equivalent, `kbagent data-app delete`, says the same thing in its own words: cascade, irreversible.
 
 ## When something is off
