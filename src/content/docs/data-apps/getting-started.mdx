@@ -7,20 +7,26 @@ redirect_from:
   - /data-apps/build-in-the-ui/
 ---
 
+import Prereqs from '../../../components/Prereqs.astro';
+
 Kai builds a working app from a plain-language description — no coding and no Git account needed. From one chat it reads your governed data, writes the code, and opens a live draft you can preview, refine, and publish. This walkthrough takes you from nothing to a **live, published app in about 10 minutes**, and covers the details you'll want next: how to prompt, what Kai asks before touching your project, how drafts become production, and the [manual creation path](#create-an-app-manually) on the same screen.
 
 Apps go well beyond dashboards — the same steps produce internal tools, data narratives, or [anything interactive](/data-apps/#beyond-dashboards). This page builds a simple dashboard so you can learn the flow.
 
-## What you'll need
-
-- A Keboola project with **Kai** available.
-- At least one table in **Storage** — Kai reads your data directly, so it works with whatever you already have.
-- A few minutes.
+<Prereqs needs={['projectWithKai', 'kai']}>
+  <li>
+    <strong>At least one table in Storage.</strong> Kai reads your data directly, so it works with
+    whatever you already have. No data yet? Load the sample{' '}
+    <a href="/tutorial/opportunity.csv">opportunity.csv</a> as in{' '}
+    <a href="/tutorial/load/#manual-data-loading">Manual Data Loading</a>.
+  </li>
+  <li><strong>A few minutes.</strong></li>
+</Prereqs>
 
 :::tip[Building with an AI agent?]
 [Build an app locally](/data-apps/build-locally/#with-an-ai-agent) sets up Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT app with Keboola's plugins and walks through one prompt to a deployed app. To add the skill to an agent by hand, the download is a copy of the skill folder: the skill itself, ready-made app templates (Python, Node.js, full-stack, Streamlit), and reference guides your agent can draw on.
 
-<!-- VERIFY(Michal Ševčík): the zip is a 2026-07-09 snapshot of the skill and lacks references/python-js-prod-and-drafts.md from dataapp-developer 1.6.1. Refresh it or link to keboola/ai-kit instead. -->
+{/* VERIFY(Michal Ševčík): the zip is a 2026-07-09 snapshot of the skill and lacks references/python-js-prod-and-drafts.md from dataapp-developer 1.6.1. Refresh it or link to keboola/ai-kit instead. */}
 
 <a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.zip" download="keboola-dataapp-development-skill.zip">⬇ Download the app-building skill (with templates)</a>
 :::
@@ -69,7 +75,11 @@ When you're happy with the draft, click **Publish to Production**. Kai merges th
 
 ![The published app: the configuration page showing Active status, next to Kai's final message with the App URL, the generated password, and an Open App button](/data-apps/getting-started-deployed.png)
 
-By default the app is protected with **Basic (Password)** authentication — the generated password also sits on the app's configuration page, ready to copy. To change who can access it (public, a password, SSO, GitHub, and more), see [Authentication](/data-apps/authentication/).
+By default the app is protected with **Basic (Password)** authentication. The generated password is also on the app's configuration page: click **Open App** in the page header and copy it from the dialog.
+
+{/* The Open App dialog (App address, Password, each with a copy button) was seen on 2026-09-29 on a running app built with kbagent (project 264, App ID 74021867). VERIFY(Nikita): the same on apps Kai built or created in the UI. */}
+
+To change who can access it (public, a password, SSO, GitHub, and more), see [Authentication](/data-apps/authentication/).
 
 Open the URL, enter the password, and your app is live — running on your governed data, served from its own address:
 
@@ -107,7 +117,7 @@ Prefer to set the app up yourself, without the chat? Manual creation lives on th
 
 ![The deploy/redeploy wizard: backend version, backend size and inactivity timeout](/data-apps/deploy-timeout-backedsize.png)
 
-7. When the status turns **Active**, click **Open App** to open it at its public URL. Use **Redeploy** to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
+7. When the status turns **Active**, click **Open App**. For an app behind a password, copy the password from the dialog, then click **Open app** in it to open the app at its public URL. Use **Redeploy** to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
 
 From here on, the app is something you run rather than something you build: [Operate and update an app](/data-apps/operate/) covers shipping changes, secrets, sleeping and versions.
 

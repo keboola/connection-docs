@@ -235,7 +235,7 @@ it works.
 ## Usage and Limits
 
 On contracted plans, Kai consumes **[PPU credits](/kai/pricing/)** — the same project
-power that runs your transformations, extractors, and data apps — rather than a monthly
+power that runs your transformations, extractors, and apps — rather than a monthly
 message quota. A median conversation costs about **1.1 PPU**. New organizations start with
 a [free allowance of 300 PPU](/kai/pricing/#free-allowance-for-new-organizations).
 
