@@ -35,15 +35,14 @@ Ready to move an app to the current stack? See [Migrate a Streamlit app to Pytho
 
 ### Create your first Streamlit app
 
-1. In your Keboola project, open **Apps** and click **Create app**. In a project with no apps yet, skip this click: the Apps page itself has the link from step 2.
-2. At the bottom of the page, click **Create a Streamlit app**. On a single-tenant stack the page may still show one card per app type instead; click **Create Streamlit app** on the **Streamlit App** card. Where Streamlit is the only option, **Create app** opens the dialog straight away. {/* VERIFY(Jordan): the single-tenant layout and the Streamlit-only stack are known from the UI code of 2 Oct only. */}
-3. Replace the prefilled **New App** with a name; a description and a folder are optional. Click **Create app**, and the app's page opens.
-4. On the **Overview** tab, the **App access** card shows the app's address. The URL prefix comes from the name. To change it, edit **App URL** (up to 50 characters) and click **Save**; the new address takes effect with the next deploy.
+1. In your Keboola project, open **Apps** from the left navigation and click **Create app**. Under **Other ways to start**, click **Create a Streamlit app**, the small link below the list. It opens the **Create Streamlit app** dialog. If you can't find the button or the link, [Create an app manually](/data-apps/getting-started/#create-an-app-manually) describes the other layouts; then come back here for step 2.
+2. Replace the prefilled **New App** with a name; a description and a folder are optional. Click **Create app**. The app opens on its own page, marked **Not Deployed**.
+3. On the **Overview** tab, the **App access** card shows the address the app gets once it's deployed. The URL prefix comes from the name. To change it, edit **App URL** (up to 50 characters) and click **Save**; the new address takes effect with the next deploy.
 
-   ![The App access card on the Overview tab: App URL with the editable prefix, the fixed part of the address and a copy button, then the collapsed Authentication section](/data-apps/streamlit/custom-data-app-url.png)
+   ![The App URL field of the App access card: the editable prefix, the fixed part of the address with a copy button, and the hint about the 50-character maximum](/data-apps/streamlit/custom-data-app-url.png)
 
-5. In the **Code Source** card, choose a deployment method, **Git Repository** or **Code**, and set it up as [Deployment methods](#deployment-methods) describes.
-6. Click **Deploy** in the app's header, then **Deploy** in the wizard. A new app asks visitors for a password, which the **App access** card shows after the first deploy. [Authentication](/data-apps/authentication/) covers the other options.
+4. In the **Code Source** card, choose a deployment method, **Git Repository** or **Code**, and set it up as [Deployment methods](#deployment-methods) describes.
+5. Click **Deploy** in the app's header, then **Deploy** in the wizard; [Create an app manually](/data-apps/getting-started/#create-an-app-manually) explains the wizard's fields and how to open the app once it runs. A new app asks visitors for a password, which the **App access** card shows after the first deploy. [Authentication](/data-apps/authentication/) covers the other options.
 
 ### Deployment methods
 
