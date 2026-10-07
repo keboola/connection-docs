@@ -28,7 +28,7 @@ If you’re running a self-hosted n8n instance, you can install the Keboola node
 4. Enter the npm package name: `@keboola/n8n-nodes-keboola`.
 5. Accept the community node disclaimer and confirm installation.
 
-<img src="./01-self-hosted-installation.png" alt="Install Keboola Node for Self-hosted n8n" />
+<img src="./01-self-hosted-installation.png" alt="Install Keboola Node for Self-hosted n8n" width="4096" height="2378" />
 
 You can now use the Keboola node in your workflows.
 
@@ -47,7 +47,7 @@ The Keboola node uses **API Key authentication**.
    - You can find or create tokens in Keboola under **Project Settings → API Tokens**.
 5. Click **Save**. You should see a confirmation message once the connection is established.
 
-<img src="./02-auth-configuration.png" alt="Auth Configuration for Keboola Token API in n8n" />
+<img src="./02-auth-configuration.png" alt="Auth Configuration for Keboola Token API in n8n" width="4092" height="2368" />
 
 Once configured, the credential can be reused across all Keboola nodes in your workflows.
 
@@ -65,7 +65,7 @@ Once your credential is configured, you can start building workflows with the Ke
 6. Connect the Keboola node with other n8n nodes (e.g., Google Sheets, MCP, Slack, HTTP Request) to design your automation.
 7. Execute the workflow to test and validate your integration.
 
-<img src="./03-workflow-overview.png" alt="Workflow example using Keboola Node in n8n" />
+<img src="./03-workflow-overview.png" alt="Workflow example using Keboola Node in n8n" width="4082" height="2382" />
 
 ## Available Operations
 
@@ -80,7 +80,7 @@ Extracts data from a Keboola table.
   - Operation (Extract)
   - Table ID
 
-<img src="./04-kbc-download.png" alt="An example of data download with Keboola Node in n8n" />
+<img src="./04-kbc-download.png" alt="An example of data download with Keboola Node in n8n" width="3584" height="2058" />
 
 This lets you pull data from a specific table and pass it to downstream nodes in your workflow.
 
@@ -97,7 +97,7 @@ Uploads data from your workflow into Keboola.
   - Primary Key(s)
   - Import Mode (Full Load or Incremental)
 
-<img src="./05-kbc-upload.png" alt="An example of data upload with Keboola Node in n8n" />
+<img src="./05-kbc-upload.png" alt="An example of data upload with Keboola Node in n8n" width="3584" height="2056" />
 
 This allows you to insert or update tables inside Keboola directly from your n8n workflows.
 
