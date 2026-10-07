@@ -19,9 +19,13 @@ An app is "published" once it's deployed and reachable at its URL, with the righ
 
 ## Share with your team
 
-Share the app URL — found on the app's **Overview** tab (the **App URL** block, with a copy button and **Open in new tab**). Anyone who passes the app's authentication can open it — control that with [Authentication](/data-apps/authentication/).
+Copy the app URL from the app's **Overview** tab. It's in the **App access** card: the **App URL** block shows the URL prefix plus a generated part, and its copy button (**Copy the address**) copies the whole URL. Once the app has been deployed, the card's own **Open** button, at its top right, opens the app in a new tab. Before the first deploy there's no **Open**, and the card shows a notice such as **Not deployed yet. Deploy it to get an address you can share.**
 
-![The app's Overview tab: the App URL block with a copy button and Open in new tab, plus the App Info panel](/data-apps/publish-config.png)
+The app's [authentication](/data-apps/authentication/) decides who gets in once they have the link. If the app is asleep, the first visit wakes it; [Stop, start, sleep](/data-apps/operate/#stop-start-sleep) has the details.
+
+With **Basic (Password)**, share the password too. It's in the same card, in the **Password** field under **Authentication**: hidden until you click the eye icon, with a copy button that copies it even while it's hidden. If the card shows a notice asking you to deploy, start or redeploy the app instead of the field, do that first; it generates the password. **Reset** replaces it with a new password after you confirm, and the old one stops working for everyone who has it, usually within a minute.
+
+![Part of a deployed app's Overview tab: the Used in and Description cards, then the App access card with Open at the top right, the App URL block (the prefix toy-store-sales, the generated part and a copy button) and Authentication set to Basic (Password), with the hidden password and its Reset, eye and copy controls; on the right, the App Info panel, Last App Runs and Versions](/data-apps/publish-config.png)
 
 ## Manage a deployed app
 
