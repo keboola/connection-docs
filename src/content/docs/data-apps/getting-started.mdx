@@ -120,7 +120,7 @@ Prefer to set the app up yourself, without the chat? The same **Create app** scr
 
    Until the app has code, its **App access** card says **No code yet** and **Deploy** is disabled. A saved repository URL already counts as code, so the card then says **Not deployed yet** and **Deploy** is enabled even before a branch is picked; pick the branch before you deploy.
 
-   {/* VERIFY(Nikita): the states right after creation (No code yet, Add Code, Load branches) come from the UI code of 1 Oct; no app in project 264 is in that state. */}
+   {/* Steps 3-4 and the paragraph above verified in the live UI on 2026-10-07 (project 264, build bundle.KLJ3B_2i.js) with temporary apps, deleted afterwards. Python / JS form: Private repository appears only once a Repository URL is typed. A Python / JS app created without a URL (App ID 74023000) and a new Streamlit app (74023001): App access says No code yet, Deploy disabled, Authentication Basic (Password). Saving a Project URL with no branch on the Python / JS app: Not deployed yet, Deploy enabled. Streamlit Code Source opens on Git Repository; Code shows Add Code; under Git Repository, Load branches turns into Reload branches and the Main File Path field (placeholder "Default value streamlit_app.py") appears once branches load. */}
 5. Configure the rest of the app's settings; see [Reference](/data-apps/reference/) for the full list. The backend size and the inactivity timeout come next, in the deploy wizard.
 
 ![A new Python/JS app's Overview tab, marked Not Deployed, with Deploy in the header: the App access card with the App URL and Authentication, the Git Repository card with keboola/titanic-python-app connected, and the App Info panel](/data-apps/build-in-ui-config.png)
