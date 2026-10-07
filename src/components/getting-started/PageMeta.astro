@@ -1,31 +1,46 @@
 ---
-// Cold-start block (a): genre, which guide the page belongs to, and an honest
-// time budget — so a reader arriving from a search engine knows within one line
-// what kind of page this is and what it will cost them.
+// Cold-start block (a): genre and which guide the page belongs to, so a reader
+// arriving from a search engine knows within one line what kind of page this is.
 //
-// Deliberately carries NO ordinal ("step 3 of 7"): numbering breaks the moment
-// a page moves, and none of the twelve documentation sites surveyed uses it.
-// Reading order lives in the sidebar.
+// Time: only the hub carries one, and only the one number that was measured
+// rather than estimated, the time Kai takes to build the pipeline from the
+// Prompt tab (Nikita, 2026-09-29). The per-step estimates came from word counts
+// at 200 words a minute plus Kai's wall time, and "about 80 minutes" on the hub
+// read as a reason not to start. A page passes `time` for that sentence, or
+// nothing. `minutes` still works for a page that has a measured figure.
 //
-// Usage:  <PageMeta genre="Tutorial" minutes="10" />
-//         <PageMeta genre="How-to" minutes="5" guide="Going further" />
+// Step numbers are not here: the course bar (CourseLine.astro) shows where a
+// step sits, from the one list in course.mjs.
+//
+// Usage:  <PageMeta genre="Tutorial" />
+//         <PageMeta genre="Tutorial" time="about 30 minutes with Kai, plus reading" />
+//         <PageMeta genre="How-to" guide="Going further" />
 
 interface Props {
   /** Diátaxis type of this page. One page, one genre. */
   genre: 'Tutorial' | 'How-to' | 'Reference' | 'Explanation';
-  /** Time budget in minutes. Measure it; do not guess. */
-  minutes: number | string;
+  /** A measured time budget in minutes. Measure it; do not guess. */
+  minutes?: number | string;
+  /** The time budget as a phrase, when a bare number would mislead. */
+  time?: string;
   /** Which guide this page belongs to. */
   guide?: string;
 }
 
-const { genre, minutes, guide = 'Getting Started' } = Astro.props;
+const { genre, minutes, time, guide = 'Getting Started' } = Astro.props;
+const timeText = time ?? (minutes ? `about ${minutes} minutes` : null);
 ---
 
 <p class="gs-pagemeta" data-genre={genre.toLowerCase()}>
   <span class="gs-pagemeta__genre">{genre}</span>
   <span class="gs-pagemeta__sep" aria-hidden="true">·</span>
   <span class="gs-pagemeta__guide">{guide}</span>
-  <span class="gs-pagemeta__sep" aria-hidden="true">·</span>
-  <span class="gs-pagemeta__time">about {minutes} minutes</span>
+  {
+    timeText && (
+      <Fragment>
+        <span class="gs-pagemeta__sep" aria-hidden="true">·</span>
+        <span class="gs-pagemeta__time">{timeText}</span>
+      </Fragment>
+    )
+  }
 </p>

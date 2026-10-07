@@ -24,7 +24,16 @@ export const TAB_LABELS = ['Prompt', 'UI', 'CLI / API'];
 export function pathIntroText({ tabs = 2, manual, approvals, yours } = {}) {
   const out = [];
 
-  if (tabs === 3) {
+  if (manual === false) {
+    // app/: the three are not interchangeable there, so the usual "each reach
+    // the same result" would be false
+    out.push(
+      '**Three tabs, not three steps**, and here only **Prompt** builds it. There is no ' +
+        'click-by-click equivalent: by hand it is a development workflow with its own section, and ' +
+        'the **UI** section says where to go for it. **CLI / API** works on what the Prompt tab ' +
+        'built.',
+    );
+  } else if (tabs === 3) {
     out.push(
       '**Three ways to do this, one page. They are alternatives, not steps.** The sections ' +
         'below (**Prompt**, **UI**, **CLI / API**) each reach the same result: **Prompt** is what ' +
@@ -38,17 +47,11 @@ export function pathIntroText({ tabs = 2, manual, approvals, yours } = {}) {
     );
   }
 
-  if (manual === false) {
-    out.push(
-      'There is no click-by-click equivalent for building this: by hand it is a development ' +
-        'workflow with its own section, and the **UI** section says where to go for it.',
-    );
-  }
-
   if (approvals !== false) {
     out.push(
-      'Kai asks before it changes anything: one approval dialog per object it creates, showing ' +
-        'the configuration it is about to write. Questions that only read do not ask.',
+      'In the chat, Kai asks before each change it makes: one approval card each, showing what it ' +
+        'is about to write or run, unless you chose Always allow for that tool. ' +
+        'Questions that only read do not ask.',
     );
   }
 
@@ -56,7 +59,7 @@ export function pathIntroText({ tabs = 2, manual, approvals, yours } = {}) {
 
   out.push(
     'If a step builds something other than what this page describes, say so in the same chat; ' +
-      'it edits what it made. Nothing here is one-way.',
+      'it edits what it made. Most of it can be undone.',
   );
 
   return out;

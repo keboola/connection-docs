@@ -2,11 +2,18 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSy
 import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
-// Getting Started pages render their own box and intro (src/components/getting-started/). A page's
-// import line says which <Prereqs> it uses, and its twin takes the wording from the same table.
-import { sharedText as gsSharedText } from '../components/getting-started/prereqs.mjs';
+import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/getting-started/prereqs.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
+import { courseListText, courseBarText } from '../components/getting-started/course.mjs';
+import { sampleText } from '../components/getting-started/sample.mjs';
+// Every other page uses the site-wide box (src/components/Prereqs.astro, from the Apps work) and
+// its stage strip. A page's own import line says which <Prereqs> it renders, and the twin takes the
+// wording from that component's table.
+import {
+  sharedText as siteSharedText,
+  tabsText as siteTabsText,
+  LABELS as SITE_LABELS,
+} from '../components/prereqs.mjs';
 
 /**
  * Astro integration that emits a raw-markdown copy of every docs page.
@@ -101,41 +108,60 @@ function inlineToMarkdown(line) {
  * Render <Prereqs needs={[…]}> as text.
  *
  * The component's own markup is dropped with every other component wrapper,
- * which would take the prerequisites with it: the twin would tell an agent to
- * load data without mentioning that a project has to exist first. The wording
- * comes from the same table the component renders (prereqs.mjs), so the two
- * cannot drift.
+ * which used to take the prerequisites with it: the twin told an agent to load
+ * data without mentioning that a project has to exist first. The wording comes
+ * from the same table the component renders (prereqs.mjs), so the two cannot
+ * drift.
  */
-function prereqsToText(tag, gs = false) {
+function prereqsToText(tag, { mayHaveOwn = false } = {}) {
   const needs = tag.match(/needs=\{\[([^\]]*)\]\}/);
   const keys = needs
     ? needs[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean)
     : ['project'];
-  if (gs) {
-    // Getting Started's own box: one list under "Before you start", shared lines first,
-    // the page's <li> children after them.
-    const gsLines = keys.map(gsSharedText).filter(Boolean);
-    return gsLines.length ? ['', '**Before you start**', '', ...gsLines.map((l) => `- ${l}`), ''] : [];
-  }
   const lines = keys.map(sharedText).filter(Boolean);
-  // The "You need" heading prints even with no shared items: the page's own
-  // <li> children follow it.
-  return ['', `**${PREREQ_LABELS.box}**`, '', `${PREREQ_LABELS.needs}:`, '', ...lines.map((l) => `- ${l}`)];
+  // The "You need" heading prints when something can follow it: shared items,
+  // or the page's own <li> children (project/ has only those). An open tag
+  // that ends up with no items takes the heading back out at its close tag
+  // (check/ passes needs={[]} and only the from/to slots).
+  const heading = lines.length || mayHaveOwn ? [`${PREREQ_LABELS.needs}:`, ''] : [];
+  return ['', '**Before you start**', '', ...heading, ...lines.map((l) => `- ${l}`)];
 }
 
-/** The second list of <Prereqs>, under the page's own `groupLabel`. */
-function prereqsGroupToText(tag, items) {
-  const label = tag.match(/\bgroupLabel="([^"]*)"/);
-  if (!label || !items.length) return [];
-  return ['', `${label[1]}:`, '', ...items];
-}
-
-/** The tab list of <Prereqs>, one line per tab, printed after the page's own items. */
+/** The second list of <Prereqs>, one line per tab, printed after the page's own items. */
 function prereqsTabsToText(tag, overrides = {}) {
   const tabs = tag.match(/tabs=\{(\d)\}/);
   const count = tabs ? Number(tabs[1]) : 0;
   if (!count) return [''];
   return ['', `${PREREQ_LABELS.tabs}:`, '', ...tabsText(count, overrides).map((l) => `- ${l}`), ''];
+}
+
+/**
+ * The same three, for the site-wide <Prereqs> (src/components/Prereqs.astro):
+ * "You need" with the shared items, a second list under the page's own
+ * `groupLabel`, and the tab lines.
+ */
+function sitePrereqsToText(tag) {
+  const needs = tag.match(/needs=\{\[([^\]]*)\]\}/);
+  const keys = needs
+    ? needs[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean)
+    : ['project'];
+  const lines = keys.map(siteSharedText).filter(Boolean);
+  // The "You need" heading prints even with no shared items: the page's own
+  // <li> children follow it.
+  return ['', `**${SITE_LABELS.box}**`, '', `${SITE_LABELS.needs}:`, '', ...lines.map((l) => `- ${l}`)];
+}
+
+function sitePrereqsGroupToText(tag, items) {
+  const label = tag.match(/\bgroupLabel="([^"]*)"/);
+  if (!label || !items.length) return [];
+  return ['', `${label[1]}:`, '', ...items];
+}
+
+function sitePrereqsTabsToText(tag, overrides = {}) {
+  const tabs = tag.match(/tabs=\{(\d)\}/);
+  const count = tabs ? Number(tabs[1]) : 0;
+  if (!count) return [''];
+  return ['', `${SITE_LABELS.tabs}:`, '', ...siteTabsText(count, overrides).map((l) => `- ${l}`), ''];
 }
 
 /**
@@ -148,58 +174,126 @@ function prereqsTabsToText(tag, overrides = {}) {
  *
  * Component wrappers are dropped and their children kept, which flattens a
  * tabbed page into its sections one after another — the right shape for a
- * reader who cannot click a tab. Children are also dedented by one level per
- * wrapper, because MDX authors indent them and four leading spaces would
- * otherwise turn ordinary prose into an indented code block.
+ * reader who cannot click a tab. Each tab's label becomes a heading, and a
+ * rule closes the group, so what follows the tabs does not read as part of
+ * the last one. Children are also dedented by the indentation their author
+ * actually gave them inside the wrapper (measured on the first child line),
+ * because four leading spaces would otherwise turn ordinary prose into an
+ * indented code block; children written flush left keep their own list and
+ * code indentation (2026-09-29: load/'s steps 10-13 lost theirs).
  *
  * Components are matched on an uppercase initial, the JSX convention, so
- * lowercase HTML written inline in a page is left alone. Three of them carry
+ * lowercase HTML written inline in a page is left alone. Several carry
  * meaning a reader needs and are rendered rather than dropped: a tab's
- * `label`, <Prereqs>, and <StageStrip>, which prints as a numbered list; so is
- * <PathIntro> on the Getting Started pages. Authoring comments, MDX and HTML
- * alike, are stripped (see stripComments).
+ * `label`, <Prereqs> (the Getting Started box or the site-wide one, by the
+ * page's import), <StageStrip> as a numbered list, and the Getting Started
+ * pictures below.
  */
 function stripMdx(body) {
   // Getting Started pages import their own <Prereqs> from components/getting-started/.
   const gs = /import\s+Prereqs\s+from\s+['"][^'"]*getting-started\/Prereqs\.astro['"]/.test(body);
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
-  const withComments = stripComments(withoutImports);
+  // <details> is how a page folds away what most readers can skip; the twin
+  // has no folding, so the summary becomes a bold line and the rest follows
+  const withoutComments = stripComments(withoutImports)
+    .replace(/^[ \t]*<details[^>]*>[ \t]*$/gm, '')
+    .replace(/^[ \t]*<\/details>[ \t]*$/gm, '')
+    .replace(/^[ \t]*<summary>([\s\S]*?)<\/summary>[ \t]*$/gm, (m, t) => `**${t.trim().replace(/<\/?code>/g, '`')}**`);
 
-  const INDENT = '    ';
-  // Comments inside <Prereqs> and <StageStrip> are dropped: a markdown list
-  // can't hold them, and glued to the next item they'd hide its slot="group".
-  const COMMENT = /<!--[\s\S]*?-->/g;
   const open = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*(?<!\/)>\s*$/;
   const selfClosing = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*\/>\s*$/;
   const close = /^\s*<\/[A-Z][A-Za-z0-9]*\s*>\s*$/;
 
-  let depth = 0;
-  let inStrip = false;
-  let stripN = 0;
+  const indents = [];   // extra indentation of each open wrapper's children
+  const stripOf = () => indents.reduce((a, b) => a + b, 0);
+  const lead = (l) => l.length - l.trimStart().length;
   let inPrereqs = false;
+  let prereqsItems = 0;
+  let lastHeading = 2;  // level of the latest markdown heading outside code
+  let tabsLevel = 3;    // tab labels sit one level below the section that holds the tabs
   let prereqsTag = '';
   let prereqsTabs = {};
+  let prereqsState = {};
+  let prereqsStart = -1;
+  let inStrip = false;
+  let stripN = 0;
   const groupItems = [];
   const slot = [];
   const out = [];
 
-  for (const line of withComments.split('\n')) {
+  // Inside a fenced code block the code's own indentation is content: YAML
+  // nests by it. Such a line loses only what its opening fence lost to the
+  // wrapper dedent, and is never read as a component tag. (2026-09-29: the
+  // flow.yaml on automate/ lost every 4-space level and no longer parsed.)
+  let fence = null;
+
+  const lines = withoutComments.split('\n');
+  for (let n = 0; n < lines.length; n += 1) {
+    const line = lines[n];
+    if (fence) {
+      const text = fence.strip && line.startsWith(' '.repeat(fence.strip)) ? line.slice(fence.strip) : line;
+      const closer = line.match(/^\s*(`{3,}|~{3,})\s*$/);
+      if (closer && closer[1][0] === fence.marker[0] && closer[1].length >= fence.marker.length) fence = null;
+      out.push(text);
+      continue;
+    }
     if (selfClosing.test(line)) {
-      if (/^\s*<Prereqs\b/.test(line)) out.push(...prereqsToText(line, gs), ...(gs ? [] : prereqsTabsToText(line)));
+      if (/^\s*<Prereqs\b/.test(line)) {
+        out.push(...(gs
+          ? [...prereqsToText(line), ...prereqsTabsToText(line)]
+          : [...sitePrereqsToText(line), ...sitePrereqsTabsToText(line)]));
+      }
       if (/^\s*<PathIntro\b/.test(line)) {
         out.push('', ...pathIntroText(tagProps(line)).map((p) => p + '\n'));
+      }
+      // The Getting Started pictures carry text a reader needs: where a step
+      // sits in the course, the sample tables, a process drawn as boxes, a card
+      // that links somewhere. Each comes from the same data as the component.
+      if (/^\s*<CourseLine\b/.test(line)) {
+        const props = tagProps(line);
+        const text = props.layout === 'list' ? courseListText() : courseBarText(props.current);
+        out.push('', ...text, '');
+      }
+      if (/^\s*<SampleData\b/.test(line)) out.push('', ...sampleText(), '');
+      if (/^\s*<FromTo\b/.test(line)) {
+        const { from, to } = tagProps(line);
+        out.push('', `**${PREREQ_LABELS.from}:** ${from} **${PREREQ_LABELS.to}:** ${to}`, '');
+      }
+      if (/^\s*<FlowStrip\b/.test(line)) {
+        const steps = String(tagProps(line).steps ?? '').split('|').map((x) => x.trim()).filter(Boolean);
+        if (steps.length) out.push('', steps.join(' → '), '');
+      }
+      if (/^\s*<LinkCard\b/.test(line)) {
+        const { title, href, description } = tagProps(line);
+        if (title && href) out.push(`- [${title}](${href})${description ? `: ${description}` : ''}`);
       }
       continue;
     }
     if (close.test(line)) {
-      depth = Math.max(0, depth - 1);
+      indents.pop();
+      if (/^\s*<\/Tabs>/.test(line)) out.push('', '---', '');
       if (/^\s*<\/StageStrip>/.test(line)) { inStrip = false; slot.length = 0; out.push(''); }
-      if (/^\s*<\/Prereqs>/.test(line)) {
-        if (!gs) out.push(...prereqsGroupToText(prereqsTag, groupItems), ...prereqsTabsToText(prereqsTag, prereqsTabs));
+      if (/^\s*<\/Prereqs>/.test(line) && !gs) {
+        out.push(...sitePrereqsGroupToText(prereqsTag, groupItems), ...sitePrereqsTabsToText(prereqsTag, prereqsTabs));
         inPrereqs = false;
         prereqsTabs = {};
         groupItems.length = 0;
         slot.length = 0;
+      } else if (/^\s*<\/Prereqs>/.test(line)) {
+        if (!prereqsItems && out[prereqsStart + 3] === `${PREREQ_LABELS.needs}:`) out.splice(prereqsStart + 3, 2);
+        out.push(...prereqsTabsToText(prereqsTag, prereqsTabs));
+        // "Where you are" and "When you finish" arrive in the slot but read
+        // first, straight under the box's heading, as they do on the page
+        const state = [
+          prereqsState.from && `**${PREREQ_LABELS.from}:** ${prereqsState.from}`,
+          prereqsState.to && `**${PREREQ_LABELS.to}:** ${prereqsState.to}`,
+        ].filter(Boolean);
+        if (state.length && prereqsStart >= 0) out.splice(prereqsStart + 2, 0, '', state.join(' '));
+        inPrereqs = false;
+        prereqsTabs = {};
+        prereqsState = {};
+        prereqsStart = -1;
+        prereqsItems = 0;
       }
       continue;
     }
@@ -208,48 +302,73 @@ function stripMdx(body) {
       // flattened sections run together and a reader cannot tell which
       // variant is which.
       const label = line.match(/\blabel=["']([^"']+)["']/);
-      if (label) out.push('', `**${label[1]}**`, '');
-      // <Prereqs needs={…}> with page-specific <li> children in its slots: the
-      // shared lines go in first, the children follow as the lists they are.
-      if (/^\s*<Prereqs\b/.test(line)) { out.push(...prereqsToText(line, gs)); inPrereqs = true; prereqsTag = line; }
+      if (/^\s*<Tabs\b/.test(line)) tabsLevel = Math.min(6, lastHeading + 1);
+      if (label) out.push('', /^\s*<TabItem\b/.test(line) ? `${'#'.repeat(tabsLevel)} ${label[1]}` : `**${label[1]}**`, '');
+      // <Prereqs needs={…}> with page-specific <li> children in its slot: the
+      // shared lines go in first, the children follow as the list they are.
       if (/^\s*<StageStrip\b/.test(line)) { inStrip = true; stripN = 0; }
-      depth += 1;
+      if (/^\s*<Prereqs\b/.test(line) && !gs) {
+        out.push(...sitePrereqsToText(line));
+        inPrereqs = true;
+        prereqsTag = line;
+      } else if (/^\s*<Prereqs\b/.test(line)) {
+        prereqsStart = out.length;
+        const head = prereqsToText(line, { mayHaveOwn: true });
+        prereqsItems = head.filter((l) => l.startsWith('- ')).length;
+        out.push(...head);
+        inPrereqs = true;
+        prereqsTag = line;
+      }
+      // how far this wrapper's author indented its children: the first
+      // non-blank line inside it, relative to the tag itself
+      let k = n + 1;
+      while (k < lines.length && !lines[k].trim()) k += 1;
+      const child = k < lines.length && !close.test(lines[k]) ? lead(lines[k]) - lead(line) : 0;
+      indents.push(Math.max(0, child));
       continue;
     }
 
-    let text = line;
-    for (let i = 0; i < depth && text.startsWith(INDENT); i += 1) {
-      text = text.slice(INDENT.length);
-    }
+    const strip = Math.min(stripOf(), lead(line));
+    const text = line.slice(strip);
+    const opener = line.match(/^\s*(`{3,}|~{3,})/);
+    if (opener) fence = { marker: opener[1], strip: line.length - text.length };
     if (inStrip) {
       // one <li> per stage: flatten it, number it, and end the bold title with a period
       slot.push(text);
       if (/<\/li>/.test(text)) {
-        const item = inlineToMarkdown(slot.join(' ').replace(COMMENT, '')).replace(/^- /, '');
+        const item = inlineToMarkdown(slot.join(' ')).replace(/^- /, '');
         slot.length = 0;
         if (item) out.push(`${++stripN}. ${item.replace(/^\*\*(.+?)\*\*\s*/, '**$1.** ')}`);
       }
       continue;
     }
     if (inPrereqs) {
-      // the slots hold raw <li> JSX, or a tab's own line as <span slot="…">;
+      // the slot holds raw <li> JSX, or a tab's own line as <span slot="…">;
       // buffer until the item closes, then flatten
       slot.push(text);
-      const joined = slot.join(' ').replace(COMMENT, '');
-      const tabLine = joined.match(/^\s*<span slot="(prompt|ui|cli)">([\s\S]*)<\/span>\s*$/);
+      const tabLine = slot.join(' ').match(/^\s*<span slot="(prompt|ui|cli|from|to)">([\s\S]*)<\/span>\s*$/);
       if (tabLine) {
-        prereqsTabs[tabLine[1]] = inlineToMarkdown(tabLine[2]);
+        const key = tabLine[1];
+        if (key === 'from' || key === 'to') prereqsState[key] = inlineToMarkdown(tabLine[2]);
+        else prereqsTabs[key] = inlineToMarkdown(tabLine[2]);
         slot.length = 0;
         continue;
       }
       if (/<\/li>/.test(text)) {
+        const joined = slot.join(' ');
         const item = inlineToMarkdown(joined);
-        // <li slot="group"> items belong to the second list, printed at </Prereqs>
-        if (item) (/^\s*<li\s+slot="group"/.test(joined) ? groupItems : out).push(item.startsWith('- ') ? item : `- ${item}`);
+        if (item) {
+          const li = item.startsWith('- ') ? item : `- ${item}`;
+          // <li slot="group"> items belong to the site-wide box's second list, printed at </Prereqs>
+          if (!gs && /^\s*<li\s+slot="group"/.test(joined)) groupItems.push(li);
+          else { out.push(li); prereqsItems += 1; }
+        }
         slot.length = 0;
       }
       continue;
     }
+    const heading = text.match(/^(#{2,6})\s/);
+    if (heading) lastHeading = heading[1].length;
     out.push(text);
   }
 

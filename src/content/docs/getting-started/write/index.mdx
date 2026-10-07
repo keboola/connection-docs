@@ -4,6 +4,7 @@ slug: 'getting-started/write'
 description: 'Send the table you just built out of Keboola into a Google Sheet using the Google Sheets data destination connector.'
 redirect_from:
   - /tutorial/write/
+prev: 'Going further'
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -11,7 +12,7 @@ import PageMeta from '../../../../components/getting-started/PageMeta.astro';
 import Prereqs from '../../../../components/getting-started/Prereqs.astro';
 import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
-<PageMeta genre="How-to" minutes="10" guide="Going further" />
+<PageMeta genre="How-to" guide="Going further" />
 
 Whoever asked the question will look in a spreadsheet, not in Keboola. This page delivers a
 Storage table to a Google Sheet, with the same mechanism that sends data to a warehouse, a BI
@@ -45,9 +46,9 @@ stays coherent across the section. No CLI tab: the OAuth consent screen cannot b
 terminal, and the two kbagent commands named above were not run here because doing so writes to
 a real spreadsheet in Nikita's Google account — they are the same commands the load page proves. */}
 
-<Prereqs needs={['project', 'google']}>
+<Prereqs needs={['project', 'google']} tabs={2}>
   <li>
-    The table you want to deliver, in Storage: <code>staffing_outlook</code> from{' '}
+    <strong>The table to deliver,</strong> in Storage: <code>staffing_outlook</code> from{' '}
     <a href="/getting-started/transform/">Transform data</a> if you are following the guide.
   </li>
 </Prereqs>
@@ -82,7 +83,7 @@ Still worth saying once on /kai/ where the boundary belongs, which is that secti
 
 2. Click **Add Component** (**Create Configuration** on the card once the component already has
    configurations), then **Connect To My Data**. It is the only button here, unlike the HTTP
-   connector in [Get your data in](/getting-started/load/), which also offered demo data.
+   connector in [Load data into Storage](/getting-started/load/), which also offered demo data.
 
    ![Screenshot - Connect to my data](/getting-started/write/writing2.png)
 
@@ -130,15 +131,12 @@ authorization above are yours either way; that consent screen is in your own Goo
 something an assistant can click through. Everything after it, Kai can do: open **Kai Agent** in
 the top bar and hand it over.
 
-```text title="Prompt"
-In my "Boolabean outlook to Sheets" configuration, write
-out.c-Boolabean-staffing-outlook.staffing_outlook to a new spreadsheet called
-"Boolabean staffing outlook", into a sheet named staffing_outlook, set to update rows rather
-than append. Then run it.
+```text title="Prompt" wrap
+In my "Boolabean outlook to Sheets" configuration, write out.c-Boolabean-staffing-outlook.staffing_outlook to a new spreadsheet called "Boolabean staffing outlook", into a sheet named staffing_outlook, set to update rows rather than append. Then run it.
 ```
 
-Naming all three matters: [the flow](/getting-started/automate/) puts this on a **daily
-schedule**, so an appending sheet grows by 42 rows a day and the manager reading it sees last
+Naming all three matters: [the flow](/getting-started/automate/) puts this on a **weekly
+schedule**, so an appending sheet grows by 42 rows a week and the manager reading it sees last
 week's forecast above this week's, and the check at the end of this tab looks for that spreadsheet
 name.
 
