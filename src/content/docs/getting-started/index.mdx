@@ -15,12 +15,13 @@ import FromTo from '../../../components/getting-started/FromTo.astro';
 <PageMeta genre="Tutorial" time="about 30 minutes with Kai, plus sign-up and reading" />
 
 Your data lives in more places than one: files, a spreadsheet someone keeps, an API, a database.
-Keboola is where you bring it together and shape it with SQL. Kai, its AI assistant, answers
-questions about it in plain language; the answer becomes an app, and the pipeline reruns by itself
-every week. This guide does each of those once, on a small sample, so you can do them on your own
-data.
+Keboola is where you bring it together and shape it with SQL. Once you have a project, Kai, its AI
+assistant, can do the work from what you tell it in plain language: it loads your data, answers
+questions about it, and turns the answer into an app, asking for your approval along the way. The
+pipeline then reruns by itself every week. This guide does each of those once, on a small sample,
+so you can do them on your own data.
 
-<video autoplay loop muted playsinline poster="/getting-started/hub-explainer-poster.png" aria-label="How Keboola works, as four numbered dots on a line: load your data, ask Kai, Kai builds it, the app is ready. Then the app this guide builds, a grid of six cafés by seven days with three red cells, beside the words: Want to build an app like this one? An interactive dashboard? A what-if simulator? Go through the guide and try it yourself.">
+<video autoplay loop muted playsinline poster="/getting-started/hub-explainer-poster.png" aria-label="How Keboola works, as four numbered dots on a line: your idea, tell Kai, Kai loads your data, Kai builds the app. Then a card beside the words Want to build: the app this guide builds, a grid of six cafés by seven days with three red cells, for an app like this one; a store dashboard switched to the last 12 months, for an interactive dashboard; and a café staffing planner at 31 °C on a Saturday, for a what-if simulator. Under them: Go through the guide and try it yourself.">
   <source src="/getting-started/hub-explainer.mp4" type="video/mp4" />
 </video>
 
@@ -108,7 +109,22 @@ app this guide builds, and only the phrase changes. 10.0 s, 201 KB, luma mean 22
 227, in limited range like the earlier clips (Remotion writes full range, so the encode converts).
 The video is 713 px wide in a 1280-px window, not the 800 the numbers above assumed, so canvas
 sizes shrink by 0.56: the 40-px lines read at 22 px, the closing line (26 px) at 14.5, the step
-titles (30 px) at 16.7. The poster is the whole line at 3.3 s. DECISIONS.md 2026-10-06. */}
+titles (30 px) at 16.7. The poster is the whole line at 3.3 s. DECISIONS.md 2026-10-06.
+
+2026-10-07, Michal via Nikita: more Kai in the process. The four steps became a hand-off, "Your
+idea", "Tell Kai", "Kai loads your data", "Kai builds the app", one line each with Kai in blue. A
+first try with two-line steps ("You tell Kai what you want", 79 characters) was too much to read in
+the line's 3.9 s, so the labels are back near the 6 Oct length (54 characters); the dot numbers
+went from 20 to 24 px. The first paragraph says the same in prose (Kai loads the data on load/'s
+Prompt path: it sets up the HTTP data source and runs it) and that Kai asks for approval along the
+way, since the clip no longer says "you approve each change" as the 09-29 version did. Timing,
+slide two and the look are unchanged; 200 KB, luma mean 228, never under 227. Later that day
+Nikita asked for a screen under each blue phrase: the card now shows the grid, then the Store
+pulse dashboard (Shopify sample, last 12 months) and the Café staffing planner (31 °C, Saturday),
+two apps Kai built in 264 on 10-06, the last frames of the ../apps-range takes. Each fades in
+through the card's white as its phrase arrives, so two screens never overlap. Unlike the 10-06
+montage this keeps one slide, the guide's grid first, and no headings over the cards. 249 KB, luma
+mean 229, never under 227. DECISIONS.md 2026-10-07. */}
 
 <FromTo from="you have heard of Keboola and have nothing set up." to="a scheduled pipeline and an app, in a project you created or joined." />
 
@@ -125,7 +141,7 @@ description you write ([What you can build](/data-apps/what-are-apps/#what-you-c
     to your company's project. A free project is enough; we ran this guide's Prompt path on one.
   </li>
   <li>
-    <strong>A browser.</strong> Every step also has a Prompt way and a terminal way;{' '}
+    <strong>A browser.</strong> Every step after the first also has a Prompt way and a terminal way;{' '}
     <a href="#how-every-page-works">How every page works</a> says what those need.
   </li>
 </Prereqs>
@@ -152,7 +168,7 @@ needs, and how to tell it worked.
 
 Every page with a task on it offers that task three ways:
 
-- **Prompt**: paste it into **Kai**, the assistant in the project's top bar, and watch it build. A
+- **Prompt**: paste it into **Kai Agent**, the assistant in the project's top bar, and watch it build. A
   new Free Plan project has Kai from the start; elsewhere an organization admin switches it on
   once; see [Get started with Kai](/kai/getting-started/).
 - **UI**: the same task click by click, to see where each setting lives.

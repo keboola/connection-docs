@@ -1636,6 +1636,48 @@ so the 40-px lines read at 22 px, the 26-px closing line at 14.5 and the step ti
 
 ---
 
+## 2026-10-07 — The hub clip's line becomes a hand-off to Kai
+
+**Asked by:** Michal, through Nikita on 7 Oct: involve Kai more in the process; for example, say in
+the clip that Kai can load your data. Nikita: make the line a pipeline of words, where you have an
+idea, go to Kai and say what you want, and Kai does the work.
+
+**Decision.** The four steps of the hub clip's line now read "Your idea", "Tell Kai", "Kai loads
+your data", "Kai builds the app", one line each, with the word Kai in Keboola blue. A first try in
+two lines per step ("You have an idea", "You tell Kai what you want") came to 79 characters, and the
+checker found it too much to read in the line's 3.9 s; the last step was on screen for 0.9 s. The
+labels are back near the 6 Oct length (54 characters) and the timing is the one Nikita approved on
+6 Oct. The dots moved 36 px apart to give the two long labels a gap, and their numbers grew from 20
+to 24 px (11 px as seen before, now 13.4). The second slide and the look are unchanged.
+
+**The page says it too.** The hub's first paragraph now reads that once you have a project, Kai can
+do the work from what you tell it in plain language: it loads your data, answers questions about
+it, and turns the answer into an app, asking for your approval along the way. That is the guide's
+Prompt path (on load/, Kai sets up the HTTP data source and runs it). "Once you have a project",
+because project/ has no prompt; "asking for your approval along the way", because the guide-tester
+found that the top of the page no longer mentioned approving anything, and the approvals section
+explains what asks and what does not (the Apps builder makes its draft without asking and asks
+twice at publish). The clip itself says nothing about approvals either way. Two small fixes rode
+along: the box says "Every step after the first" instead of "Every step", in project/'s own words
+(it has no prompt: Kai works inside a project), and How every page works names the top-bar button
+**Kai Agent**, as project/ and load/ do.
+
+**A screen under each phrase.** Later on 7 Oct Nikita asked for a different screen under each blue
+phrase on the second slide. The card now shows the guide's grid for "an app like this one?", the
+Store pulse dashboard (the project's Shopify sample, switched to the last 12 months) for "an
+interactive dashboard?", and the Café staffing planner (this guide's café sales, 31 °C on a
+Saturday) for "a what-if simulator?". Both apps are ones Kai built in project 264 on 6 Oct, and the
+screens are the last frames of their takes in `~/docs-ops/remotion/apps-range`; the cursor rests
+on the control that was used. Each screen fades in through the card's white as its phrase arrives,
+so two screens never sit on top of each other. This is not the montage rejected on 6 Oct: there is
+one slide, the guide's grid comes first, the layout and the closing line stay, and there are no
+headings over the cards.
+
+**Made with** the same Remotion project: 10.0 s, 249 KB, mean luma 229, darkest frame 227; poster
+1280x800, luma 228 (the whole line, unchanged).
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
