@@ -1,0 +1,24 @@
+---
+// The guide's prompts in course order, read from the step pages at build time (prompts.mjs), so
+// the hub never holds a second copy that could drift from the pages. Styling, if any, belongs in
+// src/styles/custom.css under .gs-guide-prompts.
+import { Code } from '@astrojs/starlight/components';
+import { guidePrompts } from './prompts.mjs';
+
+const steps = guidePrompts();
+---
+
+<ol class="gs-guide-prompts">
+  {
+    steps.map((step) => (
+      <li>
+        <p>
+          <a href={step.href}>{step.title}</a>, in {step.where[0]}<strong>{step.where[1]}</strong>{step.where[2]}:
+        </p>
+        {step.prompts.map((prompt) => (
+          <Code code={prompt} lang="text" title="Prompt" wrap />
+        ))}
+      </li>
+    ))
+  }
+</ol>

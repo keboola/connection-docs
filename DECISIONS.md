@@ -1678,6 +1678,71 @@ headings over the cards.
 
 ---
 
+## 2026-10-07 — Kai in the failure paths, and the whole guide as prompts
+
+**Asked by:** Michal, through Nikita on 7 Oct: more Kai in the process. Nikita picked two of four
+proposals and asked for them as a separate PR: ask Kai when something fails, and the whole guide
+as Kai prompts in one place.
+
+**Ask Kai first.** load/ and transform/ open their "If it goes wrong" sections with a tip in
+check/'s style holding two prompts that name the guide's configuration: one for a job that failed
+("Read its error and tell me what to change") and one for a job that succeeded but left a table
+that looks wrong ("Read the configuration [the SQL] and the first rows of that table…", with a
+placeholder for what the reader sees). The guide-tester found most of load/'s folds are such
+green-but-wrong jobs, and the checker that a failed-job prompt alone narrowed the plan. The tip
+also says to use your own name if you changed it, that Kai asks before any change unless the tool
+is set to **Always allow**, to run again and redo the check, and the terminal form (`kbagent kai
+ask`). A question that only reads asks for no approval by default, as the hub says. On ask/ the
+prompt "Show me the SQL you ran for that answer and the rows it is based on" sits in the Prompt
+tab's fold "If the numbers come out different", titled "Follow-up prompt" so the hub's list skips
+it; below the tabs it would have reached readers of the UI and CLI tabs, who have no Kai answer to
+question. On automate/ the red-run bullet of "Check it worked" ends with check/'s prompt in one
+line rather than a second copy of check/'s tip, since check/ is the next page.
+
+**Not as proposed, for Nikita.** The proposal said one prompt line in each failure fold; the tips
+carry two prompts per page instead, because the folds' failures are of two kinds and fourteen near
+identical lines would undo the dry pages. Per-fold lines are a follow-up if wanted. It also said to
+run the whole list once in one chat on 6375 before publishing; that run was not done. The list
+claims only the 1 Oct numbers (page by page), and a one-chat rerun would leave a second set of
+configurations, an app draft and a second weekly schedule in the project, with the app step in the
+Apps builder rather than the chat. Nikita's call.
+
+**The whole guide with Kai.** A new hub section before "Where to start instead": once you have a
+project, the prompts in order build the pipeline from loading to the weekly flow; paste each into
+Kai Agent, or the app's into the Apps builder, and approve what Kai asks. Before the next prompt
+the step's Check must match, with a signal per step: the load reports its row counts on its own
+about six minutes after Kai hands the chat back, the transformation's and the flow's job cards say
+**Job succeeded**, the app's chat ends with **Draft ready**, and a question is done when it is
+answered (the checker caught a first version that said "Job succeeded" for all five). The section
+gives the approvals of the run, 15 without the app's optional publish (load 7 and 3, transform 2,
+flow 3, from the pages), and is a short list: where, when to paste the next, what is left. The section names what the prompts leave to the
+reader: the flow's notifications, publishing the app, and Check Storage and Jobs; and it sends
+terminal users to each page's CLI / API tab. The guide-tester's first pass found "the whole
+pipeline", an undefined "finished" and no checks, all three fixed here. A fold holds
+the seven prompts of the five steps that have a Prompt tab. They are read from the step pages at
+build time (`components/getting-started/prompts.mjs`, used by `GuidePrompts.astro` and by the
+markdown twin), so the hub never holds a second copy; the build fails if a step that should have
+prompts has none. The text claims the 1 Oct timing (about 30 minutes from the first prompt to the
+last, one page at a time) and not that the prompts run back to back in one chat:
+that was last shown on 8 Sep, for four of the seven prompts and in older wording.
+
+**Run before the PR opened** (7 and 8 Oct, project 264, `kbagent kai ask` and `kai chat`,
+read-only, no approvals, about 30 s per answer). transform/'s failed-job prompt as worded: Kai
+checked the transformation's 24 runs, all green, and said so. The two green-but-wrong prompts, with
+"the stores table has only one column" and "it has more than 42 rows": Kai read the configuration
+or the SQL and the table's rows, found the tables fine, and said what to check or change, changing
+nothing. Asked by name about "Boolabean sales", whose last 50 runs had all
+succeeded, Kai found the configuration, checked its runs and said there was no failure rather than
+inventing one. Asked "My flow run failed. Which task failed, and why?", it found the latest failed
+run of "Boolabean morning outlook", named the failed task (the app redeploy) and read that child
+job's log: the app never reached "running". That also settles check/'s VERIFY on reading a flow
+run's child jobs. After ask/'s first question, "Show me the SQL you ran for that answer and the rows
+it is based on" printed both queries Kai had run and the three rows. transform/'s tip says Kai reads
+the job's log and the transformation's configuration, not "the SQL and the input mapping", because
+only the first was seen.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were

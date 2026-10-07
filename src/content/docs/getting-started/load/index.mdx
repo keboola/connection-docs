@@ -419,6 +419,31 @@ seconds.
 
 ## If it goes wrong
 
+:::tip[Ask Kai first]
+If the job failed:
+```text title="Prompt" wrap
+The last run of my "Boolabean sales" configuration failed. Read its error and tell me what to change.
+```
+If it succeeded but a table looks wrong (replace the part in angle brackets):
+```text title="Prompt" wrap
+The last run of my "Boolabean sales" configuration succeeded, but one of its tables looks wrong: <which table, and what you see>. Read the configuration and the first rows of that table and tell me what to change.
+```
+Kai reads the job's log, the configuration and the table
+([Troubleshooting](/kai/use-cases/#troubleshooting)); a question that only reads asks for no
+approval by default. Use your configuration's name if you changed it, or "Boolabean forecast" for
+the forecast. If Kai proposes a change, it asks before making it unless you set that tool to
+**Always allow**; then run the configuration again and redo **Check it worked**. From a terminal,
+ask the same with `kbagent kai ask --project <alias> -m "…"`. The folds below cover other errors and
+surprises, with their fixes.
+{/* Run 2026-10-07/08 in project 264 with `kbagent kai ask`, read-only, no approvals, about 30 s
+each. The failed-job prompt, about "Boolabean sales" whose last 50 runs had all succeeded: Kai found
+the configuration, checked its runs and said there was no failure rather than inventing one. On a
+real failure (a flow run) the same kind of question had Kai read the failed job's log and name the
+cause. The second prompt, with "the stores table has only one column": Kai read the configuration
+(delimiter, enclosure, header) and the table's first rows, said the table had its eight columns,
+and named what to check if it happened. DECISIONS.md 2026-10-07. */}
+:::
+
 <details>
 <summary>The job fails with a 404</summary>
 
@@ -463,14 +488,6 @@ or 8 with *Read the header* and the header's own names, unit suffixes included.
 <summary>You want the five files fetched at the same time</summary>
 
 Raise **Parallel jobs** on the configuration; the connector then processes its rows concurrently.
-
-</details>
-
-<details>
-<summary>You would rather have Kai read the job</summary>
-
-It has the log and the tables in front of it:
-`Read the last HTTP connector job and tell me what failed, then show me a sample of sales.`
 
 </details>
 

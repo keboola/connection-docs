@@ -11,6 +11,7 @@ import { CardGrid, LinkCard } from '@astrojs/starlight/components';
 import Prereqs from '../../../components/getting-started/Prereqs.astro';
 import CourseLine from '../../../components/getting-started/CourseLine.astro';
 import FromTo from '../../../components/getting-started/FromTo.astro';
+import GuidePrompts from '../../../components/getting-started/GuidePrompts.astro';
 
 <PageMeta genre="Tutorial" time="about 30 minutes with Kai, plus sign-up and reading" />
 
@@ -213,6 +214,37 @@ Storage and once to deploy it.
   ![Screenshot - The Versions tab of the Boolabean sales configuration: one version per change Kai made, from Configuration created to the fifth row added, with the Restore this version tooltip on an earlier row](/getting-started/kai-undo-versions.png)
 
 </details>
+
+## The whole guide with Kai
+
+Once you have a project, the guide's prompts in order build the pipeline, from loading the data to
+the weekly flow:
+
+- **Where:** paste each into **Kai Agent**, except the app's, which goes into the Apps builder.
+  Approve what Kai asks: 15 approvals in our run, not counting the app's optional publish.
+- **When to paste the next:** once the step's **Check** matches, on the page its name links to. The
+  load reports its row counts on its own, about six minutes after Kai hands the chat back; the
+  transformation's and the flow's job cards say **Job succeeded**; the app's chat ends with
+  **Draft ready**; a question is done when it is answered.
+- **What is left to you:** the flow's notifications, publishing the app if you want to share it,
+  and [checking Storage and Jobs](/getting-started/check/).
+
+In our run on a Free Plan project the prompts took about 30 minutes from the first to the last.
+From a terminal, use each page's **CLI / API** tab instead.
+
+<details>
+<summary>All the prompts, in order</summary>
+
+<GuidePrompts />
+
+</details>
+
+{/* Added 2026-10-07 at Nikita's request (Michal: more Kai in the process). The list is read from
+the step pages' Prompt tabs at build time (components/getting-started/prompts.mjs), so it never
+holds a second copy of a prompt. "About 30 minutes" is the 2026-10-01 Free Plan run, one page at a
+time (see the timing note at the top of this page); the prompts have not been run back to back in
+one chat in their current wording (8 Sep covered four of them, worded differently), so the text
+does not promise that. DECISIONS.md 2026-10-07. */}
 
 ## Where to start instead
 

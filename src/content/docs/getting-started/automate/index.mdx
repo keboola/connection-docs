@@ -433,7 +433,9 @@ are enough here.
   manual run, `Schedule for <flow ID> Scheduler` against an automatic one.
 - **A red run can still have done most of its work:** phases run in order, so when a later one
   fails, the ones before it are done. [Check Storage and Jobs](/getting-started/check/) shows how to read
-  the run.
+  the run, or ask Kai to read it: `My flow run failed. Which task failed, and why?`
+  {/* Same prompt as check/'s tip. Run 2026-10-07 in project 264 with `kbagent kai ask`: Kai found
+  the latest failed run of the flow, named the failed task and read that task's job log. */}
 - Next Monday there will be a second run you did not start, on a forecast that has moved by a
   week.
 

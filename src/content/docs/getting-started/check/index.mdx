@@ -101,8 +101,9 @@ My flow run failed. Which task failed, and why?
 ```
 Kai reads the run's job logs, which is faster than expanding them one at a time. The same question
 from a terminal is `kbagent kai ask --project <alias> -m "…"`.
-{/* VERIFY(owner): kai/ documents reading *a* job log, not traversing every child job of a flow
-run. The prompt is safe either way; the capability sentence is the unverified part. */}
+{/* Run 2026-10-07 in project 264 with `kbagent kai ask`, read-only, 32 s: Kai found the latest
+failed run of "Boolabean morning outlook", named the failed task (the app redeploy) and read that
+child job's log (an app that never reached "running"). DECISIONS.md 2026-10-07. */}
 :::
 
 ## The same checks from a terminal

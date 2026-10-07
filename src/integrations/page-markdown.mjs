@@ -6,6 +6,7 @@ import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/get
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
 import { courseListText, courseBarText } from '../components/getting-started/course.mjs';
 import { sampleText } from '../components/getting-started/sample.mjs';
+import { guidePromptsText } from '../components/getting-started/prompts.mjs';
 // Every other page uses the site-wide box (src/components/Prereqs.astro, from the Apps work) and
 // its stage strip. A page's own import line says which <Prereqs> it renders, and the twin takes the
 // wording from that component's table.
@@ -255,6 +256,8 @@ function stripMdx(body) {
         out.push('', ...text, '');
       }
       if (/^\s*<SampleData\b/.test(line)) out.push('', ...sampleText(), '');
+      // the guide's prompts in order, read from the step pages like the hub's component reads them
+      if (/^\s*<GuidePrompts\b/.test(line)) out.push('', ...guidePromptsText(), '');
       if (/^\s*<FromTo\b/.test(line)) {
         const { from, to } = tagProps(line);
         out.push('', `**${PREREQ_LABELS.from}:** ${from} **${PREREQ_LABELS.to}:** ${to}`, '');

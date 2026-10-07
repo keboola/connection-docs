@@ -115,7 +115,19 @@ one question because the pipeline had already put the roster next to the demand.
 Kai wrote its own SQL and may have drawn the lines somewhere else: rounded before dividing, or read
 `short_handed` as text. The definitions this guide uses are the columns your transformation
 already wrote, so point Kai at those (`expected_units`, `rostered_staff`,
-`expected_units_per_person`) rather than re-prompting blind.
+`expected_units_per_person`) rather than re-prompting blind. To see where its lines are, ask in the
+same chat:
+
+```text title="Follow-up prompt" wrap
+Show me the SQL you ran for that answer and the rows it is based on.
+```
+
+It only reads, so by default it asks for no approval, and a wrong filter or a wrong table is easier
+to spot in the SQL than in the prose.
+{/* Run 2026-10-07 in project 264 with `kbagent kai chat`, after this page's first question in the
+same chat: Kai printed both queries it had run (the short-handed filter and a date-range check) and
+the three rows, with no approval. Titled "Follow-up prompt" so components/getting-started/prompts.mjs
+does not list it on the hub as a step. DECISIONS.md 2026-10-07. */}
 
 </details>
 
