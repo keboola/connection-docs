@@ -132,18 +132,18 @@ the app, check that it loads its data, and give me its URL and its page in
 Keboola (<Keboola URL>/admin/projects/<project-id>/data-apps/<config-id>).
 ```
 
-Swap the orders table and the chart for your own data and keep the rest as it is; the agent fills in the page link itself. If kbagent knows more than one project, replace "the project kbagent is connected to" with the project's alias, from the **Alias** column of `kbagent project list`. With the sample data from [Before you start](#before-you-start), use this one:
+Swap the orders table and the chart for your own data and keep the rest as it is; the agent fills in the page link itself. If kbagent knows more than one project, replace "the project kbagent is connected to" with the project's alias, from the **Alias** column of `kbagent project list`. With the sample data from [Before you start](#before-you-start), use this one; if you loaded it with the HTTP connector, put that table's ID in place of `in.c-sample.opportunity`:
 
 ```text
 Build a Keboola app using kbagent, not an MCP server, in the project kbagent
 is connected to. It shows the number of opportunities created per month as a
-line chart, from the opportunity table (CreatedDate column).
+line chart, from the in.c-sample.opportunity table (CreatedDate column).
 Put the code in a new Keboola-managed Git repository, deploy the app, check
 that it loads its data, and give me its URL and its page in Keboola
 (<Keboola URL>/admin/projects/<project-id>/data-apps/<config-id>).
 ```
 
-{/* The sample prompt fits public/tutorial/opportunity.csv (639 rows, CreatedDate from 2015) loaded as in.c-sample.opportunity by kbagent storage upload-table (auto-creates bucket and table, per kbagent v0.96.2 --help) or by the HTTP connector (in.c-keboola-ex-http-<config-id>.opportunity). CSV Import, which tutorial/load still teaches, is deprecated and hidden from the component search (flags deprecated + excludeFromNewList on us-east4, checked 2026-10-05); VERIFY(Nikita) one run with it. The free project link is the same wizard URL the tutorial's Prerequisites use (200 on 2026-09-25). */}
+{/* The sample prompt fits public/tutorial/opportunity.csv (639 rows, CreatedDate from 2015-01 to 2015-03, stored as text) loaded as in.c-sample.opportunity by kbagent storage upload-table. Checked 2026-10-07 in project 264: an agent with the dataapp-development skill and kbagent 0.97.0 ran this prompt word for word, built and deployed a Node app with a line chart, and its startup query read 3 months and 639 rows. The prompt names the table ID because project 264 has two tables called opportunity and the agent had to guess; a reader who loaded the CSV with the HTTP connector swaps in that table's ID. VERIFY(Nikita): kbagent 0.97.0 `data-app create --use-managed-git-repo` left parameters.dataApp.git out of the config, so the app ran without a workspace until the agent added the block with `config update --merge` and redeployed; re-run the prompt once kbagent fixes that. The free project link is the same wizard URL the tutorial's Prerequisites use (200 on 2026-09-25). */}
 
 The agent reads the skill, finds the table and queries a sample before it writes any code. Name a framework too if it matters to you. To use your own GitHub repository instead, put its URL in the prompt; the repository then has to follow the layout in the skill's [reference](https://github.com/keboola/ai-kit/blob/main/plugins/dataapp-developer/skills/dataapp-development/references/python-js-apps.md).
 
