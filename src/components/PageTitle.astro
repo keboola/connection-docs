@@ -9,6 +9,8 @@ const entry = route?.entry;
 const title = entry?.data?.title as string | undefined;
 const description = entry?.data?.description as string | undefined;
 const ask = entry?.data?.ask as string | undefined;
+/* Pagefind splits data-pagefind-meta on commas, so the phrases go in "|"-joined. */
+const searchKeywords = ((entry?.data as any)?.search_keywords as string[] | undefined) ?? [];
 
 /* Auto-derive a hero lede from the first body paragraph when the
    frontmatter doesn't set `description`. We parse the raw markdown body
@@ -168,7 +170,11 @@ void ask;
 ---
 
 <div class="b-pagehead">
-  <div class="b-meta-row">
+  {searchKeywords.length > 0 && (
+    <span hidden data-pagefind-meta={`keywords:${searchKeywords.join('|')}`}></span>
+  )}
+  {/* The section pill and the date would otherwise start every search excerpt. */}
+  <div class="b-meta-row" data-pagefind-ignore>
     {!hideMeta && <span class="b-pill">{sectionLabel}</span>}
     {lastUpdated && (
       <span class="b-meta-text">

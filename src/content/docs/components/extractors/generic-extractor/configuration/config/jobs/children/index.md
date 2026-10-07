@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/config/jobs/children/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 *If new to Generic Extractor, learn about [jobs in our tutorial](/components/extractors/generic-extractor/tutorial/jobs/) first.*
 *Use [Parameter Map](/components/extractors/generic-extractor/map/) to help you navigate among various 
@@ -117,7 +119,7 @@ This is useful when using [User Defined functions](/components/extractors/generi
 or without having a placeholder in the `endpoint`. But then all the child requests would be the same and
 that is usually not what you intend to do.
 
-### Placeholder Level
+### Placeholder level
 Optionally, the placeholder name may be prefixed by a nesting **level**. Nesting allows you to
 refer to properties in other objects than the direct parent. The level is written as the
 placeholder name prefix, delimited by a colon `:`. For example, `2:user-id`.
@@ -152,7 +154,7 @@ to not contain the value `" employee"` (which is probably not what you intended 
 ## Examples
 This section contains a number of examples using child jobs.
 
-### Basic Example
+### Basic example
 Let's say that you have an API with two endpoints:
 
 - `/users/` — Returns a list of users.
@@ -255,7 +257,7 @@ property (see the next example). The auto-generated name is rather ugly.
 
 See [example [EX021]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/021-basic-child-job).
 
-### Basic Job With Data Type
+### Basic job with data type
 To avoid automatic table names, it is advisable to always use the `dataType` property for
 child jobs:
 
@@ -295,7 +297,7 @@ user-detail:
 
 See [example [EX022]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/022-basic-child-job-datatype).
 
-### Basic Job With Array Values
+### Basic job with array values
 It is also possible that the main job returns objects which contain direct references 
 to the children:
 
@@ -354,7 +356,7 @@ user-child:
 
 See [example [EX135]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/135-basic-child-job-array).
 
-### Accessing Nested ID
+### Accessing nested ID
 If the placeholder value is nested within the response object, you can use
 dot notation to access child properties of the response object. For instance, if the
 parent response with a list of users returns a response similar to this:
@@ -425,7 +427,7 @@ Notice that the parent reference column name is the concatenation of the `parent
 
 See [example [EX023]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/023-child-job-nested-id).
 
-### Accessing Deeply Nested Id
+### Accessing deeply nested id
 The placeholder path is configured **relative to** the extracted object. Assume that the
 parent endpoint returns a complicated response like this:
 
@@ -493,7 +495,7 @@ may be confusing because the endpoint property in that child job is set relative
 
 See [example [EX024]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/024-child-job-deeply-nested-id).
 
-### Naming Conflict
+### Naming conflict
 Because a new column is added to the table representing child properties, it is possible that you
 run into a naming conflict. That is, if the child response with user details looks like this:
 
@@ -534,7 +536,7 @@ to create the column `parent_id` with the placeholder value, overwriting the ori
 
 See [example [EX025]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/025-naming-conflict).
 
-### Nesting Level
+### Nesting level
 By default, the placeholder value is taken from the object retrieved in the parent job. As long as the child
 jobs are nested only one level deep, there is no other option anyway. Let's see what happens with a deeper nesting.
 
@@ -677,7 +679,7 @@ Notice that each table contains additional columns with the placeholder property
 
 See [example [EX026]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/026-basic-deeper-nesting).
 
-### Nesting Level Alternative
+### Nesting level alternative
 Because the required user and order IDs are present in multiple requests (in the list and in the detail), there
 are multiple ways how the jobs may be configured. For example, the following configuration produces the
 exact same result as the above configuration:
@@ -766,7 +768,7 @@ the deepest child will really contain the `orderId` value.
 
 See [example [EX027]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/027-basic-deeper-nesting-alternative).
 
-### Deep Job Nesting
+### Deep job nesting
 Let's look at how to retrieve more nested API resources:
 
 ```json
@@ -874,7 +876,7 @@ where the `parent_id` column refers the `5:user-id` placeholder.
 
 See [example [EX028]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/028-advanced-deep-nesting).
 
-### Nested Array
+### Nested array
 
 Suppose now that the endpoint `/users` returns a more complicated response:
 
@@ -996,7 +998,7 @@ The `users-2\_members\_items` contains the same results as the `users` table, bu
 This makes the response in the `users` table quite useless, but the job is still required to generate
 the child jobs to obtain the `user-detail` table. See [example [EX106]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/106-child-jobs-array).
 
-### Simple Filter
+### Simple filter
 Let's assume that you have an API which has two endpoints:
 
 - `users` — Returns a list of users.
@@ -1091,7 +1093,7 @@ the details are retrieved only for the desired users.
 
 See [example [EX029]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/029-simple-filter).
 
-### Not Like Filter
+### Not like filter
 Apart from the standard comparison operators, the recursive filter allows to use
 a **like** comparison operator `~`. It expects that the value contains a placeholder `%`,
 which matches any number of characters. The following configuration:
@@ -1127,7 +1129,7 @@ following `user-detail` table will be extracted:
 
 See [example [EX030]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/030-not-like-filter).
 
-### Combining Filters
+### Combining filters
 Multiple filters can be combined using the
 [logical](https://en.wikipedia.org/wiki/Boolean_algebra#Basic_operations) `&` (and) and `|` (or) operators.
 For example, the following configuration retrieves details for users who have
@@ -1160,7 +1162,7 @@ The following `user-detail` will be produced:
 
 See [example [EX031]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/031-combined-filter).
 
-### Multiple Filter Combinations
+### Multiple filter combinations
 Although you can join a multiple filter expression with logical operators as in the
 above example, there is no support for parentheses. The following configuration
 combines multiple filters:
