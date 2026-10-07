@@ -39,7 +39,7 @@ Apps go far beyond dashboards — live data narratives, internal tools, configur
 
 *The links below open real, running apps. They sleep when idle, so the first load can take about a minute while the app wakes.*
 
-<!-- Wake times measured 2026-10-06 after about 21 idle minutes: 24 s (Seasonal), 33 s (Color Season Analyzer), 64 s (Flight Shockwave). VERIFY(Nikita): re-measure after an overnight idle. -->
+<!-- Checked 2026-10-06 and 2026-10-07 by polling each example until it answered 200: about 74 minutes after our last request, 24 s (Seasonal), 33 s (Color Season Analyzer) and 64 s (Flight Shockwave); about 22 hours after it, 27 s, 37 s and 62 s. -->
 
 ### Seasonal — when and where to travel
 
