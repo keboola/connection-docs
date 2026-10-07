@@ -1,6 +1,7 @@
 ---
 title: Project Limits
 slug: 'management/project/limits'
+search_keywords: [limits]
 description: Business and platform limits of a Keboola project - time credits (PPU) per job type, Apps pricing, storage size, and platform quotas.
 redirect_from:
   - /management/limits/
