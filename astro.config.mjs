@@ -6,6 +6,7 @@ import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
 import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
+import { remarkStripComments } from './src/integrations/strip-comments.mjs';
 
 /* Shared so the llms.txt heading cannot drift from the site's own title. */
 const SITE_TITLE = 'Keboola User Documentation';
@@ -17,7 +18,7 @@ export default defineConfig({
     format: 'directory',
   },
   markdown: {
-    remarkPlugins: [beaconTransforms],
+    remarkPlugins: [remarkStripComments, beaconTransforms],
   },
   integrations: [
     redirectFrom(),
