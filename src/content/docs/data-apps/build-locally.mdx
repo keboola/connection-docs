@@ -81,7 +81,7 @@ With the `dataapp-developer` plugin from Keboola's [AI Kit](/ai/ai-kit/), the ag
   </TabItem>
   <TabItem label="Claude Desktop">
     {/* VERIFY(Michal Ševčík): not yet run in the Desktop chat (the 2026-09-23 "Desktop" run was a Claude Code session in the Code tab). Check: (1) the name of the dataapp-developer card, (2) whether the agent can run kbagent here or goes MCP-only, as the skill's Path A says, (3) the prompt below, end to end. The Keboola MCP connector itself was confirmed on 2026-09-23 (project 264). */}
-    1. Connect Keboola's MCP server for your stack, as in [Using with Claude Desktop](/ai/mcp-server/#using-with-claude-desktop).
+    1. Connect Keboola's MCP server for your stack, as in [Connect an AI client](/ai/mcp-server/connect/).
     2. Open **Customise → Plugins → Add → Add from marketplace**, paste `keboola/ai-kit`, and add `dataapp-developer`. The same route installs the `kbagent` plugin; see [kbagent with AI agents](/cli/for-agents/#claude-desktop).
     3. Start a new chat and paste the prompt from [Describe the app](#describe-the-app), with its first sentence changed to "Build a Keboola app through the Keboola MCP server." The skill prefers the MCP route in Claude Desktop, described in [The MCP route](#the-mcp-route); if it also finds kbagent, it asks which one to use. Without a way to push to Git, it builds a Streamlit app instead.
   </TabItem>
@@ -149,7 +149,7 @@ If the agent can reach Keboola more than one way, it may ask which to use, or of
 
 ### The MCP route
 
-Through a Keboola MCP server, the agent doesn't run kbagent. It calls the server's app tools instead, such as `modify_python_js_data_app`, `create_python_js_data_app_git_credential` and `deploy_data_app`. To take this route on purpose, connect the MCP server for your stack: [Claude Desktop](/ai/mcp-server/#using-with-claude-desktop), [Cursor](/ai/mcp-server/#using-with-cursor), [VS Code](/ai/mcp-server/#using-with-vs-code), [ChatGPT](/ai/mcp-server/#using-with-chatgpt).
+Through a Keboola MCP server, the agent doesn't run kbagent. It calls the server's app tools instead, such as `modify_python_js_data_app`, `create_python_js_data_app_git_credential` and `deploy_data_app`. To take this route on purpose, connect the MCP server for your stack, as in [Connect an AI client](/ai/mcp-server/connect/) (Claude, Cursor, VS Code, ChatGPT and others).
 
 - It creates the app with a Keboola-managed repository, and a draft of it next to the production app.
 - The draft runs in development mode at its own URL, so you preview the app before anything goes live. If the repository has a `keboola-config/supervisord-dev/` program, the draft reloads each push within seconds; otherwise the agent redeploys it. A draft can't be public, even if you asked for a public app.
