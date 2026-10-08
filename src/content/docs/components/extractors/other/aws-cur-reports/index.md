@@ -55,7 +55,7 @@ and copy the path of the report folder.
 
 ![AWS configuration](/components/extractors/other/aws-cur-reports/report_config.png)
 
-If the [**Incremental Load**](/storage/tables/#incremental-loading) is set to true, the new data will be appended to the old ones. 
+If the [**Incremental Load**](/storage/tables/incremental-loading/) is set to true, the new data will be appended to the old ones. 
 This way you can import new data, e.g., from today, without deleting the data imported before.
 
 ## Output Table

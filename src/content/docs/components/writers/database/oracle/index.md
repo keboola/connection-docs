@@ -67,4 +67,4 @@ fail with the following message:
     Query failed: 'ORA-00955: name is already used by an existing object
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
-[incremental processing](/storage/tables/#incremental-processing).
+[incremental processing](/storage/tables/incremental-loading/#incremental-processing).
