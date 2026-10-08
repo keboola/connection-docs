@@ -48,6 +48,18 @@ with three ways to do it. */}
 In **Storage**: two `in.c-` buckets named after the connector and the configuration ID
 (`keboola-ex-http-…`), and one `out.c-Boolabean-staffing-outlook` bucket.
 
+To have Kai list it for you, with what each part does:
+
+```text title="Follow-up prompt" wrap
+List everything the Getting Started guide created in this project (the Boolabean configurations, tables, the app and the flow) and what each does.
+```
+
+It only reads, so it asks for no approval by default.
+{/* Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals: Kai listed both
+HTTP configurations, the six input tables with 6, 18, 9,761, 552, 552 and 42 rows, the
+transformation and staffing_outlook (42 rows), the app and the flow. Project 264 also holds other
+Boolabean apps and flows made outside the guide, and Kai listed those too. */}
+
 ## The one number that proves the join
 
 `staffing_outlook` should hold **exactly 42 rows**: six cafés times the seven days in the forecast.

@@ -13,7 +13,7 @@ import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 import CourseLine from '../../../../components/getting-started/CourseLine.astro';
 import FlowStrip from '../../../../components/getting-started/FlowStrip.astro';
 
-<PageMeta genre="Tutorial" />
+<PageMeta genre="Tutorial" guide="Getting Started, step by step" />
 
 <CourseLine current="transform" />
 
@@ -163,6 +163,18 @@ screenshot; the job's card in the chat says **Job succeeded** once the table is 
 differ: re-prompt, or fix the code in place. Later steps need only that table, at
 `out.c-Boolabean-staffing-outlook.staffing_outlook` where Kai puts it, so a close-enough table is
 fine; if yours landed in another bucket, use its ID in their prompts.
+
+To see what the SQL does, ask in the same chat:
+
+```text title="Follow-up prompt" wrap
+Explain the SQL of the "Boolabean staffing outlook" transformation in plain words.
+```
+
+It only reads, so it asks for no approval by default.
+{/* Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals: Kai walked through
+the daily demand, the temperature and rain bands, the average per band, the weekday roster, the
+forecast join and the flag over 67 units per person. Titled "Follow-up prompt" so prompts.mjs leaves
+it out of the with-kai list. */}
 
 </TabItem>
 <TabItem label="UI">

@@ -256,7 +256,7 @@ function stripMdx(body) {
         out.push('', ...text, '');
       }
       if (/^\s*<SampleData\b/.test(line)) out.push('', ...sampleText(), '');
-      // the guide's prompts in order, read from the step pages like the hub's component reads them
+      // the guide's prompts in order, read from the step pages like GuidePrompts.astro reads them
       if (/^\s*<GuidePrompts\b/.test(line)) out.push('', ...guidePromptsText(), '');
       if (/^\s*<FromTo\b/.test(line)) {
         const { from, to } = tagProps(line);

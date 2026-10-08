@@ -241,3 +241,11 @@ Nikita's decision). What went with it:
 | check/ | "in an older project our first run failed at the app phase with `staffing_outlook` already rebuilt" | no app phase; the bullet now gives the transformation failing after the loads |
 | automate/ | the cost box's "between 2½ and 6 minutes a run, depending mostly on how long they waited to start" and "10 to 30 minutes a month" | extend/jobs/ bills only `standard` jobs and not waiting time: about 2½ and 4 minutes, 10 to 20 a month |
 | app/ | CLI tab: the configuration ID as "the one a flow task takes", and "A flow task that deploys the app makes the same call, so a broken app would turn a scheduled run red" | the guide's flow has no app task any more |
+
+## 2026-10-08 — The whole guide with Kai gets its own page (DECISIONS.md, same date)
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| hub | "## The whole guide with Kai": the three bullets, the timing line, the fold with the generated prompts and its author comment | moved to the new page getting-started/with-kai/ (bullets reworded for the per-step lines the list now carries); the hub keeps one sentence that links it |
+| ask/ | "## The same request, as one prompt": the intro, the prompt block (load, forecast and join in one request), "The one-prompt version works, and it is the faster route…" | the two measured observations (Kai stops after the first part; still about a dozen approvals) are the with-kai fold "Why not one prompt for everything"; the prompt block was never run on the current sample and would be a second copy of the prompts; "the faster route" was never measured (both runs on the current sample, 3 and 8 Sep, stalled after the first part; the 2 Sep run of the older block on the earlier dataset ran end to end in 14 min with 11 approvals, and the four-prompt run took 14.4) |
+| ask/ | the description's "…and the same pipeline can be asked for as one prompt" | the page no longer offers it |

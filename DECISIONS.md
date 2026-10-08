@@ -1743,6 +1743,72 @@ only the first was seen.
 
 ---
 
+## 2026-10-08 — The whole guide with Kai becomes a page, and the guide gets one true tutorial
+
+**Asked by:** Nikita, 8 Oct: more weight on Kai; whether the prompts stay on the Overview as a
+one-shot; perhaps show first that the whole thing can be done fast, then explain step by step; and a
+Diátaxis pass over the guide.
+
+**What the Diátaxis pass found.** Every task page is declared a tutorial, but with three tabs that
+are alternatives it reads closer to a how-to: a tutorial gives one guaranteed path. transform/ is
+the most explanation-heavy (its UI tab mixes steps, both SQL dialects and commentary), automate/'s
+"Check it worked" holds a cost note, app/'s CLI tab is a different task, checks appear twice on
+three pages, a few facts repeat across three or four pages, and the guide explains Kai's approvals
+itself while linking none of the kai/ overview, best-practices or security pages. Author comments
+are about 61 % of the visible words. ad-hoc/ is a 2019 tutorial with no Kai.
+
+**Nikita's decisions.**
+1. The fast path gets its own page, **The whole guide with Kai** (`getting-started/with-kai/`),
+   right after Create or join a project and before the step pages, so the sidebar and the
+   prev/next links read: Overview, project, the whole guide with Kai, then the steps.
+2. The step pages keep the genre Tutorial; the track shows in the page's line: "Getting Started,
+   step by step" on load/ to automate/, "Getting Started, with Kai" on the new page. project/ and
+   check/ serve both and keep the plain label: my call, not Nikita's (the plan had the label on
+   them too), told to Nikita in the 2026-10-08 hand-off.
+3. ask/'s "The same request, as one prompt" loses its prompt block; its two measured observations
+   move to the new page.
+4. This round also adds read-only "explain what you built" prompts and a recap prompt, and the
+   author comments get a diet in a separate PR. The within-page Diátaxis fixes wait.
+
+**The new page** is the guide's one true tutorial: Prompt only, one path. It has a state block
+(from a project with Kai to the pipeline and the answer), a Kai prerequisite that links Get started
+with Kai and Kai security and privacy, "How it goes" (where to paste, when to paste the next, what
+Kai asks), the generated list of prompts with an "Expect … Done when …" line after each step (from
+two new fields in `course.mjs`, `approvals` and `done`; 7+3, 2, 0, 0 for the draft, 3 = 15), "What
+you have now" with a recap prompt, "What is left to you" (notifications, publishing, the check),
+the fold "Why not one prompt for everything", and a closing link to Load data into Storage. The
+course line shows the seven steps unmarked: the page is a track, not an eighth step, so
+`course.mjs` keeps seven. The hub drops its #1177 section and keeps one sentence that links the
+page, which also ends the clash with the 23 Sep "no new list" ruling.
+
+**Run before writing** (8 Oct, project 264, `kbagent kai ask`, read-only, no approvals): "Explain
+the "Boolabean sales" configuration you created, row by row" (base URL, five rows, three processors
+each); "Explain the SQL of the "Boolabean staffing outlook" transformation in plain words" (daily
+demand, temperature and rain bands, weekday roster, the flag over 67); "What will the "Boolabean
+morning outlook" flow run next time, and in what order?" (phases, parallel tasks, the schedule and
+its state); and the recap (both configurations, the six tables with the guide's row counts, the
+transformation, staffing_outlook, the app and the flow; 264's other Boolabean apps came up too).
+The follow-ups sit at the end of the Prompt tabs of load/, transform/ and automate/, the recap on
+check/ and the new page, all titled "Follow-up prompt" so `prompts.mjs` leaves them out of the list.
+
+**Not claimed.** That the seven prompts run back to back in one chat: never run in their current
+wording. The page gives the 1 Oct numbers, measured one page at a time.
+
+**Review fixes (fact-checker, guide-tester, checker, same day).** ask's "Done when" said the cause
+is always in the forecast; ask/'s own Check says it is sometimes the roster, and nobody in a cold
+week, so the line now follows that Check and covers the what-if prompt. Load's line says what Kai
+does during the six-minute wait and that the forecast prompt goes in the same chat. The page now
+states the question, a "same chat" rule, **Create app** for a project that already has an app, and
+a pointer for a step that comes out different (including a staffing_outlook in another bucket).
+"The draft is yours alone" (unverified) became app/'s "nothing is published until you say so"; the
+link is behind a password. The fold credits the 14-minute control run to 8 Sep only. project/'s
+"in one sitting" (never measured) became "every prompt on one page", with a which-to-pick
+half-sentence there and on the hub. The twin prints each step as a heading, since unindented
+fences restart a markdown list. Left as is: the sidebar puts with-kai before load/, so load/'s
+Previous link goes to with-kai (Nikita chose the place).
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
@@ -1755,7 +1821,7 @@ still block rebuild work.
 | ~~Does the Free Plan include data apps?~~ | closed 2026-10-01 | **Yes.** Built, published and deployed in Free Plan project 6375 (see the entry above). |
 | ~~Does a "plan mode" exist, and what is it called?~~ | closed 2026-09-02 | **Yes.** The chat composer has a button labelled "Enable plan mode", next to "Disable follow mode". Kai drafts a plan and you approve once. Now recommended in the section ahead of "Always allow". Still owed: a description on the `kai/` pages, which document neither mode. |
 | ~~Can Kai set a schedule and notifications?~~ | half closed 2026-09-09 | **Schedule: yes.** Asked for "every day at 06:00 Europe/Prague", Kai created a Scheduler configuration (`0 6 * * *`, Europe/Prague, enabled) for the flow it had just built. **Notifications: not tested**; the page keeps them manual. |
-| ~~Has the consolidated one-prompt block ever run end to end?~~ | closed 2026-09-02 | **Yes** — run live in project 264: 14 minutes, 11 approvals, 10,000 rows in and out. The block now lives on `ask/`. Transcript in PR #1110. |
+| ~~Has the consolidated one-prompt block ever run end to end?~~ | closed 2026-09-02 | **Yes** — run live in project 264: 14 minutes, 11 approvals, 10,000 rows in and out. The block lived on `ask/` until 2026-10-08, then moved to with-kai/'s fold without its prompt. Transcript in PR #1110. |
 | Is the monthly Kai allowance per project or per organization? | `index.mdx` (Get a project) | the pricing guardrail wording |
 | Is RStudio still an offered workspace type? | `ad-hoc/index.md` | the ad-hoc page's fate |
 | Does the Kai **Add Task** menu offer three items or four (is **Build with Kai** in it)? | `automate/index.mdx` | the Kai tab's first instruction. Live check 2026-09-02 confirmed **Modify with Kai** in the flow header; the menu itself did not open to automation |

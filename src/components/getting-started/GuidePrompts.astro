@@ -1,11 +1,13 @@
 ---
 // The guide's prompts in course order, read from the step pages at build time (prompts.mjs), so
-// the hub never holds a second copy that could drift from the pages. Styling, if any, belongs in
+// with-kai/ never holds a second copy that could drift from the pages. Styling, if any, belongs in
 // src/styles/custom.css under .gs-guide-prompts.
 import { Code } from '@astrojs/starlight/components';
-import { guidePrompts } from './prompts.mjs';
+import { guidePrompts, expectLine } from './prompts.mjs';
 
 const steps = guidePrompts();
+// the course data marks product labels with **…**; the page shows them bold
+const html = (text: string) => text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
 ---
 
 <ol class="gs-guide-prompts">
@@ -18,6 +20,7 @@ const steps = guidePrompts();
         {step.prompts.map((prompt) => (
           <Code code={prompt} lang="text" title="Prompt" wrap />
         ))}
+        {expectLine(step) && <p set:html={html(expectLine(step))} />}
       </li>
     ))
   }

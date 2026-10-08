@@ -1,9 +1,10 @@
 // The guide's prompts in course order, read from the pages themselves.
 //
-// Two consumers: GuidePrompts.astro, which shows them on the hub under "The whole guide with Kai",
-// and src/integrations/page-markdown.mjs, which prints the same list into the hub's markdown twin.
+// Two consumers: GuidePrompts.astro, which shows them on the page "The whole guide with Kai"
+// (getting-started/with-kai/), and src/integrations/page-markdown.mjs, which prints the same list
+// into that page's markdown twin. Each step also carries `approvals` and `done` from course.mjs.
 // Each step page keeps its prompts where a reader meets them, in its Prompt tab; this module only
-// reads them, so a prompt changed on its page changes on the hub with the next build (2026-10-07).
+// reads them, so a prompt changed on its page changes on with-kai/ with the next build (2026-10-07).
 //
 // A prompt is a ```text title="Prompt" block inside the page's <TabItem label="Prompt">, at any
 // indentation (app/ has it inside a numbered list). Steps without a Prompt tab (project/, check/)
@@ -53,6 +54,8 @@ export function guidePrompts() {
     title: step.title,
     href: step.href,
     where: WHERE[step.key] ?? DEFAULT_WHERE,
+    approvals: step.approvals ?? null,
+    done: step.done ?? null,
     prompts: stepPrompts(step.key),
   }));
   const missing = steps.filter((s) => EXPECTED.includes(s.key) && !s.prompts.length).map((s) => s.key);
@@ -62,13 +65,24 @@ export function guidePrompts() {
   return steps.filter((step) => step.prompts.length);
 }
 
-/** The markdown twin's version: a numbered heading line per step, then its prompts as fences. */
+/** "Expect … Done when …", the line after a step's prompts; markdown bold kept as is. */
+export function expectLine(step) {
+  const parts = [];
+  if (step.approvals) parts.push(`Expect ${step.approvals}.`);
+  if (step.done) parts.push(`Done when ${step.done}.`);
+  return parts.join(' ');
+}
+
+/** The markdown twin's version: a numbered heading line per step, its prompts as fences, then the expect line. */
 export function guidePromptsText() {
   const out = [];
   guidePrompts().forEach((step, i) => {
     const [before, label, after] = step.where;
-    out.push(`${i + 1}. [${step.title}](${step.href}), in ${before}**${label}**${after}:`, '');
+    // a heading, not a list item: the unindented fences below would restart a markdown list
+    out.push(`### ${i + 1}. [${step.title}](${step.href}), in ${before}${label}${after}`, '');
     for (const prompt of step.prompts) out.push('```text', prompt, '```', '');
+    const line = expectLine(step);
+    if (line) out.push(line, '');
   });
   return out;
 }
