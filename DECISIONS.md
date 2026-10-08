@@ -1873,6 +1873,27 @@ reload keeps progress, all five done shows the closing line and rings 7; no over
 and the cards numbered 2 to 6, the page reads as steps 2-6 of the same course, which is the
 integration Nikita asked for; put to him in the hand-off, with the five-dot line as the
 alternative, his call.
+
+---
+
+## 2026-10-08 — Getting Started's sidebar shows the fork; Prev/Next stay on their path
+
+**Asked by:** Nikita, 8 Oct: from "Create or join a project" Next jumped into with-kai/, and from
+with-kai/ Next jumped to the third page, load/; "может быть, стоит в самое начало его поставить, или
+как ты думаешь?" He also pointed out that Kai can approve on its own (Always allow), so not every
+change has to be confirmed. Picked from three options: the fork after the project (recommended),
+with-kai first, or with-kai outside the chain.
+
+**Done.** The sidebar reads Overview, Create or join a project, The whole guide with Kai, then a
+label-only group **Step by step** (load/ to check/), kept open (`collapsed: false`, a new key that
+scripts/convert-nav.mjs now reads for label-only groups; every other group stays collapsed). Prev/
+Next by frontmatter: project/ → load/, load/ ← project/, with-kai/ ← project/ and → check/; the
+rest follow the sidebar. with-kai/'s closing line offers check/ first and the explained steps
+second. with-kai/'s "What Kai asks" now says how to be asked less: **Always allow** on a card, or
+the Kai panel's gear, then **Tools** (seen in project 6425: "Tools set to "Always Allow" will
+execute without asking for confirmation"); the hub's Approvals section already said it.
+Slugs and URLs unchanged, so no redirects.
+
 ---
 
 ## Open — carried as VERIFY(owner) flags in the pages
