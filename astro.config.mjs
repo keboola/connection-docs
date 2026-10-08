@@ -6,6 +6,7 @@ import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
 import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
+import pagefindTitles from './src/integrations/pagefind-titles.mjs';
 import { remarkStripComments } from './src/integrations/strip-comments.mjs';
 
 /* Shared so the llms.txt heading cannot drift from the site's own title. */
@@ -82,5 +83,8 @@ export default defineConfig({
     // pipe tables as literal text — visible corruption, and the reason no page
     // could safely be converted from .md before now.
     mdx({ gfm: true }),
+    // Must come AFTER starlight(): it reads the Pagefind index Starlight
+    // builds in the same astro:build:done hook.
+    pagefindTitles(),
   ],
 });

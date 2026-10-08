@@ -17,6 +17,10 @@ export const collections = {
         // Markdown" split button). Used by utility pages like 404 where that
         // chrome is noise — a 404 has no section and nothing worth copying.
         hideMeta: z.boolean().optional(),
+        // Search "best bets": a query that matches one of these phrases puts
+        // this page first (public/pagefind-rerank.js). For the cases where two
+        // pages fit a query and only an editor can say which one is meant.
+        search_keywords: z.array(z.string()).optional(),
       }),
     }),
   }),
