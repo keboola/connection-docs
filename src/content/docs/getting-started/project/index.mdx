@@ -56,6 +56,11 @@ Quickest first:
 1. **Free Plan:** [sign up and create a free project](https://connection.us-east4.gcp.keboola.com/wizard)
    right now, with 50 GB of Storage and up to 60 minutes of job runtime a month. That is enough
    for this guide; we ran its Prompt path end to end on one.
+   {/* VERIFY(owner): a Free Plan project created 2026-10-08 (6425) showed "Your Minutes Balance:
+   120 minutes" on its dashboard on the day it was created and 113 after the guide's run, not
+   the 60 that this line and management/pay-as-you-go/ state. A first-month or promotional
+   allowance would explain it; nothing in the docs says which. Its Storage limit was 50 GB again
+   (storage.dataSizeBytes). */}
 2. **Join an existing project:** ask an admin of your company's Keboola organization to invite you,
    from **Users & Settings → Invite User** in the project.
 3. **Talk to us:** for a trial of a full project with a chosen stack and no Free Plan limits,
@@ -87,7 +92,8 @@ used 30 minutes gets 30 free the next month), and the Free Plan gives you one pr
 choice of stack.
 {/* VERIFY(owner): /management/payg-project/ says the monthly allowance is "limited to the
    actual usage from the previous month" but never states what a project gets in its first month.
-   Worth stating on that page. */}
+   Worth stating on that page. 2026-10-08: a new project's dashboard read 120 minutes on day one
+   (see the flag above). */}
 [Pay As You Go](/management/payg-project/) has the full list of limits.
 
 A project is a self-contained workspace with its own data storage, configurations, users and
@@ -136,7 +142,10 @@ I'm new to this project. Give me an overview of the data structure and what each
 {/* VERIFY(owner): "Kai cannot create a project" is an inference, not a documented limit — it
 follows from Kai being project-scoped (kai/best-practices.md: "Kai only sees your current
 project"), but no Kai page states it outright. Confirm there is no project-creation tool, and
-consider stating the boundary on kai/index.md. */}
+consider stating the boundary on kai/index.md. 2026-10-08: asked in 264, Kai said it has no such
+tool and listed 16 write tools (~/.keboola-shots/free-run-2026-10-08/kai-proj.txt); but the Tool permissions list in a new Free Plan project (6425)
+shows 24 write tools, create_project among them. Whether it works from a project's
+Kai chat (or only in the MCP bootstrap mode of DMD-1939) is for the Kai team. */}
 
 ## Check it worked
 
@@ -151,11 +160,9 @@ As You Go", which described the beta's turn counter. kai/pricing.md says that co
 by PPU credits on 15 September 2026, and that date has now passed, so the sentence names neither a
 mechanism nor a number and points at the page that owns both.
 
-VERIFY(Kai team), live and wrong on the site today: kai/getting-started.md's "Rate Limits" section
-still opens "Kai is free during the public beta period" and still states 150 turns per month, 50 on
-Pay As You Go. kai/pricing.md says both were replaced on 15 September 2026. Two published pages
-contradict each other on what a reader will be charged; this guide no longer depends on either.
-Raised from the reviewer bot's time-critical flag on PR #1116, 2026-09-21. Seen in Free Plan
+Closed 2026-10-08: kai/getting-started.md's "Usage and Limits" now describes PPU on contracted
+plans and a monthly message limit per user on Pay As You Go, which agrees with kai/pricing.md; the
+contradiction raised from the reviewer bot's flag on PR #1116 (2026-09-21) is gone. Seen in Free Plan
 project 6375 on 2026-10-01: the chat's usage button reads "Kai usage — context window N%, messages
 N of 50, free allowance 300 PPU left", so the message counter and the PPU allowance both still
 show, which neither page describes. */}

@@ -1807,6 +1807,41 @@ half-sentence there and on the hub. The twin prints each step as a heading, sinc
 fences restart a markdown list. Left as is: the sidebar puts with-kai before load/, so load/'s
 Previous link goes to with-kai (Nikita chose the place).
 
+
+---
+
+## 2026-10-08 — VERIFY pass, and the whole guide run with Kai in a new Free Plan project
+
+**Asked by:** Nikita, 8 Oct: "проверь все верефай и также пройди гайд каем". Answers: a new empty
+Free project (he created 6425 himself), all Kai Agent prompts in one chat.
+
+**The run (6425, us-east4, BigQuery).** The with-kai page's seven prompts, help.keboola.com swapped
+for the #1144 preview host (the CSVs 404 until merge). Approvals 7 + 3, 2, 0, 0 (draft), 3 = 15, as
+the page says. Counts 6/18/9,761/552/552 and 42; staffing_outlook 42 rows; Draft ready in the
+builder; flow two phases, schedule `0 6 * * 1` Europe/Prague, run 218 s, both phases green; the
+recap prompt listed everything. About 28 minutes of work. What the page did not say, now added:
+- **A question from Kai.** The forecast week was cold; before building the transformation Kai
+  asked what to do with the cold, dry store-days the summer has no history for (four options). The
+  pages already read empty cells as "no history", so with-kai/ and transform/ now say: answer, and
+  **Leave them blank** keeps to the guide.
+- **Approval timeout.** An approval left for five minutes counts as declined and Kai says so. It
+  happened because our automation could not see the card (the tab went blank when the UI
+  navigated to the new flow); one nudge in the same chat finished the step. with-kai/ says it.
+- **One chat works.** The page now says all the Kai Agent prompts went into one chat in our run.
+Not changed, flagged: the app's What's next? chips offered no **Publish to production** this
+time (app/ step 5 relies on that chip; VERIFY, Nikita's call); the dashboard has a new "Ask Kai
+anything about your project…" field; the prompts say "next week" while the forecast is the next
+seven days, which Kai pointed out.
+
+**VERIFY markers (25 → 20; 7 closed, 2 new).** Two triage agents classified them. Closed from evidence: write/'s **Append rows** (destination screenshot), app/'s
+Publish to production (01.10 run), project/'s Kai limits (the two pages agree now), automate/'s
+use-cases citation (now our runs), automate/'s flow-name dialog (seen in 6425), a stale closure note
+(transform/); check/ keeps its VERIFY, narrowed to contract plans; googlesheets/'s level.csv became TODO(human-review, Nikita). New evidence
+added to open ones: 120 free minutes on a new project's dashboard against the documented 60
+(new VERIFY on project/), 50 GB again, create_project in the Free project's Kai tool list, Kai's
+HTTP config opening in Base URL form, the Free workspace chooser (BigQuery and R only), Kai's
+claim it can create a workspace, and no orphan schedules in 264. The hub clip's VERIFY(Jordan) stays: on 6 Oct he asked only for pace and content. Still owner-only: 50 vs 250 GB,
+dbt and Direct Mode on Free, DMD-1939, the two Google-auth checks.
 ---
 
 ## Open — carried as VERIFY(owner) flags in the pages
