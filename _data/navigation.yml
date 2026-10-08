@@ -101,6 +101,9 @@ items:
   - url: /flows/
     title: Conditional Flows
     items:
+      - url: /flows/variables/
+        title: Variables
+
       - url: /flows/flows-legacy/
         title: Legacy Flows
 
