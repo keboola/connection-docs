@@ -35,6 +35,12 @@ function toSlug(url) {
 // 3. Recursive converter
 // ---------------------------------------------------------------------------
 function convertItem(item) {
+  // A page outside the docs collection (src/pages/*.astro, e.g. /changelog/)
+  // has no slug Starlight can resolve, so it goes in as a plain link.
+  if (item.link) {
+    return { label: item.title, link: item.link };
+  }
+
   const slug = toSlug(item.url);
   const hasChildren = Array.isArray(item.items) && item.items.length > 0;
 

@@ -5,11 +5,13 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/basic/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 Basic Authentication provides the [HTTP Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 method. It requires entering a username and password in the configuration and sends the encoded values in the 
 `Authorization` header. 
 
-### User Interface
+### User interface
 
 In the user interface, you simply select the `Basic Authorization` method and enter the username and password.
 
@@ -39,11 +41,11 @@ They are also prefixed by the hash `#` character, which means they are stored [e
 If the API expects something else than a username and password in the `Authorization` header, or if it requires 
 a custom authorization header, use the [Default Headers option](/components/extractors/generic-extractor/configuration/api/#headers).
 
-## Configuration Parameters
+## Configuration parameters
 This `basic` type of authentication has no configuration parameters. The login and password must be provided in the 
 [`config` section](/components/extractors/generic-extractor/configuration/config/) of the Generic Extractor configuration.
 
-## Basic Configuration Example
+## Basic configuration example
 Assume you have an API which requires you to use the HTTP Basic authentication to send the login and password in 
 the `Authorization` header. Assume that your login is `JohnDo` and password is `secret`. The following 
 configuration solves the situation:

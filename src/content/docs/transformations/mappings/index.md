@@ -1,6 +1,7 @@
 ---
 title: Input and Output Mapping
 slug: 'transformations/mappings'
+search_keywords: [input mapping, output mapping]
 ---
 
 *To configure input and output mappings in the process of creating a transformation, 
