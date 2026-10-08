@@ -8,6 +8,8 @@ redirect_from:
   - /data-apps/backend-versions/
 ---
 
+import Prereqs from '../../../../components/Prereqs.astro';
+
 Streamlit is a Python-only framework for building data tools quickly. It remains supported for existing apps and simple internal tools.
 
 :::note[Streamlit apps only]
@@ -24,11 +26,12 @@ Ready to move an app to the current stack? See [Migrate a Streamlit app to Pytho
 
 ## Build a Streamlit app
 
-### Prerequisites
-
-* Basic Python programming knowledge
-* Familiarity with data manipulation (pandas, numpy)
-* Understanding of data visualization concepts
+<Prereqs needs={[]}>
+  <li><strong>A Keboola project</strong> to build the app in.</li>
+  <li><strong>Basic Python</strong> programming knowledge.</li>
+  <li><strong>Familiarity with data manipulation</strong> (pandas, numpy).</li>
+  <li><strong>An understanding of data visualization</strong> concepts.</li>
+</Prereqs>
 
 ### Create your first Streamlit app
 
@@ -218,7 +221,7 @@ In your app configuration, switch to the raw JSON editor and add a `config.toml`
 }
 ```
 
-The data app runtime extracts that string at startup and merges it into Streamlit's runtime config in this order, with later values winning:
+The app runtime extracts that string at startup and merges it into Streamlit's runtime config in this order, with later values winning:
 
 1. Streamlit's built-in defaults
 2. Keboola's runtime defaults (sets `[server] address = "0.0.0.0"` and `[browser] gatherUsageStats = false`)

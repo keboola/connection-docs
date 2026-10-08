@@ -30,6 +30,9 @@ After saving, the configuration appears as follows:
 Once saved, the value becomes encrypted and irreversible. The component defines which values are
 encrypted, indicating that not all values can be encrypted unless explicitly supported by the component.
 
+Inside the component the values arrive decrypted in the [configuration file](/extend/common-interface/config-file/);
+Image and Stack Parameters follow [their own encryption rules](/extend/common-interface/config-file/#encryption).
+
 For example, a component requiring the following configuration:
 
 ```json

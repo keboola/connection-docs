@@ -3,6 +3,8 @@ title: Conditional Flows
 slug: 'flows'
 redirect_from:
     - /flows/conditional-flows/
+    - /automate/
+    - /integrate/orchestrator/
 ---
 
 Flows allow you to build automated data pipelines with conditional logic, branching, retries, and robust error handling. You can define flows that react to the outcome of previous steps, dynamically control their next action, or even skip tasks entirely.
@@ -218,6 +220,7 @@ What runs:
 
 - Only the selected tasks. **Conditions are ignored** — the selected phases run one after another, including phases in different branches of a condition, and a phase several branches lead into runs only once. Phases with nothing selected are skipped.
 - Tasks selected within one phase still run in parallel, as they do in a normal run.
+- Notification tasks: if selected, they send their notification regardless of the condition.
 - Disabled tasks and tasks with a missing, invalid, or deleted configuration cannot be selected.
 - A failed task does not stop the run — every selected task runs, and the flow's status is the status of its last phase, so check the individual tasks in the run.
 
@@ -248,6 +251,8 @@ click **Set Up Schedule**. The dialog works in UTC and previews the next runs be
 **Triggers:** Set flows to automatically start when certain Storage tables are updated (ideal for managing dependencies across projects). Your projects will stay synchronized and run efficiently.
 
 *Note on Triggers: If table updates happen during the cool-down period, the trigger is suppressed, but the tables are marked as ready. Therefore, if all configured tables are updated during the cool-down period, the flow is not scheduled at that time — but once the cool-down expires and any table is updated (causing the trigger to be evaluated), the system recognizes that all tables are already up to date and runs the flow immediately.*
+
+To schedule any configuration, or a single configuration row, through the API, see [Schedule via the API](/flows/schedule-api/).
 
 ## Check Run History
 

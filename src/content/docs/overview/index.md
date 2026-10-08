@@ -1,6 +1,10 @@
 ---
 title: Keboola Overview
 slug: 'overview'
+description: "What Keboola is and how its parts fit together: deployment options, architecture, governance, extending the platform, and the terms you meet everywhere, including stacks, jobs, tokens and the APIs."
+redirect_from:
+    - /integrate/
+    - /overview/repositories/
 ---
 
 

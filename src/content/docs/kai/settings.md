@@ -238,7 +238,7 @@ Compare that with `description: Data stories`, which gives Kai nothing to match 
 Write a skill when you want Kai to do something a particular way, every time.
 
 - **House style.** Your brand palette, layout conventions and component choices, so every
-  data app someone builds looks like it belongs to your company.
+  app someone builds looks like it belongs to your company.
 - **A recurring procedure.** Month-end close, onboarding a new data source, the same set of
   quality checks.
 - **A specialised output** Kai would not produce by default, where the instructions run to
