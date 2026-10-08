@@ -38,7 +38,7 @@ Keboola is designed to be driven by code as well as through the UI:
 - [MCP Server](/ai/mcp-server/)
 
 ## Reference
-- [API reference](https://developers.keboola.com/overview/api/)
+- [API reference](/overview/api/)
 - [Release notes](https://changelog.keboola.com/)
 
 ## Resources

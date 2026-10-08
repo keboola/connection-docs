@@ -69,7 +69,6 @@ $ kbagent --json project list
 - **`workspace`** — `create`, `list`, `detail`, `delete`, `password`, `load`, `query`, `from-transformation`, `gc`.
 - **`sync`** — `init`, `pull`, `status`, `diff`, `push`, `clone`, `branch-link/unlink/status`.
 - **`encrypt`** — `values` (one-way encrypt `#`-prefixed secrets).
-- **`tool`** — call Keboola [MCP](/ai/mcp-server/) tools directly.
 - **`agent`** — **scheduled AI agents**: cron-driven agent tasks that run against your projects unattended ([recipe](/cli/workflows/#schedule-an-ai-agent)): `list`, `show`, `create`, `update`, `delete`, `run`, `runs`, `run-detail`, `run-events`, `test`, `prompt-improve`, `cron-preview`.
 - **`semantic-layer`**, **`dev-portal`**, **`http`**.
 

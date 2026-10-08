@@ -44,7 +44,7 @@ Content-Type: application/json
 
 ### Response
 
-The endpoint returns a standard asynchronous [storage job](/overview/#storage-jobs) with HTTP 202. When the job
+The endpoint returns a standard asynchronous [storage job](/storage/jobs/) with HTTP 202. When the job
 finishes, its `results` contain the ID of the exported file:
 
 ```json
@@ -55,7 +55,7 @@ finishes, its `results` contain the ID of the exported file:
 }
 ```
 
-Download the file with the standard [file download](/integrate/storage/api/importer/#download-a-file) flow.
+Download the file with the standard [file download](/storage/api/import-export/) flow.
 
 ## Backend-Specific Notes
 

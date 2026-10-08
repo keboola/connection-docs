@@ -1,7 +1,9 @@
 ---
 title: Keboola Overview
 slug: 'overview'
+description: "What Keboola is and how its parts fit together: deployment options, architecture, governance, extending the platform, and the terms you meet everywhere, including stacks, jobs, tokens and the APIs."
 redirect_from:
+    - /integrate/
     - /overview/repositories/
 ---
 
@@ -108,14 +110,14 @@ Manage user accounts in your organization, controlling their access to specific 
 organization, keep track of individual access rights, and promote clear visibility of data access.
 
 ## Working with Keboola Programmatically
-Everything you can do in the Keboola UI can also be done **programmatically through the API** of the corresponding component. All components publish their API documentation at [api.keboola.com](https://api.keboola.com/), and most are open source on [GitHub](https://github.com/keboola/)—so there are virtually endless possibilities for what you can build on top of Keboola. For a general introduction, see the [API reference](https://developers.keboola.com/overview/api/); to drive Keboola in natural language, use the [MCP Server](/ai/mcp-server/).
+Everything you can do in the Keboola UI can also be done **programmatically through the API** of the corresponding component. All components publish their API documentation at [api.keboola.com](https://api.keboola.com/), and most are open source on [GitHub](https://github.com/keboola/)—so there are virtually endless possibilities for what you can build on top of Keboola. For a general introduction, see the [API reference](/overview/api/); to drive Keboola in natural language, use the [MCP Server](/ai/mcp-server/).
 
 Components share a common structure, so once you've worked through one, you've seen them all:
 
 - **Configuration** — every component stores its configuration in [Storage](/storage/), managed through the Storage Component Configurations API. A stored configuration can be referenced whenever the component runs.
 - **Jobs** — each component is executed by a `/run` API call that queues an asynchronous [job](/management/jobs/), accepting either a reference to a stored configuration or a full configuration inline. Jobs can be scheduled and chained through [Flows](/flows/).
 
-Some components additionally expose [synchronous actions](https://developers.keboola.com/extend/common-interface/actions/), and the [Developer Portal API](https://api.keboola.com/?service=developer-portal) lists every component available in Keboola, including its metadata.
+Some components additionally expose [synchronous actions](/extend/common-interface/actions/), and the [Developer Portal API](https://api.keboola.com/?service=developer-portal) lists every component available in Keboola, including its metadata.
 
 ## Extending the Platform 
 The Keboola platform, as an open environment consisting of many built-in interoperating components (Storage, transformations, data source connectors, etc.), 
@@ -131,7 +133,7 @@ The platform automates infrastructure, user, and data management, offering servi
 and reverse billing. Components can be private or shared with Keboola users via our marketplace featuring applications mainly from 3rd parties 
 to enhance workflows and support a composable enterprise.
 
-Components can be run as standard pieces of our Flows [/tutorial/automate/#main-header], obtaining the full support and services (a link to your
+Components can be run as standard pieces of our [Flows](/flows/), obtaining the full support and services (a link to your
 [components](https://components.keboola.com/components), [logs, etc.](https://developers.keboola.com/extend/common-interface/)).
 
 ### Keboola CLI
@@ -171,7 +173,7 @@ A stack is an entirely independent, full instance of Keboola platform services. 
 multiple Keboola accounts.
 
 Each stack uses a different network with a different set of **dedicated** [IP addresses](/components/ip-addresses/). 
-Our [developer documentation](https://developers.keboola.com/overview/api/#regions-and-endpoints) describes how to handle multiple stacks 
+Our [developer documentation](/overview/api/#stacks-and-endpoints) describes how to handle multiple stacks 
 when working with the API in more detail.
 
 Single-tenant stacks are available for a single enterprise customer with a domain name in the form `connection.CUSTOMER_NAME.keboola.com`.
@@ -187,6 +189,6 @@ This token system enables easy [sharing of specific resources](/management/proje
 
 ### Input and Output Mapping
 To make sure your transformation does not harm data in Storage, [mapping](/transformations/mappings) separates source data from your script. 
-A secure [workspace](/workspace/#main-header) is created with data copied from the tables specified 
+A secure [workspace](/workspace/) is created with data copied from the tables specified 
 in the [input mapping](/transformations/mappings/#input-mapping). After the transformation is executed successfully, only tables and files defined
 in the [output mapping](/transformations/mappings/#output-mapping) are returned to Storage.

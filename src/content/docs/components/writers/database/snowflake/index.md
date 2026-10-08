@@ -21,8 +21,8 @@ The first step is to **set up credentials**:
 
 There are two modes of operation of the connector:
 
-- **Own Snowflake database** --- Use this when you have your own Snowflake database -- i.e., you have a contract with Snowflake, or someone gave you credentials of a database to write to.
-- **Keboola Snowflake database** --- In this mode, the connector will create a new schema in project's database for you and **give you credentials** to it. This option is available **only for projects using own Snowflake backend** ([KBDB](/storage/#keboola-brings-database-kbdb)/[BYODB](/storage/#bring-your-own-database-byodb)).
+- **Own Snowflake database** — Use this when you have your own Snowflake database -- i.e., you have a contract with Snowflake, or someone gave you credentials of a database to write to.
+- **Keboola Snowflake database** — In this mode, the connector will create a new schema in project's database for you and **give you credentials** to it. This option is available **only for projects using own Snowflake backend** ([KBDB](/storage/#keboola-brings-database-kbdb)/[BYODB](/storage/#bring-your-own-database-byodb)).
 
 ### Own Snowflake Database
 You need to provide a *host name* (account name), *user name*, *private key/password*, *database name*, *schema*, and *[warehouse](https://docs.snowflake.com/en/user-guide/warehouses)*.
@@ -81,7 +81,7 @@ When done configuring the columns, don't forget to **save** the settings.
 
 ### Load Settings
 At the top of the page, you can specify the target table name and additional load settings. There are two main options how the connector
-can write data to tables --- **Full Load** and **Incremental Load**.
+can write data to tables — **Full Load** and **Incremental Load**.
 
 ![Screenshot - Table Options](/components/writers/database/snowflake/snowflake-6.png)
 
@@ -101,7 +101,7 @@ Additionally, you can specify a **Primary key** of the table, a simple column **
 
 ## Using Keboola Snowflake Database
 The connector offers the option to create a [Keboola-provisioned database](#keboola-snowflake-database) for you. You can
-use this database to connect Keboola to a wide range of consumers --- especially Business Intelligence tools and Analytics.
+use this database to connect Keboola to a wide range of consumers — especially Business Intelligence tools and Analytics.
 The database can be queried in real time, but is still completely isolated from your project Storage. The database query execution time is limited to
 900 seconds (15 minutes).
 

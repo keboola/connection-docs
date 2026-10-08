@@ -18,7 +18,7 @@ a button to contact our support in the error alert message.
 
 ## Keboola Support Users
 In order to solve an issue or gain context regarding an application error, a technical support member
-may require access to your project. By default, Keboola support staff [may join](/management/project/users/#who-can-access-a-project) your project when
+may require access to your project. By default, Keboola support staff [may join](/management/project/users/#who-can-access-project) your project when
 requested, and they will appear in the member's list marked by the Keboola badge:
 
 ![Screenshot -- User joined](/management/support/users.png)
@@ -55,7 +55,7 @@ reason stated in the request and also which project user approved the request.
 
 ### Organization Changes
 When [Auto Join](#require-approval-for-support-access) is disabled, it limits
-[who can access the projects](/management/project/users/#who-can-access-a-project) in the organization. It also means
+[who can access the projects](/management/project/users/#who-can-access-project) in the organization. It also means
 that neither [the maintainer](/management/organization/), nor Keboola Support can join the organization itself.
 
 In other words, when Auto Join is turned off for an organization, only the organization users and project users may

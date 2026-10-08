@@ -21,6 +21,7 @@ Data destination connectors can be grouped by their primary purpose:
 - **Generic Storage**: [AWS S3](/components/writers/storage/aws-s3/), [Dropbox](/components/writers/storage/dropbox/), [Google Drive](/components/writers/storage/google-drive/),
 [Google Sheets](/components/writers/storage/google-sheets/), [Keboola Storage](/components/writers/storage/storage-api/), and more
 - [Other](/components/writers/other/) data destination connectors such as Azure Event Hub
+- [Generic Writer](/components/writers/generic-writer/) — sends arbitrary HTTP requests to any endpoint when no dedicated connector exists
 
 For a definitive list of usable data destination connectors, see your project **Data Destinations** section.
 

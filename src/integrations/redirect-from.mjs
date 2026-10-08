@@ -15,14 +15,14 @@ import { fileURLToPath } from 'node:url';
  */
 
 /**
- * Recursively find all .md files in a directory.
+ * Recursively find all .md and .mdx files in a directory.
  */
 function findMarkdownFiles(dir, files = []) {
   for (const entry of readdirSync(dir)) {
     const full = join(dir, entry);
     if (statSync(full).isDirectory()) {
       findMarkdownFiles(full, files);
-    } else if (extname(full) === '.md') {
+    } else if (extname(full) === '.md' || extname(full) === '.mdx') {
       files.push(full);
     }
   }

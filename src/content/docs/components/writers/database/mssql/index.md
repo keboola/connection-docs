@@ -53,7 +53,7 @@ When done configuring the columns, don't forget to **save** the settings.
 
 ### Load Options
 At the top of the page, you can specify the target table name and additional load options. There are two main options how the data destination connector
-can write data to tables --- **Full Load** and **Incremental Load**.
+can write data to tables — **Full Load** and **Incremental Load**.
 
 ![Screenshot - Table Options](/components/writers/database/mssql/mssql-6.png)
 

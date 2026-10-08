@@ -1,0 +1,140 @@
+---
+/**
+ * 404.astro — the "page not found" page.
+ *
+ * This is a real Astro page rather than an entry in the `docs` collection so it
+ * can (a) drop the chrome that makes no sense on a 404 (right-hand TOC, "Copy as
+ * Markdown", the section eyebrow pill, prev/next pagination) and (b) ship a
+ * bundled <script> for the InkDash game, which a plain `.md` file cannot.
+ *
+ * <StarlightPage> keeps the sidebar, which is the whole point — on a 404 the
+ * sidebar *is* the answer to "where was I supposed to go".
+ *
+ * Output path is unchanged: Astro special-cases the 404 route and emits
+ * `dist/404.html` at the root, exactly as the collection page did. Production is
+ * served by Vercel, which returns that file for any unmatched path — so the path
+ * must not move.
+ */
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import InkDash from '../components/InkDash.astro';
+import NotFoundSuggestions from '../components/NotFoundSuggestions.astro';
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'Page Not Found',
+    /* Four words on purpose. The block below already names the path that failed
+       and offers what's nearby, so a longer lede repeats it and costs vertical
+       space the recovery links need. This still carries a direct visit to
+       /404.html, where that block hides itself, and it is the meta description. */
+    description: "That page doesn't exist.",
+    tableOfContents: false,
+    pagefind: false,
+    hideMeta: true,
+    head: [{ tag: 'meta', attrs: { name: 'robots', content: 'noindex, follow' } }],
+  }}
+  headings={[]}
+  prev={false}
+  next={false}
+>
+  {/* Requested path, closest matches, parent section, and the two ways out —
+      one block, because "did you mean" and "get me out of here" are one job. The
+      standalone support@ line that used to sit here is gone: the same address is
+      already a bullet in the list below. */}
+  <NotFoundSuggestions />
+
+  {/* Under the Home/Search buttons, so everything that actually recovers the
+      visit — the failed address, the closest pages, and the two ways out — comes
+      first, and the game is what you find once you have been offered the exits.
+      It still costs the link list below some fold space, which is exactly why the
+      panel rests at ~215px and only takes the full field while somebody is
+      playing and nobody is reading the links. */}
+  <InkDash />
+
+  <h2>Where you might be headed</h2>
+
+  {/* No "Documentation home" bullet: the Home button above is the same link, and
+      offering one address twice on a page about a wrong address is noise. */}
+  <ul>
+    <li>
+      <a href="https://connection.keboola.com">connection.keboola.com</a> — log in to Keboola.
+    </li>
+    <li>
+      <a href="https://keboolastatus.com/">keboolastatus.com</a> — service status and changelog.
+      Worth subscribing to the feed or piping it into a Slack channel.
+    </li>
+    <li>
+      <a href="mailto:support@keboola.com">support@keboola.com</a> — talk to a human.
+    </li>
+  </ul>
+
+  <p class="notfound-partners">
+    Working with a Keboola partner? Reach your region at
+    <a href="mailto:cz.support@keboola.com">cz.support@keboola.com</a> (Europe),
+    <a href="mailto:support.ca@keboola.com">support.ca@keboola.com</a> (North America), or
+    <a href="mailto:apac.support@keboola.com">apac.support@keboola.com</a> (Asia).
+  </p>
+
+<script>
+  /* Reuse Starlight's own search modal instead of shipping a second search UI.
+     Pagefind only builds in production, so in `astro dev` the modal opens with
+     Starlight's dev-mode notice — expected, not a bug.
+
+     Delegated from `document` on purpose. Astro emits a page-level <script>
+     after </html>, which runs *after* ClientRouter has already dispatched
+     `astro:page-load` for the initial load — so wiring the button inside a
+     page-load handler silently never binds. Delegation needs no lifecycle hook
+     and keeps working across view-transition swaps. */
+  /* The URL already says what the visitor was after, so the modal opens with
+     that query instead of an empty field. NotFoundSuggestions publishes the
+     better wording on `.nf-help[data-nf-query]` — the matched page's title when
+     it found one, since Pagefind indexes content and would return noise for the
+     raw typo. Falls back to the slug words. */
+  function queryFromPath(): string {
+    const published = document.querySelector<HTMLElement>('.nf-help')?.dataset.nfQuery;
+    if (published) return published;
+
+    const seg = location.pathname
+      .replace(/\.html?$/, '')
+      .split('/')
+      .filter(Boolean)
+      .pop();
+    if (!seg || /^404$/.test(seg)) return '';
+    return decodeURIComponent(seg).replace(/[-_]+/g, ' ').trim();
+  }
+
+  /* Starlight discards its PagefindUI instance (`new PagefindUI({...})` in
+     components/Search.astro), so `triggerSearch` is out of reach — drive the
+     input directly. Svelte's handler reads from the event target, hence the
+     dispatched `input` event. The field only exists once PagefindUI has mounted,
+     so poll briefly with setTimeout — NOT requestAnimationFrame, which never
+     fires in a hidden tab. */
+  function prefill(query: string, attemptsLeft = 20) {
+    const input = document.querySelector<HTMLInputElement>(
+      '#starlight__search input.pagefind-ui__search-input'
+    );
+    if (!input) {
+      if (attemptsLeft > 0) setTimeout(() => prefill(query, attemptsLeft - 1), 50);
+      return;
+    }
+    if (input.value) return; // never clobber something the visitor typed
+    input.value = query;
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement | null;
+    if (!target?.closest('#notfound-search')) return;
+    /* Deferred to the next task, not called inline. Starlight's openModal()
+       registers a window-level "click outside closes me" handler as it opens.
+       Triggering it synchronously means our own click — still bubbling toward
+       window — reaches that fresh handler and slams the modal shut again. */
+    setTimeout(() => {
+      document
+        .querySelector<HTMLButtonElement>('site-search button[data-open-modal]')
+        ?.click();
+      const query = queryFromPath();
+      if (query) prefill(query);
+    }, 0);
+  });
+</script>
