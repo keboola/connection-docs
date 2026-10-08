@@ -30,7 +30,7 @@ Most app problems fall into a handful of patterns. Find where the evidence is fi
 | The install step fails | No `pyproject.toml` or `package.json` where `setup.sh` runs, or `pip install` in `setup.sh`; the image blocks bare `pip` (`externally-managed-environment`). | Commit the manifest; use `uv sync` or `npm install --omit=dev`. |
 | The deploy job fails on a package conflict | Two dependencies want incompatible versions, or an unpinned package moved. | Pin versions. Streamlit apps: [Lock package versions](/data-apps/streamlit/lock-version/). |
 
-<!-- VERIFY(Miro): does one failed deploy (first row) turn waking off at once, or only after several failed starts in a row? -->
+<!-- One failed deploy turns waking off at once when the app was stopped or sleeping: checked 2026-10-08 in project 264, see the note under Stop, start, sleep in operate.md. -->
 
 ## The app runs but misbehaves
 
@@ -61,7 +61,7 @@ Most app problems fall into a handful of patterns. Find where the evidence is fi
 
 An idle app suspends after its inactivity timeout. The next visit wakes it and shows a **waking up** page for a moment; if waking fails, a **wakeup error** page appears with a **Show More** link to the reason. Details and the timeout setting: [Sleep and resume](/data-apps/reference/#sleep-and-resume).
 
-If visitors get a page headed **This app is not running** instead (the browser tab says Application Disabled), the app has failed to start several times in a row. Keboola has stopped retrying, and visits no longer wake it. The app's page in Keboola says the same in a warning: "The app was disabled because it failed to start automatically multiple times."
+If visitors get a page headed **This app is not running** instead (the browser tab says Application Disabled), a deploy or start of a stopped or sleeping app has failed. Keboola stops trying, and visits no longer wake the app. One failed start is enough, even though the app's page warns that it "was disabled because it failed to start automatically multiple times." A failed **Redeploy** of a running app doesn't do this: the previous version keeps running and still wakes on visits.
 
 To bring it back, fix whatever makes it fail, then start it by hand. For an app Kai built, Kai can do both: the Builder shows a warning too, with a **Fix with Kai** button. The button asks Kai to read the app's logs and recent runs, tell you what it found before changing anything, then deploy the fix and start the app.
 
