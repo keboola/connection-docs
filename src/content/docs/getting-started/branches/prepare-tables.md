@@ -4,6 +4,7 @@ slug: 'getting-started/branches/prepare-tables'
 description: "Set up the table-manipulating configurations used by the development branches walkthrough: a data source connector and an SQL transformation in production."
 redirect_from:
   - /tutorial/branches/prepare-tables/
+prev: 'Development branches'
 ---
 
 
