@@ -13,7 +13,7 @@ import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 import CourseLine from '../../../../components/getting-started/CourseLine.astro';
 import FlowStrip from '../../../../components/getting-started/FlowStrip.astro';
 
-<PageMeta genre="Tutorial" />
+<PageMeta genre="Tutorial" guide="Getting Started, step by step" />
 
 <CourseLine current="transform" />
 
@@ -163,6 +163,18 @@ screenshot; the job's card in the chat says **Job succeeded** once the table is 
 differ: re-prompt, or fix the code in place. Later steps need only that table, at
 `out.c-Boolabean-staffing-outlook.staffing_outlook` where Kai puts it, so a close-enough table is
 fine; if yours landed in another bucket, use its ID in their prompts.
+
+To see what the SQL does, ask in the same chat:
+
+```text title="Follow-up prompt" wrap
+Explain the SQL of the "Boolabean staffing outlook" transformation in plain words.
+```
+
+It only reads, so it asks for no approval by default.
+{/* Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals: Kai walked through
+the daily demand, the temperature and rain bands, the average per band, the weekday roster, the
+forecast join and the flag over 67 units per person. Titled "Follow-up prompt" so prompts.mjs leaves
+it out of the with-kai list. */}
 
 </TabItem>
 <TabItem label="UI">
@@ -600,6 +612,29 @@ Recorded in DECISIONS.md, deliberately not on the page: decision 6. */}
 
 ## If it goes wrong
 
+:::tip[Ask Kai first]
+If the job failed:
+```text title="Prompt" wrap
+The last run of my "Boolabean staffing outlook" transformation failed. Read its error and tell me what to change.
+```
+If it succeeded but staffing_outlook looks wrong (replace the part in angle brackets):
+```text title="Prompt" wrap
+The last run of my "Boolabean staffing outlook" transformation succeeded, but staffing_outlook looks wrong: <what you see>. Read the SQL and the first rows of the table and tell me what to change.
+```
+Kai reads the job's log, the SQL and the table
+([Troubleshooting](/kai/use-cases/#troubleshooting)); a question that only reads asks for no
+approval by default. Use your transformation's name if you changed it. If Kai proposes a change, it
+asks before making it unless you set that tool to **Always allow**; then run the transformation
+again and redo the **Check**. From a terminal, ask the same with
+`kbagent kai ask --project <alias> -m "…"`. The folds below cover other errors and surprises, with
+their fixes.
+{/* Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals. The
+failed-job prompt as worded: Kai found the transformation, checked all 24 runs (8 Sep to 1 Oct, all
+succeeded) and said there was no failure. The second prompt, with "it has more than 42 rows": Kai
+read the SQL and the table, found exactly 42 rows and no duplicate forecast rows, walked through the
+joins and suggested a filter, changing nothing. DECISIONS.md 2026-10-07. */}
+:::
+
 <details>
 <summary><code>Object 'SALES' does not exist</code> (Snowflake)</summary>
 
@@ -670,14 +705,6 @@ input mapping; see [the `_timestamp` system column](/transformations/mappings/#_
 <summary>You want to see what the query returns before saving</summary>
 
 That is what a [workspace](/getting-started/transform/workspace/) is for.
-
-</details>
-
-<details>
-<summary>You would rather not read the log yourself</summary>
-
-Kai has it open already ([Troubleshooting](/kai/use-cases/#troubleshooting)):
-`My transformation "Boolabean staffing outlook" failed. Read the last job's log and tell me what to fix.`
 
 </details>
 

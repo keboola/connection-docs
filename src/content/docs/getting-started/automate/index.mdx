@@ -13,7 +13,7 @@ import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 import CourseLine from '../../../../components/getting-started/CourseLine.astro';
 import FlowStrip from '../../../../components/getting-started/FlowStrip.astro';
 
-<PageMeta genre="Tutorial" />
+<PageMeta genre="Tutorial" guide="Getting Started, step by step" />
 
 <CourseLine current="automate" />
 
@@ -189,6 +189,19 @@ once the run has ended; Kai then reports how each phase went.
 the two connectors side by side in the first. If it came out as one phase, switch to the **UI** tab, where the **+** below a phase starts a
 new phase, and move the later tasks there. The flow's **Schedules** tab shows the schedule Kai set,
 with its timezone and a toggle to pause it.
+
+To see what will run and when, ask in the same chat:
+
+```text title="Follow-up prompt" wrap
+What will the "Boolabean morning outlook" flow run next time, and in what order?
+```
+
+It only reads, so it asks for no approval by default.
+{/* Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals: Kai listed the
+phases and their tasks in order, which tasks run in parallel, and the schedule with its state (disabled there). That flow in 264
+is the older three-phase one on a daily 06:00 schedule, not this page's two-phase Monday flow; the
+prompt only reads, so it fits either. Titled "Follow-up prompt" so prompts.mjs leaves it out of the
+with-kai list. */}
 
 **Notifications** are still yours: two clicks in the flow's own tab below, and the part people
 forget exists.
@@ -433,7 +446,9 @@ are enough here.
   manual run, `Schedule for <flow ID> Scheduler` against an automatic one.
 - **A red run can still have done most of its work:** phases run in order, so when a later one
   fails, the ones before it are done. [Check Storage and Jobs](/getting-started/check/) shows how to read
-  the run.
+  the run, or ask Kai to read it: `My flow run failed. Which task failed, and why?`
+  {/* Same prompt as check/'s tip. Run 2026-10-07 in project 264 with `kbagent kai ask`: Kai found
+  the latest failed run of the flow, named the failed task and read that task's job log. */}
 - Next Monday there will be a second run you did not start, on a forecast that has moved by a
   week.
 

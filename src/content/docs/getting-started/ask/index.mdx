@@ -1,7 +1,7 @@
 ---
 title: 'Explore your data'
 slug: 'getting-started/ask'
-description: 'Put the question to your own data: Kai reads the table you built and answers it in plain words, then answers the follow-up, and the same pipeline can be asked for as one prompt.'
+description: 'Put the question to your own data: Kai reads the table you built and answers it in plain words, then answers the follow-up.'
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -10,7 +10,7 @@ import Prereqs from '../../../../components/getting-started/Prereqs.astro';
 import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 import CourseLine from '../../../../components/getting-started/CourseLine.astro';
 
-<PageMeta genre="Tutorial" />
+<PageMeta genre="Tutorial" guide="Getting Started, step by step" />
 
 <CourseLine current="ask" />
 
@@ -40,7 +40,7 @@ does, out of your own project.
 2026-09-09 (boolabean-run, the staged runs' ask.txt and ask-followup/): the first as the
 fourth prompt of the staged runs, 0 approvals, 1.3–1.6 min; the second alone in a fresh chat, 0
 approvals. Kai's figures matched the table and the offline reference to the decimal. The
-"one prompt" paragraph reports the 2026-09-03 and 2026-09-08 observations recorded in DECISIONS.md.
+"one prompt" observations of 2026-09-03 and 2026-09-08 moved to with-kai/ on 2026-10-08.
 The previous clip (kai-ask-basin.mp4) came off with the old sample world.
 
 Three tabs 2026-09-15. The CLI command was run live against project 264 (kbagent v0.93.1):
@@ -115,7 +115,19 @@ one question because the pipeline had already put the roster next to the demand.
 Kai wrote its own SQL and may have drawn the lines somewhere else: rounded before dividing, or read
 `short_handed` as text. The definitions this guide uses are the columns your transformation
 already wrote, so point Kai at those (`expected_units`, `rostered_staff`,
-`expected_units_per_person`) rather than re-prompting blind.
+`expected_units_per_person`) rather than re-prompting blind. To see where its lines are, ask in the
+same chat:
+
+```text title="Follow-up prompt" wrap
+Show me the SQL you ran for that answer and the rows it is based on.
+```
+
+It only reads, so by default it asks for no approval, and a wrong filter or a wrong table is easier
+to spot in the SQL than in the prose.
+{/* Run 2026-10-07 in project 264 with `kbagent kai chat`, after this page's first question in the
+same chat: Kai printed both queries it had run (the short-handed filter and a date-range check) and
+the three rows, with no approval. Titled "Follow-up prompt" so components/getting-started/prompts.mjs
+does not list it on with-kai/ as a step. DECISIONS.md 2026-10-07. */}
 
 </details>
 
@@ -209,26 +221,10 @@ gives you the shape of the table and
 </TabItem>
 </Tabs>
 
-## The same request, as one prompt
-
-You built this one step at a time so every result stayed checkable. Once you have seen the
-pieces, the loading, the forecast and the joining are one request rather than three:
-
-```text title="Prompt" wrap
-Load the five CSV files at https://help.keboola.com/getting-started/boolabean/ (stores, products, sales, staffing, weather_daily) into Storage as one HTTP data source configuration. Add a second HTTP configuration for the open-meteo forecast CSV for the six cafés. Then build a transformation that joins them into staffing_outlook, one row per café per forecast day with expected units per rostered person and a short_handed flag over 67, and tell me which café and day come out most stretched.
-```
-
-Two things to know before you paste it:
-
-- **It is still a dozen approvals, not one.** Kai asks before each change it makes.
-- **Kai tends to stop after the first part,** answering *"I'll tackle this in stages"* and waiting
-  for *continue*. In our runs the same work as four prompts in one chat needed no nudging.
-
-The one-prompt version works, and it is the faster route once you have seen the pieces separately.
-{/* Measured: 2026-09-03 and 2026-09-08, a four-part prompt stopped after stage one both times;
-the four-prompt version ran to the end in 14 minutes with 12 approvals and 0 nudges (DECISIONS.md,
-2026-09-08). The exact one-prompt wording above has not itself been run since the dataset
-changed; its parts are the four prompts that have, and the approvals count is theirs. */}
+{/* "The same request, as one prompt" moved on 2026-10-08 to getting-started/with-kai/ as the fold
+"Why not one prompt for everything": its two measured observations went there, the prompt block
+went (never run on the current sample; a second copy of the prompts). CONSERVATION-REPORT.md
+2026-10-08. */}
 
 A chat answer reaches only the person who asked. The next page turns the table into a grid anyone
 can open.

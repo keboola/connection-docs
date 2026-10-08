@@ -36,6 +36,7 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "getting-started" },
       { slug: "getting-started/project" },
+      { slug: "getting-started/with-kai" },
       { slug: "getting-started/load" },
       { slug: "getting-started/transform" },
       { slug: "getting-started/ask" },

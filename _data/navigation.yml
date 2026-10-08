@@ -35,6 +35,9 @@ items:
       - url: /getting-started/project/
         title: Create or join a project
 
+      - url: /getting-started/with-kai/
+        title: The whole guide with Kai
+
       - url: /getting-started/load/
         title: Load data into Storage
 

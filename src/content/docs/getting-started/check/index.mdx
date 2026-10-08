@@ -48,6 +48,18 @@ with three ways to do it. */}
 In **Storage**: two `in.c-` buckets named after the connector and the configuration ID
 (`keboola-ex-http-…`), and one `out.c-Boolabean-staffing-outlook` bucket.
 
+To have Kai list it for you, with what each part does:
+
+```text title="Follow-up prompt" wrap
+List everything the Getting Started guide created in this project (the Boolabean configurations, tables, the app and the flow) and what each does.
+```
+
+It only reads, so it asks for no approval by default.
+{/* Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals: Kai listed both
+HTTP configurations, the six input tables with 6, 18, 9,761, 552, 552 and 42 rows, the
+transformation and staffing_outlook (42 rows), the app and the flow. Project 264 also holds other
+Boolabean apps and flows made outside the guide, and Kai listed those too. */}
+
 ## The one number that proves the join
 
 `staffing_outlook` should hold **exactly 42 rows**: six cafés times the seven days in the forecast.
@@ -101,8 +113,9 @@ My flow run failed. Which task failed, and why?
 ```
 Kai reads the run's job logs, which is faster than expanding them one at a time. The same question
 from a terminal is `kbagent kai ask --project <alias> -m "…"`.
-{/* VERIFY(owner): kai/ documents reading *a* job log, not traversing every child job of a flow
-run. The prompt is safe either way; the capability sentence is the unverified part. */}
+{/* Run 2026-10-07 in project 264 with `kbagent kai ask`, read-only, 32 s: Kai found the latest
+failed run of "Boolabean morning outlook", named the failed task (the app redeploy) and read that
+child job's log (an app that never reached "running"). DECISIONS.md 2026-10-07. */}
 :::
 
 ## The same checks from a terminal

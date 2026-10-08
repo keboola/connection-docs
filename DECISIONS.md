@@ -1678,6 +1678,137 @@ headings over the cards.
 
 ---
 
+## 2026-10-07 — Kai in the failure paths, and the whole guide as prompts
+
+**Asked by:** Michal, through Nikita on 7 Oct: more Kai in the process. Nikita picked two of four
+proposals and asked for them as a separate PR: ask Kai when something fails, and the whole guide
+as Kai prompts in one place.
+
+**Ask Kai first.** load/ and transform/ open their "If it goes wrong" sections with a tip in
+check/'s style holding two prompts that name the guide's configuration: one for a job that failed
+("Read its error and tell me what to change") and one for a job that succeeded but left a table
+that looks wrong ("Read the configuration [the SQL] and the first rows of that table…", with a
+placeholder for what the reader sees). The guide-tester found most of load/'s folds are such
+green-but-wrong jobs, and the checker that a failed-job prompt alone narrowed the plan. The tip
+also says to use your own name if you changed it, that Kai asks before any change unless the tool
+is set to **Always allow**, to run again and redo the check, and the terminal form (`kbagent kai
+ask`). A question that only reads asks for no approval by default, as the hub says. On ask/ the
+prompt "Show me the SQL you ran for that answer and the rows it is based on" sits in the Prompt
+tab's fold "If the numbers come out different", titled "Follow-up prompt" so the hub's list skips
+it; below the tabs it would have reached readers of the UI and CLI tabs, who have no Kai answer to
+question. On automate/ the red-run bullet of "Check it worked" ends with check/'s prompt in one
+line rather than a second copy of check/'s tip, since check/ is the next page.
+
+**Not as proposed, for Nikita.** The proposal said one prompt line in each failure fold; the tips
+carry two prompts per page instead, because the folds' failures are of two kinds and fourteen near
+identical lines would undo the dry pages. Per-fold lines are a follow-up if wanted. It also said to
+run the whole list once in one chat on 6375 before publishing; that run was not done. The list
+claims only the 1 Oct numbers (page by page), and a one-chat rerun would leave a second set of
+configurations, an app draft and a second weekly schedule in the project, with the app step in the
+Apps builder rather than the chat. Nikita's call.
+
+**The whole guide with Kai.** A new hub section before "Where to start instead": once you have a
+project, the prompts in order build the pipeline from loading to the weekly flow; paste each into
+Kai Agent, or the app's into the Apps builder, and approve what Kai asks. Before the next prompt
+the step's Check must match, with a signal per step: the load reports its row counts on its own
+about six minutes after Kai hands the chat back, the transformation's and the flow's job cards say
+**Job succeeded**, the app's chat ends with **Draft ready**, and a question is done when it is
+answered (the checker caught a first version that said "Job succeeded" for all five). The section
+gives the approvals of the run, 15 without the app's optional publish (load 7 and 3, transform 2,
+flow 3, from the pages), and is a short list: where, when to paste the next, what is left. The section names what the prompts leave to the
+reader: the flow's notifications, publishing the app, and Check Storage and Jobs; and it sends
+terminal users to each page's CLI / API tab. The guide-tester's first pass found "the whole
+pipeline", an undefined "finished" and no checks, all three fixed here. A fold holds
+the seven prompts of the five steps that have a Prompt tab. They are read from the step pages at
+build time (`components/getting-started/prompts.mjs`, used by `GuidePrompts.astro` and by the
+markdown twin), so the hub never holds a second copy; the build fails if a step that should have
+prompts has none. The text claims the 1 Oct timing (about 30 minutes from the first prompt to the
+last, one page at a time) and not that the prompts run back to back in one chat:
+that was last shown on 8 Sep, for four of the seven prompts and in older wording.
+
+**Run before the PR opened** (7 and 8 Oct, project 264, `kbagent kai ask` and `kai chat`,
+read-only, no approvals, about 30 s per answer). transform/'s failed-job prompt as worded: Kai
+checked the transformation's 24 runs, all green, and said so. The two green-but-wrong prompts, with
+"the stores table has only one column" and "it has more than 42 rows": Kai read the configuration
+or the SQL and the table's rows, found the tables fine, and said what to check or change, changing
+nothing. Asked by name about "Boolabean sales", whose last 50 runs had all
+succeeded, Kai found the configuration, checked its runs and said there was no failure rather than
+inventing one. Asked "My flow run failed. Which task failed, and why?", it found the latest failed
+run of "Boolabean morning outlook", named the failed task (the app redeploy) and read that child
+job's log: the app never reached "running". That also settles check/'s VERIFY on reading a flow
+run's child jobs. After ask/'s first question, "Show me the SQL you ran for that answer and the rows
+it is based on" printed both queries Kai had run and the three rows. transform/'s tip says Kai reads
+the job's log and the transformation's configuration, not "the SQL and the input mapping", because
+only the first was seen.
+
+---
+
+## 2026-10-08 — The whole guide with Kai becomes a page, and the guide gets one true tutorial
+
+**Asked by:** Nikita, 8 Oct: more weight on Kai; whether the prompts stay on the Overview as a
+one-shot; perhaps show first that the whole thing can be done fast, then explain step by step; and a
+Diátaxis pass over the guide.
+
+**What the Diátaxis pass found.** Every task page is declared a tutorial, but with three tabs that
+are alternatives it reads closer to a how-to: a tutorial gives one guaranteed path. transform/ is
+the most explanation-heavy (its UI tab mixes steps, both SQL dialects and commentary), automate/'s
+"Check it worked" holds a cost note, app/'s CLI tab is a different task, checks appear twice on
+three pages, a few facts repeat across three or four pages, and the guide explains Kai's approvals
+itself while linking none of the kai/ overview, best-practices or security pages. Author comments
+are about 61 % of the visible words. ad-hoc/ is a 2019 tutorial with no Kai.
+
+**Nikita's decisions.**
+1. The fast path gets its own page, **The whole guide with Kai** (`getting-started/with-kai/`),
+   right after Create or join a project and before the step pages, so the sidebar and the
+   prev/next links read: Overview, project, the whole guide with Kai, then the steps.
+2. The step pages keep the genre Tutorial; the track shows in the page's line: "Getting Started,
+   step by step" on load/ to automate/, "Getting Started, with Kai" on the new page. project/ and
+   check/ serve both and keep the plain label: my call, not Nikita's (the plan had the label on
+   them too), told to Nikita in the 2026-10-08 hand-off.
+3. ask/'s "The same request, as one prompt" loses its prompt block; its two measured observations
+   move to the new page.
+4. This round also adds read-only "explain what you built" prompts and a recap prompt, and the
+   author comments get a diet in a separate PR. The within-page Diátaxis fixes wait.
+
+**The new page** is the guide's one true tutorial: Prompt only, one path. It has a state block
+(from a project with Kai to the pipeline and the answer), a Kai prerequisite that links Get started
+with Kai and Kai security and privacy, "How it goes" (where to paste, when to paste the next, what
+Kai asks), the generated list of prompts with an "Expect … Done when …" line after each step (from
+two new fields in `course.mjs`, `approvals` and `done`; 7+3, 2, 0, 0 for the draft, 3 = 15), "What
+you have now" with a recap prompt, "What is left to you" (notifications, publishing, the check),
+the fold "Why not one prompt for everything", and a closing link to Load data into Storage. The
+course line shows the seven steps unmarked: the page is a track, not an eighth step, so
+`course.mjs` keeps seven. The hub drops its #1177 section and keeps one sentence that links the
+page, which also ends the clash with the 23 Sep "no new list" ruling.
+
+**Run before writing** (8 Oct, project 264, `kbagent kai ask`, read-only, no approvals): "Explain
+the "Boolabean sales" configuration you created, row by row" (base URL, five rows, three processors
+each); "Explain the SQL of the "Boolabean staffing outlook" transformation in plain words" (daily
+demand, temperature and rain bands, weekday roster, the flag over 67); "What will the "Boolabean
+morning outlook" flow run next time, and in what order?" (phases, parallel tasks, the schedule and
+its state); and the recap (both configurations, the six tables with the guide's row counts, the
+transformation, staffing_outlook, the app and the flow; 264's other Boolabean apps came up too).
+The follow-ups sit at the end of the Prompt tabs of load/, transform/ and automate/, the recap on
+check/ and the new page, all titled "Follow-up prompt" so `prompts.mjs` leaves them out of the list.
+
+**Not claimed.** That the seven prompts run back to back in one chat: never run in their current
+wording. The page gives the 1 Oct numbers, measured one page at a time.
+
+**Review fixes (fact-checker, guide-tester, checker, same day).** ask's "Done when" said the cause
+is always in the forecast; ask/'s own Check says it is sometimes the roster, and nobody in a cold
+week, so the line now follows that Check and covers the what-if prompt. Load's line says what Kai
+does during the six-minute wait and that the forecast prompt goes in the same chat. The page now
+states the question, a "same chat" rule, **Create app** for a project that already has an app, and
+a pointer for a step that comes out different (including a staffing_outlook in another bucket).
+"The draft is yours alone" (unverified) became app/'s "nothing is published until you say so"; the
+link is behind a password. The fold credits the 14-minute control run to 8 Sep only. project/'s
+"in one sitting" (never measured) became "every prompt on one page", with a which-to-pick
+half-sentence there and on the hub. The twin prints each step as a heading, since unindented
+fences restart a markdown list. Left as is: the sidebar puts with-kai before load/, so load/'s
+Previous link goes to with-kai (Nikita chose the place).
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
@@ -1690,7 +1821,7 @@ still block rebuild work.
 | ~~Does the Free Plan include data apps?~~ | closed 2026-10-01 | **Yes.** Built, published and deployed in Free Plan project 6375 (see the entry above). |
 | ~~Does a "plan mode" exist, and what is it called?~~ | closed 2026-09-02 | **Yes.** The chat composer has a button labelled "Enable plan mode", next to "Disable follow mode". Kai drafts a plan and you approve once. Now recommended in the section ahead of "Always allow". Still owed: a description on the `kai/` pages, which document neither mode. |
 | ~~Can Kai set a schedule and notifications?~~ | half closed 2026-09-09 | **Schedule: yes.** Asked for "every day at 06:00 Europe/Prague", Kai created a Scheduler configuration (`0 6 * * *`, Europe/Prague, enabled) for the flow it had just built. **Notifications: not tested**; the page keeps them manual. |
-| ~~Has the consolidated one-prompt block ever run end to end?~~ | closed 2026-09-02 | **Yes** — run live in project 264: 14 minutes, 11 approvals, 10,000 rows in and out. The block now lives on `ask/`. Transcript in PR #1110. |
+| ~~Has the consolidated one-prompt block ever run end to end?~~ | closed 2026-09-02 | **Yes** — run live in project 264: 14 minutes, 11 approvals, 10,000 rows in and out. The block lived on `ask/` until 2026-10-08, then moved to with-kai/'s fold without its prompt. Transcript in PR #1110. |
 | Is the monthly Kai allowance per project or per organization? | `index.mdx` (Get a project) | the pricing guardrail wording |
 | Is RStudio still an offered workspace type? | `ad-hoc/index.md` | the ad-hoc page's fate |
 | Does the Kai **Add Task** menu offer three items or four (is **Build with Kai** in it)? | `automate/index.mdx` | the Kai tab's first instruction. Live check 2026-09-02 confirmed **Modify with Kai** in the flow header; the menu itself did not open to automation |

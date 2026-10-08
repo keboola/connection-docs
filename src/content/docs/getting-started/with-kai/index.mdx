@@ -1,0 +1,106 @@
+---
+title: 'The whole guide with Kai'
+slug: 'getting-started/with-kai'
+description: 'Build the Getting Started pipeline by pasting its prompts into Kai in order: six tables loaded, five of them joined with SQL, the question answered, an app and a weekly flow, in about 30 minutes once you have a project.'
+---
+
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import CourseLine from '../../../../components/getting-started/CourseLine.astro';
+import GuidePrompts from '../../../../components/getting-started/GuidePrompts.astro';
+
+<PageMeta genre="Tutorial" guide="Getting Started, with Kai" time="about 30 minutes, measured one page at a time" />
+
+<CourseLine />
+
+The guide builds one pipeline for six cafés, to answer one question: **Which day next week will
+leave a café short-handed?** This page has every prompt for it in one place. Kai builds each step
+from a prompt you paste, and you approve what it asks; the step pages cover the same steps with the
+click-through and terminal ways, and explain what each one does.
+
+<Prereqs needs={['project']}>
+  <span slot="from">a project with Kai and empty Storage.</span>
+  <span slot="to">two data source configurations, a transformation, an app draft and a weekly flow, and the question answered.</span>
+  <li>
+    <strong>Kai</strong>, the <strong>Kai Agent</strong> button in the top bar. A new Free Plan
+    project has it from the start; elsewhere an organization admin turns it on once, on the stacks
+    that have Kai:{' '}
+    <a href="/kai/getting-started/">Get started with Kai</a>. What it can see and change:{' '}
+    <a href="/kai/security-and-privacy/">Kai security and privacy</a>.
+  </li>
+</Prereqs>
+
+## How it goes
+
+- **Where:** paste each prompt into **Kai Agent**, except the app's, which goes into the Apps
+  builder (**Apps** in the navigation, then **Create app** if the project already has an app).
+  A step's prompts go in the same chat.
+- **When to paste the next:** once the step is done. Each step below says how to tell, and its
+  page has the full **Check**.
+- **What Kai asks:** approve each change it proposes, 15 approvals in our run without the app's
+  optional publish; a question that only reads asks for none by default.
+  [Approvals and plan mode](/getting-started/#approvals-and-plan-mode) says what asks, what does
+  not, and how to undo a step.
+- **If a step comes out different:** its page's **Check** and the folds under it say what to do. If
+  staffing_outlook landed in another bucket, put its table ID in the app prompt.
+
+## The prompts
+
+<GuidePrompts />
+
+{/* The list is read from the step pages' Prompt tabs at build time (components/getting-started/
+prompts.mjs) and the "Expect … Done when …" lines from course.mjs, so this page never holds a
+second copy of a prompt. "About 30 minutes" and the 15 approvals are the 2026-10-01 Free Plan run in
+project 6375, one page at a time: load 10.9 min (both prompts), transform 4.7, ask 1.3, app 4.5 to
+the first preview, flow 5.6 including its first run (that was the three-phase flow; the current
+two-phase prompt took about 7.5, which makes about 29, index.mdx); approvals 7 + 3 + 2 + 0 + 0 + 3. The seven
+prompts have not been run back to back in one chat in their current wording, so the page does not
+say they can be. Made 2026-10-08 at Nikita's call (own page after project/, before the step pages);
+DECISIONS.md 2026-10-08. */}
+
+<details>
+<summary>Why not one prompt for everything</summary>
+
+Asked for loading, the forecast and the join in one prompt, Kai built the first part and stopped,
+answering *"I'll tackle this in stages"* and waiting for *continue*, in both runs (3 and 8
+September). One prompt would not save approvals either, since Kai asks before each change. In the
+8 September run, four separate prompts in one chat ran to the end without a nudge, in 14 minutes
+with 12 approvals, which is why this page gives the prompts one by one.
+
+</details>
+
+{/* Moved here from ask/'s "The same request, as one prompt" on 2026-10-08: the two measured
+observations stay, the prompt block went (its wording was never run on the current sample, and a
+second copy of the prompts would drift). The 14-minute, 12-approval control run is 8 Sep only
+(DECISIONS.md 2026-09-08); it used this sample with earlier prompt wording. Both one-prompt runs on the
+current sample (3 and 8 Sep) stalled; the 2 Sep run of the older block on the earlier dataset ran
+end to end (14 min, 11 approvals). CONSERVATION-REPORT.md 2026-10-08. */}
+
+## What you have now
+
+A pipeline that loads the data, joins it, answers the question in an app and rebuilds itself every
+Monday. To see all of it in one answer, ask Kai:
+
+```text title="Follow-up prompt" wrap
+List everything the Getting Started guide created in this project (the Boolabean configurations, tables, the app and the flow) and what each does.
+```
+
+It only reads, so it asks for no approval by default.
+[Check Storage and Jobs](/getting-started/check/#what-you-should-have) lists what should be there.
+
+{/* Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals: Kai listed both
+HTTP configurations, the six input tables with 6, 18, 9,761, 552, 552 and 42 rows, the
+transformation and staffing_outlook (42 rows), the Staffing Outlook Grid app and the flow, each with
+what it does. Project 264 also holds other Boolabean apps and flows made outside the guide, and Kai
+listed those too; a project that only followed the guide has only the guide's. */}
+
+## What is left to you
+
+- **Notifications:** nobody hears about a failed run until you add a recipient in the flow's
+  [notifications](/getting-started/automate/#set-up-notifications).
+- **Sharing the app:** nothing is published until you say so; [publishing it](/getting-started/app/)
+  asks twice and gives others a link to the app, behind a password.
+- **A look at the whole run:** [Check Storage and Jobs](/getting-started/check/).
+
+**Next:** the same steps explained, with the click-through and terminal ways:
+[Load data into Storage](/getting-started/load/).
