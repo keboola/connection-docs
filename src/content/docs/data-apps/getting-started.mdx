@@ -34,13 +34,15 @@ Apps go well beyond dashboards — the same steps produce internal tools, data n
 
 ## Step 1 — Open Apps and start a new app
 
-In your project, open **Apps** from the left navigation, then click **+ Create App**.
+In your project, open **Apps** from the left navigation, then click **Create app**. A project with no apps yet has no such button: its Apps page opens on **Build web apps from your Keboola data**, with a **Describe what you want to build** prompt that does the same job as **Build with Kai**. In that case, use that prompt for Step 2.
 
-![The Apps list in a Keboola project with the Create App button in the top right](/data-apps/getting-started-apps-list.png)
+{/* VERIFY(Nikita): the Apps page of a project with no apps (here and in Create an app manually, step 1) is known from the UI code of 1 Oct only; project 264 has apps. */}
 
-You land on the **Build web apps from your Keboola data** screen. It leads with a single prompt — *"Describe what you want to build…"* — and, below it, manual **Streamlit** and **Python / JS** options for when you'd rather [set things up yourself](#create-an-app-manually). (The **Kai Agent** chat anywhere in your project works too.)
+![The Apps list in a Keboola project: the app count, the search box with status filters, and the Create app button in the top right](/data-apps/getting-started-apps-list.png)
 
-![The Create App screen: a "Describe what you want to build" prompt with manual Streamlit and Python/JS options below](/data-apps/getting-started-create-app.png)
+You land on the **Create app** screen. It leads with **Build with Kai**, a prompt box where you tell Kai what you need. Below it, **Other ways to start** links to building locally with a coding agent and to the manual routes, for when you'd rather [set things up yourself](#create-an-app-manually). (The **Kai Agent** chat anywhere in your project works too.)
+
+![The Create app screen: the Build with Kai prompt at the top and, under Other ways to start, Build locally with your coding agent, Deploy from your own Git repository, and the Create a Streamlit app link](/data-apps/getting-started-create-app.png)
 
 ## Step 2 — Describe the app you want
 
@@ -76,9 +78,7 @@ When you're happy with the draft, click **Publish to Production**. Kai merges th
 
 ![The published app: the configuration page showing Active status, next to Kai's final message with the App URL, the generated password, and an Open App button](/data-apps/getting-started-deployed.png)
 
-By default the app is protected with **Basic (Password)** authentication. The generated password is also on the app's configuration page: click **Open App** in the page header and copy it from the dialog.
-
-{/* The Open App dialog (App address, Password, each with a copy button) was seen on 2026-09-29 on a running app built with kbagent (project 264, App ID 74021867). VERIFY(Nikita): the same on apps Kai built or created in the UI. */}
+By default the app is protected with **Basic (Password)** authentication. The generated password is also on the app's configuration page: copy it from the **Password** field in the **App access** card on the **Overview** tab, or click **Open** in the page header and copy it from the dialog.
 
 To change who can access it (public, a password, SSO, GitHub, and more), see [Authentication](/data-apps/authentication/).
 
@@ -102,23 +102,35 @@ Kai uses your data through the project's access controls — the app can only re
 
 ## Create an app manually
 
-Prefer to set the app up yourself, without the chat? Manual creation lives on the same **Create App** screen, under **or create manually** — pick a stack and Keboola sets the app up for you to configure.
+Prefer to set the app up yourself, without the chat? The same **Create app** screen has two manual routes under **Other ways to start**: a **Python / JS** app that Keboola deploys from your own Git repository, and a **Streamlit** app.
 
-![The Create App screen: the Kai prompt at the top and, under "or create manually", the stack choice cards](/data-apps/build-in-ui-create.png)
+![The Other ways to start section of the Create app screen: Build locally with your coding agent; the Deploy from your own Git repository card, tagged Python / JS and No Kai, open with Name and Repository URL filled in (docs-manual-app, keboola/titanic-python-app), an empty Folder (optional) field, the Private repository switch and the Create app button; and the Create a Streamlit app link below](/data-apps/build-in-ui-create.png)
 
-1. In your Keboola project, open **Apps** and click **+ Create App**.
-2. Under **or create manually**, choose a stack — **Python / JS** (custom apps, production UIs) or **Streamlit** (existing Streamlit apps; basic Python).
-3. Name the app and click **Create App**. It opens on its own configuration page, marked **Not Deployed**.
-4. Set the **code source** and the **Authentication** method. A **Python / JS** app runs from a **Git repository** — connect one (there's no inline-code option for Python/JS). A **Streamlit** app can use inline **Code** or a Git repository.
-5. Configure the rest of the app's settings — backend size, auto-sleep, and more; see [Reference](/data-apps/reference/) for the full list.
+1. In your Keboola project, open **Apps** and click **Create app**. A project with no apps yet has no such button; its Apps page shows the choices from step 2 itself.
+2. Under **Other ways to start**, choose the stack:
+   - **Python / JS**, for a custom app ([what the stack can do](/data-apps/what-are-apps/#the-stack-pythonjs)): click **Deploy from your own Git repository** to open its form. The card is marked **No Kai** because Kai works only with a Keboola-hosted repository.
+   - **Streamlit**, for an existing Streamlit app ([Streamlit apps](/data-apps/streamlit/#create-your-first-streamlit-app)): click **Create a Streamlit app**, the small link below the list.
 
-![The app's configuration page: the Overview tab with Authentication and a Git Repository section, plus the App Info panel showing backend version, size, auto-sleep, and App ID](/data-apps/build-in-ui-config.png)
+   On a single-tenant stack, the screen may still have the older layout, with a card per stack: click **Create Python/JS app** or **Create Streamlit app**. Where only Streamlit is offered, **Create app** opens the Streamlit dialog straight away.
 
-6. Click **Deploy App**. A short wizard asks for the **backend version**, the **backend size** and an **inactivity timeout**, then deploys the app. (The same wizard runs on **Redeploy**.)
+   {/* VERIFY(Jordan): not seen on a single-tenant or a Streamlit-only stack; the card-per-stack layout and Create app opening the Streamlit dialog directly are known from the UI code of 1-2 Oct only. */}
+3. Name the app and click **Create app**; the other fields are optional. **Folder** files the app into a folder. On the Python / JS form you can paste the **Repository URL** now or add it later, and once you type one, a **Private repository** switch appears for a username and access token, or an SSH key. The app opens on its own page, marked **Not Deployed**.
+4. Add the code and check the **Authentication** method; a new app starts with **Basic (Password)** ([Authentication](/data-apps/authentication/) covers the others).
+   - **Python / JS**: the repository needs a `keboola-config/` folder that tells Keboola how to start the app ([App structure](/data-apps/build-locally/#app-structure)); there's no inline-code option. Open the app's **Git Repository** card. If you skipped the URL in step 3, enter it as the **Project URL**, and for a private repository turn on **Private** and add the credentials. Then click **Load branches**, pick the branch, and save.
+   - **Streamlit**: in the **Code Source** card, choose **Code**, click **Add Code**, paste your script and save. Or choose **Git Repository** and fill it in as for Python / JS; its **Main File Path** defaults to `streamlit_app.py`.
 
-![The deploy/redeploy wizard: backend version, backend size and inactivity timeout](/data-apps/deploy-timeout-backedsize.png)
+   Until the app has code, its **App access** card says **No code yet** and **Deploy** is disabled. A saved repository URL already counts as code, so the card then says **Not deployed yet** and **Deploy** is enabled even before a branch is picked; pick the branch before you deploy.
 
-7. When the status turns **Active**, click **Open App**. For an app behind a password, copy the password from the dialog, then click **Open app** in it to open the app at its public URL. Use **Redeploy** to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
+   {/* Steps 3-4 and the paragraph above verified in the live UI on 2026-10-07 (project 264, build bundle.KLJ3B_2i.js) with temporary apps, deleted afterwards. Python / JS form: Private repository appears only once a Repository URL is typed. A Python / JS app created without a URL (App ID 74023000) and a new Streamlit app (74023001): App access says No code yet, Deploy disabled, Authentication Basic (Password). Saving a Project URL with no branch on the Python / JS app: Not deployed yet, Deploy enabled. Streamlit Code Source opens on Git Repository; Code shows Add Code; under Git Repository, Load branches turns into Reload branches and the Main File Path field (placeholder "Default value streamlit_app.py") appears once branches load. */}
+5. Configure the rest of the app's settings; see [Reference](/data-apps/reference/) for the full list. The backend size and the inactivity timeout come next, in the deploy wizard.
+
+![A new Python/JS app's Overview tab, marked Not Deployed, with Deploy in the header: the App access card with the App URL and Authentication, the Git Repository card with keboola/titanic-python-app connected, and the App Info panel](/data-apps/build-in-ui-config.png)
+
+6. Click **Deploy**. A short wizard asks for the **backend version**, the **backend size** (not on [pay-as-you-go](/management/payg-project/) projects) and an **inactivity timeout**; click **Deploy** in the wizard to deploy the app. (**Redeploy** opens the same wizard, with these fields in a collapsed **Deploy settings** section. **Start** starts a stopped or sleeping app right away with its saved settings and opens the wizard only when Kai has undeployed drafts of the app.)
+
+![The Deploy wizard of an app that has never run: the Backend version, Backend size and Inactivity timeout fields (1.6.3, XSmall, 15 minutes), and the Deploy button](/data-apps/deploy-wizard.png)
+
+7. When the status turns **Active**, click **Open** in the page header. The dialog shows the app's address and, for an app behind a password, the password to copy. Click **Open app** in it to open the app at its public URL. Use **Redeploy** (**Start** if the app is sleeping or stopped) to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
 
 From here on, the app is something you run rather than something you build: [Operate and update an app](/data-apps/operate/) covers shipping changes, secrets, sleeping and versions.
 

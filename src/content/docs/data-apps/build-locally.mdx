@@ -20,7 +20,7 @@ There are two ways to do it:
 - [With an AI agent](#with-an-ai-agent): an agent on your computer reads your data, writes the code, creates the app and deploys it from one prompt.
 - [By hand](#by-hand): you write the code and create the app yourself, from a terminal with kbagent or from the Keboola UI with your own repository.
 
-To build inside Keboola instead, [Kai](/data-apps/getting-started/) does the same from the **Create App** screen, with a live preview. For what the Python/JS stack can do (frameworks, full-stack, APIs for agents), see [What are Keboola apps](/data-apps/what-are-apps/#the-stack-pythonjs).
+To build inside Keboola instead, [Kai](/data-apps/getting-started/) does the same from the **Create app** screen, with a live preview. For what the Python/JS stack can do (frameworks, full-stack, APIs for agents), see [What are Keboola apps](/data-apps/what-are-apps/#the-stack-pythonjs).
 
 <Prereqs id="before-you-start" needs={['project']} groupLabel="Depending on how you build">
   <li>
@@ -63,7 +63,7 @@ With the `dataapp-developer` plugin from Keboola's [AI Kit](/ai/ai-kit/), the ag
   <li><strong><a href="#set-up-your-client">Set up your client</a></strong> Connect your project and add the app-building plugin.</li>
   <li><strong><a href="#describe-the-app">Describe the app</a></strong> One prompt: what it shows, which data, where the code goes.</li>
   <li><strong>The agent builds it</strong> It reads your data, writes code and deploys; you approve its commands.</li>
-  <li><strong><a href="#check-the-app">Check the app</a></strong> On its page in Keboola, Open App has the URL and password.</li>
+  <li><strong><a href="#check-the-app">Check the app</a></strong> On its page in Keboola, click Open in the header for the URL and password.</li>
 </StageStrip>
 
 ### Set up your client
@@ -165,15 +165,15 @@ Through a Keboola MCP server, the agent doesn't run kbagent. It calls the server
 ### Check the app
 
 - The agent finishes with the app's URL and its page in Keboola.
-- The app asks for its password. On the app's page in Keboola, click **Open App**. The dialog has the app's address and its password, each with a copy button. Copy the password, then click **Open app** in the dialog.
+- The app asks for its password. On the app's page in Keboola, click **Open** in the page header. The dialog has the app's address and its password, each with a copy button. Copy the password, then click **Open app** in the dialog.
 
 ![The Open app dialog on an app's page in Keboola: the App address and the Password, hidden, each with a copy button, above an Open app button](/data-apps/open-app-dialog.png)
 
 - If the app opens without data, ask the agent to read the app's log. [Troubleshooting](/data-apps/troubleshooting/) lists the common causes, including `Promise.withResolvers is not a function` from a too-new `@keboola/api-client`.
-- On [the MCP route](#the-mcp-route), you preview a draft at its own URL first. The production app gets **Open App** once you approve the draft and the agent deploys it.
+- On [the MCP route](#the-mcp-route), you preview a draft at its own URL first. The production app gets **Open** once you approve the draft and the agent deploys it.
 - To let other people open it, see [Publish and share](/data-apps/publish-and-share/).
 
-{/* Password location checked 2026-09-29 in project 264 on App ID 74021867, started for the check and stopped after: Open App opens a dialog with App address and Password (hidden, each with a copy button); a stopped app's page shows no password (its Open App dialog was not opened), and its Authentication section names only the method, Basic (Password). VERIFY(Nikita): not checked on a sleeping app. VERIFY(Nikita): seen on europe-west3 only. Older UI builds, from 25 Aug and 14 Sep, had an App Credentials modal instead (Host, Password, an Open App button), and only a logged-in page shows which build a stack loads, so check the labels on us-east4, where free projects live. The MCP-route bullet restates The MCP route section above and operate.md (Open App on a running app, Deploy App on one that never ran). VERIFY(Nikita): where a draft's password shows was not checked. */}
+{/* Password location, checked 2026-10-06 in project 264 (UI build bundle.BeQYTX6g.js) on App ID 74016144, stopped with autoRestartEnabled true, so a visit would wake it: the header's Open opens the Open app dialog with App address and Password (hidden, each with a copy button) on any app that has been deployed (OpenDataApp.tsx), and the App access card on the Overview tab shows the same password in its Password field (hidden, eye, copy, and Reset for users who can edit the app) once it has been generated, whether the app runs or not (AppUrlSetting.tsx). First checked 2026-09-29 on App ID 74021867, when the header button read Open App. VERIFY(Nikita): seen on europe-west3 only. Older UI builds, from 25 Aug and 14 Sep, had an App Credentials modal instead (Host, Password, an Open App button), and only a logged-in page shows which build a stack loads, so check the labels on us-east4, where free projects live. The MCP-route bullet restates The MCP route section above and operate.md (Open once the app has been deployed, Deploy on one that never ran). VERIFY(Nikita): where a draft's password shows was not checked. */}
 
 ### What you get by default
 
@@ -223,7 +223,7 @@ Write the code yourself, then create the app from a terminal with kbagent, which
   <li><strong><a href="#app-structure">Write the code</a></strong> A standard web app, plus a small configuration folder.</li>
   <li><strong><a href="#from-a-terminal">Create the app</a></strong> kbagent creates it with a Keboola-managed repository.</li>
   <li><strong>Push the code</strong> Commit and push it to the app's repository.</li>
-  <li><strong>Deploy and open</strong> Deploy, then click Open App on its page for the password.</li>
+  <li><strong>Deploy and open</strong> Deploy, then click Open in its page header for the password.</li>
 </StageStrip>
 
 ### App structure
@@ -286,20 +286,21 @@ kbagent creates the app with a Keboola-managed repository, and you push your cod
    kbagent data-app detail --project <alias> --app-id <id>
    ```
 
-The password is on the app's page, `<Keboola URL>/admin/projects/<project-id>/data-apps/<config-id>`: click **Open App** and copy it from the dialog. With a Manage API token, `kbagent data-app password --project <alias> --app-id <id>` prints it too. If the app opens without data, `kbagent data-app logs --project <alias> --app-id <id>` shows its log; if it doesn't start at all, `kbagent data-app runs --project <alias> --app-id <id>` shows why.
+The password is on the app's page, `<Keboola URL>/admin/projects/<project-id>/data-apps/<config-id>`: copy it from the **Password** field in the **App access** card on the **Overview** tab, or click **Open** in the page header and copy it from the dialog. With a Manage API token, `kbagent data-app password --project <alias> --app-id <id>` prints it too. If the app opens without data, `kbagent data-app logs --project <alias> --app-id <id>` shows its log; if it doesn't start at all, `kbagent data-app runs --project <alias> --app-id <id>` shows why.
 
 ### Sync to your project
 
 To run the app from a **Git repository** you host, develop locally, push, and connect the repository in the UI:
 
-1. In your project, create a **Python/JS app** (**Apps → + Create App → Python / JS**).
-2. On the app's configuration page, open **Git Repository** and set the **Project URL**. For a private repo, toggle **Private** and add your credentials.
-3. Pick the **branch** (**Load Branches**).
-4. Click **Deploy App**. Keboola clones the repo, installs dependencies, and runs it. Push changes and **Redeploy** to ship them.
+1. In your project, create a **Python/JS app**: **Apps → Create app → Deploy from your own Git repository** (see [Create an app manually](/data-apps/getting-started/#create-an-app-manually)).
+2. On the app's configuration page, open **Git Repository** and set the **Project URL**; for a private repo, toggle **Private** and add your credentials. Skip what you already gave when you created the app.
+3. Click **Load branches**, choose the branch in the **Branch** field and save. Once the branches have loaded, the button reads **Reload branches**.
 
-![The Python/JS app configuration page: Authentication, a Git Repository section with Project URL and Load Branches, and the App Info panel showing the Python / JS backend](/data-apps/python-js-config.png)
+   ![The Git Repository card: Project URL set to a GitHub repository, the Private switch off, and Branch set to main next to the Reload branches button](/data-apps/python-js-config.png)
 
-{/* The Git Repository form has no entrypoint field (verified in the live UI, project 264, 2026-09-14); the page used to say it did. The button reads Load Branches before a repository is configured and Reload Branches after. */}
+4. Click **Deploy**. Keboola clones the repo, installs dependencies, and runs it. Push changes, then click **Redeploy** (**Start** if the app is sleeping or stopped) to ship them.
+
+{/* The Git Repository form has no entrypoint field (verified in the live UI, project 264, 2026-09-14); the page used to say it did. Per the UI code of 2026-10-01, the button reads Load branches until branches are loaded or a branch is saved, and Reload branches after. Verified in the live UI on 2026-10-07 (project 264, build bundle.KLJ3B_2i.js): an app created through Deploy from your own Git repository with a Repository URL and no branch (docs-verify-load-branches, App ID 74022992) shows only Load branches in the Git Repository card, with no Branch field; after the click it reads Loading branches for a few seconds, then the Branch field (Search branch) appears next to Reload branches. The screenshot is docs-manual-app (App ID 74022487, own GitHub repository, never deployed) in project 264, taken 2026-10-06 on build bundle.BeQYTX6g.js; the card loaded collapsed and was expanded for the shot. */}
 
 ## How development works
 
