@@ -153,19 +153,19 @@ not only a data-app control). The Add Task menu question is closed for both cont
 flow (see the walk note above); no Build with Kai in either, so the "in some projects Build with
 Kai" clause that stood below was removed rather than left as an unverified promise. Still open:
 which of the two menus an EMPTY canvas opens by itself in step 2 — settling that means creating a
-flow. VERIFY(owner): Also unverified:
-/kai/use-cases/#complex-workflows is cited for "assembling existing configurations into a flow",
-but that page documents building pipelines from scratch, which is a different job. Walk the
-Builder in 264 and correct or flag. */}
+flow. /kai/use-cases/#complex-workflows documents building pipelines from scratch, not assembling
+existing configurations, so since 2026-10-08 the Prompt tab cites our own runs for that (264 on
+2026-09-09, 6375 on 2026-10-01: Kai built the flow from the existing configurations, 3 approvals)
+and the link only for bigger pipelines. */}
 
 ## Set it up
 
 <Tabs syncKey="howto">
 <TabItem label="Prompt">
 
-Open **Kai Agent** in the top bar and ask for the whole flow; assembling configurations you already
-have is a documented Kai job ([Complex Workflows](/kai/use-cases/#complex-workflows)). The Flows
-section has Kai wired in too: **Create Flow** opens with a prompt field, and a flow that already
+Open **Kai Agent** in the top bar and ask for the whole flow; in our runs Kai built it from the configurations already
+in the project. [Complex Workflows](/kai/use-cases/#complex-workflows) shows the bigger pipelines
+it builds from scratch. The Flows section has Kai wired in too: **Create Flow** opens with a prompt field, and a flow that already
 has tasks offers **Modify with Kai** in its header.
 
 ```text title="Prompt" wrap
@@ -213,15 +213,15 @@ forget exists.
 
 1. Open **Conditional Flows** in the navigation (older projects may call it **Flows**). Click
    **Create Flow**; on the screen that opens, click **Create Flow** under **Build It Yourself**.
-   The prompt field above it is the Kai path from the other tab. Name the flow
-   `Boolabean morning outlook` and add a description.
+   The prompt field above it is the Kai path from the other tab. In the dialog that opens, name
+   the flow `Boolabean morning outlook`, optionally add a description, and click **Create Flow**.
 
    ![Screenshot - Create a flow](/getting-started/automate/01-create-flow.png)
 
    {/* Chooser screen ("Get your data connected!", Prompt Input / Build It Yourself) verified
-   live in 264 on 2026-08-27. VERIFY(owner): where exactly the name is entered after Build It
-   Yourself is unverified — confirming means creating a flow object in 264; check during the
-   fresh-project walk. */}
+   live in 264 on 2026-08-27. The dialog checked 2026-10-08 in Free Plan project 6425: CREATE FLOW
+   under Build It Yourself opens "Create Conditional Flows" with Name, Description (optional) and
+   Folder (optional) and a CREATE FLOW button; closed without creating anything. */}
 
 2. You land in the **Builder** on an empty canvas. Open the **Add Task** menu, if it is not open
    already, and choose **Component**. Here it is on a flow that already has phases:
@@ -490,5 +490,6 @@ generated anew and may cache, hence the question app/ gives. Labels read live: D
 Edit Schedule are buttons on the schedule row, read after pointing at it (07 shows the row without
 them), and Copy flow / Debug mode / Delete flow are in the flow's menu. VERIFY(owner): whether
 Delete flow also removes the flow's schedules; the box deletes the schedule first so it does not
-matter. That the configurations stay was exercised that evening: the old flow and its schedule
+matter. 2026-10-08, project 264: none of its five schedules targets a flow that no longer exists (~/.keboola-shots/free-run-2026-10-08/264-sched.json),
+weak evidence that schedules go with their flow. That the configurations stay was exercised that evening: the old flow and its schedule
 went to Trash and the new flow ran the same three configurations. No prices, per CLAUDE.md. */}

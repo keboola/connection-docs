@@ -117,7 +117,13 @@ Run it, then tell me how many rows staffing_outlook has and which store and day 
 
 Kai writes it in your project's own SQL dialect; on our Free Plan project that was BigQuery. Keep
 the column list in point 5 as written: the later pages type those names into their prompts and
-checks.
+checks. If the forecast week has cold, dry days (under 18 °C, no rain) that the summer's sales never
+had, Kai may first ask what to do with them; **Leave them blank** is what the rest of the guide expects.
+{/* Asked on the 2026-10-08 run in a new Free Plan project (6425, us-east4, BigQuery): "17 of the 42 forecast store-days fall
+into a weather band (under 18 degrees and dry) that stores S01-S05 have no history for. What should
+expected_units be for those days?", options "Use the store's cold-day average (Recommended)",
+"Leave them blank", "Use the store's overall average", Other. Question and options as in ~/.keboola-shots/free-run-2026-10-08/notes.md. Picked Leave them blank; Kai
+corrected the count to 15 and built 42 rows with 15 empty, as the Check below describes. */}
 {/* 2026-10-01 (Michal Jeřábek): the prompt no longer names Snowflake, since most new projects are
 Free Plan BigQuery on us-east4. Run that day in Free Plan project 6375 in this exact wording, in a
 fresh chat: Kai built a Google BigQuery transformation (SAFE_CAST throughout, the four bands
@@ -149,7 +155,7 @@ figures, though Kai picks its own column types and writes the weekday out in ful
 </details>
 
 {/* Observed in all three 2026-09-08 runs: storage.input.tables empty, tables addressed as
-"KBC_EUW3_264"."in.c-keboola-ex-http-<id>"."sales". This closes the VERIFY(owner) that stood here
+"KBC_EUW3_264"."in.c-keboola-ex-http-<id>"."sales". This closes the open marker that stood here
 since 5 Aug; see DECISIONS.md 2026-09-08. */}
 
 The chat links what Kai made, so that is where to find it afterwards: the transformation, and the
@@ -188,7 +194,7 @@ it out of the with-kai list. */}
 2. Click **Create Transformation**. The **New Transformation** dialog lists what this project can
    run, and it differs by project: an SQL entry for your backend, *Snowflake SQL Transformation* or
    *Google BigQuery Transformation*, plus *Python*, *R*, *DuckDB* (Beta), and on some projects
-   *dbt Core*. Take the dialog as the authority on your project rather than this sentence.
+   *dbt Core* (Beta). Take the dialog as the authority on your project rather than this sentence.
    {/* VERIFY(owner): a brand-new Free Plan project (6211, 2026-08-19) offered dbt Core, labelled
    Beta in the dialog. That contradicts management/pay-as-you-go/index.md, whose Free Plan limits
    say "Transformations: are limited to SQL, Python, and R", and transformations/dbt/index.md,

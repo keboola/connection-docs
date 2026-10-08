@@ -71,7 +71,10 @@ casing table now in the page is measured, all four rows of it, against the contr
 VERIFY(owner): the prerequisites invite a Free Plan reader, and /workspace/ says Pay As You Go
 projects have no direct access to Snowflake workspaces. Step 7 now routes them to the SQL Editor,
 but nobody has walked that path on a free project to confirm the workspace list and the Connect
-menu look as described there. */}
+menu look as described there. 2026-10-08, Free Plan project 6425: Create Workspace offers only
+"Google BigQuery Workspace" and "R Workspace" (no Snowflake, no Python), so step 7's
+Snowflake-first wording does not fit the free project any more; its BigQuery Connect menu needs
+a workspace to be created, which this check did not do. */}
 
 ## What a workspace is
 
@@ -110,8 +113,10 @@ Creating the workspace is then the **UI** or **CLI / API** tab's job.
 
 {/* VERIFY(owner): "creating the workspace is the UI or CLI tab's job" is the conservative
 reading. Kai's documented use cases (/kai/use-cases/) cover data exploration, transformations,
-integrations, apps and docs; none of them mentions creating a workspace, and I did not ask it to
-in a live chat. If Kai does create workspaces, this tab should say so instead. */}
+integrations, apps and docs; none of them mentions creating a workspace. Asked on 2026-10-08 in 264 (`kbagent kai ask`,
+answer only), Kai said it can, with `create_config` on `keboola.sandboxes` (~/.keboola-shots/free-run-2026-10-08/kai-ws.txt); its own list of write
+tools has no workspace tool, and nobody has watched such a config turn into a usable workspace. If
+a live run shows it does, this tab should say so instead. */}
 
 **Check:** the answer names a café and a day, and the SQL it shows runs on its own.
 
