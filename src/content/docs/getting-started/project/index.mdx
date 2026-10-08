@@ -1,0 +1,123 @@
+---
+title: 'Get a project'
+slug: 'getting-started/project'
+description: 'Create or join a Keboola project, find your way around it, and confirm Kai is switched on before you load any data.'
+---
+
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+
+<PageMeta genre="Tutorial" minutes="5" />
+
+Everything you build lives inside a **project**: the data you load, the SQL you write, the flow
+that runs them. This page gets you one.
+
+**Where you are:** nothing exists yet. **When you finish:** a project you can sign in to, and you
+know where its Storage, Jobs and Components live.
+
+<Prereqs needs={['nothing']}>
+  <li>An email address, for the project itself.</li>
+  <li>
+    If your company already uses Keboola, ask a colleague to invite you instead of creating your
+    own project; you probably want to work in theirs.
+  </li>
+</Prereqs>
+
+**No prompt here.** Kai works *inside* a project, so this one page is yours. Every page after it
+offers three ways to do the same task.
+
+{/* Tutorial-type page. Restored as its own page 2026-09-14 (it had been merged into the hub on
+09-09): the hub was running long and opening with prose, which is what Michal asked us to cut, and
+this is the only step with no prompt or CLI form — as a hub section it broke the "every task shows
+prompt + CLI" rule the rest of the arc follows. The URL never died: /getting-started/project/ was a
+redirect to the hub anchor for five days. The project-screen tour was verified live in project 264
+on 2026-08-04: the nav reads Dashboard / Flows / Storage / Apps / Components / Workspaces /
+Transformations / Data Catalog / Jobs, and Kai appears as "Kai Agent" with a Beta pill. Free Plan
+limits are sourced from /management/payg-project/. The sign-up wizard is deliberately NOT walked —
+creating accounts is out of scope for automated verification — so those three lines rest on the Pay
+As You Go page. */}
+
+## Get a project
+
+Three ways in, in order of how quickly they get you started:
+
+1. **Free Plan**: [sign up and create a free project](https://connection.us-east4.gcp.keboola.com/wizard)
+   right now. It is enough for everything in this guide: 250 GB of Storage and up to 60 minutes of
+   job runtime a month (the free allowance tracks your previous month's usage).
+   {/* VERIFY(owner): /management/payg-project/ says the monthly allowance is "limited to the
+   actual usage from the previous month" but never states what a project gets in its first month.
+   Worth stating on that page. */}
+   See [Pay As You Go](/management/payg-project/) for the full list of limits, including that the
+   Free Plan does not let you choose a stack and gives you one project.
+2. **Join an existing project**: ask an admin of your company's Keboola organization to invite
+   you. They do it from **Users & Settings** in the project, with **Invite User**.
+3. **Talk to us**: for a trial of a full project with a chosen stack and no Free Plan limits,
+   [contact Keboola](https://www.keboola.com/contact).
+
+A project is a self-contained workspace with its own data storage, configurations, users and
+billing. Nothing leaks between projects unless you deliberately share it through the
+[Data Catalog](/catalog/). Each project lives on one **stack**, a full instance of Keboola in one
+cloud region; you do not pick one here, because self-serve projects are created on a fixed stack.
+The list is in the [platform overview](/overview/#stacks).
+
+## Find your way around
+
+After signing in you land on the project dashboard. Five places matter for this guide:
+
+- **Components** holds every data source connector, data destination connector, and application
+  you can add. This is where you configure how data gets in and out.
+- **Transformations** is the code that reshapes your data: SQL, Python, R, and dbt. Which of them
+  a project offers is listed in its own **Create Transformation** dialog, so that dialog is the
+  answer to "what can this project run?".
+- **Storage** lists every table and file, organized into buckets. Its tabs cover **Tables &
+  Buckets**, **Files**, **Data Streams**, **Storage Jobs** and **Events**.
+- **Flows** is the automation layer: what runs, in what order, on what schedule. Projects that have
+  both kinds show this as **Conditional Flows**.
+- **Jobs** is the log of everything that has run, successfully or not.
+
+:::tip[Ask Kai to orient you]
+Look for **Kai Agent** in the top bar. It has to be enabled first and it is not on every stack, so
+see [Get started with Kai](/kai/getting-started/) if you cannot find it. On a project you inherit
+rather than create, the first question is usually
+([Data Exploration](/kai/use-cases/#data-exploration)):
+
+```text title="Prompt"
+I'm new to this project. Give me an overview of the data structure and what each bucket contains.
+```
+:::
+
+{/* VERIFY(owner): "Kai cannot create a project" is an inference, not a documented limit — it
+follows from Kai being project-scoped (kai/best-practices.md: "Kai only sees your current
+project"), but no Kai page states it outright. Confirm there is no project-creation tool, and
+consider stating the boundary on kai/index.md. */}
+
+## Check it worked
+
+Open **Storage** and you can see the project's bucket list. Empty is fine; that is what you are
+about to change. And **Kai Agent** opens a chat panel when you click it. If the button is missing,
+or clicking it asks you to switch the feature on, that is the feature gate: an organization admin
+does it, and a non-admin needs them or Support. What Kai does also counts against the project, and
+an organization admin can cap how much it spends; [Kai pricing and limits](/kai/pricing/) holds the
+current rules.
+{/* This sentence used to read "there is also a monthly message allowance, and it is smaller on Pay
+As You Go", which described the beta's turn counter. kai/pricing.md says that counter was replaced
+by PPU credits on 15 September 2026, and that date has now passed, so the sentence names neither a
+mechanism nor a number and points at the page that owns both.
+
+VERIFY(Kai team), live and wrong on the site today: kai/getting-started.md's "Rate Limits" section
+still opens "Kai is free during the public beta period" and still states 150 turns per month, 50 on
+Pay As You Go. kai/pricing.md says both were replaced on 15 September 2026. Two published pages
+contradict each other on what a reader will be charged; this guide no longer depends on either.
+Raised from the reviewer bot's time-critical flag on PR #1116, 2026-09-21. */}
+
+Not having Kai does not block the build: the loading, the SQL and the flow each carry a UI path and
+a CLI path in full.
+
+## If it goes wrong
+
+- **The sign-up email never arrives.** Check spam, then try again. A half-finished registration
+  does not block a retry with the same address.
+- **You sign in and see no project.** You are on the wrong stack, or your invite is still pending.
+  Confirm the exact URL with whoever invited you.
+- **Your company uses SSO.** Sign in through your organization's link rather than creating a new
+  account; a fresh Free Plan project will not have access to your team's data.

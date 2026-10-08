@@ -35,6 +35,8 @@ _graph/
 # (CLAUDE.md and AGENTS.md are committed — agent/contributor guides.)
 scripts/screenshot.mjs
 scripts/shoot.mjs
+scripts/record.mjs
+scripts/postgif.sh
 screenshots.manifest.json
 screenshot-*.png
 audit-*.png

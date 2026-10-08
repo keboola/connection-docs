@@ -1,0 +1,36 @@
+---
+// Cold-start block (c): prerequisites, rendered from one place.
+//
+// Hand-written prerequisite lists drift within a release cycle — Cloudflare
+// renders its prerequisites partial 4,087 times across 1,966 pages for exactly
+// this reason. At our scale one component does, but the principle is the same:
+// change the wording in prereqs.mjs, not on nine pages.
+//
+// The `needs` prop names the shared prerequisites by key; anything page-specific
+// goes in the default slot as extra <li> items. The wording itself lives in
+// ./prereqs.mjs so the markdown twin (page-markdown.mjs) can render it too.
+//
+// Usage:  <Prereqs needs={['project']} />
+//         <Prereqs needs={['project', 'google']}>
+//           <li>The table <code>x</code> in Storage, from the previous page.</li>
+//         </Prereqs>
+
+import { SHARED } from './prereqs.mjs';
+
+interface Props {
+  /** Shared prerequisites, in the order they should appear. */
+  needs?: Array<'project' | 'google' | 'kai' | 'nothing'>;
+}
+
+const { needs = ['project'] } = Astro.props;
+
+const items = needs.filter((k) => SHARED[k]);
+---
+
+<div class="gs-prereqs">
+  <p class="gs-prereqs__label">Before you start</p>
+  <ul class="gs-prereqs__list">
+    {items.map((key) => <li set:html={SHARED[key]} />)}
+    <slot />
+  </ul>
+</div>

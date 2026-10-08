@@ -60,7 +60,7 @@ Using the search box and advanced patterns you can easily find job based on vari
 For the API side of jobs (create, poll, debug, the job object), see [Jobs API](/extend/jobs/).
 
 ## Running Jobs
-Jobs are either run [manually from any configuration](/tutorial/) or automatically by the 
+Jobs are either run [manually from any configuration](/getting-started/) or automatically by the 
 [flow](/flows/) at a scheduled time. In either case, a job moves from `created` or `waiting` through `processing` to a final state; the full list of states and what each one means is on the [Jobs API](/extend/jobs/#job-status) page.
 
 Until a job is finished (i.e., it is waiting or processing), it can be terminated:
