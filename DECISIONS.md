@@ -1842,6 +1842,37 @@ added to open ones: 120 free minutes on a new project's dashboard against the do
 HTTP config opening in Base URL form, the Free workspace chooser (BigQuery and R only), Kai's
 claim it can create a workspace, and no orphan schedules in 264. The hub clip's VERIFY(Jordan) stays: on 6 Oct he asked only for pace and content. Still owner-only: 50 vs 250 GB,
 dbt and Direct Mode on Free, DMD-1939, the two Google-auth checks.
+
+---
+
+## 2026-10-08 — The whole guide with Kai becomes a tracker, and the course shows the fork
+
+**Asked by:** Nikita, 8 Oct, on with-kai/: the 1-7 dots "зачем-то" sit on a page outside the main
+plan, and the page is "просто буквально промпты, нет ничего интерактивного"; then "его либо
+интегрируют, либо он будет просто странным смотреться. Нужны либо какие-то интерактивные элементы,
+либо визуалы."
+
+**Done.**
+- **Integrated into the course.** The hub's course list has a fork card after step 1, "Steps 2 to 6
+  in one sitting: The whole guide with Kai", on the course's own line (CourseLine, list layout;
+  the twin prints it as a line under item 1). The hub's separate pointer sentence now names the
+  fork. On with-kai/ the seven dots mean something: `<CourseLine track="kai" />`, where 1 is the
+  prerequisite (filled), 2-6 jump to the step cards on the page and fill as they are ticked, and 7
+  (dashed until all are done) jumps to the recap.
+- **Interactive.** GuidePrompts renders a card per step: prompts with copy buttons, **Expect**, a
+  link to the step page, and a **Done when** checkbox. Only the first unticked card is open; the others show their header and open on it, to look ahead
+  or copy again. Ticking closes the card, opens and rings the next one and scrolls to it; "N of 5 steps done" and a closing line
+  when all five are ticked. Progress lives in localStorage (`gs-with-kai:v1`, try/catch); without
+  script every card stays open.
+- **Visual.** Each card shows its step page's own Kai screenshot (kai-forecast, kai-transform,
+  kai-ask, grid-preview, kai-flow; `shot` in course.mjs), captioned as our run's numbers.
+
+Checked in a production build with Playwright: tick, collapse, next card active, dot filled, count,
+reload keeps progress, all five done shows the closing line and rings 7; no overflow at
+1280/820/375 in light and dark. Not done: a clip of the Kai chat (the cards reuse stills). The seven dots stay (I had said a five-dot line would replace them): with the hub's fork card
+and the cards numbered 2 to 6, the page reads as steps 2-6 of the same course, which is the
+integration Nikita asked for; put to him in the hand-off, with the five-dot line as the
+alternative, his call.
 ---
 
 ## Open — carried as VERIFY(owner) flags in the pages
