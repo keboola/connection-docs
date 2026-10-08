@@ -1,6 +1,6 @@
 ---
 /**
- * changelog.astro — /changelog/, the newest platform changes without leaving
+ * changelog.astro: /changelog/, the newest platform changes without leaving
  * the docs.
  *
  * A real Astro page rather than a `docs` collection entry, on the same footing
@@ -30,7 +30,7 @@ const fmt = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', d
 <StarlightPage
   frontmatter={{
     title: 'Changelog',
-    description: 'What changed in the Keboola platform, newest first — the latest entries from changelog.keboola.com.',
+    description: 'What changed in the Keboola platform, mirrored from changelog.keboola.com.',
     tableOfContents: false,
     hideMeta: true,
     editUrl: false,
@@ -46,16 +46,19 @@ const fmt = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', d
   </p>
 
   {feed.ok ? (
-    <ul>
+    <ol class="changelog-list not-content">
       {feed.items.map((item) => (
         <li>
-          <time datetime={item.date.toISOString().slice(0, 10)}>{fmt.format(item.date)}</time>
-          {' — '}
-          <a href={item.link}>{item.title}</a>
-          {item.description && <><br />{item.description}</>}
+          <a class="changelog-card" href={item.link}>
+            <span class="changelog-card-head">
+              <span class="changelog-card-title">{item.title}</span>
+              <time class="changelog-card-date" datetime={item.date.toISOString().slice(0, 10)}>{fmt.format(item.date)}</time>
+            </span>
+            {item.description && <span class="changelog-card-desc">{item.description}</span>}
+          </a>
         </li>
       ))}
-    </ul>
+    </ol>
   ) : (
     <p>
       The feed could not be read when this page was built. The entries are on
