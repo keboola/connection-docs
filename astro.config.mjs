@@ -6,6 +6,10 @@ import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
 import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
+import pagefindTitles from './src/integrations/pagefind-titles.mjs';
+
+/* Shared so the llms.txt heading cannot drift from the site's own title. */
+const SITE_TITLE = 'Keboola User Documentation';
 
 export default defineConfig({
   site: 'https://help.keboola.com',
@@ -18,9 +22,9 @@ export default defineConfig({
   },
   integrations: [
     redirectFrom(),
-    pageMarkdown(),
+    pageMarkdown({ siteTitle: SITE_TITLE }),
     starlight({
-      title: 'Keboola User Documentation',
+      title: SITE_TITLE,
       favicon: '/favicon.ico',
       // We ship our own 404 (src/pages/404.astro) so it can drop the doc-page
       // chrome and host the InkDash game. Without this, Starlight's built-in
@@ -56,6 +60,19 @@ export default defineConfig({
         SocialIcons: './src/components/SocialIcons.astro',
       },
       pagination: true,
+      // lastUpdated is deliberately OFF. PageTitle.astro renders an
+      // "Updated <date>" line when Starlight supplies one, and Starlight takes
+      // that date from each file's last commit — so it needs real git history.
+      // Turning it on was tried and reverted: the production build on Vercel
+      // clones shallow, Starlight's getLastUpdated catches the lookup error and
+      // returns undefined, and the line renders on no page at all. Verified on
+      // the preview for PR #1132.
+      //
+      // To switch it on, the build must first have full history. Vercel has no
+      // documented clone-depth setting, so that means a `git fetch --unshallow`
+      // ahead of `astro build` (vercel.json `buildCommand`, or the project's
+      // build command) — confirm it on a preview before re-adding this, and
+      // restore `fetch-depth: 0` in .github/workflows/*.yml at the same time.
       editLink: {
         baseUrl: 'https://github.com/keboola/connection-docs/edit/main/',
       },
@@ -65,5 +82,8 @@ export default defineConfig({
     // pipe tables as literal text — visible corruption, and the reason no page
     // could safely be converted from .md before now.
     mdx({ gfm: true }),
+    // Must come AFTER starlight(): it reads the Pagefind index Starlight
+    // builds in the same astro:build:done hook.
+    pagefindTitles(),
   ],
 });

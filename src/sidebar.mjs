@@ -3,7 +3,14 @@
 
 export const sidebar = [
   { label: "Home", slug: "index" },
-  { slug: "overview" },
+  {
+    label: "Keboola Overview",
+    collapsed: true,
+    items: [
+      { label: "Overview", slug: "overview" },
+      { slug: "overview/api" },
+    ],
+  },
   {
     label: "Getting Started Tutorial",
     collapsed: true,
@@ -83,6 +90,7 @@ export const sidebar = [
       { label: "Overview", slug: "flows" },
       { slug: "flows/flows-legacy" },
       { slug: "flows/flow-migration-guide" },
+      { slug: "flows/schedule-api" },
     ],
   },
   {
@@ -105,6 +113,8 @@ export const sidebar = [
         items: [
           { slug: "data-apps/authentication" },
           { slug: "data-apps/publish-and-share" },
+          { slug: "data-apps/operate" },
+          { slug: "data-apps/troubleshooting" },
         ],
       },
       { slug: "data-apps/reference" },
@@ -539,10 +549,17 @@ export const sidebar = [
           { slug: "storage/api/import-export" },
           { slug: "storage/api/importer" },
           { slug: "storage/api/tde-exporter" },
-          { slug: "storage/api/clients/python-client" },
-          { slug: "storage/api/clients/r-client" },
-          { slug: "storage/api/clients/php-client" },
-          { slug: "storage/api/clients/docker-cli" },
+          {
+            label: "API Clients",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "storage/api/clients" },
+              { slug: "storage/api/clients/python-client" },
+              { slug: "storage/api/clients/r-client" },
+              { slug: "storage/api/clients/php-client" },
+              { slug: "storage/api/clients/docker-cli" },
+            ],
+          },
         ],
       },
     ],
@@ -744,6 +761,14 @@ export const sidebar = [
           { slug: "extend/common-interface/config-file" },
           { slug: "extend/common-interface/environment" },
           {
+            label: "Artifacts",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "extend/common-interface/artifacts" },
+              { slug: "extend/common-interface/artifacts/tutorial" },
+            ],
+          },
+          {
             label: "Manifest Files",
             collapsed: true,
             items: [
@@ -764,6 +789,8 @@ export const sidebar = [
         ],
       },
       { slug: "extend/job-queue" },
+      { slug: "extend/jobs" },
+      { slug: "extend/encryption" },
       {
         label: "Publishing Component",
         collapsed: true,
@@ -772,6 +799,7 @@ export const sidebar = [
           { slug: "extend/publish/checklist" },
         ],
       },
+      { slug: "extend/development-project" },
     ],
   },
   {

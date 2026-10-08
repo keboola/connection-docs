@@ -196,7 +196,7 @@ You don't call these tools yourself. Ask questions in plain language ("What was 
 Semantic query validation is heuristic — it matches the SQL text against semantic metadata rather than fully parsing the query. Treat it as a best-effort check, not a formal proof of correctness.
 :::
 
-Because these four tools are read-only, they remain available when the MCP connection is restricted with the `X-Read-Only-Mode` header (see [Restricting Tool Access](/ai/mcp-server/#restricting-tool-access)).
+Because these four tools are read-only, they remain available when the MCP connection is restricted with the `X-Read-Only-Mode` header (see [Restricting Tool Access](/ai/mcp-server/tools/#restricting-tool-access)).
 
 ## Example prompts
 

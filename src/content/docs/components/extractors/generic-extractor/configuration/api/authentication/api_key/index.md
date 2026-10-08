@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/api_key/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 API Key token authentication sends a token in either a header or query parameter of each API request.
 
 E.g., Headers: `X-StorageApi-Token:your_token`

@@ -2,6 +2,7 @@
 title: Keboola MCP Server
 slug: 'ai/mcp-server'
 description: 'The Keboola MCP Server lets Claude, Cursor, ChatGPT, VS Code, Windsurf, and Make work inside your Keboola project with your own permissions — query data, build transformations, run and debug jobs.'
+search_keywords: [mcp, mcp server]
 redirect_from:
     - /external-integrations/mcp-server/
     - /integrate/mcp/

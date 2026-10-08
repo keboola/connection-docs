@@ -20,7 +20,7 @@ What your AI client can call through the [Keboola MCP Server](/ai/mcp-server/), 
 | **Semantic layer** | Explore the project's semantic models and validate queries against them. See [Semantic Layer](/ai/semantic-layer/). |
 | **Jobs** | Start, monitor, and debug execution flows. |
 | **Flows** | Create and manage flows (including conditional flows) that orchestrate components. |
-| **Data Apps** | Create, deploy, and manage Streamlit and Python/JS data apps. |
+| **Data Apps** | Create, deploy, and manage Streamlit and Python/JS apps. |
 | **Search & Discovery** | Find components, configurations, and objects across the project. |
 | **Project & OAuth** | Read project info and set up OAuth authorizations for components. |
 | **Documentation** | Search the official Keboola docs from inside the AI chat. |

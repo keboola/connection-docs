@@ -17,6 +17,8 @@ The Tableau Extract Refresh Trigger application triggers extract refresh tasks o
 
 The component authenticates using a **Personal Access Token (PAT)**. Follow the [Tableau documentation](https://help.tableau.com/current/pro/desktop/en-us/useracct.htm#create-and-revoke-personal-access-tokens) to create one.
 
+Tableau allows only one active session per token, so configurations that share the same token interrupt each other when they run at the same time. Create a separate PAT for each configuration. 
+
 ## Create New Configuration
 
 [Create a new configuration](/components/#creating-component-configuration) of the **Tableau Extract Refresh Trigger** application and fill in the parameters below.

@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/tutorial/rest/
 ---
 
+<!-- Tutorial-type page. Part of the Generic Extractor tutorial chain; nav order is the reading order. -->
+
 
 An [API (Application Programming Interface)](https://en.wikipedia.org/wiki/Application_programming_interface) is 
 an [interface](https://en.wikipedia.org/wiki/Interface_(computing)) to an application, or a **service**
@@ -18,7 +20,7 @@ Used by web browsers and other API clients, it defines how two parties (client a
 - Client creates an HTTP **request** and sends it to the server over the network.
 - Server processes the request, creates a **response**, and sends it to the client over the network.
 
-## HTTP Request
+## HTTP request
 An HTTP request is composed of:
 
 - URL
@@ -93,14 +95,14 @@ example is the `X-StorageAPIToken` header used with Keboola [Storage API](/stora
 The `POST`, `PUT` and `PATCH` requests can send parameters the same way as the `GET` requests in the URL. 
 But they can also send them in the request **body**. These are sometimes called **POST data/postdata**.
 
-## HTTP Response
+## HTTP response
 An HTTP response is composed of:
 
 - Response Headers — same as the request headers (only sent by the server)
 - Response Body — actual content of the resource
 - Status Code — status of the request
 
-#### HTTP Status
+#### HTTP status
 The HTTP Status and [status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) represent 
 a standardized way of describing the response state. For example, the status `200 OK` (200 is the status code) 
 is associated with a successful response. There are many HTTP Statuses, but the following rules apply:
@@ -134,3 +136,4 @@ to get responses from virtually any HTTP REST API. Since the REST rules are not 
 is not possible to ensure that Generic Extractor will be capable of reading 100% of APIs, 
 even when declared as RESTful by someone.
 
+**Next:** [JSON introduction →](/components/extractors/generic-extractor/tutorial/json/)
