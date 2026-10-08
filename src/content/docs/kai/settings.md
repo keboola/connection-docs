@@ -8,13 +8,19 @@ description: Configure Kai's tool permissions, system instructions, context file
 
 Kai's settings let you personalize how Kai behaves in your project. Open the Kai chat panel and click the **Settings** icon (gear) to access them. Settings are **per-user and per-project**, so each team member can configure their own preferences independently.
 
-The settings panel has two tabs: **Tool Permissions** and **System Instructions**. Project-wide customization — project-level instructions, [context files](#context-files), and [skill files](#skill-files) — is managed in **Settings → Kai Agent** in the main Keboola navigation (the tab is labeled **Kai Assistant** in projects not yet upgraded to the new Kai engine).
+The settings panel has three views: **Tools**, **Instructions**, and **Notifications**. The **Project** button next to them opens the project-wide Kai settings.
+
+Project-wide customization lives in the **Kai Agent** group of the main Keboola **Settings**:
+
+- **Spend limits** — the project budget and per-user limits, see [Kai pricing](/kai/pricing/#setting-limits).
+- **Instructions & files** — [project-level instructions](#project-level-instructions), [context files](#context-files), and [skill files](#skill-files).
+- **Tool permissions** — [project tool permissions](#project-tool-permissions).
 
 ## Tool Permissions
 
 Tool Permissions let you control which tools Kai is allowed to use. This eliminates the need to manually approve each action — you can pre-approve tools you trust and block those you don't want Kai to use.
 
-These are your own settings. They apply to your Kai in this project and change nothing for your teammates, who set their own.
+These are your own settings. They apply to your Kai in this project and change nothing for your teammates, who set their own. An organization admin can also restrict tools for the whole project, see [Project tool permissions](#project-tool-permissions).
 
 ![Kai Settings — Tool Permissions](/kai/kai-settings-tool-permissions.png)
 
@@ -39,10 +45,16 @@ For each tool, you can set one of three permission levels:
 
 You can configure permissions in two ways:
 
-- **From the Settings panel** — Open **Settings → Tool Permissions**, find the tool, and select the desired permission level.
+- **From the Settings panel** — Open the chat's **Settings → Tools**, find the tool, and select the desired permission level.
 - **From the approval dialog** — When Kai requests approval for a tool, click **Always allow** to automatically approve that tool for all future uses.
 
 Your permissions persist across all conversations within the same project.
+
+### Project Tool Permissions
+
+Organization admins can restrict which tools Kai may use for everyone in the project. Go to **Settings → Kai Agent → Tool permissions** in the main Keboola navigation and set a policy per tool.
+
+Project restrictions apply on top of personal permissions: users cannot loosen them in their own Kai settings. Other project members can open the page and see the policy, but only an organization admin can change it.
 
 ## System Instructions
 
@@ -54,11 +66,11 @@ Instructions are the place for short rules. For longer knowledge, such as data s
 
 ### Project-Level Instructions
 
-![Project-level system instructions in Settings → Kai Agent](/kai/kai-settings-project-instructions.png)
+![Project-level system instructions in Settings → Kai Agent → Instructions & files](/kai/kai-settings-project-instructions.png)
 
 Project-level instructions apply to **all users** in the project. They are managed in the project settings:
 
-1. Go to **Settings → Kai Agent** in the main Keboola navigation.
+1. Go to **Settings → Kai Agent → Instructions & files** in the main Keboola navigation.
 2. Enter your instructions in the **System instructions** text field.
 3. The instructions auto-save.
 
@@ -68,7 +80,7 @@ Use project-level instructions for team-wide standards such as:
 - **Coding standards** — e.g., "Write SQL transformations using CTEs instead of subqueries. Always include comments explaining business logic."
 - **Pipeline conventions** — e.g., "Load `in.c-*` buckets incrementally and never modify them in place. Build output tables from staging tables instead of one deep query."
 
-Project-level instructions can be edited by project admins and managers.
+Project-level instructions can be edited by project members with the **admin** or **share** role.
 
 ### User-Level Instructions
 
@@ -78,7 +90,7 @@ User-level instructions are **personal to you** and are added on top of the proj
 
 1. Open the Kai chat panel.
 2. Click the **Settings** icon.
-3. Select the **System Instructions** tab.
+3. Select **Instructions**.
 4. Enter your instructions in the text field.
 5. The instructions auto-save.
 
@@ -106,24 +118,40 @@ This means user-level instructions can refine or add to the project-level instru
 - If Kai doesn't seem to follow an instruction, try rephrasing it more directly.
 - For knowledge that outgrows the 4,000-character limit, such as data standards and project-wide conventions, use [context files](#context-files) instead.
 
+## Notifications
+
+Kai can notify you when it needs a decision from you or finishes a response while its browser tab is in the background. Open the chat's **Settings → Notifications**:
+
+- **Browser notifications** — turns the notifications on. The first time, click **Enable notifications** so the browser asks for permission.
+- **Notification sound** — plays a short sound with each notification.
+
+Use **Send a test notification** to check it works. If your browser blocks notifications for the site, allow them in the browser settings and reload the page.
+
 ## Context Files
 
 Context files (also called knowledge files) are Markdown documents that Kai reads automatically at the start of every conversation. Use them to give Kai project knowledge that is too long for system instructions: data standards and project-wide conventions. Kai cannot open links for security reasons, so anything it needs to read has to arrive as a file. Reference material for a single task, such as the documentation for one external system, is better placed in a [skill file](#skill-files), which is loaded only when the skill runs.
 
-To manage them, go to **Settings → Kai Agent** in the main Keboola navigation and use the **Context files** card:
+To manage them, go to **Settings → Kai Agent → Instructions & files** in the main Keboola navigation and use the **Context files** card:
 
-![Context files card in Settings → Kai Agent](/kai/kai-settings-context-files.png)
+![Context files card in Settings → Kai Agent → Instructions & files](/kai/kai-settings-context-files.png)
 
-1. Drag a Markdown (`.md`) file onto the card, or click **Select Files**.
-2. The file is uploaded and takes effect in every **new** conversation (running conversations are not affected).
-3. To replace a file, upload the new version and delete the old one.
+1. Click **Add**.
+2. In the **Add a context file** dialog, either drop a Markdown (`.md`) file, or write one: fill in **Name** (saved as `<name>.md`) and **Content**.
+3. Click **Only create**, or **Create and open new chat** to try the file straight away. The file takes effect in every **new** conversation (running conversations are not affected).
+4. To replace a file, add the new version and delete the old one.
+
+Click the eye icon on a file to preview it. The card warns you once there is more than one file or a file grows large, because every context file is read in every conversation.
+
+You can also create a context file without leaving the chat: type `/` in the message box and pick **Create context** under **Actions**. It opens the same dialog.
+
+Context files can be added and deleted by project members with the **admin** or **share** role.
 
 Rules and limits:
 
 - **Format:** Markdown (`.md`) only.
 - **Size:** up to **50 KB** per file.
 - **Count:** up to **10 files** per project.
-- A file named `CLAUDE.md` becomes Kai's top-level memory file; all other files are loaded as always-on rules alongside it.
+- A file named `CLAUDE.md` becomes Kai's top-level memory file; all other files are loaded as always-on rules alongside it. The name is not case-sensitive, so in the dialog you can simply name it `claude`.
 - Context files apply **project-wide** — every user's conversations include them.
 
 ### Example
@@ -162,7 +190,7 @@ it to things Kai cannot work out from the project itself:
   Generic Extractor.
 ```
 
-If you upload only one file, name it `CLAUDE.md` so it becomes Kai's top-level memory file.
+If you add only one file, name it `CLAUDE.md` (or `claude` in the dialog) so it becomes Kai's top-level memory file.
 
 :::tip
 Every context file is read in every conversation, so keep the set small and focused. One well-structured standards document usually works better than many overlapping files.
@@ -181,11 +209,13 @@ A context file is read in every conversation and it can take up your context win
 A skill is used only when called, or when your request matches the skill's description.
 :::
 
-Manage them in **Settings → Kai Agent** using the **Skill files** card.
+Manage them in **Settings → Kai Agent → Instructions & files** using the **Skill files** card. Click **Add** to open the **Add a skill** dialog, or type `/` in the chat and pick **Create skill** under **Actions**. Skill files can be added and deleted by project members with the **admin** or **share** role.
 
-![Skill files card in Settings → Kai Agent](/kai/kai-settings-skill-files.png)
+![Skill files card in Settings → Kai Agent → Instructions & files](/kai/kai-settings-skill-files.png)
 
-Two formats are accepted:
+The quickest way is to write the skill in the dialog: fill in **Name** (it becomes the `/` command), **Description** (when Kai should use it), and **Instructions**. The frontmatter is written for you. The name is lowercased, and spaces and other characters become dashes.
+
+You can also drop a file into the dialog. Two formats are accepted:
 
 1. **A single `.md` file** starting with YAML frontmatter. The `name` and `description` fields are required — the description tells Kai when to invoke the skill:
 
@@ -204,7 +234,7 @@ Two formats are accepted:
 
 Rules and limits:
 
-- **Size:** up to **50 KB** per file.
+- **Size:** up to **50 KB** per file added in the UI. A `.skill` archive uploaded [via the API](#managing-files-via-api-or-cli) can be up to **10 MB**.
 - **Count:** up to **10 skill files** per project.
 - A project skill with the same `name` as a built-in skill replaces the built-in one.
 
@@ -303,6 +333,8 @@ The job can run anywhere — a CI pipeline triggered on changes to the source do
 
 ### Troubleshooting
 
-- **File uploaded but Kai doesn't see it** — check that the tag is exactly `kai-context` or `kai-skill`, the file is under 50 KB, there are at most 10 tagged files, and the conversation was started *after* the upload.
+- **File uploaded but Kai doesn't see it** — check that the tag is exactly `kai-context` or `kai-skill`, there are at most 10 tagged files, and the conversation was started *after* the upload.
+- **Kai can't start: a file is over the size limit** — a tagged file is larger than 50 KB (10 MB for a `.skill` archive). Kai refuses to start rather than run without it. Shrink the file or delete it in Storage, then start a new conversation.
+- **Couldn't load this project's context (or skill) files** — Kai could not download a tagged file. It is usually temporary; try again in a moment.
 - **Skill shows without a description, under a wrong name, or Kai doesn't invoke it** — add `name` and `description` to the `.md` frontmatter. Uploads from the Settings UI enforce the frontmatter, but API uploads don't — a file without it still appears in the `/` menu under a name derived from its file name, with no description to tell Kai when to use it. A `.skill` archive must contain `SKILL.md` at its root (or at the root of a single top-level directory).
 - **File expired or disappeared** — it was uploaded without the permanent flag; re-upload it as permanent (uploads from the Settings UI are always permanent).
