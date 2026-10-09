@@ -968,6 +968,19 @@ nav.sidebar {
   color: var(--link-hover);
   text-decoration: none;
 }
+/* A link that leaves the docs opens in a new tab (src/integrations/external-links.mjs).
+   The arrow says so; screen readers get the hidden "(opens in a new tab)" text
+   instead, so the arrow itself is announced as nothing. */
+.sl-markdown-content a.kbc-external::after,
+.prereqs a.kbc-external::after {
+  content: '\2197';
+  content: '\2197' / '';
+  display: inline-block;
+  margin-inline-start: 0.15em;
+  font-size: 0.8em;
+  line-height: 1;
+  text-decoration: none;
+}
 
 /* Block quotes */
 .sl-markdown-content blockquote:not(:where(.not-content *)) {

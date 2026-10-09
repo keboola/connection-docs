@@ -28,6 +28,8 @@
 // Keep the opening tag on one line: the markdown twin reads its props line by line.
 
 import { LABELS, SHARED, TABS } from './prereqs.mjs';
+// set:html skips the rehype plugin that opens external links in a new tab, so these strings go through it here
+import { externalizeHtml } from '../integrations/external-links.mjs';
 
 interface Props {
   /** Shared "You need" items, in the order they should appear. */
@@ -60,7 +62,7 @@ for (const t of TABS.slice(0, tabs)) {
   <p class="prereqs__label">{LABELS.box}</p>
   <p class="prereqs__group">{LABELS.needs}</p>
   <ul class="prereqs__list">
-    {items.map((key) => <li set:html={SHARED[key]} />)}
+    {items.map((key) => <li set:html={externalizeHtml(SHARED[key])} />)}
     <slot />
   </ul>
   {hasGroup && (
@@ -76,7 +78,7 @@ for (const t of TABS.slice(0, tabs)) {
       <p class="prereqs__group">{LABELS.tabs}</p>
       <ul class="prereqs__list">
         {tabLines.map((t) => (
-          <li><strong>{t.label}:</strong> <Fragment set:html={t.html} /></li>
+          <li><strong>{t.label}:</strong> <Fragment set:html={externalizeHtml(t.html)} /></li>
         ))}
       </ul>
     </Fragment>
