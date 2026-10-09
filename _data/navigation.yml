@@ -990,3 +990,7 @@ items:
     items:
       - url: /external-integrations/n8n/
         title: n8n
+
+  # Not a docs-collection page (src/pages/changelog.astro): `link`, not `url`.
+  - link: /changelog/
+    title: Changelog

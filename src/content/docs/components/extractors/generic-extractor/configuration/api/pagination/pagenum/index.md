@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/pagenum/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 The Page Number Scroller handles a pagination strategy in which the API splits the results into pages
 of the same size (limit parameter) and navigates through them using the **page offset** parameter. 
@@ -24,7 +26,7 @@ If you need to use the item offset, use the [Offset Scroller](/components/extrac
 }
 ```
 
-## Configuration Parameters
+## Configuration parameters
 The following configuration parameters are supported for the `pagenum` method of pagination:
 
 - `limit` (optional, integer) — page size
@@ -34,7 +36,7 @@ The following configuration parameters are supported for the `pagenum` method of
 value is `true`.
 - `firstPage` (optional, integer) — index of the first page; the default value is `1`.
 
-### Stopping Condition
+### Stopping condition
 The `pagenum` scroller uses similar stopping condition as the [`offset` scroller](/components/extractors/generic-extractor/configuration/api/pagination/offset/#stopping-condition). 
 Scrolling is stopped in case of an underflow — when the result contains **less items than requested** (including zero). However, 
 in the `pagenum` scroller, the **`limit` parameter is not required** and has **no default value**. This means that if you omit it, 
@@ -43,7 +45,7 @@ the scrolling will stop only if an empty page is encountered.
 ## Examples
 This section contains three API pagination examples where the Page Number Scroller is used.
 
-### Basic Scrolling
+### Basic scrolling
 The most simple scrolling setup is the following:
 
 ```json
@@ -57,7 +59,7 @@ The next request will have `page=2`, for example `/users?page=2`.
 
 See [example [EX051]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/051-pagination-pagenum-basic).
 
-### Renaming Parameters
+### Renaming parameters
 The `limitParam` and `pageParam` configuration options allow you to rename the limit and 
 offset for the needs of a specific API:
 
@@ -78,7 +80,7 @@ and `set=1`; for example, `/users?set=1&count=20`.
 
 See [example [EX052]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/052-pagination-pagenum-rename).
 
-### Overriding Parameters
+### Overriding parameters
 It is possible to override the limit parameter of a specific API job. 
 This is useful when you want to use different limits for different API endpoints.
 

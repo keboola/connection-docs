@@ -1238,6 +1238,78 @@ nav.sidebar {
    beside an 11px label. */
 .pagination-links a svg { width: 16px; height: 16px; }
 
+/* ───────── Changelog cards (src/pages/changelog.astro) ─────────
+   Same frame as the prev/next cards above: --border-1, 10px radius, --bg-1.
+   Whole card is the link; title left, date right, description below.
+   The date uses --fg-3, not --fg-4: grey-400 on white is 3.7:1, short of
+   AA for 13px text. */
+/* Scoped under .sl-markdown-content: the site's own `.sl-markdown-content ol`
+   rule (22px indent, 6px item margins) outranks a bare class. */
+.sl-markdown-content .changelog-list {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.sl-markdown-content .changelog-list > li {
+  margin: 0;
+  padding: 0;
+}
+.changelog-card {
+  display: block;
+  padding: 16px 20px;
+  border: 1px solid var(--border-1);
+  border-radius: 10px;
+  background: var(--bg-1);
+  color: var(--fg-2);
+  text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.changelog-card:hover {
+  border-color: var(--kbc-blue-200);
+  box-shadow: 0 4px 14px rgba(31, 143, 255, 0.12);
+}
+.changelog-card:focus-visible {
+  outline: 2px solid var(--kbc-blue-500);
+  outline-offset: 2px;
+}
+.changelog-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.changelog-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--fg-1);
+}
+.changelog-card:hover .changelog-card-title { color: var(--link); }
+.changelog-card-date {
+  flex-shrink: 0;
+  font-size: 13px;
+  color: var(--fg-3);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.changelog-card-desc {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--fg-3);
+}
+:root[data-theme='dark'] .changelog-card:hover {
+  border-color: var(--border-2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+@media (max-width: 560px) {
+  .changelog-card { padding: 14px 16px; }
+  .changelog-card-head { flex-direction: column; gap: 2px; }
+}
+
 /* "Was this page helpful?" feedback widget (in right rail or below content) */
 /* NOT dead code, despite nothing in this repo rendering it today: these are the
    base styles that PR #1003 (PRDCT-346, the docs feedback widget) extends, and
