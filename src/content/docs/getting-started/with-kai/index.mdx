@@ -34,17 +34,21 @@ click-through and terminal ways, and explain what each one does.
   builder (**Apps** in the navigation, then **Create app** if the project already has an app).
   A step's prompts go in the same chat; in our 8 October run all the Kai Agent prompts went into one.
 
-  <video autoplay loop muted playsinline controls poster="/getting-started/with-kai/where-kai-poster.png" aria-label="Five close-ups, three seconds each: the Kai Agent button at the top right of a project page; the Kai panel's empty chat field; the same field with the load prompt pasted in, before Enter sends it; the Apps item in the navigation; and the Create app screen's Build with Kai field, where the app's prompt goes. Each has a blue outline and a numbered caption.">
+  <video autoplay loop muted playsinline controls poster="/getting-started/with-kai/where-kai-poster.png" aria-label="Screen recording, close up, with a numbered caption on each step: click Kai Agent at the top right of the project page, paste the load prompt into the chat and press Enter; Kai works on it (sped up), then asks before creating the first data source: click Approve, next to Decline and Always allow. At the app step, open Apps in the navigation instead, click Create app if the project already has an app, and paste the app's prompt into the Build with Kai field, which has a send arrow at its right end.">
     <source src="/getting-started/with-kai/where-kai.mp4" type="video/mp4" />
   </video>
 
-  {/* States clip, 2026-10-09, Free Plan project 6425 (Nikita: "где конкретно найти кая по шагам и куда
-  вставлять промпты … приблизить нужные места"). Five 640x300 crops at 2x, a blue outline and a
-  numbered caption on each, nothing sent; the account e-mail was blanked in the DOM, the top bar's
-  left half and the account avatar never in frame. First built as a GIF; the checker found 1.4 s a
-  step too fast to read and a looping GIF has no pause (WCAG 2.2.2), so it is an MP4 with controls:
-  3 s a step, 15.8 s, 185 KB, mean luma 224, poster 22 KB (clip_metrics.sh). Scripts: the session
-  scratchpad, free2/gif*.py. */}
+  {/* Recording, 2026-10-09, Free Plan project 6425 (Nikita: "где конкретно найти кая по шагам и куда
+  вставлять промпты", then "лучше бы сделал гифку конкретную как работает в интерфейсе"). One take
+  at 2x through the CDP screencast, cut into eight 1280x800 windows at 1:1, the last panning along
+  the field to its send arrow. The pointer dot is drawn by the recorder; Kai's 22 s of work runs at
+  7x and the 5 s from the Create app click to the field at 3x, the rest at 1x; the captions sit at
+  the top because the player's controls cover the bottom while paused. The approval was declined off camera (the
+  Storage API then listed only the two HTTP configurations from the 8 October run) and the app's
+  prompt was pasted, never sent. The account e-mail was blanked in the DOM and the avatar hidden;
+  Vision OCR over all 692 frames and the poster found no e-mail. 28.8 s, 687 KB, mean luma 226, min
+  221, poster at 7.3 s (clip_metrics.sh). Recorder, raw take, edit script and
+  marks: ~/.keboola-shots/where-kai-2026-10-09/. DECISIONS.md 2026-10-09. */}
 - **When to paste the next:** once the step is done. Each step below says how to tell, and its
   page has the full **Check**.
 - **What Kai asks:** approve each change it proposes; each step below says how many to expect. To

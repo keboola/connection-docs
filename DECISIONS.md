@@ -1938,14 +1938,31 @@ check/.
   no account. The step pages keep their own screenshots.
 
 **A clip for "Where"** (Nikita, same day: "в моменте где how it goes мб добавить гифку где конкретно
-найти кая по шагам и куда вставлять промпты … приблизить нужные места"). where-kai.mp4: five close-ups
-from project 6425, built as states, a blue outline and a numbered caption each: Kai Agent in the top bar, the chat field, the field with the load prompt pasted (never
-sent), Apps in the navigation, the Create app screen's Build with Kai field. The account e-mail was
-blanked in the DOM before every shot, the top bar's left half and the account avatar never in frame.
-First a 7.6 s GIF; the checker found 1.4 s a step too fast and a looping GIF unpausable (WCAG 2.2.2),
-so it shipped as where-kai.mp4 with controls and a poster: 3 s a step, 15.8 s, 185 KB, mean luma
-224, captions about 17 px on the page. The Create app field's placeholder now reads "E.g. Weekly
-revenue by region, with a date filter", not "Describe what you want to build".
+найти кая по шагам и куда вставлять промпты … приблизить нужные места"). The first where-kai.mp4 was
+five still close-ups from project 6425, built as states with a blue outline and a numbered caption
+each (first a 7.6 s GIF; the checker found 1.4 s a step too fast and a looping GIF unpausable, WCAG
+2.2.2, so an MP4 with controls). Nikita on it: "ты сделал какие-то скриншоты увеличенные а лучше бы
+сделал гифку конкретную как работает в интерфейсе". It is now a recording of one real take in 6425:
+Kai Agent clicked, the load prompt pasted into a new chat and sent, Kai's work at 7x, the first
+approval card, then Apps, Create app and the app's prompt pasted into Build with Kai, with a pan
+along the field to its send arrow. Captured at 2x through the CDP screencast (Playwright's
+recordVideo came out at 1x), eight 1280x800 windows at 1:1 (the Create app page's load at 3x), a pointer dot drawn by the recorder,
+captions at the top because the player's controls cover the bottom while the clip is paused. The
+approval was declined (the Storage API afterwards listed only the two HTTP configurations from the
+8 October run) and the app's prompt was never sent. The account e-mail was blanked in the DOM and
+the avatar hidden by position; the throttled scrub let the e-mail show in the Apps list's Last
+edited cell for about a tenth of a second, outside the windows used, and Vision OCR over all 692
+frames and the poster found no e-mail. 28.8 s, 687 KB, mean luma 226, captions about 14 px on the
+page, poster at step 2 (the prompt pasted into the chat). Recorder, raw take, edit script and marks:
+~/.keboola-shots/where-kai-2026-10-09/. Review round on the recording: the checker asked for at
+least 3 s per caption (step 4's two captions had 2.5 s) and for "When Kai asks, click Approve"
+instead of "Kai asks before each change", since the Apps builder makes its draft without asking;
+the guide-tester for a time cue at the app step, the send step, the no-app condition in the
+aria-label, and no empty-field frame at the loop point. All done (Kai's sped-up beat went from 8x to
+7x to reach 3 s; checker round 2 PASS); caption 5 says "send it", as
+app/ does, because no run recorded whether Enter sends in Build with Kai. The Create app field's
+placeholder now reads "E.g. Weekly revenue by region, with a date filter", not "Describe what you
+want to build".
 
 **Review round (fact-checker, guide-tester, checker).** Fixed: the ask card's Done line (a cold week
 lists nothing to recompute), the cold-day choice back with its meaning, as a note on the transform
