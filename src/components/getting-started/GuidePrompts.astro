@@ -3,8 +3,9 @@
 // with-kai/ never holds a second copy that could drift from the pages.
 //
 // Since 2026-10-08 (Nikita: "нужны либо какие-то интерактивные элементы, либо визуалы") each step is
-// a card: its prompts with copy buttons, what Kai will ask, the step page's own screenshot of what
-// you will see, and a "Done when" checkbox. Only the first unticked card is open (others open on their
+// a card: its prompts with copy buttons, what Kai will ask, a frame of the finished step from our
+// 2026-10-08 run (its own, not a copy of the step page's; the app card shows where its prompt goes,
+// course.mjs), and a "Done when" checkbox. Only the first unticked card is open (others open on their
 // header, to look ahead or copy again). Ticking it closes the card, opens the next one and fills
 // the matching dot of the course bar at the top of the page (<CourseLine track="kai" />). Progress
 // is kept in this browser only (localStorage, wrapped in try/catch); without script every card
@@ -13,8 +14,10 @@ import { Code } from '@astrojs/starlight/components';
 import { guidePrompts } from './prompts.mjs';
 
 const steps = guidePrompts();
+const WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 // the course data marks product labels with **…**; the page shows them bold
-const html = (text: string) => text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+const html = (text: string) =>
+  text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2">$1</a>');
 ---
 
 <div class="gs-kai not-content" data-gs-kai>
@@ -46,8 +49,9 @@ const html = (text: string) => text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</str
                   <strong>Expect</strong> {step.approvals}.
                 </p>
               )}
+              {step.note && <p class="gs-kai__note" set:html={html(step.note)} />}
               <p class="gs-kai__more">
-                The step page, with the click-through and terminal ways: <a href={step.href}>{step.title}</a>
+                The step page, with its Check and the click-through and terminal ways: <a href={step.href}>{step.title}</a>
               </p>
             </div>
             {step.shot && (
@@ -55,7 +59,7 @@ const html = (text: string) => text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</str
                 <a href={step.shot.src} target="_blank" rel="noopener">
                   <img src={step.shot.src} alt={`Screenshot - ${step.shot.alt}`} loading="lazy" />
                 </a>
-                <figcaption>What you will see. From our run, so your week's numbers differ.</figcaption>
+                <figcaption>{step.shot.caption}</figcaption>
               </figure>
             )}
           </div>
@@ -72,7 +76,7 @@ const html = (text: string) => text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</str
     }
   </ol>
   <p class="gs-kai__finish" hidden>
-    All five steps done. <a href="#what-you-have-now">What you have now</a> lists what Kai built.
+    All {WORDS[steps.length] ?? steps.length} steps done. Next: <a href="#what-you-have-now">What you have now</a>.
   </p>
 </div>
 

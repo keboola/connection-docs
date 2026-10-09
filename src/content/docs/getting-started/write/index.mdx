@@ -115,7 +115,7 @@ The authorization belongs to this configuration. Keboola stores component secret
 [encrypted configuration parameters](/extend/encryption/); there
 is no decryption API, so the credentials are never readable back out of the configuration.
 
-{/* VERIFY(owner): the previous version of this page claimed the authorization "will only
+{/* VERIFY(Nikita): the previous version of this page claimed the authorization "will only
 allow you to write data into a Google Spreadsheet". The exact OAuth scopes requested by
 keboola.wr-google-sheets are not published, and step 9 lets the reader pick an existing
 spreadsheet from Drive, which implies more than spreadsheet-write. Claim removed rather than
@@ -219,3 +219,5 @@ readable by anyone with the link. That is the whole pipeline, end to end.
   you authorized a colleague's account, ask them to share it.
 - **You want the delivery checked against the source.** Kai can read both sides:
   `Read the last Google Sheets destination job, tell me whether it succeeded, and compare what it wrote with the row count of out.c-Boolabean-staffing-outlook.staffing_outlook.`
+
+**Next:** [Load from Google Sheets →](/getting-started/load/googlesheets/)

@@ -23,47 +23,61 @@ leave a café short-handed?** This page has every prompt for it in one place. Ka
 from a prompt you paste, and you approve what it asks; the step pages cover the same steps with the
 click-through and terminal ways, and explain what each one does.
 
-<Prereqs needs={['project']}>
+<Prereqs needs={['project', 'kai']}>
   <span slot="from">a project with Kai and empty Storage.</span>
   <span slot="to">two data source configurations, a transformation, an app draft and a weekly flow, and the question answered.</span>
-  <li>
-    <strong>Kai</strong>, the <strong>Kai Agent</strong> button in the top bar. A new Free Plan
-    project has it from the start; elsewhere an organization admin turns it on once, on the stacks
-    that have Kai:{' '}
-    <a href="/kai/getting-started/">Get started with Kai</a>. What it can see and change:{' '}
-    <a href="/kai/security-and-privacy/">Kai security and privacy</a>.
-  </li>
 </Prereqs>
 
 ## How it goes
 
-- **Where:** paste each prompt into **Kai Agent**, except the app's, which goes into the Apps
-  builder (**Apps** in the navigation, then **Create app** if the project already has an app).
-  A step's prompts go in the same chat; in our 8 October run all the Kai Agent prompts went into one.
+- **Where:** paste each prompt into **Kai Agent**, except the app's, which goes into the field on
+  the **Apps** page (in the left navigation, then **Create app** if the project already has an app;
+  if the navigation shows only icons, point at it to see the names). The app's card below shows
+  that page. A step's prompts go in the same chat; in our 8 October run all the Kai Agent
+  prompts went into one.
+
+  <video autoplay loop muted playsinline controls poster="/getting-started/with-kai/where-kai-poster.png" aria-label="Screen recording in a new project, with a numbered caption above each step: on the Storage page, click Kai Agent at the top right; paste the load prompt into the chat and press Enter; Kai works on it (sped up), then asks before creating the first data source: click Approve. Kai creates it, opens it on the left and asks again before adding the first row.">
+    <source src="/getting-started/with-kai/where-kai.mp4" type="video/mp4" />
+  </video>
+
+  {/* Recording, 2026-10-09, a new Free Plan project, 6429 (Nikita: "где конкретно найти кая по шагам
+  и куда вставлять промпты", "лучше бы сделал гифку конкретную как работает в интерфейсе"; on a
+  sample "1.6 норм, приложение на карточку … не приближай слишком близко. Можно чуть-чуть еще,
+  наверное, подальше"; on the 1.45x cut "наверное все же можно еще приблизить" and a jump of the chat
+  field at 5-6 s; "Approve можно" for the takes). Take 8 of record-where4.mjs, at 2x through the CDP
+  screencast, assembled in Remotion (~/docs-ops/remotion/where-kai, edit8.py, Composition8.tsx): the
+  whole screen first, a zoom of 1.6x, back out at the end; an arrow pointer drawn by the recorder,
+  brought up to Approve from below; captions in a band above the screen, where the player's
+  controls never cover them. Kai's 35 s of work runs at 10x and the 9 s after Approve at 2x, both
+  labelled; the 2.6 s while the new chat's suggestions load, and 1.3 s of the pasted prompt, are
+  cut; the rest is 1x. The suggestions still move the field by 4 CSS px as it is clicked (take 6:
+  16 px). Approve was clicked on camera: it created the "Boolabean sales" configuration, Kai's next
+  request (the stores row) was declined off camera, and the configuration, still without rows,
+  went to Trash; so did takes 6 and 7 (7 reopened take 6's chat and was not used); the project has
+  no buckets. The account e-mail was blanked as it rendered and the avatar hidden; Vision OCR over
+  all 621 frames and the poster found no e-mail. 25.9 s, 850 KB, mean luma 228, min 224, poster at
+  8.4 s (clip_metrics.sh). Recorders, raw takes and marks: ~/.keboola-shots/where-kai-2026-10-09/.
+  DECISIONS.md 2026-10-09. */}
 - **When to paste the next:** once the step is done. Each step below says how to tell, and its
   page has the full **Check**.
-- **What Kai asks:** approve each change it proposes, 15 approvals in both our runs without the app's
-  optional publish; a question that only reads asks for none by default. To be asked less, click
-  **Always allow** on a card, or set the tools in the Kai panel's settings (the gear, then
-  **Tools**, see [tool permissions](/kai/settings/#tool-permissions)): a tool set to **Always
-  allow** runs without asking. An approval left
-  unanswered for about five minutes counts as declined: Kai says so, and you ask it to try again.
-  [Approvals and plan mode](/getting-started/#approvals-and-plan-mode) says what asks, what does
-  not, and how to undo a step.
-- **If Kai asks you something:** answer it. If the forecast has cold, dry days (under 18 °C, no
-  rain) that the sample's one summer of sales never had, Kai may stop at the transform step to ask
-  what to do with them; **Leave them blank** keeps to the guide, which reads an empty cell as "no
-  history" (the transform page's **Check**).
+- **What Kai asks:** approve each change it proposes; each step below says how many to expect. To
+  be asked less, set the tools to **Always allow**:
+  [Approvals and plan mode](/getting-started/#approvals-and-plan-mode) says how, what does not ask,
+  what happens to an approval nobody answers, and how to undo a step.
+- **If Kai asks you something:** answer it. In a week with cold, dry days Kai may ask at the transform
+  step; that step's card says what to pick.
 - **If a step comes out different:** its page's **Check** and the folds under it say what to do. If
-  staffing_outlook landed in another bucket, put its table ID in the app prompt.
+  staffing_outlook landed in another bucket, put its full table ID (ask Kai for it) in the app prompt.
 
 ## The prompts
 
 <GuidePrompts />
 
 {/* The list is read from the step pages' Prompt tabs at build time (components/getting-started/
-prompts.mjs) and the "Expect … Done when …" lines from course.mjs, so this page never holds a
-second copy of a prompt. "About 30 minutes" and the 15 approvals are the 2026-10-01 Free Plan run in
+prompts.mjs): the prompts, and the **Expect …** phrases that say how many approvals each step asks
+for. The "Done when" lines are course.mjs digests of each page's Check, and the build fails if a
+number or a bold label in them is no longer on that page (2026-10-09), so this page never holds a
+second copy that can drift. "About 30 minutes" and the 15 approvals in total (the cards' sum) are the 2026-10-01 Free Plan run in
 project 6375, one page at a time: load 10.9 min (both prompts), transform 4.7, ask 1.3, app 4.5 to
 the first preview, flow 5.6 including its first run (that was the three-phase flow; the current
 two-phase prompt took about 7.5, which makes about 29, index.mdx); approvals 7 + 3 + 2 + 0 + 0 + 3. The 2026-10-08 run in a new Free Plan project (6425, us-east4, BigQuery)
@@ -97,16 +111,11 @@ end to end (14 min, 11 approvals). CONSERVATION-REPORT.md 2026-10-08. */}
 ## What you have now
 
 A pipeline that loads the data, joins it, answers the question in an app and rebuilds itself every
-Monday. To see all of it in one answer, ask Kai:
+Monday. [Check Storage and Jobs](/getting-started/check/#what-you-should-have) lists what should be
+there, with a prompt that has Kai list all of it in one answer.
 
-```text title="Follow-up prompt" wrap
-List everything the Getting Started guide created in this project (the Boolabean configurations, tables, the app and the flow) and what each does.
-```
-
-It only reads, so it asks for no approval by default.
-[Check Storage and Jobs](/getting-started/check/#what-you-should-have) lists what should be there.
-
-{/* Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals: Kai listed both
+{/* The recap prompt itself is on check/ since 2026-10-09 (one copy; DECISIONS.md 2026-10-09). Its run note:
+Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals: Kai listed both
 HTTP configurations, the six input tables with 6, 18, 9,761, 552, 552 and 42 rows, the
 transformation and staffing_outlook (42 rows), the Staffing Outlook Grid app and the flow, each with
 what it does. Project 264 also holds other Boolabean apps and flows made outside the guide, and Kai
@@ -117,9 +126,4 @@ listed those too; a project that only followed the guide has only the guide's. *
 - **Notifications:** nobody hears about a failed run until you add a recipient in the flow's
   [notifications](/getting-started/automate/#set-up-notifications).
 - **Sharing the app:** nothing is published until you say so; [publishing it](/getting-started/app/)
-  asks twice and gives others a link to the app, behind a password.
-- **A look at the whole run:** [Check Storage and Jobs](/getting-started/check/).
-
-**Next:** look over the whole run in [Check Storage and Jobs](/getting-started/check/), or read
-the same steps explained, with the click-through and terminal ways, from
-[Load data into Storage](/getting-started/load/).
+  gives others a link to the app, behind a password.

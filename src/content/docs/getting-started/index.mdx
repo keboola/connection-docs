@@ -140,7 +140,7 @@ description you write ([What you can build](/data-apps/what-are-apps/#what-you-c
 <Prereqs needs={[]}>
   <li>
     <strong>An email address</strong> to create a free project on the first page, or an invite
-    to your company's project. A free project is enough; we ran this guide's Prompt path on one.
+    to your company's project. A free project is enough.
   </li>
   <li>
     <strong>A browser.</strong> Every step after the first also has a Prompt way and a terminal way;{' '}
@@ -154,8 +154,9 @@ begin."), because Nikita asked for the concrete things a reader needs rather tha
 The three Free Plan questions that stood here are answered by the 2026-10-01 run in project 6375
 (us-east4): the Free Plan includes data apps (built, published and deployed), Kai is on its stack
 from the first login, and the weekly flow uses about three runtime minutes a run, which is why the
-schedule is weekly (automate/ has the box). So the first item now says the guide's Prompt path ran
-on a Free Plan project (the UI and CLI tabs were not rerun there). The sentence used to say "covers all of it" and linked the wizard; it
+schedule is weekly (automate/ has the box). The first item said the guide's Prompt path ran on
+a Free Plan project; since 2026-10-09 only project/'s Free Plan item says it (the UI and CLI tabs
+were not rerun there). The sentence used to say "covers all of it" and linked the wizard; it
 links Get a project now, so a reader meets the invite and SSO advice before a sign-up form.
 Fact-checker and guide-tester, 2026-09-23. */}
 
@@ -164,17 +165,14 @@ Fact-checker and guide-tester, 2026-09-23. */}
 <CourseLine layout="list" />
 
 Read the steps in order, or land on any one of them: each page says where you should be, what it
-needs, and how to tell it worked. Right after step 1 comes the
-fast way: [The whole guide with Kai](/getting-started/with-kai/) builds steps 2 to 6 from their
-prompts in one sitting; the step pages also show where each setting lives, and work without Kai.
+needs, and how to tell it worked.
 
 ## How every page works
 
 Every page with a task on it offers that task three ways:
 
-- **Prompt**: paste it into **Kai Agent**, the assistant in the project's top bar, and watch it build. A
-  new Free Plan project has Kai from the start; elsewhere an organization admin switches it on
-  once; see [Get started with Kai](/kai/getting-started/).
+- **Prompt**: paste it into **Kai Agent**, the assistant in the project's top bar, and watch it build.
+  [Create or join a project](/getting-started/project/#check-it-worked) says how to tell you have it.
 - **UI**: the same task click by click, to see where each setting lives.
 - **CLI / API**: the same task from a terminal with [kbagent](/cli/), with the raw request where
   there is no command for it.
@@ -194,9 +192,10 @@ the page says so rather than showing an empty tab.
 **In the chat, Kai asks before each change it makes:** an approval card shows exactly what it is
 about to write or run, with **Approve**, **Decline** and **Always allow**. Questions that only read
 do not ask, and neither do tools set to **Always allow**; a new account has two write tools set
-that way, both for apps. The Apps builder asks less: it builds a draft of the app, code and
-preview included, without asking, and when you publish it asks twice, once for the app's access to
-Storage and once to deploy it.
+that way, both for apps. In the chat, an approval left unanswered for about five minutes counts as
+declined: Kai says so, and you ask it to try again. The Apps builder asks less: it builds a draft
+of the app, code and preview included, without asking, and when you publish it asks twice, once
+for the app's access to Storage and once to deploy it.
 
 <details>
 <summary>Fewer approvals, plan mode, and undoing a step</summary>

@@ -13,10 +13,10 @@
 
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { COURSE } from './course.mjs';
+import { COURSE, KAI_TRACK } from './course.mjs';
 
 const PAGES = join(process.cwd(), 'src/content/docs/getting-started');
-const EXPECTED = ['load', 'transform', 'ask', 'app', 'automate'];
+const EXPECTED = KAI_TRACK;
 
 // Where each prompt goes, as [before, UI label, after], so only the label is bold. Every step but
 // the app is a Kai Agent chat; the app is described in the Apps builder (app/ says why).
@@ -47,19 +47,60 @@ export function stepPrompts(key) {
   return prompts;
 }
 
+/** A step page's source, and its Prompt tab, with MDX comments taken out. */
+function readStep(key) {
+  const src = readFileSync(join(PAGES, key, 'index.mdx'), 'utf8').replace(/\{\/\*[\s\S]*?\*\/\}/g, '');
+  const tab = (src.match(/<TabItem label="Prompt">([\s\S]*?)<\/TabItem>/) || [])[1] || '';
+  return { src, tab };
+}
+
+/**
+ * What Kai asks for on a step, from the step page's own **Expect …** phrases in its Prompt tab:
+ * "**Expect seven approvals:** … **Expect three approvals.**" → "seven approvals, then three".
+ */
+function liftExpect(tab) {
+  const found = [...tab.matchAll(/\*\*Expect ([^*]+?)[:.]\*\*/g)].map((m) => m[1].trim());
+  if (!found.length) return null;
+  const noun = found[0].split(' ').slice(1).join(' ');
+  return found.map((f, i) => (i && noun && f.endsWith(` ${noun}`) ? f.slice(0, -noun.length - 1) : f)).join(', then ');
+}
+
+/** Fails the build when a number or a **bold** label of a course.mjs digest is gone from its page. */
+function guardDigest(key, field, digest, src) {
+  if (!digest) return;
+  const page = src.replace(/\s+/g, ' ');
+  const text = digest.replace(/\]\([^)]*\)/g, ']');
+  const tokens = [...text.matchAll(/\*\*[^*]+\*\*|\d+(?:[,.:]\d+)*/g)].map((m) => m[0]);
+  const gone = tokens.filter((t) => !page.includes(t.replace(/\s+/g, ' ')));
+  if (gone.length) {
+    throw new Error(`prompts.mjs: course.mjs ${key}.${field} says ${gone.join(', ')}, which ${key}/index.mdx no longer does; update the digest`);
+  }
+}
+
 /** Every step that has prompts, in course order, with where its prompts go. */
 export function guidePrompts() {
-  const steps = COURSE.map((step) => ({
-    key: step.key,
-    title: step.title,
-    href: step.href,
-    where: WHERE[step.key] ?? DEFAULT_WHERE,
-    n: COURSE.indexOf(step) + 1,
-    approvals: step.approvals ?? null,
-    done: step.done ?? null,
-    shot: step.shot ?? null,
-    prompts: stepPrompts(step.key),
-  }));
+  const steps = COURSE.map((step) => {
+    const prompts = stepPrompts(step.key);
+    let approvals = step.approvals ?? null;
+    if (prompts.length) {
+      const { src, tab } = readStep(step.key);
+      approvals = liftExpect(tab) ?? approvals;
+      guardDigest(step.key, 'done', step.done, src);
+      guardDigest(step.key, 'note', step.note, src);
+    }
+    return {
+      key: step.key,
+      title: step.title,
+      href: step.href,
+      where: WHERE[step.key] ?? DEFAULT_WHERE,
+      n: COURSE.indexOf(step) + 1,
+      approvals,
+      done: step.done ?? null,
+      note: step.note ?? null,
+      shot: step.shot ?? null,
+      prompts,
+    };
+  });
   const missing = steps.filter((s) => EXPECTED.includes(s.key) && !s.prompts.length).map((s) => s.key);
   if (missing.length) {
     throw new Error(`prompts.mjs: no \`\`\`text title="Prompt" block in the Prompt tab of ${missing.join(', ')}`);
@@ -85,6 +126,7 @@ export function guidePromptsText() {
     for (const prompt of step.prompts) out.push('```text', prompt, '```', '');
     const line = expectLine(step);
     if (line) out.push(line, '');
+    if (step.note) out.push(step.note, '');
   });
   return out;
 }

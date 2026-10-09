@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/getting-started/prereqs.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
-import { courseListText, courseBarText } from '../components/getting-started/course.mjs';
+import { courseListText, courseBarText, kaiTrackText } from '../components/getting-started/course.mjs';
 import { sampleText } from '../components/getting-started/sample.mjs';
 import { guidePromptsText } from '../components/getting-started/prompts.mjs';
 // Every other page uses the site-wide box (src/components/Prereqs.astro, from the Apps work) and
@@ -252,7 +252,7 @@ function stripMdx(body) {
       // that links somewhere. Each comes from the same data as the component.
       if (/^\s*<CourseLine\b/.test(line)) {
         const props = tagProps(line);
-        const text = props.layout === 'list' ? courseListText() : courseBarText(props.current);
+        const text = props.layout === 'list' ? courseListText() : props.track === 'kai' ? kaiTrackText() : courseBarText(props.current);
         out.push('', ...text, '');
       }
       if (/^\s*<SampleData\b/.test(line)) out.push('', ...sampleText(), '');

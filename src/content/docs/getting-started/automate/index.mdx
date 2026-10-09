@@ -33,7 +33,7 @@ project 264 by Kai from the prompt in the Kai tab (flow 01m23dcqs9j2gw0q9z8y25j9
 create, update with the schedule, run). Kai named the phases "Extract source data" / "Build
 staffing outlook" / "Redeploy data app", put the two HTTP configurations in phase 1, and created a
 real Scheduler configuration (cron "0 6 * * *", timezone Europe/Prague, enabled) — which closes
-the VERIFY on whether Kai can set a schedule: yes. Notifications were not asked of Kai and stay
+the flag on whether Kai can set a schedule: yes. Notifications were not asked of Kai and stay
 manual on this page. First run (job 103117022): phase 1 success in 121 s (the sales configuration
 fans out into one job per row), phase 2 success in 41 s, phase 3 (the data app deploy) error
 "Internal Server Error occurred." after 282 s; total 460 s. See DECISIONS.md 2026-09-09 for what
@@ -381,9 +381,8 @@ it, `job run --wait` did it) and the schedule is set. Read on for notifications.
 - Click **Run flow** and confirm with **Run**. A notification with a **Show job** link appears,
   and while the run is in progress the header offers **Terminate flow**.
 - **Jobs** shows which step failed, because every task creates its own job; the flow's **All Runs**
-  tab shows each run with its phases.
-- In our Free Plan project the whole run took 5 min 38 s: 4 min 33 s for the loads, about two
-  minutes of which the jobs waited in the queue, and 53 seconds for the transformation.
+  tab shows each run with its phases, and [Reading a flow run](/getting-started/check/#reading-a-flow-run)
+  says how long ours took.
 
 ## Set a schedule
 
@@ -444,11 +443,10 @@ are enough here.
 
 - The **Schedules** tab shows a count, and the flow's **All Runs** tab a run: your name against a
   manual run, `Schedule for <flow ID> Scheduler` against an automatic one.
-- **A red run can still have done most of its work:** phases run in order, so when a later one
-  fails, the ones before it are done. [Check Storage and Jobs](/getting-started/check/) shows how to read
-  the run, or ask Kai to read it: `My flow run failed. Which task failed, and why?`
-  {/* Same prompt as check/'s tip. Run 2026-10-07 in project 264 with `kbagent kai ask`: Kai found
-  the latest failed run of the flow, named the failed task and read that task's job log. */}
+- **A red run can still have done most of its work:**
+  [Reading a flow run](/getting-started/check/#reading-a-flow-run) says how to tell, and has the
+  prompt that makes Kai read the run for you.
+  {/* The prompt and its 2026-10-07 run note are on check/ since 2026-10-09 (one copy). */}
 - Next Monday there will be a second run you did not start, on a forecast that has moved by a
   week.
 
@@ -456,15 +454,13 @@ are enough here.
 Only the jobs that do the work count as runtime: the five file jobs, the forecast and the
 transformation, not the flow's own job or the containers that only hold others, and not the time
 a job waits to start ([Pay As You Go](/management/payg-project/),
-[job types](/extend/jobs/#job-type)). They came to about 4 minutes in the run on this page and 2½
-in an earlier one. Once a week that is 10 to 20 minutes a month; every day it
+[job types](/extend/jobs/#job-type)). They came to about 4 minutes in our run
+([Reading a flow run](/getting-started/check/#reading-a-flow-run)) and 2½ in an earlier one. Once a week that is 10 to 20 minutes a month; every day it
 would be 75 or more. The Free Plan's allowance is up to 60 minutes a month, capped at what the
 project used the month before, so a month that needs more than the one before, such as one with
 five Mondays, can run short.
 
-The flow does not restart the app, which is fine for an app that reads `staffing_outlook` when
-someone opens it, as ours does. We could not confirm whether an app's own running time counts against
-the minutes. If it does, each day someone opens the app adds at least 15 minutes, because it runs
+We could not confirm whether the app's own running time counts against the minutes. If it does, each day someone opens the app adds at least 15 minutes, because it runs
 until **Auto Sleep** stops it, and one look a week comes to 60 to 75 minutes a month.
 
 To pause the run, switch off the toggle on the flow's **Schedules** tab. To stop it for good,
@@ -483,12 +479,12 @@ durations. Hence "about 2½ and 4". Flow jobs consume no minutes per management/
 Monthly at 4 to 5 Mondays: 10 to 18 min, "10 to 20" on the page; daily at 30 runs: 76 min and up. The app's "60 to 75" is
 15 minutes to Auto Sleep times 4 or 5 weeks. Project Consumption still said "not synced yet" that
 evening and Billing answered 403 ("Activate your account..."), so the metering itself was not read.
-VERIFY(owner): whether a running data app counts against the Free Plan minutes. The app built in
+VERIFY(Miro): whether a running data app counts against the Free Plan minutes. The app built in
 the run reads the table live (its /api/grid route runs the BigQuery query on every request), which
 is why the flow has no app phase since that evening (DECISIONS.md 2026-10-01). A reader's app is
 generated anew and may cache, hence the question app/ gives. Labels read live: Delete Schedule and
 Edit Schedule are buttons on the schedule row, read after pointing at it (07 shows the row without
-them), and Copy flow / Debug mode / Delete flow are in the flow's menu. VERIFY(owner): whether
+them), and Copy flow / Debug mode / Delete flow are in the flow's menu. VERIFY(Nikita): whether
 Delete flow also removes the flow's schedules; the box deletes the schedule first so it does not
 matter. 2026-10-08, project 264: none of its five schedules targets a flow that no longer exists (~/.keboola-shots/free-run-2026-10-08/264-sched.json),
 weak evidence that schedules go with their flow. That the configurations stay was exercised that evening: the old flow and its schedule

@@ -19,7 +19,7 @@
 // list as text (page-markdown.mjs), so an agent landing on a step knows the
 // steps around it.
 
-import { COURSE } from './course.mjs';
+import { COURSE, KAI_TRACK_TIME, kaiTrackRange } from './course.mjs';
 
 interface Props {
   /** The key of the page this bar sits on: project, load, transform, ask, app, automate, check. */
@@ -30,6 +30,7 @@ interface Props {
 }
 
 const { current, layout = 'bar', track } = Astro.props;
+const [first, last] = kaiTrackRange();
 const kaiHref = (key: string) =>
   key === 'project' ? '/getting-started/project/' : key === 'check' ? '#what-you-have-now' : `#step-${key}`;
 const at = current ? COURSE.findIndex((s) => s.key === current) : -1;
@@ -44,8 +45,8 @@ const at = current ? COURSE.findIndex((s) => s.key === current) : -1;
         {s.key === 'load' && (
           <li class="gs-course__fork">
             <a href="/getting-started/with-kai/">
-              <strong>Steps 2 to 6 in one sitting:</strong> The whole guide with Kai, every prompt on one
-              page, about 30 minutes
+              <strong>Steps {first} to {last} in one sitting:</strong> The whole guide with Kai, every
+              prompt on one page, {KAI_TRACK_TIME}
             </a>
           </li>
         )}
