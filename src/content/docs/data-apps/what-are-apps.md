@@ -22,7 +22,9 @@ Keboola provisions and runs the app for you — there's no server to set up.
 - **Anything interactive** — configurators, simulators, and more. [Beyond dashboards](/data-apps/#beyond-dashboards) shows three real ones, with screenshots and live links.
 - **Agent-facing services** — an app can expose an API or an MCP server so other agents and services call it, not just human visitors (a Python/JS capability).
 
-![A Keboola Python/JS app — a Shopify Store Monitor dashboard with KPI tiles, revenue and orders charts, and product/vendor tables — running on the project's governed data](/data-apps/app-dashboard.png)
+<video autoplay loop muted playsinline poster="/data-apps/apps-range-poster.png" aria-label="Five Python/JS apps built with Kai on sample data, arranged in a ring. The app in front plays while its kind from the list above is named at the top, then the ring turns and the next app comes to the front. 1, Dashboards: a store dashboard switches from the last 30 days to the last 12 months. 2, Internal tools: a deal is marked At risk with a comment and saved back to Storage. 3, Data narratives: a story about six cafés stops on two chapters as their charts animate. 4, Anything interactive: a staffing simulator whose numbers change as the temperature slider moves and Saturday is picked. 5, Agent-facing services: an API portal whose Try it panel returns live JSON.">
+  <source src="/data-apps/apps-range.mp4" type="video/mp4" />
+</video>
 
 ## The stack: Python/JS
 
