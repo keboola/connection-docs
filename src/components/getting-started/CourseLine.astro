@@ -7,6 +7,13 @@
 //   <CourseLine current="load" />     at the top of a step: where this page sits,
 //                                     done steps filled, this one ringed, each dot
 //                                     a link
+//   <CourseLine track="kai" />        on with-kai/: the same seven dots as a
+//                                     tracker. 1 (project) is the prerequisite,
+//                                     2-6 jump to that step's card on the page and
+//                                     fill as its "Done when" box is ticked
+//                                     (GuidePrompts.astro), 7 (check) is the recap
+//
+// On the hub, the list also shows the with-kai fork: steps 2 to 6 in one sitting.
 //
 // Styles live in custom.css (.gs-course). The markdown twin prints the same
 // list as text (page-markdown.mjs), so an agent landing on a step knows the
@@ -18,9 +25,13 @@ interface Props {
   /** The key of the page this bar sits on: project, load, transform, ask, app, automate, check. */
   current?: string;
   layout?: 'bar' | 'list';
+  /** 'kai': the with-kai tracker (see above). */
+  track?: 'kai';
 }
 
-const { current, layout = 'bar' } = Astro.props;
+const { current, layout = 'bar', track } = Astro.props;
+const kaiHref = (key: string) =>
+  key === 'project' ? '/getting-started/project/' : key === 'check' ? '#what-you-have-now' : `#step-${key}`;
 const at = current ? COURSE.findIndex((s) => s.key === current) : -1;
 ---
 
@@ -29,6 +40,15 @@ const at = current ? COURSE.findIndex((s) => s.key === current) : -1;
     <div class="not-content">
     <ol class="gs-course gs-course--list">
       {COURSE.map((s, i) => (
+        <>
+        {s.key === 'load' && (
+          <li class="gs-course__fork">
+            <a href="/getting-started/with-kai/">
+              <strong>Steps 2 to 6 in one sitting:</strong> The whole guide with Kai, every prompt on one
+              page, about 30 minutes
+            </a>
+          </li>
+        )}
         <li class="gs-course__step">
           <span class="gs-course__dot" aria-hidden="true">{i + 1}</span>
           <div class="gs-course__body">
@@ -41,9 +61,23 @@ const at = current ? COURSE.findIndex((s) => s.key === current) : -1;
             )}
           </div>
         </li>
+        </>
       ))}
     </ol>
     </div>
+  ) : track === 'kai' ? (
+    <nav class="gs-course gs-course--bar gs-course--kai not-content" aria-label="The guide's steps on this page">
+      <ol>
+        {COURSE.map((s, i) => (
+          <li class:list={['gs-course__step', { 'is-done': s.key === 'project', 'is-edge': s.key === 'project' || s.key === 'check' }]} data-step={s.key}>
+            <a href={kaiHref(s.key)} title={s.title}>
+              <span class="gs-course__dot">{i + 1}</span>
+              <span class="gs-course__name">{s.short}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
   ) : (
     <nav class="gs-course gs-course--bar not-content" aria-label="Getting Started steps">
       <ol>

@@ -55,9 +55,10 @@ function convertItem(item) {
   // Branch node — has children
   // The parent page itself goes first, then each child is converted recursively
   const childItems = item.items.map(convertItem);
-  // Label-only group (no landing page of its own)
+  // Label-only group (no landing page of its own). `collapsed: false` in navigation.yml keeps it
+  // open, for a group that is the main path of its section (Getting Started's "Step by step").
   if (!item.url) {
-    return { label: item.title, collapsed: true, items: childItems };
+    return { label: item.title, collapsed: item.collapsed ?? true, items: childItems };
   }
   return {
     label: item.title,

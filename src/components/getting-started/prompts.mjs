@@ -54,8 +54,10 @@ export function guidePrompts() {
     title: step.title,
     href: step.href,
     where: WHERE[step.key] ?? DEFAULT_WHERE,
+    n: COURSE.indexOf(step) + 1,
     approvals: step.approvals ?? null,
     done: step.done ?? null,
+    shot: step.shot ?? null,
     prompts: stepPrompts(step.key),
   }));
   const missing = steps.filter((s) => EXPECTED.includes(s.key) && !s.prompts.length).map((s) => s.key);
@@ -79,7 +81,7 @@ export function guidePromptsText() {
   guidePrompts().forEach((step, i) => {
     const [before, label, after] = step.where;
     // a heading, not a list item: the unindented fences below would restart a markdown list
-    out.push(`### ${i + 1}. [${step.title}](${step.href}), in ${before}${label}${after}`, '');
+    out.push(`### ${step.n}. [${step.title}](${step.href}), in ${before}${label}${after}`, '');
     for (const prompt of step.prompts) out.push('```text', prompt, '```', '');
     const line = expectLine(step);
     if (line) out.push(line, '');

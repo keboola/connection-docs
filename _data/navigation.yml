@@ -38,23 +38,26 @@ items:
       - url: /getting-started/with-kai/
         title: The whole guide with Kai
 
-      - url: /getting-started/load/
-        title: Load data into Storage
+      - title: Step by step
+        collapsed: false
+        items:
+          - url: /getting-started/load/
+            title: Load data into Storage
 
-      - url: /getting-started/transform/
-        title: Transform data
+          - url: /getting-started/transform/
+            title: Transform data
 
-      - url: /getting-started/ask/
-        title: Explore your data
+          - url: /getting-started/ask/
+            title: Explore your data
 
-      - url: /getting-started/app/
-        title: Build an app
+          - url: /getting-started/app/
+            title: Build an app
 
-      - url: /getting-started/automate/
-        title: Build and schedule a weekly flow
+          - url: /getting-started/automate/
+            title: Build and schedule a weekly flow
 
-      - url: /getting-started/check/
-        title: Check Storage and Jobs
+          - url: /getting-started/check/
+            title: Check Storage and Jobs
 
       - url: /getting-started/going-further/
         title: Going further

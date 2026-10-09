@@ -2683,6 +2683,143 @@ nav.sidebar {
 }
 .gs-course__term strong { color: var(--sl-color-gray-2); font-weight: 600; }
 
+/* The hub list's fork after step 1: steps 2-6 with Kai in one sitting (CourseLine, 2026-10-08). It
+   sits on the course's own vertical line, as a card rather than a numbered step. */
+.gs-course--list .gs-course__fork {
+  position: relative;
+  padding: 0 0 1.1rem 2.85rem;
+}
+.gs-course--list .gs-course__fork::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(1rem - 1px);
+  width: 2px;
+  background: var(--sl-color-accent-low);
+}
+.gs-course__fork a {
+  display: block;
+  padding: 0.55rem 0.8rem;
+  border: 1px dashed var(--kbc-blue-600);
+  border-radius: 0.6rem;
+  background: var(--sl-color-accent-low);
+  color: var(--sl-color-white);
+  font-size: var(--sl-text-sm);
+  line-height: 1.45;
+  text-decoration: none;
+}
+.gs-course__fork a:hover { border-style: solid; }
+.gs-course__fork strong { color: var(--sl-color-text-accent); }
+
+/* with-kai/: the course bar as a tracker. 1 and 7 are the ends (prerequisite, recap), so 7 stays
+   dashed until every step is ticked. */
+.gs-course--kai .is-edge:not(.is-done):not(.is-current) .gs-course__dot { border-style: dashed; }
+
+/* with-kai/: one card per step (GuidePrompts.astro). Without script every card is open. */
+.gs-kai__progress {
+  margin: 0 0 0.6rem;
+  font-size: var(--sl-text-sm);
+  color: var(--sl-color-gray-2);
+}
+.gs-kai__progress span { font-weight: 600; color: var(--sl-color-text-accent); }
+.gs-kai__steps { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.9rem; }
+.gs-kai__step {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.8rem;
+  padding: 0.9rem 1rem 1rem;
+  background: var(--sl-color-bg);
+  scroll-margin-top: calc(var(--sl-nav-height, 3.5rem) + 1rem);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.gs-kai__step.is-active {
+  border-color: var(--kbc-blue-600);
+  box-shadow: 0 0 0 3px var(--sl-color-accent-low);
+}
+.gs-kai__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.6rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: default;
+}
+.gs-kai__head .gs-course__dot { width: 1.7rem; height: 1.7rem; font-size: 0.8rem; }
+.gs-kai__step.is-active .gs-course__dot,
+.gs-kai__step.is-done .gs-course__dot {
+  border-color: var(--kbc-blue-600);
+  background: var(--kbc-blue-600);
+  color: #fff;
+}
+.gs-kai__title { font-weight: 600; color: var(--sl-color-white); font-size: var(--sl-text-base); }
+.gs-kai__where { font-size: var(--sl-text-sm); color: var(--sl-color-gray-3); }
+.gs-kai__where strong { color: var(--sl-color-gray-2); font-weight: 600; }
+.gs-kai__body {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 0.75rem;
+}
+.gs-kai__main { display: grid; gap: 0.6rem; min-width: 0; }
+.gs-kai__expect,
+.gs-kai__more { margin: 0; font-size: var(--sl-text-sm); color: var(--sl-color-gray-2); line-height: 1.5; }
+.gs-kai__expect strong { color: var(--sl-color-white); }
+.gs-kai__more a { color: var(--sl-color-text-accent); }
+.gs-kai__shot { margin: 0; min-width: 0; }
+.gs-kai__shot img {
+  display: block;
+  width: 100%;
+  max-height: 24rem;
+  object-fit: cover;
+  object-position: top left;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+}
+.gs-kai__shot figcaption { margin-top: 0.3rem; font-size: var(--sl-text-xs); color: var(--sl-color-gray-3); }
+.gs-kai__done {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  margin-top: 0.85rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.5rem;
+  background: var(--sl-color-gray-6);
+  font-size: var(--sl-text-sm);
+  line-height: 1.5;
+  color: var(--sl-color-gray-2);
+  cursor: pointer;
+}
+.gs-kai__done strong { color: var(--sl-color-white); }
+.gs-kai__done input {
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.15rem;
+  accent-color: var(--kbc-blue-600);
+}
+.gs-kai:not(.is-live) .gs-kai__progress { display: none; }
+.gs-kai.is-live .gs-kai__step:not(.is-active):not(.is-open) .gs-kai__body { display: none; }
+.gs-kai.is-live .gs-kai__step:not(.is-active):not(.is-done) .gs-kai__done { display: none; }
+.gs-kai.is-live .gs-kai__step:not(.is-active) .gs-kai__head { cursor: pointer; }
+.gs-kai.is-live .gs-kai__step.is-done:not(.is-open) .gs-kai__done { margin-top: 0.6rem; }
+/* specific enough to beat Starlight's heading margin, which reaches into .not-content here */
+.gs-kai .gs-kai__step > .gs-kai__heading { margin: 0; font-size: inherit; font-weight: inherit; line-height: inherit; }
+.gs-kai__finish {
+  margin: 0.9rem 0 0;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.5rem;
+  background: var(--sl-color-accent-low);
+  color: var(--sl-color-white);
+  font-size: var(--sl-text-sm);
+}
+.gs-kai__finish a { color: var(--sl-color-text-accent); font-weight: 600; }
+
 /* (e) the sample tables as cards */
 .gs-data {
   display: grid;

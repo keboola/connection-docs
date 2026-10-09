@@ -1,27 +1,160 @@
 ---
 // The guide's prompts in course order, read from the step pages at build time (prompts.mjs), so
-// with-kai/ never holds a second copy that could drift from the pages. Styling, if any, belongs in
-// src/styles/custom.css under .gs-guide-prompts.
+// with-kai/ never holds a second copy that could drift from the pages.
+//
+// Since 2026-10-08 (Nikita: "нужны либо какие-то интерактивные элементы, либо визуалы") each step is
+// a card: its prompts with copy buttons, what Kai will ask, the step page's own screenshot of what
+// you will see, and a "Done when" checkbox. Only the first unticked card is open (others open on their
+// header, to look ahead or copy again). Ticking it closes the card, opens the next one and fills
+// the matching dot of the course bar at the top of the page (<CourseLine track="kai" />). Progress
+// is kept in this browser only (localStorage, wrapped in try/catch); without script every card
+// stays open and the page reads as a plain list. Styles: custom.css, .gs-kai.
 import { Code } from '@astrojs/starlight/components';
-import { guidePrompts, expectLine } from './prompts.mjs';
+import { guidePrompts } from './prompts.mjs';
 
 const steps = guidePrompts();
 // the course data marks product labels with **…**; the page shows them bold
 const html = (text: string) => text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
 ---
 
-<ol class="gs-guide-prompts">
-  {
-    steps.map((step) => (
-      <li>
-        <p>
-          <a href={step.href}>{step.title}</a>, in {step.where[0]}<strong>{step.where[1]}</strong>{step.where[2]}:
-        </p>
-        {step.prompts.map((prompt) => (
-          <Code code={prompt} lang="text" title="Prompt" wrap />
-        ))}
-        {expectLine(step) && <p set:html={html(expectLine(step))} />}
-      </li>
-    ))
+<div class="gs-kai not-content" data-gs-kai>
+  <p class="gs-kai__progress" aria-live="polite">
+    <span data-gs-kai-count>0</span> of {steps.length} steps done. Tick a step's <strong>Done when</strong>
+    box once it matches: the card closes, the next one opens, and its dot at the top fills in. The
+    progress stays in this browser.
+  </p>
+  <ol class="gs-kai__steps">
+    {
+      steps.map((step) => (
+        <li class="gs-kai__step" id={`step-${step.key}`} data-step={step.key}>
+          <h3 class="gs-kai__heading">
+            <button type="button" class="gs-kai__head" aria-controls={`step-${step.key}-body`}>
+              <span class="gs-course__dot" aria-hidden="true">{step.n}</span>
+              <span class="gs-kai__title">{step.title}</span>
+              <span class="gs-kai__where">
+                in {step.where[0]}<strong>{step.where[1]}</strong>{step.where[2]}
+              </span>
+            </button>
+          </h3>
+          <div class="gs-kai__body" id={`step-${step.key}-body`}>
+            <div class="gs-kai__main">
+              {step.prompts.map((prompt) => (
+                <Code code={prompt} lang="text" title="Prompt" wrap />
+              ))}
+              {step.approvals && (
+                <p class="gs-kai__expect">
+                  <strong>Expect</strong> {step.approvals}.
+                </p>
+              )}
+              <p class="gs-kai__more">
+                The step page, with the click-through and terminal ways: <a href={step.href}>{step.title}</a>
+              </p>
+            </div>
+            {step.shot && (
+              <figure class="gs-kai__shot">
+                <a href={step.shot.src} target="_blank" rel="noopener">
+                  <img src={step.shot.src} alt={`Screenshot - ${step.shot.alt}`} loading="lazy" />
+                </a>
+                <figcaption>What you will see. From our run, so your week's numbers differ.</figcaption>
+              </figure>
+            )}
+          </div>
+          {step.done && (
+            <label class="gs-kai__done">
+              <input type="checkbox" data-gs-kai-check={step.key} />
+              <span>
+                <strong>Done when</strong> <span set:html={html(step.done)} />.
+              </span>
+            </label>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+  <p class="gs-kai__finish" hidden>
+    All five steps done. <a href="#what-you-have-now">What you have now</a> lists what Kai built.
+  </p>
+</div>
+
+<script>
+  const KEY = 'gs-with-kai:v1';
+
+  function load(): Set<string> {
+    try {
+      return new Set(JSON.parse(localStorage.getItem(KEY) || '[]'));
+    } catch {
+      return new Set();
+    }
   }
-</ol>
+  function save(done: Set<string>) {
+    try {
+      localStorage.setItem(KEY, JSON.stringify([...done]));
+    } catch {
+      /* private window or blocked storage: progress just is not kept */
+    }
+  }
+
+  function init() {
+    const root = document.querySelector<HTMLElement>('[data-gs-kai]');
+    if (!root || root.dataset.bound) return;
+    root.dataset.bound = '1';
+    const cards = [...root.querySelectorAll<HTMLElement>('.gs-kai__step')];
+    const bar = document.querySelector<HTMLElement>('.gs-course--kai');
+    const done = load();
+
+    function render() {
+      const active = cards.find((c) => !done.has(c.dataset.step!));
+      for (const card of cards) {
+        const key = card.dataset.step!;
+        const isDone = done.has(key);
+        card.classList.toggle('is-done', isDone);
+        card.classList.toggle('is-active', card === active);
+        const box = card.querySelector<HTMLInputElement>('[data-gs-kai-check]');
+        if (box) box.checked = isDone;
+        const open = card === active || card.classList.contains('is-open');
+        const head = card.querySelector('.gs-kai__head');
+        // the open step's header does nothing, so it does not announce itself as a toggle
+        if (card === active) head?.removeAttribute('aria-expanded');
+        else head?.setAttribute('aria-expanded', String(open));
+        const dot = bar?.querySelector(`[data-step="${key}"]`);
+        dot?.classList.toggle('is-done', isDone);
+        dot?.classList.toggle('is-current', card === active);
+      }
+      const all = !active;
+      bar?.querySelector('[data-step="check"]')?.classList.toggle('is-current', all);
+      root.querySelector('[data-gs-kai-count]')!.textContent = String(
+        cards.filter((c) => done.has(c.dataset.step!)).length,
+      );
+      root.querySelector<HTMLElement>('.gs-kai__finish')!.hidden = !all;
+    }
+
+    root.addEventListener('change', (e) => {
+      const box = (e.target as HTMLElement).closest<HTMLInputElement>('[data-gs-kai-check]');
+      if (!box) return;
+      const key = box.dataset.gsKaiCheck!;
+      if (box.checked) done.add(key);
+      else done.delete(key);
+      cards.forEach((c) => c.classList.remove('is-open'));
+      save(done);
+      render();
+      if (box.checked) {
+        const next = cards.find((c) => !done.has(c.dataset.step!));
+        next?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+    root.addEventListener('click', (e) => {
+      const head = (e.target as HTMLElement).closest('.gs-kai__head');
+      if (!head) return;
+      const card = head.closest<HTMLElement>('.gs-kai__step')!;
+      if (!card.classList.contains('is-active')) {
+        card.classList.toggle('is-open');
+        render();
+      }
+    });
+    root.classList.add('is-live');
+    render();
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+</script>

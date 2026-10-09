@@ -2,6 +2,11 @@
 title: 'The whole guide with Kai'
 slug: 'getting-started/with-kai'
 description: 'Build the Getting Started pipeline by pasting its prompts into Kai in order: six tables loaded, five of them joined with SQL, the question answered, an app and a weekly flow, in about 30 minutes once you have a project.'
+# with-kai/ is the fast way after project/; once its steps are done the next stop is the check, not
+# the first step page (Nikita, 2026-10-08: the sidebar shows the fork, Prev/Next stay on their path)
+next:
+  link: /getting-started/check/
+  label: Check Storage and Jobs
 ---
 
 import PageMeta from '../../../../components/getting-started/PageMeta.astro';
@@ -11,7 +16,7 @@ import GuidePrompts from '../../../../components/getting-started/GuidePrompts.as
 
 <PageMeta genre="Tutorial" guide="Getting Started, with Kai" time="about 30 minutes, measured one page at a time" />
 
-<CourseLine />
+<CourseLine track="kai" />
 
 The guide builds one pipeline for six cafés, to answer one question: **Which day next week will
 leave a café short-handed?** This page has every prompt for it in one place. Kai builds each step
@@ -38,7 +43,10 @@ click-through and terminal ways, and explain what each one does.
 - **When to paste the next:** once the step is done. Each step below says how to tell, and its
   page has the full **Check**.
 - **What Kai asks:** approve each change it proposes, 15 approvals in both our runs without the app's
-  optional publish; a question that only reads asks for none by default. An approval left
+  optional publish; a question that only reads asks for none by default. To be asked less, click
+  **Always allow** on a card, or set the tools in the Kai panel's settings (the gear, then
+  **Tools**, see [tool permissions](/kai/settings/#tool-permissions)): a tool set to **Always
+  allow** runs without asking. An approval left
   unanswered for about five minutes counts as declined: Kai says so, and you ask it to try again.
   [Approvals and plan mode](/getting-started/#approvals-and-plan-mode) says what asks, what does
   not, and how to undo a step.
@@ -112,5 +120,6 @@ listed those too; a project that only followed the guide has only the guide's. *
   asks twice and gives others a link to the app, behind a password.
 - **A look at the whole run:** [Check Storage and Jobs](/getting-started/check/).
 
-**Next:** the same steps explained, with the click-through and terminal ways:
+**Next:** look over the whole run in [Check Storage and Jobs](/getting-started/check/), or read
+the same steps explained, with the click-through and terminal ways, from
 [Load data into Storage](/getting-started/load/).
