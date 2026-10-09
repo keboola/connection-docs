@@ -21,7 +21,10 @@
 // - `done` is a digest of the step page's Check, written for the card. The
 //   build fails if a number or a **bold** label in it is no longer on that
 //   page (prompts.mjs), so the two cannot drift apart unnoticed.
-// - `shot` is the card's own frame of the finished step, with its own caption.
+// - `shot` is the card's own frame of the finished step, with its own caption. The app card shows
+//   where its prompt goes instead (2026-10-09, Nikita: "приложение на карточку"), since it is the one
+//   prompt that does not go into Kai Agent; app/ keeps its builder screenshots (kai-builder.png just
+//   after sending, grid-preview.png the draft grid).
 // - `note`, optional, is what the card adds under Expect: a choice Kai may ask about there. It is a
 //   digest too, so its bold labels are checked against the page like `done`.
 
@@ -58,8 +61,8 @@ export const COURSE = [
     term: null,
     approvals: 'no approvals for the draft; publishing it, which is optional, asks twice',
     done: "the builder's chat ends with **Draft ready** and the preview shows the grid",
-    shot: { src: '/getting-started/with-kai/app-done.png', alt: "The Apps builder at Draft ready, Not live yet, with a Deploy button: on the left the end of Kai's chat, on the right the draft preview of the grid, five of the six cafés in view by seven forecast days from 8 to 14 October with expected units per person in each cell and dashes on the days without history, under the caption 0 of 42 café-days are short-handed (15 have no staffing forecast yet)",
-      caption: "The Apps builder at Draft ready in our run of 8 October. Publishing it is optional and left to you." } },
+    shot: { src: '/getting-started/with-kai/app-where.png', alt: "The Apps page of a project with no app yet: under Build web apps from your Keboola data, the app's prompt pasted into the field, with the send arrow at its right end and the line Kai works only with a Keboola-hosted repository below",
+      caption: "In a project with no app, Apps in the navigation opens this page: paste the prompt into the field and send it with the arrow at its right end. The builder then opens with Kai's chat and a preview, about five minutes to a grid. Once the project has an app, the page lists it, with a Create app button for the next one." } },
   { key: 'automate', short: 'Flow', title: 'Build and schedule a weekly flow',
     outcome: 'Rebuild the table every Monday on the new forecast, and hear about it if it breaks.',
     term: null,

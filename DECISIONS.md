@@ -1938,31 +1938,46 @@ check/.
   no account. The step pages keep their own screenshots.
 
 **A clip for "Where"** (Nikita, same day: "в моменте где how it goes мб добавить гифку где конкретно
-найти кая по шагам и куда вставлять промпты … приблизить нужные места"). The first where-kai.mp4 was
-five still close-ups from project 6425, built as states with a blue outline and a numbered caption
-each (first a 7.6 s GIF; the checker found 1.4 s a step too fast and a looping GIF unpausable, WCAG
-2.2.2, so an MP4 with controls). Nikita on it: "ты сделал какие-то скриншоты увеличенные а лучше бы
-сделал гифку конкретную как работает в интерфейсе". It is now a recording of one real take in 6425:
-Kai Agent clicked, the load prompt pasted into a new chat and sent, Kai's work at 7x, the first
-approval card, then Apps, Create app and the app's prompt pasted into Build with Kai, with a pan
-along the field to its send arrow. Captured at 2x through the CDP screencast (Playwright's
-recordVideo came out at 1x), eight 1280x800 windows at 1:1 (the Create app page's load at 3x), a pointer dot drawn by the recorder,
-captions at the top because the player's controls cover the bottom while the clip is paused. The
-approval was declined (the Storage API afterwards listed only the two HTTP configurations from the
-8 October run) and the app's prompt was never sent. The account e-mail was blanked in the DOM and
-the avatar hidden by position; the throttled scrub let the e-mail show in the Apps list's Last
-edited cell for about a tenth of a second, outside the windows used, and Vision OCR over all 692
-frames and the poster found no e-mail. 28.8 s, 687 KB, mean luma 226, captions about 14 px on the
-page, poster at step 2 (the prompt pasted into the chat). Recorder, raw take, edit script and marks:
-~/.keboola-shots/where-kai-2026-10-09/. Review round on the recording: the checker asked for at
-least 3 s per caption (step 4's two captions had 2.5 s) and for "When Kai asks, click Approve"
-instead of "Kai asks before each change", since the Apps builder makes its draft without asking;
-the guide-tester for a time cue at the app step, the send step, the no-app condition in the
-aria-label, and no empty-field frame at the loop point. All done (Kai's sped-up beat went from 8x to
-7x to reach 3 s; checker round 2 PASS); caption 5 says "send it", as
-app/ does, because no run recorded whether Enter sends in Build with Kai. The Create app field's
-placeholder now reads "E.g. Weekly revenue by region, with a date filter", not "Describe what you
-want to build".
+найти кая по шагам и куда вставлять промпты … приблизить нужные места"). Three versions:
+1. Five still close-ups from project 6425, built as states (a GIF first; the checker found 1.4 s a
+   step too fast and a looping GIF unpausable, WCAG 2.2.2, so an MP4 with controls). Nikita: "ты
+   сделал какие-то скриншоты увеличенные а лучше бы сделал гифку конкретную как работает в
+   интерфейсе".
+2. A real take in 6425 cut into 1:1 crops of the 2x capture, with the app part (Apps, Create app,
+   Build with Kai), pushed as c995914c after two checker rounds: captions held at least 3 s, and
+   "When Kai asks, click Approve" instead of "Kai asks before each change", since the Apps builder
+   makes its draft without asking. Nikita: "зря так приближал". A Remotion sample from the same
+   take (the whole screen first, a zoom of 1.6x, captions in a band above the screen) got "1.6 норм,
+   приложение на карточку … Можно чуть-чуть еще, наверное, подальше"; "Approve можно" came later,
+   for the takes in the new project.
+3. Shipped, take 8 in a new, empty Free Plan project, 6429. Nikita on a 1.45x cut of take 6: "наверное
+   все же можно еще приблизить" and a jump of the chat field at 5-6 s: the new chat's suggestions load
+   late and push the field down 16 CSS px just as the pointer reaches it. The recorder now waits for
+   the field to stop moving (it still moves 4 px as it is clicked), starts the chat off camera (take 7
+   reopened take 6's chat and was not used) and brings the pointer up to Approve from below, so it
+   never rests on Always allow. The clip starts on the Storage page, so no dashboard Ask Kai field and
+   no suggestions about earlier objects; the whole screen first, then a zoom of 1.6x and back out at
+   the end; an arrow pointer with its tip on the lower left of each button, so the label stays
+   readable; an outline on each target before the click. Kai's 35 s of work runs at 10x and the 9 s
+   after Approve at 2x, both labelled; Approve is clicked on camera, then Kai creates the
+   configuration, opens it on the left and asks before the first row. 25.9 s, 850 KB, mean luma 228,
+   captions 27 px in an 80 px band, about 15 px on the page, pills and digits 24 px. Each of takes 6,
+   7 and 8 created a "Boolabean sales" configuration; all three, without rows, went to Trash, and the
+   next request was declined off camera; the project has no buckets. The recorder blanks the e-mail
+   synchronously as it renders: take 5's throttled scrub had let the Apps list's Last edited e-mail
+   stand in a raw frame for about a tenth of a second, outside the crops. Vision OCR over all 621
+   frames and the poster found no e-mail. Review on take 6 (checker FIX, fact-checker and
+   guide-tester notes): pill and digits up from 21 px with darker pill text, every speed-up labelled,
+   longer beats on Kai Agent and the approval card, the closing whole-screen view held, the last
+   caption says the configuration opens on the left, the Where bullet names the field on the Apps
+   page and stands without the card's image (the twin has none), the card's caption says how to send
+   and what opens. Checker round 2 PASS; it measured the field's 4 px move at the click.
+
+The app part is on the app card now: its frame is the empty project's Apps page with the prompt
+pasted (app-where.png) instead of the builder at Draft ready (app-done.png, CONSERVATION-REPORT.md);
+app/ keeps its builder screenshots, just after sending and the draft grid, so no image shows the
+Draft ready line itself any more. Scripts: ~/.keboola-shots/where-kai-2026-10-09/
+(record-where4.mjs, take8/) and ~/docs-ops/remotion/where-kai (edit8.py, Composition8.tsx).
 
 **Review round (fact-checker, guide-tester, checker).** Fixed: the ask card's Done line (a cold week
 lists nothing to recompute), the cold-day choice back with its meaning, as a note on the transform
@@ -1976,11 +1991,13 @@ line, Kai's workspace question and create_project to Nikita, to ask the Kai team
 fork card and with-kai's header carry it), the flow frame's Detail column fades at the edge as Kai's
 UI draws it, and the billing VERIFYs stay with Nikita to route (Miro for the app minutes).
 
-**Found, not changed here:** the Create app screen now reads "Create app", "Build with Kai" and the
-placeholder "E.g. Weekly revenue by region, with a date filter", while app/:159-160 and
-data-apps/getting-started.mdx:40-42 still quote "Build web apps from your Keboola data" and
-"Describe what you want to build…" (they describe an empty project's Apps page, which 6425 no longer
-shows). Check live and against the #1166 work on #1159's branch before editing.
+**Checked in part:** the Create app screen reads "Create app", "Build with Kai" and the placeholder
+"E.g. Weekly revenue by region, with a date filter", while app/:159-160 and
+data-apps/getting-started.mdx:36-42 quote "Build web apps from your Keboola data" and "Describe
+what you want to build…". app/ is right: it says an empty project's Apps page shows that screen,
+and the new project 6429 did on 9 October. data-apps/getting-started.mdx says the same screen comes
+after "+ Create App", which in 6425 (a project with an app) opened the "Create app" screen instead;
+that route is not checked here and stays open, outside this PR.
 
 **Left to Nikita (Diátaxis evidence, not changed):** transform/ and automate/ read as mixed
 (explanation around a tutorial spine; automate's UI path runs past its tabs); the hub is declared

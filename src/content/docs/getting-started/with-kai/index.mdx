@@ -30,25 +30,34 @@ click-through and terminal ways, and explain what each one does.
 
 ## How it goes
 
-- **Where:** paste each prompt into **Kai Agent**, except the app's, which goes into the Apps
-  builder (**Apps** in the navigation, then **Create app** if the project already has an app).
-  A step's prompts go in the same chat; in our 8 October run all the Kai Agent prompts went into one.
+- **Where:** paste each prompt into **Kai Agent**, except the app's, which goes into the field on
+  the **Apps** page (in the left navigation, then **Create app** if the project already has an app;
+  if the navigation shows only icons, point at it to see the names). The app's card below shows
+  that page. A step's prompts go in the same chat; in our 8 October run all the Kai Agent
+  prompts went into one.
 
-  <video autoplay loop muted playsinline controls poster="/getting-started/with-kai/where-kai-poster.png" aria-label="Screen recording, close up, with a numbered caption on each step: click Kai Agent at the top right of the project page, paste the load prompt into the chat and press Enter; Kai works on it (sped up), then asks before creating the first data source: click Approve, next to Decline and Always allow. At the app step, open Apps in the navigation instead, click Create app if the project already has an app, and paste the app's prompt into the Build with Kai field, which has a send arrow at its right end.">
+  <video autoplay loop muted playsinline controls poster="/getting-started/with-kai/where-kai-poster.png" aria-label="Screen recording in a new project, with a numbered caption above each step: on the Storage page, click Kai Agent at the top right; paste the load prompt into the chat and press Enter; Kai works on it (sped up), then asks before creating the first data source: click Approve. Kai creates it, opens it on the left and asks again before adding the first row.">
     <source src="/getting-started/with-kai/where-kai.mp4" type="video/mp4" />
   </video>
 
-  {/* Recording, 2026-10-09, Free Plan project 6425 (Nikita: "где конкретно найти кая по шагам и куда
-  вставлять промпты", then "лучше бы сделал гифку конкретную как работает в интерфейсе"). One take
-  at 2x through the CDP screencast, cut into eight 1280x800 windows at 1:1, the last panning along
-  the field to its send arrow. The pointer dot is drawn by the recorder; Kai's 22 s of work runs at
-  7x and the 5 s from the Create app click to the field at 3x, the rest at 1x; the captions sit at
-  the top because the player's controls cover the bottom while paused. The approval was declined off camera (the
-  Storage API then listed only the two HTTP configurations from the 8 October run) and the app's
-  prompt was pasted, never sent. The account e-mail was blanked in the DOM and the avatar hidden;
-  Vision OCR over all 692 frames and the poster found no e-mail. 28.8 s, 687 KB, mean luma 226, min
-  221, poster at 7.3 s (clip_metrics.sh). Recorder, raw take, edit script and
-  marks: ~/.keboola-shots/where-kai-2026-10-09/. DECISIONS.md 2026-10-09. */}
+  {/* Recording, 2026-10-09, a new Free Plan project, 6429 (Nikita: "где конкретно найти кая по шагам
+  и куда вставлять промпты", "лучше бы сделал гифку конкретную как работает в интерфейсе"; on a
+  sample "1.6 норм, приложение на карточку … не приближай слишком близко. Можно чуть-чуть еще,
+  наверное, подальше"; on the 1.45x cut "наверное все же можно еще приблизить" and a jump of the chat
+  field at 5-6 s; "Approve можно" for the takes). Take 8 of record-where4.mjs, at 2x through the CDP
+  screencast, assembled in Remotion (~/docs-ops/remotion/where-kai, edit8.py, Composition8.tsx): the
+  whole screen first, a zoom of 1.6x, back out at the end; an arrow pointer drawn by the recorder,
+  brought up to Approve from below; captions in a band above the screen, where the player's
+  controls never cover them. Kai's 35 s of work runs at 10x and the 9 s after Approve at 2x, both
+  labelled; the 2.6 s while the new chat's suggestions load, and 1.3 s of the pasted prompt, are
+  cut; the rest is 1x. The suggestions still move the field by 4 CSS px as it is clicked (take 6:
+  16 px). Approve was clicked on camera: it created the "Boolabean sales" configuration, Kai's next
+  request (the stores row) was declined off camera, and the configuration, still without rows,
+  went to Trash; so did takes 6 and 7 (7 reopened take 6's chat and was not used); the project has
+  no buckets. The account e-mail was blanked as it rendered and the avatar hidden; Vision OCR over
+  all 621 frames and the poster found no e-mail. 25.9 s, 850 KB, mean luma 228, min 224, poster at
+  8.4 s (clip_metrics.sh). Recorders, raw takes and marks: ~/.keboola-shots/where-kai-2026-10-09/.
+  DECISIONS.md 2026-10-09. */}
 - **When to paste the next:** once the step is done. Each step below says how to tell, and its
   page has the full **Check**.
 - **What Kai asks:** approve each change it proposes; each step below says how many to expect. To

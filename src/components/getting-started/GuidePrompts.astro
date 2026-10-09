@@ -4,7 +4,8 @@
 //
 // Since 2026-10-08 (Nikita: "нужны либо какие-то интерактивные элементы, либо визуалы") each step is
 // a card: its prompts with copy buttons, what Kai will ask, a frame of the finished step from our
-// 2026-10-08 run (its own, not a copy of the step page's), and a "Done when" checkbox. Only the first unticked card is open (others open on their
+// 2026-10-08 run (its own, not a copy of the step page's; the app card shows where its prompt goes,
+// course.mjs), and a "Done when" checkbox. Only the first unticked card is open (others open on their
 // header, to look ahead or copy again). Ticking it closes the card, opens the next one and fills
 // the matching dot of the course bar at the top of the page (<CourseLine track="kai" />). Progress
 // is kept in this browser only (localStorage, wrapped in try/catch); without script every card
