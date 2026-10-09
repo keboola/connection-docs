@@ -129,7 +129,7 @@ Free Plan BigQuery on us-east4. Run that day in Free Plan project 6375 in this e
 fresh chat: Kai built a Google BigQuery transformation (SAFE_CAST throughout, the four bands
 half-open, tables read by full name with an empty input mapping), two approvals, 42 rows, and named
 Zelný trh on Monday and Tuesday at 85.2 as most stretched, which matches an offline computation
-from the same files and forecast. DECISIONS.md 2026-10-01. VERIFY(owner): this wording has not
+from the same files and forecast. DECISIONS.md 2026-10-01. VERIFY(Nikita): this wording has not
 run on a Snowflake project; the Snowflake runs (264, 2026-09-08/09) used a prompt that named
 Snowflake. */}
 {/* Guide test 2026-09-09: the live run's prompt described the columns in words and Kai chose
@@ -195,7 +195,7 @@ it out of the with-kai list. */}
    run, and it differs by project: an SQL entry for your backend, *Snowflake SQL Transformation* or
    *Google BigQuery Transformation*, plus *Python*, *R*, *DuckDB* (Beta), and on some projects
    *dbt Core* (Beta). Take the dialog as the authority on your project rather than this sentence.
-   {/* VERIFY(owner): a brand-new Free Plan project (6211, 2026-08-19) offered dbt Core, labelled
+   {/* VERIFY(Nikita): a brand-new Free Plan project (6211, 2026-08-19) offered dbt Core, labelled
    Beta in the dialog. That contradicts management/pay-as-you-go/index.md, whose Free Plan limits
    say "Transformations: are limited to SQL, Python, and R", and transformations/dbt/index.md,
    which says new PAYG projects get dbt activated by default. The repo never labels dbt Beta.
@@ -247,7 +247,7 @@ data filters. None of it is needed here; see
    Output mapping opens in **Guided Mode**, the standard, copy-based mapping the steps below
    describe. If your project also shows **Direct Mode**, ignore it here: that writes straight to
    Storage and is a [private beta](/transformations/mappings/#direct-mode-output-mapping).
-   {/* VERIFY(owner): transformations/mappings/index.md says Direct Mode is a private beta that
+   {/* VERIFY(Nikita): transformations/mappings/index.md says Direct Mode is a private beta that
    Support has to enable, yet the toggle was visible in a brand-new Free Plan project (6211,
    2026-08-19) with no such request. Either that gate has changed or the mappings page is stale.
    Seen again in Free Plan project 6375 on 2026-10-01, with the UPPERCASE suggestion of step 2,
@@ -279,7 +279,7 @@ data filters. None of it is needed here; see
    bucket from the lower-case ID, and so whether a bucket created that way keeps the lower case;
    the page therefore tells a hand-building reader to use their own table ID later, since
    BigQuery dataset names are case-sensitive even where Storage lookups are not. This replaces
-   the VERIFY that stood here since 2026-09-08. */}
+   the flag that stood here since 2026-09-08. */}
 
    ![Screenshot - Table Output Mapping with one row: staffing_outlook, written to the OUT bucket Boolabean-staffing-outlook as staffing_outlook](/getting-started/transform/06-output-mapping.png)
 
@@ -300,7 +300,7 @@ offers **Copy Code** and **Edit Code**.
 opens the All Queries editor with these three lines, and clicking the saved code opens a
 "Block 1 > Code" editor with a rename pencil, Copy Code and Save. The page used to offer that
 single-code editor as an alternative to All Queries; it is what opening a code shows. This closes
-the VERIFY that stood here since 2026-08-19. */}
+the flag that stood here since 2026-08-19. */}
 
 **If your project uses Snowflake**
 
@@ -628,12 +628,9 @@ If it succeeded but staffing_outlook looks wrong (replace the part in angle brac
 The last run of my "Boolabean staffing outlook" transformation succeeded, but staffing_outlook looks wrong: <what you see>. Read the SQL and the first rows of the table and tell me what to change.
 ```
 Kai reads the job's log, the SQL and the table
-([Troubleshooting](/kai/use-cases/#troubleshooting)); a question that only reads asks for no
-approval by default. Use your transformation's name if you changed it. If Kai proposes a change, it
-asks before making it unless you set that tool to **Always allow**; then run the transformation
-again and redo the **Check**. From a terminal, ask the same with
-`kbagent kai ask --project <alias> -m "…"`. The folds below cover other errors and surprises, with
-their fixes.
+([Troubleshooting](/kai/use-cases/#troubleshooting)). Use your transformation's name if you changed it.
+After a fix, run the transformation again and redo the **Check**; from a terminal, ask the same
+with `kbagent kai ask --project <alias> -m "…"`. The folds below cover the rest.
 {/* Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals. The
 failed-job prompt as worded: Kai found the transformation, checked all 24 runs (8 Sep to 1 Oct, all
 succeeded) and said there was no failure. The second prompt, with "it has more than 42 rows": Kai

@@ -68,7 +68,7 @@ dialog's unchecked box. The first example query was wrong on both column names a
 casing table now in the page is measured, all four rows of it, against the control table on
 2026-09-15.
 
-VERIFY(owner): the prerequisites invite a Free Plan reader, and /workspace/ says Pay As You Go
+VERIFY(Nikita): the prerequisites invite a Free Plan reader, and /workspace/ says Pay As You Go
 projects have no direct access to Snowflake workspaces. Step 7 now routes them to the SQL Editor,
 but nobody has walked that path on a free project to confirm the workspace list and the Connect
 menu look as described there. 2026-10-08, Free Plan project 6425: Create Workspace offers only
@@ -111,7 +111,7 @@ Open a real workspace when the chat stops being the right tool:
 
 Creating the workspace is then the **UI** or **CLI / API** tab's job.
 
-{/* VERIFY(owner): "creating the workspace is the UI or CLI tab's job" is the conservative
+{/* VERIFY(Nikita), ask the Kai team: "creating the workspace is the UI or CLI tab's job" is the conservative
 reading. Kai's documented use cases (/kai/use-cases/) cover data exploration, transformations,
 integrations, apps and docs; none of them mentions creating a workspace. Asked on 2026-10-08 in 264 (`kbagent kai ask`,
 answer only), Kai said it can, with `create_config` on `keboola.sandboxes` (~/.keboola-shots/free-run-2026-10-08/kai-ws.txt); its own list of write
@@ -167,7 +167,7 @@ Every click above is an API call underneath, and [kbagent](/cli/) is the same ca
 terminal. It needs to be [installed](/cli/getting-started/) and pointed at your project once with
 `kbagent project add`, which stores the connection under an alias. The examples use `docs-demo`,
 substitute yours. Creating a workspace needs an admin (master) token.
-{/* VERIFY(owner): the admin-token requirement comes from our own cli/getting-started.mdx:148 and
+{/* VERIFY(Nikita): the admin-token requirement comes from our own cli/getting-started.mdx:148 and
 cli/troubleshooting.md:42. The fact-checker (2026-09-25) found no master-token check in the CLI's
 workspace service and a Storage API 403 that names only write access and the read-only role, so a
 token with write access may be enough. An admin token works either way, which is why the page
@@ -278,3 +278,5 @@ read-only.
 - [Transform data](/getting-started/transform/) is where the query you just tested belongs.
 - [Workspaces](/workspace/) covers the Python and R flavours, access for other users, and
   read-only access to all of Storage.
+
+**Next:** [Ad-hoc data analysis →](/getting-started/ad-hoc/)

@@ -2770,14 +2770,23 @@ nav.sidebar {
 .gs-kai__expect,
 .gs-kai__more { margin: 0; font-size: var(--sl-text-sm); color: var(--sl-color-gray-2); line-height: 1.5; }
 .gs-kai__expect strong { color: var(--sl-color-white); }
+.gs-kai__note {
+  margin: 0;
+  padding: 0.45rem 0.7rem;
+  border-left: 3px solid var(--kbc-blue-600);
+  background: var(--sl-color-accent-low);
+  border-radius: 0 0.4rem 0.4rem 0;
+  font-size: var(--sl-text-sm);
+  line-height: 1.5;
+  color: var(--sl-color-gray-1);
+}
+.gs-kai__note a { color: var(--sl-color-text-accent); }
 .gs-kai__more a { color: var(--sl-color-text-accent); }
 .gs-kai__shot { margin: 0; min-width: 0; }
 .gs-kai__shot img {
   display: block;
   width: 100%;
-  max-height: 24rem;
-  object-fit: cover;
-  object-position: top left;
+  height: auto;
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 0.5rem;
 }

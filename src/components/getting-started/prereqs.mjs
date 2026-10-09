@@ -20,12 +20,19 @@ export const LABELS = {
   tabs: 'What each tab needs',
 };
 
+// Where Kai is and who switches it on: one wording for the Prompt tab line below and for the "You
+// need" item of with-kai/, which needs nothing else (2026-10-09, after the duplication audit found
+// it typed in five places with three wordings).
+const KAI =
+  'the <strong>Kai Agent</strong> button in the top bar, on supported stacks. A new Free Plan project has it from the start; elsewhere an organization admin turns it on once: <a href="/kai/getting-started/">Get started with Kai</a>.';
+
 /** Shared "You need" items, by the key a page passes in `needs`. HTML. */
 export const SHARED = {
   project:
     '<strong>A Keboola project.</strong> No project yet? <a href="/getting-started/project/">Create or join a project</a>.',
   google:
     '<strong>A Google account</strong> you can sign in with, to approve Keboola\'s access.',
+  kai: `<strong>Kai</strong>, ${KAI} What it can see and change: <a href="/kai/security-and-privacy/">Kai security and privacy</a>.`,
 };
 
 /**
@@ -42,8 +49,7 @@ export const SHARED = {
 // admin turns it on once. 2026-10-01: a new Free Plan project (6375) had Kai
 // from its first login, so the line says that first.
 export const TABS = [
-  { key: 'prompt', label: 'Prompt tab',
-    html: 'Kai, the <strong>Kai Agent</strong> button in the top bar, on supported stacks. A new Free Plan project has it from the start; elsewhere an organization admin turns it on once: <a href="/kai/getting-started/">Get started with Kai</a>.' },
+  { key: 'prompt', label: 'Prompt tab', html: `Kai, ${KAI}` },
   { key: 'ui', label: 'UI tab', html: 'a browser.' },
   { key: 'cli', label: 'CLI / API tab',
     html: '<a href="/cli/getting-started/">kbagent</a>, connected to your project with write access.' },

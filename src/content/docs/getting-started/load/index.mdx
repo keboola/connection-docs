@@ -73,7 +73,7 @@ did not say what it did to the queue). CONSERVATION-REPORT.md, 2026-09-29. */}
 ## The sample data
 
 A fictional café chain, Boolabean: invented sales, rosters and weather, and one real forecast,
-fetched live. Each table is half a story; the next page joins them.
+fetched live. Each table is half a story.
 
 <SampleData />
 
@@ -142,7 +142,7 @@ https://api.open-meteo.com/v1/forecast?latitude=50.0755,49.1928,49.8352,49.7475,
 It is open-meteo's CSV export: seven lines of metadata, a blank line, then the header row, then 42 data rows. Load only the data rows and name the columns location_id, time, temperature_2m_max and precipitation_sum. Run it, then tell me how many rows the forecast table has.
 ```
 
-**Expect three approvals.** Kai skips the nine leading lines and names the four columns as asked,
+**Expect three approvals for the forecast.** Kai skips the nine leading lines and names the four columns as asked,
 rather than keeping the header's `temperature_2m_max (°C)`.
 {/* Guide test 2026-09-09: the live run's prompt said "skip the first eight lines" and described the
 columns in words; Kai read the file and chose 9 + explicit names on its own. The prompt now asks
@@ -200,7 +200,7 @@ the HTTP data source, its base URL, the five rows and the three processors each 
    and the change is recorded on the configuration as *Disable simplified mode*. If you already see
    **Base URL and Connection Options** and a **Rows** section, you are in the right mode and there
    is nothing to switch.
-   {/* VERIFY(owner): the simplified mode was seen once, in a brand-new Free Plan project (6211)
+   {/* VERIFY(Nikita): the simplified mode was seen once, in a brand-new Free Plan project (6211)
    on 2026-08-19; project 264 went straight to the base-URL form on 2026-08-04, which is what
    screenshots 02/03 still show — hence "may". This page is currently the only source for the
    mode: the connector reference (components/extractors/storage/http/index.md) documents only
@@ -446,12 +446,10 @@ If it succeeded but a table looks wrong (replace the part in angle brackets):
 The last run of my "Boolabean sales" configuration succeeded, but one of its tables looks wrong: <which table, and what you see>. Read the configuration and the first rows of that table and tell me what to change.
 ```
 Kai reads the job's log, the configuration and the table
-([Troubleshooting](/kai/use-cases/#troubleshooting)); a question that only reads asks for no
-approval by default. Use your configuration's name if you changed it, or "Boolabean forecast" for
-the forecast. If Kai proposes a change, it asks before making it unless you set that tool to
-**Always allow**; then run the configuration again and redo **Check it worked**. From a terminal,
-ask the same with `kbagent kai ask --project <alias> -m "…"`. The folds below cover other errors and
-surprises, with their fixes.
+([Troubleshooting](/kai/use-cases/#troubleshooting)). Use your configuration's name if you
+changed it, or "Boolabean forecast" for the forecast. After a fix, run the configuration again and
+redo **Check it worked**; from a terminal, ask the same with `kbagent kai ask --project <alias> -m "…"`.
+The folds below cover the rest.
 {/* Run 2026-10-07/08 in project 264 with `kbagent kai ask`, read-only, no approvals, about 30 s
 each. The failed-job prompt, about "Boolabean sales" whose last 50 runs had all succeeded: Kai found
 the configuration, checked its runs and said there was no failure rather than inventing one. On a

@@ -1894,6 +1894,83 @@ the Kai panel's gear, then **Tools** (seen in project 6425: "Tools set to "Alway
 execute without asking for confirmation"); the hub's Approvals section already said it.
 Slugs and URLs unchanged, so no redirects.
 
+
+---
+
+## 2026-10-09 — Getting Started: Diátaxis check, duplication cut, D5 exemption, frames on with-kai
+
+**Asked by:** Nikita, 9 Oct: "прогони dataxis разбор getting started, не вышло ли из этого какой-то
+дуплицирования", and the day before, that with-kai lacks screenshots or visuals. Answers: cut all
+16 duplicates; exempt course-bar pages from D5; one PR on top of #1180 for this, the VERIFY owners
+and the visuals.
+
+**The check.** docs-diataxis-check over the section (22 pages): 43 FAIL, nearly all backlog, D5 (no
+`**Next:**` footer) and D9 (`VERIFY(owner)` names nobody); no marker reached dist. Three
+diataxis-checker runs on the nine course pages and a separate duplication audit. The audit: with-kai
+is a distinct tutorial track (its prompts are generated from the step pages), but 16 duplicates had
+grown around it and between older pages; the four that mattered were course.mjs's second copy of
+every step's approvals and done signal, the recap prompt on with-kai and check/, automate/ repeating
+check/'s red-run text and timing, and the cold-week explanation written out on transform/ and
+check/.
+
+**Done.**
+- **Cuts** (CONSERVATION-REPORT.md 2026-10-09 lists each with its home): with-kai keeps a pointer
+  where it re-explained approvals, the cold-day question, the recap and the closing links; the hub
+  keeps one link to with-kai (the fork card); automate/ links check/ for the red run and the timing;
+  check/ links transform/ for empty cells; the Ask-Kai-first tips lose their approval boilerplate;
+  project/ says where Kai is once, in Check it worked.
+- **One source.** prompts.mjs now lifts each step's **Expect …** phrases from its Prompt tab
+  (course.mjs keeps `approvals` only for ask/ and app/, whose pages have none), and fails the build
+  when a number or a bold label in a `done` digest is gone from its page. The Kai prerequisite is
+  `SHARED.kai` in prereqs.mjs, also behind the Prompt tab line. `KAI_TRACK` and `KAI_TRACK_TIME` in
+  course.mjs feed the fork card's "Steps 2 to 6 … about 30 minutes" and the twin.
+- **D5.** Pages with the course bar are exempt (the bar and Prev/Next already carry the next step);
+  rules.md, check.mjs and two fixtures in ~/keboola-rig/user/docs-diataxis-check, tests 21/21. The
+  five Going-further pages got their `**Next:**` footers, two by moving an existing Going-further
+  link rather than repeating it. The seven legacy pages (ad-hoc/, branches/) still fail D5: each
+  already ends with a prose "next" link, so a footer would duplicate it; converting them is a
+  separate cleanup.
+- **D9.** Every `VERIFY(owner)` names someone: Nikita, who routes it, except the app minutes
+  (Miro). Four prose mentions of closed markers now say "flag".
+- **Frames.** Each with-kai card shows its own frame of the finished step from the 2026-10-08 run
+  in project 6425, cropped to Kai's answer (load counts, transformation answer, the question's
+  answer in a cold week, the flow's phase table) or the Apps builder at Draft ready; no top bar,
+  no account. The step pages keep their own screenshots.
+
+**A clip for "Where"** (Nikita, same day: "в моменте где how it goes мб добавить гифку где конкретно
+найти кая по шагам и куда вставлять промпты … приблизить нужные места"). where-kai.mp4: five close-ups
+from project 6425, built as states, a blue outline and a numbered caption each: Kai Agent in the top bar, the chat field, the field with the load prompt pasted (never
+sent), Apps in the navigation, the Create app screen's Build with Kai field. The account e-mail was
+blanked in the DOM before every shot, the top bar's left half and the account avatar never in frame.
+First a 7.6 s GIF; the checker found 1.4 s a step too fast and a looping GIF unpausable (WCAG 2.2.2),
+so it shipped as where-kai.mp4 with controls and a poster: 3 s a step, 15.8 s, 185 KB, mean luma
+224, captions about 17 px on the page. The Create app field's placeholder now reads "E.g. Weekly
+revenue by region, with a date filter", not "Describe what you want to build".
+
+**Review round (fact-checker, guide-tester, checker).** Fixed: the ask card's Done line (a cold week
+lists nothing to recompute), the cold-day choice back with its meaning, as a note on the transform
+card itself (`note` in course.mjs, guarded like `done`), project/'s Kai bullet says where the button
+is and what no button means, the hub's timeout sentence sits in the chat paragraph, per-frame
+captions, the load and ask frames re-cropped (the ask frame starts at "Closest call", leaving out a
+paragraph where Kai miscounted the blank days), full frames instead of a 24rem crop, the
+Troubleshooting link and workspace's Going-further bullet restored (its Next goes to ad-hoc/, as the
+sidebar does), "the run on this page" on automate/ linked to check/, the with-kai twin gets its course
+line, Kai's workspace question and create_project to Nikita, to ask the Kai team (VERIFY needs a person). Not changed: project/'s fork line keeps no time (the
+fork card and with-kai's header carry it), the flow frame's Detail column fades at the edge as Kai's
+UI draws it, and the billing VERIFYs stay with Nikita to route (Miro for the app minutes).
+
+**Found, not changed here:** the Create app screen now reads "Create app", "Build with Kai" and the
+placeholder "E.g. Weekly revenue by region, with a date filter", while app/:159-160 and
+data-apps/getting-started.mdx:40-42 still quote "Build web apps from your Keboola data" and
+"Describe what you want to build…" (they describe an empty project's Apps page, which 6425 no longer
+shows). Check live and against the #1166 work on #1159's branch before editing.
+
+**Left to Nikita (Diátaxis evidence, not changed):** transform/ and automate/ read as mixed
+(explanation around a tutorial spine; automate's UI path runs past its tabs); the hub is declared
+Tutorial but reads as an overview; ledes that state a problem rather than the page (load/,
+transform/, app/); titles not in the reader's words ("Explore your data" for asking Kai, "Transform
+data" without SQL or transformation, "Check Storage and Jobs" without troubleshooting, "The whole
+guide with Kai" without prompts); ask/ and app/ have no closing verification block.
 ---
 
 ## Open — carried as VERIFY(owner) flags in the pages
