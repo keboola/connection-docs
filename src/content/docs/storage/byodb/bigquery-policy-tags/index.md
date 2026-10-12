@@ -42,9 +42,9 @@ job was about to replace stays as it was. The job fails as a user error, so Kebo
 ## Access Keboola holds
 
 Enablement never grants Keboola read access to protected values. Reading a protected column requires the Fine-Grained
-Reader role on the policy tag. Keboola never asks for it, and enablement only binds your custom role to the project
-service accounts. The rights Keboola asks for would technically let its root account add other bindings to the taxonomy;
-Keboola does not.
+Reader role on the policy tag. Keboola never asks for it, and enablement only binds your setter role to the project
+service accounts. The rights Keboola asks for would technically let your backend's service account add other bindings to
+the taxonomy; Keboola does not.
 
 Copying a protected column still requires read access to it. If your project service accounts do not hold the
 Fine-Grained Reader role, copies of protected columns may fail. Granting it is your decision.

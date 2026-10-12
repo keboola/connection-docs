@@ -16,15 +16,20 @@ Repeat it for each backend that needs the feature.
 
 ## 1. Grant access on the taxonomy
 
-Grant both roles to the root service account of your Keboola backend, on the taxonomy:
+Grant both roles on the taxonomy to the service account your Keboola backend is registered with. That is the
+"Keboola Main Service Account" from [connecting BigQuery](/storage/byobq/#4-create-a-service-account), the account whose
+key you used to register the backend.
 
 | Role | Permissions | Why |
 |---|---|---|
-| A custom role that you name | `datacatalog.taxonomies.get` | Lets Keboola check the taxonomy. Granted onward, it lets project service accounts attach its tags. |
-| A role for distribution | `datacatalog.taxonomies.getIamPolicy` and `datacatalog.taxonomies.setIamPolicy` | Lets Keboola grant the custom role to each project's service account. |
+| A custom role that you name (the setter role) | `datacatalog.taxonomies.get` | Lets Keboola check the taxonomy. Granted onward, it lets project service accounts attach its tags. |
+| A role for distribution (custom recommended) | `datacatalog.taxonomies.getIamPolicy` and `datacatalog.taxonomies.setIamPolicy` | Lets Keboola grant the setter role to each project's service account. |
 
-Use a custom role for the first one. Keboola refuses a predefined role there, because the role is granted to every
+The setter role must be a custom role. Keboola refuses a predefined role there, because the role is granted to every
 project service account on the backend. A role that holds only `datacatalog.taxonomies.get` is enough.
+
+For distribution, a custom role with just these two permissions is the narrowest grant. A broader predefined role that
+includes them also works, but gives more than Keboola needs.
 
 These grants do not give Keboola read access to protected values. See
 [Access Keboola holds](/storage/byodb/bigquery-policy-tags/#access-keboola-holds).
@@ -34,11 +39,11 @@ These grants do not give Keboola read access to protected values. See
 Contact Keboola support and send:
 
 - the taxonomy resource name;
-- the name of the custom role;
+- the name of the setter role;
 - a policy tag from that taxonomy that Keboola may attach to a scratch table to test the setup.
 
 Keboola then tests the setup end to end. It creates a scratch table, attaches the test tag, removes the table, and checks
-that it can grant the custom role onward. It then grants the role to every project service account on the backend and
+that it can grant the setter role onward. It then grants the role to every project service account on the backend and
 turns the feature on. If any step fails, Keboola does not turn the feature on, and support tells you what to fix.
 
 ## 3. Fix the first incremental loads
