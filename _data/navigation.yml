@@ -690,6 +690,9 @@ items:
           - url: /storage/byodb/snowflake-secure-data-sharing/
             title: Snowflake Secure Data Sharing
 
+          - url: /storage/byodb/bigquery-policy-tags/
+            title: BigQuery Policy Tags
+
       - url: /storage/byobq/
         title: Bring Your Own BigQuery
 

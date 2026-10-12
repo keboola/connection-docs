@@ -537,6 +537,7 @@ export const sidebar = [
           { label: "Overview", slug: "storage/byodb" },
           { slug: "storage/byodb/external-buckets" },
           { slug: "storage/byodb/snowflake-secure-data-sharing" },
+          { slug: "storage/byodb/bigquery-policy-tags" },
         ],
       },
       { slug: "storage/byobq" },

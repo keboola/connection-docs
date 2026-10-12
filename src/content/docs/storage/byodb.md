@@ -46,6 +46,10 @@ possibly as low as [1 second](https://docs.snowflake.com/en/sql-reference/sql/al
 
 ![Snowflake account schema](/storage/byodb/schema.png)
 
+## BigQuery Policy Tags
+If you protect columns with BigQuery policy tags, Keboola can keep that protection on every copy it makes. See
+[BigQuery Policy Tags](/storage/byodb/bigquery-policy-tags/).
+
 ## BigQuery Limitations
 Google Cloud Computing services, including BigQuery, have introduced several limitations on their services, impacting Keboola, especially for customers using their own BigQuery or
 Google Cloud Storage as storage backends. These limitations require careful management.
