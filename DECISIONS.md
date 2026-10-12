@@ -1991,13 +1991,14 @@ line, Kai's workspace question and create_project to Nikita, to ask the Kai team
 fork card and with-kai's header carry it), the flow frame's Detail column fades at the edge as Kai's
 UI draws it, and the billing VERIFYs stay with Nikita to route (Miro for the app minutes).
 
-**Checked in part:** the Create app screen reads "Create app", "Build with Kai" and the placeholder
-"E.g. Weekly revenue by region, with a date filter", while app/:159-160 and
-data-apps/getting-started.mdx:36-42 quote "Build web apps from your Keboola data" and "Describe
-what you want to build…". app/ is right: it says an empty project's Apps page shows that screen,
-and the new project 6429 did on 9 October. data-apps/getting-started.mdx says the same screen comes
-after "+ Create App", which in 6425 (a project with an app) opened the "Create app" screen instead;
-that route is not checked here and stays open, outside this PR.
+**Checked, no change needed (corrected 2026-10-12):** a project with no apps opens Apps on "Build
+web apps from your Keboola data" with "Describe what you want to build..." and, under "or", the manual
+routes (6429 on 9 October; 6439, a new account's empty project, on 12 October), so app/:159-160 is
+right. In a project with an app, Apps, then **Create app**, opens the "Create app" screen with
+**Build with Kai** (6425, 9 October). data-apps/getting-started.mdx on main has described both since
+#1159 (8 October), which carried #1166; the "+ Create App … Build web apps" text quoted here before
+was this branch's stale copy, from before #1166, and the chain does not touch data-apps. The page's
+VERIFY on the empty-project screen is closed in its own PR on main, #1185.
 
 **Left to Nikita (Diátaxis evidence, not changed):** transform/ and automate/ read as mixed
 (explanation around a tutorial spine; automate's UI path runs past its tabs); the hub is declared
