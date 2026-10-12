@@ -28,8 +28,8 @@ below was run as-is through a temporary transformation with exactly the input ma
 describes (project 264, job 103114885, 61 s): 42 rows, 42 distinct (store, date), 0 empty cells, 4
 short-handed, top row Brno / Tue 2026-09-08 / 84.4, identical to Kai's read-only-input version
 from the 2026-09-08 runs and to the offline reference. The BigQuery block is a translation and has
-NOT been run (decision 7 in the plan; no BigQuery project). Screenshots 00–10 still show the
-previous sample's names; phase 2 reshoots them.
+NOT been run (decision 7 in the plan; no BigQuery project). The page's twelve screenshots were
+reshot on 2026-10-01 in Free Plan project 6375, with the Boolabean names.
 
 CLI / API tab added 2026-09-15 and run live against project 264 with kbagent v0.93.1: `transformation
 create --sql-file --created-table` built a throwaway transformation from the page's own SQL file, `transformation edit --storage @file` added the five inputs (create leaves the input mapping empty —
@@ -189,7 +189,7 @@ it out of the with-kai list. */}
 
 1. Open **Transformations**.
 
-   ![Screenshot - Transformations section](/getting-started/transform/00-transformations.png)
+   ![Screenshot - The Transformations page with the blue Create Transformation button at the top right and one transformation, Boolabean staffing outlook, in the list below](/getting-started/transform/00-transformations.png)
 
 2. Click **Create Transformation**. The **New Transformation** dialog lists what this project can
    run, and it differs by project: an SQL entry for your backend, *Snowflake SQL Transformation* or
@@ -206,14 +206,14 @@ it out of the with-kai list. */}
 
    Pick the SQL transformation your project offers, and use the matching query block below.
 
-   ![Screenshot - The New Transformation dialog](/getting-started/transform/01-new-transformation.png)
+   ![Screenshot - The New Transformation dialog listing Google BigQuery Transformation first, then Python, R, DuckDB (Beta) and dbt Core (Beta) transformations](/getting-started/transform/01-new-transformation.png)
 
 3. Name it `Boolabean staffing outlook`, add a description, and in **Folder** type `Boolabean` and
    pick **Create folder "Boolabean"**. Folders are cosmetic, but they are the difference between a
    browsable project and a wall of configurations. If the dialog offers **Use predefined code
    pattern**, ignore it. Click **Create transformation**.
 
-   ![Screenshot - Name the transformation](/getting-started/transform/02-name-transformation.png)
+   ![Screenshot - The New Google BigQuery Transformation dialog with Boolabean staffing outlook in Name, empty Description and Folder fields, and the Create transformation button](/getting-started/transform/02-name-transformation.png)
 
 **Set the input mapping**
 
@@ -568,9 +568,9 @@ green **Success** means it worked; the notification's **Show job** link and **Jo
 it. The job below is Kai's build, which reads its tables in place, so its **Mapping** says
 **Input: No tables**.
 
-![Screenshot - Running the transformation](/getting-started/transform/08-run.png)
+![Screenshot - The Run transformation confirmation dialog with an unticked power user checkbox above the green Run button](/getting-started/transform/08-run.png)
 
-![Screenshot - Successful job](/getting-started/transform/09-job-success.png)
+![Screenshot - The job page for Boolabean staffing outlook with a green Success badge, a 55 sec duration, and a Mapping card showing Input: No tables and Output staffing_outlook](/getting-started/transform/09-job-success.png)
 
 Then open **Storage**: a new bucket `out.c-Boolabean-staffing-outlook` (in lower case if the UI
 tab created it), listed without its `out.c-` prefix and with an **OUT** badge, holds

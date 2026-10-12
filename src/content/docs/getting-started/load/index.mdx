@@ -52,8 +52,8 @@ v0.76.1 and the CI gate checks flags against it, so every flag above exists in b
 Our own connector page (components/extractors/storage/http/index.md) now says "Add Row" too
 (checked 2026-09-09). 2026-09-14: the click-through steps use the base-URL-with-folder + bare-file-name
 convention because that is what Kai built and what the reshot captures show; both conventions
-work, and the 404 bullet explains the slash rule for either. Screenshots 01–07 still show the previous sample's configuration
-name; phase 2 reshoots them from the Boolabean configurations.
+work, and the 404 bullet explains the slash rule for either. The page's screenshots show the Boolabean
+configurations: one from 2026-09-14, the other seven reshot on 2026-10-01 in Free Plan project 6375.
 
 2026-10-01: the whole Prompt tab ran in Free Plan project 6375 (us-east4, BigQuery), both prompts
 word for word except the file host: help.keboola.com/getting-started/boolabean/ answers 404 until
@@ -182,7 +182,7 @@ the HTTP data source, its base URL, the five rows and the three processors each 
    connectors with HTTP in the name may also appear; go by that description rather than by
    position in the list.
 
-   ![Screenshot - Find the HTTP data source connector](/getting-started/load/01-find-http.png)
+   ![Screenshot - The Add New Component page searched for HTTP, where the plain HTTP data source card, "Downloading CSV files from any HTTP, and HTTPS URL", offers Create Configuration and HTTP Advanced is marked Beta](/getting-started/load/01-find-http.png)
 
 2. Choose **Connect To My Data**. (**Use With Demo Data** sets the connector up against a dataset
    Keboola prepared, handy for a look around, but here you want your own URL.)
@@ -191,7 +191,7 @@ the HTTP data source, its base URL, the five rows and the three processors each 
    **Create Configuration**. Descriptions are what keep a project readable six months later; see
    the [best practices cheat sheet](/overview/onboarding/cheat-sheet/).
 
-   ![Screenshot - Create the configuration](/getting-started/load/02-create-configuration.png)
+   ![Screenshot - The Create HTTP dialog with Boolabean sales in the Name field, the optional Description field still empty, and the Create Configuration button at the bottom](/getting-started/load/02-create-configuration.png)
 
 4. **If the configuration opens with a single File URL field, switch to Advanced Mode.** A new
    configuration may start in a simplified mode that takes one URL and nothing else: no base URL,
@@ -215,7 +215,7 @@ the HTTP data source, its base URL, the five rows and the three processors each 
    https://help.keboola.com/getting-started/boolabean/
    ```
 
-   ![Screenshot - Set the base URL](/getting-started/load/03-base-url.png)
+   ![Screenshot - The Base URL and Connection Options section with the Base URL field set to https://help.keboola.com/getting-started/boolabean/](/getting-started/load/03-base-url.png)
 
 **Add the five tables**
 
@@ -241,7 +241,7 @@ settings, sharing the configuration's base URL.
      Leave it alone. (The alternative, **Set Header**, is typing the columns yourself; the forecast
      below is where that becomes necessary.)
 
-   ![Screenshot - Row path and save settings](/getting-started/load/04-row-settings.png)
+   ![Screenshot - The stores row of Boolabean sales, with Path stores.csv under Download Settings and, under Save Settings, Table name stores with Incremental load unchecked](/getting-started/load/04-row-settings.png)
 
 9. Repeat steps 6 to 8 for the other four files:
 
@@ -255,7 +255,7 @@ settings, sharing the configuration's base URL.
 10. Back on the configuration, click **Run Component** and confirm with **Run**. One run fetches
     all five rows; in **Jobs** it may fan out into a job per row under the one you started.
 
-    ![Screenshot - The configuration ready to run](/getting-started/load/05-run.png)
+    ![Screenshot - The Boolabean sales configuration page with the green Run Component button at the top of the right-hand panel and, further down, the Rows section with its Add Row button](/getting-started/load/05-run.png)
 
 **Add the forecast**
 
@@ -417,7 +417,7 @@ counts:
 - `forecast` has **42** rows: seven dates, `location_id` 0 to 5.
 - Every column arrived as text. The connector does not guess types, so the next page casts them.
 
-![Screenshot - Table detail with data sample](/getting-started/load/07-table-detail.png)
+![Screenshot - The Data Sample tab of the sales table, marked NON-TYPED, with the columns date, store_id, product_id, units and revenue_czk above rows of sample values](/getting-started/load/07-table-detail.png)
 
 <details>
 <summary>Your bucket names will differ, and what else to look at</summary>

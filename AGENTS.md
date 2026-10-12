@@ -105,10 +105,12 @@ Images: place alongside the Markdown and reference with an absolute path
 - Docs-as-code: changes go through PRs; a maintainer reviews and merges.
 - **`help.keboola.com` is served by Vercel.** Every PR also gets a Vercel preview
   deployment — use it to check rendering before asking for review.
-- Vercel applies its defaults, since `vercel.json` only sets cache headers for
-  `/pagefind/*`: a missing trailing slash is normalized, and `404.html` from the
-  build root is returned for unmatched paths. **Don't move the 404 out of the
-  build root.**
+- `vercel.json` sets cache headers for `/pagefind/*` and carries a few permanent
+  (308) redirects for files that moved, such as the old `/tutorial/*.csv` samples,
+  which page redirects (`redirect_from`) cannot cover. Otherwise Vercel applies its
+  defaults: a missing trailing slash is normalized, and `404.html` from the build
+  root is returned for unmatched paths. **Don't move the 404 out of the build
+  root.**
 - `.github/workflows/main.yml` still builds and runs `aws s3 sync` to
   `s3://help.keboola.com` on every push to `main`. It succeeds, but it is not
   what serves the live domain — don't reason about production routing, redirects,
