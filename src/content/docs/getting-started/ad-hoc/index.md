@@ -296,3 +296,5 @@ However, teaching you everything was not really the point of this tutorial.
 We wanted to show you how Keboola can help in connecting different systems together.
 
 [Return to the beginning](/getting-started/) or [contact us](/management/support/).
+
+**Next:** [Development Branches →](/getting-started/branches/)

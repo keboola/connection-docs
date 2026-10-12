@@ -154,7 +154,7 @@ and in its own clip. `app/grid-preview.png` stays and is reused on the explainer
 page text changed.
 
 
-## 2026-09-29 — Getting Started text pass (David Esner's "too wordy"; DECISIONS.md, same date)
+## 2026-09-29 — Getting Started text pass (David Esner found it too wordy; DECISIONS.md, same date)
 
 Moved, so not lost: PathIntro's approvals, tool permissions and plan mode paragraph → the hub,
 "Approvals and plan mode". Each step's "Where you are / When you finish" paragraph → the first row

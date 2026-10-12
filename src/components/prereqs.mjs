@@ -39,8 +39,10 @@ const KAI =
 export const SHARED = {
   project:
     '<strong>A Keboola project.</strong> No project yet? <a href="/getting-started/project/">Create or join a project</a>.',
-  // for a page that needs Kai, listed before `kai`; no sign-up link, because
-  // whether the Free Plan includes apps is still open
+  // for a page that needs Kai, listed before `kai`. No sign-up link: it was written while it was
+  // open whether the Free Plan includes apps. Free Plan project 6375 deployed the Getting Started
+  // app on 2026-10-01, so linking getting-started/project/ here is now the Apps owners' call
+  // (VERIFY(Jordan) on data-apps/build-locally.mdx).
   projectWithKai: '<strong>A Keboola project</strong> on a stack where Kai is available.',
   google:
     '<strong>A Google account</strong> you can sign in with, to approve Keboola\'s access.',

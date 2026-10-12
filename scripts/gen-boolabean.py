@@ -35,7 +35,7 @@ Run from the repo root:
 Without --fetch the output is byte-identical to the committed CSVs (checked
 2026-10-12). With --fetch, check the diff before committing: the archive can revise
 recent values, and the guide quotes exact row counts and results built on them. On
-2026-10-12 the archive still returned all 552 values unchanged.
+2026-10-12 the archive still returned all 552 rows (1,104 values) unchanged.
 """
 import argparse, csv, json, pathlib, random, subprocess, urllib.request
 

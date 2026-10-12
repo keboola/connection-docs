@@ -73,7 +73,7 @@ function tagProps(tag) {
 function inlineToMarkdown(line) {
   return line
     .replace(/\{'\s*'\}/g, ' ')
-    .replace(/<a href="([^"]+)">([^<]*)<\/a>/g, '$2 ($1)')
+    .replace(/<a\s[^>]*?href="([^"]+)"[^>]*>([^<]*)<\/a>/g, '$2 ($1)')
     .replace(/<\/?(code|strong|em|b|i)>/g, (m) => (m.includes('code') ? '`' : '**'))
     .replace(/<li(?:\s[^>]*)?>\s*/g, '- ')
     .replace(/\s*<\/li>/g, '')

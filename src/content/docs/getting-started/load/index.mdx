@@ -28,6 +28,10 @@ them.
 <Prereqs needs={['project']} tabs={3}>
   <span slot="from">a project with empty Storage.</span>
   <span slot="to">six tables in Storage and two connector configurations you can re-run.</span>
+  <span slot="cli">
+    <a href="/cli/getting-started/">kbagent</a>, connected to your project with write access; for
+    the raw requests, your stack's host and a Storage API token.
+  </span>
 </Prereqs>
 
 <PathIntro tabs={3} />
@@ -81,9 +85,18 @@ Weather data by [Open-Meteo.com](https://open-meteo.com/), under
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). `weather_daily` is Open-Meteo's
 historical daily maximum temperature and precipitation for June to August 2026, reshaped into one
 row per café and day with our column names; `forecast` comes from its forecast API when you load it.
+That API is free for non-commercial use, up to 10,000 calls a day
+([terms](https://open-meteo.com/en/terms)), and the guide's weekly flow sends it one request a week.
+
+{/* VERIFY(Jordan): Open-Meteo's terms (read 2026-10-12) limit the free API to non-commercial use
+and 10,000 calls a day, 5,000 an hour, 600 a minute. Whether a weekly call from a customer's
+project, which is what automate/ schedules, counts as non-commercial is an owner's call; Jordan's
+review on #1116, item 7, asked who confirms it. Until then the page states the terms and leaves
+the call to the reader. The terms sat in the fold below until the guide test of 2026-10-12 found
+that a reader who does not open it never sees them. */}
 
 {/* 2026-10-12, Jordan's review on #1116, item 7: the page said the weather was invented, the
-generator said it was real. It is real: all 552 values in weather_daily.csv equal what
+generator said it was real. It is real: all 552 rows in weather_daily.csv (1,104 values) equal what
 archive-api.open-meteo.com returned on 2026-10-12 for the six coordinates, June 1 to August 31,
 timezone Europe/Prague. Open-Meteo's licence page asks for "Weather data by Open-Meteo.com" with a
 link next to the data, a link to the licence, and a note of changes, which the paragraph above
@@ -93,15 +106,8 @@ weather or with --fetch. */}
 <details>
 <summary>What the forecast URL asks for</summary>
 
-[Open-Meteo](https://open-meteo.com/) needs no account and no key. Its free API is offered for
-non-commercial use, up to 10,000 calls a day ([terms](https://open-meteo.com/en/terms)); the
-guide's weekly flow makes one call a week. One request returns the next seven days for all six
-cafés at once, as CSV:
-{/* VERIFY(Jordan): Open-Meteo's terms (read 2026-10-12) limit the free API to non-commercial use
-and 10,000 calls a day, 5,000 an hour, 600 a minute. Whether a weekly call from a customer's
-project, which is what automate/ schedules, counts as non-commercial is an owner's call; Jordan's
-review on #1116, item 7, asked who confirms it. Until then the page states the terms and leaves
-the call to the reader. */}
+[Open-Meteo](https://open-meteo.com/) needs no account and no key. One request returns the
+next seven days for all six cafés at once, as CSV:
 
 ```text
 https://api.open-meteo.com/v1/forecast?latitude=50.0755,49.1928,49.8352,49.7475,49.5938,50.7663&longitude=14.4426,16.6083,18.2833,13.3776,17.2509,15.0562&daily=temperature_2m_max,precipitation_sum&timezone=Europe%2FPrague&format=csv
@@ -109,8 +115,8 @@ https://api.open-meteo.com/v1/forecast?latitude=50.0755,49.1928,49.8352,49.7475,
 
 The six coordinate pairs are the cafés in `store_id` order, so `location_id` 0 in the answer is
 `S01` and 5 is `S06`. The connector has to be told about the file's shape: seven lines of metadata
-about the locations and a blank line come before the real header row. Loaded as it comes, it is 42
-rows: seven days for six cafés.
+about the locations and a blank line come before the real header row. Skip those lines and the
+forecast is 42 rows: seven days for six cafés.
 
 </details>
 

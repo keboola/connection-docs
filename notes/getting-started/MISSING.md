@@ -35,7 +35,7 @@ still open come first, and the closed ones are kept below with what closed them.
 | Gap | Closed | How |
 |---|---|---|
 | A BigQuery run of the transform SQL | 2026-10-12 | Run as printed in Free Plan project 6439 through the five-table input mapping and the lower-case output mapping: job success in 61 s, 42 rows. Earlier, 2026-10-01: the query body as a read-only query in 6375. |
-| Weather provenance and licence | 2026-10-12 | `weather_daily.csv` is real Open-Meteo archive data (all 552 values equal the archive on 2026-10-12); `load/` says so and carries the CC BY 4.0 attribution; `scripts/gen-boolabean.py` rebuilds the five CSVs byte for byte. |
+| Weather provenance and licence | 2026-10-12 | `weather_daily.csv` is real Open-Meteo archive data (all 552 rows, 1,104 values, equal the archive on 2026-10-12); `load/` says so and carries the CC BY 4.0 attribution; `scripts/gen-boolabean.py` rebuilds the five CSVs byte for byte. |
 | A shared prerequisites partial | 2026-10-12 | The guide's own box, in use since wave one, merged into the site-wide `src/components/Prereqs.astro` (Jordan's review on #1116, item 6); one component, one style. |
 | Four different time budgets | 2026-10-12 | `index.md`, `overview/index.md` and the hub all say about 30 minutes with Kai, plus sign-up (#1187). |
 | No `vercel.json` rule for the sample files, and copies under `public/tutorial/` | 2026-10-12 | `vercel.json` 308s the old `/tutorial/*.csv` and the `.docx`; the copies are deleted (#1187); the Boolabean files live in `public/getting-started/boolabean/`. |

@@ -2150,10 +2150,11 @@ TODO there. The classes lost their `gs-` prefix (`.fromto`, `.prereqs__tab`), an
 `FromTo.astro` uses the same cards. Checked in a production build: every Getting Started box keeps
 its size at 1280 and 375 px in both themes and is pixel-identical apart from apostrophes, which
 the local MDX version (5.0.2 against the lockfile's 5.0.6) leaves straight on untouched pages
-too; the Getting Started twins are unchanged. Two Apps boxes change on purpose: the project link
-on `build-locally`, and the Kai line on `data-apps/getting-started` and `migrate-to-python-js`.
+too; the Getting Started twins are unchanged (the review round below then added two lines on
+purpose). Three Apps boxes change on purpose: the project link on `build-locally`, and the Kai line
+on `data-apps/getting-started` and `migrate-to-python-js`.
 
-**The weather is real.** All 552 values in `weather_daily.csv` equal what Open-Meteo's archive API
+**The weather is real.** All 552 rows in `weather_daily.csv`, 1,104 values, equal what Open-Meteo's archive API
 returned on 12 October for the six coordinates, June 1 to August 31, Europe/Prague. `load/` said
 the weather was invented; it now says it is real and carries Open-Meteo's attribution (CC BY 4.0,
 a link, what changed), and it states the free API's terms: non-commercial use, up to 10,000 calls

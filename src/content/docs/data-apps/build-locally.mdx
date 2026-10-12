@@ -11,7 +11,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 import Prereqs from '../../../components/Prereqs.astro';
 import StageStrip from '../../../components/StageStrip.astro';
 
-{/* 2026-09-29: "Build an app with an AI agent" (PR #1143) merged into this page after review (PRDCT-693); the old URL redirects here. Agent flow verified live on 2026-09-23 in project 264 (europe-west3) with Claude Code 2.1.280, kbagent 0.94.0 and dataapp-developer 1.6.1 from marketplace keboola-claude-kit 1.14.0 (App ID 74021867, about 11 minutes, including the Storage workaround below), and on 2026-09-25 with Codex CLI 0.157.0 (App ID 74022065). Michal Ševčík's Cursor review (2026-09-25): agent mode is the default, the route question appears, a prompt that names kbagent reads better, the password is the main friction. The example prompt was then revised to name kbagent and ask for a data check and the page link, and revised again to name the project and rule out MCP, after his run built in another project through an MCP sign-in; VERIFY(Michal Ševčík) that wording in Cursor. Claude Desktop, VS Code and the ChatGPT app screens: VERIFY the dataapp-developer install and the build flow. */}
+{/* 2026-09-29: "Build an app with an AI agent" (PR #1143) merged into this page after review (PRDCT-693); the old URL redirects here. Agent flow verified live on 2026-09-23 in project 264 (europe-west3) with Claude Code 2.1.280, kbagent 0.94.0 and dataapp-developer 1.6.1 from marketplace keboola-claude-kit 1.14.0 (App ID 74021867, about 11 minutes, including the Storage workaround below), and on 2026-09-25 with Codex CLI 0.157.0 (App ID 74022065). Michal Ševčík's Cursor review (2026-09-25): agent mode is the default, the route question appears, a prompt that names kbagent reads better, the password is the main friction. The example prompt was then revised to name kbagent and ask for a data check and the page link, and revised again to name the project and rule out MCP, after his run built in another project through an MCP sign-in; VERIFY(Michal Ševčík) that wording in Cursor. Claude Desktop, VS Code and the ChatGPT app screens: VERIFY(Michal Ševčík) the dataapp-developer install and the build flow. */}
 
 Build an app on your own computer when you want your own editor, your own agent or your own Git workflow. Keboola still hosts and runs the app: it clones the repository, installs dependencies, starts the app and serves it behind a secure URL. You don't manage servers, ports or Docker, only your code and a small configuration folder.
 
@@ -39,8 +39,8 @@ To build inside Keboola instead, [Kai](/data-apps/getting-started/) does the sam
   <li slot="group">
     <strong>With an AI agent:</strong> Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT
     app, and <a href="/cli/">kbagent</a> connected to that project. Connecting kbagent asks for
-    your stack URL, the part of your project's address before `/admin`; for a free project from
-    the link above, it's `https://connection.us-east4.gcp.keboola.com`.
+    your stack URL, the part of your project's address before `/admin`; for a Free Plan project,
+    it's `https://connection.us-east4.gcp.keboola.com`.
     Creating the push token for the app's repository needs admin rights in the project. Using
     another agent? See <a href="#other-agents">Other agents</a>.
   </li>
@@ -51,7 +51,9 @@ To build inside Keboola instead, [Kai](/data-apps/getting-started/) does the sam
   </li>
 </Prereqs>
 
-{/* VERIFY(Jordan): whether the Free Plan includes apps; the "Create a free one" link in the box assumes it does. */}
+{/* VERIFY(Jordan): whether the Free Plan includes apps. The box's project item links
+getting-started/project/, which starts with the Free Plan sign-up; Free Plan project 6375 deployed
+the Getting Started app on 2026-10-01 (getting-started/project/index.mdx and app/index.mdx). */}
 
 <span id="develop-with-an-ai-coding-tool"></span>
 
@@ -203,7 +205,7 @@ It needs `jq`, and each run creates a new token, so use it in place of the `git-
 
 Have it load kbagent's full command reference with `kbagent context` first ([the context reference](/cli/for-agents/#the-context-reference)). If the agent can't install plugins, give it the skill as files: the folder is [on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/dataapp-developer/skills/dataapp-development), with the app templates and reference guides the skill points to.
 
-{/* Claude Code, 2026-09-23: the kbagent route ran end to end (App ID 74021867); the MCP route ran up to the draft preview (prod 74021869 left undeployed, draft 74021870 reloaded a push and loaded 36,043 orders). The merge, prod deploy and draft cleanup (TOOLS.md, modify_python_js_data_app scenario A) were not run. The other tabs are pending review (VERIFY). */}
+{/* Claude Code, 2026-09-23: the kbagent route ran end to end (App ID 74021867); the MCP route ran up to the draft preview (prod 74021869 left undeployed, draft 74021870 reloaded a push and loaded 36,043 orders). The merge, prod deploy and draft cleanup (TOOLS.md, modify_python_js_data_app scenario A) were not run. The other tabs are pending review: VERIFY(Michal Ševčík). */}
 
 ### The skill as a download
 
