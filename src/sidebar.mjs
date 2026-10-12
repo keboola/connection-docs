@@ -809,4 +809,5 @@ export const sidebar = [
       { slug: "external-integrations/n8n" },
     ],
   },
+  { label: "Changelog", link: "/changelog/" },
 ];
