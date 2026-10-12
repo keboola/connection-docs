@@ -72,7 +72,7 @@ the source table, the destination table and the columns involved.
 |---|---|---|
 | `storage.policyTagsNotPropagated` | A protected column was copied without its tag, because Keboola could not carry the protection over on this copy. Usually the feature is not enabled on this backend. | Ask for enablement if copies must stay protected, and check who can read the copy. |
 | `storage.policyTagPropagationFailed` | Keboola tried to keep the tag, failed, and copied nothing. | Read the error in the event, fix its cause, and run the job again. |
-| `storage.workspacePolicyTagMismatch` | An incremental load was refused, because the existing workspace table is less protected than its source. | Run the load once with the table overwritten. |
+| `storage.workspacePolicyTagMismatch` | An incremental load was refused, because the existing workspace table is less protected than its source. | Run the load once as a full, non-incremental load that replaces the workspace table. |
 
 ## What this feature does not cover
 
