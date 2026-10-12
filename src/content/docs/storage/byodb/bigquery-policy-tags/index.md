@@ -55,8 +55,8 @@ project service account on the backend. A role that holds only `datacatalog.taxo
 Fine-Grained Reader role on the policy tag. Keboola never asks for it, and enablement only binds your custom role. The
 policy rights above would technically let the root account add other bindings to the taxonomy; Keboola does not.
 
-Copying a protected column does read it. Whether project service accounts may read protected data is your decision. If
-they cannot, a copy of a protected column fails, exactly as it does without this feature.
+Copying a protected column still requires read access to it. Keboola never requests the Fine-Grained Reader role; if your
+project service accounts do not hold it, copies of protected columns may fail. Granting it is your decision.
 
 ## Enable the feature
 
@@ -133,6 +133,8 @@ Policy-tag support keeps protection on the copies Keboola makes within your BigQ
   account can read them.
 - **Approved access.** Granting a person access to protected data after a legal or compliance approval is not part of
   this feature.
-- **Row-level security.** BigQuery row access policies are not carried over to the copies Keboola makes.
+- **Row-level security.** BigQuery row access policies are a separate mechanism from policy tags and are outside this
+  feature. A clone-based copy keeps them; a copy Keboola has to rebuild (a source that cannot be cloned, or a COPY load
+  into a workspace) does not.
 - **Grants removed after enablement.** Keboola does not detect or prevent changes to the grants on your taxonomy. If you
   remove them, copies of protected columns fail.
