@@ -43,6 +43,8 @@ These settings are shared by all rows:
 
 Click **Test connection** to confirm that the mServer is reachable and accepts the credentials, then save.
 
+![Screenshot - POHODA mServer connection settings](/components/extractors/erp/pohoda-mserver/pohoda-mserver-1.png)
+
 ### Row configuration
 
 Click **Add Row** and configure one row per agenda:
@@ -53,6 +55,8 @@ Click **Add Row** and configure one row per agenda:
 | Invoice type, Order type, Offer type, Enquiry type | One of these appears when the agenda is Invoices, Orders, Offers or Enquiries. It selects the document direction and sub-type, for example *Issued invoice*, *Received invoice* or *Issued advance invoice*. |
 | Load mode | **Incremental** (default) fetches only the records changed since the last run and upserts them by primary key. **Full** downloads all records and replaces the table. A full load is the only way to capture deletions. |
 | Output table name | Overrides the default table name, which is the agenda in snake case, for example `address_book` or `invoice_issued_invoice`. |
+
+![Screenshot - POHODA mServer row configuration](/components/extractors/erp/pohoda-mserver/pohoda-mserver-2.png)
 
 ## Output
 

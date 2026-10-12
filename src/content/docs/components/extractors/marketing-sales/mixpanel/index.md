@@ -31,6 +31,8 @@ search_keywords: [mixpanel]
 | Load type | **Full load** (default) overwrites the table on every run. **Incremental load** creates the table with primary keys and upserts new data. |
 | Raw data export | Off: the JSON is parsed into a key-value pair table. On: the raw JSON response is stored in the table for you to parse later, for example in a Snowflake or Python transformation. |
 
+![Screenshot - MixPanel configuration](/components/extractors/marketing-sales/mixpanel/mixpanel-1.png)
+
 ## Output
 
 With raw data export off, the connector returns one table with three columns:

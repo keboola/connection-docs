@@ -37,6 +37,8 @@ The official API documentation is at [api.mpohoda.cz/doc](https://api.mpohoda.cz
 
 Click **Test connection** to verify the key and the base URL, then save.
 
+![Screenshot - mPOHODA connection settings](/components/writers/erp/mpohoda/mpohoda-1.png)
+
 ### Row configuration
 
 Click **Add Row** and configure one row per agenda. Map the input table, or the header and line-items tables, in the row's input mapping first.
@@ -54,6 +56,8 @@ Click **Add Row** and configure one row per agenda. Map the input table, or the 
 | Line items table | Optional. Input table with the line items of a document agenda, linked to the header by the key column. Auto-detected when left empty, and ignored for agendas without line items, such as business partners and payment methods. |
 | Document key column | Column present in both the header and line-items tables that links items to their document. Required when the line items table is set explicitly. |
 | Column mapping | Maps input columns to mPOHODA fields. Click **Load columns** to prefill it, and leave it empty if your columns already use the mPOHODA field names. For line items, include an `item_type` column with the value `price_list` or `text`; it selects the line variant. |
+
+![Screenshot - mPOHODA row in column mapping mode](/components/writers/erp/mpohoda/mpohoda-2.png)
 
 #### Raw JSON mode
 

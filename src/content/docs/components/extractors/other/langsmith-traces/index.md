@@ -40,6 +40,8 @@ Click **Test connection**.
 | Fetch from | Start of the interval: an ISO 8601 timestamp such as `2024-01-01T00:00:00Z`, or a relative phrase such as `7 days ago` (default). |
 | Fetch to | End of the interval. Default `Now`. |
 
+![Screenshot - LangSmith Traces configuration](/components/extractors/other/langsmith-traces/langsmith-traces-1.png)
+
 ### Advanced parameters
 
 | Field | Description |

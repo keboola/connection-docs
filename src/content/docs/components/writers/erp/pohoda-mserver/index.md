@@ -43,6 +43,8 @@ These settings are shared by all rows:
 
 Click **Test connection** to confirm that the mServer is reachable and accepts the credentials, then save.
 
+![Screenshot - POHODA mServer connection settings](/components/writers/erp/pohoda-mserver/pohoda-mserver-1.png)
+
 ### Row configuration
 
 Click **Add Row** and configure one row per agenda. Map the input table, or the header and line-items tables, in the row's input mapping first.
@@ -55,6 +57,8 @@ Click **Add Row** and configure one row per agenda. Map the input table, or the 
 | Line items table | Input table with the line items of a document agenda, linked to the header table by the key column. Auto-detected when left empty. Document agendas only. |
 | Document key column | Column present in both the header and line-items tables that groups the items of one document, for example `document_id`. Required when the line items table is set explicitly. |
 | Column mapping | Maps input columns to POHODA fields. Click **Load columns** to prefill it, and leave it empty if your columns already use the POHODA field names. |
+
+![Screenshot - POHODA mServer row configuration](/components/writers/erp/pohoda-mserver/pohoda-mserver-2.png)
 
 Columns are matched to POHODA fields by name, per agenda. Unknown columns are ignored and empty values are skipped.
 

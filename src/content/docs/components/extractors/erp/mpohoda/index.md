@@ -37,6 +37,8 @@ The official API documentation is at [api.mpohoda.cz/doc](https://api.mpohoda.cz
 
 Click **Test connection** to verify the key and the base URL, then save.
 
+![Screenshot - mPOHODA connection settings](/components/extractors/erp/mpohoda/mpohoda-1.png)
+
 ### Row configuration
 
 Click **Add Row** and configure one row per agenda:
@@ -49,6 +51,8 @@ Click **Add Row** and configure one row per agenda:
 | Page size | Records per API page. The mPOHODA API caps this at 50. |
 | Columns to keep | Optional. Output only these columns from the main table; the `id` primary key is always kept. Use the flattened snake_case names, for example `vat_percent`. |
 | Output table name | Optional. Defaults to the agenda name in snake case, for example `issued_invoices`. |
+
+![Screenshot - mPOHODA row configuration](/components/extractors/erp/mpohoda/mpohoda-2.png)
 
 ## Output
 

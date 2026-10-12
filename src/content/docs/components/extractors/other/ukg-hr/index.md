@@ -47,6 +47,8 @@ The credentials are stored encrypted. No Keboola OAuth broker or partner registr
 
 Click **Test connection**, then save.
 
+![Screenshot - UKG HR connection settings](/components/extractors/other/ukg-hr/ukg-hr-1.png)
+
 ### Row configuration
 
 Click **Add Row** and configure one row per resource:
@@ -63,6 +65,8 @@ Incremental options for requests, employees and employee documents:
 | Date field | Requests only: `updated_at` (default), `created_at` or `closed_at`. Employees and employee documents always filter by `created_at`. |
 | Start date | Lower bound of the first incremental run: an ISO 8601 datetime such as `2026-01-01T00:00:00+00:00`, or a relative phrase such as `yesterday` or `3 days ago`. |
 | Overlap margin (seconds) | Seconds subtracted from the last watermark, so a small window is read again and late-arriving records are caught. The primary key makes the overlap idempotent. |
+
+![Screenshot - UKG HR row for the requests resource](/components/extractors/other/ukg-hr/ukg-hr-2.png)
 
 Filters by resource:
 
