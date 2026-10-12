@@ -9,6 +9,8 @@ description: Import cost and usage data of an Azure subscription, signed in with
 This data source connector uses the [Azure Cost Management API](https://docs.microsoft.com/en-us/rest/api/cost-management/)
 to import cost and usage data of an [Azure subscription](https://techcommunity.microsoft.com/t5/azure/understanding-azure-account-subscription-and-directory/m-p/34800).
 
+<!-- Reference-type page. Service principal section added 2026-10-12 from the registry schema of `keboola.ex-azure-cost-management-sp` and the README of keboola/ex-azure-cost-management; the rest is the legacy page. -->
+
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Azure Cost Management** connector.  
 Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with your Azure account.
