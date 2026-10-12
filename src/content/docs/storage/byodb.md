@@ -47,7 +47,8 @@ possibly as low as [1 second](https://docs.snowflake.com/en/sql-reference/sql/al
 ![Snowflake account schema](/storage/byodb/schema.png)
 
 ## BigQuery policy tags
-If you protect columns with BigQuery policy tags, Keboola can keep that protection on every copy it makes. See
+If you protect columns with BigQuery policy tags, Keboola can keep that protection on the copies it makes within your
+BigQuery backend. See
 [BigQuery policy tags](/storage/byodb/bigquery-policy-tags/).
 
 ## BigQuery Limitations
