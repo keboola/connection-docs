@@ -3,6 +3,7 @@ import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/getting-started/prereqs.mjs';
+import { stripHtmlComments } from './strip-comments.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
 import { courseListText, courseBarText, kaiTrackText } from '../components/getting-started/course.mjs';
 import { sampleText } from '../components/getting-started/sample.mjs';
@@ -46,23 +47,6 @@ function findMarkdownFiles(dir, files = []) {
     }
   }
   return files;
-}
-
-/**
- * Authoring comments never reach the published markdown.
- *
- * Both comment forms carry the same thing: provenance for whoever edits the
- * page next — live-walk dates, job and configuration IDs from the demo
- * project, exception IDs, VERIFY(owner) flags, notes about what is visible in
- * a capture. That is internal (PRDCT-616), and the markdown twin is public and
- * machine-read, so it is stripped here rather than translated. Rationale that
- * outlives an edit belongs in DECISIONS.md, which is version-controlled and
- * not served.
- */
-function stripComments(body) {
-  return body
-    .replace(/\{\/\*[\s\S]*?\*\/\}/g, '')   // MDX  {/* … */}
-    .replace(/<!--[\s\S]*?-->/g, '');       // HTML <!-- … -->
 }
 
 /**
@@ -188,7 +172,8 @@ function sitePrereqsTabsToText(tag, overrides = {}) {
  * meaning a reader needs and are rendered rather than dropped: a tab's
  * `label`, <Prereqs> (the Getting Started box or the site-wide one, by the
  * page's import), <StageStrip> as a numbered list, and the Getting Started
- * pictures below.
+ * pictures below. MDX comments become HTML comments, which the caller removes
+ * with stripHtmlComments (strip-comments.mjs), outside fenced code.
  */
 function stripMdx(body) {
   // Getting Started pages import their own <Prereqs> from components/getting-started/.
@@ -196,7 +181,8 @@ function stripMdx(body) {
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
   // <details> is how a page folds away what most readers can skip; the twin
   // has no folding, so the summary becomes a bold line and the rest follows
-  const withoutComments = stripComments(withoutImports)
+  const withoutComments = withoutImports
+    .replace(/\{\/\*([\s\S]*?)\*\/\}/g, (_, inner) => `<!--${inner}-->`)
     .replace(/^[ \t]*<details[^>]*>[ \t]*$/gm, '')
     .replace(/^[ \t]*<\/details>[ \t]*$/gm, '')
     .replace(/^[ \t]*<summary>([\s\S]*?)<\/summary>[ \t]*$/gm, (m, t) => `**${t.trim().replace(/<\/?code>/g, '`')}**`);
@@ -521,8 +507,9 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
 
           const isMdx = extname(file) === '.mdx';
           const raw = stripFrontmatter(content);
-          // .md pages carry the same authoring notes as HTML comments.
-          const body = (isMdx ? stripMdx(raw) : stripComments(raw)).replace(/\n{3,}/g, '\n\n').trim();
+          // authors' notes (VERIFY markers, where a claim was checked) stay in the source; comments
+          // inside fenced code are content and survive (strip-comments.mjs)
+          const body = stripHtmlComments(isMdx ? stripMdx(raw) : raw).replace(/\n{3,}/g, '\n\n').trim();
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });
