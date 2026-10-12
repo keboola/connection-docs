@@ -51,5 +51,5 @@ turns the feature on. If any step fails, Keboola does not turn the feature on, a
 A workspace table created before the feature was enabled carries no tags. The first incremental load into it from a
 protected source fails before it writes any data, and names the columns.
 
-Run that load once with the table overwritten. The table is re-created with the source's protection, and later
-incremental loads work again. If you tag many columns, expect this right after enablement.
+Run that load once as a full, non-incremental load that replaces the workspace table. The table is re-created with the
+source's protection, and later incremental loads work again. If you tag many columns, expect this right after enablement.
