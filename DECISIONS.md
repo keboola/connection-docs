@@ -2027,7 +2027,7 @@ three acts or the question-frame poster, which is now the whole line, VERIFY(Jor
 
 Tutorial-hub page: the arc index. "Get a project" moved back to its own page 2026-09-14 (see
 that page's comment and DECISIONS.md), and the café story that used to open this page is gone:
-Michal, 2026-09-02, "dataset je jen helping vehicle… není to nosné téma… já bych v tom byl sušší".
+at the 2026-09-02 sync, the dataset was called a helping vehicle rather than the theme, and the page drier.
 The world is now described once, on load/. Timing, since 2026-09-29 (Nikita): one number, the
 time Kai takes to build the pipeline from the Prompt tabs, with "plus sign-up and reading" said
 next to it. It
@@ -2075,7 +2075,7 @@ up at least 3 s, and the clip fades to its empty first frame so the loop has no 
 whole line with its four captions, 99.5 KB. The app card is app/grid-preview.png (14 Sep), cut just
 under Brno's weekday line, above the line its own screenshot slices.
 
-Cut to 10 s on 2026-10-01 for Michal Jeřábek (30.09, "úvodní klip max 10 s"), from
+Cut to 10 s on 2026-10-01 after the 30.09 review asked for an opening clip of at most 10 s, from
 explainer-short.html in the docs-clip rig: the four dots carry their titles only, about 1.35 s
 each, then 2.5 s of the app and one line, and the clip fades to its empty first frame. That breaks
 the docs-clip rule of three seconds per caption on purpose; the step texts are in the course line

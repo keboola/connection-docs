@@ -194,9 +194,9 @@ to build one ([Build your first app with Kai](/data-apps/getting-started/)).
 5. **Optional, to share it:** if **What's next?** in the chat offers **Publish to production**, click it.
    Kai moves the draft's code into the app and asks twice, the first approvals on this page: once
    to give the published app access to Storage, and once to deploy it. A few minutes later the
-   app's own page (**Apps**, then the app) says **Active** and offers **Open**, which shows the app's
-   address and password ([App actions](/data-apps/reference/#app-actions)), and the grid sits behind
-   the password from the app's **Authentication** setting, **Basic (Password)** by
+   app's own page (**Apps**, then the app) says **Active** and offers **Open**: a dialog with the
+   app's address, its password and an **Open app** button ([App actions](/data-apps/reference/#app-actions)).
+   The grid sits behind the password from the app's **Authentication** setting, **Basic (Password)** by
    default. This worked in our Free Plan project; in an older project the deploy failed, for the
    reasons below. The builder also shows **Deploy** buttons, in its header and on the *Draft ready*
    card; this guide uses the **Publish to production** chip.
@@ -207,7 +207,7 @@ to build one ([Build your first app with Kai](/data-apps/getting-started/)).
    this flow was not tried (publishing was optional and not asked for). Both point at Deploy: Kai's
    recap in the Kai Agent chat said "Click Deploy in the app's Builder to publish it", and its
    chips there offered "Publish the Café Staffing Outlook app…". Nikita's call. */} The draft preview is enough to finish
-   it. To remove the app later, open **More actions** (**⋯**) on its page and pick **Delete app**.
+   it. To remove the app later, open **More actions** (**⋮**) on its page and pick **Delete app**.
 
 **Check:** the draft preview (or the app itself, through **Open**, once deployed) shows the grid, and its caption's
 count equals both the number of red cells and the number of rows where `short_handed` is true in
@@ -326,9 +326,10 @@ string) into true or false before it colours a cell.
 
 The draft ran, so the code works; the production container did not come up. The job's own error is
 usually just *Internal Server Error occurred*, which says nothing. The reason is in the container's
-startup log, and the fastest way to read it is
-`kbagent data-app runs --project <alias> --app-id <app-id>`. Two causes have shown up in our older
-project, and neither is your grid (the same deploy worked in a new Free Plan project):
+startup log: on the app's **All Runs** tab, open the failed run, or from a terminal run
+`kbagent data-app runs --project docs-demo --app-id <app-id>` (your project's alias, as in the CLI
+tab). Two causes have shown up in our older project, and neither is your grid (the same deploy
+worked in a new Free Plan project):
 
 - `App must have keboola-config/nginx/ directory`: the repository Kai wrote has no nginx
   configuration, which a Python/JS app needs in production. The draft does not, because it runs in
@@ -337,13 +338,14 @@ project, and neither is your grid (the same deploy worked in a new Free Plan pro
   incorrect or have expired*: the app's managed Git credentials have expired, so the container
   cannot clone its own code.
 
-After several failures the platform disables the app: a banner says it failed to start
-automatically multiple times, and the app's page offers **Start**. [The app doesn't
-start](/data-apps/troubleshooting/#the-app-doesnt-start) has the fix for the missing nginx
-configuration and a check to run on the repository before the next deploy, and [Sleeping and
-waking](/data-apps/troubleshooting/#sleeping-and-waking) says how to bring a disabled app back,
-including the builder's **Fix with Kai** for an app Kai built. Expired managed Git credentials are
-one for [Support](/management/support/), with the run ID from the command above. The rest of the pipeline
+One failed start is enough for the platform to disable the app, even though its page says it
+"failed to start automatically multiple times"; the page then offers **Start**. Since Kai built
+this app, open it in the builder and click **Fix with Kai**: Kai reads the logs and recent runs,
+tells you what it found before it changes anything, then deploys the fix and starts the app. By
+hand, [The app doesn't start](/data-apps/troubleshooting/#the-app-doesnt-start) has the fix for the
+missing nginx configuration, and [Sleeping and waking](/data-apps/troubleshooting/#sleeping-and-waking)
+how to start a disabled app again. For the expired credentials, redeploy; if it happens again,
+report it to [Support](/management/support/) with the job ID. The rest of the pipeline
 is unaffected: the table is rebuilt every week whether or not the app is up, and the draft
 preview still shows it.
 

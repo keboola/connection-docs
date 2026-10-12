@@ -28,7 +28,8 @@ below was run as-is through a temporary transformation with exactly the input ma
 describes (project 264, job 103114885, 61 s): 42 rows, 42 distinct (store, date), 0 empty cells, 4
 short-handed, top row Brno / Tue 2026-09-08 / 84.4, identical to Kai's read-only-input version
 from the 2026-09-08 runs and to the offline reference. The BigQuery block is a translation and has
-NOT been run (decision 7 in the plan; no BigQuery project). The page's twelve screenshots were
+NOT been run as written: the Free Plan runs on BigQuery (6375, 6425) used the SQL Kai wrote; Jordan's
+review on #1116, item 3, asks for one run or a label on the page. The page's twelve screenshots were
 reshot on 2026-10-01 in Free Plan project 6375, with the Boolabean names.
 
 CLI / API tab added 2026-09-15 and run live against project 264 with kbagent v0.93.1: `transformation
