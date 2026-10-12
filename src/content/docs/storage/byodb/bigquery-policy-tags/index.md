@@ -14,7 +14,7 @@ With policy-tag support enabled on your backend, Keboola does three things:
 
 - It keeps the policy tag on the copies it makes of a protected column within your BigQuery backend. The exceptions are
   listed in [What this feature does not cover](#what-this-feature-does-not-cover).
-- It refuses a copy rather than produce an unprotected one.
+- On those copies, it refuses rather than produce an unprotected one.
 - It reports each column's protection state in the table detail.
 
 Keboola keeps tags that a source already carries. It never adds a tag to a table whose source has none.
@@ -24,8 +24,8 @@ enables it for one backend at a time on request.
 
 ## How it works
 
-Keboola carries the tag over whenever it copies data within your backend. Examples are copying a table in Storage and
-loading a table into a workspace. The destination is created already protected, before any row reaches it.
+Keboola carries the tag over when it copies a table in Storage or loads a table into a workspace within your backend.
+Other paths, such as snapshot restore, are listed in [What this feature does not cover](#what-this-feature-does-not-cover). The destination is created already protected, before any row reaches it.
 
 Columns are matched by name. A column renamed in an input mapping keeps its tag under the new name.
 
