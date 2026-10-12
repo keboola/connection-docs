@@ -3,6 +3,7 @@ title: Google BigQuery
 slug: 'components/extractors/database/bigquery'
 redirect_from:
     - /extractors/database/bigquery/
+description: Run queries in Google BigQuery and load the results into Storage tables, or as Avro files with the files variant.
 ---
 
 
@@ -14,6 +15,8 @@ Running the connector creates a background job that
 - saves the results to Google Cloud Storage.
 - exports the results from Google Cloud Storage and stores them in specified tables in Keboola Storage.
 - removes the results from Google Cloud Storage.
+
+<!-- Reference-type page. Avro files section added 2026-10-12 from Jiří Soukup's summary of the developer-portal description; the rest is the legacy page. -->
 
 ***Note:** Using the Google BigQuery connector is also described in our [Getting Started Tutorial](/tutorial/ad-hoc/#using-bigquery-connector).*
 
@@ -76,3 +79,9 @@ Name the query and click **Create**.
 ![Screenshot - Name Query](/components/extractors/database/bigquery/bigquery-6.png)
 
 To learn how to modify your configuration, go to the [SQL databases section](/components/extractors/database/sqldb/#modify-configuration).
+
+## Avro files variant
+
+The **Google BigQuery avro files** connector is configured the same way, with the service account, the bucket and the queries, but it does not write the query results into Storage tables. Each result is stored as an Avro file in [Storage Files](/storage/files/) instead. Use it for results too large for a table, or when the next step of your pipeline works with files, for example a transformation or a [processor](/extend/component/processors/) that reads Avro.
+
+<!-- VERIFY(Jiří Soukup): the connector's exact name and id, and whether one query produces one file; the component is in the developer portal but not in any stack's /v2/storage on 12 Oct, so this paragraph follows your summary and the portal description. -->
