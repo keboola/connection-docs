@@ -2,20 +2,12 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSy
 import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/getting-started/prereqs.mjs';
+import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
 import { stripHtmlComments } from './strip-comments.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
 import { courseListText, courseBarText, kaiTrackText } from '../components/getting-started/course.mjs';
 import { sampleText } from '../components/getting-started/sample.mjs';
 import { guidePromptsText } from '../components/getting-started/prompts.mjs';
-// Every other page uses the site-wide box (src/components/Prereqs.astro, from the Apps work) and
-// its stage strip. A page's own import line says which <Prereqs> it renders, and the twin takes the
-// wording from that component's table.
-import {
-  sharedText as siteSharedText,
-  tabsText as siteTabsText,
-  LABELS as SITE_LABELS,
-} from '../components/prereqs.mjs';
 
 /**
  * Astro integration that emits a raw-markdown copy of every docs page.
@@ -109,44 +101,22 @@ function prereqsToText(tag, { mayHaveOwn = false } = {}) {
   // that ends up with no items takes the heading back out at its close tag
   // (check/ passes needs={[]} and only the from/to slots).
   const heading = lines.length || mayHaveOwn ? [`${PREREQ_LABELS.needs}:`, ''] : [];
-  return ['', '**Before you start**', '', ...heading, ...lines.map((l) => `- ${l}`)];
+  return ['', `**${PREREQ_LABELS.box}**`, '', ...heading, ...lines.map((l) => `- ${l}`)];
 }
 
-/** The second list of <Prereqs>, one line per tab, printed after the page's own items. */
-function prereqsTabsToText(tag, overrides = {}) {
-  const tabs = tag.match(/tabs=\{(\d)\}/);
-  const count = tabs ? Number(tabs[1]) : 0;
-  if (!count) return [''];
-  return ['', `${PREREQ_LABELS.tabs}:`, '', ...tabsText(count, overrides).map((l) => `- ${l}`), ''];
-}
-
-/**
- * The same three, for the site-wide <Prereqs> (src/components/Prereqs.astro):
- * "You need" with the shared items, a second list under the page's own
- * `groupLabel`, and the tab lines.
- */
-function sitePrereqsToText(tag) {
-  const needs = tag.match(/needs=\{\[([^\]]*)\]\}/);
-  const keys = needs
-    ? needs[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean)
-    : ['project'];
-  const lines = keys.map(siteSharedText).filter(Boolean);
-  // The "You need" heading prints even with no shared items: the page's own
-  // <li> children follow it.
-  return ['', `**${SITE_LABELS.box}**`, '', `${SITE_LABELS.needs}:`, '', ...lines.map((l) => `- ${l}`)];
-}
-
-function sitePrereqsGroupToText(tag, items) {
+/** The list under the page's own `groupLabel`, from its <li slot="group"> children. */
+function prereqsGroupToText(tag, items) {
   const label = tag.match(/\bgroupLabel="([^"]*)"/);
   if (!label || !items.length) return [];
   return ['', `${label[1]}:`, '', ...items];
 }
 
-function sitePrereqsTabsToText(tag, overrides = {}) {
+/** The tab lines of <Prereqs>, one per tab, printed after the page's own items. */
+function prereqsTabsToText(tag, overrides = {}) {
   const tabs = tag.match(/tabs=\{(\d)\}/);
   const count = tabs ? Number(tabs[1]) : 0;
   if (!count) return [''];
-  return ['', `${SITE_LABELS.tabs}:`, '', ...siteTabsText(count, overrides).map((l) => `- ${l}`), ''];
+  return ['', `${PREREQ_LABELS.tabs}:`, '', ...tabsText(count, overrides).map((l) => `- ${l}`), ''];
 }
 
 /**
@@ -170,14 +140,12 @@ function sitePrereqsTabsToText(tag, overrides = {}) {
  * Components are matched on an uppercase initial, the JSX convention, so
  * lowercase HTML written inline in a page is left alone. Several carry
  * meaning a reader needs and are rendered rather than dropped: a tab's
- * `label`, <Prereqs> (the Getting Started box or the site-wide one, by the
- * page's import), <StageStrip> as a numbered list, and the Getting Started
- * pictures below. MDX comments become HTML comments, which the caller removes
- * with stripHtmlComments (strip-comments.mjs), outside fenced code.
+ * `label`, <Prereqs> (src/components/Prereqs.astro), <StageStrip> as a
+ * numbered list, and the Getting Started pictures below. MDX comments become
+ * HTML comments, which the caller removes with stripHtmlComments
+ * (strip-comments.mjs), outside fenced code.
  */
 function stripMdx(body) {
-  // Getting Started pages import their own <Prereqs> from components/getting-started/.
-  const gs = /import\s+Prereqs\s+from\s+['"][^'"]*getting-started\/Prereqs\.astro['"]/.test(body);
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
   // <details> is how a page folds away what most readers can skip; the twin
   // has no folding, so the summary becomes a bold line and the rest follows
@@ -225,11 +193,7 @@ function stripMdx(body) {
       continue;
     }
     if (selfClosing.test(line)) {
-      if (/^\s*<Prereqs\b/.test(line)) {
-        out.push(...(gs
-          ? [...prereqsToText(line), ...prereqsTabsToText(line)]
-          : [...sitePrereqsToText(line), ...sitePrereqsTabsToText(line)]));
-      }
+      if (/^\s*<Prereqs\b/.test(line)) out.push(...prereqsToText(line), ...prereqsTabsToText(line));
       if (/^\s*<PathIntro\b/.test(line)) {
         out.push('', ...pathIntroText(tagProps(line)).map((p) => p + '\n'));
       }
@@ -262,15 +226,9 @@ function stripMdx(body) {
       indents.pop();
       if (/^\s*<\/Tabs>/.test(line)) out.push('', '---', '');
       if (/^\s*<\/StageStrip>/.test(line)) { inStrip = false; slot.length = 0; out.push(''); }
-      if (/^\s*<\/Prereqs>/.test(line) && !gs) {
-        out.push(...sitePrereqsGroupToText(prereqsTag, groupItems), ...sitePrereqsTabsToText(prereqsTag, prereqsTabs));
-        inPrereqs = false;
-        prereqsTabs = {};
-        groupItems.length = 0;
-        slot.length = 0;
-      } else if (/^\s*<\/Prereqs>/.test(line)) {
+      if (/^\s*<\/Prereqs>/.test(line)) {
         if (!prereqsItems && out[prereqsStart + 3] === `${PREREQ_LABELS.needs}:`) out.splice(prereqsStart + 3, 2);
-        out.push(...prereqsTabsToText(prereqsTag, prereqsTabs));
+        out.push(...prereqsGroupToText(prereqsTag, groupItems), ...prereqsTabsToText(prereqsTag, prereqsTabs));
         // "Where you are" and "When you finish" arrive in the slot but read
         // first, straight under the box's heading, as they do on the page
         const state = [
@@ -283,6 +241,8 @@ function stripMdx(body) {
         prereqsState = {};
         prereqsStart = -1;
         prereqsItems = 0;
+        groupItems.length = 0;
+        slot.length = 0;
       }
       continue;
     }
@@ -296,11 +256,7 @@ function stripMdx(body) {
       // <Prereqs needs={…}> with page-specific <li> children in its slot: the
       // shared lines go in first, the children follow as the list they are.
       if (/^\s*<StageStrip\b/.test(line)) { inStrip = true; stripN = 0; }
-      if (/^\s*<Prereqs\b/.test(line) && !gs) {
-        out.push(...sitePrereqsToText(line));
-        inPrereqs = true;
-        prereqsTag = line;
-      } else if (/^\s*<Prereqs\b/.test(line)) {
+      if (/^\s*<Prereqs\b/.test(line)) {
         prereqsStart = out.length;
         const head = prereqsToText(line, { mayHaveOwn: true });
         prereqsItems = head.filter((l) => l.startsWith('- ')).length;
@@ -348,8 +304,8 @@ function stripMdx(body) {
         const item = inlineToMarkdown(joined);
         if (item) {
           const li = item.startsWith('- ') ? item : `- ${item}`;
-          // <li slot="group"> items belong to the site-wide box's second list, printed at </Prereqs>
-          if (!gs && /^\s*<li\s+slot="group"/.test(joined)) groupItems.push(li);
+          // <li slot="group"> items belong to the box's second list, printed at </Prereqs>
+          if (/^\s*<li\s+slot="group"/.test(joined)) groupItems.push(li);
           else { out.push(li); prereqsItems += 1; }
         }
         slot.length = 0;

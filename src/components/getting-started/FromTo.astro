@@ -8,9 +8,10 @@
 // Usage:  <FromTo from="nothing exists yet." to="a project you can sign in to." />
 //
 // Plain text only, so the markdown twin can read both props off the tag
-// (page-markdown.mjs). Styles: .gs-fromto in custom.css.
+// (page-markdown.mjs). Styles: .fromto in custom.css, shared with the cards
+// inside the site-wide box (src/components/Prereqs.astro).
 
-import { LABELS } from './prereqs.mjs';
+import { LABELS } from '../prereqs.mjs';
 
 interface Props {
   from: string;
@@ -20,14 +21,14 @@ interface Props {
 const { from, to } = Astro.props;
 ---
 
-<div class="gs-fromto gs-fromto--standalone">
-  <p class="gs-fromto__card">
-    <span class="gs-fromto__label">{LABELS.from}</span>
+<div class="fromto fromto--standalone">
+  <p class="fromto__card">
+    <span class="fromto__label">{LABELS.from}</span>
     {from}
   </p>
-  <span class="gs-fromto__arrow" aria-hidden="true">→</span>
-  <p class="gs-fromto__card gs-fromto__card--to">
-    <span class="gs-fromto__label">{LABELS.to}</span>
+  <span class="fromto__arrow" aria-hidden="true">→</span>
+  <p class="fromto__card fromto__card--to">
+    <span class="fromto__label">{LABELS.to}</span>
     {to}
   </p>
 </div>

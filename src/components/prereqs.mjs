@@ -4,39 +4,47 @@
 // itself, and src/integrations/page-markdown.mjs, which renders a text
 // fallback for <Prereqs /> into the agent-facing /<slug>/index.md twin — a
 // page whose prerequisites are invisible there is a page an agent will
-// happily start without a project.
+// happily start without a project. getting-started/FromTo.astro reads the
+// two state labels from here too.
 //
-// The box has up to three lists. "You need" holds the things themselves,
-// one per item, the thing first and then where to get it. A page with two
-// ways through it (build-locally: with an agent or by hand) adds a second
-// list under its own label. "Depending on the tab you use" says what each tab
-// of a Prompt / UI / CLI page needs.
+// The box has up to four parts. "Where you are" → "When you finish" says what
+// state a step page starts from and leaves you in. "You need" holds the things
+// themselves, one per item, the thing first and then where to get it. A page
+// with two ways through it (build-locally: with an agent or by hand) adds a
+// second list under its own label. "What each tab needs" says what each tab of
+// a Prompt / UI / CLI page needs, so a reader on the Prompt tab learns that it
+// needs Kai and a reader on the CLI / API tab that it needs kbagent.
 //
-// TODO: the `project` item links the Free Plan sign-up because
-// /getting-started/project/ is not on main yet; once it is, point the item
-// there ("Get a project"), and every page that uses the box follows.
+// 2026-10-12: the Getting Started guide had its own copy of this box
+// (components/getting-started/Prereqs.astro and prereqs.mjs); Jordan's review
+// on #1116, item 6, merged it into this one. Its state cards, tab cards and
+// the newer Kai wording came along, and `project` now points at the guide's
+// project page, which was the TODO here.
 
 export const LABELS = {
   box: 'Before you start',
+  from: 'Where you are',
+  to: 'When you finish',
   needs: 'You need',
-  tabs: 'Depending on the tab you use',
+  tabs: 'What each tab needs',
 };
 
-// How to reach Kai and who switches it on (kai/getting-started.md): shared by
-// the `kai` item and the Prompt tab line, so the two cannot drift.
-const KAI_WHERE =
-  'the <strong>Kai Agent</strong> button in the project\'s top bar, on supported stacks. The first time, an organization admin switches it on; see <a href="/kai/getting-started/">Get started with Kai</a>.';
+// Where Kai is and who switches it on: one wording for the `kai` item and the
+// Prompt tab line, so the two cannot drift. 2026-10-01: a new Free Plan project
+// (6375) had Kai from its first login, so the line says that first.
+const KAI =
+  'the <strong>Kai Agent</strong> button in the top bar, on supported stacks. A new Free Plan project has it from the start; elsewhere an organization admin turns it on once: <a href="/kai/getting-started/">Get started with Kai</a>.';
 
 /** Shared "You need" items, by the key a page passes in `needs`. HTML. */
 export const SHARED = {
   project:
-    '<strong>A Keboola project.</strong> No project yet? <a href="https://connection.us-east4.gcp.keboola.com/wizard">Create a free one</a>.',
+    '<strong>A Keboola project.</strong> No project yet? <a href="/getting-started/project/">Create or join a project</a>.',
   // for a page that needs Kai, listed before `kai`; no sign-up link, because
   // whether the Free Plan includes apps is still open
   projectWithKai: '<strong>A Keboola project</strong> on a stack where Kai is available.',
   google:
     '<strong>A Google account</strong> you can sign in with, to approve Keboola\'s access.',
-  kai: `<strong>Kai</strong>, ${KAI_WHERE}`,
+  kai: `<strong>Kai</strong>, ${KAI} What it can see and change: <a href="/kai/security-and-privacy/">Kai security and privacy</a>.`,
 };
 
 /**
@@ -48,8 +56,8 @@ export const SHARED = {
  * needs a master token.
  */
 export const TABS = [
-  { key: 'prompt', label: 'Prompt tab', html: `Kai, ${KAI_WHERE}` },
-  { key: 'ui', label: 'UI tab', html: 'only a browser.' },
+  { key: 'prompt', label: 'Prompt tab', html: `Kai, ${KAI}` },
+  { key: 'ui', label: 'UI tab', html: 'a browser.' },
   { key: 'cli', label: 'CLI / API tab',
     html: '<a href="/cli/getting-started/">kbagent</a>, connected to your project with write access.' },
 ];
