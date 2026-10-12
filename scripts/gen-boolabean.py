@@ -5,24 +5,51 @@ Boolabean is a fictional coffee chain — the name is a pun on Keboola + coffee 
 in the same slot as dbt's jaffle_shop and Databricks' Wanderbricks. The schema is
 deliberately mundane; the whimsy lives only in the product names.
 
-Static half (shipped as CSVs the guide loads):
+Static half (shipped as CSVs the guide loads, in public/getting-started/boolabean/):
   stores.csv          6 cafés, real coordinates so a weather join works
   products.csv        18 items, prices in CZK
-  sales.csv           daily units per store per product
-  staffing.csv        who was rostered, per store per day
-  weather_daily.csv   what the weather actually did — REAL observations from
-                      open-meteo's archive API, per store per day
+  sales.csv           daily units per store per product (invented)
+  staffing.csv        who was rostered, per store per day (invented)
+  weather_daily.csv   what the weather actually did: real daily values from
+                      Open-Meteo's historical weather API, per store per day
 
-The live half is not shipped: the guide fetches tomorrow's forecast from
-open-meteo at read time, which is what makes the scheduling step teach anything.
+The live half is not shipped: the guide fetches next week's forecast from
+Open-Meteo at read time, which is what makes the scheduling step teach anything.
 
 Sales are generated with a real dependency on the real weather, so the join
 produces a genuine signal: iced drinks track temperature, hot drinks move against
 it, and rain suppresses footfall — most sharply where a café has a terrace.
-"""
-import csv, json, math, urllib.request, pathlib, random
 
-OUT = pathlib.Path('/private/tmp/claude-501/-Users-nikita/07f8e68e-3805-4474-a079-2875f59d3ff6/scratchpad/boolabean')
+Weather data by Open-Meteo.com (https://open-meteo.com/), licensed CC BY 4.0
+(https://creativecommons.org/licenses/by/4.0/). Changed here: one row per café and
+day, columns renamed (time -> date, temperature_2m_max -> temp_max_c,
+precipitation_sum -> rain_mm).
+
+Run from the repo root:
+  python3 scripts/gen-boolabean.py              rebuild all five CSVs; the weather is
+                                                read from the committed weather_daily.csv
+  python3 scripts/gen-boolabean.py --fetch      fetch the weather from the archive first
+  python3 scripts/gen-boolabean.py --out DIR    write somewhere else, to diff against the
+                                                committed files
+
+Without --fetch the output is byte-identical to the committed CSVs (checked
+2026-10-12). With --fetch, check the diff before committing: the archive can revise
+recent values, and the guide quotes exact row counts and results built on them. On
+2026-10-12 the archive still returned all 552 values unchanged.
+"""
+import argparse, csv, json, pathlib, random, subprocess, urllib.request
+
+REPO = pathlib.Path(__file__).resolve().parent.parent
+SAMPLE = REPO / 'public' / 'getting-started' / 'boolabean'
+ARCHIVE = ('https://archive-api.open-meteo.com/v1/archive?latitude={lat}&longitude={lon}'
+           '&start_date={start}&end_date={end}&daily=temperature_2m_max,precipitation_sum'
+           '&timezone=Europe%2FPrague')
+
+ap = argparse.ArgumentParser(description='Generate the Boolabean sample CSVs.')
+ap.add_argument('--fetch', action='store_true', help="fetch the weather from Open-Meteo's archive")
+ap.add_argument('--out', type=pathlib.Path, default=SAMPLE, help='output folder (default: the committed one)')
+args = ap.parse_args()
+OUT = args.out
 OUT.mkdir(parents=True, exist_ok=True)
 START, END = '2026-06-01', '2026-08-31'
 random.seed(20260903)  # deterministic: the guide quotes exact numbers
@@ -60,15 +87,29 @@ PRODUCTS = [
     ('P18', 'Soup of the Morning',        'food',   109, -1, 0.007),
 ]
 
-def fetch_weather(store_id):
-    """Weather comes from files fetched with curl — python.org's interpreter on this
-    machine has no CA bundle, so urllib cannot do TLS."""
-    d = json.load(open(pathlib.Path(__file__).parent / 'wx' / f'{store_id}.json'))['daily']
+def fetch_weather(store):
+    """One café's summer from Open-Meteo's archive. Falls back to curl, because some
+    Python installs have no CA bundle and urllib then cannot do TLS."""
+    url = ARCHIVE.format(lat=store[3], lon=store[4], start=START, end=END)
+    try:
+        body = urllib.request.urlopen(url, timeout=60).read()
+    except Exception:
+        body = subprocess.run(['curl', '-sf', url], check=True, capture_output=True).stdout
+    d = json.loads(body)['daily']
     return list(zip(d['time'], d['temperature_2m_max'], d['precipitation_sum']))
 
+def committed_weather():
+    """The weather as committed, so a rebuild needs no network."""
+    by_store = {}
+    with open(SAMPLE / 'weather_daily.csv', newline='') as f:
+        for r in csv.DictReader(f):
+            by_store.setdefault(r['store_id'], []).append((r['date'], float(r['temp_max_c']), float(r['rain_mm'])))
+    return by_store
+
 weather = {}
+saved = None if args.fetch else committed_weather()
 for s in STORES:
-    weather[s[0]] = fetch_weather(s[0])
+    weather[s[0]] = fetch_weather(s) if args.fetch else saved[s[0]]
     print(f'  {s[0]} {s[2]:<9} {len(weather[s[0]])} days of real weather')
 
 # ---- weather_daily.csv -------------------------------------------------------

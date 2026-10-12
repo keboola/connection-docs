@@ -27,10 +27,11 @@ offers "Create Multiple Queries". 2026-09-09: dataset swapped to Boolabean. The 
 below was run as-is through a temporary transformation with exactly the input mapping this page
 describes (project 264, job 103114885, 61 s): 42 rows, 42 distinct (store, date), 0 empty cells, 4
 short-handed, top row Brno / Tue 2026-09-08 / 84.4, identical to Kai's read-only-input version
-from the 2026-09-08 runs and to the offline reference. The BigQuery block is a translation and has
-NOT been run as written: the Free Plan runs on BigQuery (6375, 6425) used the SQL Kai wrote; Jordan's
-review on #1116, item 3, asks for one run or a label on the page. The page's twelve screenshots were
-reshot on 2026-10-01 in Free Plan project 6375, with the Boolabean names.
+from the 2026-09-08 runs and to the offline reference. The BigQuery block was run as printed on
+2026-10-12 in Free Plan project 6439 (BigQuery, us-east4), through the input and output mapping this
+tab describes: job success, 61 s, 42 rows (the note after the block has the details). That answers
+Jordan's review on #1116, item 3, which asked for one run or a label on the page. The page's twelve
+screenshots were reshot on 2026-10-01 in Free Plan project 6375, with the Boolabean names.
 
 CLI / API tab added 2026-09-15 and run live against project 264 with kbagent v0.93.1: `transformation
 create --sql-file --created-table` built a throwaway transformation from the page's own SQL file, `transformation edit --storage @file` added the five inputs (create leaves the input mapping empty —
@@ -276,11 +277,12 @@ data filters. None of it is needed here; see
    Trash; screenshots mapping, 03, 04 and 07 come from it): the Guided Mode auto-fill lower-cases
    the transformation's name. A GET of /v2/storage/buckets/out.c-boolabean-staffing-outlook
    returned Kai's bucket, out.c-Boolabean-staffing-outlook, and the output row showed it as
-   Boolabean-staffing-outlook, so the lookup ignores case. Not exercised: a run that creates the
-   bucket from the lower-case ID, and so whether a bucket created that way keeps the lower case;
-   the page therefore tells a hand-building reader to use their own table ID later, since
-   BigQuery dataset names are case-sensitive even where Storage lookups are not. This replaces
-   the flag that stood here since 2026-09-08. */}
+   Boolabean-staffing-outlook, so the lookup ignores case. Exercised 2026-10-12 in Free Plan
+   project 6439, which had no Kai bucket: the run created the bucket from the lower-case ID as
+   out.c-boolabean-staffing-outlook, shown as boolabean-staffing-outlook, so a bucket created
+   that way keeps the lower case. The page therefore tells a hand-building reader to use their
+   own table ID later, since BigQuery dataset names are case-sensitive even where Storage
+   lookups are not. This replaces the flag that stood here since 2026-09-08. */}
 
    ![Screenshot - Table Output Mapping with one row: staffing_outlook, written to the OUT bucket Boolabean-staffing-outlook as staffing_outlook](/getting-started/transform/06-output-mapping.png)
 
@@ -468,9 +470,19 @@ returned 42 rows with the same three short-handed café-days as the Kai-built ta
 2026-10-01 at 73 and Zelný trh 2026-10-05 and 2026-10-06 at 85.2, and weekday as Mon/Tue. Later
 the same day a copy was built through this tab, with the five-table input mapping and this block
 pasted into All Queries (saved text equal to the block), for screenshots mapping, 03, 04 and 07; it
-was deleted unrun, because its output would have replaced Kai's typed staffing_outlook. So the
-CREATE TABLE wrapper and the short names through an input mapping have still not run on BigQuery
-(MISSING.md). The points that were open before the run: `date` and `time` as column names inside SAFE_CAST (backticked here on purpose),
+was deleted unrun, because its output would have replaced Kai's typed staffing_outlook.
+Run as printed 2026-10-12 in Free Plan project 6439 (BigQuery, us-east4), a project with no Kai
+objects: the two HTTP configurations exactly as load/'s CLI / API tab (files from the branch
+preview, same bytes; jobs 171 s and 35 s, 6, 18, 9,761, 552, 552 and 42 rows), then a BigQuery
+transformation built through the Storage API the way this tab builds it: the five-table input
+mapping with these short names, the output mapping staffing_outlook to the lower-case auto-filled
+destination, and this block, cut from this file byte for byte, as the one code in Block 1 (saved
+script compared equal). Job 58251625 succeeded in 61 s and wrote a typed table, 42 rows and these
+10 columns, date as DATE, short_handed as BOOL, weekday Mon to Sun. That forecast week (12 to 18
+Oct) was under 18 °C every day: 29 rows with an empty expected_units and none short-handed, the
+highest 58.4 a person (Vinohrady, Wed 14 Oct), as the Check fold below says a cold week does. The
+configurations went to Trash afterwards; the tables stay in 6439. notes/getting-started/DECISIONS.md, 2026-10-12.
+The points that were open before the 2026-10-01 run: `date` and `time` as column names inside SAFE_CAST (backticked here on purpose),
 FORMAT_DATE('%a') returning Mon/Tue like Snowflake's DAYNAME, and that every column is qualified
 (the 2026-08-19 lesson from project 6211: a bare column name that matches a table name resolves to
 the range variable and comparisons then fail with "STRUCT<...> vs STRING"). The 2026-08-25 note
