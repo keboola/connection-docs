@@ -7,8 +7,8 @@ description: Keep BigQuery column-level access control on the copies Keboola mak
 BigQuery [policy tags](https://cloud.google.com/bigquery/docs/column-level-security-intro) restrict who can read a column.
 You attach them in BigQuery.
 
-Without this feature, Keboola copies a tagged column within your backend without its tag and gives no warning. The copy
-is unprotected.
+Without this feature, Keboola copies a tagged column within your backend without its tag. The copy is unprotected, and
+the only trace is a `storage.policyTagsNotPropagated` event in the project (see [Events](#events)).
 
 With policy-tag support enabled on your backend, Keboola does three things:
 
