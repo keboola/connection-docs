@@ -49,8 +49,9 @@ resource name, `projects/{project}/locations/{location}/taxonomies/{taxonomyId}`
 Use a custom role that you name. Keboola refuses a predefined role in this position, because the role is granted to every
 project service account on the backend. A role that holds only `datacatalog.taxonomies.get` is enough.
 
-**These grants let Keboola attach tags. They do not let Keboola read protected values.** Reading a protected column
-requires the Fine-Grained Reader role on the policy tag, which this feature never asks for.
+**Enablement never grants Keboola read access to protected values.** Reading a protected column requires the
+Fine-Grained Reader role on the policy tag. Keboola never asks for it, and enablement only binds your custom role. The
+policy rights above would technically let the root account add other bindings to the taxonomy; Keboola does not.
 
 Copying a protected column does read it. Whether project service accounts may read protected data is your decision. If
 they cannot, a copy of a protected column fails, exactly as it does without this feature.
