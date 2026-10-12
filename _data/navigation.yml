@@ -691,7 +691,7 @@ items:
             title: Snowflake Secure Data Sharing
 
           - url: /storage/byodb/bigquery-policy-tags/
-            title: BigQuery Policy Tags
+            title: BigQuery policy tags
 
       - url: /storage/byobq/
         title: Bring Your Own BigQuery
