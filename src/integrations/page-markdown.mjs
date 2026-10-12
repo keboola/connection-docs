@@ -3,6 +3,7 @@ import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
+import { stripHtmlComments } from './strip-comments.mjs';
 // Getting Started pages render their own box and intro (src/components/getting-started/). A page's
 // import line says which <Prereqs> it uses, and its twin takes the wording from the same table.
 import { sharedText as gsSharedText } from '../components/getting-started/prereqs.mjs';
@@ -38,23 +39,6 @@ function findMarkdownFiles(dir, files = []) {
     }
   }
   return files;
-}
-
-/**
- * Authoring comments never reach the published markdown.
- *
- * Both comment forms carry the same thing: provenance for whoever edits the
- * page next — live-walk dates, job and configuration IDs from the demo
- * project, exception IDs, VERIFY(owner) flags, notes about what is visible in
- * a capture. That is internal (PRDCT-616), and the markdown twin is public and
- * machine-read, so it is stripped here rather than translated. Rationale that
- * outlives an edit belongs in DECISIONS.md, which is version-controlled and
- * not served.
- */
-function stripComments(body) {
-  return body
-    .replace(/\{\/\*[\s\S]*?\*\/\}/g, '')   // MDX  {/* … */}
-    .replace(/<!--[\s\S]*?-->/g, '');       // HTML <!-- … -->
 }
 
 /**
@@ -156,14 +140,18 @@ function prereqsTabsToText(tag, overrides = {}) {
  * lowercase HTML written inline in a page is left alone. Three of them carry
  * meaning a reader needs and are rendered rather than dropped: a tab's
  * `label`, <Prereqs>, and <StageStrip>, which prints as a numbered list; so is
- * <PathIntro> on the Getting Started pages. Authoring comments, MDX and HTML
- * alike, are stripped (see stripComments).
+ * <PathIntro> on the Getting Started pages. MDX comments become HTML comments,
+ * which the caller removes with stripHtmlComments (strip-comments.mjs), outside
+ * fenced code.
  */
 function stripMdx(body) {
   // Getting Started pages import their own <Prereqs> from components/getting-started/.
   const gs = /import\s+Prereqs\s+from\s+['"][^'"]*getting-started\/Prereqs\.astro['"]/.test(body);
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
-  const withComments = stripComments(withoutImports);
+  const withComments = withoutImports.replace(
+    /\{\/\*([\s\S]*?)\*\/\}/g,
+    (_, inner) => `<!--${inner}-->`,
+  );
 
   const INDENT = '    ';
   // Comments inside <Prereqs> and <StageStrip> are dropped: a markdown list
@@ -399,8 +387,9 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
 
           const isMdx = extname(file) === '.mdx';
           const raw = stripFrontmatter(content);
-          // .md pages carry the same authoring notes as HTML comments.
-          const body = (isMdx ? stripMdx(raw) : stripComments(raw)).replace(/\n{3,}/g, '\n\n').trim();
+          // authors' notes (VERIFY markers, where a claim was checked) stay in the source; comments
+          // inside fenced code are content and survive (strip-comments.mjs)
+          const body = stripHtmlComments(isMdx ? stripMdx(raw) : raw).replace(/\n{3,}/g, '\n\n').trim();
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });
