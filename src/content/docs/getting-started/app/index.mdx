@@ -194,8 +194,9 @@ to build one ([Build your first app with Kai](/data-apps/getting-started/)).
 5. **Optional, to share it:** if **What's next?** in the chat offers **Publish to production**, click it.
    Kai moves the draft's code into the app and asks twice, the first approvals on this page: once
    to give the published app access to Storage, and once to deploy it. A few minutes later the
-   app's own page (**Apps**, then the app) says **Active** and offers **Open App**, and the grid
-   sits behind the password from the app's **Authentication** setting, **Basic (Password)** by
+   app's own page (**Apps**, then the app) says **Active** and offers **Open**, which shows the app's
+   address and password ([App actions](/data-apps/reference/#app-actions)), and the grid sits behind
+   the password from the app's **Authentication** setting, **Basic (Password)** by
    default. This worked in our Free Plan project; in an older project the deploy failed, for the
    reasons below. The builder also shows **Deploy** buttons, in its header and on the *Draft ready*
    card; this guide uses the **Publish to production** chip.
@@ -208,7 +209,7 @@ to build one ([Build your first app with Kai](/data-apps/getting-started/)).
    chips there offered "Publish the Café Staffing Outlook app…". Nikita's call. */} The draft preview is enough to finish
    it. To remove the app later, open **More actions** (**⋯**) on its page and pick **Delete app**.
 
-**Check:** the draft preview (or **Open App**, once deployed) shows the grid, and its caption's
+**Check:** the draft preview (or the app itself, through **Open**, once deployed) shows the grid, and its caption's
 count equals both the number of red cells and the number of rows where `short_handed` is true in
 Storage. The count moves with the forecast. The sample's history is one summer, so a week under
 18 °C has no red cells at all, and on cold, dry days most cafés have no figure to show; that is the
@@ -337,8 +338,12 @@ project, and neither is your grid (the same deploy worked in a new Free Plan pro
   cannot clone its own code.
 
 After several failures the platform disables the app: a banner says it failed to start
-automatically multiple times, and the app's page offers **Start**. Either message is one for
-[Support](/management/support/), with the run ID from the command above. The rest of the pipeline
+automatically multiple times, and the app's page offers **Start**. [The app doesn't
+start](/data-apps/troubleshooting/#the-app-doesnt-start) has the fix for the missing nginx
+configuration and a check to run on the repository before the next deploy, and [Sleeping and
+waking](/data-apps/troubleshooting/#sleeping-and-waking) says how to bring a disabled app back,
+including the builder's **Fix with Kai** for an app Kai built. Expired managed Git credentials are
+one for [Support](/management/support/), with the run ID from the command above. The rest of the pipeline
 is unaffected: the table is rebuilt every week whether or not the app is up, and the draft
 preview still shows it.
 
