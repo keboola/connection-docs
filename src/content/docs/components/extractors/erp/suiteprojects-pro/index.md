@@ -49,8 +49,9 @@ Click **Add Row** for each object type. A row has four parts.
 |---|---|
 | Object type | The object type, or approval history, this row extracts into one table. Click **Load object types** to pick from the list. |
 | Fetch mode | **Incremental fetch** (default) reads only the objects changed since the previous run. **Full fetch** reads all of them. **Date window** reads the objects between Date start (included) and Date end (excluded). |
-| Fetch field | The date property that incremental fetch and date window compare. |
-| Lookback | How far before the previous run to read again. |
+| Fetch field | The date property that incremental fetch and date window compare. `updated` is the last change of an object and suits incremental fetch; pick another date, such as `date` of Task, for a date window. |
+| Lookback | How far before the previous run to read again, as a whole number of minutes, hours, days or weeks, for example `2 days` or `6 hours`. The connector always adds an overlap of its own on top. |
+| Date start, Date end | Bounds of the date window in SuiteProjects Pro server time; Date start is included and Date end excluded. Enter `YYYY-MM-DD`, `YYYY-MM-DD HH:MM:SS` or a relative value such as `30 days ago`, `yesterday` or `today`. |
 
 Some object types add options of their own, for example **Download files** and **Keep files permanently** for attachments, **Base currency** and **Rate precision** for exchange rates, or **Include placeholder users** for users.
 

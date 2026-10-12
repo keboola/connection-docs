@@ -10,8 +10,8 @@ Data destination connectors export data from Keboola to external systems. The ER
 
 Keboola provides the following ERP data destination connectors:
 
-- [mPOHODA](/components/writers/erp/mpohoda/) --- creates invoices, orders, offers, business partners and other records in the mPOHODA cloud accounting service.
-- [POHODA mServer](/components/writers/erp/pohoda-mserver/) --- imports address book entries, invoices, orders, stock and other agendas into STORMWARE POHODA through mServer.
+- [mPOHODA](/components/writers/erp/mpohoda/) creates invoices, orders, offers, business partners and other records in the mPOHODA cloud accounting service.
+- [POHODA mServer](/components/writers/erp/pohoda-mserver/) imports address book entries, invoices, orders, stock and other agendas into STORMWARE POHODA through mServer.
 - And [more](https://components.keboola.com/components)
 
 **Next:** [mPOHODA →](/components/writers/erp/mpohoda/)

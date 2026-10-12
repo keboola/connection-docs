@@ -74,6 +74,8 @@ Filters by resource:
 
 ## Output
 
-Each row produces one table with `id` as the primary key. Nested objects are flattened into underscore-separated columns; lists and arrays of objects are stored as JSON strings. Datetime fields are typed as `TIMESTAMP`. The connector follows the API's RFC 5988 `link` pagination headers.
+Each row produces one table with `id` as the primary key. Nested objects are flattened into underscore-separated columns; lists and arrays of objects are stored as JSON strings. Datetime fields are typed as `TIMESTAMP`.
 
-The API has no field-selection parameter, so each resource always returns its full object shape.
+## Limits
+
+The API has no field-selection parameter, so each resource always returns its full object shape. Organizations and users have no date filter, so those two resources are always a full load.
