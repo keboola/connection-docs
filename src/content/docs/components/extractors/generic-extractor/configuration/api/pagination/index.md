@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 *If new to Generic Extractor, learn about [pagination in our tutorial](/components/extractors/generic-extractor/tutorial/pagination/) first.*
 *Use [Parameter Map](/components/extractors/generic-extractor/map/) to help you navigate among various configuration options.*
@@ -41,7 +43,7 @@ An example pagination configuration looks like this:
 }
 ```
 
-## Paging Strategy
+## Paging strategy
 Generic Extractor supports the following paging strategies (scrollers); they are configured
 using the `method` option:
 
@@ -52,7 +54,7 @@ using the `method` option:
 - [`cursor`](/components/extractors/generic-extractor/configuration/api/pagination/cursor/) — uses the identifier of the item in response to maintain a scrolling cursor.
 - [`multiple`](/components/extractors/generic-extractor/configuration/api/pagination/multiple/) — allows to set different scrollers for different API endpoints.
 
-### Choosing Paging Strategy
+### Choosing paging strategy
 If the API responses contain direct links to the next set of results, use the
 [`response.url` method](/components/extractors/generic-extractor/configuration/api/pagination/response-url/).
 This applies to the APIs following the [JSON API specification](https://jsonapi.org/). The response usually
@@ -100,7 +102,7 @@ If the API uses different paging methods for different endpoints, use the
 [`multiple` method](/components/extractors/generic-extractor/configuration/api/pagination/multiple/) together with
 any of the above methods.
 
-## Stopping Strategy
+## Stopping strategy
 Generic Extractor stops scrolling
 
 - based on the `nextPageFlag` condition configuration.
@@ -135,7 +137,7 @@ the first page, it is not same as the previous page and therefore another reques
 is the same as the previous page, the same check kicks in and the extraction is stopped too. However, the results from the first
 page will be duplicated.
 
-### Next Page Flag
+### Next page flag
 The above describes automatic behavior of Generic Extractor regarding scrolling stopping.
 Using **Next Page Flag** allows you to do a **manual setup of the stopping strategy**: Generic Extractor analyzes the response,
 looks for a particular field (the flag) and decides whether to continue scrolling based on the value or presence of that flag.
@@ -167,7 +169,7 @@ Example `nextPageFlag` setting:
 
 See our [Next Page Flag Examples](#next-page-flag-examples).
 
-### Force Stop
+### Force stop
 Force stop configuration allows you to stop scrolling when some extraction limits are hit.
 The supported options are:
 
@@ -232,7 +234,7 @@ and [example [EX116]](https://github.com/keboola/generic-extractor/tree/master/d
 and [example [EX140]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/140-pagination-forcestop-child-filter)
 (combining with child jobs).
 
-### Limit Stop
+### Limit stop
 Limit stop configuration allows you to stop scrolling when a specified number of items is extracted.
 The supported options are:
 
@@ -281,7 +283,7 @@ See [example [EX126]](https://github.com/keboola/generic-extractor/tree/master/d
 For `count` configuration, see [example [EX127]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/127-pagination-stop-field)
 (a modified version of [EX051](https://github.com/keboola/generic-extractor/tree/master/doc/examples/051-pagination-pagenum-basic).
 
-### Combining Multiple Stopping Strategies
+### Combining multiple stopping strategies
 All stopping strategies are evaluated simultaneously and for the scrolling to continue, none of
 the stopping conditions must be met. In other words, the scrolling continues until any of the
 stopping conditions is true. To this you need to account specific stopping strategies for
@@ -310,14 +312,14 @@ will stop if **any** of the following is true:
 - The `isLast` field is present in the response and is true (`nextPageFlag`).
 - The `isLast` field is not present in the response.
 
-## Next Page Flag Examples
+## Next page flag examples
 In this section, we want to show you the following examples of the Next Page Flag stopping strategy:
 
 - Has-More Scrolling
 - Non-Boolean Has-More Scrolling
 - Is-Last Scrolling
 
-### Has-More Scrolling
+### Has-More scrolling
 Assume that the API returns a response which contains a `hasMore` field. The field is present in
 every response and has always the value `true` except for the last response where it is `false`.
 The following pagination configuration can be used to configure the stopping strategy:
@@ -339,7 +341,7 @@ In this case, setting `ifNotSet` is not necessary.
 See [example [EX045]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/045-next-page-flag-has-more)
 and [example [EX139]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/139-pagination-hasmore-child-filter) (combining with child jobs).
 
-### Non-Boolean Has-More Scrolling
+### Non-Boolean Has-More scrolling
 Assume that the API returns a response which contains a `hasMore` field. The field is present only in the
 last response and has the value `"no"` there.
 The following pagination configuration can be used to configure the stopping strategy:
@@ -363,7 +365,7 @@ to false. In this case setting `ifNotSet` is mandatory.
 
 See [example [EX046]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/046-next-page-flag-has-more-2).
 
-### Is-Last Scrolling
+### Is-Last scrolling
 Assume that the API returns a response which contains an `isLast` field. The field is present only in the
 last response and has the value `true` there.
 The following pagination configuration can be used to configure the stopping strategy:

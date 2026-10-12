@@ -1665,6 +1665,92 @@ overview/'s other paragraphs.
 
 ---
 
+## 2026-10-06 — The hub clip: a faster line, and a closing slide that asks what you want to build
+
+**Asked by:** Jordan, through Nikita on 6 Oct: the hub clip is long. Draw the line faster and use
+the time to say something concrete: apps, dashboards, something interactive. Nikita, the same
+evening, after two cuts: keep one screen, the app this guide really builds, with "Want to build"
+and a phrase that changes; draw the line about 1.5 times slower than the first cut; and build it in
+Remotion in Keboola's own style.
+
+**Decision.** The clip stays at 10.0 s, Michal Jeřábek's limit of 30 Sep. Slide one is the line of
+four dots and their titles, a dot every 0.67 s (1.35 s in the 10-01 cut), whole from 3.0 to 3.9 s.
+Slide two is the guide's grid beside "Want to build" and a phrase that changes every 1.7 s (an app
+like this one, an interactive dashboard, a what-if simulator: the apps, dashboards and something
+interactive Jordan asked for), with "Go through the guide and try it yourself." under it. The
+poster is still the whole line.
+
+**Where the words come from.** The first phrase points at the card, the app this guide builds. The
+other two are kinds from the list on What are apps: Dashboards, and Anything interactive
+("configurators, simulators"). The hub's sample paragraph now ends with one sentence that names
+them and links that list, so the clip says nothing the page does not. Two phrases went on the way.
+"An approval form" was in the second cut, but no app built on 6 Oct showed one (the internal tool
+saved a review back to Storage), so the fact-checker found nothing to back it. "A data story" made
+four phrases of 1.2 s each, faster than the cut before it, which the checker flagged after Nikita
+had asked for a slower clip. The grid still has no filters, so the ruling of 29 Sep on
+"interactive" stands: the word is in a phrase about another kind of app. 1.7 s per phrase breaks
+the three-second rule on purpose, as the dots have since 1 Oct.
+
+**Keboola's style.** Colours, type and motion come from `@keboola/design` 13, the package behind
+the product UI: Inter at weight 600, slate text #1e293b, the light-mode primary #2563eb ("Keboola
+blue, AA-tuned"; the brighter brand blue #1f8fff gave the phrases only 3.1:1), the #f9fafb canvas,
+a white card with a #e5e7eb edge and blue-grey shadows, and the easing cubic-bezier(0.2, 0.7, 0.2,
+1). Entrances are springs, as in Keboola's own Remotion videos (the kbl-content plugin).
+
+**The cuts that were rejected.** First, three apps Kai built in project 264 that day (a store
+dashboard, a data narrative, a staffing planner), about 1.5 s each, then the grid: Nikita found it
+strange. Second, the one-screen slide in the old explainer look with a dot every 0.43 s: the line
+too fast, and the look not Keboola's.
+
+**Made with** Remotion (`~/docs-ops/remotion/hub-explainer`): 1280x800, 30 fps, 10.0 s, 201 KB, mean
+luma 228, darkest frame 227, encoded in limited range like the earlier clips (Remotion writes full
+range, which measured 246 and could not be compared). The video is 713 px wide in a 1280-px window,
+so the 40-px lines read at 22 px, the 26-px closing line at 14.5 and the step titles at 16.7.
+
+---
+
+## 2026-10-07 — The hub clip's line becomes a hand-off to Kai
+
+**Asked by:** Michal, through Nikita on 7 Oct: involve Kai more in the process; for example, say in
+the clip that Kai can load your data. Nikita: make the line a pipeline of words, where you have an
+idea, go to Kai and say what you want, and Kai does the work.
+
+**Decision.** The four steps of the hub clip's line now read "Your idea", "Tell Kai", "Kai loads
+your data", "Kai builds the app", one line each, with the word Kai in Keboola blue. A first try in
+two lines per step ("You have an idea", "You tell Kai what you want") came to 79 characters, and the
+checker found it too much to read in the line's 3.9 s; the last step was on screen for 0.9 s. The
+labels are back near the 6 Oct length (54 characters) and the timing is the one Nikita approved on
+6 Oct. The dots moved 36 px apart to give the two long labels a gap, and their numbers grew from 20
+to 24 px (11 px as seen before, now 13.4). The second slide and the look are unchanged.
+
+**The page says it too.** The hub's first paragraph now reads that once you have a project, Kai can
+do the work from what you tell it in plain language: it loads your data, answers questions about
+it, and turns the answer into an app, asking for your approval along the way. That is the guide's
+Prompt path (on load/, Kai sets up the HTTP data source and runs it). "Once you have a project",
+because project/ has no prompt; "asking for your approval along the way", because the guide-tester
+found that the top of the page no longer mentioned approving anything, and the approvals section
+explains what asks and what does not (the Apps builder makes its draft without asking and asks
+twice at publish). The clip itself says nothing about approvals either way. Two small fixes rode
+along: the box says "Every step after the first" instead of "Every step", in project/'s own words
+(it has no prompt: Kai works inside a project), and How every page works names the top-bar button
+**Kai Agent**, as project/ and load/ do.
+
+**A screen under each phrase.** Later on 7 Oct Nikita asked for a different screen under each blue
+phrase on the second slide. The card now shows the guide's grid for "an app like this one?", the
+Store pulse dashboard (the project's Shopify sample, switched to the last 12 months) for "an
+interactive dashboard?", and the Café staffing planner (this guide's café sales, 31 °C on a
+Saturday) for "a what-if simulator?". Both apps are ones Kai built in project 264 on 6 Oct, and the
+screens are the last frames of their takes in `~/docs-ops/remotion/apps-range`; the cursor rests
+on the control that was used. Each screen fades in through the card's white as its phrase arrives,
+so two screens never sit on top of each other. This is not the montage rejected on 6 Oct: there is
+one slide, the guide's grid comes first, the layout and the closing line stay, and there are no
+headings over the cards.
+
+**Made with** the same Remotion project: 10.0 s, 249 KB, mean luma 229, darkest frame 227; poster
+1280x800, luma 228 (the whole line, unchanged).
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
 These are product facts an agent must not guess. Two of the seven below were
