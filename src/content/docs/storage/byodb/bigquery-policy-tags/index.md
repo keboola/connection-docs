@@ -14,18 +14,19 @@ With policy-tag support enabled on your backend, Keboola does three things:
 
 - It keeps the policy tag on the copies it makes of a protected column within your BigQuery backend. The exceptions are
   listed in [What this feature does not cover](#what-this-feature-does-not-cover).
-- On those copies, it refuses rather than produce an unprotected one.
+- When it cannot keep the tag on one of those copies, it refuses to make the copy.
 - It reports each column's protection state in the table detail.
 
 Keboola keeps tags that a source already carries. It never adds a tag to a table whose source has none.
 
 The feature is available only on your own BigQuery backend ([BYODB](/storage/byodb/)). It is off by default, and Keboola
-enables it for one backend at a time on request.
+enables it for one backend at a time on request. See [Enable BigQuery policy tags](/storage/byodb/bigquery-policy-tags/enable/).
 
 ## How it works
 
 Keboola carries the tag over when it copies a table in Storage or loads a table into a workspace within your backend.
-Other paths, such as snapshot restore, are listed in [What this feature does not cover](#what-this-feature-does-not-cover). The destination is created already protected, before any row reaches it.
+Other paths, such as snapshot restore, are listed in [What this feature does not cover](#what-this-feature-does-not-cover).
+The destination is created already protected, before any row reaches it.
 
 Columns are matched by name. A column renamed in an input mapping keeps its tag under the new name.
 
@@ -38,55 +39,15 @@ job was about to replace stays as it was. The job fails as a user error, so Kebo
   comes from. A view that passes a protected column through under its own name is copied with the tag.
 - Keboola cannot read the source, or the project's service account lacks a grant that the copy needs.
 
-## What you grant
+## Access Keboola holds
 
-Keboola asks for permissions on the taxonomy that holds your policy tags, nothing more. The taxonomy is identified by its
-resource name, `projects/{project}/locations/{location}/taxonomies/{taxonomyId}`.
+Enablement never grants Keboola read access to protected values. Reading a protected column requires the Fine-Grained
+Reader role on the policy tag. Keboola never asks for it, and enablement only binds your custom role to the project
+service accounts. The rights Keboola asks for would technically let its root account add other bindings to the taxonomy;
+Keboola does not.
 
-| Who | Permission on the taxonomy | Why |
-|---|---|---|
-| The root service account of your Keboola backend | A custom role with `datacatalog.taxonomies.get` | Lets Keboola check the taxonomy. Granted onward, it lets project service accounts attach its tags. |
-| The same root service account | A role with `datacatalog.taxonomies.getIamPolicy` and `datacatalog.taxonomies.setIamPolicy` | Lets Keboola grant the custom role to each project's service account |
-
-Use a custom role that you name. Keboola refuses a predefined role in this position, because the role is granted to every
-project service account on the backend. A role that holds only `datacatalog.taxonomies.get` is enough.
-
-**Enablement never grants Keboola read access to protected values.** Reading a protected column requires the
-Fine-Grained Reader role on the policy tag. Keboola never asks for it, and enablement only binds your custom role. The
-policy rights above would technically let the root account add other bindings to the taxonomy; Keboola does not.
-
-Copying a protected column still requires read access to it. Keboola never requests the Fine-Grained Reader role; if your
-project service accounts do not hold it, copies of protected columns may fail. Granting it is your decision.
-
-## Enable the feature
-
-Contact Keboola support, one request per backend, and send:
-
-- the taxonomy resource name;
-- the name of the custom role;
-- a policy tag from that taxonomy that Keboola may attach to a scratch table to test the setup.
-
-Keboola then tests the setup end to end. It creates a scratch table, attaches the test tag, removes the table, and checks
-that it can grant the custom role onward. It then grants the role to every project service account on the backend and
-turns the feature on. If any step fails, Keboola does not turn the feature on, and support tells you what to fix.
-
-### Plan for the first incremental load
-
-A workspace table created before the feature was enabled carries no tags. The first incremental load into it from a
-protected source fails before it writes any data, and names the columns.
-
-To fix it, run that load once with the table overwritten. The table is re-created with the source's protection, and later
-incremental loads work again. If you tag many columns, expect this right after enablement.
-
-### The principal limit
-
-A BigQuery IAM policy holds at most 1,500 principals. Every project service account on the backend becomes one member of
-your taxonomy's policy. Once the policy is full, granting the role fails, and so does creating a project on the backend.
-
-Keboola refuses to enable the feature if that would take the policy past 1,400, leaving room for your own bindings.
-Keboola tries to remove a project's service account from the policy when the project is deleted. Members left behind by
-deleted accounts are cleared when support re-runs the enablement. If you run many projects on one backend, check the
-policy's size before you ask for enablement.
+Copying a protected column still requires read access to it. If your project service accounts do not hold the
+Fine-Grained Reader role, copies of protected columns may fail. Granting it is your decision.
 
 ## Column protection in the table detail
 
@@ -113,11 +74,6 @@ the source table, the destination table and the columns involved.
 | `storage.policyTagPropagationFailed` | Keboola tried to keep the tag, failed, and copied nothing. | Read the error in the event, fix its cause, and run the job again. |
 | `storage.workspacePolicyTagMismatch` | An incremental load was refused, because the existing workspace table is less protected than its source. | Run the load once with the table overwritten. |
 
-## One taxonomy per backend
-
-Each backend works with one taxonomy. If a source column carries a tag from a different taxonomy, Keboola cannot attach
-it, and the copy fails. Support for several taxonomies on one backend is planned.
-
 ## What this feature does not cover
 
 Policy-tag support keeps protection on the copies Keboola makes within your BigQuery backend. It does not cover:
@@ -138,3 +94,13 @@ Policy-tag support keeps protection on the copies Keboola makes within your BigQ
   into a workspace) does not.
 - **Grants removed after enablement.** Keboola does not detect or prevent changes to the grants on your taxonomy. If you
   remove them, copies of protected columns fail.
+
+## Limits
+
+- **One taxonomy per backend.** If a source column carries a tag from a different taxonomy, Keboola cannot attach it, and
+  the copy fails. Support for several taxonomies on one backend is planned.
+- **Principals in the taxonomy's policy.** A BigQuery IAM policy holds at most 1,500 principals, and every project service
+  account on the backend becomes one member of your taxonomy's policy. Once the policy is full, granting the role fails,
+  and so does creating a project on the backend. Keboola refuses to enable the feature if that would take the policy past
+  1,400, leaving room for your own bindings. Keboola tries to remove a project's service account from the policy when the
+  project is deleted, and members left behind by deleted accounts are cleared when support re-runs the enablement.
