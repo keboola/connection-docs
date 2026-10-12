@@ -2,6 +2,7 @@
 title: MixPanel
 slug: 'components/extractors/marketing-sales/mixpanel'
 description: Export raw event data from Mixpanel into Storage as a name-value-pair table or as raw JSON, for a date range or a rolling window of full days.
+search_keywords: [mixpanel]
 ---
 
 
@@ -30,8 +31,6 @@ description: Export raw event data from Mixpanel into Storage as a name-value-pa
 | Load type | **Full load** (default) overwrites the table on every run. **Incremental load** creates the table with primary keys and upserts new data. |
 | Raw data export | Off: the JSON is parsed into a key-value pair table. On: the raw JSON response is stored in the table for you to parse later, for example in a Snowflake or Python transformation. |
 
-Large exports can run for hours. For a full history, split the export into several runs with From date and To date. In a nightly flow, use Throwback instead, so each run picks up the latest full days.
-
 ## Output
 
 With raw data export off, the connector returns one table with three columns:
@@ -46,3 +45,7 @@ With raw data export off, the connector returns one table with three columns:
 `id` is the MD5 hash of the unprocessed row, so it is unique per exported event and lets you pivot the parameters of one event back together.
 
 With raw data export on, the table has two columns, `id` and `raw`, where `raw` holds the unprocessed JSON.
+
+## Limits
+
+Large exports can run for hours. For a full history, split the export into several runs with From date and To date. In a nightly flow, use Throwback instead, so each run picks up the latest full days.

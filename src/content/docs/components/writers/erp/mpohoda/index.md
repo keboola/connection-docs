@@ -2,10 +2,11 @@
 title: mPOHODA
 slug: 'components/writers/erp/mpohoda'
 description: Create invoices, orders, offers, business partners and other records in the mPOHODA cloud accounting API from Keboola tables, with a results table per run.
+search_keywords: [pohoda, stormware, mpohoda]
 ---
 
 
-[mPOHODA](https://www.mpohoda.cz) is STORMWARE's cloud accounting service. The mPOHODA data destination connector creates records in it from Keboola tables through the REST API. One configuration row writes to one agenda: business partners, issued invoices, issued advance invoices, received invoices, issued orders, received orders, issued offers, issue slips, other liabilities or payment methods.
+[mPOHODA](https://www.mpohoda.cz) is STORMWARE's cloud accounting service. The mPOHODA data destination connector creates records in it from Keboola tables through the REST API. One configuration row writes to one agenda: business partners, issued invoices, issued advance invoices, received invoices, issued orders, received orders, issued offers, issue slips, other liabilities or payment methods. The [mPOHODA data source connector](/components/extractors/erp/mpohoda/) reads the agendas the other way.
 
 <!-- Reference-type page. Source: the component registry copy of `keboola.wr-mpohoda` (/v2/storage longDescription, configurationDescription and config schema), verified 2026-10-12. -->
 

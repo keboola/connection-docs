@@ -2,10 +2,11 @@
 title: mPOHODA
 slug: 'components/extractors/erp/mpohoda'
 description: Extract invoices, orders, offers, business partners, price lists and reference lists from the mPOHODA cloud accounting API, with incremental loading.
+search_keywords: [pohoda, stormware, mpohoda]
 ---
 
 
-[mPOHODA](https://www.mpohoda.cz) is STORMWARE's cloud accounting service. The mPOHODA data source connector reads its REST API into Storage. One configuration row extracts one agenda: issued and received invoices and advance invoices, issued and received orders, issued offers, issue slips, other liabilities, business partners, price-list items, selling prices, registration numbers, activities, cash registers, bank accounts, establishments, centres, and reference lists such as banks, countries, currencies, VAT rates, payment methods, regions, exchange rates, and city and post codes.
+[mPOHODA](https://www.mpohoda.cz) is STORMWARE's cloud accounting service. The mPOHODA data source connector reads its REST API into Storage. One configuration row extracts one agenda: issued invoices, issued advance invoices, issued corrective tax documents, received invoices, issued and received orders, issued offers, issue slips, other liabilities, business partners, price-list items, selling prices, registration and serial numbers, activities, cash registers, bank accounts, establishments, centres, and reference lists such as banks, countries, currencies, VAT rates, payment methods and their types, regions, exchange rates, and city and post codes. The [mPOHODA data destination connector](/components/writers/erp/mpohoda/) writes records the other way.
 
 <!-- Reference-type page. Source: the component registry copy of `keboola.ex-mpohoda` (/v2/storage longDescription, configurationDescription and config schema), verified 2026-10-12. -->
 

@@ -2,6 +2,7 @@
 title: SuiteProjects Pro
 slug: 'components/extractors/erp/suiteprojects-pro'
 description: Extract projects, tasks, time entries, invoices, approvals and about 160 other object types from NetSuite SuiteProjects Pro, formerly OpenAir, through its XML API.
+search_keywords: [openair, netsuite openair, suiteprojects]
 ---
 
 
@@ -20,8 +21,6 @@ Incremental fetch is the default: after the first run, each run reads only the o
 - **API access**, a licensed SuiteProjects Pro add-on. When it is enabled for the account, SuiteProjects Pro issues the API namespace and the API key.
 - **A dedicated API user** that signs in with a password. Single sign-on does not work for the API. The connector reads only the objects that this user's role and filter sets allow.
 - The account-specific domain from the address bar after you sign in.
-
-Every request counts against the account's API limits for 60 seconds and for 24 hours, which the account shares with its other integrations. Keep row parallelism off.
 
 ## Configuration
 
@@ -69,7 +68,7 @@ Some object types add options of their own, for example **Download files** and *
 | Field | Description |
 |---|---|
 | Table name | Storage table name. Empty uses the object type in lowercase. |
-| Load type | **Incremental load** (default) adds to the table; **Full load** replaces it. |
+| Load type | **Incremental load** (default) updates rows by primary key and keeps the rest. **Full load** replaces the table: with full fetch it mirrors SuiteProjects Pro, with incremental fetch or a date window the table holds only each run's objects. Object types without a primary key, such as Term, need full load. |
 
 **Read options**
 
@@ -77,9 +76,13 @@ Some object types add options of their own, for example **Download files** and *
 |---|---|
 | Columns | The properties to read. Empty reads all of them. |
 | Batch size | Objects per API request, at most 1,000. |
-| Custom fields | **Inline** (default) writes custom field values as columns, **Separate table** writes them to their own table, optionally only the named custom fields, and **Off** skips them. |
+| Custom fields | **Inline columns** (default) writes custom field values as columns, **Separate table** writes them to their own table, optionally only the named custom fields, and **Off** skips them. |
 | Include deleted | Also reads the objects marked as deleted and flags them in an `is_deleted` column. |
 
 ## Output
 
 One table per row, named after the object type in lowercase unless you set a table name. With custom fields set to a separate table, their values land in their own table. Attachment contents go to [File Storage](/storage/files/) when Download files is on.
+
+## Limits
+
+Every request counts against the account's API limits for 60 seconds and for 24 hours, which the account shares with its other integrations. Keep row parallelism off, and keep incremental fetch wherever the object type has an updated field.

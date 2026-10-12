@@ -2,6 +2,7 @@
 title: UKG HR
 slug: 'components/extractors/other/ukg-hr'
 description: Extract requests, employees, employee documents, organizations and users from UKG HR Service Delivery into Storage, with incremental loading.
+search_keywords: [hrsd, hr service delivery, ultipro, people assist]
 ---
 
 
@@ -15,11 +16,11 @@ This connector is experimental. Its configuration and output may still change. S
 
 One configuration row extracts one resource:
 
-- **requests**: People Assist requests and cases. Incremental by `updated_at`, `created_at` or `closed_at`.
-- **employees**: the employee directory. Incremental by `created_at`.
-- **employee_documents**: employee document metadata. Incremental by `created_at`. The document files themselves are not downloaded.
-- **organizations**: the company structure. Full load only, because the API has no date filter.
-- **users**: user profiles. Full load only.
+- `requests`: People Assist requests and cases. Incremental by `updated_at`, `created_at` or `closed_at`.
+- `employees`: the employee directory. Incremental by `created_at`.
+- `employee_documents`: employee document metadata. Incremental by `created_at`. The document files themselves are not downloaded.
+- `organizations`: the company structure. Full load only, because the API has no date filter.
+- `users`: user profiles. Full load only.
 
 ## Prerequisites
 
@@ -71,8 +72,8 @@ Filters by resource:
 - **Organizations:** parent organization ID, recursive, full-text query.
 - **Users:** active users only, role ID, organization ID, email.
 
-The API has no field-selection parameter, so each resource always returns its full object shape.
-
 ## Output
 
 Each row produces one table with `id` as the primary key. Nested objects are flattened into underscore-separated columns; lists and arrays of objects are stored as JSON strings. Datetime fields are typed as `TIMESTAMP`. The connector follows the API's RFC 5988 `link` pagination headers.
+
+The API has no field-selection parameter, so each resource always returns its full object shape.

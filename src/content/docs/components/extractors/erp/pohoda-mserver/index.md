@@ -2,10 +2,11 @@
 title: POHODA mServer
 slug: 'components/extractors/erp/pohoda-mserver'
 description: Extract address book, invoices, orders, stock and other agendas from STORMWARE POHODA through its mServer XML API, with incremental loading.
+search_keywords: [pohoda, stormware, mserver]
 ---
 
 
-[STORMWARE POHODA](https://www.stormware.cz/pohoda/) is a widely used Czech accounting system. The POHODA mServer data source connector reads its agendas through the mServer HTTP/XML API and writes them to Storage tables. One configuration row extracts one agenda: address book, invoices, orders, offers, enquiries, stock, cost centres, contracts, activities, internal documents, cash vouchers, payment forms or bank accounts.
+[STORMWARE POHODA](https://www.stormware.cz/pohoda/) is a widely used Czech accounting system. The POHODA mServer data source connector reads its agendas through the mServer HTTP/XML API and writes them to Storage tables. One configuration row extracts one agenda: address book, invoices, orders, offers, enquiries, stock, cost centres, contracts, activities, internal documents, cash vouchers, payment forms or bank accounts. The [POHODA mServer data destination connector](/components/writers/erp/pohoda-mserver/) writes records the other way.
 
 <!-- Reference-type page. Source: the component registry copy of `keboola.ex-pohoda-mserver` (/v2/storage longDescription, configurationDescription and config schema), verified 2026-10-12. -->
 
@@ -49,7 +50,7 @@ Click **Add Row** and configure one row per agenda:
 | Field | Description |
 |---|---|
 | Agenda | The POHODA entity to extract: address book, centre, contract, activity, stock, invoice, order, offer, enquiry, cash voucher, internal document, payment form or bank account. |
-| Invoice, order, offer or enquiry type | Shown for the Invoices, Orders, Offers and Enquiries agendas only. Selects the document direction and sub-type, for example *Issued invoice*, *Received invoice* or *Issued advance invoice*. |
+| Invoice type, Order type, Offer type, Enquiry type | One of these appears when the agenda is Invoices, Orders, Offers or Enquiries. It selects the document direction and sub-type, for example *Issued invoice*, *Received invoice* or *Issued advance invoice*. |
 | Load mode | **Incremental** (default) fetches only the records changed since the last run and upserts them by primary key. **Full** downloads all records and replaces the table. A full load is the only way to capture deletions. |
 | Output table name | Overrides the default table name, which is the agenda in snake case, for example `address_book` or `invoice_issued_invoice`. |
 
