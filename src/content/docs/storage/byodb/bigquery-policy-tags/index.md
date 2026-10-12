@@ -1,17 +1,19 @@
 ---
 title: BigQuery policy tags
 slug: 'storage/byodb/bigquery-policy-tags'
-description: Keep BigQuery column-level access control on every copy Keboola makes of a protected table.
+description: Keep BigQuery column-level access control on the copies Keboola makes of a protected table within your BigQuery backend.
 ---
 
 BigQuery [policy tags](https://cloud.google.com/bigquery/docs/column-level-security-intro) restrict who can read a column.
 You attach them in BigQuery.
 
-Without this feature, Keboola copies a tagged column without its tag and gives no warning. The copy is unprotected.
+Without this feature, Keboola copies a tagged column within your backend without its tag and gives no warning. The copy
+is unprotected.
 
 With policy-tag support enabled on your backend, Keboola does three things:
 
-- It keeps the policy tag on every copy it makes of a protected column.
+- It keeps the policy tag on the copies it makes of a protected column within your BigQuery backend. The exceptions are
+  listed in [What this feature does not cover](#what-this-feature-does-not-cover).
 - It refuses a copy rather than produce an unprotected one.
 - It reports each column's protection state in the table detail.
 
@@ -102,8 +104,8 @@ project.
 
 ## Events
 
-Keboola records an event in the project whenever a policy tag affects a copy. Each event names the source table, the
-destination table and the columns involved.
+Keboola records an event in the project when a policy tag affects a copy within your BigQuery backend. Each event names
+the source table, the destination table and the columns involved.
 
 | Event | What happened | What to do |
 |---|---|---|
