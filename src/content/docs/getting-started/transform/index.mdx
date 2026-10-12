@@ -52,10 +52,10 @@ deleted the same minute. */}
 
 <PathIntro tabs={3} />
 
-{/* 2026-09-29, David Esner ("strašně moc textu") and Nikita: the mapping model and the four parts
+{/* 2026-09-29, David Esner (far too much text) and Nikita: the mapping model and the four parts
 of the query are strips now, the bucket-names paragraph and the "which SQL" paragraph are two
 bullets, and the half-open detail is folded. Cut: "Close the dialog and carry that word into your
-tab", nothing else; CONSERVATION-REPORT.md, 2026-09-29. */}
+tab", nothing else; notes/getting-started/CONSERVATION-REPORT.md, 2026-09-29. */}
 
 ## How a transformation works
 
@@ -131,7 +131,7 @@ Free Plan BigQuery on us-east4. Run that day in Free Plan project 6375 in this e
 fresh chat: Kai built a Google BigQuery transformation (SAFE_CAST throughout, the four bands
 half-open, tables read by full name with an empty input mapping), two approvals, 42 rows, and named
 Zelný trh on Monday and Tuesday at 85.2 as most stretched, which matches an offline computation
-from the same files and forecast. DECISIONS.md 2026-10-01. VERIFY(Nikita): this wording has not
+from the same files and forecast. notes/getting-started/DECISIONS.md 2026-10-01. VERIFY(Nikita): this wording has not
 run on a Snowflake project; the Snowflake runs (264, 2026-09-08/09) used a prompt that named
 Snowflake. */}
 {/* Guide test 2026-09-09: the live run's prompt described the columns in words and Kai chose
@@ -158,7 +158,7 @@ figures, though Kai picks its own column types and writes the weekday out in ful
 
 {/* Observed in all three 2026-09-08 runs: storage.input.tables empty, tables addressed as
 "KBC_EUW3_264"."in.c-keboola-ex-http-<id>"."sales". This closes the open marker that stood here
-since 5 Aug; see DECISIONS.md 2026-09-08. */}
+since 5 Aug; see notes/getting-started/DECISIONS.md 2026-09-08. */}
 
 The chat links what Kai made, so that is where to find it afterwards: the transformation, and the
 job that ran it.
@@ -627,7 +627,7 @@ the scheduling page is for.
 
 {/* On the day this was written (forecast 2026-09-08 to 09-14): 4 rows flagged, top row Boolabean
 Zelný trh (Brno), Tue 2026-09-08, 31.2 °C, 0 mm, 168.8 expected units, 2 rostered, 84.4 per person.
-Recorded in DECISIONS.md, deliberately not on the page: decision 6. */}
+Recorded in notes/getting-started/DECISIONS.md, deliberately not on the page: decision 6. */}
 
 ## If it goes wrong
 
@@ -648,7 +648,7 @@ with `kbagent kai ask --project <alias> -m "…"`. The folds below cover the res
 failed-job prompt as worded: Kai found the transformation, checked all 24 runs (8 Sep to 1 Oct, all
 succeeded) and said there was no failure. The second prompt, with "it has more than 42 rows": Kai
 read the SQL and the table, found exactly 42 rows and no duplicate forecast rows, walked through the
-joins and suggested a filter, changing nothing. DECISIONS.md 2026-10-07. */}
+joins and suggested a filter, changing nothing. notes/getting-started/DECISIONS.md 2026-10-07. */}
 :::
 
 <details>

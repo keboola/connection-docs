@@ -2500,7 +2500,7 @@ nav.sidebar {
    Components: src/components/getting-started/{PageMeta,Prereqs,PathIntro,CourseLine,
    SampleData,FlowStrip}.astro
    All four blocks exist so a page survives being landed on cold from a search
-   engine (decision of 2026-09-02, see DECISIONS.md). Styles live here per
+   engine (decision of 2026-09-02, see notes/getting-started/DECISIONS.md). Styles live here per
    AGENTS.md — never as <style> blocks in the components.
    --------------------------------------------------------------------------- */
 

@@ -35,6 +35,14 @@ not yet done).
 
 ## Pending
 
+**Status 2026-10-12** (Jordan's review on #1116, item 8, found this table stale): the first row
+was done on 2026-09-09 and undone on 2026-09-14, when `project/` became a page again (see the
+row about the hub's "Get a project" section under *Deliberate deletions*). The other five moves
+never happened, so nothing in them was lost: `automate/` still has "Phases and tasks",
+`transform/` "How a transformation works", `write/` "Sending data out" and its failure modes
+under "If it goes wrong", and `load/` teaches one configuration with a row per file under "How
+loading works". Whether any of them should move to the section pages named here is open.
+
 | Content | From | Planned destination |
 |---|---|---|
 | Project isolation, the three entry routes, what a stack is, the five locators, the Kai orientation prompt, the two checks and the three sign-in failure modes | `project/index.mdx` | `getting-started/index.mdx` → **Get a project** (routes, project + stack in one paragraph, **Find your way around**, the tip, **Check it worked** and **If it goes wrong** as two bold-led paragraphs); the two `VERIFY(owner)` comments travelled with their facts; `/getting-started/project/` redirects to the hub | merged 2026-09-09 |
@@ -68,7 +76,7 @@ not yet done).
 | `write/writing11.png` | `write/index.mdx:196` | Deleted 2026-09-22: an unmasked top bar (organization, project, branch, avatar) and the retired sample world. It also contradicted its own step, which says the click opens the spreadsheet while the picture showed a Keboola page. |
 | `ad-hoc/ex-bigquery-6.png`, the service-account key screenshot | `ad-hoc/index.md:114` | Deleted 2026-09-22, not masked: its only content was a pasted Google service-account JSON (private key, client_email, project_id), and the sentence above it already says what to paste. House style and Google's own guide both say not to use images of text or code. The masked twin of the same file survives at the old path in PR #1100. |
 | The hub's hero clip `map-tour.mp4` (octopus tour, 25 s) and its poster | `index.mdx` | The sample world changed on 2026-09-03; a clip answering the old question under the new text would mislead. Replaced by `outlook-tour.mp4`, shot from the live pipeline in project 264. The two files stayed in `public/` unreferenced until 2026-09-16, when they were deleted: 1.15 MB serving no page, and the last octopus-era asset in the repo. |
-| "No Kai path here" call-out and the project page's own `PageMeta` (5 min) | `project/index.mdx` | The step is now a section of the hub; its five minutes fold into the hub's total, to be re-measured in the phase-3 stopwatch pass. |
+| "No Kai path here" call-out and the project page's own `PageMeta` (5 min) | `project/index.mdx` | The step is now a section of the hub; its five minutes fold into the hub's total, to be re-measured in the phase-3 stopwatch pass. **Superseded 2026-09-14:** `project/` is a page again, with its own `PageMeta`. |
 
 
 | Content | Why | Where the information survives |
@@ -274,4 +282,47 @@ Nikita's decision). What went with it:
 | load/ | "The sample data": "; the next page joins them" | load/'s lede says it |
 | load/googlesheets.mdx | "Going further" bullet: "Load from a database is the other side trip: a source that needs credentials rather than a consent screen." | moved, same words, into the page's closing **Next:** line |
 | with-kai/ | the cards' screenshots: kai-forecast, kai-transform, kai-ask, grid-preview, kai-flow, with their alt text typed a second time in course.mjs | the images stay on their step pages; the cards now show their own frames of the finished step from the 2026-10-08 run (public/getting-started/with-kai/) |
-| with-kai/ (app card) | the frame of the Apps builder at Draft ready, Not live yet, with the draft grid (app-done.png, 8 October run) | the card now shows where the app's prompt goes (app-where.png, the empty project 6429's Apps page with the prompt pasted, Nikita 2026-10-09: "приложение на карточку"); the card's Done when line still names Draft ready, and app/ step 3 describes it; app/ keeps its builder screenshots (kai-builder.png just after sending, grid-preview.png the draft grid), so no image in the guide shows the Draft ready line itself any more |
+| with-kai/ (app card) | the frame of the Apps builder at Draft ready, Not live yet, with the draft grid (app-done.png, 8 October run) | the card now shows where the app's prompt goes (app-where.png, the empty project 6429's Apps page with the prompt pasted, Nikita asked for the app on its card, 2026-10-09); the card's Done when line still names Draft ready, and app/ step 3 describes it; app/ keeps its builder screenshots (kai-builder.png just after sending, grid-preview.png the draft grid), so no image in the guide shows the Draft ready line itself any more |
+
+## main's `/tutorial/` pages, replaced by this rebuild (#1116; Jordan's review, item 8)
+
+The tables above follow the intermediate octopus branch. These rows map what `main` still
+serves under `/tutorial/` to where it lives now. Each old slug has a `redirect_from` on its new
+page. The pages that moved whole, `/tutorial/ad-hoc/`, the seven under `/tutorial/branches/`
+and the six under `/tutorial/onboarding/` (to `getting-started/ad-hoc/`,
+`getting-started/branches/` and `overview/onboarding/`), moved as they were and are not
+repeated here.
+
+| Content | From (`main`) | Now | Status |
+|---|---|---|---|
+| The opening paragraph (extract, transform, store, write, automate) | `tutorial/index.md` | the hub's opening paragraph: where data lives, what Keboola does with it, and what Kai does for you | merged |
+| Prerequisites: the platform overview link | `tutorial/index.md` | `project/` links the overview where it explains stacks (`/overview/#stacks`); the hub sends a team planning a rollout to Platform Onboarding | moved |
+| Prerequisites: get a project (sales@keboola.com, the free project wizard) | `tutorial/index.md` | `project/`: three routes, the Free Plan sign-up, an invite to your company's project, and "Talk to us" through Keboola's contact page instead of the e-mail address | moved |
+| Prerequisites: a developer's own development project | `tutorial/index.md` | dropped: this guide is for using a project; `going-further/` links the component tutorial for building one | dropped |
+| Prerequisites: a basic understanding of SQL | `tutorial/index.md` | dropped: on the Prompt tab Kai writes the SQL, and the UI tab prints it with an explanation of each part | dropped |
+| "Upon completing this tutorial" (four outcomes) and the basic steps list (load manually, manipulate, write to Google Sheets) | `tutorial/index.md` | the hub's course list (seven steps, with what you will be able to do); writing to Google Sheets is a side trip, `write/` | replaced |
+| The advanced steps list (Google Sheets and database sources, a workspace, a flow, ad-hoc analysis, development branches, the CLI) | `tutorial/index.md` | the side trips `load/googlesheets/`, `load/database/`, `transform/workspace/`; the flow is a main step, `automate/`; ad-hoc analysis, branches and the CLI are in `going-further/` | moved |
+| Manual loading suits a proof of concept, connectors suit production | `tutorial/load/manual.md` | `load/` "How loading works": the HTTP data source connector can be re-run, scheduled and put in a flow. The proof-of-concept sentence was cut on 2026-09-29 (row above) | merged |
+| The four sample files, opportunity, account, user and level | `tutorial/load/manual.md` | `public/getting-started/*.csv`, and `vercel.json` 308s the old `/tutorial/*.csv` URLs there. `opportunity.csv` is the sample for `data-apps/getting-started` and `build-locally`, `level.csv` for `load/googlesheets/`; `account.csv` and `user.csv` stay for the old URLs and as extra sample tables on `components/extractors/storage/http/`, which also uses `level.csv` and `opportunity.csv` | moved |
+| "All characters in this data are fictitious…" | `tutorial/load/manual.md` | retired with that dataset; `load/` declares Boolabean fictional in the first sentence of "The sample data" | dropped |
+| The CSV Import walk: a configuration per file, Select file, the destination `in.c-csv-import.*`, Upload | `tutorial/load/manual.md` | dropped: CSV Import is deprecated (`load/`'s comment). `load/` builds one HTTP data source configuration with a row per file, which a flow can re-run | dropped |
+| The naming-conventions note and the best-practices link | `tutorial/load/manual.md` | `load/` UI tab, with the link to the best practices cheat sheet; `transform/` explains folders | moved |
+| Buckets, tables and the Data Sample tab | `tutorial/load/manual.md` | `load/` "Check": the bucket's Storage page and a table's **Data Sample** tab | moved |
+| Creating the transformation (backend, name, description, folder) | `tutorial/manipulate/index.md` | `transform/` UI tab, "Create the transformation" | moved |
+| How a transformation runs (a dedicated schema, cloned inputs, unloaded outputs) and the three building blocks | `tutorial/manipulate/index.md` | `transform/` "How a transformation works"; the safeguard and lineage sentence was cut on 2026-09-29 (row above) | moved |
+| Input mapping (New Input, the Source search, the generated table name), the **Changed in Last** filter and the link | `tutorial/manipulate/index.md` | `transform/` UI tab, "Set the input mapping", and the paragraph on what input mapping can also do | moved |
+| Output mapping (the table name, the generated destination, the bucket created on the first run) | `tutorial/manipulate/index.md` | `transform/` UI tab, "Set the output mapping" | moved |
+| The three queries that build `opportunity_denorm` (level labels, the probability class, the join of opportunity, user and account), in Snowflake and BigQuery SQL | `tutorial/manipulate/index.md` | retired with that dataset; `transform/` builds `staffing_outlook` in both dialects, and "What the SQL has to do" explains each part as the old page did | dropped |
+| New Code, naming the code, Save | `tutorial/manipulate/index.md` | `transform/` UI tab, "Write the queries" (**Create Multiple Queries**, the code named Code, the rename pencil) | moved |
+| Running the transformation (the job's four steps, Jobs, the notification) and **Recently updated by** | `tutorial/manipulate/index.md` | `transform/` "Run it and check the result", and its fold on the columns | moved |
+| Using a workspace: create it, map and load the data, read-only access to all Storage, Connect and the web IDE | `tutorial/manipulate/workspace.md` | `transform/workspace/`, rewritten on the guide's table with the three tabs | moved, rewritten |
+| Writing data out (reverse ETL; BI tools, databases and applications as destinations) | `tutorial/write/index.md` | `write/` "Sending data out" | moved |
+| The Google Sheets destination walk: authorize (external authorization too), the table, a new spreadsheet, Update rows, Run, open the sheet | `tutorial/write/index.md` | `write/`, the same walk for `staffing_outlook` instead of `opportunity_denorm` | moved |
+| Why flows: the same steps have to repeat, in order, on a schedule | `tutorial/automate/index.md` | `automate/` opening and "Phases and tasks" | moved |
+| Building the flow: Create Flow, the folder, the first step, two extractions in parallel in one step, the transformation, the Sheets destination | `tutorial/automate/index.md` | `automate/` UI tab: the two connectors in one phase, then the transformation; the Sheets destination optional | moved |
+| Repointing the transformation's input mapping at the extracted tables | `tutorial/automate/index.md` | no longer a step: the guide's transformation reads the connectors' tables from the start; `automate/`'s fold "If you took the connector side trips" keeps the repoint for a hand-built transformation | moved |
+| A daily schedule at 6:15 UTC | `tutorial/automate/index.md` | `automate/` "Set a schedule": every Monday at 06:00 in your own time zone, weekly because of the Free Plan's minutes | changed |
+| Notifications on success, warning, error or processing | `tutorial/automate/index.md` | `automate/` "Set up notifications" | moved |
+| Loading from a database: the Snowflake data source and the sample database credentials, Advanced Mode | `tutorial/load/database.md` | `load/database/`, the same sample database, with the three tabs | moved, rewritten |
+| Loading from Google Sheets: a spreadsheet from `level.csv`, authorization, picking the file and the sheet, **Use With Demo Data** | `tutorial/load/googlesheets.md` | `load/googlesheets/`, the same walk | moved, rewritten |
+| "What's Next" and "If You Need Help" on every page | all eight pages | the **Next** footer, and "If it goes wrong" on every step page except `automate/`, which sends a failed run to `check/` ("Reading a flow run") | replaced |

@@ -58,7 +58,8 @@ The full repo guide — stack, structure, commands, and conventions — lives in
 - Structure/form: the agent may decide. Facts and deletions: owner or code only —
   else keep and flag `VERIFY(<owner>)` / `TODO(human-review, <owner>)`.
 - Conserve content: every removed paragraph → a new home or a logged deletion
-  (CONSERVATION-REPORT + MISSING list). Never drop silently.
+  (a CONSERVATION-REPORT and a MISSING list under `notes/<section>/`, as in
+  `notes/getting-started/`). Never drop silently.
 - Current guardrails: don't assert E2B as hosting; don't say Streamlit is retired.
   (Kai pricing, the in-app enable toggle and the semantic layer are now shipped
   docs — `kai/pricing.md`, Settings → Features in `kai/getting-started.md`,

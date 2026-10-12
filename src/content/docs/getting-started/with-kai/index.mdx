@@ -40,11 +40,11 @@ click-through and terminal ways, and explain what each one does.
     <source src="/getting-started/with-kai/where-kai.mp4" type="video/mp4" />
   </video>
 
-  {/* Recording, 2026-10-09, a new Free Plan project, 6429 (Nikita: "где конкретно найти кая по шагам
-  и куда вставлять промпты", "лучше бы сделал гифку конкретную как работает в интерфейсе"; on a
-  sample "1.6 норм, приложение на карточку … не приближай слишком близко. Можно чуть-чуть еще,
-  наверное, подальше"; on the 1.45x cut "наверное все же можно еще приблизить" and a jump of the chat
-  field at 5-6 s; "Approve можно" for the takes). Take 8 of record-where4.mjs, at 2x through the CDP
+  {/* Recording, 2026-10-09, a new Free Plan project, 6429 (Nikita asked to see step by step where Kai
+  is and where the prompts go, as a clip of the interface rather than enlarged screenshots; on a
+  sample he approved a 1.6x zoom with the app on its card, not too close and perhaps a little
+  further out; on the 1.45x cut, a little closer after all, and a jump of the chat field at 5-6 s;
+  he approved clicking Approve for the takes). Take 8 of record-where4.mjs, at 2x through the CDP
   screencast, assembled in Remotion (~/docs-ops/remotion/where-kai, edit8.py, Composition8.tsx): the
   whole screen first, a zoom of 1.6x, back out at the end; an arrow pointer drawn by the recorder,
   brought up to Approve from below; captions in a band above the screen, where the player's
@@ -57,7 +57,7 @@ click-through and terminal ways, and explain what each one does.
   no buckets. The account e-mail was blanked as it rendered and the avatar hidden; Vision OCR over
   all 621 frames and the poster found no e-mail. 25.9 s, 850 KB, mean luma 228, min 224, poster at
   8.4 s (clip_metrics.sh). Recorders, raw takes and marks: ~/.keboola-shots/where-kai-2026-10-09/.
-  DECISIONS.md 2026-10-09. */}
+  notes/getting-started/DECISIONS.md 2026-10-09. */}
 - **When to paste the next:** once the step is done. Each step below says how to tell, and its
   page has the full **Check**.
 - **What Kai asks:** approve each change it proposes; each step below says how many to expect. To
@@ -88,7 +88,7 @@ timeout (our automation could not see the card; it then read "Confirmation Decli
 request "timed out after 5 minutes with no answer", and redid it after one nudge). About 28 minutes of work in 40 on the clock. The week was cold: Kai asked what to do with
 15 cold, dry store-days without history (picked Leave them blank), and nothing came out
 short-handed, as ask/'s Check warns. Notes: ~/.keboola-shots/free-run-2026-10-08/notes.md. Made 2026-10-08 at Nikita's call (own page after project/, before the step pages);
-DECISIONS.md 2026-10-08. */}
+notes/getting-started/DECISIONS.md 2026-10-08. */}
 
 <details>
 <summary>Why not one prompt for everything</summary>
@@ -104,9 +104,9 @@ with 12 approvals, which is why this page gives the prompts one by one.
 {/* Moved here from ask/'s "The same request, as one prompt" on 2026-10-08: the two measured
 observations stay, the prompt block went (its wording was never run on the current sample, and a
 second copy of the prompts would drift). The 14-minute, 12-approval control run is 8 Sep only
-(DECISIONS.md 2026-09-08); it used this sample with earlier prompt wording. Both one-prompt runs on the
+(notes/getting-started/DECISIONS.md 2026-09-08); it used this sample with earlier prompt wording. Both one-prompt runs on the
 current sample (3 and 8 Sep) stalled; the 2 Sep run of the older block on the earlier dataset ran
-end to end (14 min, 11 approvals). CONSERVATION-REPORT.md 2026-10-08. */}
+end to end (14 min, 11 approvals). notes/getting-started/CONSERVATION-REPORT.md 2026-10-08. */}
 
 ## What you have now
 
@@ -114,7 +114,7 @@ A pipeline that loads the data, joins it, answers the question in an app and reb
 Monday. [Check Storage and Jobs](/getting-started/check/#what-you-should-have) lists what should be
 there, with a prompt that has Kai list all of it in one answer.
 
-{/* The recap prompt itself is on check/ since 2026-10-09 (one copy; DECISIONS.md 2026-10-09). Its run note:
+{/* The recap prompt itself is on check/ since 2026-10-09 (one copy; notes/getting-started/DECISIONS.md 2026-10-09). Its run note:
 Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals: Kai listed both
 HTTP configurations, the six input tables with 6, 18, 9,761, 552, 552 and 42 rows, the
 transformation and staffing_outlook (42 rows), the Staffing Outlook Grid app and the flow, each with

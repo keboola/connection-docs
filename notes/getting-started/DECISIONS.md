@@ -16,10 +16,9 @@ pages and are listed at the bottom of this file so they can be closed in batches
 12-site documentation survey.
 
 The octopus dataset — and any dataset — is a vehicle, not the subject of the
-guide. *"Dataset je podle mě jen helping vehicle k tomu, abych si mohl zkusit
-tasky. Ale není to nosné téma."* The failure mode named on the call was landing
-confusion: *"Já si to prokliknu a vidím: Octopus, Octopus. Pro mě je to
-matoucí."*
+guide. On the call Michal called the dataset only a vehicle for trying the
+tasks, not a theme the guide should carry. The failure mode he named was landing
+confusion: clicking through and meeting octopus on every page confused him.
 
 Evidence: of twelve documentation sites examined (dbt, Snowflake, Databricks,
 Metabase, Airbyte, Fivetran, Hex, dltHub, Supabase, Cloudflare, PostHog,
@@ -37,8 +36,9 @@ Doohickey). Never in navigation.
 
 **Decided by:** Michal (call, 2 Sep 2026).
 
-*"To MCP a CLI jsou jen drivery a vehikly. Ty nechceš pracovat s CLI, ty chceš
-prostě zpracovat data. Já bych stavěl strukturu těch věcí od user needs."*
+MCP and the CLI are only drivers and vehicles: a reader does not want to work
+with the CLI, they want their data processed, so the structure should start from
+user needs.
 
 **Consequence:** page titles state what the reader gets. Tool names survive as
 tab labels and as their own reference sections in a separate "going further"
@@ -48,7 +48,8 @@ tier — never as chapters of the guide.
 
 **Decided by:** Michal (call, 2 Sep 2026).
 
-*"Musíš přemýšlet tak, že ten člověk přistane tady. Nikdy to nečetl."*
+Write every page for a reader who lands on it directly and has read nothing
+before it.
 
 This collides with the design rule that the guide's question is answered only at
 the last step. Both survive with two payoffs at different scales: a **local** one
@@ -79,7 +80,8 @@ rather than presenting them as separate sequential chapters.
 
 **Consequence:** each task page carries tabs for the same task, Kai/prompt
 selected by default. This is the same mechanism Michal asked for independently
-on 2 Sep (*"Mám tam nějaký prompt? Jak to zpracuje to CLI?"*) — it is one
+on 2 Sep, when he asked whether a page has a prompt and how the CLI would do
+the same task — it is one
 structural answer to two requests, not two features.
 
 ## 2026-08-05 — Kai first, manual path kept
@@ -136,7 +138,7 @@ where present. Adding a `title:` to navigation.yml still does nothing; use
 
 ## 2026-09-03 — The sample world is Boolabean, a fictional coffee chain
 
-**Decided by:** Nikita, on the delegated call ("придумай сам"), against the five
+**Decided by:** Nikita, who left the choice to the agent, against the five
 criteria in the 2 Sep memo.
 
 **The name.** Every natural café or bakery name is taken by a real business —
@@ -542,9 +544,9 @@ request beside it where there is no command). Starlight stores the reader's choi
 label *text*, so the three strings are a contract; it is written into `PathIntro.astro`'s header,
 and a page that spells one differently silently drops out of the sync.
 
-**Why:** Michal asked it directly on 2 September — "Mám tam nějaký prompt? Jak to zpracuje to
-CLI?" — and warned that without it "neztratila se nám podstata" ("kočičky"). Jordan had agreed
-the same mechanism on 5 August ("combined UI + API format"). Two independent asks, one answer.
+**Why:** Michal asked for it directly on 2 September: is there a prompt on the page, and how
+would the CLI do the same task? He also warned that the substance must not get lost under
+decoration. Jordan had agreed the same mechanism on 5 August (the combined UI and API format). Two independent asks, one answer.
 The third tab also ends the awkwardness of a guide that mentions the CLI only as a link.
 
 **Rollout:** one page per commit. `PathIntro` takes `tabs={3}`; the default stays the old two-tab
@@ -568,8 +570,8 @@ v0.76.1 reference, so every flag exists in both versions.
 produces, how long it takes). The café story is gone; the sample world is described once, on
 `load/`. **Get a project** returns to `/getting-started/project/`.
 
-**Why:** Michal, 2 September: "dataset je jen helping vehicle… není to nosné téma… já bych v tom
-byl sušší", and "já bych to už nedělal moc složitější". The merge of 9 September had made the hub
+**Why:** Michal, 2 September: the dataset is only a vehicle and not the guide's theme, the hub
+should be drier, and nothing should get more complicated than it already is. The merge of 9 September had made the hub
 230 lines that opened with two paragraphs of narrative. Get a project is also the only step with
 no prompt and no command, so as a hub section it broke the rule the rest of the arc now follows.
 Its URL had been a redirect to the hub anchor for five days; it is a real page again, and the nav,
@@ -577,7 +579,7 @@ the shared `Prereqs` link and the two inbound links point back at it.
 
 **Also taken from Stripe** (Nikita, 14 September): a "Where to start instead" table at the foot of
 the hub — this guide, the kbagent CLI, the MCP server, and building an app with Kai. It is where
-Michal's "MCP a CLI jsou jen drivery a vehikly" lands without them becoming topics inside the
+Michal's point that MCP and the CLI are only drivers and vehicles lands without them becoming topics inside the
 guide. Not taken: the three-column layout with code following the prose (a custom Starlight layout
 override; the cheap substitute is the `.gs-pair` grid for a capture beside its request), and the
 by-business-type use-case grid (one guide, one dataset).
@@ -1152,7 +1154,7 @@ PR. Two of Jordan's decisions of 21 August change and carry VERIFY(Jordan), belo
 prerequisites, a verification block) and the hub was the one page that did none of it. The reader
 met the question as the first line, then 74 words, then the table. Nikita's reading, on 23
 September: no sense of why the section exists, what the sample is, or what one learns; the question
-"sounds strange and as if it were not needed at all". Michal's test on 22 September had already
+read as strange, as if nothing needed it. Michal's test on 22 September had already
 shown a reader who skips introductions and reads steps; a hub that is all puzzle and no map serves
 neither reader.
 
@@ -1169,7 +1171,7 @@ five task pages; then the clip; then the state block the other pages carry; then
 three sentences with the question as the concrete goal every step works toward; then the
 free-project sentence; then the table, whose "What happens" column is now "What you'll be able to
 do" and reads as capabilities. No new list: the outcomes live in the table the reader already
-looks at, per Michal's "nedělal bych to složitější". The intro grows from 74 to about 200 words, and the hub stays inside its
+looks at, following Michal's advice not to make it more complicated. The intro grows from 74 to about 200 words, and the hub stays inside its
 five minutes.
 
 **What the checks changed.** The first draft's fourth verb was "put the answer in front of
@@ -1199,8 +1201,8 @@ page's owner has the contradiction in the PR body.
 
 ## 2026-09-25 — "Before you start" lists things, and each tab says what it needs
 
-**Asked by:** Nikita, 24 Sep: the block was "scattered", and he wanted "the concrete things I need
-to start".
+**Asked by:** Nikita, 24 Sep: the block was scattered, and he wanted to see the concrete things he
+needs to start.
 
 **What was wrong.** Eleven boxes of different shapes: some items were things, some were
 explanations or reassurance. On `load/` the box said "Nothing else. No installs" and then asked for
@@ -1224,7 +1226,7 @@ overrides, so an agent reading `/index.md` sees the same checklist.
 
 ## 2026-09-25 — The hub clip is bright
 
-**Asked by:** Nikita, 24 Sep: the clip was "somehow dark" and he did not like it at all.
+**Asked by:** Nikita, 24 Sep: the clip looked dark, and he did not like it at all.
 
 **What the numbers showed.** The 09-23 cut averaged a luma of 71 of 255 (minimum 55) against 229 for
 the screenshots it was made from; its poster was 54. The compositor's spotlight dims everything
@@ -1272,7 +1274,7 @@ instead, and describes the one-prompt block on `ask/` without quoting it, becaus
 end to end only on the earlier dataset and its current wording has not been rerun. Not that the
 same prompt builds the app: the block loads, joins and answers, and the app is a paragraph you write,
 which is what step 4 says. Not "interactive": the example grid has no filters. Step 2 says what Kai
-is (Jordan: "explain Kai upfront"); step 3 says "you approve each change", which How every page
+is (Jordan asked for Kai to be explained up front); step 3 says "you approve each change", which How every page
 works already states; the app on the last slide is the draft preview.
 
 **Made with** `explainer.html` in the docs-clip rig, recorded through `record-composite.mjs --page`:
@@ -1295,9 +1297,9 @@ weather line (MISSING). The screenshot clip's structure was already under VERIFY
 
 ## 2026-09-29 — Getting Started loses 43% of its words to cards, strips and folds
 
-**Asked by:** David Esner, Slack, 29 Sep, on the #1144 preview: too wordy, "strašně moc textu",
-nobody has the attention span; he likes the prompts and the Prompt · UI · CLI split and would
-release it after one more pass with "co nejméně textu, co nejvíc krátkých odrážek". His screenshot
+**Asked by:** David Esner, Slack, 29 Sep, on the #1144 preview: far too much text, and nobody has
+the attention span for it; he likes the prompts and the Prompt · UI · CLI split and would release
+it after one more pass with as little text and as many short bullets as possible. His screenshot
 was load/: the Before you start box, the three PathIntro paragraphs under it, then the sample data.
 Nikita agreed and asked for pictures, screens, icons and diagrams instead of text, and questioned
 the hub's "about 80 minutes".
@@ -1812,7 +1814,7 @@ Previous link goes to with-kai (Nikita chose the place).
 
 ## 2026-10-08 — VERIFY pass, and the whole guide run with Kai in a new Free Plan project
 
-**Asked by:** Nikita, 8 Oct: "проверь все верефай и также пройди гайд каем". Answers: a new empty
+**Asked by:** Nikita, 8 Oct: check every VERIFY flag, and run the guide through Kai. Answers: a new empty
 Free project (he created 6425 himself), all Kai Agent prompts in one chat.
 
 **The run (6425, us-east4, BigQuery).** The with-kai page's seven prompts, help.keboola.com swapped
@@ -1847,10 +1849,9 @@ dbt and Direct Mode on Free, DMD-1939, the two Google-auth checks.
 
 ## 2026-10-08 — The whole guide with Kai becomes a tracker, and the course shows the fork
 
-**Asked by:** Nikita, 8 Oct, on with-kai/: the 1-7 dots "зачем-то" sit on a page outside the main
-plan, and the page is "просто буквально промпты, нет ничего интерактивного"; then "его либо
-интегрируют, либо он будет просто странным смотреться. Нужны либо какие-то интерактивные элементы,
-либо визуалы."
+**Asked by:** Nikita, 8 Oct, on with-kai/: the 1-7 dots sit, for no clear reason, on a page
+outside the main plan, and the page is only prompts, with nothing interactive; either it is
+integrated into the course or it will look odd, and it needs interactive elements or visuals.
 
 **Done.**
 - **Integrated into the course.** The hub's course list has a fork card after step 1, "Steps 2 to 6
@@ -1879,8 +1880,8 @@ alternative, his call.
 ## 2026-10-08 — Getting Started's sidebar shows the fork; Prev/Next stay on their path
 
 **Asked by:** Nikita, 8 Oct: from "Create or join a project" Next jumped into with-kai/, and from
-with-kai/ Next jumped to the third page, load/; "может быть, стоит в самое начало его поставить, или
-как ты думаешь?" He also pointed out that Kai can approve on its own (Always allow), so not every
+with-kai/ Next jumped to the third page, load/, and he asked whether the page should go at the
+very start instead. He also pointed out that Kai can approve on its own (Always allow), so not every
 change has to be confirmed. Picked from three options: the fork after the project (recommended),
 with-kai first, or with-kai outside the chain.
 
@@ -1899,8 +1900,8 @@ Slugs and URLs unchanged, so no redirects.
 
 ## 2026-10-09 — Getting Started: Diátaxis check, duplication cut, D5 exemption, frames on with-kai
 
-**Asked by:** Nikita, 9 Oct: "прогони dataxis разбор getting started, не вышло ли из этого какой-то
-дуплицирования", and the day before, that with-kai lacks screenshots or visuals. Answers: cut all
+**Asked by:** Nikita, 9 Oct: run a Diátaxis review of Getting Started and check whether the recent
+work duplicated anything, and the day before, that with-kai lacks screenshots or visuals. Answers: cut all
 16 duplicates; exempt course-bar pages from D5; one PR on top of #1180 for this, the VERIFY owners
 and the visuals.
 
@@ -1937,21 +1938,20 @@ check/.
   answer in a cold week, the flow's phase table) or the Apps builder at Draft ready; no top bar,
   no account. The step pages keep their own screenshots.
 
-**A clip for "Where"** (Nikita, same day: "в моменте где how it goes мб добавить гифку где конкретно
-найти кая по шагам и куда вставлять промпты … приблизить нужные места"). Three versions:
+**A clip for "Where"** (Nikita, same day: at "How it goes", a GIF showing step by step where Kai is
+and where the prompts go, zoomed in on those places rather than the whole interface). Three versions:
 1. Five still close-ups from project 6425, built as states (a GIF first; the checker found 1.4 s a
-   step too fast and a looping GIF unpausable, WCAG 2.2.2, so an MP4 with controls). Nikita: "ты
-   сделал какие-то скриншоты увеличенные а лучше бы сделал гифку конкретную как работает в
-   интерфейсе".
+   step too fast and a looping GIF unpausable, WCAG 2.2.2, so an MP4 with controls). Nikita: enlarged
+   screenshots miss the point, and a clip of how it works in the interface would be better.
 2. A real take in 6425 cut into 1:1 crops of the 2x capture, with the app part (Apps, Create app,
    Build with Kai), pushed as c995914c after two checker rounds: captions held at least 3 s, and
    "When Kai asks, click Approve" instead of "Kai asks before each change", since the Apps builder
-   makes its draft without asking. Nikita: "зря так приближал". A Remotion sample from the same
-   take (the whole screen first, a zoom of 1.6x, captions in a band above the screen) got "1.6 норм,
-   приложение на карточку … Можно чуть-чуть еще, наверное, подальше"; "Approve можно" came later,
-   for the takes in the new project.
-3. Shipped, take 8 in a new, empty Free Plan project, 6429. Nikita on a 1.45x cut of take 6: "наверное
-   все же можно еще приблизить" and a jump of the chat field at 5-6 s: the new chat's suggestions load
+   makes its draft without asking. Nikita: it zoomed in too far. A Remotion sample from the same
+   take (the whole screen first, a zoom of 1.6x, captions in a band above the screen) was approved
+   at 1.6x, with the app on the card and the camera perhaps a little further out; his approval to
+   click Approve in the new project came later, for the takes.
+3. Shipped, take 8 in a new, empty Free Plan project, 6429. Nikita on a 1.45x cut of take 6: it
+   could zoom in a little more after all, and the chat field jumps at 5-6 s: the new chat's suggestions load
    late and push the field down 16 CSS px just as the pointer reaches it. The recorder now waits for
    the field to stop moving (it still moves 4 px as it is clicked), starts the chat off camera (take 7
    reopened take 6's chat and was not used) and brings the pointer up to Approve from below, so it
@@ -2066,7 +2066,7 @@ one chat took 14.4 min with 12 approvals (ask/, app/, DECISIONS.md). Step 2 desc
 quoting, the one-prompt block that was on ask/ (moved to with-kai/'s fold on 2026-10-08 without its
 prompt), which ran end to end on the earlier dataset; that block loaded, joined and answered but
 built no app, so the app is its own step, from a paragraph you write. Step 2 also says what Kai is, per Jordan's
-"explain Kai upfront"; step 3 says you approve each change, as How every page works does; the app
+request to explain Kai up front; step 3 says you approve each change, as How every page works does; the app
 is the draft preview, which app/ calls "running as an app you can open and refine". "Interactive"
 is avoided: the grid has no filters. Made with explainer.html in the docs-clip rig
 (record-composite.mjs --page), 1280x800: 29.6 s, 394 KB, luma mean 227, never under 225; captions
@@ -2119,25 +2119,113 @@ mean 229, never under 227. DECISIONS.md 2026-10-07.
 
 ---
 
+## 2026-10-12 — Jordan's review on #1116: the BigQuery block run, one prerequisites box, the weather's source, and these notes
+
+**Asked by:** Jordan, review of #1116 (12 Oct), items 3, 6, 7 and 8. Nikita's calls the same day:
+run the BigQuery block in a Free Plan project rather than label it, and move the three working
+files to `notes/getting-started/`.
+
+**The BigQuery block ran.** Free Plan project 6439 (us-east4, BigQuery, no Kai objects), through
+the Storage API under Nikita's signed-in session, with his OK. First the two HTTP configurations
+exactly as `load/`'s CLI / API tab gives them, with the files from the #1187 preview (the same
+bytes as the repo; help.keboola.com serves them only after the merge): job 58251430 in 171 s
+(6, 18, 9,761, 552 and 552 rows) and job 58251431 in 35 s (42). Then a
+`keboola.google-bigquery-transformation` built the way the UI tab builds it: the five-table input
+mapping with the short names, the output mapping to the lower-case destination the Guided Mode
+proposes, and the page's block, cut from the MDX byte for byte, as Block 1's one code. Job
+58251625 succeeded in 61 s and wrote a typed table: 42 rows, the page's 10 columns (`date` as
+DATE, `short_handed` as BOOL), weekday Mon to Sun. The run also settled the open point on the
+Destination step: a bucket created from the lower-case ID keeps the lower case
+(`out.c-boolabean-staffing-outlook`). The forecast week, 12 to 18 October, was cold: 29 rows
+without `expected_units`, none flagged, the highest 58.4 a person, which is what the Check fold
+says a cold week gives. The three configurations went to Trash; the tables stay in 6439.
+
+**One prerequisites box.** The guide's own box is gone: `components/getting-started/Prereqs.astro`,
+its `prereqs.mjs`, the second CSS block and the `gs` branch in `page-markdown.mjs`. The site-wide
+`src/components/Prereqs.astro` took over what the guide used: the from/to state cards, the tab
+cards with their icons, and a "You need" heading only when something follows it. Its
+`prereqs.mjs` took the guide's newer Kai wording (a new Free Plan project has Kai from the start)
+with the security link, and `project` now points at `/getting-started/project/`, which closes the
+TODO there. The classes lost their `gs-` prefix (`.fromto`, `.prereqs__tab`), and the hub's
+`FromTo.astro` uses the same cards. Checked in a production build: every Getting Started box keeps
+its size at 1280 and 375 px in both themes and is pixel-identical apart from apostrophes, which
+the local MDX version (5.0.2 against the lockfile's 5.0.6) leaves straight on untouched pages
+too; the Getting Started twins are unchanged. Two Apps boxes change on purpose: the project link
+on `build-locally`, and the Kai line on `data-apps/getting-started` and `migrate-to-python-js`.
+
+**The weather is real.** All 552 values in `weather_daily.csv` equal what Open-Meteo's archive API
+returned on 12 October for the six coordinates, June 1 to August 31, Europe/Prague. `load/` said
+the weather was invented; it now says it is real and carries Open-Meteo's attribution (CC BY 4.0,
+a link, what changed), and it states the free API's terms: non-commercial use, up to 10,000 calls
+a day. Whether a weekly call from a customer's project qualifies is an owner's call,
+VERIFY(Jordan) on `load/`. `scripts/gen-boolabean.py` now writes into the repo, reads the
+committed `weather_daily.csv` by default and fetches the archive with `--fetch`; both ways rebuild
+the five CSVs byte for byte.
+
+**These notes moved.** `DECISIONS.md`, `CONSERVATION-REPORT.md` and `MISSING.md` left the repo
+root for `notes/getting-started/`, with a README, and every reference in the pages' comments
+points there. Internal calls and chats that were quoted word for word, in Czech, Russian and
+English, are paraphrased, here and in six source comments. `MISSING.md` lists the open gaps
+first and keeps the closed ones with what closed them; `CONSERVATION-REPORT.md` marks its stale
+`project/` rows, gives the "Pending" moves that never happened their status, and gains rows for
+the eight `main` pages under `/tutorial/` that this rebuild replaces. The index below is rebuilt
+from the flags in the pages.
+
+**What the reviews changed.** The guide-tester found the API terms only inside the forecast-URL
+fold, where a reader who does not open it never sees them; they are now in the attribution
+paragraph under the cards. Its smaller points went in too: the weather card no longer says each
+fictional café "really had" its weather, load/'s box names what the raw requests need, with-kai/'s
+box names Apps for its app step, and the twin no longer prints a raw `<a download>` tag. The
+fact-checker caught `build-locally`'s "free project from the link above", which no longer fits a
+link to `project/`, two comments that still called Free Plan apps an open question, and three
+conservation rows that were inexact.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
-These are product facts an agent must not guess. Two of the seven below were
-closed on 2026-09-02 by checking the product rather than by guessing; the rest
-still block rebuild work.
+Rebuilt on 2026-10-12 from the pages: 21 flags. These are product facts an agent must not guess;
+each flag stays in its page, next to the sentence it qualifies.
 
-| Question | Where flagged | Blocks |
+| Where | Owner | Question |
 |---|---|---|
-| Can Kai create a project? | `index.mdx` (Get a project) | page 1's Kai coverage |
-| ~~Does the Free Plan include data apps?~~ | closed 2026-10-01 | **Yes.** Built, published and deployed in Free Plan project 6375 (see the entry above). |
-| ~~Does a "plan mode" exist, and what is it called?~~ | closed 2026-09-02 | **Yes.** The chat composer has a button labelled "Enable plan mode", next to "Disable follow mode". Kai drafts a plan and you approve once. Now recommended in the section ahead of "Always allow". Still owed: a description on the `kai/` pages, which document neither mode. |
-| ~~Can Kai set a schedule and notifications?~~ | half closed 2026-09-09 | **Schedule: yes.** Asked for "every day at 06:00 Europe/Prague", Kai created a Scheduler configuration (`0 6 * * *`, Europe/Prague, enabled) for the flow it had just built. **Notifications: not tested**; the page keeps them manual. |
-| ~~Has the consolidated one-prompt block ever run end to end?~~ | closed 2026-09-02 | **Yes** — run live in project 264: 14 minutes, 11 approvals, 10,000 rows in and out. The block lived on `ask/` until 2026-10-08, then moved to with-kai/'s fold without its prompt. Transcript in PR #1110. |
-| Is the monthly Kai allowance per project or per organization? | `index.mdx` (Get a project) | the pricing guardrail wording |
-| Is RStudio still an offered workspace type? | `ad-hoc/index.md` | the ad-hoc page's fate |
-| Does the Kai **Add Task** menu offer three items or four (is **Build with Kai** in it)? | `automate/index.mdx` | the Kai tab's first instruction. Live check 2026-09-02 confirmed **Modify with Kai** in the flow header; the menu itself did not open to automation |
-| Does `/kai/use-cases/#complex-workflows` cover assembling *existing* configurations into a flow? | `automate/index.mdx` | whether that citation stands — the page documents building pipelines from scratch |
-| ~~Does Kai really build transformations on read-only input, and does that need bucket-ID-qualified table names?~~ | closed 2026-09-08 | **Yes, and yes.** The live transformation in project 264 has an empty input mapping and reads `"KBC_EUW3_264"."in.c-keboola-ex-http-01m20b1fwj3px5x6bzzckeb81a"."sales"` by full name — see the 2026-09-08 entry above. |
-| Can Kai traverse every child job of a flow run, or only read one job log? | `check/index.mdx` | one sentence; the prompt is safe either way |
-| Do flow jobs themselves consume credits? | half closed 2026-10-01 | **No, on the Free Plan.** `management/pay-as-you-go/`: "The only exceptions are Flow/Orchestration jobs, which do not consume any minutes." `automate/`'s cost box counts the jobs inside the flow. Still open: contract plans (`check/` keeps its VERIFY), and whether a running data app counts on the Free Plan. |
-| **Time-critical:** `kai/pricing.md` says that from **15 September 2026** Kai moves to PPU credits and the message counter is "replaced" — but `kai/getting-started.md` still states 150 turns/month (50 on PAYG), and the section inherits that number | `index.mdx` (Get a project) | the allowance sentence, in 12 days |
-| On a BigQuery project — the Free Plan default — is there a browser SQL path at all? | `transform/workspace.md` | the Kai-free fallback, and the hub's "nothing needs installing" promise |
+| `app/index.mdx:203` | Nikita | Is there always a route to **Publish to production** after *Draft ready*? The chat's *What's next?* chips are generated per answer and did not offer it in the 8 Oct run. |
+| `automate/index.mdx:482` | Miro | Does a running data app count against the Free Plan minutes? |
+| `automate/index.mdx:487` | Nikita | Does **Delete flow** also remove the flow's schedules? The box deletes the schedule first, so the page does not depend on the answer. |
+| `check/index.mdx:175` | Nikita | On contract plans, do flow jobs consume credits? |
+| `index.mdx:30` | Jordan | Two decisions of 21 Aug (the clip in three acts, the question frame as its poster) changed with the clips after 23 Sep. |
+| `load/database.mdx:46` | Nikita | Do the UI and Prompt paths name the bucket after the configuration? Only the CLI path was walked. |
+| `load/googlesheets.mdx:145` | Nikita | The four bullets on re-authorizing and the file picker come from how the connector behaves, not from a walk. |
+| `load/index.mdx:91` | Jordan | Does a weekly call to Open-Meteo's free API from a customer's project count as non-commercial use? |
+| `load/index.mdx:229` | Nikita | The HTTP connector's simplified mode was seen once (6211), and the page is its only source. |
+| `project/index.mdx:51` | Nikita | Which Free Plan Storage limit is right: 50 GB (the project's own limits) or 250 GB (`management/pay-as-you-go/`)? |
+| `project/index.mdx:63` | Nikita | A new Free Plan project showed 120 minutes, not the documented 60. A first-month allowance? |
+| `project/index.mdx:82` | MCP team, DMD-1939 | Which stack offers `create_project` to a session without an account, and when? |
+| `project/index.mdx:97` | Nikita | What does a project get in its first month? `management/payg-project/` never says. |
+| `project/index.mdx:143` | Nikita, ask the Kai team | Can Kai create a project? The page infers that it cannot. |
+| `transform/index.mdx:134` | Nikita | The neutral transform prompt has not run on a Snowflake project. |
+| `transform/index.mdx:200` | Nikita | A new Free Plan project offers dbt Core (Beta), against the Free Plan limits in `management/pay-as-you-go/`. |
+| `transform/index.mdx:252` | Nikita | Direct Mode shows in new Free Plan projects, though `transformations/mappings/` calls it a private beta that Support enables. |
+| `transform/workspace.mdx:71` | Nikita | Nobody has walked the SQL Editor route that step 7 gives a Free Plan reader. |
+| `transform/workspace.mdx:114` | Nikita, ask the Kai team | Can Kai create a workspace? The page leaves it to the UI and CLI tabs. |
+| `transform/workspace.mdx:170` | Nikita | Does kbagent need an admin token for workspaces, or is write access enough? |
+| `write/index.mdx:118` | Nikita | Which OAuth scopes does the Google Sheets destination request? |
+
+### Closed
+
+| Question | Closed | Answer |
+|---|---|---|
+| Does the BigQuery block on `transform/` run as printed? | 2026-10-12 | **Yes**, in Free Plan project 6439 through an input mapping (the entry above). |
+| Does the Free Plan include data apps? | 2026-10-01 | **Yes.** Built, published and deployed in Free Plan project 6375. |
+| Do flow jobs consume credits on the Free Plan? | 2026-10-01 | **No.** `management/pay-as-you-go/` exempts flow jobs; contract plans stay open (`check/`). |
+| Is the monthly Kai allowance per project or per organization? | 2026-10-08 | Closed in the VERIFY pass: `project/` and the Kai pages agree now. |
+| Does `/kai/use-cases/#complex-workflows` cover assembling existing configurations into a flow? | 2026-10-08 | The citation gave way to our own runs (VERIFY pass). |
+| Can Kai read the child jobs of a flow run? | 2026-10-07 | **Yes.** Asked about a failed run, it read the failed child job's log (entry of that date). |
+| Kai's message allowance and the PPU switch on 15 September | 2026-09-21 | The flag was right; the sentence follows `kai/pricing.md` (entry of that date). |
+| Does Kai build transformations on read-only input, with bucket-qualified table names? | 2026-09-08 | **Yes, and yes**, in project 264. |
+| Can Kai set a schedule and notifications? | 2026-09-09 | **Schedule: yes**, a Scheduler configuration for the flow it built. Notifications were not tested and stay manual. |
+| Does the Kai **Add Task** menu have a "Build with Kai" item? | 2026-09-22 | **No**, in neither of the two menus, walked in project 264 (`automate/`'s comment). |
+| Has the one-prompt block run end to end? | 2026-09-02 | **Yes**, in project 264: 14 minutes, 11 approvals. The block moved to with-kai/'s fold without its prompt on 2026-10-08. |
+| Does a "plan mode" exist, and what is it called? | 2026-09-02 | **Yes**: "Enable plan mode" in the chat composer. |
+| Is RStudio still an offered workspace type? | by 2026-10-12 | No longer asked: `ad-hoc/` stopped naming RStudio and points to `/workspace/`; whether RStudio is retired is the workspace owner's call. |
+| On a BigQuery project, is there a browser SQL path? | 2026-10-08 | Moved into the flag at `workspace.mdx:71`: a new Free Plan project offered a BigQuery workspace (and an R one), and the route step 7 gives has not been walked. |

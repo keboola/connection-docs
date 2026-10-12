@@ -6,7 +6,7 @@
 // src/integrations/page-markdown.mjs, which prints the same list into the
 // markdown twin. PageMeta used to carry no step numbers because numbering
 // breaks the moment a page moves (2026-09-02); with the order kept here, a
-// move is one edit and every number follows it (2026-09-29, DECISIONS.md).
+// move is one edit and every number follows it (2026-09-29, notes/getting-started/DECISIONS.md).
 //
 // `key` is the page's last slug segment and what a page passes as
 // <CourseLine current="…" />. `short` fits under a dot at phone width;
@@ -22,7 +22,7 @@
 //   build fails if a number or a **bold** label in it is no longer on that
 //   page (prompts.mjs), so the two cannot drift apart unnoticed.
 // - `shot` is the card's own frame of the finished step, with its own caption. The app card shows
-//   where its prompt goes instead (2026-10-09, Nikita: "приложение на карточку"), since it is the one
+//   where its prompt goes instead (2026-10-09, Nikita asked for the app on its card), since it is the one
 //   prompt that does not go into Kai Agent; app/ keeps its builder screenshots (kai-builder.png just
 //   after sending, grid-preview.png the draft grid).
 // - `note`, optional, is what the card adds under Expect: a choice Kai may ask about there. It is a
