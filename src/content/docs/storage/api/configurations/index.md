@@ -523,3 +523,70 @@ It will return the ID of the newly created configuration:
 }
 ```
 
+
+### Configuration Folders
+The Keboola UI groups configurations into folders — for example, transformations, flows and data apps.
+A folder is not a separate object: it is a [configuration metadata](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-/metadata)
+entry with the key `KBC.configuration.folderName`, whose value is the folder name.
+
+- Folders are flat. There is no nesting; a `/` in the name is part of the name.
+- A folder exists only while at least one configuration carries its name. There is no way to create an empty folder.
+- Flows (`keboola.flow`) use the same key as any other component.
+
+:::note
+A dedicated `folder` property on the configuration is planned. Once it is available, this section will describe it instead of the metadata key.
+:::
+
+To put the configuration `364479526` of the `keboola.ex-aws-s3` component into the folder `Marketing`,
+[create configuration metadata](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-/metadata).
+Writing the key again overwrites the previous value, so the same call moves the configuration to another folder:
+
+```bash
+curl --request POST \
+--url https://connection.keboola.com/v2/storage/branch/default/components/keboola.ex-aws-s3/configs/364479526/metadata \
+--header "Content-Type: application/json" \
+--header 'X-StorageAPI-Token: {{token}}' \
+--data-binary '{
+    "metadata": [
+        {
+            "key": "KBC.configuration.folderName",
+            "value": "Marketing"
+        }
+    ]
+}'
+```
+
+The response lists the metadata of the configuration. Note the `id` of the folder entry; you need it to remove the configuration from the folder:
+
+```json
+[
+    {
+        "id": "1234567",
+        "key": "KBC.configuration.folderName",
+        "value": "Marketing",
+        "timestamp": "2026-10-12T10:00:00+0200"
+    }
+]
+```
+
+To read the folder of a single configuration, [list its metadata](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-/metadata)
+with a `GET` request to the same URL. To read the folders of all configurations of a component at once, use the configuration search
+and ask only for the folder key:
+
+```bash
+curl --request GET \
+--url 'https://connection.keboola.com/v2/storage/branch/default/search/component-configurations?idComponent=keboola.flow&metadataKeys[]=KBC.configuration.folderName&include=filteredMetadata' \
+--header 'X-StorageAPI-Token: {{token}}'
+```
+
+Each item carries `idComponent`, `configurationId` and the matching `metadata` entries. A configuration without an entry is not in any folder.
+
+To take a configuration out of its folder, delete the metadata entry by its `id`:
+
+```bash
+curl --request DELETE \
+--url https://connection.keboola.com/v2/storage/branch/default/components/keboola.ex-aws-s3/configs/364479526/metadata/1234567 \
+--header 'X-StorageAPI-Token: {{token}}'
+```
+
+Renaming a folder means writing the new name to every configuration in it; there is no single call that renames a folder.
