@@ -95,9 +95,40 @@ function prereqsTabsToText(tag, overrides = {}) {
  * Drop the <span data-pagefind-…> wrappers a page adds to tune site search.
  * A reader of the twin gets nothing from them, and in a heading they print as
  * raw HTML: `#### <span data-pagefind-weight="5">Apps pricing</span>`.
+ *
+ * Only the wrapper goes: a span nested inside keeps its own tags, because each
+ * </span> is paired with its opener. Fenced code blocks and inline code are
+ * samples, so they stay as written (the same rule as stripHtmlComments).
  */
-function stripSearchMarkup(text) {
-  return text.replace(/<span\b(?=[^>]*\bdata-pagefind-)[^>]*>([\s\S]*?)<\/span>/g, '$1');
+const SPAN_TAG = /<span\b[^>]*>|<\/span>/gi;
+const PAGEFIND_SPAN = /^<span\b[^>]*\bdata-pagefind-/i;
+
+function stripSearchMarkup(markdown) {
+  const open = []; // per open <span>: true when it is a search wrapper to drop
+  const dropTags = (text) =>
+    text.replace(SPAN_TAG, (tag) => {
+      if (tag[1] !== '/') {
+        const isWrapper = PAGEFIND_SPAN.test(tag);
+        open.push(isWrapper);
+        return isWrapper ? '' : tag;
+      }
+      return open.pop() ? '' : tag;
+    });
+  let fence = null; // the opening fence (``` or ~~~, any length) while inside a code block
+  return markdown
+    .split('\n')
+    .map((line) => {
+      const marker = line.match(/^\s*(`{3,}|~{3,})/);
+      if (marker) {
+        if (!fence) fence = marker[1];
+        else if (marker[1][0] === fence[0] && marker[1].length >= fence.length) fence = null;
+        return line;
+      }
+      if (fence) return line;
+      // odd parts are inline code spans, left alone
+      return line.split(/(`+[^`]*`+)/).map((part, i) => (i % 2 ? part : dropTags(part))).join('');
+    })
+    .join('\n');
 }
 
 /**
