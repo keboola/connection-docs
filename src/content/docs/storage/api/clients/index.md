@@ -8,6 +8,8 @@ Rather than calling the [Storage API](https://api.keboola.com/?service=storage) 
 use a client library. Each one handles authentication, multipart uploads, and the asynchronous
 import/export jobs for you, so you do not have to manage CSV staging by hand.
 
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Choosing a client
 
 | Client | Use it when |
@@ -27,3 +29,7 @@ Every client authenticates with a [Storage API token](/management/project/tokens
 `X-StorageApi-Token` header. Create the token in your project settings and give it only the buckets
 it needs — tokens are scoped per project and per stack, and a token from one
 [stack](/overview/api/#stacks-and-endpoints) will not work against another.
+
+---
+
+**Next:** [Python client →](/storage/api/clients/python-client/)

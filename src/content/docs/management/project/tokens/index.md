@@ -1,6 +1,7 @@
 ---
 title: API Tokens
 slug: 'management/project/tokens'
+description: 'Learn what Keboola API tokens are, how master tokens differ from limited ones, and how to create, refresh and share a token with restricted access.'
 redirect_from:
   - /storage/tokens/
 ---
@@ -26,6 +27,8 @@ To learn more about all the available programmatic approaches, please follow our
 Tokens can be managed from the **Project Settings > API Tokens** page.
 
 ![Screenshot - Storage Tokens](/management/project/tokens/API_tokens.png)
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Master Tokens
 Tokens that belong to project administrators are called **master tokens**. Their description is 
@@ -182,3 +185,7 @@ The link to the Storage API Console is available at the token retrieval page as 
 - [AWS US Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.keboola.com)
 - [AWS EU Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.eu-central-1.keboola.com)
 - [Azure EU Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.north-europe.azure.keboola.com)
+
+---
+
+**Next:** [Limits & Project Power →](/management/project/limits/)

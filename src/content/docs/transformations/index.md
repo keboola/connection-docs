@@ -1,6 +1,7 @@
 ---
 title: Transformations
 slug: 'transformations'
+description: 'Learn how Keboola transformations work, how input and output mapping keep them isolated from Storage, which backends run them, and how to develop them.'
 redirect_from:
     - /manipulation/transformations/
 ---
@@ -38,6 +39,8 @@ The transformation job then runs the transformation script operating on the stag
 When the transformation is finished, the **output mapping** process moves the transformation results back to
 the designated tables in Storage. The **input** and **output** mappings ensure complete safety of
 the transformation processes -- the transformation always operates in an isolated workspace.
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Mapping
 [**Input and output mapping**](/transformations/mappings/) — separates the source data from your transformation. 
@@ -267,3 +270,7 @@ When triggered
 With the [read-only input mapping](/transformations/mappings/#read-only-input-mapping) feature, you can access all buckets (your own or linked) in transformations. Your transformation user
 has read-only access to buckets (and their tables), so you can access such data. So, there is no need to specify standard input mapping 
 for your transformations. The name of the backend object (database, schema, etc.) depends on the backend you use, and it contains the bucket ID (not the bucket name).
+
+---
+
+**Next:** [Mappings →](/transformations/mappings/)

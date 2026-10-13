@@ -1,6 +1,7 @@
 ---
 title: Keboola Getting Started Tutorial
 slug: 'tutorial'
+description: 'Follow the Getting Started tutorial to load data into Keboola, transform it and write it to Google Sheets, then try advanced steps such as flows and branches.'
 redirect_from:
   - /getting-started/
 ---
@@ -10,6 +11,8 @@ Uncover the capabilities to not only store the transformed data but also to effi
 automating the entire data pipeline for enhanced efficiency and consistency. This tutorial will guide you through basic usage of Keboola platform.
 
 
+
+<!-- Tutorial-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prerequisites 
 
@@ -55,3 +58,7 @@ For a deeper exploration of Keboola features, aligning with real-world usage, co
    - Operate a project efficiently using the Keboola command-line tool.
 
 These advanced steps will provide you with a comprehensive understanding of Keboola's capabilities and their practical application in real-world scenarios.
+
+---
+
+**Next:** [Part 1: Loading Data →](/tutorial/load/)

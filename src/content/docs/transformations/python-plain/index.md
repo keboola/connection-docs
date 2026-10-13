@@ -1,6 +1,7 @@
 ---
 title: Python Transformation
 slug: 'transformations/python-plain'
+description: 'Write a Python transformation that fits the Keboola environment and its limits, add packages, read CSV files, and develop the script in a workspace or locally.'
 redirect_from:
     - /transformations/python/
 ---
