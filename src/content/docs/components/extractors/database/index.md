@@ -1,6 +1,7 @@
 ---
 title: Database Data Source Connectors
 slug: 'components/extractors/database'
+description: 'Choose query-based or log-based connectors for SQL and NoSQL databases, connect over an SSH tunnel, and fetch changes with CDC or incremental fetching.'
 redirect_from:
   - /extractors/database/
   - /integrate/database/
@@ -10,6 +11,8 @@ redirect_from:
 
 
 Data source connectors import and integrate data from external sources into the Keboola environment.
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## SQL Databases
 
@@ -158,3 +161,7 @@ The currently supported log-based connectors:
 
 - [MySql CDC](/components/extractors/database/mysql/)
 - [PostgreSQL CDC](/components/extractors/database/postgresql/)
+
+---
+
+**Next:** [MySQL →](/components/extractors/database/mysql/)

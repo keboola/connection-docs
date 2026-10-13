@@ -1,6 +1,7 @@
 ---
 title: REST HTTP API Introduction
 slug: 'components/extractors/generic-extractor/tutorial/rest'
+description: 'Learn how a REST HTTP API request and response work before you configure Generic Extractor: URL, method, headers, body and status codes.'
 redirect_from:
     - /extend/generic-extractor/tutorial/rest/
 ---

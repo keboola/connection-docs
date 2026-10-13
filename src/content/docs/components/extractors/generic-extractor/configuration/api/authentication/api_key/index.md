@@ -1,6 +1,7 @@
 ---
 title: API Key Authentication
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/api_key'
+description: 'Set up API key authentication in Generic Extractor: send a token in a header or query parameter, in the UI or in JSON with the attr function.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/api_key/
 ---
