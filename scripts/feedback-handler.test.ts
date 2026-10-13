@@ -88,7 +88,7 @@ test('Linear configured: probe enabled, one issueCreate with team and labels', a
   assert.equal(variables.input.teamId, 'team-uuid');
   assert.deepEqual(variables.input.labelIds, ['label-a', 'label-b']);
   assert.equal(variables.input.title, 'Docs feedback (👎 Inaccurate): Tables | Keboola Docs');
-  assert.match(variables.input.description, /\[\/storage\/tables\/\]\(https:\/\/help\.keboola\.com\/storage\/tables\/\)/);
+  assert.match(variables.input.description, /\[`\/storage\/tables\/`\]\(https:\/\/help\.keboola\.com\/storage\/tables\/\)/);
   assert.doesNotMatch(variables.input.description, /203\.0\.113\.7|user_agent|referrer/);
 });
 

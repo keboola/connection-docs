@@ -231,7 +231,8 @@ export function issueMarkdown(record: FeedbackRecord): string {
   // reason line is pushed conditionally rather than filtered out afterwards.
   const lines: string[] = [
     // `path` matched PATH_RE in buildRecord, so it is safe inside the link.
-    `- **Page:** [${record.path}](${SITE_ORIGIN}${record.path})`,
+    // Code span in the link text, so `~` or `_` in a path can't format it.
+    `- **Page:** [\`${record.path}\`](${SITE_ORIGIN}${record.path})`,
     `- **Verdict:** ${verdict}`,
   ];
   if (reason) lines.push(`- **Reason:** ${reason}`);
@@ -242,7 +243,7 @@ export function issueMarkdown(record: FeedbackRecord): string {
     fence(record.comment),
     '',
     '---',
-    'Submitted from the docs feedback widget. Anonymous — there is no way to',
+    'Submitted from the docs feedback widget. Anonymous: there is no way to',
     `reply to the author, so treat this as a one-way report. (${record.ts})`,
   );
   return lines.join('\n');
@@ -353,14 +354,19 @@ async function postIngest(record: FeedbackRecord): Promise<void> {
  */
 async function deliver(record: FeedbackRecord, req: VercelRequest): Promise<boolean> {
   const jobs: Promise<void>[] = [];
+  let dropped = false;
   if (LINEAR_ENABLED && record.comment) {
     if (allowIssue(clientIp(req))) jobs.push(createLinearIssue(record));
-    else console.warn('[feedback] issue rate limit hit; comment kept in ingest only');
+    else if (INGEST_URL) console.warn('[feedback] issue rate limit hit; comment kept in ingest only');
+    else {
+      dropped = true;
+      console.warn('[feedback] issue rate limit hit; comment dropped (no ingest configured)');
+    }
   }
   if (INGEST_URL) jobs.push(postIngest(record));
 
   const results = await Promise.allSettled(jobs);
-  let ok = true;
+  let ok = !dropped;
   for (const r of results) {
     if (r.status === 'rejected') {
       ok = false;
