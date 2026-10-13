@@ -11,6 +11,7 @@ You can now start working with Keboola for free. Simply [sign up](https://connec
 Free Plan projects have the following limits:
 
 - **Stack**: no option to choose a stack. Free Plan projects always live on Google Cloud **us-east4**, at `https://connection.us-east4.gcp.keboola.com`. To sign in later, open that address, or pick **Google Cloud · United States · us-east4** in the stack picker on the sign-in page; it starts on AWS us-east-1, where a Free Plan account has no project. Read more about stacks [here](/overview/#stacks).
+  <!-- VERIFY(Nikita): the picker label "Google Cloud · United States · us-east4" and the AWS us-east-1 default come from a first-time tester's sign-in on 4 Oct 2026. Checked 13 Oct: connection.keboola.com (AWS us-east-1) serves the sign-in page with "Please select your stack" and no region preselected; the picker's option labels are rendered client-side and were not read. -->
 - **Single project:** each account is limited to one project, so it is not feasible for [multi-project architecture](/catalog/multi-project/).
 - **Data Catalog:** sharing & grouping data using the [data catalog](/catalog/) is not available. 
 - **Transformations:** are limited to SQL, Python, and R.
