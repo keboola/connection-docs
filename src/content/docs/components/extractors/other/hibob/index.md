@@ -1,9 +1,14 @@
 ---
 title: HiBob
 slug: 'components/extractors/other/hibob'
+description: 'Retrieve employees, work history, employment history and lifecycle tables from the HiBob HR platform with a service user ID and token.'
 ---
 
 
+
+This page shows how to configure the HiBob data source connector with a service user ID and token, and lists the four tables it loads into Keboola.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Introduction
 

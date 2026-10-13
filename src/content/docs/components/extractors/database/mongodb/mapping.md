@@ -1,12 +1,16 @@
 ---
 title: Mapping Examples
 slug: 'components/extractors/database/mongodb/mapping'
+description: 'Copy MongoDB mapping examples that turn documents into tables, with a primary key, nested documents, lists and boolean values.'
 redirect_from:
     - /extractors/database/mongodb/mapping/
 
 ---
 
 
+Each example shows a MongoDB document, the same document in strict mode, the mapping for the [MongoDB data source connector](/components/extractors/database/mongodb/#configure-mapping), and the output tables it produces.
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Basic Mapping Without Nested Documents
 

@@ -1,6 +1,7 @@
 ---
 title: ECB Currency Rates
 slug: 'components/extractors/other/currency-rates'
+description: 'Download ECB exchange rates from EUR, GBP or USD to 42 currencies for every working day since 4 January 1999, through the Fixer API.'
 redirect_from:
     - /extractors/other/currency-rates/
 ---
@@ -11,6 +12,8 @@ This data source connector uses the [Fixer API](https://fixer.io/documentation) 
 the European Central Bank (ECB).
 
 The exchange rates are available from a base currency to 42 destination currencies for all **working days** from 4th January 1999. 
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **ECB Currency Rates** connector.

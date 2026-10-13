@@ -1,6 +1,7 @@
 ---
 title: Microsoft SQL
 slug: 'components/extractors/database/microsoft-sql'
+description: 'Sync SQL Server and Azure SQL data into Keboola with queries, or with native CDC on CDC-enabled tables to capture deletions too.'
 ---
 
 
@@ -8,6 +9,8 @@ slug: 'components/extractors/database/microsoft-sql'
 [MS SQL](https://www.microsoft.com/en-us/sql-server/) is a relational database management system that stores and retrieves data as requested by other software applications. 
 
 This connector supports the most recent versions of both SQL Server and Azure SQL deployments.
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Default Functionality
 

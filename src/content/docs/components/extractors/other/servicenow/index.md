@@ -1,6 +1,7 @@
 ---
 title: ServiceNow Data Source Connector
 slug: 'components/extractors/other/servicenow'
+description: 'Fetch ServiceNow tables with a username and password, filter rows with a sysparm query, limit fields, and load in backfill or incremental mode.'
 redirect_from:
     - /extractors/other/servicenow/
 ---
@@ -8,6 +9,8 @@ redirect_from:
 
 
 This data source connector fetches data from ServiceNow tables. It supports backfill mode and also incremental fetching.
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prerequisites
 
