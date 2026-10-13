@@ -26,7 +26,7 @@ Pick your operating system:
     curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
     ```
 
-    Then **open a new terminal**. The script puts kbagent in `~/.local/bin` but does not change the `PATH` of the shell that ran it, so `kbagent` answers `command not found` there until you do. If the script installed uv as well, `source $HOME/.local/bin/env` fixes the current shell instead (in fish, `source $HOME/.local/bin/env.fish`). If a new terminal still answers `command not found`, uv was already on your machine and `~/.local/bin` isn't on your `PATH`: run `uv tool update-shell`, then open another terminal.
+    Then **open a new terminal**. The script puts kbagent in `~/.local/bin` but can't change the `PATH` of the shell that ran it, so `kbagent` may answer `command not found` there. To use it in this shell, or from a script or an AI agent, run `export PATH="$HOME/.local/bin:$PATH"` (in fish, `fish_add_path ~/.local/bin`). If a new terminal still answers `command not found`, `~/.local/bin` isn't on your `PATH` for good, which happens when uv was installed before kbagent: run `uv tool update-shell`, then open another terminal.
 
     Alternative — [uv](https://docs.astral.sh/uv/), if you want to pin to a version or uninstall cleanly:
 
@@ -41,7 +41,7 @@ Pick your operating system:
     curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
     ```
 
-    Then **open a new terminal**. The script puts kbagent in `~/.local/bin` but does not change the `PATH` of the shell that ran it, so `kbagent` answers `command not found` there until you do. If the script installed uv as well, `source $HOME/.local/bin/env` fixes the current shell instead (in fish, `source $HOME/.local/bin/env.fish`). If a new terminal still answers `command not found`, uv was already on your machine and `~/.local/bin` isn't on your `PATH`: run `uv tool update-shell`, then open another terminal.
+    Then **open a new terminal**. The script puts kbagent in `~/.local/bin` but can't change the `PATH` of the shell that ran it, so `kbagent` may answer `command not found` there. To use it in this shell, or from a script or an AI agent, run `export PATH="$HOME/.local/bin:$PATH"` (in fish, `fish_add_path ~/.local/bin`). If a new terminal still answers `command not found`, `~/.local/bin` isn't on your `PATH` for good, which happens when uv was installed before kbagent: run `uv tool update-shell`, then open another terminal.
 
     Alternative — [uv](https://docs.astral.sh/uv/), if you want to pin to a version or uninstall cleanly:
 
@@ -85,7 +85,7 @@ Pick your operating system:
 
 Whichever method you use, kbagent keeps itself current with its own startup update check (`kbagent update` runs one manually).
 
-Confirm it's on your `PATH` (all platforms):
+Confirm it's on your `PATH` (all platforms). Any version line like the one below means it worked. On macOS or Linux, `command not found` means the `PATH` step under your tab above.
 
 ```console
 $ kbagent --version
