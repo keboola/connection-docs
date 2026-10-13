@@ -981,6 +981,10 @@ nav.sidebar {
   line-height: 1;
   text-decoration: none;
 }
+/* Copying a sentence with such a link shouldn't copy the hidden hint along. */
+a[target='_blank'] > .sr-only[data-pagefind-ignore] {
+  user-select: none;
+}
 
 /* Block quotes */
 .sl-markdown-content blockquote:not(:where(.not-content *)) {
