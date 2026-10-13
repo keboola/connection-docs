@@ -375,7 +375,11 @@ runs as before, without an error.
 
   Ingestion-time partitioning is not supported.
 - The partitioning column is **part of the primary key**.
-- A single load touches at most 4,000 partitions (a BigQuery limit). Above that, the load runs without the filter.
+- The loaded data contains at most 4,000 distinct values of the partitioning column. For time-unit partitioning, the
+  values are counted per partition unit (e.g., per day for `DAY` partitioning); for integer-range partitioning, every
+  distinct integer counts, even when several of them fall into the same range partition. Above the limit, the
+  deduplication runs without the filter. This does not lift BigQuery's own limit on the number of partitions a single
+  job can modify.
 
 ##### Setting it up
 
@@ -391,8 +395,11 @@ runs as before, without an error.
    the output mapping. This changes the deduplication: two rows with the same key but a different partitioning value
    (e.g., a different `date`) are kept as two rows.
 3. **Enable the option** in the table output mapping by checking **Partition-aware import**. The checkbox is shown only
-   when Incremental loading is enabled and a primary key is set. In the configuration JSON, the option is stored as
-   `partition_aware_import`:
+   when Incremental loading is enabled and a primary key is set.
+
+   ![Partition-aware import option in the table output mapping](/transformations/mappings/partition-aware-import.png)
+
+   In the configuration JSON, the option is stored as `partition_aware_import`:
 
    ```json
    {
@@ -412,9 +419,11 @@ recent dates. If a load contains rows spread across most partitions, the filter 
 ##### Checking that it is used
 
 - The parameters of the storage import job and the `storage.tableImportStarted` and `storage.tableImportDone` events of
-  the job show `partitionAwareImport: true`.
-- In the BigQuery job history of the project, the deduplication statement (`MERGE`, or `UPDATE`, `DELETE`, and `INSERT`)
-  contains the filter on the partitioning column, and its bytes processed drop accordingly.
+  the job show `partitionAwareImport: true`. This only confirms that the option was enabled for the load, not that the
+  filter was applied.
+- Whether the filter was applied shows in the BigQuery job history of the project: the deduplication statement
+  (`MERGE`, or `UPDATE`, `DELETE`, and `INSERT`) contains the filter on the partitioning column, and its bytes processed
+  drop accordingly.
 
 
 ### File Output Mapping
