@@ -8,21 +8,29 @@
  * widget, and a stub mode when the ingestion env isn't configured yet (so the
  * site can ship before the stream exists).
  *
- * Submissions that carry a written comment are additionally filed as GitHub
- * issues, so docs feedback lands where the docs are worked on rather than in a
- * separate database. A bare thumb is never filed: the widget is on all ~366
- * pages, and one issue per click would bury the repository. Bare thumbs (and
- * the beacon-captured abandoned ones) still reach the ingest endpoint below.
+ * Submissions that carry a written comment are additionally filed as Linear
+ * issues, so docs feedback lands where the docs work is triaged. Linear rather
+ * than GitHub Issues: connection-docs is public, and readers paste project IDs,
+ * stack URLs and emails into a "what could be better?" box. A bare thumb is
+ * never filed: the widget is on every page, and one issue per click would bury
+ * the team. Bare thumbs still reach the ingest endpoint below. An abandoned
+ * verdict (thumb clicked, form never submitted) never carries its comment.
  *
  * Optional env (set in the Vercel project):
- *   FEEDBACK_INGEST_URL     ingestion endpoint (e.g. a Keboola Data Stream URL)
- *   FEEDBACK_INGEST_TOKEN   optional bearer token for that endpoint
- *   FEEDBACK_GITHUB_TOKEN   token with Issues: write on FEEDBACK_GITHUB_REPO.
- *                           Use a fine-grained PAT scoped to that one repo —
- *                           this endpoint is reachable by anyone.
- *   FEEDBACK_GITHUB_REPO    owner/repo to file into (default keboola/connection-docs)
+ *   FEEDBACK_INGEST_URL       ingestion endpoint (e.g. a Keboola Data Stream URL)
+ *   FEEDBACK_INGEST_TOKEN     optional bearer token for that endpoint
+ *   FEEDBACK_LINEAR_API_KEY   Linear API key or OAuth access token. Issues show
+ *                             as created by its owner, so use an app actor or a
+ *                             service account, not a person's key.
+ *   FEEDBACK_LINEAR_TEAM_ID   team UUID the issues are filed into
+ *   FEEDBACK_LINEAR_LABEL_IDS optional, comma-separated label UUIDs
+ *   FEEDBACK_LINEAR_PROJECT_ID optional project UUID
+ *   FEEDBACK_LINEAR_STATE_ID  optional workflow state UUID (e.g. the team's
+ *                             Triage); without it the team's default applies
+ *   FEEDBACK_LINEAR_DAILY_CAP optional cap on issues per instance per day (50)
  *
- * With neither configured the handler stays in stub mode (logs + 204).
+ * With nothing configured the probe reports `enabled: false`, so the widget
+ * stays hidden and merging this is a no-op until a sink exists.
  *
  * Request:  POST { verdict: 'up'|'down', reason?, comment?, path, title?,
  *                  abandoned?, hp? }
@@ -36,8 +44,19 @@ export const config = { runtime: 'nodejs' };
 
 const INGEST_URL = (process.env.FEEDBACK_INGEST_URL || '').trim();
 const INGEST_TOKEN = (process.env.FEEDBACK_INGEST_TOKEN || '').trim();
-const GITHUB_TOKEN = (process.env.FEEDBACK_GITHUB_TOKEN || '').trim();
-const GITHUB_REPO = (process.env.FEEDBACK_GITHUB_REPO || 'keboola/connection-docs').trim();
+const LINEAR_API_KEY = (process.env.FEEDBACK_LINEAR_API_KEY || '').trim();
+const LINEAR_TEAM_ID = (process.env.FEEDBACK_LINEAR_TEAM_ID || '').trim();
+const LINEAR_LABEL_IDS = (process.env.FEEDBACK_LINEAR_LABEL_IDS || '')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+const LINEAR_PROJECT_ID = (process.env.FEEDBACK_LINEAR_PROJECT_ID || '').trim();
+const LINEAR_STATE_ID = (process.env.FEEDBACK_LINEAR_STATE_ID || '').trim();
+const LINEAR_DAILY_CAP = Number(process.env.FEEDBACK_LINEAR_DAILY_CAP) || 50;
+const LINEAR_ENABLED = Boolean(LINEAR_API_KEY && LINEAR_TEAM_ID);
+
+/** Upstream calls must not hold the function until Vercel kills it. */
+const UPSTREAM_TIMEOUT_MS = 5000;
 
 const SITE_ORIGIN = 'https://help.keboola.com';
 
@@ -74,6 +93,17 @@ const ALLOWED_REASONS = new Set([
 const MAX_COMMENT = 1000;
 const MAX_FIELD = 512;
 
+/**
+ * What location.pathname can legitimately look like on this site. Anything
+ * else is dropped: the path is interpolated into the issue's page link, so a
+ * `]`, `)` or newline in it could otherwise inject markdown outside the fence.
+ */
+const PATH_RE = /^\/[A-Za-z0-9/_.~%-]{0,255}$/;
+
+/** Per-IP issue limit within one function instance. */
+const IP_WINDOW_MS = 60 * 60 * 1000;
+const IP_MAX_ISSUES = 5;
+
 interface FeedbackBody {
   verdict?: unknown;
   reason?: unknown;
@@ -84,7 +114,7 @@ interface FeedbackBody {
   hp?: unknown; // honeypot — must be empty
 }
 
-interface FeedbackRecord {
+export interface FeedbackRecord {
   submission_id: string;
   verdict: 'up' | 'down';
   reason: string;
@@ -131,8 +161,10 @@ function setCors(req: VercelRequest, res: VercelResponse) {
   res.setHeader('access-control-allow-methods', 'POST, OPTIONS');
 }
 
-async function readJsonBody(req: VercelRequest): Promise<FeedbackBody> {
-  if (req.body && typeof req.body === 'object') return req.body as FeedbackBody;
+async function readJsonBody(req: VercelRequest): Promise<unknown> {
+  // Vercel has already parsed a JSON body, including `null` or a bare number;
+  // the caller decides what is a submission.
+  if (req.body !== undefined && typeof req.body !== 'string') return req.body;
   if (typeof req.body === 'string' && req.body) return JSON.parse(req.body);
   const chunks: Buffer[] = [];
   for await (const chunk of req as any) chunks.push(chunk as Buffer);
@@ -146,7 +178,7 @@ function str(v: unknown, max = MAX_FIELD): string {
 }
 
 /** Build a validated record, or null if the payload is unusable / dropped. */
-function buildRecord(body: FeedbackBody, req: VercelRequest): FeedbackRecord | null {
+export function buildRecord(body: FeedbackBody, req: VercelRequest): FeedbackRecord | null {
   // Honeypot: real users never fill this hidden field. Bots do — drop silently.
   if (str(body.hp)) return null;
 
@@ -154,7 +186,7 @@ function buildRecord(body: FeedbackBody, req: VercelRequest): FeedbackRecord | n
   if (!verdict) return null;
 
   const path = str(body.path);
-  if (!path.startsWith('/')) return null;
+  if (!PATH_RE.test(path)) return null;
 
   const reasonRaw = str(body.reason, 64).toLowerCase();
   const reason = ALLOWED_REASONS.has(reasonRaw) ? reasonRaw : '';
@@ -163,9 +195,14 @@ function buildRecord(body: FeedbackBody, req: VercelRequest): FeedbackRecord | n
     submission_id: `fb-${Date.now()}-${Math.round(Math.random() * 1e9).toString(36)}`,
     verdict,
     reason,
-    comment: str(body.comment, MAX_COMMENT),
+    // An abandoned verdict was never submitted, so whatever sits in the box is
+    // not something the reader chose to send. The client strips it too.
+    comment:
+      body.abandoned === true
+        ? ''
+        : str(body.comment, MAX_COMMENT).replace(/\r\n?/g, '\n'),
     path,
-    title: str(body.title),
+    title: str(body.title).replace(/\s+/g, ' '),
     locale: str((req.headers['accept-language'] as string) || '', 32),
     referrer: str((req.headers['referer'] as string) || ''),
     user_agent: str((req.headers['user-agent'] as string) || ''),
@@ -175,85 +212,126 @@ function buildRecord(body: FeedbackBody, req: VercelRequest): FeedbackRecord | n
 }
 
 /**
- * File a submission as a GitHub issue.
- *
- * Only called when the reader actually wrote something — that free text is the
- * part a maintainer can act on, and it is the only part worth a notification.
- *
- * The issue body deliberately omits `user_agent`, `referrer` and `locale`.
- * They are useful in a private analytics table but this repository is public,
- * and together they are mildly fingerprinting for no reviewer benefit.
+ * Wrap reader text in a code fence it cannot close: one backtick longer than
+ * the longest run inside it. A blockquote doesn't hold — a bare `\r` ends the
+ * quote, and mentions and references inside it still render.
  */
-async function createIssue(record: FeedbackRecord): Promise<void> {
-  const pageTitle = record.title || record.path;
-  const verdict = record.verdict === 'up' ? '👍' : '👎';
+export function fence(text: string): string {
+  const longest = Math.max(0, ...(text.match(/`+/g) ?? []).map((m) => m.length));
+  const ticks = '`'.repeat(Math.max(3, longest + 1));
+  return `${ticks}text\n${text}\n${ticks}`;
+}
+
+/** Markdown description for a Linear issue. Exported for the handler tests. */
+export function issueMarkdown(record: FeedbackRecord): string {
+  const verdict = record.verdict === 'up' ? '👍 Helpful' : '👎 Not helpful';
   const reason = REASON_TEXT[record.reason] || record.reason;
 
   // Blank entries are paragraph breaks and have to survive, so the optional
   // reason line is pushed conditionally rather than filtered out afterwards.
-  // A list rather than bare lines: consecutive single newlines only render as
-  // breaks where a flavour enables hard wrapping, and this body is also read
-  // through the API and in notification emails.
   const lines: string[] = [
+    // `path` matched PATH_RE in buildRecord, so it is safe inside the link.
     `- **Page:** [${record.path}](${SITE_ORIGIN}${record.path})`,
-    `- **Verdict:** ${verdict} ${record.verdict === 'up' ? 'Helpful' : 'Not helpful'}`,
+    `- **Verdict:** ${verdict}`,
   ];
   if (reason) lines.push(`- **Reason:** ${reason}`);
   lines.push(
     '',
     '**Comment:**',
     '',
-    // Quote the reader's text so no markdown in it can restructure the issue.
-    record.comment
-      .split('\n')
-      .map((line) => `> ${line}`)
-      .join('\n'),
+    fence(record.comment),
     '',
     '---',
     'Submitted from the docs feedback widget. Anonymous — there is no way to',
     `reply to the author, so treat this as a one-way report. (${record.ts})`,
   );
-  const body = lines.join('\n');
+  return lines.join('\n');
+}
 
-  const res = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/issues`, {
+const ISSUE_CREATE = `mutation DocsFeedback($input: IssueCreateInput!) {
+  issueCreate(input: $input) { success issue { identifier } }
+}`;
+
+/**
+ * File a submission as a Linear issue.
+ *
+ * Only called when the reader actually wrote something — that free text is the
+ * part someone can act on, and it is the only part worth a notification.
+ * `user_agent`, `referrer` and `locale` stay out of the issue: they belong in
+ * an analytics table, not in a ticket.
+ */
+async function createLinearIssue(record: FeedbackRecord): Promise<void> {
+  const pageTitle = record.title || record.path;
+  const reason = REASON_TEXT[record.reason];
+  const verdict = record.verdict === 'up' ? '👍' : '👎';
+  const input: Record<string, unknown> = {
+    teamId: LINEAR_TEAM_ID,
+    title: `Docs feedback (${verdict}${reason ? ` ${reason}` : ''}): ${pageTitle}`.slice(0, 250),
+    description: issueMarkdown(record),
+  };
+  if (LINEAR_LABEL_IDS.length) input.labelIds = LINEAR_LABEL_IDS;
+  if (LINEAR_PROJECT_ID) input.projectId = LINEAR_PROJECT_ID;
+  if (LINEAR_STATE_ID) input.stateId = LINEAR_STATE_ID;
+
+  const res = await fetch('https://api.linear.app/graphql', {
     method: 'POST',
     headers: {
-      accept: 'application/vnd.github+json',
-      authorization: `Bearer ${GITHUB_TOKEN}`,
       'content-type': 'application/json',
-      'x-github-api-version': '2022-11-28',
+      // Personal API keys go in bare; OAuth access tokens need the scheme.
+      authorization: LINEAR_API_KEY.startsWith('lin_api_')
+        ? LINEAR_API_KEY
+        : `Bearer ${LINEAR_API_KEY}`,
     },
-    body: JSON.stringify({
-      title: `Docs feedback: ${pageTitle}`.slice(0, 250),
-      body,
-      labels: ['docs-feedback', record.verdict === 'up' ? 'feedback:up' : 'feedback:down'],
-    }),
+    body: JSON.stringify({ query: ISSUE_CREATE, variables: { input } }),
+    signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
   });
-
-  if (!res.ok) {
-    // 410 means Issues are disabled on the repo — the one failure worth naming,
-    // because it is a settings toggle rather than a bug.
-    const hint = res.status === 410 ? ' (Issues disabled on the repository?)' : '';
-    throw new Error(`feedback issue create failed: HTTP ${res.status}${hint}`);
+  // GraphQL reports most failures as 200 with an `errors` array.
+  const json: any = await res.json().catch(() => null);
+  if (!res.ok || json?.errors?.length || !json?.data?.issueCreate?.success) {
+    const detail = json?.errors?.[0]?.message ?? `HTTP ${res.status}`;
+    throw new Error(`feedback issue create failed: ${detail}`);
   }
 }
 
-/** Forward the record to the ingestion endpoint. No-op (stub) when unconfigured. */
-async function ingest(record: FeedbackRecord): Promise<void> {
-  // A written comment goes to GitHub as an issue; everything else is a counter
-  // and belongs in the stream only. The two paths are independent, so a repo
-  // with Issues still off doesn't stop the stream from collecting.
-  if (GITHUB_TOKEN && record.comment) {
-    await createIssue(record);
-  }
+/**
+ * Rate limits on issue creation. The honeypot and caps do nothing against a
+ * curl loop, and every commented request would otherwise become an issue.
+ *
+ * These counters live in one function instance, so they are a backstop, not
+ * the limit: the real per-IP limit is a Vercel Firewall rule on /api/feedback.
+ * What they guarantee is that a single warm instance can't flood the team.
+ */
+const ipHits = new Map<string, number[]>();
+let dayKey = '';
+let dayCount = 0;
 
-  if (!INGEST_URL) {
-    if (!GITHUB_TOKEN) {
-      // Stub mode: nothing wired up at all. Log so it's visible in Vercel.
-      console.log('[feedback] (stub, no ingest configured)', JSON.stringify(record));
-    }
-    return;
+function clientIp(req: VercelRequest): string {
+  const fwd = req.headers['x-forwarded-for'];
+  const first = (Array.isArray(fwd) ? fwd[0] : fwd || '').split(',')[0].trim();
+  return first || 'unknown';
+}
+
+export function allowIssue(ip: string, now = Date.now()): boolean {
+  const today = new Date(now).toISOString().slice(0, 10);
+  if (today !== dayKey) {
+    dayKey = today;
+    dayCount = 0;
+    ipHits.clear();
   }
+  if (dayCount >= LINEAR_DAILY_CAP) return false;
+  const recent = (ipHits.get(ip) ?? []).filter((t) => now - t < IP_WINDOW_MS);
+  if (recent.length >= IP_MAX_ISSUES) {
+    ipHits.set(ip, recent);
+    return false;
+  }
+  recent.push(now);
+  ipHits.set(ip, recent);
+  dayCount += 1;
+  return true;
+}
+
+/** Forward the record to the ingestion endpoint. */
+async function postIngest(record: FeedbackRecord): Promise<void> {
   const headers: Record<string, string> = { 'content-type': 'application/json' };
   if (INGEST_TOKEN) headers.authorization = `Bearer ${INGEST_TOKEN}`;
 
@@ -261,10 +339,35 @@ async function ingest(record: FeedbackRecord): Promise<void> {
     method: 'POST',
     headers,
     body: JSON.stringify(record),
+    signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
   });
   if (!res.ok) {
     throw new Error(`feedback ingest failed: HTTP ${res.status}`);
   }
+}
+
+/**
+ * Send the record to every configured sink. The sinks are independent: a
+ * Linear failure must not cost the stream its row, and the other way round.
+ * Resolves to false if any sink failed, after logging each failure.
+ */
+async function deliver(record: FeedbackRecord, req: VercelRequest): Promise<boolean> {
+  const jobs: Promise<void>[] = [];
+  if (LINEAR_ENABLED && record.comment) {
+    if (allowIssue(clientIp(req))) jobs.push(createLinearIssue(record));
+    else console.warn('[feedback] issue rate limit hit; comment kept in ingest only');
+  }
+  if (INGEST_URL) jobs.push(postIngest(record));
+
+  const results = await Promise.allSettled(jobs);
+  let ok = true;
+  for (const r of results) {
+    if (r.status === 'rejected') {
+      ok = false;
+      console.error('[feedback] sink error:', r.reason?.message ?? String(r.reason));
+    }
+  }
+  return ok;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -282,9 +385,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.setHeader('content-type', 'application/json');
     setCors(req, res);
     res.setHeader('cache-control', 'no-store');
-    // Enabled even in stub mode: the widget still works (submissions are logged
-    // server-side) and starts collecting the moment the stream env is set.
-    res.end(JSON.stringify({ enabled: true }));
+    // Only with a sink. Otherwise readers' text would go nowhere but the short
+    // retention of the function logs, so the widget stays hidden instead.
+    res.end(JSON.stringify({ enabled: Boolean(INGEST_URL || LINEAR_ENABLED) }));
     return;
   }
 
@@ -297,7 +400,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   setCors(req, res);
 
-  let body: FeedbackBody;
+  let body: unknown;
   try {
     body = await readJsonBody(req);
   } catch {
@@ -307,7 +410,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  const record = buildRecord(body, req);
+  // `null`, an array or a number is valid JSON but not a submission.
+  const record = body && typeof body === 'object' && !Array.isArray(body) ? buildRecord(body as FeedbackBody, req) : null;
   if (!record) {
     // Invalid or honeypot-tripped: 204 either way (don't teach bots the rules).
     res.statusCode = 204;
@@ -315,17 +419,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  try {
-    await ingest(record);
-  } catch (err: any) {
-    // Don't surface ingestion failures to the widget — the user already got
-    // their "thanks". Log for ops and return 202 (accepted, best-effort).
-    console.error('[feedback] ingest error:', err?.message ?? String(err));
-    res.statusCode = 202;
-    res.end();
-    return;
-  }
-
-  res.statusCode = 204;
+  // Don't surface sink failures to the widget — the user already got their
+  // "thanks". 202 (accepted, best-effort) tells the client something went
+  // wrong without making it an error.
+  res.statusCode = (await deliver(record, req)) ? 204 : 202;
   res.end();
 }

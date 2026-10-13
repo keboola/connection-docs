@@ -21,16 +21,19 @@
 
   <div class="b-feedback-buttons" data-fb-verdicts>
     <button type="button" class="b-feedback-btn" data-fb-verdict="up" aria-pressed="false">
-      👍 Yes
+      <span aria-hidden="true">👍</span> Yes
     </button>
     <button type="button" class="b-feedback-btn" data-fb-verdict="down" aria-pressed="false">
-      👎 No
+      <span aria-hidden="true">👎</span> No
     </button>
   </div>
 
   <form class="b-feedback-followup" data-fb-followup hidden>
-    <p class="b-feedback-followup-q" data-fb-followup-q></p>
-    <div class="b-feedback-options" data-fb-options></div>
+    <!-- The fieldset gives the radio group its accessible name. -->
+    <fieldset class="b-feedback-fieldset">
+      <legend class="b-feedback-followup-q" data-fb-followup-q></legend>
+      <div class="b-feedback-options" data-fb-options></div>
+    </fieldset>
     <!-- Comment box; moved inline under the selected option by the script. -->
     <div class="b-feedback-comment-wrap" data-fb-comment-wrap hidden>
       <label class="b-feedback-comment-label">
@@ -40,9 +43,13 @@
           data-fb-comment
           rows="3"
           maxlength="1000"
-          placeholder="(Optional) Try to be as specific and detailed as possible!"
+          aria-describedby="fb-comment-note"
+          placeholder="(Optional) What should we change?"
         ></textarea>
       </label>
+      <p class="b-feedback-note" id="fb-comment-note">
+        Your comment goes to the Keboola docs team. Don't include credentials or personal data.
+      </p>
     </div>
     <!-- Honeypot: hidden from humans; bots that fill it get dropped server-side. -->
     <input
@@ -56,7 +63,7 @@
     <button type="submit" class="b-feedback-submit" data-fb-submit disabled>Submit</button>
   </form>
 
-  <p class="b-feedback-thanks" data-fb-thanks hidden>
+  <p class="b-feedback-thanks" data-fb-thanks role="status" tabindex="-1" hidden>
     Thank you for helping improve Keboola's documentation!
   </p>
 </section>
@@ -175,6 +182,9 @@
       followup.hidden = true;
       verdictsWrap.hidden = true;
       thanks.hidden = false;
+      // The focused Submit button just disappeared; move focus to the
+      // confirmation instead of letting it fall back to <body>.
+      thanks.focus();
       try {
         localStorage.setItem(storageKey(), '1');
       } catch {}
@@ -184,9 +194,10 @@
       reason = value;
       submitBtn.disabled = false;
       // Reveal the comment box directly under the chosen option (Stripe-style).
+      // No focus move: arrow keys fire `change` while walking the radio group,
+      // and pulling focus into the textarea would stop the walk at the first step.
       optionEl.insertAdjacentElement('afterend', commentWrap);
       commentWrap.hidden = false;
-      comment.focus();
     }
 
     function selectVerdict(v: 'up' | 'down') {
@@ -242,7 +253,8 @@
         keepalive: true,
       })
         .then((res) => {
-          if (!res.ok) console.debug('[feedback] submit returned HTTP', res.status);
+          // 202 is res.ok too, but means a sink failed server-side.
+          if (res.status !== 204) console.debug('[feedback] submit returned HTTP', res.status);
         })
         .catch((err) => console.debug('[feedback] submit failed:', err));
       markDone();
@@ -255,7 +267,8 @@
       try {
         navigator.sendBeacon(
           `${apiBase}/api/feedback`,
-          new Blob([payload({ abandoned: true })], { type: 'application/json' }),
+          // Never the comment: the reader didn't choose to send it.
+          new Blob([payload({ abandoned: true, comment: '' })], { type: 'application/json' }),
         );
       } catch {}
     }

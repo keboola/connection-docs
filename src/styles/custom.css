@@ -1347,19 +1347,31 @@ nav.sidebar {
   font-family: inherit;
 }
 .b-feedback-btn:hover { border-color: var(--border-2); color: var(--fg-1); }
+/* blue-700 text: blue-600 on blue-100 is 3.90:1, short of AA for 13px. */
 .b-feedback-btn[aria-pressed='true'] {
   border-color: var(--kbc-blue-600);
-  color: var(--kbc-blue-600);
+  color: var(--kbc-blue-700);
   background: var(--kbc-blue-100);
 }
+/* The blue tokens aren't redefined for dark mode, so the light pill would sit
+   pale on a near-black page. Same tint + blue-450 text as the other dark
+   overrides. */
+:root[data-theme='dark'] .b-feedback-btn[aria-pressed='true'] {
+  border-color: var(--kbc-blue-450);
+  color: var(--kbc-blue-450);
+  background: rgba(31, 143, 255, 0.18);
+}
 
-/* Follow-up: heading + vertical radio list, revealed after a thumb click */
+/* Follow-up: heading + vertical radio list, revealed after a thumb click.
+   The heading is the fieldset's legend, so strip the UA fieldset chrome. */
 .b-feedback-followup { margin-top: 20px; }
+.b-feedback-fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .b-feedback-followup-q {
   font-size: 17px;
   font-weight: 600;
   color: var(--fg-1);
   margin: 0 0 14px;
+  padding: 0;
 }
 .b-feedback-options { display: flex; flex-direction: column; gap: 4px; }
 .b-feedback-option {
@@ -1400,10 +1412,13 @@ nav.sidebar {
   padding: 10px 12px;
   resize: vertical;
 }
-.b-feedback-comment:focus-visible {
-  outline: none;
-  border-color: var(--kbc-blue-600);
-  box-shadow: 0 0 0 3px var(--kbc-blue-100);
+/* Border tint only; the ring itself comes from the site-wide *:focus-visible
+   rule, which is what meets SC 1.4.11's 3:1. */
+.b-feedback-comment:focus-visible { border-color: var(--kbc-blue-600); }
+.b-feedback-note {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--fg-3);
 }
 .b-feedback-submit {
   margin-top: 14px;
@@ -1425,6 +1440,8 @@ nav.sidebar {
   color: var(--fg-1);
   margin: 0;
 }
+/* Focused programmatically after submit; no ring on a non-interactive line. */
+.b-feedback-thanks:focus { outline: none; }
 /* Honeypot + screen-reader-only helpers */
 .b-feedback-hp {
   position: absolute;
