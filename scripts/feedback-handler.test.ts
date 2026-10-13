@@ -92,6 +92,20 @@ test('Linear configured: probe enabled, one issueCreate with team and labels', a
   assert.doesNotMatch(variables.input.description, /203\.0\.113\.7|user_agent|referrer/);
 });
 
+test('the API key alone is enough: built-in team, project, state and label', async () => {
+  const mod = await load({ FEEDBACK_LINEAR_API_KEY: 'lin_api_test' }, 'defaults');
+  const calls = mockFetch();
+  const probe = res();
+  await mod.default(req('GET'), probe);
+  assert.deepEqual(JSON.parse(probe.body), { enabled: true });
+  await mod.default(req('POST', valid), res());
+  const { input } = JSON.parse(calls[0].init.body).variables;
+  assert.equal(input.teamId, '20917244-2e69-4226-8f05-d1bf40d99ea2');
+  assert.equal(input.projectId, '8bf3317f-1860-44aa-94b0-627bece939e3');
+  assert.equal(input.stateId, '78e62541-bf17-4628-8155-a3c12470c66b');
+  assert.deepEqual(input.labelIds, ['9c08b2d5-1598-4aeb-bd4a-085349e371e2']);
+});
+
 test('OAuth token gets the Bearer scheme', async () => {
   const mod = await load({ ...LINEAR, FEEDBACK_LINEAR_API_KEY: 'oauth-token' }, 'oauth');
   const calls = mockFetch();

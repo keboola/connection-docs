@@ -19,14 +19,13 @@
  * Optional env (set in the Vercel project):
  *   FEEDBACK_INGEST_URL       ingestion endpoint (e.g. a Keboola Data Stream URL)
  *   FEEDBACK_INGEST_TOKEN     optional bearer token for that endpoint
- *   FEEDBACK_LINEAR_API_KEY   Linear API key or OAuth access token. Issues show
- *                             as created by its owner, so use an app actor or a
- *                             service account, not a person's key.
- *   FEEDBACK_LINEAR_TEAM_ID   team UUID the issues are filed into
- *   FEEDBACK_LINEAR_LABEL_IDS optional, comma-separated label UUIDs
- *   FEEDBACK_LINEAR_PROJECT_ID optional project UUID
- *   FEEDBACK_LINEAR_STATE_ID  optional workflow state UUID (e.g. the team's
- *                             Triage); without it the team's default applies
+ *   FEEDBACK_LINEAR_API_KEY   Linear API key or OAuth access token. The only
+ *                             variable Linear filing needs. Issues show as
+ *                             created by its owner, so prefer an app actor or a
+ *                             service account over a person's key.
+ *   FEEDBACK_LINEAR_TEAM_ID / _PROJECT_ID / _STATE_ID / _LABEL_IDS
+ *                             optional overrides of LINEAR_DEFAULTS below; an
+ *                             empty value clears project, state or labels
  *   FEEDBACK_LINEAR_DAILY_CAP optional cap on issues per instance per day (50)
  *
  * With nothing configured the probe reports `enabled: false`, so the widget
@@ -45,13 +44,21 @@ export const config = { runtime: 'nodejs' };
 const INGEST_URL = (process.env.FEEDBACK_INGEST_URL || '').trim();
 const INGEST_TOKEN = (process.env.FEEDBACK_INGEST_TOKEN || '').trim();
 const LINEAR_API_KEY = (process.env.FEEDBACK_LINEAR_API_KEY || '').trim();
-const LINEAR_TEAM_ID = (process.env.FEEDBACK_LINEAR_TEAM_ID || '').trim();
-const LINEAR_LABEL_IDS = (process.env.FEEDBACK_LINEAR_LABEL_IDS || '')
+// Where issues land. These IDs are not secrets, so they live here and the
+// only thing the Vercel project has to hold is the API key. Env overrides them.
+const LINEAR_DEFAULTS = {
+  team: '20917244-2e69-4226-8f05-d1bf40d99ea2', // [Team] Product (PRDCT)
+  project: '8bf3317f-1860-44aa-94b0-627bece939e3', // Help Documentation Revamp
+  state: '78e62541-bf17-4628-8155-a3c12470c66b', // Backlog (PRDCT has no Triage)
+  labels: '9c08b2d5-1598-4aeb-bd4a-085349e371e2', // docs-feedback
+};
+const LINEAR_TEAM_ID = (process.env.FEEDBACK_LINEAR_TEAM_ID || LINEAR_DEFAULTS.team).trim();
+const LINEAR_LABEL_IDS = (process.env.FEEDBACK_LINEAR_LABEL_IDS ?? LINEAR_DEFAULTS.labels)
   .split(',')
   .map((s) => s.trim())
   .filter(Boolean);
-const LINEAR_PROJECT_ID = (process.env.FEEDBACK_LINEAR_PROJECT_ID || '').trim();
-const LINEAR_STATE_ID = (process.env.FEEDBACK_LINEAR_STATE_ID || '').trim();
+const LINEAR_PROJECT_ID = (process.env.FEEDBACK_LINEAR_PROJECT_ID ?? LINEAR_DEFAULTS.project).trim();
+const LINEAR_STATE_ID = (process.env.FEEDBACK_LINEAR_STATE_ID ?? LINEAR_DEFAULTS.state).trim();
 const LINEAR_DAILY_CAP = Number(process.env.FEEDBACK_LINEAR_DAILY_CAP) || 50;
 const LINEAR_ENABLED = Boolean(LINEAR_API_KEY && LINEAR_TEAM_ID);
 
