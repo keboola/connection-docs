@@ -26,7 +26,7 @@ Pick your operating system:
     curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
     ```
 
-    Then **open a new terminal**, or run `source $HOME/.local/bin/env` in this one. The script puts kbagent in `~/.local/bin` but does not change the `PATH` of the shell that ran it, so `kbagent` answers `command not found` there until you do.
+    Then **open a new terminal**. The script puts kbagent in `~/.local/bin` but does not change the `PATH` of the shell that ran it, so `kbagent` answers `command not found` there until you do. If the script installed uv as well, `source $HOME/.local/bin/env` fixes the current shell instead. If a new terminal still answers `command not found`, uv was already on your machine and `~/.local/bin` isn't on your `PATH`: run `uv tool update-shell`, then open another terminal.
 
     Alternative — [uv](https://docs.astral.sh/uv/), if you want to pin to a version or uninstall cleanly:
 
@@ -41,7 +41,7 @@ Pick your operating system:
     curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
     ```
 
-    Then **open a new terminal**, or run `source $HOME/.local/bin/env` in this one. The script puts kbagent in `~/.local/bin` but does not change the `PATH` of the shell that ran it, so `kbagent` answers `command not found` there until you do.
+    Then **open a new terminal**. The script puts kbagent in `~/.local/bin` but does not change the `PATH` of the shell that ran it, so `kbagent` answers `command not found` there until you do. If the script installed uv as well, `source $HOME/.local/bin/env` fixes the current shell instead. If a new terminal still answers `command not found`, uv was already on your machine and `~/.local/bin` isn't on your `PATH`: run `uv tool update-shell`, then open another terminal.
 
     Alternative — [uv](https://docs.astral.sh/uv/), if you want to pin to a version or uninstall cleanly:
 
