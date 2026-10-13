@@ -1,40 +1,50 @@
 /**
- * /api/feedback — receives documentation feedback from the page widget and
- * forwards it to a Keboola ingestion endpoint (intended to be a Data Stream
- * that lands each submission as a row in a Storage table).
+ * /api/feedback — receives documentation feedback from the page widget.
  *
- * Mirrors api/chat.ts conventions: plain JSON handler, a GET
- * `{ enabled }` probe so the static frontend can decide whether to render the
- * widget, and a stub mode when the ingestion env isn't configured yet (so the
- * site can ship before the stream exists).
+ * Mirrors api/chat.ts conventions: plain JSON handler and a GET `{ enabled }`
+ * probe, so the static frontend renders the widget only when a sink exists.
  *
- * Submissions that carry a written comment are additionally filed as Linear
- * issues, so docs feedback lands where the docs work is triaged. Linear rather
- * than GitHub Issues: connection-docs is public, and readers paste project IDs,
- * stack URLs and emails into a "what could be better?" box. A bare thumb is
- * never filed: the widget is on every page, and one issue per click would bury
- * the team. Bare thumbs still reach the ingest endpoint below. An abandoned
- * verdict (thumb clicked, form never submitted) never carries its comment.
+ * Sinks:
+ * - Linear: submissions that carry a written comment become issues, so docs
+ *   feedback lands where the docs work is triaged. Linear rather than GitHub
+ *   Issues: connection-docs is public, and readers paste project IDs, stack URLs
+ *   and emails into a "what could be better?" box. A bare thumb is never filed:
+ *   the widget is on every page, and one issue per click would bury the team.
+ * - FEEDBACK_INGEST_URL (optional): every record, thumbs included, as a row.
+ * - Function logs: when no ingest is configured, every vote is logged as one
+ *   `[feedback] vote` line so it stays countable (a log drain can collect it),
+ *   and a comment no sink accepted is logged as `[feedback] undelivered comment`
+ *   rather than lost.
  *
- * Optional env (set in the Vercel project):
- *   FEEDBACK_INGEST_URL       ingestion endpoint (e.g. a Keboola Data Stream URL)
- *   FEEDBACK_INGEST_TOKEN     optional bearer token for that endpoint
+ * An abandoned verdict (thumb clicked, form never submitted) never carries its
+ * comment. It shares `submission_id` with a later full submission from the same
+ * widget, so a consumer keeps the latest row per id.
+ *
+ * Env (set in the Vercel project):
  *   FEEDBACK_LINEAR_API_KEY   Linear API key or OAuth access token. The only
  *                             variable Linear filing needs. Issues show as
  *                             created by its owner, so prefer an app actor or a
  *                             service account over a person's key.
  *   FEEDBACK_LINEAR_TEAM_ID / _PROJECT_ID / _STATE_ID / _LABEL_IDS
  *                             optional overrides of LINEAR_DEFAULTS below; an
- *                             empty value clears project, state or labels
- *   FEEDBACK_LINEAR_DAILY_CAP optional cap on issues per instance per day (50)
+ *                             empty value clears project, state or labels. The
+ *                             default project, state and label belong to the
+ *                             default team, so another team gets none of them
+ *                             unless they are set too.
+ *   FEEDBACK_LINEAR_DAILY_CAP optional cap on issues per instance per day (50);
+ *                             0 stops Linear filing
+ *   FEEDBACK_INGEST_URL       optional ingestion endpoint (e.g. a Keboola Data
+ *                             Stream URL)
+ *   FEEDBACK_INGEST_TOKEN     optional bearer token for that endpoint
  *
- * With nothing configured the probe reports `enabled: false`, so the widget
- * stays hidden and merging this is a no-op until a sink exists.
+ * With neither a Linear key nor an ingest URL the probe reports
+ * `enabled: false`, so the widget stays hidden.
  *
  * Request:  POST { verdict: 'up'|'down', reason?, comment?, path, title?,
- *                  abandoned?, hp? }
- * Response: 204 No Content on success (or when silently dropped);
- *           400 on invalid payload.
+ *                  abandoned?, sid?, hp? }
+ * Response: 204 when every record went where it should, or when the payload
+ *           was dropped (invalid, honeypot); 202 when a sink failed or a
+ *           comment reached no sink; 400 on a body that isn't JSON.
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
@@ -52,14 +62,23 @@ const LINEAR_DEFAULTS = {
   state: '78e62541-bf17-4628-8155-a3c12470c66b', // Backlog (PRDCT has no Triage)
   labels: '9c08b2d5-1598-4aeb-bd4a-085349e371e2', // docs-feedback
 };
-const LINEAR_TEAM_ID = (process.env.FEEDBACK_LINEAR_TEAM_ID || LINEAR_DEFAULTS.team).trim();
-const LINEAR_LABEL_IDS = (process.env.FEEDBACK_LINEAR_LABEL_IDS ?? LINEAR_DEFAULTS.labels)
+const LINEAR_TEAM_ID = (process.env.FEEDBACK_LINEAR_TEAM_ID || '').trim() || LINEAR_DEFAULTS.team;
+// The default project, state and label are PRDCT's. Sent with another team
+// they would fail every issueCreate, so a team override drops them.
+const TEAM_DEFAULTS =
+  LINEAR_TEAM_ID === LINEAR_DEFAULTS.team ? LINEAR_DEFAULTS : { project: '', state: '', labels: '' };
+const LINEAR_LABEL_IDS = (process.env.FEEDBACK_LINEAR_LABEL_IDS ?? TEAM_DEFAULTS.labels)
   .split(',')
   .map((s) => s.trim())
   .filter(Boolean);
-const LINEAR_PROJECT_ID = (process.env.FEEDBACK_LINEAR_PROJECT_ID ?? LINEAR_DEFAULTS.project).trim();
-const LINEAR_STATE_ID = (process.env.FEEDBACK_LINEAR_STATE_ID ?? LINEAR_DEFAULTS.state).trim();
-const LINEAR_DAILY_CAP = Number(process.env.FEEDBACK_LINEAR_DAILY_CAP) || 50;
+const LINEAR_PROJECT_ID = (process.env.FEEDBACK_LINEAR_PROJECT_ID ?? TEAM_DEFAULTS.project).trim();
+const LINEAR_STATE_ID = (process.env.FEEDBACK_LINEAR_STATE_ID ?? TEAM_DEFAULTS.state).trim();
+// Parsed by hand: `Number(x) || 50` would turn an explicit 0 into 50.
+const LINEAR_DAILY_CAP = (() => {
+  const raw = (process.env.FEEDBACK_LINEAR_DAILY_CAP || '').trim();
+  const n = Number(raw);
+  return raw !== '' && Number.isFinite(n) && n >= 0 ? n : 50;
+})();
 const LINEAR_ENABLED = Boolean(LINEAR_API_KEY && LINEAR_TEAM_ID);
 
 /** Upstream calls must not hold the function until Vercel kills it. */
@@ -67,7 +86,7 @@ const UPSTREAM_TIMEOUT_MS = 5000;
 
 const SITE_ORIGIN = 'https://help.keboola.com';
 
-/** Reason values rendered for humans; keys mirror ALLOWED_REASONS. */
+/** Reason values rendered for humans; its keys are the allowed reasons. */
 const REASON_TEXT: Record<string, string> = {
   accurate: 'Accurate',
   'solved-problem': 'Solved my problem',
@@ -80,22 +99,10 @@ const REASON_TEXT: Record<string, string> = {
   'another-reason': 'Another reason',
 };
 
-// Keep in sync with the reasons offered in Feedback.astro. Unknown reasons are
-// dropped rather than rejected, so tweaking the UI never 400s a submission.
-const ALLOWED_REASONS = new Set([
-  // 👍 "What did you like?"
-  'accurate',
-  'solved-problem',
-  'easy-to-understand',
-  'helped-decide',
-  // 👎 "What could be better?"
-  'inaccurate',
-  'hard-to-understand',
-  'missing-info',
-  'didnt-solve',
-  // shared
-  'another-reason',
-]);
+// Keep REASON_TEXT in sync with the reasons offered in Feedback.astro. Unknown
+// reasons are dropped rather than rejected, so tweaking the UI never 400s a
+// submission.
+const ALLOWED_REASONS = new Set(Object.keys(REASON_TEXT));
 
 const MAX_COMMENT = 1000;
 const MAX_FIELD = 512;
@@ -106,6 +113,9 @@ const MAX_FIELD = 512;
  * `]`, `)` or newline in it could otherwise inject markdown outside the fence.
  */
 const PATH_RE = /^\/[A-Za-z0-9/_.~%-]{0,255}$/;
+
+/** A crypto.randomUUID() from the widget. */
+const SID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 /** Per-IP issue limit within one function instance. */
 const IP_WINDOW_MS = 60 * 60 * 1000;
@@ -118,6 +128,7 @@ interface FeedbackBody {
   path?: unknown;
   title?: unknown;
   abandoned?: unknown;
+  sid?: unknown; // client-generated id, shared by the abandoned and the full row
   hp?: unknown; // honeypot — must be empty
 }
 
@@ -140,21 +151,15 @@ export interface FeedbackRecord {
  *
  * In a production or preview build the widget requests `/api/feedback` with an
  * empty apiBase, i.e. same-origin, and same-origin requests are not subject to
- * CORS at all — so a wildcard grants access to nobody who needs it, and to
- * every third-party page that does not. That is a free spam vector: any site
- * could POST feedback using its visitors' browsers and IPs.
- *
- * The only cross-origin caller is `astro dev`, where Feedback.astro points
- * apiBase at the scratch beacon deployment. Hence localhost and this project's
- * own Vercel hostnames, rather than all of vercel.app — anyone can deploy
- * there.
+ * CORS at all. The only cross-origin caller is `astro dev` on localhost, where
+ * Feedback.astro points apiBase at the scratch beacon deployment. No vercel.app
+ * pattern belongs here: anyone can name a Vercel project `connection-docs-…`.
  *
  * CORS is a browser control and stops none of this from curl, so the honeypot,
- * length caps and reason allow-list in buildRecord() remain the real defence.
- * This just removes the free half.
+ * caps and rate limits remain the real defence. This removes the free half:
+ * third-party pages posting with their visitors' browsers.
  */
-const ALLOWED_ORIGIN =
-  /^https:\/\/help\.keboola\.com$|^https:\/\/(?:connection-docs|keboola-docs-beacon)[a-z0-9-]*\.vercel\.app$|^http:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/;
+const ALLOWED_ORIGIN = /^https:\/\/help\.keboola\.com$|^http:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/;
 
 function setCors(req: VercelRequest, res: VercelResponse) {
   const origin = typeof req.headers.origin === 'string' ? req.headers.origin : '';
@@ -179,9 +184,15 @@ async function readJsonBody(req: VercelRequest): Promise<unknown> {
   return raw ? JSON.parse(raw) : {};
 }
 
+/** slice() that never leaves half of a surrogate pair (an emoji) at the end. */
+function cut(s: string, max: number): string {
+  const out = s.slice(0, max);
+  return /[\uD800-\uDBFF]$/.test(out) ? out.slice(0, -1) : out;
+}
+
 /** Coerce to a trimmed string capped at `max` chars; non-strings → ''. */
 function str(v: unknown, max = MAX_FIELD): string {
-  return typeof v === 'string' ? v.trim().slice(0, max) : '';
+  return typeof v === 'string' ? cut(v.trim(), max) : '';
 }
 
 /** Build a validated record, or null if the payload is unusable / dropped. */
@@ -198,8 +209,11 @@ export function buildRecord(body: FeedbackBody, req: VercelRequest): FeedbackRec
   const reasonRaw = str(body.reason, 64).toLowerCase();
   const reason = ALLOWED_REASONS.has(reasonRaw) ? reasonRaw : '';
 
+  const sid = str(body.sid, 64);
   return {
-    submission_id: `fb-${Date.now()}-${Math.round(Math.random() * 1e9).toString(36)}`,
+    submission_id: SID_RE.test(sid)
+      ? sid
+      : `fb-${Date.now()}-${Math.round(Math.random() * 1e9).toString(36)}`,
     verdict,
     reason,
     // An abandoned verdict was never submitted, so whatever sits in the box is
@@ -219,14 +233,14 @@ export function buildRecord(body: FeedbackBody, req: VercelRequest): FeedbackRec
 }
 
 /**
- * Wrap reader text in a code fence it cannot close: one backtick longer than
- * the longest run inside it. A blockquote doesn't hold — a bare `\r` ends the
- * quote, and mentions and references inside it still render.
+ * Wrap reader text in a code fence it cannot close. A blockquote doesn't hold
+ * (a bare `\r` ends the quote, and mentions and references inside it still
+ * render), and a longer fence only holds where the parser follows CommonMark's
+ * fence-length rule. So no backtick run survives at all: a zero-width space goes
+ * between adjacent backticks, which no parser reads as a fence.
  */
 export function fence(text: string): string {
-  const longest = Math.max(0, ...(text.match(/`+/g) ?? []).map((m) => m.length));
-  const ticks = '`'.repeat(Math.max(3, longest + 1));
-  return `${ticks}text\n${text}\n${ticks}`;
+  return '```text\n' + text.replace(/`(?=`)/g, '`\u200B') + '\n```';
 }
 
 /** Markdown description for a Linear issue. Exported for the handler tests. */
@@ -274,7 +288,7 @@ async function createLinearIssue(record: FeedbackRecord): Promise<void> {
   const verdict = record.verdict === 'up' ? '👍' : '👎';
   const input: Record<string, unknown> = {
     teamId: LINEAR_TEAM_ID,
-    title: `Docs feedback (${verdict}${reason ? ` ${reason}` : ''}): ${pageTitle}`.slice(0, 250),
+    title: cut(`Docs feedback (${verdict}${reason ? ` ${reason}` : ''}): ${pageTitle}`, 250),
     description: issueMarkdown(record),
   };
   if (LINEAR_LABEL_IDS.length) input.labelIds = LINEAR_LABEL_IDS;
@@ -357,27 +371,42 @@ async function postIngest(record: FeedbackRecord): Promise<void> {
 /**
  * Send the record to every configured sink. The sinks are independent: a
  * Linear failure must not cost the stream its row, and the other way round.
- * Resolves to false if any sink failed, after logging each failure.
+ * Resolves to false if a sink failed or a comment reached no sink.
  */
 async function deliver(record: FeedbackRecord, req: VercelRequest): Promise<boolean> {
-  const jobs: Promise<void>[] = [];
-  let dropped = false;
+  let linear: Promise<void> | null = null;
   if (LINEAR_ENABLED && record.comment) {
-    if (allowIssue(clientIp(req))) jobs.push(createLinearIssue(record));
-    else if (INGEST_URL) console.warn('[feedback] issue rate limit hit; comment kept in ingest only');
-    else {
-      dropped = true;
-      console.warn('[feedback] issue rate limit hit; comment dropped (no ingest configured)');
-    }
+    if (allowIssue(clientIp(req))) linear = createLinearIssue(record);
+    else console.warn('[feedback] issue rate limit hit');
   }
-  if (INGEST_URL) jobs.push(postIngest(record));
+  const [linearResult, ingestResult] = await Promise.allSettled([
+    linear ?? Promise.resolve(),
+    INGEST_URL ? postIngest(record) : Promise.resolve(),
+  ]);
 
-  const results = await Promise.allSettled(jobs);
-  let ok = !dropped;
-  for (const r of results) {
+  let ok = true;
+  for (const r of [linearResult, ingestResult]) {
     if (r.status === 'rejected') {
       ok = false;
       console.error('[feedback] sink error:', r.reason?.message ?? String(r.reason));
+    }
+  }
+
+  const inIngest = Boolean(INGEST_URL) && ingestResult.status === 'fulfilled';
+  if (!inIngest) {
+    // No row anywhere, so keep the vote countable from the logs. No comment,
+    // user agent or referrer in this line.
+    const { submission_id, verdict, reason, path, abandoned, ts } = record;
+    console.log('[feedback] vote', JSON.stringify({ submission_id, verdict, reason, path, abandoned, ts }));
+    const inLinear = linear !== null && linearResult.status === 'fulfilled';
+    if (record.comment && !inLinear) {
+      // Rate-limited, Linear down or the key revoked: the logs are the last
+      // place this comment exists, so say so loudly instead of dropping it.
+      ok = false;
+      console.error(
+        '[feedback] undelivered comment',
+        JSON.stringify({ submission_id, path, comment: record.comment }),
+      );
     }
   }
   return ok;

@@ -151,6 +151,12 @@
     let verdict: 'up' | 'down' | null = null;
     let reason = '';
     let submitted = false;
+    // One id per widget. A thumb sent on pagehide and a later Submit (after a
+    // Back restore from the bfcache) share it, so the two rows read as one.
+    let sid = '';
+    try {
+      sid = crypto.randomUUID();
+    } catch {}
 
     // Already gave feedback on this page → show the thank-you, skip the form.
     let seen = false;
@@ -172,6 +178,7 @@
         comment: comment.value.trim(),
         path: location.pathname,
         title: document.title,
+        sid,
         hp: honeypot.value,
         ...extra,
       });
