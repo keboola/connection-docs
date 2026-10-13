@@ -8,6 +8,8 @@ search_keywords: [mixpanel]
 
 [Mixpanel](https://mixpanel.com/) analyzes user behavior across websites and apps. The MixPanel data source connector uses the [raw data export API](https://developer.mixpanel.com/docs/exporting-raw-data) to download event data into Storage. The API returns one JSON object per event, and events do not share the same keys, so by default the connector unpivots them into a name-value pair table. It can also store the raw JSON for you to parse in a transformation.
 
+<!-- VERIFY(Jiří Soukup): which primary key does Incremental load use? In the name-value table every parameter row of one event shares `id`, so a key of `id` alone would overwrite all but one parameter per event. -->
+
 <!-- Reference-type page. Source: the component registry copy of `kds-team.ex-mixpanel` (/v2/storage longDescription, configurationDescription and config schema), verified 2026-10-12. -->
 
 ## Prerequisites

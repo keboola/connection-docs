@@ -1,9 +1,9 @@
 ---
 title: Google BigQuery
+description: Run queries in Google BigQuery and load the results into Storage tables, or as Avro files with the files variant.
 slug: 'components/extractors/database/bigquery'
 redirect_from:
     - /extractors/database/bigquery/
-description: Run queries in Google BigQuery and load the results into Storage tables, or as Avro files with the files variant.
 ---
 
 
@@ -16,7 +16,7 @@ Running the connector creates a background job that
 - exports the results from Google Cloud Storage and stores them in specified tables in Keboola Storage.
 - removes the results from Google Cloud Storage.
 
-<!-- Reference-type page. Avro files section added 2026-10-12 and corrected 2026-10-13 from Jiří Soukup's code-checked review of PR #1183; the rest is the legacy page. -->
+<!-- How-to-type page. Avro files section added 2026-10-12 and corrected 2026-10-13 from Jiří Soukup's code-checked review of PR #1183; the rest is the legacy page. -->
 
 ***Note:** Using the Google BigQuery connector is also described in our [Getting Started Tutorial](/tutorial/ad-hoc/#using-bigquery-connector).*
 

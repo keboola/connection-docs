@@ -41,7 +41,13 @@ Click **Test connection** to verify the key and the base URL, then save.
 
 ### Row configuration
 
-Click **Add Row** and configure one row per agenda. Map the input table, or the header and line-items tables, in the row's input mapping first.
+Click **Add Row** and configure one row per agenda.
+
+:::caution[No input mapping in the form]
+The row form does not offer a table input mapping, so you cannot pick the input tables in the UI.
+:::
+
+<!-- VERIFY(Jiří Soukup): keboola.wr-mpohoda lacks the genericDockerUI-tableInput flag (wr-pohoda-mserver has it); checked live in project 6439 on 13 Oct 2026, the row page shows no Table Input Mapping. Remove this caution once the flag is added. -->
 
 | Field | Description |
 |---|---|
