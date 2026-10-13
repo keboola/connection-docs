@@ -5,6 +5,8 @@ slug: 'components/extractors/database/oracle'
 
 
 
+Use the Oracle connector to sync data from an Oracle database into Keboola by running queries against it. Its setup matches the other [database connectors](/components/extractors/database/); the shared steps are in [Initial setup](/components/extractors/database/sqldb/#initial-setup).
+
 ## Query-Based connector
 
 This is a [standard connector](https://components.keboola.com/components/keboola.ex-db-oracle) that performs queries against the source database to sync data. 
