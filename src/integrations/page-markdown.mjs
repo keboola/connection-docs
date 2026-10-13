@@ -3,6 +3,7 @@ import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
+import { stripHtmlComments } from './strip-comments.mjs';
 
 /**
  * Astro integration that emits a raw-markdown copy of every docs page.
@@ -349,7 +350,8 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
 
           const isMdx = extname(file) === '.mdx';
           const raw = stripFrontmatter(content);
-          const body = (isMdx ? stripMdx(raw) : raw).trim();
+          // authors' notes (VERIFY markers, where a claim was checked) stay in the source
+          const body = stripHtmlComments(isMdx ? stripMdx(raw) : raw).trim();
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });

@@ -249,8 +249,8 @@ Runtime settings change how a job runs, not what it does:
   [container size](/transformations/python-plain/#dynamic-backends). Values are `xsmall`, `small`,
   `medium`, `large`.
 - `parallelism`: runs [configuration rows](/components/#configuration-rows) in parallel. An integer
-  from 2 to 100; `infinity` is still accepted for compatibility but is capped at 100. Unset, rows run
-  one after another.
+  from 2 to 100; `infinity` is still accepted for compatibility but is capped at 100. Unset, it
+  defaults to 1: rows run one after another, each in its own job.
 - `tag`: runs a specific version of the component's code, mostly during development and debugging.
 
 Runtime settings can live in the component configuration, in the job request (which overrides the
