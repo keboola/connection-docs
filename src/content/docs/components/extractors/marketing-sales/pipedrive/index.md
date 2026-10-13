@@ -1,6 +1,7 @@
 ---
 title: Pipedrive
 slug: 'components/extractors/marketing-sales/pipedrive'
+description: 'Import organizations, persons, activities, pipelines and, with the Extended template, deals from Pipedrive with an API token and your company domain.'
 redirect_from:
     - /extractors/marketing-sales/pipedrive/
 ---
@@ -9,6 +10,8 @@ redirect_from:
 
 This data source connector uses the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1) to import data 
 from [Pipedrive](https://www.pipedrive.com/en-gb).
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Pipedrive** connector.

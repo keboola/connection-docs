@@ -1,11 +1,16 @@
 ---
 title: Columns and primary key of report configuration presets
 slug: 'components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk'
+description: 'Look up the columns and primary key of each Microsoft Advertising (Bing Ads) report preset, for daily and hourly aggregation.'
 redirect_from:
     - /extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/
 ---
 
 
+
+These are the columns and the primary key that each report preset of the [Microsoft Advertising (Bing Ads) connector](/components/extractors/marketing-sales/bing-ads/) uses, for daily and for hourly aggregation.
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## AccountPerformance Report Presets
 ### Daily aggregation
