@@ -1,6 +1,7 @@
 ---
 title: PostgreSQL
 slug: 'components/writers/database/postgresql'
+description: 'Write Keboola tables to a PostgreSQL database and schema with dedicated credentials or an SSH tunnel, then set column types and full or incremental load.'
 redirect_from:
     - /writers/database/postgresql/
 
@@ -9,6 +10,8 @@ redirect_from:
 
 
 This data destination connector sends data to a [PostgreSQL](https://www.postgresql.org/) database.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **PostgreSQL** data destination connector.
