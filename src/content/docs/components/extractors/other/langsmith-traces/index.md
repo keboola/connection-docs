@@ -51,6 +51,11 @@ Click **Test connection**.
 
 ## Output
 
-Two tables, loaded incrementally: one with the runs and one with their feedback, including evaluator scores and corrections.
+Two tables, both loaded incrementally:
 
-<!-- VERIFY(Jiří Soukup): names and primary keys of the two output tables. The registry copy says only "two incremental tables"; the repo README predates the current schema and does not list them. -->
+| Table | Primary key | Contents |
+|---|---|---|
+| `runs` | `id` | The run history. |
+| `langsmith_feedback` | `id`, `run_id` | The feedback on the runs, including evaluator scores and corrections. |
+
+<!-- Table names and keys: deployed version 0.2.0, confirmed by Jiří Soukup in his review of PR #1183 (13 Oct 2026). The repository the developer portal links to is an older prototype, so its README does not match this output. -->

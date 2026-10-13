@@ -1,12 +1,12 @@
 ---
 title: MixPanel
 slug: 'components/extractors/marketing-sales/mixpanel'
-description: Export raw event data from Mixpanel into Storage as a name-value-pair table or as raw JSON, for a date range or a rolling window of full days.
+description: Export raw event data from Mixpanel into Storage as a name-value pair table or as raw JSON, for a date range or a rolling window of full days.
 search_keywords: [mixpanel]
 ---
 
 
-[Mixpanel](https://mixpanel.com/) analyzes user behavior across websites and apps. The MixPanel data source connector uses the [raw data export API](https://developer.mixpanel.com/docs/exporting-raw-data) to download event data into Storage. The API returns one JSON object per event, and events do not share the same keys, so by default the connector unpivots them into a name-value-pair table. It can also store the raw JSON for you to parse in a transformation.
+[Mixpanel](https://mixpanel.com/) analyzes user behavior across websites and apps. The MixPanel data source connector uses the [raw data export API](https://developer.mixpanel.com/docs/exporting-raw-data) to download event data into Storage. The API returns one JSON object per event, and events do not share the same keys, so by default the connector unpivots them into a name-value pair table. It can also store the raw JSON for you to parse in a transformation.
 
 <!-- Reference-type page. Source: the component registry copy of `kds-team.ex-mixpanel` (/v2/storage longDescription, configurationDescription and config schema), verified 2026-10-12. -->
 
@@ -29,7 +29,7 @@ search_keywords: [mixpanel]
 | Events | Optional list of events to export. Empty exports all events. |
 | Where | Optional [segmentation expression](https://developer.mixpanel.com/reference/segmentation-expressions) that filters the events. |
 | Load type | **Full load** (default) overwrites the table on every run. **Incremental load** creates the table with primary keys and upserts new data. |
-| Raw data export | Off: the JSON is parsed into a key-value pair table. On: the raw JSON response is stored in the table for you to parse later, for example in a Snowflake or Python transformation. |
+| Raw data export | Off: the JSON is parsed into a name-value pair table. On: the raw JSON response is stored in the table for you to parse later, for example in a Snowflake or Python transformation. |
 
 ![Screenshot - MixPanel configuration](/components/extractors/marketing-sales/mixpanel/mixpanel-1.png)
 

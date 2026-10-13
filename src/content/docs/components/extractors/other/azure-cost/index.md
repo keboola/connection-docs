@@ -42,7 +42,7 @@ The **Azure Cost Management Service Principal** connector reads the same cost an
 
 [Create a new configuration](/components/#creating-component-configuration) of the **Azure Cost Management Service Principal** connector and fill in the **Subscription ID** and the service principal's **Tenant ID**, **Username** and **Password**. Username is the application (client) ID and Password is the client secret of the [service principal](https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals) registered in your tenant; the password is stored encrypted. The service principal needs read access to Cost Management for that subscription. The rows, their fields and the output table are the same as above.
 
-<!-- VERIFY(Jiří Soukup): the exact Azure role the service principal needs (Cost Management Reader on the subscription?); the README of keboola/ex-azure-cost-management names tenant, username and password but no role. -->
+<!-- VERIFY(Jiří Soukup): the exact Azure role. Microsoft documents Cost Management Reader (or Contributor) for a subscription's cost data, but the connector POSTs to the Cost Management Query API and the Reader role lists only Microsoft.CostManagement/*/read. Untested with a Reader-only service principal (Jiří's review of PR #1183, 13 Oct 2026); keep the general wording until someone runs it. -->
 
 ## Output Table
 

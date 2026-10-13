@@ -18,7 +18,7 @@ Input table columns map to POHODA fields by name, or through an explicit column 
 
 ## Prerequisites
 
-- A running POHODA mServer that Keboola can reach over plain HTTP. The default mServer port is 444, and mServer does not use HTTPS by default.
+- A running POHODA mServer that Keboola can reach over plain HTTP. The default mServer port is 444, and mServer does not use HTTPS by default, so credentials and data travel unencrypted. Allow access to mServer only from [Keboola's IP addresses](/components/ip-addresses/), or put it behind a VPN.
 - The IČ (company ID) of the accounting unit to write to.
 - A POHODA user account, not a Windows or domain account, and its password if it has one.
 

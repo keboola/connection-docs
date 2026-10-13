@@ -16,7 +16,7 @@ Running the connector creates a background job that
 - exports the results from Google Cloud Storage and stores them in specified tables in Keboola Storage.
 - removes the results from Google Cloud Storage.
 
-<!-- Reference-type page. Avro files section added 2026-10-12 from Jiří Soukup's summary of the developer-portal description; the rest is the legacy page. -->
+<!-- Reference-type page. Avro files section added 2026-10-12 and corrected 2026-10-13 from Jiří Soukup's code-checked review of PR #1183; the rest is the legacy page. -->
 
 ***Note:** Using the Google BigQuery connector is also described in our [Getting Started Tutorial](/tutorial/ad-hoc/#using-bigquery-connector).*
 
@@ -82,6 +82,8 @@ To learn how to modify your configuration, go to the [SQL databases section](/co
 
 ## Avro files variant
 
-The **Google BigQuery avro files** connector is configured the same way, with the service account, the bucket and the queries, but it does not write the query results into Storage tables. Each result is stored as an Avro file in [Storage Files](/storage/files/) instead. Use it for results too large for a table, or when the next step of your pipeline works with files, for example a transformation or a [processor](/extend/component/processors/) that reads Avro.
+The **Google BigQuery avro files** connector (`keboola.ex-google-bigquery-v2-avro-files`) is configured the same way, with the service account, the bucket and the queries, but it does not write the query results into Storage tables. Each query's result is exported to one Avro file in [Storage Files](/storage/files/) instead. Use it when the next step of your pipeline works with files, for example a transformation or a [processor](/extend/component/processors/) that reads Avro.
 
-<!-- VERIFY(Jiří Soukup): the connector's exact name and id, and whether one query produces one file; the component is in the developer portal but not in any stack's /v2/storage on 12 Oct, so this paragraph follows your summary and the portal description. -->
+Because each result goes to a single file, it is bound by BigQuery's limit of [1 GB per exported file](https://cloud.google.com/bigquery/docs/exporting-data); a larger result fails. The main connector unloads its results into several files through a wildcard, so this limit does not apply to it.
+
+<!-- Source for this section: Jiří Soukup's review of PR #1183 (13 Oct 2026), checked against the developer portal and the component code: name and id as above, one query = one file with no wildcard. The component is not listed in /v2/storage on the five multi-tenant stacks; whether it should stay documented is an open product question. -->
