@@ -10,7 +10,7 @@ import Prereqs from '../../../../components/Prereqs.astro';
 import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 import CourseLine from '../../../../components/getting-started/CourseLine.astro';
 
-<PageMeta genre="Tutorial" guide="Getting Started, step by step" />
+<PageMeta genre="Tutorial" />
 
 <CourseLine current="ask" />
 
@@ -40,7 +40,8 @@ does, out of your own project.
 2026-09-09 (boolabean-run, the staged runs' ask.txt and ask-followup/): the first as the
 fourth prompt of the staged runs, 0 approvals, 1.3–1.6 min; the second alone in a fresh chat, 0
 approvals. Kai's figures matched the table and the offline reference to the decimal. The
-"one prompt" observations of 2026-09-03 and 2026-09-08 moved to with-kai/ on 2026-10-08.
+"one prompt" observations of 2026-09-03 and 2026-09-08 moved to with-kai/ on 2026-10-08; that page
+went on 2026-10-13, and both are recorded in notes/getting-started/DECISIONS.md under 2026-09-08.
 The previous clip (kai-ask-basin.mp4) came off with the old sample world.
 
 Three tabs 2026-09-15. The CLI command was run live against project 264 (kbagent v0.93.1):
@@ -126,8 +127,7 @@ It only reads, so by default it asks for no approval, and a wrong filter or a wr
 to spot in the SQL than in the prose.
 {/* Run 2026-10-07 in project 264 with `kbagent kai chat`, after this page's first question in the
 same chat: Kai printed both queries it had run (the short-handed filter and a date-range check) and
-the three rows, with no approval. Titled "Follow-up prompt" so components/getting-started/prompts.mjs
-does not list it on with-kai/ as a step. notes/getting-started/DECISIONS.md 2026-10-07. */}
+the three rows, with no approval. notes/getting-started/DECISIONS.md 2026-10-07. */}
 
 </details>
 
@@ -223,8 +223,9 @@ gives you the shape of the table and
 
 {/* "The same request, as one prompt" moved on 2026-10-08 to getting-started/with-kai/ as the fold
 "Why not one prompt for everything": its two measured observations went there, the prompt block
-went (never run on the current sample; a second copy of the prompts). notes/getting-started/CONSERVATION-REPORT.md
-2026-10-08. */}
+went (never run on the current sample; a second copy of the prompts). The page and the fold went
+on 2026-10-13, when the tabbed flow became the final one: the guide gives the prompts one page at
+a time. notes/getting-started/CONSERVATION-REPORT.md 2026-10-08 and 2026-10-13. */}
 
 A chat answer reaches only the person who asked. The next page turns the table into a grid anyone
 can open.

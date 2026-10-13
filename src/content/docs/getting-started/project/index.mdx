@@ -2,10 +2,6 @@
 title: 'Create or join a project'
 slug: 'getting-started/project'
 description: 'Create or join a Keboola project, find your way around it, and confirm Kai is switched on before you load any data.'
-# the step-by-step path goes on to load/; with-kai/ is the other way, offered in the closing line
-next:
-  link: /getting-started/load/
-  label: Load data into Storage
 ---
 
 import PageMeta from '../../../../components/getting-started/PageMeta.astro';
@@ -28,7 +24,7 @@ that runs them. This page gets you one.
   </li>
 </Prereqs>
 
-**No prompt here.** Kai works *inside* a project, so this one page is yours. Every step page after
+**No Prompt tab here.** Kai works *inside* a project, so this one page is yours. Every step page after
 it offers three ways to do the same task.
 
 {/* Tutorial-type page. Restored as its own page 2026-09-14 (it had been merged into the hub on
@@ -154,7 +150,7 @@ Kai chat (or only in the MCP bootstrap mode of DMD-1939) is for the Kai team. */
 - **Kai Agent**, the button in the project's top bar, opens a chat panel. A new Free Plan project
   has it from the start. If it asks you to switch the feature on, an organization admin does it, and
   anyone else asks them or Support ([Get started with Kai](/kai/getting-started/)). No button means
-  your stack does not offer Kai: follow the step pages instead.
+  your stack does not offer Kai.
 - What Kai does counts against the project, and an organization admin can cap how much it spends;
   [Kai pricing and limits](/kai/pricing/) holds the current rules.
 
@@ -170,13 +166,39 @@ project 6375 on 2026-10-01: the chat's usage button reads "Kai usage — context
 N of 50, free allowance 300 PPU left", so the message counter and the PPU allowance both still
 show, which neither page describes. */}
 
-Not having Kai does not block the build: the loading, the SQL and the flow each carry a UI path and
-a CLI path in full.
+On the next pages, the **Prompt** tab works like this: open **Kai Agent**, paste the prompt, send
+it, and approve each change Kai asks about. The app's prompt is the one exception: it goes into the
+field on the **Apps** page. Here it is in a new Free Plan project, with the first prompt of the next
+page, [Load data into Storage](/getting-started/load/):
 
-**Next:** for the result first, every prompt on one page:
-[The whole guide with Kai](/getting-started/with-kai/). To learn where each setting lives, or
-without Kai, go step by step from
-[Load data into Storage](/getting-started/load/).
+<video autoplay loop muted playsinline controls poster="/getting-started/project/where-kai-poster.png" aria-label="Screen recording in a new project, with a numbered caption above each step: on the Storage page, click Kai Agent at the top right; paste the load prompt into the chat and press Enter; Kai works on it (sped up), then asks before creating the first data source: click Approve. Kai creates it, opens it on the left and asks again before adding the first row.">
+  <source src="/getting-started/project/where-kai.mp4" type="video/mp4" />
+</video>
+
+{/* Moved here on 2026-10-13 from the "The whole guide with Kai" page, which went when the tabbed
+flow became the final one (Nikita's pick after Jordan preferred it; notes/getting-started/DECISIONS.md
+2026-10-13). This page is where the reader checks Kai Agent is there, right before the first
+Prompt tab, and it has no other clip. Recording, 2026-10-09, a new Free Plan project, 6429 (Nikita
+asked to see step by step where Kai is and where the prompts go, as a clip of the interface rather
+than enlarged screenshots). Take 8 of record-where4.mjs, at 2x through the CDP screencast,
+assembled in Remotion (~/docs-ops/remotion/where-kai, edit8.py, Composition8.tsx): the whole
+screen first, a zoom of 1.6x, back out at the end; an arrow pointer drawn by the recorder, brought
+up to Approve from below; captions in a band above the screen, where the player's controls never
+cover them. Kai's 35 s of work runs at 10x and the 9 s after Approve at 2x, both labelled; the
+2.6 s while the new chat's suggestions load, and 1.3 s of the pasted prompt, are cut; the rest is
+1x. The suggestions still move the field by 4 CSS px as it is clicked (take 6: 16 px). Approve was
+clicked on camera: it created the "Boolabean sales" configuration, Kai's next
+request (the stores row) was declined off camera, and the configuration went to Trash. The
+account e-mail was blanked as it rendered and the avatar hidden; Vision OCR over all 621 frames
+and the poster found no e-mail. 25.9 s, 850 KB, mean luma 228, min 224, poster at 8.4 s
+(clip_metrics.sh). Recorders, raw takes and marks: ~/.keboola-shots/where-kai-2026-10-09/.
+notes/getting-started/DECISIONS.md 2026-10-09. */}
+
+Not having Kai does not block the build: the loading, the SQL and the flow each carry a UI path and
+a CLI path in full, and the questions can be asked in SQL in a workspace. Without Kai the app is
+your own code in a Git repository; its page links where that is covered.
+
+**Next:** [Load data into Storage](/getting-started/load/).
 
 ## If it goes wrong
 

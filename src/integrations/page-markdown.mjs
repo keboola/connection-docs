@@ -5,9 +5,8 @@ import { fileURLToPath } from 'node:url';
 import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
 import { stripHtmlComments } from './strip-comments.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
-import { courseListText, courseBarText, kaiTrackText } from '../components/getting-started/course.mjs';
+import { courseListText, courseBarText } from '../components/getting-started/course.mjs';
 import { sampleText } from '../components/getting-started/sample.mjs';
-import { guidePromptsText } from '../components/getting-started/prompts.mjs';
 
 /**
  * Astro integration that emits a raw-markdown copy of every docs page.
@@ -202,12 +201,10 @@ function stripMdx(body) {
       // that links somewhere. Each comes from the same data as the component.
       if (/^\s*<CourseLine\b/.test(line)) {
         const props = tagProps(line);
-        const text = props.layout === 'list' ? courseListText() : props.track === 'kai' ? kaiTrackText() : courseBarText(props.current);
+        const text = props.layout === 'list' ? courseListText() : courseBarText(props.current);
         out.push('', ...text, '');
       }
       if (/^\s*<SampleData\b/.test(line)) out.push('', ...sampleText(), '');
-      // the guide's prompts in order, read from the step pages like GuidePrompts.astro reads them
-      if (/^\s*<GuidePrompts\b/.test(line)) out.push('', ...guidePromptsText(), '');
       if (/^\s*<FromTo\b/.test(line)) {
         const { from, to } = tagProps(line);
         out.push('', `**${PREREQ_LABELS.from}:** ${from} **${PREREQ_LABELS.to}:** ${to}`, '');

@@ -2181,6 +2181,34 @@ fact-checker caught `build-locally`'s "free project from the link above", which 
 link to `project/`, two comments that still called Free Plan apps an open question, and three
 conservation rows that were inexact.
 
+## 2026-10-13 — The tabbed flow is final; The whole guide with Kai goes
+
+**Decided by:** Nikita, 13 Oct, after Jordan said he prefers the earlier flow, where the reader
+picks a tab on each page, to the split into a Kai page and a "Step by step" group. Three variants
+were compared on the same content (#1187's head): A, tabs only; B, the two tracks of 8 October; C,
+tabs with the Kai page outside the chain. The comparison report and the previews of A and C (branches
+PRDCT-487-flow-a-tabs and PRDCT-487-flow-c-kai-side, no pull requests) were made for this. Nikita
+picked A and kept the clip that shows where Kai is and where the prompt goes.
+
+**Done.**
+- The sidebar lists the seven steps in one list again, with no "Step by step" group and no Kai
+  page; Prev/Next run from the project to Check without frontmatter overrides; the hub's course
+  list has no fork card; project/'s closing line is "Next: Load data into Storage"; the step pages lose
+  the "Getting Started, step by step" label.
+- `getting-started/with-kai/` is removed. It never reached help.keboola.com (only PR previews),
+  so it needs no redirect.
+- The clip `where-kai.mp4` and its poster move to `public/getting-started/project/` and sit in
+  project/'s "Check it worked", after the checks and before the first Prompt tab. The
+  hub keeps its own clip, so it stays one clip per page.
+- The code only that page used is gone: `GuidePrompts.astro`, `prompts.mjs`, the card fields in
+  `course.mjs` (`approvals`, `done`, `note`, `shot`, the Kai track exports), the Kai branch of
+  `CourseLine.astro`, the twin's hooks for both, 146 lines of CSS, and the five card frames. Comments
+  that described them are updated.
+
+This reverses the three entries of 8 October (the Kai page, the tracker, the sidebar fork); they
+stay above as history. What the page held and where each part went is in CONSERVATION-REPORT.md,
+2026-10-13.
+
 ---
 
 ## Open — carried as VERIFY(owner) flags in the pages
@@ -2191,22 +2219,22 @@ each flag stays in its page, next to the sentence it qualifies.
 | Where | Owner | Question |
 |---|---|---|
 | `app/index.mdx:203` | Nikita | Is there always a route to **Publish to production** after *Draft ready*? The chat's *What's next?* chips are generated per answer and did not offer it in the 8 Oct run. |
-| `automate/index.mdx:482` | Miro | Does a running data app count against the Free Plan minutes? |
-| `automate/index.mdx:487` | Nikita | Does **Delete flow** also remove the flow's schedules? The box deletes the schedule first, so the page does not depend on the answer. |
+| `automate/index.mdx:481` | Miro | Does a running data app count against the Free Plan minutes? |
+| `automate/index.mdx:486` | Nikita | Does **Delete flow** also remove the flow's schedules? The box deletes the schedule first, so the page does not depend on the answer. |
 | `check/index.mdx:175` | Nikita | On contract plans, do flow jobs consume credits? |
 | `index.mdx:30` | Jordan | Two decisions of 21 Aug (the clip in three acts, the question frame as its poster) changed with the clips after 23 Sep. |
 | `load/database.mdx:46` | Nikita | Do the UI and Prompt paths name the bucket after the configuration? Only the CLI path was walked. |
 | `load/googlesheets.mdx:145` | Nikita | The four bullets on re-authorizing and the file picker come from how the connector behaves, not from a walk. |
-| `load/index.mdx:91` | Jordan | Does a weekly call to Open-Meteo's free API from a customer's project count as non-commercial use? |
-| `load/index.mdx:229` | Nikita | The HTTP connector's simplified mode was seen once (6211), and the page is its only source. |
-| `project/index.mdx:51` | Nikita | Which Free Plan Storage limit is right: 50 GB (the project's own limits) or 250 GB (`management/pay-as-you-go/`)? |
-| `project/index.mdx:63` | Nikita | A new Free Plan project showed 120 minutes, not the documented 60. A first-month allowance? |
-| `project/index.mdx:82` | MCP team, DMD-1939 | Which stack offers `create_project` to a session without an account, and when? |
-| `project/index.mdx:97` | Nikita | What does a project get in its first month? `management/payg-project/` never says. |
-| `project/index.mdx:143` | Nikita, ask the Kai team | Can Kai create a project? The page infers that it cannot. |
+| `load/index.mdx:87` | Jordan | Does a weekly call to Open-Meteo's free API from a customer's project count as non-commercial use? |
+| `load/index.mdx:224` | Nikita | The HTTP connector's simplified mode was seen once (6211), and the page is its only source. |
+| `project/index.mdx:47` | Nikita | Which Free Plan Storage limit is right: 50 GB (the project's own limits) or 250 GB (`management/pay-as-you-go/`)? |
+| `project/index.mdx:59` | Nikita | A new Free Plan project showed 120 minutes, not the documented 60. A first-month allowance? |
+| `project/index.mdx:78` | MCP team, DMD-1939 | Which stack offers `create_project` to a session without an account, and when? |
+| `project/index.mdx:93` | Nikita | What does a project get in its first month? `management/payg-project/` never says. |
+| `project/index.mdx:139` | Nikita, ask the Kai team | Can Kai create a project? The page infers that it cannot. |
 | `transform/index.mdx:134` | Nikita | The neutral transform prompt has not run on a Snowflake project. |
-| `transform/index.mdx:200` | Nikita | A new Free Plan project offers dbt Core (Beta), against the Free Plan limits in `management/pay-as-you-go/`. |
-| `transform/index.mdx:252` | Nikita | Direct Mode shows in new Free Plan projects, though `transformations/mappings/` calls it a private beta that Support enables. |
+| `transform/index.mdx:199` | Nikita | A new Free Plan project offers dbt Core (Beta), against the Free Plan limits in `management/pay-as-you-go/`. |
+| `transform/index.mdx:251` | Nikita | Direct Mode shows in new Free Plan projects, though `transformations/mappings/` calls it a private beta that Support enables. |
 | `transform/workspace.mdx:71` | Nikita | Nobody has walked the SQL Editor route that step 7 gives a Free Plan reader. |
 | `transform/workspace.mdx:114` | Nikita, ask the Kai team | Can Kai create a workspace? The page leaves it to the UI and CLI tabs. |
 | `transform/workspace.mdx:170` | Nikita | Does kbagent need an admin token for workspaces, or is write access enough? |

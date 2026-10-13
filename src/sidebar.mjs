@@ -36,19 +36,12 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "getting-started" },
       { slug: "getting-started/project" },
-      { slug: "getting-started/with-kai" },
-      {
-        label: "Step by step",
-        collapsed: false,
-        items: [
-          { slug: "getting-started/load" },
-          { slug: "getting-started/transform" },
-          { slug: "getting-started/ask" },
-          { slug: "getting-started/app" },
-          { slug: "getting-started/automate" },
-          { slug: "getting-started/check" },
-        ],
-      },
+      { slug: "getting-started/load" },
+      { slug: "getting-started/transform" },
+      { slug: "getting-started/ask" },
+      { slug: "getting-started/app" },
+      { slug: "getting-started/automate" },
+      { slug: "getting-started/check" },
       {
         label: "Going further",
         collapsed: true,

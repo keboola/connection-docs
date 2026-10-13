@@ -326,3 +326,20 @@ repeated here.
 | Loading from a database: the Snowflake data source and the sample database credentials, Advanced Mode | `tutorial/load/database.md` | `load/database/`, the same sample database, with the three tabs | moved, rewritten |
 | Loading from Google Sheets: a spreadsheet from `level.csv`, authorization, picking the file and the sheet, **Use With Demo Data** | `tutorial/load/googlesheets.md` | `load/googlesheets/`, the same walk | moved, rewritten |
 | "What's Next" and "If You Need Help" on every page | all eight pages | the **Next** footer, and "If it goes wrong" on every step page except `automate/`, which sends a failed run to `check/` ("Reading a flow run") | replaced |
+
+## 2026-10-13 — The tabbed flow is final (DECISIONS.md, same date)
+
+| Page | What | Now | Status |
+|---|---|---|---|
+| with-kai/ | "How it goes": where each prompt goes (Kai Agent, the app's into the Apps page), when to paste the next, what Kai asks, what to do if Kai asks something or a step comes out different | each step page's Prompt tab says where its prompt goes and how many approvals to expect (ask/: its box, and its note that reading asks for no approval); the hub's "How every page works" and "Approvals and plan mode"; transform/'s cold-week answer; each page's Check and the folds under it. Dropped: the tip to point at an icon-only navigation to see the names, and the note that in the 8 October run all the Kai Agent prompts went into one chat (DECISIONS.md, 2026-10-08) | moved (already there), two details dropped |
+| with-kai/ | the clip `where-kai.mp4` and its poster | project/, "Check it worked", after the Kai Agent check | moved |
+| with-kai/ | the box (a project, Kai, Apps for the app step) and the state cards | project/'s box and Kai Agent check; app/'s box names Apps | moved (already there) |
+| with-kai/ | the prompt cards: the seven prompts, Expect, Done when, a frame per step, the progress tracker | the prompts and the approval counts are on the step pages' Prompt tabs; the Done when digests, the five frames (load-done, transform-done, ask-done, app-where, flow-done) and the tracker are deleted | dropped: the guide goes page by page, and each page's Check says when a step is done |
+| with-kai/ | the fold "Why not one prompt for everything" (the 3 and 8 September observations) | not on a page; recorded in DECISIONS.md, 2026-09-08 (both runs, and the 14.4-minute, 12-approval control run) | dropped: no page offers the whole guide at once any more |
+| with-kai/ | "What you have now" and its pointer to the recap prompt | check/, "What you should have", which holds the recap prompt since 2026-10-09 | moved (already there) |
+| with-kai/ | "What is left to you": notifications, publishing, the check | automate/ (notifications), app/ (publishing), check/ | moved (already there) |
+| with-kai/ | the intro: the guide's question, and that the page holds every prompt in one place | the hub states the question; each step page holds its own prompts | dropped with the page |
+| hub | the fork card "Steps 2 to 6 in one sitting: The whole guide with Kai" | none | dropped with the page |
+| project/ | the closing line that offered the Kai page first | "Next: Load data into Storage" | changed |
+| load/ to automate/ | the track label "Getting Started, step by step" | the plain "Getting Started" | changed |
+

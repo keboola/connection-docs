@@ -4,10 +4,6 @@ slug: 'getting-started/load'
 description: 'Load five CSV files and a live weather forecast into Keboola Storage with the HTTP data source connector, straight from their URLs.'
 redirect_from:
   - /tutorial/load/
-# back along the step-by-step path, past with-kai/, which sits between them in the sidebar
-prev:
-  link: /getting-started/project/
-  label: Create or join a project
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
@@ -18,7 +14,7 @@ import CourseLine from '../../../../components/getting-started/CourseLine.astro'
 import SampleData from '../../../../components/getting-started/SampleData.astro';
 import FlowStrip from '../../../../components/getting-started/FlowStrip.astro';
 
-<PageMeta genre="Tutorial" guide="Getting Started, step by step" />
+<PageMeta genre="Tutorial" />
 
 <CourseLine current="load" />
 
@@ -193,8 +189,7 @@ Explain the "Boolabean sales" configuration you created, row by row.
 
 It only reads, so it asks for no approval by default.
 {/* Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals: Kai described
-the HTTP data source, its base URL, the five rows and the three processors each row runs. Titled
-"Follow-up prompt" so components/getting-started/prompts.mjs leaves it out of the with-kai list. */}
+the HTTP data source, its base URL, the five rows and the three processors each row runs. */}
 
 </TabItem>
 <TabItem label="UI">
