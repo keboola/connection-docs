@@ -1,6 +1,7 @@
 ---
 title: Code Pattern Interface
 slug: 'extend/component/code-patterns/interface'
+description: 'Specifies the generate action of a code pattern component, the config.json keys it gets, the JSON it writes to stdout and its Developer Portal settings.'
 ---
 
 

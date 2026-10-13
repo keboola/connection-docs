@@ -1,6 +1,7 @@
 ---
 title: Environment Specification
 slug: 'extend/common-interface/environment'
+description: 'Lists the environment variables Keboola injects into a component container, such as KBC_DATADIR and KBC_CONFIGID, and what each exit code means.'
 ---
 
 
@@ -8,6 +9,8 @@ Components use several [channels](/extend/common-interface/) to exchange informa
 primarily through [structured folders](/extend/common-interface/) and [configuration files](/extend/common-interface/config-file/).
 Each component has full access to the external network.
 Below are the specific aspects of the environment in which your component operates.
+
+<!-- Reference-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ## Environment Variables
 The following environment variables are injected into the container:

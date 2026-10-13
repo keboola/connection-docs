@@ -1,6 +1,7 @@
 ---
 title: Components
 slug: 'extend/component'
+description: 'Explains what a Keboola component is, what you need before you build one, and how the extractor, writer, application, processor and code pattern types differ.'
 redirect_from:
     - /extend/docker/
     - /extend/custom-science/
@@ -12,6 +13,8 @@ redirect_from:
 Components allow you to [extend](/extend/) Keboola.
 The data interface to components is very similar to [Transformations](/transformations/) — data is exchanged as
 CSV files in [designated directories](/extend/common-interface/).
+
+<!-- Explanation-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ### Intro to Component Creation
 As a developer, you implement the application logic in a language of your choice and store it in a
@@ -98,3 +101,7 @@ and configuration options. These are created by Keboola. If you wish to bring yo
 - Follow the [next steps](/extend/component/tutorial/input-mapping/) of the tutorial to understand how your component interacts with Keboola.
 - See more about [testing and debugging of components](/extend/component/tutorial/debugging/) in the Keboola environment.
 - Request [publication](/extend/publish/) of your component. 
+
+---
+
+**Next:** [Tutorial →](/extend/component/tutorial/)
