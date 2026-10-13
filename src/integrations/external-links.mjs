@@ -81,8 +81,16 @@ function markElement(node, inHeading) {
 
 const isJsx = (n) => n.type === 'mdxJsxTextElement' || n.type === 'mdxJsxFlowElement';
 
-const hrefOf = (attrs) => (attrs.match(/\bhref=(["'])([^"']+)\1/) || [])[2];
-const opensNewTab = (attrs) => isExternalHref(hrefOf(attrs)) && !/\btarget=/i.test(attrs);
+// An attribute by its whole name: `(?<![\w-])` keeps data-href, data-target and
+// the like from matching href, target, rel or class.
+const attr = (name) => new RegExp(`(?<![\\w-])${name}=(["'])([^"']*)\\1`, 'i');
+const HREF = attr('href');
+const TARGET = attr('target');
+const REL_ATTR = attr('rel');
+const CLASS_ATTR = attr('class');
+
+const hrefOf = (attrs) => (attrs.match(HREF) || [])[2];
+const opensNewTab = (attrs) => isExternalHref(hrefOf(attrs)) && !TARGET.test(attrs);
 
 /** How many external <a …> in an HTML string close somewhere else. */
 function unclosedExternal(html) {
@@ -148,13 +156,12 @@ export default function externalLinks() {
 /** Add target, rel and (unless asked not to) the class to an <a> tag's attribute string. */
 function tagAttrs(attrs, withClass) {
   // an existing rel gets noopener added; a second rel attribute would be ignored
-  const rel = /\brel=(["'])([^"']*)\1/;
-  let out = rel.test(attrs)
-    ? `${attrs.replace(rel, (m, q, v) => `rel=${q}${withRel(relTokens(v)).join(' ')}${q}`)} target="_blank"`
+  let out = REL_ATTR.test(attrs)
+    ? `${attrs.replace(REL_ATTR, (m, q, v) => `rel=${q}${withRel(relTokens(v)).join(' ')}${q}`)} target="_blank"`
     : `${attrs} target="_blank" rel="${REL}"`;
   if (!withClass) return out;
-  return /\bclass=(["'])/.test(out)
-    ? out.replace(/\bclass=(["'])([^"']*)\1/, (m, q, v) => `class=${q}${v} ${CLASS}${q}`)
+  return CLASS_ATTR.test(out)
+    ? out.replace(CLASS_ATTR, (m, q, v) => `class=${q}${v} ${CLASS}${q}`)
     : `${out} class="${CLASS}"`;
 }
 
