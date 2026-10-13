@@ -1,6 +1,7 @@
 ---
 title: Keboola Model Context Protocol (MCP) Server
 slug: 'ai/mcp-server'
+search_keywords: [mcp, mcp server]
 redirect_from:
     - /external-integrations/mcp-server/
     - /integrate/mcp/
@@ -252,7 +253,7 @@ Don't worry about remembering command names — your AI client handles that. Jus
 - **Semantic layer** – Explore the project's semantic models and validate queries against them. See [Semantic Layer](/ai/semantic-layer/).  
 - **Jobs** – Start, monitor, and debug execution flows.  
 - **Flows** – Create and manage flows (including conditional flows) that orchestrate your components.  
-- **Data Apps** – Create, deploy, and manage Streamlit and Python/JS data apps.  
+- **Data Apps** – Create, deploy, and manage Streamlit and Python/JS apps.  
 - **Search & Discovery** – Find components, configurations, and objects across your project.  
 - **Project & OAuth** – Read project info and set up OAuth authorizations for components.  
 - **Documentation** – Search official Keboola docs from within your AI chat.

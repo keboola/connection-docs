@@ -21,7 +21,7 @@ Normally, when you are using the user interface, your API token is exchanged aut
 the server backend. Therefore you need to work with tokens only when working with Keboola programmatically 
 (or if you need to limit a user's authorization to certain operations or data). 
 To learn more about all the available programmatic approaches, please follow our 
-[developers documentation](https://developers.keboola.com/overview/api/).
+[developers documentation](/overview/api/).
 
 Tokens can be managed from the **Project Settings > API Tokens** page.
 
@@ -49,7 +49,7 @@ API tokens are created
 Automatically created tokens have the lowest possible permissions for their task and also set expiration if possible.
 These are the typical reasons to manually create a new API token:
 
-- You want to use the [APIs](https://developers.keboola.com/overview/api/); this includes all of the [Storage clients](https://developers.keboola.com/integrate/storage/#storage-api-clients).
+- You want to use the [APIs](/overview/api/); this includes all of the [Storage clients](https://developers.keboola.com/integrate/storage/#storage-api-clients).
 - You need to limit access to certain data (for example, share a single table) or components.
 
 Although tokens cannot be used to directly log in to the Keboola user interface, they do allow executing almost all 
@@ -163,7 +163,7 @@ people can send data directly to your Keboola project instead of struggling with
 To revoke the access, simply delete or refresh the token.
 
 The token can then be used with the [Storage API](https://developers.keboola.com/integrate/) 
-or [other APIs](https://developers.keboola.com/overview/api/). 
+or [other APIs](/overview/api/). 
 
 ### Storage Console
 Typical usecase of sharing a token with someone is giving them a partial access to your project storage. The 
@@ -177,7 +177,7 @@ The Storage Console allows some basic operations with the project [Storage](/sto
 ![Screenshot - Storage Console](/management/project/tokens/storage-console.png)
 
 The link to the Storage API Console is available at the token retrieval page as it is different for each 
-[region](https://developers.keboola.com/overview/api/):
+[region](/overview/api/):
 
 - [AWS US Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.keboola.com)
 - [AWS EU Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.eu-central-1.keboola.com)

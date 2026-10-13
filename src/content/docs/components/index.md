@@ -138,7 +138,7 @@ The [developer guide](https://developers.keboola.com/integrate/storage/api/confi
 **Important**: Component configurations do not count towards your project quota.
 
 The version list is unlimited. Configuration versions are also created when the configurations are manipulated 
-programmatically using [the API](https://developers.keboola.com/overview/api/). In other words, all configuration modifications are recorded.
+programmatically using [the API](/overview/api/). In other words, all configuration modifications are recorded.
 
 ### Compare Versions
 You can compare adjacent versions by clicking the *compare* icon:
@@ -151,7 +151,7 @@ The differences between the raw JSON configurations are displayed when you compa
 
 When you roll back a configuration, a new version is created. This means you never lose any version of
 a configuration, and there is always an option to get back to it. Configuration versions are also created when 
-the configurations are manipulated programmatically via [the API](https://developers.keboola.com/overview/api/).
+the configurations are manipulated programmatically via [the API](/overview/api/).
 
 ### Rollback Version
 If you need to return to an older version of the configuration, you can also roll back to it (the other option is to make its copy).
@@ -249,7 +249,7 @@ configuration.*
 All components (usually data source and destination connectors) that support configuration rows now have the option to set job parallelism at the configuration level.
 This means you can control the speed of an extraction or writing process and specify which scenarios you want to speed up.
 
-This setting is optional, with the default option being **Parallel jobs: Off**.
+Each row runs as its own job. The default (and minimum) parallelism is **1**, which runs the rows one after another.
 
 **Example:** If your configuration has five rows and you set the parallelism to 2, the five jobs will be processed in three consecutive sets (2 + 2 + 1). The jobs within each set will run in parallel.
 

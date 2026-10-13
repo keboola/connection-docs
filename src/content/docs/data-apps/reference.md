@@ -21,7 +21,7 @@ Each app has its own configuration.
 | Authentication | Who can open the app — None, Basic, OIDC, GitHub, GitLab, or JumpCloud. See [Authentication](/data-apps/authentication/). |
 | Code Source | Where the app's code comes from — inline **Code** or a **Git Repository**. |
 | Backend version | The runtime image (Python version and, for Streamlit, the Streamlit version). See [Backend versions](#backend-versions). |
-| Backend size | The compute allocated to the app (for example XSmall, Small); chosen on deploy. |
+| Backend size | The compute allocated to the app (for example XSmall, Small); chosen on deploy. The hourly rate in time credits depends on the size and the framework. See [Apps pricing](/management/project/limits/#apps-pricing) and the [backend sizes](/management/project/limits/#apps-backend-sizes). |
 | Auto-sleep | The inactivity timeout before the app suspends. See [Sleep and resume](#sleep-and-resume). |
 | URL | The address where the app is served. |
 | Versioning | Draft vs production versions of the app, on the **Versions** tab. |
@@ -165,32 +165,41 @@ Open the table in **Storage** and check its **Overview** tab — it shows the **
 
 ## Terminal log
 
-The Terminal Log tab provides an **almost real-time** view of the application's terminal logs (with a slight delay of a few seconds), helping with monitoring and troubleshooting.
+The **Terminal Logs** tab provides an **almost real-time** view of the application's terminal logs (with a slight delay of a few seconds), for monitoring and troubleshooting.
 
 ![Screenshot - Hello World App](/data-apps/terminal-log.png)
 
 - **Near real-time log display** — terminal output as it is generated, with a short delay.
-- **Full log download** — download the complete log from the app's start with **Download Logs**.
+- **Full log download** — download the complete log from the app's start with **Download logs**.
 - **Log availability** — logs are accessible only while the app is running, and are deleted when it stops or pauses.
 
 ## App actions
 
-Manage a deployed app from its actions menu.
+Manage an app from the header and the **⋮** (More actions) menu on its page.
 
-![Actions menu](/data-apps/manage-redeploy.png)
+![A stopped app's header with Open and the ⋮ menu open over the Start button: Duplicate with Kai, Automate, Debug mode and Delete app](/data-apps/app-actions-menu.png)
 
-- **Deploy App** — starts the app. Once the deployment job finishes, open the app's public URL with **Open App**.
-- **Open App** — opens a new window with your app.
+- **Deploy** — starts an app that has never run. Once the deployment job finishes, open the app with **Open**.
+- **Open** — on any app that has been deployed, opens the **Open app** dialog, whatever the app's authentication. The dialog shows the app's address with a copy button, then the hidden password with its own copy button. An app without a password gets a line saying why instead. The dialog's **Open app** button opens the app in a new tab.
 - **Redeploy** — apply changes made in the app configuration (they take effect only after a redeploy).
-- **Suspend App** — stops the app. The container stops and the URL is no longer available, but the configuration is kept.
-- **Delete App** — stops the deployment and deletes its configuration.
+- **Start** — starts a stopped or sleeping app with its current configuration.
+- **Edit with Kai** — opens the Builder, where Kai changes the app in a draft. Shown on Python/JS apps with a Keboola-managed repository, to users who can edit the app, when Kai can build apps in the project.
+- **Migrate to Python/JS with Kai** — on Streamlit apps, asks Kai to migrate the app to Python/JS. Shown to users who can edit the app, when Kai can build apps in the project and the stack offers Python/JS apps. [Migrate to Python/JS](/data-apps/streamlit/migrate-to-python-js/) walks through it.
+- **Pause app** — puts a running app to sleep right away, before its inactivity timeout runs out. The configuration is kept, and the next visit or **Start** wakes the app. While the app is still starting, the item is **Cancel start** instead, which stops the start and keeps the deployed configuration.
+- **Duplicate with Kai** — on apps with a Keboola-managed repository, opens a new Kai chat and asks Kai to copy the app. The request tells Kai to say what carries over and to wait for your confirmation.
+- **Duplicate** — on all other apps, copies the app's code (or its repository and branch) and settings into a new app, which starts undeployed and gets its own address when you deploy it.
+- **Automate** — creates a flow that starts the app on a schedule you pick.
+- **Debug mode** — opens the app's configuration and its state as raw JSON in a full-screen editor, on the **Update Configuration** and **Update State** tabs. It doesn't run the app. A configuration saved there is a change like any other, and the app picks it up at the next **Redeploy** or **Start**. Saving the state doesn't create a configuration version.
+- **Delete app** — stops the deployment and deletes its configuration.
+
+Which of these the header and the **⋮** menu offer depends on the app's state and where its code lives, on your role in the project, and on whether Kai can build apps there. [Operate and update an app](/data-apps/operate/) walks through them in the order you meet them.
 
 ## Sleep and resume
 
 The Suspend/Resume feature saves resources by putting your app to sleep after a period of inactivity.
 
 - **Activity monitoring** — the app watches for HTTP requests and active WebSocket connections. If none occur for the configured period, it suspends. An inactive browser tab can still cause background activity; Chrome's Memory Saver can help prevent this.
-- **Automatic resumption** — the next request wakes the app. The first request after waking may take slightly longer.
+- **Automatic resumption** — the next request wakes the app, except after a failed start (see below). The first request after waking may take slightly longer.
 - **Cost efficiency** — you're billed only for the time the app was active or waiting to suspend.
 
 If you open the URL of a sleeping app, it triggers wakeup and shows a **waking up** page.
@@ -201,9 +210,11 @@ If something goes wrong, a **wakeup error** page appears; click **Show More** fo
 
 ![Wakeup error](/data-apps/proxy-error-wakeing-up.png)
 
-When you **Deploy** or **Redeploy**, a wizard prompts for the backend size and the auto-sleep timeout (five minutes to 24 hours; default five minutes).
+If a deploy or start of a stopped or sleeping app fails, Keboola stops trying, and visits no longer wake the app. Its URL shows a page headed **This app is not running** instead, which tells visitors to contact the app's maintainer. The app's page in Keboola warns that it "was disabled because it failed to start automatically multiple times", though one failed start is enough. It stays off until someone fixes the cause and starts it by hand with **Start**, which turns waking on visits back on (`kbagent data-app deploy` starts it from a terminal); [Troubleshooting](/data-apps/troubleshooting/#sleeping-and-waking) explains how to find the cause. A failed **Redeploy** of a running app doesn't disable it: the previous version keeps running.
 
-![Deploy timeout and backend size](/data-apps/deploy-timeout-backedsize.png)
+When you **Deploy**, a wizard prompts for the backend version, the backend size and the auto-sleep timeout (five minutes to 30 days; default 15 minutes). **Redeploy** opens the same wizard with the app's current values in a collapsed **Deploy settings** section; expand it to change them. **Start** starts a stopped or sleeping app right away with those saved values and opens the wizard only when Kai has undeployed drafts of the app. [Pay-as-you-go](/management/payg-project/) projects have no backend size field.
+
+![The Redeploy wizard of a running app, with the Deploy settings section collapsed to its summary: 1.18.0 · XSmall · Sleeps after 15 minutes](/data-apps/redeploy-wizard.png)
 
 ## Debugging app deployment
 

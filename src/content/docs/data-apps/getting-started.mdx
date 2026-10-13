@@ -1,0 +1,139 @@
+---
+title: Build your first app with Kai
+slug: 'data-apps/getting-started'
+description: Build and publish a Keboola app in about 10 minutes — describe it to Kai, preview the live draft, publish to production. Plus prompting tips, the approval model, and manual creation.
+redirect_from:
+  - /data-apps/build-with-kai/
+  - /data-apps/build-in-the-ui/
+---
+
+import Prereqs from '../../../components/Prereqs.astro';
+
+Kai builds a working app from a plain-language description — no coding and no Git account needed. From one chat it reads your governed data, writes the code, and opens a live draft you can preview, refine, and publish. This walkthrough takes you from nothing to a **live, published app in about 10 minutes**, and covers the details you'll want next: how to prompt, what Kai asks before touching your project, how drafts become production, and the [manual creation path](#create-an-app-manually) on the same screen.
+
+Apps go well beyond dashboards — the same steps produce internal tools, data narratives, or [anything interactive](/data-apps/#beyond-dashboards). This page builds a simple dashboard so you can learn the flow.
+
+<Prereqs needs={['projectWithKai', 'kai']}>
+  <li>
+    <strong>At least one table in Storage.</strong> Kai reads your data directly, so it works with
+    whatever you already have. No data yet? Download the sample{' '}
+    <a href="/tutorial/opportunity.csv" download>opportunity.csv</a> and attach it in Kai's chat with{' '}
+    <a href="/kai/getting-started/#attaching-files">Upload files</a>; Kai loads it into a table in
+    the <code>in.c-uploads-from-Kai</code> bucket.
+  </li>
+  <li><strong>A few minutes.</strong></li>
+</Prereqs>
+
+:::tip[Building with an AI agent?]
+[Build an app locally](/data-apps/build-locally/#with-an-ai-agent) sets up Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT app with Keboola's plugins and walks through one prompt to a deployed app. To add the skill to an agent by hand, the download is a copy of the skill folder: the skill itself, ready-made app templates (Python, Node.js, full-stack, Streamlit), and reference guides your agent can draw on.
+
+{/* VERIFY(Michal Ševčík): the zip is a 2026-07-09 snapshot of the skill and lacks references/python-js-prod-and-drafts.md from dataapp-developer 1.6.1. Refresh it or link to keboola/ai-kit instead. */}
+
+<a class="skill-download-btn" href="/data-apps/keboola-dataapp-development-skill.zip" download="keboola-dataapp-development-skill.zip">⬇ Download the app-building skill (with templates)</a>
+:::
+
+## Step 1 — Open Apps and start a new app
+
+In your project, open **Apps** from the left navigation, then click **Create app**. A project with no apps yet has no such button: its Apps page opens on **Build web apps from your Keboola data**, with a **Describe what you want to build** prompt that does the same job as **Build with Kai**. In that case, use that prompt for Step 2.
+
+{/* VERIFY(Nikita): the Apps page of a project with no apps (here and in Create an app manually, step 1) is known from the UI code of 1 Oct only; project 264 has apps. */}
+
+![The Apps list in a Keboola project: the app count, the search box with status filters, and the Create app button in the top right](/data-apps/getting-started-apps-list.png)
+
+You land on the **Create app** screen. It leads with **Build with Kai**, a prompt box where you tell Kai what you need. Below it, **Other ways to start** links to building locally with a coding agent and to the manual routes, for when you'd rather [set things up yourself](#create-an-app-manually). (The **Kai Agent** chat anywhere in your project works too.)
+
+![The Create app screen: the Build with Kai prompt at the top and, under Other ways to start, Build locally with your coding agent, Deploy from your own Git repository, and the Create a Streamlit app link](/data-apps/getting-started-create-app.png)
+
+## Step 2 — Describe the app you want
+
+Type what you want in plain language. The clearer your prompt, the closer Kai's first version lands — name three things: **the data**, **the audience**, and **the main action** you want people to take. For example:
+
+> Build a simple dashboard from my Storage data: a title, three key metrics as big number tiles, and one bar chart. Keep it clean and easy to read.
+
+The more specific you are — which tables, which charts, who it's for — the less you'll need to refine afterward.
+
+## Step 3 — Watch Kai read your data, verify it, and ask for your approval
+
+Kai gets to work. It **explores your Storage on its own** — listing buckets, reading table details, even sampling the data to verify its queries will work. Then, before creating anything in your project, it shows a **Confirmation required** card with the exact app configuration — name, description, and authentication type — and waits for your **Approve** (or **Decline**; **Always allow** skips this prompt for future builds).
+
+![Kai's confirmation card before creating the app: the generated configuration with Decline, Always allow, and Approve buttons, next to the draft-vs-production explainer](/data-apps/getting-started-approve.png)
+
+After you approve, Kai creates the app, sets up a **private draft**, and writes the code — you see each step in the chat (*File index.ts edited*, *Writing file…*) while it deploys a development container.
+
+In our run, Kai found the project's Shopify tables and built a **Toy Store Sales Dashboard**: total orders, revenue, and customers as tiles, plus a "top products by orders" bar chart.
+
+![Kai building the dashboard: creating the prod app and the draft, deploying the dev container, and writing each file, next to the draft panel](/data-apps/getting-started-kai-build.png)
+
+## Step 4 — Preview the draft and refine it
+
+The build runs in a **split-screen builder**: your chat with Kai on the left, and the app as a **draft** on the right — toggle between a live **Preview** and the **Code** view of its files. As the product puts it, this is *"a private draft that updates live as Kai builds"* — it hot-reloads as Kai edits and doesn't touch anything you've shared.
+
+![The split-screen builder: Kai's chat next to the live Preview of the Toy Store Sales Dashboard draft — metric tiles and a top-products chart — with the Publish to Production button](/data-apps/getting-started-draft-preview.png)
+
+Kai's first version is a starting point, not the final word. Keep chatting to change it — a different chart, another metric, a new filter, a cleaner layout — in as many rounds as you need. Kai finishes each round with next-step suggestions: **Publish to production**, **Make changes**, or type your own.
+
+## Step 5 — Publish to production
+
+When you're happy with the draft, click **Publish to Production**. Kai merges the draft into the app's main branch, deploys the production app, and cleans the draft up. The app turns **Active** and is available at its own URL — and Kai's final message hands you the **App URL, the password, and an Open App button**.
+
+![The published app: the configuration page showing Active status, next to Kai's final message with the App URL, the generated password, and an Open App button](/data-apps/getting-started-deployed.png)
+
+By default the app is protected with **Basic (Password)** authentication. The generated password is also on the app's configuration page: copy it from the **Password** field in the **App access** card on the **Overview** tab, or click **Open** in the page header and copy it from the dialog.
+
+To change who can access it (public, a password, SSO, GitHub, and more), see [Authentication](/data-apps/authentication/).
+
+Open the URL, enter the password, and your app is live — running on your governed data, served from its own address:
+
+![The published Toy Store Sales Dashboard open at its own URL — metric tiles and the top-products chart, no Keboola chrome around it](/data-apps/getting-started-live-app.png)
+
+That's it — you've built and published your first app, and you never picked a framework. The sections below cover the mechanics you'll want as you build more.
+
+## What Kai does on its own — and what it asks first
+
+Kai explores your Storage without asking, so it can find the right tables and understand your data. But before it **creates or modifies the app** in your project, it shows the **Confirmation required** card and waits for your **Approve** — click **Always allow** to skip the prompt for future builds ([Tool Permissions](/kai/settings/#tool-permissions) gives you the same control centrally). The draft itself is private: nothing is shared until you publish.
+
+## How drafts become production
+
+A draft is your private working version with live preview — Kai keeps it on its own branch in the app's managed Git repository, alongside the production app it created up front. **Publish to Production** merges the draft branch into `main`, deploys the production app, and cleans the draft up.
+
+## How Kai handles data access
+
+Kai uses your data through the project's access controls — the app can only reach data the project can reach. Read-only access is used by default, so the app can't change your data unless you ask for write-back.
+
+## Create an app manually
+
+Prefer to set the app up yourself, without the chat? The same **Create app** screen has two manual routes under **Other ways to start**: a **Python / JS** app that Keboola deploys from your own Git repository, and a **Streamlit** app.
+
+![The Other ways to start section of the Create app screen: Build locally with your coding agent; the Deploy from your own Git repository card, tagged Python / JS and No Kai, open with Name and Repository URL filled in (docs-manual-app, keboola/titanic-python-app), an empty Folder (optional) field, the Private repository switch and the Create app button; and the Create a Streamlit app link below](/data-apps/build-in-ui-create.png)
+
+1. In your Keboola project, open **Apps** and click **Create app**. A project with no apps yet has no such button; its Apps page shows the choices from step 2 itself.
+2. Under **Other ways to start**, choose the stack:
+   - **Python / JS**, for a custom app ([what the stack can do](/data-apps/what-are-apps/#the-stack-pythonjs)): click **Deploy from your own Git repository** to open its form. The card is marked **No Kai** because Kai works only with a Keboola-hosted repository.
+   - **Streamlit**, for an existing Streamlit app ([Streamlit apps](/data-apps/streamlit/#create-your-first-streamlit-app)): click **Create a Streamlit app**, the small link below the list.
+
+   On a single-tenant stack, the screen may still have the older layout, with a card per stack: click **Create Python/JS app** or **Create Streamlit app**. Where only Streamlit is offered, **Create app** opens the Streamlit dialog straight away.
+
+   {/* VERIFY(Jordan): not seen on a single-tenant or a Streamlit-only stack; the card-per-stack layout and Create app opening the Streamlit dialog directly are known from the UI code of 1-2 Oct only. */}
+3. Name the app and click **Create app**; the other fields are optional. **Folder** files the app into a folder. On the Python / JS form you can paste the **Repository URL** now or add it later, and once you type one, a **Private repository** switch appears for a username and access token, or an SSH key. The app opens on its own page, marked **Not Deployed**.
+4. Add the code and check the **Authentication** method; a new app starts with **Basic (Password)** ([Authentication](/data-apps/authentication/) covers the others).
+   - **Python / JS**: the repository needs a `keboola-config/` folder that tells Keboola how to start the app ([App structure](/data-apps/build-locally/#app-structure)); there's no inline-code option. Open the app's **Git Repository** card. If you skipped the URL in step 3, enter it as the **Project URL**, and for a private repository turn on **Private** and add the credentials. Then click **Load branches**, pick the branch, and save.
+   - **Streamlit**: in the **Code Source** card, choose **Code**, click **Add Code**, paste your script and save. Or choose **Git Repository** and fill it in as for Python / JS; its **Main File Path** defaults to `streamlit_app.py`.
+
+   Until the app has code, its **App access** card says **No code yet** and **Deploy** is disabled. A saved repository URL already counts as code, so the card then says **Not deployed yet** and **Deploy** is enabled even before a branch is picked; pick the branch before you deploy.
+
+   {/* Steps 3-4 and the paragraph above verified in the live UI on 2026-10-07 (project 264, build bundle.KLJ3B_2i.js) with temporary apps, deleted afterwards. Python / JS form: Private repository appears only once a Repository URL is typed. A Python / JS app created without a URL (App ID 74023000) and a new Streamlit app (74023001): App access says No code yet, Deploy disabled, Authentication Basic (Password). Saving a Project URL with no branch on the Python / JS app: Not deployed yet, Deploy enabled. Streamlit Code Source opens on Git Repository; Code shows Add Code; under Git Repository, Load branches turns into Reload branches and the Main File Path field (placeholder "Default value streamlit_app.py") appears once branches load. */}
+5. Configure the rest of the app's settings; see [Reference](/data-apps/reference/) for the full list. The backend size and the inactivity timeout come next, in the deploy wizard.
+
+![A new Python/JS app's Overview tab, marked Not Deployed, with Deploy in the header: the App access card with the App URL and Authentication, the Git Repository card with keboola/titanic-python-app connected, and the App Info panel](/data-apps/build-in-ui-config.png)
+
+6. Click **Deploy**. A short wizard asks for the **backend version**, the **backend size** (not on [pay-as-you-go](/management/payg-project/) projects) and an **inactivity timeout**; click **Deploy** in the wizard to deploy the app. (**Redeploy** opens the same wizard, with these fields in a collapsed **Deploy settings** section. **Start** starts a stopped or sleeping app right away with its saved settings and opens the wizard only when Kai has undeployed drafts of the app.)
+
+![The Deploy wizard of an app that has never run: the Backend version, Backend size and Inactivity timeout fields (1.6.3, XSmall, 15 minutes), and the Deploy button](/data-apps/deploy-wizard.png)
+
+7. When the status turns **Active**, click **Open** in the page header. The dialog shows the app's address and, for an app behind a password, the password to copy. Click **Open app** in it to open the app at its public URL. Use **Redeploy** (**Start** if the app is sleeping or stopped) to apply any later config change; see [App actions](/data-apps/reference/#app-actions).
+
+From here on, the app is something you run rather than something you build: [Operate and update an app](/data-apps/operate/) covers shipping changes, secrets, sleeping and versions.
+
+---
+
+**Next:** [Build an app locally →](/data-apps/build-locally/)
