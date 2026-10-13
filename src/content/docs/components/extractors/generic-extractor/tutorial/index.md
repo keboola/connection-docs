@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/tutorial/
 ---
 
+<!-- Tutorial-type page. Part of the Generic Extractor tutorial chain; nav order is the reading order. -->
+
 
 In this tutorial, we will guide you through configuring Generic Extractor for a new API.
 In our case, MailChimp — an email marketing service.
@@ -34,7 +36,7 @@ data**:
 [generate your API Key](https://mailchimp.com/help/about-api-keys/#Find-or-Generate-Your-API-Key).
 It will look like this: `c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13`.
 
-## Get Started
+## Get started
 Let's take a closer look at the [MailChimp API](https://mailchimp.com/developer/) now.
 There are plenty of documentation guides available. To explore the API and review what information is in
 each resource, use, for example, the [Playground](https://us1.api.mailchimp.com/playground/).
@@ -69,7 +71,7 @@ requests and responses. The response body is in [JSON](/components/extractors/ge
       ...
 ```
 
-## Next Steps
+## Next steps
 Now you have everything you need to actually start extracting the data. Continue with your Generic Extractor
 configuration here:
 
@@ -80,3 +82,5 @@ configuration here:
 		(resources) to be extracted.
 - [Mapping](/components/extractors/generic-extractor/tutorial/mapping/) — describes how the JSON
 		response is converted into CSV files that will be imported into Storage.
+
+**Next:** [REST HTTP API introduction →](/components/extractors/generic-extractor/tutorial/rest/)
