@@ -38,20 +38,32 @@ export function remarkStripComments() {
   };
 }
 
+/**
+ * Feed it a markdown string line by line: it answers true for a line that
+ * opens, closes or sits inside a fenced code block (``` or ~~~, any length),
+ * so a caller can leave code samples as written.
+ */
+export function fenceTracker() {
+  let fence = null; // the opening fence while inside a code block
+  return (line) => {
+    const marker = line.match(/^\s*(`{3,}|~{3,})/);
+    if (marker) {
+      if (!fence) fence = marker[1];
+      else if (marker[1][0] === fence[0] && marker[1].length >= fence.length) fence = null;
+      return true;
+    }
+    return fence !== null;
+  };
+}
+
 /** Remove HTML comments from a markdown string, outside fenced code blocks. */
 export function stripHtmlComments(markdown) {
   const out = [];
-  let fence = null; // the opening fence (``` or ~~~, any length) while inside a code block
+  const inCode = fenceTracker();
   let pending = ''; // text of an unfinished comment that spans lines
   for (const line of markdown.split('\n')) {
-    const marker = line.match(/^\s*(`{3,}|~{3,})/);
-    if (!pending && marker) {
-      if (!fence) fence = marker[1];
-      else if (marker[1][0] === fence[0] && marker[1].length >= fence.length) fence = null;
-      out.push(line);
-      continue;
-    }
-    if (fence) {
+    // a fence inside an unfinished comment is part of the comment, so ask only outside one
+    if (!pending && inCode(line)) {
       out.push(line);
       continue;
     }
