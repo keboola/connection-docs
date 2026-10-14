@@ -38,6 +38,7 @@ src/
   sidebar.mjs     # GENERATED sidebar (from _data/navigation.yml — don't hand-edit)
 public/           # static assets served as-is (images, favicon, llms)
 api/chat.ts       # "Ask Kai" backend (Vercel function → Keboola AI Service)
+api/feedback.ts   # "Was this page helpful?" backend (Vercel function → Linear issues)
 scripts/
   convert-nav.mjs # builds src/sidebar.mjs from _data/navigation.yml
   audit-phase2.mjs# read-only link/image/heading/table audit
@@ -115,3 +116,9 @@ Images: place alongside the Markdown and reference with an absolute path
   or cache headers from it.
 - The "Ask Kai" widget (`api/chat.ts`) is a Vercel function; it needs
   `AI_SERVICE_URL` + `KBC_STORAGE_API_TOKEN` env vars.
+- The feedback widget (`api/feedback.ts`, rendered by `Feedback.astro`) is a
+  Vercel function too. It needs `FEEDBACK_LINEAR_API_KEY`; the Linear team,
+  project, state and label IDs are in the code. Without the key (or a
+  `FEEDBACK_INGEST_URL`) the widget hides itself. A revoked key leaves it
+  visible, and comments then reach only the function logs as
+  `[feedback] undelivered comment`. Tests: `npm test`.
