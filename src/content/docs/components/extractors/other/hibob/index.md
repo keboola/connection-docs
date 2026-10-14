@@ -6,15 +6,9 @@ description: 'Retrieve employees, work history, employment history and lifecycle
 
 
 
-This page shows how to configure the HiBob data source connector with a service user ID and token, and lists the four tables it loads into Keboola.
-
-<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
-
-## Introduction
-
 HiBob is an HR management platform that offers a wide range of features to support talent management. These features include onboarding administration, task management, payroll reporting, time tracking, and a manager dashboard for tracking employee performance.
 
-The HiBob data source connector enables you to retrieve data from the HiBob HR platform.
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prerequisites
 
