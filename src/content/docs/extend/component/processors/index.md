@@ -1,6 +1,7 @@
 ---
 title: Processors
 slug: 'extend/component/processors'
+description: 'Add processors to the before or after array of a component configuration through the Storage API, set their parameters and version tag, and chain them.'
 redirect_from:
     - /integrate/docker-runner/processors/
     - /extend/docker-runner/processors/

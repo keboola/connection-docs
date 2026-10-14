@@ -1,12 +1,15 @@
 ---
 title: UI Element Examples
 slug: 'extend/component/ui-options/configuration-schema/examples'
+description: 'Copy JSON schema snippets for common configuration form fields such as passwords, checkboxes, multi selects, code editors, date pickers and conditional fields.'
 
 ---
 
 
 [JSON schema](https://json-schema.org/) allows for design of some advanced UI elements. Some of these are often reused 
 in many components. This page contains a list of the commonly used UI elements and some advanced tips for UI design.
+
+<!-- Reference-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ### API Token & Secret Values
 

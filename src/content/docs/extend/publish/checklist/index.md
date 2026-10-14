@@ -1,11 +1,14 @@
 ---
 title: Checklist
 slug: 'extend/publish/checklist'
+description: 'Check a component against this list before you send the publish request, from its name, icon and descriptions to its configuration schema and user errors.'
 ---
 
 
 This checklist is used for the last check of the component before sending the publish request.
 See [Publish Component tutorial](/extend/publish/) for details.
+
+<!-- Reference-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 **Developer Portal**
 - <input type="checkbox"> The component name doesn't contain words like `extractor`, `application`, and `writer`.
