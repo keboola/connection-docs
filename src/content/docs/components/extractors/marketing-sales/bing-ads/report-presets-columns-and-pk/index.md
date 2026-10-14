@@ -8,7 +8,7 @@ redirect_from:
 
 
 
-These are the columns and the primary key that each report preset of the [Microsoft Advertising (Bing Ads) connector](/components/extractors/marketing-sales/bing-ads/) uses, for daily and for hourly aggregation.
+You pick a preset in the **Preset Name** field of the [Microsoft Advertising (Bing Ads) connector](/components/extractors/marketing-sales/bing-ads/).
 
 <!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
