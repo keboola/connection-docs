@@ -138,23 +138,34 @@ function svg(b) {
   return null;
 }
 
-const PARSERS = { '.png': png, '.gif': gif, '.jpg': jpeg, '.jpeg': jpeg, '.webp': webp, '.svg': svg };
+/**
+ * Picks the parser from the file's first bytes, not its extension: some files
+ * in public/ are JPEGs named `.png`, and trusting the name would skip them.
+ */
+function sniff(b) {
+  if (b.length >= 4 && b.readUInt32BE(0) === 0x89504e47) return png;
+  if (b.length >= 2 && b.readUInt16BE(0) === 0xffd8) return jpeg;
+  if (b.length >= 4 && b.toString('latin1', 0, 4) === 'GIF8') return gif;
+  if (b.length >= 12 && b.toString('latin1', 0, 4) === 'RIFF' && b.toString('latin1', 8, 12) === 'WEBP') return webp;
+  if (/^\s*(?:﻿)?\s*<(?:\?xml|svg|!--|!DOCTYPE)/i.test(b.toString('utf8', 0, Math.min(b.length, 256)))) return svg;
+  return null;
+}
 
 /** Reads intrinsic size from `file`, or null if the format/file is unusable. */
 export function readDimensions(file) {
   if (cache.has(file)) return cache.get(file);
   let out = null;
   try {
-    const ext = path.extname(file).toLowerCase();
-    const parse = PARSERS[ext];
+    const head = readHead(file, HEADER_BYTES);
+    const parse = sniff(head);
     if (parse) {
-      out = parse(readHead(file, HEADER_BYTES));
+      out = parse(head);
       // A JPEG's frame header can sit past our window; that is the only format
       // where re-reading in full is worth it.
-      if (!out && (ext === '.jpg' || ext === '.jpeg')) out = jpeg(fs.readFileSync(file));
+      if (!out && parse === jpeg) out = jpeg(fs.readFileSync(file));
     }
   } catch {
-    out = null; // unreadable or malformed — caller warns
+    out = null; // unreadable or malformed; the build warns about it
   }
   if (out && (!Number.isFinite(out.width) || !Number.isFinite(out.height) || out.width <= 0 || out.height <= 0)) {
     out = null;
@@ -255,6 +266,7 @@ export default function imageDimensions() {
           }
         }
         for (const m of missing) logger.warn(`missing image ${m}`);
+        for (const u of unsized) logger.warn(`could not read the size of ${u}`);
         logger.info(`Sized ${sized} images on ${pages} pages`);
         // A missing image fails the build in CI (GitHub Actions and Vercel both
         // set CI), so a mistyped public/ path can't ship. Locally it only warns,
