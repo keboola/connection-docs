@@ -23,7 +23,7 @@ Dashboards and reports, internal tools, data narratives, configurators, and agen
 
 ## Two ways to build
 
-- **[Build with Kai](/data-apps/getting-started/)**: describe the app in plain language and Kai reads your data, builds a live draft you preview and refine, and publishes when you're ready. No coding needed; the walkthrough takes about 10 minutes. The same **Create App** screen also offers [manual creation](/data-apps/getting-started/#create-an-app-manually) if you'd rather configure the app yourself. **You need:** a Keboola project. Nothing else.
+- **[Build with Kai](/data-apps/getting-started/)**: describe the app in plain language and Kai reads your data, builds a live draft you preview and refine, and publishes when you're ready. No coding needed; the walkthrough takes about 10 minutes. The same **Create app** screen also offers [manual creation](/data-apps/getting-started/#create-an-app-manually) if you'd rather configure the app yourself. **You need:** a Keboola project. Nothing else.
 - **[Build locally](/data-apps/build-locally/)**: build on your own computer, for developers who want full control. [With an AI agent](/data-apps/build-locally/#with-an-ai-agent), you ask Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT app for the app in one prompt, and with Keboola's `dataapp-developer` plugin and [kbagent](/cli/) it reads your data, writes the code, creates the app and deploys it. [By hand](/data-apps/build-locally/#by-hand), you write the code and create the app from a terminal or connect your own repository. **You need:** for the agent, kbagent connected to your project and one of those clients; by hand, kbagent or a Git account and somewhere to host the repository, and about half an hour the first time.
   <!-- VERIFY(Nikita): the agent route ran end to end in Claude Code and the Codex CLI only. Claude Desktop may take the MCP-only path without kbagent; Cursor, VS Code and the ChatGPT app screens not run yet. -->
 
@@ -37,7 +37,9 @@ Every app has its own settings page in **Apps**: who can open it ([Authenticatio
 
 Apps go far beyond dashboards — live data narratives, internal tools, configurators, even games. These three were built with Kai during Keboola's internal app competition; each turns real data into something interactive and genuinely useful, built the same way you'd build an everyday internal tool: describe what you want to Kai, on top of your Storage data.
 
-*The links below open real, running apps that sleep when idle — the first load may take a few seconds to wake.*
+*The links below open real, running apps. They sleep when idle, so the first load can take about a minute while the app wakes.*
+
+<!-- Checked 2026-10-06 and 2026-10-07 by polling each example until it answered 200: about 74 minutes after our last request, 24 s (Seasonal), 33 s (Color Season Analyzer) and 64 s (Flight Shockwave); about 22 hours after it, 27 s, 37 s and 62 s. -->
 
 ### Seasonal — when and where to travel
 

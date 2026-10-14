@@ -200,7 +200,10 @@ export const sidebar = [
             items: [
               { label: "Overview", slug: "components/extractors/erp" },
               { slug: "components/extractors/erp/k2" },
+              { slug: "components/extractors/erp/mpohoda" },
               { slug: "components/extractors/erp/netsuite" },
+              { slug: "components/extractors/erp/pohoda-mserver" },
+              { slug: "components/extractors/erp/suiteprojects-pro" },
             ],
           },
           {
@@ -233,6 +236,7 @@ export const sidebar = [
                   { slug: "components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk" },
                 ],
               },
+              { slug: "components/extractors/marketing-sales/mixpanel" },
               { slug: "components/extractors/marketing-sales/pinterest-ads" },
               { slug: "components/extractors/marketing-sales/pipedrive" },
               { slug: "components/extractors/marketing-sales/salesforce" },
@@ -285,6 +289,7 @@ export const sidebar = [
               { slug: "components/extractors/other/google-search-console" },
               { slug: "components/extractors/other/okta" },
               { slug: "components/extractors/other/hibob" },
+              { slug: "components/extractors/other/langsmith-traces" },
               { slug: "components/extractors/other/mapbox" },
               { slug: "components/extractors/other/papertrail" },
               { slug: "components/extractors/other/pingdom" },
@@ -292,6 +297,7 @@ export const sidebar = [
               { slug: "components/extractors/other/stripe" },
               { slug: "components/extractors/other/telemetry-data" },
               { slug: "components/extractors/other/time-doctor-2" },
+              { slug: "components/extractors/other/ukg-hr" },
               { slug: "components/extractors/other/weather-api" },
               { slug: "components/extractors/other/what3words" },
               { slug: "components/extractors/other/yourpass" },
@@ -416,6 +422,15 @@ export const sidebar = [
               { slug: "components/writers/database/snowflake" },
               { slug: "components/writers/database/mssql" },
               { slug: "components/writers/database/synapse" },
+            ],
+          },
+          {
+            label: "ERP",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "components/writers/erp" },
+              { slug: "components/writers/erp/mpohoda" },
+              { slug: "components/writers/erp/pohoda-mserver" },
             ],
           },
           {
@@ -802,4 +817,5 @@ export const sidebar = [
       { slug: "external-integrations/n8n" },
     ],
   },
+  { label: "Changelog", link: "/changelog/" },
 ];
