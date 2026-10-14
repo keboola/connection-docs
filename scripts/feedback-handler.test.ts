@@ -4,10 +4,20 @@
 // The handler reads its env at module load, so each configuration imports a
 // fresh copy of the module via a distinct query string.
 
-import { test } from 'node:test';
+import { test, beforeEach, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 
 type Call = { url: string; init: any };
+
+// The handler logs every vote and sink error; keep that out of CI output.
+// Tests that assert on logs use captureLogs below.
+const realConsole = { log: console.log, warn: console.warn, error: console.error };
+beforeEach(() => {
+  console.log = console.warn = console.error = () => {};
+});
+afterEach(() => {
+  Object.assign(console, realConsole);
+});
 
 async function load(env: Record<string, string>, tag: string) {
   for (const k of Object.keys(process.env)) if (k.startsWith('FEEDBACK_')) delete process.env[k];
@@ -229,8 +239,10 @@ test('a comment Linear rejects is logged, not lost, when there is no ingest', as
 test('FEEDBACK_LINEAR_DAILY_CAP=0 stops Linear filing', async () => {
   const mod = await load({ ...LINEAR, FEEDBACK_LINEAR_DAILY_CAP: '0' }, 'cap0');
   const calls = mockFetch();
-  await captureLogs(() => mod.default(req('POST', valid), res()));
+  const logs = await captureLogs(() => mod.default(req('POST', valid), res()));
   assert.equal(calls.length, 0);
+  assert.ok(logs.some((l) => l.text.includes('Linear filing paused')));
+  assert.ok(!logs.some((l) => l.text.includes('rate limit hit')));
 });
 
 test('the widget id becomes submission_id; anything else is replaced', async () => {

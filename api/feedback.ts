@@ -79,7 +79,8 @@ const LINEAR_DAILY_CAP = (() => {
   const n = Number(raw);
   return raw !== '' && Number.isFinite(n) && n >= 0 ? n : 50;
 })();
-const LINEAR_ENABLED = Boolean(LINEAR_API_KEY && LINEAR_TEAM_ID);
+// LINEAR_TEAM_ID always has a default, so the key alone switches Linear on.
+const LINEAR_ENABLED = Boolean(LINEAR_API_KEY);
 
 /** Upstream calls must not hold the function until Vercel kills it. */
 const UPSTREAM_TIMEOUT_MS = 5000;
@@ -477,6 +478,7 @@ async function deliver(record: FeedbackRecord, req: VercelRequest): Promise<bool
   let linear: Promise<void> | null = null;
   if (LINEAR_ENABLED && record.comment) {
     if (allowIssue(clientIp(req))) linear = fileInLinear(record);
+    else if (LINEAR_DAILY_CAP === 0) console.warn('[feedback] Linear filing paused (FEEDBACK_LINEAR_DAILY_CAP=0)');
     else console.warn('[feedback] issue rate limit hit');
   }
   const [linearResult, ingestResult] = await Promise.allSettled([
