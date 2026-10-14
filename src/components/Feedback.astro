@@ -82,9 +82,8 @@ const { source = '' } = Astro.props as { source?: string };
     Thank you for helping improve Keboola's documentation!
   </p>
   <!-- Shown after a 👎 for missing information or an unsolved problem, when Kai
-       is available. data-ask-kai-open is AskKaiDrawer's own trigger; the
-       script below only fills in the question. -->
-  <button type="button" class="b-feedback-kai" data-fb-kai data-ask-kai-open hidden>
+       is available. Opens AskKaiDrawer through its kbc:ask-kai event. -->
+  <button type="button" class="b-feedback-kai" data-fb-kai hidden>
     Ask Kai about this page
   </button>
 </section>
@@ -173,6 +172,9 @@ const { source = '' } = Astro.props as { source?: string };
     let verdict: 'up' | 'down' | null = null;
     let reason = '';
     let submitted = false;
+    // What the last leave beacon reported, so a bfcache round trip without a
+    // change doesn't send (and log) the same vote again.
+    let beaconSent = '';
     // One id per widget. A thumb sent on pagehide and a later Submit (after a
     // Back restore from the bfcache) share it, so the two rows read as one.
     let sid = '';
@@ -230,21 +232,14 @@ const { source = '' } = Astro.props as { source?: string };
         kai = sessionStorage.getItem('kbc-kai-enabled') === 'true';
       } catch {}
       if (!kai) return;
+      // The reader's comment stays out of the question: the server scrubs
+      // secrets from it, this client-side prompt would not. They can paste
+      // what they need into Kai themselves.
       const page = document.title.split(' | ')[0];
-      const asked = comment.value.trim();
-      const question = asked
-        ? `I was reading "${page}" (${location.pathname}). ${asked}`
-        : `I was reading "${page}" (${location.pathname}) and didn't find what I needed. Can you help?`;
+      const question = `I was reading "${page}" (${location.pathname}) and didn't find what I needed. Can you help?`;
       kaiBtn.hidden = false;
       kaiBtn.addEventListener('click', () => {
-        // The drawer opens on this same click and focuses its input after
-        // 30 ms; fill the question in after that.
-        setTimeout(() => {
-          const input = document.getElementById('ak-input') as HTMLTextAreaElement | null;
-          if (!input) return;
-          input.value = question;
-          input.dispatchEvent(new Event('input'));
-        }, 60);
+        document.dispatchEvent(new CustomEvent('kbc:ask-kai', { detail: { prefill: question } }));
       });
     }
 
@@ -322,6 +317,8 @@ const { source = '' } = Astro.props as { source?: string };
     function flushOnLeave() {
       if (!verdict || submitted) return;
       submitted = true; // guard against double-send
+      if (beaconSent === `${verdict}|${reason}`) return;
+      beaconSent = `${verdict}|${reason}`;
       try {
         navigator.sendBeacon(
           `${apiBase}/api/feedback`,

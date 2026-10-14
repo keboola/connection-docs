@@ -17,8 +17,11 @@ import AnchorCopy from './AnchorCopy.astro';
    empty body; a 404 would otherwise report the bad URL as a page. */
 const entry: any = (Astro as any).locals?.starlightRoute?.entry;
 const isDocsPage = typeof entry?.body === 'string' && entry.body.length > 0;
+// Repo-relative path of the page's Markdown, whatever form filePath takes
+// (relative today; absolute in some Astro versions).
+const source = String(entry?.filePath ?? '').replace(/^.*?(?=src\/content\/docs\/)/, '');
 ---
-{isDocsPage && <Feedback source={entry.filePath} />}
+{isDocsPage && <Feedback source={source} />}
 <Default><slot /></Default>
 <AskKaiDrawer />
 <SearchPersistFix />

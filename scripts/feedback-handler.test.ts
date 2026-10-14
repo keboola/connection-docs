@@ -122,14 +122,14 @@ test('Linear configured: probe enabled, one issueCreate with team and labels', a
   assert.equal(calls[0].init.headers.authorization, 'lin_api_test');
   const find = JSON.parse(op(calls, 'DocsFeedbackFind')!.init.body).variables.filter;
   assert.deepEqual(find.title, { endsWith: ' (/storage/tables/)' });
-  assert.deepEqual(find.state, { type: { nin: ['completed', 'canceled'] } });
+  assert.deepEqual(find.state, { type: { nin: ['completed', 'canceled', 'duplicate'] } });
   const { variables } = JSON.parse(op(calls, 'DocsFeedbackIssue')!.init.body);
   assert.equal(variables.input.teamId, 'team-uuid');
   assert.deepEqual(variables.input.labelIds, ['label-a', 'label-b']);
   // PRDCT's default project and Backlog state would fail with another team.
   assert.equal(variables.input.projectId, undefined);
   assert.equal(variables.input.stateId, undefined);
-  assert.equal(variables.input.title, 'Docs feedback: Tables | Keboola Docs (/storage/tables/)');
+  assert.equal(variables.input.title, 'Docs feedback: Tables (/storage/tables/)', 'site suffix dropped');
   assert.match(variables.input.description, /\[`\/storage\/tables\/`\]\(https:\/\/help\.keboola\.com\/storage\/tables\/\)/);
   assert.doesNotMatch(variables.input.description, /203\.0\.113\.7|user_agent|referrer/);
 });
@@ -208,8 +208,9 @@ test('sinks are independent: a Linear failure still delivers to ingest (I1)', as
   const logs = await captureLogs(() => mod.default(req('POST', valid), r));
   assert.equal(calls.length, 3, 'lookup and create both fail, ingest still runs');
   assert.equal(r.statusCode, 202);
-  const errors = logs.filter((l) => l.level === 'error');
-  assert.equal(errors.length, 1, 'the sink error only; ingest kept the comment');
+  const errors = logs.filter((l) => l.level === 'error').map((l) => l.text);
+  assert.ok(errors.some((t) => t.startsWith('[feedback] sink error')));
+  assert.ok(!errors.some((t) => t.includes('undelivered comment')), 'ingest kept the comment');
 });
 
 test('a thumb with no ingest is still logged as a countable vote', async () => {
@@ -307,11 +308,29 @@ test('the issue names the section and links the page source', async () => {
   const mod = await load({}, 'source');
   const record = mod.buildRecord({ ...valid, source: 'src/content/docs/storage/tables.md' }, req('POST'));
   const md: string = mod.issueMarkdown(record);
-  assert.match(md, /Section:\*\* storage/);
+  assert.match(md, /Section:\*\* `storage`/);
   assert.match(md, /\(https:\/\/github\.com\/keboola\/connection-docs\/blob\/main\/src\/content\/docs\/storage\/tables\.md\)/);
   for (const source of ['../../etc/passwd', 'src/content/docs/a](https://evil)/b.md', 'src/content/docs/../x.md', 'README.md']) {
     assert.equal(mod.buildRecord({ ...valid, source }, req('POST')).source, '', source);
   }
+});
+
+test('a token straddling the 1000-char cap is still redacted', async () => {
+  const mod = await load({}, 'scrub-cut');
+  const token = '264-123456-' + 'A1b2C3d4E5'.repeat(4);
+  const record = mod.buildRecord({ ...valid, comment: 'x'.repeat(985) + ' ' + token }, req('POST'));
+  assert.ok(record.comment.length <= 1000);
+  assert.doesNotMatch(record.comment, /A1b2C3d4E5/);
+  assert.equal(record.redactions, 1);
+});
+
+test('a path too long for the marker still gives a valid title', async () => {
+  const mod = await load({}, 'long-path');
+  const path = '/' + 'a'.repeat(240) + '/';
+  const record = mod.buildRecord({ ...valid, path }, req('POST'));
+  const title: string = mod.issueTitle(record);
+  assert.ok(title.length <= 250, String(title.length));
+  assert.equal(mod.issueTitle(mod.buildRecord(valid, req('POST'))), 'Docs feedback: Tables (/storage/tables/)');
 });
 
 test('per-IP and daily caps stop issue floods (B3)', async () => {

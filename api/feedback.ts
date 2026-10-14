@@ -5,11 +5,13 @@
  * probe, so the static frontend renders the widget only when a sink exists.
  *
  * Sinks:
- * - Linear: submissions that carry a written comment become issues, so docs
- *   feedback lands where the docs work is triaged. Linear rather than GitHub
- *   Issues: connection-docs is public, and readers paste project IDs, stack URLs
- *   and emails into a "what could be better?" box. A bare thumb is never filed:
- *   the widget is on every page, and one issue per click would bury the team.
+ * - Linear: submissions that carry a written comment are filed in the Docs
+ *   feedback project, one open issue per page: the first report creates it
+ *   (title ending in ` (<path>)`, the lookup key), later ones are added as
+ *   comments. Linear rather than GitHub Issues: connection-docs is public, and
+ *   readers paste project IDs, stack URLs and emails into a "what could be
+ *   better?" box; known secrets and emails are scrubbed before any sink. A bare
+ *   thumb is never filed: the widget is on every page.
  * - FEEDBACK_INGEST_URL (optional): every record, thumbs included, as a row.
  * - Function logs: when no ingest is configured, every vote is logged as one
  *   `[feedback] vote` line so it stays countable (a log drain can collect it),
@@ -253,16 +255,20 @@ export function buildRecord(body: FeedbackBody, req: VercelRequest): FeedbackRec
   const sid = str(body.sid, 64);
   // An abandoned verdict was never submitted, so whatever sits in the box is
   // not something the reader chose to send. The client strips it too.
-  const clean = scrub(
-    body.abandoned === true ? '' : str(body.comment, MAX_COMMENT).replace(/\r\n?/g, '\n'),
-  );
+  // Scrub before the length cap: a secret straddling the cut would otherwise
+  // lose its tail, stop matching its pattern and go through as a prefix.
+  const rawComment =
+    body.abandoned === true || typeof body.comment !== 'string'
+      ? ''
+      : body.comment.slice(0, MAX_COMMENT * 4).replace(/\r\n?/g, '\n');
+  const clean = scrub(rawComment);
   return {
     submission_id: SID_RE.test(sid)
       ? sid
       : `fb-${Date.now()}-${Math.round(Math.random() * 1e9).toString(36)}`,
     verdict,
     reason,
-    comment: clean.text,
+    comment: cut(clean.text.trim(), MAX_COMMENT),
     path,
     title: str(body.title).replace(/\s+/g, ' '),
     source: (() => {
@@ -300,7 +306,7 @@ export function issueMarkdown(record: FeedbackRecord): string {
     // `path` matched PATH_RE in buildRecord, so it is safe inside the link.
     // Code span in the link text, so `~` or `_` in a path can't format it.
     `- **Page:** [\`${record.path}\`](${SITE_ORIGIN}${record.path})`,
-    `- **Section:** ${record.path.split('/')[1] || 'home'}`,
+    `- **Section:** \`${record.path.split('/')[1] || 'home'}\``,
     `- **Verdict:** ${verdict}`,
   ];
   // `source` matched SOURCE_RE in buildRecord, so it is safe inside the link.
@@ -333,7 +339,11 @@ const FIND_PAGE_ISSUE = `query DocsFeedbackFind($filter: IssueFilter!) {
 }`;
 
 /** One GraphQL call to Linear; throws on transport and GraphQL errors. */
-async function linearRequest(query: string, variables: Record<string, unknown>): Promise<any> {
+async function linearRequest(
+  query: string,
+  variables: Record<string, unknown>,
+  signal: AbortSignal,
+): Promise<any> {
   const res = await fetch('https://api.linear.app/graphql', {
     method: 'POST',
     headers: {
@@ -344,7 +354,7 @@ async function linearRequest(query: string, variables: Record<string, unknown>):
         : `Bearer ${LINEAR_API_KEY}`,
     },
     body: JSON.stringify({ query, variables }),
-    signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+    signal,
   });
   // GraphQL reports most failures as 200 with an `errors` array.
   const json: any = await res.json().catch(() => null);
@@ -359,15 +369,30 @@ function pageMarker(path: string): string {
   return ` (${path})`;
 }
 
+/**
+ * `Docs feedback: <page> (<path>)`, at most TITLE_MAX characters. The site
+ * suffix (" | Keboola User Documentation") is dropped. A path too long to fit
+ * leaves the marker off: that page's reports then open separate issues, which
+ * beats a title Linear might reject.
+ */
+const TITLE_MAX = 250;
+export function issueTitle(record: FeedbackRecord): string {
+  const page = (record.title.split(' | ')[0] || record.path).trim();
+  const marker = pageMarker(record.path);
+  const room = TITLE_MAX - marker.length;
+  return room >= 30 ? cut(`Docs feedback: ${page}`, room) + marker : cut(`Docs feedback: ${page}`, TITLE_MAX);
+}
+
 /** The open feedback issue for this page, if there is one. */
-async function findPageIssue(path: string): Promise<string | null> {
+async function findPageIssue(path: string, signal: AbortSignal): Promise<string | null> {
   const filter: Record<string, unknown> = {
     team: { id: { eq: LINEAR_TEAM_ID } },
     title: { endsWith: pageMarker(path) },
-    state: { type: { nin: ['completed', 'canceled'] } },
+    // `duplicate` is its own state type in PRDCT; a merged-away issue is closed.
+    state: { type: { nin: ['completed', 'canceled', 'duplicate'] } },
   };
   if (LINEAR_LABEL_IDS.length) filter.labels = { some: { id: { in: LINEAR_LABEL_IDS } } };
-  const data = await linearRequest(FIND_PAGE_ISSUE, { filter });
+  const data = await linearRequest(FIND_PAGE_ISSUE, { filter }, signal);
   return data?.issues?.nodes?.[0]?.id ?? null;
 }
 
@@ -385,26 +410,31 @@ async function findPageIssue(path: string): Promise<string | null> {
  * can also produce two issues; whoever triages merges them.
  */
 async function fileInLinear(record: FeedbackRecord): Promise<void> {
+  // One deadline for the lookup and the write together, so a slow Linear
+  // can't hold the function for two full timeouts.
+  const signal = AbortSignal.timeout(UPSTREAM_TIMEOUT_MS + 1000);
   let existing: string | null = null;
   try {
-    existing = await findPageIssue(record.path);
+    existing = await findPageIssue(record.path, signal);
   } catch (err: any) {
-    console.warn('[feedback] page issue lookup failed, creating a new issue:', err?.message ?? String(err));
+    // Error level: if this fires on every report, grouping is broken (e.g. a
+    // Linear schema change) and every report is opening a new issue.
+    console.error('[feedback] page issue lookup failed, creating a new issue:', err?.message ?? String(err));
   }
 
   if (existing) {
-    const data = await linearRequest(COMMENT_CREATE, {
-      input: { issueId: existing, body: issueMarkdown(record) },
-    });
+    const data = await linearRequest(
+      COMMENT_CREATE,
+      { input: { issueId: existing, body: issueMarkdown(record) } },
+      signal,
+    );
     if (!data?.commentCreate?.success) throw new Error('Linear: commentCreate did not succeed');
     return;
   }
 
-  const marker = pageMarker(record.path);
-  const pageTitle = record.title || record.path;
   const input: Record<string, unknown> = {
     teamId: LINEAR_TEAM_ID,
-    title: cut(`Docs feedback: ${pageTitle}`, Math.max(20, 250 - marker.length)) + marker,
+    title: issueTitle(record),
     description:
       'Reader feedback for this page. Further reports on the same page are added as comments.\n\n' +
       issueMarkdown(record),
@@ -412,7 +442,7 @@ async function fileInLinear(record: FeedbackRecord): Promise<void> {
   if (LINEAR_LABEL_IDS.length) input.labelIds = LINEAR_LABEL_IDS;
   if (LINEAR_PROJECT_ID) input.projectId = LINEAR_PROJECT_ID;
   if (LINEAR_STATE_ID) input.stateId = LINEAR_STATE_ID;
-  const data = await linearRequest(ISSUE_CREATE, { input });
+  const data = await linearRequest(ISSUE_CREATE, { input }, signal);
   if (!data?.issueCreate?.success) throw new Error('Linear: issueCreate did not succeed');
 }
 
