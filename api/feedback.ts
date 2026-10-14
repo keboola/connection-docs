@@ -58,7 +58,7 @@ const LINEAR_API_KEY = (process.env.FEEDBACK_LINEAR_API_KEY || '').trim();
 // only thing the Vercel project has to hold is the API key. Env overrides them.
 const LINEAR_DEFAULTS = {
   team: '20917244-2e69-4226-8f05-d1bf40d99ea2', // [Team] Product (PRDCT)
-  project: '8bf3317f-1860-44aa-94b0-627bece939e3', // Help Documentation Revamp
+  project: 'f5a83846-63e4-4ddd-b19f-0ddfb425fc8b', // Docs feedback (P-PRDCT-302)
   state: '78e62541-bf17-4628-8155-a3c12470c66b', // Backlog (PRDCT has no Triage)
   labels: '9c08b2d5-1598-4aeb-bd4a-085349e371e2', // docs-feedback
 };

@@ -120,7 +120,7 @@ test('the API key alone is enough: built-in team, project, state and label', asy
   await mod.default(req('POST', valid), res());
   const { input } = JSON.parse(calls[0].init.body).variables;
   assert.equal(input.teamId, '20917244-2e69-4226-8f05-d1bf40d99ea2');
-  assert.equal(input.projectId, '8bf3317f-1860-44aa-94b0-627bece939e3');
+  assert.equal(input.projectId, 'f5a83846-63e4-4ddd-b19f-0ddfb425fc8b');
   assert.equal(input.stateId, '78e62541-bf17-4628-8155-a3c12470c66b');
   assert.deepEqual(input.labelIds, ['9c08b2d5-1598-4aeb-bd4a-085349e371e2']);
 });
