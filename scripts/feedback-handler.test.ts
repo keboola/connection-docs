@@ -233,6 +233,24 @@ test('caps never cut an emoji in half', async () => {
   assert.equal(record.comment, 'a'.repeat(999));
 });
 
+test('secrets and emails are scrubbed before any sink', async () => {
+  const mod = await load(LINEAR, 'scrub');
+  const calls = mockFetch();
+  const token = '264-123456-' + 'A1b2C3d4E5'.repeat(4);
+  const comment = `My token ${token} and mail jane.doe@example.com, key lin_api_${'x'.repeat(30)}`;
+  await captureLogs(() => mod.default(req('POST', { ...valid, comment }), res()));
+  const body = JSON.stringify(JSON.parse(calls[0].init.body).variables);
+  assert.doesNotMatch(body, /A1b2C3d4E5|jane\.doe|lin_api_x/);
+  assert.match(body, /\[redacted token\].*\[redacted email\].*\[redacted token\]/);
+  assert.match(body, /Redacted:\*\* 3 secret/);
+});
+
+test('ordinary text survives the scrub untouched', async () => {
+  const mod = await load({}, 'scrub-clean');
+  const text = 'Step 3 fails on project 264-abc, see /storage/tables/ and the 2026-10-14 run.';
+  assert.deepEqual(mod.scrub(text), { text, redactions: 0 });
+});
+
 test('per-IP and daily caps stop issue floods (B3)', async () => {
   const mod = await load({ ...LINEAR, FEEDBACK_LINEAR_DAILY_CAP: '7' }, 'caps');
   const now = Date.parse('2026-10-13T10:00:00Z');

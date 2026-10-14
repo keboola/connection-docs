@@ -114,6 +114,39 @@ const MAX_FIELD = 512;
  */
 const PATH_RE = /^\/[A-Za-z0-9/_.~%-]{0,255}$/;
 
+/**
+ * Secrets readers paste by accident. Matches become `[redacted token]` before
+ * the text reaches any sink, logs included; the note under the textarea asks
+ * for no credentials, and this is what holds when someone ignores it.
+ */
+const SECRET_PATTERNS: RegExp[] = [
+  /\b\d+-(?:\d+-)?[A-Za-z0-9]{40}\b/g, // Keboola Storage / Manage API token
+  /\blin_(?:api|oauth)_[A-Za-z0-9]{20,}\b/g, // Linear
+  /\b(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,})\b/g, // GitHub
+  /\bxox[abprs]-[A-Za-z0-9-]{10,}\b/g, // Slack
+  /\bsk-[A-Za-z0-9_-]{20,}\b/g, // OpenAI / Anthropic style
+  /\bAKIA[0-9A-Z]{16}\b/g, // AWS access key id
+  /\beyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\b/g, // JWT
+];
+const EMAIL_RE = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
+
+/** Replace secrets and email addresses; returns the clean text and the count. */
+export function scrub(text: string): { text: string; redactions: number } {
+  let redactions = 0;
+  let out = text;
+  for (const re of SECRET_PATTERNS) {
+    out = out.replace(re, () => {
+      redactions += 1;
+      return '[redacted token]';
+    });
+  }
+  out = out.replace(EMAIL_RE, () => {
+    redactions += 1;
+    return '[redacted email]';
+  });
+  return { text: out, redactions };
+}
+
 /** A crypto.randomUUID() from the widget. */
 const SID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -143,6 +176,7 @@ export interface FeedbackRecord {
   referrer: string;
   user_agent: string;
   abandoned: boolean;
+  redactions: number;
   ts: string;
 }
 
@@ -210,24 +244,25 @@ export function buildRecord(body: FeedbackBody, req: VercelRequest): FeedbackRec
   const reason = ALLOWED_REASONS.has(reasonRaw) ? reasonRaw : '';
 
   const sid = str(body.sid, 64);
+  // An abandoned verdict was never submitted, so whatever sits in the box is
+  // not something the reader chose to send. The client strips it too.
+  const clean = scrub(
+    body.abandoned === true ? '' : str(body.comment, MAX_COMMENT).replace(/\r\n?/g, '\n'),
+  );
   return {
     submission_id: SID_RE.test(sid)
       ? sid
       : `fb-${Date.now()}-${Math.round(Math.random() * 1e9).toString(36)}`,
     verdict,
     reason,
-    // An abandoned verdict was never submitted, so whatever sits in the box is
-    // not something the reader chose to send. The client strips it too.
-    comment:
-      body.abandoned === true
-        ? ''
-        : str(body.comment, MAX_COMMENT).replace(/\r\n?/g, '\n'),
+    comment: clean.text,
     path,
     title: str(body.title).replace(/\s+/g, ' '),
     locale: str((req.headers['accept-language'] as string) || '', 32),
     referrer: str((req.headers['referer'] as string) || ''),
     user_agent: str((req.headers['user-agent'] as string) || ''),
     abandoned: body.abandoned === true,
+    redactions: clean.redactions,
     ts: new Date().toISOString(),
   };
 }
@@ -257,6 +292,9 @@ export function issueMarkdown(record: FeedbackRecord): string {
     `- **Verdict:** ${verdict}`,
   ];
   if (reason) lines.push(`- **Reason:** ${reason}`);
+  if (record.redactions) {
+    lines.push(`- **Redacted:** ${record.redactions} secret(s) or email address(es) removed from the comment`);
+  }
   lines.push(
     '',
     '**Comment:**',
