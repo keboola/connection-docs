@@ -6,7 +6,7 @@ description: 'The Oracle connector syncs data from an Oracle database into Keboo
 
 
 
-Use the Oracle connector to sync data from an Oracle database into Keboola by running queries against it. Its setup matches the other [database connectors](/components/extractors/database/); the shared steps are in [Initial setup](/components/extractors/database/sqldb/#initial-setup).
+Keboola reads Oracle with a query-based connector. The log-based CDC connectors cover MySQL and PostgreSQL only; [Database Data Source Connectors](/components/extractors/database/) compares the two approaches.
 
 ## Query-Based connector
 
