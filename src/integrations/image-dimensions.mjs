@@ -256,6 +256,12 @@ export default function imageDimensions() {
         }
         for (const m of missing) logger.warn(`missing image ${m}`);
         logger.info(`Sized ${sized} images on ${pages} pages`);
+        // A missing image fails the build in CI (GitHub Actions and Vercel both
+        // set CI), so a mistyped public/ path can't ship. Locally it only warns,
+        // so a page can be edited before its screenshot lands.
+        if (missing.length && process.env.CI) {
+          throw new Error(`[image-dimensions] ${missing.length} image(s) referenced but not in the build; see the warnings above`);
+        }
       },
     },
   };
