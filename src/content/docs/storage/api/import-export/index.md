@@ -7,7 +7,7 @@ redirect_from:
 ---
 
 
-This page walks through importing a table into Storage and exporting one by hand with the Storage API, with curl commands and a Python script for the import. It is for anyone calling the API directly; the rest of the API is covered under [Storage API](/storage/api/).
+Read this page when you call the Storage API yourself. [Storage API](/storage/api/) covers the rest of the API, and the [API Importer](/storage/api/importer/) uploads a file in one call.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
