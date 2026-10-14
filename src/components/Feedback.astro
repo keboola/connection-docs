@@ -15,9 +15,12 @@
  * /api/feedback. All styling lives in custom.css (no <style> here). The client
  * script (re)initialises on astro:page-load to survive view transitions.
  */
+
+// The page's Markdown file, so a feedback issue can link to its source.
+const { source = '' } = Astro.props as { source?: string };
 ---
 
-<section class="b-feedback" data-feedback hidden>
+<section class="b-feedback" data-feedback data-source={source} hidden>
   <p class="b-feedback-q">Was this page helpful?</p>
 
   <div class="b-feedback-buttons" data-fb-verdicts>
@@ -188,6 +191,7 @@
         path: location.pathname,
         title: document.title,
         sid,
+        source: root.dataset.source ?? '',
         hp: honeypot.value,
         ...extra,
       });

@@ -18,7 +18,7 @@ import AnchorCopy from './AnchorCopy.astro';
 const entry: any = (Astro as any).locals?.starlightRoute?.entry;
 const isDocsPage = typeof entry?.body === 'string' && entry.body.length > 0;
 ---
-{isDocsPage && <Feedback />}
+{isDocsPage && <Feedback source={entry.filePath} />}
 <Default><slot /></Default>
 <AskKaiDrawer />
 <SearchPersistFix />

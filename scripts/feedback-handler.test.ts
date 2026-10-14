@@ -291,6 +291,17 @@ test('a failed page lookup still files a new issue', async () => {
   assert.ok(logs.some((l) => l.text.includes('page issue lookup failed')));
 });
 
+test('the issue names the section and links the page source', async () => {
+  const mod = await load({}, 'source');
+  const record = mod.buildRecord({ ...valid, source: 'src/content/docs/storage/tables.md' }, req('POST'));
+  const md: string = mod.issueMarkdown(record);
+  assert.match(md, /Section:\*\* storage/);
+  assert.match(md, /\(https:\/\/github\.com\/keboola\/connection-docs\/blob\/main\/src\/content\/docs\/storage\/tables\.md\)/);
+  for (const source of ['../../etc/passwd', 'src/content/docs/a](https://evil)/b.md', 'src/content/docs/../x.md', 'README.md']) {
+    assert.equal(mod.buildRecord({ ...valid, source }, req('POST')).source, '', source);
+  }
+});
+
 test('per-IP and daily caps stop issue floods (B3)', async () => {
   const mod = await load({ ...LINEAR, FEEDBACK_LINEAR_DAILY_CAP: '7' }, 'caps');
   const now = Date.parse('2026-10-13T10:00:00Z');

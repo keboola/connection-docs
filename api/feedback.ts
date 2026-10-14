@@ -85,6 +85,10 @@ const LINEAR_ENABLED = Boolean(LINEAR_API_KEY && LINEAR_TEAM_ID);
 const UPSTREAM_TIMEOUT_MS = 5000;
 
 const SITE_ORIGIN = 'https://help.keboola.com';
+const SOURCE_ORIGIN = 'https://github.com/keboola/connection-docs/blob/main/';
+
+/** The page's Markdown file, as Footer.astro passes it from the content entry. */
+const SOURCE_RE = /^src\/content\/docs\/[A-Za-z0-9/_.-]{1,250}\.mdx?$/;
 
 /** Reason values rendered for humans; its keys are the allowed reasons. */
 const REASON_TEXT: Record<string, string> = {
@@ -162,6 +166,7 @@ interface FeedbackBody {
   title?: unknown;
   abandoned?: unknown;
   sid?: unknown; // client-generated id, shared by the abandoned and the full row
+  source?: unknown; // the page's Markdown file, e.g. src/content/docs/storage/tables.md
   hp?: unknown; // honeypot — must be empty
 }
 
@@ -172,6 +177,7 @@ export interface FeedbackRecord {
   comment: string;
   path: string;
   title: string;
+  source: string;
   locale: string;
   referrer: string;
   user_agent: string;
@@ -258,6 +264,10 @@ export function buildRecord(body: FeedbackBody, req: VercelRequest): FeedbackRec
     comment: clean.text,
     path,
     title: str(body.title).replace(/\s+/g, ' '),
+    source: (() => {
+      const s = str(body.source, 300);
+      return SOURCE_RE.test(s) && !s.includes('..') ? s : '';
+    })(),
     locale: str((req.headers['accept-language'] as string) || '', 32),
     referrer: str((req.headers['referer'] as string) || ''),
     user_agent: str((req.headers['user-agent'] as string) || ''),
@@ -289,8 +299,11 @@ export function issueMarkdown(record: FeedbackRecord): string {
     // `path` matched PATH_RE in buildRecord, so it is safe inside the link.
     // Code span in the link text, so `~` or `_` in a path can't format it.
     `- **Page:** [\`${record.path}\`](${SITE_ORIGIN}${record.path})`,
+    `- **Section:** ${record.path.split('/')[1] || 'home'}`,
     `- **Verdict:** ${verdict}`,
   ];
+  // `source` matched SOURCE_RE in buildRecord, so it is safe inside the link.
+  if (record.source) lines.push(`- **Source:** [\`${record.source}\`](${SOURCE_ORIGIN}${record.source})`);
   if (reason) lines.push(`- **Reason:** ${reason}`);
   if (record.redactions) {
     lines.push(`- **Redacted:** ${record.redactions} secret(s) or email address(es) removed from the comment`);
