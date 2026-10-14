@@ -2,19 +2,11 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSy
 import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/getting-started/prereqs.mjs';
-import { stripHtmlComments } from './strip-comments.mjs';
+import { sharedText, tabsText, linksToText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
+import { stripHtmlComments, collapseBlankLines } from './strip-comments.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
 import { courseListText, courseBarText } from '../components/getting-started/course.mjs';
 import { sampleText } from '../components/getting-started/sample.mjs';
-// Every other page uses the site-wide box (src/components/Prereqs.astro, from the Apps work) and
-// its stage strip. A page's own import line says which <Prereqs> it renders, and the twin takes the
-// wording from that component's table.
-import {
-  sharedText as siteSharedText,
-  tabsText as siteTabsText,
-  LABELS as SITE_LABELS,
-} from '../components/prereqs.mjs';
 
 /**
  * Astro integration that emits a raw-markdown copy of every docs page.
@@ -49,24 +41,30 @@ function findMarkdownFiles(dir, files = []) {
 }
 
 /**
- * Read the props off a component tag, for the two components whose text a
- * reader of the twin actually needs.
+ * Read the props off a one-line component tag, for the components whose text a
+ * reader of the twin needs. Attributes are read left to right, so a word inside
+ * a quoted value is never taken for a prop of its own: `"…"` and `'…'` are
+ * strings, `{…}` keeps a number or boolean as one and drops a string
+ * literal's quotes, and a bare name is `true`.
  */
 function tagProps(tag) {
   const props = {};
-  for (const m of tag.matchAll(/(\w+)=\{([^}]*)\}/g)) {
-    const raw = m[2].trim();
-    if (raw === 'true' || raw === 'false') props[m[1]] = raw === 'true';
-    else if (/^\d+$/.test(raw)) props[m[1]] = Number(raw);
-    else props[m[1]] = raw;
-  }
-  for (const m of tag.matchAll(/(\w+)="([^"]*)"/g)) props[m[1]] = m[2];
-  if (/<\w+\s[^>]*\b(\w+)(?=\s|\/>|>)/.test(tag)) {
-    // bare boolean props (`<PathIntro manual />`) are not used here, but treat
-    // a lone name as true rather than dropping it
-    for (const m of tag.matchAll(/\s(\w+)(?=\s|\/?>)/g)) if (!(m[1] in props)) props[m[1]] = true;
+  const attrs = tag.replace(/^\s*<[A-Za-z][\w.]*/, '').replace(/\/?>\s*$/, '');
+  for (const [, name, dq, sq, expr] of attrs.matchAll(/([\w-]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|\{([^}]*)\}))?/g)) {
+    if (dq !== undefined) props[name] = dq;
+    else if (sq !== undefined) props[name] = sq;
+    else if (expr !== undefined) props[name] = exprValue(expr.trim());
+    else props[name] = true;
   }
   return props;
+}
+
+/** The value of a `{…}` prop: the literal where it is one, else the source text. */
+function exprValue(raw) {
+  if (raw === 'true' || raw === 'false') return raw === 'true';
+  if (/^\d+$/.test(raw)) return Number(raw);
+  const str = raw.match(/^(["'`])([\s\S]*)\1$/);
+  return str ? str[2] : raw;
 }
 
 /**
@@ -78,9 +76,7 @@ function tagProps(tag) {
  * enough to spell out.
  */
 function inlineToMarkdown(line) {
-  return line
-    .replace(/\{'\s*'\}/g, ' ')
-    .replace(/<a href="([^"]+)">([^<]*)<\/a>/g, '$2 ($1)')
+  return linksToText(line.replace(/\{'\s*'\}/g, ' '))
     .replace(/<\/?(code|strong|em|b|i)>/g, (m) => (m.includes('code') ? '`' : '**'))
     .replace(/<li(?:\s[^>]*)?>\s*/g, '- ')
     .replace(/\s*<\/li>/g, '')
@@ -108,44 +104,22 @@ function prereqsToText(tag, { mayHaveOwn = false } = {}) {
   // that ends up with no items takes the heading back out at its close tag
   // (check/ passes needs={[]} and only the from/to slots).
   const heading = lines.length || mayHaveOwn ? [`${PREREQ_LABELS.needs}:`, ''] : [];
-  return ['', '**Before you start**', '', ...heading, ...lines.map((l) => `- ${l}`)];
+  return ['', `**${PREREQ_LABELS.box}**`, '', ...heading, ...lines.map((l) => `- ${l}`)];
 }
 
-/** The second list of <Prereqs>, one line per tab, printed after the page's own items. */
-function prereqsTabsToText(tag, overrides = {}) {
-  const tabs = tag.match(/tabs=\{(\d)\}/);
-  const count = tabs ? Number(tabs[1]) : 0;
-  if (!count) return [''];
-  return ['', `${PREREQ_LABELS.tabs}:`, '', ...tabsText(count, overrides).map((l) => `- ${l}`), ''];
-}
-
-/**
- * The same three, for the site-wide <Prereqs> (src/components/Prereqs.astro):
- * "You need" with the shared items, a second list under the page's own
- * `groupLabel`, and the tab lines.
- */
-function sitePrereqsToText(tag) {
-  const needs = tag.match(/needs=\{\[([^\]]*)\]\}/);
-  const keys = needs
-    ? needs[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean)
-    : ['project'];
-  const lines = keys.map(siteSharedText).filter(Boolean);
-  // The "You need" heading prints even with no shared items: the page's own
-  // <li> children follow it.
-  return ['', `**${SITE_LABELS.box}**`, '', `${SITE_LABELS.needs}:`, '', ...lines.map((l) => `- ${l}`)];
-}
-
-function sitePrereqsGroupToText(tag, items) {
+/** The list under the page's own `groupLabel`, from its <li slot="group"> children. */
+function prereqsGroupToText(tag, items) {
   const label = tag.match(/\bgroupLabel="([^"]*)"/);
   if (!label || !items.length) return [];
   return ['', `${label[1]}:`, '', ...items];
 }
 
-function sitePrereqsTabsToText(tag, overrides = {}) {
+/** The tab lines of <Prereqs>, one per tab, printed after the page's own items. */
+function prereqsTabsToText(tag, overrides = {}) {
   const tabs = tag.match(/tabs=\{(\d)\}/);
   const count = tabs ? Number(tabs[1]) : 0;
   if (!count) return [''];
-  return ['', `${SITE_LABELS.tabs}:`, '', ...siteTabsText(count, overrides).map((l) => `- ${l}`), ''];
+  return ['', `${PREREQ_LABELS.tabs}:`, '', ...tabsText(count, overrides).map((l) => `- ${l}`), ''];
 }
 
 /**
@@ -169,22 +143,27 @@ function sitePrereqsTabsToText(tag, overrides = {}) {
  * Components are matched on an uppercase initial, the JSX convention, so
  * lowercase HTML written inline in a page is left alone. Several carry
  * meaning a reader needs and are rendered rather than dropped: a tab's
- * `label`, <Prereqs> (the Getting Started box or the site-wide one, by the
- * page's import), <StageStrip> as a numbered list, and the Getting Started
- * pictures below. MDX comments become HTML comments, which the caller removes
- * with stripHtmlComments (strip-comments.mjs), outside fenced code.
+ * `label`, <Prereqs> (src/components/Prereqs.astro), <StageStrip> as a
+ * numbered list, and the Getting Started pictures below. MDX comments become
+ * HTML comments, which the caller removes with stripHtmlComments
+ * (strip-comments.mjs), outside fenced code; inside the <Prereqs> and
+ * <StageStrip> lists they are dropped here.
  */
 function stripMdx(body) {
-  // Getting Started pages import their own <Prereqs> from components/getting-started/.
-  const gs = /import\s+Prereqs\s+from\s+['"][^'"]*getting-started\/Prereqs\.astro['"]/.test(body);
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
   // <details> is how a page folds away what most readers can skip; the twin
-  // has no folding, so the summary becomes a bold line and the rest follows
+  // has no folding, so the summary becomes a bold line and the rest follows.
+  // The <summary> may share the <details> line or have its own; either way it
+  // is one line, so a fold written another way is left as it is rather than
+  // run on into the text below it.
+  const fold = (t) => `**${t.trim().replace(/<\/?code>/g, '`')}**`;
   const withoutComments = withoutImports
     .replace(/\{\/\*([\s\S]*?)\*\/\}/g, (_, inner) => `<!--${inner}-->`)
+    .replace(/^[ \t]*<details[^>]*>[ \t]*<summary>([^\n]*?)<\/summary>[ \t]*$/gm, (m, t) => fold(t))
     .replace(/^[ \t]*<details[^>]*>[ \t]*$/gm, '')
     .replace(/^[ \t]*<\/details>[ \t]*$/gm, '')
-    .replace(/^[ \t]*<summary>([\s\S]*?)<\/summary>[ \t]*$/gm, (m, t) => `**${t.trim().replace(/<\/?code>/g, '`')}**`);
+    .replace(/^[ \t]*<summary>([^\n]*?)<\/summary>[ \t]*$/gm, (m, t) => fold(t));
+  const COMMENT = /<!--[\s\S]*?-->/g;
 
   const open = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*(?<!\/)>\s*$/;
   const selfClosing = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*\/>\s*$/;
@@ -224,11 +203,7 @@ function stripMdx(body) {
       continue;
     }
     if (selfClosing.test(line)) {
-      if (/^\s*<Prereqs\b/.test(line)) {
-        out.push(...(gs
-          ? [...prereqsToText(line), ...prereqsTabsToText(line)]
-          : [...sitePrereqsToText(line), ...sitePrereqsTabsToText(line)]));
-      }
+      if (/^\s*<Prereqs\b/.test(line)) out.push(...prereqsToText(line), ...prereqsTabsToText(line));
       if (/^\s*<PathIntro\b/.test(line)) {
         out.push('', ...pathIntroText(tagProps(line)).map((p) => p + '\n'));
       }
@@ -259,15 +234,9 @@ function stripMdx(body) {
       indents.pop();
       if (/^\s*<\/Tabs>/.test(line)) out.push('', '---', '');
       if (/^\s*<\/StageStrip>/.test(line)) { inStrip = false; slot.length = 0; out.push(''); }
-      if (/^\s*<\/Prereqs>/.test(line) && !gs) {
-        out.push(...sitePrereqsGroupToText(prereqsTag, groupItems), ...sitePrereqsTabsToText(prereqsTag, prereqsTabs));
-        inPrereqs = false;
-        prereqsTabs = {};
-        groupItems.length = 0;
-        slot.length = 0;
-      } else if (/^\s*<\/Prereqs>/.test(line)) {
+      if (/^\s*<\/Prereqs>/.test(line)) {
         if (!prereqsItems && out[prereqsStart + 3] === `${PREREQ_LABELS.needs}:`) out.splice(prereqsStart + 3, 2);
-        out.push(...prereqsTabsToText(prereqsTag, prereqsTabs));
+        out.push(...prereqsGroupToText(prereqsTag, groupItems), ...prereqsTabsToText(prereqsTag, prereqsTabs));
         // "Where you are" and "When you finish" arrive in the slot but read
         // first, straight under the box's heading, as they do on the page
         const state = [
@@ -280,6 +249,8 @@ function stripMdx(body) {
         prereqsState = {};
         prereqsStart = -1;
         prereqsItems = 0;
+        groupItems.length = 0;
+        slot.length = 0;
       }
       continue;
     }
@@ -293,11 +264,7 @@ function stripMdx(body) {
       // <Prereqs needs={…}> with page-specific <li> children in its slot: the
       // shared lines go in first, the children follow as the list they are.
       if (/^\s*<StageStrip\b/.test(line)) { inStrip = true; stripN = 0; }
-      if (/^\s*<Prereqs\b/.test(line) && !gs) {
-        out.push(...sitePrereqsToText(line));
-        inPrereqs = true;
-        prereqsTag = line;
-      } else if (/^\s*<Prereqs\b/.test(line)) {
+      if (/^\s*<Prereqs\b/.test(line)) {
         prereqsStart = out.length;
         const head = prereqsToText(line, { mayHaveOwn: true });
         prereqsItems = head.filter((l) => l.startsWith('- ')).length;
@@ -318,21 +285,27 @@ function stripMdx(body) {
     const text = line.slice(strip);
     const opener = line.match(/^\s*(`{3,}|~{3,})/);
     if (opener) fence = { marker: opener[1], strip: line.length - text.length };
-    if (inStrip) {
-      // one <li> per stage: flatten it, number it, and end the bold title with a period
+    if (inStrip || inPrereqs) {
+      // Both lists are built from raw <li> JSX, buffered until the item closes,
+      // then flattened. An author's comment is dropped here rather than left for
+      // stripHtmlComments: glued to the next item it would hide that item's
+      // slot="…" and its list marker. A comment over several lines waits for
+      // its end.
       slot.push(text);
-      if (/<\/li>/.test(text)) {
-        const item = inlineToMarkdown(slot.join(' ')).replace(/^- /, '');
-        slot.length = 0;
-        if (item) out.push(`${++stripN}. ${item.replace(/^\*\*(.+?)\*\*\s*/, '**$1.** ')}`);
+      const joined = slot.join(' ').replace(COMMENT, '');
+      if (joined.includes('<!--')) continue;
+      if (!joined.trim()) { slot.length = 0; continue; }
+      if (inStrip) {
+        // one <li> per stage: number it, and end the bold title with a period
+        if (/<\/li>/.test(joined)) {
+          const item = inlineToMarkdown(joined).replace(/^- /, '');
+          slot.length = 0;
+          if (item) out.push(`${++stripN}. ${item.replace(/^\*\*(.+?)\*\*\s*/, '**$1.** ')}`);
+        }
+        continue;
       }
-      continue;
-    }
-    if (inPrereqs) {
-      // the slot holds raw <li> JSX, or a tab's own line as <span slot="…">;
-      // buffer until the item closes, then flatten
-      slot.push(text);
-      const tabLine = slot.join(' ').match(/^\s*<span slot="(prompt|ui|cli|from|to)">([\s\S]*)<\/span>\s*$/);
+      // <Prereqs> also takes a tab's own line, or a state card, as <span slot="…">
+      const tabLine = joined.match(/^\s*<span slot="(prompt|ui|cli|from|to)">([\s\S]*)<\/span>\s*$/);
       if (tabLine) {
         const key = tabLine[1];
         if (key === 'from' || key === 'to') prereqsState[key] = inlineToMarkdown(tabLine[2]);
@@ -340,13 +313,12 @@ function stripMdx(body) {
         slot.length = 0;
         continue;
       }
-      if (/<\/li>/.test(text)) {
-        const joined = slot.join(' ');
+      if (/<\/li>/.test(joined)) {
         const item = inlineToMarkdown(joined);
         if (item) {
           const li = item.startsWith('- ') ? item : `- ${item}`;
-          // <li slot="group"> items belong to the site-wide box's second list, printed at </Prereqs>
-          if (!gs && /^\s*<li\s+slot="group"/.test(joined)) groupItems.push(li);
+          // <li slot="group"> items belong to the box's second list, printed at </Prereqs>
+          if (/^\s*<li\s+slot="group"/.test(joined)) groupItems.push(li);
           else { out.push(li); prereqsItems += 1; }
         }
         slot.length = 0;
@@ -358,7 +330,7 @@ function stripMdx(body) {
     out.push(text);
   }
 
-  return out.join('\n').replace(/\n{3,}/g, '\n\n');
+  return collapseBlankLines(out.join('\n'));
 }
 
 /**
@@ -505,8 +477,8 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
           const isMdx = extname(file) === '.mdx';
           const raw = stripFrontmatter(content);
           // authors' notes (VERIFY markers, where a claim was checked) stay in the source; comments
-          // inside fenced code are content and survive (strip-comments.mjs)
-          const body = stripHtmlComments(isMdx ? stripMdx(raw) : raw).replace(/\n{3,}/g, '\n\n').trim();
+          // and blank lines inside fenced code are content and survive (strip-comments.mjs)
+          const body = stripHtmlComments(isMdx ? stripMdx(raw) : raw).trim();
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });

@@ -8,7 +8,7 @@ redirect_from:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PageMeta from '../../../../components/getting-started/PageMeta.astro';
-import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import Prereqs from '../../../../components/Prereqs.astro';
 import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
 <PageMeta genre="How-to" guide="Going further" />
@@ -42,7 +42,7 @@ Two tabs, matching /getting-started/write/, and for the same reason: OAuth. The 
 named above were not run against this page — doing so writes into a real Drive account — they are
 the same two commands the CLI tab on /getting-started/load/ proves.
 
-VERIFY(owner): this side trip still uses level.csv, the pre-Boolabean sample (28 rows of names and
+TODO(human-review, Nikita): this side trip still uses level.csv, the pre-Boolabean sample (28 rows of names and
 a size band). The main path is Boolabean now, so the section reads as two datasets. Swapping it
 means reshooting steps 5-12 with a live Google authorization, which needs Nikita's account — the
 same blocker as the /getting-started/write/ captures. Flagged rather than half-changed. */}
@@ -88,11 +88,11 @@ inside it. The connector asks for them in that order.
 
 1. Go to **Components** and click **Add Component**.
 
-   ![Screenshot - Components](/getting-started/load/source-intro-0.png)
+   ![Screenshot - The Components page, with Components highlighted in the top navigation and a red arrow pointing at the green Add Component button on the right](/getting-started/load/source-intro-0.png)
 
 2. Search for the **Google Sheets** data source and open it.
 
-   ![Screenshot - Find the Google Sheets data source](/getting-started/load/source-intro.png)
+   ![Screenshot - The Google Sheets data source dialog with the green Connect To My Data button next to the blue Use With Demo Data button](/getting-started/load/source-intro.png)
 
 3. Click **Connect To My Data**. **Use With Demo Data** next to it loads a dataset Keboola
    prepared, which most connectors offer and which is not what you want here.
@@ -100,14 +100,14 @@ inside it. The connector asks for them in that order.
 4. Name the configuration `Level from Sheets`, describe it, and click **Create Configuration**.
    The **Prompt** tab uses the same name, so either path leaves you in the same place.
 
-   ![Screenshot - Create the configuration](/getting-started/load/google-sheets-create.png)
+   ![Screenshot - The Google Sheets dialog with Name and Description filled in, above the Create Configuration button](/getting-started/load/google-sheets-create.png)
 
    Every component can hold several [configurations](/components/), which is how one project
    extracts from two different Google accounts.
 
 5. Click **Sign in with Google** to authorize the connector.
 
-   ![Screenshot - Sign in with Google](/getting-started/load/sign-in-with-google.png)
+   ![Screenshot - The new Google Sheets configuration page with a red arrow on the Sign in with Google button in the Authorization section, above the Select sheets from Google Drive and Load data sections](/getting-started/load/sign-in-with-google.png)
 
 6. Google takes over: it asks which account to use and what Keboola may reach in it. Pick the
    account holding the spreadsheet you just made and grant the access it asks for. Google's wording
@@ -115,7 +115,7 @@ inside it. The connector asks for them in that order.
 
 7. Now choose the Drive files to import.
 
-   ![Screenshot - Select Drive files](/getting-started/load/select-files.png)
+   ![Screenshot - The Select sheets from Google Drive section with a red arrow on the green Load Spreadsheet Documents from Google Drive button, above an empty area that reads Load data above to see sheets](/getting-started/load/select-files.png)
 
 8. Google asks a second time. Step 6 let Keboola reach the account at all; this prompt is
    narrower, about which files it may see. Allow it for your spreadsheets and continue, because
@@ -127,12 +127,12 @@ inside it. The connector asks for them in that order.
 
 11. Select the sheet and click **Save and Run Configuration**.
 
-    ![Screenshot - Save and run](/getting-started/load/save-and-run.png)
+    ![Screenshot - The Select sheets from Google Drive section with Level / level picked and an arrow on Save and Run Configuration, and Load data showing Last job status Success and an arrow on the Level-level table](/getting-started/load/save-and-run.png)
 
 12. The connector creates its own output bucket and table. Click the table name to see what
     arrived, or go to **Storage**.
 
-    ![Screenshot - The table in Storage](/getting-started/load/storage.png)
+    ![Screenshot - The Storage page with the Google Sheets data source's IN bucket expanded and red arrows on it and its table Level-level, both just updated by that configuration](/getting-started/load/storage.png)
 
 </TabItem>
 </Tabs>
@@ -142,7 +142,7 @@ inside it. The connector asks for them in that order.
 The new table holds 28 rows, the ones you uploaded into the spreadsheet, with the column names
 from its first row.
 
-{/* VERIFY(owner): the four bullets below are written from how the connector behaves, not from a
+{/* VERIFY(Nikita): the four bullets below are written from how the connector behaves, not from a
 walk — reproducing them needs an authorized Drive account, the same blocker as the captures. Worth
 one pass by someone signed in: that re-authorizing keeps the file selection, that the picker only
 lists the authorized account's files, and that a sheet whose first row is not treated as a header
@@ -163,7 +163,8 @@ never was. */}
 
 ## Going further
 
-- [Load from a database](/getting-started/load/database/) is the other side trip: a source that
-  needs credentials rather than a consent screen.
 - [Send a table to Google Sheets](/getting-started/write/) goes the other way, out of Storage into
   a spreadsheet.
+
+**Next:** [Load from a database →](/getting-started/load/database/), the other side trip: a source
+that needs credentials rather than a consent screen.

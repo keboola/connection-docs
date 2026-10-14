@@ -1534,33 +1534,6 @@ nav.sidebar {
   .sl-markdown-content .beacon-code-pair { grid-template-columns: 1fr; }
 }
 
-/* Getting Started: a UI capture and the request that does the same thing, side
-   by side. Stripe puts the code in a third column that follows the prose; that
-   needs a layout override, so the cheap version is a pair grid the author opts
-   into with <div class="gs-pair"> around exactly two blocks. */
-.sl-markdown-content .gs-pair {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  align-items: start;
-  margin: 14px 0;
-}
-.sl-markdown-content .gs-pair > .expressive-code,
-.sl-markdown-content .gs-pair > pre,
-.sl-markdown-content .gs-pair > p,
-.sl-markdown-content .gs-pair > p > img,
-.sl-markdown-content .gs-pair > img {
-  margin: 0 !important;
-}
-.sl-markdown-content .gs-pair > p > img,
-.sl-markdown-content .gs-pair > img {
-  border: 1px solid var(--sl-color-gray-5);
-  border-radius: 8px;
-}
-@media (max-width: 720px) {
-  .sl-markdown-content .gs-pair { grid-template-columns: 1fr; }
-}
-
 /* Auto-migrated: bolded inline callouts (**Note:** …) */
 .sl-markdown-content > aside.starlight-aside--note,
 .sl-markdown-content > aside.starlight-aside--tip,
@@ -2613,10 +2586,12 @@ nav.sidebar {
 
 /* ---------------------------------------------------------------------------
    Getting Started — cold-start blocks
-   Components: src/components/getting-started/{PageMeta,Prereqs,PathIntro,CourseLine,
-   SampleData,FlowStrip}.astro
-   All four blocks exist so a page survives being landed on cold from a search
-   engine (decision of 2026-09-02, see DECISIONS.md). Styles live here per
+   Components: src/components/getting-started/{PageMeta,PathIntro,CourseLine,
+   SampleData,FlowStrip,FromTo}.astro. The "Before you start" box is the site-wide
+   src/components/Prereqs.astro, styled under "Prerequisites box" below, and
+   FromTo.astro shares its .fromto rules there.
+   The blocks exist so a page survives being landed on cold from a search
+   engine (decision of 2026-09-02, see notes/getting-started/DECISIONS.md). Styles live here per
    AGENTS.md — never as <style> blocks in the components.
    --------------------------------------------------------------------------- */
 
@@ -2638,118 +2613,10 @@ nav.sidebar {
 }
 .gs-pagemeta__sep { color: var(--sl-color-gray-4); }
 
-/* (c) prerequisites, from one partial */
-.gs-prereqs {
-  margin: 0 0 1.5rem;
-  padding: 0.85rem 1.1rem;
-  border: 1px solid var(--sl-color-gray-5);
-  border-radius: 0.5rem;
-  background: var(--sl-color-gray-7, var(--sl-color-gray-6));
-}
-.gs-prereqs__label {
-  margin: 0 0 0.4rem;
-  font-size: var(--sl-text-xs);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--sl-color-gray-2);
-}
-.gs-prereqs__list {
-  margin: 0;
-  padding-left: 1.15rem;
-}
-.gs-prereqs__list > li + li { margin-top: 0.3rem; }
-/* MDX wraps a multi-line <li> in <p>; without this those items sit further apart than the rest */
-.gs-prereqs__list > li > p { margin: 0; }
-.gs-prereqs__group {
-  margin: 0.7rem 0 0.25rem;
-  font-size: var(--sl-text-sm);
-  font-weight: 600;
-  color: var(--sl-color-white);
-}
-.gs-prereqs__label + .gs-prereqs__group { margin-top: 0; }
-
 /* the tab convention, stated once */
 .gs-pathintro { margin: 0 0 1.5rem; }
 .gs-pathintro > p { margin: 0 0 0.6rem; }
 .gs-pathintro__recovery { color: var(--sl-color-gray-2); }
-
-/* (c, top row) where you are → when you finish, inside the prerequisites box */
-.gs-fromto {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: stretch;
-  gap: 0.6rem;
-  margin: 0.2rem 0 0.35rem;
-}
-.gs-fromto__card {
-  margin: 0;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--sl-color-gray-5);
-  border-radius: 0.5rem;
-  background: var(--sl-color-bg);
-  font-size: var(--sl-text-sm);
-  line-height: 1.45;
-}
-.gs-fromto__card--to { border-color: var(--sl-color-accent); }
-.gs-fromto--standalone { margin: 1.25rem 0 1.5rem; }
-.gs-fromto__label {
-  display: block;
-  font-size: var(--sl-text-xs);
-  font-weight: 600;
-  color: var(--sl-color-gray-3);
-}
-.gs-fromto__card--to .gs-fromto__label { color: var(--sl-color-text-accent); }
-.gs-fromto__arrow {
-  align-self: center;
-  font-size: 1.25rem;
-  color: var(--sl-color-gray-3);
-}
-@media (max-width: 40rem) {
-  .gs-fromto { grid-template-columns: minmax(0, 1fr); }
-  .gs-fromto__arrow { justify-self: center; transform: rotate(90deg); line-height: 1; }
-}
-
-/* (c, bottom row) what each tab needs: one row per tab, the tab's name on the left */
-.gs-prereqs__tabs {
-  display: grid;
-  gap: 0.35rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.gs-prereqs__tab {
-  display: grid;
-  grid-template-columns: 8.5rem minmax(0, 1fr);
-  gap: 0.75rem;
-  align-items: baseline;
-  padding: 0.45rem 0.7rem;
-  border: 1px solid var(--sl-color-gray-5);
-  border-radius: 0.5rem;
-  background: var(--sl-color-bg);
-  font-size: var(--sl-text-sm);
-  line-height: 1.45;
-}
-.gs-prereqs__tab a { color: var(--sl-color-text-accent); text-decoration: underline; }
-.gs-prereqs__tab strong { font-weight: 600; color: var(--sl-color-white); }
-.gs-prereqs__tabname {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-weight: 600;
-  color: var(--sl-color-white);
-  white-space: nowrap;
-}
-.gs-prereqs__glyph {
-  font-family: var(--sl-font-mono, monospace);
-  font-size: 0.8em;
-  font-weight: 700;
-  color: var(--sl-color-text-accent);
-}
-.gs-prereqs__tabname svg { flex: none; color: var(--sl-color-text-accent); }
-@media (max-width: 40rem) {
-  .gs-prereqs__tab { grid-template-columns: minmax(0, 1fr); gap: 0.1rem; }
-}
 
 /* (d) the course as a line of dots: a bar at the top of a step, a list on the hub */
 /* Dots and line are --kbc-blue-600, where white numerals pass 4.5:1 (the StageStrip rule). The bar
@@ -3004,6 +2871,85 @@ nav.sidebar {
   color: var(--sl-color-white);
 }
 .prereqs__label + .prereqs__group { margin-top: 0; }
+
+/* Where you are → When you finish: two cards with an arrow, at the top of the box on a course
+   step (the `from` and `to` slots), and on their own on the Getting Started hub (FromTo.astro). */
+.fromto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0.6rem;
+  margin: 0.2rem 0 0.35rem;
+}
+.fromto__card {
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-bg);
+  font-size: var(--sl-text-sm);
+  line-height: 1.45;
+}
+.fromto__card--to { border-color: var(--sl-color-accent); }
+.fromto--standalone { margin: 1.25rem 0 1.5rem; }
+.fromto__label {
+  display: block;
+  font-size: var(--sl-text-xs);
+  font-weight: 600;
+  color: var(--sl-color-gray-3);
+}
+.fromto__card--to .fromto__label { color: var(--sl-color-text-accent); }
+.fromto__arrow {
+  align-self: center;
+  font-size: 1.25rem;
+  color: var(--sl-color-gray-3);
+}
+@media (max-width: 40rem) {
+  .fromto { grid-template-columns: minmax(0, 1fr); }
+  .fromto__arrow { justify-self: center; transform: rotate(90deg); line-height: 1; }
+}
+
+/* What each tab needs: one row per tab, the tab's name on the left. */
+.prereqs__tabs {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.prereqs__tab {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-bg);
+  font-size: var(--sl-text-sm);
+  line-height: 1.45;
+}
+.prereqs__tab a { color: var(--sl-color-text-accent); text-decoration: underline; }
+.prereqs__tab strong { font-weight: 600; color: var(--sl-color-white); }
+.prereqs__tabname {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: var(--sl-color-white);
+  white-space: nowrap;
+}
+.prereqs__glyph {
+  font-family: var(--sl-font-mono, monospace);
+  font-size: 0.8em;
+  font-weight: 700;
+  color: var(--sl-color-text-accent);
+}
+.prereqs__tabname svg { flex: none; color: var(--sl-color-text-accent); }
+@media (max-width: 40rem) {
+  .prereqs__tab { grid-template-columns: minmax(0, 1fr); gap: 0.1rem; }
+}
+
 
 /* ───────── Stage strip (src/components/StageStrip.astro) ───────── */
 /* Numbered dots on a line, one per stage. Horizontal while

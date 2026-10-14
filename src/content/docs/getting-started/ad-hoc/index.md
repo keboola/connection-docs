@@ -123,7 +123,7 @@ service-account JSON: project_id, private_key_id, the PEM private_key body and c
 deleted on 2026-09-22 rather than masked, because its only content was a pasted secret and the
 sentence above already says what to paste. The key itself was confirmed inactive on 2026-08-27 and
 that escalation is closed; do not re-raise it. The masked twin of this file still exists at the old
-path in PR #1100. See DECISIONS.md. -->
+path in PR #1100. See notes/getting-started/DECISIONS.md. -->
 
 Fill the bucket you have created above:
 
@@ -296,3 +296,5 @@ However, teaching you everything was not really the point of this tutorial.
 We wanted to show you how Keboola can help in connecting different systems together.
 
 [Return to the beginning](/getting-started/) or [contact us](/management/support/).
+
+**Next:** [Development Branches →](/getting-started/branches/)

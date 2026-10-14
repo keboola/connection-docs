@@ -8,7 +8,7 @@ redirect_from:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PageMeta from '../../../../components/getting-started/PageMeta.astro';
-import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import Prereqs from '../../../../components/Prereqs.astro';
 import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 import CourseLine from '../../../../components/getting-started/CourseLine.astro';
 import FlowStrip from '../../../../components/getting-started/FlowStrip.astro';
@@ -27,9 +27,11 @@ offers "Create Multiple Queries". 2026-09-09: dataset swapped to Boolabean. The 
 below was run as-is through a temporary transformation with exactly the input mapping this page
 describes (project 264, job 103114885, 61 s): 42 rows, 42 distinct (store, date), 0 empty cells, 4
 short-handed, top row Brno / Tue 2026-09-08 / 84.4, identical to Kai's read-only-input version
-from the 2026-09-08 runs and to the offline reference. The BigQuery block is a translation and has
-NOT been run (decision 7 in the plan; no BigQuery project). Screenshots 00–10 still show the
-previous sample's names; phase 2 reshoots them.
+from the 2026-09-08 runs and to the offline reference. The BigQuery block was run as printed on
+2026-10-12 in Free Plan project 6439 (BigQuery, us-east4), through the input and output mapping this
+tab describes: job success, 61 s, 42 rows (the note after the block has the details). That answers
+Jordan's review on #1116, item 3, which asked for one run or a label on the page. The page's twelve
+screenshots were reshot on 2026-10-01 in Free Plan project 6375, with the Boolabean names.
 
 CLI / API tab added 2026-09-15 and run live against project 264 with kbagent v0.93.1: `transformation
 create --sql-file --created-table` built a throwaway transformation from the page's own SQL file, `transformation edit --storage @file` added the five inputs (create leaves the input mapping empty —
@@ -50,10 +52,10 @@ deleted the same minute. */}
 
 <PathIntro tabs={3} />
 
-{/* 2026-09-29, David Esner ("strašně moc textu") and Nikita: the mapping model and the four parts
+{/* 2026-09-29, David Esner (far too much text) and Nikita: the mapping model and the four parts
 of the query are strips now, the bucket-names paragraph and the "which SQL" paragraph are two
 bullets, and the half-open detail is folded. Cut: "Close the dialog and carry that word into your
-tab", nothing else; CONSERVATION-REPORT.md, 2026-09-29. */}
+tab", nothing else; notes/getting-started/CONSERVATION-REPORT.md, 2026-09-29. */}
 
 ## How a transformation works
 
@@ -117,13 +119,19 @@ Run it, then tell me how many rows staffing_outlook has and which store and day 
 
 Kai writes it in your project's own SQL dialect; on our Free Plan project that was BigQuery. Keep
 the column list in point 5 as written: the later pages type those names into their prompts and
-checks.
+checks. If the forecast week has cold, dry days (under 18 °C, no rain) that the summer's sales never
+had, Kai may first ask what to do with them; **Leave them blank** is what the rest of the guide expects.
+{/* Asked on the 2026-10-08 run in a new Free Plan project (6425, us-east4, BigQuery): "17 of the 42 forecast store-days fall
+into a weather band (under 18 degrees and dry) that stores S01-S05 have no history for. What should
+expected_units be for those days?", options "Use the store's cold-day average (Recommended)",
+"Leave them blank", "Use the store's overall average", Other. Question and options as in ~/.keboola-shots/free-run-2026-10-08/notes.md. Picked Leave them blank; Kai
+corrected the count to 15 and built 42 rows with 15 empty, as the Check below describes. */}
 {/* 2026-10-01 (Michal Jeřábek): the prompt no longer names Snowflake, since most new projects are
 Free Plan BigQuery on us-east4. Run that day in Free Plan project 6375 in this exact wording, in a
 fresh chat: Kai built a Google BigQuery transformation (SAFE_CAST throughout, the four bands
 half-open, tables read by full name with an empty input mapping), two approvals, 42 rows, and named
 Zelný trh on Monday and Tuesday at 85.2 as most stretched, which matches an offline computation
-from the same files and forecast. DECISIONS.md 2026-10-01. VERIFY(owner): this wording has not
+from the same files and forecast. notes/getting-started/DECISIONS.md 2026-10-01. VERIFY(Nikita): this wording has not
 run on a Snowflake project; the Snowflake runs (264, 2026-09-08/09) used a prompt that named
 Snowflake. */}
 {/* Guide test 2026-09-09: the live run's prompt described the columns in words and Kai chose
@@ -149,8 +157,8 @@ figures, though Kai picks its own column types and writes the weekday out in ful
 </details>
 
 {/* Observed in all three 2026-09-08 runs: storage.input.tables empty, tables addressed as
-"KBC_EUW3_264"."in.c-keboola-ex-http-<id>"."sales". This closes the VERIFY(owner) that stood here
-since 5 Aug; see DECISIONS.md 2026-09-08. */}
+"KBC_EUW3_264"."in.c-keboola-ex-http-<id>"."sales". This closes the open marker that stood here
+since 5 Aug; see notes/getting-started/DECISIONS.md 2026-09-08. */}
 
 The chat links what Kai made, so that is where to find it afterwards: the transformation, and the
 job that ran it.
@@ -164,6 +172,17 @@ differ: re-prompt, or fix the code in place. Later steps need only that table, a
 `out.c-Boolabean-staffing-outlook.staffing_outlook` where Kai puts it, so a close-enough table is
 fine; if yours landed in another bucket, use its ID in their prompts.
 
+To see what the SQL does, ask in the same chat:
+
+```text title="Follow-up prompt" wrap
+Explain the SQL of the "Boolabean staffing outlook" transformation in plain words.
+```
+
+It only reads, so it asks for no approval by default.
+{/* Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals: Kai walked through
+the daily demand, the temperature and rain bands, the average per band, the weekday roster, the
+forecast join and the flag over 67 units per person. */}
+
 </TabItem>
 <TabItem label="UI">
 
@@ -171,13 +190,13 @@ fine; if yours landed in another bucket, use its ID in their prompts.
 
 1. Open **Transformations**.
 
-   ![Screenshot - Transformations section](/getting-started/transform/00-transformations.png)
+   ![Screenshot - The Transformations page with the blue Create Transformation button at the top right and one transformation, Boolabean staffing outlook, in the list below](/getting-started/transform/00-transformations.png)
 
 2. Click **Create Transformation**. The **New Transformation** dialog lists what this project can
    run, and it differs by project: an SQL entry for your backend, *Snowflake SQL Transformation* or
    *Google BigQuery Transformation*, plus *Python*, *R*, *DuckDB* (Beta), and on some projects
-   *dbt Core*. Take the dialog as the authority on your project rather than this sentence.
-   {/* VERIFY(owner): a brand-new Free Plan project (6211, 2026-08-19) offered dbt Core, labelled
+   *dbt Core* (Beta). Take the dialog as the authority on your project rather than this sentence.
+   {/* VERIFY(Nikita): a brand-new Free Plan project (6211, 2026-08-19) offered dbt Core, labelled
    Beta in the dialog. That contradicts management/pay-as-you-go/index.md, whose Free Plan limits
    say "Transformations: are limited to SQL, Python, and R", and transformations/dbt/index.md,
    which says new PAYG projects get dbt activated by default. The repo never labels dbt Beta.
@@ -188,14 +207,14 @@ fine; if yours landed in another bucket, use its ID in their prompts.
 
    Pick the SQL transformation your project offers, and use the matching query block below.
 
-   ![Screenshot - The New Transformation dialog](/getting-started/transform/01-new-transformation.png)
+   ![Screenshot - The New Transformation dialog listing Google BigQuery Transformation first, then Python, R, DuckDB (Beta) and dbt Core (Beta) transformations](/getting-started/transform/01-new-transformation.png)
 
 3. Name it `Boolabean staffing outlook`, add a description, and in **Folder** type `Boolabean` and
    pick **Create folder "Boolabean"**. Folders are cosmetic, but they are the difference between a
    browsable project and a wall of configurations. If the dialog offers **Use predefined code
    pattern**, ignore it. Click **Create transformation**.
 
-   ![Screenshot - Name the transformation](/getting-started/transform/02-name-transformation.png)
+   ![Screenshot - The New Google BigQuery Transformation dialog with Boolabean staffing outlook in Name, empty Description and Folder fields, and the Create transformation button](/getting-started/transform/02-name-transformation.png)
 
 **Set the input mapping**
 
@@ -229,7 +248,7 @@ data filters. None of it is needed here; see
    Output mapping opens in **Guided Mode**, the standard, copy-based mapping the steps below
    describe. If your project also shows **Direct Mode**, ignore it here: that writes straight to
    Storage and is a [private beta](/transformations/mappings/#direct-mode-output-mapping).
-   {/* VERIFY(owner): transformations/mappings/index.md says Direct Mode is a private beta that
+   {/* VERIFY(Nikita): transformations/mappings/index.md says Direct Mode is a private beta that
    Support has to enable, yet the toggle was visible in a brand-new Free Plan project (6211,
    2026-08-19) with no such request. Either that gate has changed or the mappings page is stale.
    Seen again in Free Plan project 6375 on 2026-10-01, with the UPPERCASE suggestion of step 2,
@@ -257,11 +276,12 @@ data filters. None of it is needed here; see
    Trash; screenshots mapping, 03, 04 and 07 come from it): the Guided Mode auto-fill lower-cases
    the transformation's name. A GET of /v2/storage/buckets/out.c-boolabean-staffing-outlook
    returned Kai's bucket, out.c-Boolabean-staffing-outlook, and the output row showed it as
-   Boolabean-staffing-outlook, so the lookup ignores case. Not exercised: a run that creates the
-   bucket from the lower-case ID, and so whether a bucket created that way keeps the lower case;
-   the page therefore tells a hand-building reader to use their own table ID later, since
-   BigQuery dataset names are case-sensitive even where Storage lookups are not. This replaces
-   the VERIFY that stood here since 2026-09-08. */}
+   Boolabean-staffing-outlook, so the lookup ignores case. Exercised 2026-10-12 in Free Plan
+   project 6439, which had no Kai bucket: the run created the bucket from the lower-case ID as
+   out.c-boolabean-staffing-outlook, shown as boolabean-staffing-outlook, so a bucket created
+   that way keeps the lower case. The page therefore tells a hand-building reader to use their
+   own table ID later, since BigQuery dataset names are case-sensitive even where Storage
+   lookups are not. This replaces the flag that stood here since 2026-09-08. */}
 
    ![Screenshot - Table Output Mapping with one row: staffing_outlook, written to the OUT bucket Boolabean-staffing-outlook as staffing_outlook](/getting-started/transform/06-output-mapping.png)
 
@@ -282,7 +302,7 @@ offers **Copy Code** and **Edit Code**.
 opens the All Queries editor with these three lines, and clicking the saved code opens a
 "Block 1 > Code" editor with a rename pencil, Copy Code and Save. The page used to offer that
 single-code editor as an alternative to All Queries; it is what opening a code shows. This closes
-the VERIFY that stood here since 2026-08-19. */}
+the flag that stood here since 2026-08-19. */}
 
 **If your project uses Snowflake**
 
@@ -449,9 +469,19 @@ returned 42 rows with the same three short-handed café-days as the Kai-built ta
 2026-10-01 at 73 and Zelný trh 2026-10-05 and 2026-10-06 at 85.2, and weekday as Mon/Tue. Later
 the same day a copy was built through this tab, with the five-table input mapping and this block
 pasted into All Queries (saved text equal to the block), for screenshots mapping, 03, 04 and 07; it
-was deleted unrun, because its output would have replaced Kai's typed staffing_outlook. So the
-CREATE TABLE wrapper and the short names through an input mapping have still not run on BigQuery
-(MISSING.md). The points that were open before the run: `date` and `time` as column names inside SAFE_CAST (backticked here on purpose),
+was deleted unrun, because its output would have replaced Kai's typed staffing_outlook.
+Run as printed 2026-10-12 in Free Plan project 6439 (BigQuery, us-east4), a project with no Kai
+objects: the two HTTP configurations exactly as load/'s CLI / API tab (files from the branch
+preview, same bytes; jobs 171 s and 35 s, 6, 18, 9,761, 552, 552 and 42 rows), then a BigQuery
+transformation built through the Storage API the way this tab builds it: the five-table input
+mapping with these short names, the output mapping staffing_outlook to the lower-case auto-filled
+destination, and this block, cut from this file byte for byte, as the one code in Block 1 (saved
+script compared equal). Job 58251625 succeeded in 61 s and wrote a typed table, 42 rows and these
+10 columns, date as DATE, short_handed as BOOL, weekday Mon to Sun. That forecast week (12 to 18
+Oct) was under 18 °C every day: 29 rows with an empty expected_units and none short-handed, the
+highest 58.4 a person (Vinohrady, Wed 14 Oct), as the Check fold below says a cold week does. The
+configurations went to Trash afterwards; the tables stay in 6439. notes/getting-started/DECISIONS.md, 2026-10-12.
+The points that were open before the 2026-10-01 run: `date` and `time` as column names inside SAFE_CAST (backticked here on purpose),
 FORMAT_DATE('%a') returning Mon/Tue like Snowflake's DAYNAME, and that every column is qualified
 (the 2026-08-19 lesson from project 6211: a bare column name that matches a table name resolves to
 the range variable and comparisons then fail with "STRUCT<...> vs STRING"). The 2026-08-25 note
@@ -550,9 +580,9 @@ green **Success** means it worked; the notification's **Show job** link and **Jo
 it. The job below is Kai's build, which reads its tables in place, so its **Mapping** says
 **Input: No tables**.
 
-![Screenshot - Running the transformation](/getting-started/transform/08-run.png)
+![Screenshot - The Run transformation confirmation dialog with an unticked power user checkbox above the green Run button](/getting-started/transform/08-run.png)
 
-![Screenshot - Successful job](/getting-started/transform/09-job-success.png)
+![Screenshot - The job page for Boolabean staffing outlook with a green Success badge, a 55 sec duration, and a Mapping card showing Input: No tables and Output staffing_outlook](/getting-started/transform/09-job-success.png)
 
 Then open **Storage**: a new bucket `out.c-Boolabean-staffing-outlook` (in lower case if the UI
 tab created it), listed without its `out.c-` prefix and with an **OUT** badge, holds
@@ -596,9 +626,29 @@ the scheduling page is for.
 
 {/* On the day this was written (forecast 2026-09-08 to 09-14): 4 rows flagged, top row Boolabean
 Zelný trh (Brno), Tue 2026-09-08, 31.2 °C, 0 mm, 168.8 expected units, 2 rostered, 84.4 per person.
-Recorded in DECISIONS.md, deliberately not on the page: decision 6. */}
+Recorded in notes/getting-started/DECISIONS.md, deliberately not on the page: decision 6. */}
 
 ## If it goes wrong
+
+:::tip[Ask Kai first]
+If the job failed:
+```text title="Prompt" wrap
+The last run of my "Boolabean staffing outlook" transformation failed. Read its error and tell me what to change.
+```
+If it succeeded but staffing_outlook looks wrong (replace the part in angle brackets):
+```text title="Prompt" wrap
+The last run of my "Boolabean staffing outlook" transformation succeeded, but staffing_outlook looks wrong: <what you see>. Read the SQL and the first rows of the table and tell me what to change.
+```
+Kai reads the job's log, the SQL and the table
+([Troubleshooting](/kai/use-cases/#troubleshooting)). Use your transformation's name if you changed it.
+After a fix, run the transformation again and redo the **Check**; from a terminal, ask the same
+with `kbagent kai ask --project <alias> -m "…"`. The folds below cover the rest.
+{/* Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals. The
+failed-job prompt as worded: Kai found the transformation, checked all 24 runs (8 Sep to 1 Oct, all
+succeeded) and said there was no failure. The second prompt, with "it has more than 42 rows": Kai
+read the SQL and the table, found exactly 42 rows and no duplicate forecast rows, walked through the
+joins and suggested a filter, changing nothing. notes/getting-started/DECISIONS.md 2026-10-07. */}
+:::
 
 <details>
 <summary><code>Object 'SALES' does not exist</code> (Snowflake)</summary>
@@ -670,14 +720,6 @@ input mapping; see [the `_timestamp` system column](/transformations/mappings/#_
 <summary>You want to see what the query returns before saving</summary>
 
 That is what a [workspace](/getting-started/transform/workspace/) is for.
-
-</details>
-
-<details>
-<summary>You would rather not read the log yourself</summary>
-
-Kai has it open already ([Troubleshooting](/kai/use-cases/#troubleshooting)):
-`My transformation "Boolabean staffing outlook" failed. Read the last job's log and tell me what to fix.`
 
 </details>
 
