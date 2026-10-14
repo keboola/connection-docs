@@ -11,24 +11,18 @@ import PageMeta from '../../../../components/getting-started/PageMeta.astro';
 import Prereqs from '../../../../components/getting-started/Prereqs.astro';
 import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
-<PageMeta genre="How-to" minutes="10" guide="Going further" />
+<PageMeta genre="How-to" guide="Going further" />
 
-A side trip from [Get your data in](/getting-started/load/): a source behind credentials rather
+A side trip from [Load data into Storage](/getting-started/load/): a source behind credentials rather
 than a public URL. Every database connector Keboola has works this way, so walking one teaches all
 of them.
 
 **Where you are:** you can load a public file already. **When you finish:** three tables in
 Storage, pulled out of a live database.
 
-<Prereqs needs={['project']}>
+<Prereqs needs={['project']} tabs={3}>
   <li>
-    No credentials of your own. The walk uses Keboola's sample Snowflake database, and the values
-    are on this page.
-  </li>
-  <li>
-    For the <strong>CLI / API</strong> tab only:{' '}
-    <a href="/cli/getting-started/">kbagent</a> installed and connected to your project. The other
-    two tabs need nothing but the browser.
+    <strong>Keboola's sample Snowflake database,</strong> whose login is printed on this page.
   </li>
 </Prereqs>
 
@@ -73,9 +67,8 @@ Database connectors are configured like any other data source
 ([integration setup](/kai/use-cases/#integration-setup)). Open **Kai Agent** in the top bar and
 say what you want connected, not what your credentials are:
 
-```text title="Prompt"
-Set up a Snowflake data source connector against our sample database and load the OPPORTUNITY,
-ACCOUNT and USER tables into Storage.
+```text title="Prompt" wrap
+Set up a Snowflake data source connector against our sample database and load the OPPORTUNITY, ACCOUNT and USER tables into Storage.
 ```
 
 :::caution[Never paste a password into the chat]

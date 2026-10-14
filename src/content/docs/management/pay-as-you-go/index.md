@@ -7,7 +7,7 @@ slug: 'management/payg-project'
 
 You can now start working with Keboola for free. Simply [sign up](https://connection.us-east4.gcp.keboola.com/wizard) on the website and create a free project.
 
-Once you have one, [Get a project](/getting-started/project/) walks you through your first steps in it.
+Once you have one, [Getting started with Keboola](/getting-started/) walks you through your first steps in it.
 
 ## Free Plan Limits
 Free Plan projects have the following limits:
@@ -21,6 +21,8 @@ Free Plan projects have the following limits:
 - **Storage:** is limited to 250 GB of data storage.
 - **Time travel:** is not supported and there is no option to restore data if bucket or table has been accidentaly deleted.
 - **Support:** while we strive to provide great support even under the Free Plan, there is no service-level agreement (SLA) and we will deal with the tickets on a best-effort basis. 
+
+<!-- VERIFY(owner): a new Free Plan project (6375, us-east4, 2026-10-01) reported storage.dataSizeBytes = 50000000000 (50 GB) through /v2/storage/tokens/verify, read while Billing still asked to activate the account; Create or join a project says 50 GB. One of the two is wrong. -->
 
 ## DWH Backend
 In Pay As You Go projects, only a Keboola-managed backend is available. You can use your own database ([Bring Your Own Database](/storage/byodb/)) within any of the subscription plans.
