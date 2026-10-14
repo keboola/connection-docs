@@ -5,7 +5,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { readDimensions, sizeImages } from '../src/integrations/image-dimensions.mjs';
+import { pathToFileURL } from 'node:url';
+import imageDimensions, { readDimensions, sizeImages } from '../src/integrations/image-dimensions.mjs';
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'imgdims-'));
 const write = (name: string, data: Buffer | string) => {
@@ -82,6 +83,26 @@ test('sizes a root-relative and a page-relative <img>, skips /_astro/ and author
   assert.match(res.html, /<img src="\/_astro\/x\.webp" alt="c">/);
   assert.match(res.html, /width="45%" alt="d">/);
   assert.deepEqual(res.missing, []);
+});
+
+test('a missing image warns locally and fails the build in CI', async () => {
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), 'imgdims-dist-'));
+  fs.mkdirSync(path.join(out, 'a'));
+  fs.writeFileSync(path.join(out, 'a', 'index.html'), '<p><img src="/nope.png" alt="x"></p>');
+  const warnings: string[] = [];
+  const logger = { warn: (s: string) => warnings.push(s), info: () => {} };
+  const run = () => imageDimensions().hooks['astro:build:done']({ dir: pathToFileURL(out + '/'), logger } as any);
+  const ci = process.env.CI;
+  try {
+    delete process.env.CI;
+    await run();
+    assert.deepEqual(warnings, ['missing image /a/ → /nope.png']);
+    process.env.CI = 'true';
+    await assert.rejects(run, /1 image\(s\) referenced but not in the build/);
+  } finally {
+    if (ci === undefined) delete process.env.CI;
+    else process.env.CI = ci;
+  }
 });
 
 test('reports a missing image', () => {
