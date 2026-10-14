@@ -13,7 +13,8 @@ Keboola is a cloud-based platform for all your data integration, transformation,
 Designed for data engineers, analysts, and scientists, Keboola **simplifies data processes, enabling efficient management and insightful analysis**. 
 
 *This page explains what the platform is made of. To build something with it instead, work
-through [Getting Started](/getting-started/) — a running pipeline in about 30 minutes.*
+through [Getting Started](/getting-started/): a scheduled pipeline and an app, in about 30 minutes
+with Kai, plus sign-up and reading.*
 
 Key features of Keboola:
 - **Data Integration:** Effortlessly extract data from various sources like databases, cloud services, and APIs. Load it seamlessly into destinations of your choice for comprehensive analysis.
