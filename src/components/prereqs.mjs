@@ -64,10 +64,18 @@ export const TABS = [
     html: '<a href="/cli/getting-started/">kbagent</a>, connected to your project with write access.' },
 ];
 
+/**
+ * Links as `Label (url)`. One rule for the box's own items here and for the
+ * markup a page writes inside the box (page-markdown.mjs), so a link with more
+ * attributes than `href`, such as `<a download>`, keeps its URL in both.
+ */
+export function linksToText(html) {
+  return html.replace(/<a\s[^>]*?href="([^"]+)"[^>]*>([^<]*)<\/a>/g, '$2 ($1)');
+}
+
 /** Reduce one HTML item to the markdown the twin prints. */
 export function toText(html) {
-  return html
-    .replace(/<a href="([^"]+)">([^<]+)<\/a>/g, '$2 ($1)')
+  return linksToText(html)
     .replace(/<\/?strong>/g, '**')
     .replace(/<\/?code>/g, '`')
     .replace(/<[^>]+>/g, '');

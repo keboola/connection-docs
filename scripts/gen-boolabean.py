@@ -37,7 +37,7 @@ Without --fetch the output is byte-identical to the committed CSVs (checked
 recent values, and the guide quotes exact row counts and results built on them. On
 2026-10-12 the archive still returned all 552 rows (1,104 values) unchanged.
 """
-import argparse, csv, json, pathlib, random, subprocess, urllib.request
+import argparse, csv, json, pathlib, random, subprocess, sys, urllib.request
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 SAMPLE = REPO / 'public' / 'getting-started' / 'boolabean'
@@ -96,7 +96,12 @@ def fetch_weather(store):
     except Exception:
         body = subprocess.run(['curl', '-sf', url], check=True, capture_output=True).stdout
     d = json.loads(body)['daily']
-    return list(zip(d['time'], d['temperature_2m_max'], d['precipitation_sum']))
+    days = list(zip(d['time'], d['temperature_2m_max'], d['precipitation_sum']))
+    # a day with no value would crash the run halfway through writing the CSVs
+    gaps = [day for day, t, r in days if t is None or r is None]
+    if gaps:
+        sys.exit(f'{store[0]}: the archive has no value for {", ".join(gaps)}; nothing was written')
+    return days
 
 def committed_weather():
     """The weather as committed, so a rebuild needs no network."""

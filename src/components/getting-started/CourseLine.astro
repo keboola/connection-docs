@@ -29,7 +29,6 @@ const at = current ? COURSE.findIndex((s) => s.key === current) : -1;
     <div class="not-content">
     <ol class="gs-course gs-course--list">
       {COURSE.map((s, i) => (
-        <>
         <li class="gs-course__step">
           <span class="gs-course__dot" aria-hidden="true">{i + 1}</span>
           <div class="gs-course__body">
@@ -42,7 +41,6 @@ const at = current ? COURSE.findIndex((s) => s.key === current) : -1;
             )}
           </div>
         </li>
-        </>
       ))}
     </ol>
     </div>

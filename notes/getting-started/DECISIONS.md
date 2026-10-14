@@ -581,7 +581,8 @@ the shared `Prereqs` link and the two inbound links point back at it.
 the hub — this guide, the kbagent CLI, the MCP server, and building an app with Kai. It is where
 Michal's point that MCP and the CLI are only drivers and vehicles lands without them becoming topics inside the
 guide. Not taken: the three-column layout with code following the prose (a custom Starlight layout
-override; the cheap substitute is the `.gs-pair` grid for a capture beside its request), and the
+override; the cheap substitute was a `.gs-pair` grid for a capture beside its request, which no page
+ever used and which was removed on 2026-10-14), and the
 by-business-type use-case grid (one guide, one dataset).
 
 ---

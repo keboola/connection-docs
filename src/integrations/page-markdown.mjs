@@ -2,8 +2,8 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSy
 import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
-import { stripHtmlComments } from './strip-comments.mjs';
+import { sharedText, tabsText, linksToText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
+import { stripHtmlComments, collapseBlankLines } from './strip-comments.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
 import { courseListText, courseBarText } from '../components/getting-started/course.mjs';
 import { sampleText } from '../components/getting-started/sample.mjs';
@@ -41,24 +41,30 @@ function findMarkdownFiles(dir, files = []) {
 }
 
 /**
- * Read the props off a component tag, for the two components whose text a
- * reader of the twin actually needs.
+ * Read the props off a one-line component tag, for the components whose text a
+ * reader of the twin needs. Attributes are read left to right, so a word inside
+ * a quoted value is never taken for a prop of its own: `"…"` and `'…'` are
+ * strings, `{…}` keeps a number or boolean as one and drops a string
+ * literal's quotes, and a bare name is `true`.
  */
 function tagProps(tag) {
   const props = {};
-  for (const m of tag.matchAll(/(\w+)=\{([^}]*)\}/g)) {
-    const raw = m[2].trim();
-    if (raw === 'true' || raw === 'false') props[m[1]] = raw === 'true';
-    else if (/^\d+$/.test(raw)) props[m[1]] = Number(raw);
-    else props[m[1]] = raw;
-  }
-  for (const m of tag.matchAll(/(\w+)="([^"]*)"/g)) props[m[1]] = m[2];
-  if (/<\w+\s[^>]*\b(\w+)(?=\s|\/>|>)/.test(tag)) {
-    // bare boolean props (`<PathIntro manual />`) are not used here, but treat
-    // a lone name as true rather than dropping it
-    for (const m of tag.matchAll(/\s(\w+)(?=\s|\/?>)/g)) if (!(m[1] in props)) props[m[1]] = true;
+  const attrs = tag.replace(/^\s*<[A-Za-z][\w.]*/, '').replace(/\/?>\s*$/, '');
+  for (const [, name, dq, sq, expr] of attrs.matchAll(/([\w-]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|\{([^}]*)\}))?/g)) {
+    if (dq !== undefined) props[name] = dq;
+    else if (sq !== undefined) props[name] = sq;
+    else if (expr !== undefined) props[name] = exprValue(expr.trim());
+    else props[name] = true;
   }
   return props;
+}
+
+/** The value of a `{…}` prop: the literal where it is one, else the source text. */
+function exprValue(raw) {
+  if (raw === 'true' || raw === 'false') return raw === 'true';
+  if (/^\d+$/.test(raw)) return Number(raw);
+  const str = raw.match(/^(["'`])([\s\S]*)\1$/);
+  return str ? str[2] : raw;
 }
 
 /**
@@ -70,9 +76,7 @@ function tagProps(tag) {
  * enough to spell out.
  */
 function inlineToMarkdown(line) {
-  return line
-    .replace(/\{'\s*'\}/g, ' ')
-    .replace(/<a\s[^>]*?href="([^"]+)"[^>]*>([^<]*)<\/a>/g, '$2 ($1)')
+  return linksToText(line.replace(/\{'\s*'\}/g, ' '))
     .replace(/<\/?(code|strong|em|b|i)>/g, (m) => (m.includes('code') ? '`' : '**'))
     .replace(/<li(?:\s[^>]*)?>\s*/g, '- ')
     .replace(/\s*<\/li>/g, '')
@@ -142,17 +146,24 @@ function prereqsTabsToText(tag, overrides = {}) {
  * `label`, <Prereqs> (src/components/Prereqs.astro), <StageStrip> as a
  * numbered list, and the Getting Started pictures below. MDX comments become
  * HTML comments, which the caller removes with stripHtmlComments
- * (strip-comments.mjs), outside fenced code.
+ * (strip-comments.mjs), outside fenced code; inside the <Prereqs> and
+ * <StageStrip> lists they are dropped here.
  */
 function stripMdx(body) {
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
   // <details> is how a page folds away what most readers can skip; the twin
-  // has no folding, so the summary becomes a bold line and the rest follows
+  // has no folding, so the summary becomes a bold line and the rest follows.
+  // The <summary> may share the <details> line or have its own; either way it
+  // is one line, so a fold written another way is left as it is rather than
+  // run on into the text below it.
+  const fold = (t) => `**${t.trim().replace(/<\/?code>/g, '`')}**`;
   const withoutComments = withoutImports
     .replace(/\{\/\*([\s\S]*?)\*\/\}/g, (_, inner) => `<!--${inner}-->`)
+    .replace(/^[ \t]*<details[^>]*>[ \t]*<summary>([^\n]*?)<\/summary>[ \t]*$/gm, (m, t) => fold(t))
     .replace(/^[ \t]*<details[^>]*>[ \t]*$/gm, '')
     .replace(/^[ \t]*<\/details>[ \t]*$/gm, '')
-    .replace(/^[ \t]*<summary>([\s\S]*?)<\/summary>[ \t]*$/gm, (m, t) => `**${t.trim().replace(/<\/?code>/g, '`')}**`);
+    .replace(/^[ \t]*<summary>([^\n]*?)<\/summary>[ \t]*$/gm, (m, t) => fold(t));
+  const COMMENT = /<!--[\s\S]*?-->/g;
 
   const open = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*(?<!\/)>\s*$/;
   const selfClosing = /^\s*<[A-Z][A-Za-z0-9]*\b[^>]*\/>\s*$/;
@@ -274,21 +285,27 @@ function stripMdx(body) {
     const text = line.slice(strip);
     const opener = line.match(/^\s*(`{3,}|~{3,})/);
     if (opener) fence = { marker: opener[1], strip: line.length - text.length };
-    if (inStrip) {
-      // one <li> per stage: flatten it, number it, and end the bold title with a period
+    if (inStrip || inPrereqs) {
+      // Both lists are built from raw <li> JSX, buffered until the item closes,
+      // then flattened. An author's comment is dropped here rather than left for
+      // stripHtmlComments: glued to the next item it would hide that item's
+      // slot="…" and its list marker. A comment over several lines waits for
+      // its end.
       slot.push(text);
-      if (/<\/li>/.test(text)) {
-        const item = inlineToMarkdown(slot.join(' ')).replace(/^- /, '');
-        slot.length = 0;
-        if (item) out.push(`${++stripN}. ${item.replace(/^\*\*(.+?)\*\*\s*/, '**$1.** ')}`);
+      const joined = slot.join(' ').replace(COMMENT, '');
+      if (joined.includes('<!--')) continue;
+      if (!joined.trim()) { slot.length = 0; continue; }
+      if (inStrip) {
+        // one <li> per stage: number it, and end the bold title with a period
+        if (/<\/li>/.test(joined)) {
+          const item = inlineToMarkdown(joined).replace(/^- /, '');
+          slot.length = 0;
+          if (item) out.push(`${++stripN}. ${item.replace(/^\*\*(.+?)\*\*\s*/, '**$1.** ')}`);
+        }
+        continue;
       }
-      continue;
-    }
-    if (inPrereqs) {
-      // the slot holds raw <li> JSX, or a tab's own line as <span slot="…">;
-      // buffer until the item closes, then flatten
-      slot.push(text);
-      const tabLine = slot.join(' ').match(/^\s*<span slot="(prompt|ui|cli|from|to)">([\s\S]*)<\/span>\s*$/);
+      // <Prereqs> also takes a tab's own line, or a state card, as <span slot="…">
+      const tabLine = joined.match(/^\s*<span slot="(prompt|ui|cli|from|to)">([\s\S]*)<\/span>\s*$/);
       if (tabLine) {
         const key = tabLine[1];
         if (key === 'from' || key === 'to') prereqsState[key] = inlineToMarkdown(tabLine[2]);
@@ -296,8 +313,7 @@ function stripMdx(body) {
         slot.length = 0;
         continue;
       }
-      if (/<\/li>/.test(text)) {
-        const joined = slot.join(' ');
+      if (/<\/li>/.test(joined)) {
         const item = inlineToMarkdown(joined);
         if (item) {
           const li = item.startsWith('- ') ? item : `- ${item}`;
@@ -314,7 +330,7 @@ function stripMdx(body) {
     out.push(text);
   }
 
-  return out.join('\n').replace(/\n{3,}/g, '\n\n');
+  return collapseBlankLines(out.join('\n'));
 }
 
 /**
@@ -461,8 +477,8 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
           const isMdx = extname(file) === '.mdx';
           const raw = stripFrontmatter(content);
           // authors' notes (VERIFY markers, where a claim was checked) stay in the source; comments
-          // inside fenced code are content and survive (strip-comments.mjs)
-          const body = stripHtmlComments(isMdx ? stripMdx(raw) : raw).replace(/\n{3,}/g, '\n\n').trim();
+          // and blank lines inside fenced code are content and survive (strip-comments.mjs)
+          const body = stripHtmlComments(isMdx ? stripMdx(raw) : raw).trim();
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });
