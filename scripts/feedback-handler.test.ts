@@ -15,7 +15,7 @@ async function load(env: Record<string, string>, tag: string) {
   return import(`../api/feedback.ts?${tag}`);
 }
 
-function mockFetch(respond: (call: Call) => Response = () => linearOk()) {
+function mockFetch(respond: (call: Call) => Response = linearMock()) {
   const calls: Call[] = [];
   globalThis.fetch = (async (url: string, init: any) => {
     const call = { url: String(url), init };
@@ -25,11 +25,22 @@ function mockFetch(respond: (call: Call) => Response = () => linearOk()) {
   return calls;
 }
 
-function linearOk() {
-  return new Response(
-    JSON.stringify({ data: { issueCreate: { success: true, issue: { identifier: 'PRDCT-1' } } } }),
-    { status: 200, headers: { 'content-type': 'application/json' } },
-  );
+/** Answers Linear GraphQL by operation; `existing` is the page issue the lookup finds. */
+function linearMock(existing: string | null = null) {
+  return (call: Call) => {
+    const query = String(JSON.parse(call.init.body).query ?? '');
+    const data = query.includes('DocsFeedbackFind')
+      ? { issues: { nodes: existing ? [{ id: existing, identifier: 'PRDCT-9' }] : [] } }
+      : query.includes('DocsFeedbackComment')
+        ? { commentCreate: { success: true } }
+        : { issueCreate: { success: true, issue: { identifier: 'PRDCT-1' } } };
+    return new Response(JSON.stringify({ data }), { status: 200, headers: { 'content-type': 'application/json' } });
+  };
+}
+
+/** The Linear call for one operation (DocsFeedbackFind / Issue / Comment). */
+function op(calls: Call[], name: string) {
+  return calls.find((c) => c.url.includes('linear') && JSON.parse(c.init.body).query.includes(name));
 }
 
 function req(method: string, body?: unknown, headers: Record<string, string> = {}) {
@@ -94,19 +105,21 @@ test('Linear configured: probe enabled, one issueCreate with team and labels', a
   assert.deepEqual(JSON.parse(probe.body), { enabled: true });
 
   const post = res();
-  await mod.default(req('POST', valid), post);
+  await captureLogs(() => mod.default(req('POST', valid), post));
   assert.equal(post.statusCode, 204);
-  assert.equal(calls.length, 1);
+  assert.equal(calls.length, 2, 'page lookup, then issueCreate');
   assert.equal(calls[0].url, 'https://api.linear.app/graphql');
   assert.equal(calls[0].init.headers.authorization, 'lin_api_test');
-  const { query, variables } = JSON.parse(calls[0].init.body);
-  assert.match(query, /issueCreate/);
+  const find = JSON.parse(op(calls, 'DocsFeedbackFind')!.init.body).variables.filter;
+  assert.deepEqual(find.title, { endsWith: ' (/storage/tables/)' });
+  assert.deepEqual(find.state, { type: { nin: ['completed', 'canceled'] } });
+  const { variables } = JSON.parse(op(calls, 'DocsFeedbackIssue')!.init.body);
   assert.equal(variables.input.teamId, 'team-uuid');
   assert.deepEqual(variables.input.labelIds, ['label-a', 'label-b']);
   // PRDCT's default project and Backlog state would fail with another team.
   assert.equal(variables.input.projectId, undefined);
   assert.equal(variables.input.stateId, undefined);
-  assert.equal(variables.input.title, 'Docs feedback (👎 Inaccurate): Tables | Keboola Docs');
+  assert.equal(variables.input.title, 'Docs feedback: Tables | Keboola Docs (/storage/tables/)');
   assert.match(variables.input.description, /\[`\/storage\/tables\/`\]\(https:\/\/help\.keboola\.com\/storage\/tables\/\)/);
   assert.doesNotMatch(variables.input.description, /203\.0\.113\.7|user_agent|referrer/);
 });
@@ -117,8 +130,8 @@ test('the API key alone is enough: built-in team, project, state and label', asy
   const probe = res();
   await mod.default(req('GET'), probe);
   assert.deepEqual(JSON.parse(probe.body), { enabled: true });
-  await mod.default(req('POST', valid), res());
-  const { input } = JSON.parse(calls[0].init.body).variables;
+  await captureLogs(() => mod.default(req('POST', valid), res()));
+  const { input } = JSON.parse(op(calls, 'DocsFeedbackIssue')!.init.body).variables;
   assert.equal(input.teamId, '20917244-2e69-4226-8f05-d1bf40d99ea2');
   assert.equal(input.projectId, 'f5a83846-63e4-4ddd-b19f-0ddfb425fc8b');
   assert.equal(input.stateId, '78e62541-bf17-4628-8155-a3c12470c66b');
@@ -183,7 +196,7 @@ test('sinks are independent: a Linear failure still delivers to ingest (I1)', as
   );
   const r = res();
   const logs = await captureLogs(() => mod.default(req('POST', valid), r));
-  assert.equal(calls.length, 2);
+  assert.equal(calls.length, 3, 'lookup and create both fail, ingest still runs');
   assert.equal(r.statusCode, 202);
   const errors = logs.filter((l) => l.level === 'error');
   assert.equal(errors.length, 1, 'the sink error only; ingest kept the comment');
@@ -239,7 +252,7 @@ test('secrets and emails are scrubbed before any sink', async () => {
   const token = '264-123456-' + 'A1b2C3d4E5'.repeat(4);
   const comment = `My token ${token} and mail jane.doe@example.com, key lin_api_${'x'.repeat(30)}`;
   await captureLogs(() => mod.default(req('POST', { ...valid, comment }), res()));
-  const body = JSON.stringify(JSON.parse(calls[0].init.body).variables);
+  const body = JSON.stringify(JSON.parse(op(calls, 'DocsFeedbackIssue')!.init.body).variables);
   assert.doesNotMatch(body, /A1b2C3d4E5|jane\.doe|lin_api_x/);
   assert.match(body, /\[redacted token\].*\[redacted email\].*\[redacted token\]/);
   assert.match(body, /Redacted:\*\* 3 secret/);
@@ -249,6 +262,33 @@ test('ordinary text survives the scrub untouched', async () => {
   const mod = await load({}, 'scrub-clean');
   const text = 'Step 3 fails on project 264-abc, see /storage/tables/ and the 2026-10-14 run.';
   assert.deepEqual(mod.scrub(text), { text, redactions: 0 });
+});
+
+test('a second report on the same page becomes a comment, not a new issue', async () => {
+  const mod = await load(LINEAR, 'comment');
+  const calls = mockFetch(linearMock('issue-uuid-1'));
+  const r = res();
+  await captureLogs(() => mod.default(req('POST', valid), r));
+  assert.equal(r.statusCode, 204);
+  assert.equal(op(calls, 'DocsFeedbackIssue'), undefined);
+  const { input } = JSON.parse(op(calls, 'DocsFeedbackComment')!.init.body).variables;
+  assert.equal(input.issueId, 'issue-uuid-1');
+  assert.match(input.body, /The limit is 50, not 20\./);
+});
+
+test('a failed page lookup still files a new issue', async () => {
+  const mod = await load(LINEAR, 'lookup-fails');
+  const ok = linearMock();
+  const calls = mockFetch((c) =>
+    JSON.parse(c.init.body).query.includes('DocsFeedbackFind')
+      ? new Response(JSON.stringify({ errors: [{ message: 'Unknown field endsWith' }] }), { status: 200 })
+      : ok(c),
+  );
+  const r = res();
+  const logs = await captureLogs(() => mod.default(req('POST', valid), r));
+  assert.equal(r.statusCode, 204);
+  assert.ok(op(calls, 'DocsFeedbackIssue'));
+  assert.ok(logs.some((l) => l.text.includes('page issue lookup failed')));
 });
 
 test('per-IP and daily caps stop issue floods (B3)', async () => {

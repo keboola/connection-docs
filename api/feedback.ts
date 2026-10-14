@@ -308,31 +308,18 @@ export function issueMarkdown(record: FeedbackRecord): string {
   return lines.join('\n');
 }
 
-const ISSUE_CREATE = `mutation DocsFeedback($input: IssueCreateInput!) {
+const ISSUE_CREATE = `mutation DocsFeedbackIssue($input: IssueCreateInput!) {
   issueCreate(input: $input) { success issue { identifier } }
 }`;
+const COMMENT_CREATE = `mutation DocsFeedbackComment($input: CommentCreateInput!) {
+  commentCreate(input: $input) { success }
+}`;
+const FIND_PAGE_ISSUE = `query DocsFeedbackFind($filter: IssueFilter!) {
+  issues(filter: $filter, first: 1) { nodes { id identifier } }
+}`;
 
-/**
- * File a submission as a Linear issue.
- *
- * Only called when the reader actually wrote something — that free text is the
- * part someone can act on, and it is the only part worth a notification.
- * `user_agent`, `referrer` and `locale` stay out of the issue: they belong in
- * an analytics table, not in a ticket.
- */
-async function createLinearIssue(record: FeedbackRecord): Promise<void> {
-  const pageTitle = record.title || record.path;
-  const reason = REASON_TEXT[record.reason];
-  const verdict = record.verdict === 'up' ? '👍' : '👎';
-  const input: Record<string, unknown> = {
-    teamId: LINEAR_TEAM_ID,
-    title: cut(`Docs feedback (${verdict}${reason ? ` ${reason}` : ''}): ${pageTitle}`, 250),
-    description: issueMarkdown(record),
-  };
-  if (LINEAR_LABEL_IDS.length) input.labelIds = LINEAR_LABEL_IDS;
-  if (LINEAR_PROJECT_ID) input.projectId = LINEAR_PROJECT_ID;
-  if (LINEAR_STATE_ID) input.stateId = LINEAR_STATE_ID;
-
+/** One GraphQL call to Linear; throws on transport and GraphQL errors. */
+async function linearRequest(query: string, variables: Record<string, unknown>): Promise<any> {
   const res = await fetch('https://api.linear.app/graphql', {
     method: 'POST',
     headers: {
@@ -342,15 +329,77 @@ async function createLinearIssue(record: FeedbackRecord): Promise<void> {
         ? LINEAR_API_KEY
         : `Bearer ${LINEAR_API_KEY}`,
     },
-    body: JSON.stringify({ query: ISSUE_CREATE, variables: { input } }),
+    body: JSON.stringify({ query, variables }),
     signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
   });
   // GraphQL reports most failures as 200 with an `errors` array.
   const json: any = await res.json().catch(() => null);
-  if (!res.ok || json?.errors?.length || !json?.data?.issueCreate?.success) {
-    const detail = json?.errors?.[0]?.message ?? `HTTP ${res.status}`;
-    throw new Error(`feedback issue create failed: ${detail}`);
+  if (!res.ok || json?.errors?.length) {
+    throw new Error(`Linear: ${json?.errors?.[0]?.message ?? `HTTP ${res.status}`}`);
   }
+  return json?.data;
+}
+
+/** The page's path in parentheses ends every issue title; it is the lookup key. */
+function pageMarker(path: string): string {
+  return ` (${path})`;
+}
+
+/** The open feedback issue for this page, if there is one. */
+async function findPageIssue(path: string): Promise<string | null> {
+  const filter: Record<string, unknown> = {
+    team: { id: { eq: LINEAR_TEAM_ID } },
+    title: { endsWith: pageMarker(path) },
+    state: { type: { nin: ['completed', 'canceled'] } },
+  };
+  if (LINEAR_LABEL_IDS.length) filter.labels = { some: { id: { in: LINEAR_LABEL_IDS } } };
+  const data = await linearRequest(FIND_PAGE_ISSUE, { filter });
+  return data?.issues?.nodes?.[0]?.id ?? null;
+}
+
+/**
+ * File a submission in Linear: one open issue per page, later reports on the
+ * same page as comments on it, so ten complaints about one page are one item
+ * to triage rather than ten.
+ *
+ * Only called when the reader actually wrote something — that free text is the
+ * part someone can act on. `user_agent`, `referrer` and `locale` stay out of
+ * Linear: they belong in an analytics table, not in a ticket.
+ *
+ * If the lookup itself fails, the submission still becomes a new issue: a
+ * duplicate is cheaper than a lost report. Two first reports arriving at once
+ * can also produce two issues; whoever triages merges them.
+ */
+async function fileInLinear(record: FeedbackRecord): Promise<void> {
+  let existing: string | null = null;
+  try {
+    existing = await findPageIssue(record.path);
+  } catch (err: any) {
+    console.warn('[feedback] page issue lookup failed, creating a new issue:', err?.message ?? String(err));
+  }
+
+  if (existing) {
+    const data = await linearRequest(COMMENT_CREATE, {
+      input: { issueId: existing, body: issueMarkdown(record) },
+    });
+    if (!data?.commentCreate?.success) throw new Error('Linear: commentCreate did not succeed');
+    return;
+  }
+
+  const marker = pageMarker(record.path);
+  const pageTitle = record.title || record.path;
+  const input: Record<string, unknown> = {
+    teamId: LINEAR_TEAM_ID,
+    title: cut(`Docs feedback: ${pageTitle}`, Math.max(20, 250 - marker.length)) + marker,
+    description:
+      'Reader feedback for this page. Further reports on the same page are added as comments.\n\n' +
+      issueMarkdown(record),
+  };
+  if (LINEAR_LABEL_IDS.length) input.labelIds = LINEAR_LABEL_IDS;
+  if (LINEAR_PROJECT_ID) input.projectId = LINEAR_PROJECT_ID;
+  if (LINEAR_STATE_ID) input.stateId = LINEAR_STATE_ID;
+  const data = await linearRequest(ISSUE_CREATE, { input });
+  if (!data?.issueCreate?.success) throw new Error('Linear: issueCreate did not succeed');
 }
 
 /**
@@ -414,7 +463,7 @@ async function postIngest(record: FeedbackRecord): Promise<void> {
 async function deliver(record: FeedbackRecord, req: VercelRequest): Promise<boolean> {
   let linear: Promise<void> | null = null;
   if (LINEAR_ENABLED && record.comment) {
-    if (allowIssue(clientIp(req))) linear = createLinearIssue(record);
+    if (allowIssue(clientIp(req))) linear = fileInLinear(record);
     else console.warn('[feedback] issue rate limit hit');
   }
   const [linearResult, ingestResult] = await Promise.allSettled([
