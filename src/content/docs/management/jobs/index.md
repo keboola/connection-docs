@@ -21,6 +21,8 @@ All jobs are logged and their tracked history is virtually unlimited. Click on a
 
 ![Screenshot - Jobs Detail](/management/jobs/jobs-detail.png)
 
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Searching the jobs log
 
 Using the search box and advanced patterns you can easily find job based on various parameters. 

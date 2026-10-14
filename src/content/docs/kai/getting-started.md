@@ -1,11 +1,12 @@
 ---
 title: Getting Started with Kai
 slug: 'kai/getting-started'
+description: 'Enable Kai in a project, open the chat, and learn to use it, with example prompts, action approval, plan mode, attachments, slash commands and usage limits.'
 ---
 
 
 
-This page shows first-time users how to enable Kai in a project, open the chat, and use it: example prompts, action approval, plan mode, slash commands and usage limits. If you first want to know what Kai is, see the [Kai overview](/kai/).
+Read this page before your first chat with Kai. If you want to know what Kai is first, start with the [Kai overview](/kai/). Once you're set up, [Kai settings](/kai/settings/) covers tool permissions, instructions and context files.
 
 ## Access
 
