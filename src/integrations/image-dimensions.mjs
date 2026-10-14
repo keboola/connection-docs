@@ -1,38 +1,41 @@
 /**
- * image-dimensions.mjs — remark plugin that stamps intrinsic width/height onto
- * markdown images served from `public/`.
+ * image-dimensions.mjs: an Astro integration that stamps intrinsic width/height
+ * onto every <img> in the built HTML whose file is served from `public/`.
  *
  * Why this exists: Astro sizes the images it processes itself (they come out as
  * `/_astro/…` with width and height), but it never touches `public/`, so it
  * cannot know the intrinsic size of an image referenced the way AGENTS.md
- * prescribes — `![Alt](/section/page/image.png)`. Those ship as a bare
+ * prescribes, `![Alt](/section/page/image.png)`. Those ship as a bare
  * `<img src alt>`, and the browser has no aspect ratio to reserve space with
  * until the bytes arrive.
  *
  * Starlight already ships `max-width: 100%; height: auto` for content images,
- * which is exactly the pairing that makes intrinsic attributes correct: the
- * browser derives the ratio from width/height, `max-width` caps the displayed
- * size and `height: auto` keeps the proportion. So this adds the attributes and
- * changes nothing about how images render.
+ * which is the pairing that makes intrinsic attributes correct: the browser
+ * derives the ratio from width/height, `max-width` caps the displayed size and
+ * `height: auto` keeps the proportion.
  *
- * Dimensions are read straight from the file header — no decode, no new
- * dependency, and synchronous, so the remark pipeline stays synchronous like
- * every other plugin here. Results are cached per build, since the same
- * screenshot is often referenced from several pages.
+ * It runs in `astro:build:done` over every built `.html` page rather than as a remark
+ * plugin, so it sees every image the reader gets (markdown images, figures that
+ * beacon-transforms writes as raw HTML, hand-written <img> tags) and always
+ * reads the files that shipped: Astro's content cache can't serve stale sizes
+ * after a screenshot is replaced under the same name. It doesn't run in
+ * `astro dev`, which is fine for a layout-shift fix.
  *
- * This must run BEFORE beacon-transforms: `transformFigureCaptions` replaces
- * image nodes with hand-built raw HTML, and reads the dimensions this plugin
- * attaches.
+ * Dimensions are read straight from the file header, no decode and no new
+ * dependency.
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { visit } from 'unist-util-visit';
+import { fileURLToPath } from 'node:url';
 
 /** Enough for every header we parse; JPEG re-reads in full if SOF sits later. */
 const HEADER_BYTES = 65536;
 
-/** Resolved path → {width, height} | null (null = parsed and unusable). */
+/**
+ * Resolved path → {width, height} | null (null = parsed and unusable). Cleared
+ * at the start of every build, so a replaced screenshot is always re-read.
+ */
 const cache = new Map();
 
 function readHead(file, bytes) {
@@ -160,66 +163,100 @@ export function readDimensions(file) {
   return out;
 }
 
-/**
- * Resolves an image URL to a file on disk, or null when it is not ours to size
- * (external, data URI, or produced by Astro's own pipeline).
- */
-function resolveImage(url, { publicDir, pageDir }) {
-  if (!url) return null;
-  if (/^[a-z][a-z0-9+.-]*:/i.test(url) || url.startsWith('//')) return null; // http:, data:, …
-  const clean = url.split('#')[0].split('?')[0];
-  if (!clean) return null;
-  let decoded;
-  try {
-    decoded = decodeURIComponent(clean);
-  } catch {
-    decoded = clean;
+/** Every `.html` file under `dir`. The `index.md` twins are left alone. */
+function htmlFiles(dir) {
+  const out = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) out.push(...htmlFiles(full));
+    else if (entry.name.endsWith('.html')) out.push(full);
   }
-  if (decoded.startsWith('/_astro/')) return null; // already sized by Astro
-  if (decoded.startsWith('/')) return path.join(publicDir, decoded);
-  // A relative URL resolves against the page's own URL, which mirrors its
-  // directory under public/ for anything not picked up by Astro's pipeline.
-  return pageDir ? path.join(publicDir, pageDir, decoded) : null;
+  return out;
+}
+
+/** The value of `name` on an <img> tag, or null. */
+function attr(tag, name) {
+  const m = tag.match(new RegExp(`\\s${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, 'i'));
+  return m ? (m[1] ?? m[2] ?? m[3]) : null;
 }
 
 /**
- * @param {object} [options]
- * @param {string} [options.publicDir]  absolute path to the public/ directory
- * @param {string} [options.contentDir] absolute path to src/content/docs
+ * Resolves an <img src> to a file in the build output, or null when it is not
+ * ours to size (external, data URI, or produced by Astro's own pipeline).
+ * Relative sources resolve against the page's URL, the way the browser does.
  */
-export default function imageDimensions({ publicDir, contentDir } = {}) {
-  const PUBLIC = publicDir ?? path.resolve('public');
-  const CONTENT = contentDir ?? path.resolve('src/content/docs');
+function resolveSrc(src, pageUrl, outDir) {
+  if (!src) return null;
+  if (/^[a-z][a-z0-9+.-]*:/i.test(src) || src.startsWith('//')) return null; // http:, data:, …
+  let pathname;
+  try {
+    pathname = decodeURIComponent(new URL(src, `https://x${pageUrl}`).pathname);
+  } catch {
+    return null;
+  }
+  if (pathname.startsWith('/_astro/')) return null; // already sized by Astro
+  return path.join(outDir, pathname);
+}
 
-  return (tree, file) => {
-    // The page's directory relative to the docs root, used to resolve the
-    // handful of images written as relative URLs.
-    let pageDir = null;
-    if (file?.path) {
-      const rel = path.relative(CONTENT, file.path);
-      if (rel && !rel.startsWith('..')) pageDir = path.dirname(rel);
+/** Sizes the images on one built page. Returns the new HTML and what it saw. */
+export function sizeImages(html, pageUrl, outDir) {
+  let sized = 0;
+  const missing = [];
+  const unsized = [];
+  const out = html.replace(/<img\b[^>]*>/gi, (tag) => {
+    // An author-set width or height (like width="45%") is a layout choice; leave it.
+    if (attr(tag, 'width') != null || attr(tag, 'height') != null) return tag;
+    const src = attr(tag, 'src');
+    const file = resolveSrc(src, pageUrl, outDir);
+    if (!file) return tag;
+    if (!fs.existsSync(file)) {
+      missing.push(src);
+      return tag;
     }
+    const size = readDimensions(file);
+    if (!size) {
+      unsized.push(src);
+      return tag;
+    }
+    sized += 1;
+    return tag.replace(/\s*(\/?)>$/, ` width="${size.width}" height="${size.height}"$1>`);
+  });
+  return { html: out, sized, missing, unsized };
+}
 
-    visit(tree, 'image', (node) => {
-      const existing = node.data?.hProperties;
-      if (existing && existing.width != null && existing.height != null) return;
+/** The URL a built file is served at: `kai/settings/index.html` → `/kai/settings/`. */
+function pageUrlFor(file, outDir) {
+  const rel = path.relative(outDir, file).split(path.sep).join('/');
+  return '/' + rel.replace(/(^|\/)index\.html$/, '$1');
+}
 
-      const resolved = resolveImage(node.url, { publicDir: PUBLIC, pageDir });
-      if (!resolved) return;
-
-      if (!fs.existsSync(resolved)) {
-        // Not fatal: audit-phase2.mjs is what fails on a genuinely missing
-        // image, and a hard error here would block editing a page whose
-        // screenshot has not landed yet.
-        console.warn(`[image-dimensions] missing image ${node.url} (referenced by ${file?.path ?? 'unknown page'})`);
-        return;
-      }
-
-      const size = readDimensions(resolved);
-      if (!size) return; // unsupported format or unreadable header
-
-      node.data = node.data ?? {};
-      node.data.hProperties = { ...node.data.hProperties, width: size.width, height: size.height };
-    });
+export default function imageDimensions() {
+  return {
+    name: 'image-dimensions',
+    hooks: {
+      'astro:build:done': async ({ dir, logger }) => {
+        const outDir = fileURLToPath(dir);
+        cache.clear();
+        let sized = 0;
+        let pages = 0;
+        const missing = [];
+        const unsized = [];
+        for (const file of htmlFiles(outDir)) {
+          const html = fs.readFileSync(file, 'utf8');
+          if (!/<img\b/i.test(html)) continue;
+          const pageUrl = pageUrlFor(file, outDir);
+          const res = sizeImages(html, pageUrl, outDir);
+          for (const src of res.missing) missing.push(`${pageUrl} → ${src}`);
+          for (const src of res.unsized) unsized.push(`${pageUrl} → ${src}`);
+          if (res.sized) {
+            fs.writeFileSync(file, res.html);
+            sized += res.sized;
+            pages += 1;
+          }
+        }
+        for (const m of missing) logger.warn(`missing image ${m}`);
+        logger.info(`Sized ${sized} images on ${pages} pages`);
+      },
+    },
   };
 }

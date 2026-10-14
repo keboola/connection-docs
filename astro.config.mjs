@@ -20,13 +20,12 @@ export default defineConfig({
     format: 'directory',
   },
   markdown: {
-    // remarkStripComments runs first so nothing else walks author comments;
-    // imageDimensions runs before beaconTransforms, which turns some images
-    // into raw HTML and reads the dimensions this attaches.
-    remarkPlugins: [remarkStripComments, imageDimensions, beaconTransforms],
+    remarkPlugins: [remarkStripComments, beaconTransforms],
   },
   integrations: [
     redirectFrom(),
+    // Sizes <img> tags in the built HTML; see the file for why it runs on dist/.
+    imageDimensions(),
     pageMarkdown({ siteTitle: SITE_TITLE }),
     starlight({
       title: SITE_TITLE,
