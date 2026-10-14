@@ -36,6 +36,31 @@ test('reads a JPEG saved with a .png extension', () => {
   assert.deepEqual(readDimensions(write('mislabeled.png', jpegBytes(1200, 1600))), { width: 1200, height: 1600 });
 });
 
+test('SVG: px and unitless sizes are read', () => {
+  assert.deepEqual(readDimensions(write('px.svg', '<svg xmlns="http://www.w3.org/2000/svg" width="120px" height="80">')), { width: 120, height: 80 });
+});
+
+test('SVG: width="100%" falls back to the viewBox', () => {
+  assert.deepEqual(
+    readDimensions(write('pct.svg', '<svg width="100%" height="100%" viewBox="0 0 800 400">')),
+    { width: 800, height: 400 },
+  );
+});
+
+test('SVG: stroke-width is not the width', () => {
+  assert.deepEqual(
+    readDimensions(write('stroke.svg', '<svg stroke-width="2" viewBox="0 0 800 400" height="400">')),
+    { width: 800, height: 400 },
+  );
+});
+
+test('SVG: em units fall back to the viewBox', () => {
+  assert.deepEqual(
+    readDimensions(write('em.svg', '<?xml version="1.0"?>\n<svg width="20em" height="10em" viewBox="0 0 640 320">')),
+    { width: 640, height: 320 },
+  );
+});
+
 test('returns null for a file that is no image at all', () => {
   assert.equal(readDimensions(write('notes.png', 'just text')), null);
 });

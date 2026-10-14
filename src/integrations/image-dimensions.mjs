@@ -125,9 +125,12 @@ function svg(b) {
   const head = b.toString('utf8', 0, Math.min(b.length, 8192));
   const tag = head.match(/<svg\b[^>]*>/i);
   if (!tag) return null;
+  // Only a plain number or px counts. The name must start the attribute, so
+  // stroke-width doesn't match, and %, em and friends fall through to the viewBox:
+  // width="100%" sets no intrinsic size.
   const attr = (name) => {
-    const m = tag[0].match(new RegExp(`\\b${name}\\s*=\\s*["']?\\s*([\\d.]+)\\s*(px)?\\s*["']?`, 'i'));
-    return m ? Number.parseFloat(m[1]) : null;
+    const m = tag[0].match(new RegExp(`\\s${name}\\s*=\\s*(["']?)\\s*([\\d.]+)\\s*(?:px)?\\s*\\1(?=[\\s/>])`, 'i'));
+    return m ? Number.parseFloat(m[2]) : null;
   };
   const w = attr('width');
   const h = attr('height');
