@@ -15,13 +15,13 @@ AGENTS.md. Read it first:
   must be invoked before any response. Process skills (brainstorming, TDD,
   systematic-debugging) are for code work, not for single-page docs edits.
 - Review agents: after changing pages under `src/content/docs/`, run the
-  `fact-checker` agent on the changed pages, and `guide-tester` on any guide or
-  tutorial, before opening or updating a PR. You have standing authorization to
+  `keboola-docs:fact-checker` agent on the changed pages, and
+  `keboola-docs:guide-tester` on any guide or tutorial, before opening or updating a PR. You have standing authorization to
   run them without asking. Nothing else needs a subagent unless I ask.
-- Local tooling: those agents and the skills named below live in `.claude/`,
-  which is gitignored and comes from the maintainers' local setup. In a fresh
-  clone they don't exist. If one is missing, do the check yourself and say in
-  your summary which check was skipped.
+- Local tooling: those agents and the `keboola-docs:*` skills come from the
+  maintainers' `keboola-docs` Claude Code plugin, which is not part of this repo.
+  Without the plugin they don't exist. If one is missing, do the check yourself
+  and say in your summary which check was skipped.
 
 ## Claude-specific notes
 
@@ -82,7 +82,7 @@ AGENTS.md. Read it first:
   already lives, including every `**/other/` nav subgroup (thin stubs hide there).
 - Placement is a human call, made against the live preview. Audit output is
   evidence, not a verdict. Recommend a home and surface the decision; don't place
-  cross-cutting features yourself. The `migration-placement` skill encodes this
+  cross-cutting features yourself. The `keboola-docs:migration-placement` skill encodes this
   and the known failure cases.
 - Before removing a dev page, check what links to it:
   `gh search code "developers.keboola.com/<section>" --owner keboola`, plus

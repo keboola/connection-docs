@@ -20,7 +20,7 @@ npm run build        # production build → dist/
 npm run preview      # serve dist/ locally
 npm run gen:sidebar  # regenerate src/sidebar.mjs from _data/navigation.yml
 npm run check:cli    # kbagent usage in docs vs the generated CLI reference
-npm test             # unit tests for scripts/ and the API functions
+npm test             # unit tests (scripts/*.test.ts)
 ```
 
 - Node.js 22 (what CI uses).
