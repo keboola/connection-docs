@@ -1,6 +1,7 @@
 ---
 title: OpenTelemetry (OTLP) Data Streams
 slug: 'storage/data-streams/opentelemetry'
+description: Use the OpenTelemetry (OTLP) source type to send logs, metrics, and traces from any OTel SDK or collector into Keboola Storage and query telemetry beside business data.
 ---
 
 
