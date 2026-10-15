@@ -7,7 +7,7 @@ description: "How a third-party developer gets a Keboola project to build and te
 <!-- Moved from the developers.keboola.com home page, section "Development Project" (PRDCT-582, replacing the copy in #1022).
      The dev site listed the project's size as 3.5 GB storage, Snowflake backend, 10 users and 3 orchestrations. Those figures are an
      outward-facing commitment that no public source confirms, so they are not republished here (Jordan's review of #1120, 2026-09-14);
-     they are recorded in that PR's conservation log. VERIFY(owner): confirm the current offer and put the numbers back if they still hold. -->
+     they are recorded in that PR's conservation log. VERIFY(Nikita): confirm the current offer and put the numbers back if they still hold. -->
 
 If you are a third-party developer working with Keboola, chances are that you do not have access to a
 project in Keboola. Having a project is not strictly necessary, but it helps: you can test your code in action.

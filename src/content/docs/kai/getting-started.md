@@ -5,6 +5,8 @@ slug: 'kai/getting-started'
 
 
 
+This page shows first-time users how to enable Kai in a project, open the chat, and use it: example prompts, action approval, plan mode, slash commands and usage limits. If you first want to know what Kai is, see the [Kai overview](/kai/).
+
 ## Access
 
 Kai is **generally available** to all users in supported stacks.

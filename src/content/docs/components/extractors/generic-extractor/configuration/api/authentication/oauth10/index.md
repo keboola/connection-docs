@@ -1,6 +1,7 @@
 ---
 title: OAuth 1.0 Authentication
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth10'
+description: 'The oauth10 type in Generic Extractor is not yet supported (the test endpoint button fails); published components only, tested by injecting oauth_token.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth10/
 ---

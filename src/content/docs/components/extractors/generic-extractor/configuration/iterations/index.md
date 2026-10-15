@@ -1,6 +1,7 @@
 ---
 title: Iterations
 slug: 'components/extractors/generic-extractor/configuration/iterations'
+description: 'Run a Generic Extractor configuration several times with different values, for example for multiple accounts, using the iterations key.'
 redirect_from:
     - /extend/generic-extractor/configuration/iterations/
     - /extend/generic-extractor/iterations/

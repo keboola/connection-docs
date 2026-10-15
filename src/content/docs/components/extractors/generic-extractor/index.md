@@ -1,6 +1,7 @@
 ---
 title: Generic Extractor
 slug: 'components/extractors/generic-extractor'
+description: 'Generic Extractor is a configurable REST client that extracts data from almost any web API without code, set up in a visual builder or in JSON.'
 redirect_from:
     - /extend/generic-extractor/
     - /components/extractors/other/generic/
@@ -78,3 +79,7 @@ main repository, it uses some vital libraries (which partially define its capabi
 - [CSV Map](https://github.com/keboola/php-csvmap) — library that converts JSON data into CSV tables
 - [Filter](https://github.com/keboola/php-filter) — library that allows to match values together
 - [JSON Parser](https://github.com/keboola/php-jsonparser) — JSON parser which produces CSV tables while maintaining relations
+
+---
+
+**Next:** [Tutorial →](/components/extractors/generic-extractor/tutorial/)

@@ -1,6 +1,7 @@
 ---
 title: Pagination
 slug: 'components/extractors/generic-extractor/configuration/api/pagination'
+description: 'The pagination key in Generic Extractor sets a paging strategy and a stopping strategy, such as a next page flag, a force stop or a limit stop.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/
 ---
