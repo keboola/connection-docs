@@ -15,6 +15,10 @@ const SITE_TITLE = 'Keboola User Documentation';
 export default defineConfig({
   site: 'https://help.keboola.com',
   trailingSlash: 'always',
+  /* Astro 7 defaults to 'jsx', which drops the space where text and an inline
+     element meet across a line break ("region at\n<a>" -> "region at<a>").
+     `true` is the Astro 6 behaviour our .astro templates are written for. */
+  compressHTML: true,
   build: {
     format: 'directory',
   },
