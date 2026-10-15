@@ -1,0 +1,273 @@
+---
+title: 'Use a workspace'
+slug: 'getting-started/transform/workspace'
+description: 'Develop and test SQL against a copy of your data before it becomes a transformation, from the browser, your own IDE, or a terminal.'
+redirect_from:
+  - /tutorial/manipulate/workspace/
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
+
+<PageMeta genre="How-to" minutes="10" guide="Going further" />
+
+A transformation is SQL you have finished writing. A **workspace** is where you write it: your own
+schema, holding a copy of the Storage tables you ask for, where a wrong query costs you nothing.
+
+**Where you are:** you have tables in Storage and a query you are not sure about. **When you
+finish:** the same query, tested against real rows, ready to paste into a transformation.
+
+<Prereqs needs={['project']}>
+  <li>
+    At least one table in Storage: <code>staffing_outlook</code> from{' '}
+    <a href="/getting-started/transform/">Transform data</a> if you are following the guide.
+  </li>
+  <li>
+    For the <strong>CLI / API</strong> tab only:{' '}
+    <a href="/cli/getting-started/">kbagent</a> installed and connected to your project. The other
+    two tabs need nothing but the browser.
+  </li>
+</Prereqs>
+
+<PathIntro tabs={3} approvals={false} />
+
+The **Prompt** tab reaches the tested query without a workspace at all, which is the honest
+shortest path; the other two build one. All three end with SQL you trust.
+
+{/* How-to page, side trip off /getting-started/transform/. Converted to the three-tab shape
+2026-09-15 with the rest of the section; before that it was six numbered steps in the legacy
+tutorial voice ("An integral aspect of creating a transformation is the development of the script
+itself"), with no Kai and no CLI path at all.
+
+Every command in the CLI tab was run live in project 264 on 2026-09-15 against the control
+staffing_outlook table, and the workspace deleted the same minute: workspace create (printed a
+private key and the "cannot be retrieved later" warning; login type snowflake-person-keypair),
+workspace load (Success: Loaded 1 table(s) into workspace 9659101 (1 clone)), workspace query,
+workspace detail (host/warehouse/database/schema/user, no key), workspace delete. The quoting trap
+is measured, not assumed: SELECT COUNT(*) FROM staffing_outlook answered "Object
+'STAFFING_OUTLOOK' does not exist or not authorized", the same query with the name double-quoted
+answered 42. workspace from-transformation was refused against the guide's own transformation
+config with "No input tables found ... may not have input mapping defined" — which is the same
+gap /getting-started/transform/ documents, since transformation create leaves the input mapping
+empty.
+
+Screenshots workspaces1-3 are the legacy captures, kept as UI locators (the wizard's shape is
+unchanged); they are not from the Boolabean walk, so no step here quotes a number out of them.
+workspaces4-7 were removed on 2026-09-22: 4, 5 and 6 are list views carrying a colleague's name in
+the Last Change / Last Use / Versions columns, and 7 is the Connect dialog showing a live Snowflake
+host, user, database and schema. 7 was also stale, describing password auth where the workspace now
+uses a key pair. Steps 4 to 6 read fine without them; step 7's two routes are already spelled out in
+the text. Reshooting them means a filtered or element capture from 264, not a full list view.
+
+Fact-check 2026-09-15 corrected three things in step 2, step 7 and the CLI tab: the picker labels
+are "Snowflake SQL Workspace" / "Google BigQuery Workspace" per /workspace/sql-editor/; the
+Connect button opens Snowflake's Snowsight, not a Keboola console (/workspace/ "Person type
+workspace"), and direct access needs a dedicated backend; and `--read-only` defaults to ON
+(`kbagent workspace create --help`, v0.93.2: "[default: read-only]"), which is the opposite of the
+dialog's unchecked box. The first example query was wrong on both column names and case — the
+casing table now in the page is measured, all four rows of it, against the control table on
+2026-09-15.
+
+VERIFY(owner): the prerequisites invite a Free Plan reader, and /workspace/ says Pay As You Go
+projects have no direct access to Snowflake workspaces. Step 7 now routes them to the SQL Editor,
+but nobody has walked that path on a free project to confirm the workspace list and the Connect
+menu look as described there. */}
+
+## What a workspace is
+
+A workspace is a schema of your own in the project's backend, with the tables you choose copied
+into it. SQL workspaces follow the backend the project runs on, Snowflake or BigQuery; Python and
+R workspaces give you a notebook against the same data.
+
+Nothing you do in one reaches Storage. The copy is taken at the moment you load it and stays as it
+was until you load it again, so dropping a table or rewriting a query twenty times leaves
+production untouched. The [workspaces reference](/workspace/) covers the rest, including the
+Python and R flavours.
+
+## Set it up
+
+<Tabs syncKey="howto">
+<TabItem label="Prompt">
+
+Most of the time you do not need a workspace. You want one because you want to try SQL against
+your data, and [Kai does that](/kai/use-cases/#data-exploration) without creating anything: open
+**Kai Agent** in the top bar and ask the question you would have written the query for.
+
+```text title="Prompt"
+Using out.c-Boolabean-staffing-outlook.staffing_outlook, which café and which day has the highest
+expected_units_per_person? Show me the SQL you ran.
+```
+
+Asking for the SQL matters. The answer is the thing you were developing, and it is what you paste
+into a [transformation](/getting-started/transform/) once it says what you meant.
+
+Open a real workspace when the chat stops being the right tool:
+
+- you are iterating for an hour rather than asking two questions;
+- you want your own IDE or notebook against the data, not a chat window;
+- you need Python or R libraries that a transformation does not have yet.
+
+Creating the workspace is then the **UI** or **CLI / API** tab's job.
+
+{/* VERIFY(owner): "creating the workspace is the UI or CLI tab's job" is the conservative
+reading. Kai's documented use cases (/kai/use-cases/) cover data exploration, transformations,
+integrations, apps and docs; none of them mentions creating a workspace, and I did not ask it to
+in a live chat. If Kai does create workspaces, this tab should say so instead. */}
+
+**Check:** the answer names a café and a day, and the SQL it shows runs on its own.
+
+</TabItem>
+<TabItem label="UI">
+
+1. Go to **Workspaces** and click **Create Workspace**.
+
+   ![Screenshot - Create a workspace](/getting-started/transform/workspaces1.png)
+
+2. Pick the SQL workspace for your backend, **Snowflake SQL Workspace** or **Google BigQuery
+   Workspace**. The list also offers Python and R, which give you a notebook instead of a SQL
+   console.
+
+   ![Screenshot - Select a workspace type](/getting-started/transform/workspaces2.png)
+
+3. Name it, describe it, and click **Create Workspace**. You can grant other project users access
+   here, so a colleague can open the same workspace rather than build their own copy.
+
+   ![Screenshot - Name the workspace](/getting-started/transform/workspaces3.png)
+
+   **Grant read-only access to all storage data** is the alternative to loading tables one by one:
+   the workspace sees everything in Storage without copying anything. Leave it off to follow the
+   steps below.
+
+4. A job creates the workspace. In the **Workspaces** list it shows as *Creating* until that job
+   finishes, then as ready.
+
+5. Click the workspace name to open it.
+
+6. Set the **table input mapping**, exactly as a transformation does, then click **Load Data**.
+   The tables are copied as they are at that moment; click **Load Data** again to refresh them.
+
+7. Open the **Connect** menu. On a Snowflake backend it holds two ways in: a **Connect** button
+   that signs you in to Snowflake's own Snowsight interface, and, beside it, the key-pair
+   credentials for a database client of your own.
+
+   Both of those need a project with a dedicated Snowflake backend. On the shared backend that
+   Pay As You Go and multi-tenant projects use, which includes the free project this guide starts
+   from, there is no direct connection, and the [SQL Editor](/workspace/sql-editor/) is the way
+   in: it runs the same queries against the same workspace, in the browser, on Snowflake and
+   BigQuery alike.
+
+</TabItem>
+<TabItem label="CLI / API">
+
+Every click above is an API call underneath, and [kbagent](/cli/) is the same calls from a
+terminal. It needs to be [installed](/cli/getting-started/) and pointed at your project once with
+`kbagent project add`, which stores the connection under an alias. The examples use `docs-demo`,
+substitute yours.
+
+**Create the workspace**
+
+```bash
+kbagent workspace create --project docs-demo --name "Boolabean SQL"
+```
+
+It prints the workspace ID; keep it, because every command below takes it. The backend is taken
+from the project unless you pass `--backend`.
+
+Read-only access to all of Storage, the checkbox in the UI tab's step 3, is **on** here, the
+other way round from the dialog. That is the `--read-only` default; `--no-read-only` turns it off.
+It does not stop you loading tables or writing in your own schema: it decides whether the
+workspace can also see the rest of Storage without copying it.
+
+:::caution[The private key is printed once]
+On a Snowflake backend the workspace authenticates with a key pair, and `create` prints the
+private key with the warning that it cannot be retrieved later. Redirect it into a file you are
+willing to hold, or plan to throw the workspace away when you are done. `workspace detail` will
+tell you the host, database, schema and user afterwards, but never the key.
+:::
+
+**Load the tables**
+
+```bash
+kbagent workspace load --project docs-demo --workspace-id <workspace-id> --tables out.c-Boolabean-staffing-outlook.staffing_outlook
+```
+
+Repeat `--tables` for each one. The load clears the workspace first unless you add `--preserve`,
+which is the difference between refreshing a copy and adding to it.
+
+**Run your SQL**
+
+```bash
+kbagent workspace query --project docs-demo --workspace-id <workspace-id> --sql 'SELECT "STORE_NAME", "DATE", "EXPECTED_UNITS_PER_PERSON" FROM "staffing_outlook" ORDER BY "EXPECTED_UNITS_PER_PERSON" DESC LIMIT 5'
+```
+
+:::caution[Case is not a detail here]
+Double quotes mean *exactly this name*; without them Snowflake reads any name as upper case. On
+this table the two halves disagree, and both halves of the disagreement are load-bearing:
+
+| You write | What happens |
+|---|---|
+| `FROM staffing_outlook` | fails; looks for `STAFFING_OUTLOOK`, the table is stored lower case |
+| `FROM "staffing_outlook"` | works |
+| `SELECT "store_name"` | fails with `invalid identifier`, the column is stored upper case |
+| `SELECT STORE_NAME` or `SELECT "STORE_NAME"` | works |
+
+The table was named by the output mapping, which kept the name as written; the columns came out of
+SQL that did not quote its aliases, so the backend upper-cased them. Run
+`SHOW COLUMNS IN "staffing_outlook"` when a name refuses to resolve, rather than guessing which
+half you are on.
+:::
+
+`--file` takes a `.sql` file instead, which is the shape you want once the query is longer than a
+line, and `--full` fetches the whole result rather than the first page.
+
+**Look at it, then throw it away**
+
+```bash
+kbagent workspace detail --project docs-demo --workspace-id <workspace-id>
+```
+
+```bash
+kbagent workspace delete --project docs-demo --workspace-id <workspace-id>
+```
+
+`kbagent workspace from-transformation --project docs-demo --component-id … --config-id …` is the
+shortcut for the other direction: it builds a workspace loaded with exactly what a transformation reads. It needs
+that configuration to have an input mapping, and one created by `kbagent transformation create`
+does not have one yet; see [Transform data](/getting-started/transform/).
+
+</TabItem>
+</Tabs>
+
+## Check it worked
+
+*Coming from the **Prompt** tab? You have no workspace to check. Your answer arrived with the SQL
+that produced it, which is what the other two tabs spend a workspace getting to. You are done.*
+
+Your query returns rows, and the same query returns the same rows after a reload: the copy does
+not move under you. The workspace itself shows up in **Workspaces**, and from a terminal in
+`kbagent workspace list --project docs-demo`, with its ID, its backend, and whether it is
+read-only.
+
+## If it goes wrong
+
+- **A name will not resolve, but the table is loaded.** Case. `Object '<NAME>' does not exist`
+  means an unquoted name was upper-cased and the stored one is not; `invalid identifier "<name>"`
+  means you quoted a name that is stored in a different case. The table above shows both.
+- **The workspace is empty after loading.** Loading again replaces what was there rather than
+  adding to it, in the UI's **Load Data** and in `workspace load` alike. Pass `--preserve` when
+  you meant to add a table.
+- **You cannot find the password.** Workspace credentials are shown once, when they are created,
+  and are not readable back. Reissue them from the **Connect** dialog, or with
+  `kbagent workspace password`.
+- **Old workspaces you forgot about.** They are all in **Workspaces**; from a terminal,
+  `kbagent workspace list --project docs-demo --orphaned` finds the ones whose configuration is
+  already gone, and `kbagent workspace gc --dry-run` says what it would clean up before it does
+  anything.
+
+## Going further
+
+- [Transform data](/getting-started/transform/) is where the query you just tested belongs.
+- [Workspaces](/workspace/) covers the Python and R flavours, access for other users, and
+  read-only access to all of Storage.

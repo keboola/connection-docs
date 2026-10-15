@@ -2,7 +2,7 @@
 title: Management
 slug: 'management'
 redirect_from:
-  - /tutorial/management/
+  - /getting-started/management/
 ---
 
 

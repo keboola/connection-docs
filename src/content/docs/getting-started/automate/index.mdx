@@ -1,0 +1,393 @@
+---
+title: 'Make it run every morning'
+slug: 'getting-started/automate'
+description: 'Wire your two connectors, the transformation and the app into a single flow, run the two loads in parallel, give it a 06:00 schedule, and get notified when it fails.'
+redirect_from:
+  - /tutorial/automate/
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
+
+<PageMeta genre="Tutorial" minutes="15" />
+
+Your table is true this morning, because you ran every step by hand. Tomorrow the forecast has
+moved on and the table has not. A **flow** chains your configurations in the order each one needs
+the last and runs them on a schedule, so the outlook is rebuilt before the first café opens,
+without you.
+
+**Where you are:** the pieces work individually, each run by hand. **When you finish:** one flow
+that runs them in order every morning and emails you when it breaks.
+
+<PathIntro tabs={3} yours="the notifications, which come after the tabs and are the same either way" />
+
+{/* Tutorial-type page. 2026-09-09: dataset swapped to Boolabean; the flow was built live in
+project 264 by Kai from the prompt in the Kai tab (flow 01m23dcqs9j2gw0q9z8y25j9v2, 3 approvals:
+create, update with the schedule, run). Kai named the phases "Extract source data" / "Build
+staffing outlook" / "Redeploy data app", put the two HTTP configurations in phase 1, and created a
+real Scheduler configuration (cron "0 6 * * *", timezone Europe/Prague, enabled) — which closes
+the VERIFY on whether Kai can set a schedule: yes. Notifications were not asked of Kai and stay
+manual on this page. First run (job 103117022): phase 1 success in 121 s (the sales configuration
+fans out into one job per row), phase 2 success in 41 s, phase 3 (the data app deploy) error
+"Internal Server Error occurred." after 282 s; total 460 s. See DECISIONS.md 2026-09-09 for what
+that means for the app page. UI mechanics walked live in 264 on 2026-08-04 and re-checked
+2026-08-27: the + between phases adds a PHASE, not a task; the Builder needs an explicit Save
+before Run flow is enabled; scheduling is Schedules tab > Create Schedule > Set Up Schedule, NOT
+"Set Schedule" as /flows/ still says; the Notifications tab edits in place with
+Success/Errors/Processing cards and has no "Edit Notifications" button and no Warnings card,
+contrary to /management/notifications/. Create Flow opens a chooser ("Get your data connected!").
+2026-09-14: captures 01 and 05–09 reshot from "Boolabean morning outlook" (element captures, no top
+bar); 02 (the Add Task menu) kept from the previous shoot because it is theme-neutral; 03 (the
+component picker) and 04 (the second phase) removed rather than shown with the old names — a
+reshoot of the picker needs a flow-creation click, which the read-only capture session did not do.
+
+CLI / API tab added 2026-09-15 and run live against project 264 (kbagent v0.93.1): `flow validate`
+accepted this YAML, `flow new --file` created a throwaway flow from it, and `flow schedule --cron
+'0 6 * * *' --timezone Europe/Prague --enabled` created and activated the scheduler configuration.
+The throwaway flow and its scheduler were both deleted the same minute (note that
+`flow schedule-remove` prompts for confirmation, so a scheduler can outlive the flow it points at
+if you abort). The flow's own run was not re-run from the CLI: the scheduled run does it daily. */}
+
+<Prereqs needs={['project']}>
+  <li>
+    The two connector configurations from <a href="/getting-started/load/">Get your data in</a>.
+  </li>
+  <li>
+    The transformation from <a href="/getting-started/transform/">Transform data</a>.
+  </li>
+  <li>
+    Optionally the app from <a href="/getting-started/app/">Put it in front of someone</a> and the
+    destination from <a href="/getting-started/write/">Send a table to Google Sheets</a>. Without
+    them the flow has two phases instead of three, which is still a real pipeline.
+  </li>
+</Prereqs>
+
+## Phases and tasks
+
+A flow is a list of **phases**. Each phase holds one or more **tasks**: a component configuration
+to run, a notification to send, a variable to set.
+
+- **Tasks inside one phase run in parallel.**
+- **Phases run one after another**, and the flow only moves on when a phase is finished.
+
+That is the whole model, and it makes the ordering obvious: things that can happen at the same
+time go in one phase; things that depend on each other go in separate phases. Your pipeline is
+three phases. The two connectors do not need each other, so they share phase 1 and fetch at the
+same time. The transformation needs both of their tables, so it is phase 2. The app reads the
+table the transformation writes, so redeploying it is phase 3, and if you took the
+[spreadsheet side trip](/getting-started/write/), its destination sits in phase 3 as well, for the
+same reason.
+
+Inside the sales configuration the five files are already fetched by one job. Row-based components
+like this one can be [parallelized internally](/flows/#execute-tasks-in-parallel), and in **Jobs**
+you will see that one task fan out into a job per row.
+
+To add a second task to a phase that already has one, hover the phase and click the **+** in the
+small toolbar that appears on its top edge. It opens an **Add Task** menu scoped to that phase
+(**Component**, **Notification**, **Variable**). The **+** on the line *between* phases opens a
+longer one that also offers **Conditions**, because a condition sits between phases rather than
+inside one. Do not confuse it with the
+**+** *below* a phase, which starts a new phase instead. That toolbar belongs to the phase; the one
+that appears on the card itself is the task's, and carries **Run task** and its settings.
+{/* Walked live in project 264 on 2026-08-19 in the previous tutorial flow builder: the phase's
+own + is tooltipped "Open menu" and opens ADD TASK with Component / Notification / Variable.
+Re-walked 2026-09-22 on the Boolabean morning outlook flow, both controls: the phase toolbar's +
+(tooltip "Open menu", beside "Delete Phase") opens exactly those three; the standalone + node on the
+line between phases (also "Open menu") opens Component / Conditions / Notification / Variable.
+Neither menu has a "Build with Kai" entry in this project. Nothing was saved. The first version of
+this day's edit put the four-item list on the toolbar +, which had not been exercised; the
+fact-checker caught it against the retired still, which shows the toolbar's three. The pre-migration page said to drag the second task into the "Step 1" box;
+that is Legacy Flow Builder language (see /flows/flows-legacy/) and does not apply here. */}
+
+Flows can also branch on what happened: retry a task, take a different path on failure, end early.
+That is [conditions](/flows/#conditions), and you need none of it yet.
+
+{/* Live check 2026-09-02 in project 264 confirmed **Modify with Kai** in the flow header (it is
+not only a data-app control). The Add Task menu question is closed for both controls on a populated
+flow (see the walk note above); no Build with Kai in either, so the "in some projects Build with
+Kai" clause that stood below was removed rather than left as an unverified promise. Still open:
+which of the two menus an EMPTY canvas opens by itself in step 2 — settling that means creating a
+flow. VERIFY(owner): Also unverified:
+/kai/use-cases/#complex-workflows is cited for "assembling existing configurations into a flow",
+but that page documents building pipelines from scratch, which is a different job. Walk the
+Builder in 264 and correct or flag. */}
+
+## Set it up
+
+<Tabs syncKey="howto">
+<TabItem label="Prompt">
+
+Building a pipeline out of configurations you already have is a documented Kai job
+([Complex Workflows](/kai/use-cases/#complex-workflows)), and the Flows section has it wired in:
+the **Create Flow** screen opens with a prompt field, and a flow that already has tasks offers
+**Modify with Kai** in its header. The same request works from **Kai Agent** in the top bar, which
+is where this one was run:
+
+```text title="Prompt"
+Create a flow called "Boolabean morning outlook" with three phases, in this order:
+1. Phase 1 runs the two HTTP data source configurations "Boolabean sales" and "Boolabean
+   forecast" in parallel.
+2. Phase 2 runs the transformation "Boolabean staffing outlook".
+3. Phase 3 redeploys the data app "Staffing Outlook Grid" so it shows the new table.
+Then give the flow a schedule: every day at 06:00 Europe/Prague. Then run the flow once now and
+tell me whether every phase succeeded and how long the run took.
+```
+
+Use your app's own name in the third phase (Kai named ours *Staffing Outlook Grid*); leave the
+phase out if you skipped the app, and add `and the "Boolabean outlook to Sheets" destination` to it
+if you took the spreadsheet side trip. Expect three approvals: the flow, the schedule, the run.
+
+**Check:** the canvas shows **three separate phases**, not several tasks in one, with the two
+connectors side by side in the first. Each later phase needs the previous one's output, so the
+split is the whole point. If it came out as one phase, the fix is the one the numbered steps use:
+switch to the **UI** tab, where the **+** below a phase starts a new phase, and move
+the later tasks there. Then open the flow's **Schedules** tab: the schedule Kai set is there, with
+its timezone, and can be paused with its toggle.
+
+Kai set the schedule because the prompt asked for it. **Notifications** are still yours, in the
+flow's own tab below; they are two clicks, and they are the part people forget exists. A flow
+nobody gets told about is just a button.
+
+</TabItem>
+<TabItem label="UI">
+
+**Build the flow**
+
+1. Open **Flows** in the navigation. In projects that have both kinds the section is titled
+   **Conditional Flows**, which is what these screenshots show. Click **Create Flow**; on the
+   screen that opens, take **Build It Yourself**. The prompt field above it is the Kai path from
+   the other tab. Name the flow `Boolabean morning outlook` and add a description.
+
+   ![Screenshot - Create a flow](/getting-started/automate/01-create-flow.png)
+
+   {/* Chooser screen ("Get your data connected!", Prompt Input / Build It Yourself) verified
+   live in 264 on 2026-08-27. VERIFY(owner): where exactly the name is entered after Build It
+   Yourself is unverified — confirming means creating a flow object in 264; check during the
+   fresh-project walk. */}
+
+2. You land in the **Builder** on an empty canvas, with an **Add Task** menu already open. Choose
+   **Component**.
+
+   ![Hovering the plus above the first phase shows an Open menu tooltip; clicking it opens the Add Task menu with Component, Conditions, Notification and Variable; choosing Component opens the component picker with a search box and the project's components listed](/getting-started/automate/add-task.gif)
+
+   {/* GIF, 2026-09-22, replaces the 02-add-task.png still. It shows the standalone + above the
+   first phase: the tooltip that hover reveals, its four-item menu, and the picker that Component
+   opens. The retired still showed the phase toolbar's three-item menu instead; the two controls
+   differ by Conditions. Captured from the live Boolabean morning outlook
+   flow in 264 as five states, cropped below the top bar so no organization, project or branch name
+   is in frame; 860x390, 40 KB, five real frames after gifsicle. Nothing was saved in the flow. */}
+
+3. A component picker opens, listing what the project has, grouped by component with each one's
+   configurations. Pick **HTTP**, then the `Boolabean sales` configuration. It drops onto the
+   canvas as a task inside a box labelled **Phase 1**.
+
+4. Hover **Phase 1** and click the **+** in the toolbar on its top edge, the one that adds a task
+   *to this phase*. Pick **HTTP** again, then `Boolabean forecast`. The two connectors now sit side
+   by side and will run at the same time.
+
+5. Click the **+** *below* Phase 1. That is the control that starts a **new phase**. Add the
+   `Boolabean staffing outlook` transformation there. Being in a later phase is what guarantees
+   both tables have landed before the SQL runs.
+
+   *The finished flow further down shows phases that have been renamed. Yours start life as
+   **Phase 1**, **Phase 2**, … until you rename them.*
+
+6. If you built the app, click the **+** below Phase 2 and add the `Staffing Outlook Grid` data
+   app to the new phase; a data app is a component like the others and appears in the same picker.
+   If you took the [spreadsheet side trip](/getting-started/write/), its destination goes into
+   this phase too.
+   {/* VERIFY(owner): the data app task was added by Kai through the API in the live build; how
+   the component picker groups data apps (under Apps, or by component name) was not walked. The
+   task exists in the flow as keboola.data-apps / 01m23crd87d02y8gd0q8499x67. */}
+
+7. Click **Save**. The Builder keeps your changes as a draft until you do. **Save** and **Reset**
+   only appear while there are unsaved changes, and **Run flow** stays disabled until you save.
+
+You now have three phases: the two loads, then the transformation, then the app.
+
+![Screenshot - The saved flow](/getting-started/automate/05-flow-saved.png)
+
+</TabItem>
+<TabItem label="CLI / API">
+
+A flow is a configuration like any other, and `kbagent` writes it from a YAML file. Run `kbagent flow schema`
+once to see the full format with comments (add `--project <alias> --full` for the live JSON
+schema); the file below is the three phases of this guide.
+
+```yaml title="flow.yaml"
+phases:
+  - id: "extract"
+    name: "Extract source data"
+    next:
+      - id: "default"
+        goto: "transform"
+  - id: "transform"
+    name: "Build staffing outlook"
+    next:
+      - id: "default"
+        goto: "redeploy"
+  - id: "redeploy"
+    name: "Redeploy data app"
+    next:
+      - id: "done"
+        goto: null
+tasks:
+  - id: "task-sales"
+    name: "Boolabean sales"
+    phase: "extract"
+    enabled: true
+    task: { type: job, componentId: "keboola.ex-http", configId: "<sales-config-id>", mode: run }
+  - id: "task-forecast"
+    name: "Boolabean forecast"
+    phase: "extract"
+    enabled: true
+    task: { type: job, componentId: "keboola.ex-http", configId: "<forecast-config-id>", mode: run }
+  - id: "task-outlook"
+    name: "Boolabean staffing outlook"
+    phase: "transform"
+    enabled: true
+    task: { type: job, componentId: "keboola.snowflake-transformation", configId: "<transformation-config-id>", mode: run }
+  - id: "task-app"
+    name: "Staffing Outlook Grid"
+    phase: "redeploy"
+    enabled: true
+    task: { type: job, componentId: "keboola.data-apps", configId: "<app-config-id>", mode: run }
+```
+
+Two tasks in one phase is the parallelism: both connectors sit in `extract`, and the phase is done
+when both are. `goto: null` ends the flow.
+
+**Where the four IDs come from.** The three `configId` values for the connectors and the
+transformation were printed when you created them; `kbagent config list --project docs-demo
+--component-id keboola.ex-http` finds them again. The app's is the one identifier that is not the
+number you have been using: `kbagent data-app detail --project docs-demo --app-id <app-id>` prints
+the Storage configuration ID, and that is what a flow task takes.
+
+Check the file before it reaches the project, then create it:
+
+```bash
+kbagent flow validate --project docs-demo --file @flow.yaml
+```
+
+```bash
+kbagent flow new --project docs-demo --name "Boolabean morning outlook" --file @flow.yaml
+```
+
+It prints the flow's configuration ID, which the next two commands take as `<flow-id>`;
+`kbagent config list --project docs-demo --component-id keboola.flow` finds it again.
+
+**The schedule** is a separate configuration, and one command upserts it:
+
+```bash
+kbagent flow schedule --project docs-demo --flow-id <flow-id> --cron '0 6 * * *' --timezone Europe/Prague --enabled
+```
+
+**Run it now** rather than waiting for six in the morning:
+
+```bash
+kbagent job run --project docs-demo --component-id keboola.flow --config-id <flow-id> --wait
+```
+
+**Check:** the run's own job and one job per task:
+
+```bash
+kbagent job list --project docs-demo --component-id keboola.flow --limit 5
+```
+
+Notifications have no command; they live in the flow's **Notifications** tab, below.
+
+</TabItem>
+</Tabs>
+
+:::note[Clicking a task opens its settings]
+Worth knowing early: selecting a task gives you **Edit Configuration**, **Run rows** (for
+row-based components like your HTTP connector, so a flow can run a subset of rows), **Retry After
+Failure**, **Delay Before Start**, and **Continue on Failure**, which reads *Handled via
+Conditions*, because in Conditional Flows that behaviour comes from
+[conditions](/flows/#conditions) rather than a toggle.
+:::
+
+:::note[If you took the connector side trips]
+If you also added the Google Sheets or database connector, put them in the first phase alongside
+the two HTTP configurations; that is the same parallelism, with a third source. Then make the
+transformation read from the tables those connectors produce, since they land in their own
+buckets: on a hand-built transformation, repoint its **input mapping**; on a Kai-built one there
+is no input mapping, so re-prompt Kai to include the new tables. A flow that runs the right
+components against the wrong inputs succeeds and produces nothing useful.
+:::
+
+## Run it
+
+*Coming from the **CLI / API** tab? `job run --wait` already did this, and the schedule is already
+set. Read on for notifications, which have no command.*
+
+If **Run flow** is disabled, the Builder is still holding your changes as a draft: click **Save**
+first. That applies however the flow got built, including when Kai built it for you.
+
+Click **Run flow** and confirm with **Run**. A *Conditional Flows job has been scheduled*
+notification appears with a **Show job** link, and while the run is in progress the header offers
+**Terminate flow**.
+
+Every task creates its own job, so **Jobs** tells you exactly which step failed if one does, and
+the flow's own **All Runs** tab shows each run with its phases. Expect the loads to take a couple
+of minutes and the transformation under one; the app phase is the slow one, because a deploy
+builds and starts a container.
+
+## Set a schedule
+
+*Coming from the **Prompt** or **CLI / API** tab? The schedule is already there; open the tab to see it, and skip to
+notifications.*
+
+Open the flow's **Schedules** tab and click **Create Schedule**. The predefined intervals are
+**Every 15 minutes**, **Every hour**, **Once a day**, **Once a week** and **End of month**; for a
+fixed hour use **Set Your Own** (every day/week/month, at an hour and minute you pick) and set
+06:00, before the first café opens. Then click **Set Up Schedule**.
+
+![Screenshot - Create a schedule](/getting-started/automate/06-create-schedule.png)
+
+The schedule appears in the tab with a toggle, so you can pause it without deleting it, and the
+tab shows a count. A flow can hold **several** schedules: they work independently, and the flow
+runs whenever any of them fires. Check the timezone the list displays before relying on it; a
+schedule set by hand may show in UTC, and 06:00 UTC is 08:00 in Prague in summer.
+
+![Screenshot - The schedule](/getting-started/automate/07-schedule-set.png)
+
+If you share a stack with other projects, scheduling slightly off the hour avoids the busiest
+moments. A schedule can also be driven by a table changing rather than a clock; see
+[Schedule and Automate](/flows/#schedule-and-automate).
+
+## Get told when it breaks
+
+An automated pipeline that fails silently is worse than a manual one. Open the flow's
+**Notifications** tab; there is nothing to click into, you edit it in place. Three cards:
+
+| Card | Fires when |
+|---|---|
+| **Success** | the flow finishes successfully |
+| **Errors** | the flow finishes with an error |
+| **Processing** | the job runs longer than usual, by a percentage you set |
+
+Each takes **Email** addresses (pick colleagues or type any address) or a **Webhook** URL. Fill in
+**Errors** at minimum; on a scheduled production flow that is the one setting nobody should skip.
+
+![Screenshot - Notifications](/getting-started/automate/08-notifications.png)
+
+There is a second, finer mechanism: a **Notification** task placed inside the flow, driven by a
+[condition](/flows/#conditions) such as *if any task in the flow ended with an error*. That is
+what you reach for when one flow needs different alerts for different failures; these three cards
+are enough here.
+
+## Check it worked
+
+The **Schedules** tab should show a count, and the flow's **All Runs** tab a run, with your name
+against a manual run and *scheduled run* against the automatic one.
+
+A run can end red and still have done most of its work. Phases run in order, so when the app phase
+fails, the two data phases before it have already succeeded and `staffing_outlook` has already
+been rebuilt; the run detail shows exactly which phase stopped. That is the first thing to read
+when the Errors email arrives, and [Check it worked](/getting-started/check/) walks through it.
+
+Tomorrow morning there will be a second run you did not start, on a forecast that has moved by a
+day.

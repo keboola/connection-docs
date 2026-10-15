@@ -4,6 +4,10 @@ import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
 import { stripHtmlComments } from './strip-comments.mjs';
+// Getting Started pages render their own box and intro (src/components/getting-started/). A page's
+// import line says which <Prereqs> it uses, and its twin takes the wording from the same table.
+import { sharedText as gsSharedText } from '../components/getting-started/prereqs.mjs';
+import { pathIntroText } from '../components/getting-started/pathintro.mjs';
 
 /**
  * Astro integration that emits a raw-markdown copy of every docs page.
@@ -38,6 +42,27 @@ function findMarkdownFiles(dir, files = []) {
 }
 
 /**
+ * Read the props off a component tag, for the two components whose text a
+ * reader of the twin actually needs.
+ */
+function tagProps(tag) {
+  const props = {};
+  for (const m of tag.matchAll(/(\w+)=\{([^}]*)\}/g)) {
+    const raw = m[2].trim();
+    if (raw === 'true' || raw === 'false') props[m[1]] = raw === 'true';
+    else if (/^\d+$/.test(raw)) props[m[1]] = Number(raw);
+    else props[m[1]] = raw;
+  }
+  for (const m of tag.matchAll(/(\w+)="([^"]*)"/g)) props[m[1]] = m[2];
+  if (/<\w+\s[^>]*\b(\w+)(?=\s|\/>|>)/.test(tag)) {
+    // bare boolean props (`<PathIntro manual />`) are not used here, but treat
+    // a lone name as true rather than dropping it
+    for (const m of tag.matchAll(/\s(\w+)(?=\s|\/?>)/g)) if (!(m[1] in props)) props[m[1]] = true;
+  }
+  return props;
+}
+
+/**
  * Inline JSX and HTML a page writes by hand, as markdown.
  *
  * The <li> children a page passes into <Prereqs> come through the slot as raw
@@ -65,11 +90,17 @@ function inlineToMarkdown(line) {
  * comes from the same table the component renders (prereqs.mjs), so the two
  * cannot drift.
  */
-function prereqsToText(tag) {
+function prereqsToText(tag, gs = false) {
   const needs = tag.match(/needs=\{\[([^\]]*)\]\}/);
   const keys = needs
     ? needs[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean)
     : ['project'];
+  if (gs) {
+    // Getting Started's own box: one list under "Before you start", shared lines first,
+    // the page's <li> children after them.
+    const gsLines = keys.map(gsSharedText).filter(Boolean);
+    return gsLines.length ? ['', '**Before you start**', '', ...gsLines.map((l) => `- ${l}`), ''] : [];
+  }
   const lines = keys.map(sharedText).filter(Boolean);
   // The "You need" heading prints even with no shared items: the page's own
   // <li> children follow it.
@@ -108,11 +139,14 @@ function prereqsTabsToText(tag, overrides = {}) {
  * Components are matched on an uppercase initial, the JSX convention, so
  * lowercase HTML written inline in a page is left alone. Three of them carry
  * meaning a reader needs and are rendered rather than dropped: a tab's
- * `label`, <Prereqs>, and <StageStrip>, which prints as a numbered list.
- * MDX comments become HTML comments, except inside those two lists, where
- * they are dropped.
+ * `label`, <Prereqs>, and <StageStrip>, which prints as a numbered list; so is
+ * <PathIntro> on the Getting Started pages. MDX comments become HTML comments,
+ * which the caller removes with stripHtmlComments (strip-comments.mjs), outside
+ * fenced code.
  */
 function stripMdx(body) {
+  // Getting Started pages import their own <Prereqs> from components/getting-started/.
+  const gs = /import\s+Prereqs\s+from\s+['"][^'"]*getting-started\/Prereqs\.astro['"]/.test(body);
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
   const withComments = withoutImports.replace(
     /\{\/\*([\s\S]*?)\*\/\}/g,
@@ -139,14 +173,17 @@ function stripMdx(body) {
 
   for (const line of withComments.split('\n')) {
     if (selfClosing.test(line)) {
-      if (/^\s*<Prereqs\b/.test(line)) out.push(...prereqsToText(line), ...prereqsTabsToText(line));
+      if (/^\s*<Prereqs\b/.test(line)) out.push(...prereqsToText(line, gs), ...(gs ? [] : prereqsTabsToText(line)));
+      if (/^\s*<PathIntro\b/.test(line)) {
+        out.push('', ...pathIntroText(tagProps(line)).map((p) => p + '\n'));
+      }
       continue;
     }
     if (close.test(line)) {
       depth = Math.max(0, depth - 1);
       if (/^\s*<\/StageStrip>/.test(line)) { inStrip = false; slot.length = 0; out.push(''); }
       if (/^\s*<\/Prereqs>/.test(line)) {
-        out.push(...prereqsGroupToText(prereqsTag, groupItems), ...prereqsTabsToText(prereqsTag, prereqsTabs));
+        if (!gs) out.push(...prereqsGroupToText(prereqsTag, groupItems), ...prereqsTabsToText(prereqsTag, prereqsTabs));
         inPrereqs = false;
         prereqsTabs = {};
         groupItems.length = 0;
@@ -162,7 +199,7 @@ function stripMdx(body) {
       if (label) out.push('', `**${label[1]}**`, '');
       // <Prereqs needs={…}> with page-specific <li> children in its slots: the
       // shared lines go in first, the children follow as the lists they are.
-      if (/^\s*<Prereqs\b/.test(line)) { out.push(...prereqsToText(line)); inPrereqs = true; prereqsTag = line; }
+      if (/^\s*<Prereqs\b/.test(line)) { out.push(...prereqsToText(line, gs)); inPrereqs = true; prereqsTag = line; }
       if (/^\s*<StageStrip\b/.test(line)) { inStrip = true; stripN = 0; }
       depth += 1;
       continue;
@@ -350,8 +387,9 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
 
           const isMdx = extname(file) === '.mdx';
           const raw = stripFrontmatter(content);
-          // authors' notes (VERIFY markers, where a claim was checked) stay in the source
-          const body = stripHtmlComments(isMdx ? stripMdx(raw) : raw).trim();
+          // authors' notes (VERIFY markers, where a claim was checked) stay in the source; comments
+          // inside fenced code are content and survive (strip-comments.mjs)
+          const body = stripHtmlComments(isMdx ? stripMdx(raw) : raw).replace(/\n{3,}/g, '\n\n').trim();
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });
