@@ -1,6 +1,7 @@
 ---
 title: IMAP Email Contents and Attachments
 slug: 'components/extractors/communication/email-imap'
+description: 'Download email contents and attachments over IMAP with basic authentication, filter them with IMAP queries, and store attachments as files or tables.'
 redirect_from:
     - /extractors/communication/email-imap/
 ---
@@ -9,6 +10,8 @@ redirect_from:
 
 This extractor allows you to automatically retrieve email contents and/or attachments via the [IMAP protocol](https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol) using [basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). 
 It supports incremental loads and IMAP queries to define specific criteria. 
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 
 The IMAP protocol offers several advantages:
