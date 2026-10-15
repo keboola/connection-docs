@@ -228,10 +228,12 @@ Write the code yourself, then create the app from a terminal with kbagent, which
 
 ### App structure
 
-A Keboola app is a standard web app. The typical scaffold is:
+A Keboola app is a standard web app. The skill's default template, [`react-vite-app`](https://github.com/keboola/ai-kit/tree/main/plugins/dataapp-developer/skills/dataapp-development/templates/react-vite-app), is a React frontend built with Vite and an Express server in one Node container:
 
 - `src/App.tsx` for the frontend (React).
 - `server/index.ts` for server-side API routes (Express).
+
+The skill has two other starting points: [`python-app`](https://github.com/keboola/ai-kit/tree/main/plugins/dataapp-developer/skills/dataapp-development/templates/python-app) for a Python-only app (Flask or similar) and [`python-node-app`](https://github.com/keboola/ai-kit/tree/main/plugins/dataapp-developer/skills/dataapp-development/templates/python-node-app) for a Python backend next to the Node server.
 
 All data-fetching logic, meaning SQL queries and anything that uses your Storage token, belongs in the server-side routes.
 
