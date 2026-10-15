@@ -1,6 +1,7 @@
 ---
 title: MySQL
 slug: 'components/writers/database/mysql'
+description: 'Write Keboola tables to a MySQL or MariaDB database with dedicated credentials or an SSH tunnel, then set column types and full or incremental load.'
 redirect_from:
     - /writers/database/mysql/
 
@@ -9,6 +10,8 @@ redirect_from:
 
 
 This data destination connector sends data to a [MySQL](https://www.mysql.com/products/) or [MariaDB](https://mariadb.org/) database.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **MySQL** data destination connector.
