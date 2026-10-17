@@ -135,7 +135,7 @@ message box.
 |--------|---------|--------------|
 | ![New chat](/kai/kai-new-chat.png) | **New chat** | Start a fresh conversation. Kai keeps no context from the previous one. |
 | ![Report a bug](/kai/kai-report-bug.png) | **Report a bug** | **Send support ticket** opens the support form with the details Keboola support needs — conversation ID, trace link, project, stack — pre-filled in its description. You still write the summary, pick a severity, and send it. **Copy debug info** puts the same details on your clipboard instead. On stacks without support tickets, **Report a bug** only copies. |
-| ![Settings](/kai/kai-settings-gear.png) | **Settings** | Open your [Tool Permissions and System Instructions](/kai/settings/). These are personal to you and apply to this project only. Project-wide settings live in **Settings → Kai Agent**. |
+| ![Settings](/kai/kai-settings-gear.png) | **Settings** | Open your [tool permissions, instructions and notifications](/kai/settings/). These are personal to you and apply to this project only. The **Project** button opens the project-wide settings in **Settings → Kai Agent**. |
 | ![Expand](/kai/kai-expand-chat.png) | **Expand** | Widen the panel. The expanded view also lists your chat history, so you can reopen a previous conversation. Useful when Kai returns a long table or diagram. |
 | ![Close](/kai/kai-close-chat.png) | **Close** | Close the panel. Your conversation is kept. |
 
@@ -240,7 +240,7 @@ message quota. A median conversation costs about **1.1 PPU**. New organizations 
 a [free allowance of 300 PPU](/kai/pricing/#free-allowance-for-new-organizations).
 
 Organization Admins cap Kai spend with a monthly project budget and per-user limits in
-**Settings → Kai Agent → Kai spend limits**. An indicator appears in your chat panel at 80%
+**Settings → Kai Agent → Spend limits**. An indicator appears in your chat panel at 80%
 of your limit, and when a limit is reached, Kai stops and tells you which one applied. A
 reply that has already started always finishes, so a limit never cuts off work in progress —
 see [Hierarchy of limits](/kai/pricing/#hierarchy-of-limits) for what that means for your

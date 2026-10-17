@@ -109,7 +109,7 @@ the project budget.
 
 ## Setting limits
 
-Kai spend limits live in **Settings → Kai Agent → Kai spend limits** in the main
+Kai spend limits live in **Settings → Kai Agent → Spend limits** in the main
 Keboola navigation.
 
 [Organization Admins](/management/organization/#organization-admins) set up limits for
@@ -150,9 +150,8 @@ under a 10 PPU project budget.
 
 To set the project budget:
 
-1. Go to **Settings → Kai Agent** in the main Keboola navigation.
-2. Open **Kai spend limits**.
-3. Enter a value in **Monthly project budget**.
+1. Go to **Settings → Kai Agent → Spend limits** in the main Keboola navigation.
+2. Enter a value in **Monthly project budget**.
 
 Usage counts from the start of each calendar month, and the budget resets with it.
 
