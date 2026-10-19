@@ -4,9 +4,9 @@
 // Two consumers: CourseLine.astro, which draws the course as a line of dots
 // (vertically on the hub, as a short bar at the top of every step), and
 // src/integrations/page-markdown.mjs, which prints the same list into the
-// markdown twin. PageMeta used to carry no step numbers because numbering
-// breaks the moment a page moves (2026-09-02); with the order kept here, a
-// move is one edit and every number follows it (2026-09-29, notes/getting-started/DECISIONS.md).
+// markdown twin. Numbers written into each page break the moment a page
+// moves; with the order kept here, a move is one edit and every number
+// follows it (notes/getting-started/DECISIONS.md).
 //
 // `key` is the page's last slug segment and what a page passes as
 // <CourseLine current="…" />. `short` fits under a dot at phone width;

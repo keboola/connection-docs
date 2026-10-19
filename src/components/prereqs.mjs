@@ -15,11 +15,9 @@
 // a Prompt / UI / CLI page needs, so a reader on the Prompt tab learns that it
 // needs Kai and a reader on the CLI / API tab that it needs kbagent.
 //
-// 2026-10-12: the Getting Started guide had its own copy of this box
-// (components/getting-started/Prereqs.astro and prereqs.mjs); Jordan's review
-// on #1116, item 6, merged it into this one. Its state cards, tab cards and
-// the newer Kai wording came along, and `project` now points at the guide's
-// project page, which was the TODO here.
+// The Getting Started guide uses this same box, so its state cards, tab cards
+// and Kai wording live here too, and `project` points at the guide's project
+// page.
 
 export const LABELS = {
   box: 'Before you start',
@@ -30,8 +28,8 @@ export const LABELS = {
 };
 
 // Where Kai is and who switches it on: one wording for the `kai` item and the
-// Prompt tab line, so the two cannot drift. 2026-10-01: a new Free Plan project
-// (6375) had Kai from its first login, so the line says that first.
+// Prompt tab line, so the two cannot drift. A new Free Plan project has Kai from
+// its first login, so the line says that first.
 const KAI =
   'the <strong>Kai Agent</strong> button in the top bar, on supported stacks. A new Free Plan project has it from the start; elsewhere an organization admin turns it on once: <a href="/kai/getting-started/">Get started with Kai</a>.';
 
@@ -39,10 +37,8 @@ const KAI =
 export const SHARED = {
   project:
     '<strong>A Keboola project.</strong> No project yet? <a href="/getting-started/project/">Create or join a project</a>.',
-  // for a page that needs Kai, listed before `kai`. No sign-up link: it was written while it was
-  // open whether the Free Plan includes apps. Free Plan project 6375 deployed the Getting Started
-  // app on 2026-10-01, so linking getting-started/project/ here is now the Apps owners' call
-  // (VERIFY(Jordan) on data-apps/build-locally.mdx).
+  // for a page that needs Kai, listed before `kai`. No sign-up link: whether to send Apps readers
+  // to the Free Plan is the Apps owners' call (VERIFY(Jordan) on data-apps/build-locally.mdx).
   projectWithKai: '<strong>A Keboola project</strong> on a stack where Kai is available.',
   google:
     '<strong>A Google account</strong> you can sign in with, to approve Keboola\'s access.',

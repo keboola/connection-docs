@@ -138,7 +138,7 @@ function prereqsTabsToText(tag, overrides = {}) {
  * actually gave them inside the wrapper (measured on the first child line),
  * because four leading spaces would otherwise turn ordinary prose into an
  * indented code block; children written flush left keep their own list and
- * code indentation (2026-09-29: load/'s steps 10-13 lost theirs).
+ * code indentation (without that, load/'s steps 10-13 lost theirs).
  *
  * Components are matched on an uppercase initial, the JSX convention, so
  * lowercase HTML written inline in a page is left alone. Several carry
@@ -188,7 +188,7 @@ export function stripMdx(body) {
 
   // Inside a fenced code block the code's own indentation is content: YAML
   // nests by it. Such a line loses only what its opening fence lost to the
-  // wrapper dedent, and is never read as a component tag. (2026-09-29: the
+  // wrapper dedent, and is never read as a component tag. (Without that, the
   // flow.yaml on automate/ lost every 4-space level and no longer parsed.)
   let fence = null;
 
