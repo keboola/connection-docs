@@ -18,8 +18,14 @@ Whoever asked the question will look in a spreadsheet, not in Keboola. This page
 Storage table to a Google Sheet, with the same mechanism that sends data to a warehouse, a BI
 tool, or a CRM.
 
-**Where you are:** the table you want to send is in Storage. **When you finish:** the same rows
-in a spreadsheet, refreshed on every run.
+<Prereqs needs={['project', 'google']} tabs={2}>
+  <span slot="from">the table you want to send is in Storage.</span>
+  <span slot="to">the same rows in a spreadsheet, refreshed on every run.</span>
+  <li>
+    <strong>The table to deliver,</strong> in Storage: <code>staffing_outlook</code> from{' '}
+    <a href="/getting-started/transform/">Transform data</a> if you are following the guide.
+  </li>
+</Prereqs>
 
 <PathIntro tabs={2} yours="the Google consent screen, which lives in your own account, so no assistant can click it for you" />
 
@@ -45,13 +51,6 @@ Tab labels aligned with the main path 2026-09-15 (Prompt / UI) so the reader's s
 stays coherent across the section. No CLI tab: the OAuth consent screen cannot be driven from a
 terminal, and the two kbagent commands named above were not run here because doing so writes to
 a real spreadsheet in Nikita's Google account — they are the same commands the load page proves. */}
-
-<Prereqs needs={['project', 'google']} tabs={2}>
-  <li>
-    <strong>The table to deliver,</strong> in Storage: <code>staffing_outlook</code> from{' '}
-    <a href="/getting-started/transform/">Transform data</a> if you are following the guide.
-  </li>
-</Prereqs>
 
 ## Sending data out
 

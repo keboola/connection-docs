@@ -16,10 +16,9 @@ import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 A transformation is SQL you have finished writing. A **workspace** is where you write it: your own
 schema, holding a copy of the Storage tables you ask for, where a wrong query costs you nothing.
 
-**Where you are:** you have tables in Storage and a query you are not sure about. **When you
-finish:** the same query, tested against real rows, ready to paste into a transformation.
-
 <Prereqs needs={['project']} tabs={3}>
+  <span slot="from">you have tables in Storage and a query you are not sure about.</span>
+  <span slot="to">the same query, tested against real rows, ready to paste into a transformation.</span>
   <li>
     <strong>A table in Storage,</strong> such as <code>staffing_outlook</code> from{' '}
     <a href="/getting-started/transform/">Transform data</a> if you are following the guide.
