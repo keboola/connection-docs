@@ -204,11 +204,13 @@ which is the difference between refreshing a copy and adding to it.
 
 **Run your SQL**
 
+On a Snowflake workspace:
+
 ```bash
 kbagent workspace query --project docs-demo --workspace-id <workspace-id> --sql 'SELECT "STORE_NAME", "DATE", "EXPECTED_UNITS_PER_PERSON" FROM "staffing_outlook" ORDER BY "EXPECTED_UNITS_PER_PERSON" DESC LIMIT 5'
 ```
 
-:::caution[Case is not a detail here]
+:::caution[On Snowflake, case is not a detail]
 Double quotes mean *exactly this name*; without them Snowflake reads any name as upper case. On
 this table the two halves disagree, and both halves of the disagreement are load-bearing:
 
@@ -224,6 +226,18 @@ SQL that did not quote its aliases, so the backend upper-cased them. Run
 `SHOW COLUMNS IN "staffing_outlook"` when a name refuses to resolve, rather than guessing which
 half you are on.
 :::
+
+On a BigQuery workspace, which is what a Free Plan project creates, double quotes make a string
+literal rather than a name, so write the names plain, with `date` in backticks as on
+[Explore your data](/getting-started/ask/):
+
+```bash
+kbagent workspace query --project docs-demo --workspace-id <workspace-id> --sql 'SELECT store_name, `date`, expected_units_per_person FROM staffing_outlook ORDER BY expected_units_per_person DESC LIMIT 5'
+```
+
+{/* VERIFY(Nikita): the BigQuery query above mirrors the one ask/ ran through Kai in Free Plan
+project 6375 (lower-case column names, `date` in backticks); it has not been run inside a BigQuery
+workspace with `kbagent workspace query`. */}
 
 `--file` takes a `.sql` file instead, which is the shape you want once the query is longer than a
 line, and `--full` fetches the whole result rather than the first page.
