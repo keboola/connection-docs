@@ -149,7 +149,7 @@ function prereqsTabsToText(tag, overrides = {}) {
  * (strip-comments.mjs), outside fenced code; inside the <Prereqs> and
  * <StageStrip> lists they are dropped here.
  */
-function stripMdx(body) {
+export function stripMdx(body) {
   const withoutImports = body.replace(/^import\s[^\n]*?;\s*$/gm, '');
   // <details> is how a page folds away what most readers can skip; the twin
   // has no folding, so the summary becomes a bold line and the rest follows.
