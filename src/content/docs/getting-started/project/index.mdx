@@ -42,8 +42,9 @@ As You Go page.
 navigation reads Dashboard / Conditional Flows / Storage / Apps / Components / Workspaces /
 Transformations / Semantic Layer (Beta) / Jobs / Trash; Kai Agent is in the top bar from the start,
 with no Beta pill and a "Kai is free for you right now" banner. The Storage API's own limits for
-that project say storage.dataSizeBytes = 50000000000, so the Storage line below says 50 GB, against
-the 250 GB that management/pay-as-you-go/ still states (raised in notes/getting-started/DECISIONS.md 2026-10-01).
+that project say storage.dataSizeBytes = 50000000000 (50 GB), against the 250 GB that
+management/pay-as-you-go/ still states (raised in notes/getting-started/DECISIONS.md 2026-10-01), so
+the Free Plan line below gives no Storage figure until the owner settles which one is right.
 VERIFY(Nikita): which limit is right. The 50 GB was read while Billing still answered 403 "Activate
 your account", so whether activation changes it is unknown; the PAYG page carries the same flag.
 The whole Prompt path of the guide ran there, data app deploy included; the UI and CLI tabs did not,
@@ -54,7 +55,7 @@ apart from the transform UI tab's screens, built on a copy that never ran. */}
 Quickest first:
 
 1. **Free Plan:** [sign up and create a free project](https://connection.us-east4.gcp.keboola.com/wizard)
-   right now, with 50 GB of Storage and up to 60 minutes of job runtime a month. That is enough
+   right now, with up to 60 minutes of job runtime a month. That is enough
    for this guide; we ran its Prompt path end to end on one.
    {/* VERIFY(Nikita): a Free Plan project created 2026-10-08 (6425) showed "Your Minutes Balance:
    120 minutes" on its dashboard on the day it was created and 113 after the guide's run, not
