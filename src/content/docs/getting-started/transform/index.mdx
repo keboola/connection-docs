@@ -552,6 +552,14 @@ configuration IDs to hand.
 
 **Run it and read the result**
 
+If the **Prompt** tab already built `staffing_outlook`, delete that table before the first run, as
+the **UI** tab says: Kai's columns differ from this query's in type or in case, and the write can
+fail. Run this with `--dry-run` to see what would go, then again without it to delete:
+
+```bash
+kbagent storage delete-table --project docs-demo --table-id out.c-Boolabean-staffing-outlook.staffing_outlook --dry-run
+```
+
 ```bash
 kbagent job run --project docs-demo --component-id keboola.google-bigquery-transformation --config-id <config-id> --wait
 ```
