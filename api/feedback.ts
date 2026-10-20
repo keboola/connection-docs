@@ -5,11 +5,13 @@
  * probe, so the static frontend renders the widget only when a sink exists.
  *
  * Sinks:
- * - Linear: submissions that carry a written comment become issues, so docs
- *   feedback lands where the docs work is triaged. Linear rather than GitHub
- *   Issues: connection-docs is public, and readers paste project IDs, stack URLs
- *   and emails into a "what could be better?" box. A bare thumb is never filed:
- *   the widget is on every page, and one issue per click would bury the team.
+ * - Linear: submissions that carry a written comment are filed in the Docs
+ *   feedback project, one open issue per page: the first report creates it
+ *   (title ending in ` (<path>)`, the lookup key), later ones are added as
+ *   comments. Linear rather than GitHub Issues: connection-docs is public, and
+ *   readers paste project IDs, stack URLs and emails into a "what could be
+ *   better?" box; known secrets and emails are scrubbed before any sink. A bare
+ *   thumb is never filed: the widget is on every page.
  * - FEEDBACK_INGEST_URL (optional): every record, thumbs included, as a row.
  * - Function logs: when no ingest is configured, every vote is logged as one
  *   `[feedback] vote` line so it stays countable (a log drain can collect it),
@@ -58,7 +60,7 @@ const LINEAR_API_KEY = (process.env.FEEDBACK_LINEAR_API_KEY || '').trim();
 // only thing the Vercel project has to hold is the API key. Env overrides them.
 const LINEAR_DEFAULTS = {
   team: '20917244-2e69-4226-8f05-d1bf40d99ea2', // [Team] Product (PRDCT)
-  project: '8bf3317f-1860-44aa-94b0-627bece939e3', // Help Documentation Revamp
+  project: 'f5a83846-63e4-4ddd-b19f-0ddfb425fc8b', // Docs feedback (P-PRDCT-302)
   state: '78e62541-bf17-4628-8155-a3c12470c66b', // Backlog (PRDCT has no Triage)
   labels: '9c08b2d5-1598-4aeb-bd4a-085349e371e2', // docs-feedback
 };
@@ -79,12 +81,17 @@ const LINEAR_DAILY_CAP = (() => {
   const n = Number(raw);
   return raw !== '' && Number.isFinite(n) && n >= 0 ? n : 50;
 })();
-const LINEAR_ENABLED = Boolean(LINEAR_API_KEY && LINEAR_TEAM_ID);
+// LINEAR_TEAM_ID always has a default, so the key alone switches Linear on.
+const LINEAR_ENABLED = Boolean(LINEAR_API_KEY);
 
 /** Upstream calls must not hold the function until Vercel kills it. */
 const UPSTREAM_TIMEOUT_MS = 5000;
 
 const SITE_ORIGIN = 'https://help.keboola.com';
+const SOURCE_ORIGIN = 'https://github.com/keboola/connection-docs/blob/main/';
+
+/** The page's Markdown file, as Footer.astro passes it from the content entry. */
+const SOURCE_RE = /^src\/content\/docs\/[A-Za-z0-9/_.-]{1,250}\.mdx?$/;
 
 /** Reason values rendered for humans; its keys are the allowed reasons. */
 const REASON_TEXT: Record<string, string> = {
@@ -114,6 +121,39 @@ const MAX_FIELD = 512;
  */
 const PATH_RE = /^\/[A-Za-z0-9/_.~%-]{0,255}$/;
 
+/**
+ * Secrets readers paste by accident. Matches become `[redacted token]` before
+ * the text reaches any sink, logs included; the note under the textarea asks
+ * for no credentials, and this is what holds when someone ignores it.
+ */
+const SECRET_PATTERNS: RegExp[] = [
+  /\b\d+-(?:\d+-)?[A-Za-z0-9]{40}\b/g, // Keboola Storage / Manage API token
+  /\blin_(?:api|oauth)_[A-Za-z0-9]{20,}\b/g, // Linear
+  /\b(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,})\b/g, // GitHub
+  /\bxox[abprs]-[A-Za-z0-9-]{10,}\b/g, // Slack
+  /\bsk-[A-Za-z0-9_-]{20,}\b/g, // OpenAI / Anthropic style
+  /\bAKIA[0-9A-Z]{16}\b/g, // AWS access key id
+  /\beyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\b/g, // JWT
+];
+const EMAIL_RE = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g;
+
+/** Replace secrets and email addresses; returns the clean text and the count. */
+export function scrub(text: string): { text: string; redactions: number } {
+  let redactions = 0;
+  let out = text;
+  for (const re of SECRET_PATTERNS) {
+    out = out.replace(re, () => {
+      redactions += 1;
+      return '[redacted token]';
+    });
+  }
+  out = out.replace(EMAIL_RE, () => {
+    redactions += 1;
+    return '[redacted email]';
+  });
+  return { text: out, redactions };
+}
+
 /** A crypto.randomUUID() from the widget. */
 const SID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -129,6 +169,7 @@ interface FeedbackBody {
   title?: unknown;
   abandoned?: unknown;
   sid?: unknown; // client-generated id, shared by the abandoned and the full row
+  source?: unknown; // the page's Markdown file, e.g. src/content/docs/storage/tables.md
   hp?: unknown; // honeypot — must be empty
 }
 
@@ -139,10 +180,12 @@ export interface FeedbackRecord {
   comment: string;
   path: string;
   title: string;
+  source: string;
   locale: string;
   referrer: string;
   user_agent: string;
   abandoned: boolean;
+  redactions: number;
   ts: string;
 }
 
@@ -210,24 +253,33 @@ export function buildRecord(body: FeedbackBody, req: VercelRequest): FeedbackRec
   const reason = ALLOWED_REASONS.has(reasonRaw) ? reasonRaw : '';
 
   const sid = str(body.sid, 64);
+  // An abandoned verdict was never submitted, so whatever sits in the box is
+  // not something the reader chose to send. The client strips it too.
+  // Scrub before the length cap: a secret straddling the cut would otherwise
+  // lose its tail, stop matching its pattern and go through as a prefix.
+  const rawComment =
+    body.abandoned === true || typeof body.comment !== 'string'
+      ? ''
+      : body.comment.slice(0, MAX_COMMENT * 4).replace(/\r\n?/g, '\n');
+  const clean = scrub(rawComment);
   return {
     submission_id: SID_RE.test(sid)
       ? sid
       : `fb-${Date.now()}-${Math.round(Math.random() * 1e9).toString(36)}`,
     verdict,
     reason,
-    // An abandoned verdict was never submitted, so whatever sits in the box is
-    // not something the reader chose to send. The client strips it too.
-    comment:
-      body.abandoned === true
-        ? ''
-        : str(body.comment, MAX_COMMENT).replace(/\r\n?/g, '\n'),
+    comment: cut(clean.text.trim(), MAX_COMMENT),
     path,
     title: str(body.title).replace(/\s+/g, ' '),
+    source: (() => {
+      const s = str(body.source, 300);
+      return SOURCE_RE.test(s) && !s.includes('..') ? s : '';
+    })(),
     locale: str((req.headers['accept-language'] as string) || '', 32),
     referrer: str((req.headers['referer'] as string) || ''),
     user_agent: str((req.headers['user-agent'] as string) || ''),
     abandoned: body.abandoned === true,
+    redactions: clean.redactions,
     ts: new Date().toISOString(),
   };
 }
@@ -254,9 +306,15 @@ export function issueMarkdown(record: FeedbackRecord): string {
     // `path` matched PATH_RE in buildRecord, so it is safe inside the link.
     // Code span in the link text, so `~` or `_` in a path can't format it.
     `- **Page:** [\`${record.path}\`](${SITE_ORIGIN}${record.path})`,
+    `- **Section:** \`${record.path.split('/')[1] || 'home'}\``,
     `- **Verdict:** ${verdict}`,
   ];
+  // `source` matched SOURCE_RE in buildRecord, so it is safe inside the link.
+  if (record.source) lines.push(`- **Source:** [\`${record.source}\`](${SOURCE_ORIGIN}${record.source})`);
   if (reason) lines.push(`- **Reason:** ${reason}`);
+  if (record.redactions) {
+    lines.push(`- **Redacted:** ${record.redactions} secret(s) or email address(es) removed from the comment`);
+  }
   lines.push(
     '',
     '**Comment:**',
@@ -270,31 +328,22 @@ export function issueMarkdown(record: FeedbackRecord): string {
   return lines.join('\n');
 }
 
-const ISSUE_CREATE = `mutation DocsFeedback($input: IssueCreateInput!) {
+const ISSUE_CREATE = `mutation DocsFeedbackIssue($input: IssueCreateInput!) {
   issueCreate(input: $input) { success issue { identifier } }
 }`;
+const COMMENT_CREATE = `mutation DocsFeedbackComment($input: CommentCreateInput!) {
+  commentCreate(input: $input) { success }
+}`;
+const FIND_PAGE_ISSUE = `query DocsFeedbackFind($filter: IssueFilter!) {
+  issues(filter: $filter, first: 1) { nodes { id identifier } }
+}`;
 
-/**
- * File a submission as a Linear issue.
- *
- * Only called when the reader actually wrote something — that free text is the
- * part someone can act on, and it is the only part worth a notification.
- * `user_agent`, `referrer` and `locale` stay out of the issue: they belong in
- * an analytics table, not in a ticket.
- */
-async function createLinearIssue(record: FeedbackRecord): Promise<void> {
-  const pageTitle = record.title || record.path;
-  const reason = REASON_TEXT[record.reason];
-  const verdict = record.verdict === 'up' ? '👍' : '👎';
-  const input: Record<string, unknown> = {
-    teamId: LINEAR_TEAM_ID,
-    title: cut(`Docs feedback (${verdict}${reason ? ` ${reason}` : ''}): ${pageTitle}`, 250),
-    description: issueMarkdown(record),
-  };
-  if (LINEAR_LABEL_IDS.length) input.labelIds = LINEAR_LABEL_IDS;
-  if (LINEAR_PROJECT_ID) input.projectId = LINEAR_PROJECT_ID;
-  if (LINEAR_STATE_ID) input.stateId = LINEAR_STATE_ID;
-
+/** One GraphQL call to Linear; throws on transport and GraphQL errors. */
+async function linearRequest(
+  query: string,
+  variables: Record<string, unknown>,
+  signal: AbortSignal,
+): Promise<any> {
   const res = await fetch('https://api.linear.app/graphql', {
     method: 'POST',
     headers: {
@@ -304,15 +353,97 @@ async function createLinearIssue(record: FeedbackRecord): Promise<void> {
         ? LINEAR_API_KEY
         : `Bearer ${LINEAR_API_KEY}`,
     },
-    body: JSON.stringify({ query: ISSUE_CREATE, variables: { input } }),
-    signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
+    body: JSON.stringify({ query, variables }),
+    signal,
   });
   // GraphQL reports most failures as 200 with an `errors` array.
   const json: any = await res.json().catch(() => null);
-  if (!res.ok || json?.errors?.length || !json?.data?.issueCreate?.success) {
-    const detail = json?.errors?.[0]?.message ?? `HTTP ${res.status}`;
-    throw new Error(`feedback issue create failed: ${detail}`);
+  if (!res.ok || json?.errors?.length) {
+    throw new Error(`Linear: ${json?.errors?.[0]?.message ?? `HTTP ${res.status}`}`);
   }
+  return json?.data;
+}
+
+/** The page's path in parentheses ends every issue title; it is the lookup key. */
+function pageMarker(path: string): string {
+  return ` (${path})`;
+}
+
+/**
+ * `Docs feedback: <page> (<path>)`, at most TITLE_MAX characters. The site
+ * suffix (" | Keboola User Documentation") is dropped. A path too long to fit
+ * leaves the marker off: that page's reports then open separate issues, which
+ * beats a title Linear might reject.
+ */
+const TITLE_MAX = 250;
+export function issueTitle(record: FeedbackRecord): string {
+  const page = (record.title.split(' | ')[0] || record.path).trim();
+  const marker = pageMarker(record.path);
+  const room = TITLE_MAX - marker.length;
+  return room >= 30 ? cut(`Docs feedback: ${page}`, room) + marker : cut(`Docs feedback: ${page}`, TITLE_MAX);
+}
+
+/** The open feedback issue for this page, if there is one. */
+async function findPageIssue(path: string, signal: AbortSignal): Promise<string | null> {
+  const filter: Record<string, unknown> = {
+    team: { id: { eq: LINEAR_TEAM_ID } },
+    title: { endsWith: pageMarker(path) },
+    // `duplicate` is its own state type in PRDCT; a merged-away issue is closed.
+    state: { type: { nin: ['completed', 'canceled', 'duplicate'] } },
+  };
+  if (LINEAR_LABEL_IDS.length) filter.labels = { some: { id: { in: LINEAR_LABEL_IDS } } };
+  const data = await linearRequest(FIND_PAGE_ISSUE, { filter }, signal);
+  return data?.issues?.nodes?.[0]?.id ?? null;
+}
+
+/**
+ * File a submission in Linear: one open issue per page, later reports on the
+ * same page as comments on it, so ten complaints about one page are one item
+ * to triage rather than ten.
+ *
+ * Only called when the reader actually wrote something — that free text is the
+ * part someone can act on. `user_agent`, `referrer` and `locale` stay out of
+ * Linear: they belong in an analytics table, not in a ticket.
+ *
+ * If the lookup itself fails, the submission still becomes a new issue: a
+ * duplicate is cheaper than a lost report. Two first reports arriving at once
+ * can also produce two issues; whoever triages merges them.
+ */
+async function fileInLinear(record: FeedbackRecord): Promise<void> {
+  // One deadline for the lookup and the write together, so a slow Linear
+  // can't hold the function for two full timeouts.
+  const signal = AbortSignal.timeout(UPSTREAM_TIMEOUT_MS + 1000);
+  let existing: string | null = null;
+  try {
+    existing = await findPageIssue(record.path, signal);
+  } catch (err: any) {
+    // Error level: if this fires on every report, grouping is broken (e.g. a
+    // Linear schema change) and every report is opening a new issue.
+    console.error('[feedback] page issue lookup failed, creating a new issue:', err?.message ?? String(err));
+  }
+
+  if (existing) {
+    const data = await linearRequest(
+      COMMENT_CREATE,
+      { input: { issueId: existing, body: issueMarkdown(record) } },
+      signal,
+    );
+    if (!data?.commentCreate?.success) throw new Error('Linear: commentCreate did not succeed');
+    return;
+  }
+
+  const input: Record<string, unknown> = {
+    teamId: LINEAR_TEAM_ID,
+    title: issueTitle(record),
+    description:
+      'Reader feedback for this page. Further reports on the same page are added as comments.\n\n' +
+      issueMarkdown(record),
+  };
+  if (LINEAR_LABEL_IDS.length) input.labelIds = LINEAR_LABEL_IDS;
+  if (LINEAR_PROJECT_ID) input.projectId = LINEAR_PROJECT_ID;
+  if (LINEAR_STATE_ID) input.stateId = LINEAR_STATE_ID;
+  const data = await linearRequest(ISSUE_CREATE, { input }, signal);
+  if (!data?.issueCreate?.success) throw new Error('Linear: issueCreate did not succeed');
 }
 
 /**
@@ -376,7 +507,8 @@ async function postIngest(record: FeedbackRecord): Promise<void> {
 async function deliver(record: FeedbackRecord, req: VercelRequest): Promise<boolean> {
   let linear: Promise<void> | null = null;
   if (LINEAR_ENABLED && record.comment) {
-    if (allowIssue(clientIp(req))) linear = createLinearIssue(record);
+    if (allowIssue(clientIp(req))) linear = fileInLinear(record);
+    else if (LINEAR_DAILY_CAP === 0) console.warn('[feedback] Linear filing paused (FEEDBACK_LINEAR_DAILY_CAP=0)');
     else console.warn('[feedback] issue rate limit hit');
   }
   const [linearResult, ingestResult] = await Promise.allSettled([
