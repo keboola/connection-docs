@@ -227,8 +227,17 @@ items:
               - url: /components/extractors/erp/k2/
                 title: K2
 
+              - url: /components/extractors/erp/mpohoda/
+                title: mPOHODA
+
               - url: /components/extractors/erp/netsuite/
                 title: NetSuite
+
+              - url: /components/extractors/erp/pohoda-mserver/
+                title: POHODA mServer
+
+              - url: /components/extractors/erp/suiteprojects-pro/
+                title: SuiteProjects Pro
 
           - url: /components/extractors/marketing-sales/
             title: Marketing/Sales
@@ -289,6 +298,9 @@ items:
                 items:
                   - url: /components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/
                     title: Columns and primary keys of report presets
+
+              - url: /components/extractors/marketing-sales/mixpanel/
+                title: MixPanel
 
               - url: /components/extractors/marketing-sales/pinterest-ads/
                 title: Pinterest Ads
@@ -392,6 +404,9 @@ items:
               - url: /components/extractors/other/hibob/
                 title: HiBob
 
+              - url: /components/extractors/other/langsmith-traces/
+                title: LangSmith Traces
+
               - url: /components/extractors/other/mapbox/
                 title: Mapbox
 
@@ -412,6 +427,9 @@ items:
 
               - url: /components/extractors/other/time-doctor-2
                 title: Time Doctor 2
+
+              - url: /components/extractors/other/ukg-hr/
+                title: UKG HR
 
               - url: /components/extractors/other/weather-api
                 title: Weather API
@@ -557,6 +575,15 @@ items:
 
               - url: /components/writers/database/synapse/
                 title: Synapse
+
+          - url: /components/writers/erp/
+            title: ERP
+            items:
+              - url: /components/writers/erp/mpohoda/
+                title: mPOHODA
+
+              - url: /components/writers/erp/pohoda-mserver/
+                title: POHODA mServer
 
           - url: /components/writers/storage/
             title: Storage
