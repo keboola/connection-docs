@@ -8,7 +8,7 @@ redirect_from:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PageMeta from '../../../../components/getting-started/PageMeta.astro';
-import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import Prereqs from '../../../../components/Prereqs.astro';
 import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
 <PageMeta genre="How-to" guide="Going further" />
@@ -17,10 +17,9 @@ A side trip from [Load data into Storage](/getting-started/load/): a source behi
 than a public URL. Every database connector Keboola has works this way, so walking one teaches all
 of them.
 
-**Where you are:** you can load a public file already. **When you finish:** three tables in
-Storage, pulled out of a live database.
-
 <Prereqs needs={['project']} tabs={3}>
+  <span slot="from">you can load a public file already.</span>
+  <span slot="to">three tables in Storage, pulled out of a live database.</span>
   <li>
     <strong>Keboola's sample Snowflake database,</strong> whose login is printed on this page.
   </li>
@@ -43,7 +42,7 @@ config delete reports that it moved the configuration to the trash and names
 The sample database's host, user, password and schema were public in this page long before this
 edit; they are a shared read-only demo, not a secret.
 
-VERIFY(owner): only the CLI path was walked, so "the UI and Prompt paths name the bucket after the
+VERIFY(Nikita): only the CLI path was walked, so "the UI and Prompt paths name the bucket after the
 configuration" in the note under Check it worked is reasoning from how the connector behaves, not
 something anyone watched happen. One UI run settles it. */}
 
@@ -84,19 +83,19 @@ type into that form are the ones in **The sample database** above.
 
 1. Go to **Components** and click **Add Component**.
 
-   ![Screenshot - Add a component](/getting-started/load/db-picture1.png)
+   ![Screenshot - The Components page, with Components highlighted in the top navigation and a red arrow pointing at the green Add Component button on the right](/getting-started/load/db-picture1.png)
 
 2. Search for the **Snowflake** data source.
 
-   ![Screenshot - Find the Snowflake data source](/getting-started/load/db-picture2.png)
+   ![Screenshot - The Add New Component page searched for Snowflake, with red arrows on the search box, the Snowflake Data Source card and its Add Component button, next to the Snowflake Data Destination card](/getting-started/load/db-picture2.png)
 
 3. Click **Add Component**, then **Connect To My Data**.
 
-   ![Screenshot - Connect to my data](/getting-started/load/db-picture3.png)
+   ![Screenshot - The Snowflake data source dialog with the green Connect To My Data button next to the blue Use With Demo Data button](/getting-started/load/db-picture3.png)
 
 4. Name the configuration, describe it, and click **Create Configuration**.
 
-   ![Screenshot - Create the configuration](/getting-started/load/db-picture4.png)
+   ![Screenshot - The Snowflake dialog with Name and Description filled in, above the Create Configuration button](/getting-started/load/db-picture4.png)
 
    One configuration is one database connection, so this walk needs exactly one. A project that
    reads two databases has two.
@@ -105,7 +104,7 @@ type into that form are the ones in **The sample database** above.
 
 6. Click **Test Connection and Load Available Sources**.
 
-   ![Screenshot - Credentials](/getting-started/load/db-picture5.png)
+   ![Screenshot - The Credentials section filled in with host kebooladev.snowflakecomputing.com, HELP_TUTORIAL as username, database and schema, warehouse DEV, and an arrow on Test Connection and Load Available Sources](/getting-started/load/db-picture5.png)
 
    Once it saves, the **Password** field shows a long value that is not what you typed. That is
    expected: Keboola encrypts the field on save and keeps only the cipher, so nothing reads the
@@ -114,12 +113,12 @@ type into that form are the ones in **The sample database** above.
 
 7. Under **Select sources**, pick `OPPORTUNITY`, `ACCOUNT` and `USER`.
 
-   ![Screenshot - Select sources](/getting-started/load/db-picture6.png)
+   ![Screenshot - The Select sources section with the Select database sources list open on schema HELP_TUTORIAL, showing the cars, countries, DATATYPES and USER tables, and red arrows on the list toggle and on USER](/getting-started/load/db-picture6.png)
 
 8. Click **Save and Run Configuration**. The run connects to the database, executes one query per
    table, and writes the results into Storage.
 
-   ![Screenshot - Tables selected](/getting-started/load/db-picture7.png)
+   ![Screenshot - The Select sources section listing HELP_TUTORIAL / ACCOUNT, HELP_TUTORIAL / OPPORTUNITY and HELP_TUTORIAL / USER, with a red arrow on the Save and Run Configuration button below](/getting-started/load/db-picture7.png)
 
 **Advanced Mode**, top right of the configuration page, is where incremental fetch, incremental
 load and hand-written SQL live. This walk does not need them.
@@ -238,3 +237,5 @@ The **UI** and **Prompt** paths name the bucket after the configuration, so your
 - [Load from Google Sheets](/getting-started/load/googlesheets/) is the other side trip: a source
   behind a consent screen rather than a password.
 - [Data source connectors](/components/extractors/) lists every database Keboola reads.
+
+**Next:** [Use a workspace →](/getting-started/transform/workspace/)

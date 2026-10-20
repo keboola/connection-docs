@@ -4,9 +4,9 @@
 // Two consumers: CourseLine.astro, which draws the course as a line of dots
 // (vertically on the hub, as a short bar at the top of every step), and
 // src/integrations/page-markdown.mjs, which prints the same list into the
-// markdown twin. PageMeta used to carry no step numbers because numbering
-// breaks the moment a page moves (2026-09-02); with the order kept here, a
-// move is one edit and every number follows it (2026-09-29, DECISIONS.md).
+// markdown twin. Numbers written into each page break the moment a page
+// moves; with the order kept here, a move is one edit and every number
+// follows it (notes/getting-started/DECISIONS.md).
 //
 // `key` is the page's last slug segment and what a page passes as
 // <CourseLine current="…" />. `short` fits under a dot at phone width;
@@ -37,10 +37,11 @@ export const COURSE = [
 
 /** The markdown twin's version of the hub's vertical line: a numbered list. */
 export function courseListText() {
-  return COURSE.map(
+  const lines = COURSE.map(
     (s, i) =>
       `${i + 1}. [${s.title}](${s.href}): ${s.outcome}` + (s.term ? ` Keboola calls it ${s.term}.` : ''),
   );
+  return lines;
 }
 
 /** The markdown twin's version of the bar at the top of a step: where the page sits. */
@@ -55,3 +56,4 @@ export function courseBarText(key) {
   if (after) line += ` After it: ${after.title} (${after.href}).`;
   return [line];
 }
+

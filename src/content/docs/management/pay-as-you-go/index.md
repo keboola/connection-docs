@@ -1,6 +1,7 @@
 ---
 title: Pay As You Go (Free Plan)
 slug: 'management/payg-project'
+description: 'The limits of a Free Plan project, its free monthly minutes and how to buy more, how to upgrade it to a standard project, and when an inactive one is deleted.'
 ---
 
 
@@ -22,7 +23,7 @@ Free Plan projects have the following limits:
 - **Time travel:** is not supported and there is no option to restore data if bucket or table has been accidentaly deleted.
 - **Support:** while we strive to provide great support even under the Free Plan, there is no service-level agreement (SLA) and we will deal with the tickets on a best-effort basis. 
 
-<!-- VERIFY(owner): a new Free Plan project (6375, us-east4, 2026-10-01) reported storage.dataSizeBytes = 50000000000 (50 GB) through /v2/storage/tokens/verify, read while Billing still asked to activate the account; Create or join a project says 50 GB. One of the two is wrong. -->
+<!-- VERIFY(Nikita): a new Free Plan project (6375, us-east4, 2026-10-01) reported storage.dataSizeBytes = 50000000000 (50 GB) through /v2/storage/tokens/verify, read while Billing still asked to activate the account; Create or join a project says 50 GB. One of the two is wrong. -->
 
 ## DWH Backend
 In Pay As You Go projects, only a Keboola-managed backend is available. You can use your own database ([Bring Your Own Database](/storage/byodb/)) within any of the subscription plans.
@@ -67,3 +68,5 @@ and that you have not requested the deletion to be canceled.
 
 If, during those 45 days, there has been no new activity in your project and we have not received a request from you to cancel 
 the deletion, we will then permanently delete the project.
+
+**Next:** [Organizations](/management/organization/)

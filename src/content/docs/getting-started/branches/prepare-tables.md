@@ -4,6 +4,7 @@ slug: 'getting-started/branches/prepare-tables'
 description: "Set up the table-manipulating configurations used by the development branches walkthrough: a data source connector and an SQL transformation in production."
 redirect_from:
   - /tutorial/branches/prepare-tables/
+prev: 'Development branches'
 ---
 
 
@@ -69,4 +70,6 @@ five values from the source data: dates and amounts from when bitcoin had the mo
 ![New table](/getting-started/branches/figures/snflk-new-table.png)
 
 Now you have the production set up. In [the next section](/getting-started/branches/prepare-files/) of our tutorial, you'll set up 
-a Python transformation using file storage. After that, you can give the branches a test run. 
+a Python transformation using file storage. After that, you can give the branches a test run.
+
+**Next:** [Prepare the file configurations →](/getting-started/branches/prepare-files/)

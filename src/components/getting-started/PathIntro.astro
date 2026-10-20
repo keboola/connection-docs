@@ -1,10 +1,8 @@
 ---
 // The tab convention, stated once, on every page that has tabs.
 //
-// Three ways, not two. Michal asked the question directly on 2 September —
-// "Mám tam nějaký prompt? Jak to zpracuje to CLI?" — and Jordan had agreed the
-// same mechanism on 5 August ("combined UI + API format"). A page that shows
-// only the prompt and the clicks answers neither.
+// Three ways, not two: a page that shows only the prompt and the clicks leaves
+// the reader who works from a terminal or the API with nothing.
 //
 // TAB LABEL CONTRACT — these three strings, byte for byte, on every page:
 //
@@ -14,22 +12,22 @@
 // localStorage under the *label text*, so a page that spells a label
 // differently silently drops out of the sync and resets the reader.
 //
-// Plan mode, measured on 2026-09-08 (two staged runs in project 264): it adds
+// Plan mode, measured in two staged runs: it adds
 // one approval of a written plan and then asks for every change exactly as
 // before — 8 approvals to the control run's 7. It is a review gate, not a way
 // to approve once, and the wording below says so.
 //
-// Every task page carries three tabs as of 2026-09-15; `write/` keeps two, so
+// Every task page carries three tabs; `write/` keeps two, so
 // both shapes exist. `manual={false}` is now an EXTRA paragraph rather than a
 // branch that replaces the intro: on app/ it used to win over `tabs={3}` and
-// hide the CLI tab from the reader entirely (guide test, 2026-09-15).
+// hide the CLI tab from the reader entirely.
 //
 // The same wording in plain text lives in ./pathintro.mjs, because the markdown
 // twin has to carry the "these are alternatives" sentence too — without it an
 // agent reads the three flattened sections as three things to do in sequence.
 //
-// 2026-09-29: three short lines instead of three paragraphs (179 words on every
-// task page, the block in David Esner's screenshot). The approvals, tool
+// Three short lines instead of three paragraphs, which put 179 words on every
+// task page. The approvals, tool
 // permissions and plan mode detail moved to the hub, under "How every page
 // works", where every page links; the twin keeps the full wording.
 //

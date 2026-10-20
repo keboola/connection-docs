@@ -35,6 +35,14 @@ not yet done).
 
 ## Pending
 
+**Status 2026-10-12** (Jordan's review on #1116, item 8, found this table stale): the first row
+was done on 2026-09-09 and undone on 2026-09-14, when `project/` became a page again (see the
+row about the hub's "Get a project" section under *Deliberate deletions*). The other five moves
+never happened, so nothing in them was lost: `automate/` still has "Phases and tasks",
+`transform/` "How a transformation works", `write/` "Sending data out" and its failure modes
+under "If it goes wrong", and `load/` teaches one configuration with a row per file under "How
+loading works". Whether any of them should move to the section pages named here is open.
+
 | Content | From | Planned destination |
 |---|---|---|
 | Project isolation, the three entry routes, what a stack is, the five locators, the Kai orientation prompt, the two checks and the three sign-in failure modes | `project/index.mdx` | `getting-started/index.mdx` → **Get a project** (routes, project + stack in one paragraph, **Find your way around**, the tip, **Check it worked** and **If it goes wrong** as two bold-led paragraphs); the two `VERIFY(owner)` comments travelled with their facts; `/getting-started/project/` redirects to the hub | merged 2026-09-09 |
@@ -68,7 +76,7 @@ not yet done).
 | `write/writing11.png` | `write/index.mdx:196` | Deleted 2026-09-22: an unmasked top bar (organization, project, branch, avatar) and the retired sample world. It also contradicted its own step, which says the click opens the spreadsheet while the picture showed a Keboola page. |
 | `ad-hoc/ex-bigquery-6.png`, the service-account key screenshot | `ad-hoc/index.md:114` | Deleted 2026-09-22, not masked: its only content was a pasted Google service-account JSON (private key, client_email, project_id), and the sentence above it already says what to paste. House style and Google's own guide both say not to use images of text or code. The masked twin of the same file survives at the old path in PR #1100. |
 | The hub's hero clip `map-tour.mp4` (octopus tour, 25 s) and its poster | `index.mdx` | The sample world changed on 2026-09-03; a clip answering the old question under the new text would mislead. Replaced by `outlook-tour.mp4`, shot from the live pipeline in project 264. The two files stayed in `public/` unreferenced until 2026-09-16, when they were deleted: 1.15 MB serving no page, and the last octopus-era asset in the repo. |
-| "No Kai path here" call-out and the project page's own `PageMeta` (5 min) | `project/index.mdx` | The step is now a section of the hub; its five minutes fold into the hub's total, to be re-measured in the phase-3 stopwatch pass. |
+| "No Kai path here" call-out and the project page's own `PageMeta` (5 min) | `project/index.mdx` | The step is now a section of the hub; its five minutes fold into the hub's total, to be re-measured in the phase-3 stopwatch pass. **Superseded 2026-09-14:** `project/` is a page again, with its own `PageMeta`. |
 
 
 | Content | Why | Where the information survives |
@@ -146,7 +154,7 @@ and in its own clip. `app/grid-preview.png` stays and is reused on the explainer
 page text changed.
 
 
-## 2026-09-29 — Getting Started text pass (David Esner's "too wordy"; DECISIONS.md, same date)
+## 2026-09-29 — Getting Started text pass (David Esner found it too wordy; DECISIONS.md, same date)
 
 Moved, so not lost: PathIntro's approvals, tool permissions and plan mode paragraph → the hub,
 "Approvals and plan mode". Each step's "Where you are / When you finish" paragraph → the first row
@@ -241,3 +249,141 @@ Nikita's decision). What went with it:
 | check/ | "in an older project our first run failed at the app phase with `staffing_outlook` already rebuilt" | no app phase; the bullet now gives the transformation failing after the loads |
 | automate/ | the cost box's "between 2½ and 6 minutes a run, depending mostly on how long they waited to start" and "10 to 30 minutes a month" | extend/jobs/ bills only `standard` jobs and not waiting time: about 2½ and 4 minutes, 10 to 20 a month |
 | app/ | CLI tab: the configuration ID as "the one a flow task takes", and "A flow task that deploys the app makes the same call, so a broken app would turn a scheduled run red" | the guide's flow has no app task any more |
+
+## 2026-10-02: Leftovers outside the retitle
+
+After the retitle (DECISIONS.md, same date) a guide test found pages that still described the guide
+in its old order or linked it by old names. What went:
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| home (`index.md`) | "load data, transform it with SQL, deliver the result, and put it on a schedule. It starts by getting you a project, free." | #1187's wording (e37355af4), with Kai explained at first mention as this branch asked: "With Kai, the AI assistant in your project, you build a real pipeline in about 30 minutes plus sign-up: load data, transform it with SQL, ask it a question, put an app on it and run it every week. It starts by getting you a project, free." (merged over this branch's longer wording) |
+| ad-hoc/ | the opening "After you have loaded your tables, either from a URL or using a data source connector, manipulated the data in SQL, written it into Google Sheets, and set everything to run automatically, let's take a look at some additional Keboola features related to doing ad-hoc analysis." | dropped: the page uses none of those steps, and the hub gives the guide's order. The new opening says where the side trip branches off and what it does |
+| ad-hoc/ | "This part of the tutorial shows how to work with arbitrary data in Python in a completely unrestricted way. Although our examples use the Python language, the very same can be achieved using R." and "Before you start, you should have a basic understanding of the Python language." | the new opening ("any code you like", "The examples use Python; the same can be done in R") and the **You need** box, whose last item is a basic understanding of Python |
+| ad-hoc/ | `## Final Note`: "This is the end of our stroll around Keboola. On our walk, we missed quite a few things: Applications, Python and R transformations, Snowflake features, to name a few. However, teaching you everything was not really the point of this tutorial. We wanted to show you how Keboola can help in connecting different systems together." | dropped as the end of a tutorial the page no longer ends. What it listed has homes: Applications, the component category the 2018 text meant, is its own section under Components (`/components/applications/`); the Wrap Up links Python Transformation and Workspaces for R; Going further's **Pick your next thing** covers SQL, Python, R and dbt transformations. The hub says what the guide is for |
+| ad-hoc/ | the links "Return to the beginning" and "contact us" | the new **Going further** list, as Getting started with Keboola and Keboola Support |
+| ad-hoc/ | the caution box as the page's first block, titled "These Google Cloud steps describe an older console" | under the opening and the **You need** box, titled "Parts of this page are out of date": the same Google paragraph, then a line pointing to the note at the start of Exploring Data, which already says that sandboxes are legacy |
+| ad-hoc/ | `index.md`, with three `<!-- -->` authoring comments | `index.mdx`, for the `PageMeta` line and the `Prereqs` box the other side trips have; the comments are `{/* */}` with the same text |
+| going-further/ | "Two worked examples sit in this tier"; "what it does beyond the arc" | "Two of the side trips above are worked examples"; "beyond this guide" |
+| `components/extractors/database/` index, mysql, ms-sql, oracle, postgresql | the link texts "Tutorial - Loading Data with Database Extractor", "Tutorial - Loading Data from Database" and "Loading Data with Database data source connector" | the target's title, Load from a database |
+| storage/api/tde-exporter/ | "This component is normally a part of the [Tableau Writer](/getting-started/write/), but it can also be used as a standalone component.", whose link opened the Google Sheets side trip (its old target `/tutorial/write/` redirects there) | "In the UI, this component is the [Tableau TDE](/components/writers/bi-tools/tableau/) data destination connector. Through the API you can also run it on its own, with a stored configuration or a custom one sent in the request.": the Storage API index lists `tde-exporter` itself as Tableau TDE, a writer, and the page's own Running the Component section covers both kinds of configuration. In the next paragraph, `the *Storage* --- *File uploads* section` is "the *Files* section of *Storage*", the name `storage/files/` gives it |
+| ad-hoc/ | "[Transformation](/getting-started/transform/)" in the Wrap Up, the SQL page, for Python code | "[Python transformation](/transformations/python-plain/)" |
+| branches/ | the title "Development Branches"; the footers "Next: Overview" on ad-hoc/ and "Previous: Overview" on prepare-tables/, both opening that page | "Development branches", as the sidebar, the hub and Going further have it; the two footers name the page through `next:` and `prev:` in their frontmatter |
+| branches/ | "The feature Development Branches allows you to modify"; the link texts "Preparing table manipulating configurations", "Preparing file manipulating configurations", "Working with tables in a branch", "Working with files in a branch" and "Project diff" | "Development branches let you modify"; each link now says its page's title (Prepare the table configurations, Prepare the file configurations, Work with tables in a branch, Work with files in a branch, Review the project diff) |
+
+The fact-checker, guide-tester and checker rounds the same day added these, all of the same kinds:
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| project/ | the footer "Previous: Overview", which opens the hub | "Previous: Getting started with Keboola", through `prev:` in its frontmatter |
+| going-further/ | "Everything you just did by clicking can be done by an AI assistant instead." | "An AI assistant can carry out most of this guide's steps for you", because the guide is prompt first and the hub names what no assistant can do (a signup form, a Google consent screen, a branch merge) |
+| going-further/ | "the one you have been using through this guide's **Prompt** tabs" | "the one this guide's **Prompt** tabs use", which holds for a reader on the UI or CLI tabs too |
+| going-further/ | the `variables` link to `/transformations/variables/`, a redirect stub | `/components/variables/`, the page the stub forwards to |
+| overview/ | "a running pipeline in about 30 minutes" | "a running pipeline in about 30 minutes with Kai, plus sign-up", the hub's time as #1187 set it (merged over this branch's "a scheduled pipeline and an app…") |
+| check/ | "delivery on Send a table to Google Sheets, and apps on Build an app", in the old order | apps first, then the spreadsheet delivery as the side trip it is |
+| write/ | the description "Send the table you just built out of Keboola" | "Send a Storage table out of Keboola": the page is reached from anywhere, and its **Where you are** already says the table is in Storage |
+
+A second commit the same day holds the additions that bring new facts to ad-hoc/, so they can be
+dropped on their own (the link retargets and the TDE wording above stay with the requested link
+fixes):
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| ad-hoc/ | "Querying public data is free up to 1 TB a month without enabling billing; past that you need to enable billing." | "free up to 1 TB a month, but the storage bucket below needs a project with billing enabled all the same: Google's free tier needs a billing account" (Google's free-tier page). The **You need** item asks for billing too |
+| ad-hoc/ | "The following part of the tutorial will be updated soon. Please be aware that sandboxes now exist only in their legacy form" | "The following part of the tutorial still shows sandboxes, which now exist only in their legacy form", then "To follow along today, create a Python workspace instead": the promise was never kept, and the page says what to do |
+
+Nothing went to MISSING.md: no removed sentence was the only place a fact lived.
+
+## 2026-10-08 — The whole guide with Kai gets its own page (DECISIONS.md, same date)
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| hub | "## The whole guide with Kai": the three bullets, the timing line, the fold with the generated prompts and its author comment | moved to the new page getting-started/with-kai/ (bullets reworded for the per-step lines the list now carries); the hub keeps one sentence that links it |
+| ask/ | "## The same request, as one prompt": the intro, the prompt block (load, forecast and join in one request), "The one-prompt version works, and it is the faster route…" | the two measured observations (Kai stops after the first part; still about a dozen approvals) are the with-kai fold "Why not one prompt for everything"; the prompt block was never run on the current sample and would be a second copy of the prompts; "the faster route" was never measured (both runs on the current sample, 3 and 8 Sep, stalled after the first part; the 2 Sep run of the older block on the earlier dataset ran end to end in 14 min with 11 approvals, and the four-prompt run took 14.4) |
+| ask/ | the description's "…and the same pipeline can be asked for as one prompt" | the page no longer offers it |
+
+## 2026-10-09 — Getting Started duplication audit (DECISIONS.md, same date)
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| with-kai/ | the typed Kai prerequisite (Kai Agent button, Free Plan has it, an admin turns it on, Get started with Kai, Kai security and privacy) | the same facts are now one shared item, `SHARED.kai` in components/getting-started/prereqs.mjs, which with-kai/ renders with `needs={['project', 'kai']}`; the Prompt tab line of every step reads the same wording |
+| with-kai/ | "What Kai asks": 15 approvals in both runs, reads ask for none, how to set Always allow (card button, gear, Tools, tool permissions link), the five-minute timeout | hub "Approvals and plan mode" owns the how (Always allow, reads do not ask, the timeout sentence moved there); the total 15 is the sum of the cards' Expect lines; the bullet keeps "each step below says how many to expect", Always allow in one clause (Nikita, 2026-10-08) and the link; the per-step counts are on the cards |
+| with-kai/ | "If Kai asks you something": the full cold-day explanation (under 18 °C, no rain, the sample's one summer, empty cell means no history) | transform/ Prompt tab says it, with the question's wording in its comment; with-kai's transform card carries a note with the choice and a link (course.mjs `note`, its bold label checked against transform/); How it goes points to the card |
+| with-kai/ | "What you have now": the recap prompt ("List everything the Getting Started guide created…") and "It only reads, so it asks for no approval by default" | verbatim on check/ "What you should have", which the paragraph now links; the run note stays in the comment |
+| with-kai/ | "Sharing the app": "asks twice and" | the app card's Expect line says it ("publishing it asks twice"), and app/ step 5 |
+| with-kai/ | "A look at the whole run: Check Storage and Jobs" and the closing **Next:** line (check/ or the explained steps) | the Next button (frontmatter, to check/), the recap paragraph's check/ link and the step link on every card |
+| hub | "Right after step 1 comes the fast way: The whole guide with Kai builds steps 2 to 6 … the step pages also show where each setting lives, and work without Kai." | the fork card in the course list right above it; project/'s closing line keeps the which-to-pick half |
+| hub | "How every page works", Prompt bullet: "A new Free Plan project has Kai from the start; elsewhere an organization admin switches it on once; see Get started with Kai." | project/ "Check it worked", which the bullet now links |
+| hub | Prereqs: "we ran this guide's Prompt path on one" | project/ Free Plan item says it |
+| project/ | "Ask Kai to orient you" tip: "Look for Kai Agent in the top bar. A new Free Plan project has it from the start; elsewhere it may have to be enabled first, and it is not on every stack, so see Get started with Kai if you cannot find it." | merged into project/ "Check it worked", Kai Agent bullet (Free Plan from the start, an admin turns it on, on the stacks that have Kai, Get started with Kai) |
+| project/ | closing line: "about 30 minutes" | with-kai/ PageMeta and the hub fork card (`KAI_TRACK_TIME` in course.mjs) |
+| automate/ | "Run it": "In our Free Plan project the whole run took 5 min 38 s: 4 min 33 s for the loads, about two minutes of which the jobs waited in the queue, and 53 seconds for the transformation." | check/ "Reading a flow run", verbatim, next to its screenshot; the Jobs bullet links it |
+| automate/ | "Check it worked": "phases run in order, so when a later one fails, the ones before it are done. Check Storage and Jobs shows how to read the run, or ask Kai to read it: `My flow run failed. Which task failed, and why?`" and its run note | check/ "Reading a flow run" ("Error is not all lost" and the "Let Kai read the run for you" tip with the same prompt and its run note); the bullet links it |
+| automate/ | cost box: "The flow does not restart the app, which is fine for an app that reads staffing_outlook when someone opens it, as ours does." | automate/ "Phases and tasks": "The app is not in the flow. Ours reads staffing_outlook each time someone opens it" |
+| check/ | the column fold's full cold-week explanation (cold and dry band, five of six cafés, the week in the screenshots had three short-handed rows, 65.5 units a person, the grid is right to be quiet) | transform/ fold "The ten columns, upper-case names, and empty cells", which the fold now links; check/ keeps the rule and the failure signals |
+| load/ | "Ask Kai first" tip: "a question that only reads asks for no approval by default", "If Kai proposes a change, it asks before making it unless you set that tool to Always allow" | hub "Approvals and plan mode"; the tip keeps its two prompts, the Troubleshooting link, the name swap, the redo-the-check step and the terminal line |
+| transform/ | the same two sentences of its "Ask Kai first" tip | as for load/ |
+| load/ | "The sample data": "; the next page joins them" | load/'s lede says it |
+| load/googlesheets.mdx | "Going further" bullet: "Load from a database is the other side trip: a source that needs credentials rather than a consent screen." | moved, same words, into the page's closing **Next:** line |
+| with-kai/ | the cards' screenshots: kai-forecast, kai-transform, kai-ask, grid-preview, kai-flow, with their alt text typed a second time in course.mjs | the images stay on their step pages; the cards now show their own frames of the finished step from the 2026-10-08 run (public/getting-started/with-kai/) |
+| with-kai/ (app card) | the frame of the Apps builder at Draft ready, Not live yet, with the draft grid (app-done.png, 8 October run) | the card now shows where the app's prompt goes (app-where.png, the empty project 6429's Apps page with the prompt pasted, Nikita asked for the app on its card, 2026-10-09); the card's Done when line still names Draft ready, and app/ step 3 describes it; app/ keeps its builder screenshots (kai-builder.png just after sending, grid-preview.png the draft grid), so no image in the guide shows the Draft ready line itself any more |
+
+## main's `/tutorial/` pages, replaced by this rebuild (#1116; Jordan's review, item 8)
+
+The tables above follow the intermediate octopus branch. These rows map what `main` still
+serves under `/tutorial/` to where it lives now. Each old slug has a `redirect_from` on its new
+page. The pages that moved whole, `/tutorial/ad-hoc/`, the seven under `/tutorial/branches/`
+and the six under `/tutorial/onboarding/` (to `getting-started/ad-hoc/`,
+`getting-started/branches/` and `overview/onboarding/`), moved as they were and are not
+repeated here.
+
+| Content | From (`main`) | Now | Status |
+|---|---|---|---|
+| The opening paragraph (extract, transform, store, write, automate) | `tutorial/index.md` | the hub's opening paragraph: where data lives, what Keboola does with it, and what Kai does for you | merged |
+| Prerequisites: the platform overview link | `tutorial/index.md` | `project/` links the overview where it explains stacks (`/overview/#stacks`); the hub sends a team planning a rollout to Platform Onboarding | moved |
+| Prerequisites: get a project (sales@keboola.com, the free project wizard) | `tutorial/index.md` | `project/`: three routes, the Free Plan sign-up, an invite to your company's project, and "Talk to us" through Keboola's contact page instead of the e-mail address | moved |
+| Prerequisites: a developer's own development project | `tutorial/index.md` | dropped: this guide is for using a project; `going-further/` links the component tutorial for building one | dropped |
+| Prerequisites: a basic understanding of SQL | `tutorial/index.md` | dropped: on the Prompt tab Kai writes the SQL, and the UI tab prints it with an explanation of each part | dropped |
+| "Upon completing this tutorial" (four outcomes) and the basic steps list (load manually, manipulate, write to Google Sheets) | `tutorial/index.md` | the hub's course list (seven steps, with what you will be able to do); writing to Google Sheets is a side trip, `write/` | replaced |
+| The advanced steps list (Google Sheets and database sources, a workspace, a flow, ad-hoc analysis, development branches, the CLI) | `tutorial/index.md` | the side trips `load/googlesheets/`, `load/database/`, `transform/workspace/`; the flow is a main step, `automate/`; ad-hoc analysis, branches and the CLI are in `going-further/` | moved |
+| Manual loading suits a proof of concept, connectors suit production | `tutorial/load/manual.md` | `load/` "How loading works": the HTTP data source connector can be re-run, scheduled and put in a flow. The proof-of-concept sentence was cut on 2026-09-29 (row above) | merged |
+| The four sample files, opportunity, account, user and level | `tutorial/load/manual.md` | `public/getting-started/*.csv`, and `vercel.json` 308s the old `/tutorial/*.csv` URLs there. `opportunity.csv` is the sample for `data-apps/getting-started` and `build-locally`, `level.csv` for `load/googlesheets/`; `account.csv` and `user.csv` stay for the old URLs and as extra sample tables on `components/extractors/storage/http/`, which also uses `level.csv` and `opportunity.csv` | moved |
+| "All characters in this data are fictitious…" | `tutorial/load/manual.md` | retired with that dataset; `load/` declares Boolabean fictional in the first sentence of "The sample data" | dropped |
+| The CSV Import walk: a configuration per file, Select file, the destination `in.c-csv-import.*`, Upload | `tutorial/load/manual.md` | dropped: CSV Import is deprecated (`load/`'s comment). `load/` builds one HTTP data source configuration with a row per file, which a flow can re-run | dropped |
+| The naming-conventions note and the best-practices link | `tutorial/load/manual.md` | `load/` UI tab, with the link to the best practices cheat sheet; `transform/` explains folders | moved |
+| Buckets, tables and the Data Sample tab | `tutorial/load/manual.md` | `load/` "Check": the bucket's Storage page and a table's **Data Sample** tab | moved |
+| Creating the transformation (backend, name, description, folder) | `tutorial/manipulate/index.md` | `transform/` UI tab, "Create the transformation" | moved |
+| How a transformation runs (a dedicated schema, cloned inputs, unloaded outputs) and the three building blocks | `tutorial/manipulate/index.md` | `transform/` "How a transformation works"; the safeguard and lineage sentence was cut on 2026-09-29 (row above) | moved |
+| Input mapping (New Input, the Source search, the generated table name), the **Changed in Last** filter and the link | `tutorial/manipulate/index.md` | `transform/` UI tab, "Set the input mapping", and the paragraph on what input mapping can also do | moved |
+| Output mapping (the table name, the generated destination, the bucket created on the first run) | `tutorial/manipulate/index.md` | `transform/` UI tab, "Set the output mapping" | moved |
+| The three queries that build `opportunity_denorm` (level labels, the probability class, the join of opportunity, user and account), in Snowflake and BigQuery SQL | `tutorial/manipulate/index.md` | retired with that dataset; `transform/` builds `staffing_outlook` in both dialects, and "What the SQL has to do" explains each part as the old page did | dropped |
+| New Code, naming the code, Save | `tutorial/manipulate/index.md` | `transform/` UI tab, "Write the queries" (**Create Multiple Queries**, the code named Code, the rename pencil) | moved |
+| Running the transformation (the job's four steps, Jobs, the notification) and **Recently updated by** | `tutorial/manipulate/index.md` | `transform/` "Run it and check the result", and its fold on the columns | moved |
+| Using a workspace: create it, map and load the data, read-only access to all Storage, Connect and the web IDE | `tutorial/manipulate/workspace.md` | `transform/workspace/`, rewritten on the guide's table with the three tabs | moved, rewritten |
+| Writing data out (reverse ETL; BI tools, databases and applications as destinations) | `tutorial/write/index.md` | `write/` "Sending data out" | moved |
+| The Google Sheets destination walk: authorize (external authorization too), the table, a new spreadsheet, Update rows, Run, open the sheet | `tutorial/write/index.md` | `write/`, the same walk for `staffing_outlook` instead of `opportunity_denorm` | moved |
+| Why flows: the same steps have to repeat, in order, on a schedule | `tutorial/automate/index.md` | `automate/` opening and "Phases and tasks" | moved |
+| Building the flow: Create Flow, the folder, the first step, two extractions in parallel in one step, the transformation, the Sheets destination | `tutorial/automate/index.md` | `automate/` UI tab: the two connectors in one phase, then the transformation; the Sheets destination optional | moved |
+| Repointing the transformation's input mapping at the extracted tables | `tutorial/automate/index.md` | no longer a step: the guide's transformation reads the connectors' tables from the start; `automate/`'s fold "If you took the connector side trips" keeps the repoint for a hand-built transformation | moved |
+| A daily schedule at 6:15 UTC | `tutorial/automate/index.md` | `automate/` "Set a schedule": every Monday at 06:00 in your own time zone, weekly because of the Free Plan's minutes | changed |
+| Notifications on success, warning, error or processing | `tutorial/automate/index.md` | `automate/` "Set up notifications" | moved |
+| Loading from a database: the Snowflake data source and the sample database credentials, Advanced Mode | `tutorial/load/database.md` | `load/database/`, the same sample database, with the three tabs | moved, rewritten |
+| Loading from Google Sheets: a spreadsheet from `level.csv`, authorization, picking the file and the sheet, **Use With Demo Data** | `tutorial/load/googlesheets.md` | `load/googlesheets/`, the same walk | moved, rewritten |
+| "What's Next" and "If You Need Help" on every page | all eight pages | the **Next** footer, and "If it goes wrong" on every step page except `automate/`, which sends a failed run to `check/` ("Reading a flow run") | replaced |
+
+## 2026-10-13 — The tabbed flow is final (DECISIONS.md, same date)
+
+| Page | What | Now | Status |
+|---|---|---|---|
+| with-kai/ | "How it goes": where each prompt goes (Kai Agent, the app's into the Apps page), when to paste the next, what Kai asks, what to do if Kai asks something or a step comes out different | each step page's Prompt tab says where its prompt goes and how many approvals to expect (ask/: its box, and its note that reading asks for no approval); the hub's "How every page works" and "Approvals and plan mode"; transform/'s cold-week answer; each page's Check and the folds under it. Dropped: the tip to point at an icon-only navigation to see the names, and the note that in the 8 October run all the Kai Agent prompts went into one chat (DECISIONS.md, 2026-10-08) | moved (already there), two details dropped |
+| with-kai/ | the clip `where-kai.mp4` and its poster | project/, "Check it worked", after the Kai Agent check | moved |
+| with-kai/ | the box (a project, Kai, Apps for the app step) and the state cards | project/'s box and Kai Agent check; app/'s box names Apps | moved (already there) |
+| with-kai/ | the prompt cards: the seven prompts, Expect, Done when, a frame per step, the progress tracker | the prompts and the approval counts are on the step pages' Prompt tabs; the Done when digests, the five frames (load-done, transform-done, ask-done, app-where, flow-done) and the tracker are deleted | dropped: the guide goes page by page, and each page's Check says when a step is done |
+| with-kai/ | the fold "Why not one prompt for everything" (the 3 and 8 September observations) | not on a page; recorded in DECISIONS.md, 2026-09-08 (both runs, and the 14.4-minute, 12-approval control run) | dropped: no page offers the whole guide at once any more |
+| with-kai/ | "What you have now" and its pointer to the recap prompt | check/, "What you should have", which holds the recap prompt since 2026-10-09 | moved (already there) |
+| with-kai/ | "What is left to you": notifications, publishing, the check | automate/ (notifications), app/ (publishing), check/ | moved (already there) |
+| with-kai/ | the intro: the guide's question, and that the page holds every prompt in one place | the hub states the question; each step page holds its own prompts | dropped with the page |
+| hub | the fork card "Steps 2 to 6 in one sitting: The whole guide with Kai" | none | dropped with the page |
+| project/ | the closing line that offered the Kai page first | "Next: Load data into Storage" | changed |
+| load/ to automate/ | the track label "Getting Started, step by step" | the plain "Getting Started" | changed |
+

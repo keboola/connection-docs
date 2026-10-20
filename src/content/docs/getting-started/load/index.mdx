@@ -8,7 +8,7 @@ redirect_from:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PageMeta from '../../../../components/getting-started/PageMeta.astro';
-import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import Prereqs from '../../../../components/Prereqs.astro';
 import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 import CourseLine from '../../../../components/getting-started/CourseLine.astro';
 import SampleData from '../../../../components/getting-started/SampleData.astro';
@@ -24,6 +24,10 @@ them.
 <Prereqs needs={['project']} tabs={3}>
   <span slot="from">a project with empty Storage.</span>
   <span slot="to">six tables in Storage and two connector configurations you can re-run.</span>
+  <span slot="cli">
+    <a href="/cli/getting-started/">kbagent</a>, connected to your project with write access; for
+    the raw requests, your stack's host and a Storage API token.
+  </span>
 </Prereqs>
 
 <PathIntro tabs={3} />
@@ -33,7 +37,7 @@ new configurations (verified live in project 264, 2026-08-04). Every label, defa
 the visual row form below was read live from project 264 on 2026-09-09 (Download Settings → Path,
 Decompress; Save Settings → Table name, Incremental load, Delimiter, Enclosure; Header & Primary
 Key → Read Header / Set Header / Primary Key). The two configurations and their row counts are the
-2026-09-08 runs recorded in DECISIONS.md; the forecast row was built by Kai with a skip-lines
+2026-09-08 runs recorded in notes/getting-started/DECISIONS.md; the forecast row was built by Kai with a skip-lines
 processor and explicit column names, and that row opens in the code editor only: the Visual
 Editor button is disabled with the tooltip "Can't close the code editor, the configuration is not
 compatible. Revert your changes to allow switching back to the visual editor." (read live
@@ -48,8 +52,8 @@ v0.76.1 and the CI gate checks flags against it, so every flag above exists in b
 Our own connector page (components/extractors/storage/http/index.md) now says "Add Row" too
 (checked 2026-09-09). 2026-09-14: the click-through steps use the base-URL-with-folder + bare-file-name
 convention because that is what Kai built and what the reshot captures show; both conventions
-work, and the 404 bullet explains the slash rule for either. Screenshots 01–07 still show the previous sample's configuration
-name; phase 2 reshoots them from the Boolabean configurations.
+work, and the 404 bullet explains the slash rule for either. The page's PNG screenshots show the Boolabean
+configurations: one from 2026-09-14, the other seven reshot on 2026-10-01 in Free Plan project 6375.
 
 2026-10-01: the whole Prompt tab ran in Free Plan project 6375 (us-east4, BigQuery), both prompts
 word for word except the file host: help.keboola.com/getting-started/boolabean/ answers 404 until
@@ -59,24 +63,46 @@ The load job took 327 s, its first row starting 2.5 min after the run approval, 
 the chat back while it ran and came back with the counts on its own. Screenshots 01, 02, 05, 06
 and 07 and kai-forecast.png were taken that day in 6375 (main-area captures, the account name
 masked); 03 and 04 stay from 264, because Kai's configuration in 6375 points at the preview host
-and its rows carry processors. DECISIONS.md 2026-10-01. */}
+and its rows carry processors. notes/getting-started/DECISIONS.md 2026-10-01. */}
 
-{/* 2026-09-29, David Esner ("strašně moc textu") and Nikita: the sample and the connector are
+{/* 2026-09-29, David Esner (far too much text) and Nikita: the sample and the connector are
 cards and a strip now, and the forecast URL's anatomy is folded. Cut, not moved: the sentence on
 what the sales file cannot say alone, and the "half a story" examples (S02, P07, the rain that
-did not say what it did to the queue). CONSERVATION-REPORT.md, 2026-09-29. */}
+did not say what it did to the queue). notes/getting-started/CONSERVATION-REPORT.md, 2026-09-29. */}
 
 ## The sample data
 
-A fictional café chain, Boolabean: invented sales, rosters and weather, and one real forecast,
-fetched live. Each table is half a story; the next page joins them.
+A fictional café chain, Boolabean: invented sales and rosters, the real weather of summer 2026 in
+each café's city, and a real forecast, fetched live. Each table is half a story.
 
 <SampleData />
+
+Weather data by [Open-Meteo.com](https://open-meteo.com/), under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). `weather_daily` is Open-Meteo's
+historical daily maximum temperature and precipitation for June to August 2026, reshaped into one
+row per café and day with our column names; `forecast` comes from its forecast API when you load it.
+That API is free for non-commercial use, up to 10,000 calls a day
+([terms](https://open-meteo.com/en/terms)), and the guide's weekly flow sends it one request a week.
+
+{/* VERIFY(Jordan): Open-Meteo's terms (read 2026-10-12) limit the free API to non-commercial use
+and 10,000 calls a day, 5,000 an hour, 600 a minute. Whether a weekly call from a customer's
+project, which is what automate/ schedules, counts as non-commercial is an owner's call; Jordan's
+review on #1116, item 7, asked who confirms it. Until then the page states the terms and leaves
+the call to the reader. The terms sat in the fold below until the guide test of 2026-10-12 found
+that a reader who does not open it never sees them. */}
+
+{/* 2026-10-12, Jordan's review on #1116, item 7: the page said the weather was invented, the
+generator said it was real. It is real: all 552 rows in weather_daily.csv (1,104 values) equal what
+archive-api.open-meteo.com returned on 2026-10-12 for the six coordinates, June 1 to August 31,
+timezone Europe/Prague. Open-Meteo's licence page asks for "Weather data by Open-Meteo.com" with a
+link next to the data, a link to the licence, and a note of changes, which the paragraph above
+gives. scripts/gen-boolabean.py rebuilds the five CSVs byte for byte, offline from the committed
+weather or with --fetch. */}
 
 <details>
 <summary>What the forecast URL asks for</summary>
 
-[Open-Meteo](https://open-meteo.com/) is free, with no account and no key. One request returns the
+[Open-Meteo](https://open-meteo.com/) needs no account and no key. One request returns the
 next seven days for all six cafés at once, as CSV:
 
 ```text
@@ -85,8 +111,8 @@ https://api.open-meteo.com/v1/forecast?latitude=50.0755,49.1928,49.8352,49.7475,
 
 The six coordinate pairs are the cafés in `store_id` order, so `location_id` 0 in the answer is
 `S01` and 5 is `S06`. The connector has to be told about the file's shape: seven lines of metadata
-about the locations and a blank line come before the real header row. Loaded as it comes, it is 42
-rows: seven days for six cafés.
+about the locations and a blank line come before the real header row. Skip those lines and the
+forecast is 42 rows: seven days for six cafés.
 
 </details>
 
@@ -138,7 +164,7 @@ https://api.open-meteo.com/v1/forecast?latitude=50.0755,49.1928,49.8352,49.7475,
 It is open-meteo's CSV export: seven lines of metadata, a blank line, then the header row, then 42 data rows. Load only the data rows and name the columns location_id, time, temperature_2m_max and precipitation_sum. Run it, then tell me how many rows the forecast table has.
 ```
 
-**Expect three approvals.** Kai skips the nine leading lines and names the four columns as asked,
+**Expect three approvals for the forecast.** Kai skips the nine leading lines and names the four columns as asked,
 rather than keeping the header's `temperature_2m_max (°C)`.
 {/* Guide test 2026-09-09: the live run's prompt said "skip the first eight lines" and described the
 columns in words; Kai read the file and chose 9 + explicit names on its own. The prompt now asks
@@ -155,6 +181,16 @@ The chat keeps what Kai made as links, so that is where to find it afterwards:
 or delete the configuration and use the **UI** tab, which also shows where a configuration and its
 rows live.
 
+To see what Kai built, ask in the same chat:
+
+```text title="Follow-up prompt" wrap
+Explain the "Boolabean sales" configuration you created, row by row.
+```
+
+It only reads, so it asks for no approval by default.
+{/* Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals: Kai described
+the HTTP data source, its base URL, the five rows and the three processors each row runs. */}
+
 </TabItem>
 <TabItem label="UI">
 
@@ -167,7 +203,7 @@ rows live.
    connectors with HTTP in the name may also appear; go by that description rather than by
    position in the list.
 
-   ![Screenshot - Find the HTTP data source connector](/getting-started/load/01-find-http.png)
+   ![Screenshot - The Add New Component page searched for HTTP, where the plain HTTP data source card, "Downloading CSV files from any HTTP, and HTTPS URL", offers Create Configuration and HTTP Advanced is marked Beta](/getting-started/load/01-find-http.png)
 
 2. Choose **Connect To My Data**. (**Use With Demo Data** sets the connector up against a dataset
    Keboola prepared, handy for a look around, but here you want your own URL.)
@@ -176,7 +212,7 @@ rows live.
    **Create Configuration**. Descriptions are what keep a project readable six months later; see
    the [best practices cheat sheet](/overview/onboarding/cheat-sheet/).
 
-   ![Screenshot - Create the configuration](/getting-started/load/02-create-configuration.png)
+   ![Screenshot - The Create HTTP dialog with Boolabean sales in the Name field, the optional Description field still empty, and the Create Configuration button at the bottom](/getting-started/load/02-create-configuration.png)
 
 4. **If the configuration opens with a single File URL field, switch to Advanced Mode.** A new
    configuration may start in a simplified mode that takes one URL and nothing else: no base URL,
@@ -185,11 +221,13 @@ rows live.
    and the change is recorded on the configuration as *Disable simplified mode*. If you already see
    **Base URL and Connection Options** and a **Rows** section, you are in the right mode and there
    is nothing to switch.
-   {/* VERIFY(owner): the simplified mode was seen once, in a brand-new Free Plan project (6211)
+   {/* VERIFY(Nikita): the simplified mode was seen once, in a brand-new Free Plan project (6211)
    on 2026-08-19; project 264 went straight to the base-URL form on 2026-08-04, which is what
    screenshots 02/03 still show — hence "may". This page is currently the only source for the
    mode: the connector reference (components/extractors/storage/http/index.md) documents only
-   Base URL + rows and needs the mode added. */}
+   Base URL + rows and needs the mode added. 2026-10-08, Free Plan project 6425: the configuration
+   Kai created opened straight in the Base URL form with no Advanced Mode button, so a Prompt-path
+   reader never meets the simplified mode; a UI-created one is still unwalked there. */}
 
 5. Open **Base URL and Connection Options** and set **Base URL** to the folder shared by every
    file this configuration downloads, with its trailing slash, then click **Save**:
@@ -198,7 +236,7 @@ rows live.
    https://help.keboola.com/getting-started/boolabean/
    ```
 
-   ![Screenshot - Set the base URL](/getting-started/load/03-base-url.png)
+   ![Screenshot - The Base URL and Connection Options section with the Base URL field set to https://help.keboola.com/getting-started/boolabean/](/getting-started/load/03-base-url.png)
 
 **Add the five tables**
 
@@ -224,7 +262,7 @@ settings, sharing the configuration's base URL.
      Leave it alone. (The alternative, **Set Header**, is typing the columns yourself; the forecast
      below is where that becomes necessary.)
 
-   ![Screenshot - Row path and save settings](/getting-started/load/04-row-settings.png)
+   ![Screenshot - The stores row of Boolabean sales, with Path stores.csv under Download Settings and, under Save Settings, Table name stores with Incremental load unchecked](/getting-started/load/04-row-settings.png)
 
 9. Repeat steps 6 to 8 for the other four files:
 
@@ -238,7 +276,7 @@ settings, sharing the configuration's base URL.
 10. Back on the configuration, click **Run Component** and confirm with **Run**. One run fetches
     all five rows; in **Jobs** it may fan out into a job per row under the one you started.
 
-    ![Screenshot - The configuration ready to run](/getting-started/load/05-run.png)
+    ![Screenshot - The Boolabean sales configuration page with the green Run Component button at the top of the right-hand panel and, further down, the Rows section with its Add Row button](/getting-started/load/05-run.png)
 
 **Add the forecast**
 
@@ -400,7 +438,7 @@ counts:
 - `forecast` has **42** rows: seven dates, `location_id` 0 to 5.
 - Every column arrived as text. The connector does not guess types, so the next page casts them.
 
-![Screenshot - Table detail with data sample](/getting-started/load/07-table-detail.png)
+![Screenshot - The Data Sample tab of the sales table, marked NON-TYPED, with the columns date, store_id, product_id, units and revenue_czk above rows of sample values](/getting-started/load/07-table-detail.png)
 
 <details>
 <summary>Your bucket names will differ, and what else to look at</summary>
@@ -412,12 +450,35 @@ names the SQL depends on.
 
 Click a table and open its **Data Sample** tab to see the real contents: `sales` has the columns
 `date`, `store_id`, `product_id`, `units` and `revenue_czk`. In **Jobs**, the five rows of the first
-configuration are fetched in turn, so expect a couple of minutes for all five; the forecast takes
+configuration are fetched in turn, so expect about six minutes for all five; the forecast takes
 seconds.
 
 </details>
 
 ## If it goes wrong
+
+:::tip[Ask Kai first]
+If the job failed:
+```text title="Prompt" wrap
+The last run of my "Boolabean sales" configuration failed. Read its error and tell me what to change.
+```
+If it succeeded but a table looks wrong (replace the part in angle brackets):
+```text title="Prompt" wrap
+The last run of my "Boolabean sales" configuration succeeded, but one of its tables looks wrong: <which table, and what you see>. Read the configuration and the first rows of that table and tell me what to change.
+```
+Kai reads the job's log, the configuration and the table
+([Troubleshooting](/kai/use-cases/#troubleshooting)). Use your configuration's name if you
+changed it, or "Boolabean forecast" for the forecast. After a fix, run the configuration again and
+redo **Check it worked**; from a terminal, ask the same with `kbagent kai ask --project <alias> -m "…"`.
+The folds below cover the rest.
+{/* Run 2026-10-07/08 in project 264 with `kbagent kai ask`, read-only, no approvals, about 30 s
+each. The failed-job prompt, about "Boolabean sales" whose last 50 runs had all succeeded: Kai found
+the configuration, checked its runs and said there was no failure rather than inventing one. On a
+real failure (a flow run) the same kind of question had Kai read the failed job's log and name the
+cause. The second prompt, with "the stores table has only one column": Kai read the configuration
+(delimiter, enclosure, header) and the table's first rows, said the table had its eight columns,
+and named what to check if it happened. notes/getting-started/DECISIONS.md 2026-10-07. */}
+:::
 
 <details>
 <summary>The job fails with a 404</summary>
@@ -463,14 +524,6 @@ or 8 with *Read the header* and the header's own names, unit suffixes included.
 <summary>You want the five files fetched at the same time</summary>
 
 Raise **Parallel jobs** on the configuration; the connector then processes its rows concurrently.
-
-</details>
-
-<details>
-<summary>You would rather have Kai read the job</summary>
-
-It has the log and the tables in front of it:
-`Read the last HTTP connector job and tell me what failed, then show me a sample of sales.`
 
 </details>
 

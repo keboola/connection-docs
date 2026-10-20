@@ -8,7 +8,7 @@ redirect_from:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import PageMeta from '../../../../components/getting-started/PageMeta.astro';
-import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import Prereqs from '../../../../components/Prereqs.astro';
 import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 
 <PageMeta genre="How-to" guide="Going further" />
@@ -16,10 +16,9 @@ import PathIntro from '../../../../components/getting-started/PathIntro.astro';
 A transformation is SQL you have finished writing. A **workspace** is where you write it: your own
 schema, holding a copy of the Storage tables you ask for, where a wrong query costs you nothing.
 
-**Where you are:** you have tables in Storage and a query you are not sure about. **When you
-finish:** the same query, tested against real rows, ready to paste into a transformation.
-
 <Prereqs needs={['project']} tabs={3}>
+  <span slot="from">you have tables in Storage and a query you are not sure about.</span>
+  <span slot="to">the same query, tested against real rows, ready to paste into a transformation.</span>
   <li>
     <strong>A table in Storage,</strong> such as <code>staffing_outlook</code> from{' '}
     <a href="/getting-started/transform/">Transform data</a> if you are following the guide.
@@ -68,10 +67,13 @@ dialog's unchecked box. The first example query was wrong on both column names a
 casing table now in the page is measured, all four rows of it, against the control table on
 2026-09-15.
 
-VERIFY(owner): the prerequisites invite a Free Plan reader, and /workspace/ says Pay As You Go
+VERIFY(Nikita): the prerequisites invite a Free Plan reader, and /workspace/ says Pay As You Go
 projects have no direct access to Snowflake workspaces. Step 7 now routes them to the SQL Editor,
 but nobody has walked that path on a free project to confirm the workspace list and the Connect
-menu look as described there. */}
+menu look as described there. 2026-10-08, Free Plan project 6425: Create Workspace offers only
+"Google BigQuery Workspace" and "R Workspace" (no Snowflake, no Python), so step 7's
+Snowflake-first wording does not fit the free project any more; its BigQuery Connect menu needs
+a workspace to be created, which this check did not do. */}
 
 ## What a workspace is
 
@@ -108,10 +110,12 @@ Open a real workspace when the chat stops being the right tool:
 
 Creating the workspace is then the **UI** or **CLI / API** tab's job.
 
-{/* VERIFY(owner): "creating the workspace is the UI or CLI tab's job" is the conservative
+{/* VERIFY(Nikita), ask the Kai team: "creating the workspace is the UI or CLI tab's job" is the conservative
 reading. Kai's documented use cases (/kai/use-cases/) cover data exploration, transformations,
-integrations, apps and docs; none of them mentions creating a workspace, and I did not ask it to
-in a live chat. If Kai does create workspaces, this tab should say so instead. */}
+integrations, apps and docs; none of them mentions creating a workspace. Asked on 2026-10-08 in 264 (`kbagent kai ask`,
+answer only), Kai said it can, with `create_config` on `keboola.sandboxes` (~/.keboola-shots/free-run-2026-10-08/kai-ws.txt); its own list of write
+tools has no workspace tool, and nobody has watched such a config turn into a usable workspace. If
+a live run shows it does, this tab should say so instead. */}
 
 **Check:** the answer names a café and a day, and the SQL it shows runs on its own.
 
@@ -120,18 +124,18 @@ in a live chat. If Kai does create workspaces, this tab should say so instead. *
 
 1. Go to **Workspaces** and click **Create Workspace**.
 
-   ![Screenshot - Create a workspace](/getting-started/transform/workspaces1.png)
+   ![Screenshot - The Workspaces page with red arrows pointing to the Workspaces tab in the top navigation and to the green Create Workspace button, and no workspaces created yet](/getting-started/transform/workspaces1.png)
 
 2. Pick the SQL workspace for your backend, **Snowflake SQL Workspace** or **Google BigQuery
    Workspace**. The list also offers Python and R, which give you a notebook instead of a SQL
    console.
 
-   ![Screenshot - Select a workspace type](/getting-started/transform/workspaces2.png)
+   ![Screenshot - The New Workspace dialog listing Python Workspace, R Workspace and Snowflake SQL Workspace, the only SQL option shown](/getting-started/transform/workspaces2.png)
 
 3. Name it, describe it, and click **Create Workspace**. You can grant other project users access
    here, so a colleague can open the same workspace rather than build their own copy.
 
-   ![Screenshot - Name the workspace](/getting-started/transform/workspaces3.png)
+   ![Screenshot - The New Snowflake SQL Workspace dialog with Name and Description filled in, Share with all project users and Grant read-only access to all storage data unticked, and the Create Workspace button](/getting-started/transform/workspaces3.png)
 
    **Grant read-only access to all storage data** is the alternative to loading tables one by one:
    the workspace sees everything in Storage without copying anything. Leave it off to follow the
@@ -149,11 +153,11 @@ in a live chat. If Kai does create workspaces, this tab should say so instead. *
    that signs you in to Snowflake's own Snowsight interface, and, beside it, the key-pair
    credentials for a database client of your own.
 
-   Both of those need a project with a dedicated Snowflake backend. On the shared backend that
-   Pay As You Go and multi-tenant projects use, which includes the free project this guide starts
-   from, there is no direct connection, and the [SQL Editor](/workspace/sql-editor/) is the way
-   in: it runs the same queries against the same workspace, in the browser, on Snowflake and
-   BigQuery alike.
+   Both of those need a project with a dedicated Snowflake backend. A project on the shared
+   Snowflake backend that Pay As You Go and multi-tenant projects use has no direct connection,
+   and a Free Plan project, the kind this guide starts from, runs on BigQuery rather than
+   Snowflake. In either case the [SQL Editor](/workspace/sql-editor/) is the way in: it runs the
+   same queries against the same workspace, in the browser, on Snowflake and BigQuery alike.
 
 </TabItem>
 <TabItem label="CLI / API">
@@ -162,7 +166,7 @@ Every click above is an API call underneath, and [kbagent](/cli/) is the same ca
 terminal. It needs to be [installed](/cli/getting-started/) and pointed at your project once with
 `kbagent project add`, which stores the connection under an alias. The examples use `docs-demo`,
 substitute yours. Creating a workspace needs an admin (master) token.
-{/* VERIFY(owner): the admin-token requirement comes from our own cli/getting-started.mdx:148 and
+{/* VERIFY(Nikita): the admin-token requirement comes from our own cli/getting-started.mdx:148 and
 cli/troubleshooting.md:42. The fact-checker (2026-09-25) found no master-token check in the CLI's
 workspace service and a Storage API 403 that names only write access and the read-only role, so a
 token with write access may be enough. An admin token works either way, which is why the page
@@ -200,11 +204,13 @@ which is the difference between refreshing a copy and adding to it.
 
 **Run your SQL**
 
+On a Snowflake workspace:
+
 ```bash
 kbagent workspace query --project docs-demo --workspace-id <workspace-id> --sql 'SELECT "STORE_NAME", "DATE", "EXPECTED_UNITS_PER_PERSON" FROM "staffing_outlook" ORDER BY "EXPECTED_UNITS_PER_PERSON" DESC LIMIT 5'
 ```
 
-:::caution[Case is not a detail here]
+:::caution[On Snowflake, case is not a detail]
 Double quotes mean *exactly this name*; without them Snowflake reads any name as upper case. On
 this table the two halves disagree, and both halves of the disagreement are load-bearing:
 
@@ -220,6 +226,18 @@ SQL that did not quote its aliases, so the backend upper-cased them. Run
 `SHOW COLUMNS IN "staffing_outlook"` when a name refuses to resolve, rather than guessing which
 half you are on.
 :::
+
+On a BigQuery workspace, which is what a Free Plan project creates, double quotes make a string
+literal rather than a name, so write the names plain, with `date` in backticks as on
+[Explore your data](/getting-started/ask/):
+
+```bash
+kbagent workspace query --project docs-demo --workspace-id <workspace-id> --sql 'SELECT store_name, `date`, expected_units_per_person FROM staffing_outlook ORDER BY expected_units_per_person DESC LIMIT 5'
+```
+
+{/* VERIFY(Nikita): the BigQuery query above mirrors the one ask/ ran through Kai in Free Plan
+project 6375 (lower-case column names, `date` in backticks); it has not been run inside a BigQuery
+workspace with `kbagent workspace query`. */}
 
 `--file` takes a `.sql` file instead, which is the shape you want once the query is longer than a
 line, and `--full` fetches the whole result rather than the first page.
@@ -273,3 +291,5 @@ read-only.
 - [Transform data](/getting-started/transform/) is where the query you just tested belongs.
 - [Workspaces](/workspace/) covers the Python and R flavours, access for other users, and
   read-only access to all of Storage.
+
+**Next:** [Ad-hoc data analysis →](/getting-started/ad-hoc/)
