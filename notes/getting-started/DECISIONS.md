@@ -1608,6 +1608,10 @@ the header's Kai button and the Ask Kai drawer: the same mix-up that dropped "As
 data" as a title (entry above). The 30 minutes are the hub's, on the hub's condition (the prompt
 each step gives you for Kai) and with its "plus sign-up and reading". overview/'s one-line pointer
 says the same outcome and time. The home page's seven dashes are commas and colons now.
+Superseded on 12 Oct by #1187's e37355af4, which gave the home page and overview/ the hub's shorter
+wording ("In about 30 minutes with Kai, plus sign-up, you build a real pipeline…"); the merge of
+this branch into #1187 kept that, and the home page names Kai as "the AI assistant in your project"
+at its first mention, so the mix-up above still cannot happen.
 
 ad-hoc/ opens and ends as a side trip, in the form Load from Google Sheets and Load from a database
 use: a line saying where it branches off, **Where you are** and **When you finish**, a **You need**
@@ -1617,7 +1621,7 @@ box needs MDX, so the page is `index.mdx` now, with the `PageMeta` line the othe
 (How-to, Going further) and its three authoring comments in MDX form. The caution box, under the
 **You need** box and titled "Parts of this page are out of date", points to the note at the start
 of Exploring Data instead of repeating that sandboxes are legacy. The steps between are as they
-were, and whether the page stays at all is still the RStudio row in the table below.
+were. Whether the page stays depended on the RStudio question, closed in the table below.
 
 Link texts name the page they open. The five database connector pages say Load from a database,
 and branches/ lists its parts by their titles. TDE Exporter's link goes to Tableau TDE instead of
