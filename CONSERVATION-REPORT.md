@@ -108,3 +108,136 @@ input rows, `06` the single output row, `07` the Queries/Blocks panel where the
 code lives (the SQL itself stays transcribed in fenced blocks on the page, not
 in an image). `05` was never referenced by any page — the numbering simply
 skips it; no file is owed.
+
+`public/getting-started/outlook-tour.mp4` and `outlook-tour-poster.png` were
+**removed 2026-09-23**, replaced on the hub by `hub-demo.mp4` and its poster.
+Nothing the clip carried is lost: its five file cards are the sample paragraph
+on `load/`, its question frame is the goal sentence on the hub, and its closing
+grid is the fourth and sixth beat of the new clip, from the same
+`app/grid-preview.png`. The reason is in DECISIONS.md (2026-09-23): the hub now
+opens with what the guide is for, so the clip shows the results rather than the
+ingredients. Jordan's 21 Aug decisions on the three acts and on the poster carry
+VERIFY(Jordan) there.
+
+**"Before you start" rewritten as two lists, 2026-09-25.** Nothing a reader needs was dropped. One
+sentence was retired; the rest moved or became items in the new lists:
+
+- `load/`, "Nothing else. No installs, no credentials, no files to download." It contradicted the
+  kbagent line under it. Retired from the box: "no installs" is the UI tab line on every page, and
+  the page body already says the forecast API needs no account and no key. The body sentence "The
+  sixth table is not a file you download" read as if the five CSVs were, so it now says the sixth
+  table does not come from a file.
+- `project/`, the same sentence. Retired: the box there lists an email address or an invite, and a
+  page with no tabs has nothing to install.
+- `app/`, "Whether the Free Plan includes data apps is not settled in our own docs". Moved into a
+  `VERIFY(owner)` author comment beside the box; the question stays in the DECISIONS Open table,
+  and the reader keeps the action (no Apps, skip the page).
+- `transform/`, "The bucket names contain configuration IDs, so yours will not match the
+  screenshots." Moved into the body paragraph that already says the bucket names do not matter.
+- The three hand-written "For the CLI / API tab only: kbagent…" items on `load/`,
+  `load/database` and `transform/workspace` are replaced by the shared tab lines.
+- The hub's sentence "Everything here can be done in the browser… A free project is enough to
+  begin." is replaced by the box, which points at "How every page works" for the tab needs.
+
+`public/getting-started/hub-demo.mp4` and `hub-demo-poster.png` were **removed 2026-09-29**,
+replaced on the hub by `hub-explainer.mp4` and its poster. The screenshots of Kai's two answers and
+of the Apps list lived only in that clip and go with it; Kai's answers are still on `ask/`, in text
+and in its own clip. `app/grid-preview.png` stays and is reused on the explainer's last slide. No
+page text changed.
+
+
+## 2026-09-29 — Getting Started text pass (David Esner's "too wordy"; DECISIONS.md, same date)
+
+Moved, so not lost: PathIntro's approvals, tool permissions and plan mode paragraph → the hub,
+"Approvals and plan mode". Each step's "Where you are / When you finish" paragraph → the first row
+of its Before you start box. load/'s sample-data table → cards (`sample.mjs`), its forecast-URL
+explanation → a fold. transform/'s bucket-names and "which SQL" paragraphs → bullets; the band
+definitions and the half-open paragraph → a fold. Every "If it goes wrong" item on the eight pages →
+a fold, word for word. The hub's steps table → the course line (`course.mjs`), outcomes shortened.
+
+Cut, with no new home (flavour or repetition, no fact lost):
+
+| Page | Cut | Why it can go |
+|---|---|---|
+| all GS pages | "about N minutes" in PageMeta; the hub's Minutes column and "about 80 minutes" | Nikita, 29 Sep: estimates, not measurements; the hub keeps one measured number |
+| load/ | "Apart, the sales file can plot a summer but cannot say what any day was." and the S02 / P07 / rain examples of "half a story" | the intro and "each table is half a story" carry the point |
+| load/ | "The extra minutes pay for themselves" (Prompt tab); "which is why a proof of concept usually starts there" and "the run you kicked off by hand becomes one that repeats on a schedule" (Going further); "they differ in how they sign in and what they fetch" | the instruction stays, the persuasion goes |
+| transform/ | "That is the safeguard … data lineage"; "contract customers choose theirs. Close the dialog and carry that word into your tab."; "(`products` is not needed)" | the mapping bullet and the tabs say it |
+| ask/ | "Everywhere else in this guide Kai stood in for your clicking." | the bullet says Kai reads here |
+| app/ | "does not want to ask" (Brno manager); "and the shared password above" (Going further) | trimmed sentences, same meaning |
+| automate/ | "That is the whole model, and it makes the ordering obvious …" (the three-phase reasoning, now the strip); "Each later phase needs the previous one's output, so the split is the whole point"; "Kai set the schedule because the prompt asked for it"; "A flow nobody gets told about is just a button"; "on a scheduled production flow that is the one setting nobody should skip" | the strip and the Errors sentence carry it |
+| check/ | "a duration chart over time"; "Both inputs are fixed, so the count is too, and it catches both directions of failure"; the Schedules-count bullet | the schedule toggle lives on automate/ |
+| hub | "The **Next** control at the foot of every page follows this order."; "It needs a Google account you can authorize" (Going further) | the course line shows the order; write/'s own box names the Google account |
+
+Correction, same day, after the fact-check: four transform/ cuts in the table above were restored,
+so only "Close the dialog and carry that word into your tab" stays cut there: "It is also how
+Keboola tracks lineage", "contract customers choose theirs", "(`products` is not needed for this
+table)" and "give them exactly these names in the input mapping, or edit the queries to match". The
+hub's time line says "plus sign-up and reading".
+
+Also cut on 29 Sep, after the checker: the hub's "This guide" link card under "Where to start
+instead" (it linked Get a project, which the course line above it already starts with). Masked, not
+cut: a colleague's name in `transform/mapping.png` (PRDCT-616).
+
+Later the same day the transform/ bullets were cut again, so three phrases quoted in the correction
+above ("(`products` is not needed for this table)", "give them exactly these names", "It is also
+how") are now worded differently; the facts behind them are still on the page: `products` is not
+read, the input-mapping names must match the SQL, and mappings are how Keboola tracks lineage.
+
+## 2026-10-01 — The Free Plan run
+
+Michal Jeřábek's review (30 Sep) and the run in Free Plan project 6375 replaced these. Each has a
+new home or a reason:
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| ask/ | `kai-ask-staffing.mp4` and its poster (project 264's week, only Brno flagged, with the pointer) | `ask/kai-ask.png`, the same question answered in 6375; which café, which day and why are in the Check and the folded answer |
+| ask/ | "two cafés were flagged on the same two days ... *a thin start-of-week roster colliding with warm, dry weather*" | the fold now gives the screenshots' week (three café-days) in Kai's words; the old quote described a week no image shows |
+| hub | the 29.6-s `hub-explainer.mp4`, a caption per step and a closing question | the 10-s cut keeps the four step titles and the closing line; the step texts are in the course line under the clip |
+| app/ | step 3: "asks once before it writes code: a **Confirmation required** card", and the quote "This is a private draft that updates live as Kai builds" | not what the builder did in 6375 (no card until Publish); steps 3 and 5 now say when it asks |
+| app/ | step 5: "no dialog appears", **Deploy App** on a **Not Deployed** page, "It has not succeeded in our project yet"; the box's "Publishing it to production has not worked in our project yet" | superseded: Publish to production asks twice and the app came up Active; the failure fold keeps 264's two causes |
+| automate/ | "Expect the loads to take a couple of minutes ...; the app phase is slowest" | the run's own figures (128, 40, 24 s); 264's are in DECISIONS.md 2026-09-09 |
+| check/ | "most of it for the app deploy"; "Our week had four" | the run's figures; three flags in the screenshots' week |
+| project/ | "250 GB of Storage" | 50 GB, the new project's own limit (DECISIONS.md 2026-10-01) |
+| hub | "The Apps builder ... asks once before it writes code" (the first rewrite, the same morning) | replaced by what the run showed |
+
+Nothing else was cut. Nineteen screenshots were replaced in place under the same file names; six
+are new.
+
+The reviewers' fix pass the same evening (fact-checker, guide-tester, checker) replaced these:
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| hub | "Nothing here is one-way." | "Most of it can be undone.", followed by what Versions does not undo (tables already written, the schedule, an app's code) |
+| hub | "asks before it changes the published app" | "when you publish it asks twice"; the merge into main happened without a card |
+| transform/ | "You may get an editor for that one code, where you can also name it; call it `Staffing outlook`." | opening a saved code shows that editor and its rename pencil; **Create Multiple Queries** opened **All Queries** in both Free Plan projects |
+| transform/ | "Later steps depend only on the table name" | later steps use the full table ID, so the Check names it |
+| transform/, check/ | "rarely none (a cool, wet week can flag nothing)" | under 18 °C nothing is flagged; a mild wet week still flags Brno, so "wet" was wrong |
+| ask/ | "In a wet week Kai will tell you nobody is short-handed" | the same correction, as a week under 18 °C |
+| app/ | "most of it the preview starting" | the container start was not timed; the five minutes stay |
+| app/ | "click **Create app** to get back to it" | the list and its **Create app** button were seen; the click was not made |
+| automate/ | "The app does not need that restart ..., because it reads `staffing_outlook` each time someone opens it" | true of the app built in the run only; the box now says how to ask about yours |
+| load/ | "the rest of the guide assumes you have seen where a configuration and its rows live" | kept as the reason the UI tab helps, next to "say so in the same chat" as the first recovery |
+| load/ | `06-storage-tables.png` cut after two of five tables | the same page at a taller window, all five tables |
+| task pages (PathIntro) | "Nothing here is one-way" | "Most of it can be undone", the hub's wording; the hub fold says what cannot |
+| app/ | "It should compare true and false, not `1` or text" (written in this pass) | the working app converts the text it gets, so the test now says to turn whatever arrives into true or false |
+| app/ | "nothing is published until step 5" | step 3 already says nothing is published until you say so |
+| transform/ | "the result is the same table" | "the same rows and figures, though Kai picks its own column types" |
+| transform/ | "Storage found the same bucket under both spellings in our project, so keep what the field gives you. Neither the bucket nor the table exists yet" | the lookup fact moved to the comment; the step now says which case applies to whom and to use your own table ID later |
+| load/ | `04-row-settings.png`'s side panel (264's daily scheduled runs) | cropped off; the row's settings are what the step needs |
+
+The flow lost its app phase the same evening (DECISIONS.md 2026-10-01, ruling 1, reversed at
+Nikita's decision). What went with it:
+
+| Page | What went | Where it lives now, or why it can go |
+|---|---|---|
+| automate/ | the prompt's line "Phase 3 redeploys the data app ... so it shows the new table" and the strip's "Phase 3: redeploy the app" | the app reads the table on every request; a bullet says the app is not in the flow, and the box says how to check yours |
+| automate/ | UI step 6, adding the data app to a third phase | step 6 now adds the Sheets destination there, which the old step also covered |
+| automate/ | the YAML's `redeploy` phase and `task-app` task, "Without the app, delete the `redeploy` phase…", and how to find the app's configuration ID | not needed without the phase; app/'s CLI tab still shows how to get the configuration ID |
+| automate/ | the cost box's paragraph on the third phase restarting the app | replaced by how to ask whether your app reads the table live, and the open question on app running time |
+| check/ | the fold "The app phase fails, and the rest succeeds" | no app phase; app/'s deploy fold keeps the disabled-app banner and **Start** |
+| app/ | "Kai also names the app, and not always the same way… The flow on the next page asks for it by name" | the flow no longer needs the name; the step says where to read it |
+| automate/, check/ | the run's own figures of the morning (128, 40, 24 s; 3 min 25 s) | the two-phase run's (4 min 33 s, 53 s; 5 min 38 s); the morning's are in DECISIONS.md and the automate/ comment |
+| check/ | "in an older project our first run failed at the app phase with `staffing_outlook` already rebuilt" | no app phase; the bullet now gives the transformation failing after the loads |
+| automate/ | the cost box's "between 2½ and 6 minutes a run, depending mostly on how long they waited to start" and "10 to 30 minutes a month" | extend/jobs/ bills only `standard` jobs and not waiting time: about 2½ and 4 minutes, 10 to 20 a month |
+| app/ | CLI tab: the configuration ID as "the one a flow task takes", and "A flow task that deploys the app makes the same call, so a broken app would turn a scheduled run red" | the guide's flow has no app task any more |
