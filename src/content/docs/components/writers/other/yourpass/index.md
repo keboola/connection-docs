@@ -52,7 +52,7 @@ Once all configurations are set, click **save** to save the configuration.
 
 ### Input table mapping
 
-Click **New Table Input** to add one table to the [Input Mapping](/transformations/mappings/).
+Click **Add Table Input** to add one table to the [Input Mapping](/transformations/mappings/).
 
 ![Screenshot - Input mapping](/components/writers/other/yourpass/inputmapping.png)
 
