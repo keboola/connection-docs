@@ -96,7 +96,8 @@ You can also limit the token validity.
 ![Screenshot - Access Tokens](/management/project/tokens/access-token-detail.png)
 
 You can see and copy the token only once — right after it was created. If you
-need the token value later, [refresh the token](#refreshing-token) to get a new value.
+need the token value later, [refresh the token](#refreshing-token) to get a new value. The old value stops
+working immediately, so update every script and integration that uses it.
 
 ![Screenshot - Access Tokens](/management/project/tokens/access-token-detail-2.png)
 
@@ -142,7 +143,7 @@ A new token is generated. Copy the new value now; it is shown only once.
 ## Sharing Token
 :::caution[Deprecated]
 Sending a token via email (the **Send via email** button) is deprecated and will be removed on February 4, 2027.
-To get a token value again, [refresh the token](#refreshing-token). See the
+To get a token value again, [refresh the token](#refreshing-token); the old value stops working immediately. See the
 [announcement](CHANGELOG_URL_TBD) for details.
 :::
 
