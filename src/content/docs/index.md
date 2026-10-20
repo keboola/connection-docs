@@ -11,9 +11,9 @@ the ins and outs of Keboola.
 
 ## Where to Start
 
-**New to Keboola?** Work through [Getting Started](/getting-started/). In about 30 minutes with
-Kai, the AI assistant in your project, plus sign-up, you build a real pipeline: load data, transform it with SQL, ask it a question, put an app on
-it and run it every week. It starts by [getting you a project](/getting-started/project/), free.
+**New to Keboola?** Work through [Getting Started](/getting-started/). With Kai, the AI assistant in your
+project, you build a real pipeline in about 30 minutes plus sign-up: load data, transform it with
+SQL, ask it a question, put an app on it and run it every week. It starts by [getting you a project](/getting-started/project/), free.
 
 Prefer to understand the pieces first? The [platform overview](/overview/) explains what the
 components are, how Storage works, and what a stack is.

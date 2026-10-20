@@ -1610,8 +1610,8 @@ each step gives you for Kai) and with its "plus sign-up and reading". overview/'
 says the same outcome and time. The home page's seven dashes are commas and colons now.
 Superseded on 12 Oct by #1187's e37355af4, which gave the home page and overview/ the hub's shorter
 wording ("In about 30 minutes with Kai, plus sign-up, you build a real pipeline…"); the merge of
-this branch into #1187 kept that, and the home page names Kai as "the AI assistant in your project"
-at its first mention, so the mix-up above still cannot happen.
+this branch into #1187 kept that wording, reordered so the home page names Kai as "the AI assistant in
+your project" at its first mention, so the mix-up above still cannot happen.
 
 ad-hoc/ opens and ends as a side trip, in the form Load from Google Sheets and Load from a database
 use: a line saying where it branches off, **Where you are** and **When you finish**, a **You need**
