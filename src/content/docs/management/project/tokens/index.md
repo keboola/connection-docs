@@ -144,7 +144,7 @@ A new token is generated. Copy the new value now; it is shown only once.
 :::caution[Deprecated]
 Sending a token via email (the **Send via email** button) is deprecated and will be removed on February 4, 2027.
 To get a token value again, [refresh the token](#refreshing-token); the old value stops working immediately. See the
-[announcement](CHANGELOG_URL_TBD) for details.
+[announcement](https://changelog.keboola.com/sending-api-tokens-via-email-will-be-removed-on-february-4-2027/) for details.
 :::
 
 An existing token can be shared to an arbitrary email address (including yours). You can
