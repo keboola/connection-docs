@@ -49,14 +49,14 @@ off it, each worth reading for a specific reason:
 **"My real data is not a CSV file on a public URL."** Browse the
 [data source connectors](/components/extractors/): databases, APIs, cloud storage, ad platforms,
 CRMs. They configure the same way the HTTP connector did, and drop into a flow the same way. Two
-worked examples sit in this tier: [Google Sheets](/getting-started/load/googlesheets/), a source
-that needs an authorized account rather than a public URL, and
-[a database](/getting-started/load/database/), which you can walk against Keboola's own sample
-Snowflake database without credentials of your own.
+of the side trips above are worked examples:
+[Google Sheets](/getting-started/load/googlesheets/), a source that needs an authorized account
+rather than a public URL, and [a database](/getting-started/load/database/), which you can walk
+against Keboola's own sample Snowflake database without credentials of your own.
 
 **"My transformation needs to be more than one query."** [Transformations](/transformations/)
 covers SQL, Python, R and dbt, code blocks and phases, shared code, and
-[variables](/transformations/variables/). To develop against a copy of your data
+[variables](/components/variables/). To develop against a copy of your data
 interactively, use a [workspace](/getting-started/transform/workspace/).
 
 **"I need to send data somewhere specific."** The
@@ -87,14 +87,14 @@ in. Making it available to everyone else is a separate, approval-gated step:
 
 ## Drive Keboola with an agent
 
-Everything you just did by clicking can be done by an AI assistant instead. The platform exposes
-the same operations three ways, and which one you pick depends on where you work.
+An AI assistant can carry out most of this guide's steps for you. The platform exposes the same
+operations three ways, and which one you pick depends on where you work.
 
-- **[Kai](/kai/)** is the assistant built into the project, the one you have been using through
-  this guide's **Prompt** tabs. It already knows your configurations, table schemas, and
-  job logs, so it is the fastest way to ask "why did this fail?" or "write me the transformation
-  that joins these tables." No setup. [Use cases](/kai/use-cases/) covers what it does beyond the
-  arc: dashboards, project documentation, table descriptions, cohort analysis.
+- **[Kai](/kai/)** is the assistant built into the project, the one this guide's **Prompt** tabs
+  use. It already knows your configurations, table schemas, and job logs, so it is the fastest way
+  to ask "why did this fail?" or "write me the transformation that joins these tables." No setup.
+  [Use cases](/kai/use-cases/) covers what it does beyond this guide: dashboards, project
+  documentation, table descriptions, cohort analysis.
 - **[MCP server](/ai/mcp-server/)** connects Keboola to an AI assistant or IDE that speaks the
   Model Context Protocol (Claude, Cursor, and others). Use this when you want your coding agent to
   read and change the project while you work on code.
