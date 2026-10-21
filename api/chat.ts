@@ -49,19 +49,54 @@ async function readJsonBody(req: VercelRequest): Promise<ChatRequest> {
   return raw ? JSON.parse(raw) : { message: '' };
 }
 
+// Longest question the widget will forward upstream — the proxy runs on a
+// shared Storage token, so don't let arbitrary payload sizes burn AI quota.
+const MAX_MESSAGE_CHARS = 2_000;
+
+/**
+ * Echo the request origin only when it's one of ours (prod docs, Vercel
+ * previews, local dev). Same-origin requests need no CORS header at all;
+ * everything else gets none, so foreign pages can't script this proxy.
+ */
+function corsOrigin(req: VercelRequest): string | null {
+  const origin = req.headers.origin;
+  if (!origin) return null;
+  try {
+    const { protocol, hostname } = new URL(origin);
+    if (protocol !== 'https:' && hostname !== 'localhost') return null;
+    if (
+      hostname === 'help.keboola.com' ||
+      hostname === 'localhost' ||
+      hostname.endsWith('.vercel.app')
+    ) {
+      return origin;
+    }
+  } catch {
+    /* fall through */
+  }
+  return null;
+}
+
+function setCors(req: VercelRequest, res: VercelResponse) {
+  const origin = corsOrigin(req);
+  if (!origin) return;
+  res.setHeader('access-control-allow-origin', origin);
+  res.setHeader('vary', 'origin');
+  res.setHeader('access-control-allow-headers', 'content-type');
+  res.setHeader('access-control-allow-methods', 'POST, OPTIONS');
+}
+
 function writeSse(res: VercelResponse, data: unknown) {
   res.write(`data: ${JSON.stringify(data)}\n\n`);
 }
 
-function setupSse(res: VercelResponse) {
+function setupSse(req: VercelRequest, res: VercelResponse) {
   res.statusCode = 200;
   res.setHeader('content-type', 'text/event-stream; charset=utf-8');
   res.setHeader('cache-control', 'no-cache, no-transform');
   res.setHeader('connection', 'keep-alive');
   res.setHeader('x-accel-buffering', 'no');
-  res.setHeader('access-control-allow-origin', '*');
-  res.setHeader('access-control-allow-headers', 'content-type');
-  res.setHeader('access-control-allow-methods', 'POST, OPTIONS');
+  setCors(req, res);
 }
 
 // ─── AI Service client ───────────────────────────────────────────────────
@@ -172,8 +207,12 @@ function labelForUrl(url: string): string {
 
 // ─── Docs-question handler ───────────────────────────────────────────────
 
-async function handleDocsQuestion(message: string, res: VercelResponse) {
-  setupSse(res);
+async function handleDocsQuestion(
+  req: VercelRequest,
+  message: string,
+  res: VercelResponse,
+) {
+  setupSse(req, res);
   writeSse(res, { type: 'session', sessionId: `ai-${Date.now()}` });
   writeSse(res, {
     type: 'progress',
@@ -187,14 +226,22 @@ async function handleDocsQuestion(message: string, res: VercelResponse) {
   let answer: DocsAnswer | null = null;
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    if (Date.now() - startedAt > budgetMs) break;
+    const remainingBudget = budgetMs - (Date.now() - startedAt);
+    if (remainingBudget <= 0) break;
     try {
-      answer = await askDocsQuestion(message);
+      // Abort the in-flight fetch when the remaining budget runs out — without
+      // this, one hung upstream connection blows straight past the 15s budget.
+      answer = await askDocsQuestion(
+        message,
+        AbortSignal.timeout(remainingBudget),
+      );
       break;
     } catch (e: any) {
-      const msg = String(e?.message || '');
+      const msg = String(e?.message || e?.name || '');
       // Retry only on transient cold-start / upstream errors.
-      const isTransient = /HTTP 5\d\d/.test(msg) || /fetch failed|ECONN|ETIMEDOUT/i.test(msg);
+      const isTransient =
+        /HTTP 5\d\d/.test(msg) ||
+        /fetch failed|ECONN|ETIMEDOUT|Timeout|abort/i.test(msg);
       if (!isTransient || attempt >= maxAttempts) break;
       writeSse(res, {
         type: 'progress',
@@ -238,8 +285,12 @@ async function handleDocsQuestion(message: string, res: VercelResponse) {
 
 // ─── Stub handler (used when the AI Service env isn't configured) ────────
 
-async function handleStub(message: string, res: VercelResponse) {
-  setupSse(res);
+async function handleStub(
+  req: VercelRequest,
+  message: string,
+  res: VercelResponse,
+) {
+  setupSse(req, res);
   writeSse(res, { type: 'session', sessionId: 'stub' });
   const reply =
     `Ask Kai is wiring up. Once the AI Service env (AI_SERVICE_URL + ` +
@@ -259,9 +310,7 @@ async function handleStub(message: string, res: VercelResponse) {
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'OPTIONS') {
     res.statusCode = 204;
-    res.setHeader('access-control-allow-origin', '*');
-    res.setHeader('access-control-allow-headers', 'content-type');
-    res.setHeader('access-control-allow-methods', 'POST, OPTIONS');
+    setCors(req, res);
     res.setHeader('access-control-max-age', '86400');
     res.end();
     return;
@@ -271,7 +320,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'GET') {
     res.statusCode = 200;
     res.setHeader('content-type', 'application/json');
-    res.setHeader('access-control-allow-origin', '*');
+    setCors(req, res);
     res.setHeader('cache-control', 'no-store');
     res.end(JSON.stringify({ enabled: Boolean(AI_SERVICE_URL && KBC_TOKEN) }));
     return;
@@ -300,22 +349,35 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.end(JSON.stringify({ error: 'message is required' }));
     return;
   }
+  if (message.length > MAX_MESSAGE_CHARS) {
+    res.statusCode = 400;
+    res.setHeader('content-type', 'application/json');
+    res.end(
+      JSON.stringify({
+        error: `message is too long (max ${MAX_MESSAGE_CHARS} characters)`,
+      }),
+    );
+    return;
+  }
 
   try {
     if (AI_SERVICE_URL && KBC_TOKEN) {
-      await handleDocsQuestion(message, res);
+      await handleDocsQuestion(req, message, res);
     } else {
-      await handleStub(message, res);
+      await handleStub(req, message, res);
     }
   } catch (err: any) {
+    // Log the real error server-side; never echo internals to the client.
+    console.error('chat handler failed:', err);
+    const generic = 'Something went wrong answering your question. Please try again.';
     if (res.headersSent) {
-      writeSse(res, { type: 'error', message: err?.message ?? String(err) });
+      writeSse(res, { type: 'error', message: generic });
       writeSse(res, { type: 'done' });
       res.end();
     } else {
       res.statusCode = 500;
       res.setHeader('content-type', 'application/json');
-      res.end(JSON.stringify({ error: err?.message ?? String(err) }));
+      res.end(JSON.stringify({ error: generic }));
     }
   }
 }
