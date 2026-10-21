@@ -181,7 +181,7 @@ running there:
   protects the project from [race conditions](https://en.wikipedia.org/wiki/Race_condition).
 - Phases of a [Legacy Flow](/flows/flows-legacy/): running one creates the jobs for all phases at
   once, and a phase that depends on another waits.
-  <!-- VERIFY(owner): how Conditional Flows (keboola.flow) create their phase jobs. Their page says the next phase is decided after the previous one completes, and the job queue assigns phaseContainer only to keboola.orchestrator jobs, so this bullet is scoped to Legacy Flows (2026-09-09 review). -->
+  <!-- VERIFY(Nikita): how Conditional Flows (keboola.flow) create their phase jobs. Their page says the next phase is decided after the previous one completes, and the job queue assigns phaseContainer only to keboola.orchestrator jobs, so this bullet is scoped to Legacy Flows (2026-09-09 review). -->
 - Parallel limits: a configuration with 10 rows and parallelism 2 creates 10 jobs, 2 start
   `processing` and 8 wait.
 
@@ -228,7 +228,7 @@ Alternatively, send the whole configuration in `configData`. That is the content
 [stored configuration](https://api.keboola.com/?service=storage),
 not the entire response. With `configData`, `configRowIds` and `branchId` are ignored, and
 `config` is not read for configuration data.
-<!-- VERIFY(owner): whether branchId is really ignored when configData is supplied; the runtime resolver suggests it may still select the branch (2026-09-09 review). -->
+<!-- VERIFY(Nikita): whether branchId is really ignored when configData is supplied; the runtime resolver suggests it may still select the branch (2026-09-09 review). -->
 `config` may still be required when the component
 uses a [default bucket](/extend/component/tutorial/output-mapping/#configuring-default-bucket),
 because the referenced configuration then names the output bucket. `configData` always fully
@@ -284,7 +284,7 @@ the jobs of one phase. These containers have a strong parent-child relationship:
 container fails too, subject to the `onError` setting. You never choose the type; it is set
 automatically.
 
-<!-- VERIFY(owner): `retryContainer` is in the swagger enum (2026-06-22 audit, A1) but its behaviour is not documented anywhere public. Describe it here or confirm it is internal. -->
+<!-- VERIFY(Nikita): `retryContainer` is in the swagger enum (2026-06-22 audit, A1) but its behaviour is not documented anywhere public. Describe it here or confirm it is internal. -->
 
 ## Working with the Jobs API
 
