@@ -3,7 +3,7 @@ import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
-import { stripHtmlComments } from './strip-comments.mjs';
+import { stripHtmlComments, fenceTracker } from './strip-comments.mjs';
 
 /**
  * Astro integration that emits a raw-markdown copy of every docs page.
@@ -89,6 +89,47 @@ function prereqsTabsToText(tag, overrides = {}) {
   const count = tabs ? Number(tabs[1]) : 0;
   if (!count) return [''];
   return ['', `${PREREQ_LABELS.tabs}:`, '', ...tabsText(count, overrides).map((l) => `- ${l}`), ''];
+}
+
+/**
+ * Drop the <span data-pagefind-…> wrappers a page adds to tune site search.
+ * A reader of the twin gets nothing from them, and in a heading they print as
+ * raw HTML: `#### <span data-pagefind-weight="5">Apps pricing</span>`.
+ *
+ * Only the wrapper goes: a span nested inside keeps its own tags, because each
+ * </span> is paired with its opener, and a self-closing <span … /> has no
+ * closer to pair. Fenced code blocks (via fenceTracker, as stripHtmlComments
+ * does) and inline code spans are samples, so they stay as written.
+ */
+const SPAN_TAG = /<span\b[^>]*>|<\/span>/gi;
+// a code span: a run of N backticks closed by the next run of exactly N
+const CODE_SPAN = /(?<!`)(`+)(?!`)[\s\S]*?(?<!`)\1(?!`)/g;
+// a data-pagefind-* attribute name, looked for after quoted values are blanked
+const isSearchWrapper = (tag) => /\sdata-pagefind-[\w-]*/i.test(tag.replace(/(["'])[\s\S]*?\1/g, '""'));
+
+function stripSearchMarkup(markdown) {
+  const open = []; // per open <span>: true when it is a search wrapper to drop
+  const dropTags = (text) =>
+    text.replace(SPAN_TAG, (tag) => {
+      if (tag[1] === '/') return open.pop() ? '' : tag;
+      const wrapper = isSearchWrapper(tag);
+      if (!/\/\s*>$/.test(tag)) open.push(wrapper);
+      return wrapper ? '' : tag;
+    });
+  const outsideCode = (line) => {
+    let out = '';
+    let last = 0;
+    for (const m of line.matchAll(CODE_SPAN)) {
+      out += dropTags(line.slice(last, m.index)) + m[0];
+      last = m.index + m[0].length;
+    }
+    return out + dropTags(line.slice(last));
+  };
+  const inCode = fenceTracker();
+  return markdown
+    .split('\n')
+    .map((line) => (inCode(line) ? line : outsideCode(line)))
+    .join('\n');
 }
 
 /**
@@ -351,7 +392,7 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
           const isMdx = extname(file) === '.mdx';
           const raw = stripFrontmatter(content);
           // authors' notes (VERIFY markers, where a claim was checked) stay in the source
-          const body = stripHtmlComments(isMdx ? stripMdx(raw) : raw).trim();
+          const body = stripSearchMarkup(stripHtmlComments(isMdx ? stripMdx(raw) : raw)).trim();
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });
