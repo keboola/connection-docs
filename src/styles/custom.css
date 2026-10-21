@@ -1327,32 +1327,34 @@ a[target='_blank'] > .sr-only[data-pagefind-ignore] {
   .changelog-card-head { flex-direction: column; gap: 2px; }
 }
 
-/* "Was this page helpful?" feedback widget (in right rail or below content) */
-/* NOT dead code, despite nothing in this repo rendering it today: these are the
-   base styles that PR #1003 (PRDCT-346, the docs feedback widget) extends, and
-   its Feedback.astro is what renders them. The component is parked, not
-   abandoned — leave this block alone so that PR still applies cleanly.
-   https://github.com/keboola/connection-docs/pull/1003 */
+/* "Was this page helpful?" feedback widget — Stripe-style, below page content.
+   Borderless: just a hairline divider separating it from the article.
+   Rendered by src/components/Feedback.astro, mounted once from Footer.astro —
+   grep there before touching anything here. */
 .b-feedback {
-  margin-top: 28px;
-  padding: 14px;
-  border: 1px solid var(--border-1);
-  border-radius: 8px;
-  background: var(--bg-1);
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-1);
 }
 .b-feedback-q {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--fg-2);
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 }
-.b-feedback-buttons { display: flex; gap: 6px; }
+/* The `hidden` attribute only gets `display: none` from the UA stylesheet, so
+   any author `display` below silently defeats it — without this the thank-you
+   state rendered with the thumbs still sitting above it. Attribute + class
+   outranks the bare class rules, so no !important is needed. */
+.b-feedback [hidden] { display: none; }
+
+.b-feedback-buttons { display: flex; gap: 8px; }
 .b-feedback-btn {
-  flex: 1;
-  height: 30px;
+  min-width: 84px;
+  height: 32px;
   border: 1px solid var(--border-1);
   background: var(--bg-1);
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--fg-2);
   cursor: pointer;
   display: inline-flex;
@@ -1362,6 +1364,136 @@ a[target='_blank'] > .sr-only[data-pagefind-ignore] {
   font-family: inherit;
 }
 .b-feedback-btn:hover { border-color: var(--border-2); color: var(--fg-1); }
+/* blue-700 text: blue-600 on blue-100 is 3.90:1, short of AA for 13px. */
+.b-feedback-btn[aria-pressed='true'] {
+  border-color: var(--kbc-blue-600);
+  color: var(--kbc-blue-700);
+  background: var(--kbc-blue-100);
+}
+/* The blue tokens aren't redefined for dark mode, so the light pill would sit
+   pale on a near-black page. Same tint + blue-450 text as the other dark
+   overrides. */
+:root[data-theme='dark'] .b-feedback-btn[aria-pressed='true'] {
+  border-color: var(--kbc-blue-450);
+  color: var(--kbc-blue-450);
+  background: rgba(31, 143, 255, 0.18);
+}
+
+/* Follow-up: heading + vertical radio list, revealed after a thumb click.
+   The heading is the fieldset's legend, so strip the UA fieldset chrome. */
+.b-feedback-followup { margin-top: 20px; }
+.b-feedback-fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.b-feedback-followup-q {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--fg-1);
+  margin: 0 0 14px;
+  padding: 0;
+}
+.b-feedback-options { display: flex; flex-direction: column; gap: 4px; }
+.b-feedback-option {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 6px 0;
+}
+.b-feedback-radio {
+  width: 16px;
+  height: 16px;
+  margin: 2px 0 0;
+  accent-color: var(--kbc-blue-600);
+  cursor: pointer;
+}
+.b-feedback-option-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  cursor: pointer;
+}
+.b-feedback-option-label { font-size: 14px; font-weight: 600; color: var(--fg-1); }
+.b-feedback-option-desc { font-size: 13px; color: var(--fg-2); }
+
+/* Comment box: moved inline under the selected option; indented to align with
+   the option text (past the radio + gap). */
+.b-feedback-comment-wrap { padding-left: 26px; margin: 6px 0 4px; }
+.b-feedback-comment {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--border-1);
+  border-radius: 8px;
+  background: var(--bg-1);
+  color: var(--fg-1);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 10px 12px;
+  resize: vertical;
+}
+/* Border tint only; the ring itself comes from the site-wide *:focus-visible
+   rule, which is what meets SC 1.4.11's 3:1. */
+.b-feedback-comment:focus-visible { border-color: var(--kbc-blue-600); }
+.b-feedback-note {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--fg-3);
+}
+.b-feedback-submit {
+  margin-top: 14px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid var(--border-1);
+  border-radius: 6px;
+  background: var(--bg-1);
+  color: var(--fg-1);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.b-feedback-submit:hover:not(:disabled) { border-color: var(--border-2); }
+.b-feedback-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+.b-feedback-thanks {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--fg-1);
+  margin: 0;
+}
+/* Focused programmatically after submit; no ring on a non-interactive line. */
+.b-feedback-thanks:focus { outline: none; }
+/* "Ask Kai about this page", offered after a 👎 for missing information. */
+.b-feedback-kai {
+  margin-top: 12px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid var(--kbc-blue-600);
+  border-radius: 6px;
+  background: var(--bg-1);
+  color: var(--kbc-blue-700);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.b-feedback-kai:hover { background: var(--kbc-blue-100); }
+:root[data-theme='dark'] .b-feedback-kai { border-color: var(--kbc-blue-450); color: var(--kbc-blue-450); }
+:root[data-theme='dark'] .b-feedback-kai:hover { background: rgba(31, 143, 255, 0.18); }
+/* Honeypot + screen-reader-only helpers */
+.b-feedback-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.b-feedback-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* ───────── Misc ───────── */
 /* WCAG 2.2 SC 1.4.11 requires 3:1 for focus indicators. A 40% alpha ring
@@ -1379,6 +1511,14 @@ a[target='_blank'] > .sr-only[data-pagefind-ignore] {
   border-radius: 8px;
   border: 1px solid var(--border-1);
   background: var(--bg-2);
+}
+/* Looping demo clips ("GIFs") get the same frame as screenshots */
+.sl-markdown-content video:not(:where(.not-content *)) {
+  border-radius: 8px;
+  border: 1px solid var(--border-1);
+  background: var(--bg-2);
+  max-width: 100%;
+  height: auto;
 }
 
 /* Standalone screenshots need more room than a run of text. Scoped to images that
