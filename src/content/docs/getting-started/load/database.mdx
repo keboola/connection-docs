@@ -1,0 +1,247 @@
+---
+title: 'Load from a database'
+slug: 'getting-started/load/database'
+description: 'Load tables from an external database with the Snowflake data source connector, against a sample database that needs no credentials of your own.'
+redirect_from:
+  - /tutorial/load/database/
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/getting-started/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
+
+<PageMeta genre="How-to" minutes="10" guide="Going further" />
+
+A side trip from [Get your data in](/getting-started/load/): a source behind credentials rather
+than a public URL. Every database connector Keboola has works this way, so walking one teaches all
+of them.
+
+**Where you are:** you can load a public file already. **When you finish:** three tables in
+Storage, pulled out of a live database.
+
+<Prereqs needs={['project']}>
+  <li>
+    No credentials of your own. The walk uses Keboola's sample Snowflake database, and the values
+    are on this page.
+  </li>
+  <li>
+    For the <strong>CLI / API</strong> tab only:{' '}
+    <a href="/cli/getting-started/">kbagent</a> installed and connected to your project. The other
+    two tabs need nothing but the browser.
+  </li>
+</Prereqs>
+
+<PathIntro tabs={3} />
+
+{/* How-to page, side trip off /getting-started/load/. Converted to the three-tab shape
+2026-09-15 with the rest of the section; the ":::tip[Do it with Kai]" box it used to carry is now
+the Prompt tab, with the "never paste a password into the chat" warning intact.
+
+The CLI tab was walked live in project 264 on 2026-09-15 and every object deleted the same
+minute: config new --dry-run (schema validation passed), config new --push (config
+01m2jb689nzr1f5nf76n2kzq7t), three config row-create calls, job run --wait (job 104350143,
+success), storage tables --bucket-id (ACCOUNT 275, OPPORTUNITY 639, USER 28), then
+storage delete-bucket --force and config delete. The row counts in "Check it worked" are those.
+config delete reports that it moved the configuration to the trash and names
+`kbagent config restore` as the undo, which is where the "If it goes wrong" bullet comes from.
+
+The sample database's host, user, password and schema were public in this page long before this
+edit; they are a shared read-only demo, not a secret.
+
+VERIFY(owner): only the CLI path was walked, so "the UI and Prompt paths name the bucket after the
+configuration" in the note under Check it worked is reasoning from how the connector behaves, not
+something anyone watched happen. One UI run settles it. */}
+
+## The sample database
+
+All three paths connect to the same place, a read-only database Keboola keeps for this walk. None
+of it is secret:
+
+| Field | Value |
+|---|---|
+| Host name | `kebooladev.snowflakecomputing.com` |
+| Username, Password, Database, Schema | `HELP_TUTORIAL` |
+| Warehouse | `DEV` |
+
+## Set it up
+
+<Tabs syncKey="howto">
+<TabItem label="Prompt">
+
+Database connectors are configured like any other data source
+([integration setup](/kai/use-cases/#integration-setup)). Open **Kai Agent** in the top bar and
+say what you want connected, not what your credentials are:
+
+```text title="Prompt"
+Set up a Snowflake data source connector against our sample database and load the OPPORTUNITY,
+ACCOUNT and USER tables into Storage.
+```
+
+:::caution[Never paste a password into the chat]
+Kai asks for credentials through a secure form instead, which is its documented behavior and what
+[Kai's own guidance](/kai/getting-started/#tips-for-new-users) tells you to expect. The values to
+type into that form are the ones in **The sample database** above.
+:::
+
+**Check:** three new tables, and Kai names the bucket it put them in.
+
+</TabItem>
+<TabItem label="UI">
+
+1. Go to **Components** and click **Add Component**.
+
+   ![Screenshot - Add a component](/getting-started/load/db-picture1.png)
+
+2. Search for the **Snowflake** data source.
+
+   ![Screenshot - Find the Snowflake data source](/getting-started/load/db-picture2.png)
+
+3. Click **Add Component**, then **Connect To My Data**.
+
+   ![Screenshot - Connect to my data](/getting-started/load/db-picture3.png)
+
+4. Name the configuration, describe it, and click **Create Configuration**.
+
+   ![Screenshot - Create the configuration](/getting-started/load/db-picture4.png)
+
+   One configuration is one database connection, so this walk needs exactly one. A project that
+   reads two databases has two.
+
+5. Enter the credentials from **The sample database** above.
+
+6. Click **Test Connection and Load Available Sources**.
+
+   ![Screenshot - Credentials](/getting-started/load/db-picture5.png)
+
+   Once it saves, the **Password** field shows a long value that is not what you typed. That is
+   expected: Keboola encrypts the field on save and keeps only the cipher, so nothing reads the
+   original back out, not the form and not the API. You will see the same thing anywhere a field's
+   name starts with `#`, including the JSON in the **CLI / API** tab.
+
+7. Under **Select sources**, pick `OPPORTUNITY`, `ACCOUNT` and `USER`.
+
+   ![Screenshot - Select sources](/getting-started/load/db-picture6.png)
+
+8. Click **Save and Run Configuration**. The run connects to the database, executes one query per
+   table, and writes the results into Storage.
+
+   ![Screenshot - Tables selected](/getting-started/load/db-picture7.png)
+
+**Advanced Mode**, top right of the configuration page, is where incremental fetch, incremental
+load and hand-written SQL live. This walk does not need them.
+
+</TabItem>
+<TabItem label="CLI / API">
+
+Every click above is an API call underneath, and [kbagent](/cli/) is the same calls from a
+terminal. It needs to be [installed](/cli/getting-started/) and pointed at your project once with
+`kbagent project add`, which stores the connection under an alias. The examples use `docs-demo`,
+substitute yours.
+
+**The connection**
+
+The configuration holds the credentials and nothing else. Put them in a file, because this one is
+worth reading before you send it:
+
+```json title="snowflake-db.json"
+{
+  "parameters": {
+    "db": {
+      "host": "kebooladev.snowflakecomputing.com",
+      "port": 443,
+      "database": "HELP_TUTORIAL",
+      "schema": "HELP_TUTORIAL",
+      "warehouse": "DEV",
+      "user": "HELP_TUTORIAL",
+      "#password": "HELP_TUTORIAL"
+    }
+  }
+}
+```
+
+The `#` in front of `password` is the whole security model: Keboola encrypts any value whose key
+starts with one when the configuration is saved, and encryption is one-way, so nothing reads it
+back out again. Add `--dry-run` to the command below to see the request and check it against the
+component's schema without creating anything:
+
+```bash
+kbagent config new --project docs-demo --component-id keboola.ex-db-snowflake --name "Sample Snowflake" --push --no-files --configuration @snowflake-db.json
+```
+
+It prints the new configuration ID. If you would rather the password never sat in a file or a
+shell history in the clear, [encrypt it first](/cli/workflows/#encrypt-secrets) and paste the
+cipher into the JSON instead.
+
+**One row per table**
+
+Each table you extract is a row on that configuration, the same list the UI's **Select sources**
+builds:
+
+```json title="account-row.json"
+{
+  "parameters": {
+    "name": "ACCOUNT",
+    "outputTable": "in.c-sample-snowflake.ACCOUNT",
+    "table": { "schema": "HELP_TUTORIAL", "tableName": "ACCOUNT" },
+    "incremental": false,
+    "primaryKey": [],
+    "enabled": true
+  }
+}
+```
+
+```bash
+kbagent config row-create --project docs-demo --component-id keboola.ex-db-snowflake --config-id <config-id> --name ACCOUNT --configuration @account-row.json
+```
+
+Repeat for `OPPORTUNITY` and `USER`, changing the name, the source table and the output table
+together. `outputTable` is the one the UI decides for you. Here you choose the bucket, so you
+know its name in advance.
+
+**Run it**
+
+```bash
+kbagent job run --project docs-demo --component-id keboola.ex-db-snowflake --config-id <config-id> --wait
+```
+
+```bash
+kbagent storage tables --project docs-demo --bucket-id in.c-sample-snowflake
+```
+
+</TabItem>
+</Tabs>
+
+## Check it worked
+
+Three tables, in one bucket:
+
+| Table | Rows |
+|---|---|
+| `OPPORTUNITY` | 639 |
+| `ACCOUNT` | 275 |
+| `USER` | 28 |
+
+:::note[Your bucket name will differ]
+The **UI** and **Prompt** paths name the bucket after the configuration, so yours will not read
+`in.c-sample-snowflake`. The table names and the row counts are the same either way.
+:::
+
+## If it goes wrong
+
+- **The connection is refused.** A typo in the host or the warehouse. All four of username,
+  password, database and schema are the same word here, `HELP_TUTORIAL`, which is easy to read
+  past. The UI has a **Test Connection** button for this; the CLI finds out when the job runs.
+- **The job succeeds but a table is empty.** The row is pointing at a table name that exists in a
+  different schema. `schema` inside `table` is per row, not inherited from the connection.
+- **You want the configuration back after deleting it.** `kbagent config delete` moves it to the
+  trash rather than destroying it, and prints the command that undoes it. The UI has the same
+  trash, under [Delete Configuration](/components/#delete-configuration).
+- **You need only new rows next time.** That is incremental fetch, in **Advanced Mode** and in the
+  row's parameters. [Database data sources](/components/extractors/database/) covers it.
+
+## Going further
+
+- [Load from Google Sheets](/getting-started/load/googlesheets/) is the other side trip: a source
+  behind a consent screen rather than a password.
+- [Data source connectors](/components/extractors/) lists every database Keboola reads.

@@ -6,7 +6,7 @@ slug: 'components/branches'
 
 
 *If you already know how development branches work in general and want to create and start using your first branch,
-go to our [Getting Started tutorial](/tutorial/branches/).*
+go to our [Getting Started tutorial](/getting-started/branches/).*
 
 Development Branches allow you to modify [component configurations](/components/) without interfering with running
 configurations or entire [automated pipelines](/flows/). They are ideal to use when making bigger changes
@@ -88,28 +88,28 @@ all storage content at branch creation.
 If you have your configurations ready in production and want to create a branch to test some changes, click on your project's name
 at the top of the screen. Then click on the green icon **New** displayed next to your project's name.
 
-![Screenshot - Create Development Branch](/tutorial/branches/figures/08-create-dev-branch.png)
+![Screenshot - Create Development Branch](/getting-started/branches/figures/08-create-dev-branch.png)
 
 Name your new branch and click **Create Development Branch** to open it.
 
-![Screenshot - Name Development Branch](/tutorial/branches/figures/09-name-dev-branch.png)
+![Screenshot - Name Development Branch](/getting-started/branches/figures/09-name-dev-branch.png)
 
 The branch will appear right below the name of your production project.
 
-![Screenshot - Created Development Branch](/tutorial/branches/figures/10-dev-branch-created.png)
+![Screenshot - Created Development Branch](/getting-started/branches/figures/10-dev-branch-created.png)
 
 Now you can start modifying your configurations, run them, and analyze the results.
 
-If you want to learn more about working in a branch, follow our [tutorial](/tutorial/branches/).
+If you want to learn more about working in a branch, follow our [tutorial](/getting-started/branches/).
 
 ## Closing a Branch
 
-Before you merge your development branch back to production, check a detailed [diff of the configuration changes](/tutorial/branches/project-diff/).
+Before you merge your development branch back to production, check a detailed [diff of the configuration changes](/getting-started/branches/project-diff/).
 
 You can end your branch's lifecycle in two ways:
 
 - **Deleting** — if you do not wish to use the changes you've made and want to simply discard them. The data associated with the branch is discarded when the branch is deleted.
-- [**Merging into production**](/tutorial/branches/merge-to-production/) — all changes in the configurations are brought back to the respective production configurations. All the changes are applied at once (after you approve them) and produce new [versions](/components/#configuration-versions) of the respective configurations. The branch can be either deleted or kept for further reference after merging. Projects with [**Branches 2.0**](/components/branches/merge-requests/) enabled merge through a [merge request](/components/branches/merge-requests/), which lets you review the configuration diff and, if the project requires it, collect approvals before the changes reach production.
+- [**Merging into production**](/getting-started/branches/merge-to-production/) — all changes in the configurations are brought back to the respective production configurations. All the changes are applied at once (after you approve them) and produce new [versions](/components/#configuration-versions) of the respective configurations. The branch can be either deleted or kept for further reference after merging. Projects with [**Branches 2.0**](/components/branches/merge-requests/) enabled merge through a [merge request](/components/branches/merge-requests/), which lets you review the configuration diff and, if the project requires it, collect approvals before the changes reach production.
 
 ***Important:** All of this happens within the same project, enabling collaboration with other project members on the modifications.*
 
