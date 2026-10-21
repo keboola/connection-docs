@@ -1492,7 +1492,9 @@ nav.sidebar {
 }
 .sl-markdown-content img:not(:where(.not-content *)) {
   border-radius: 8px;
-  border: 1px solid var(--border-1);
+  /* A ring, not a border: with width/height on the tag and border-box sizing, a
+     1px border would come out of the image and downscale it by 2px. */
+  box-shadow: 0 0 0 1px var(--border-1);
   background: var(--bg-2);
 }
 /* Looping demo clips ("GIFs") get the same frame as screenshots */
