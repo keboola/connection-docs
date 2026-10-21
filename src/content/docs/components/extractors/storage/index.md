@@ -1,12 +1,15 @@
 ---
 title: Storage Data Source Connectors
 slug: 'components/extractors/storage'
+description: 'Pick the connector that imports data into Keboola from AWS S3, Azure Datalake Gen2, FTP, Google Drive, HTTP, OneDrive or another Keboola project.'
 redirect_from:
     - /extractors/storage/
 ---
 
 Data source connectors import data from external sources and integrate it to the Keboola environment.
 The following data source connectors allow access to data from generic storage services:
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 - [AWS S3](/components/extractors/storage/aws-s3/) — imports CSV files from multiple AWS S3 buckets into multiple tables with additional postprocessing.
 - [Azure Datalake Gen2](/components/extractors/storage/azure-datalake-gen2/) — imports CSV files from Azure Datalake Gen2 into multiple tables.

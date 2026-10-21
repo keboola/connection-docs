@@ -1,6 +1,7 @@
 ---
 title: AWS S3
 slug: 'components/extractors/storage/aws-s3'
+description: 'Load CSV files from AWS S3 buckets into Keboola tables with an access key or an AWS role, and set wildcards, new files only and CSV header options.'
 redirect_from:
     - /extractors/other/aws-s3/
 ---
@@ -12,6 +13,8 @@ in Keboola Storage.
 
 After creating a new configuration, select the files you want to extract from AWS S3 and determine how
 you save them to Keboola Storage. You also need to set up proper permissions on AWS.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **AWS S3** connector.
