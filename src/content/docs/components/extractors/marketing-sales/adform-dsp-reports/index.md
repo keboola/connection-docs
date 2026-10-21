@@ -1,6 +1,7 @@
 ---
 title: Adform DSP Reports
 slug: 'components/extractors/marketing-sales/adform-dsp-reports'
+description: 'Extract Adform Buy-Side report data from the Reporting Stats API with client credentials, choosing dimensions, up to ten metrics, a date range and load type.'
 redirect_from:
     - /extractors/marketing-sales/adform-dsp-reports/
 ---
@@ -10,6 +11,8 @@ redirect_from:
 This data source connector retrieves Buy-Side report data from the [Reporting Stats API](https://api.adform.com/help/guides/how-to-report-on-campaigns/reporting-stats).
 It may be used to retrieve similar data as via the [MasterData source connector](https://components.keboola.com/components/ex-adform-masterdata) 
 if the Master Data service is not enabled in your account.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 Reporting Stats API returns report data consisting of statistics derived from the data collected by the Adform tracking code. 
 Each report is organized as dimensions and metrics. Metrics are the individual measurements of user activity on your property,

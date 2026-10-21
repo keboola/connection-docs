@@ -1,6 +1,7 @@
 ---
 title: Salesforce
 slug: 'components/extractors/marketing-sales/salesforce'
+description: 'Import Salesforce data through the Bulk API with a SOQL query or a whole object, authenticating with a security token or an External Client App.'
 redirect_from:
     - /extractors/marketing-sales/salesforce/
 ---
@@ -9,6 +10,8 @@ redirect_from:
 
 This data source connector allows you to import data from Salesforce via the Bulk API. Data can be fetched in two ways: by running
 a specified SOQL query, or by selecting a Salesforce object and getting all data from that object.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Salesforce V2** connector.
