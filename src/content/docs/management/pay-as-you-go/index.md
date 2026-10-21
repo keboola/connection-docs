@@ -10,7 +10,8 @@ You can now start working with Keboola for free. Simply [sign up](https://connec
 ## Free Plan Limits
 Free Plan projects have the following limits:
 
-- **Stack**: no option to choose a stack. Read more about stacks [here](/overview/#stacks).
+- **Stack**: no option to choose a stack. New Free Plan projects are created on Google Cloud **us-east4**, at `https://connection.us-east4.gcp.keboola.com`. To sign in later, open that address, or pick **Google Cloud · United States · us-east4** in the stack picker on the sign-in page; the sign-in page at `connection.keboola.com` is on AWS us-east-1, where a Free Plan account has no project. Read more about stacks [here](/overview/#stacks).
+  <!-- VERIFY(Nikita): (1) the picker label "Google Cloud · United States · us-east4" comes from a first-time tester's sign-in on 4 Oct 2026; the picker renders client-side (the server HTML has region: null), so it wasn't read. (2) Sign-up on keboola.com goes to connection.us-east4.gcp.keboola.com/wizard, but the FAQ on keboola.com/pricing still says Free Plan projects are hosted in MS Azure in the EU, and connection.north-europe.azure.keboola.com/wizard answers 200; ask the Free Plan owner whether older Free Plan projects live on Azure north-europe. Checked 13 Oct 2026. -->
 - **Single project:** each account is limited to one project, so it is not feasible for [multi-project architecture](/catalog/multi-project/).
 - **Data Catalog:** sharing & grouping data using the [data catalog](/catalog/) is not available. 
 - **Transformations:** are limited to SQL, Python, and R.
