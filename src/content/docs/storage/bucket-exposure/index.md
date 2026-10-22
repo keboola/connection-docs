@@ -5,7 +5,8 @@ slug: 'storage/bucket-exposure'
 
 :::caution
 Important: This feature is currently available in BETA for BigQuery projects and for
-Snowflake projects on your own Snowflake account ([BYODB](/storage/byodb/)).
+Snowflake projects on your own Snowflake account ([BYODB](/storage/byodb/)) or on an
+account Keboola runs for your organization alone.
 Contact Keboola support to have it enabled for your project.
 :::
 
@@ -193,7 +194,8 @@ Grantee roles must follow these rules:
 
 - The role must **already exist** in the account. Keboola does not create roles. If a role
   is missing, the job fails, names the role, and grants nothing.
-- Use **unquoted** role names (letters, digits, `_` and `$`, not starting with a digit).
+- Use **unquoted** role names: letters, digits, `_` and `$`, starting with a letter or `_`
+  (not with a digit or `$`).
   Names are converted to upper case, which matches every role created without quotes.
   Quoted, case-sensitive role names such as `"analyst"` are not supported.
 - At most 100 roles per exposure.
@@ -231,7 +233,7 @@ privileges on the same schema by hand, outside Keboola, those grants are removed
 **`USAGE` on the project database stays.** Keboola never revokes it, because another
 exposure in the same project may still need it. A removed role can therefore see that the
 project database exists, but it cannot read any table or view in the exposed bucket. The
-database, and the grant with it, is removed when the project is deleted.
+database, and the grant with it, is removed when the project is purged.
 
 ### Checking Access in Snowflake
 
@@ -253,9 +255,12 @@ only grant this exposure leaves behind is `USAGE` on the project database.
 - **Ending access means deleting the exposure.** Disabling or deleting a project does not
   revoke grants until the project is purged. Delete the exposure first if access must end now.
 - **Persisted aliases are exposed as views.** Grantees can read the alias's rows and its
-  view definition, which names the source table and the alias filter. A bucket that holds
-  an alias over a linked bucket from another project cannot be exposed, and such an alias
-  cannot be added to an exposed bucket.
+  view definition, which names the source table and the alias filter.
+- **Aliases that read outside the project are not allowed.** A bucket cannot be exposed
+  while it holds an alias whose source chain leaves the project's database — through a
+  linked bucket from another project or an external source, directly or through another
+  alias. Such an alias cannot be added to an exposed bucket either.
+  <!-- VERIFY(Connection team): matches the alias guard of DMD-2497 (RFC Task 1.10) once it is merged; publish this page only after it. -->
 - **Consumers' queries are theirs.** Grantees run queries on their own warehouses; the
   queries are not tagged by Keboola.
 - **Subscriptions are BigQuery only.** The *Subscriptions* view of an exposure does not
