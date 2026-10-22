@@ -217,6 +217,9 @@ If a job fails part-way (for example because one role does not exist), the other
 still processed and the error names the roles that failed. Fix the list and save again; the
 next save also finishes any revoke that the failed job did not run.
 
+After you create a missing role in Snowflake, save the exposure again with the list
+unchanged: every save re-applies the grants to all listed roles.
+
 ### What a Revoke Removes and What Stays
 
 Removing a role, deleting the exposure, or deleting the bucket revokes from that role:
