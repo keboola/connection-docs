@@ -42,18 +42,11 @@ Keboola does not enable the backend and tells you what to fix.
 To add a project later, ask Keboola to switch it on. If your taxonomy enforces fine-grained access, grant that project the
 read role first; Keboola warns when it is missing.
 
-## Incremental loads into existing workspace tables
+## Known issue: incremental loads into existing workspace tables
 
-Keboola attaches tags to a workspace table only when it creates the table. A table that was already in a workspace before
-the feature was switched on therefore has no tags.
-
-If a load adds rows from a tagged source to such a table incrementally, Keboola refuses it. Adding protected rows to an
-unprotected table would expose them. The job fails before it writes anything, names the affected columns, and the project
-records a `storage.workspacePolicyTagMismatch` event.
-
-To fix it, run that load once with incremental loading turned off. Keboola then replaces the workspace table with a new
-one that carries the source's tags, and incremental loads work again from the next run. This happens once per table. If
-you tag many columns, expect several such failures right after the feature is switched on.
+An incremental load from Storage into a workspace table that already exists can be refused right after the feature is
+switched on. This affects only that one case; most input mappings never see it. See
+[Known gaps](/storage/byodb/bigquery-policy-tags/#known-gaps) for the scope and the fix.
 
 ## Changing the setup later
 
