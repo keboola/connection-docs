@@ -42,13 +42,18 @@ Keboola does not enable the backend and tells you what to fix.
 To add a project later, ask Keboola to switch it on. If your taxonomy enforces fine-grained access, grant that project the
 read role first; Keboola warns when it is missing.
 
-## Fix the first incremental loads
+## Incremental loads into existing workspace tables
 
-A workspace table created before the feature was turned on carries no tags. The first incremental load into it from a
-protected source fails before it writes any data, and names the columns.
+Keboola attaches tags to a workspace table only when it creates the table. A table that was already in a workspace before
+the feature was switched on therefore has no tags.
 
-Run that load once as a full, non-incremental load that replaces the workspace table. The table is re-created with the
-source's protection, and later incremental loads work again. If you tag many columns, expect this right after enablement.
+If a load adds rows from a tagged source to such a table incrementally, Keboola refuses it. Adding protected rows to an
+unprotected table would expose them. The job fails before it writes anything, names the affected columns, and the project
+records a `storage.workspacePolicyTagMismatch` event.
+
+To fix it, run that load once with incremental loading turned off. Keboola then replaces the workspace table with a new
+one that carries the source's tags, and incremental loads work again from the next run. This happens once per table. If
+you tag many columns, expect several such failures right after the feature is switched on.
 
 ## Changing the setup later
 

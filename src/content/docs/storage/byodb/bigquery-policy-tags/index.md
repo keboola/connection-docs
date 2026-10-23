@@ -126,7 +126,7 @@ the source table, the destination table and the columns involved.
 |---|---|---|
 | `storage.policyTagsNotPropagated` | A protected column was copied without its tag, because Keboola could not carry the protection over on this copy. Usually the backend is not enabled, or the project does not have the feature turned on. | Ask for the feature if copies must stay protected, and check who can read the copy. |
 | `storage.policyTagPropagationFailed` | Keboola tried to keep the tag, failed, and copied nothing. | Read the error in the event, fix its cause, and run the job again. |
-| `storage.workspacePolicyTagMismatch` | An incremental load was refused, because the existing workspace table is less protected than its source. | Run the load once as a full, non-incremental load that replaces the workspace table. |
+| `storage.workspacePolicyTagMismatch` | An incremental load was refused, because the existing workspace table is less protected than its source. | Run that load once with incremental loading turned off; the workspace table is replaced with one that carries the tags. See [Incremental loads into existing workspace tables](/storage/byodb/bigquery-policy-tags/enable/#incremental-loads-into-existing-workspace-tables). |
 
 ## What this feature does not cover
 
