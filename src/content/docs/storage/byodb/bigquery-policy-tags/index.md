@@ -9,6 +9,9 @@ You attach them in BigQuery.
 
 Without this feature, Keboola copies a tagged column within your backend without its tag. The copy is unprotected, and
 the only trace is a `storage.policyTagsNotPropagated` event in the project (see [Events](#events)).
+This holds only when the project's service account can read the column: on a taxonomy that enforces fine-grained
+access, a project without the Fine-Grained Reader gets `storage.backend.policyTagAccessDenied` instead, with or without
+the feature.
 
 With policy-tag support turned on, Keboola does three things:
 
@@ -32,8 +35,8 @@ The feature is switched on at two levels, and Keboola support handles both on re
   This is done once per backend.
 - **Each project.** Tags are carried over only in projects where Keboola also turns on the project feature
   `bigquery-policy-tags`. The other projects on the backend keep the previous behavior: a copy loses its tag, and a
-  `storage.policyTagsNotPropagated` event names the exposed columns. You can start with one project and add more later;
-  adding a project needs nothing on your side beyond asking for it.
+  `storage.policyTagsNotPropagated` event names the exposed columns, provided the project can read them (see above).
+  You can start with one project and add more later; adding a project needs nothing on your side beyond asking for it.
 
 For a linked bucket, the project that decides is the one that makes the copy, not the one that shares the data. Turning
 the feature on in a project affects the next copy; tables already copied without tags are not re-tagged.
