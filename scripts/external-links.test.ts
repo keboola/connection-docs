@@ -5,6 +5,9 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync, readdirSync } from 'node:fs';
+import { basename, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import externalLinks, { externalizeHtml, isExternalHref } from '../src/integrations/external-links.mjs';
 
 const HINT = '<span class="sr-only" data-pagefind-ignore> (opens in a new tab)</span>';
@@ -176,4 +179,41 @@ test("plugin: JSX <a> extends an author's rel instead of adding a second one", (
   assert.deepEqual(attrOf(link, 'rel').map((x: any) => x.value), ['nofollow noopener']);
   assert.equal(attrOf(link, 'class')[0]?.value, 'kbc-external');
   assert.ok(isHint(link.children.at(-1)));
+});
+
+// set:html skips the rehype plugin, so a component that injects authored HTML
+// has to call externalizeHtml() itself, as Prereqs.astro does. A new sink, or a
+// rewrite that drops the call, fails here. Sinks that never carry authored links
+// are listed with the reason.
+const EXEMPT = [
+  { file: 'Head.astro', expr: /^importMap$/, why: 'an import map, no links' },
+  { file: 'NotFoundSuggestions.astro', expr: /^JSON\.stringify\(pages\)/, why: 'JSON data for a script' },
+  { file: 'StageStrip.astro', expr: /^html$/, why: "the slot's HTML, which the rehype plugin has already processed" },
+];
+
+/** The expression inside each set:html={…}, braces balanced. */
+function setHtmlExpressions(source: string) {
+  const out: string[] = [];
+  for (let i = source.indexOf('set:html={'); i !== -1; i = source.indexOf('set:html={', i + 1)) {
+    const start = i + 'set:html={'.length;
+    let depth = 1;
+    let j = start;
+    for (; j < source.length && depth > 0; j++) {
+      if (source[j] === '{') depth++;
+      else if (source[j] === '}') depth--;
+    }
+    out.push(source.slice(start, j - 1).trim());
+  }
+  return out;
+}
+
+test('components: every set:html runs its HTML through externalizeHtml, or is listed with a reason', () => {
+  const dir = fileURLToPath(new URL('../src/components/', import.meta.url));
+  const files = readdirSync(dir, { recursive: true }).map(String).filter((f) => f.endsWith('.astro'));
+  const sinks = files.flatMap((f) => setHtmlExpressions(readFileSync(join(dir, f), 'utf8')).map((expr) => ({ file: f, expr })));
+  assert.ok(sinks.length > 0, 'no set:html found; has src/components moved?');
+  const unchecked = sinks.filter(
+    ({ file, expr }) => !expr.includes('externalizeHtml(') && !EXEMPT.some((e) => e.file === basename(file) && e.expr.test(expr)),
+  );
+  assert.deepEqual(unchecked, [], 'wrap these in externalizeHtml(), or add them to EXEMPT with the reason');
 });
