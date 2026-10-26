@@ -136,9 +136,12 @@ CI runs `npm run check:cli` and `npm run build` on every PR. Run both locally fi
 - Docs-as-code: changes go through PRs; a maintainer reviews and merges.
 - `help.keboola.com` is served by Vercel. Every PR also gets a Vercel preview
   deployment. Use it to check rendering before asking for review.
-- `vercel.json` only sets cache headers for `/pagefind/*`, so Vercel's defaults
-  apply: a missing trailing slash is normalized, and `404.html` from the build
-  root is returned for unmatched paths. Keep the 404 in the build root.
+- `vercel.json` sets cache headers for `/pagefind/*` and carries a few permanent
+  (308) redirects for files that moved, such as the old `/tutorial/*.csv` samples
+  and screenshots, which page redirects (`redirect_from`) cannot cover. Otherwise
+  Vercel's defaults apply: a missing trailing slash is normalized, and `404.html`
+  from the build root is returned for unmatched paths. Keep the 404 in the build
+  root.
 - `.github/workflows/main.yml` still builds and runs `aws s3 sync` to
   `s3://help.keboola.com` on every push to `main`. It succeeds, but it doesn't
   serve the live domain, so don't infer production routing, redirects or cache
