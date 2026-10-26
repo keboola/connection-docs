@@ -4,28 +4,34 @@
 // itself, and src/integrations/page-markdown.mjs, which renders a text
 // fallback for <Prereqs /> into the agent-facing /<slug>/index.md twin — a
 // page whose prerequisites are invisible there is a page an agent will
-// happily start without a project.
+// happily start without a project. getting-started/FromTo.astro reads the
+// two state labels from here too.
 //
-// The box has up to three lists. "You need" holds the things themselves,
-// one per item, the thing first and then where to get it. A page with two
-// ways through it (build-locally: with an agent or by hand) adds a second
-// list under its own label. "Depending on the tab you use" says what each tab
-// of a Prompt / UI / CLI page needs.
+// The box has up to four parts. "Where you are" → "When you finish" says what
+// state a step page starts from and leaves you in. "You need" holds the things
+// themselves, one per item, the thing first and then where to get it. A page
+// with two ways through it (build-locally: with an agent or by hand) adds a
+// second list under its own label. "What each tab needs" says what each tab of
+// a Prompt / UI / CLI page needs, so a reader on the Prompt tab learns that it
+// needs Kai and a reader on the CLI / API tab that it needs kbagent.
 //
-// TODO: the `project` item links the Free Plan sign-up because
-// /getting-started/project/ is not on main yet; once it is, point the item
-// there ("Get a project"), and every page that uses the box follows.
+// The Getting Started guide uses this same box, so its state cards, tab cards
+// and Kai wording live here too, and `project` points at the guide's project
+// page.
 
 export const LABELS = {
   box: 'Before you start',
+  from: 'Where you are',
+  to: 'When you finish',
   needs: 'You need',
-  tabs: 'Depending on the tab you use',
+  tabs: 'What each tab needs',
 };
 
-// How to reach Kai and who switches it on (kai/getting-started.md): shared by
-// the `kai` item and the Prompt tab line, so the two cannot drift.
-const KAI_WHERE =
-  'the <strong>Kai Agent</strong> button in the project\'s top bar, on supported stacks. The first time, an organization admin switches it on; see <a href="/kai/getting-started/">Get started with Kai</a>.';
+// Where Kai is and who switches it on: one wording for the `kai` item and the
+// Prompt tab line, so the two cannot drift. A new Free Plan project has Kai from
+// its first login, so the line says that first.
+const KAI =
+  'the <strong>Kai Agent</strong> button in the top bar, on supported stacks. A new Free Plan project has it from the start; elsewhere an organization admin turns it on once: <a href="/kai/getting-started/">Get started with Kai</a>.';
 
 /** Shared "You need" items, by the key a page passes in `needs`. HTML. */
 export const SHARED = {
@@ -36,7 +42,7 @@ export const SHARED = {
   projectWithKai: '<strong>A Keboola project</strong> on a stack where Kai is available.',
   google:
     '<strong>A Google account</strong> you can sign in with, to approve Keboola\'s access.',
-  kai: `<strong>Kai</strong>, ${KAI_WHERE}`,
+  kai: `<strong>Kai</strong>, ${KAI} What it can see and change: <a href="/kai/security-and-privacy/">Kai security and privacy</a>.`,
 };
 
 /**
@@ -48,16 +54,24 @@ export const SHARED = {
  * needs a master token.
  */
 export const TABS = [
-  { key: 'prompt', label: 'Prompt tab', html: `Kai, ${KAI_WHERE}` },
-  { key: 'ui', label: 'UI tab', html: 'only a browser.' },
+  { key: 'prompt', label: 'Prompt tab', html: `Kai, ${KAI}` },
+  { key: 'ui', label: 'UI tab', html: 'a browser.' },
   { key: 'cli', label: 'CLI / API tab',
     html: '<a href="/cli/getting-started/">kbagent</a>, connected to your project with write access.' },
 ];
 
+/**
+ * Links as `Label (url)`. One rule for the box's own items here and for the
+ * markup a page writes inside the box (page-markdown.mjs), so a link with more
+ * attributes than `href`, such as `<a download>`, keeps its URL in both.
+ */
+export function linksToText(html) {
+  return html.replace(/<a\s[^>]*?href="([^"]+)"[^>]*>([^<]*)<\/a>/g, '$2 ($1)');
+}
+
 /** Reduce one HTML item to the markdown the twin prints. */
 export function toText(html) {
-  return html
-    .replace(/<a href="([^"]+)">([^<]+)<\/a>/g, '$2 ($1)')
+  return linksToText(html)
     .replace(/<\/?strong>/g, '**')
     .replace(/<\/?code>/g, '`')
     .replace(/<[^>]+>/g, '');
