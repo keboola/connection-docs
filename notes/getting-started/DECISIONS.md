@@ -2428,7 +2428,7 @@ each flag stays in its page, next to the sentence it qualifies.
 
 | Where | Owner | Question |
 |---|---|---|
-| `app/index.mdx` (step 5) | Nikita | Step 5 now names the **Publish to Production** button, as the Apps pages do. In the 8 Oct run the builder showed **Deploy** there instead: is it the same action? |
+| `app/index.mdx` (step 5) | Nikita | Step 5 now names the **Publish to Production** button, as the Apps pages do. In the 8 Oct run the builder showed **Deploy** there instead: is it the same action? Also not run yet: typing `Publish to production` in the chat (the 1 Oct run picked the chip), and the prompt that adds the Open-Meteo credit to the app. |
 | `automate/index.mdx:481` | Miro | Does a running data app count against the Free Plan minutes? |
 | `automate/index.mdx:486` | Nikita | Does **Delete flow** also remove the flow's schedules? The box deletes the schedule first, so the page does not depend on the answer. |
 | `check/index.mdx:175` | Nikita | On contract plans, do flow jobs consume credits? |
@@ -2438,7 +2438,7 @@ each flag stays in its page, next to the sentence it qualifies.
 | `load/index.mdx:223` | Nikita | The HTTP connector's simplified mode was seen once (6211), and the page is its only source. |
 | `project/index.mdx:47` | Nikita | Which Free Plan Storage limit is right: 50 GB (the project's own limits) or 250 GB (`management/pay-as-you-go/`)? |
 | `project/index.mdx:59` | Nikita | A new Free Plan project showed 120 minutes, not the documented 60. A first-month allowance? |
-| `project/index.mdx:78` | MCP team, DMD-1939 | Which stack offers `create_project` to a session without an account, and when? |
+| `project/index.mdx:80` | Nikita, ask the MCP team (DMD-1939) | Which stack offers `create_project` to a session without an account, and when? |
 | `project/index.mdx:93` | Nikita | What does a project get in its first month? `management/payg-project/` never says. |
 | `project/index.mdx:139` | Nikita, ask the Kai team | Can Kai create a project? The page infers that it cannot. |
 | `transform/index.mdx:134` | Nikita | The neutral transform prompt has not run on a Snowflake project. |
