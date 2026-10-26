@@ -14,17 +14,20 @@
 //
 // Plan mode, measured in two staged runs: it adds
 // one approval of a written plan and then asks for every change exactly as
-// before — 8 approvals to the control run's 7. It is a review gate, not a way
-// to approve once, and the wording below says so.
+// before: 8 approvals to the control run's 7. It is a review gate, not a way
+// to approve once, and the hub's #approvals-and-plan-mode, which the undo line
+// links, says so.
 //
 // Every task page carries three tabs; `write/` keeps two, so
-// both shapes exist. `manual={false}` is now an EXTRA paragraph rather than a
-// branch that replaces the intro: on app/ it used to win over `tabs={3}` and
-// hide the CLI tab from the reader entirely.
+// both shapes exist. `manual={false}` swaps in a lead that still names all
+// three tabs: on app/ an earlier version let it win over `tabs={3}` and hide
+// the CLI tab from the reader entirely.
 //
-// The same wording in plain text lives in ./pathintro.mjs, because the markdown
-// twin has to carry the "these are alternatives" sentence too — without it an
-// agent reads the three flattened sections as three things to do in sequence.
+// The wording lives in ./pathintro.mjs (pathIntroHtml), next to the fuller
+// plain-text version the markdown twin prints, because the twin has to carry
+// the "these are alternatives" sentence too: without it, an agent reads the
+// three flattened sections as three things to do in sequence.
+// scripts/pathintro.test.ts holds the two to the same facts.
 //
 // Three short lines instead of three paragraphs, which put 179 words on every
 // task page. The approvals, tool
@@ -36,44 +39,12 @@
 //         <PathIntro approvals={false} />     — read-only pages, where it does not
 //         <PathIntro manual={false} />        — no click-by-click equivalent exists
 //         <PathIntro yours="the Google consent screen" />
+
+import { pathIntroHtml } from './pathintro.mjs';
+
+const paragraphs = pathIntroHtml(Astro.props);
 ---
 
 <div class="gs-pathintro">
-  <p>
-    {
-      Astro.props.manual === false ? (
-        <Fragment>
-          <strong>Prompt, UI and CLI / API are three tabs, not three steps,</strong> and here only{' '}
-          <strong>Prompt</strong> builds it: the <strong>UI</strong> tab says where the hand-built
-          route is covered, and <strong>CLI / API</strong> works on what the Prompt tab built.{' '}
-        </Fragment>
-      ) : Astro.props.tabs === 3 ? (
-        <Fragment>
-          <strong>Prompt, UI and CLI / API: three ways to do the same task, not three steps.</strong>{' '}
-        </Fragment>
-      ) : (
-        <Fragment>
-          <strong>Prompt and UI: two ways to do the same task, not two steps.</strong>{' '}
-        </Fragment>
-      )
-    }
-    Pick one tab below; later pages open on it.
-  </p>
-
-  {
-    Astro.props.yours && (
-      <p>
-        One thing stays yours either way: {Astro.props.yours}.
-      </p>
-    )
-  }
-
-  <p class="gs-pathintro__recovery">
-    {Astro.props.approvals !== false && (
-      <Fragment>
-        In the chat, Kai asks before each change it makes (<a href="/getting-started/#approvals-and-plan-mode">how approvals work</a>), and{' '}
-      </Fragment>
-    )}
-    {Astro.props.approvals === false ? 'Most' : 'most'} of it can be undone: if a step builds something else, say so in the same chat.
-  </p>
+  {paragraphs.map((p) => <p class={p.recovery ? 'gs-pathintro__recovery' : undefined} set:html={p.html} />)}
 </div>

@@ -45,9 +45,10 @@ function findMarkdownFiles(dir, files = []) {
  * reader of the twin needs. Attributes are read left to right, so a word inside
  * a quoted value is never taken for a prop of its own: `"…"` and `'…'` are
  * strings, `{…}` keeps a number or boolean as one and drops a string
- * literal's quotes, and a bare name is `true`.
+ * literal's quotes, and a bare name is `true`. Exported for
+ * scripts/pathintro.test.ts, which reads the pages' <PathIntro> tags with it.
  */
-function tagProps(tag) {
+export function tagProps(tag) {
   const props = {};
   const attrs = tag.replace(/^\s*<[A-Za-z][\w.]*/, '').replace(/\/?>\s*$/, '');
   for (const [, name, dq, sq, expr] of attrs.matchAll(/([\w-]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|\{([^}]*)\}))?/g)) {

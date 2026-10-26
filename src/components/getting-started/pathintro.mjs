@@ -1,11 +1,17 @@
-// The tab convention in words, for the two places that need it: the component
-// (PathIntro.astro) and the markdown twin (page-markdown.mjs).
+// The tab convention in words, for the two places that need it: the page
+// (PathIntro.astro renders pathIntroHtml) and the markdown twin
+// (page-markdown.mjs prints pathIntroText).
 //
 // The twin matters more than it looks. It flattens the tabs into three
 // consecutive blocks, so an agent reading it top to bottom sees "ask Kai to
 // build it", then "click through and build it", then "build it from a
 // terminal" — and, executed literally, builds the thing three times. The
 // sentence that says they are alternatives has to survive the flattening.
+//
+// So the two are worded differently on purpose: the page keeps to three short
+// lines and leaves the approvals detail to the hub, the twin keeps the fuller
+// wording. Both live in this file, and scripts/pathintro.test.ts holds them to
+// the same facts for every <PathIntro> a page uses.
 //
 // TAB LABEL CONTRACT — these three strings, byte for byte, on every page:
 //
@@ -16,8 +22,54 @@
 
 export const TAB_LABELS = ['Prompt', 'UI', 'CLI / API'];
 
+const escapeHtml = (s) =>
+  String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
 /**
- * Plain-text rendering of the intro, matching what PathIntro.astro shows.
+ * The intro as the page shows it: one entry per paragraph, as HTML. The last
+ * entry is the undo line, marked `recovery` for its own class.
+ *
+ * @param {{ tabs?: number, manual?: boolean, approvals?: boolean, yours?: string }} props
+ * @returns {{ html: string, recovery?: boolean }[]}
+ */
+export function pathIntroHtml({ tabs = 2, manual, approvals, yours } = {}) {
+  let lead;
+  if (manual === false) {
+    // app/: only the Prompt tab builds it, and the lead still names all three tabs
+    lead =
+      '<strong>Prompt, UI and CLI / API are three tabs, not three steps,</strong> and here only ' +
+      '<strong>Prompt</strong> builds it: the <strong>UI</strong> tab says where the hand-built ' +
+      'route is covered, and <strong>CLI / API</strong> works on what the Prompt tab built.';
+  } else if (tabs === 3) {
+    lead = '<strong>Prompt, UI and CLI / API: three ways to do the same task, not three steps.</strong>';
+  } else {
+    lead = '<strong>Prompt and UI: two ways to do the same task, not two steps.</strong>';
+  }
+  const out = [{ html: `${lead} Pick one tab below; later pages open on it.` }];
+
+  if (yours) out.push({ html: `One thing stays yours either way: ${escapeHtml(yours)}.` });
+
+  out.push({
+    recovery: true,
+    html:
+      (approvals === false
+        ? 'Most'
+        : 'In the chat, Kai asks before each change it makes ' +
+          '(<a href="/getting-started/#approvals-and-plan-mode">how approvals work</a>), and most') +
+      ' of it can be undone: if a step builds something else, say so in the same chat.',
+  });
+
+  return out;
+}
+
+/**
+ * Plain-text rendering of the intro for the twin: the same facts as
+ * pathIntroHtml, in the fuller wording.
  *
  * @param {{ tabs?: number, manual?: boolean, approvals?: boolean, yours?: string }} props
  */
