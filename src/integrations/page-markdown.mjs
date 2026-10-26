@@ -107,7 +107,7 @@ const CODE_SPAN = /(?<!`)(`+)(?!`)[\s\S]*?(?<!`)\1(?!`)/g;
 // a data-pagefind-* attribute name, looked for after quoted values are blanked
 const isSearchWrapper = (tag) => /\sdata-pagefind-[\w-]*/i.test(tag.replace(/(["'])[\s\S]*?\1/g, '""'));
 
-function stripSearchMarkup(markdown) {
+export function stripSearchMarkup(markdown) {
   const open = []; // per open <span>: true when it is a search wrapper to drop
   const dropTags = (text) =>
     text.replace(SPAN_TAG, (tag) => {
