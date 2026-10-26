@@ -59,5 +59,5 @@ Keboola performs scheduled maintenance from time to time to keep things running 
 
 If maintenance is needed outside of the regular window, we’ll post an announcement at least 48 hours in advance on our [status page](https://keboolastatus.com/), unless we’ve agreed on a different way to notify you.
 
-To check how the platform is doing at any moment, visit [stats.keboola.com](http://stats.keboola.com/) or use an alternative tracking method if one has been arranged with you.
+To check how the platform is doing at any moment, visit [keboolastatus.com](https://keboolastatus.com/) or use an alternative tracking method if one has been arranged with you.
 
