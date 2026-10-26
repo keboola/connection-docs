@@ -96,7 +96,8 @@ You can also limit the token validity.
 ![Screenshot - Access Tokens](/management/project/tokens/access-token-detail.png)
 
 You can see and copy the token only once — right after it was created. If you
-need to access the token later, you can [share it](#sharing-token).
+need the token value later, [refresh the token](#refreshing-token) to get a new value. The old value stops
+working immediately, so update every script and integration that uses it.
 
 ![Screenshot - Access Tokens](/management/project/tokens/access-token-detail-2.png)
 
@@ -117,7 +118,7 @@ You would then create a token that is authorized for running the **MySQL databas
 *Note: For historical reasons, specifying the Orchestrator component in component permissions is optional. 
 This means that the token will also work if it has access to no components.*
 
-You can then [share the token](#sharing-token) to the person responsible for the database process and be 
+You can then give the token to the person responsible for the database process and be 
 sure that they can use only that particular component in that particular bucket. They will be even able to 
 reconfigure it — e.g., update the extraction queries (but only via the API).
 Also, writing to a limited set of buckets is a good way of preventing accidentally overwriting data.
@@ -135,16 +136,19 @@ A confirmation dialog is displayed. When you click **Refresh**, the old token wi
 
 ![Screenshot - Refresh Token Detail](/management/project/tokens/refresh-token-detail.png)
 
-A new token is generated. Now you can copy it or send it to someone.
+A new token is generated. Copy the new value now; it is shown only once.
 
 ![Screenshot - Refresh Token Done](/management/project/tokens/refresh-token-done.png)
 
 ## Sharing Token
-An existing token can be shared to an arbitrary email address (including yours). You can
-share a token by clicking the **Send Token** button. Note that master tokens cannot be shared. 
+:::caution[Deprecated]
+Sending a token via email (the **Send via email** button) is deprecated and will be removed on February 4, 2027.
+To get a token value again, [refresh the token](#refreshing-token); the old value stops working immediately. See the
+[announcement](https://changelog.keboola.com/sending-api-tokens-via-email-will-be-removed-on-february-4-2027/) for details.
+:::
 
-**Important:** Always use the **Send Token** feature instead of copying and sending the token yourself. 
-This is more secure because it does not actually send the token, only a link to retrieve it.
+An existing token can be shared to an arbitrary email address (including yours). You can
+share a token by clicking the **Send via email** button. Note that master tokens cannot be shared. 
 
 ![Screenshot - Access Tokens](/management/project/tokens/send-token-button.png)
 

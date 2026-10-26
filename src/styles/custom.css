@@ -1442,6 +1442,22 @@ nav.sidebar {
 }
 /* Focused programmatically after submit; no ring on a non-interactive line. */
 .b-feedback-thanks:focus { outline: none; }
+/* "Ask Kai about this page", offered after a 👎 for missing information. */
+.b-feedback-kai {
+  margin-top: 12px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid var(--kbc-blue-600);
+  border-radius: 6px;
+  background: var(--bg-1);
+  color: var(--kbc-blue-700);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.b-feedback-kai:hover { background: var(--kbc-blue-100); }
+:root[data-theme='dark'] .b-feedback-kai { border-color: var(--kbc-blue-450); color: var(--kbc-blue-450); }
+:root[data-theme='dark'] .b-feedback-kai:hover { background: rgba(31, 143, 255, 0.18); }
 /* Honeypot + screen-reader-only helpers */
 .b-feedback-hp {
   position: absolute;
