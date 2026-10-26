@@ -39,7 +39,8 @@ tutorial voice ("An integral aspect of creating a transformation is the developm
 itself"), with no Kai and no CLI path at all.
 
 Every command in the CLI tab was run live in project 264 on 2026-09-15 against the control
-staffing_outlook table, and the workspace deleted the same minute: workspace create (printed a
+staffing_outlook table, apart from the lower-case Snowflake query, the SELECT * check and the
+BigQuery query added later (see the notes after them), and the workspace deleted the same minute: workspace create (printed a
 private key and the "cannot be retrieved later" warning; login type snowflake-person-keypair),
 workspace load (Success: Loaded 1 table(s) into workspace 9659101 (1 clone)), workspace query,
 workspace detail (host/warehouse/database/schema/user, no key), workspace delete. The quoting trap
@@ -63,9 +64,9 @@ are "Snowflake SQL Workspace" / "Google BigQuery Workspace" per /workspace/sql-e
 Connect button opens Snowflake's Snowsight, not a Keboola console (/workspace/ "Person type
 workspace"), and direct access needs a dedicated backend; and `--read-only` defaults to ON
 (`kbagent workspace create --help`, v0.93.2: "[default: read-only]"), which is the opposite of the
-dialog's unchecked box. The first example query was wrong on both column names and case — the
-casing table now in the page is measured, all four rows of it, against the control table on
-2026-09-15.
+dialog's unchecked box. The first example query was wrong on both column names and case. The
+casing table was measured against the control table on 2026-09-15; the half of its rows for a
+table built with transform/'s SQL was added on 2026-10-26 (see the note after the table).
 
 VERIFY(Nikita): the prerequisites invite a Free Plan reader, and /workspace/ says Pay As You Go
 projects have no direct access to Snowflake workspaces. Step 7 now routes them to the SQL Editor,
@@ -204,28 +205,49 @@ which is the difference between refreshing a copy and adding to it.
 
 **Run your SQL**
 
-On a Snowflake workspace:
+On a Snowflake workspace, for a table built with the SQL on
+[Transform data](/getting-started/transform/):
+
+```bash
+kbagent workspace query --project docs-demo --workspace-id <workspace-id> --sql 'SELECT "store_name", "date", "expected_units_per_person" FROM "staffing_outlook" ORDER BY "expected_units_per_person" DESC LIMIT 5'
+```
+
+For a table Kai built from that page's **Prompt** tab, the same query with the column names in
+upper case:
 
 ```bash
 kbagent workspace query --project docs-demo --workspace-id <workspace-id> --sql 'SELECT "STORE_NAME", "DATE", "EXPECTED_UNITS_PER_PERSON" FROM "staffing_outlook" ORDER BY "EXPECTED_UNITS_PER_PERSON" DESC LIMIT 5'
 ```
 
 :::caution[On Snowflake, case is not a detail]
-Double quotes mean *exactly this name*; without them Snowflake reads any name as upper case. On
-this table the two halves disagree, and both halves of the disagreement are load-bearing:
+Double quotes mean *exactly this name*; without them Snowflake reads any name as upper case. The
+table is stored in lower case, the way the output mapping wrote it. The columns depend on the SQL
+that built the table: the SQL on Transform data quotes its aliases, so the names stay lower case,
+while the SQL Kai wrote from that page's **Prompt** tab left them unquoted in our runs, and
+Snowflake upper-cased them.
 
 | You write | What happens |
 |---|---|
 | `FROM staffing_outlook` | fails; looks for `STAFFING_OUTLOOK`, the table is stored lower case |
 | `FROM "staffing_outlook"` | works |
-| `SELECT "store_name"` | fails with `invalid identifier`, the column is stored upper case |
-| `SELECT STORE_NAME` or `SELECT "STORE_NAME"` | works |
+| `SELECT "store_name"` | works on a table built with the SQL on Transform data; on one Kai built, fails with `invalid identifier` |
+| `SELECT STORE_NAME` or `SELECT "STORE_NAME"` | works on a table Kai built; fails on one built with the SQL on Transform data |
 
-The table was named by the output mapping, which kept the name as written; the columns came out of
-SQL that did not quote its aliases, so the backend upper-cased them. Run
-`SHOW COLUMNS IN "staffing_outlook"` when a name refuses to resolve, rather than guessing which
-half you are on.
+When a name refuses to resolve, print one row and write the names the way its header spells
+them:
+
+```bash
+kbagent workspace query --project docs-demo --workspace-id <workspace-id> --sql 'SELECT * FROM "staffing_outlook" LIMIT 1'
+```
 :::
+
+{/* Case rows corrected 2026-10-26. The 2026-09-15 run used the upper-case query against 264's
+control table, which Kai had built with unquoted aliases (STORE_NAME … SHORT_HANDED, see the
+2026-09-09 note on transform/). The SQL printed on transform/ quotes its aliases and so writes
+lower-case columns, which ask/'s Snowflake queries already assume. The caution used to suggest
+SHOW COLUMNS; SELECT * … LIMIT 1 shows the same names without depending on whether the query
+endpoint passes SHOW statements through. VERIFY(Nikita): the lower-case query and the SELECT *
+check have not been run in a workspace. */}
 
 On a BigQuery workspace, which is what a Free Plan project creates, double quotes make a string
 literal rather than a name, so write the names plain, with `date` in backticks as on
