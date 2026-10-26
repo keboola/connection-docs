@@ -142,7 +142,7 @@ I'm new to this project. Give me an overview of the data structure and what each
 follows from Kai being project-scoped (kai/best-practices.md: "Kai only sees your current
 project"), but no Kai page states it outright. Confirm there is no project-creation tool, and
 consider stating the boundary on kai/index.md. 2026-10-08: asked in 264, Kai said it has no such
-tool and listed 16 write tools (~/.keboola-shots/free-run-2026-10-08/kai-proj.txt); but the Tool permissions list in a new Free Plan project (6425)
+tool and listed 16 write tools; but the Tool permissions list in a new Free Plan project (6425)
 shows 24 write tools, create_project among them. Whether it works from a project's
 Kai chat (or only in the MCP bootstrap mode of DMD-1939) is for the Kai team. */}
 
@@ -178,23 +178,12 @@ page, [Load data into Storage](/getting-started/load/):
 </video>
 
 {/* Moved here on 2026-10-13 from the "The whole guide with Kai" page, which went when the tabbed
-flow became the final one (Nikita's pick after Jordan preferred it; notes/getting-started/DECISIONS.md
-2026-10-13). This page is where the reader checks Kai Agent is there, right before the first
-Prompt tab, and it has no other clip. Recording, 2026-10-09, a new Free Plan project, 6429 (Nikita
-asked to see step by step where Kai is and where the prompts go, as a clip of the interface rather
-than enlarged screenshots). Take 8 of record-where4.mjs, at 2x through the CDP screencast,
-assembled in Remotion (~/docs-ops/remotion/where-kai, edit8.py, Composition8.tsx): the whole
-screen first, a zoom of 1.6x, back out at the end; an arrow pointer drawn by the recorder, brought
-up to Approve from below; captions in a band above the screen, where the player's controls never
-cover them. Kai's 35 s of work runs at 10x and the 9 s after Approve at 2x, both labelled; the
-2.6 s while the new chat's suggestions load, and 1.3 s of the pasted prompt, are cut; the rest is
-1x. The suggestions still move the field by 4 CSS px as it is clicked (take 6: 16 px). Approve was
-clicked on camera: it created the "Boolabean sales" configuration, Kai's next
-request (the stores row) was declined off camera, and the configuration went to Trash. The
-account e-mail was blanked as it rendered and the avatar hidden; Vision OCR over all 621 frames
-and the poster found no e-mail. 25.9 s, 850 KB, mean luma 228, min 224, poster at 8.4 s
-(clip_metrics.sh). Recorders, raw takes and marks: ~/.keboola-shots/where-kai-2026-10-09/.
-notes/getting-started/DECISIONS.md 2026-10-09. */}
+flow became the final one (notes/getting-started/DECISIONS.md 2026-10-13). This page is where the
+reader checks Kai Agent is there, right before the first Prompt tab, and it has no other clip.
+Recorded 2026-10-09 in a new Free Plan project (6429). Approve was clicked on camera, and the
+configuration it created went to Trash. The account e-mail was blanked and the avatar hidden, and
+Vision OCR over every frame and the poster found no e-mail. How it was recorded and edited:
+notes/getting-started/DECISIONS.md, 2026-10-09 and 2026-10-26. */}
 
 Not having Kai does not block the build: the loading, the SQL and the flow each carry a UI path and
 a CLI path in full, and the questions can be asked in SQL in a workspace. Without Kai the app is

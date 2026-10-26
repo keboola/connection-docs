@@ -81,15 +81,14 @@ Weather data by [Open-Meteo.com](https://open-meteo.com/), under
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). `weather_daily` is Open-Meteo's
 historical daily maximum temperature and precipitation for June to August 2026, reshaped into one
 row per café and day with our column names; `forecast` comes from its forecast API when you load it.
-That API is free for non-commercial use, up to 10,000 calls a day
-([terms](https://open-meteo.com/en/terms)), and the guide's weekly flow sends it one request a week.
 
-{/* VERIFY(Jordan): Open-Meteo's terms (read 2026-10-12) limit the free API to non-commercial use
-and 10,000 calls a day, 5,000 an hour, 600 a minute. Whether a weekly call from a customer's
-project, which is what automate/ schedules, counts as non-commercial is an owner's call; Jordan's
-review on #1116, item 7, asked who confirms it. Until then the page states the terms and leaves
-the call to the reader. The terms sat in the fold below until the guide test of 2026-10-12 found
-that a reader who does not open it never sees them. */}
+{/* Open-Meteo's terms (read 2026-10-12) limit the free API to non-commercial use and 10,000 calls
+a day, 5,000 an hour, 600 a minute. Decided in Jordan's approval of #1116 (2026-10-26): keep the
+live weekly call and accept the risk. The CC BY data licence allows commercial use with
+attribution, so the exposure is that call alone; a block would be per IP, and jobs leave a stack
+through shared IPs. The page no longer quotes the free tier's terms, so it does not present them
+as clearing the reader. If the call ever becomes a problem, the fallback is a forecast snapshot
+hosted on help.keboola.com next to the other CSVs. */}
 
 {/* 2026-10-12, Jordan's review on #1116, item 7: the page said the weather was invented, the
 generator said it was real. It is real: all 552 rows in weather_daily.csv (1,104 values) equal what

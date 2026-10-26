@@ -1008,8 +1008,8 @@ previous pages behind them, so one sentence says the page works with their own t
 the name in the prompt.
 
 The third is the authorization boundary, and it is the one that finally closes rather than hedges.
-Product said it on the call, in as many words: setting up an OAuth provider "will never be
-possible" for an agent. The CLI agrees by construction, since `kbagent data-app create --auth`
+Product said plainly on the call that an agent will never be able to set up an OAuth
+provider. The CLI agrees by construction, since `kbagent data-app create --auth`
 accepts only `password` or `public`. Two independent sources, so the page states it plainly instead
 of carrying it as a conservative reading.
 
@@ -1709,7 +1709,7 @@ dashboard, a data narrative, a staffing planner), about 1.5 s each, then the gri
 strange. Second, the one-screen slide in the old explainer look with a dot every 0.43 s: the line
 too fast, and the look not Keboola's.
 
-**Made with** Remotion (`~/docs-ops/remotion/hub-explainer`): 1280x800, 30 fps, 10.0 s, 201 KB, mean
+**Made with** Remotion: 1280x800, 30 fps, 10.0 s, 201 KB, mean
 luma 228, darkest frame 227, encoded in limited range like the earlier clips (Remotion writes full
 range, which measured 246 and could not be compared). The video is 713 px wide in a 1280-px window,
 so the 40-px lines read at 22 px, the 26-px closing line at 14.5 and the step titles at 16.7.
@@ -1747,7 +1747,7 @@ phrase on the second slide. The card now shows the guide's grid for "an app like
 Store pulse dashboard (the project's Shopify sample, switched to the last 12 months) for "an
 interactive dashboard?", and the Café staffing planner (this guide's café sales, 31 °C on a
 Saturday) for "a what-if simulator?". Both apps are ones Kai built in project 264 on 6 Oct, and the
-screens are the last frames of their takes in `~/docs-ops/remotion/apps-range`; the cursor rests
+screens are the last frames of their takes; the cursor rests
 on the control that was used. Each screen fades in through the card's white as its phrase arrives,
 so two screens never sit on top of each other. This is not the montage rejected on 6 Oct: there is
 one slide, the guide's grid comes first, the layout and the closing line stay, and there are no
@@ -2004,7 +2004,7 @@ check/.
   `SHARED.kai` in prereqs.mjs, also behind the Prompt tab line. `KAI_TRACK` and `KAI_TRACK_TIME` in
   course.mjs feed the fork card's "Steps 2 to 6 … about 30 minutes" and the twin.
 - **D5.** Pages with the course bar are exempt (the bar and Prev/Next already carry the next step);
-  rules.md, check.mjs and two fixtures in ~/keboola-rig/user/docs-diataxis-check, tests 21/21. The
+  rules.md, check.mjs and two fixtures in the docs-diataxis-check skill, tests 21/21. The
   five Going-further pages got their `**Next:**` footers, two by moving an existing Going-further
   link rather than repeating it. The seven legacy pages (ad-hoc/, branches/) still fail D5: each
   already ends with a prose "next" link, so a footer would duplicate it; converting them is a
@@ -2054,8 +2054,8 @@ and where the prompts go, zoomed in on those places rather than the whole interf
 The app part is on the app card now: its frame is the empty project's Apps page with the prompt
 pasted (app-where.png) instead of the builder at Draft ready (app-done.png, CONSERVATION-REPORT.md);
 app/ keeps its builder screenshots, just after sending and the draft grid, so no image shows the
-Draft ready line itself any more. Scripts: ~/.keboola-shots/where-kai-2026-10-09/
-(record-where4.mjs, take8/) and ~/docs-ops/remotion/where-kai (edit8.py, Composition8.tsx).
+Draft ready line itself any more. The recorder (record-where4.mjs, take 8) and the Remotion edit
+(edit8.py, Composition8.tsx) are kept outside the repo.
 
 **Review round (fact-checker, guide-tester, checker).** Fixed: the ask card's Done line (a cold week
 lists nothing to recompute), the cold-day choice back with its meaning, as a note on the transform
@@ -2161,8 +2161,8 @@ under the clip. The card is the Free Plan grid (app/grid-preview.png, project 63
 three red cells), the same week as the run's other screenshots. 10.0 s, 193 KB, luma mean 229, never
 under 227; the poster is the whole line at 5.6 s. DECISIONS.md 2026-10-01.
 
-Remade 2026-10-06 for Jordan, who found the clip long. Built in Remotion
-(~/docs-ops/remotion/hub-explainer), 1280x800 at 30 fps, in the look of Keboola's design system as
+Remade 2026-10-06 for Jordan, who found the clip long. Built in Remotion,
+1280x800 at 30 fps, in the look of Keboola's design system as
 Nikita asked (@keboola/design 13: Inter, slate text, Keboola blue #2563eb on #f9fafb, a white card
 with a #e5e7eb edge). The line draws faster than the 10-01 cut, a dot every 0.67 s (Nikita wanted
 it about 1.5 times slower than a first try at 0.43 s), so the whole line is up from 3.0 to 3.9 s.
@@ -2289,22 +2289,153 @@ stay above as history. What the page held and where each part went is in CONSERV
 
 ---
 
+## 2026-10-26 — Jordan approves the stack, and it lands as one commit
+
+Jordan approved #1116 on 26 October as the base of the stack, after checking the main fixes at
+#1187's tip. On its own #1116 still has the issues from his first review, so the three land
+together. In a follow-up he asked for the final state to land as a single squash commit, because
+the commits under #1116 carry the old root `DECISIONS.md` with verbatim quotes from internal
+calls and chats, and the repo is public. Squash merging is off in the repository settings, so an
+admin turns it on for this merge; #1187 is retargeted to `main` and squash-merged, and #1116, #1144
+and #1157 close as landed through it.
+
+His answers to the open questions:
+
+- **Open-Meteo terms.** Keep the live weekly call and accept the risk. The data licence (CC BY 4.0)
+  allows commercial use with attribution, so the only exposure is the call to the free API from
+  readers' projects. A block would be per IP, and jobs leave a stack through shared IPs. `load/`
+  no longer quotes the free tier's terms, and its VERIFY is closed. The fallback, if it is ever
+  needed, is a forecast snapshot hosted next to the other CSVs.
+- **Attribution.** The credit line now sits under the weather-derived visuals on `ask/` and
+  `app/` too, and `app/`'s step 5 gives a prompt that adds it to the app before publishing.
+- **Apps owners.** No separate sign-off on `app/` before merge: it follows and links the Apps
+  pages, and it ran live on a Free Plan project.
+
+His non-blocking notes, done on #1187: `app/`'s step 5 names the **Publish to Production**
+button the Apps pages use, and sending `Publish to production` in the chat where the builder shows
+only **Deploy**, as the 8 Oct run did (flagged for Nikita);
+the `management/pay-as-you-go/` comment no longer leans on `project/`'s old Storage figure; page
+comments and these notes stop citing local paths nobody else can open; the last verbatim quote
+here is paraphrased; and two long page comments moved here, below, so the pages keep only what is
+current.
+
+### Moved from `app/index.mdx` (the authoring comment as it stood on 2026-10-26)
+
+Tutorial-type page. Walked live in project 264 on 2026-09-09 with the prompt below. Observed: the Apps list's button reads "Create App" (accessible text; data-apps/getting-started.md
+writes it "+ Create App", the plus being the icon), the Create App screen has a textarea "Describe
+what you want to build..." and a send control; below it, "or create manually" offers Streamlit and Python/JS. Kai
+created the production configuration first ("Prod app created"), then a DRAFT pinned to a branch
+("Staffing Outlook Grid draft", branch init), booted the draft dev container (a Python/JS app: npm
+install, Vite), wrote the code, and opened a live preview: "This is a private draft that updates
+live as Kai builds. Publish it when you're ready to share a production app with your team." One
+approval card (Decline / Always allow / Approve). Buttons in the builder: Preview, Code, Publish to
+production. Total 5 min 44 s to a running draft. The production configuration: name "Staffing
+Outlook Grid", Authentication Basic (password), code in a Keboola-managed private Git repository
+(branch main), backend Python / JS, size XSmall, auto sleep 15 minutes, URL prefix
+"<prefix>-74021219.hub.europe-west3.gcp.keboola.com".
+
+Re-checked read-only on 2026-09-22, and one half has changed. The 09-22 container run
+(01a0c74d-9a1c-7b2c-94d2-005cfee2a2ad, 04:09) CLONED successfully — "Saving git commit hash to
+state: f9cab9f7" — and then failed on the missing keboola-config/nginx directory. So the managed Git
+credentials are working again; the runs that failed on "Authentication failed" are 09-20 and 09-21
+(and job 105560409, quoted below, is the 09-21 one). The nginx gap is the durable cause and the one
+the bug report should lead with. Both are kept in the failure list because a reader can still meet
+either. Re-checked 2026-09-23: the 04:07 UTC run (01a0cc72-9400-76da-b211-3e7d2afee913) failed on
+the credentials again, StartupProbeFailed with "Credentials are incorrect or have expired", so
+"working again" held for one day and both causes are live. So the page keeps sending the reader to the
+draft preview as the finishing line. Step 5 now states the missing dialog BEFORE the click rather
+than after it, which is the lesson from Michal's OIDC walk-through: he pressed Publish, got no
+feedback, and could not tell whether he had missed a step.
+
+The Apps section itself is being reworked in parallel on PRDCT-692 / AJDA-3380 (data-apps/**,
+including a new operate.md and troubleshooting.md). This page only links there; the contradiction
+between data-apps/getting-started.md's "turns Active" and what happens here belongs to that work,
+not to this branch.
+
+Settled 2026-10-01 in Free Plan project 6375 (see below): "Publish to production" merged the
+draft into main, asked two approvals and deployed, and the app came up Active. History, for the
+Apps team's bug report: in 264 clicking it (twice, 2026-09-09)
+produced no dialog, no new configuration version and no deploy job; the production app stayed "Not
+Deployed" and later "Stopped". The UI only ever reported "Internal Server Error occurred."
+2026-09-15: `kbagent data-app runs` prints the container's startup log, and the real causes are
+there — the 09-14 run cloned the repo and then failed on `[ERROR] App must have
+keboola-config/nginx/ directory. Missing: /app/keboola-config/nginx`, and both 09-15 runs failed
+earlier still, on `fatal: Authentication failed for …/app-74021219.git` with "Credentials are
+incorrect or have expired". So the publish does carry code (the repo has a commit), and production
+fails for two platform-side reasons: the app Kai generated lacks the nginx config a Python/JS app
+needs outside dev mode, and the managed Git credentials have since expired. Worth a bug report to
+the Apps team with both run IDs; the page now says this instead of "we could not tell". The page therefore describes the
+draft honestly, says production needs a deploy and may fail, and does not promise an Active app.
+data-apps/getting-started.md, which documents this flow with its own screenshots, should be checked
+against this. Whether the Free Plan includes data apps stayed unsettled in our own docs until
+2026-10-01 (closed below the Prereqs). The previous clip (app-preview.mp4) and the octopus-map-preview.png came off with the old
+sample world; phase 2 records the grid from the draft preview, which needs no password.
+
+CLI / API tab added 2026-09-15. `data-app list` was run live against project 264 (kbagent
+v0.93.1) and prints id, state and URL per app; `deploy --wait` was exercised on this app and
+reproduces the failure documented above, which is the honest thing to show — it is the same
+call the flow's third phase made until 2026-10-01, when the phase was dropped. `start`, `logs` and `password` are listed from the command
+reference and are read-only or idempotent; they have not been run here.
+
+2026-10-01, Free Plan project 6375 (us-east4, BigQuery), the prompt below word for word. A
+read-only watcher on the Storage API and the page logged every step. An empty project's Apps page
+is the builder itself (no Create App click); with an app in the project the list's button reads
+"Create app". On send the builder created a "New App" configuration at once, renamed it "Staffing
+Outlook" 45 s later, created a draft configuration, seeded its Git branch, booted the preview
+container, wrote and pushed the code: no approval card at any point. The chat ended "Draft ready /
+Not live yet" with a Deploy button and the chips "Publish to production" and "Make changes...".
+First preview after about 4.5 min: the right grid, but no red cells and the caption "No
+short-handed café-days in this outlook", while Kai's summary claimed three; Kai's diagnosis was
+that short_handed reached the app as "1" or an empty string, and one message fixed it (again no
+approval). The "Publish to production" chip then merged the draft into main, and the first two
+approval cards of the whole page came: storage access for the production app ("settings don't
+carry over from the draft"), then the deploy. The app came up Active (Python / JS, XSmall, sleep 15
+minutes, Basic (Password)) and the draft was deleted, without a card: delete_python_js_data_app_draft
+and create_python_js_data_app_git_credential are the two write tools a fresh account has on Always
+allow. So the old "asks once before it writes code" was wrong in 6375, and the deploy that never
+worked in 264 worked here; the flow's redeploy phase also succeeded, in 19 s, before it was dropped
+that evening because the app reads its table on every request. The builder's chat
+printed its Git remote with a credential in it during "Seed draft branch": keep that step out of
+any screenshot. notes/getting-started/DECISIONS.md 2026-10-01.
+
+### Moved from `project/index.mdx` (the where-kai clip's render log)
+
+Moved here on 2026-10-13 from the "The whole guide with Kai" page, which went when the tabbed
+flow became the final one (Nikita's pick after Jordan preferred it; notes/getting-started/DECISIONS.md
+2026-10-13). This page is where the reader checks Kai Agent is there, right before the first
+Prompt tab, and it has no other clip. Recording, 2026-10-09, a new Free Plan project, 6429 (Nikita
+asked to see step by step where Kai is and where the prompts go, as a clip of the interface rather
+than enlarged screenshots). Take 8 of record-where4.mjs, at 2x through the CDP screencast,
+assembled in Remotion (edit8.py, Composition8.tsx): the whole
+screen first, a zoom of 1.6x, back out at the end; an arrow pointer drawn by the recorder, brought
+up to Approve from below; captions in a band above the screen, where the player's controls never
+cover them. Kai's 35 s of work runs at 10x and the 9 s after Approve at 2x, both labelled; the
+2.6 s while the new chat's suggestions load, and 1.3 s of the pasted prompt, are cut; the rest is
+1x. The suggestions still move the field by 4 CSS px as it is clicked (take 6: 16 px). Approve was
+clicked on camera: it created the "Boolabean sales" configuration, Kai's next
+request (the stores row) was declined off camera, and the configuration went to Trash. The
+account e-mail was blanked as it rendered and the avatar hidden; Vision OCR over all 621 frames
+and the poster found no e-mail. 25.9 s, 850 KB, mean luma 228, min 224, poster at 8.4 s
+(clip_metrics.sh). Recorders, raw takes and marks are kept outside the repo.
+notes/getting-started/DECISIONS.md 2026-10-09.
+
+---
+
 ## Open — carried as VERIFY(owner) flags in the pages
 
-Rebuilt on 2026-10-12 from the pages: 21 flags. These are product facts an agent must not guess;
+Rebuilt on 2026-10-12 from the pages: 21 flags, 20 since Jordan answered the Open-Meteo one on 2026-10-26. These are product facts an agent must not guess;
 each flag stays in its page, next to the sentence it qualifies.
 
 | Where | Owner | Question |
 |---|---|---|
-| `app/index.mdx:203` | Nikita | Is there always a route to **Publish to production** after *Draft ready*? The chat's *What's next?* chips are generated per answer and did not offer it in the 8 Oct run. |
+| `app/index.mdx` (step 5) | Nikita | Step 5 now names the **Publish to Production** button, as the Apps pages do. In the 8 Oct run the builder showed **Deploy** there instead: is it the same action? |
 | `automate/index.mdx:481` | Miro | Does a running data app count against the Free Plan minutes? |
 | `automate/index.mdx:486` | Nikita | Does **Delete flow** also remove the flow's schedules? The box deletes the schedule first, so the page does not depend on the answer. |
 | `check/index.mdx:175` | Nikita | On contract plans, do flow jobs consume credits? |
 | `index.mdx:30` | Jordan | Two decisions of 21 Aug (the clip in three acts, the question frame as its poster) changed with the clips after 23 Sep. |
 | `load/database.mdx:46` | Nikita | Do the UI and Prompt paths name the bucket after the configuration? Only the CLI path was walked. |
 | `load/googlesheets.mdx:145` | Nikita | The four bullets on re-authorizing and the file picker come from how the connector behaves, not from a walk. |
-| `load/index.mdx:87` | Jordan | Does a weekly call to Open-Meteo's free API from a customer's project count as non-commercial use? |
-| `load/index.mdx:224` | Nikita | The HTTP connector's simplified mode was seen once (6211), and the page is its only source. |
+| `load/index.mdx:223` | Nikita | The HTTP connector's simplified mode was seen once (6211), and the page is its only source. |
 | `project/index.mdx:47` | Nikita | Which Free Plan Storage limit is right: 50 GB (the project's own limits) or 250 GB (`management/pay-as-you-go/`)? |
 | `project/index.mdx:59` | Nikita | A new Free Plan project showed 120 minutes, not the documented 60. A first-month allowance? |
 | `project/index.mdx:78` | MCP team, DMD-1939 | Which stack offers `create_project` to a session without an account, and when? |
@@ -2322,6 +2453,7 @@ each flag stays in its page, next to the sentence it qualifies.
 
 | Question | Closed | Answer |
 |---|---|---|
+| Does a weekly call to Open-Meteo's free API from a customer's project count as non-commercial use? | 2026-10-26 | Jordan, approving #1116: keep the call and accept the risk; `load/` stops quoting the free tier's terms; the fallback is a forecast snapshot on help.keboola.com. |
 | Does the BigQuery block on `transform/` run as printed? | 2026-10-12 | **Yes**, in Free Plan project 6439 through an input mapping (the entry above). |
 | Does the Free Plan include data apps? | 2026-10-01 | **Yes.** Built, published and deployed in Free Plan project 6375. |
 | Do flow jobs consume credits on the Free Plan? | 2026-10-01 | **No.** `management/pay-as-you-go/` exempts flow jobs; contract plans stay open (`check/`). |

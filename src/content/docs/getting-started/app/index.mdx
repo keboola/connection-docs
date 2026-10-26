@@ -18,83 +18,27 @@ import FlowStrip from '../../../../components/getting-started/FlowStrip.astro';
 A chat answer reaches only the person who asked. The manager of the Brno café wants to glance at
 next week on Monday morning and see which day is red.
 
-{/* Tutorial-type page. Walked live in project 264 on 2026-09-09 with the prompt below
-(boolabean-run/app-build/). Observed: the Apps list's button reads "Create App" (accessible text; data-apps/getting-started.md
-writes it "+ Create App", the plus being the icon), the Create App screen has a textarea "Describe
-what you want to build..." and a send control; below it, "or create manually" offers Streamlit and Python/JS. Kai
-created the production configuration first ("Prod app created"), then a DRAFT pinned to a branch
-("Staffing Outlook Grid draft", branch init), booted the draft dev container (a Python/JS app: npm
-install, Vite), wrote the code, and opened a live preview: "This is a private draft that updates
-live as Kai builds. Publish it when you're ready to share a production app with your team." One
-approval card (Decline / Always allow / Approve). Buttons in the builder: Preview, Code, Publish to
-production. Total 5 min 44 s to a running draft. The production configuration: name "Staffing
-Outlook Grid", Authentication Basic (password), code in a Keboola-managed private Git repository
-(branch main), backend Python / JS, size XSmall, auto sleep 15 minutes, URL prefix
-"<prefix>-74021219.hub.europe-west3.gcp.keboola.com".
+{/* Tutorial-type page. The flow as it runs now, 2026-10-01 in Free Plan project 6375 (us-east4,
+BigQuery), with the prompt below word for word and a read-only watcher on the Storage API: an
+empty project's Apps page is the builder itself (no Create App click); with an app in the project
+the list's button reads "Create app". On send the builder created a "New App" configuration at
+once, renamed it "Staffing Outlook" 45 s later, created a draft configuration, seeded its Git
+branch, booted the preview container, and wrote and pushed the code, with no approval card. The
+chat ended "Draft ready / Not live yet" with a Deploy button and the chips "Publish to
+production" and "Make changes...". The first preview had the right grid but no red cells while
+Kai's summary claimed three (short_handed reached the app as "1" or an empty string); one message
+fixed it. Publishing merged the draft into main and brought the page's first two approval cards
+(storage access for the production app, then the deploy); the app came up Active (Python / JS,
+XSmall, sleep 15 minutes, Basic (Password)) and the draft was deleted without a card. The
+builder's chat printed its Git remote with a credential in it during "Seed draft branch": keep
+that step out of any screenshot.
 
-Re-checked read-only on 2026-09-22, and one half has changed. The 09-22 container run
-(01a0c74d-9a1c-7b2c-94d2-005cfee2a2ad, 04:09) CLONED successfully — "Saving git commit hash to
-state: f9cab9f7" — and then failed on the missing keboola-config/nginx directory. So the managed Git
-credentials are working again; the runs that failed on "Authentication failed" are 09-20 and 09-21
-(and job 105560409, quoted below, is the 09-21 one). The nginx gap is the durable cause and the one
-the bug report should lead with. Both are kept in the failure list because a reader can still meet
-either. Re-checked 2026-09-23: the 04:07 UTC run (01a0cc72-9400-76da-b211-3e7d2afee913) failed on
-the credentials again, StartupProbeFailed with "Credentials are incorrect or have expired", so
-"working again" held for one day and both causes are live. So the page keeps sending the reader to the
-draft preview as the finishing line. Step 5 now states the missing dialog BEFORE the click rather
-than after it, which is the lesson from Michal's OIDC walk-through: he pressed Publish, got no
-feedback, and could not tell whether he had missed a step.
-
-The Apps section itself is being reworked in parallel on PRDCT-692 / AJDA-3380 (data-apps/**,
-including a new operate.md and troubleshooting.md). This page only links there; the contradiction
-between data-apps/getting-started.md's "turns Active" and what happens here belongs to that work,
-not to this branch.
-
-Settled 2026-10-01 in Free Plan project 6375 (see below): "Publish to production" merged the
-draft into main, asked two approvals and deployed, and the app came up Active. History, for the
-Apps team's bug report: in 264 clicking it (twice, 2026-09-09)
-produced no dialog, no new configuration version and no deploy job; the production app stayed "Not
-Deployed" and later "Stopped". The UI only ever reported "Internal Server Error occurred."
-2026-09-15: `kbagent data-app runs` prints the container's startup log, and the real causes are
-there — the 09-14 run cloned the repo and then failed on `[ERROR] App must have
-keboola-config/nginx/ directory. Missing: /app/keboola-config/nginx`, and both 09-15 runs failed
-earlier still, on `fatal: Authentication failed for …/app-74021219.git` with "Credentials are
-incorrect or have expired". So the publish does carry code (the repo has a commit), and production
-fails for two platform-side reasons: the app Kai generated lacks the nginx config a Python/JS app
-needs outside dev mode, and the managed Git credentials have since expired. Worth a bug report to
-the Apps team with both run IDs; the page now says this instead of "we could not tell". The page therefore describes the
-draft honestly, says production needs a deploy and may fail, and does not promise an Active app.
-data-apps/getting-started.md, which documents this flow with its own screenshots, should be checked
-against this. Whether the Free Plan includes data apps stayed unsettled in our own docs until
-2026-10-01 (closed below the Prereqs). The previous clip (app-preview.mp4) and the octopus-map-preview.png came off with the old
-sample world; phase 2 records the grid from the draft preview, which needs no password.
-
-CLI / API tab added 2026-09-15. `data-app list` was run live against project 264 (kbagent
-v0.93.1) and prints id, state and URL per app; `deploy --wait` was exercised on this app and
-reproduces the failure documented above, which is the honest thing to show — it is the same
-call the flow's third phase made until 2026-10-01, when the phase was dropped. `start`, `logs` and `password` are listed from the command
-reference and are read-only or idempotent; they have not been run here.
-
-2026-10-01, Free Plan project 6375 (us-east4, BigQuery), the prompt below word for word. A
-read-only watcher on the Storage API and the page logged every step. An empty project's Apps page
-is the builder itself (no Create App click); with an app in the project the list's button reads
-"Create app". On send the builder created a "New App" configuration at once, renamed it "Staffing
-Outlook" 45 s later, created a draft configuration, seeded its Git branch, booted the preview
-container, wrote and pushed the code: no approval card at any point. The chat ended "Draft ready /
-Not live yet" with a Deploy button and the chips "Publish to production" and "Make changes...".
-First preview after about 4.5 min: the right grid, but no red cells and the caption "No
-short-handed café-days in this outlook", while Kai's summary claimed three; Kai's diagnosis was
-that short_handed reached the app as "1" or an empty string, and one message fixed it (again no
-approval). The "Publish to production" chip then merged the draft into main, and the first two
-approval cards of the whole page came: storage access for the production app ("settings don't
-carry over from the draft"), then the deploy. The app came up Active (Python / JS, XSmall, sleep 15
-minutes, Basic (Password)) and the draft was deleted, without a card: delete_python_js_data_app_draft
-and create_python_js_data_app_git_credential are the two write tools a fresh account has on Always
-allow. So the old "asks once before it writes code" was wrong in 6375, and the deploy that never
-worked in 264 worked here; the flow's redeploy phase also succeeded, in 19 s, before it was dropped
-that evening because the app reads its table on every request. The builder's chat
-printed its Git remote with a credential in it during "Seed draft branch": keep that step out of
-any screenshot. notes/getting-started/DECISIONS.md 2026-10-01. */}
+Before that, in project 264 (2026-09-09 to 09-23), publishing never produced an Active app: the
+generated app had no keboola-config/nginx/, and the managed Git credentials expired. The CLI /
+API tab dates from 2026-09-15: `data-app list` and `deploy --wait` ran against 264 (kbagent
+v0.93.1); `start`, `logs` and `password` come from the command reference and have not been run
+here. The full history, with the run IDs for the Apps team, is in notes/getting-started/DECISIONS.md
+(2026-10-26). */}
 
 <Prereqs needs={['project']} tabs={3}>
   <span slot="from"><code>staffing_outlook</code> exists in Storage.</span>
@@ -187,27 +131,40 @@ to build one ([Build your first app with Kai](/data-apps/getting-started/)).
 
    ![Screenshot - The grid in the draft preview: six cafés by seven days from 1 to 7 October, three red cells (Vinohrady on Thursday, Zelný trh on Monday and Tuesday) under the caption 3 short-handed café-days in this outlook](/getting-started/app/grid-preview.png)
 
+   Weather data by [Open-Meteo.com](https://open-meteo.com/) ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)).
+
    {/* Draft preview iframe captured 2026-10-01 in Free Plan project 6375 at 2x, after the
    one-message fix; replaces the 264 capture of 2026-09-14 (two red cells, another week). Same week
    as the run's other screenshots. */}
 
-5. **Optional, to share it:** if **What's next?** in the chat offers **Publish to production**, click it.
-   Kai moves the draft's code into the app and asks twice, the first approvals on this page: once
-   to give the published app access to Storage, and once to deploy it. A few minutes later the
+5. **Optional, to share it:** first ask Kai in the same chat to put Open-Meteo's credit in the
+   app, since the grid's numbers come from their forecast:
+
+   ```text title="Prompt" wrap
+   Under the grid, add the line "Weather data by Open-Meteo.com (CC BY 4.0)", with Open-Meteo.com linking to https://open-meteo.com/ and CC BY 4.0 linking to https://creativecommons.org/licenses/by/4.0/.
+   ```
+
+   Then click **Publish to Production** in the builder, the step the Apps pages describe in
+   [Publish to production](/data-apps/getting-started/#step-5--publish-to-production). If the
+   builder shows only **Deploy** there, send `Publish to production` in the chat instead: in our
+   Free Plan run that was one of Kai's *What's next?* suggestions, and picking it published the
+   app. Kai moves the draft's code into the app and asks twice, the first approvals on this page:
+   once to give the published app access to Storage, and once to deploy it. A few minutes later the
    app's own page (**Apps**, then the app) says **Active** and offers **Open**: a dialog with the
-   app's address, its password and an **Open app** button ([App actions](/data-apps/reference/#app-actions)).
-   The grid sits behind the password from the app's **Authentication** setting, **Basic (Password)** by
-   default. This worked in our Free Plan project; in an older project the deploy failed, for the
-   reasons below. The builder also shows **Deploy** buttons, in its header and on the *Draft ready*
-   card; this guide uses the **Publish to production** chip.
-   {/* VERIFY(Nikita): in the 2026-10-08 run (Free Plan project 6425) the chat's What's next? chips
-   after Draft ready were "Make changes to the café grid" and a highlight suggestion, with no
-   Publish to production; only the Draft ready card's and the header's Deploy were there. The chips
-   are generated per answer, so step 5 needs a route that is always present; what Deploy does on
-   this flow was not tried (publishing was optional and not asked for). Both point at Deploy: Kai's
-   recap in the Kai Agent chat said "Click Deploy in the app's Builder to publish it", and its
-   chips there offered "Publish the Café Staffing Outlook app…". Nikita's call. */} The draft preview is enough to finish
-   it. To remove the app later, open **More actions** (**⋮**) on its page and pick **Delete app**.
+   app's address, its password and an **Open app** button
+   ([App actions](/data-apps/reference/#app-actions)). The grid sits behind the password from the
+   app's **Authentication** setting, **Basic (Password)** by default. This worked in our Free Plan
+   project; in an older project of ours the deploy failed, and **If it goes wrong** below has the
+   reasons. The draft preview is enough to finish the page. To remove the app later, open **More
+   actions** (**⋮**) on its page and pick **Delete app**.
+
+   {/* VERIFY(Nikita): main's Apps page (data-apps/getting-started, verified 2026-10-07) and its
+   builder screenshot show a Publish to Production button, and the 6375 run published through the
+   What's next? chip of that name. In the 2026-10-08 run (Free Plan project 6425) the builder showed
+   Deploy in its header and on the Draft ready card, the chips had no Publish to production, and
+   Kai's recap in the Kai Agent chat said "Click Deploy in the app's Builder to publish it". Not yet
+   run: typing "Publish to production" in the chat rather than picking the chip, what that Deploy
+   does, and the credit prompt above. */}
 
 **Check:** the draft preview (or the app itself, through **Open**, once deployed) shows the grid, and its caption's
 count equals both the number of red cells and the number of rows where `short_handed` is true in
@@ -221,7 +178,7 @@ While the builder chat is open, also ask Kai:
 the next page rebuilds the table but does not restart the app. Ours reads it on every request. An
 app that reads it only when it starts still shows a new week once it has slept and started again.
 To be sure, ask Kai in the same chat to make yours read the table on every request. If the app is
-already published, click **Publish to production** again so the live app gets the change.
+already published, click **Publish to Production** again so the live app gets the change.
 
 </TabItem>
 <TabItem label="UI">
