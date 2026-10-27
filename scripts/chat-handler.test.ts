@@ -139,3 +139,47 @@ test('per-IP limit: the handler answers 429 with JSON and never calls upstream',
   assert.match(JSON.parse(r.body).error, /Too many questions/);
   assert.equal(calls, 0);
 });
+
+// ─── Upstream retries ────────────────────────────────────────────────────
+
+test('a 5xx is retried with a waking-up event, then the answer streams', async () => {
+  const mod = await load(LIVE, 'retry-5xx');
+  let calls = 0;
+  globalThis.fetch = (async () => (++calls === 1 ? new Response('', { status: 503 }) : answer('Hi.'))) as any;
+  const r = res();
+  await mod.default(req('POST', { message: 'Hello' }), r);
+  const ev = events(r);
+  assert.equal(calls, 2);
+  assert.ok(ev.some((e) => e.type === 'progress' && /waking up/.test(e.label)));
+  assert.deepEqual(ev.find((e) => e.type === 'text-delta'), { type: 'text-delta', text: 'Hi.' });
+  assert.equal(ev.at(-1).type, 'done');
+});
+
+test('a timeout ends the request without a retry it has no budget for', async () => {
+  const mod = await load(LIVE, 'retry-timeout');
+  let calls = 0;
+  globalThis.fetch = (async () => {
+    calls++;
+    throw new DOMException('The operation was aborted due to timeout', 'TimeoutError');
+  }) as any;
+  const r = res();
+  await mod.default(req('POST', { message: 'Hello' }), r);
+  const ev = events(r);
+  assert.equal(calls, 1);
+  assert.ok(!ev.some((e) => e.type === 'progress' && /retrying/.test(e.label)), 'no dead retry');
+  assert.ok(ev.some((e) => e.type === 'error'));
+  assert.equal(ev.at(-1).type, 'done');
+});
+
+test('a 4xx from upstream is not retried', async () => {
+  const mod = await load(LIVE, 'retry-4xx');
+  let calls = 0;
+  globalThis.fetch = (async () => {
+    calls++;
+    return new Response('', { status: 401 });
+  }) as any;
+  const r = res();
+  await mod.default(req('POST', { message: 'Hello' }), r);
+  assert.equal(calls, 1);
+  assert.ok(events(r).some((e) => e.type === 'error'));
+});

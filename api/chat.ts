@@ -267,10 +267,13 @@ async function handleDocsQuestion(
       break;
     } catch (e: any) {
       const msg = String(e?.message || e?.name || '');
+      // The per-attempt timeout is the whole remaining budget, so a timeout
+      // or abort means there is no time left to retry in: stop instead of
+      // announcing a retry that can't happen.
+      if (e?.name === 'TimeoutError' || e?.name === 'AbortError') break;
       // Retry only on transient cold-start / upstream errors.
       const isTransient =
-        /HTTP 5\d\d/.test(msg) ||
-        /fetch failed|ECONN|ETIMEDOUT|Timeout|abort/i.test(msg);
+        /HTTP 5\d\d/.test(msg) || /fetch failed|ECONN|ETIMEDOUT/i.test(msg);
       if (!isTransient || attempt >= maxAttempts) break;
       writeSse(res, {
         type: 'progress',
