@@ -26,8 +26,8 @@ News and more information about the migration will be posted to our [changelog](
 
 
 
-*If you already know how flows work in general and want to create your first flow, go to our [Getting Started tutorial](/tutorial/automate/).  
-For useful tips, check out our cheat sheet with [best practices](/tutorial/onboarding/cheat-sheet/#automating-your-flow).*
+*If you already know how flows work in general and want to create your first flow, go to our [Getting Started tutorial](/getting-started/automate/).  
+For useful tips, check out our cheat sheet with [best practices](/overview/onboarding/cheat-sheet/#automating-your-flow).*
 
 Legacy Flows integrate all of your project's segments (data connectors, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, 
 and defining the execution schedule to **bring in the newest data available**. 
@@ -58,7 +58,7 @@ Let us show you how to organize individual tasks into steps, set up notification
 ## Access the Legacy Flow Builder
 Select from the top menu **Conditional Flows > Legacy Flows** and click the **Create Flow** button.
    
-![Go to Flows](/tutorial/automate/automate1.png)
+![Go to Flows](/getting-started/automate/automate1.png)
 
 Name your new flow and add an easy to understand description. Then click **Create Flow** again. 
 
@@ -104,7 +104,7 @@ execute more jobs in parallel. Keboola will then concurrently execute the jobs t
 
 - If you are working with APIs that are inconsistent or prone to frequent errors, consider enabling the **Continue on Failure** flag. Each phase (or step) of the flow will only run successfully if all jobs within that phase complete successfully. If a phase fails, no subsequent phases will continue. However, enabling this flag for each task (off by default) allows the flow to continue to subsequent phases, ending with a warning status if errors are encountered.
 
-- Finally, to modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**. 
+- Finally, to modify the parameters sent to the underlying [API call](/extend/jobs/#run-a-job), you can set **Task Parameters**. 
 Select the task and click **Set advanced parameters**. When finished, click **Set**.
 
 ***Example of the advanced parameter:** changing a variable in transformation:*

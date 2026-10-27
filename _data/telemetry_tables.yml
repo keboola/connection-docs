@@ -2156,7 +2156,7 @@ tables:
 
   - id: kbc_non_sql_workspace
     mode: project
-    description: "This table shows data about non-SQL [workspaces](/workspace/), including Data Apps (Streamlit, Python JS) and Data Science sandboxes (Python, R, etc.)."
+    description: "This table shows data about non-SQL [workspaces](/workspace/), including Apps (Streamlit, Python/JS) and Data Science sandboxes (Python, R, etc.)."
     is_full_load: false
     columns:
       - name: kbc_non_sql_workspace_id
@@ -2164,7 +2164,7 @@ tables:
         description: "Unique non-SQL workspace identifier"
         example: "`985088171_kbc-us-east-1`"
       - name: kbc_data_app_id
-        description: "Data App identifier (populated only for Data App workspaces with type `streamlit` or `python-js`; empty for Data Science sandboxes)"
+        description: "App identifier (populated only for App workspaces with type `streamlit` or `python-js`; empty for Data Science sandboxes)"
         example: "`7880_kbc-us-east-1_keboola.data-apps_985088171`"
       - name: workspace_id_num
         description: "Numeric part of the workspace identifier (without the stack suffix)"
@@ -2223,7 +2223,7 @@ tables:
 
   - id: kbc_non_sql_workspace_run
     mode: project
-    description: "This table lists runs of non-SQL [workspaces](/workspace/) (Data Apps and Data Science sandboxes) and their consumption metrics. It replaces `kbc_data_app_workspace` and `kbc_data_science_sandbox` for non-SQL workspace run tracking."
+    description: "This table lists runs of non-SQL [workspaces](/workspace/) (Apps and Data Science sandboxes) and their consumption metrics. It replaces `kbc_data_app_workspace` and `kbc_data_science_sandbox` for non-SQL workspace run tracking."
     is_full_load: false
     note: "A value of `0` in `runtime_hours`, `time_credits_used`, or `billed_credits_used` means a correction was made. The row couldn't be removed due to incremental loads, so the original value was set to zero."
     columns:

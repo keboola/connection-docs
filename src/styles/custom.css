@@ -69,8 +69,16 @@
   --border-1: var(--kbc-grey-150);
   --border-2: var(--kbc-grey-200);
 
-  --link: var(--kbc-blue-500);
-  --link-hover: var(--kbc-blue-600);
+  /* blue-500 on #fff is 3.27:1 — 15px body text needs 4.5:1 (WCAG 2.1 AA).
+     blue-700 is 6.29:1. --link-hover must move too, or hover ends up LIGHTER
+     than the resting state: blue-600 is 4.53:1, blue-800 is 8.81:1.
+     --link is also used on the tinted aside backgrounds (.starlight-aside a),
+     so those were checked too rather than assuming the white-page number
+     carries: light note/tip/caution/danger = 5.62 / 5.86 / 5.74 / 5.11:1, and
+     dark (blue-450 over the 12% tints on #101114) = 5.91 / 5.68 / 5.67 / 6.42:1.
+     All pass AA; re-check these if a tint or either --link value moves. */
+  --link: var(--kbc-blue-700);
+  --link-hover: var(--kbc-blue-800);
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
@@ -111,6 +119,20 @@
   --sl-sidebar-width: 18rem;
 
   --sl-text-base: 0.9375rem; /* 15px */
+
+  /* Headings are restyled below as ELEMENTS (.sl-markdown-content h2 etc), but
+     Starlight wraps each heading in .sl-heading-wrapper.level-hN whose
+     font-size is keyed to --sl-text-hN. Leaving these at Starlight's defaults
+     (h2 = 35px) meant the wrapper and the heading disagreed, which is what
+     mis-sized the anchor icon and its gap. Keep the two in sync.
+     h1, h5 and --sl-text-2xl are deliberately NOT set: neither h1 nor h5 has an
+     element override, so wrapper and element already agree and pinning the
+     token would only shrink body-level headings (Starlight's h1 is 35px/42px);
+     the only consumer of 2xl is .link-title, handled explicitly in the
+     Prev/Next rules below. */
+  --sl-text-h2: 22px;
+  --sl-text-h3: 16px;
+  --sl-text-h4: 14px;
   --sl-line-height: 1.6;
   --sl-content-gap-y: 0.6rem;
 }
@@ -490,15 +512,19 @@ nav.sidebar {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-.content h1#_top,
-.content h1[id]:first-of-type {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: clamp(28px, 4vw, 38px);
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  color: var(--fg-1);
-}
+/* The page title is <h1 id="_top" class="b-title">, rendered by
+   src/components/PageTitle.astro. It sits outside .sl-markdown-content and
+   carries none of Starlight's scoped classes, so --sl-text-h1 never reaches it.
+   The rule that used to live here targeted `.content h1#_top` — nothing on this
+   site has class="content" (0 matches in the live DOM), so it never applied and
+   the title has been rendering at the browser default, 2em/32px. That size is
+   kept for now, deliberately. The design it was meant to produce was:
+       font-family: var(--font-sans); font-weight: 600;
+       font-size: clamp(28px, 4vw, 38px);
+       letter-spacing: -0.02em; line-height: 1.1;
+   Restoring it is a visible change on every page and is a separate decision.
+   Only the line-height is corrected now, via .content-panel h1 below. */
+.content-panel h1 { line-height: 1.25; }
 
 .b-lede {
   margin: 0 0 22px;
@@ -692,27 +718,78 @@ nav.sidebar {
   padding-top: 0;
   border-top: none;
 }
-.sl-markdown-content h2 a.sl-anchor-link,
-.sl-markdown-content h3 a.sl-anchor-link {
-  color: var(--fg-4);
-  opacity: 0;
-  font-size: 12px;
-  text-decoration: none;
-  transition: opacity 0.15s, color 0.15s;
-}
-.sl-markdown-content h2:hover a.sl-anchor-link,
-.sl-markdown-content h3:hover a.sl-anchor-link {
-  opacity: 0.6;
-}
-.sl-markdown-content h2 a.sl-anchor-link:hover,
-.sl-markdown-content h3 a.sl-anchor-link:hover { color: var(--link); }
+/* Starlight renders the anchor as a SIBLING of the heading inside
+   .sl-heading-wrapper, not a descendant — the `h2 a.sl-anchor-link` rules that
+   used to be here matched 0 elements. Do NOT add opacity rules: Starlight
+   already ships @media (hover:hover) { .sl-anchor-link { opacity: 0 } }, which
+   is what keeps the icons visible on touch devices. */
+.sl-markdown-content .sl-heading-wrapper > a.sl-anchor-link { color: var(--fg-4); }
+.sl-markdown-content .sl-heading-wrapper > a.sl-anchor-link:hover { color: var(--link); }
 
 /* Push the heading anchor (chain) icon farther right so it sits clearly to
    the side of the heading instead of colliding with the last word. Starlight
    renders the link as a sibling of the heading and controls the text→icon
    spacing via --sl-anchor-icon-gap on the wrapper (default 0.25em). */
 .sl-markdown-content .sl-heading-wrapper {
-  --sl-anchor-icon-gap: 0.5em;
+  --sl-anchor-icon-size: 0.75em;
+  --sl-anchor-icon-gap: 0.4em;
+}
+
+/* Copy-link-on-click (src/components/AnchorCopy.astro). The whole heading is
+   the click target, but the text keeps the I-beam cursor so the "you can
+   select this" affordance survives — only the icon reads as a control. */
+.sl-markdown-content .sl-heading-wrapper { cursor: text; }
+.sl-markdown-content .sl-heading-wrapper > a.sl-anchor-link {
+  cursor: pointer;
+  position: relative;   /* the toast anchors to the link, so it needs no JS positioning */
+}
+/* Starlight's @media (hover:hover) rule drops .sl-anchor-link to opacity 0
+   unless the wrapper is hovered or the link is focused, and opacity applies to
+   the subtree — so the toast living inside the link would blank out the moment
+   the pointer left the heading. AnchorCopy adds this class for the lifetime of
+   the toast. Unlayered, so it beats Starlight's layered rule. */
+.sl-markdown-content .sl-heading-wrapper > a.sl-anchor-link.kbc-anchor-pinned {
+  opacity: 1;
+}
+
+.kbc-copied {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 6px);
+  transform: translate(-50%, 4px);
+  z-index: 20;
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: var(--fg-1);
+  color: var(--bg-1);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.kbc-copied.is-in { opacity: 1; transform: translate(-50%, 0); }
+.kbc-copied--err { background: #a8232c; color: #fff; }
+
+/* Pointer up toward the icon. */
+.kbc-copied::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-bottom-color: var(--fg-1);
+}
+.kbc-copied--err::after { border-bottom-color: #a8232c; }
+
+@media (prefers-reduced-motion: reduce) {
+  .kbc-copied { transition: none; }
 }
 
 .sl-markdown-content h3 {
@@ -1064,15 +1141,20 @@ nav.sidebar {
   padding-left: 16px;
   list-style: none;
 }
+/* Real DOM is .right-sidebar-panel > div > starlight-toc > nav > ul, so the
+   descendant combinator is required — `> nav > ul` matches nothing. Each nested
+   <ul> used to paint its own rail at left:0, giving 5 disconnected fragments.
+   1px pairs with the 2px active marker below, which sits ON the rail. */
 .right-sidebar-panel ul::before {
   content: '';
   position: absolute;
   top: 4px;
   bottom: 4px;
   left: 0;
-  width: 2px;
+  width: 1px;
   background: var(--border-1);
 }
+.right-sidebar-panel ul ul::before { display: none; }
 .right-sidebar-panel ul li { padding-left: 0; margin: 0; }
 .right-sidebar-panel a {
   display: block;
@@ -1091,15 +1173,19 @@ nav.sidebar {
   font-weight: 600;
   border-left: none;
 }
+/* The dot was centred on the <a> box. On wrapped entries that box is 52px tall,
+   so the marker floated between the two lines instead of marking the first one.
+   A 5px dot also protrudes past the rail. Bar on the rail, aligned to line 1.
+   Starlight sets --depth inline on the <a>; each level indents 16px. */
 .right-sidebar-panel a[aria-current='true']::before {
   content: '';
   position: absolute;
-  left: -19px;
-  top: 50%;
+  left: calc(-16px - var(--depth, 0) * 16px);
+  top: 16px;                /* 6px padding-top + half the 20px line box */
   transform: translateY(-50%);
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
+  width: 2px;
+  height: 20px;
+  border-radius: 1px;
   background: var(--kbc-blue-500);
 }
 :root[data-theme='dark'] .right-sidebar-panel a[aria-current='true'] {
@@ -1125,43 +1211,133 @@ nav.sidebar {
   text-decoration: none;
 }
 .pagination-links a:hover { border-color: var(--border-2); }
-.pagination-links a > span:first-child {
+/* DOM is <a><svg/><span>Previous<span class="link-title">Home</span></span></a>.
+   The <a>'s first child is the <svg>, so `> span:first-child` matched nothing and
+   the 11px eyebrow never rendered; `:last-child` hit the same span that holds the
+   label, so it came out 14px/600 near-black with no hierarchy. */
+.pagination-links a > span {
+  display: block;
   font-size: 11px;
   font-weight: 600;
   color: var(--fg-4);
   text-transform: uppercase;
   letter-spacing: 1px;
-  display: block;
 }
-.pagination-links a > span:last-child {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--fg-1);
-  margin-top: 4px;
+/* .link-title is keyed to --sl-text-2xl (24px) — larger than the page's own H2.
+   Set it here rather than moving the shared 2xl scale token. */
+.pagination-links a > span > .link-title {
   display: block;
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--fg-1);
+}
+/* The arrow carries an inline --sl-icon-size: 1.5rem, so it renders at 24px
+   beside an 11px label. */
+.pagination-links a svg { width: 16px; height: 16px; }
+
+/* ───────── Changelog cards (src/pages/changelog.astro) ─────────
+   Same frame as the prev/next cards above: --border-1, 10px radius, --bg-1.
+   Whole card is the link; title left, date right, description below.
+   The date uses --fg-3, not --fg-4: grey-400 on white is 3.7:1, short of
+   AA for 13px text. */
+/* Scoped under .sl-markdown-content: the site's own `.sl-markdown-content ol`
+   rule (22px indent, 6px item margins) outranks a bare class. */
+.sl-markdown-content .changelog-list {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.sl-markdown-content .changelog-list > li {
+  margin: 0;
+  padding: 0;
+}
+.changelog-card {
+  display: block;
+  padding: 16px 20px;
+  border: 1px solid var(--border-1);
+  border-radius: 10px;
+  background: var(--bg-1);
+  color: var(--fg-2);
+  text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.changelog-card:hover {
+  border-color: var(--kbc-blue-200);
+  box-shadow: 0 4px 14px rgba(31, 143, 255, 0.12);
+}
+.changelog-card:focus-visible {
+  outline: 2px solid var(--kbc-blue-500);
+  outline-offset: 2px;
+}
+.changelog-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.changelog-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--fg-1);
+}
+.changelog-card:hover .changelog-card-title { color: var(--link); }
+.changelog-card-date {
+  flex-shrink: 0;
+  font-size: 13px;
+  color: var(--fg-3);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.changelog-card-desc {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--fg-3);
+}
+:root[data-theme='dark'] .changelog-card:hover {
+  border-color: var(--border-2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+@media (max-width: 560px) {
+  .changelog-card { padding: 14px 16px; }
+  .changelog-card-head { flex-direction: column; gap: 2px; }
 }
 
-/* "Was this page helpful?" feedback widget (in right rail or below content) */
+/* "Was this page helpful?" feedback widget — Stripe-style, below page content.
+   Borderless: just a hairline divider separating it from the article.
+   Rendered by src/components/Feedback.astro, mounted once from Footer.astro —
+   grep there before touching anything here. */
 .b-feedback {
-  margin-top: 28px;
-  padding: 14px;
-  border: 1px solid var(--border-1);
-  border-radius: 8px;
-  background: var(--bg-1);
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-1);
 }
 .b-feedback-q {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--fg-2);
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 }
-.b-feedback-buttons { display: flex; gap: 6px; }
+/* The `hidden` attribute only gets `display: none` from the UA stylesheet, so
+   any author `display` below silently defeats it — without this the thank-you
+   state rendered with the thumbs still sitting above it. Attribute + class
+   outranks the bare class rules, so no !important is needed. */
+.b-feedback [hidden] { display: none; }
+
+.b-feedback-buttons { display: flex; gap: 8px; }
 .b-feedback-btn {
-  flex: 1;
-  height: 30px;
+  min-width: 84px;
+  height: 32px;
   border: 1px solid var(--border-1);
   background: var(--bg-1);
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--fg-2);
   cursor: pointer;
   display: inline-flex;
@@ -1171,23 +1347,173 @@ nav.sidebar {
   font-family: inherit;
 }
 .b-feedback-btn:hover { border-color: var(--border-2); color: var(--fg-1); }
+/* blue-700 text: blue-600 on blue-100 is 3.90:1, short of AA for 13px. */
+.b-feedback-btn[aria-pressed='true'] {
+  border-color: var(--kbc-blue-600);
+  color: var(--kbc-blue-700);
+  background: var(--kbc-blue-100);
+}
+/* The blue tokens aren't redefined for dark mode, so the light pill would sit
+   pale on a near-black page. Same tint + blue-450 text as the other dark
+   overrides. */
+:root[data-theme='dark'] .b-feedback-btn[aria-pressed='true'] {
+  border-color: var(--kbc-blue-450);
+  color: var(--kbc-blue-450);
+  background: rgba(31, 143, 255, 0.18);
+}
+
+/* Follow-up: heading + vertical radio list, revealed after a thumb click.
+   The heading is the fieldset's legend, so strip the UA fieldset chrome. */
+.b-feedback-followup { margin-top: 20px; }
+.b-feedback-fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.b-feedback-followup-q {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--fg-1);
+  margin: 0 0 14px;
+  padding: 0;
+}
+.b-feedback-options { display: flex; flex-direction: column; gap: 4px; }
+.b-feedback-option {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 6px 0;
+}
+.b-feedback-radio {
+  width: 16px;
+  height: 16px;
+  margin: 2px 0 0;
+  accent-color: var(--kbc-blue-600);
+  cursor: pointer;
+}
+.b-feedback-option-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  cursor: pointer;
+}
+.b-feedback-option-label { font-size: 14px; font-weight: 600; color: var(--fg-1); }
+.b-feedback-option-desc { font-size: 13px; color: var(--fg-2); }
+
+/* Comment box: moved inline under the selected option; indented to align with
+   the option text (past the radio + gap). */
+.b-feedback-comment-wrap { padding-left: 26px; margin: 6px 0 4px; }
+.b-feedback-comment {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--border-1);
+  border-radius: 8px;
+  background: var(--bg-1);
+  color: var(--fg-1);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 10px 12px;
+  resize: vertical;
+}
+/* Border tint only; the ring itself comes from the site-wide *:focus-visible
+   rule, which is what meets SC 1.4.11's 3:1. */
+.b-feedback-comment:focus-visible { border-color: var(--kbc-blue-600); }
+.b-feedback-note {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--fg-3);
+}
+.b-feedback-submit {
+  margin-top: 14px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid var(--border-1);
+  border-radius: 6px;
+  background: var(--bg-1);
+  color: var(--fg-1);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.b-feedback-submit:hover:not(:disabled) { border-color: var(--border-2); }
+.b-feedback-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+.b-feedback-thanks {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--fg-1);
+  margin: 0;
+}
+/* Focused programmatically after submit; no ring on a non-interactive line. */
+.b-feedback-thanks:focus { outline: none; }
+/* "Ask Kai about this page", offered after a 👎 for missing information. */
+.b-feedback-kai {
+  margin-top: 12px;
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid var(--kbc-blue-600);
+  border-radius: 6px;
+  background: var(--bg-1);
+  color: var(--kbc-blue-700);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.b-feedback-kai:hover { background: var(--kbc-blue-100); }
+:root[data-theme='dark'] .b-feedback-kai { border-color: var(--kbc-blue-450); color: var(--kbc-blue-450); }
+:root[data-theme='dark'] .b-feedback-kai:hover { background: rgba(31, 143, 255, 0.18); }
+/* Honeypot + screen-reader-only helpers */
+.b-feedback-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.b-feedback-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* ───────── Misc ───────── */
+/* WCAG 2.2 SC 1.4.11 requires 3:1 for focus indicators. A 40% alpha ring
+   composites to 1.58:1 on white and 1.87:1 on #101114 — both fail, on every
+   focusable element on every page. Solid brand tokens instead of an invented
+   hex: blue-700 is 6.29:1 on white, blue-450 is 6.78:1 on #101114. */
 *:focus-visible {
-  outline: 2px solid rgba(31, 143, 255, 0.4);
+  outline: 2px solid var(--kbc-blue-700);
   outline-offset: 2px;
+}
+:root[data-theme='dark'] *:focus-visible {
+  outline-color: var(--kbc-blue-450);
 }
 .sl-markdown-content img:not(:where(.not-content *)) {
   border-radius: 8px;
   border: 1px solid var(--border-1);
   background: var(--bg-2);
 }
+/* Looping demo clips ("GIFs") get the same frame as screenshots */
+.sl-markdown-content video:not(:where(.not-content *)) {
+  border-radius: 8px;
+  border: 1px solid var(--border-1);
+  background: var(--bg-2);
+  max-width: 100%;
+  height: auto;
+}
+
+/* Standalone screenshots need more room than a run of text. Scoped to images that
+   are alone in their paragraph, so table icons (in <td>) and inline images are
+   untouched. */
+.sl-markdown-content p:has(> starlight-image-zoom-zoomable:only-child):not(:where(.not-content *)) {
+  margin-block: 2rem;
+}
 
 /* Mobile / tablet */
 @media (max-width: 50rem) {
   .b-title-icon { width: 32px; height: 32px; font-size: 18px; }
-  .content h1#_top,
-  .content h1[id]:first-of-type { font-size: 28px; }
   .pagination-links { grid-template-columns: 1fr; }
 }
 
@@ -2272,4 +2598,495 @@ nav.sidebar {
 .notfound-partners {
   font-size: 13.5px;
   color: var(--sl-color-gray-3);
+}
+
+/* ---------------------------------------------------------------------------
+   Getting Started — cold-start blocks
+   Components: src/components/getting-started/{PageMeta,PathIntro,CourseLine,
+   SampleData,FlowStrip,FromTo}.astro. The "Before you start" box is the site-wide
+   src/components/Prereqs.astro, styled under "Prerequisites box" below, and
+   FromTo.astro shares its .fromto rules there.
+   The blocks exist so a page survives being landed on cold from a search
+   engine (decision of 2026-09-02, see notes/getting-started/DECISIONS.md). Styles live here per
+   AGENTS.md — never as <style> blocks in the components.
+   --------------------------------------------------------------------------- */
+
+/* (a) genre · guide · time budget */
+.gs-pagemeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+  font-size: var(--sl-text-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sl-color-gray-3);
+}
+.gs-pagemeta__genre {
+  font-weight: 600;
+  color: var(--sl-color-white);
+}
+.gs-pagemeta__sep { color: var(--sl-color-gray-4); }
+
+/* the tab convention, stated once */
+.gs-pathintro { margin: 0 0 1.5rem; }
+.gs-pathintro > p { margin: 0 0 0.6rem; }
+.gs-pathintro__recovery { color: var(--sl-color-gray-2); }
+
+/* (d) the course as a line of dots: a bar at the top of a step, a list on the hub */
+/* Dots and line are --kbc-blue-600, where white numerals pass 4.5:1 (the StageStrip rule). The bar
+   is a container: between 800 and 1400 px the sidebar leaves the column narrow, so the names hide
+   by the column's width, not the window's. */
+.gs-course--bar { margin: 0 0 1.25rem; container-type: inline-size; }
+.gs-course--bar ol {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.gs-course--bar .gs-course__step {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+}
+/* the segment from this dot to the next one */
+.gs-course--bar .gs-course__step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 0.7rem;
+  left: calc(50% + 0.8rem);
+  right: calc(-50% + 0.8rem);
+  height: 2px;
+  background: var(--sl-color-gray-5);
+}
+.gs-course--bar .gs-course__step.is-done::after { background: var(--kbc-blue-600); }
+.gs-course--bar a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+  color: var(--sl-color-gray-3);
+}
+.gs-course__dot {
+  display: inline-grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--sl-color-gray-4);
+  background: var(--sl-color-bg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--sl-color-gray-3);
+}
+.gs-course--bar .is-done .gs-course__dot,
+.gs-course--bar .is-current .gs-course__dot {
+  border-color: var(--kbc-blue-600);
+  background: var(--kbc-blue-600);
+  color: #fff;
+}
+.gs-course--bar .is-current .gs-course__dot { box-shadow: 0 0 0 4px var(--sl-color-accent-low); }
+.gs-course__name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--sl-text-xs);
+}
+.gs-course--bar .is-current .gs-course__name {
+  font-weight: 600;
+  color: var(--sl-color-text-accent);
+}
+.gs-course--bar a:hover .gs-course__name { color: var(--sl-color-white); }
+@container (max-width: 36rem) {
+  .gs-course__step:not(.is-current) .gs-course__name { visibility: hidden; }
+  .gs-course__step.is-current .gs-course__name { overflow: visible; }
+}
+
+.gs-course--list {
+  margin: 1rem 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+.gs-course--list .gs-course__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.85rem;
+  padding-bottom: 1.1rem;
+}
+.gs-course--list .gs-course__step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: 2rem;
+  bottom: 0;
+  left: calc(1rem - 1px);
+  width: 2px;
+  background: var(--sl-color-accent-low);
+}
+.gs-course--list .gs-course__dot {
+  width: 2rem;
+  height: 2rem;
+  border-color: var(--kbc-blue-600);
+  background: var(--kbc-blue-600);
+  color: #fff;
+  font-size: 0.9rem;
+}
+.gs-course__title {
+  font-weight: 600;
+  color: var(--sl-color-white);
+}
+.gs-course__title:hover { color: var(--sl-color-text-accent); }
+.gs-course__outcome {
+  margin: 0.1rem 0 0;
+  color: var(--sl-color-gray-2);
+  line-height: 1.5;
+}
+.sl-markdown-content .gs-course__body p + p,
+.gs-course__term {
+  margin: 0.2rem 0 0;
+  font-size: var(--sl-text-xs);
+  color: var(--sl-color-gray-3);
+}
+.gs-course__term strong { color: var(--sl-color-gray-2); font-weight: 600; }
+
+/* (e) the sample tables as cards */
+.gs-data {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 1rem 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+.gs-data__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-bg);
+  font-size: var(--sl-text-sm);
+  line-height: 1.4;
+}
+.gs-data__card--live { border-color: var(--sl-color-accent); }
+@media (max-width: 40rem) {
+  .gs-data { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.gs-data__head {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.1rem;
+}
+.gs-data__kind {
+  padding: 0.05rem 0.35rem;
+  border-radius: 0.3rem;
+  background: var(--sl-color-gray-6);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--sl-color-gray-2);
+}
+.gs-data__card--live .gs-data__kind {
+  background: var(--sl-color-accent-low);
+  color: var(--sl-color-text-accent);
+}
+.gs-data__name { text-decoration: none; color: var(--sl-color-text-accent); }
+.gs-data__name code {
+  padding: 0;
+  background: none;
+  font-weight: 600;
+  color: inherit;
+}
+.gs-data__name:hover code { text-decoration: underline; }
+.gs-data__rows { font-weight: 600; color: var(--sl-color-white); }
+.gs-data__what { color: var(--sl-color-gray-2); }
+
+/* (f) a process as boxes with arrows */
+.gs-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.4rem 1.6rem;
+  margin: 1rem 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+.gs-flow__step {
+  position: relative;
+  flex: 1 1 9rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-bg);
+  font-size: var(--sl-text-sm);
+  line-height: 1.4;
+}
+.gs-flow__step:last-child { border-color: var(--sl-color-accent); }
+.gs-flow__step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  top: 50%;
+  right: -1.25rem;
+  transform: translateY(-50%);
+  color: var(--sl-color-gray-3);
+}
+.gs-flow-wrap { container-type: inline-size; }
+@container (max-width: 44rem) {
+  .gs-flow { flex-direction: column; gap: 1.4rem; }
+  .gs-flow__step { flex-basis: auto; }
+  .gs-flow__step:not(:last-child)::after {
+    top: auto;
+    right: auto;
+    bottom: -1.3rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(90deg);
+  }
+}
+
+/* (g) folds: what most readers can skip */
+.sl-markdown-content details { margin-block: 0.75rem; }
+.sl-markdown-content details > :last-child { margin-bottom: 0.25rem; }
+
+/* ───────── Prerequisites box (src/components/Prereqs.astro) ───────── */
+/* "Before you start", then "You need" and up to two more lists. One component
+   renders every prerequisites block on the site, so the look cannot drift from
+   page to page. */
+.prereqs {
+  margin: 0 0 1.5rem;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-gray-7, var(--sl-color-gray-6));
+}
+.prereqs__label {
+  margin: 0 0 0.4rem;
+  font-size: var(--sl-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sl-color-gray-2);
+}
+.prereqs__list {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+.prereqs__list > li + li { margin-top: 0.3rem; }
+/* MDX wraps a multi-line <li> in <p>; without this those items sit further apart than the rest */
+.prereqs__list > li > p { margin: 0; }
+.prereqs__group {
+  margin: 0.7rem 0 0.25rem;
+  font-size: var(--sl-text-sm);
+  font-weight: 600;
+  color: var(--sl-color-white);
+}
+.prereqs__label + .prereqs__group { margin-top: 0; }
+
+/* Where you are → When you finish: two cards with an arrow, at the top of the box on a course
+   step (the `from` and `to` slots), and on their own on the Getting Started hub (FromTo.astro). */
+.fromto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0.6rem;
+  margin: 0.2rem 0 0.35rem;
+}
+.fromto__card {
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-bg);
+  font-size: var(--sl-text-sm);
+  line-height: 1.45;
+}
+.fromto__card--to { border-color: var(--sl-color-accent); }
+.fromto--standalone { margin: 1.25rem 0 1.5rem; }
+.fromto__label {
+  display: block;
+  font-size: var(--sl-text-xs);
+  font-weight: 600;
+  color: var(--sl-color-gray-3);
+}
+.fromto__card--to .fromto__label { color: var(--sl-color-text-accent); }
+.fromto__arrow {
+  align-self: center;
+  font-size: 1.25rem;
+  color: var(--sl-color-gray-3);
+}
+@media (max-width: 40rem) {
+  .fromto { grid-template-columns: minmax(0, 1fr); }
+  .fromto__arrow { justify-self: center; transform: rotate(90deg); line-height: 1; }
+}
+
+/* What each tab needs: one row per tab, the tab's name on the left. */
+.prereqs__tabs {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.prereqs__tab {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: baseline;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+  background: var(--sl-color-bg);
+  font-size: var(--sl-text-sm);
+  line-height: 1.45;
+}
+.prereqs__tab a { color: var(--sl-color-text-accent); text-decoration: underline; }
+.prereqs__tab strong { font-weight: 600; color: var(--sl-color-white); }
+.prereqs__tabname {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  color: var(--sl-color-white);
+  white-space: nowrap;
+}
+.prereqs__glyph {
+  font-family: var(--sl-font-mono, monospace);
+  font-size: 0.8em;
+  font-weight: 700;
+  color: var(--sl-color-text-accent);
+}
+.prereqs__tabname svg { flex: none; color: var(--sl-color-text-accent); }
+@media (max-width: 40rem) {
+  .prereqs__tab { grid-template-columns: minmax(0, 1fr); gap: 0.1rem; }
+}
+
+
+/* ───────── Stage strip (src/components/StageStrip.astro) ───────── */
+/* Numbered dots on a line, one per stage. Horizontal while
+   the content column is wide, vertical with the text beside the dots when it is
+   not: a container query, because between 800 and 1400 px the sidebar leaves the
+   column about 450 px wide. Dots and line in --kbc-blue-600, where white numerals
+   pass 4.5:1 (on blue-500 they don't). */
+.stage-strip { container-type: inline-size; margin: 1rem 0 1.5rem; }
+/* the same small caps label as the Prereqs box */
+.stage-strip__caption {
+  margin: 0 0 0.6rem;
+  font-size: var(--sl-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sl-color-gray-2);
+}
+.stage-strip__list {
+  --dot: 1.75rem;
+  --gap: 0.75rem;
+  display: flex;
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: stage;
+}
+.stage-strip__list > li {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  padding-top: calc(var(--dot) + 0.6rem);
+  text-align: center;
+  font-size: var(--sl-text-sm);
+  line-height: 1.45;
+  color: var(--sl-color-gray-3);
+  counter-increment: stage;
+  overflow-wrap: anywhere;
+}
+/* the numbered dot */
+.stage-strip__list > li::before {
+  content: counter(stage);
+  position: absolute;
+  top: 0;
+  left: calc(50% - var(--dot) / 2);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: var(--dot);
+  height: var(--dot);
+  border-radius: 50%;
+  background: var(--kbc-blue-600);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+}
+/* the segment from this dot to the next one */
+.stage-strip__list > li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: calc(var(--dot) / 2 - 1.5px);
+  left: 50%;
+  right: calc(-50% - var(--gap));
+  height: 3px;
+  background: var(--kbc-blue-600);
+}
+.stage-strip__title {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: var(--sl-text-base);
+  font-weight: 700;
+  color: var(--sl-color-white);
+}
+.stage-strip a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
+.stage-strip a:hover { color: var(--link-hover); text-decoration: none; }
+.stage-strip__title a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--sl-color-gray-5);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.stage-strip__title a:hover { color: var(--sl-color-text-accent); text-decoration-color: currentColor; }
+@container (max-width: 36rem) {
+  .stage-strip__list { flex-direction: column; gap: 1rem; }
+  /* flex: none, or the row layout's flex-basis 0 plus min-height squeezes each
+     stage to one dot's height and its text runs into the next stage */
+  .stage-strip__list > li {
+    flex: none;
+    padding: 0.15rem 0 0 calc(var(--dot) + 0.75rem);
+    min-height: var(--dot);
+    text-align: left;
+  }
+  .stage-strip__list > li::before { left: 0; }
+  .stage-strip__list > li:not(:last-child)::after {
+    top: var(--dot);
+    bottom: -1rem;
+    left: calc(var(--dot) / 2 - 1.5px);
+    right: auto;
+    width: 3px;
+    height: auto;
+  }
+}
+
+/* ───────── Print ───────── */
+/* print.css ships `.print\:hidden { display: none }` inside @media print, but
+   Page.css loads after it, so any rule in THIS file that sets `display` on a
+   tagged element wins on source order at equal specificity — that is how the
+   Prev/Next cards ended up printing. Restore the class rather than naming the
+   casualties: Starlight already tags .pagination-links, .sidebar,
+   .right-sidebar-container and the header's right group, and the next rule we
+   add would silently break one of them again. */
+@media print {
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* The header carries no print class of its own (and neither does the Kai
+     button, which AskKaiDrawer injects inside it). */
+  header.header {
+    display: none !important;
+  }
 }

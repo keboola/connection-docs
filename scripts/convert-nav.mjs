@@ -35,6 +35,12 @@ function toSlug(url) {
 // 3. Recursive converter
 // ---------------------------------------------------------------------------
 function convertItem(item) {
+  // A page outside the docs collection (src/pages/*.astro, e.g. /changelog/)
+  // has no slug Starlight can resolve, so it goes in as a plain link.
+  if (item.link) {
+    return { label: item.title, link: item.link };
+  }
+
   const slug = toSlug(item.url);
   const hasChildren = Array.isArray(item.items) && item.items.length > 0;
 
@@ -43,23 +49,31 @@ function convertItem(item) {
     return { label: 'Home', slug: 'index' };
   }
 
-  // Leaf node — no children
+  // Leaf node — no children.
+  // By default the sidebar label comes from the page's own frontmatter title.
+  // An explicit `label:` in navigation.yml overrides it — use that when the
+  // sidebar needs a shorter label than the page title (`title:` alone is NOT
+  // read here, so adding one has no effect).
   if (!hasChildren) {
-    return { slug };
+    return item.label ? { label: item.label, slug } : { slug };
   }
 
   // Branch node — has children
   // The parent page itself goes first, then each child is converted recursively
   const childItems = item.items.map(convertItem);
-  // Label-only group (no landing page of its own)
+  // Label-only group (no landing page of its own). `collapsed: false` in navigation.yml keeps it
+  // open, for a group that is the main path of its section.
   if (!item.url) {
-    return { label: item.title, collapsed: true, items: childItems };
+    return { label: item.title, collapsed: item.collapsed ?? true, items: childItems };
   }
   return {
     label: item.title,
     collapsed: true,
     items: [
-      { label: 'Overview', slug },  // parent page labeled "Overview" to avoid duplicating group name
+      // The landing page defaults to "Overview" so it does not repeat the group
+      // name; `label:` on the group overrides it where the page has a real name
+      // of its own.
+      { label: item.label ?? 'Overview', slug },
       ...childItems,
     ],
   };

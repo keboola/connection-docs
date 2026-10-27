@@ -48,7 +48,7 @@ Choose the **period** you want to fetch data for.
 - `Last 3O days` -- *Pingdom API provides history only for up to 30 days before the current day*
 
 And finally, select the data **Basic** template and click on **Save**.
-You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
 
 ## Extraction Output Tables
 

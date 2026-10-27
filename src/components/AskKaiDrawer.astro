@@ -34,7 +34,7 @@
         <div class="ak-suggestions">
           <button type="button" class="ak-suggestion" data-ask-kai-prompt>How do I set up a flow with conditional steps?</button>
           <button type="button" class="ak-suggestion" data-ask-kai-prompt>What backends does Keboola Storage support?</button>
-          <button type="button" class="ak-suggestion" data-ask-kai-prompt>How do I deploy a Streamlit data app?</button>
+          <button type="button" class="ak-suggestion" data-ask-kai-prompt>How do I deploy a Streamlit app?</button>
         </div>
       </div>
     </section>
@@ -472,6 +472,13 @@
     document.addEventListener('astro:page-load', ensureSearchKaiCta);
 
     // ─── Wire triggers ───────────────────────────────────────────────
+    // Other components open the drawer with a suggested question by
+    // dispatching `kbc:ask-kai` with { detail: { prefill } }. A draft the
+    // reader already typed wins over the suggestion.
+    document.addEventListener('kbc:ask-kai', (e) => {
+      const prefill = (e as CustomEvent<{ prefill?: string }>).detail?.prefill;
+      openDrawer(input.value.trim() ? undefined : prefill);
+    });
     document.addEventListener('click', (e) => {
       const t = e.target as HTMLElement | null;
       if (!t) return;
