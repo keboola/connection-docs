@@ -113,3 +113,29 @@ test('a body that is not JSON is a 400', async () => {
   assert.equal(r.statusCode, 400);
   assert.equal(JSON.parse(r.body).error, 'Invalid JSON body');
 });
+
+// ─── Rate limit ──────────────────────────────────────────────────────────
+
+test('per-IP limit: the 21st question in 10 minutes gets 429, other IPs pass', async () => {
+  const mod = await load({}, 'ratelimit');
+  const now = Date.UTC(2026, 9, 27, 12);
+  for (let i = 0; i < 20; i++) assert.equal(mod.allowQuestion('198.51.100.1', now + i), true, `question ${i + 1}`);
+  assert.equal(mod.allowQuestion('198.51.100.1', now + 20), false);
+  assert.equal(mod.allowQuestion('198.51.100.2', now + 20), true, 'another IP has its own window');
+  assert.equal(mod.allowQuestion('198.51.100.1', now + 10 * 60 * 1000 + 1), true, 'the window slides');
+});
+
+test('per-IP limit: the handler answers 429 with JSON and never calls upstream', async () => {
+  const mod = await load(LIVE, 'ratelimit-handler');
+  let calls = 0;
+  globalThis.fetch = (async () => {
+    calls++;
+    return answer();
+  }) as any;
+  for (let i = 0; i < 20; i++) mod.allowQuestion('203.0.113.7');
+  const r = res();
+  await mod.default(req('POST', { message: 'How do flows work?' }), r);
+  assert.equal(r.statusCode, 429);
+  assert.match(JSON.parse(r.body).error, /Too many questions/);
+  assert.equal(calls, 0);
+});

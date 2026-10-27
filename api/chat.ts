@@ -81,6 +81,40 @@ function setCors(req: VercelRequest, res: VercelResponse) {
   res.setHeader('access-control-allow-methods', 'POST, OPTIONS');
 }
 
+/**
+ * Per-IP question limit. CORS is a browser control and stops nothing from curl,
+ * and every question spends AI quota on the shared Storage token.
+ *
+ * The counters live in one function instance, so they are a backstop, not the
+ * limit: a Vercel Firewall rule on /api/chat is what holds across instances.
+ * What this guarantees is that one warm instance can't be looped for free.
+ * Same pattern as api/feedback.ts (clientIp / allowIssue).
+ */
+const IP_WINDOW_MS = 10 * 60 * 1000;
+const IP_MAX_QUESTIONS = 20;
+const ipHits = new Map<string, number[]>();
+
+function clientIp(req: VercelRequest): string {
+  const fwd = req.headers['x-forwarded-for'];
+  const first = (Array.isArray(fwd) ? fwd[0] : fwd || '').split(',')[0].trim();
+  return first || 'unknown';
+}
+
+export function allowQuestion(ip: string, now = Date.now()): boolean {
+  const recent = (ipHits.get(ip) ?? []).filter((t) => now - t < IP_WINDOW_MS);
+  if (recent.length >= IP_MAX_QUESTIONS) {
+    ipHits.set(ip, recent);
+    return false;
+  }
+  recent.push(now);
+  ipHits.set(ip, recent);
+  // Keep the map from growing without bound on a long-lived instance.
+  if (ipHits.size > 10_000) {
+    for (const [k, v] of ipHits) if (!v.some((t) => now - t < IP_WINDOW_MS)) ipHits.delete(k);
+  }
+  return true;
+}
+
 function writeSse(res: VercelResponse, data: unknown) {
   res.write(`data: ${JSON.stringify(data)}\n\n`);
 }
@@ -353,6 +387,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.end(
       JSON.stringify({
         error: `message is too long (max ${MAX_MESSAGE_CHARS} characters)`,
+      }),
+    );
+    return;
+  }
+
+  if (!allowQuestion(clientIp(req))) {
+    console.warn('[chat] per-IP rate limit hit');
+    res.statusCode = 429;
+    res.setHeader('content-type', 'application/json');
+    res.setHeader('retry-after', String(IP_WINDOW_MS / 1000));
+    setCors(req, res);
+    res.end(
+      JSON.stringify({
+        error: 'Too many questions in a short time. Wait a few minutes and try again.',
       }),
     );
     return;
