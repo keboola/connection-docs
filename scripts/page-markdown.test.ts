@@ -1,13 +1,71 @@
-// Tests for stripSearchMarkup() in src/integrations/page-markdown.mjs. Run: npm test
+// Tests for src/integrations/page-markdown.mjs, the code that writes each page's
+// markdown twin (View as Markdown, llms.txt). Run: npm test
 //
-// The markdown twin drops the <span data-pagefind-…> wrappers a page adds to
-// tune site search. Each case below is a shape that broke in review: nested
-// spans, self-closing spans, and span samples inside code.
+// stripMdx turns an .mdx page into plain markdown. stripSearchMarkup drops the
+// <span data-pagefind-…> wrappers a page adds to tune site search; each of its
+// cases below is a shape that broke in review: nested spans, self-closing
+// spans, and span samples inside code.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { stripSearchMarkup } from '../src/integrations/page-markdown.mjs';
+import { stripMdx, stripSearchMarkup } from '../src/integrations/page-markdown.mjs';
+
+const prereqs = (inner: string) =>
+  `<Prereqs needs={['project']} tabs={3} groupLabel="For this page">\n${inner}\n</Prereqs>\n\nBody.`;
+
+test('an MDX comment inside <Prereqs> does not swallow the from/to slots', () => {
+  const out = stripMdx(prereqs([
+    '  {/* editor note */}',
+    '  <span slot="from">a project with empty Storage.</span>',
+    '  <span slot="to">six tables in Storage.</span>',
+  ].join('\n')));
+  assert.match(out, /\*\*Where you are:\*\* a project with empty Storage\. \*\*When you finish:\*\* six tables in Storage\./);
+  assert.doesNotMatch(out, /editor note/);
+});
+
+test('an HTML comment before a group item leaves the item in its own list', () => {
+  const out = stripMdx(prereqs([
+    '  <!-- note -->',
+    '  <li slot="group">group item</li>',
+  ].join('\n')));
+  assert.match(out, /For this page:\n\n- group item/);
+  assert.doesNotMatch(out, /<!--|note -->/);
+});
+
+test('tabs become headings, a rule closes the group, and fenced YAML keeps its indentation', () => {
+  const out = stripMdx([
+    "import { Tabs, TabItem } from '@astrojs/starlight/components';",
+    '',
+    '## Do it',
+    '',
+    '<Tabs syncKey="path">',
+    '  <TabItem label="UI">',
+    '    1. Click **Run**.',
+    '  </TabItem>',
+    '  <TabItem label="CLI / API">',
+    '    ```yaml',
+    '    phases:',
+    '      - name: load',
+    '        tasks: []',
+    '    ```',
+    '  </TabItem>',
+    '</Tabs>',
+    '',
+    'After.',
+  ].join('\n'));
+  assert.doesNotMatch(out, /import|<Tabs|<TabItem/);
+  assert.match(out, /### UI\n\n1\. Click \*\*Run\*\*\./);
+  assert.match(out, /### CLI \/ API/);
+  assert.match(out, /```yaml\nphases:\n  - name: load\n    tasks: \[\]\n```/);
+  assert.match(out, /---\n\nAfter\./);
+});
+
+test('<details> folds out: the summary becomes a bold line and the rest follows', () => {
+  const out = stripMdx('<details><summary>Why <code>out.c-</code>?</summary>\n\nBecause.\n\n</details>');
+  assert.match(out, /^\*\*Why `out\.c-`\?\*\*\n\nBecause\./);
+  assert.doesNotMatch(out, /<\/?details|<\/?summary/);
+});
 
 test('a weighted heading loses the wrapper and keeps its text', () => {
   assert.equal(
