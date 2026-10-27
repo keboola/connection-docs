@@ -54,27 +54,20 @@ async function readJsonBody(req: VercelRequest): Promise<ChatRequest> {
 const MAX_MESSAGE_CHARS = 2_000;
 
 /**
- * Echo the request origin only when it's one of ours (prod docs, Vercel
- * previews, local dev). Same-origin requests need no CORS header at all;
- * everything else gets none, so foreign pages can't script this proxy.
+ * Origins allowed to call this proxy from a browser: the same allowlist as
+ * api/feedback.ts.
+ *
+ * Production and preview builds call `/api/chat` same-origin (AskKaiDrawer's
+ * apiBase is empty), and same-origin requests need no CORS header at all. The
+ * only cross-origin caller is `astro dev` on localhost, which points apiBase at
+ * a deployed function. No *.vercel.app pattern belongs here: anyone can deploy
+ * a page there, and it would get to script this shared-token proxy.
  */
+const ALLOWED_ORIGIN = /^https:\/\/help\.keboola\.com$|^http:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/;
+
 function corsOrigin(req: VercelRequest): string | null {
-  const origin = req.headers.origin;
-  if (!origin) return null;
-  try {
-    const { protocol, hostname } = new URL(origin);
-    if (protocol !== 'https:' && hostname !== 'localhost') return null;
-    if (
-      hostname === 'help.keboola.com' ||
-      hostname === 'localhost' ||
-      hostname.endsWith('.vercel.app')
-    ) {
-      return origin;
-    }
-  } catch {
-    /* fall through */
-  }
-  return null;
+  const origin = typeof req.headers.origin === 'string' ? req.headers.origin : '';
+  return origin && ALLOWED_ORIGIN.test(origin) ? origin : null;
 }
 
 function setCors(req: VercelRequest, res: VercelResponse) {
