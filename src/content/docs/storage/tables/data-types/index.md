@@ -66,7 +66,7 @@ Source data types are mapped to a destination using a **base type**. The current
 
 For detailed mappings, please refer to the [conversion table](https://developers.keboola.com/extend/common-interface/manifest-files/out-tables-manifests-native-types/#data-type-conversions). You can also view the extracted data types in the [storage table](/storage/tables/) detail.
 
-Because this list is deliberately small, when a component describes its output with base types, a source type that has no equivalent among them (for example `TIME`, `INTERVAL`, `UUID`, `BLOB`, `JSON`, arrays, or structs) arrives in Storage as `STRING`. Components that write the backend's own types instead are not limited in this way. Length, precision, and scale are only carried over when the source type actually holds them --- if the source engine discards them, they cannot be reconstructed later. See [output data types in DuckDB transformations](/transformations/duckdb/#output-data-types) for a concrete example of both cases.
+Because this list is deliberately small, when a component describes its output with base types, a source type that has no equivalent among them (for example `TIME`, `INTERVAL`, `UUID`, `BLOB`, `JSON`, arrays, or structs) arrives in Storage as `STRING`. Components that write the backend's own types instead are not limited in this way. Length, precision, and scale are only carried over when the source type actually holds them. If the source engine discards them, they cannot be reconstructed later. See [output data types in DuckDB transformations](/transformations/duckdb/#output-data-types) for a concrete example of both cases.
 
 ### How to Define Data Types
 
@@ -114,15 +114,15 @@ You **cannot change the type of a column in a typed table once it has been creat
 :::
 
 #### Widening a Text Column
-The **length** of a text column (`VARCHAR` on Snowflake, `STRING(n)` on BigQuery) can be increased in place. If a Snowflake transformation redefines an existing column with a longer length --- for example from `VARCHAR(2)` to `VARCHAR(50)` --- Storage widens the column instead of failing the load. It is a metadata-only change, so existing rows are preserved, for both full and incremental loads. The type itself still cannot be changed this way.
+The **length** of a text column (`VARCHAR` on Snowflake, `STRING(n)` on BigQuery) can be increased in place. If a Snowflake transformation redefines an existing column with a longer length, for example from `VARCHAR(2)` to `VARCHAR(50)`, Storage widens the column instead of failing the load. It is a metadata-only change, so existing rows are preserved, for both full and incremental loads. The type itself still cannot be changed this way.
 
 :::caution
-**Widening is one-way.** Once a column has been widened to `VARCHAR(50)`, a load that declares the original `VARCHAR(2)` fails --- loading a shorter length into a longer column is not supported.
+**Widening is one-way.** Once a column has been widened to `VARCHAR(50)`, a load that declares the original `VARCHAR(2)` fails, because loading a shorter length into a longer column is not supported.
 
 As a result, `VARCHAR(n)` written in a transformation is not a durable constraint: the length that is enforced is always the **current definition of the column in Storage**, not the one in your latest query. If you rely on a maximum width being enforced, [create the table as typed first](#how-to-create-a-typed-table) and keep that definition as the source of truth.
 :::
 
-The same length change --- together with a column's nullability and default value --- can also be made explicitly through the [update column definition endpoint](https://api.keboola.com/?service=storage#put-/v2/storage/tables/-id-/columns/-column-/definition) of the Storage API, without running a transformation.
+The same length change, together with a column's nullability and default value, can also be made explicitly through the [update column definition endpoint](https://api.keboola.com/?service=storage#put-/v2/storage/tables/-id-/columns/-column-/definition) of the Storage API, without running a transformation.
 
 ### How to Create a Typed Table Based on a Non-Typed Table
 If you have a non-typed table, `non_typed_table`, with undefined data types and want to convert it into a typed table, follow these steps:
