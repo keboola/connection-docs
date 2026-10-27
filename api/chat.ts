@@ -53,7 +53,9 @@ async function readJsonBody(req: VercelRequest): Promise<unknown> {
 
 // Longest question the widget will forward upstream — the proxy runs on a
 // shared Storage token, so don't let arbitrary payload sizes burn AI quota.
-const MAX_MESSAGE_CHARS = 2_000;
+// Keep in sync with the textarea's maxlength in src/components/AskKaiDrawer.astro
+// (scripts/chat-handler.test.ts checks it).
+export const MAX_MESSAGE_CHARS = 2_000;
 
 /**
  * Origins allowed to call this proxy from a browser: the same allowlist as

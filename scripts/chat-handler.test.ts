@@ -208,3 +208,28 @@ test('a client disconnect aborts the upstream call and stops retries', async () 
   const ev = events(r);
   assert.ok(!ev.some((e) => e.type === 'error' || e.type === 'text-delta'));
 });
+
+// ─── Length cap ──────────────────────────────────────────────────────────
+
+test('a message over the cap is a 400 whose error the widget can show', async () => {
+  const mod = await load(LIVE, 'toolong');
+  let calls = 0;
+  globalThis.fetch = (async () => {
+    calls++;
+    return answer();
+  }) as any;
+  const r = res();
+  await mod.default(req('POST', { message: 'x'.repeat(mod.MAX_MESSAGE_CHARS + 1) }), r);
+  assert.equal(r.statusCode, 400);
+  assert.match(JSON.parse(r.body).error, /too long \(max 2000 characters\)/);
+  assert.equal(calls, 0);
+});
+
+test('the widget textarea maxlength matches MAX_MESSAGE_CHARS', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const mod = await load({}, 'maxlength');
+  const astro = await readFile(new URL('../src/components/AskKaiDrawer.astro', import.meta.url), 'utf-8');
+  const m = astro.match(/id="ak-input"[\s\S]*?maxlength="(\d+)"[\s\S]*?<\/textarea>/);
+  assert.ok(m, 'textarea #ak-input has a maxlength');
+  assert.equal(Number(m[1]), mod.MAX_MESSAGE_CHARS);
+});
