@@ -1,6 +1,7 @@
 ---
 title: Buckets
 slug: 'storage/buckets'
+description: Create a Storage bucket, pick its in or out stage, and open a bucket's details.
 ---
 
 Buckets are containers for tables in Storage. They are further organized into the following two **stages**:
