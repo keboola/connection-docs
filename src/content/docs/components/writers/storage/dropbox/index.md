@@ -20,6 +20,7 @@ You may specify Storage [tables](/storage/tables/) or [files](/storage/files/) t
 - To specify files, click **New File Input** and specify a file tag or [Elastic Query string](https://www.elastic.co/guide/en/elasticsearch/reference/6.6/query-dsl-query-string-query.html#query-string-syntax).
 
 ![Screenshot - Specify input](/components/writers/storage/dropbox/dropbox-1.png)
+<!-- VERIFY(Nikita): reshoot this screenshot; it still shows the old New Table Input button, now Add Table Input. -->
 
 The written files will be available in the **Apps/Keboola Connection Writer V2** folder in Dropbox. You can optionally specify 
 an additional subfolder in this folder in the `Destination folder` setting. In the above screenshot, the files would be saved 

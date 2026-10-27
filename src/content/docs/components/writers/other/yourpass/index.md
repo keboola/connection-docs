@@ -48,6 +48,7 @@ For each action there are specific requirements for the input tables, these are 
 Once all configurations are set, click **save** to save the configuration.
 
 ![Screenshot - Input mapping](/components/writers/other/yourpass/row.png)
+<!-- VERIFY(Nikita): reshoot this screenshot; it still shows the old New Table Input button, now Add Table Input. -->
 
 
 ### Input table mapping

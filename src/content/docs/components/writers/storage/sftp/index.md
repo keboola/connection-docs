@@ -42,5 +42,6 @@ If you want to add [processors](https://developers.keboola.com/extend/component/
 to the files or tables before the input, you can specify these in the processor configuration window.
 
 ![Screenshot - New row configuration](/components/writers/storage/sftp/rowconfig.png) 
+<!-- VERIFY(Nikita): reshoot this screenshot; it still shows the old New Table Input button, now Add Table Input. -->
 
 
