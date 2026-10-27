@@ -1,6 +1,6 @@
 // Tests for src/integrations/image-dimensions.mjs. Run: npm test
 
-import { test } from 'node:test';
+import { after, test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -9,6 +9,7 @@ import { pathToFileURL } from 'node:url';
 import imageDimensions, { readDimensions, sizeImages } from '../src/integrations/image-dimensions.mjs';
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'imgdims-'));
+after(() => fs.rmSync(dir, { recursive: true, force: true }));
 const write = (name: string, data: Buffer | string) => {
   const file = path.join(dir, name);
   fs.mkdirSync(path.dirname(file), { recursive: true });
@@ -102,6 +103,7 @@ test('a missing image warns locally and fails the build in CI', async () => {
   } finally {
     if (ci === undefined) delete process.env.CI;
     else process.env.CI = ci;
+    fs.rmSync(out, { recursive: true, force: true });
   }
 });
 
