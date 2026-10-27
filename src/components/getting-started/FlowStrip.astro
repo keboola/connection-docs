@@ -8,6 +8,9 @@
 // tag (page-markdown.mjs prints it joined with arrows). `code` in backticks
 // renders as code. Styles: .gs-flow in custom.css.
 
+// set:html skips the rehype plugin that opens external links in a new tab, so the HTML goes through it here
+import { externalizeHtml } from '../../integrations/external-links.mjs';
+
 interface Props {
   steps: string;
   /** Accessible name for the whole strip. */
@@ -25,6 +28,6 @@ const items = steps
 
 <div class="gs-flow-wrap not-content">
   <ol class="gs-flow" aria-label={label}>
-    {items.map((html) => <li class="gs-flow__step" set:html={html} />)}
+    {items.map((html) => <li class="gs-flow__step" set:html={externalizeHtml(html)} />)}
   </ol>
 </div>
