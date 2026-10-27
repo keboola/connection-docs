@@ -88,6 +88,14 @@ test('externalizeHtml: an image-only link gets the hint but no arrow class', () 
   );
 });
 
+test('externalizeHtml: a link that holds only a <picture> gets no arrow class', () => {
+  const pic = '<picture><source srcset="/b.avif" type="image/avif"><img src="/b.png" alt="Install"></picture>';
+  assert.equal(
+    externalizeHtml(`<a href="https://example.com">${pic}</a>`),
+    `<a href="https://example.com" target="_blank" rel="noopener">${pic}${HINT}</a>`,
+  );
+});
+
 test('externalizeHtml: hint: false leaves the hidden text out', () => {
   assert.equal(
     externalizeHtml('<a href="https://example.com">x</a>', { hint: false }),
@@ -153,6 +161,21 @@ test('plugin: inline raw HTML gets the hint before the </a> in a later raw node'
   run(el('p', {}, [text('See '), open, text('the site'), close, text('.')]));
   assert.equal(open.value, '<a href="https://example.com" target="_blank" rel="noopener" class="kbc-external">');
   assert.equal(close.value, `${HINT}</a>`);
+});
+
+test('plugin: an inline HTML badge in a paragraph gets the hint but no arrow class', () => {
+  const open = raw('<a href="https://example.com">');
+  const img = raw('<img src="/badge.svg" alt="Install">');
+  const close = raw('</a>');
+  run(el('p', {}, [open, img, close]));
+  assert.equal(open.value, '<a href="https://example.com" target="_blank" rel="noopener">');
+  assert.equal(close.value, `${HINT}</a>`);
+});
+
+test('plugin: an inline HTML link around a picture and text keeps the arrow class', () => {
+  const open = raw('<a href="https://example.com">');
+  run(el('p', {}, [open, raw('<img src="/x.svg" alt="">'), text(' GitHub'), raw('</a>')]));
+  assert.match(open.value, /class="kbc-external"/);
 });
 
 test('plugin: inline raw HTML in a heading gets no hint at the closing tag', () => {
