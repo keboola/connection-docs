@@ -151,7 +151,7 @@ Three consequences are worth knowing before you design your output tables.
 
 **DuckDB types with no Keboola equivalent become strings.** Base types are limited to `STRING`, `INTEGER`, `NUMERIC`, `FLOAT`, `BOOLEAN`, `DATE`, and `TIMESTAMP`, so a `TIME`, `INTERVAL`, or `JSON` column lands in Storage as text. If you need such a value in a typed form downstream, split it into supported types in the transformation (for example a `TIME` into an hour and a minute integer, or a `JSON` document into columns).
 
-**Single-precision floats are not mapped.** DuckDB reports both `FLOAT` and its alias `REAL` as `FLOAT`, which is not among the mapped types, so such a column also arrives as text. Cast single-precision values to `DOUBLE` (or `DECIMAL(p,s)`) if you need a numeric column in Storage.
+**Single-precision floats are not mapped.** DuckDB's own `FLOAT` type (alias `REAL`) is the 4-byte single-precision float. It is not the same as the Keboola `FLOAT` base type, which comes from DuckDB `DOUBLE` in the table above. DuckDB reports both `FLOAT` and `REAL` as `FLOAT`, which is not among the mapped types, so such a column arrives as text. Cast single-precision values to `DOUBLE` (or `DECIMAL(p,s)`) if you need a numeric column in Storage.
 
 **`VARCHAR(n)` length cannot be preserved.** DuckDB [does not store the length of a `VARCHAR`](https://duckdb.org/docs/stable/sql/data_types/text): it accepts `VARCHAR(n)` only for compatibility and discards `n` immediately. By the time the output schema is read, the length is gone, so a column cast as `VARCHAR(2)` reaches Storage as a full-width string (`VARCHAR(16777216)` on Snowflake).
 
