@@ -29,6 +29,15 @@ updates:
         update-types:
           - "minor"
           - "patch"
+      # Security fixes get the same split: the Astro chain in its own pull
+      # request, everything else in one catch-all.
+      astro-security:
+        applies-to: security-updates
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+          - "starlight-*"
+          - "sharp"
       security:
         applies-to: security-updates
         patterns:
