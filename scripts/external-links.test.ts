@@ -230,11 +230,12 @@ function setHtmlExpressions(source: string) {
   return out;
 }
 
-test('components: every set:html runs its HTML through externalizeHtml, or is listed with a reason', () => {
-  const dir = fileURLToPath(new URL('../src/components/', import.meta.url));
+test('src: every set:html runs its HTML through externalizeHtml, or is listed with a reason', () => {
+  // all of src/, so a sink in a page or a layout is caught as well as one in a component
+  const dir = fileURLToPath(new URL('../src/', import.meta.url));
   const files = readdirSync(dir, { recursive: true }).map(String).filter((f) => f.endsWith('.astro'));
   const sinks = files.flatMap((f) => setHtmlExpressions(readFileSync(join(dir, f), 'utf8')).map((expr) => ({ file: f, expr })));
-  assert.ok(sinks.length > 0, 'no set:html found; has src/components moved?');
+  assert.ok(sinks.length > 0, 'no set:html found; has src/ moved?');
   const unchecked = sinks.filter(
     ({ file, expr }) => !expr.includes('externalizeHtml(') && !EXEMPT.some((e) => e.file === basename(file) && e.expr.test(expr)),
   );
