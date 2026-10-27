@@ -108,13 +108,9 @@ export function stripHtmlComments(markdown) {
  */
 export function collapseBlankLines(markdown) {
   const out = [];
-  let fence = null;
+  const inCode = fenceTracker();
   for (const line of markdown.split('\n')) {
-    const marker = line.match(/^\s*(`{3,}|~{3,})/);
-    if (marker) {
-      if (!fence) fence = marker[1];
-      else if (marker[1][0] === fence[0] && marker[1].length >= fence.length) fence = null;
-    } else if (!fence && line === '' && out.at(-1) === '') continue;
+    if (!inCode(line) && line === '' && out.at(-1) === '') continue;
     out.push(line);
   }
   return out.join('\n');

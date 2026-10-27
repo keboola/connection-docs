@@ -3,7 +3,7 @@ import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, linksToText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
-import { stripHtmlComments, collapseBlankLines, fenceTracker } from './strip-comments.mjs';
+import { stripHtmlComments, collapseBlankLines, fenceTracker, fenceOpener, closesFence } from './strip-comments.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
 import { courseListText, courseBarText } from '../components/getting-started/course.mjs';
 import { sampleText } from '../components/getting-started/sample.mjs';
@@ -239,8 +239,7 @@ export function stripMdx(body) {
     const line = lines[n];
     if (fence) {
       const text = fence.strip && line.startsWith(' '.repeat(fence.strip)) ? line.slice(fence.strip) : line;
-      const closer = line.match(/^\s*(`{3,}|~{3,})\s*$/);
-      if (closer && closer[1][0] === fence.marker[0] && closer[1].length >= fence.marker.length) fence = null;
+      if (closesFence(line, fence.marker)) fence = null;
       out.push(text);
       continue;
     }
@@ -325,8 +324,8 @@ export function stripMdx(body) {
 
     const strip = Math.min(stripOf(), lead(line));
     const text = line.slice(strip);
-    const opener = line.match(/^\s*(`{3,}|~{3,})/);
-    if (opener) fence = { marker: opener[1], strip: line.length - text.length };
+    const opener = fenceOpener(line);
+    if (opener) fence = { marker: opener, strip: line.length - text.length };
     if (inStrip || inPrereqs) {
       // Both lists are built from raw <li> JSX, buffered until the item closes,
       // then flattened. An author's comment is dropped here rather than left for
