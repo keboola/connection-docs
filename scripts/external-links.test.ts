@@ -7,7 +7,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { createRequire } from 'node:module';
 import externalLinks, { externalizeHtml, isExternalHref } from '../src/integrations/external-links.mjs';
 
 const HINT = '<span class="sr-only" data-pagefind-ignore> (opens in a new tab)</span>';
@@ -241,4 +242,37 @@ test('src: every set:html runs its HTML through externalizeHtml, or is listed wi
     ({ file, expr }) => !expr.includes('externalizeHtml(') && !EXEMPT.some((e) => e.file === basename(file) && e.expr.test(expr)),
   );
   assert.deepEqual(unchecked, [], 'wrap these in externalizeHtml(), or add them to EXEMPT with the reason');
+});
+
+// The hand-built trees above can't show what the real parser hands the plugin.
+// This runs a .md page through the processor Astro itself uses (resolved from
+// astro's own dependencies, so it is the version the build runs), with rehype-raw
+// and heading ids after the plugin, as in the build.
+async function renderMd(md: string) {
+  const fromAstro = createRequire(createRequire(import.meta.url).resolve('astro/package.json'));
+  const { createMarkdownProcessor } = await import(pathToFileURL(fromAstro.resolve('@astrojs/markdown-remark')).href);
+  const processor = await createMarkdownProcessor({ rehypePlugins: [externalLinks], syntaxHighlight: false });
+  return processor.render(md);
+}
+
+test('pipeline: a .md page, with markdown links, inline HTML, a badge and an HTML block', async () => {
+  const { code, metadata } = await renderMd([
+    '## Install from [GitHub](https://github.com/keboola)',
+    '',
+    'A <a href="https://example.com"><img src="/b.svg" alt="Install"></a> badge, <a href="https://example.org">a site</a> and [the CLI](/cli/).',
+    '',
+    '<table><tr><td><a href="https://example.net">x</a></td></tr></table>',
+  ].join('\n'));
+  // the heading's link opens in a new tab, and its id and TOC text carry no hint
+  assert.match(code, /<h2 id="install-from-github">Install from <a href="https:\/\/github\.com\/keboola" target="_blank" rel="noopener" class="kbc-external">GitHub<\/a><\/h2>/);
+  assert.deepEqual(metadata.headings.map((h: any) => h.text), ['Install from GitHub']);
+  // the inline badge: hint, no arrow class; the inline text link: both
+  assert.ok(
+    code.includes('<a href="https://example.com" target="_blank" rel="noopener"><img src="/b.svg" alt="Install"><span class="sr-only" data-pagefind-ignore=""> (opens in a new tab)</span></a>'),
+    code,
+  );
+  assert.match(code, /<a href="https:\/\/example\.org" target="_blank" rel="noopener" class="kbc-external">a site<span class="sr-only"/);
+  assert.match(code, /<a href="\/cli\/">the CLI<\/a>/);
+  // the HTML block's link
+  assert.match(code, /<a href="https:\/\/example\.net" target="_blank" rel="noopener" class="kbc-external">x<span class="sr-only"/);
 });
