@@ -399,7 +399,7 @@ It is possible to capture changes in a PostgreSQL database that is running in
   If the `wal_level` is not set to `logical` after you make the preceding change, it is probably because the instance
   has to be restarted after the parameter group change.
   Restarts occur during your maintenance window, or you can initiate a restart manually.
-* Set the Debezium `plugin.name` parameter to `pgoutput`.
+* Nothing to set on the connector side: it already uses `pgoutput`.
 * Initiate logical replication from an AWS account that has the `rds_replication` role.
   The role grants permissions to manage logical slots and to stream data using logical slots.
   By default, only the master user account on AWS has the `rds_replication` role on Amazon RDS.
