@@ -1481,6 +1481,13 @@ nav.sidebar {
   box-shadow: 0 0 0 1px var(--border-1);
   background: var(--bg-2);
 }
+/* Forced-colors mode drops box-shadow; an outline survives it and, like the
+   ring, takes no layout space. */
+@media (forced-colors: active) {
+  .sl-markdown-content img:not(:where(.not-content *)) {
+    outline: 1px solid CanvasText;
+  }
+}
 /* Looping demo clips ("GIFs") get the same frame as screenshots */
 .sl-markdown-content video:not(:where(.not-content *)) {
   border-radius: 8px;
