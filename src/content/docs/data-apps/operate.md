@@ -1,7 +1,7 @@
 ---
 title: Operate and update an app
 slug: 'data-apps/operate'
-description: "Day-to-day work on a deployed Keboola app: read its state, ship a code change, change settings, stop and start it, rotate a secret, delete it."
+description: "Day-to-day work on a deployed Keboola app: read its state, ship a code change, change settings, stop and start it, start it from a flow, rotate a secret, delete it."
 ---
 
 Once an app is deployed, everything you do with it starts on its page under **Apps**. This page walks through the routine tasks; [Apps reference](/data-apps/reference/) has the full list of settings and actions.
@@ -58,8 +58,46 @@ Code changes are tracked separately from configuration: for a Kai-built app they
 
 - **Duplicate with Kai** has Kai copy an app with a Keboola-managed repository, so you can try a change without touching the one people use. It opens a new Kai chat and asks Kai to copy the app. The request tells Kai to check whether a copy is possible, to say what carries over and what you'll have to set up again, and to make the copy only once you confirm. Only Kai can copy these apps, so the item is disabled when Kai isn't available.
 - **Duplicate** does the same for any other app. It copies the app's code (or its repository and branch) and settings into a new app, which starts undeployed and gets its own address when you deploy it. If the app runs from your own repository, the copy deploys the same branch, so switch the copy to a branch of its own before you push experiments.
-- **Automate** creates a flow that starts the app on a schedule. In its dialog, name the flow (leave the name blank for "Scheduled" plus the app's name), pick the schedule and click **Automate**. The schedule is preset to **Once per hour**, which wakes a sleeping app every hour. For a time of day you choose, pick **Custom schedule**; times follow the timezone shown next to **Schedule**, UTC unless you change it. A started app still goes back to sleep after its inactivity timeout if nobody opens it. The new flow has the app as its only task and is listed with your other [flows](/flows/). Only the **Admin** and **Share** [roles](/management/project/users/#user-roles) see **Automate**.
+- **Automate** creates a flow that starts the app on a schedule. In its dialog, name the flow (leave the name blank for "Scheduled" plus the app's name), pick the schedule and click **Automate**. The schedule is preset to **Once per hour**, which starts the app every hour, restarting it with a new build if it's running. For a time of day you choose, pick **Custom schedule**; times follow the timezone shown next to **Schedule**, UTC unless you change it. A started app still goes back to sleep after its inactivity timeout if nobody opens it. The new flow has the app as its only task and is listed with your other [flows](/flows/); [Start the app from a flow](#start-the-app-from-a-flow) explains what that task does. Only the **Admin** and **Share** [roles](/management/project/users/#user-roles) see **Automate**.
 - **Delete app** stops the app and deletes its configuration. The App URL stops working immediately; there is no undo. The terminal equivalent, `kbagent data-app delete`, says the same thing in its own words: cascade, irreversible.
+
+## Start the app from a flow
+
+Add the app to a [flow](/flows/) when it should start after other work, for example after the transformation that refreshes the tables in its [Input Mapping](/data-apps/reference/#input-mapping). **Automate** builds a flow with the app as its only task; to add the app to a flow you already have:
+
+1. Open the flow and click **+** where the app should run, then **Component**.
+2. Switch to the **Apps** tab, or search for the app's name, and select the app.
+3. Save the flow.
+
+When the flow runs, the task starts a stopped or sleeping app and restarts a running one, the way **Redeploy** does:
+
+- Keboola builds the app again from the latest code in its repository, the current head of the branch for an app on your own repository. It keeps the configuration version the app was last deployed with and the package versions frozen in earlier builds, so settings saved since the last deploy still need a **Redeploy**.
+- The app loads its Input Mapping again and gets a new `KBC_TOKEN`.
+- The task waits until the app is running, up to five minutes. If a stopped or sleeping app fails to start or doesn't make it in time, the task fails, and so does an app that was deleted. Use a [condition](/flows/#conditions), such as [Continue on Failure](/flows/#4-continue-on-failure), if the rest of the flow should go on.
+- A running app can report **running** for the whole restart, so its task may finish before the new build is live, and a failed rebuild doesn't fail the task. Don't count on the new build in the next task.
+
+The flows **Automate** creates use the same task, so each scheduled run restarts the app with a new build even when people are using it.
+
+<!-- VERIFY(Miroslav Čillík): taken from keboola/component-data-app-control (PR #7: forceRestart defaults to true, known limit of the final wait on a running app) and the flows-v2 builder; not yet run end to end on a stack. Check that a restart reruns the Input Mapping load, how long a restarted running app is unavailable to its users, and which project roles can run a flow with an app task. -->
+
+In the flow's configuration, the task runs the **Data App Control** component, `keboola.data-app-control`, with the **App ID** from the app's **App Info** panel and no `configId`:
+
+```json
+{
+  "type": "job",
+  "componentId": "keboola.data-app-control",
+  "configData": {
+    "parameters": {
+      "appId": "<App ID>"
+    }
+  },
+  "mode": "run"
+}
+```
+
+To only start a stopped or sleeping app and leave a running one alone, add `"forceRestart": false` to `configData.parameters`. In the flow builder, select the task and click **Set advanced parameters** at the bottom of its panel; through the API, edit the flow's configuration. A running app then keeps its build and its `KBC_TOKEN`.
+
+If the task shows `keboola.data-apps` with a `configId` instead, it was added before the app was first deployed or on a stack without Data App Control. It restarts the app the same way, but `forceRestart` has no effect there. Deploy the app, then remove the task and add the app again.
 
 ## When something is off
 
