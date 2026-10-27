@@ -218,15 +218,17 @@ export function sizeImages(html, pageUrl, outDir) {
   const missing = [];
   const unsized = [];
   const out = html.replace(/<img\b[^>]*>/gi, (tag) => {
-    // An author-set width or height (like width="45%") is a layout choice; leave it.
-    if (attr(tag, 'width') != null || attr(tag, 'height') != null) return tag;
     const src = attr(tag, 'src');
     const file = resolveSrc(src, pageUrl, outDir);
     if (!file) return tag;
+    // Checked before the author-size skip, so a sized <img> with a mistyped path
+    // still fails CI.
     if (!fs.existsSync(file)) {
       missing.push(src);
       return tag;
     }
+    // An author-set width or height (like width="45%") is a layout choice; leave it.
+    if (attr(tag, 'width') != null || attr(tag, 'height') != null) return tag;
     const size = readDimensions(file);
     if (!size) {
       unsized.push(src);

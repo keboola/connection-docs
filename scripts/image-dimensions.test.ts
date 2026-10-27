@@ -110,3 +110,9 @@ test('reports a missing image', () => {
   assert.deepEqual(res.missing, ['/nope.png']);
   assert.equal(res.sized, 0);
 });
+
+test('reports a missing image even when the author set its width', () => {
+  const res = sizeImages('<img src="/nope.png" width="45%" alt="x">', '/', dir);
+  assert.deepEqual(res.missing, ['/nope.png']);
+  assert.equal(res.sized, 0);
+});
