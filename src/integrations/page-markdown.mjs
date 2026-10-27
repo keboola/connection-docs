@@ -401,6 +401,19 @@ function stripFrontmatter(content) {
 }
 
 /**
+ * The body of a page's markdown twin, from the page source: frontmatter off,
+ * .mdx reduced to markdown, authors' comments and search markup dropped. The
+ * build calls this for every page; scripts/page-markdown.test.ts runs it too,
+ * so a step dropped from the chain fails a test.
+ */
+export function twinBody(content, isMdx) {
+  const raw = stripFrontmatter(content);
+  // authors' notes (VERIFY markers, where a claim was checked) stay in the source; comments
+  // and blank lines inside fenced code are content and survive (strip-comments.mjs)
+  return stripSearchMarkup(stripHtmlComments(isMdx ? stripMdx(raw) : raw)).trim();
+}
+
+/**
  * Build the llms.txt index from the pages we just emitted.
  *
  * Grouped by top-level slug segment, and each group is titled with that
@@ -515,11 +528,7 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
             continue;
           }
 
-          const isMdx = extname(file) === '.mdx';
-          const raw = stripFrontmatter(content);
-          // authors' notes (VERIFY markers, where a claim was checked) stay in the source; comments
-          // and blank lines inside fenced code are content and survive (strip-comments.mjs)
-          const body = stripSearchMarkup(stripHtmlComments(isMdx ? stripMdx(raw) : raw)).trim();
+          const body = twinBody(content, extname(file) === '.mdx');
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });

@@ -6,10 +6,11 @@
 // cases below is a shape that broke in review: nested spans, self-closing
 // spans, and span samples inside code.
 
+import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { stripMdx, stripSearchMarkup } from '../src/integrations/page-markdown.mjs';
+import { stripMdx, stripSearchMarkup, twinBody } from '../src/integrations/page-markdown.mjs';
 import { fenceTracker } from '../src/integrations/strip-comments.mjs';
 
 const prereqs = (inner: string) =>
@@ -134,4 +135,23 @@ test('fenceTracker: an inline code span at the start of a line opens no block', 
   assert.deepEqual(['```x``` text', 'next'].map(inCode), [false, false]);
   const wrapped = '<span data-pagefind-weight="5">y</span>';
   assert.equal(stripSearchMarkup(['```x``` text', wrapped].join('\n')), '```x``` text\ny');
+});
+
+test('the twin pipeline drops search markup from .md and .mdx pages', () => {
+  const page = [
+    '---',
+    'title: Limits',
+    '---',
+    '#### <span data-pagefind-weight="5">Apps pricing</span>',
+    '<!-- VERIFY(owner): checked -->',
+    'Text.',
+  ].join('\n');
+  for (const isMdx of [false, true]) {
+    assert.equal(twinBody(page, isMdx), '#### Apps pricing\nText.');
+  }
+});
+
+test('the twin of the page that carries a data-pagefind span has none left', () => {
+  const src = readFileSync('src/content/docs/management/project/limits/index.md', 'utf8');
+  assert.doesNotMatch(twinBody(src, false), /data-pagefind/);
 });
