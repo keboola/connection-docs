@@ -131,7 +131,9 @@ function prereqsTabsToText(tag, overrides = {}) {
  * Only the wrapper goes: a span nested inside keeps its own tags, because each
  * </span> is paired with its opener, and a self-closing <span … /> has no
  * closer to pair. Fenced code blocks (via fenceTracker, as stripHtmlComments
- * does) and inline code spans are samples, so they stay as written.
+ * does) and inline code spans are samples, so they stay as written. Text is
+ * read a paragraph at a time, not a line, because an opening tag and a code
+ * span may both run onto the next line, as they may in markdown.
  */
 const SPAN_TAG = /<span\b[^>]*>|<\/span>/gi;
 // a code span: a run of N backticks closed by the next run of exactly N
@@ -148,20 +150,30 @@ export function stripSearchMarkup(markdown) {
       if (!/\/\s*>$/.test(tag)) open.push(wrapper);
       return wrapper ? '' : tag;
     });
-  const outsideCode = (line) => {
+  const outsideCode = (para) => {
     let out = '';
     let last = 0;
-    for (const m of line.matchAll(CODE_SPAN)) {
-      out += dropTags(line.slice(last, m.index)) + m[0];
+    for (const m of para.matchAll(CODE_SPAN)) {
+      out += dropTags(para.slice(last, m.index)) + m[0];
       last = m.index + m[0].length;
     }
-    return out + dropTags(line.slice(last));
+    return out + dropTags(para.slice(last));
   };
   const inCode = fenceTracker();
-  return markdown
-    .split('\n')
-    .map((line) => (inCode(line) ? line : outsideCode(line)))
-    .join('\n');
+  const out = [];
+  let para = []; // lines of the paragraph being read; a blank line or a fence ends it
+  const flush = () => {
+    if (para.length) out.push(outsideCode(para.join('\n')));
+    para = [];
+  };
+  for (const line of markdown.split('\n')) {
+    if (inCode(line) || !line.trim()) {
+      flush();
+      out.push(line);
+    } else para.push(line);
+  }
+  flush();
+  return out.join('\n');
 }
 
 /**

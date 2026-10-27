@@ -155,3 +155,17 @@ test('the twin of the page that carries a data-pagefind span has none left', () 
   const src = readFileSync('src/content/docs/management/project/limits/index.md', 'utf8');
   assert.doesNotMatch(twinBody(src, false), /data-pagefind/);
 });
+
+test('a wrapper whose opening tag runs onto the next line still goes', () => {
+  assert.equal(stripSearchMarkup('<span\n  data-pagefind-weight="5">Title</span> text'), 'Title text');
+});
+
+test('a span sample in a code span that runs onto the next line stays as written', () => {
+  const md = 'See `the\n<span data-pagefind-weight="5">x</span>` sample.';
+  assert.equal(stripSearchMarkup(md), md);
+});
+
+test('a code span does not reach past a blank line', () => {
+  const md = 'A stray ` tick.\n\n<span data-pagefind-weight="5">y</span> and a ` tick.';
+  assert.equal(stripSearchMarkup(md), 'A stray ` tick.\n\ny and a ` tick.');
+});
