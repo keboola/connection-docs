@@ -41,10 +41,12 @@
 //         <PathIntro yours="the Google consent screen" />
 
 import { pathIntroHtml } from './pathintro.mjs';
+// set:html skips the rehype plugin that opens external links in a new tab, so the HTML goes through it here
+import { externalizeHtml } from '../../integrations/external-links.mjs';
 
 const paragraphs = pathIntroHtml(Astro.props);
 ---
 
 <div class="gs-pathintro">
-  {paragraphs.map((p) => <p class={p.recovery ? 'gs-pathintro__recovery' : undefined} set:html={p.html} />)}
+  {paragraphs.map((p) => <p class={p.recovery ? 'gs-pathintro__recovery' : undefined} set:html={externalizeHtml(p.html)} />)}
 </div>
