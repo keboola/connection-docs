@@ -10,7 +10,7 @@ Buckets are containers for tables in Storage. They are further organized into th
 
 The distinction between the input and output stages is purely conventional differentiation between raw and processed data.
 When creating a new bucket, select one of the stages and a suitable [database backend](/storage/#storage-backend-types-and-features) based on its properties.
-For information on how to load data into Storage, see the corresponding part of our [tutorial](/tutorial/load/).
+For information on how to load data into Storage, see the corresponding part of our [tutorial](/getting-started/load/).
 <!-- VERIFY(Jordan Burger): the Create Bucket dialog in project 264 (2026-10-20) has only Name and Stage, no backend choice. Does a backend field appear in projects with more than one backend? If not, drop the backend half of this sentence. -->
 
 To create a bucket, click **Create bucket** on the **Storage** page, enter a name, choose the stage, and click **Create bucket** in the dialog:
