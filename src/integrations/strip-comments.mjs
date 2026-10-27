@@ -39,19 +39,35 @@ export function remarkStripComments() {
 }
 
 /**
+ * The fence a line opens a code block with (``` or ~~~, any length), or null.
+ * A backtick fence's info string may not hold a backtick (CommonMark), so
+ * "```x``` text" is an inline code span, not a fence.
+ */
+export function fenceOpener(line) {
+  const m = line.match(/^\s*(`{3,}|~{3,})(.*)$/);
+  if (!m || (m[1][0] === '`' && m[2].includes('`'))) return null;
+  return m[1];
+}
+
+/** Whether a line closes the block `fence` opened: same character, at least as long, nothing after it. */
+export function closesFence(line, fence) {
+  const m = line.match(/^\s*(`{3,}|~{3,})\s*$/);
+  return Boolean(m) && m[1][0] === fence[0] && m[1].length >= fence.length;
+}
+
+/**
  * Feed it a markdown string line by line: it answers true for a line that
- * opens, closes or sits inside a fenced code block (``` or ~~~, any length),
- * so a caller can leave code samples as written.
+ * opens, closes or sits inside a fenced code block, so a caller can leave code
+ * samples as written. Inside a block, "```js" is code, not a closer.
  */
 export function fenceTracker() {
   let fence = null; // the opening fence while inside a code block
   return (line) => {
-    const marker = line.match(/^\s*(`{3,}|~{3,})/);
-    if (marker) {
-      if (!fence) fence = marker[1];
-      else if (marker[1][0] === fence[0] && marker[1].length >= fence.length) fence = null;
+    if (fence) {
+      if (closesFence(line, fence)) fence = null;
       return true;
     }
+    fence = fenceOpener(line);
     return fence !== null;
   };
 }

@@ -10,6 +10,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { stripMdx, stripSearchMarkup } from '../src/integrations/page-markdown.mjs';
+import { fenceTracker } from '../src/integrations/strip-comments.mjs';
 
 const prereqs = (inner: string) =>
   `<Prereqs needs={['project']} tabs={3} groupLabel="For this page">\n${inner}\n</Prereqs>\n\nBody.`;
@@ -118,4 +119,19 @@ test('data-pagefind- inside an attribute value is not a wrapper', () => {
 
 test('a stray closer with no opener stays', () => {
   assert.equal(stripSearchMarkup('text</span>'), 'text</span>');
+});
+
+test('fenceTracker: a fence with an info string inside a block is code, not a closer', () => {
+  const inCode = fenceTracker();
+  const lines = ['````md', '```js', 'x', '```', '````', 'after'];
+  assert.deepEqual(lines.map(inCode), [true, true, true, true, true, false]);
+  const plain = fenceTracker();
+  assert.deepEqual(['```', '```js', 'still code', '```', 'after'].map(plain), [true, true, true, true, false]);
+});
+
+test('fenceTracker: an inline code span at the start of a line opens no block', () => {
+  const inCode = fenceTracker();
+  assert.deepEqual(['```x``` text', 'next'].map(inCode), [false, false]);
+  const wrapped = '<span data-pagefind-weight="5">y</span>';
+  assert.equal(stripSearchMarkup(['```x``` text', wrapped].join('\n')), '```x``` text\ny');
 });
