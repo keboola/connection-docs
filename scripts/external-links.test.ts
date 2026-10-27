@@ -210,6 +210,7 @@ test("plugin: JSX <a> extends an author's rel instead of adding a second one", (
 // are listed with the reason.
 const EXEMPT = [
   { file: 'Head.astro', expr: /^importMap$/, why: 'an import map, no links' },
+  { file: 'FlowStrip.astro', expr: /^html$/, why: 'escaped step text with only <code> added, so it holds no <a>' },
   { file: 'NotFoundSuggestions.astro', expr: /^JSON\.stringify\(pages\)/, why: 'JSON data for a script' },
   { file: 'StageStrip.astro', expr: /^html$/, why: "the slot's HTML, which the rehype plugin has already processed" },
 ];
