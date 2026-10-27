@@ -40,8 +40,10 @@ const KBC_TOKEN = process.env.KBC_STORAGE_API_TOKEN || '';
 
 // ─── HTTP / SSE plumbing ─────────────────────────────────────────────────
 
-async function readJsonBody(req: VercelRequest): Promise<ChatRequest> {
-  if (req.body && typeof req.body === 'object') return req.body as ChatRequest;
+async function readJsonBody(req: VercelRequest): Promise<unknown> {
+  // Vercel has already parsed a JSON body, including `null` or a bare number;
+  // the caller decides what is a valid request.
+  if (req.body !== undefined && typeof req.body !== 'string') return req.body;
   if (typeof req.body === 'string' && req.body) return JSON.parse(req.body);
   const chunks: Buffer[] = [];
   for await (const chunk of req as any) chunks.push(chunk as Buffer);
@@ -325,7 +327,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  let body: ChatRequest;
+  let body: unknown;
   try {
     body = await readJsonBody(req);
   } catch {
@@ -335,7 +337,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  const message = (body.message || '').trim();
+  // A JSON body of `null`, a number, or a non-string `message` is a bad
+  // request, not a crash: these lines run outside the try/catch below.
+  const raw = body && typeof body === 'object' ? (body as ChatRequest).message : undefined;
+  const message = typeof raw === 'string' ? raw.trim() : '';
   if (!message) {
     res.statusCode = 400;
     res.setHeader('content-type', 'application/json');

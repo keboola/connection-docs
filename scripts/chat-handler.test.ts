@@ -93,3 +93,23 @@ test('CORS: vercel.app and look-alike origins get no allow header', async () => 
     assert.equal(r.headers['access-control-allow-origin'], undefined, origin);
   }
 });
+
+// ─── Request validation ──────────────────────────────────────────────────
+
+test('a missing, empty or non-string message is a 400, not a 500', async () => {
+  const mod = await load({}, 'validate');
+  for (const body of [{}, { message: '   ' }, { message: 42 }, { message: ['a'] }, { message: { x: 1 } }, null, 'null', '7']) {
+    const r = res();
+    await mod.default(req('POST', body), r);
+    assert.equal(r.statusCode, 400, JSON.stringify(body));
+    assert.equal(JSON.parse(r.body).error, 'message is required');
+  }
+});
+
+test('a body that is not JSON is a 400', async () => {
+  const mod = await load({}, 'badjson');
+  const r = res();
+  await mod.default(req('POST', '{not json'), r);
+  assert.equal(r.statusCode, 400);
+  assert.equal(JSON.parse(r.body).error, 'Invalid JSON body');
+});
