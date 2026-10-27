@@ -105,6 +105,12 @@ test('a missing image warns locally and fails the build in CI', async () => {
   }
 });
 
+test('a > inside a quoted attribute does not end the tag', () => {
+  write('docs/page/menu.png', pngBytes(40, 30));
+  const res = sizeImages('<img alt="Settings > Users" src="/docs/page/menu.png">', '/docs/page/', dir);
+  assert.equal(res.html, '<img alt="Settings > Users" src="/docs/page/menu.png" width="40" height="30">');
+});
+
 test('reports a missing image', () => {
   const res = sizeImages('<img src="/nope.png" alt="x">', '/', dir);
   assert.deepEqual(res.missing, ['/nope.png']);

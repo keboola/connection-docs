@@ -217,7 +217,9 @@ export function sizeImages(html, pageUrl, outDir) {
   let sized = 0;
   const missing = [];
   const unsized = [];
-  const out = html.replace(/<img\b[^>]*>/gi, (tag) => {
+  // Quoted values are matched whole: a '>' inside alt="Settings > Users" is not
+  // the end of the tag (the HTML serializer leaves '>' unescaped in attributes).
+  const out = html.replace(/<img\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi, (tag) => {
     const src = attr(tag, 'src');
     const file = resolveSrc(src, pageUrl, outDir);
     if (!file) return tag;
