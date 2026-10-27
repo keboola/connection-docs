@@ -41,6 +41,8 @@ updates:
       day: "monday"
       time: "06:00"
       timezone: "Europe/Prague"
+    cooldown:
+      default-days: 7
     commit-message:
       prefix: "chore(ci)"
     groups:
