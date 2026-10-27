@@ -254,7 +254,15 @@ async function handleDocsQuestion(
 
   let answer: DocsAnswer | null = null;
 
+  // The reader closed the drawer, sent a new question, or left the page: stop
+  // spending the shared token on an answer nobody will read.
+  const clientGone = new AbortController();
+  res.on('close', () => {
+    if (!res.writableFinished) clientGone.abort();
+  });
+
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    if (clientGone.signal.aborted) break;
     const remainingBudget = budgetMs - (Date.now() - startedAt);
     if (remainingBudget <= 0) break;
     try {
@@ -262,7 +270,7 @@ async function handleDocsQuestion(
       // this, one hung upstream connection blows straight past the 15s budget.
       answer = await askDocsQuestion(
         message,
-        AbortSignal.timeout(remainingBudget),
+        AbortSignal.any([clientGone.signal, AbortSignal.timeout(remainingBudget)]),
       );
       break;
     } catch (e: any) {
@@ -285,6 +293,11 @@ async function handleDocsQuestion(
         setTimeout(r, Math.min(2000, Math.max(500, remaining / 4))),
       );
     }
+  }
+
+  if (clientGone.signal.aborted) {
+    res.end();
+    return;
   }
 
   if (!answer) {

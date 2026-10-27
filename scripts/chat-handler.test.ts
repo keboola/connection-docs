@@ -183,3 +183,28 @@ test('a 4xx from upstream is not retried', async () => {
   assert.equal(calls, 1);
   assert.ok(events(r).some((e) => e.type === 'error'));
 });
+
+// ─── Client disconnect ───────────────────────────────────────────────────
+
+test('a client disconnect aborts the upstream call and stops retries', async () => {
+  const mod = await load(LIVE, 'disconnect');
+  let calls = 0;
+  let upstreamSignal: AbortSignal | undefined;
+  const r = res();
+  globalThis.fetch = ((_url: string, init: any) => {
+    calls++;
+    upstreamSignal = init.signal;
+    // The reader closes the drawer while the AI Service is still thinking.
+    setTimeout(() => r.emit('close'), 5);
+    return new Promise((_, reject) =>
+      init.signal.addEventListener('abort', () => reject(init.signal.reason)),
+    );
+  }) as any;
+  const started = Date.now();
+  await mod.default(req('POST', { message: 'Hello' }), r);
+  assert.equal(calls, 1, 'no retry after the client left');
+  assert.equal(upstreamSignal?.aborted, true);
+  assert.ok(Date.now() - started < 1000, 'did not wait for the 15s budget');
+  const ev = events(r);
+  assert.ok(!ev.some((e) => e.type === 'error' || e.type === 'text-delta'));
+});
