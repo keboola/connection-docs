@@ -648,7 +648,7 @@ For more details, refer to the [Debezium documentation](https://debezium.io/docu
 
 Enable heartbeat signals to prevent the consumption of WAL disk space. The connector will periodically emit a heartbeat signal to the selected table.
 
-![img_4.png](/components/extractors/database/postgresql/img_4.png)
+![Heartbeat settings: the Enable Heartbeat checkbox, Heartbeat Interval set to 3000 ms, and an Action Query that updates a heartbeat table](/components/extractors/database/postgresql/img_4.png)
 
 ***Note:** The heartbeat signal must also be selected in the `Datasource > Tables to sync` configuration property. For more information, see the [WAL disk space consumption](#wal-disk-space-consumption) section.*
 
@@ -664,7 +664,7 @@ These parameters control whether the connector creates a publication and how it 
 
 More information about the publication creation process can be found in the [Publication Creation](#publication-creation) section.
 
-![img_2.png](/components/extractors/database/postgresql/img_2.png)
+![Replication Plugin Advanced Options: the Publication Auto Create Mode, Publication Name, and Replica Identity override values fields](/components/extractors/database/postgresql/img_2.png)
 
 - **Publication Auto Create Mode**: The mode specifying how the connector creates publications. The following options
   are available:
