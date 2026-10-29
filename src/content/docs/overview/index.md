@@ -166,7 +166,7 @@ A stack is an entirely independent, full instance of Keboola platform services. 
 multiple Keboola accounts.
 
 Each stack uses a different network with a different set of **dedicated** [IP addresses](/components/ip-addresses/). 
-Our [developer documentation](/overview/api/#stacks-and-endpoints) describes how to handle multiple stacks 
+[Stacks and endpoints](/overview/api/#stacks-and-endpoints) on the APIs page describes how to handle multiple stacks 
 when working with the API in more detail.
 
 Single-tenant stacks are available for a single enterprise customer with a domain name in the form `connection.CUSTOMER_NAME.keboola.com`.

@@ -137,7 +137,7 @@ For detailed documentation on each plugin, including complete agent specificatio
 Additional resources:
 
 - [kbagent CLI](/cli/) — the command-line interface for driving Keboola projects, agent-friendly and sandboxable
-- [Keboola Developer Documentation](/extend/)
+- [Extending Keboola](/extend/)
 - [Python Component Library](https://github.com/keboola/python-component)
 - [Cookiecutter Python Component Template](https://github.com/keboola/cookiecutter-python-component)
 - [Streamlit Documentation](https://docs.streamlit.io)
