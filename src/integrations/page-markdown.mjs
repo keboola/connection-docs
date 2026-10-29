@@ -3,7 +3,7 @@ import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, linksToText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
-import { stripHtmlComments, collapseBlankLines } from './strip-comments.mjs';
+import { stripHtmlComments, collapseBlankLines, fenceTracker, fenceOpener, closesFence } from './strip-comments.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
 import { courseListText, courseBarText } from '../components/getting-started/course.mjs';
 import { sampleText } from '../components/getting-started/sample.mjs';
@@ -124,6 +124,59 @@ function prereqsTabsToText(tag, overrides = {}) {
 }
 
 /**
+ * Drop the <span data-pagefind-…> wrappers a page adds to tune site search.
+ * A reader of the twin gets nothing from them, and in a heading they print as
+ * raw HTML: `#### <span data-pagefind-weight="5">Apps pricing</span>`.
+ *
+ * Only the wrapper goes: a span nested inside keeps its own tags, because each
+ * </span> is paired with its opener, and a self-closing <span … /> has no
+ * closer to pair. Fenced code blocks (via fenceTracker, as stripHtmlComments
+ * does) and inline code spans are samples, so they stay as written. Text is
+ * read a paragraph at a time, not a line, because an opening tag and a code
+ * span may both run onto the next line, as they may in markdown.
+ */
+const SPAN_TAG = /<span\b[^>]*>|<\/span>/gi;
+// a code span: a run of N backticks closed by the next run of exactly N
+const CODE_SPAN = /(?<!`)(`+)(?!`)[\s\S]*?(?<!`)\1(?!`)/g;
+// a data-pagefind-* attribute name, looked for after quoted values are blanked
+const isSearchWrapper = (tag) => /\sdata-pagefind-[\w-]*/i.test(tag.replace(/(["'])[\s\S]*?\1/g, '""'));
+
+export function stripSearchMarkup(markdown) {
+  const open = []; // per open <span>: true when it is a search wrapper to drop
+  const dropTags = (text) =>
+    text.replace(SPAN_TAG, (tag) => {
+      if (tag[1] === '/') return open.pop() ? '' : tag;
+      const wrapper = isSearchWrapper(tag);
+      if (!/\/\s*>$/.test(tag)) open.push(wrapper);
+      return wrapper ? '' : tag;
+    });
+  const outsideCode = (para) => {
+    let out = '';
+    let last = 0;
+    for (const m of para.matchAll(CODE_SPAN)) {
+      out += dropTags(para.slice(last, m.index)) + m[0];
+      last = m.index + m[0].length;
+    }
+    return out + dropTags(para.slice(last));
+  };
+  const inCode = fenceTracker();
+  const out = [];
+  let para = []; // lines of the paragraph being read; a blank line or a fence ends it
+  const flush = () => {
+    if (para.length) out.push(outsideCode(para.join('\n')));
+    para = [];
+  };
+  for (const line of markdown.split('\n')) {
+    if (inCode(line) || !line.trim()) {
+      flush();
+      out.push(line);
+    } else para.push(line);
+  }
+  flush();
+  return out.join('\n');
+}
+
+/**
  * Reduce an .mdx body to plain markdown.
  *
  * The raw-markdown copies exist so an agent can read a page as text, so MDX
@@ -198,8 +251,7 @@ export function stripMdx(body) {
     const line = lines[n];
     if (fence) {
       const text = fence.strip && line.startsWith(' '.repeat(fence.strip)) ? line.slice(fence.strip) : line;
-      const closer = line.match(/^\s*(`{3,}|~{3,})\s*$/);
-      if (closer && closer[1][0] === fence.marker[0] && closer[1].length >= fence.marker.length) fence = null;
+      if (closesFence(line, fence.marker)) fence = null;
       out.push(text);
       continue;
     }
@@ -284,8 +336,8 @@ export function stripMdx(body) {
 
     const strip = Math.min(stripOf(), lead(line));
     const text = line.slice(strip);
-    const opener = line.match(/^\s*(`{3,}|~{3,})/);
-    if (opener) fence = { marker: opener[1], strip: line.length - text.length };
+    const opener = fenceOpener(line);
+    if (opener) fence = { marker: opener, strip: line.length - text.length };
     if (inStrip || inPrereqs) {
       // Both lists are built from raw <li> JSX, buffered until the item closes,
       // then flattened. An author's comment is dropped here rather than left for
@@ -358,6 +410,19 @@ function parseFrontmatter(content) {
  */
 function stripFrontmatter(content) {
   return content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
+}
+
+/**
+ * The body of a page's markdown twin, from the page source: frontmatter off,
+ * .mdx reduced to markdown, authors' comments and search markup dropped. The
+ * build calls this for every page; scripts/page-markdown.test.ts runs it too,
+ * so a step dropped from the chain fails a test.
+ */
+export function twinBody(content, isMdx) {
+  const raw = stripFrontmatter(content);
+  // authors' notes (VERIFY markers, where a claim was checked) stay in the source; comments
+  // and blank lines inside fenced code are content and survive (strip-comments.mjs)
+  return stripSearchMarkup(stripHtmlComments(isMdx ? stripMdx(raw) : raw)).trim();
 }
 
 /**
@@ -475,11 +540,7 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
             continue;
           }
 
-          const isMdx = extname(file) === '.mdx';
-          const raw = stripFrontmatter(content);
-          // authors' notes (VERIFY markers, where a claim was checked) stay in the source; comments
-          // and blank lines inside fenced code are content and survive (strip-comments.mjs)
-          const body = stripHtmlComments(isMdx ? stripMdx(raw) : raw).trim();
+          const body = twinBody(content, extname(file) === '.mdx');
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });
