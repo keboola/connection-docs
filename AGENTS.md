@@ -6,7 +6,7 @@ site. Read this before making changes.
 ## What this is
 
 The official Keboola product documentation, served at help.keboola.com. Built
-with Astro 6 + Starlight. Content is Markdown (a few pages are MDX); the site
+with Astro 7 + Starlight. Content is Markdown (a few pages are MDX); the site
 builds to static HTML with full-text search (Pagefind), redirects, and a
 generated sidebar. The repo is public, so everything committed is readable by
 anyone, comments included.
