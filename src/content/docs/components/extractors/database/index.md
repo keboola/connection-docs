@@ -4,6 +4,7 @@ description: Data source connectors import and integrate data from external sour
 slug: 'components/extractors/database'
 redirect_from:
   - /extractors/database/
+  - /integrate/database/
 
 ---
 
@@ -35,7 +36,7 @@ This straightforward approach suits most use cases and supports Timestamp-based 
 
 All are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and offer an [advanced mode](/components/extractors/database/sqldb/#advanced-mode).
 
-Their basic configuration is also part of the [Tutorial - Loading Data from Database](/tutorial/load/database/).
+Their basic configuration is also part of [Load from a database](/getting-started/load/database/) in Getting Started.
 
 ### Log-Based Connectors
 

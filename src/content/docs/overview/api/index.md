@@ -56,6 +56,8 @@ Each stack operates as an independent instance of Keboola services with its own 
 Single-tenant stacks are available for a single enterprise customer, with a domain name
 in the format `connection.CUSTOMER_NAME.keboola.com`.
 
+For your own stack, the authoritative list of service hosts is the [Storage API](https://api.keboola.com/?service=storage) index call, `GET /v2/storage` (no token needed), in its `services` array.
+
 ### API Documentation Portals
 
 The API documentation portal (`api.*`) is deployed independently per stack. Always use the portal
@@ -148,7 +150,7 @@ The services listed above are:
 - `queue` — [Service for Running Components](/extend/job-queue/)
 - `billing` — Service for Computing Credits
 - `encryption` — Service for [Encryption](/extend/encryption/)
-- `scheduler` — [Service for Configuring Schedules](https://developers.keboola.com/automate/set-schedule/)
+- `scheduler` — [Service for Configuring Schedules](/flows/schedule-api/)
 - `sync-actions` — [Service for Running Synchronous Actions](/extend/common-interface/actions/)
 - `notification` — Service for Configuring Job Notifications
 
@@ -198,7 +200,7 @@ and in application integrations, we strongly suggest using the above API call.
 | Notification           | `notification` | EU Ireland Azure | https://notification.north-europe.azure.keboola.com |
 | Notification           | `notification` | EU Frankfurt GCP | https://notification.europe-west3.gcp.keboola.com   |
 | OAuth                  | `oauth`        | US Virginia AWS  | https://oauth.keboola.com                           |
-| OAuth                  | `oauth`        | US Virginia GCP  | https://oauth.europe-west3.gcp.keboola.com          |
+| OAuth                  | `oauth`        | US Virginia GCP  | https://oauth.us-east4.gcp.keboola.com          |
 | OAuth                  | `oauth`        | EU Frankfurt AWS | https://oauth.eu-central-1.keboola.com              |
 | OAuth                  | `oauth`        | EU Ireland Azure | https://oauth.north-europe.azure.keboola.com        |
 | OAuth                  | `oauth`        | EU Frankfurt GCP | https://oauth.europe-west3.gcp.keboola.com          |

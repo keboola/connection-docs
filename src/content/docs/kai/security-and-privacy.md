@@ -58,7 +58,6 @@ Contact [support@keboola.com](mailto:support@keboola.com) to discuss BYOLLM opti
 
 Kai leverages Keboola's existing security certifications:
 - SOC 2 Type II
-- ISO 27001
 - GDPR compliant
 - Regional data residency
 
