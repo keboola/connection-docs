@@ -91,7 +91,7 @@ client.tables.export_to_file(table_id="in.c-main.my_table", path_name=".")
 df = pd.read_csv("my_table")
 ```
 
-For the full API, see the [Keboola Storage Python Client documentation](https://developers.keboola.com/integrate/storage/python-client/).
+For the full API, see the [Keboola Storage Python Client documentation](/storage/api/clients/python-client/).
 
 ### Storage Access
 

@@ -105,7 +105,7 @@ This is to limit only to attributes you need. All attributes are downloaded if l
 
 ***Note:** It is possible that there are some custom attributes with the same name. E.g., `Name` and `name` 
 or `Last name` and `last_name` are considered the same after conversion to a supported Storage format. 
-You may use appropriate [processors](https://developers.keboola.com/extend/component/processors/) to deal with this situation.*
+You may use appropriate [processors](/extend/component/processors/) to deal with this situation.*
 
 ### Activities 
 Activities are cards in campaigns, broadcasts, etc. They might be messages, webhooks, attribute changes, etc.
