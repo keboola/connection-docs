@@ -166,7 +166,7 @@ An exception occurred while executing a query: User character length limit (2) e
 Note that this cuts both ways: the definition that applies is always the one the table already has in Storage. Because the component never declares a length for string columns, an existing column keeps its original definition, and a change in the mapping (or in your casts) only shows up on a **newly created** output table. See [changing types of existing typed columns](/storage/tables/data-types/#changing-types-of-existing-typed-columns) for the ways around that.
 
 :::caution
-Arrays of a parameterized type are a known gap: DuckDB reports such a column as `DECIMAL(10,2)[]`, and the component reads only the leading type name, so the column is declared as `NUMERIC(10,2)` while the exported value is still an array literal, so the load fails on the type mismatch. Cast arrays (and other nested values) to text explicitly, for example `CAST("my_array" AS VARCHAR)`.
+Arrays of a parameterized type are a known gap: DuckDB reports such a column as `DECIMAL(10,2)[]`, and the component reads only the leading type name, so the column is declared as `NUMERIC(10,2)` while the exported value is still an array literal, and the load fails on the type mismatch. Cast arrays (and other nested values) to text explicitly, for example `CAST("my_array" AS VARCHAR)`.
 :::
 
 ## Example
