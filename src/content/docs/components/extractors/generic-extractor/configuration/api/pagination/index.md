@@ -1,6 +1,6 @@
 ---
 title: Pagination
-description: If new to Generic Extractor, learn about pagination in our tutorial first. Use Parameter Map to help you navigate among various configuration options.
+description: 'Choose how Generic Extractor pages through API results: by offset, page number, cursor, a URL or value from the response, or several scrollers.'
 slug: 'components/extractors/generic-extractor/configuration/api/pagination'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/

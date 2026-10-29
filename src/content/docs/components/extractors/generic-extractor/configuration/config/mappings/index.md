@@ -1,6 +1,6 @@
 ---
 title: Mapping
-description: If you are new to Generic Extractor, learn about mapping in our tutorial first. Use the Parameter Map to help you navigate among various configuration options.
+description: Control how Generic Extractor turns JSON responses into tables with column, user and table mapping, with automatic, manual and child-job examples.
 slug: 'components/extractors/generic-extractor/configuration/config/mappings'
 redirect_from:
     - /extend/generic-extractor/configuration/config/mappings/

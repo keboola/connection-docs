@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Kai
-description: Kai is now in Public Beta and available to all users in supported stacks.
+description: Enable Kai in your project, start your first conversation, and see how Kai usage is billed and limited.
 slug: 'kai/getting-started'
 ---
 

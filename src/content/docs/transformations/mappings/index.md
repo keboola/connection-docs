@@ -1,6 +1,6 @@
 ---
 title: Input and Output Mapping
-description: To configure input and output mappings in the process of creating a transformation, go to our Getting Started tutorial.
+description: Define which tables and files a transformation reads (input mapping) and where its results go (output mapping), including direct-mode output.
 slug: 'transformations/mappings'
 search_keywords: [input mapping, output mapping]
 ---
