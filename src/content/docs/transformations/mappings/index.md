@@ -5,7 +5,7 @@ search_keywords: [input mapping, output mapping]
 ---
 
 *To configure input and output mappings in the process of creating a transformation, 
-go to our [Getting Started tutorial](/tutorial/manipulate/).*
+go to our [Getting Started tutorial](/getting-started/transform/).*
 
 
 
@@ -65,7 +65,7 @@ The supported database type is [Snowflake](https://www.snowflake.com/).
 
 ![Table Input mapping](/transformations/mappings/table-input-mapping.png)
 
-*See an example of [setting up an input mapping](/tutorial/manipulate/#input-mapping) in our tutorial.*
+*See an example of [setting up an input mapping](/getting-started/transform/#set-it-up) in our tutorial — in the **UI** tab.*
 
 #### Options
 
@@ -255,7 +255,7 @@ malformed files, etc.) or, for example, to work with pre-trained models that you
 - **Processed Tags** *(deprecated, do not use)* — legacy option that assigned tags to input files after the transformation finished, used to process files incrementally.
 
 :::caution
-*Processed Tags* and *Query* are deprecated and not compatible with [development branches](/tutorial/branches/). New configurations should not use them, and the UI no longer offers them. Existing configurations continue to work; affected projects will be contacted before any breaking change.
+*Processed Tags* and *Query* are deprecated and not compatible with [development branches](/getting-started/branches/). New configurations should not use them, and the UI no longer offers them. Existing configurations continue to work; affected projects will be contacted before any breaking change.
 :::
 
 #### Incremental file processing
@@ -292,7 +292,7 @@ The supported staging for CSV files is a storage local to the transformation.
 
 ![Table Output Mapping](/transformations/mappings/table-output-mapping.png)
 
-*See an example of [setting up an output mapping](/tutorial/manipulate/#output-mapping) in our tutorial.*
+*See an example of [setting up an output mapping](/getting-started/transform/#set-it-up) in our tutorial — in the **UI** tab.*
 
 #### Options
 - **Table** — Enter the name of the table that should be created in the transformation. 
@@ -311,7 +311,7 @@ the primary key must match. Feel free to use a multi-column primary key.
 -  **Delete rows** — When Incremental loading is enabled, you can delete specific rows from the destination table before importing new data into the Storage. This gives you precise control over incremental updates. There are 2 options you can use:
    1. **Delete rows from values** - this option lets you manually specify values that identify rows to be removed from your destination table. This is particularly useful when the rows to delete are consistent, predictable, or rarely changing.
    2. **Delete rows from transformation table** - this option enables you to define deletion criteria using live data generated in your transformation. 
-  This method provides flexibility for more complex, data-driven scenarios, such as removing obsolete records based on recent transactions or other dynamic conditions. This option needs to be enabled by navigating to Project Settings → Features → Delete rows from transformation table. Please note that this option **is available in the production environment only** and **is not supported in development branches** (e.g. for testing or configuration changes in a development branch, the option will not be applied).
+  This method provides flexibility for more complex, data-driven scenarios, such as removing obsolete records based on recent transactions or other dynamic conditions. Please note that this option **is available in the production environment only** and **is not supported in development branches** (e.g. for testing or configuration changes in a development branch, the option will not be applied).
 	- **How the Delete Rows feature Works**
 
      	Deletion is performed using SQL `DELETE` statements:
