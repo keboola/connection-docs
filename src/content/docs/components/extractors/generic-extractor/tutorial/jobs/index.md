@@ -1,6 +1,6 @@
 ---
 title: Jobs Tutorial
-description: On your way through the Generic Extractor tutorial, you have learned about Basic configuration and Configuration of pagination.
+description: Use child jobs to fetch details for each item a list endpoint returns, and run several jobs in one Generic Extractor configuration.
 slug: 'components/extractors/generic-extractor/tutorial/jobs'
 redirect_from:
     - /extend/generic-extractor/tutorial/jobs/
