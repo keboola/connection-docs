@@ -1,6 +1,7 @@
 ---
 title: Keboola Model Context Protocol (MCP) Server
 slug: 'ai/mcp-server'
+search_keywords: [mcp, mcp server]
 redirect_from:
     - /external-integrations/mcp-server/
     - /integrate/mcp/
@@ -252,7 +253,7 @@ Don't worry about remembering command names — your AI client handles that. Jus
 - **Semantic layer** – Explore the project's semantic models and validate queries against them. See [Semantic Layer](/ai/semantic-layer/).  
 - **Jobs** – Start, monitor, and debug execution flows.  
 - **Flows** – Create and manage flows (including conditional flows) that orchestrate your components.  
-- **Data Apps** – Create, deploy, and manage Streamlit and Python/JS data apps.  
+- **Data Apps** – Create, deploy, and manage Streamlit and Python/JS apps.  
 - **Search & Discovery** – Find components, configurations, and objects across your project.  
 - **Project & OAuth** – Read project info and set up OAuth authorizations for components.  
 - **Documentation** – Search official Keboola docs from within your AI chat.
@@ -436,7 +437,7 @@ The primary way to run the server locally without Docker is by using `uv` or `uv
    * `KBC_STORAGE_API_URL`: Your Keboola instance API URL (e.g., `https://connection.keboola.com` or `https://connection.YOUR_REGION.keboola.com`).
    * `KBC_BRANCH_ID` (optional): a development branch ID to scope operations to; defaults to the production branch.
 
-   Refer to the [Keboola Tokens](/management/project/tokens/) and [Keboola workspace manipulation](/tutorial/manipulate/workspace/) for detailed instructions on obtaining these values.
+   Refer to the [Keboola Tokens](/management/project/tokens/) and [Keboola workspace manipulation](/getting-started/transform/workspace/) for detailed instructions on obtaining these values.
 
    **1.1. Additional Setup for BigQuery Users**  
    If your Keboola project uses BigQuery as its backend, you will also need to set up the `GOOGLE_APPLICATION_CREDENTIALS` environment variable. This variable should point to the JSON file containing your Google Cloud service account key that has the necessary permissions to access your BigQuery data.

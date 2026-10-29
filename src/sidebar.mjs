@@ -3,61 +3,68 @@
 
 export const sidebar = [
   { label: "Home", slug: "index" },
-  { slug: "overview" },
   {
-    label: "Getting Started Tutorial",
+    label: "Keboola Overview",
     collapsed: true,
     items: [
-      { label: "Overview", slug: "tutorial" },
+      { label: "Overview", slug: "overview" },
       {
-        label: "Part 1: Loading Data",
+        label: "Platform Onboarding",
         collapsed: true,
         items: [
-          { label: "Overview", slug: "tutorial/load" },
-          { slug: "tutorial/load/googlesheets" },
-          { slug: "tutorial/load/database" },
-        ],
-      },
-      {
-        label: "Part 2: Data Manipulation",
-        collapsed: true,
-        items: [
-          { label: "Overview", slug: "tutorial/manipulate" },
-          { slug: "tutorial/manipulate/workspace" },
-        ],
-      },
-      { slug: "tutorial/write" },
-      { slug: "tutorial/automate" },
-      { slug: "tutorial/ad-hoc" },
-      {
-        label: "Part 6: Development Branches",
-        collapsed: true,
-        items: [
-          { label: "Overview", slug: "tutorial/branches" },
-          { slug: "tutorial/branches/prepare-tables" },
-          { slug: "tutorial/branches/prepare-files" },
-          { slug: "tutorial/branches/tables-in-branch" },
-          { slug: "tutorial/branches/files-in-branch" },
-          { slug: "tutorial/branches/project-diff" },
-          { slug: "tutorial/branches/merge-to-production" },
-        ],
-      },
-      {
-        label: "Keboola Platform Onboarding",
-        collapsed: true,
-        items: [
-          { label: "Overview", slug: "tutorial/onboarding" },
-          { slug: "tutorial/onboarding/usage-blueprint" },
+          { label: "Overview", slug: "overview/onboarding" },
+          { slug: "overview/onboarding/usage-blueprint" },
           {
             label: "Multi-Project Architecture",
             collapsed: true,
             items: [
-              { label: "Overview", slug: "tutorial/onboarding/architecture-guide" },
-              { slug: "tutorial/onboarding/architecture-guide/bdm-guide" },
+              { label: "Overview", slug: "overview/onboarding/architecture-guide" },
+              { slug: "overview/onboarding/architecture-guide/bdm-guide" },
             ],
           },
-          { slug: "tutorial/onboarding/cheat-sheet" },
-          { slug: "tutorial/onboarding/governance-guide" },
+          { slug: "overview/onboarding/cheat-sheet" },
+          { slug: "overview/onboarding/governance-guide" },
+        ],
+      },
+      { slug: "overview/google-data-policy" },
+      { slug: "overview/api" },
+    ],
+  },
+  {
+    label: "Getting Started",
+    collapsed: true,
+    items: [
+      { label: "Overview", slug: "getting-started" },
+      { slug: "getting-started/project" },
+      { slug: "getting-started/load" },
+      { slug: "getting-started/transform" },
+      { slug: "getting-started/ask" },
+      { slug: "getting-started/app" },
+      { slug: "getting-started/automate" },
+      { slug: "getting-started/check" },
+      {
+        label: "Going further",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "getting-started/going-further" },
+          { slug: "getting-started/write" },
+          { slug: "getting-started/load/googlesheets" },
+          { slug: "getting-started/load/database" },
+          { slug: "getting-started/transform/workspace" },
+          { slug: "getting-started/ad-hoc" },
+          {
+            label: "Development branches",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "getting-started/branches" },
+              { slug: "getting-started/branches/prepare-tables" },
+              { slug: "getting-started/branches/prepare-files" },
+              { slug: "getting-started/branches/tables-in-branch" },
+              { slug: "getting-started/branches/files-in-branch" },
+              { slug: "getting-started/branches/project-diff" },
+              { slug: "getting-started/branches/merge-to-production" },
+            ],
+          },
         ],
       },
     ],
@@ -83,6 +90,7 @@ export const sidebar = [
       { label: "Overview", slug: "flows" },
       { slug: "flows/flows-legacy" },
       { slug: "flows/flow-migration-guide" },
+      { slug: "flows/schedule-api" },
     ],
   },
   {
@@ -105,6 +113,8 @@ export const sidebar = [
         items: [
           { slug: "data-apps/authentication" },
           { slug: "data-apps/publish-and-share" },
+          { slug: "data-apps/operate" },
+          { slug: "data-apps/troubleshooting" },
         ],
       },
       { slug: "data-apps/reference" },
@@ -190,7 +200,10 @@ export const sidebar = [
             items: [
               { label: "Overview", slug: "components/extractors/erp" },
               { slug: "components/extractors/erp/k2" },
+              { slug: "components/extractors/erp/mpohoda" },
               { slug: "components/extractors/erp/netsuite" },
+              { slug: "components/extractors/erp/pohoda-mserver" },
+              { slug: "components/extractors/erp/suiteprojects-pro" },
             ],
           },
           {
@@ -223,6 +236,7 @@ export const sidebar = [
                   { slug: "components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk" },
                 ],
               },
+              { slug: "components/extractors/marketing-sales/mixpanel" },
               { slug: "components/extractors/marketing-sales/pinterest-ads" },
               { slug: "components/extractors/marketing-sales/pipedrive" },
               { slug: "components/extractors/marketing-sales/salesforce" },
@@ -275,6 +289,7 @@ export const sidebar = [
               { slug: "components/extractors/other/google-search-console" },
               { slug: "components/extractors/other/okta" },
               { slug: "components/extractors/other/hibob" },
+              { slug: "components/extractors/other/langsmith-traces" },
               { slug: "components/extractors/other/mapbox" },
               { slug: "components/extractors/other/papertrail" },
               { slug: "components/extractors/other/pingdom" },
@@ -282,6 +297,7 @@ export const sidebar = [
               { slug: "components/extractors/other/stripe" },
               { slug: "components/extractors/other/telemetry-data" },
               { slug: "components/extractors/other/time-doctor-2" },
+              { slug: "components/extractors/other/ukg-hr" },
               { slug: "components/extractors/other/weather-api" },
               { slug: "components/extractors/other/what3words" },
               { slug: "components/extractors/other/yourpass" },
@@ -406,6 +422,15 @@ export const sidebar = [
               { slug: "components/writers/database/snowflake" },
               { slug: "components/writers/database/mssql" },
               { slug: "components/writers/database/synapse" },
+            ],
+          },
+          {
+            label: "ERP",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "components/writers/erp" },
+              { slug: "components/writers/erp/mpohoda" },
+              { slug: "components/writers/erp/pohoda-mserver" },
             ],
           },
           {
@@ -539,10 +564,17 @@ export const sidebar = [
           { slug: "storage/api/import-export" },
           { slug: "storage/api/importer" },
           { slug: "storage/api/tde-exporter" },
-          { slug: "storage/api/clients/python-client" },
-          { slug: "storage/api/clients/r-client" },
-          { slug: "storage/api/clients/php-client" },
-          { slug: "storage/api/clients/docker-cli" },
+          {
+            label: "API Clients",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "storage/api/clients" },
+              { slug: "storage/api/clients/python-client" },
+              { slug: "storage/api/clients/r-client" },
+              { slug: "storage/api/clients/php-client" },
+              { slug: "storage/api/clients/docker-cli" },
+            ],
+          },
         ],
       },
     ],
@@ -736,6 +768,14 @@ export const sidebar = [
           { slug: "extend/common-interface/config-file" },
           { slug: "extend/common-interface/environment" },
           {
+            label: "Artifacts",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "extend/common-interface/artifacts" },
+              { slug: "extend/common-interface/artifacts/tutorial" },
+            ],
+          },
+          {
             label: "Manifest Files",
             collapsed: true,
             items: [
@@ -756,6 +796,8 @@ export const sidebar = [
         ],
       },
       { slug: "extend/job-queue" },
+      { slug: "extend/jobs" },
+      { slug: "extend/encryption" },
       {
         label: "Publishing Component",
         collapsed: true,
@@ -764,6 +806,7 @@ export const sidebar = [
           { slug: "extend/publish/checklist" },
         ],
       },
+      { slug: "extend/development-project" },
     ],
   },
   {
@@ -774,4 +817,5 @@ export const sidebar = [
       { slug: "external-integrations/n8n" },
     ],
   },
+  { label: "Changelog", link: "/changelog/" },
 ];

@@ -28,6 +28,6 @@ If you check the **Wait for result** option, the component will wait for the job
 You can find out how to get a service account token in the [dbt Cloud documentation](https://docs.getdbt.com/docs/dbt-cloud-apis/service-tokens).
 
 ## Notes on Artifacts Usage 
-In order to be able to use Keboola artifacts, the project must have the ```artifact``` feature enabled. You can find more information about this in [Keboola's docs](https://developers.keboola.com/integrate/artifacts/).
+In order to be able to use Keboola artifacts, the project must have the ```artifact``` feature enabled. You can find more information about this in [Keboola's docs](/extend/common-interface/artifacts/).
 
 

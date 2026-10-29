@@ -7,7 +7,7 @@ redirect_from:
 
 
 
-*Go to our [Getting Started tutorial](/tutorial/manipulate/) to create your first transformation and learn how transformations 
+*Go to our [Getting Started tutorial](/getting-started/transform/) to create your first transformation and learn how transformations 
 are an integral part of the Keboola workflow.*
 
 **Transformations** allow you to manipulate data in your project. They are the tasks you want to perform
@@ -59,8 +59,9 @@ tables from the input mapping are taken, modified, and produced into the tables 
 
 A backend is the engine running the transformation script. It is a database server
 ([Snowflake](https://www.snowflake.com/),
-[BigQuery](https://cloud.google.com/bigquery),
-[DuckDB](https://duckdb.org/)),
+[BigQuery](https://cloud.google.com/bigquery)),
+an in-process database engine
+([DuckDB](https://duckdb.org/)),
 or a language interpreter 
 ([Python](https://www.python.org/about/),
 [R](https://www.r-project.org/about.html)).

@@ -26,6 +26,8 @@ Pick your operating system:
     curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
     ```
 
+    Then **open a new terminal**.
+
     Alternative — [uv](https://docs.astral.sh/uv/), if you want to pin to a version or uninstall cleanly:
 
     ```bash
@@ -38,6 +40,8 @@ Pick your operating system:
     ```bash
     curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh
     ```
+
+    Then **open a new terminal**.
 
     Alternative — [uv](https://docs.astral.sh/uv/), if you want to pin to a version or uninstall cleanly:
 
@@ -81,7 +85,7 @@ Pick your operating system:
 
 Whichever method you use, kbagent keeps itself current with its own startup update check (`kbagent update` runs one manually).
 
-Confirm it's on your `PATH` (all platforms):
+Confirm it's on your `PATH` (all platforms). Any version line like the one below means it worked.
 
 ```console
 $ kbagent --version
@@ -89,9 +93,13 @@ kbagent v0.91.0
 ```
 {/* Verified locally 2026-07-13 (macOS) via uv; version sample tracks the vendored command reference. Windows block (winget uv + release wheel + `uv tool update-shell`, Git-bash and self-contained-zip alternatives, no WinGet package, stale Chocolatey) copied from the "Windows" section of keboola/cli's README, which is the source of truth for it. */}
 
-:::note
-On macOS and Linux the install script does not touch the `PATH` of the shell that ran it. If `kbagent: command not found` comes back right afterwards, the install worked and your `PATH` has not caught up. Run `source $HOME/.local/bin/env`, or open a new terminal.
-:::
+**`command not found` on macOS or Linux?** kbagent lives in `~/.local/bin` (the install script and `uv tool install` both put it there), but neither can change the `PATH` of the shell that ran them. Open a new terminal, or add the folder to the current shell, which is also what a script or an AI agent needs:
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+In fish, run `fish_add_path ~/.local/bin` instead. If a new terminal still answers `command not found`, `~/.local/bin` isn't on your `PATH` for good, which happens when uv came from Homebrew, pip or another package manager: run `uv tool update-shell`, then open another terminal.
 
 :::tip
 On any platform you can also run kbagent through [uvx](https://docs.astral.sh/uv/) without installing (`uvx --from 'git+https://github.com/keboola/cli' kbagent …`) — handy for a one-off or in CI.
@@ -137,13 +145,13 @@ You sign in once per machine. Every tool reads the same local config, so a proje
 
 ### When you need a token
 
-CI, containers, cron, and anything else running unattended need a Storage API token, because `auth login` cannot run there. A few features need a static token rather than a browser session too: Kai, data apps, the semantic layer, streams, and the Python SDK.
+CI, containers, cron, and anything else running unattended need a Storage API token, because `auth login` cannot run there. Kai and the Python SDK still need a static token rather than a browser session. Since kbagent 0.94.0, a browser session covers apps and streams too.
 
 **These docs cannot create a token for you.** Open your project in the Keboola UI and go to **Settings → Developer settings → Agentic CLI**. That page builds the exact `kbagent project add` command for your project and your stack, and it can include a read-only token in it. Copy it from there.
 
 If you don't see **Agentic CLI** in your project's settings, create the token yourself under **Settings → API Tokens** and pass it as `--token`. [API tokens](/management/project/tokens/) covers that screen.
 
-{/* Step 2's static-token half mirrors the Agentic CLI surface in the product UI (Settings → Developer settings → Agentic CLI): the same `kbagent project add --project <name> --url <stack>` and the read-only token that page can put into the command. That page is feature-flagged, hence the API Tokens fallback. Browser-login half (`auth login` + `auth register-projects`, `--all`, the device-code path, the `Auth` column, no headless path) and the static-token-only features (Kai, data apps, semantic layer, streams, Python SDK) from keboola/cli docs/auth.md on main. */}
+{/* Step 2's static-token half mirrors the Agentic CLI surface in the product UI (Settings → Developer settings → Agentic CLI): the same `kbagent project add --project <name> --url <stack>` and the read-only token that page can put into the command. That page is feature-flagged, hence the API Tokens fallback. Browser-login half (`auth login` + `auth register-projects`, `--all`, the device-code path, the `Auth` column, no headless path) and the static-token-only features from keboola/cli docs/auth.md on main; narrowed to Kai and the Python SDK (plus one semantic-layer command) by the v0.94.0 release notes, keboola/cli#759. */}
 
 A Storage API token is enough for browsing. Some commands need an admin (master) token, e.g. creating branches or workspaces needs admin privileges. Token types and scoping options are covered in [API tokens](/management/project/tokens/).
 

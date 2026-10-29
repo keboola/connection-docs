@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/config/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 *To configure your first Generic Extractor, follow our [tutorial](/components/extractors/generic-extractor/tutorial/).*
 *Use [Parameter Map](/components/extractors/generic-extractor/map/) to help you navigate among various
@@ -43,7 +45,7 @@ Apart from the properties listed below, the `config` section can contain any num
 other properties which are not used by Generic Extractor itself, but may be referenced
 from within [functions](/components/extractors/generic-extractor/functions/).
 
-The keys prefixed by the hash character `#` are [automatically encrypted](/overview/encryption/) when the
+The keys prefixed by the hash character `#` are [automatically encrypted](/extend/encryption/) when the
 configuration is saved. It is advisable to store sensitive information in such fields. Note, however, they
 are not automatic aliases to un-encrypted fields. That means that when using a `#password` field, you
 must always refer to it as `#password` (for instance, in [functions](/components/extractors/generic-extractor/functions)).
@@ -54,14 +56,14 @@ The Jobs configuration describes the API endpoints (resources) which will be ext
 includes configuring the HTTP method and parameters. The `jobs` configuration is
 **required** and is described in a [separate article](/components/extractors/generic-extractor/configuration/config/jobs/).
 
-## Output Bucket
+## Output bucket
 The `outputBucket` option defines the name of the [Storage Bucket](/storage/buckets/)
 in which the extracted tables will be stored. The configuration is **required** unless
 the extractor is [published](/components/extractors/generic-extractor/publish/) as a standalone component with the
 [Default Bucket](/extend/common-interface/folders/#default-bucket) option.
 
 The following configuration will make Generic Extractor put all extracted tables in the `ge-tutorial` bucket
-(the names of the tables are defined by the [`dataType`](/components/extractors/generic-extractor/configuration/config/jobs/#dataType) setting):
+(the names of the tables are defined by the [`dataType`](/components/extractors/generic-extractor/configuration/config/jobs/#data-type) setting):
 
 ```json
 {
@@ -108,7 +110,7 @@ which case it is essentially equal to [`api.http.headers`](/components/extractor
 
 See [example [EX074]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/074-http-headers).
 
-## Incremental Output
+## Incremental output
 The `incrementalOutput` boolean option allows you to load the extracted data into
 [Storage](/storage/) incrementally. This flag in no way affects the data extraction.
 When `incrementalOutput` is set to `true`, the contents of the target table in Storage will not be cleared.
@@ -119,7 +121,7 @@ is described in a [dedicated article](/components/extractors/generic-extractor/i
 
 See [example [EX075]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/075-incremental-output).
 
-## User Data
+## User data
 The `userData` option allows you to add arbitrary data to extracted records.
 It is an object with arbitrary property names which are added as columns to all records extracted
 from parent jobs. The property values are the columns values. It is also possible to use
@@ -165,7 +167,7 @@ contains a column with the same name as a `userData` property, the `userData` co
 
 See [example [EX076]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/076-user-data).
 
-## Compatibility Level
+## Compatibility level
 As we develop the Generic Extractor, some of the new features might lead to minor differences in extraction results.
 When such a situation arises, a new *compatibility level* is introduced. The `compatLevel` setting allows
 you to force the old compatibility level and **temporarily** maintain the old behavior. The current
