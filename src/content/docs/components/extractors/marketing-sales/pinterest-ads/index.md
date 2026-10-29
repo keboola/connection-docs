@@ -1,12 +1,15 @@
 ---
 title: Pinterest Ads
 slug: 'components/extractors/marketing-sales/pinterest-ads'
+description: 'Download Pinterest ad analytics reports from several ad accounts by defining a custom report or using an existing report template, with a time range.'
 ---
 
 
 
 [Pinterest](https://www.pinterest.com/) is a social media platform and a visual discovery engine that allows users to discover, save, and share creative
 ideas and inspirations through images and links.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 The Pinterest Ads data source connector is a powerful component that automates the retrieval of [ad analytics reports](https://help.pinterest.com/en/business/article/create-edit-and-review-custom-reports), 
 enabling users to schedule and download predefined reports effortlessly. This component streamlines the data collection process by allowing you to fetch reports from multiple ad accounts simultaneously.

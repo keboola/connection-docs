@@ -1,6 +1,7 @@
 ---
 title: ChartMogul
 slug: 'components/extractors/marketing-sales/chartmogul'
+description: 'Fetch activities, customers, subscriptions, invoices and key metrics from ChartMogul with an active Read API key, choosing one endpoint per row.'
 redirect_from:
     - /extractors/marketing-sales/chartmogul/
 ---
@@ -9,6 +10,8 @@ redirect_from:
 
 The ChartMogul data source connector fetches data from the [ChartMogul API](https://dev.chartmogul.com/). [ChartMogul](https://chartmogul.com/) offers subscription analytics and 
 revenue recognition solutions to subscription businesses. 
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 With this connector, you can quickly obtain the following data:
 

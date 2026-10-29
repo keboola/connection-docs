@@ -1,6 +1,7 @@
 ---
 title: BigCommerce
 slug: 'components/extractors/marketing-sales/bigcommerce'
+description: 'Download brands, customers, orders and products from your BigCommerce store with an API path and read-only access token, as full or incremental loads.'
 redirect_from:
     - /extractors/marketing-sales/bigcommerce/
 ---
@@ -8,6 +9,8 @@ redirect_from:
 
 
 This data source connector downloads data about brands, customers, orders, and products in your BigCommerce store.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prerequisites
 You need a V2/V3 API access token with read-only OAuth scope and know your API path. You can find more information on how to obtain these in [this guide](https://support.bigcommerce.com/s/article/Store-API-Accounts?language=en_US#creating).
