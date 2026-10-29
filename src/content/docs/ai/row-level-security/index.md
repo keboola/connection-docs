@@ -85,13 +85,7 @@ kbagent rls create --project my-project --table-id in.c-crm.orders \
   --rules @rls-rules.json --default '{"false": true}' --dry-run
 ```
 
-<!-- kbagent-check: skip-next -->
-```bash
-kbagent cls create --project my-project --table-id in.c-crm.orders \
-  --rules @cls-rules.json --dry-run
-```
-
-The rule files are described in the [policy reference](/ai/row-level-security/policy-reference/), together with the other commands (`list`, `detail`, `update`, `delete`, `schema` and the guided `rls setup`).
+The rule files are described in the [policy reference](/ai/row-level-security/policy-reference/), together with the column-level commands (`cls create` and friends) and the other commands (`list`, `detail`, `update`, `delete`, `schema` and the guided `rls setup`).
 
 **With an AI assistant.** The `kbagent` plugin of [AI Kit](/ai/ai-kit/) teaches an assistant these commands (the plugin is installed with `/plugin install kbagent@keboola-claude-kit`). Once the CLI release that contains them is out, you can describe the goal in plain words, for example:
 
