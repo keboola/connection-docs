@@ -1,0 +1,60 @@
+# One weekly pull request per group instead of one per package.
+# Groups are matched in order: a dependency lands in the first one it fits.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Prague"
+    # Skip releases younger than a week, so a bad publish is usually pulled
+    # before it reaches us. Security updates ignore this.
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      # The Astro chain moves together and breaks together: Starlight and
+      # sharp are 0.x, where a "minor" bump can be breaking, so every update
+      # type stays out of the low-risk group below.
+      astro:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+          - "starlight-*"
+          - "sharp"
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+      # Security fixes get the same split: the Astro chain in its own pull
+      # request, everything else in one catch-all.
+      astro-security:
+        applies-to: security-updates
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+          - "starlight-*"
+          - "sharp"
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Prague"
+    cooldown:
+      default-days: 7
+    commit-message:
+      prefix: "chore(ci)"
+    groups:
+      actions:
+        patterns:
+          - "*"
