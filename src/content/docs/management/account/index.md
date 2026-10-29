@@ -1,6 +1,6 @@
 ---
 title: Account Management
-description: Account management allows you to configure your own account. You can reach your account settings from two places.
+description: Account management allows you to configure your own account.
 slug: 'management/account'
 ---
 

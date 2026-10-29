@@ -1,6 +1,6 @@
 ---
 title: Project Users
-description: To be able to work with Keboola, each user needs to have the following.
+description: Invite users to a project, give them a role, change or remove their access, and set up sign-in with Google or multi-factor authentication.
 slug: 'management/project/users'
 redirect_from:
   - /management/users/

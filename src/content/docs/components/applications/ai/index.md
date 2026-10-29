@@ -1,6 +1,6 @@
 ---
 title: AI Applications
-description: AI applications are used to generate, process, or enrich data via custom models or 3rd-party AI API services. The following AI applications are available.
+description: AI applications are used to generate, process, or enrich data via custom models or 3rd-party AI API services.
 slug: 'components/applications/ai'
 redirect_from:
     - /applications/ai/

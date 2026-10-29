@@ -50,10 +50,14 @@ const MIN = 25; // shorter than this is a label ("Video:"), not a description
 const cleanParagraph = (lines) =>
   lines
     .join(' ')
-    .replace(/!\[[^\]]*\]\([^)]*\)/g, '') // images
-    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1') // links → text
+    // one level of parens inside a URL: `…/Interface_(computing))`
+    .replace(/!\[[^\]]*\]\((?:[^()]|\([^)]*\))*\)/g, '') // images
+    .replace(/\[([^\]]+)\]\((?:[^()]|\([^)]*\))*\)/g, '$1') // links → text
     .replace(/<[^>]*>/g, ' ') // stray inline HTML tags
-    .replace(/[*_`]/g, '') // emphasis/code marks
+    .replace(/`/g, '') // code marks
+    // emphasis only at word edges, so `client_credentials` keeps its `_`
+    .replace(/(^|\W)[*_]{1,2}(\S)/g, '$1$2')
+    .replace(/(\S)[*_]{1,2}(?=\W|$)/g, '$1')
     .replace(/\s+/g, ' ')
     .trim();
 
@@ -140,12 +144,18 @@ function clip(text) {
   return cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:]$/, '') + '…';
 }
 
-/** Final polish: a list-introducing colon becomes a period; a paragraph cut
- *  mid-sentence (prose running into a list) retreats to the previous sentence
- *  or gets an explicit ellipsis. */
+/** Final polish: a sentence ending in a list-introducing colon points at a
+ *  list the description can't carry, so it goes; with nothing before it, the
+ *  page is left for a human. A paragraph cut mid-sentence (prose running into
+ *  a list) retreats to the previous sentence or gets an explicit ellipsis. */
 function finish(text) {
   if (!text) return text;
-  let t = text.replace(/\s+$/, '').replace(/[,;:]$/, '.');
+  let t = text.replace(/\s+$/, '');
+  if (t.endsWith(':')) {
+    const s = t.lastIndexOf('. ');
+    return s >= MIN ? t.slice(0, s + 1) : '';
+  }
+  t = t.replace(/[,;]$/, '.');
   if (!/[.!?…"”')\]]$/.test(t)) {
     const s = t.lastIndexOf('. ');
     t = s >= MIN ? t.slice(0, s + 1) : `${t}…`;
