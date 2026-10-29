@@ -1,0 +1,198 @@
+---
+title: 'Check Storage and Jobs'
+slug: 'getting-started/check'
+description: 'What should be in Storage and Jobs once the pipeline runs, how to read a flow run, and the failures that actually happen.'
+next: 'Going further'
+---
+
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/Prereqs.astro';
+import CourseLine from '../../../../components/getting-started/CourseLine.astro';
+
+<PageMeta genre="How-to" />
+
+<CourseLine current="check" />
+
+Everything you built leaves a trace in two places: **Storage** holds the tables, **Jobs** holds
+every run that produced them. This page says what should be there, and what to do when it is not.
+
+<Prereqs needs={[]}>
+  <span slot="from">the pipeline has run at least once, by hand or on its schedule.</span>
+  <span slot="to">you know it works, or which step to look at.</span>
+</Prereqs>
+
+{/* How-to page, NEW 2026-09-02, re-based on Boolabean 2026-09-09. Assembled from verification
+content that existed on five pages: the "what you built" table from next-steps, the All Runs
+reading and the job topology from automate, the row-count sanity check from transform, and the
+Storage inventory from project. Numbers below are from the live builds in project 264 on
+2026-09-08/09: the Boolabean sales configuration fans out into one job per row (six ex-http jobs
+under one task), the transformation job took 33–61 s, and the first run of "Boolabean morning
+outlook" ended in error at phase 3 (data app deploy, "Internal Server Error occurred.") with
+phases 1 and 2 successful, which was the run-reading section's example until 2026-10-01. 09-all-runs
+was reshot that day from the two-phase flow's successful run in Free Plan project 6375.
+
+The terminal section was added 2026-09-15. `job list`, `job detail` and `storage tables` were run
+live against project 264 (kbagent v0.93.1) while verifying the other pages; all three are
+read-only. This page keeps no tabs on purpose: it is a how-to about reading state, not a task
+with three ways to do it. */}
+
+## What you should have
+
+| What you built | What it does | Where it lives |
+|---|---|---|
+| Two HTTP configurations | bring the five files and the live forecast into the project | **Components** |
+| SQL transformation | joins five of the six tables into `staffing_outlook` | **Transformations** |
+| App, if your project has Apps | the grid | **Apps** |
+| Flow | runs the loads and the transformation, in order, every Monday morning | **Conditional Flows** |
+
+In **Storage**: two `in.c-` buckets named after the connector and the configuration ID
+(`keboola-ex-http-…`), and one `out.c-Boolabean-staffing-outlook` bucket.
+
+To have Kai list it for you, with what each part does:
+
+```text title="Follow-up prompt" wrap
+List everything the Getting Started guide created in this project (the Boolabean configurations, tables, the app and the flow) and what each does.
+```
+
+It only reads, so it asks for no approval by default.
+{/* Run 2026-10-08 in project 264 with `kbagent kai ask`, read-only, no approvals: Kai listed both
+HTTP configurations, the six input tables with 6, 18, 9,761, 552, 552 and 42 rows, the
+transformation and staffing_outlook (42 rows), the app and the flow. Project 264 also holds other
+Boolabean apps and flows made outside the guide, and Kai listed those too. */}
+
+## The one number that proves the join
+
+`staffing_outlook` should hold **exactly 42 rows**: six cafés times the seven days in the forecast.
+
+- **More than 42:** an input has duplicate rows, such as the forecast loaded twice with incremental
+  load on, or a café listed twice in `stores`. The joins cannot multiply rows on their own.
+- **Fewer:** a join dropped rows, such as a `location_id` that did not map onto a `store_id`, or a
+  forecast with fewer than seven days.
+- **Ten columns,** and `short_handed` true on a **few** rows in a warm week, never on all of them.
+  A week under 18 °C flags none (see below).
+
+<details>
+<summary>Which columns may be empty, and which may not</summary>
+
+Open the table's **Data Sample** and check the columns the right way round. `store_name`, `city`,
+`date`, `weekday`, the two forecast columns and `rostered_staff` are filled on **every** row; they
+come from straight lookups. `expected_units` and `expected_units_per_person` can be empty on a
+row, and that is not an error: the summer never had a day in that café's weather band.
+[Transform data](/getting-started/transform/#run-it-and-check-the-result) says which band, and why
+a cold week flags nobody, in its fold *The ten columns, upper-case names, and empty cells*.
+
+So the failure signals are the extremes: a lookup column empty on any row means a join matched
+nothing, and `expected_units` empty on *every* row means the two band expressions in the SQL no
+longer match each other.
+
+</details>
+
+## Reading a flow run
+
+The flow's **All Runs** tab lists every run: who or what started it (your name, or
+`Schedule for <flow ID> Scheduler` for a scheduled run), duration and status. Expand a run to see its phases;
+the **Conditions** rows marked **Matched** between them are the flow moving on to the next phase.
+
+![Screenshot - The flow's All Runs tab with one run expanded: Extract data 4 min 33 sec, Conditions Matched, Staffing outlook 53 sec, all Success, 5 min 38 sec in total](/getting-started/check/09-all-runs.png)
+
+- **Success** is the goal: a few minutes end to end. Ours, in a Free Plan project, took 5 min 38
+  s: 4 min 33 s for the loads, about two minutes of which the jobs waited in the queue, and 53
+  seconds for the transformation.
+- **Error is not all lost.** Phases run in order, so the earlier ones finished and their tables
+  are updated: if the transformation fails, the loads have still brought in the new forecast.
+- **More jobs than tasks is normal:** one per task, a **Conditional Flows phase** job per phase, a
+  **Conditional Flows** job for the run, and one per row for a row-based connector (six lines for
+  the five-file configuration).
+
+:::tip[Let Kai read the run for you]
+```text title="Prompt" wrap
+My flow run failed. Which task failed, and why?
+```
+Kai reads the run's job logs, which is faster than expanding them one at a time. The same question
+from a terminal is `kbagent kai ask --project <alias> -m "…"`.
+{/* Run 2026-10-07 in project 264 with `kbagent kai ask`, read-only, 32 s: Kai found the latest
+failed run of "Boolabean morning outlook", named the failed task (the app redeploy) and read that
+child job's log (an app that never reached "running"). notes/getting-started/DECISIONS.md 2026-10-07. */}
+:::
+
+## The same checks from a terminal
+
+Every number above has a read-only command behind it, which is the fastest way to answer "did
+Monday's run work?" without opening the project. They need
+[kbagent](/cli/getting-started/) connected to your project. `docs-demo` below is a project alias,
+substitute yours:
+
+```bash
+kbagent job list --project docs-demo --component-id keboola.flow --limit 5
+```
+
+```bash
+kbagent job detail --project docs-demo --job-id <job-id>
+```
+
+```bash
+kbagent storage tables --project docs-demo --bucket-id out.c-Boolabean-staffing-outlook
+```
+
+Recent runs with status and duration; one run, including which task failed; and the row count that
+proves the join. None of them changes anything.
+
+## The failures that actually happen
+
+<details>
+<summary>The transformation fails inside the flow, but works on its own</summary>
+
+Its phase is running before the loads finish. Check that both connectors sit in an *earlier*
+phase, not the same one.
+
+</details>
+
+<details>
+<summary>Every task succeeds, but the grid is unchanged</summary>
+
+Reload the page first: a tab opened before Monday's run still shows last week. The flow does not
+restart the app, so after that the app shows the new table if it reads `staffing_outlook` when
+someone opens it, as ours does, or once it has slept and started again. If yours read the table
+only when it started and was kept awake, click **Edit with Kai** on the app's page, ask Kai to make
+it read the table on every request, and click **Publish to Production** so the live app gets the
+change. If the grid still shows last week, check that the transformation is in the flow: without
+it the run rebuilds nothing.
+
+</details>
+
+<details>
+<summary>The forecast table has 42 rows, but the outlook has more</summary>
+
+Duplicate input rows: see the one number above.
+
+</details>
+
+<details>
+<summary>The scheduled run never happens</summary>
+
+The schedule's toggle is off, the flow is disabled, or the project has used up its runtime
+minutes.
+{/* VERIFY(Nikita), contract plans only: do flow jobs consume credits there? The arc previously stated "flow jobs themselves consume none; the component
+  jobs they start do". management/project/limits/ has no orchestrator/flow row at all, and
+  flows/index.md says only that each job consumes credits independently. Billing claim — removed
+  here until an owner confirms it. For the Free Plan, management/pay-as-you-go/ now says it
+  outright ("Flow/Orchestration jobs ... do not consume any minutes"), and automate/'s cost box
+  relies on that. extend/jobs/ says only `standard` jobs consume billable time, which would cover
+  contract plans too; billing wording is the owner's call, so the flag stays. "Minutes" since 2026-10-01, matching
+  automate/. */}
+
+</details>
+
+<details>
+<summary>Jobs queue instead of running</summary>
+
+A short wait before the jobs start needs no fix: ours waited about two minutes with two tasks in
+the phase. If the wait grows with every task you add, split the phase: ten concurrent component jobs
+is the [recommended ceiling](/flows/), and Support can adjust a project's limits.
+
+</details>
+
+Failures specific to one step stay on its page: loading on [Load data into Storage](/getting-started/load/),
+SQL and mapping on [Transform data](/getting-started/transform/), and apps on
+[Build an app](/getting-started/app/). Failures of the spreadsheet delivery are on the
+[Send a table to Google Sheets](/getting-started/write/) side trip.
