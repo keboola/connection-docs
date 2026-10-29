@@ -64,8 +64,9 @@ If you configured the UI correctly, you should see the corresponding control in 
 configuration page.
 
 ![Screenshot -- Component Configuration](/extend/component/tutorial/input-mapping-2.png)
+<!-- VERIFY(Nikita): reshoot this screenshot; it still shows the old New Table Input button, now Add Table Input. -->
 
-Add a **New Table Input**, select an arbitrary table from the project, and make sure to set **Destination** to `source.csv`
+Click **Add Table Input**, select an arbitrary table from the project, and make sure to set **Destination** to `source.csv`
 so that the final path matches `/data/in/tables/source.csv`, which is what you are expecting in the code.
 
 ![Screenshot -- Input Mapping Detail](/extend/component/tutorial/input-mapping-3.png)
