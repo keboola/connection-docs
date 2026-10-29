@@ -1,6 +1,6 @@
 ---
 title: OAuth 1.0 Authentication
-description: 'Authenticate Generic Extractor requests with OAuth 1.0 — the credentials the method expects and how the signature is assembled.'
+description: 'The OAuth 1.0 settings for Generic Extractor: the credentials the method expects and how the request signature is assembled.'
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth10'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth10/
@@ -10,6 +10,7 @@ redirect_from:
 
 
 **Note** that this configuration option is not yet supported and the test endpoint button will not work.
+<!-- VERIFY(Ondřej Popelka): this banner says the method is not yet supported, but PRDCT-377 (5e8e8307) argues it is implemented in keboola/generic-extractor. Confirm, then keep or drop the banner. The description stays neutral until then. -->
 
 OAuth 1.0 authentication is one of the [two OAuth methods](/components/extractors/generic-extractor/configuration/api/authentication/#oauth) and
 is supported only for [published components](/components/extractors/generic-extractor/publish/).
