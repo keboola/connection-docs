@@ -1,6 +1,6 @@
 ---
 title: Configuration
-description: In this part of the tutorial, you will see how to pass arbitrary configuration parameters to your component.
+description: Pass configuration parameters to your component, read them in the source code, and give them a form in the UI.
 slug: 'extend/component/tutorial/configuration'
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: IMAP Email Contents and Attachments
-description: This extractor allows you to automatically retrieve email contents and/or attachments via the IMAP protocol using basic authentication.
+description: Download email contents and attachments from an IMAP mailbox, filtered by search query, folder and date.
 slug: 'components/extractors/communication/email-imap'
 redirect_from:
     - /extractors/communication/email-imap/

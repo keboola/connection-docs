@@ -1,6 +1,6 @@
 ---
 title: Input Mapping
-description: "In this part of the tutorial, you will see how to use input mapping. Input mapping defines what data your component receives from the end users' project."
+description: Add input mapping to your component so it receives tables from the user's project, then check that it works.
 slug: 'extend/component/tutorial/input-mapping'
 ---
 

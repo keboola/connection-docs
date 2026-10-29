@@ -1,6 +1,6 @@
 ---
 title: dbt Cloud
-description: dbt Cloud is supported via dedicated components. You can find them in the menu section Components.
+description: Trigger dbt Cloud jobs from Keboola and extract data from the dbt Cloud API with two dedicated components.
 slug: 'transformations/dbt/cloud'
 ---
 

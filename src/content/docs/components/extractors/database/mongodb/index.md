@@ -1,6 +1,6 @@
 ---
 title: MongoDB
-description: The MongoDB data source connector allows you to fetch data from the NoSQL MongoDB database. Supported MongoDB versions are from 4.4 to the latest (6.0).
+description: Export collections from a MongoDB database, with incremental fetching, mapping of documents to tables, or a raw export mode.
 slug: 'components/extractors/database/mongodb'
 redirect_from:
     - /extractors/database/mongodb/

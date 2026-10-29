@@ -1,6 +1,6 @@
 ---
 title: Okta
-description: This extractor fetches data from Okta. It supports backfill mode and also incremental fetching.
+description: Fetch users, user types and devices from Okta, in backfill mode or incrementally.
 slug: 'components/extractors/other/okta'
 redirect_from:
     - /extractors/other/okta/

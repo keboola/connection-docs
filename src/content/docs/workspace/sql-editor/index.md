@@ -1,6 +1,6 @@
 ---
 title: SQL Editor
-description: The Keboola SQL Editor allows users without specialized tools to directly interact with their data warehouse within Keboola Connection.
+description: 'Query your project''s data warehouse in the browser: create an SQL workspace, explore tables, run queries, export results and work in sessions.'
 slug: 'workspace/sql-editor'
 redirect_from:
   - /transformations/sql-editor/

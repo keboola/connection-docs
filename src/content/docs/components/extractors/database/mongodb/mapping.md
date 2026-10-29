@@ -1,6 +1,6 @@
 ---
 title: Mapping Examples
-description: Examples of mapping MongoDB documents to CSV tables — from a basic flat mapping to nested documents, arrays of scalars, and splitting nested arrays into linked tables.
+description: Examples of mapping MongoDB documents to CSV tables, from flat mappings to nested documents, arrays of scalars and nested arrays in linked tables.
 slug: 'components/extractors/database/mongodb/mapping'
 redirect_from:
     - /extractors/database/mongodb/mapping/
