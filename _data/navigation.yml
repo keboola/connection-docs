@@ -924,6 +924,12 @@ items:
       - url: /ai/semantic-layer/
         title: Semantic Layer
 
+      - url: /ai/row-level-security/
+        title: Row- and Column-Level Security
+        items:
+          - url: /ai/row-level-security/policy-reference/
+            title: Policy Reference
+
   - url: /extend/
     title: Extending Keboola
     items:
