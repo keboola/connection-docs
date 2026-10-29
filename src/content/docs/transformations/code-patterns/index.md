@@ -1,5 +1,6 @@
 ---
 title: Code Patterns
+description: Code Pattern is a special type of component that generates code based on parameters, and can be used in the user interface of New Transformations.
 slug: 'transformations/code-patterns'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Pingdom
+description: This data source connector helps you import data from Pingdom.
 slug: 'components/extractors/other/pingdom'
 redirect_from:
     - /extractors/other/pingdom/

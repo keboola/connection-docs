@@ -1,5 +1,6 @@
 ---
 title: Zoho
+description: This data source uses the Zoho Bulk Read APIs to extract data from Zoho CRM modules.
 slug: 'components/extractors/marketing-sales/zoho'
 ---
 

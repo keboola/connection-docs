@@ -1,5 +1,6 @@
 ---
 title: Generative AI
+description: Query large language models from OpenAI, Azure OpenAI, Anthropic, Hugging Face, or Google with data from your Keboola project.
 slug: 'components/applications/ai/generative-ai'
 redirect_from:
     - /components/applications/ai/open-ai/
@@ -39,7 +40,7 @@ Select your provider in the **AI Service Provider** field, then authenticate.
 1. Obtain your API key from your Azure OpenAI resource — see [Create and deploy an Azure OpenAI resource](https://learn.microsoft.com/en-us/azure/foundry-classic/openai/how-to/create-resource?pivots=web-portal), which covers retrieving the key and endpoint.
 2. Enter your API key into the **API Key** field within the **Data Source Configuration** window.
 3. Fill in **API Base**, which should resemble `https://YOUR_RESOURCE_NAME.openai.azure.com/`.
-4. Fill in **Deployment ID** — the name you gave the model deployment. <!-- VERIFY(owner): Microsoft's docs now route deployments through the Foundry portal (ai.azure.com → Deployments), not "Azure Portal → Azure OpenAI → Model deployments" as this page previously said. Confirm the current path before restating a click-path here. -->
+4. Fill in **Deployment ID** — the name you gave the model deployment. <!-- VERIFY(Nikita): Microsoft's docs now route deployments through the Foundry portal (ai.azure.com → Deployments), not "Azure Portal → Azure OpenAI → Model deployments" as this page previously said. Confirm the current path before restating a click-path here. -->
 5. Fill in **API Version**. For the available versions, see the [Azure OpenAI REST API reference](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference?WT.mc_id=AZ-MVP-5004796).
 
 Upon completing these steps, click the **Add Row** button and provide a name for the row configuration (this is solely for identification).

@@ -1,5 +1,6 @@
 ---
 title: Data Folders Specification
+description: Data folders are one of the possible channels to exchange data between your component and Keboola.
 slug: 'extend/common-interface/folders'
 ---
 

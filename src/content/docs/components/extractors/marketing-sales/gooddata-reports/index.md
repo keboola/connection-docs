@@ -1,5 +1,6 @@
 ---
 title: GoodData Reports
+description: 'Import reports from the GoodData business intelligence platform into Keboola Storage.'
 slug: 'components/extractors/marketing-sales/gooddata-reports'
 redirect_from:
     - /extractors/marketing-sales/gooddata-reports/

@@ -1,5 +1,6 @@
 ---
 title: Buckets
+description: Buckets are containers for tables in Storage. They are further organized into the following two stages.
 slug: 'storage/buckets'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Deepnote Notebook Execution Trigger
+description: Deepnote is a collaborative data science notebook. This component enables you to trigger the running of a specified notebook in Deepnote.
 slug: 'components/applications/triggers/deepnote-notebook-execution-trigger'
 ---
 

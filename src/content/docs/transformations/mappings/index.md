@@ -1,5 +1,6 @@
 ---
 title: Input and Output Mapping
+description: Define which tables and files a transformation reads (input mapping) and where its results go (output mapping), including direct-mode output.
 slug: 'transformations/mappings'
 search_keywords: [input mapping, output mapping]
 ---

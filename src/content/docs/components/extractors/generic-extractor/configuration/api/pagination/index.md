@@ -1,5 +1,6 @@
 ---
 title: Pagination
+description: 'Choose how Generic Extractor pages through API results: by offset, page number, cursor, a URL or value from the response, or several scrollers.'
 slug: 'components/extractors/generic-extractor/configuration/api/pagination'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/

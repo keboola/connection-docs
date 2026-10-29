@@ -1,5 +1,6 @@
 ---
 title: Multi-Project Architecture
+description: Split extraction, transformation and delivery across several Keboola projects, and share data between them through the Data Catalog.
 slug: 'catalog/multi-project'
 ---
 

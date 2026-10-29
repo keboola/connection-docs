@@ -1,5 +1,6 @@
 ---
 title: Google Drive Sheets
+description: This data source connector loads sheets from Google Drive Sheets and stores them as tables in a bucket in your current project.
 slug: 'components/extractors/storage/google-drive'
 redirect_from:
     - /extractors/storage/google-drive/

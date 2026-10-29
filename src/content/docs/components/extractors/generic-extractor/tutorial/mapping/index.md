@@ -1,5 +1,6 @@
 ---
 title: Mapping Tutorial
+description: Turn the MailChimp campaign response into clean tables with Generic Extractor mapping, including references from child rows to their parent.
 slug: 'components/extractors/generic-extractor/tutorial/mapping'
 redirect_from:
     - /extend/generic-extractor/tutorial/mapping/

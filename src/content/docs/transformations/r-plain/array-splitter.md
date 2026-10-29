@@ -1,5 +1,6 @@
 ---
 title: Array Splitting
+description: 'Split a delimited list held in one cell into separate rows — a ready-to-use R script and how to prepare your data for it.'
 slug: 'transformations/r-plain/array-splitter'
 redirect_from:
     - /manipulation/transformations/r/array-splitter/

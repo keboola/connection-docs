@@ -1,5 +1,6 @@
 ---
 title: Plots & Graphs
+description: Generating plots in R is supported through Storage file uploads. To upload a plot to Storage, save the file in the output directory for files (out/files/).
 slug: 'transformations/r-plain/plots'
 redirect_from:
     - /manipulation/transformations/r/plots/

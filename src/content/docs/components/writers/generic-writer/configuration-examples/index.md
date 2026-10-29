@@ -1,5 +1,6 @@
 ---
 title: Generic Writer Configuration Examples
+description: "This configuration sends the POST request to https://example.com/test/[[id]] where [[id]] is a column expected in the input table."
 slug: 'components/writers/generic-writer/configuration-examples'
 redirect_from:
     - /extend/generic-writer/configuration-examples/

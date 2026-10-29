@@ -11,6 +11,8 @@
     "astro": "astro",
     "gen:sidebar": "node scripts/convert-nav.mjs",
     "check:cli": "node scripts/check-cli-reference.mjs",
+    "lint:content": "node scripts/content-lint.mjs",
+    "backfill:desc": "node scripts/backfill-descriptions.mjs",
     "test": "node --test scripts/*.test.ts"
   },
   "dependencies": {

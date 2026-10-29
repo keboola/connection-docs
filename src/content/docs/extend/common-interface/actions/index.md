@@ -1,5 +1,6 @@
 ---
 title: Actions
+description: Actions provide a way to execute very quick tasks in a single Component, using a single code base.
 slug: 'extend/common-interface/actions'
 ---
 

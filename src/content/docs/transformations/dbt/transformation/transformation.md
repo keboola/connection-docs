@@ -1,5 +1,6 @@
 ---
 title: dbt transformation
+description: The required connection parameters for your remote data warehouse vary depending on the selected backend type.
 slug: 'transformations/dbt/transformation'
 ---
 

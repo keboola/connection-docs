@@ -1,5 +1,6 @@
 ---
 title: Sklik
+description: The Sklik data source connector fetches data from Sklik. It downloads configured reports for all specified accounts.
 slug: 'components/extractors/marketing-sales/sklik'
 redirect_from:
     - /extractors/marketing-sales/sklik/

@@ -1,5 +1,6 @@
 ---
 title: Input Mapping
+description: Add input mapping to your component so it receives tables from the user's project, then check that it works.
 slug: 'extend/component/tutorial/input-mapping'
 ---
 

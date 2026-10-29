@@ -1,5 +1,6 @@
 ---
 title: Code Pattern Interface
+description: 'How a code pattern talks to Keboola: the generate action, its configuration and output format, and how to register it in the Developer Portal.'
 slug: 'extend/component/code-patterns/interface'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Keboola Support
+description: There are multiple ways to obtain support from within your project (if you cannot access your account at all, see below).
 slug: 'management/support'
 ---
 

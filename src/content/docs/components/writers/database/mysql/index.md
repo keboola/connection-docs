@@ -1,5 +1,6 @@
 ---
 title: MySQL
+description: This data destination connector sends data to a MySQL or MariaDB database.
 slug: 'components/writers/database/mysql'
 redirect_from:
     - /writers/database/mysql/

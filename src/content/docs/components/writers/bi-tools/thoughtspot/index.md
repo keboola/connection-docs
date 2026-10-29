@@ -1,5 +1,6 @@
 ---
 title: ThoughtSpot
+description: This data destination connector sends data to the ThoughtSpot platform.
 slug: 'components/writers/bi-tools/thoughtspot'
 redirect_from:
     - /writers/bi-tools/thoughtspot/

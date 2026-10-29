@@ -1,5 +1,6 @@
 ---
 title: R Client Library
+description: The R client library is a Storage API client which you can use in your R code. The current implementation supports all basic data manipulations.
 slug: 'storage/api/clients/r-client'
 redirect_from:
     - /integrate/storage/r-client/

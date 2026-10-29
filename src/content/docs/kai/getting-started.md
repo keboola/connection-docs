@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Kai
+description: Enable Kai in your project, start your first conversation, and see how Kai usage is billed and limited.
 slug: 'kai/getting-started'
 ---
 

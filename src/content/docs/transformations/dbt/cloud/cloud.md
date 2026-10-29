@@ -1,5 +1,6 @@
 ---
 title: dbt Cloud
+description: Trigger dbt Cloud jobs from Keboola and extract data from the dbt Cloud API with two dedicated components.
 slug: 'transformations/dbt/cloud'
 ---
 

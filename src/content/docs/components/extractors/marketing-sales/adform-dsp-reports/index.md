@@ -1,5 +1,6 @@
 ---
 title: Adform DSP Reports
+description: This data source connector retrieves Buy-Side report data from the Reporting Stats API.
 slug: 'components/extractors/marketing-sales/adform-dsp-reports'
 redirect_from:
     - /extractors/marketing-sales/adform-dsp-reports/

@@ -1,5 +1,6 @@
 ---
 title: LinkedIn Pages 
+description: 'Download LinkedIn organization pages, their posts, and post performance statistics into Storage.'
 slug: 'components/extractors/marketing-sales/linkedin-pages'
 redirect_from:
     - /extractors/marketing-sales/linkedin-pages/

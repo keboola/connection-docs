@@ -1,5 +1,6 @@
 ---
 title: MongoDB
+description: Export collections from a MongoDB database, with incremental fetching, mapping of documents to tables, or a raw export mode.
 slug: 'components/extractors/database/mongodb'
 redirect_from:
     - /extractors/database/mongodb/

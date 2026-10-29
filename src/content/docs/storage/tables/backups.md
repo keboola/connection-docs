@@ -1,5 +1,6 @@
 ---
 title: Backups and Restorations
+description: There are two methods available for backing up and restoring data.
 slug: 'storage/tables/backups'
 ---
 

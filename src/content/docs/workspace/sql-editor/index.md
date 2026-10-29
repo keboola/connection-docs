@@ -1,5 +1,6 @@
 ---
 title: SQL Editor
+description: 'Query your project''s data warehouse in the browser: create an SQL workspace, explore tables, run queries, export results and work in sessions.'
 slug: 'workspace/sql-editor'
 redirect_from:
   - /transformations/sql-editor/

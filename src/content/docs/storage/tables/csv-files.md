@@ -1,5 +1,6 @@
 ---
 title: CSV Files
+description: All data imported to and exported from Storage has to be in the CSV format.
 slug: 'storage/tables/csv-files'
 ---
 

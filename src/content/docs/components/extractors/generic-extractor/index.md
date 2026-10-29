@@ -1,5 +1,6 @@
 ---
 title: Generic Extractor
+description: Generic Extractor is a Keboola component that acts like a customizable HTTP REST client. It can be configured to extract data from virtually any sane web API.
 slug: 'components/extractors/generic-extractor'
 redirect_from:
     - /extend/generic-extractor/

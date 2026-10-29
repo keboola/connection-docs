@@ -1,5 +1,6 @@
 ---
 title: FileMaker
+description: FileMaker is a cross-platform relational database application from Claris International.
 slug: 'components/extractors/database/filemaker'
 ---
 
