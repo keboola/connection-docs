@@ -38,8 +38,8 @@ the [**Configuration Parameters**](#configuration-parameters). Then click **Save
 - **`table`**: string (required); the name of the input table in the Table storage
 - **`output`**: string (required); the name of the output CSV file
 - **`maxTries`**: integer (optional); the max number of retries if an error occurs; the default is `5`
-- **`incremental`**: boolean (optional); enables [Incremental Loading](https://help.keboola.com/storage/tables/#incremental-loading); the default is `false`
-- **`incrementalFetchingKey`**: string (optional); the name of the key for [incremental fetching](https://help.keboola.com/components/extractors/database/#incremental-fetching)
+- **`incremental`**: boolean (optional); enables [Incremental Loading](/storage/tables/#incremental-loading); the default is `false`
+- **`incrementalFetchingKey`**: string (optional); the name of the key for [incremental fetching](/components/extractors/database/#incremental-fetching)
 - **`mode`**: enum (optional)
   - `mapping` (default) 
     - Row is exported using specified `mapping`.
