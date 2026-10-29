@@ -1,6 +1,7 @@
 ---
 title: SQL Server
 slug: 'components/writers/database/mssql'
+description: 'Write Keboola tables to a Microsoft SQL Server database, map columns to SQL Server types, choose full or incremental load, and see how binary values convert.'
 redirect_from:
     - /writers/database/mssql/
 ---
@@ -8,6 +9,8 @@ redirect_from:
 
 
 This data destination connector sends data to a [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017) database.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **SQL Server** data destination connector.

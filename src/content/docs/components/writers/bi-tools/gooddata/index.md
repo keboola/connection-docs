@@ -1,6 +1,7 @@
 ---
 title: GoodData
 slug: 'components/writers/bi-tools/gooddata'
+description: 'Write Keboola tables to a GoodData project and let the connector build its logical data model from the column types and date dimensions you set.'
 redirect_from:
     - /writers/bi-tools/gooddata/
 ---
@@ -15,6 +16,8 @@ The GoodData data destination connector creates the LDM for you so that you don'
 provided by GoodData. However, you need to provide all the required information in the configuration. This makes
 the configuration non-trivial, and you should have the data model designed before you start configuring
 the connector.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 
