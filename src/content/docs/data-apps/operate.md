@@ -69,7 +69,7 @@ Add the app to a [flow](/flows/) when it should start after other work, for exam
 2. Switch to the **Apps** tab, or search for the app's name, and select the app.
 3. Save the flow.
 
-When the flow runs, the task starts a stopped or sleeping app and restarts a running one, the way **Redeploy** does:
+When the flow runs, the task starts a stopped or sleeping app and restarts a running one. Unlike **Redeploy**, it keeps the configuration the app was last deployed with:
 
 - Keboola builds the app again from the latest code in its repository, the current head of the branch for an app on your own repository. It keeps the configuration version the app was last deployed with and the package versions frozen in earlier builds, so settings saved since the last deploy still need a **Redeploy**.
 - The app loads its Input Mapping again and gets a new `KBC_TOKEN`.
@@ -78,7 +78,7 @@ When the flow runs, the task starts a stopped or sleeping app and restarts a run
 
 The flows **Automate** creates use the same task, so each scheduled run restarts the app with a new build even when people are using it.
 
-<!-- VERIFY(Miroslav Čillík): taken from keboola/component-data-app-control (PR #7: forceRestart defaults to true, known limit of the final wait on a running app) and the flows-v2 builder; not yet run end to end on a stack. Check that a restart reruns the Input Mapping load, how long a restarted running app is unavailable to its users, and which project roles can run a flow with an app task. -->
+<!-- VERIFY(Miroslav Čillík): taken from keboola/component-data-app-control (PR #7: forceRestart defaults to true, known limit of the final wait on a running app) and the flows-v2 builder. The Input Mapping reload follows from the restart being a new pod (sandboxes-service AppProvisioner::transitionAppState). Not yet run end to end on a stack; check there how long a restarted running app is unavailable to its users, and which project roles can run a flow with an app task. -->
 
 In the flow's configuration, the task runs the **Data App Control** component, `keboola.data-app-control`, with the **App ID** from the app's **App Info** panel and no `configId`:
 
