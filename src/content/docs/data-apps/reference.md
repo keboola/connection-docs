@@ -74,7 +74,7 @@ import pandas as pd
 df = pd.read_csv("/data/in/tables/my_table.csv")
 ```
 
-Input Mapping data is loaded once at startup. To get fresh data, redeploy the app or use the Storage API at runtime.
+Input Mapping data is loaded once at startup. To get fresh data, redeploy the app, [start it from a flow](/data-apps/operate/#start-the-app-from-a-flow) after the tables change, or use the Storage API at runtime.
 
 ### Storage API at runtime
 
@@ -188,7 +188,7 @@ Manage an app from the header and the **⋮** (More actions) menu on its page.
 - **Pause app** — puts a running app to sleep right away, before its inactivity timeout runs out. The configuration is kept, and the next visit or **Start** wakes the app. While the app is still starting, the item is **Cancel start** instead, which stops the start and keeps the deployed configuration.
 - **Duplicate with Kai** — on apps with a Keboola-managed repository, opens a new Kai chat and asks Kai to copy the app. The request tells Kai to say what carries over and to wait for your confirmation.
 - **Duplicate** — on all other apps, copies the app's code (or its repository and branch) and settings into a new app, which starts undeployed and gets its own address when you deploy it.
-- **Automate** — creates a flow that starts the app on a schedule you pick.
+- **Automate** — creates a flow that starts the app on a schedule you pick. To add the app to a flow you already have, see [Start the app from a flow](/data-apps/operate/#start-the-app-from-a-flow).
 - **Debug mode** — opens the app's configuration and its state as raw JSON in a full-screen editor, on the **Update Configuration** and **Update State** tabs. It doesn't run the app. A configuration saved there is a change like any other, and the app picks it up at the next **Redeploy** or **Start**. Saving the state doesn't create a configuration version.
 - **Delete app** — stops the deployment and deletes its configuration.
 
