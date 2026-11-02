@@ -111,6 +111,31 @@ truth. For compatibility, Storage mirrors it into the `KBC.description` [metadat
 a fallback only when the table or column has no description of its own from the user or from Storage.
 New integrations should read and write the `description` field of the table definition, not the metadata.
 
+
+## Data types in the table definition
+The column data types of a [typed table](/storage/tables/data-types/) are part of the same table definition as the
+descriptions. For each column the definition holds the `type`, and, where they apply, `length`, `nullable` and
+`default`, together with the column's `basetype`. The table detail returns them, and the
+[table list](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list) returns them
+with `include=definition`. The stored type is the one the backend reports, for example `NUMBER(38,0)` on Snowflake
+for a column created as `INT`.
+
+- **Non-typed tables.** The definition of a non-typed table carries descriptions only. Type information for
+  such a table exists only as `KBC.datatype.*` [metadata](#metadata), for example `KBC.datatype.basetype`.
+- **Aliases.** An alias that synchronizes its columns with its source shows the types of the source table for
+  the columns of the alias.
+- **Table list.** The `definition` of a table in the table list is `null` when it cannot be built from the
+  stored definition, for example for a typed table whose columns do not have a stored type yet, and for aliases of
+  such tables. Use the table detail for those tables.
+- **Changing types.** The data type of a typed column cannot be changed. On Snowflake and BigQuery you can
+  [update the definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition)
+  to change a column's length, nullability or default within the limits the backend allows.
+
+**Relation to `KBC.datatype.*` metadata.** For a typed table the definition is the source of truth for the types.
+Storage still keeps `KBC.datatype.*` copies under the `storage` provider for compatibility, and `KBC.datatype.*`
+rows written by other providers do not change the definition of a typed table. New integrations should read the
+types from the `definition` of the table, not from the metadata.
+
 ## Primary Keys
 Each table may have a **primary key** defined on one or more columns. A primary key represents an
 identifier of each row in the table. Each primary key can be defined manually on a table or as part of
