@@ -69,6 +69,44 @@ arbitrary user-defined metadata, there is also some information stored automatic
 each bucket and table has information about which configuration of which component created them.
 One important use case of metadata is [Column Data Types](/storage/tables/data-types/).
 
+## Descriptions
+Tables and columns carry a description that is part of the [table definition](/storage/tables/data-types/).
+It is the text shown for the table and its columns in Storage and returned by the API as `description`.
+
+**Where to set it.** Send `description` for the table, and for each column, in the typed
+[table definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-id-/definition)
+when you create or update the table. <!-- VERIFY(DMD-2627 owner): list the Storage UI place where users edit the description, if it is editable there. -->
+The [table list](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list)
+returns the table description and, with `include=definition`, the column descriptions.
+
+**Visible in your backend.** On Snowflake and BigQuery projects the descriptions are written to the
+database itself: a Snowflake `COMMENT` on the table and its columns, and the BigQuery table and column
+description. Storage writes them when the table is created, again whenever a description changes, and
+existing tables have been backfilled. You can therefore see the same text in a SQL client or in the
+BigQuery console.
+
+| Backend | Limit applied to the backend text |
+|---|---|
+| Snowflake | 16 384 characters |
+| BigQuery | 1 024 characters |
+
+Storage accepts descriptions up to 65 535 characters and keeps the full text. Only the copy written to
+the backend is cut to the backend limit, so a longer description is still complete in Storage.
+
+Descriptions are not written to the backend for:
+- aliases that are not materialized as a view, tables in [linked buckets](/catalog/), and tables
+  in buckets backed by an external schema;
+- projects on other backends.
+
+Aliases read the description of the table they point to; an alias with its own description shows that one.
+A materialized alias view carries the resolved description as its comment.
+
+**Relation to `KBC.description` metadata.** The description in the table definition is the source of
+truth. For compatibility, Storage mirrors it into the `KBC.description` [metadata](#metadata) under the
+`storage` provider. A `KBC.description` written by another provider (for example a component) is used as
+a fallback only when the table or column has no description of its own from the user or from Storage.
+New integrations should read and write the `description` field of the table definition, not the metadata.
+
 ## Primary Keys
 Each table may have a **primary key** defined on one or more columns. A primary key represents an
 identifier of each row in the table. Each primary key can be defined manually on a table or as part of
