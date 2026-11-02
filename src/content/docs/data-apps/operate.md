@@ -76,9 +76,7 @@ When the flow runs, the task starts a stopped or sleeping app and restarts a run
 - The task waits until the app is running, up to five minutes. If a stopped or sleeping app fails to start or doesn't make it in time, the task fails, and so does an app that was deleted. Use a [condition](/flows/#conditions), such as [Continue on Failure](/flows/#4-continue-on-failure), if the rest of the flow should go on.
 - A running app can report **running** for the whole restart, so its task may finish before the new build is live, and a failed rebuild doesn't fail the task. Don't count on the new build in the next task.
 
-The flows **Automate** creates use the same task, so each scheduled run restarts the app with a new build even when people are using it.
-
-<!-- VERIFY(Miroslav Čillík): taken from keboola/component-data-app-control (PR #7: forceRestart defaults to true, known limit of the final wait on a running app) and the flows-v2 builder. The Input Mapping reload follows from the restart being a new pod (sandboxes-service AppProvisioner::transitionAppState). Not yet run end to end on a stack; check there how long a restarted running app is unavailable to its users, and which project roles can run a flow with an app task. -->
+The flows **Automate** creates use the same task, so each scheduled run restarts the app with a new build. People keep using the old build until the new one is ready, and if the new build fails, the old one keeps running. Open sessions may have to reconnect when the new build takes over.
 
 In the flow's configuration, the task runs the **Data App Control** component, `keboola.data-app-control`, with the **App ID** from the app's **App Info** panel and no `configId`:
 
@@ -95,7 +93,7 @@ In the flow's configuration, the task runs the **Data App Control** component, `
 }
 ```
 
-To only start a stopped or sleeping app and leave a running one alone, add `"forceRestart": false` to `configData.parameters`. In the flow builder, select the task and click **Set advanced parameters** at the bottom of its panel; through the API, edit the flow's configuration. A running app then keeps its build and its `KBC_TOKEN`.
+To only start a stopped or sleeping app and leave a running one alone, add `"forceRestart": false` to `configData.parameters`. In the flow builder, select the task and click **Set advanced parameters** at the bottom of its panel; through the API, edit the flow's configuration. A running app then keeps its build and its `KBC_TOKEN`. A stopped or sleeping app still starts and loads its Input Mapping again, but from its last build, not from the latest code.
 
 If the task shows `keboola.data-apps` with a `configId` instead, it was added before the app was first deployed or on a stack without Data App Control. It restarts the app the same way, but `forceRestart` has no effect there. Deploy the app, then remove the task and add the app again.
 
