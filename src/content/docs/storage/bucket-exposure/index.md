@@ -168,7 +168,6 @@ which sees the whole project.
 Grant mode is available only when the project's Snowflake backend is **your own account**
 ([BYODB](/storage/byodb/)), or an account Keboola runs for your organization alone. It is not
 available on Keboola's shared Snowflake accounts or in Snowflake Partner Connect projects.
-<!-- VERIFY(Connection team): availability matches the Snowflake gate once grant mode is released (technical owner byodb or kbdb). -->
 
 ### What a grantee role gets
 
@@ -263,7 +262,6 @@ only grant this exposure leaves behind is `USAGE` on the project database.
   while it holds an alias whose source chain leaves the project's database — through a
   linked bucket from another project or an external source, directly or through another
   alias. Such an alias cannot be added to an exposed bucket either.
-  <!-- VERIFY(Connection team): matches the alias guard of DMD-2497 (RFC Task 1.10) once it is merged; publish this page only after it. -->
 - **Consumers' queries are theirs.** Grantees run queries on their own warehouses; the
   queries are not tagged by Keboola.
 - **Subscriptions are BigQuery only.** The *Subscriptions* view of an exposure does not
