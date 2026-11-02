@@ -4,12 +4,6 @@ slug: 'ai/row-level-security/policy-reference'
 description: Write row-level and column-level security policies — how rules select readers, the condition language, how policies combine, examples, and the Keboola CLI and API calls that create them.
 ---
 
-<!-- VERIFY(maintainers): see the comment at the top of /ai/row-level-security/. Condition shapes and rule
-semantics verified against the Metastore schemas `rls-policy` 1.2.0 and `cls-policy` 1.2.0 (go-monorepo
-services/metastore/migrations/schema), the policy engine (services/query/policy-engine) and the kbagent
-`rls`/`cls` command help. The curl envelope is the one the kbagent Metastore client and the Metastore
-integration tests send. -->
-
 This page describes the policies behind [row-level and column-level security](/ai/row-level-security/): what a policy contains, how a rule selects its readers, and how to create one.
 
 ## A policy
@@ -103,10 +97,10 @@ Instead of a fixed value, a condition can use the reader's own identity:
 ## How rules and policies combine
 
 - Within one `rls-policy`, every rule that selects the reader applies, and their conditions are combined with **OR**.
-- If no rule selects the reader, the reader gets the policy's `default` condition. Without a `default` the read is **refused**. Use `{"false": true}` as the `default` to return no rows instead.
+- If no rule selects the reader, the reader gets the policy's `default` condition. Without a `default` an administrator is **refused** and an end user of a Data App gets an empty result. Use `{"false": true}` as the `default` to return no rows for every reader instead of a refusal.
 - Within one `cls-policy`, the reader sees the **union** of the `visible_columns` of the rules that select them. A column policy has no `default`: a reader that no rule selects is refused.
 - Several policies on one table combine with **AND** (for columns, the intersection). A policy added later can only narrow access.
-- A table with no policy, or only a column policy, is refused (see [deny by default](/ai/row-level-security/#deny-by-default)).
+- A table needs a row policy. A table with no policy is refused for an administrator and empty for a Data App user, and a column policy does not open a table by itself (see [deny by default](/ai/row-level-security/#deny-by-default)).
 
 ## Scope and permissions
 
@@ -188,10 +182,6 @@ A reference table that every identified reader may read in full needs a row poli
 ```
 
 ## Create a policy with the Keboola CLI
-
-:::caution[Upcoming]
-The `rls` and `cls` commands are not in a released version of the Keboola CLI yet.
-:::
 
 Both groups have the same commands. `--rules` accepts JSON, `@file` or `-` for standard input. Add `--dry-run` to any command that writes to see the result without writing it.
 

@@ -4,15 +4,9 @@ slug: 'ai/row-level-security'
 description: Restrict which rows and columns of a Storage table each reader can see when they query through the MCP Server, Data Apps or the Keboola CLI — policies you write once and Keboola enforces on every query.
 ---
 
-<!-- VERIFY(maintainers): availability wording. Verified against the Query Service RFC (go-monorepo
-docs/rfc/query-service-rls-cls), the policy engine README, keboola-mcp-server workspace.py and the kbagent
-`rls`/`cls` command help (keboola/cli PRs #778 and #923, not merged at the time of writing). The `kbagent-check`
-markers on this page and on the policy reference exist only because command-reference.md is synced from CLI
-releases and does not contain `rls`/`cls` yet. Remove them once it does. -->
-
 :::caution[Beta]
 Row- and column-level security (RLS/CLS) is in beta. It works on Snowflake. Support for BigQuery is not in
-production yet. A few parts described below are marked **Upcoming**; they are not released at the time of writing.
+production yet.
 :::
 
 Row-level security (RLS) limits **which rows** of a table a reader can see. Column-level security (CLS) limits **which columns**. You describe both in *policies* stored with your project. Keboola applies them to every query that runs through a *governed workspace*, so an AI assistant, a Data App user or a script can only read the part of a table the policy allows.
@@ -27,7 +21,7 @@ Policies are enforced by Query Service on queries sent to a **governed workspace
 |---|---|
 | [MCP Server](/ai/mcp-server/) session of a project administrator (`query_data`), when the project has the `row-level-security` feature | Yes |
 | A script, the [Keboola CLI](/cli/) or another client that queries a governed workspace through Query Service | Yes |
-| End users of a [Data App](/data-apps/) signed in through single sign-on (OIDC) | Yes, once the app passes the user's token to Query Service (see [Data Apps](#data-apps)) |
+| End users of a [Data App](/data-apps/) signed in through single sign-on (OIDC) | Yes, when the app lists policies in its configuration and passes the user's token to Query Service (see [Data Apps](#data-apps)) |
 | Transformations, component runs, the SQL editor, ordinary workspaces, table exports | **No** |
 
 :::caution[What this is, and what it is not]
@@ -44,14 +38,19 @@ Data that is copied out of a governed table is not governed: transformation outp
 
 ### Deny by default
 
-In a governed workspace nothing is readable until a policy allows it:
+In a governed workspace nothing is readable until a policy allows it. What the reader gets instead depends on who they are:
 
-- A table with **no policy** is refused. This also applies to project administrators and organization administrators.
-- A table with a policy is refused for a reader that none of its rules selects, unless the policy has a `default` rule.
+| Situation | Administrator (Storage token, MCP Server, CLI) | End user of a Data App |
+|---|---|---|
+| A table with **no policy** | Refused. This also applies to project and organization administrators. | An empty result (no rows), not an error |
+| A table with a policy, and **no rule selects the reader** and the policy has no `default` | Refused | An empty result |
+| A table whose **column policy does not list the reader** | Refused | Refused |
+| A reader Query Service **cannot identify** | Refused | Refused |
+
 - A column policy never grants rows by itself. A table needs a row policy; a column policy then narrows its columns.
-- A reader whom Query Service cannot identify reads nothing. Integration tokens, Data App tokens and Kai are not identified readers.
+- Integration tokens, Data App tokens without a user token, and Kai are not identified readers. A password-protected Data App, or an app that does not forward the user's token, is refused too (HTTP 403), it does not read an empty table.
 
-A refused query fails with one generic message, `Row-level security does not allow this query`, whatever the reason. It does not tell the reader whether a policy exists. **Upcoming:** for an end user of a Data App, a table without a policy or a table no rule selects them for will return an empty result instead of an error; administrators keep the error.
+A refused query fails with one generic message, `Row-level security does not allow this query`, whatever the reason. It does not tell the reader whether a policy exists. Because an end user gets an empty result instead of a refusal for a missing policy or an unmatched rule, an empty result can also mean "no access".
 
 ## Set it up
 
@@ -75,10 +74,6 @@ You can write policies in three ways. They all create the same `rls-policy` and 
 
 **With the Keboola CLI.** The `rls` and `cls` command groups create, list, update and delete policies. Add `--dry-run` to preview the result without writing anything.
 
-:::caution[Upcoming]
-The `rls` and `cls` commands are not in a released version of the Keboola CLI yet.
-:::
-
 <!-- kbagent-check: skip-next -->
 ```bash
 kbagent rls create --project my-project --table-id in.c-crm.orders \
@@ -87,7 +82,7 @@ kbagent rls create --project my-project --table-id in.c-crm.orders \
 
 The rule files are described in the [policy reference](/ai/row-level-security/policy-reference/), together with the column-level commands (`cls create` and friends) and the other commands (`list`, `detail`, `update`, `delete`, `schema` and the guided `rls setup`).
 
-**With an AI assistant.** The `kbagent` plugin of [AI Kit](/ai/ai-kit/) teaches an assistant these commands (the plugin is installed with `/plugin install kbagent@keboola-claude-kit`). Once the CLI release that contains them is out, you can describe the goal in plain words, for example:
+**With an AI assistant.** The `kbagent` plugin of [AI Kit](/ai/ai-kit/) teaches an assistant these commands (the plugin is installed with `/plugin install kbagent@keboola-claude-kit`). You can describe the goal in plain words, for example:
 
 > Protect the table `in.c-crm.orders` so that people in the group `eu-analysts` see only the rows with `region` equal to `EU`, and let the administrator with ID 1234 see all rows. Show me the dry run first.
 
@@ -102,16 +97,47 @@ Query a protected table the way the reader does and compare the result with what
 ## What users see
 
 - **`query_data` in the MCP Server** returns only the allowed rows and columns. A refused query returns an error with the message `Row-level security does not allow this query` and an exception ID.
-- **Upcoming:** the metadata tools of the MCP Server (`get_tables`, `get_buckets`, `search`) will list only the tables the reader can read, and only the columns a column policy allows. Until that release they still list every table and column of the project. Names and descriptions are visible, the data is not.
-- **Debugging a refusal:** the message is deliberately the same for a missing policy, a rule that does not match and an unsupported statement. The precise reason is recorded in the Query Service log. When you contact [support](mailto:support@keboola.com), include the exception ID from the error. Use `rls list` to check that the table has a policy, and check that a rule selects the reader.
+- **The metadata tools of the MCP Server** (`get_tables`, `get_buckets`, `search`) list only the tables the reader can read, and only the columns a column policy allows. A table the reader cannot read is reported as not found. A readable table is shown without `rows_count` and `data_size_bytes`, because they count rows that a row policy hides. Table names inside the configurations that `get_configs` and `search` return, and shared buckets of other projects, are not filtered.
+- **Debugging a refusal:** the message is deliberately the same for a missing policy, a rule that does not match and an unsupported statement (an end user of a Data App gets an empty result for the first two, not a message). The precise reason is recorded in the Query Service log. When you contact [support](mailto:support@keboola.com), include the exception ID from the error. Use `rls list` to check that the table has a policy, and check that a rule selects the reader.
 
 ## Data Apps
 
-A Data App protected by single sign-on (OIDC) is the case where policies are a hard boundary. The proxy that sits in front of the app signs a token with the user's identity and groups and sends it with each request in the `X-Kbc-App-User-Token` header; the app has to pass that header to Query Service with every query. A Data App that uses a shared password, or a background job without a signed-in user, has no identity and reads nothing from a governed table.
+A Data App protected by single sign-on (OIDC) is the case where policies are a hard boundary. The proxy that sits in front of the app signs a token with the user's identity and groups and sends it with each request in the `X-Kbc-App-User-Token` header. The app has to pass that header to Query Service with every query, together with the app's own Storage token. See [Data Apps authentication](/data-apps/authentication/) for how users sign in.
 
-:::caution[Upcoming]
-Forwarding the header from the Python and JavaScript Query Service clients, and enabling policies for an app in its configuration, are in progress. See [Data Apps authentication](/data-apps/authentication/) for how users sign in.
-:::
+**1. List the policies of the app.** Set `runtime.workspace.rlsPolicies` in the app configuration to the IDs of the policies that apply to the app, the `id` of each `rls-policy` and `cls-policy` (`rls list`, `cls list` or the Metastore API return them). The workspace must be enabled:
+
+```json
+{
+  "runtime": {
+    "workspace": {
+      "enabled": true,
+      "rlsPolicies": ["<rls-policy-id>", "<cls-policy-id>"]
+    }
+  }
+}
+```
+
+- The list has 1 to 100 policy IDs. An empty list `[]` is refused.
+- Only the listed policies apply to the app. A changed list takes effect after you redeploy the app.
+- The app must use single sign-on. The platform rejects the configuration (HTTP 400 when you update or deploy the app) if it has a public path or a provider other than single sign-on, so a password-protected app cannot be governed.
+- **An app without `rlsPolicies` is not governed and reads every row.** This is the most likely misconfiguration: check that the option is set before you rely on a policy.
+
+**2. Forward the user's token.** The Query Service clients do it for you:
+
+```python
+from keboola_query_service import AppUserToken, StorageToken
+
+auth = AppUserToken(user_token, storage_token=StorageToken(app_storage_token))
+```
+
+```javascript
+const auth = { type: 'app-user-token', token: userToken, storageToken: appStorageToken };
+// pass it to createQueryServiceClient({ baseUrl, auth }) from '@keboola/api-client/queryService'
+```
+
+The Python client is `keboola-query-service` 0.4.0 or later, the JavaScript client is `@keboola/api-client` 52.0.0 or later. Both send the user token in `X-Kbc-App-User-Token` and the app token in `X-StorageAPI-Token`, and both raise a `RowLevelSecurityError` when a query is refused.
+
+A query that carries only the app's Storage token, without the user token, is refused (HTTP 403, `Row-level security does not allow this query`). So is a background job without a signed-in user.
 
 ## Limitations
 
