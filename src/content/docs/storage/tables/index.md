@@ -70,10 +70,25 @@ each bucket and table has information about which configuration of which compone
 One important use case of metadata is [Column Data Types](/storage/tables/data-types/).
 
 ## Descriptions
-Tables and columns carry a description that is part of the [table definition](/storage/tables/data-types/).
+Tables and columns carry a description that is part of the
+[table definition](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-bucketId-/tables-definition).
 It is the text shown for the table and its columns in Storage and returned by the API as `description`.
 
-**Where to set it.** Send the table `description`, and a description for each column, when you
+### Edit Descriptions in the Storage UI
+On Snowflake and BigQuery projects, open a bucket and then a table.
+- **Table description:** on the **Overview** tab, the **Table Description** box has an **Add description** button.
+  An existing description opens for editing when you click it.
+- **Column description:** on the **Schema** tab, each column row has a **Description** cell with an
+  **Edit Description** button.
+
+Descriptions are Markdown, within the [size limit](#descriptions-in-your-backend), and are saved with **Save**.
+Saving a description in the UI turns off the **Managed by Keboola** switch of the table, so Keboola components stop
+updating the descriptions of the table and all its columns. You can turn it on again from the same box.
+The description of an alias shows the description of its source table and is read-only, as are the descriptions of
+tables in buckets backed by an external schema.
+
+### Set Descriptions Through the API
+Send the table `description`, and a description for each column, when you
 [create a table with a definition](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-bucketId-/tables-definition)
 or [update its definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition).
 When you create a table, a column description goes in the column's `definition.description`; when you update a
@@ -81,71 +96,81 @@ table, it is the column's `description`.
 The [table list](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list)
 returns the table description and, with `include=definition`, the column descriptions.
 
-**In the Storage UI.** On Snowflake and BigQuery projects, open a bucket and then a table. On the **Overview** tab, the **Table Description** box has an
-**Add description** button, and an existing description opens for editing when you click it. On the **Schema** tab,
-each column row has a **Description** cell with an **Edit Description** button. Descriptions are Markdown, up to
-65,535 characters, and are saved with **Save**. Saving a description in the UI turns off the **Managed by Keboola**
-switch of the table, so Keboola components stop updating the descriptions of the table and all its columns; you
-can turn it on again from the same box. The description of an alias shows the description of its source table and
-is read-only, as are the descriptions of tables in buckets backed by an external schema.
-
-**Visible in your backend.** On Snowflake and BigQuery projects the descriptions are written to the
-database itself: a Snowflake `COMMENT` on the table and its columns, and the BigQuery table and column
-description. Storage writes them when the table is created, again whenever a description changes, and
-existing tables have been backfilled. You can therefore see the same text in a SQL client or in the
+### Descriptions in Your Backend
+On Snowflake and BigQuery projects the descriptions are written to the database itself: a Snowflake `COMMENT` on
+the table and its columns, and the BigQuery table and column description. Storage writes them when the table is
+created and whenever a description changes. You can therefore see the same text in a SQL client or in the
 BigQuery console.
 
-| Backend | Longest description Storage writes to the backend |
+Storage accepts descriptions up to 65,535 bytes (fewer characters for non-ASCII text) and stores the full text,
+which stays available through the Storage API. The backend receives only the part within its own limit:
+
+| Backend | Longest description written to the backend |
 |---|---|
 | Snowflake | 16,384 characters |
 | BigQuery | 1,024 characters |
 
-Storage accepts descriptions up to 65,535 characters and stores the full text (the stored size limit is 65,535
-bytes, so keep text with many multi-byte characters well below that). Only the part within the limits
-above is written to the backend, and the full text stays available through the Storage API. The Storage UI,
-components and the API save descriptions through the table definition update endpoint. On BigQuery, a column
-description longer than 1,024 characters can make that update fail, so keep column descriptions within the limit.
+<!-- TODO(DMD-2640): remove the exception below once Storage truncates column descriptions before writing them to BigQuery. -->
+Exception: on BigQuery, column descriptions are not truncated when you save them through the table definition
+update, which is also what the Storage UI and components use. An update with a column description longer than
+1,024 characters fails, so keep BigQuery column descriptions within the limit.
 
 Descriptions are not written to the backend for:
 - aliases that are not materialized as a view, tables in [linked buckets](/catalog/), and tables
   in buckets backed by an external schema;
 - projects on other backends.
 
-Aliases that synchronize columns with their source read the description of the table they point to; an alias's own table description takes precedence.
-A materialized alias view carries the resolved description as its comment (Snowflake) or description (BigQuery); views created before this feature get it the next time a description changes.
+Aliases that synchronize columns with their source read the description of the table they point to; an alias's
+own table description takes precedence. A materialized alias view carries the resolved description as its comment
+(Snowflake) or description (BigQuery), and is updated when a description changes.
 
-**Relation to `KBC.description` metadata.** The description in the table definition is the source of
-truth. For compatibility, Storage mirrors it into the `KBC.description` [metadata](#metadata) under the
-`storage` provider. A `KBC.description` written by another provider (for example a component) is used as
-a fallback only when the table or column has no description of its own from the user or from Storage.
-New integrations should read and write the `description` field of the table definition, not the metadata.
+### Relation to KBC.description Metadata
+The description in the table definition is the source of truth. For compatibility, Storage mirrors it into the
+`KBC.description` [metadata](#metadata). A `KBC.description` written by another provider is only a fallback; see the
+[table detail](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/tables/-tableId-) and
+[table list](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list) reference for the
+exact rules. New integrations should read and write the `description` field of the table definition, not the metadata.
 
-
-## Data types in the table definition
+## Data Types in the Table Definition
 The column data types of a [typed table](/storage/tables/data-types/) are part of the same table definition as the
 descriptions. For each column the definition holds the `type`, `nullable` and, where they apply, `length` and
 `default`, next to the column's `basetype`. The table detail returns them, and the
 [table list](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list) returns them
-with `include=definition`. The stored type is the one the backend reports: a column created as `INT` on Snowflake is returned with
-`type` `NUMBER`, `length` `38,0` and `basetype` `INTEGER`.
+with `include=definition`. The stored type is the one the backend reports: a column created as `INT` on Snowflake
+is returned with `type` `NUMBER`, `length` `38,0` and `basetype` `INTEGER`.
 
-- **Non-typed tables.** The definition of a non-typed table carries descriptions only. Type information for
+- **Non-typed tables:** the definition of a non-typed table carries descriptions only. Type information for
   such a table exists only as `KBC.datatype.*` [metadata](#metadata), for example `KBC.datatype.basetype`.
-- **Aliases.** An alias that synchronizes its columns with its source shows the types of the source table for
+- **Aliases:** an alias that synchronizes its columns with its source shows the types of the source table for
   the columns of the alias.
-- **Table list.** The `definition` of a table in the table list is `null` when it cannot be built from the
-  stored definition, for example for a typed table where not every column has a stored type yet, for aliases of
-  such tables, and for an alias of a typed table with its own column list. Use the table detail for those tables.
-- **Changing types.** The data type of a typed column cannot be changed. On Snowflake and BigQuery you can
-  [update the definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition)
-  to increase a column's length or precision, make it nullable or required, or change its default. Which of these a backend
-  allows depends on the alteration; for example Snowflake cannot add or change a default, and BigQuery cannot make
-  a column required.
+- **Table list:** for some tables the table list returns `definition` as `null`. Use the table detail for those
+  tables; the [table list reference](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list)
+  lists the cases.
 
-**Relation to `KBC.datatype.*` metadata.** For a typed table the definition is the source of truth for the types.
-Storage still keeps `KBC.datatype.*` copies under the `storage` provider for compatibility, and `KBC.datatype.*`
-rows written by other providers do not change the definition of a typed table. New integrations should read the
-types from the `definition` of the table, not from the metadata.
+### Changing Column Definitions
+The data type of a typed column cannot be changed. On Snowflake and BigQuery you can
+[update the table definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition)
+to make these alterations:
+
+| Alteration | Snowflake | BigQuery |
+|---|---|---|
+| Change the data type | No | No |
+| Increase text length | Yes | Yes |
+| Decrease text length | No | No |
+| Increase numeric precision | Yes | Yes |
+| Decrease numeric precision | No | No |
+| Change numeric scale | No | Yes |
+| Make a column nullable | Yes | Yes |
+| Make a column required | Yes | No |
+| Add a default | No | Yes |
+| Change a default | No | Yes |
+| Drop a default | Yes | Yes |
+
+### Relation to KBC.datatype Metadata
+For a typed table the definition is the source of truth for the types. Storage still keeps `KBC.datatype.*` copies
+under the `storage` provider for compatibility, and `KBC.datatype.*` rows written by other providers do not change
+the definition of a typed table. New integrations should read the types from the `definition` of the table, not from
+the metadata.
 
 ## Primary Keys
 Each table may have a **primary key** defined on one or more columns. A primary key represents an
