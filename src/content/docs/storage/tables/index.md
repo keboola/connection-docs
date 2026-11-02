@@ -126,10 +126,11 @@ own table description takes precedence. A materialized alias view carries the re
 
 ### Relation to KBC.description Metadata
 The description in the table definition is the source of truth. For compatibility, Storage mirrors it into the
-`KBC.description` [metadata](#metadata). A `KBC.description` written by another provider is only a fallback; see the
-[table detail](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/tables/-tableId-) and
-[table list](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list) reference for the
-exact rules. New integrations should read and write the `description` field of the table definition, not the metadata.
+`KBC.description` [metadata](#metadata) under the `storage` provider. A `KBC.description` written by another provider
+(for example a component) is only a fallback, used when the table or column has no description from the user or from
+Storage. The table detail falls back to the legacy `KBC.description` when the native table description is empty; the
+[table list](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list) does not.
+New integrations should read and write the `description` field of the table definition, not the metadata.
 
 ## Data Types in the Table Definition
 The column data types of a [typed table](/storage/tables/data-types/) are part of the same table definition as the
@@ -150,7 +151,7 @@ is returned with `type` `NUMBER`, `length` `38,0` and `basetype` `INTEGER`.
 ### Changing Column Definitions
 The data type of a typed column cannot be changed. On Snowflake and BigQuery you can
 [update the table definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition)
-to make these alterations:
+The table shows which alterations each backend supports:
 
 | Alteration | Snowflake | BigQuery |
 |---|---|---|
