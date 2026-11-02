@@ -126,10 +126,10 @@ with `include=definition`. The stored type is the one the backend reports: a col
   the columns of the alias.
 - **Table list.** The `definition` of a table in the table list is `null` when it cannot be built from the
   stored definition, for example for a typed table where not every column has a stored type yet, for aliases of
-  such tables, and for an alias with its own column list. Use the table detail for those tables.
+  such tables, and for an alias of a typed table with its own column list. Use the table detail for those tables.
 - **Changing types.** The data type of a typed column cannot be changed. On Snowflake and BigQuery you can
   [update the definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition)
-  to increase a column's length or precision, make it nullable, or change its default. Which of these a backend
+  to increase a column's length or precision, make it nullable or required, or change its default. Which of these a backend
   allows depends on the alteration; for example Snowflake cannot add or change a default, and BigQuery cannot make
   a column required.
 
