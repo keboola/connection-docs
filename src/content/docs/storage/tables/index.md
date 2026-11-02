@@ -100,7 +100,8 @@ BigQuery console.
 | Snowflake | 16,384 characters |
 | BigQuery | 1,024 characters |
 
-Storage accepts descriptions up to 65,535 characters and stores the full text. Only the part within the limits
+Storage accepts descriptions up to 65,535 characters and stores the full text (the stored size limit is 65,535
+bytes, so keep text with many multi-byte characters well below that). Only the part within the limits
 above is written to the backend, and the full text stays available through the Storage API. The Storage UI,
 components and the API save descriptions through the table definition update endpoint. On BigQuery, a column
 description longer than 1,024 characters can make that update fail, so keep column descriptions within the limit.
