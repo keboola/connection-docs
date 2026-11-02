@@ -44,10 +44,10 @@ In a governed workspace nothing is readable until a policy allows it. What the r
 |---|---|---|
 | A table with **no policy** | Refused. This also applies to project and organization administrators. | An empty result (no rows), not an error |
 | A table with a policy, and **no rule selects the reader** and the policy has no `default` | Refused | An empty result |
-| A table whose **column policy does not list the reader** | Refused | Refused |
+| A table whose **column policy does not list the reader** (also when the table has a row policy) | Refused | Refused |
 | A reader Query Service **cannot identify** | Refused | Refused |
 
-- A column policy never grants rows by itself. A table needs a row policy; a column policy then narrows its columns.
+- A column policy alone opens a table for the readers it names: they read all rows and only the columns the policy allows. A reader it does not name is refused. When the table has a row policy too, the rows come from the row policy and the columns from the column policy.
 - Integration tokens, Data App tokens without a user token, and Kai are not identified readers. A password-protected Data App, or an app that does not forward the user's token, is refused too (HTTP 403), it does not read an empty table.
 
 A refused query fails with one generic message, `Row-level security does not allow this query`, whatever the reason. It does not tell the reader whether a policy exists. Because an end user gets an empty result instead of a refusal for a missing policy or an unmatched rule, an empty result can also mean "no access".
@@ -97,6 +97,7 @@ Query a protected table the way the reader does and compare the result with what
 ## What users see
 
 - **`query_data` in the MCP Server** returns only the allowed rows and columns. A refused query returns an error with the message `Row-level security does not allow this query` and an exception ID.
+- **The query you sent** is what the status and history of a query show, not the rewritten SQL that Query Service runs, so a reader never sees the conditions of a policy.
 - **The metadata tools of the MCP Server** (`get_tables`, `get_buckets`, `search`) list only the tables the reader can read, and only the columns a column policy allows. A table the reader cannot read is reported as not found. A readable table is shown without `rows_count` and `data_size_bytes`, because they count rows that a row policy hides. Table names inside the configurations that `get_configs` and `search` return, and shared buckets of other projects, are not filtered.
 - **Debugging a refusal:** the message is deliberately the same for a missing policy, a rule that does not match and an unsupported statement (an end user of a Data App gets an empty result for the first two, not a message). The precise reason is recorded in the Query Service log. When you contact [support](mailto:support@keboola.com), include the exception ID from the error. Use `rls list` to check that the table has a policy, and check that a rule selects the reader.
 
@@ -104,23 +105,24 @@ Query a protected table the way the reader does and compare the result with what
 
 A Data App protected by single sign-on (OIDC) is the case where policies are a hard boundary. The proxy that sits in front of the app signs a token with the user's identity and groups and sends it with each request in the `X-Kbc-App-User-Token` header. The app has to pass that header to Query Service with every query, together with the app's own Storage token. See [Data Apps authentication](/data-apps/authentication/) for how users sign in.
 
-**1. List the policies of the app.** Set `runtime.workspace.rlsPolicies` in the app configuration to the IDs of the policies that apply to the app, the `id` of each `rls-policy` and `cls-policy` (`rls list`, `cls list` or the Metastore API return them). The workspace must be enabled:
+**1. List the policies of the app.** Set `runtime.workspace.rlsPolicies` in the app configuration to the IDs of the row policies that apply to the app, and `runtime.workspace.clsPolicies` to the IDs of the column policies (the `id` of each `rls-policy` and `cls-policy`; `rls list`, `cls list` or the Metastore API return them). The two lists are independent: you can set one or both. The workspace must be enabled:
 
 ```json
 {
   "runtime": {
     "workspace": {
       "enabled": true,
-      "rlsPolicies": ["<rls-policy-id>", "<cls-policy-id>"]
+      "rlsPolicies": ["<rls-policy-id>"],
+      "clsPolicies": ["<cls-policy-id>"]
     }
   }
 }
 ```
 
-- The list has 1 to 100 policy IDs. An empty list `[]` is refused.
+- Each list has 1 to 100 policy IDs. An empty list `[]` is refused: remove the key instead. Put a policy in the list of its own kind; the lists are not interchangeable.
 - Only the listed policies apply to the app. A changed list takes effect after you redeploy the app.
 - The app must use single sign-on. The platform rejects the configuration (HTTP 400 when you update or deploy the app) if it has a public path or a provider other than single sign-on, so a password-protected app cannot be governed.
-- **An app without `rlsPolicies` is not governed and reads every row.** This is the most likely misconfiguration: check that the option is set before you rely on a policy.
+- **An app with neither `rlsPolicies` nor `clsPolicies` is not governed and reads every row and column.** This is the most likely misconfiguration: check that the option is set before you rely on a policy. An app is governed when either list is set.
 
 **2. Forward the user's token.** The Query Service clients do it for you:
 

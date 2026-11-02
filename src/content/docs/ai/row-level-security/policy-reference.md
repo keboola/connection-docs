@@ -100,7 +100,7 @@ Instead of a fixed value, a condition can use the reader's own identity:
 - If no rule selects the reader, the reader gets the policy's `default` condition. Without a `default` an administrator is **refused** and an end user of a Data App gets an empty result. Use `{"false": true}` as the `default` to return no rows for every reader instead of a refusal.
 - Within one `cls-policy`, the reader sees the **union** of the `visible_columns` of the rules that select them. A column policy has no `default`: a reader that no rule selects is refused.
 - Several policies on one table combine with **AND** (for columns, the intersection). A policy added later can only narrow access.
-- A table needs a row policy. A table with no policy is refused for an administrator and empty for a Data App user, and a column policy does not open a table by itself (see [deny by default](/ai/row-level-security/#deny-by-default)).
+- A table needs a policy. A table with no policy is refused for an administrator and empty for a Data App user. A column policy alone opens the table for the readers it names, with all rows and only the columns it allows, and refuses everyone else (see [deny by default](/ai/row-level-security/#deny-by-default)). When the table has a row policy as well, the rows come from the row policy and the columns from the column policy.
 
 ## Scope and permissions
 
@@ -171,7 +171,7 @@ Members of `analysts` see three columns and the administrator sees one more. Nob
 
 ### A table everyone may read
 
-A reference table that every identified reader may read in full needs a row policy with the wildcard. Without it the table is refused.
+A reference table that every identified reader may read in full needs a policy that selects every reader: a row policy with the wildcard, or a column policy with the wildcard that lists the columns. Without a policy the table is refused.
 
 ```json
 {
@@ -192,7 +192,7 @@ Both groups have the same commands. `--rules` accepts JSON, `@file` or `-` for s
 | `rls schema`, `cls schema` | Print the live JSON Schema of the policy from the Metastore |
 | `rls create`, `cls create` | Create the policy of one table (`--table-id`, `--rules`; `rls create` also takes `--default`) |
 | `rls update`, `cls update` | Change only the options you pass |
-| `rls delete`, `cls delete` | Delete a policy. In a governed workspace a table without a row policy is refused |
+| `rls delete`, `cls delete` | Delete a policy. In a governed workspace a table without any policy is refused |
 | `rls setup` | Guided setup in a terminal: pick tables, build a condition, preview, write |
 
 Useful options of `create` and `update`: `--scope targeted|organization`, `--target-project` (repeatable) and `--dialect snowflake|bigquery`. Without a `--default`, a reader that no rule selects is refused.
