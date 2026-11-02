@@ -143,7 +143,8 @@ A query that carries only the app's Storage token, without the user token, is re
 
 - Governed workspaces answer a single `SELECT` (with `WITH`, `UNION`, `EXCEPT`, `INTERSECT`). Everything else is refused, including `SHOW`, `DESCRIBE`, `EXPLAIN`, `INFORMATION_SCHEMA`, `CREATE`, `INSERT`, user-defined functions and queries on query history.
 - Tables must be written with their bucket schema, for example `"in.c-crm"."orders"`. A governed workspace cannot query tables stored in the workspace itself.
-- Linked buckets and alias tables have not been verified with policies yet. Do not rely on a policy for them.
+- On Snowflake, a table of a linked bucket (a bucket shared from another project) cannot be read in a governed workspace: Query Service refuses it for every reader, because the table lives in the database of the source project. Until linked buckets are supported, load the data into a table of your own project and write the policy for that table.
+- Alias tables have not been verified with policies yet. Do not rely on a policy for them.
 - Projects with a protected default branch (SOX) are not supported.
 - On BigQuery, governed workspaces are not available in production yet.
 - Column policies are an allowlist of visible columns. Masking a column's values is not supported.
