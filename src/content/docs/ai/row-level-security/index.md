@@ -5,8 +5,8 @@ description: Restrict which rows and columns of a Storage table each reader can 
 ---
 
 :::caution[Beta]
-Row- and column-level security (RLS/CLS) is in beta. It works on Snowflake. Support for BigQuery is not in
-production yet.
+Row- and column-level security (RLS/CLS) is in beta. It works on Snowflake. On BigQuery, governed workspaces can
+be created in production, but it has not been verified end to end on a production stack yet.
 :::
 
 Row-level security (RLS) limits **which rows** of a table a reader can see. Column-level security (CLS) limits **which columns**. You describe both in *policies* stored with your project. Keboola applies them to every query that runs through a *governed workspace*, so an AI assistant, a Data App user or a script can only read the part of a table the policy allows.
@@ -148,7 +148,7 @@ A query that carries only the app's Storage token, without the user token, is re
 - On Snowflake, a table of a linked bucket (a bucket shared from another project) cannot be read in a governed workspace: Query Service refuses it for every reader, because the table lives in the database of the source project. Until linked buckets are supported, load the data into a table of your own project and write the policy for that table.
 - Alias tables have not been verified with policies yet. Do not rely on a policy for them.
 - Projects with a protected default branch (SOX) are not supported.
-- On BigQuery, governed workspaces are not available in production yet.
+- On BigQuery, create the governed workspace with the MCP Server or the API. `kbagent workspace create --governed` does not support BigQuery yet.
 - Column policies are an allowlist of visible columns. Masking a column's values is not supported.
 - The project feature `row-level-security` is checked by the MCP Server only. A workspace you create with the login type `governed` is enforced regardless of the feature.
 
