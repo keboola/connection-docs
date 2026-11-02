@@ -73,9 +73,9 @@ One important use case of metadata is [Column Data Types](/storage/tables/data-t
 Tables and columns carry a description that is part of the [table definition](/storage/tables/data-types/).
 It is the text shown for the table and its columns in Storage and returned by the API as `description`.
 
-**Where to set it.** Send `description` for the table, and for each column, in the typed
-[table definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-id-/definition)
-when you create or update the table. <!-- VERIFY(DMD-2627 owner): list the Storage UI place where users edit the description, if it is editable there. -->
+**Where to set it.** Send `description` for the table, and for each column, when you
+[create a table with a definition](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-bucketId-/tables-definition)
+or [update its definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition). <!-- VERIFY(DMD-2627 owner): list the Storage UI place where users edit the description, if it is editable there. -->
 The [table list](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list)
 returns the table description and, with `include=definition`, the column descriptions.
 
@@ -85,20 +85,21 @@ description. Storage writes them when the table is created, again whenever a des
 existing tables have been backfilled. You can therefore see the same text in a SQL client or in the
 BigQuery console.
 
-| Backend | Limit applied to the backend text |
+| Backend | Longest description Storage writes to the backend |
 |---|---|
 | Snowflake | 16 384 characters |
 | BigQuery | 1 024 characters |
 
 Storage accepts descriptions up to 65 535 characters and keeps the full text. Only the copy written to
-the backend is cut to the backend limit, so a longer description is still complete in Storage.
+the backend is cut to this limit, so a longer description is still complete in Storage.
+<!-- VERIFY(connection owner): the table definition update endpoint passes the text to the backend without shortening it first; confirm that an over-limit description is accepted there. -->
 
 Descriptions are not written to the backend for:
 - aliases that are not materialized as a view, tables in [linked buckets](/catalog/), and tables
   in buckets backed by an external schema;
 - projects on other backends.
 
-Aliases read the description of the table they point to; an alias with its own description shows that one.
+Aliases that synchronize columns with their source read the description of the table they point to; an alias's own table description takes precedence.
 A materialized alias view carries the resolved description as its comment.
 
 **Relation to `KBC.description` metadata.** The description in the table definition is the source of
