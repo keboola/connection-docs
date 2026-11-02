@@ -114,22 +114,24 @@ New integrations should read and write the `description` field of the table defi
 
 ## Data types in the table definition
 The column data types of a [typed table](/storage/tables/data-types/) are part of the same table definition as the
-descriptions. For each column the definition holds the `type`, and, where they apply, `length`, `nullable` and
-`default`, together with the column's `basetype`. The table detail returns them, and the
+descriptions. For each column the definition holds the `type`, `nullable` and, where they apply, `length` and
+`default`, next to the column's `basetype`. The table detail returns them, and the
 [table list](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list) returns them
-with `include=definition`. The stored type is the one the backend reports, for example `NUMBER(38,0)` on Snowflake
-for a column created as `INT`.
+with `include=definition`. The stored type is the one the backend reports: a column created as `INT` on Snowflake is returned with
+`type` `NUMBER`, `length` `38,0` and `basetype` `INTEGER`.
 
 - **Non-typed tables.** The definition of a non-typed table carries descriptions only. Type information for
   such a table exists only as `KBC.datatype.*` [metadata](#metadata), for example `KBC.datatype.basetype`.
 - **Aliases.** An alias that synchronizes its columns with its source shows the types of the source table for
   the columns of the alias.
 - **Table list.** The `definition` of a table in the table list is `null` when it cannot be built from the
-  stored definition, for example for a typed table whose columns do not have a stored type yet, and for aliases of
-  such tables. Use the table detail for those tables.
+  stored definition, for example for a typed table where not every column has a stored type yet, for aliases of
+  such tables, and for an alias with its own column list. Use the table detail for those tables.
 - **Changing types.** The data type of a typed column cannot be changed. On Snowflake and BigQuery you can
   [update the definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition)
-  to change a column's length, nullability or default within the limits the backend allows.
+  to increase a column's length or precision, make it nullable, or change its default. Which of these a backend
+  allows depends on the alteration; for example Snowflake cannot add or change a default, and BigQuery cannot make
+  a column required.
 
 **Relation to `KBC.datatype.*` metadata.** For a typed table the definition is the source of truth for the types.
 Storage still keeps `KBC.datatype.*` copies under the `storage` provider for compatibility, and `KBC.datatype.*`
