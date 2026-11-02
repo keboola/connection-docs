@@ -81,7 +81,7 @@ table, it is the column's `description`.
 The [table list](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list)
 returns the table description and, with `include=definition`, the column descriptions.
 
-**In the Storage UI.** Open a bucket and then a table. On the **Overview** tab, the **Table Description** box has an
+**In the Storage UI.** On Snowflake and BigQuery projects, open a bucket and then a table. On the **Overview** tab, the **Table Description** box has an
 **Add description** button, and an existing description opens for editing when you click it. On the **Schema** tab,
 each column row has a **Description** cell with an **Edit Description** button. Descriptions are Markdown, up to
 65,535 characters, and are saved with **Save**. Saving a description in the UI turns off the **Managed by Keboola**
@@ -101,9 +101,9 @@ BigQuery console.
 | BigQuery | 1,024 characters |
 
 Storage accepts descriptions up to 65,535 characters and stores the full text. Only the part within the limits
-above is written to the backend, and the full text stays available through the Storage API. When you set a
-description through the table definition update endpoint, keep it within the backend limit, because a longer text
-can make that update fail on BigQuery.
+above is written to the backend, and the full text stays available through the Storage API. The Storage UI,
+components and the API save descriptions through the table definition update endpoint. On BigQuery, a column
+description longer than 1,024 characters can make that update fail, so keep column descriptions within the limit.
 
 Descriptions are not written to the backend for:
 - aliases that are not materialized as a view, tables in [linked buckets](/catalog/), and tables
