@@ -77,9 +77,17 @@ It is the text shown for the table and its columns in Storage and returned by th
 [create a table with a definition](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-bucketId-/tables-definition)
 or [update its definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition).
 When you create a table, a column description goes in the column's `definition.description`; when you update a
-table, it is the column's `description`. <!-- VERIFY(DMD-2627 owner): list the Storage UI place where users edit the description, if it is editable there. -->
+table, it is the column's `description`.
 The [table list](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list)
 returns the table description and, with `include=definition`, the column descriptions.
+
+**In the Storage UI.** Open a bucket and then a table. On the **Overview** tab, the **Table Description** box has an
+**Add description** button, and an existing description opens for editing when you click it. On the **Schema** tab,
+each column row has a **Description** cell with an **Edit Description** button. Descriptions are Markdown, up to
+65,535 characters, and are saved with **Save**. Saving a description in the UI turns off the **Managed by Keboola**
+switch of the table, so Keboola components stop updating the descriptions of the table and all its columns; you
+can turn it on again from the same box. The description of an alias shows the description of its source table and
+is read-only, as are the descriptions of tables in buckets backed by an external schema.
 
 **Visible in your backend.** On Snowflake and BigQuery projects the descriptions are written to the
 database itself: a Snowflake `COMMENT` on the table and its columns, and the BigQuery table and column
@@ -92,10 +100,10 @@ BigQuery console.
 | Snowflake | 16,384 characters |
 | BigQuery | 1,024 characters |
 
-Storage accepts descriptions up to 65,535 characters. Keep descriptions within the limits above so the backend
-holds the complete text; Storage shortens longer text it writes to the backend when it creates a table or
-refreshes descriptions.
-<!-- VERIFY(connection owner): the table definition update endpoint passes the text to the backend without shortening it first; confirm that an over-limit description is accepted there. -->
+Storage accepts descriptions up to 65,535 characters and stores the full text. Only the part within the limits
+above is written to the backend, and the full text stays available through the Storage API. When you set a
+description through the table definition update endpoint, keep it within the backend limit, because a longer text
+can make that update fail on BigQuery.
 
 Descriptions are not written to the backend for:
 - aliases that are not materialized as a view, tables in [linked buckets](/catalog/), and tables

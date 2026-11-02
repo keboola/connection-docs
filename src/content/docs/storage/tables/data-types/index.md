@@ -22,7 +22,7 @@ These are the key benefits of using the Native Data Types feature:
 
 ## Current Drawbacks
 Using the Native Data Types feature also has its drawbacks:
-- Data types in typed tables cannot be modified after creation. To change the data types, you must recreate the table. This limitation applies to both the UI and the API. See [How to Change Column Types](/storage/tables/data-types/#changing-types-of-existing-typed-columns).
+- The data type of a column in a typed table cannot be changed after creation. To change a type, you must create a new column or recreate the table. See [How to Change Column Types](/storage/tables/data-types/#changing-types-of-existing-typed-columns). On Snowflake and BigQuery you can still [update the table definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition) through the API to increase a column's length or precision, make it nullable or required, or change its default, within the limits of the backend (see [Data types in the table definition](/storage/tables/#data-types-in-the-table-definition)).
 - Keboola does not perform any type conversion during data loading. Your data must exactly match the column type defined in the table within Storage.
 - Loading data with incompatible types will result in a failure.
 
