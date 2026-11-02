@@ -92,8 +92,9 @@ BigQuery console.
 | Snowflake | 16,384 characters |
 | BigQuery | 1,024 characters |
 
-Storage accepts descriptions up to 65,535 characters and keeps the full text. Only the copy written to
-the backend is cut to this limit, so a longer description is still complete in Storage.
+Storage accepts descriptions up to 65,535 characters. Keep descriptions within the limits above so the backend
+holds the complete text; Storage shortens longer text it writes to the backend when it creates a table or
+refreshes descriptions.
 <!-- VERIFY(connection owner): the table definition update endpoint passes the text to the backend without shortening it first; confirm that an over-limit description is accepted there. -->
 
 Descriptions are not written to the backend for:
@@ -102,7 +103,7 @@ Descriptions are not written to the backend for:
 - projects on other backends.
 
 Aliases that synchronize columns with their source read the description of the table they point to; an alias's own table description takes precedence.
-A materialized alias view carries the resolved description as its comment; views created before this feature get it the next time a description changes.
+A materialized alias view carries the resolved description as its comment (Snowflake) or description (BigQuery); views created before this feature get it the next time a description changes.
 
 **Relation to `KBC.description` metadata.** The description in the table definition is the source of
 truth. For compatibility, Storage mirrors it into the `KBC.description` [metadata](#metadata) under the
