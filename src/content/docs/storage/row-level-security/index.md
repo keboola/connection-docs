@@ -52,6 +52,8 @@ In a governed workspace nothing is readable until a policy allows it. What the r
 
 A refused query fails with one generic message, `Row-level security does not allow this query`, whatever the reason. It does not tell the reader whether a policy exists. Because an end user gets an empty result instead of a refusal for a missing policy or an unmatched rule, an empty result can also mean "no access".
 
+A different failure is the HTTP 503 `Row-level security could not be applied to this workspace`. Query Service could not apply the policies at all, for example because it could not read them or the policy engine did not answer, so it ran nothing. It is not a decision about the reader and it can be retried.
+
 ## Set it up
 
 ### 1. Make sure queries go through a governed workspace
@@ -144,13 +146,15 @@ A query that carries only the app's Storage token, without the user token, is re
 ## Limitations
 
 - Governed workspaces answer a single `SELECT` (with `WITH`, `UNION`, `EXCEPT`, `INTERSECT`). Everything else is refused, including `SHOW`, `DESCRIBE`, `EXPLAIN`, `INFORMATION_SCHEMA`, `CREATE`, `INSERT`, user-defined functions and queries on query history.
+- A statement is refused with the generic 403 when it uses a construct that could reach data outside the policies: `IDENTIFIER()` or `TABLE()` to name an object from a string, AI and ML functions (`AI_*`, `AI.*`, `PREDICT`, `VECTOR_SEARCH`), `TO_FILE`, `READ_CSV` or `READ_PARQUET`, `SECRET`, session-context functions such as `CURRENT_USER()`, `CURRENT_ROLE()` or `CURRENT_STATEMENT()`, `<sequence>.NEXTVAL`, a session variable (`$x`, `@@x`), a control character, or an unquoted name with `$$` or a non-ASCII character in it. `CURRENT_DATE`, `CURRENT_TIME` and `CURRENT_TIMESTAMP` stay allowed. A statement longer than 32 KiB, or with more than 200 CTEs or 300 table references, is refused too.
 - Tables must be written with their bucket schema, for example `"in.c-crm"."orders"`. A governed workspace cannot query tables stored in the workspace itself.
 - On Snowflake, a table of a linked bucket (a bucket shared from another project) cannot be read in a governed workspace: Query Service refuses it for every reader, because the table lives in the database of the source project. Until linked buckets are supported, load the data into a table of your own project and write the policy for that table.
 - Alias tables have not been verified with policies yet. Do not rely on a policy for them.
 - Projects with a protected default branch (SOX) are not supported.
+- Row-level security of a Data App works on Snowflake projects only. A governed app can only read: it runs `SELECT` statements and nothing else, so an app that writes to its Storage Access tables fails on its inserts, updates and deletes.
 - On BigQuery, create the governed workspace with the MCP Server or the API. The `--governed` flag of `kbagent workspace create` does not support BigQuery yet.
 - Column policies are an allowlist of visible columns. Masking a column's values is not supported.
-- The project feature `row-level-security` is checked by the MCP Server only. A workspace you create with the login type `governed` is enforced regardless of the feature.
+- The project feature `row-level-security` is checked by the MCP Server and by the Data App settings page of the Keboola UI only. A workspace you create with the login type `governed` is enforced regardless of the feature.
 
 ## Related
 

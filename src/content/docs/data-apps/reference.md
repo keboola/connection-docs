@@ -226,7 +226,7 @@ If the app deployment job fails, you can see the logs from its container in the 
 
 Storage Access has the following limitations:
 
-- **Column-level permissions not supported** — granting access to a table grants read/write on all its columns.
+- **No column-level permissions on the grant** — granting access to a table grants read/write on all its columns. To limit the rows and columns that the signed-in users of an app can read, use [row-level and column-level security](/storage/row-level-security/#data-apps); a governed app can only read.
 - **Permission changes require app restart** — adding or removing tables takes effect on the next app start (deploy, redeploy, or wake from sleep).
 
 ---

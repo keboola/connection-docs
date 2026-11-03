@@ -87,7 +87,7 @@ Column names are matched exactly, including case.
 
 Instead of a fixed value, a condition can use the reader's own identity:
 
-- `{"$identity": "email"}` as a `value` is the reader's email. It exists only when the identity provider verified the email. A reader without one is refused by a rule that uses it.
+- `{"$identity": "email"}` as a `value` is the reader's email. It exists only when the identity provider verified the email. A rule that uses it cannot be applied to a reader without one: an end user of a Data App gets an empty result for the table, and an administrator is refused (HTTP 403).
 - `{"$identity": "groups"}` as `values` is the reader's list of groups.
 
 ```json
@@ -99,7 +99,7 @@ Instead of a fixed value, a condition can use the reader's own identity:
 - Within one `rls-policy`, every rule that selects the reader applies, and their conditions are combined with **OR**.
 - If no rule selects the reader, the reader gets the policy's `default` condition. Without a `default` an administrator is **refused** and an end user of a Data App gets an empty result. Use `{"false": true}` as the `default` to return no rows for every reader instead of a refusal.
 - Within one `cls-policy`, the reader sees the **union** of the `visible_columns` of the rules that select them. A column policy has no `default`: a reader that no rule selects is refused.
-- Several policies on one table combine with **AND** (for columns, the intersection). A policy added later can only narrow access.
+- Several policies on one table combine with **AND** (for columns, the intersection). A policy added later can only narrow access for a workspace that has no policy binding (a list of the policies that apply to one workspace or app). A Data App applies only the policies listed in its configuration, and a workspace that is bound to policies only those. A binding can leave a policy out, an organization-scoped one too. The table is then read under fewer policies, so access can be wider than the full set of policies of the project allows. Whoever edits the list of an app or the binding of a workspace decides which policies apply.
 - A table needs a policy. A table with no policy is refused for an administrator and empty for a Data App user. A column policy alone opens the table for the readers it names, with all rows and only the columns it allows, and refuses everyone else (see [deny by default](/storage/row-level-security/#deny-by-default)). When the table has a row policy as well, the rows come from the row policy and the columns from the column policy.
 
 ## Scope and permissions
@@ -113,7 +113,7 @@ There is no project-only scope; a `targeted` policy with no targets covers its o
 
 A project administrator (master Storage token) can create, change and delete a `targeted` policy of their own project. Sharing it with other projects (`targetProjectIds`) or creating an `organization` policy needs the organization administrator role.
 
-The `dialect` field of a policy (`snowflake` or `bigquery`) is optional in the API. The CLI sets it to the backend of the project and refuses any other value.
+The `dialect` field of a policy (`snowflake` or `bigquery`) is optional in the API, and Query Service does not read it: it compiles every condition for the backend of the workspace, so one policy works on both backends. The CLI leaves `dialect` out of a new policy unless you pass `--dialect`, and it refuses a `--dialect` that differs from the backend of the project.
 
 ## Examples
 
