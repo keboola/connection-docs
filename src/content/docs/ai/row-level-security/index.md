@@ -148,7 +148,7 @@ A query that carries only the app's Storage token, without the user token, is re
 - On Snowflake, a table of a linked bucket (a bucket shared from another project) cannot be read in a governed workspace: Query Service refuses it for every reader, because the table lives in the database of the source project. Until linked buckets are supported, load the data into a table of your own project and write the policy for that table.
 - Alias tables have not been verified with policies yet. Do not rely on a policy for them.
 - Projects with a protected default branch (SOX) are not supported.
-- On BigQuery, create the governed workspace with the MCP Server or the API. `kbagent workspace create --governed` does not support BigQuery yet.
+- On BigQuery, create the governed workspace with the MCP Server or the API. The `--governed` flag of `kbagent workspace create` does not support BigQuery yet.
 - Column policies are an allowlist of visible columns. Masking a column's values is not supported.
 - The project feature `row-level-security` is checked by the MCP Server only. A workspace you create with the login type `governed` is enforced regardless of the feature.
 
