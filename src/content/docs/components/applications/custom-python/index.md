@@ -83,6 +83,10 @@ When using **Get from Git repository** as your code source, fill in the reposito
   - **Public – None** — Public repository, no credentials needed.
   - **Private – Personal Access Token** — The token is encrypted in Keboola Storage.
   - **Private – SSH Key** — The private key is encrypted in Keboola Storage.
+- **Organization GitHub App** — Select **Use the organization's GitHub App** to clone a private GitHub repository
+  through your organization's GitHub App, without storing credentials. Use an `https://` repository URL and set
+  **Repository Visibility & Authentication** to **None (public repository or organization GitHub App)**.
+  An organization admin has to [connect the GitHub organization](/management/organization/#connect-github) first.
 - **Branch Name** — The branch to check out. Defaults to `main`. Use **List Branches** to pick from the repository.
 - **Script Filename** — The Python file to run. Defaults to `main.py`. Use **List Files** to pick from the repository.
 
