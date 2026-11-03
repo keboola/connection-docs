@@ -36,7 +36,7 @@ with prefixed bucket names (like `in.c-1234-bucket`), each branch gets its own f
 Production data is never touched, and no data is copied up front — a copy is created only when you actually write to or modify a table within the branch.
 
 :::tip
-Branched Storage is available for projects running on <strong>Snowflake</strong>. If your project uses BigQuery, the classic prefix-based model still applies — Branched Storage support for BigQuery is coming.
+Branched Storage is available for projects running on <strong>Snowflake</strong> and <strong>BigQuery</strong>. Projects without Branched Storage enabled, and projects on other backends, use the classic prefix-based model.
 :::
 
 ### Why It Matters
@@ -76,7 +76,7 @@ When you delete or merge the branch, the branched storage is cleaned up accordin
 In production, you might have a data source connector that extracts data into a bucket `in.c-requests`, and a transformation
 that reads from it and writes results to `out.c-visits`.
 
-When you switch to a branch on a **Snowflake project with Branched Storage enabled**, no data is copied immediately.
+When you switch to a branch in a **project with Branched Storage enabled**, no data is copied immediately.
 The branch reads from production Storage until you run a job that writes data — at that point, only the affected tables
 are materialized in the branch's own storage. Your production `out.c-visits` remains untouched throughout.
 
