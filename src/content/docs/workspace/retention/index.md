@@ -21,7 +21,7 @@ The following workspaces are **not** affected:
 
 - workspaces created by a transformation run (they are temporary and are removed separately, without an e-mail),
 - workspaces of [data apps](/data-apps/) and of the [MCP server](/ai/mcp-server/),
-- read-only workspaces that give access to shared data,
+- read-only workspaces of the [Data Gateway](/components/applications/data-gateway/) (Snowflake reader account),
 - workspaces on any other backend.
 
 ## What Counts as Use
