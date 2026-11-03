@@ -19,6 +19,7 @@ Retention applies to Snowflake and BigQuery workspaces that have their own datab
 
 The following workspaces are **not** affected:
 
+- Python and R workspaces (JupyterLab),
 - workspaces created by a transformation run (they are temporary and are removed separately, without an e-mail),
 - workspaces of [data apps](/data-apps/) and of the [MCP server](/ai/mcp-server/),
 - read-only workspaces of the [Data Gateway](/components/applications/data-gateway/) (Snowflake reader account),
