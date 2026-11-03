@@ -14,11 +14,11 @@
     "test": "node --test scripts/*.test.ts"
   },
   "dependencies": {
-    "@astrojs/mdx": "^5.0.2",
-    "@astrojs/starlight": "^0.38",
-    "astro": "^6",
+    "@astrojs/mdx": "^8.0.3",
+    "@astrojs/starlight": "^0.42",
+    "astro": "^7",
     "marked": "^18.0.4",
-    "sharp": "^0.33",
+    "sharp": "^0.35",
     "starlight-image-zoom": "^0.14"
   },
   "devDependencies": {
