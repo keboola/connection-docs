@@ -1,6 +1,6 @@
 ---
 title: Row-Level and Column-Level Security
-slug: 'ai/row-level-security'
+slug: 'storage/row-level-security'
 description: Restrict which rows and columns of a Storage table each reader can see when they query through the MCP Server, Data Apps or the Keboola CLI — policies you write once and Keboola enforces on every query.
 ---
 
@@ -32,7 +32,7 @@ Data that is copied out of a governed table is not governed: transformation outp
 
 ## How it works
 
-1. You write **policies**, one per protected table. A policy is a list of *rules*; each rule selects readers and says which rows or columns they get. See the [policy reference](/ai/row-level-security/policy-reference/).
+1. You write **policies**, one per protected table. A policy is a list of *rules*; each rule selects readers and says which rows or columns they get. See the [policy reference](/storage/row-level-security/policy-reference/).
 2. A **governed workspace** serves the queries. The MCP Server creates its own governed workspace when the project has the `row-level-security` feature. You can also create one yourself.
 3. For every query, Query Service identifies the reader, looks up the policies of the tables the query uses and rewrites the query so it can only return the allowed rows and columns.
 
@@ -80,7 +80,7 @@ kbagent rls create --project my-project --table-id in.c-crm.orders \
   --rules @rls-rules.json --default '{"false": true}' --dry-run
 ```
 
-The rule files are described in the [policy reference](/ai/row-level-security/policy-reference/), together with the column-level commands (`cls create` and friends) and the other commands (`list`, `detail`, `update`, `delete`, `schema` and the guided `rls setup`).
+The rule files are described in the [policy reference](/storage/row-level-security/policy-reference/), together with the column-level commands (`cls create` and friends) and the other commands (`list`, `detail`, `update`, `delete`, `schema` and the guided `rls setup`).
 
 **With an AI assistant.** The `kbagent` plugin of [AI Kit](/ai/ai-kit/) teaches an assistant these commands (the plugin is installed with `/plugin install kbagent@keboola-claude-kit`). You can describe the goal in plain words, for example:
 
@@ -88,11 +88,11 @@ The rule files are described in the [policy reference](/ai/row-level-security/po
 
 Ask the assistant to run the dry run and show it to you before it writes. Commands that write are subject to the CLI's [permission settings](/cli/); an agent that runs them with `--json` is not asked for a confirmation, so the dry run is your check.
 
-**With the API.** Policies are objects in the Keboola Metastore, so you can create them with `curl` and an administrator's Storage token. The [policy reference](/ai/row-level-security/policy-reference/#create-a-policy-with-the-api) has the requests.
+**With the API.** Policies are objects in the Keboola Metastore, so you can create them with `curl` and an administrator's Storage token. The [policy reference](/storage/row-level-security/policy-reference/#create-a-policy-with-the-api) has the requests.
 
 ### 3. Check it as the reader
 
-Query a protected table the way the reader does and compare the result with what the policy should allow. Your own identity matters here: an administrator behind a Storage token is matched by the subject `keboola|<your administrator ID>` and is not exempt, so you need a rule for yourself to see anything. The [policy reference](/ai/row-level-security/policy-reference/#who-a-rule-selects) shows where to find your ID.
+Query a protected table the way the reader does and compare the result with what the policy should allow. Your own identity matters here: an administrator behind a Storage token is matched by the subject `keboola|<your administrator ID>` and is not exempt, so you need a rule for yourself to see anything. The [policy reference](/storage/row-level-security/policy-reference/#who-a-rule-selects) shows where to find your ID.
 
 ## What users see
 
@@ -154,7 +154,7 @@ A query that carries only the app's Storage token, without the user token, is re
 
 ## Related
 
-- [Policy reference](/ai/row-level-security/policy-reference/): rule syntax, examples and the API
+- [Policy reference](/storage/row-level-security/policy-reference/): rule syntax, examples and the API
 - [MCP Server](/ai/mcp-server/)
 - [Keboola CLI](/cli/)
 - [AI Kit](/ai/ai-kit/)

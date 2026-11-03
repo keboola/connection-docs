@@ -1,10 +1,10 @@
 ---
 title: Policy Reference
-slug: 'ai/row-level-security/policy-reference'
+slug: 'storage/row-level-security/policy-reference'
 description: Write row-level and column-level security policies — how rules select readers, the condition language, how policies combine, examples, and the Keboola CLI and API calls that create them.
 ---
 
-This page describes the policies behind [row-level and column-level security](/ai/row-level-security/): what a policy contains, how a rule selects its readers, and how to create one.
+This page describes the policies behind [row-level and column-level security](/storage/row-level-security/): what a policy contains, how a rule selects its readers, and how to create one.
 
 ## A policy
 
@@ -100,7 +100,7 @@ Instead of a fixed value, a condition can use the reader's own identity:
 - If no rule selects the reader, the reader gets the policy's `default` condition. Without a `default` an administrator is **refused** and an end user of a Data App gets an empty result. Use `{"false": true}` as the `default` to return no rows for every reader instead of a refusal.
 - Within one `cls-policy`, the reader sees the **union** of the `visible_columns` of the rules that select them. A column policy has no `default`: a reader that no rule selects is refused.
 - Several policies on one table combine with **AND** (for columns, the intersection). A policy added later can only narrow access.
-- A table needs a policy. A table with no policy is refused for an administrator and empty for a Data App user. A column policy alone opens the table for the readers it names, with all rows and only the columns it allows, and refuses everyone else (see [deny by default](/ai/row-level-security/#deny-by-default)). When the table has a row policy as well, the rows come from the row policy and the columns from the column policy.
+- A table needs a policy. A table with no policy is refused for an administrator and empty for a Data App user. A column policy alone opens the table for the readers it names, with all rows and only the columns it allows, and refuses everyone else (see [deny by default](/storage/row-level-security/#deny-by-default)). When the table has a row policy as well, the rows come from the row policy and the columns from the column policy.
 
 ## Scope and permissions
 
@@ -247,6 +247,6 @@ A rule that selects by email is rejected by the schema validation (HTTP `422`), 
 
 ## See also
 
-- [Row-level and column-level security](/ai/row-level-security/): what is protected, deny by default, limitations
+- [Row-level and column-level security](/storage/row-level-security/): what is protected, deny by default, limitations
 - [Keboola CLI](/cli/)
 - [MCP Server](/ai/mcp-server/)
