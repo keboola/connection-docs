@@ -36,7 +36,7 @@ with prefixed bucket names (like `in.c-1234-bucket`), each branch gets its own f
 Production data is never touched, and no data is copied up front — a copy is created only when you actually write to or modify a table within the branch.
 
 :::tip
-Branched Storage is available for projects running on <strong>Snowflake</strong> and <strong>BigQuery</strong>.
+Branched Storage is available for projects running on <strong>Snowflake</strong> and <strong>BigQuery</strong>. Projects without Branched Storage enabled, and projects on other backends, use the classic prefix-based model.
 :::
 
 ### Why It Matters
