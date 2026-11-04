@@ -117,10 +117,10 @@ The organization page will show that MFA is required:
 ![Screenshot -- MFA Required](/management/organization/organization-8.png)
 
 ## Connect GitHub
-Connect your GitHub organization to let [dbt transformations](/transformations/dbt/transformation/#dbt-project-repository)
-and [Custom Python](/components/applications/custom-python/#git-configuration) clone private repositories
-through the Keboola GitHub App. Configurations then store no personal access token or SSH key;
-Keboola gets a short-lived token from the App for each job.
+Connect your GitHub organization to let [dbt transformations](/transformations/dbt/transformation/#dbt-project-repository),
+[Custom Python](/components/applications/custom-python/#git-configuration), and [Apps](/data-apps/getting-started/)
+clone private repositories through the Keboola GitHub App. Configurations then store no personal access token or SSH key;
+Keboola gets a short-lived token from the App each time it clones the repository.
 
 Keboola has already registered the GitHub App for your stack. You only install it on your GitHub organization
 and connect that GitHub organization to your Keboola organization.
