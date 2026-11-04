@@ -52,7 +52,8 @@ function resolves(p) {
 
 const findings = { brokenLinks: [], missingImages: [], jekyllSmell: [], multiH1: [], extCount: 0 };
 
-const ATTR = /(?:href|src)\s*=\s*["']([^"']+)["']/gi;
+// `poster` is a video's still: an image, and nothing else would notice it missing
+const ATTR = /(?:href|src|poster)\s*=\s*["']([^"']+)["']/gi;
 
 for (const file of htmlFiles) {
   const raw = readFileSync(file, 'utf8');
@@ -70,7 +71,7 @@ for (const file of htmlFiles) {
   ATTR.lastIndex = 0;
   while ((m = ATTR.exec(html))) {
     const url = m[1].trim();
-    const isImg = m[0].toLowerCase().startsWith('src');
+    const isImg = !m[0].toLowerCase().startsWith('href');
 
     if (/^(mailto:|tel:|javascript:|data:|#)/i.test(url)) continue;
     if (/^https?:\/\//i.test(url)) {
@@ -89,7 +90,7 @@ for (const file of htmlFiles) {
     }
 
     if (!resolves(url)) {
-      if (isImg || /\.(png|jpe?g|gif|svg|webp|avif)$/i.test(url)) {
+      if (isImg || /\.(png|jpe?g|gif|svg|webp|avif|mp4|webm)$/i.test(url)) {
         findings.missingImages.push({ page: r, url });
       } else {
         findings.brokenLinks.push({ page: r, url });

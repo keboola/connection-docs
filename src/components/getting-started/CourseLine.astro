@@ -1,0 +1,61 @@
+---
+// The course as a line of dots, the picture the hub clip draws.
+//
+// Two layouts from one list (./course.mjs):
+//   <CourseLine layout="list" />      on the hub: every step with what you can
+//                                     do after it, instead of a four-column table
+//   <CourseLine current="load" />     at the top of a step: where this page sits,
+//                                     done steps filled, this one ringed, each dot
+//                                     a link
+//
+// Styles live in custom.css (.gs-course). The markdown twin prints the same
+// list as text (page-markdown.mjs), so an agent landing on a step knows the
+// steps around it.
+
+import { COURSE } from './course.mjs';
+
+interface Props {
+  /** The key of the page this bar sits on: project, load, transform, ask, app, automate, check. */
+  current?: string;
+  layout?: 'bar' | 'list';
+}
+
+const { current, layout = 'bar' } = Astro.props;
+const at = current ? COURSE.findIndex((s) => s.key === current) : -1;
+---
+
+{
+  layout === 'list' ? (
+    <div class="not-content">
+    <ol class="gs-course gs-course--list">
+      {COURSE.map((s, i) => (
+        <li class="gs-course__step">
+          <span class="gs-course__dot" aria-hidden="true">{i + 1}</span>
+          <div class="gs-course__body">
+            <a class="gs-course__title" href={s.href}>{s.title}</a>
+            <p class="gs-course__outcome">{s.outcome}</p>
+            {s.term && (
+              <p class="gs-course__term">
+                In Keboola: <strong>{s.term}</strong>
+              </p>
+            )}
+          </div>
+        </li>
+      ))}
+    </ol>
+    </div>
+  ) : (
+    <nav class="gs-course gs-course--bar not-content" aria-label="Getting Started steps">
+      <ol>
+        {COURSE.map((s, i) => (
+          <li class:list={['gs-course__step', { 'is-done': i < at, 'is-current': i === at }]}>
+            <a href={s.href} aria-current={i === at ? 'step' : undefined} title={s.title}>
+              <span class="gs-course__dot">{i + 1}</span>
+              <span class="gs-course__name">{s.short}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}

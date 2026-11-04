@@ -21,5 +21,7 @@ jobs:
         run: npm ci
       - name: "Check CLI reference freshness"
         run: npm run check:cli
+      - name: "Handler tests"
+        run: npm test
       - name: "Build"
         run: npm run build

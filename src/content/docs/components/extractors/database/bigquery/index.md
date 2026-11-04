@@ -1,5 +1,6 @@
 ---
 title: Google BigQuery
+description: Run queries in Google BigQuery and load the results into Storage tables, or as Avro files with the files variant.
 slug: 'components/extractors/database/bigquery'
 redirect_from:
     - /extractors/database/bigquery/
@@ -15,7 +16,9 @@ Running the connector creates a background job that
 - exports the results from Google Cloud Storage and stores them in specified tables in Keboola Storage.
 - removes the results from Google Cloud Storage.
 
-***Note:** Using the Google BigQuery connector is also described in our [Getting Started Tutorial](/tutorial/ad-hoc/#using-bigquery-connector).*
+<!-- How-to-type page. Avro files section added 2026-10-12 and corrected 2026-10-13 from Jiří Soukup's code-checked review of PR #1183; the rest is the legacy page. -->
+
+***Note:** Using the Google BigQuery connector is also described in our [Getting Started Tutorial](/getting-started/ad-hoc/#using-bigquery-connector).*
 
 ## Initial Setup
 
@@ -36,7 +39,7 @@ Finally, click **+ Create Key** to create a new JSON key, and then click **Creat
 ![Screenshot - Create JSON key](/components/extractors/database/bigquery/googlecloud-3.png)
 
 ### Bucket
-The data source connector uses a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
+The data source connector uses a Google Cloud Storage bucket as a temporary storage for off-loading the data from BigQuery.
 Go to the [**Google Cloud Platform Console > Storage >  Cloud Storage > Browser**](https://console.cloud.google.com/storage/browser)
 and click **Create Bucket**. **Name** the bucket and select its **location** (must be the same as of your dataset).
 
@@ -76,3 +79,11 @@ Name the query and click **Create**.
 ![Screenshot - Name Query](/components/extractors/database/bigquery/bigquery-6.png)
 
 To learn how to modify your configuration, go to the [SQL databases section](/components/extractors/database/sqldb/#modify-configuration).
+
+## Avro files variant
+
+The **Google BigQuery avro files** connector (`keboola.ex-google-bigquery-v2-avro-files`) is configured the same way, with the service account, the bucket and the queries, but it does not write the query results into Storage tables. Each query's result is exported to one Avro file in [Storage Files](/storage/files/) instead. Use it when the next step of your pipeline works with files, for example a transformation or a [processor](/extend/component/processors/) that reads Avro.
+
+Because each result goes to a single file, it is bound by BigQuery's limit of [1 GB per exported file](https://cloud.google.com/bigquery/docs/exporting-data); a larger result fails. The main connector unloads its results into several files through a wildcard, so this limit does not apply to it.
+
+<!-- Source for this section: Jiří Soukup's review of PR #1183 (13 Oct 2026), checked against the developer portal and the component code: name and id as above, one query = one file with no wildcard. The component is not listed in /v2/storage on the five multi-tenant stacks; whether it should stay documented is an open product question. -->

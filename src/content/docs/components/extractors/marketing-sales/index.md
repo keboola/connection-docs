@@ -27,6 +27,7 @@ Keboola provides the following marketing and sales connectors:
 - [Mailchimp](/components/extractors/marketing-sales/mailchimp/)
 - [Market Vision](/components/extractors/marketing-sales/market-vision/)
 - [Microsoft Advertising (Bing Ads)](/components/extractors/marketing-sales/bing-ads/)
+- [MixPanel](/components/extractors/marketing-sales/mixpanel/)
 - [Pinterest Ads](/components/extractors/marketing-sales/pinterest-ads/)
 - [Pipedrive](/components/extractors/marketing-sales/pipedrive/)
 - [Salesforce](/components/extractors/marketing-sales/salesforce/). 

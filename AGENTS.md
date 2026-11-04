@@ -1,70 +1,70 @@
-# AGENTS.md — working in this repo
+# AGENTS.md: working in this repo
 
 Guide for AI coding agents (and humans) contributing to the Keboola documentation
 site. Read this before making changes.
 
 ## What this is
 
-The official Keboola product documentation, served at **help.keboola.com**. Built
-with **Astro + Starlight**. Content is Markdown; the site builds to static HTML
-with full-text search (Pagefind), redirects, and a generated sidebar.
+The official Keboola product documentation, served at help.keboola.com. Built
+with Astro 6 + Starlight. Content is Markdown (a few pages are MDX); the site
+builds to static HTML with full-text search (Pagefind), redirects, and a
+generated sidebar. The repo is public, so everything committed is readable by
+anyone, comments included.
 
 ## Quick start
 
 ```bash
 npm install
-npm run dev        # dev server at http://localhost:4321 (hot reload)
-npm run build      # production build → dist/
+npm run dev          # dev server at http://localhost:4321 (hot reload)
+npm run build        # production build → dist/
+npm run preview      # serve dist/ locally
 npm run gen:sidebar  # regenerate src/sidebar.mjs from _data/navigation.yml
+npm run check:cli    # kbagent usage in docs vs the generated CLI reference
+npm test             # unit tests (scripts/*.test.ts)
 ```
 
-- Node.js 22+.
-- Search (Pagefind) only works in a production build/preview, **not** in `npm run dev`.
-
-## Editing content
-
-Docs pages are Markdown in **`src/content/docs/`** — edit them directly. The
-sidebar is generated from `_data/navigation.yml`, so after changing it run
-`npm run gen:sidebar` (don't hand-edit `src/sidebar.mjs`).
+- Node.js 22 (what CI uses).
+- Search (Pagefind) only works in a production build or preview, not in `npm run dev`.
 
 ## Repo structure
 
 ```
 src/
-  content/docs/   # documentation pages (Markdown) — edit these directly
-  components/     # Starlight component overrides (PageTitle, Head, AskKaiDrawer, …)
-  styles/custom.css  # ALL UI/CSS customization lives here
-  integrations/   # custom Astro integrations (redirect-from, beacon-transforms)
-  sidebar.mjs     # GENERATED sidebar (from _data/navigation.yml — don't hand-edit)
+  content/docs/   # documentation pages (.md, some .mdx)
+  components/     # Starlight overrides and page components (PageTitle, Head,
+                  # AskKaiDrawer, Prereqs, StageStrip, …)
+  styles/custom.css  # all UI/CSS customization
+  integrations/   # custom Astro integrations: redirect-from, beacon-transforms,
+                  # page-markdown (the "View as Markdown" twin), pagefind-titles
+  sidebar.mjs     # generated from _data/navigation.yml
 public/           # static assets served as-is (images, favicon, llms)
 api/chat.ts       # "Ask Kai" backend (Vercel function → Keboola AI Service)
+api/feedback.ts   # "Was this page helpful?" backend (Vercel function → Linear issues)
 scripts/
-  convert-nav.mjs # builds src/sidebar.mjs from _data/navigation.yml
-  audit-phase2.mjs# read-only link/image/heading/table audit
-  check-cli-reference.mjs  # CI gate: docs `kbagent` usage vs _data/cli/command-reference.md
-  migrate.mjs, switchover.mjs  # legacy Jekyll→Astro migration — DO NOT RUN: no dry-run,
-                      # no confirmation, and it deletes every page whose Jekyll source is
-                      # gone from the repo root — which today is all of them
+  convert-nav.mjs          # builds src/sidebar.mjs from _data/navigation.yml
+  audit-phase2.mjs         # read-only link/image/heading/table audit of dist/
+  check-cli-reference.mjs  # CI gate behind `npm run check:cli`
+  migrate.mjs, switchover.mjs  # legacy Jekyll→Astro migration; see "Don't run"
 astro.config.mjs  # Astro + Starlight config
-_data/navigation.yml  # sidebar source (consumed by convert-nav.mjs)
-_data/cli/command-reference.md  # generated kbagent reference, auto-synced from
-                      # keboola/cli releases (sync-cli-reference.yml) — don't hand-edit
+_data/navigation.yml            # sidebar source
+_data/cli/command-reference.md  # generated kbagent reference, synced from
+                                # keboola/cli releases (sync-cli-reference.yml)
 ```
 
-## Core rules
+## Where each kind of change goes
 
-- **CSS / UI changes → only `src/styles/custom.css`.** Don't scatter `<style>`
-  blocks; don't restyle in components.
-- **Component behavior/markup → the relevant `src/components/*.astro`.**
-- **Content → edit `src/content/docs/` directly** (Markdown).
-- **Sidebar → `_data/navigation.yml`**, then `npm run gen:sidebar`. Don't
-  hand-edit `src/sidebar.mjs`.
-- **Product facts vs content choices:** when unsure whether something is accurate
-  product behavior or a wording choice, ask a maintainer — don't guess.
+- Page content: edit `src/content/docs/` directly.
+- Sidebar: edit `_data/navigation.yml`, then run `npm run gen:sidebar`.
+  `src/sidebar.mjs` is overwritten on every regeneration, so hand edits are lost.
+- CSS / visual changes: `src/styles/custom.css` only, so styling stays in one
+  place. No `<style>` blocks in pages or components.
+- Component behavior or markup: the relevant `src/components/*.astro`.
+- CLI reference: `_data/cli/command-reference.md` is regenerated by a
+  workflow; change the source in keboola/cli instead.
 
 ## Authoring content
 
-Frontmatter needs at least `title` and `slug`:
+Frontmatter needs `title`, `slug` and `description`:
 
 ```yaml
 ---
@@ -85,33 +85,79 @@ Beta notice.
 :::
 ```
 
-Images: place alongside the Markdown and reference with an absolute path
-(`![Alt](/section/page/image.png)`). Click-to-zoom is automatic.
+Images: place them under `public/<section>/` and reference them with an absolute
+path (`![Alt](/section/page/image.png)`). Click-to-zoom is automatic.
+
+### Moving, merging or deleting a page
+
+Every URL that stops existing needs a redirect, or external links break. Add the
+old path to the surviving page's frontmatter:
+
+```yaml
+redirect_from:
+  - /old/section/page/
+```
+
+The `redirect-from` integration turns these into redirect pages at build time.
+Point straight at the final page; a redirect to another redirect is a chain.
+Then search `src/` and `_data/navigation.yml` for the old slug and update the links.
+
+### MDX pages
+
+In `.mdx` files, `{...}` in prose is a JavaScript expression, not text. A literal
+placeholder like `{URL}` evaluates to whatever that name means in scope (Node's
+`URL` class, for example) and prints it on the page. Put placeholders in code spans
+or fenced blocks, and check for bare braces before renaming a `.md` file to `.mdx`.
+
+### Comments and unverified claims
+
+The repo is public, and HTML comments (and MDX `{/* */}` comments, which become
+HTML comments) survive into the page's Markdown twin. Write comments as if a
+reader will see them.
+
+When you can't confirm that a statement matches how the product behaves, don't
+guess. Keep the text, mark it `<!-- VERIFY(<owner>): what to check -->`, and
+tell the person you're working with what needs checking.
 
 ## Verify before pushing
 
-- `npm run build` is clean (no fatal errors).
-- For link/image/table changes, run `node scripts/audit-phase2.mjs` after building.
-- For CSS that must survive client-side navigation, verify in a **production
-  build** (`astro build && astro preview`) — dev injects `<style>` tags that
-  don't survive Astro view-transition swaps.
+CI runs `npm run check:cli` and `npm run build` on every PR. Run both locally first.
+
+- For link, image or table changes, run `node scripts/audit-phase2.mjs` after building.
+- For CSS that must survive client-side navigation, check a production build
+  (`npm run build && npm run preview`). The dev server injects `<style>` tags
+  that Astro view-transition swaps drop.
 - `astro preview` enforces `trailingSlash: 'always'` and answers a URL without a
   slash with its own "Not Found" page instead of the site's 404. To check the 404
-  locally, open `/404.html` directly; production normalizes the slash and does not
-  behave this way.
+  locally, open `/404.html` directly. Production normalizes the slash.
 
 ## Workflow & deployment
 
 - Docs-as-code: changes go through PRs; a maintainer reviews and merges.
-- **`help.keboola.com` is served by Vercel.** Every PR also gets a Vercel preview
-  deployment — use it to check rendering before asking for review.
-- Vercel applies its defaults, since `vercel.json` only sets cache headers for
-  `/pagefind/*`: a missing trailing slash is normalized, and `404.html` from the
-  build root is returned for unmatched paths. **Don't move the 404 out of the
-  build root.**
+- `help.keboola.com` is served by Vercel. Every PR also gets a Vercel preview
+  deployment. Use it to check rendering before asking for review.
+- `vercel.json` sets cache headers for `/pagefind/*` and carries a few permanent
+  (308) redirects for files that moved, such as the old `/tutorial/*.csv` samples
+  and screenshots, which page redirects (`redirect_from`) cannot cover. Otherwise
+  Vercel's defaults apply: a missing trailing slash is normalized, and `404.html`
+  from the build root is returned for unmatched paths. Keep the 404 in the build
+  root.
 - `.github/workflows/main.yml` still builds and runs `aws s3 sync` to
-  `s3://help.keboola.com` on every push to `main`. It succeeds, but it is not
-  what serves the live domain — don't reason about production routing, redirects,
-  or cache headers from it.
-- The "Ask Kai" widget (`api/chat.ts`) is a Vercel function; it needs
-  `AI_SERVICE_URL` + `KBC_STORAGE_API_TOKEN` env vars.
+  `s3://help.keboola.com` on every push to `main`. It succeeds, but it doesn't
+  serve the live domain, so don't infer production routing, redirects or cache
+  headers from it.
+- The "Ask Kai" widget (`api/chat.ts`) is a Vercel function; it needs the
+  `AI_SERVICE_URL` and `KBC_STORAGE_API_TOKEN` env vars.
+- The feedback widget (`api/feedback.ts`, rendered by `Feedback.astro`) is a
+  Vercel function too. It needs `FEEDBACK_LINEAR_API_KEY`; the Linear team,
+  project, state and label IDs are in the code. Without the key (or a
+  `FEEDBACK_INGEST_URL`) the widget hides itself. A revoked key leaves it
+  visible, and comments then reach only the function logs as
+  `[feedback] undelivered comment`. Tests: `npm test`.
+
+## Don't run
+
+- `scripts/migrate.mjs` and `scripts/switchover.mjs` are the one-time Jekyll→Astro
+  migration. They have no dry run and no confirmation, and they delete every page
+  whose Jekyll source is missing from the repo root, which today is all of them.
+  Leave them alone even if a task seems to call for re-migrating.

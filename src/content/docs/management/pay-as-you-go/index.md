@@ -1,16 +1,20 @@
 ---
 title: Pay As You Go (Free Plan)
 slug: 'management/payg-project'
+description: 'The limits of a Free Plan project, its free monthly minutes and how to buy more, how to upgrade it to a standard project, and when an inactive one is deleted.'
 ---
 
 
 
 You can now start working with Keboola for free. Simply [sign up](https://connection.us-east4.gcp.keboola.com/wizard) on the website and create a free project.
 
+Once you have one, [Getting started with Keboola](/getting-started/) walks you through your first steps in it.
+
 ## Free Plan Limits
 Free Plan projects have the following limits:
 
-- **Stack**: no option to choose a stack. Read more about stacks [here](/overview/#stacks).
+- **Stack**: no option to choose a stack. The sign-up link above creates the project on Google Cloud **us-east4**, at `https://connection.us-east4.gcp.keboola.com`. To sign in later, open that address, or pick **Google Cloud · United States · us-east4** in the stack picker on the sign-in page at `connection.keboola.com`. Read more about stacks [here](/overview/#stacks).
+  <!-- VERIFY(Martin Matějka): are all new Free Plan projects created on us-east4, and since when? The page says only that the sign-up link above creates one there. The sign-in picker (read live 26 Oct 2026) marks two stacks PAY AS YOU GO: Google Cloud · United States · us-east4 and Azure north-europe. Do Free Plan projects live on north-europe, and should the page tell those readers to sign in there? The FAQ on keboola.com/pricing still says Free Plan projects are hosted in MS Azure in the EU, and connection.north-europe.azure.keboola.com/wizard answers 200. -->
 - **Single project:** each account is limited to one project, so it is not feasible for [multi-project architecture](/catalog/multi-project/).
 - **Data Catalog:** sharing & grouping data using the [data catalog](/catalog/) is not available. 
 - **Transformations:** are limited to SQL, Python, and R.
@@ -19,6 +23,8 @@ Free Plan projects have the following limits:
 - **Storage:** is limited to 250 GB of data storage.
 - **Time travel:** is not supported and there is no option to restore data if bucket or table has been accidentaly deleted.
 - **Support:** while we strive to provide great support even under the Free Plan, there is no service-level agreement (SLA) and we will deal with the tickets on a best-effort basis. 
+
+<!-- VERIFY(Nikita): a new Free Plan project (6375, us-east4, 2026-10-01) reported storage.dataSizeBytes = 50000000000 (50 GB) through /v2/storage/tokens/verify, read while Billing still asked to activate the account, against the 250 GB this page states. One of the two is wrong. -->
 
 ## DWH Backend
 In Pay As You Go projects, only a Keboola-managed backend is available. You can use your own database ([Bring Your Own Database](/storage/byodb/)) within any of the subscription plans.
@@ -63,3 +69,5 @@ and that you have not requested the deletion to be canceled.
 
 If, during those 45 days, there has been no new activity in your project and we have not received a request from you to cancel 
 the deletion, we will then permanently delete the project.
+
+**Next:** [Organizations](/management/organization/)

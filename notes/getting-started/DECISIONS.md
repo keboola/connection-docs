@@ -1,0 +1,2470 @@
+# Decisions — Getting Started
+
+Append-only. Each entry records a decision, who made it, and the date, so the
+reasoning survives the page it was made about. Rationale that lives only inside
+an authoring comment gets lost the moment that page is rewritten; this file is
+where it goes instead.
+
+Open questions are not decisions — they stay as `VERIFY(owner)` flags in the
+pages and are listed at the bottom of this file so they can be closed in batches.
+
+---
+
+## 2026-09-02 — The sample dataset stops being the theme
+
+**Decided by:** Michal (call, 2 Sep 2026), with evidence accepted from the
+12-site documentation survey.
+
+The octopus dataset — and any dataset — is a vehicle, not the subject of the
+guide. On the call Michal called the dataset only a vehicle for trying the
+tasks, not a theme the guide should carry. The failure mode he named was landing
+confusion: clicking through and meeting octopus on every page confused him.
+
+Evidence: of twelve documentation sites examined (dbt, Snowflake, Databricks,
+Metabase, Airbyte, Fivetran, Hex, dltHub, Supabase, Cloudflare, PostHog,
+Firecrawl), **zero** put the sample dataset's topic in a page title or a step
+heading; **twelve** name pages by task or outcome. Snowflake demoted its own
+sample brand out of a page title into the URL slug.
+
+**Consequence:** no theme vocabulary in titles, headings, or sidebar labels.
+Whimsy is allowed in exactly two places, both with precedent — the *name* of the
+sample world (`jaffle_shop`, Tasty Bytes, Wanderbricks) and the *values inside*
+the data (Metabase ships "Lightweight Wool Computer" in a category called
+Doohickey). Never in navigation.
+
+## 2026-09-02 — Structure comes from user needs, not from tools
+
+**Decided by:** Michal (call, 2 Sep 2026).
+
+MCP and the CLI are only drivers and vehicles: a reader does not want to work
+with the CLI, they want their data processed, so the structure should start from
+user needs.
+
+**Consequence:** page titles state what the reader gets. Tool names survive as
+tab labels and as their own reference sections in a separate "going further"
+tier — never as chapters of the guide.
+
+## 2026-09-02 — Every page must survive a cold landing
+
+**Decided by:** Michal (call, 2 Sep 2026).
+
+Write every page for a reader who lands on it directly and has read nothing
+before it.
+
+This collides with the design rule that the guide's question is answered only at
+the last step. Both survive with two payoffs at different scales: a **local** one
+on every page (a state sentence at the top, a verification block at the bottom)
+and a single **global** one (the business question resolves in the app).
+
+**Consequence:** four blocks on every task page — genre and position and time
+budget; a state sentence; prerequisites rendered from a shared partial; a
+verification block.
+
+## 2026-08-21 — The hero clip sits above the fold
+
+**Decided by:** Jordan (call, 21 Aug 2026). Recorded here because it existed
+only as an HTML comment in `getting-started/index.md`.
+
+The guide's question has to be answerable without reading. The hero clip is
+placed directly under the question, with the question frame as its poster so it
+is legible before autoplay starts. Its three-act structure — the raw files, the
+question, the answer — is deliberate and should be preserved through any
+dataset change.
+
+## 2026-08-05 — Combined UI and API format
+
+**Decided by:** Jordan (call, 5 Aug 2026).
+
+Pages show both the UI path and the underlying API/CLI form of the same task,
+rather than presenting them as separate sequential chapters.
+
+**Consequence:** each task page carries tabs for the same task, Kai/prompt
+selected by default. This is the same mechanism Michal asked for independently
+on 2 Sep, when he asked whether a page has a prompt and how the CLI would do
+the same task — it is one
+structural answer to two requests, not two features.
+
+## 2026-08-05 — Kai first, manual path kept
+
+**Decided by:** Jordan (call, 5 Aug 2026).
+
+Kai is the default emphasis; the click-through path stays for readers who need
+to know where each setting lives. Rationale recorded on the call: deep
+platform-specific knowledge is not career-transferable for most readers, so the
+goal is that a reader copies a prompt, gets a result, and feels it work.
+
+## 2026-08-05 — "Pick a stack" leaves Getting Started
+
+**Decided by:** Jordan (call, 5 Aug 2026).
+
+Self-serve signup exists only on pay-as-you-go; every other stack follows a
+signed contract, so a stack chooser in the first-run guide is a dead end.
+
+**Consequence:** stack topology belongs to the architecture tier, not here.
+
+## 2026-09-02 — One Getting Started for all segments
+
+**Decided by:** analysis accepted in the 2 Sep memo; confirms Jordan's audience
+call against marketing's enterprise focus.
+
+The docs reader is not the buyer. In an enterprise deal the person who opens
+this guide is an engineer running a proof of concept, a practitioner handed the
+project after signature, or an implementing partner — none of whom needs a
+different first pipeline than a pay-as-you-go signup does. What differs is what
+comes *after*: stacks, architecture, governance, SSO, branches and CI, cost
+control.
+
+**Consequence:** do not fork the guide by segment. Enterprise concerns go to a
+separate architecture tier. Precedent: Cloudflare keeps Reference Architectures
+apart from Get started.
+
+## 2026-09-02 — Sidebar labels are opt-in overrides
+
+**Decided by:** Nikita, implementing the rebuild.
+
+`scripts/convert-nav.mjs` returned a bare `{ slug }` for every leaf, so a
+`title:` in `_data/navigation.yml` was silently discarded and the sidebar label
+came from the page's frontmatter. Group landing pages were hardcoded to
+`label: 'Overview'`.
+
+Honouring `navigation.yml` titles wholesale would have changed **129 of 352**
+sidebar labels across the entire site (`/kai/settings/` from "Kai Settings" to
+"Settings", and so on) — an information-architecture change well outside this
+rebuild.
+
+**Consequence:** the generator now honours an **optional** `label:`, and only
+where present. Adding a `title:` to navigation.yml still does nothing; use
+`label:` when the sidebar needs a shorter name than the page title.
+
+## 2026-09-03 — The sample world is Boolabean, a fictional coffee chain
+
+**Decided by:** Nikita, who left the choice to the agent, against the five
+criteria in the 2 Sep memo.
+
+**The name.** Every natural café or bakery name is taken by a real business —
+checked Kolache Bar, Kettle & Crumb, Poppyseed, Bakelane, Crumbline, Kettleflow;
+all of them exist. `jaffle_shop` collides the same way, so uniqueness is not the
+criterion — *not impersonating anyone* is. So the name follows Databricks'
+Wanderbricks and Snowflake's Tasty Bytes: a pun on our own brand.
+**Boolabean** — Keboola plus coffee bean. Obviously invented, easy to say and
+search, and free.
+
+**The schema is deliberately mundane**, per the evidence: five tables,
+`stores` / `products` / `sales` / `staffing` / `weather_daily`. Whimsy lives only
+in the product values — "Iced Latte, Extremely Iced", "Cold Brew, Patient",
+"Decaf, Genuinely" — which is the Metabase slot ("Lightweight Wool Computer").
+No theme word appears in a page title or the sidebar.
+
+**The static half is generated but the weather is real.** `scripts/gen-boolabean.py`
+pulls 92 days of actual observations from open-meteo's archive API for each
+café's real coordinates, then generates sales that genuinely depend on it. Seeded,
+so the numbers the guide quotes are reproducible.
+
+**The live half is not shipped.** The guide fetches tomorrow's forecast from
+open-meteo at read time — no authentication — which is what finally makes the
+scheduling step teach something: run it again tomorrow and the answer has moved.
+dltHub pays the same price for the same reason.
+
+**The question, after testing it against the data:**
+*"Which day next week will leave a café short-handed?"*
+
+It started as *"should we put an extra person on this weekend?"* — and the data
+said no. Rosters already allow for the weekend (the Prague café goes from three
+people to four), so the weekend is the part the manager has already solved. What
+the roster cannot see is the weather: a 26 °C Monday is riskier than a cool
+Saturday, because nobody staffed up for it. In the forecast tested on 2026-09-03,
+the two stretched days were a Monday and a Tuesday, and the weekend was fine.
+
+Keeping the weekend wording would have produced a guide whose closing question
+answers "no" — so the question changed to fit the data, not the other way round.
+This is also a better demonstration: the insight is that *the roster is built on
+the day of the week and demand is built on the weather*, which is exactly the
+kind of thing you only see once two sources are joined.
+
+Verified in the data before committing to it:
+
+| Signal | Result |
+|---|---|
+| Iced-to-hot drink ratio by temperature band | 0.45 below 18 °C → 1.54 above 28 °C |
+| Rain, terrace cafés vs indoor | −25% vs −12% — the terrace is the difference |
+| Rosters vs actual demand | 55 stretched days of 552; 29 of them 26 °C+, 16 on a weekend |
+
+The rosters are planned from each café's typical week, not from what actually
+happened — a manager writing next week's rota does not know the weather. That is
+why a shortfall exists at all, and it is the thing the forecast join predicts.
+
+**Cost, stated plainly:** the live source adds one connector configuration the
+static-only version would not need, and open-meteo's CSV is two-block with units
+in the header (`temperature_2m_max (°C)`), so it needs a `skip-lines` processor —
+the same processor Kai reached for unprompted in the 2 Sep run.
+
+---
+
+## 2026-09-08 — The pipeline runs as four prompts, and the numbers match
+
+**Decision:** the section teaches the Boolabean pipeline as four prompts in one Kai chat —
+load, forecast, transform, ask — because that is what was run end to end in project 264 today
+and checked against an offline reference. "Everything in one prompt" stays an experiment
+paragraph, not the spine of the section.
+
+**What ran (control run, plan mode off, 14.4 min, 12 approvals, 0 nudges):**
+
+| stage | minutes | approvals | Kai's report | independent check (Storage API) |
+|---|---|---|---|---|
+| load — `1-load.txt` | 5.6 | 7 (config, 5 rows, run) | stores 6, products 18, sales 9,761, staffing 552, weather_daily 552 | identical |
+| forecast — `2-forecast.txt` | 3.5 | 3 | forecast 42 rows, columns `location_id, time, temperature_2m_max, precipitation_sum` | identical |
+| transform — `3-transform.txt` | 3.7 | 2 (create, run) | `staffing_outlook` 42 rows; most stretched Brno, Tue 2026-09-08, 31.2 °C dry, ~169 units / 2 staff = 84.4 | 42 rows, 42 distinct (store, date), 0 empty cells, 4 short-handed, 32.0–84.4 per person |
+| ask — `4-ask.txt` | 1.3 | 0 (read-only) | "a thin start-of-week roster colliding with warm, dry weather" | — |
+
+Kai's four flagged rows match the offline reference (a Python re-implementation of the same spec,
+run on the same day's forecast) to the decimal: Brno Tue 84.4 and Mon 83.5, Prague Mon 73.0 and Tue 71.3. **On the day this was
+written** (forecast window 2026-09-08 … 09-14) that is the whole answer; the forecast is live, so
+`check/` states the shape — 42 rows, a handful of red days — and not these values.
+
+**What Kai did differently from the plan, and why it stands:**
+
+- open-meteo's preamble: the prompt said "skip the first eight lines"; Kai set `skip-lines: 9`
+  and named the four columns in the manifest instead of reading the header. Same 42 rows, and the
+  names come out without the header's unit suffixes (`temperature_2m_max (°C)` → `temperature_2m_max`).
+  The UI tab can show either; the SQL on page 3 uses the clean names.
+- the transformation reads the source tables by fully qualified name
+  (`"KBC_EUW3_264"."in.c-keboola-ex-http-…"."sales"`) with an **empty input mapping** — the
+  read-only-input behaviour Jordan described on 5 Aug, now observed rather than reported.
+- half-open bands as `CASE WHEN t < 18 … WHEN t < 23 … WHEN t < 28 … ELSE`, twenty `TRY_CAST`s,
+  no `BETWEEN` anywhere. The roster is `ROUND(AVG(staff_on_shift))` per `DAYNAME` — exact, because
+  the headcount is constant per store and weekday (42 combinations, 0 with two values).
+- output aliases were unquoted, so Snowflake returned `STORE_NAME … SHORT_HANDED` in upper case.
+  **Not cosmetic, as the next run showed** — see "The output-mapping trap" below. The page's own SQL
+  leaves aliases unquoted too, and says why.
+
+**Product behaviour the pages must state honestly (seen twice, 3 Sep and 8 Sep):** on a
+four-part prompt Kai answers "I'll tackle this in stages", fetches the component schema, and
+stops after the first stage until told to continue. The staged version needed no nudge at all.
+The `ask/` paragraph on "the same request as one prompt" says so instead of promising a one-shot.
+
+**The output-mapping trap (plan-mode run, 2026-09-08, job 102863448):** Kai's second
+transformation quoted its aliases in lower case (`AS "store_name"`) while writing into the
+`staffing_outlook` table the first run had already created with upper-case columns. The job
+failed in 26 s with
+
+> Failed to process output mapping: Failed to load table
+> "out.c-Boolabean-staffing-outlook.staffing_outlook": Some columns are missing in the csv
+> file. Missing columns: STORE_NAME, CITY, … Expected columns: STORE_NAME, CITY, …
+
+The mechanism is not "Snowflake wants upper case" (Kai's reading) but that an **existing Storage
+table's column names must match exactly, case included**, and Snowflake upper-cases unquoted
+identifiers. The reader hits this the first time they edit the SQL and re-run: a change in
+quoting is enough. Kai diagnosed and fixed it unprompted (upper-cased the ten aliases). This is
+the failure mode `transform/` and `check/` carry; the fix is one line — quote consistently or
+not at all — and the message is quoted verbatim so it can be searched.
+
+**Plan mode, measured (staged run with plan mode on, 2026-09-08):** Kai writes a plan file,
+shows "Ready for approval", and after that approval asks for every change exactly as before —
+the load stage took 8 approvals to the control run's 7. Plan mode is a review gate, not a way to
+approve once. `PathIntro.astro` and `index.mdx` said the opposite; both corrected the same day. A
+second thing seen only in plan mode: Kai handed control back while the load job was still running
+("Checking status every 2 seconds…" → "What's next?"), so a reader may need to ask for the row
+counts — the pages should not promise the report arrives unprompted. Only the **first** prompt of
+the chat got a written plan; the forecast, transform and ask prompts ran with the ordinary
+per-change approvals (3, 3, 0). The second plan-mode run ended at 23.7 min with the ask stage
+timed out, for a reason that is mine: Kai's "run the transformation again" card is textually
+identical to the first run's card and the runner skipped it as already approved, so the
+approval expired on Kai's side ("The re-run approval timed out, so I've paused"). Runner fixed;
+the third plan-mode run is the clean figure: **14.3 min, 15 approvals (8 + 3 + 4 + 0), no
+nudge**, all four stages done — against the control run's 14.4 min and 12. The output-mapping
+trap fired again (quoted lower-case aliases into the existing upper-case table), Kai fixed and
+re-ran it unprompted, and the answer came out identical: 42 rows, Brno on Tuesday at 84.4 per
+person. Two of two plan-mode runs hit the trap; the control run, which wrote the table first, did
+not — so the page shows the failure as what happens on a *second* run, which is when a reader
+meets it.
+
+**Measurement notes for table A of the plan:** the chat shows no "Used monthly budget" indicator
+in project 264 any more, so turns consumed could not be logged; approvals were counted only when
+the click removed an enabled button in a card not seen before (the previous runner clicked one
+resolved card 172 times, because approval cards keep their buttons in the chat history).
+
+---
+
+## 2026-09-09 — The hub absorbs "Get a project"
+
+**Decision:** `getting-started/project/` is no longer a page. Its content is the **Get a project**
+section of the hub, and the old URL redirects there.
+
+**Why:** it was the only step without a Kai path, it took five minutes, and every reader of the hub
+needs it before step one anyway — so the hub kept sending people away and back. Michal's ask was
+that the first screen shows what you get; the steps list now starts with data, not with sign-up.
+The wave-one plan already called for this merge; the Boolabean rewrite was the natural moment,
+because the hub had to be rewritten top to bottom regardless.
+
+**What stayed and where:** everything — CONSERVATION-REPORT.md lists the mapping block by block,
+including both `VERIFY(owner)` comments. Nothing on the page was a fact only the project page
+carried. Four inbound links repointed (`docs/index.md`, `pay-as-you-go/`, the shared `Prereqs`
+partial, the nav); `src/sidebar.mjs` regenerated and lost one line.
+
+**Cost:** the hub is longer (about 230 lines against 158), and its first screen is text until the
+phase-2 clip lands.
+
+---
+
+## 2026-09-09 — The forecast is a second configuration, and by hand it is JSON
+
+**Decision:** `load/` builds two HTTP configurations: `Boolabean sales` with five rows for the
+static files, and `Boolabean forecast` with one row for the open-meteo URL. The Kai tab is two
+prompts, the click-through tab finishes the forecast row in the **Code Editor**.
+
+**Why two:** the forecast lives on another host, so it cannot share the base URL, and the flow on
+page 5 wants to refresh it every morning while the history stays put. Kai split it the same way
+unprompted in all three runs.
+
+**Why JSON:** the visual row form has no field for skipping the seven metadata lines and the blank
+line before open-meteo's header. Its **Header & Primary Key** section offers *Read the header from
+the file(s) header*, *Set Header* and a primary key, nothing about leading lines (form read live
+in project 264, 2026-09-09). The skip needs the `keboola.processor-skip-lines` processor, and a row
+carrying it opens in the code editor only: the **Visual Editor** button is disabled with the
+tooltip "Can't close the code editor, the configuration is not compatible. Revert your changes to
+allow switching back to the visual editor." The page shows the exact `processors` block Kai wrote
+and says the disabled button is expected, rather than pretending the form can do it.
+
+**Nine, not eight:** Kai skipped the header too and named the columns in the manifest, so the
+columns come out as `temperature_2m_max` instead of the header's `temperature_2m_max (°C)`. The
+page teaches that version and names the alternative (8 with *Read the header*) in "If it goes
+wrong", with its symptom.
+
+---
+
+## 2026-09-09 — Transform data keeps its title, and its SQL was run in the shape the page shows
+
+**Title:** stays *Transform data*. The plan floated *Combine it with data you don't have* for this
+page; dropped, because Jordan asked for exactly *Transform data* on 21 Aug after finding the
+previous clever title confusing. A second clever title is not the fix for a confusing one.
+
+**SQL:** the Snowflake block on the page is not Kai's query copied out. Kai built on read-only
+input with fully qualified table names, which is not what a reader with an input mapping types. The
+page's block uses the mapped names (`sales`, `weather_daily`, `staffing`, `stores`, `forecast`),
+quoted identifiers and readable band labels, and it was run in that exact form through a temporary
+transformation in project 264 with that exact input mapping (job 103114885, 61 s, then deleted
+along with its bucket): 42 rows, 42 distinct (store, date), 0 empty cells, 4 short-handed, top row
+Brno / Tue / 84.4, identical to Kai's output and to the offline reference. The BigQuery block is a
+translation and carries a `VERIFY(owner)`; MISSING.md lists the run.
+
+**Case convention:** the page quotes its output aliases, so the table gets lower-case columns. The
+Kai runs did the opposite (unquoted → upper case), which is how the output-mapping trap fired on
+8 September. The page names the trap by its exact error text in "If it goes wrong" and says it
+happens in both directions: Kai first, then hand-written, or the reverse.
+
+**Structural checks instead of numbers:** the check section asks for 42 rows, no repeated (café,
+date), and a *few* flagged rows, with "two to eight is usual, zero in a wet week is right" in place
+of a count. The day-of-writing values live in a comment and here, not in the reader's text.
+
+---
+
+## 2026-09-09 — The Sheets side trip sends staffing_outlook after all
+
+**Decision:** `write/` is re-themed in text to `staffing_outlook`; its captures and clip are not
+reshot in this PR.
+
+**Why the text changes:** plan decision 5 said to leave the side trips with "their own examples",
+because reshooting the Google flow needs Nikita's OAuth. The example on this page was the table the
+main path used to build, `out.c-octopus-atlas.octopus_atlas`, which no reader of the new guide
+will have. Keeping it would have made the page a dead end at step 8. Changing names in text costs
+nothing and needs no authorization, so the names change: configuration `Boolabean outlook to
+Sheets`, spreadsheet `Boolabean staffing outlook`, sheet `staffing_outlook`, 42 rows.
+
+**Why the media does not:** the Keboola-side stills and the clip show the previous configuration
+and would need a live Google authorization to redo, so they stay as UI locators with a MISSING.md
+entry, and the clip comes off the page rather than showing the wrong thing. The Google consent
+captures are Google's screens and are unaffected.
+
+---
+
+## 2026-09-09 — The flow has three phases, and Kai set its schedule
+
+**Decision:** `automate/` teaches a three-phase flow: the two HTTP configurations in parallel, then
+the transformation, then the data app redeploy (with the Sheets destination alongside it for
+readers who took that side trip). Schedule 06:00 Europe/Prague, before the first café opens.
+
+**Observed:** Kai built exactly that from the prompt on the page (flow `01m23dcqs9j2gw0q9z8y25j9v2`,
+three approvals: create, update, run), named the phases itself ("Extract source data", "Build
+staffing outlook", "Redeploy data app"), and created a real Scheduler configuration
+(`0 6 * * *`, Europe/Prague, enabled). That closes the VERIFY on whether Kai can set a schedule:
+it can, when asked. Notifications were not asked of it and the page keeps them manual.
+
+**First run:** phase 1 success in 121 s (the sales configuration fans out into a job per row),
+phase 2 success in 41 s, phase 3 error after 282 s: the data app deploy failed with "Internal
+Server Error occurred." The run is kept as the worked example on `check/`: a red run whose earlier
+phases did their work. What the failure means for the app page is recorded separately once the
+retry is in.
+
+**Screenshots:** all nine automate captures and the All Runs capture show the previous flow;
+MISSING.md carries the reshoot.
+
+---
+
+## 2026-09-09 — The app is a six-by-seven grid, built live to a running draft; production is flagged
+
+**Decision (plan decision 4):** the app shows the answer directly: a grid, cafés down and forecast
+days across, one number per cell, red where `short_handed` is true, one caption with the count. No
+map, no filters. A map of six cafés would be a picture of the Czech Republic with six dots; the
+question is about days, not places.
+
+**Observed in the builder (project 264, 2026-09-09, 5 min 44 s):** prompt → one approval → Kai
+creates the production configuration, then a draft on its own branch, boots a Python/JS dev
+container, writes the code, opens a live preview ("This is a private draft that updates live as Kai
+builds"). Buttons: Preview, Code, Publish to production. The page teaches exactly that sequence,
+including the sentence about saying what *not* to build.
+
+**Not observed, and flagged:** an Active production app. "Publish to production" produced no
+dialog, no configuration version and no job, twice; the production app read "Not Deployed" and
+two deploys (the flow's phase 3 and a direct one) failed after about 4.5 minutes with "Internal
+Server Error occurred." and nothing in Terminal Logs. The page therefore says publishing and
+starting are two steps, tells the reader what a failed deploy looks like and what to send Support,
+and never promises the grid is up. Exception IDs are in the page comment and in MISSING.md for a
+bug report. The daily flow in 264 will keep failing at phase 3 until this is resolved; leaving it
+is deliberate, because a red phase next to green ones is the example `check/` uses.
+
+**Media:** the map clip and its stills are gone; phase 2 records the grid from the draft preview,
+which needs no password.
+
+---
+
+## 2026-09-09 — Fact-check of the rewritten pages: two real errors, corrected
+
+The fact-checker pass (CLAUDE.md standing authorization) over the nine rewritten pages found about
+45 claims confirmed, two wrong, and a handful of drifts. All fixed the same day; recorded here
+because both errors were mine and both would have misled a reader with a correct table.
+
+**Wrong, and load-bearing:** `check/` and `transform/` said an empty `expected_units` happens on a
+*cold, wet* forecast day and that a filled value on such a day would mean the bands were drawn
+wrong. Computed from `weather_daily.csv` with the page's own `CASE`: every café has cold, wet
+history (2–13 days); five of six have **no cold, dry** day at all. The band with no history is cold
+and dry. Both pages now say so, and `check/` no longer turns a correct table into a failure signal.
+
+**Wrong, inherited from the octopus design:** "more than 42 rows means the `BETWEEN` trap". That
+was true when bands were a lookup table joined by range. With `CASE` bands (first match wins),
+`GROUP BY` per (café, band) and equality joins, nothing in the query can multiply rows; the output
+is bounded by the 42 forecast rows however the thresholds are written. Where a boundary day lands
+still matters (nine summer days sit exactly on a temperature threshold, twelve exactly on 0.5 mm),
+and the two `CASE`s must match, but the symptom is an empty average, not a 43rd row. Both pages now
+name the real causes of a count over 42: duplicated input rows (incremental load left on, a café
+listed twice).
+
+**Drifts corrected:** the hub's step list said "one sentence … one button" and "the schedule is two
+clicks", both predating the 09-09 observations; the hub's opening roster now matches the Brno café
+(2, 2, then 3); `check/` said six tables are joined (five are); the auto-sleep figure was this
+app's setting, not a default; the automate prompt names an app the reader was never told to name
+(now: "use your app's own name"); `load/` no longer asserts one job for a direct run; three Open
+rows pointed at the deleted project page. New `VERIFY(owner)`: whether Guided Mode's auto-filled
+destination keeps the capital B of `out.c-Boolabean-staffing-outlook`; the time-critical Kai
+allowance sentence on the hub.
+
+---
+
+## 2026-09-09 — Guide test: followable by a human and by an agent, no blockers
+
+The guide-tester pass (cold read of all nine pages plus read-only label checks in project 264
+against the objects the pages describe) found no blocker and three things a reader would have had
+to guess; fixed the same day.
+
+- **Column names.** The transform prompt described the ten output columns in words; the later
+  pages type them exactly. The prompt now lists them. Kai's own build had produced those names, in
+  upper case because it did not quote its aliases, so the check now says upper case is the same
+  names. Not re-run in the new wording (noted on the page).
+- **Which SQL dialect.** How to find out was inside the click-through tab only, while the Kai
+  prompt opened with "Snowflake" and the Free Plan defaults to BigQuery. The "look in the New
+  Transformation dialog" paragraph now sits above the tabs.
+- **Two diagnoses for one symptom** (more than 42 rows) between `transform/` and `check/`: already
+  aligned by the fact-check commit; the tester read the page mid-edit.
+
+Also from the live read: after several failed starts the platform **disables** a data app (banner
+"failed to start automatically multiple times", button **Start App**), so the scheduled flow's app
+phase keeps failing until someone starts it by hand — now stated on `app/` and `check/`. The
+phase-scoped Add Task menu has exactly Component / Notification / Variable; the empty-canvas menu
+stays unverified, and the automate page now says "in some projects" for Build with Kai. The
+forecast prompt asks for nine skipped lines and the four column names directly, which is what Kai
+did on its own in the live run. Everything else the tester checked live matched the pages: nav,
+Storage tabs, the HTTP card and row form, the transformation sections, the flow's tabs and phase
+names, the schedule's timezone, the Notifications cards, the Jobs fan-out (six lines for the
+five-file configuration), the data app's settings, all links and the Next order.
+
+---
+
+## 2026-09-14 — Time budgets come from word counts plus measured Kai wall time
+
+**Decision:** the hub says an hour and a half and carries `minutes="80"`; the steps carry 15 / 15 /
+5 / 15 / 15 / 5. The plan's target of a 45-minute full pass is not met and is not claimed.
+
+**Method (in place of a literal stopwatch):** words per page with comments and code removed, one
+tab's worth (about 60%) at 200 words per minute, plus the wall time Kai took in the 8–9 September
+runs: load 9 min (two prompts, jobs included), transform 4, ask 3 for two questions, app 6 to a
+running draft plus a deploy, flow 3 to build plus an 8-minute first run. Reading everything on every
+page is nearer 80 minutes; the building alone, Kai path, was about 30. Both numbers are on the hub,
+so the reader knows which one they are signing up for. Re-measure with a real reader when one is
+available; the ±20% tolerance in the plan applies to that measurement, not to this estimate.
+
+---
+
+## 2026-09-14 — Phase 2: media shot from the live pipeline, nothing staged
+
+**What was shot, and how:** 26 stills and two clips, all from project 264 as it stands after five
+scheduled mornings, with a logged-in Playwright session, as element captures without the top bar
+(no names, no project title). Load 01–08 from the real `Boolabean sales` and `Boolabean forecast`
+configurations; the base-URL capture (03) shows `https://help.keboola.com/getting-started/boolabean/`
+because the live configuration was switched to that value for one screenshot and switched back
+in the same script (both PUTs logged, restoration verified). Transform 00–10 from a temporary
+mapped copy of the transformation, created and deleted within a minute; 00 cropped to its header
+so a colleague's name in the list stays out. Automate 01 and 05–09 and check 09 from the live
+flow: the All Runs capture shows the five red scheduled runs, which is the example `check/`
+describes. The app grid is the draft preview's iframe, captured after opening the draft in the
+builder (the draft container booted itself); production still does not deploy.
+
+**Clips:** the hero, three acts on the compositor scene (rows verbatim from the CSVs, the question
+as poster, the grid as background), 32 s, 0.9 MB. The ask clip, a 104-second live recording of the
+Kai panel compressed to 44 s with the 50-second thinking stretch at 6x; the pointer lands on Kai's
+conclusion. Kai's answer on the recording day (14 Sept, forecast 14–20 Sept): only Brno flagged,
+Monday 72.3 and Tuesday 85.2 per person on a two-person roster, "warm and completely dry".
+
+**Not shot, and why:** the Sheets captures and clip (need Nikita's Google authorization); the flow
+builder's component picker and second-phase step (would mean starting a flow-creation flow, which
+the read-only capture session did not do; both images removed rather than shown with old names,
+the Add Task menu capture kept because it is theme-neutral). The load page's click-through steps now
+use the base-URL-with-folder convention Kai built, so the captures and the text agree.
+
+**Things learned the hard way:** `/private/tmp` scratch files older than three days are purged by
+macOS, which took the reference SQL and the run logs with it — the SQL was restored from the page
+itself. The fact-check fix from 09-09 (cold, dry is the band with no history) is visible in the
+grid: the dashes sit on cold, dry days.
+
+---
+
+## 2026-09-14 — Three tabs: Prompt · UI · CLI / API, and the hub goes dry
+
+**Decision:** task pages offer the same task three ways, in this order, with these exact labels:
+**Prompt** (paste into Kai) · **UI** (click by click) · **CLI / API** (`kbagent`, with the raw
+request beside it where there is no command). Starlight stores the reader's choice under the
+label *text*, so the three strings are a contract; it is written into `PathIntro.astro`'s header,
+and a page that spells one differently silently drops out of the sync.
+
+**Why:** Michal asked for it directly on 2 September: is there a prompt on the page, and how
+would the CLI do the same task? He also warned that the substance must not get lost under
+decoration. Jordan had agreed the same mechanism on 5 August (the combined UI and API format). Two independent asks, one answer.
+The third tab also ends the awkwardness of a guide that mentions the CLI only as a link.
+
+**Rollout:** one page per commit. `PathIntro` takes `tabs={3}`; the default stays the old two-tab
+wording until the last page is converted, so an unconverted page never advertises a tab it does
+not have. `load/` is first and is the stop point: the pattern goes to Michal before the rest
+follow.
+
+**Verified before shipping (load/, 2026-09-14, project 264, kbagent v0.93.1):** `config new
+--push --no-files` created a throwaway configuration; `config row-create` added rows with exactly
+the processors block on the page; `job run --wait` finished green (job 104214515); `storage
+tables --bucket-id` and `storage table-detail` read back 6 and 18 rows with their columns; the
+curl POST created a second throwaway configuration through the Storage API. Both configurations
+trashed and the bucket dropped the same minute. `npm run check:cli` passes against the repo's
+v0.76.1 reference, so every flag exists in both versions.
+
+---
+
+## 2026-09-14 — The hub is dry again, and Get a project is a page again
+
+**Decision:** the hub opens with the question, the clip and a table of the seven steps (what each
+produces, how long it takes). The café story is gone; the sample world is described once, on
+`load/`. **Get a project** returns to `/getting-started/project/`.
+
+**Why:** Michal, 2 September: the dataset is only a vehicle and not the guide's theme, the hub
+should be drier, and nothing should get more complicated than it already is. The merge of 9 September had made the hub
+230 lines that opened with two paragraphs of narrative. Get a project is also the only step with
+no prompt and no command, so as a hub section it broke the rule the rest of the arc now follows.
+Its URL had been a redirect to the hub anchor for five days; it is a real page again, and the nav,
+the shared `Prereqs` link and the two inbound links point back at it.
+
+**Also taken from Stripe** (Nikita, 14 September): a "Where to start instead" table at the foot of
+the hub — this guide, the kbagent CLI, the MCP server, and building an app with Kai. It is where
+Michal's point that MCP and the CLI are only drivers and vehicles lands without them becoming topics inside the
+guide. Not taken: the three-column layout with code following the prose (a custom Starlight layout
+override; the cheap substitute was a `.gs-pair` grid for a capture beside its request, which no page
+ever used and which was removed on 2026-10-14), and the
+by-business-type use-case grid (one guide, one dataset).
+
+---
+
+## 2026-09-14 — Authoring comments no longer ship to agents
+
+**Decision:** `page-markdown.mjs` strips `{/* … */}` and `<!-- … -->` from the `/<slug>/index.md`
+twins instead of publishing them, and renders `<Prereqs>` as text.
+
+**Why:** the twins are public and machine-read. They were carrying demo-project configuration IDs,
+job and exception IDs, capture notes and VERIFY flags — internal by PRDCT-616. Rationale that
+outlives an edit belongs here, in a file that is versioned and not served. The `<Prereqs>` half is
+the opposite failure: the component was dropped with the others, so the twin told an agent to load
+data without mentioning that a project has to exist first. The wording now comes from
+`prereqs.mjs`, which both the component and the integration import, so they cannot drift.
+
+---
+
+## 2026-09-15 — The three tabs are on every task page, and the CLI found the app bug
+
+**Done:** `load/`, `transform/`, `ask/`, `app/` and `automate/` each carry **Prompt · UI ·
+CLI / API**; `check/` gets a read-only terminal section instead of tabs, because it is about
+reading state, not a task with three ways to do it; `write/` keeps two tabs (renamed to Prompt and
+UI so the reader's saved choice stays coherent) and says why it has no third: a browser consent
+screen cannot be driven from a terminal.
+
+**Every command was run against project 264 before it shipped** (kbagent v0.93.1, alias
+`docs-demo`), and everything it created was deleted the same minute:
+
+| page | verified | result |
+|---|---|---|
+| load | `config new --push --no-files`, `config row-create`, `job run --wait`, `storage tables`, `storage table-detail`, plus the curl POST | job 104214515 green, 6 and 18 rows |
+| transform | `transformation create --sql-file --created-table`, `transformation edit --storage @file`, `job run --wait`, `storage table-detail` | job 104346054 green, 42 rows |
+| ask | `kai ask -m "…"` | answered in 22 s with the same café, day and flag count as the chat |
+| app | `data-app list`, `data-app deploy --wait`, `data-app runs` | deploy failed — see below |
+| automate | `flow validate`, `flow new --file`, `flow schedule --cron --timezone --enabled` | flow and schedule created, both deleted |
+
+**What the CLI taught us that the UI would not.** `transformation create` leaves the input mapping
+empty, so the page needs a second command (`transformation edit --storage`) to add the five inputs
+— the UI tab's mapping section has no single-command equivalent, and pretending otherwise would
+have shipped a recipe that fails on the first run. And `data-app runs` prints the container's
+startup log, which finally explains the deploy failures the UI reported only as "Internal Server
+Error occurred": the 14 Sept run cloned the repo and died on `App must have keboola-config/nginx/
+directory`, and both 15 Sept runs died earlier, on `Authentication failed …/app-74021219.git`
+("Credentials are incorrect or have expired"). So publishing does carry the code; production fails
+because the app Kai generated has no nginx config outside dev mode, and because the managed Git
+credentials have since expired. Both belong in a bug report to the Apps team, with the run IDs.
+
+**One trap recorded for whoever does this next:** `flow schedule-remove` prompts for confirmation,
+so aborting it leaves a scheduler configuration pointing at a flow you then delete. Delete the
+scheduler explicitly (`config delete --component-id keboola.scheduler`).
+
+---
+
+## 2026-09-15 — What the two review passes caught on the three-tab conversion
+
+Both subagents (CLAUDE.md standing authorization) ran against the converted pages. Between them
+they found three blockers, and every one was in the new CLI path or in what an agent reads.
+
+**The markdown twin read as three jobs, not three choices.** `PathIntro` renders in HTML but was
+dropped from `/<slug>/index.md`, so an agent reading the twin saw "ask Kai to build it", "click
+through and build it", "build it from a terminal" as consecutive instructions — three HTTP
+configurations on one page if executed literally. The intro's wording now lives in
+`pathintro.mjs`, imported by both the component and the integration, and leads with "they are
+alternatives, not steps". The same pass fixed the `<Prereqs>` slot, which was shipping raw JSX
+(`The <code>staffing_outlook</code> table … from{' '}<a href="…">`) into the twin.
+
+**The CLI journey had two dead ends.** The forecast row's JSON was named as a file and never
+shown, and the flow's YAML needed a data-app *configuration* ID while the app page only ever
+produced the numeric app ID. Both are now in the pages, along with where every other `<config-id>`
+comes from.
+
+**`<your-stack>` and `$KBC_TOKEN` were never defined**, in a copy-paste command. The load page's
+CLI tab now says what they are and where to read them, and its prerequisites say plainly that this
+tab — unlike the other two — needs something installed.
+
+**The CLI tab was Snowflake-only on a guide that tells Free Plan readers they are on BigQuery.**
+`--component-id` is optional and defaults to the project's backend, so the commands now omit it.
+
+**`manual={false}` was hiding the third tab.** On `app/` it short-circuited the intro, so the page
+with three tabs told the reader there were two. It is an additional paragraph now, not a branch.
+
+**Two honesty fixes, both mine.** `app/` promised the status "turns Active, Open App appears" on a
+page whose own failure list says production has never come up here — it now says so where the
+reader meets it. And the same page compared "two red cells" in a capture with "four" in the check,
+sixteen lines apart, as if one week; the count is described as moving with the forecast.
+
+Everything else the passes raised was confirmed: 41 factual claims on the CLI tabs check out
+against the command reference, the Storage API pages and the CSVs, and the three tab labels are
+byte-identical across all six pages.
+
+---
+
+## 2026-09-15 — The side trips get the same tabs, and the three pages that do not
+
+The main path carries three tabs; the pages hanging off it still carried the shape the tabs
+replaced, a `:::tip[Do it with Kai]` box above a list of clicks. Two patterns for one thing in one
+section is the thing Nikita called mixed up, so the side trips now use the tabs too — and the
+pages where a path genuinely does not exist say so instead of pretending.
+
+**Three tabs, walked live in 264 and cleaned up the same minute.** `load/database/` gets the full
+set: the Kai box became the **Prompt** tab with its "never paste a password into the chat" warning
+intact, and the **CLI / API** tab is a configuration holding the sample credentials, one row per
+table, and a run — created, run, counted and deleted on 2026-09-15 (job 104350143; OPPORTUNITY
+639, ACCOUNT 275, USER 28, which is where the check numbers come from). `transform/workspace/`
+gets them too, and its CLI tab is the strongest of the three: `workspace create`, `load`, `query`,
+`detail`, `delete`, all run against the control table.
+
+Two things that walk taught the page, neither of them guessable. `workspace create` prints a
+private key once and says it cannot be retrieved later, so the page says it in a caution rather
+than letting a reader discover it after closing the terminal. And a query against a freshly
+loaded table fails — `Object 'STAFFING_OUTLOOK' does not exist or not authorized` — because
+Storage spells table names in lower case while Snowflake folds an unquoted name to upper case. The
+same query with the name quoted answers 42. It is the trap `ask/` already documents for columns,
+one level up.
+
+**Two tabs on `load/googlesheets/`**, matching `write/` and for the same reason: the consent screen
+and the Drive picker are dialogs in the reader's own Google account, so a terminal cannot start the
+task. Both pages now say that in the same words, and both say what `kbagent` *can* drive once the
+authorization exists.
+
+**No tabs on the branch tutorial, and the reason is a product fact.** `kbagent branch merge` does
+not merge — it prints the URL of the merge screen. The diff and the partial-merge checkboxes are
+where the decision gets made, so four of those six pages could not have an honest CLI tab. Instead
+the branch hub gained one short section saying what the CLI does (create, use, list, reset,
+delete, and `--branch` on read-only commands) and what it hands back to the browser.
+
+**No tabs on `ad-hoc/`.** Most of that page is the Google Cloud console — service accounts, IAM
+roles, a storage bucket — which is nobody's CLI and nobody's Kai. It needs a rewrite, not a tab,
+and it still calls workspaces sandboxes.
+
+**`project/`, `check/` and `going-further/` stay as they are.** Getting a project is a signup form,
+`check/` already has its terminal section, and `going-further/` routes rather than does.
+
+VERIFY(owner): `load/googlesheets/` still loads `level.csv`, the pre-Boolabean sample, so the
+section reads as two datasets. Swapping it means reshooting steps 5-12 against a live Google
+authorization, which needs Nikita's own account — the same blocker as the `write/` captures.
+
+---
+
+## 2026-09-15 — What the reviews caught on the side trips
+
+Both passes ran again on the three converted pages. They agreed on the blocker, and each found
+things the other did not.
+
+**The one worked query in the workspace tab selected columns that do not exist.** It asked for
+`cafe_name` and `forecast_date`; the table has `STORE_NAME` and `DATE`. My live run had used
+`SELECT COUNT(*)`, which names no columns, so the example was the one thing on the page nobody had
+executed. Fixed and re-run against the control table.
+
+Chasing it turned the casing note into something better than it was. I had written "Storage spells
+names in lower case, so quote them", which is half a rule. Measured, all four ways: the table is
+stored lower case and needs quotes, the columns are stored upper case and break when quoted lower
+case. The table was named by the output mapping, which keeps what you write; the columns came out
+of SQL that did not quote its aliases, so the backend upper-cased them. The page now carries the
+four rows and the reason, and the troubleshooting bullet covers both directions instead of sending
+a reader round in a circle.
+
+**Three product facts were wrong in the same tab.** `--read-only` defaults to *on*, the opposite
+of the dialog's unchecked box. The **Connect** button opens Snowflake's own Snowsight, not a
+Keboola console — and direct access needs a dedicated backend, which the free project this guide
+starts from does not have, so that step now routes to the SQL Editor. And the workspace picker's
+labels are "Snowflake SQL Workspace" and "Google BigQuery Workspace".
+
+**Two tabs did not stand alone.** `workspace create` prints the ID every later command needs, and
+the page never said to keep it. The database page kept its credentials inside the UI tab while the
+Prompt tab pointed at them, which contradicts "pick one tab and carry on" — they are their own
+section now, above the tabs, where all three paths can reach them.
+
+**Two sections spoke past the reader who chose Prompt.** "Check it worked" on the workspace page
+assumed a workspace, which the Prompt reader deliberately never made; it now says so first, the
+way `write/` does. The Sheets handoff told the reader to do "steps 5 to 9, both inside Google" —
+but two of those five are Keboola screens, and a reader who let Kai build the configuration was
+never told how to get to it. Both fixed.
+
+**Dropped the "reading this with an agent?" line.** The plan asked for it, but it landed on three
+side trips and no main-path page, and every page already has *View as Markdown* in its title bar.
+Either it goes on all twelve or on none; it is off for now.
+
+Everything else held: 118 factual claims confirmed, including all six live runs as they are stated,
+the three sample-database row counts against the repo's own CSVs, and the tab-label contract across
+all nine tabbed pages.
+
+Worth knowing separately: `_data/cli/command-reference.md` is generated from kbagent v0.76.1 while
+the installed CLI is v0.93.2, so the gate runs seventeen minor versions behind. It cost us a true
+sentence this week — `kbagent config restore` is real, and the gate rejected it.
+
+---
+
+## 2026-09-15 — The hero clip, taken apart frame by frame
+
+Nikita asked for two things on the clip: the highlighted moments look cut off, and the blue marker
+is redundant when something is already lit. A review pass over all 31 stills confirmed both and
+found more.
+
+**Every cut-out was placed as if its coordinates were a corner.** `spotAt` reads them as a centre
+and subtracts half the width and height, so all three tour stops sat half a row above their target.
+The Brno stop, the payoff of the whole clip, lit the café above it and left the cell it was
+captioning dimmed. The dash stop cut a line of text in half, bright above and dim below, which
+reads as a rendering fault. The stops now carry centres measured against the grid's own cell edges,
+and act 1 lights the whole file card rather than a token inside a line of monospace, which is what
+used to slice the characters either side of `S02`.
+
+**Three blue markers pointed at one thing.** The cut-out had a blue outline, a pulsing blue ring sat
+inside it, and the caption chip carried a blue dot. On the dash stop the ring physically covered the
+dash the caption exists to explain. All three are gone. The lit rectangle and the sentence do the
+pointing.
+
+**The caption parked on the payoff row in every beat.** It was pinned to the bottom, and the grid's
+last row is its bottom row, so the chip covered Brno in all three acts including the final frame. It
+now sits in whichever half the spotlight is not in.
+
+**The poster was two layers of text on top of each other.** Act 2 drew the question straight onto
+the live grid over a white wash rather than the dark scrim the other two acts use, so the question
+crossed the numbers behind it. That frame is the page's `poster`, which made it the first thing a
+reader sees. The question has its own panel now, over the same scrim as everything else.
+
+**The first frame gave away the ending.** Frame 0 was the finished grid, cross-dissolving into act
+1. It opens on the scrim now.
+
+**Four files on screen, five in every caption.** `products.csv` was missing. It is there now, with
+its real columns and its real first row: I had typed a plausible one from memory, and checking it
+against the file caught that both the column name and the values were invented. All five rows in
+act 1 are verbatim.
+
+**Not fixed, and it needs the owner.** The app capture is 966x744 and the grid's last row needs 765,
+so Brno is cut off by its own screenshot in every frame. The clip is cropped to 724 so the cut falls
+between two lines instead of through them, which reads as a crop rather than a fault, but the row is
+still short. A taller capture means unlocking the data app, and its password is not mine to handle.
+
+---
+
+## 2026-09-16 — The broken-link PR already exists, so this is two links instead
+
+The link check has been reporting one blocker since the rebuild started, `/extend/component/running/`
+pointing at `/integrate/jobs/`. Chasing it properly turned up 29 broken internal links across the
+site, all landing on three dev-docs paths that were never migrated: `/integrate/jobs/`,
+`/overview/encryption/` and `/overview/api/`.
+
+The developers-docs retirement branch already decides where each one belongs, in its
+`redirect_to` frontmatter: jobs to `/management/jobs/api/`, encryption to
+`/extend/common-interface/encryption/`, the API overview to `/overview/apis/`. None of those three
+pages exists on help yet, which is why every inbound link is broken.
+
+**PR #1120 creates all three, and repoints the links.** Its diff drops 50 lines carrying the old
+paths and adds 67 with the new ones, and it touches every single page that carries one of the 29.
+A second pull request would have collided with it on every file and fixed nothing that is not
+already fixed there. #1094 then flips the remaining dev-domain absolute links once #1120 lands;
+that PR states the merge order itself.
+
+What was left that nobody else owns: two links that resolve only through a redirect, both created by
+this branch retiring the `/tutorial/` slugs. They now point at the real page.
+
+| was | now |
+|---|---|
+| `/tutorial/onboarding/architecture-guide/` in `catalog/multi-project/` | `/overview/onboarding/architecture-guide/` |
+| `/extractors/ip-addresses/` in the generic extractor's SSH proxy page | `/components/ip-addresses/` |
+
+A third one, in `storage/api/tde-exporter/`, is left alone on purpose: #1120 edits that file, and
+two branches rewriting the same line is how a merge conflict gets made for no gain.
+
+---
+
+## 2026-09-21 — The Kai allowance sentence went stale on schedule
+
+The reviewer bot, run when #1116 came out of draft, flagged one thing that was not simply "a human
+should look at this": a time-critical VERIFY on `project/` dated 15 September. That date has passed.
+
+The flag was right. `kai/pricing.md` says Kai's message counter was replaced by PPU credits on
+15 September 2026. `kai/getting-started.md` still opens its Rate Limits section with "Kai is free
+during the public beta period" and still gives 150 turns a month, 50 on Pay As You Go. Both pages
+are live. A reader comparing them cannot tell what Kai costs.
+
+This guide's own sentence said "there is also a monthly message allowance, and it is smaller on Pay
+As You Go", which was the beta counter described in the present tense. It now names neither a
+mechanism nor a number, says only that Kai's work counts against the project and that an admin can
+cap it, and links to the page that owns the rules. That way the guide stays true whichever of the
+two Kai pages is the stale one.
+
+Which of them is stale is not mine to decide, and the repo's guardrail is not to document pricing.
+Carried as VERIFY(Kai team) on the page, and it is the one open flag on this PR that is wrong on a
+published site rather than merely unconfirmed.
+
+The bot's other three concerns are the expected ones and need no change: new rendering components
+and a modified build integration are always escalated, and `app/` documents a production deploy
+that failed every time in testing, which the page already says where the reader meets it.
+
+---
+
+## 2026-09-22 — Two behaviour GIFs from 264, and the rule for when a GIF earns its place
+
+Nikita asked for GIFs like the ones on the Kai page, with the condition that each one make sense
+rather than decorate. Studying what the repo already has settled the pattern: the Kai one is a
+designed motion graphic at 2.5 MB, the MCP one a 9.5 MB screen recording, and the six on the
+component UI-options pages are what to copy — cropped to one control, a handful of states, under
+250 KB, placed under the thing they explain.
+
+The rule that came out of it: a GIF earns its place when the reader cannot click the real thing and
+a still cannot carry it. On this section that means hover-revealed UI, which is exactly two places.
+
+**automate/ gets `add-task.gif`.** The plus that opens the Add Task menu only shows its tooltip on
+hover, the menu is a state, and the component picker is a third. Five frames from the live flow,
+860x430, 42 KB. It replaces the still of the menu. The walk also found that there are two Add
+Task menus, and my first edit conflated them: the phase toolbar's + offers Component,
+Notification, Variable, which is what the page had always said, while the standalone + between
+phases adds Conditions. I had put the four-item list on the toolbar control I never clicked; the
+fact-check caught it against the retired still, which shows the toolbar's three. The page now
+names both. Neither menu has a Build with Kai entry in this project, so that unverified clause is
+gone, and the empty-canvas menu of step 2 stays flagged because settling it means creating a flow.
+
+**load/ gets `forecast-row-code-editor.gif`.** The Visual Editor button is disabled on the forecast
+row and says why only on hover. Two frames, 18 KB. The smaller win of the two, and it is placed
+under the sentence that quotes the note rather than anywhere prominent.
+
+**The hub's tab-sync GIF** from the day before is the third, and the only one that needed no
+project at all.
+
+Masking is by framing: every frame is a crop that starts below the top bar, so the organization,
+project and branch names never enter a frame. The picker frame shows component names and
+configuration counts, which are product surface, not people.
+
+One slip worth recording: a fragile click meant to dismiss a "Latest update" popover hit the
+top bar's New Development Branch button instead and opened its dialog. Nothing was typed and the
+create button stayed disabled; `kbagent branch list` afterwards shows only Main. The lesson is in
+the recorder now: no blind clicks on ancestors of text, only on the element itself.
+
+---
+
+## 2026-09-22 — PRDCT-616 never reached the renamed paths
+
+The screenshot scrub masked 44 images in August. It edited `public/tutorial/**`. This section had
+already moved to `public/getting-started/**` on 3 August, three weeks earlier, so the mask missed
+every copy the guide actually serves. Checked by hash, not by eye: all 44 files on this branch were
+byte-identical to the unmasked originals.
+
+Forty-three now carry the masked blobs from `af990ae2`, each verified to hash exactly to its
+counterpart. They were applied from the local object store, because GitHub was unreachable at the
+time and the branch was already fetched.
+
+The forty-fourth, `ad-hoc/ex-bigquery-6.png`, is deleted instead. Its only content was a pasted
+Google service-account JSON with a private key in it, and the step above it already tells the
+reader what to paste. Masking an image whose entire subject is a secret leaves an image of nothing.
+The key was confirmed inactive on 2026-08-27 and that escalation is closed; this is not a re-raise
+and the key is not reproduced anywhere.
+
+**What this does not fix.** PR #1100 is still open, with zero reviews, and `main` does not carry the
+mask. Production therefore still serves the unmasked original at the old path: a HEAD request for
+`help.keboola.com/tutorial/ad-hoc/ex-bigquery-6.png` returns 200 and 211,051 bytes, which is the
+pre-mask size. That is a merge, not an edit, and it belongs to whoever reviews #1100.
+
+Merge order matters now. If this chain lands first, #1100 needs a rebase because its files moved
+underneath it. If #1100 lands first, the content is identical on both sides and the rename merges
+cleanly.
+
+The `ad-hoc/` page also gained a caution saying its Google Cloud steps describe the 2019 console:
+read them as a list of what to create, not what to click. That is the third-party rule from the
+usability test, applied where the drift is widest.
+
+---
+
+## 2026-09-22 — The sweep, and what it did not find
+
+Every remaining image in the section went through contact sheets: 55 files outside the two
+directories the scrub covers, plus a strip of the top 56 pixels of every screenshot that could
+plausibly carry a header. Three more turned up with the organization, project, branch and avatar in
+frame, all on the Sheets writer page, and all three are cropped to start at the breadcrumb.
+
+What the sweep did not find is worth recording too, so nobody repeats it. The flow and Storage
+screens carry internal job labels and scheduler IDs, not people. The Storage list views show
+component names in "Recently Updated By", not colleagues. The notifications screen says "Choose from
+your colleagues or enter an email address" as interface text, with no address in it. Those are
+fine and should stay.
+
+Three unreferenced files went at the same time. A fourth, `automate/automate1.png`, looked
+unreferenced from inside Getting Started and is not: the legacy Flows page still uses it. It was
+restored before the commit. Checking `src/content/docs/` as a whole rather than the section is the
+lesson.
+
+---
+
+## 2026-09-22 — The PII the scrub never listed, and the first use of the third-party rule
+
+Reading every image in the section turned up sixteen files carrying something that should not
+ship, none of them in the scrub's list. Four could be saved by cropping, ten could not.
+
+**Cropped, then checked by eye rather than by filter.** `load/source-intro-0.png` and
+`load/db-picture1.png` repeated a colleague's name down a Last Change column; both are now just the
+Components header and the Add Component button, which is all their steps point at.
+`load/select-files.png` had "Authorized by" and an address above the card it was meant to show; it
+starts at the card now. `write/01-find-destination.png` carried the top bar; it starts below it.
+
+**Deleted.** Five screens belong to Google, three of them with a colleague's address in frame. Three
+workspace captures are list views with a name in the Last Change, Last Use or Versions column. One
+is the Connect dialog with a live Snowflake host, user, database and schema, stale as well since it
+shows password auth where the workspace now issues a key pair. One more, `write/writing11.png`, had
+an unmasked top bar and contradicted its own step: the text says the click opens the spreadsheet,
+the picture showed a Keboola page.
+
+**The Google steps are the first use of the rule the usability test produced.** Michal lost time on
+a Google screen whose button had moved since our guide was written. So those steps now say what to
+do and why, and link Google's own help, instead of naming buttons we do not control and shipping a
+picture of them. Three deletions and three rewrites, on two pages. What Keboola itself shows still
+gets a screenshot; that part is ours and it is verifiable.
+
+This is the conflict between "deletions are owner-only" and "never publish colleagues' names or
+internal identifiers" resolved in favour of the second. The ledger rows and this entry are the
+owner's visibility, and none of it is recoverable by reshooting the same frames: a list view will
+always carry whoever last touched the configuration.
+
+---
+
+## 2026-09-22 — The app step for launch week, and the boundary with the Apps rework
+
+Three changes on `getting-started/app/`, all from the usability test.
+
+The first is the one Michal actually hit. He pressed **Publish to production** and nothing visible
+happened, so he could not tell whether the button had worked or he had missed a step. The page
+already documented that, but after the click. It now says it before: expect no dialog, then go to
+**Apps** and press **Deploy App**. The honesty did not change; its position did.
+
+The second is a cold landing. Readers arriving from the Apps announcement will not have the six
+previous pages behind them, so one sentence says the page works with their own table if they swap
+the name in the prompt.
+
+The third is the authorization boundary, and it is the one that finally closes rather than hedges.
+Product said plainly on the call that an agent will never be able to set up an OAuth
+provider. The CLI agrees by construction, since `kbagent data-app create --auth`
+accepts only `password` or `public`. Two independent sources, so the page states it plainly instead
+of carrying it as a conservative reading.
+
+Re-checked the deploy read-only the same day, and the fact-check caught that "same two causes" was
+lazy. The 09-22 run cloned successfully and failed only on the missing nginx directory; the
+authentication failures are 09-20 and 09-21. So the managed Git credentials are working again and
+the nginx gap is the durable cause. Both stay in the failure list, because a reader can still meet
+either, but the bug report should lead with nginx.
+
+The fact-check also caught four things the rewrite itself introduced or sharpened:
+
+- The cold-landing sentence said swap the table name and read the rest as written. The prompt
+  hard-codes seven column names, so a reader with their own table would have handed Kai six columns
+  that do not exist. It now says to adapt the columns too, and offers the from-scratch Apps page as
+  the better route.
+- The page opened by promising "an app with its own URL and a password" while step 5 now ends on the
+  draft preview. The promise now matches: the grid you can open and refine, with the URL and
+  password coming from a publish step that did not succeed here.
+- `check/`'s summary table called the app "the grid anyone can open", which contradicts both the
+  password gate and the fact that the deploy has never succeeded. It now says "behind the password
+  you set".
+- Naming four OIDC providers read as the whole set of sign-in gates. There are six methods;
+  GitHub, GitLab and JumpCloud also need a client registered in the provider's console. The bullet
+  now says every gate other than Basic does.
+
+**Scope boundary.** Two other sessions are reworking the Apps section right now, on
+`PRDCT-692-apps-launch-polish` and the `AJDA-3380` branches, adding `operate.md` and
+`troubleshooting.md` and rewriting `authentication.mdx`. Their branches touch no file under
+`getting-started/`, and this branch touches no file under `data-apps/`, which I verified by diffing
+both ways before continuing. The contradiction between `data-apps/getting-started.md` promising the
+app "turns Active" and what this page observed is therefore theirs to resolve, not something to
+route or fix from here. This page links to `/data-apps/authentication/` by page, not by anchor, so
+their restructuring cannot break it.
+
+---
+
+## 2026-09-22 — What the guide test found after the screenshots came out
+
+Cold read of the four rewritten pages. No blockers: every step still reaches its Check line, every
+remaining image exists, and no page references a deleted file. The two Google hand-offs came out as
+the strongest part of the rewrite, because they say the reader is leaving Keboola, what they will
+be looking at, which account to pick, and what they will see on return.
+
+Seven things were worth fixing.
+
+**Step 5 told the reader what not to expect and never what success is.** It also merged two
+different facts into one clause: no dialog is designed behaviour, no deploy job is the defect. A
+reader could not separate them. The step now says the missing dialog is normal, names the positive
+confirmation (the app is listed under **Apps** with a page of its own), and puts the absent job in
+its own parenthesis as the platform failure. "Most likely read Not Deployed" lost its hedge.
+
+**Two steps on `write/` leaned entirely on pictures that are gone.** Step 4 said "authorize the
+account" and named no control; it now names the section and the button. Step 12 said to click the
+spreadsheet name without saying where it appears, which matters because the Prompt-tab guard routes
+readers straight there without ever opening the configuration; it now names the **Sheets** section.
+
+**The write page's numbering argued against its own tabs.** Steps 1 to 6 are shared, 7 to 10 belong
+to the UI tab, 11 and 12 are shared again. Flattened into the markdown twin that reads as one run of
+twelve, so an agent could run the prompt and then also walk the wizard, creating the sheet twice.
+The existing guard sat after the UI steps. A second guard now sits before them, and it survives into
+the twin.
+
+**Three smaller ones.** The Sheets UI tab never named the configuration while the Prompt tab used
+`Level from Sheets` twice, so a reader crossing tabs met a name they were never given. Step 8 kept
+the what and dropped the why when the button names went; the rationale is back, with the consequence
+of under-granting. And "Open the **Connect** menu ... **Connect** signs you in" used one word for
+the menu and an item inside it, which the deleted capture used to settle.
+
+**One prerequisite was softened.** The cold lander added earlier met a Prereqs item demanding
+`staffing_outlook` from a page they had skipped, then a line later was told it did not matter. The
+item now says any table with a few numeric columns works.
+
+Left alone deliberately: `transform/workspace.mdx` step 7 ends in a link rather than a click for a
+free-project reader, which predates this work and is already flagged there; and `Boolabean staffing
+outlook` naming both the transformation and the destination spreadsheet, which is a dataset naming
+choice rather than a defect.
+
+---
+
+## 2026-09-22 — The rest of the test's lessons, turned into edits
+
+Two of Michal's seven had no edit against them yet.
+
+**The secret that came back different.** He saved a password, saw a long unfamiliar value in the
+field, and read it as a bug. It is encryption. The database side trip now says so at the moment it
+happens, in step 6, and names the general rule: any field whose name starts with `#` behaves this
+way, including the JSON in the CLI tab. Warning after the surprise is not warning.
+
+**Kai and provider authorization.** Two flags hedged this as "the conservative reading" because
+`kai/use-cases.md` advertises setting up a generic extractor "with pagination and OAuth
+authentication". That is configuring a connector's auth, not granting it, and the distinction is now
+settled twice over: product said on the call that an agent needs an OAuth provider and it will never
+be possible, and `kbagent data-app create --auth` accepts only `password` or `public`. One flag
+closed on `write/`, and the unverified "and so does Kai" clause came out of the Sheets side trip
+rather than staying as a claim nobody had checked.
+
+**Three images that a reader could not place.** The configured transformation and the new Storage
+table both sat with no sentence saying where the reader was; each now opens with one, and both alt
+texts moved to the house format that says what is shown rather than labelling the file. The third,
+Advanced Mode on the database page, was decorative by the step's own admission, so it went and the
+sentence gained "top right of the configuration page" instead.
+
+**The 250 KB image budget, measured rather than assumed.** Four files exceed it: 371, 277, 263 and
+253 KB. All four are 2x retina captures, which the same GitHub guidance that sets the budget also
+requires. Downscaling the two widest from 2800 to 2000 pixels made them *larger*, 328 and 305 KB,
+because the originals are already better compressed than ffmpeg's encoder manages, and no dedicated
+optimizer is installed here. So they stay. Degrading real captures to hit a number borrowed from a
+site whose images are half the resolution would trade something a reader can see for something only
+a linter can. Worth revisiting if `pngquant` or `oxipng` ever lands in the toolchain.
+
+---
+
+## 2026-09-23 — Merged main, and it paid for itself
+
+The PR's base was changed from the stacked branch to `main`, which had moved 91 commits ahead, so
+it stopped merging. Three files conflicted and each wanted a different treatment.
+
+`_data/navigation.yml` was the only one needing judgement. Main still carries the whole `/tutorial/`
+tree, which this branch retires in favour of `/getting-started/`, and main had added "Our APIs" under
+Overview, which this branch never saw. Both decisions are kept: the tutorial entry stays gone, the
+APIs entry comes in. `src/sidebar.mjs` was not merged at all — it is generated, so it was regenerated
+from the resolved source. `src/styles/custom.css` turned out not to be a real conflict: this branch
+appended the Getting Started blocks, main appended print rules, and neither touches the other.
+
+The merge was worth more than it cost. Broken internal links across the site went from 29 to 0 and
+total audit issues from 116 to 59, because main brought the pages those links had been waiting on.
+The command reference is now generated from kbagent v0.91.0 rather than v0.76.1, so the gate stops
+running fifteen minor versions behind — which was an open complaint here two days ago.
+
+It also closed a deferral. Two links pointed at `developers.keboola.com` for encryption and the API
+overview, left there deliberately because help had no equivalent page and retargeting would have
+created broken links. Both pages now exist, at `/extend/encryption/` and `/overview/api/`, though not
+at the slugs #1120 had planned. The links point inward now, and the section has no dev-domain links
+left at all.
+
+## 2026-09-23 — The hub opens like a course, and the question becomes its goal
+
+**Decided by:** Nikita (23 Sep 2026), as the section's owner. Michal's rules of 2 September
+(dry; structure from user needs; MCP and CLI are vehicles, not chapters) are kept and named in the
+PR. Two of Jordan's decisions of 21 August change and carry VERIFY(Jordan), below.
+
+**What was wrong.** Every task page opens the same four ways (genre and time, a state sentence,
+prerequisites, a verification block) and the hub was the one page that did none of it. The reader
+met the question as the first line, then 74 words, then the table. Nikita's reading, on 23
+September: no sense of why the section exists, what the sample is, or what one learns; the question
+read as strange, as if nothing needed it. Michal's test on 22 September had already
+shown a reader who skips introductions and reads steps; a hub that is all puzzle and no map serves
+neither reader.
+
+**Evidence.** The openings of Google Data Analytics on Coursera and of the DeepLearning.AI short
+courses run in one order: why, in a sentence or two; what you will be able to do, as verbs; the
+outline; prerequisites. The introduction is a 3-minute lesson in a course whose lessons run from 1 to
+10 minutes. Diátaxis on tutorials: "Confidence can only be built up layer by layer, and is easily
+shaken"; its predecessor, the Divio documentation system, on the same page type: "if your student
+has to do strange and incomprehensible things for two pages before they even see a result, that's
+much too long."
+
+**Decision.** The hub opens with one dry paragraph of what Keboola is for, its five verbs being the
+five task pages; then the clip; then the state block the other pages carry; then the sample in
+three sentences with the question as the concrete goal every step works toward; then the
+free-project sentence; then the table, whose "What happens" column is now "What you'll be able to
+do" and reads as capabilities. No new list: the outcomes live in the table the reader already
+looks at, following Michal's advice not to make it more complicated. The intro grows from 74 to about 200 words, and the hub stays inside its
+five minutes.
+
+**What the checks changed.** The first draft's fourth verb was "put the answer in front of
+someone"; the app page ends at a private draft, because publishing has not succeeded in 264, so the
+hub says "turn the answer into an app" and its description no longer says "publish". "A free
+project covers all of it" became "is enough to begin", with the three open questions in a
+VERIFY(owner) note, and its link moved from the wizard to Get a project. "Nothing needs installing"
+is scoped to the browser paths, with kbagent named for the command-line way, because that is the
+path an agent reads. Fact-checker and guide-tester, 2026-09-23.
+
+**The question stays.** It is the only concrete promise the guide makes, and Jordan's rule that it
+be "answerable without reading" holds: the clip's poster answers it. What changes is its place,
+from headline to goal, after the reader knows what a café has to do with anything.
+
+**The clip changes in commit 2** (`hub-demo`, replacing `outlook-tour`): six beats, two real
+questions to the table with Kai's answers, the app prompt field, the grid, the Apps list, a closing
+chip pointing at the seven steps. That drops the three-act "files, question, grid" structure Jordan
+asked to preserve, and moves the poster from the question frame to the answer frame.
+**VERIFY(Jordan)** on both; the fallback if he keeps the first act is a 4-second prefix from the
+outlook-tour cards and one fewer beat.
+
+**Not done here, on purpose.** A "build an app from Claude Code or Cursor via MCP" path: no section
+documents one, the production deploy has failed in 264 for nine days (StartupProbeFailed, expired
+managed Git credentials, last seen 2026-09-23 04:07 UTC), and Apps owns the surface (PRDCT-692).
+MISSING carries it. `data-apps/getting-started.md` still promises a live app in ten minutes; that
+page's owner has the contradiction in the PR body.
+
+## 2026-09-25 — "Before you start" lists things, and each tab says what it needs
+
+**Asked by:** Nikita, 24 Sep: the block was scattered, and he wanted to see the concrete things he
+needs to start.
+
+**What was wrong.** Eleven boxes of different shapes: some items were things, some were
+explanations or reassurance. On `load/` the box said "Nothing else. No installs" and then asked for
+kbagent. Kai was listed on 2 of the 9 pages whose Prompt tab needs it; kbagent on 3 of 8 pages with
+a CLI / API tab.
+
+**Decision.** Two lists in one box. "You need": the things, one per item, the thing first and then
+where to get it. "Depending on the tab you use": a line per tab. The default lines live in
+`prereqs.mjs`; a page whose tab needs something else overrides that line with a named slot, because
+the first version, one global line per tab, was false on three pages. The fact-checker and the
+guide-tester caught it: the UI tab of `ask/` needs a workspace, the UI tab of `app/` is a Git
+repository and your own code, `app/`'s Prompt tab is Kai under Apps → Create App, creating a
+workspace needs an admin token, and `kbagent kai ask` needs a static master token (browser sign-in
+and custom tokens cannot reach Kai; `kai preflight` checks "master token + AI Agent Chat"). The hub
+lists only what starting needs (an email address or an invite, and a browser) and points at "How
+every page works" for the tabs, since the hub has no tabs and explains them further down.
+
+**Checked by** the new `checker` agent (lens 3: can a newcomer list what they need in ten seconds),
+the fact-checker and the guide-tester. The markdown twin renders both lists, with the per-page
+overrides, so an agent reading `/index.md` sees the same checklist.
+
+## 2026-09-25 — The hub clip is bright
+
+**Asked by:** Nikita, 24 Sep: the clip looked dark, and he did not like it at all.
+
+**What the numbers showed.** The 09-23 cut averaged a luma of 71 of 255 (minimum 55) against 229 for
+the screenshots it was made from; its poster was 54. The compositor's spotlight dims everything
+outside the highlight with a 66 % navy scrim, and scene mode turned a veil on from frame 0. I had
+read the contact sheet myself and passed it, which is why a checker agent now measures clips.
+
+**Decision.** A `bright` look in the compositor: no scrim, a 3 px blue outline marks the point, and
+the camera eases in only where that keeps the content clear of the caption and the frame edge.
+Captions go from 17 to 22 px so they read at 13.75 px on the page. The grid's highlight moves from
+the caption box to the two red Brno cells, which is what "red where it will hurt" names. The Apps
+list now comes before the grid, so the clip ends on the result. The docs-clip skill's checklist
+carries the brightness budget now (mean at least 200, no frame under 180).
+
+**The checker's review changed the second cut.** Captions were up for 2.2 to 2.8 s, so the holds
+grew and every caption now stays more than 3 s. The camera move pushed the what-if question out of
+frame, so there is no camera move. "Different apps, built the same way" was a fact the hub never
+states, and the list mixes Streamlit and Python/JS apps, so that beat now carries the hub's own
+words, "Go straight to a data app on data you already have". The chat's input box showed a blue
+border under the caption that read as a second outline, so the Kai frames stop above it. The grid's
+screenshot slices the Brno row, and Nikita had called that out on 15 Sep; a taller capture needs the
+app running, which its deploy prevents, so the grid is cut between two lines of text, the outline
+holds only the red figures, and the poster is Kai's one-line answer instead of the grid. Third cut:
+27.1 s, 579 KB, luma mean 223, minimum 221; poster 132 KB, luma 220. The poster change is a second
+reason to show Jordan the VERIFY above.
+
+## 2026-09-29 — The hub clip explains Keboola as a line of four dots
+
+**Asked by:** Nikita, 29 Sep: on the first page, show quickly how Keboola works, with the data
+already loaded, and that analysis is a prompt away; show the pipeline in words or signs rather than
+screenshots, one step at a time, then the finished app and a question ("Want [analysis / an app /
+…]? Go through the guide and try it yourself"). He then asked for the pipeline as a line that draws
+itself, a new dot per step with a caption saying what it does.
+
+**Decision.** `hub-explainer.mp4` replaces the screenshot clip. Slide one: a line draws left to
+right; four numbered dots appear in turn with "Load your data", "Ask Kai", "Kai builds it" and "The
+app is ready", each with one line saying what it does. Slide two: the finished app (the draft grid)
+beside "Want an answer from your data? / a data app? / a pipeline that reruns every morning? Go
+through the guide and try it yourself." Poster: the whole line with its four captions, so the page
+explains Keboola before the clip plays.
+
+**What the clip does not say, and why.** Not "in five seconds": a question takes Kai 22 s from the
+terminal and 1.3 to 1.6 min in the chat, an app draft 5 to 6 min, and load, forecast, transform and
+question as four prompts in one chat took 14.4 min with 12 approvals. It says "one prompt"
+instead, and describes the one-prompt block on `ask/` without quoting it, because that block ran
+end to end only on the earlier dataset and its current wording has not been rerun. Not that the
+same prompt builds the app: the block loads, joins and answers, and the app is a paragraph you write,
+which is what step 4 says. Not "interactive": the example grid has no filters. Step 2 says what Kai
+is (Jordan asked for Kai to be explained up front); step 3 says "you approve each change", which How every page
+works already states; the app on the last slide is the draft preview.
+
+**Made with** `explainer.html` in the docs-clip rig, recorded through `record-composite.mjs --page`:
+29.6 s, 394 KB, luma mean 227, never under 225; captions 17.5 and 13.75 px on the page; every step
+and closing phrase up at least 3 s; the clip fades to its empty first frame, so the loop is seamless;
+poster 99.5 KB. The checker and the fact-checker read the first cut: the prompt in quotes had never
+run, Kai was never introduced, the closing phrases were up 2.3 s, and the grid card faded over
+Brno's row; all four are fixed. The checker's second pass found step 2 typing itself out, which
+shifted centred text while it was being read, so it now appears whole. The guide-tester found step
+2 naming "the most stretched café" before the hub introduces the cafés, and the screen calling the
+app ready where the aria-label said draft; step 2 now asks which café will be short-handed next
+week, the hub's own question, and step 4 and the aria-label both say draft. It also suggested the
+course table's order (Kai transforms, then the question) and a fifth dot for the schedule. Declined:
+Nikita gave four steps in this order, and the schedule is the third closing phrase. The final
+checker pass is PASS; its one open minor is Brno's row, which still meets the card edge without its
+weather line (MISSING). The screenshot clip's structure was already under VERIFY(Jordan)
+(three acts, poster); this is a third structure, so the flag stands and Jordan sees it in the PR.
+
+---
+
+## 2026-09-29 — Getting Started loses 43% of its words to cards, strips and folds
+
+**Asked by:** David Esner, Slack, 29 Sep, on the #1144 preview: far too much text, and nobody has
+the attention span for it; he likes the prompts and the Prompt · UI · CLI split and would release
+it after one more pass with as little text and as many short bullets as possible. His screenshot
+was load/: the Before you start box, the three PathIntro paragraphs under it, then the sample data.
+Nikita agreed and asked for pictures, screens, icons and diagrams instead of text, and questioned
+the hub's "about 80 minutes".
+
+**Decision.** A form pass on the hub and the seven steps; facts, prompts, clicks and commands stay.
+
+- A course line (`CourseLine.astro`, `course.mjs`): seven numbered dots, the hub clip's picture.
+  Vertical on the hub, where it replaces the four-column steps table; a bar at the top of each step.
+  PageMeta carried no step numbers since 2026-09-02 because numbering breaks when a page moves;
+  the order now lives in one list, so a move is one edit and the numbers follow it.
+- "Where you are → When you finish" is the first row of the Before you start box (`from`/`to`
+  slots), two cards with an arrow; the hub keeps its own strip (`FromTo.astro`) in its 23.09 place.
+- PathIntro went from three paragraphs (179 words on every task page) to two lines. The approvals,
+  tool permissions and plan mode paragraph moved to the hub, "Approvals and plan mode", which every
+  page links. The twin keeps the full "alternatives, not steps; do one of them" wording.
+- Diagrams: load/'s sample tables are cards (`SampleData.astro`, counts in `sample.mjs`); the
+  connector, the mapping model, the four parts of the query, a data app and the flow's phases are
+  strips (`FlowStrip.astro`). The hub's "Where to start instead" table is four link cards.
+- Folds: every "If it goes wrong" item is a `<details>` with the symptom as its summary, and so are
+  the explanations most readers can skip (the forecast URL, the half-open bands, why the transform
+  prompt is long, the Free Plan limits, adding tasks by hand, schedule options). The twin prints the
+  summary in bold and the content after it.
+- Time: no per-page minutes. The hub says "about 30 minutes with Kai, plus sign-up and reading": Kai's wall
+  time in the 2026-09-08/09 runs (load 9, transform 4, ask 3, app 6, flow 3 + an 8-minute first
+  run). "About 80 minutes" was that plus reading one tab at 200 words a minute, and read as a reason
+  not to start. Nikita chose the one honest number, re-measured. The re-measurement did not happen
+  on 29 Sep: a script that clicks Kai's approvals unattended was refused, so the number rests on
+  the recorded runs until Nikita decides how to time it. VERIFY(Nikita).
+
+**Measured** on the rendered pages (visible words: hidden tabs and closed folds do not count;
+code blocks excluded), before on the #1144 preview at 046410c3, after on the local build:
+
+| Page | Prompt path, words | Before the tabs | Page height |
+|---|---|---|---|
+| hub | 905 → 772 |  | 4041 → 3952 px |
+| project | 719 → 516 |  | 2533 → 2490 px |
+| load | 1600 → 766 | 893 → 476 | 6134 → 4945 px |
+| transform | 2145 → 921 | 1030 → 523 | 7694 → 5963 px |
+| ask | 823 → 559 | 442 → 374 | 3604 → 3484 px |
+| app | 1597 → 938 | 702 → 481 | 5030 → 4125 px |
+| automate | 1778 → 1024 | 830 → 502 | 6577 → 5715 px |
+| check | 1179 → 634 |  | 4063 → 3437 px |
+| **total** | **10746 → 6130, −43%** | | **−14%** |
+
+The plan's targets were half the words and no more than 120 words before the tabs; neither is met.
+What is left above the tabs is the cold-landing block (where you are, what you need, what each tab
+needs) and the one explanation each step needs before its task. Cutting further would start cutting
+Michal's rule that every page survives a cold landing.
+
+**Seen in the product while preparing the timing run** (read-only, project 264, 29 Sep): the Kai
+panel now has a **Mode** menu, Standard or Lite ("Lite answers quick questions for a fraction of the
+cost. Standard builds and changes things."), which the guide does not mention; and in Nikita's
+account a new chat opened with **plan mode** already on. Whether that is the default for a new user
+is not known. VERIFY(Kai team).
+
+**Reviewed.** The fact-checker found no changed number but five qualifiers the cut had separated
+from their claims; all five are back: the Free Plan limits beside "enough for everything in this
+guide", the forecast path in load/'s UI step 11 (it had pointed at a folded URL), the wet-week
+exception beside the transform and ask checks, app/'s "This is a private draft", and "five of them"
+plus `products` and the input-mapping names on transform/. It also caught the twin generator
+stripping indentation inside code blocks, so automate/'s flow.yaml no longer parsed as YAML; that
+was older than this pass and is fixed in page-markdown.mjs (all 66 Getting Started code blocks now
+match their source). The time line says "plus sign-up and reading", since sign-up is neither.
+
+The guide-tester found it followable by a human and by an agent, with fixes: ask/'s CLI check
+pointed at the grid a page later (it now names the top row of the table); app/'s twin said the
+three tabs reach the same result, though only Prompt builds the app (PathIntro's `manual={false}`
+line says so now, on the page and in the twin); flow.yaml needed the BigQuery component ID and the
+no-app variant; every Prompt box scrolled sideways (they wrap now, one line per paragraph in the
+source, the words unchanged, which also mends the two quoted names split across lines); automate/'s
+"Run it" told only CLI readers the run had happened; the intros repeated the lede, and three are cut
+to their "why"; transform/ said plainly that code never touches Storage, which Kai's read-only
+build contradicts, so the bullet and the Prompt tab now say both. Three twin defects are fixed in
+page-markdown.mjs: an empty "You need:", tab labels that looked like fold titles (tabs are
+`###` headings now and a rule closes the group, which also changes the twins of cli/getting-started
+and data-apps/authentication), and list items that lost their indentation because wrappers were
+dedented by a fixed 4 spaces instead of what their author wrote (83 code blocks across all MDX pages
+match their source). Declined: cutting the hub's "why" paragraph where it repeats the lede, because
+Nikita set that paragraph on 23 Sep. The course dots are `--kbc-blue-600`, where white numerals pass
+4.5:1, and the bar hides its names by the column's width (a container query), as the docs-stage-strip
+skill asks of its StageStrip.
+
+The checker's first pass was FIX. Its blocker: re-wrapping the prompts had joined automate/'s
+"Then give the flow a schedule … Then run the flow once now" onto item 3, so a reader told to leave
+the app phase out would drop the schedule and the run with it; the line is its own paragraph again,
+the words unchanged (no other prompt had a line like it). Also fixed: the long bullets on transform/,
+automate/ and check/ cut to a clause or two; the flow strip starts with the schedule, which is what
+starts the flow; tab headings in the twin sit one level below the section that holds the tabs, so
+data-apps/authentication's providers are `####` under "Step 2"; app/'s tab note no longer calls the
+three tabs the same task; the hub's "Three others" sits above three cards now (the "This guide" card
+went, the course line above it is the guide). And `transform/mapping.png` showed a colleague's name in
+its Versions panel ("by …", PRDCT-616) right under the new strip: those words are covered with the
+panel's own colour, nothing else in the capture changed. The CONSERVATION-REPORT table for this pass
+still lists four transform/ cuts that its correction line restores: the file could only be appended
+to in this session, so the correction stands below the table.
+
+The checker's second pass is PASS. Its minors went in after it: five more bullets cut to a clause or
+two; the four-box strips stack by the column's width (a container query), because between about 800
+and 990 px their fourth box dropped to a row of its own; check/ and automate/ name an automatic run
+the way 09-all-runs.png shows it, `Schedule for <flow ID> Scheduler`, not *scheduled run*; and a
+ledger line for the transform/ phrases the second cut reworded. The twin generator changes two
+twins outside Getting Started, cli/getting-started and data-apps/authentication, whose tab headings
+now nest under their section.
+
+**Not in this pass:** new screenshots (load 01–07 still show the previous configuration name; the
+app cannot be reshot while its deploy fails), and the side trips (write, ad-hoc, branches,
+load/googlesheets, load/database, transform/workspace), which only lost their minutes and got the
+shorter shared blocks through the components.
+
+---
+
+## 2026-10-01 — The guide on a real Free Plan project
+
+**Asked by:** Michal Jeřábek, Slack, 30 Sep: the best Getting Started so far, but not to merge until
+it has run where newcomers land, a free Pay As You Go project on BigQuery in us-east4 (his figure:
+53 % of new projects in 90 days). His list: run it there with prompts that do not say Snowflake and
+SQL that fits the dialect; look at the failing app; schedule weekly, with a box on what it costs and
+how to switch it off; reshoot the images in that project, all from one week; on the Prompt path show
+the prompt in the chat and what Kai created, where to find it and how to undo it; fix the hub's
+"Kai always asks"; a hero clip of ten seconds at most. Nikita, 1 Oct: run the Prompt path yourself,
+keep the schedule on, do the edits.
+
+**The run.** Free Plan project 6375 (`payAsYouGoBigQuery`, us-east4), signed up by Nikita that
+morning. Claude drove a headed browser on Nikita's session, read every approval card and clicked
+**Approve** only on what the page's step creates, never **Always allow**, and logged times, jobs and
+objects through read-only Storage and Queue API calls. The prompts went in word for word with two
+exceptions: the five CSV URLs pointed at the branch preview, because
+`help.keboola.com/getting-started/boolabean/` answers 404 until this PR merges, and the flow prompt
+named the app by the name Kai gave it, as the page tells the reader to.
+
+| Page | What the page said | What happened |
+|---|---|---|
+| load/ | 7 + 3 approvals; 6, 18, 9,761, 552, 552; forecast 42 | the same; Kai hands the chat back while the job runs and returns with the counts by itself; load job 327 s |
+| transform/ | 2 approvals, 42 rows | the same; Kai chose BigQuery from the neutral prompt, and its answer equals an offline computation |
+| ask/ | an answer, no approvals | 63 s and 12 s; for Brno Kai said the forecast is not the difference, the roster is |
+| app/ | one card before the code; the deploy has never worked | no card while building; the first preview had no red cells (`short_handed` reached the app as `1` or empty), fixed by one message; Publish to production asked twice and the app came up Active |
+| automate/ | 3 approvals, three phases, a schedule with a toggle | the same; the run took 205 s against 510 to 636 s in 264, the app phase 19 s, success. Rebuilt that evening with two phases (ruling 1): 3 approvals, 338 s, of which about two minutes was queue wait |
+
+Kai's wall time was 27 minutes (load 10.9, transform 4.7, ask 1.3, app 4.5 to the first preview,
+flow 5.6 with its run), plus 4 for the app fix and 6 for the optional publish, so the hub's 30
+stands. Kai's usage button went from 0 to 9 of 50 messages and from 300 to 274.9 PPU of free
+allowance. A survey ("That was your first run with the AI Assistant...") opened after the first
+runs and was closed unanswered.
+
+**What changed on the pages.**
+
+- **hub:** the approvals paragraph says what the run showed (the chat asks per change unless a tool
+  is on **Always allow**, and a new account has two write tools set that way, both for data apps;
+  the builder builds a draft without asking and asks twice when you publish); the undo fold names
+  **Versions** and **Restore this version**, with a screenshot, and what they do not undo (tables
+  already written, the schedule, an app's code); plan mode is in the **+** menu; Kai is named before
+  the clip, and a new Free Plan project has it from the start; the box says the guide's Prompt path
+  ran on a Free Plan project; the timing VERIFY is closed.
+- **project/:** 50 GB of Storage, the new project's own limit, instead of 250, with a VERIFY on both
+  pages; **Conditional Flows** and **Apps** in the navigation; Kai there from the start on Free; the
+  allowance capped at last month's usage, in the PAYG page's words.
+- **load/:** the hand-back while the job runs, about six minutes; weekly; the forecast step's chat
+  as a screenshot; 06 shows the bucket with all five tables.
+- **transform/:** the prompt's VERIFY closed; the chat with what Kai created, and to wait for its
+  confirmation; the BigQuery block run as a query; three flagged rows; what a week under 18 °C
+  looks like; the UI tab's destination auto-fills in lower case and Storage finds the bucket under
+  either spelling; **Create Multiple Queries** opens **All Queries** with its markers, and opening
+  a code renames it; running both tabs needs Kai's table deleted first.
+- **ask/:** a still replaces the clip; the check accepts the roster answer; the fold's answer is the
+  screenshots' week; a BigQuery variant of the two workspace queries, run.
+- **app/:** steps 1, 3, 4 and 5, the check, the box and the failure folds rewritten from the run;
+  PathIntro without its approvals line, which the builder contradicts; a fix message to copy; cold
+  weeks (no red cells, empty cells) in the check and two folds; the **Deploy** buttons named;
+  **Start** as the live label.
+- **automate/:** **Conditional Flows**; **Create Flow** under **Build It Yourself**; two phases,
+  with no app phase (ruling 1); the run's timings; the schedule with its time zone; the cost box,
+  which says about 2½ to 4 billed job minutes a run and 10 to 20 a month (extend/jobs/: only
+  `standard` jobs are billed, not containers or waiting) and that the app's own running time may
+  count; app/ asks whether the app reads the table live.
+- **check/:** three flags; the run's timings; **Conditional Flows**; the **Conditions** rows; cold
+  weeks; the "grid is unchanged" fold now says the flow does not restart the app, and the "app
+  phase fails" fold is gone with the phase.
+
+**Images.** Twenty-three captures replaced in 6375 under their old names (nineteen in the
+morning run, four more for the transform UI tab that evening), `load/04` cropped, the Add Task GIF
+reshot, six new ones for the Prompt path, the ask clip removed. All from the forecast week of 1 to 7 October. The account name, which
+is a personal email, was greyed out in the page before each capture. The builder chat's "Seed draft
+branch" step, which prints the Git remote with a credential, is in none of them, and the app's own
+host is greyed out in `app/kai-builder.png`. Kept from 264: `load/03` (the base URL card, nothing
+project-specific in it) and `load/04` (cropped to the row's settings, so its side panel of 264's
+daily scheduled runs is gone) and `load/forecast-row-code-editor.gif` (the forecast row's
+greyed-out Visual Editor, nothing project-specific). `automate/kai-flow.png`, `05`, `07`, `08`,
+`add-task.gif` (five states, nothing saved) and `check/09` were reshot from the two-phase flow
+that evening. The
+transform UI tab's `mapping.png`, `03`, `04` and `07` were reshot that evening from a copy built
+through the tab (input mapping, output mapping, the BigQuery block pasted into **All Queries**),
+which was saved, never run, and deleted into Trash; Kai's transformation and its table were not
+touched (version 1, last import 14:09 UTC). `load/06` was reshot at a taller window so all five
+tables show.
+
+**The clip.** `hub-explainer.mp4` is the 10-second cut: four dots with their titles, then the Free
+Plan grid and one line. That breaks the three-seconds-per-caption rule on purpose; the step texts
+are in the course line. 10.0 s, 193 KB, luma mean 229, never under 227.
+
+**Rulings made without asking, and what each costs if wrong.**
+
+1. ~~The flow keeps its third phase.~~ Reversed the same evening. The plan (30.09) said to drop
+   the app phase once the app proved to read fresh data, and it does: its `/api/grid` route queries
+   BigQuery on every request (code read in the builder's **Code** tab). The checker flagged the
+   ruling against the plan; Nikita chose to drop the phase and rebuild. The three-phase flow and
+   its schedule went to Trash, and the two-phase prompt ran in a fresh chat (flow
+   `01m3we5c5k6n9qy8ysrfq40e2x`, schedule `0 6 * * 1` Europe/Prague, three approvals, run 338 s).
+   The first automatic run is still Monday 5 October at 06:00 Prague. Cost: a reader whose app
+   reads the table only at start-up and is kept awake through the Monday run sees last week until
+   it restarts; app/ gives the question to ask and the fix, and check/ the symptom.
+2. ~~The prompts stay as run, with the app named as Kai named it.~~ Moot since ruling 1 was
+   reversed: no prompt after app/ names the app. The prompts on the pages are the ones that ran.
+3. ~~No mapped copy of the transformation in 6375 for the remaining UI shots.~~ Superseded the same
+   day after the checker's review: a mapped copy was built and shot but never run, because a run
+   would collide with the Kai-built typed table (weekday Mon against Monday, `rostered_staff`
+   FLOAT64 against INTEGER). Cost: the `CREATE TABLE` wrapper with an input mapping is still unrun.
+4. No prices, only minutes, with `management/pay-as-you-go/` as the source of the 60 and of the
+   rule that flow jobs use none. Cost: none.
+5. Cold weeks are described, not fixed. The sample's history is June to August, so under 18 °C
+   nothing is flagged (the highest cold-band figure is 65.5 a person) and on dry cold days five of
+   six cafés have no history. The pages now say so; adding cold-weather history to the sample is
+   Nikita's call. Cost: from about mid-October to April a reader's grid is mostly quiet.
+6. ~~One story about the third phase.~~ Moot since ruling 1 was reversed: the flow has no app
+   phase, and automate/ and check/ both say the app must read the table when it is opened.
+7. ~~The flow prompt names the app `Staffing Outlook`.~~ Moot: the two-phase prompt names no app.
+8. `transform/kai-transform.png` starts at Kai's work, not at the prompt, which is the code block
+   right above it; the other four Kai images show the prompt. Cost: one image short of Michal's
+   "prompt in the chat".
+
+**Still open.** Whether a running app counts against the Free Plan minutes (Project Consumption said
+"not synced yet" that evening; Billing answered 403). The schedule's first automatic run, Monday 5
+October at 06:00 Prague, left on at Nikita's request. 50 GB against the 250 GB of
+`management/pay-as-you-go/`, now a VERIFY on both pages. The BigQuery block's `CREATE TABLE`
+wrapper and input mapping. Cold-weather history for the sample. What the builder's **Deploy**
+buttons do (not clicked). Four checks the plan named that did not run in 6375: the neutral
+transform prompt on a Snowflake project, the CLI / API tabs, the BigQuery `CREATE TABLE` through an
+input mapping, and ask/'s BigQuery queries inside a workspace. The sign-up path from the reader's
+own AI assistant (the MCP server's `create_project`): prepared on project/ as a hidden draft under
+`VERIFY(MCP team, DMD-1939)`, because no public stack has agent provisioning enabled yet; the
+question for the MCP team is Nikita's to send. From the plan, for Nikita: in project 264, drop
+the old flow's app phase or fix its app (the previous session switched its schedule off), and confirm
+in the queue that no 06:00 job ran there on 2 October. A risk for Monday 5 October: the scheduled
+run in 6375 loads the five CSVs from the branch preview host, because help.keboola.com answers 404
+until this PR merges; if that preview is gone by then, phase 1 fails, and after the merge the
+configuration's base URL should move to help.keboola.com. The cost box's minutes follow
+extend/jobs/ (only `standard` jobs are billed), read after the third review: about 2½ and 4
+minutes in the two runs, 10 to 20 a month weekly; read Project Consumption in 6375 after Monday's
+run to see what was actually metered. #1116 and #1144 stay drafts until Michal says otherwise.
+
+
+## 2026-10-02 — Page titles in Keboola's words
+
+**Asked by:** Nikita, 2 Oct: "Put it in front of someone" says nothing, and the titles should be
+in Keboola's own words, so that a reader can find the same feature later in the product and in
+the docs. The ask/ title is Nikita's pick from three options, after the reviewers' round.
+
+| Page | Was | Now |
+|---|---|---|
+| project/ | Get a project | Create or join a project |
+| load/ | Get your data in | Load data into Storage |
+| transform/ | Transform data | (kept: Jordan's title of 21 Aug, and already the product's word) |
+| ask/ | Ask a question and get an answer | Explore your data |
+| app/ | Put it in front of someone | Build an app |
+| automate/ | Make it run every week | Build and schedule a weekly flow |
+| check/ | Check it worked | Check Storage and Jobs |
+
+The words are the product's: **Storage** and **Jobs** are navigation items; **app**, not "data
+app", because the product says Apps, Create app and Open App, and the Apps docs renamed "Data
+Apps" to "Apps" on 2026-04-01 (AJDA-2544; "Data App" survives as the component's name in the flow's
+task picker and in `kbagent data-app`); **flow** is Create Flow and Run flow under Conditional
+Flows; "Explore" follows Kai's own name for this use case, Data Exploration. "Ask Kai about your
+data" was tried first and dropped: the docs site's own assistant is called "Ask Kai" and cannot
+see the reader's project, and the page's UI tab is SQL in a workspace, not Kai.
+
+The sidebar takes these from each page's frontmatter title (`convert-nav.mjs` ignores `title:` on
+single pages); `_data/navigation.yml` was changed too so it stays in step. check/'s next link and
+write/'s previous link are labelled Going further in their frontmatter, so the footer after check/
+no longer says "Next: Overview" while the sidebar keeps the site's Overview convention. The
+course line (`course.mjs`) has the same titles and the short labels Project, Load, Transform,
+Explore, App, Flow and Check; its "In Keboola:" term is gone where the title already names the
+thing. Link texts that used a title were changed on every page, including `components/extractors/`
+and the Pay As You Go page, which now points at the hub. The hub's tab-sync GIF was re-recorded
+from the build, because its sidebar showed the old titles. On automate/ "Get told when it breaks"
+is "Set up notifications", the name of the tab; project/'s section is "Choose a way in". The
+"Check it worked" sections inside pages stay: they name a step of the page, not a feature. Slugs
+and URLs do not change.
+
+**How this sits with the rule of 2 Sep:** "Tool names survive as tab labels and as their own
+reference sections in a separate 'going further' tier, never as chapters of the guide." The tools
+that rule meant are the ways of driving Keboola (CLI, MCP, Kai's prompt). None of the new titles
+names one; the product words in them (Storage, app, flow, Jobs) are what the reader gets.
+
+
+## 2026-10-02: The leftovers outside the retitle
+
+**Asked by:** Nikita, 2 Oct, after a guide test found pages outside the retitle that still
+described the guide in its old order or linked it by old names.
+
+The home page's summary follows the hub now: load data into Storage, transform it with SQL into one
+table, ask Kai about that table, build an app on it, schedule a flow that rebuilds the table every
+week. It used to list "deliver the result", which has been a side trip since 2 September, and
+named neither Kai nor the app. Kai is explained where it is first named ("the AI assistant inside
+your Keboola project"), because this docs site has a Kai of its own, a chat about the docs behind
+the header's Kai button and the Ask Kai drawer: the same mix-up that dropped "Ask Kai about your
+data" as a title (entry above). The 30 minutes are the hub's, on the hub's condition (the prompt
+each step gives you for Kai) and with its "plus sign-up and reading". overview/'s one-line pointer
+says the same outcome and time. The home page's seven dashes are commas and colons now.
+Superseded on 12 Oct by #1187's e37355af4, which gave the home page and overview/ the hub's shorter
+wording ("In about 30 minutes with Kai, plus sign-up, you build a real pipeline…"); the merge of
+this branch into #1187 kept that wording, reordered so the home page names Kai as "the AI assistant in
+your project" at its first mention, so the mix-up above still cannot happen.
+
+ad-hoc/ opens and ends as a side trip, in the form Load from Google Sheets and Load from a database
+use: a line saying where it branches off, **Where you are** and **When you finish**, a **You need**
+box, and a closing **Going further** list. It used to open with the old order (load, transform,
+Google Sheets, automate) and close the whole tutorial ("the end of our stroll around Keboola"). The
+box needs MDX, so the page is `index.mdx` now, with the `PageMeta` line the other side trips carry
+(How-to, Going further) and its three authoring comments in MDX form. The caution box, under the
+**You need** box and titled "Parts of this page are out of date", points to the note at the start
+of Exploring Data instead of repeating that sandboxes are legacy. The steps between are as they
+were. Whether the page stays depended on the RStudio question, closed in the table below.
+
+Link texts name the page they open. The five database connector pages say Load from a database,
+and branches/ lists its parts by their titles. TDE Exporter's link goes to Tableau TDE instead of
+the Google Sheets side trip that its old `/tutorial/write/` target redirects to, and the sentence
+now says the exporter is that connector in the UI and can also run on its own through the API: the
+Storage API index lists `tde-exporter` itself as Tableau TDE, a writer. ad-hoc's Wrap Up links
+Python Transformation instead of the SQL page, and going-further's `variables` link skips its
+redirect stub. Development branches is sentence case in its page title and first line, as it
+already was in the sidebar, on the hub and on Going further. The footer links next to it said
+Overview, the sidebar's label for a group's landing page, so ad-hoc/'s `next:` and
+prepare-tables/'s `prev:` name the page, as check/'s and write/'s do (entry above), and project/'s
+`prev:` names the hub the same way. Inside the guide, only merge-to-production's Next, which leaves
+for `/kai/`, still says Overview.
+
+The same kinds, found by the guide test and fixed here: going-further/ loses "the arc" and "this
+tier", and two lines that each assumed one path through the guide, "Everything you just did by
+clicking" (the UI) and "the one you have been using" (the Prompt tabs); check/ lists the step
+pages before the spreadsheet side trip; write/'s description no longer assumes the reader just
+built the table.
+
+A second commit the same day holds the additions that bring new facts to ad-hoc/, so that they can
+be dropped on their own (CLAUDE.md keeps form and accuracy apart; the link retargets and the TDE
+wording in the first commit stay with the link fixes Nikita asked for). ad-hoc/'s **You need** item
+asks for a Google Cloud project with billing enabled, because the bucket needs it: Google's
+free-tier page says a free tier needs a billing account. The BigQuery section says so next to the
+free 1 TB of queries instead of "without enabling billing". The caution adds that organizations
+created on or after 3 May 2024 block service account keys by default, which an organization policy
+administrator can lift, and the note at the start of Exploring Data says to create a Python
+workspace instead of the sandbox, without its stale "will be updated soon". The fact-checker raised
+the billing, the guide test the key policy and the workspace line, and the checker asked for the
+split; Google's own pages confirm both Google facts.
+
+**Not changed in this pass, for Nikita:** generic "Getting Started tutorial" or "tutorial" links
+that land in the guide (flows-legacy, transformations, mappings, storage, storage/buckets, the sqldb
+connector, `components/branches/`); the BigQuery connector's "Getting Started Tutorial", which opens
+ad-hoc/, and the storage connectors page's "Tutorial" and the extractors index's "sample data source
+connector", which open Load from Google Sheets; "new R transformation" on
+`transformations/r-plain/plots`, which opens the SQL page; "Keboola workspace manipulation" on the
+MCP page; "manually from any configuration" on `management/jobs/`, which opens the hub; the home
+page's "Data governance", which opens account administration; "the **Tableau** connector" on the
+Tableau TDE page; app/'s prompt "Build a data app", which ran as written and would need a rerun;
+footers labelled Overview at the edges of sidebar sections (overview/api/ into the hub,
+merge-to-production into `/kai/`): the built site has 68 "Next: Overview" and 67 "Previous:
+Overview", so they want one fix in `convert-nav.mjs` or the `Footer.astro` override rather than
+frontmatter page by page; merge-to-production's "You Did It! 🎉" ending; the title case of
+`components/branches/` ("Development Branches") and of the home page's headings; the dashes in
+overview/'s other paragraphs.
+
+---
+
+## 2026-10-06 — The hub clip: a faster line, and a closing slide that asks what you want to build
+
+**Asked by:** Jordan, through Nikita on 6 Oct: the hub clip is long. Draw the line faster and use
+the time to say something concrete: apps, dashboards, something interactive. Nikita, the same
+evening, after two cuts: keep one screen, the app this guide really builds, with "Want to build"
+and a phrase that changes; draw the line about 1.5 times slower than the first cut; and build it in
+Remotion in Keboola's own style.
+
+**Decision.** The clip stays at 10.0 s, Michal Jeřábek's limit of 30 Sep. Slide one is the line of
+four dots and their titles, a dot every 0.67 s (1.35 s in the 10-01 cut), whole from 3.0 to 3.9 s.
+Slide two is the guide's grid beside "Want to build" and a phrase that changes every 1.7 s (an app
+like this one, an interactive dashboard, a what-if simulator: the apps, dashboards and something
+interactive Jordan asked for), with "Go through the guide and try it yourself." under it. The
+poster is still the whole line.
+
+**Where the words come from.** The first phrase points at the card, the app this guide builds. The
+other two are kinds from the list on What are apps: Dashboards, and Anything interactive
+("configurators, simulators"). The hub's sample paragraph now ends with one sentence that names
+them and links that list, so the clip says nothing the page does not. Two phrases went on the way.
+"An approval form" was in the second cut, but no app built on 6 Oct showed one (the internal tool
+saved a review back to Storage), so the fact-checker found nothing to back it. "A data story" made
+four phrases of 1.2 s each, faster than the cut before it, which the checker flagged after Nikita
+had asked for a slower clip. The grid still has no filters, so the ruling of 29 Sep on
+"interactive" stands: the word is in a phrase about another kind of app. 1.7 s per phrase breaks
+the three-second rule on purpose, as the dots have since 1 Oct.
+
+**Keboola's style.** Colours, type and motion come from `@keboola/design` 13, the package behind
+the product UI: Inter at weight 600, slate text #1e293b, the light-mode primary #2563eb ("Keboola
+blue, AA-tuned"; the brighter brand blue #1f8fff gave the phrases only 3.1:1), the #f9fafb canvas,
+a white card with a #e5e7eb edge and blue-grey shadows, and the easing cubic-bezier(0.2, 0.7, 0.2,
+1). Entrances are springs, as in Keboola's own Remotion videos (the kbl-content plugin).
+
+**The cuts that were rejected.** First, three apps Kai built in project 264 that day (a store
+dashboard, a data narrative, a staffing planner), about 1.5 s each, then the grid: Nikita found it
+strange. Second, the one-screen slide in the old explainer look with a dot every 0.43 s: the line
+too fast, and the look not Keboola's.
+
+**Made with** Remotion: 1280x800, 30 fps, 10.0 s, 201 KB, mean
+luma 228, darkest frame 227, encoded in limited range like the earlier clips (Remotion writes full
+range, which measured 246 and could not be compared). The video is 713 px wide in a 1280-px window,
+so the 40-px lines read at 22 px, the 26-px closing line at 14.5 and the step titles at 16.7.
+
+---
+
+## 2026-10-07 — The hub clip's line becomes a hand-off to Kai
+
+**Asked by:** Michal, through Nikita on 7 Oct: involve Kai more in the process; for example, say in
+the clip that Kai can load your data. Nikita: make the line a pipeline of words, where you have an
+idea, go to Kai and say what you want, and Kai does the work.
+
+**Decision.** The four steps of the hub clip's line now read "Your idea", "Tell Kai", "Kai loads
+your data", "Kai builds the app", one line each, with the word Kai in Keboola blue. A first try in
+two lines per step ("You have an idea", "You tell Kai what you want") came to 79 characters, and the
+checker found it too much to read in the line's 3.9 s; the last step was on screen for 0.9 s. The
+labels are back near the 6 Oct length (54 characters) and the timing is the one Nikita approved on
+6 Oct. The dots moved 36 px apart to give the two long labels a gap, and their numbers grew from 20
+to 24 px (11 px as seen before, now 13.4). The second slide and the look are unchanged.
+
+**The page says it too.** The hub's first paragraph now reads that once you have a project, Kai can
+do the work from what you tell it in plain language: it loads your data, answers questions about
+it, and turns the answer into an app, asking for your approval along the way. That is the guide's
+Prompt path (on load/, Kai sets up the HTTP data source and runs it). "Once you have a project",
+because project/ has no prompt; "asking for your approval along the way", because the guide-tester
+found that the top of the page no longer mentioned approving anything, and the approvals section
+explains what asks and what does not (the Apps builder makes its draft without asking and asks
+twice at publish). The clip itself says nothing about approvals either way. Two small fixes rode
+along: the box says "Every step after the first" instead of "Every step", in project/'s own words
+(it has no prompt: Kai works inside a project), and How every page works names the top-bar button
+**Kai Agent**, as project/ and load/ do.
+
+**A screen under each phrase.** Later on 7 Oct Nikita asked for a different screen under each blue
+phrase on the second slide. The card now shows the guide's grid for "an app like this one?", the
+Store pulse dashboard (the project's Shopify sample, switched to the last 12 months) for "an
+interactive dashboard?", and the Café staffing planner (this guide's café sales, 31 °C on a
+Saturday) for "a what-if simulator?". Both apps are ones Kai built in project 264 on 6 Oct, and the
+screens are the last frames of their takes; the cursor rests
+on the control that was used. Each screen fades in through the card's white as its phrase arrives,
+so two screens never sit on top of each other. This is not the montage rejected on 6 Oct: there is
+one slide, the guide's grid comes first, the layout and the closing line stay, and there are no
+headings over the cards.
+
+**Made with** the same Remotion project: 10.0 s, 249 KB, mean luma 229, darkest frame 227; poster
+1280x800, luma 228 (the whole line, unchanged).
+
+---
+
+## 2026-10-07 — Kai in the failure paths, and the whole guide as prompts
+
+**Asked by:** Michal, through Nikita on 7 Oct: more Kai in the process. Nikita picked two of four
+proposals and asked for them as a separate PR: ask Kai when something fails, and the whole guide
+as Kai prompts in one place.
+
+**Ask Kai first.** load/ and transform/ open their "If it goes wrong" sections with a tip in
+check/'s style holding two prompts that name the guide's configuration: one for a job that failed
+("Read its error and tell me what to change") and one for a job that succeeded but left a table
+that looks wrong ("Read the configuration [the SQL] and the first rows of that table…", with a
+placeholder for what the reader sees). The guide-tester found most of load/'s folds are such
+green-but-wrong jobs, and the checker that a failed-job prompt alone narrowed the plan. The tip
+also says to use your own name if you changed it, that Kai asks before any change unless the tool
+is set to **Always allow**, to run again and redo the check, and the terminal form (`kbagent kai
+ask`). A question that only reads asks for no approval by default, as the hub says. On ask/ the
+prompt "Show me the SQL you ran for that answer and the rows it is based on" sits in the Prompt
+tab's fold "If the numbers come out different", titled "Follow-up prompt" so the hub's list skips
+it; below the tabs it would have reached readers of the UI and CLI tabs, who have no Kai answer to
+question. On automate/ the red-run bullet of "Check it worked" ends with check/'s prompt in one
+line rather than a second copy of check/'s tip, since check/ is the next page.
+
+**Not as proposed, for Nikita.** The proposal said one prompt line in each failure fold; the tips
+carry two prompts per page instead, because the folds' failures are of two kinds and fourteen near
+identical lines would undo the dry pages. Per-fold lines are a follow-up if wanted. It also said to
+run the whole list once in one chat on 6375 before publishing; that run was not done. The list
+claims only the 1 Oct numbers (page by page), and a one-chat rerun would leave a second set of
+configurations, an app draft and a second weekly schedule in the project, with the app step in the
+Apps builder rather than the chat. Nikita's call.
+
+**The whole guide with Kai.** A new hub section before "Where to start instead": once you have a
+project, the prompts in order build the pipeline from loading to the weekly flow; paste each into
+Kai Agent, or the app's into the Apps builder, and approve what Kai asks. Before the next prompt
+the step's Check must match, with a signal per step: the load reports its row counts on its own
+about six minutes after Kai hands the chat back, the transformation's and the flow's job cards say
+**Job succeeded**, the app's chat ends with **Draft ready**, and a question is done when it is
+answered (the checker caught a first version that said "Job succeeded" for all five). The section
+gives the approvals of the run, 15 without the app's optional publish (load 7 and 3, transform 2,
+flow 3, from the pages), and is a short list: where, when to paste the next, what is left. The section names what the prompts leave to the
+reader: the flow's notifications, publishing the app, and Check Storage and Jobs; and it sends
+terminal users to each page's CLI / API tab. The guide-tester's first pass found "the whole
+pipeline", an undefined "finished" and no checks, all three fixed here. A fold holds
+the seven prompts of the five steps that have a Prompt tab. They are read from the step pages at
+build time (`components/getting-started/prompts.mjs`, used by `GuidePrompts.astro` and by the
+markdown twin), so the hub never holds a second copy; the build fails if a step that should have
+prompts has none. The text claims the 1 Oct timing (about 30 minutes from the first prompt to the
+last, one page at a time) and not that the prompts run back to back in one chat:
+that was last shown on 8 Sep, for four of the seven prompts and in older wording.
+
+**Run before the PR opened** (7 and 8 Oct, project 264, `kbagent kai ask` and `kai chat`,
+read-only, no approvals, about 30 s per answer). transform/'s failed-job prompt as worded: Kai
+checked the transformation's 24 runs, all green, and said so. The two green-but-wrong prompts, with
+"the stores table has only one column" and "it has more than 42 rows": Kai read the configuration
+or the SQL and the table's rows, found the tables fine, and said what to check or change, changing
+nothing. Asked by name about "Boolabean sales", whose last 50 runs had all
+succeeded, Kai found the configuration, checked its runs and said there was no failure rather than
+inventing one. Asked "My flow run failed. Which task failed, and why?", it found the latest failed
+run of "Boolabean morning outlook", named the failed task (the app redeploy) and read that child
+job's log: the app never reached "running". That also settles check/'s VERIFY on reading a flow
+run's child jobs. After ask/'s first question, "Show me the SQL you ran for that answer and the rows
+it is based on" printed both queries Kai had run and the three rows. transform/'s tip says Kai reads
+the job's log and the transformation's configuration, not "the SQL and the input mapping", because
+only the first was seen.
+
+---
+
+## 2026-10-08 — The whole guide with Kai becomes a page, and the guide gets one true tutorial
+
+**Asked by:** Nikita, 8 Oct: more weight on Kai; whether the prompts stay on the Overview as a
+one-shot; perhaps show first that the whole thing can be done fast, then explain step by step; and a
+Diátaxis pass over the guide.
+
+**What the Diátaxis pass found.** Every task page is declared a tutorial, but with three tabs that
+are alternatives it reads closer to a how-to: a tutorial gives one guaranteed path. transform/ is
+the most explanation-heavy (its UI tab mixes steps, both SQL dialects and commentary), automate/'s
+"Check it worked" holds a cost note, app/'s CLI tab is a different task, checks appear twice on
+three pages, a few facts repeat across three or four pages, and the guide explains Kai's approvals
+itself while linking none of the kai/ overview, best-practices or security pages. Author comments
+are about 61 % of the visible words. ad-hoc/ is a 2019 tutorial with no Kai.
+
+**Nikita's decisions.**
+1. The fast path gets its own page, **The whole guide with Kai** (`getting-started/with-kai/`),
+   right after Create or join a project and before the step pages, so the sidebar and the
+   prev/next links read: Overview, project, the whole guide with Kai, then the steps.
+2. The step pages keep the genre Tutorial; the track shows in the page's line: "Getting Started,
+   step by step" on load/ to automate/, "Getting Started, with Kai" on the new page. project/ and
+   check/ serve both and keep the plain label: my call, not Nikita's (the plan had the label on
+   them too), told to Nikita in the 2026-10-08 hand-off.
+3. ask/'s "The same request, as one prompt" loses its prompt block; its two measured observations
+   move to the new page.
+4. This round also adds read-only "explain what you built" prompts and a recap prompt, and the
+   author comments get a diet in a separate PR. The within-page Diátaxis fixes wait.
+
+**The new page** is the guide's one true tutorial: Prompt only, one path. It has a state block
+(from a project with Kai to the pipeline and the answer), a Kai prerequisite that links Get started
+with Kai and Kai security and privacy, "How it goes" (where to paste, when to paste the next, what
+Kai asks), the generated list of prompts with an "Expect … Done when …" line after each step (from
+two new fields in `course.mjs`, `approvals` and `done`; 7+3, 2, 0, 0 for the draft, 3 = 15), "What
+you have now" with a recap prompt, "What is left to you" (notifications, publishing, the check),
+the fold "Why not one prompt for everything", and a closing link to Load data into Storage. The
+course line shows the seven steps unmarked: the page is a track, not an eighth step, so
+`course.mjs` keeps seven. The hub drops its #1177 section and keeps one sentence that links the
+page, which also ends the clash with the 23 Sep "no new list" ruling.
+
+**Run before writing** (8 Oct, project 264, `kbagent kai ask`, read-only, no approvals): "Explain
+the "Boolabean sales" configuration you created, row by row" (base URL, five rows, three processors
+each); "Explain the SQL of the "Boolabean staffing outlook" transformation in plain words" (daily
+demand, temperature and rain bands, weekday roster, the flag over 67); "What will the "Boolabean
+morning outlook" flow run next time, and in what order?" (phases, parallel tasks, the schedule and
+its state); and the recap (both configurations, the six tables with the guide's row counts, the
+transformation, staffing_outlook, the app and the flow; 264's other Boolabean apps came up too).
+The follow-ups sit at the end of the Prompt tabs of load/, transform/ and automate/, the recap on
+check/ and the new page, all titled "Follow-up prompt" so `prompts.mjs` leaves them out of the list.
+
+**Not claimed.** That the seven prompts run back to back in one chat: never run in their current
+wording. The page gives the 1 Oct numbers, measured one page at a time.
+
+**Review fixes (fact-checker, guide-tester, checker, same day).** ask's "Done when" said the cause
+is always in the forecast; ask/'s own Check says it is sometimes the roster, and nobody in a cold
+week, so the line now follows that Check and covers the what-if prompt. Load's line says what Kai
+does during the six-minute wait and that the forecast prompt goes in the same chat. The page now
+states the question, a "same chat" rule, **Create app** for a project that already has an app, and
+a pointer for a step that comes out different (including a staffing_outlook in another bucket).
+"The draft is yours alone" (unverified) became app/'s "nothing is published until you say so"; the
+link is behind a password. The fold credits the 14-minute control run to 8 Sep only. project/'s
+"in one sitting" (never measured) became "every prompt on one page", with a which-to-pick
+half-sentence there and on the hub. The twin prints each step as a heading, since unindented
+fences restart a markdown list. Left as is: the sidebar puts with-kai before load/, so load/'s
+Previous link goes to with-kai (Nikita chose the place).
+
+
+---
+
+## 2026-10-08 — VERIFY pass, and the whole guide run with Kai in a new Free Plan project
+
+**Asked by:** Nikita, 8 Oct: check every VERIFY flag, and run the guide through Kai. Answers: a new empty
+Free project (he created 6425 himself), all Kai Agent prompts in one chat.
+
+**The run (6425, us-east4, BigQuery).** The with-kai page's seven prompts, help.keboola.com swapped
+for the #1144 preview host (the CSVs 404 until merge). Approvals 7 + 3, 2, 0, 0 (draft), 3 = 15, as
+the page says. Counts 6/18/9,761/552/552 and 42; staffing_outlook 42 rows; Draft ready in the
+builder; flow two phases, schedule `0 6 * * 1` Europe/Prague, run 218 s, both phases green; the
+recap prompt listed everything. About 28 minutes of work. What the page did not say, now added:
+- **A question from Kai.** The forecast week was cold; before building the transformation Kai
+  asked what to do with the cold, dry store-days the summer has no history for (four options). The
+  pages already read empty cells as "no history", so with-kai/ and transform/ now say: answer, and
+  **Leave them blank** keeps to the guide.
+- **Approval timeout.** An approval left for five minutes counts as declined and Kai says so. It
+  happened because our automation could not see the card (the tab went blank when the UI
+  navigated to the new flow); one nudge in the same chat finished the step. with-kai/ says it.
+- **One chat works.** The page now says all the Kai Agent prompts went into one chat in our run.
+Not changed, flagged: the app's What's next? chips offered no **Publish to production** this
+time (app/ step 5 relies on that chip; VERIFY, Nikita's call); the dashboard has a new "Ask Kai
+anything about your project…" field; the prompts say "next week" while the forecast is the next
+seven days, which Kai pointed out.
+
+**VERIFY markers (25 → 20; 7 closed, 2 new).** Two triage agents classified them. Closed from evidence: write/'s **Append rows** (destination screenshot), app/'s
+Publish to production (01.10 run), project/'s Kai limits (the two pages agree now), automate/'s
+use-cases citation (now our runs), automate/'s flow-name dialog (seen in 6425), a stale closure note
+(transform/); check/ keeps its VERIFY, narrowed to contract plans; googlesheets/'s level.csv became TODO(human-review, Nikita). New evidence
+added to open ones: 120 free minutes on a new project's dashboard against the documented 60
+(new VERIFY on project/), 50 GB again, create_project in the Free project's Kai tool list, Kai's
+HTTP config opening in Base URL form, the Free workspace chooser (BigQuery and R only), Kai's
+claim it can create a workspace, and no orphan schedules in 264. The hub clip's VERIFY(Jordan) stays: on 6 Oct he asked only for pace and content. Still owner-only: 50 vs 250 GB,
+dbt and Direct Mode on Free, DMD-1939, the two Google-auth checks.
+
+---
+
+## 2026-10-08 — The whole guide with Kai becomes a tracker, and the course shows the fork
+
+**Asked by:** Nikita, 8 Oct, on with-kai/: the 1-7 dots sit, for no clear reason, on a page
+outside the main plan, and the page is only prompts, with nothing interactive; either it is
+integrated into the course or it will look odd, and it needs interactive elements or visuals.
+
+**Done.**
+- **Integrated into the course.** The hub's course list has a fork card after step 1, "Steps 2 to 6
+  in one sitting: The whole guide with Kai", on the course's own line (CourseLine, list layout;
+  the twin prints it as a line under item 1). The hub's separate pointer sentence now names the
+  fork. On with-kai/ the seven dots mean something: `<CourseLine track="kai" />`, where 1 is the
+  prerequisite (filled), 2-6 jump to the step cards on the page and fill as they are ticked, and 7
+  (dashed until all are done) jumps to the recap.
+- **Interactive.** GuidePrompts renders a card per step: prompts with copy buttons, **Expect**, a
+  link to the step page, and a **Done when** checkbox. Only the first unticked card is open; the others show their header and open on it, to look ahead
+  or copy again. Ticking closes the card, opens and rings the next one and scrolls to it; "N of 5 steps done" and a closing line
+  when all five are ticked. Progress lives in localStorage (`gs-with-kai:v1`, try/catch); without
+  script every card stays open.
+- **Visual.** Each card shows its step page's own Kai screenshot (kai-forecast, kai-transform,
+  kai-ask, grid-preview, kai-flow; `shot` in course.mjs), captioned as our run's numbers.
+
+Checked in a production build with Playwright: tick, collapse, next card active, dot filled, count,
+reload keeps progress, all five done shows the closing line and rings 7; no overflow at
+1280/820/375 in light and dark. Not done: a clip of the Kai chat (the cards reuse stills). The seven dots stay (I had said a five-dot line would replace them): with the hub's fork card
+and the cards numbered 2 to 6, the page reads as steps 2-6 of the same course, which is the
+integration Nikita asked for; put to him in the hand-off, with the five-dot line as the
+alternative, his call.
+
+---
+
+## 2026-10-08 — Getting Started's sidebar shows the fork; Prev/Next stay on their path
+
+**Asked by:** Nikita, 8 Oct: from "Create or join a project" Next jumped into with-kai/, and from
+with-kai/ Next jumped to the third page, load/, and he asked whether the page should go at the
+very start instead. He also pointed out that Kai can approve on its own (Always allow), so not every
+change has to be confirmed. Picked from three options: the fork after the project (recommended),
+with-kai first, or with-kai outside the chain.
+
+**Done.** The sidebar reads Overview, Create or join a project, The whole guide with Kai, then a
+label-only group **Step by step** (load/ to check/), kept open (`collapsed: false`, a new key that
+scripts/convert-nav.mjs now reads for label-only groups; every other group stays collapsed). Prev/
+Next by frontmatter: project/ → load/, load/ ← project/, with-kai/ ← project/ and → check/; the
+rest follow the sidebar. with-kai/'s closing line offers check/ first and the explained steps
+second. with-kai/'s "What Kai asks" now says how to be asked less: **Always allow** on a card, or
+the Kai panel's gear, then **Tools** (seen in project 6425: "Tools set to "Always Allow" will
+execute without asking for confirmation"); the hub's Approvals section already said it.
+Slugs and URLs unchanged, so no redirects.
+
+
+---
+
+## 2026-10-09 — Getting Started: Diátaxis check, duplication cut, D5 exemption, frames on with-kai
+
+**Asked by:** Nikita, 9 Oct: run a Diátaxis review of Getting Started and check whether the recent
+work duplicated anything, and the day before, that with-kai lacks screenshots or visuals. Answers: cut all
+16 duplicates; exempt course-bar pages from D5; one PR on top of #1180 for this, the VERIFY owners
+and the visuals.
+
+**The check.** docs-diataxis-check over the section (22 pages): 43 FAIL, nearly all backlog, D5 (no
+`**Next:**` footer) and D9 (`VERIFY(owner)` names nobody); no marker reached dist. Three
+diataxis-checker runs on the nine course pages and a separate duplication audit. The audit: with-kai
+is a distinct tutorial track (its prompts are generated from the step pages), but 16 duplicates had
+grown around it and between older pages; the four that mattered were course.mjs's second copy of
+every step's approvals and done signal, the recap prompt on with-kai and check/, automate/ repeating
+check/'s red-run text and timing, and the cold-week explanation written out on transform/ and
+check/.
+
+**Done.**
+- **Cuts** (CONSERVATION-REPORT.md 2026-10-09 lists each with its home): with-kai keeps a pointer
+  where it re-explained approvals, the cold-day question, the recap and the closing links; the hub
+  keeps one link to with-kai (the fork card); automate/ links check/ for the red run and the timing;
+  check/ links transform/ for empty cells; the Ask-Kai-first tips lose their approval boilerplate;
+  project/ says where Kai is once, in Check it worked.
+- **One source.** prompts.mjs now lifts each step's **Expect …** phrases from its Prompt tab
+  (course.mjs keeps `approvals` only for ask/ and app/, whose pages have none), and fails the build
+  when a number or a bold label in a `done` digest is gone from its page. The Kai prerequisite is
+  `SHARED.kai` in prereqs.mjs, also behind the Prompt tab line. `KAI_TRACK` and `KAI_TRACK_TIME` in
+  course.mjs feed the fork card's "Steps 2 to 6 … about 30 minutes" and the twin.
+- **D5.** Pages with the course bar are exempt (the bar and Prev/Next already carry the next step);
+  rules.md, check.mjs and two fixtures in the docs-diataxis-check skill, tests 21/21. The
+  five Going-further pages got their `**Next:**` footers, two by moving an existing Going-further
+  link rather than repeating it. The seven legacy pages (ad-hoc/, branches/) still fail D5: each
+  already ends with a prose "next" link, so a footer would duplicate it; converting them is a
+  separate cleanup.
+- **D9.** Every `VERIFY(owner)` names someone: Nikita, who routes it, except the app minutes
+  (Miro). Four prose mentions of closed markers now say "flag".
+- **Frames.** Each with-kai card shows its own frame of the finished step from the 2026-10-08 run
+  in project 6425, cropped to Kai's answer (load counts, transformation answer, the question's
+  answer in a cold week, the flow's phase table) or the Apps builder at Draft ready; no top bar,
+  no account. The step pages keep their own screenshots.
+
+**A clip for "Where"** (Nikita, same day: at "How it goes", a GIF showing step by step where Kai is
+and where the prompts go, zoomed in on those places rather than the whole interface). Three versions:
+1. Five still close-ups from project 6425, built as states (a GIF first; the checker found 1.4 s a
+   step too fast and a looping GIF unpausable, WCAG 2.2.2, so an MP4 with controls). Nikita: enlarged
+   screenshots miss the point, and a clip of how it works in the interface would be better.
+2. A real take in 6425 cut into 1:1 crops of the 2x capture, with the app part (Apps, Create app,
+   Build with Kai), pushed as c995914c after two checker rounds: captions held at least 3 s, and
+   "When Kai asks, click Approve" instead of "Kai asks before each change", since the Apps builder
+   makes its draft without asking. Nikita: it zoomed in too far. A Remotion sample from the same
+   take (the whole screen first, a zoom of 1.6x, captions in a band above the screen) was approved
+   at 1.6x, with the app on the card and the camera perhaps a little further out; his approval to
+   click Approve in the new project came later, for the takes.
+3. Shipped, take 8 in a new, empty Free Plan project, 6429. Nikita on a 1.45x cut of take 6: it
+   could zoom in a little more after all, and the chat field jumps at 5-6 s: the new chat's suggestions load
+   late and push the field down 16 CSS px just as the pointer reaches it. The recorder now waits for
+   the field to stop moving (it still moves 4 px as it is clicked), starts the chat off camera (take 7
+   reopened take 6's chat and was not used) and brings the pointer up to Approve from below, so it
+   never rests on Always allow. The clip starts on the Storage page, so no dashboard Ask Kai field and
+   no suggestions about earlier objects; the whole screen first, then a zoom of 1.6x and back out at
+   the end; an arrow pointer with its tip on the lower left of each button, so the label stays
+   readable; an outline on each target before the click. Kai's 35 s of work runs at 10x and the 9 s
+   after Approve at 2x, both labelled; Approve is clicked on camera, then Kai creates the
+   configuration, opens it on the left and asks before the first row. 25.9 s, 850 KB, mean luma 228,
+   captions 27 px in an 80 px band, about 15 px on the page, pills and digits 24 px. Each of takes 6,
+   7 and 8 created a "Boolabean sales" configuration; all three, without rows, went to Trash, and the
+   next request was declined off camera; the project has no buckets. The recorder blanks the e-mail
+   synchronously as it renders: take 5's throttled scrub had let the Apps list's Last edited e-mail
+   stand in a raw frame for about a tenth of a second, outside the crops. Vision OCR over all 621
+   frames and the poster found no e-mail. Review on take 6 (checker FIX, fact-checker and
+   guide-tester notes): pill and digits up from 21 px with darker pill text, every speed-up labelled,
+   longer beats on Kai Agent and the approval card, the closing whole-screen view held, the last
+   caption says the configuration opens on the left, the Where bullet names the field on the Apps
+   page and stands without the card's image (the twin has none), the card's caption says how to send
+   and what opens. Checker round 2 PASS; it measured the field's 4 px move at the click.
+
+The app part is on the app card now: its frame is the empty project's Apps page with the prompt
+pasted (app-where.png) instead of the builder at Draft ready (app-done.png, CONSERVATION-REPORT.md);
+app/ keeps its builder screenshots, just after sending and the draft grid, so no image shows the
+Draft ready line itself any more. The recorder (record-where4.mjs, take 8) and the Remotion edit
+(edit8.py, Composition8.tsx) are kept outside the repo.
+
+**Review round (fact-checker, guide-tester, checker).** Fixed: the ask card's Done line (a cold week
+lists nothing to recompute), the cold-day choice back with its meaning, as a note on the transform
+card itself (`note` in course.mjs, guarded like `done`), project/'s Kai bullet says where the button
+is and what no button means, the hub's timeout sentence sits in the chat paragraph, per-frame
+captions, the load and ask frames re-cropped (the ask frame starts at "Closest call", leaving out a
+paragraph where Kai miscounted the blank days), full frames instead of a 24rem crop, the
+Troubleshooting link and workspace's Going-further bullet restored (its Next goes to ad-hoc/, as the
+sidebar does), "the run on this page" on automate/ linked to check/, the with-kai twin gets its course
+line, Kai's workspace question and create_project to Nikita, to ask the Kai team (VERIFY needs a person). Not changed: project/'s fork line keeps no time (the
+fork card and with-kai's header carry it), the flow frame's Detail column fades at the edge as Kai's
+UI draws it, and the billing VERIFYs stay with Nikita to route (Miro for the app minutes).
+
+**Checked, no change needed (corrected 2026-10-12):** a project with no apps opens Apps on "Build
+web apps from your Keboola data" with "Describe what you want to build..." and, under "or", the manual
+routes (6429 on 9 October; 6439, a new account's empty project, on 12 October), so app/:159-160 is
+right. In a project with an app, Apps, then **Create app**, opens the "Create app" screen with
+**Build with Kai** (6425, 9 October). data-apps/getting-started.mdx on main has described both since
+#1159 (8 October), which carried #1166; the "+ Create App … Build web apps" text quoted here before
+was this branch's stale copy, from before #1166, and the chain does not touch data-apps. The page's
+VERIFY on the empty-project screen is closed in its own PR on main, #1185.
+
+**Left to Nikita (Diátaxis evidence, not changed):** transform/ and automate/ read as mixed
+(explanation around a tutorial spine; automate's UI path runs past its tabs); the hub is declared
+Tutorial but reads as an overview; ledes that state a problem rather than the page (load/,
+transform/, app/); titles not in the reader's words ("Explore your data" for asking Kai, "Transform
+data" without SQL or transformation, "Check Storage and Jobs" without troubleshooting, "The whole
+guide with Kai" without prompts); ask/ and app/ have no closing verification block.
+---
+
+## 2026-10-12 — Hub authoring notes
+
+Moved verbatim from the comment under the clip on getting-started/index.mdx, which had grown
+to over 100 lines of ordering rationale and render notes (Jordan's review on #1116 asked for
+them to live with the asset pipeline or here). The page keeps a two-line pointer.
+
+Reordered 2026-09-23 (Nikita): the hub opens the way a course does. A "why" paragraph, the clip,
+the state block every task page already carries, the sample with the question as the course's goal,
+then the table with its column renamed from "What happens" to "What you'll be able to do". Before
+this the question was the first line and the reader had 74 words of context before the table; the
+guide test and the Coursera / DeepLearning.AI openings both put outcomes before the puzzle. The clip
+is hub-explainer since 2026-09-29, a line of four dots; two of Jordan's 21 Aug decisions (three
+acts; question frame as poster) changed with the clips since 09-23, and Jordan reviewed the line clip
+on 6 Oct and asked only for pace and content (DECISIONS.md 2026-10-06); he did not rule on the
+three acts or the question-frame poster, which is now the whole line, VERIFY(Jordan). DECISIONS.md
+2026-09-23.
+
+Tutorial-hub page: the arc index. "Get a project" moved back to its own page 2026-09-14 (see
+that page's comment and DECISIONS.md), and the café story that used to open this page is gone:
+at the 2026-09-02 sync, the dataset was called a helping vehicle rather than the theme, and the page drier.
+The world is now described once, on load/. Timing, since 2026-09-29 (Nikita): one number, the
+time Kai takes to build the pipeline from the Prompt tabs, with "plus sign-up and reading" said
+next to it. It
+replaced "about 80 minutes" (this page 5 + the seven steps 5+15+15+5+15+15+5, reading one tab at
+200 words/min plus Kai's wall time), which read as a reason not to start, and the per-step minutes.
+The 30 is Kai's wall time per step in the 2026-09-08/09 runs: load 9, transform 4, ask 3, app 6,
+flow 3 + an 8-minute first run. Re-measured 2026-10-01 in Free Plan project 6375, with Claude
+driving the browser at Nikita's request and reading each approval card before approving it: load
+10.9 (both prompts), transform 4.7, ask 1.3, app 4.5 to the first preview, flow 5.6 including its
+3.4-minute first run, 27 minutes in all. The app's one-message fix and the optional publish added 4
+and 6. The flow was rebuilt that evening with two phases (no app phase); that prompt took about 7.5
+minutes including a 5.6-minute run, two of them queue wait, which makes about 29. The 30 stands.
+DECISIONS.md 2026-10-01.
+
+The tab-sync GIF follows the pattern the component docs already use for UI behaviour
+(public/extend/component/ui-options/ui-examples/*.gif): cropped to just the region that carries the
+point, a handful of states rather than smooth motion, and small. Built 2026-09-22 from the local
+preview of this branch, so it needs no project and shows no project data. Five states captured at
+1000x384 (the sidebar's current-page highlight on the left, the tab strip on the right), held by
+repeating frames at 5 fps, then palettegen at 96 colours and `gifsicle -O3 --lossy=40`, which
+collapses the repeats back to five real frames: 104 KB, 7.2 s. Re-recorded 2026-10-02, because its
+sidebar still showed the old page titles: three states from the local build at a 1280-px window
+(load/ on Prompt, the same page on CLI / API, transform/ already on CLI / API), cropped to the
+content column's width, with no drawn pointer; 1056x384, 165 KB, 7.6 s. The two big GIFs in this repo
+(kai/Capabilities.gif at 2.5 MB, ai/mcp-server's at 9.5 MB) are the pattern NOT to copy on a page
+this size.
+
+Hero clip hub-explainer, 2026-09-29, replacing the screenshot clip hub-demo. Nikita asked for the
+first page to show how Keboola works in a few seconds of watching, with the data already loaded:
+a line that draws itself, a dot per step with a caption saying what it does, then the app and a
+question. So it is words and dots, no screenshots, except the app on the last slide. Every claim
+comes from the Getting Started pages, condensed; the closing line is the call to action he asked
+for. The clip claims no timing: a question takes Kai 22 s from the terminal and 1.3 to 1.6 min in
+the chat, an app draft 5 to 6 min, and load, forecast, transform and question as four prompts in
+one chat took 14.4 min with 12 approvals (ask/, app/, DECISIONS.md). Step 2 describes, without
+quoting, the one-prompt block that was on ask/ (moved to with-kai/'s fold on 2026-10-08 without its
+prompt), which ran end to end on the earlier dataset; that block loaded, joined and answered but
+built no app, so the app is its own step, from a paragraph you write. Step 2 also says what Kai is, per Jordan's
+request to explain Kai up front; step 3 says you approve each change, as How every page works does; the app
+is the draft preview, which app/ calls "running as an app you can open and refine". "Interactive"
+is avoided: the grid has no filters. Made with explainer.html in the docs-clip rig
+(record-composite.mjs --page), 1280x800: 29.6 s, 394 KB, luma mean 227, never under 225; captions
+28 and 22 px on the canvas, 17.5 and 13.75 px on the page; each step and each closing phrase stays
+up at least 3 s, and the clip fades to its empty first frame so the loop has no jump. Poster = the
+whole line with its four captions, 99.5 KB. The app card is app/grid-preview.png (14 Sep), cut just
+under Brno's weekday line, above the line its own screenshot slices.
+
+Cut to 10 s on 2026-10-01 after the 30.09 review asked for an opening clip of at most 10 s, from
+explainer-short.html in the docs-clip rig: the four dots carry their titles only, about 1.35 s
+each, then 2.5 s of the app and one line, and the clip fades to its empty first frame. That breaks
+the docs-clip rule of three seconds per caption on purpose; the step texts are in the course line
+under the clip. The card is the Free Plan grid (app/grid-preview.png, project 6375, 2026-10-01,
+three red cells), the same week as the run's other screenshots. 10.0 s, 193 KB, luma mean 229, never
+under 227; the poster is the whole line at 5.6 s. DECISIONS.md 2026-10-01.
+
+Remade 2026-10-06 for Jordan, who found the clip long. Built in Remotion,
+1280x800 at 30 fps, in the look of Keboola's design system as
+Nikita asked (@keboola/design 13: Inter, slate text, Keboola blue #2563eb on #f9fafb, a white card
+with a #e5e7eb edge). The line draws faster than the 10-01 cut, a dot every 0.67 s (Nikita wanted
+it about 1.5 times slower than a first try at 0.43 s), so the whole line is up from 3.0 to 3.9 s.
+The second slide is the old one, the guide's grid with the closing line, plus "Want to build" over
+a phrase that changes every 1.7 s: an app like this one, an interactive dashboard, a what-if
+simulator, the apps, dashboards and something interactive Jordan asked for. The last two are kinds
+from What are apps' "What you can build", and the sentence after the sample names them. The 29.6-s
+version had a changing phrase too ("Want …", 3 s each); 1.7 s breaks the docs-clip rule of three
+seconds per caption on purpose, like the dots since 10-01. Cut on the way: "an approval form" (no
+app built on 10-06 showed one) and "a data story" (four phrases left 1.2 s each). A first cut
+showed three apps Kai built in 264 that day; Nikita rejected it the same evening: one screen, the
+app this guide builds, and only the phrase changes. 10.0 s, 201 KB, luma mean 228, never under
+227, in limited range like the earlier clips (Remotion writes full range, so the encode converts).
+The video is 713 px wide in a 1280-px window, not the 800 the numbers above assumed, so canvas
+sizes shrink by 0.56: the 40-px lines read at 22 px, the closing line (26 px) at 14.5, the step
+titles (30 px) at 16.7. The poster is the whole line at 3.3 s. DECISIONS.md 2026-10-06.
+
+2026-10-07, Michal via Nikita: more Kai in the process. The four steps became a hand-off, "Your
+idea", "Tell Kai", "Kai loads your data", "Kai builds the app", one line each with Kai in blue. A
+first try with two-line steps ("You tell Kai what you want", 79 characters) was too much to read in
+the line's 3.9 s, so the labels are back near the 6 Oct length (54 characters); the dot numbers
+went from 20 to 24 px. The first paragraph says the same in prose (Kai loads the data on load/'s
+Prompt path: it sets up the HTTP data source and runs it) and that Kai asks for approval along the
+way, since the clip no longer says "you approve each change" as the 09-29 version did. Timing,
+slide two and the look are unchanged; 200 KB, luma mean 228, never under 227. Later that day
+Nikita asked for a screen under each blue phrase: the card now shows the grid, then the Store
+pulse dashboard (Shopify sample, last 12 months) and the Café staffing planner (31 °C, Saturday),
+two apps Kai built in 264 on 10-06, the last frames of the ../apps-range takes. Each fades in
+through the card's white as its phrase arrives, so two screens never overlap. Unlike the 10-06
+montage this keeps one slide, the guide's grid first, and no headings over the cards. 249 KB, luma
+mean 229, never under 227. DECISIONS.md 2026-10-07.
+
+---
+
+## 2026-10-12 — Jordan's review on #1116: the BigQuery block run, one prerequisites box, the weather's source, and these notes
+
+**Asked by:** Jordan, review of #1116 (12 Oct), items 3, 6, 7 and 8. Nikita's calls the same day:
+run the BigQuery block in a Free Plan project rather than label it, and move the three working
+files to `notes/getting-started/`.
+
+**The BigQuery block ran.** Free Plan project 6439 (us-east4, BigQuery, no Kai objects), through
+the Storage API under Nikita's signed-in session, with his OK. First the two HTTP configurations
+exactly as `load/`'s CLI / API tab gives them, with the files from the #1187 preview (the same
+bytes as the repo; help.keboola.com serves them only after the merge): job 58251430 in 171 s
+(6, 18, 9,761, 552 and 552 rows) and job 58251431 in 35 s (42). Then a
+`keboola.google-bigquery-transformation` built the way the UI tab builds it: the five-table input
+mapping with the short names, the output mapping to the lower-case destination the Guided Mode
+proposes, and the page's block, cut from the MDX byte for byte, as Block 1's one code. Job
+58251625 succeeded in 61 s and wrote a typed table: 42 rows, the page's 10 columns (`date` as
+DATE, `short_handed` as BOOL), weekday Mon to Sun. The run also settled the open point on the
+Destination step: a bucket created from the lower-case ID keeps the lower case
+(`out.c-boolabean-staffing-outlook`). The forecast week, 12 to 18 October, was cold: 29 rows
+without `expected_units`, none flagged, the highest 58.4 a person, which is what the Check fold
+says a cold week gives. The three configurations went to Trash; the tables stay in 6439.
+
+**One prerequisites box.** The guide's own box is gone: `components/getting-started/Prereqs.astro`,
+its `prereqs.mjs`, the second CSS block and the `gs` branch in `page-markdown.mjs`. The site-wide
+`src/components/Prereqs.astro` took over what the guide used: the from/to state cards, the tab
+cards with their icons, and a "You need" heading only when something follows it. Its
+`prereqs.mjs` took the guide's newer Kai wording (a new Free Plan project has Kai from the start)
+with the security link, and `project` now points at `/getting-started/project/`, which closes the
+TODO there. The classes lost their `gs-` prefix (`.fromto`, `.prereqs__tab`), and the hub's
+`FromTo.astro` uses the same cards. Checked in a production build: every Getting Started box keeps
+its size at 1280 and 375 px in both themes and is pixel-identical apart from apostrophes, which
+the local MDX version (5.0.2 against the lockfile's 5.0.6) leaves straight on untouched pages
+too; the Getting Started twins are unchanged (the review round below then added two lines on
+purpose). Three Apps boxes change on purpose: the project link on `build-locally`, and the Kai line
+on `data-apps/getting-started` and `migrate-to-python-js`.
+
+**The weather is real.** All 552 rows in `weather_daily.csv`, 1,104 values, equal what Open-Meteo's archive API
+returned on 12 October for the six coordinates, June 1 to August 31, Europe/Prague. `load/` said
+the weather was invented; it now says it is real and carries Open-Meteo's attribution (CC BY 4.0,
+a link, what changed), and it states the free API's terms: non-commercial use, up to 10,000 calls
+a day. Whether a weekly call from a customer's project qualifies is an owner's call,
+VERIFY(Jordan) on `load/`. `scripts/gen-boolabean.py` now writes into the repo, reads the
+committed `weather_daily.csv` by default and fetches the archive with `--fetch`; both ways rebuild
+the five CSVs byte for byte.
+
+**These notes moved.** `DECISIONS.md`, `CONSERVATION-REPORT.md` and `MISSING.md` left the repo
+root for `notes/getting-started/`, with a README, and every reference in the pages' comments
+points there. Internal calls and chats that were quoted word for word, in Czech, Russian and
+English, are paraphrased, here and in six source comments. `MISSING.md` lists the open gaps
+first and keeps the closed ones with what closed them; `CONSERVATION-REPORT.md` marks its stale
+`project/` rows, gives the "Pending" moves that never happened their status, and gains rows for
+the eight `main` pages under `/tutorial/` that this rebuild replaces. The index below is rebuilt
+from the flags in the pages.
+
+**What the reviews changed.** The guide-tester found the API terms only inside the forecast-URL
+fold, where a reader who does not open it never sees them; they are now in the attribution
+paragraph under the cards. Its smaller points went in too: the weather card no longer says each
+fictional café "really had" its weather, load/'s box names what the raw requests need, with-kai/'s
+box names Apps for its app step, and the twin no longer prints a raw `<a download>` tag. The
+fact-checker caught `build-locally`'s "free project from the link above", which no longer fits a
+link to `project/`, two comments that still called Free Plan apps an open question, and three
+conservation rows that were inexact.
+
+## 2026-10-13 — The tabbed flow is final; The whole guide with Kai goes
+
+**Decided by:** Nikita, 13 Oct, after Jordan said he prefers the earlier flow, where the reader
+picks a tab on each page, to the split into a Kai page and a "Step by step" group. Three variants
+were compared on the same content (#1187's head): A, tabs only; B, the two tracks of 8 October; C,
+tabs with the Kai page outside the chain. The comparison report and the previews of A and C (branches
+PRDCT-487-flow-a-tabs and PRDCT-487-flow-c-kai-side, no pull requests) were made for this. Nikita
+picked A and kept the clip that shows where Kai is and where the prompt goes.
+
+**Done.**
+- The sidebar lists the seven steps in one list again, with no "Step by step" group and no Kai
+  page; Prev/Next run from the project to Check without frontmatter overrides; the hub's course
+  list has no fork card; project/'s closing line is "Next: Load data into Storage"; the step pages lose
+  the "Getting Started, step by step" label.
+- `getting-started/with-kai/` is removed. It never reached help.keboola.com (only PR previews),
+  so it needs no redirect.
+- The clip `where-kai.mp4` and its poster move to `public/getting-started/project/` and sit in
+  project/'s "Check it worked", after the checks and before the first Prompt tab. The
+  hub keeps its own clip, so it stays one clip per page.
+- The code only that page used is gone: `GuidePrompts.astro`, `prompts.mjs`, the card fields in
+  `course.mjs` (`approvals`, `done`, `note`, `shot`, the Kai track exports), the Kai branch of
+  `CourseLine.astro`, the twin's hooks for both, 146 lines of CSS, and the five card frames. Comments
+  that described them are updated.
+
+This reverses the three entries of 8 October (the Kai page, the tracker, the sidebar fork); they
+stay above as history. What the page held and where each part went is in CONSERVATION-REPORT.md,
+2026-10-13.
+
+---
+
+## 2026-10-26 — Jordan approves the stack, and it lands as one commit
+
+Jordan approved #1116 on 26 October as the base of the stack, after checking the main fixes at
+#1187's tip. On its own #1116 still has the issues from his first review, so the three land
+together. In a follow-up he asked for the final state to land as a single squash commit, because
+the commits under #1116 carry the old root `DECISIONS.md` with verbatim quotes from internal
+calls and chats, and the repo is public. Squash merging is off in the repository settings, so an
+admin turns it on for this merge; #1187 is retargeted to `main` and squash-merged, and #1116, #1144
+and #1157 close as landed through it.
+
+His answers to the open questions:
+
+- **Open-Meteo terms.** Keep the live weekly call and accept the risk. The data licence (CC BY 4.0)
+  allows commercial use with attribution, so the only exposure is the call to the free API from
+  readers' projects. A block would be per IP, and jobs leave a stack through shared IPs. `load/`
+  no longer quotes the free tier's terms, and its VERIFY is closed. The fallback, if it is ever
+  needed, is a forecast snapshot hosted next to the other CSVs.
+- **Attribution.** The credit line now sits under the weather-derived visuals on `ask/` and
+  `app/` too, and `app/`'s step 5 gives a prompt that adds it to the app before publishing.
+- **Apps owners.** No separate sign-off on `app/` before merge: it follows and links the Apps
+  pages, and it ran live on a Free Plan project.
+
+His non-blocking notes, done on #1187: `app/`'s step 5 names the **Publish to Production**
+button the Apps pages use, and sending `Publish to production` in the chat where the builder shows
+only **Deploy**, as the 8 Oct run did (flagged for Nikita);
+the `management/pay-as-you-go/` comment no longer leans on `project/`'s old Storage figure; page
+comments and these notes stop citing local paths nobody else can open; the last verbatim quote
+here is paraphrased; and two long page comments moved here, below, so the pages keep only what is
+current.
+
+### Moved from `app/index.mdx` (the authoring comment as it stood on 2026-10-26)
+
+Tutorial-type page. Walked live in project 264 on 2026-09-09 with the prompt below. Observed: the Apps list's button reads "Create App" (accessible text; data-apps/getting-started.md
+writes it "+ Create App", the plus being the icon), the Create App screen has a textarea "Describe
+what you want to build..." and a send control; below it, "or create manually" offers Streamlit and Python/JS. Kai
+created the production configuration first ("Prod app created"), then a DRAFT pinned to a branch
+("Staffing Outlook Grid draft", branch init), booted the draft dev container (a Python/JS app: npm
+install, Vite), wrote the code, and opened a live preview: "This is a private draft that updates
+live as Kai builds. Publish it when you're ready to share a production app with your team." One
+approval card (Decline / Always allow / Approve). Buttons in the builder: Preview, Code, Publish to
+production. Total 5 min 44 s to a running draft. The production configuration: name "Staffing
+Outlook Grid", Authentication Basic (password), code in a Keboola-managed private Git repository
+(branch main), backend Python / JS, size XSmall, auto sleep 15 minutes, URL prefix
+"<prefix>-74021219.hub.europe-west3.gcp.keboola.com".
+
+Re-checked read-only on 2026-09-22, and one half has changed. The 09-22 container run
+(01a0c74d-9a1c-7b2c-94d2-005cfee2a2ad, 04:09) CLONED successfully — "Saving git commit hash to
+state: f9cab9f7" — and then failed on the missing keboola-config/nginx directory. So the managed Git
+credentials are working again; the runs that failed on "Authentication failed" are 09-20 and 09-21
+(and job 105560409, quoted below, is the 09-21 one). The nginx gap is the durable cause and the one
+the bug report should lead with. Both are kept in the failure list because a reader can still meet
+either. Re-checked 2026-09-23: the 04:07 UTC run (01a0cc72-9400-76da-b211-3e7d2afee913) failed on
+the credentials again, StartupProbeFailed with "Credentials are incorrect or have expired", so
+"working again" held for one day and both causes are live. So the page keeps sending the reader to the
+draft preview as the finishing line. Step 5 now states the missing dialog BEFORE the click rather
+than after it, which is the lesson from Michal's OIDC walk-through: he pressed Publish, got no
+feedback, and could not tell whether he had missed a step.
+
+The Apps section itself is being reworked in parallel on PRDCT-692 / AJDA-3380 (data-apps/**,
+including a new operate.md and troubleshooting.md). This page only links there; the contradiction
+between data-apps/getting-started.md's "turns Active" and what happens here belongs to that work,
+not to this branch.
+
+Settled 2026-10-01 in Free Plan project 6375 (see below): "Publish to production" merged the
+draft into main, asked two approvals and deployed, and the app came up Active. History, for the
+Apps team's bug report: in 264 clicking it (twice, 2026-09-09)
+produced no dialog, no new configuration version and no deploy job; the production app stayed "Not
+Deployed" and later "Stopped". The UI only ever reported "Internal Server Error occurred."
+2026-09-15: `kbagent data-app runs` prints the container's startup log, and the real causes are
+there — the 09-14 run cloned the repo and then failed on `[ERROR] App must have
+keboola-config/nginx/ directory. Missing: /app/keboola-config/nginx`, and both 09-15 runs failed
+earlier still, on `fatal: Authentication failed for …/app-74021219.git` with "Credentials are
+incorrect or have expired". So the publish does carry code (the repo has a commit), and production
+fails for two platform-side reasons: the app Kai generated lacks the nginx config a Python/JS app
+needs outside dev mode, and the managed Git credentials have since expired. Worth a bug report to
+the Apps team with both run IDs; the page now says this instead of "we could not tell". The page therefore describes the
+draft honestly, says production needs a deploy and may fail, and does not promise an Active app.
+data-apps/getting-started.md, which documents this flow with its own screenshots, should be checked
+against this. Whether the Free Plan includes data apps stayed unsettled in our own docs until
+2026-10-01 (closed below the Prereqs). The previous clip (app-preview.mp4) and the octopus-map-preview.png came off with the old
+sample world; phase 2 records the grid from the draft preview, which needs no password.
+
+CLI / API tab added 2026-09-15. `data-app list` was run live against project 264 (kbagent
+v0.93.1) and prints id, state and URL per app; `deploy --wait` was exercised on this app and
+reproduces the failure documented above, which is the honest thing to show — it is the same
+call the flow's third phase made until 2026-10-01, when the phase was dropped. `start`, `logs` and `password` are listed from the command
+reference and are read-only or idempotent; they have not been run here.
+
+2026-10-01, Free Plan project 6375 (us-east4, BigQuery), the prompt below word for word. A
+read-only watcher on the Storage API and the page logged every step. An empty project's Apps page
+is the builder itself (no Create App click); with an app in the project the list's button reads
+"Create app". On send the builder created a "New App" configuration at once, renamed it "Staffing
+Outlook" 45 s later, created a draft configuration, seeded its Git branch, booted the preview
+container, wrote and pushed the code: no approval card at any point. The chat ended "Draft ready /
+Not live yet" with a Deploy button and the chips "Publish to production" and "Make changes...".
+First preview after about 4.5 min: the right grid, but no red cells and the caption "No
+short-handed café-days in this outlook", while Kai's summary claimed three; Kai's diagnosis was
+that short_handed reached the app as "1" or an empty string, and one message fixed it (again no
+approval). The "Publish to production" chip then merged the draft into main, and the first two
+approval cards of the whole page came: storage access for the production app ("settings don't
+carry over from the draft"), then the deploy. The app came up Active (Python / JS, XSmall, sleep 15
+minutes, Basic (Password)) and the draft was deleted, without a card: delete_python_js_data_app_draft
+and create_python_js_data_app_git_credential are the two write tools a fresh account has on Always
+allow. So the old "asks once before it writes code" was wrong in 6375, and the deploy that never
+worked in 264 worked here; the flow's redeploy phase also succeeded, in 19 s, before it was dropped
+that evening because the app reads its table on every request. The builder's chat
+printed its Git remote with a credential in it during "Seed draft branch": keep that step out of
+any screenshot. notes/getting-started/DECISIONS.md 2026-10-01.
+
+### Moved from `project/index.mdx` (the where-kai clip's render log)
+
+Moved here on 2026-10-13 from the "The whole guide with Kai" page, which went when the tabbed
+flow became the final one (Nikita's pick after Jordan preferred it; notes/getting-started/DECISIONS.md
+2026-10-13). This page is where the reader checks Kai Agent is there, right before the first
+Prompt tab, and it has no other clip. Recording, 2026-10-09, a new Free Plan project, 6429 (Nikita
+asked to see step by step where Kai is and where the prompts go, as a clip of the interface rather
+than enlarged screenshots). Take 8 of record-where4.mjs, at 2x through the CDP screencast,
+assembled in Remotion (edit8.py, Composition8.tsx): the whole
+screen first, a zoom of 1.6x, back out at the end; an arrow pointer drawn by the recorder, brought
+up to Approve from below; captions in a band above the screen, where the player's controls never
+cover them. Kai's 35 s of work runs at 10x and the 9 s after Approve at 2x, both labelled; the
+2.6 s while the new chat's suggestions load, and 1.3 s of the pasted prompt, are cut; the rest is
+1x. The suggestions still move the field by 4 CSS px as it is clicked (take 6: 16 px). Approve was
+clicked on camera: it created the "Boolabean sales" configuration, Kai's next
+request (the stores row) was declined off camera, and the configuration went to Trash. The
+account e-mail was blanked as it rendered and the avatar hidden; Vision OCR over all 621 frames
+and the poster found no e-mail. 25.9 s, 850 KB, mean luma 228, min 224, poster at 8.4 s
+(clip_metrics.sh). Recorders, raw takes and marks are kept outside the repo.
+notes/getting-started/DECISIONS.md 2026-10-09.
+
+---
+
+## Open — carried as VERIFY(owner) flags in the pages
+
+Rebuilt on 2026-10-12 from the pages: 21 flags, 20 since Jordan answered the Open-Meteo one on 2026-10-26. These are product facts an agent must not guess;
+each flag stays in its page, next to the sentence it qualifies.
+
+| Where | Owner | Question |
+|---|---|---|
+| `app/index.mdx` (step 5) | Nikita | Step 5 now names the **Publish to Production** button, as the Apps pages do. In the 8 Oct run the builder showed **Deploy** there instead: is it the same action? Also not run yet: typing `Publish to production` in the chat (the 1 Oct run picked the chip), and the prompt that adds the Open-Meteo credit to the app. |
+| `automate/index.mdx:481` | Miro | Does a running data app count against the Free Plan minutes? |
+| `automate/index.mdx:486` | Nikita | Does **Delete flow** also remove the flow's schedules? The box deletes the schedule first, so the page does not depend on the answer. |
+| `check/index.mdx:175` | Nikita | On contract plans, do flow jobs consume credits? |
+| `index.mdx:30` | Jordan | Two decisions of 21 Aug (the clip in three acts, the question frame as its poster) changed with the clips after 23 Sep. |
+| `load/database.mdx:46` | Nikita | Do the UI and Prompt paths name the bucket after the configuration? Only the CLI path was walked. |
+| `load/googlesheets.mdx:145` | Nikita | The four bullets on re-authorizing and the file picker come from how the connector behaves, not from a walk. |
+| `load/index.mdx:223` | Nikita | The HTTP connector's simplified mode was seen once (6211), and the page is its only source. |
+| `project/index.mdx:47` | Nikita | Which Free Plan Storage limit is right: 50 GB (the project's own limits) or 250 GB (`management/pay-as-you-go/`)? |
+| `project/index.mdx:59` | Nikita | A new Free Plan project showed 120 minutes, not the documented 60. A first-month allowance? |
+| `project/index.mdx:80` | Nikita, ask the MCP team (DMD-1939) | Which stack offers `create_project` to a session without an account, and when? |
+| `project/index.mdx:93` | Nikita | What does a project get in its first month? `management/payg-project/` never says. |
+| `project/index.mdx:139` | Nikita, ask the Kai team | Can Kai create a project? The page infers that it cannot. |
+| `transform/index.mdx:134` | Nikita | The neutral transform prompt has not run on a Snowflake project. |
+| `transform/index.mdx:199` | Nikita | A new Free Plan project offers dbt Core (Beta), against the Free Plan limits in `management/pay-as-you-go/`. |
+| `transform/index.mdx:251` | Nikita | Direct Mode shows in new Free Plan projects, though `transformations/mappings/` calls it a private beta that Support enables. |
+| `transform/workspace.mdx:71` | Nikita | Nobody has walked the SQL Editor route that step 7 gives a Free Plan reader. |
+| `transform/workspace.mdx:114` | Nikita, ask the Kai team | Can Kai create a workspace? The page leaves it to the UI and CLI tabs. |
+| `transform/workspace.mdx:170` | Nikita | Does kbagent need an admin token for workspaces, or is write access enough? |
+| `write/index.mdx:118` | Nikita | Which OAuth scopes does the Google Sheets destination request? |
+
+### Closed
+
+| Question | Closed | Answer |
+|---|---|---|
+| Does a weekly call to Open-Meteo's free API from a customer's project count as non-commercial use? | 2026-10-26 | Jordan, approving #1116: keep the call and accept the risk; `load/` stops quoting the free tier's terms; the fallback is a forecast snapshot on help.keboola.com. |
+| Does the BigQuery block on `transform/` run as printed? | 2026-10-12 | **Yes**, in Free Plan project 6439 through an input mapping (the entry above). |
+| Does the Free Plan include data apps? | 2026-10-01 | **Yes.** Built, published and deployed in Free Plan project 6375. |
+| Do flow jobs consume credits on the Free Plan? | 2026-10-01 | **No.** `management/pay-as-you-go/` exempts flow jobs; contract plans stay open (`check/`). |
+| Is the monthly Kai allowance per project or per organization? | 2026-10-08 | Closed in the VERIFY pass: `project/` and the Kai pages agree now. |
+| Does `/kai/use-cases/#complex-workflows` cover assembling existing configurations into a flow? | 2026-10-08 | The citation gave way to our own runs (VERIFY pass). |
+| Can Kai read the child jobs of a flow run? | 2026-10-07 | **Yes.** Asked about a failed run, it read the failed child job's log (entry of that date). |
+| Kai's message allowance and the PPU switch on 15 September | 2026-09-21 | The flag was right; the sentence follows `kai/pricing.md` (entry of that date). |
+| Does Kai build transformations on read-only input, with bucket-qualified table names? | 2026-09-08 | **Yes, and yes**, in project 264. |
+| Can Kai set a schedule and notifications? | 2026-09-09 | **Schedule: yes**, a Scheduler configuration for the flow it built. Notifications were not tested and stay manual. |
+| Does the Kai **Add Task** menu have a "Build with Kai" item? | 2026-09-22 | **No**, in neither of the two menus, walked in project 264 (`automate/`'s comment). |
+| Has the one-prompt block run end to end? | 2026-09-02 | **Yes**, in project 264: 14 minutes, 11 approvals. The block moved to with-kai/'s fold without its prompt on 2026-10-08. |
+| Does a "plan mode" exist, and what is it called? | 2026-09-02 | **Yes**: "Enable plan mode" in the chat composer. |
+| Is RStudio still an offered workspace type? | by 2026-10-12 | No longer asked: `ad-hoc/` stopped naming RStudio and points to `/workspace/`; whether RStudio is retired is the workspace owner's call. |
+| On a BigQuery project, is there a browser SQL path? | 2026-10-08 | Moved into the flag at `workspace.mdx:71`: a new Free Plan project offered a BigQuery workspace (and an R one), and the route step 7 gives has not been walked. |

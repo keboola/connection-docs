@@ -1,0 +1,235 @@
+---
+title: 'Explore your data'
+slug: 'getting-started/ask'
+description: 'Put the question to your own data: Kai reads the table you built and answers it in plain words, then answers the follow-up.'
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
+import CourseLine from '../../../../components/getting-started/CourseLine.astro';
+
+<PageMeta genre="Tutorial" />
+
+<CourseLine current="ask" />
+
+You built the table to answer something, and nobody has said the answer out loud yet. This page
+does, out of your own project.
+
+<Prereqs needs={['project']} tabs={3}>
+  <span slot="from"><code>staffing_outlook</code> is in Storage.</span>
+  <span slot="to">the guide's question answered from your data, and a second answer you did not have to build anything new to get.</span>
+  <li>
+    <strong>The <code>staffing_outlook</code> table</strong> in Storage, from{' '}
+    <a href="/getting-started/transform/">Transform data</a>.
+  </li>
+  <span slot="ui">
+    a <a href="/getting-started/transform/workspace/">workspace</a> loaded with{' '}
+    <code>staffing_outlook</code>, where you run the SQL below.
+  </span>
+  <span slot="cli">
+    <a href="/cli/getting-started/">kbagent</a>, connected through <code>kbagent project add</code>{' '}
+    with an admin (master) token.
+  </span>
+</Prereqs>
+
+<PathIntro tabs={3} approvals={false} />
+
+{/* Tutorial-type page. Both prompts below were run live in project 264 on 2026-09-08 and
+2026-09-09 (boolabean-run, the staged runs' ask.txt and ask-followup/): the first as the
+fourth prompt of the staged runs, 0 approvals, 1.3–1.6 min; the second alone in a fresh chat, 0
+approvals. Kai's figures matched the table and the offline reference to the decimal. The
+"one prompt" observations of 2026-09-03 and 2026-09-08 moved to with-kai/ on 2026-10-08; that page
+went on 2026-10-13, and both are recorded in notes/getting-started/DECISIONS.md under 2026-09-08.
+The previous clip (kai-ask-basin.mp4) came off with the old sample world.
+
+Three tabs 2026-09-15. The CLI command was run live against project 264 (kbagent v0.93.1):
+`kai ask` answered in 22 s with the same café, day and flag count the chat gives — a markdown
+table plus a "next actions" block. The workspace SQL in the UI tab is the page's own query
+narrowed to the flagged rows; it is not a new claim, but it has not been run in a workspace. */}
+
+## Reading is different from building
+
+- **Here Kai reads what you built** instead of building for you. Querying a table and calculating a
+  metric is [Data Exploration](/kai/use-cases/#data-exploration), and it needs nothing set up.
+- **Nothing on this page changes the project.** Kai's read-only tools run without asking by
+  default, so expect an answer, not an approval card, unless this project's
+  [tool permissions](/kai/settings/#tool-permissions) are set to ask.
+
+The question and Kai's answer in a Free Plan project, in the week the screenshots in this guide
+come from:
+
+![Screenshot - The Kai chat with the question about staffing_outlook and the start of Kai's answer: Vinohrady in Prague is short-handed on Thursday, its warmest day, and Zelný trh in Brno on Monday and Tuesday, where the forecast is much like the rest of its week and the roster is two people instead of three](/getting-started/ask/kai-ask.png)
+
+Weather data by [Open-Meteo.com](https://open-meteo.com/) ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)).
+
+{/* 2026-10-01, Free Plan project 6375 (us-east4, BigQuery): the Prompt tab's first question in a
+fresh chat, answered in 63 s (sent 13:40:16, answered 13:41:19 UTC) with no approvals and an inline chart below the frame. Captured from
+the expanded Kai panel with the chat history hidden; nothing in frame names the project or a
+person. It replaces kai-ask-staffing.mp4 (project 264, 2026-09-14), which showed another week
+(only Brno flagged) and still carried the pointer Nikita asked to drop; Michal Jeřábek (30.09)
+asked for every image from one week. notes/getting-started/CONSERVATION-REPORT.md has the clip's removal. */}
+
+## Ask it
+
+<Tabs syncKey="howto">
+<TabItem label="Prompt">
+
+:::tip[The question the guide started with]
+```text title="Prompt" wrap
+Using staffing_outlook: which café is short-handed on which day next week, and what in the forecast makes that day different from the rest of its week?
+```
+
+**Check:** Kai names the flagged café-days (the rows where `short_handed` is true) and, for each,
+what sets that day apart from the rest of its week, with the table's figures. Usually it is a warm,
+dry forecast on a thin roster. When the forecast is much the same all week, Kai names the roster as
+the difference instead. In a week under 18 °C Kai will tell you nobody is short-handed, and that is
+the table being right: the sample's history is one summer, and on a cold day it never puts more
+than 65.5 units on one person.
+:::
+
+The same table answers what-if questions too:
+
+```text title="Prompt" wrap
+Using staffing_outlook: if one extra person joined the roster on every short-handed day, which of those days would still be over 67 expected units per person, and what would each day's figure become?
+```
+
+**Check:** Kai recomputes the per-person figure for every flagged row with one more person and
+lists the before and after. In a week with nothing flagged there is nothing to recompute.
+
+<details>
+<summary>What Kai answered on the day this was written</summary>
+
+The answer changes with the forecast. In the week of the screenshots, 1 to 7 October 2026, three
+café-days were flagged: Vinohrady on Thursday, its warmest day, and Zelný trh on Monday and
+Tuesday, where Kai noticed that the forecast was much like its other days' and the roster was
+two people instead of three, *"a roster fix, not a forecast surprise"*.
+
+The follow-up's answer that week was *none of them*: one extra person brought the three days to
+54.8, 56.8 and 56.8 expected units per person. That is the kind of thing nobody can see in five separate files, and it took
+one question because the pipeline had already put the roster next to the demand.
+
+</details>
+
+<details>
+<summary>If the numbers come out different</summary>
+
+Kai wrote its own SQL and may have drawn the lines somewhere else: rounded before dividing, or read
+`short_handed` as text. The definitions this guide uses are the columns your transformation
+already wrote, so point Kai at those (`expected_units`, `rostered_staff`,
+`expected_units_per_person`) rather than re-prompting blind. To see where its lines are, ask in the
+same chat:
+
+```text title="Follow-up prompt" wrap
+Show me the SQL you ran for that answer and the rows it is based on.
+```
+
+It only reads, so by default it asks for no approval, and a wrong filter or a wrong table is easier
+to spot in the SQL than in the prose.
+{/* Run 2026-10-07 in project 264 with `kbagent kai chat`, after this page's first question in the
+same chat: Kai printed both queries it had run (the short-handed filter and a date-range check) and
+the three rows, with no approval. notes/getting-started/DECISIONS.md 2026-10-07. */}
+
+</details>
+
+</TabItem>
+<TabItem label="UI">
+
+There is no dialog for "answer this question". Reading a table by hand means querying it. Open a
+[workspace](/getting-started/transform/workspace/) on the same table and run the SQL yourself, in
+your project's dialect.
+
+**If your project uses Snowflake**
+
+```sql
+SELECT "store_name", "city", "date", "weekday", "expected_units", "rostered_staff",
+       "expected_units_per_person"
+FROM "staffing_outlook"
+WHERE "short_handed" = TRUE
+ORDER BY "expected_units_per_person" DESC;
+```
+
+The follow-up is the same query with one more person on the roster:
+
+```sql
+SELECT "store_name", "date",
+       ROUND("expected_units" / ("rostered_staff" + 1), 1) AS "with_one_more"
+FROM "staffing_outlook"
+WHERE "short_handed" = TRUE
+ORDER BY "with_one_more" DESC;
+```
+
+If those raise `invalid identifier`, your table has upper-case column names: Snowflake upper-cases
+an alias that was not quoted, and the **Prompt** path's Kai does not quote them. Either drop the
+quotes from the query or upper-case the names inside them. The
+[transform page](/getting-started/transform/#if-it-goes-wrong) explains why the two cases exist.
+
+**If your project uses BigQuery**
+
+BigQuery reads double quotes as text rather than as names, so the same two queries go without
+them, with `date` in backticks as on the transform page:
+
+```sql
+SELECT store_name, city, `date`, weekday, expected_units, rostered_staff,
+       expected_units_per_person
+FROM staffing_outlook
+WHERE short_handed = TRUE
+ORDER BY expected_units_per_person DESC;
+```
+
+```sql
+SELECT store_name, `date`,
+       ROUND(expected_units / (rostered_staff + 1), 1) AS with_one_more
+FROM staffing_outlook
+WHERE short_handed = TRUE
+ORDER BY with_one_more DESC;
+```
+
+{/* Both run 2026-10-01 in Free Plan project 6375 (BigQuery) as read-only queries through Kai,
+identical to the blocks above except the table name, which Kai qualified as
+`out_c_Boolabean_staffing_outlook`.`staffing_outlook` (executed SQL diffed against the page): three
+rows, Zelný trh 2026-10-06 and 2026-10-05 at 85.2 and Vinohrady 2026-10-01 at 73.04; then 56.8,
+56.8 and 54.8. The table Kai's transformation writes on BigQuery is typed (BOOL, NUMERIC, INTEGER,
+DATE), which is why no casts are needed. Not run inside a workspace. */}
+
+Storage's own **Data Sample** tab answers the simpler half without a workspace at all: open
+`staffing_outlook`, sort by `expected_units_per_person` descending, and read the top rows.
+
+</TabItem>
+<TabItem label="CLI / API">
+
+`kbagent kai ask` puts the same question from a terminal and prints the answer, tables and all. It
+is one shot: no chat to keep, nothing created. It needs kbagent connected through
+`kbagent project add` with an admin (master) token; a connection made with `kbagent auth login`
+does not reach Kai.
+
+```bash
+kbagent kai ask --project docs-demo -m "Using out.c-Boolabean-staffing-outlook.staffing_outlook, which cafe and day has the highest expected units per person, and how many rows are flagged short_handed?"
+```
+
+Name the table by its full Storage ID rather than the short name the transformation used: the
+short name only exists inside a transformation's input mapping.
+
+For a conversation rather than a single question, `kbagent kai chat -m "…"` returns a chat ID and
+`--chat-id` continues it.
+
+**Check:** the answer names a café and a day: the top row of `staffing_outlook` sorted by
+`expected_units_per_person`, descending. The top can be a tie: days in the same weather band with
+the same roster get the same figure, and any of the tied days is right. If you would rather have
+the numbers than the prose,
+`kbagent storage table-detail --project docs-demo --table-id out.c-Boolabean-staffing-outlook.staffing_outlook`
+gives you the shape of the table and
+[a workspace](/getting-started/transform/workspace/) gives you the SQL.
+
+</TabItem>
+</Tabs>
+
+{/* "The same request, as one prompt" moved on 2026-10-08 to getting-started/with-kai/ as the fold
+"Why not one prompt for everything": its two measured observations went there, the prompt block
+went (never run on the current sample; a second copy of the prompts). The page and the fold went
+on 2026-10-13, when the tabbed flow became the final one: the guide gives the prompts one page at
+a time. notes/getting-started/CONSERVATION-REPORT.md 2026-10-08 and 2026-10-13. */}
+
+A chat answer reaches only the person who asked. The next page turns the table into a grid anyone
+can open.

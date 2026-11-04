@@ -1,0 +1,224 @@
+---
+title: 'Create or join a project'
+slug: 'getting-started/project'
+description: 'Create or join a Keboola project, find your way around it, and confirm Kai is switched on before you load any data.'
+prev: 'Getting started with Keboola'
+---
+
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/Prereqs.astro';
+import CourseLine from '../../../../components/getting-started/CourseLine.astro';
+
+<PageMeta genre="Tutorial" />
+
+<CourseLine current="project" />
+
+Everything you build lives inside a **project**: the data you load, the SQL you write, the flow
+that runs them. This page gets you one.
+
+<Prereqs needs={[]}>
+  <span slot="from">nothing exists yet.</span>
+  <span slot="to">a project you can sign in to, and you know where its Storage, Jobs and Components live.</span>
+  <li>
+    <strong>An email address</strong> for your Keboola account, or an invite to your company's
+    Keboola project if it already has one.
+  </li>
+</Prereqs>
+
+**No Prompt tab here.** Kai works *inside* a project, so this one page is yours. Every step page after
+it offers three ways to do the same task.
+
+{/* Tutorial-type page. Restored as its own page 2026-09-14 (it had been merged into the hub on
+09-09): the hub was running long and opening with prose, which is what Michal asked us to cut, and
+this is the only step with no prompt or CLI form — as a hub section it broke the "every task shows
+prompt + CLI" rule the rest of the arc follows. The URL never died: /getting-started/project/ was a
+redirect to the hub anchor for five days. The project-screen tour was verified live in project 264
+on 2026-08-04: the nav reads Dashboard / Flows / Storage / Apps / Components / Workspaces /
+Transformations / Data Catalog / Jobs, and Kai appears as "Kai Agent" with a Beta pill. Free Plan
+limits are sourced from /management/payg-project/. The sign-up wizard is deliberately NOT walked —
+creating accounts is out of scope for automated verification — so those three lines rest on the Pay
+As You Go page.
+
+2026-10-01, a brand-new Free Plan project (6375, us-east4, BigQuery, signed up by Nikita): the
+navigation reads Dashboard / Conditional Flows / Storage / Apps / Components / Workspaces /
+Transformations / Semantic Layer (Beta) / Jobs / Trash; Kai Agent is in the top bar from the start,
+with no Beta pill and a "Kai is free for you right now" banner. The Storage API's own limits for
+that project say storage.dataSizeBytes = 50000000000 (50 GB), against the 250 GB that
+management/pay-as-you-go/ still states (raised in notes/getting-started/DECISIONS.md 2026-10-01), so
+the Free Plan line below gives no Storage figure until the owner settles which one is right.
+VERIFY(Nikita): which limit is right. The 50 GB was read while Billing still answered 403 "Activate
+your account", so whether activation changes it is unknown; the PAYG page carries the same flag.
+The whole Prompt path of the guide ran there, data app deploy included; the UI and CLI tabs did not,
+apart from the transform UI tab's screens, built on a copy that never ran. */}
+
+## Choose a way in
+
+Quickest first:
+
+1. **Free Plan:** [sign up and create a free project](https://connection.us-east4.gcp.keboola.com/wizard)
+   right now, with up to 60 minutes of job runtime a month. That is enough
+   for this guide; we ran its Prompt path end to end on one.
+   {/* VERIFY(Nikita): a Free Plan project created 2026-10-08 (6425) showed "Your Minutes Balance:
+   120 minutes" on its dashboard on the day it was created and 113 after the guide's run, not
+   the 60 that this line and management/pay-as-you-go/ state. A first-month or promotional
+   allowance would explain it; nothing in the docs says which. Its Storage limit was 50 GB again
+   (storage.dataSizeBytes). */}
+2. **Join an existing project:** ask an admin of your company's Keboola organization to invite you,
+   from **Users & Settings → Invite User** in the project.
+3. **Talk to us:** for a trial of a full project with a chosen stack and no Free Plan limits,
+   [contact Keboola](https://www.keboola.com/contact).
+
+{/* PREPARED, NOT PUBLISHED (Nikita, 2026-10-01, after a suggestion from Michal the designer): a
+fourth way in, from the reader's own AI assistant. It goes into the list above as item 4 only after
+someone has walked it on a stack where it works. Draft:
+
+4. **From your own AI assistant:** connect the [Keboola MCP server](/ai/mcp-server/) to your
+   assistant without any Keboola credentials and ask it to create a project. It creates one and
+   gives you a confirmation link; opening the link and signing in makes the project yours. Until
+   then the project is temporary.
+
+VERIFY(Nikita), ask the MCP team (DMD-1939): the keboola/mcp-server README, section "Starting without a Keboola
+account", documents the create_project tool in bootstrap mode (the server started with only
+KBC_STORAGE_API_URL and no token) and says it "needs a stack with agent provisioning enabled;
+elsewhere the tool reports that it is not available". On 2026-10-01 no public stack listed such a
+feature in /v2/storage (us-east4, europe-west3, connection.keboola.com, eu-central-1, Azure
+north-europe). Which stack gets it, when, and who owns it is the question for DMD-1939. Kai inside
+the product still cannot create a project (the flag further down); this path belongs to the MCP
+server. notes/getting-started/MISSING.md has the row. */}
+
+<details>
+<summary>The Free Plan's limits, and what a project and a stack are</summary>
+
+The free minutes each month are capped at what the project used the month before (a project that
+used 30 minutes gets 30 free the next month), and the Free Plan gives you one project and no
+choice of stack.
+{/* VERIFY(Nikita): /management/payg-project/ says the monthly allowance is "limited to the
+   actual usage from the previous month" but never states what a project gets in its first month.
+   Worth stating on that page. 2026-10-08: a new project's dashboard read 120 minutes on day one
+   (see the flag above). */}
+[Pay As You Go](/management/payg-project/) has the full list of limits.
+
+A project is a self-contained workspace with its own data storage, configurations, users and
+billing. Nothing leaks between projects unless you deliberately share it through the
+[Data Catalog](/catalog/). Each project lives on one **stack**, a full instance of Keboola in one
+cloud region. You do not pick one here: Free Plan projects are always created on Google Cloud
+**us-east4**, at `https://connection.us-east4.gcp.keboola.com`. The list of stacks is in the
+[platform overview](/overview/#stacks).
+
+</details>
+
+## Find your way around
+
+After signing in you land on the project dashboard. Six places matter for this guide:
+
+- **Components**: every data source connector, data destination connector and application you can
+  add; how data gets in and out.
+- **Transformations**: the code that reshapes your data, in SQL, Python, R or dbt. The
+  **Create Transformation** dialog lists what this project can run.
+- **Storage**: every table and file, organized into buckets.
+- **Conditional Flows**: what runs, in what order, on what schedule. Older projects may call it
+  **Flows**.
+- **Apps**: the apps you build and publish.
+- **Jobs**: the log of everything that has run, successfully or not.
+
+<details>
+<summary>What else is in Storage</summary>
+
+Its tabs cover **Tables & Buckets**, **Files**, **Data Streams**, **Storage Jobs** and
+**Events**.
+
+</details>
+
+:::tip[Ask Kai to orient you]
+In **Kai Agent** (the top bar), on a project you inherit rather than create, the first question is usually
+([Data Exploration](/kai/use-cases/#data-exploration)):
+
+```text title="Prompt" wrap
+I'm new to this project. Give me an overview of the data structure and what each bucket contains.
+```
+:::
+
+{/* VERIFY(Nikita), ask the Kai team: "Kai cannot create a project" is an inference, not a documented limit — it
+follows from Kai being project-scoped (kai/best-practices.md: "Kai only sees your current
+project"), but no Kai page states it outright. Confirm there is no project-creation tool, and
+consider stating the boundary on kai/index.md. 2026-10-08: asked in 264, Kai said it has no such
+tool and listed 16 write tools; but the Tool permissions list in a new Free Plan project (6425)
+shows 24 write tools, create_project among them. Whether it works from a project's
+Kai chat (or only in the MCP bootstrap mode of DMD-1939) is for the Kai team. */}
+
+## Check it worked
+
+- **Storage** shows the project's bucket list. Empty is fine; that is what you are about to change.
+- **Kai Agent**, the button in the project's top bar, opens a chat panel. A new Free Plan project
+  has it from the start. If it asks you to switch the feature on, an organization admin does it, and
+  anyone else asks them or Support ([Get started with Kai](/kai/getting-started/)). No button means
+  your stack does not offer Kai.
+- What Kai does counts against the project, and an organization admin can cap how much it spends;
+  [Kai pricing and limits](/kai/pricing/) holds the current rules.
+
+{/* This sentence used to read "there is also a monthly message allowance, and it is smaller on Pay
+As You Go", which described the beta's turn counter. kai/pricing.md says that counter was replaced
+by PPU credits on 15 September 2026, and that date has now passed, so the sentence names neither a
+mechanism nor a number and points at the page that owns both.
+
+Closed 2026-10-08: kai/getting-started.md's "Usage and Limits" now describes PPU on contracted
+plans and a monthly message limit per user on Pay As You Go, which agrees with kai/pricing.md; the
+contradiction raised from the reviewer bot's flag on PR #1116 (2026-09-21) is gone. Seen in Free Plan
+project 6375 on 2026-10-01: the chat's usage button reads "Kai usage — context window N%, messages
+N of 50, free allowance 300 PPU left", so the message counter and the PPU allowance both still
+show, which neither page describes. */}
+
+On the next pages, the **Prompt** tab works like this: open **Kai Agent**, paste the prompt, send
+it, and approve each change Kai asks about. The app's prompt is the one exception: it goes into the
+field on the **Apps** page. Here it is in a new Free Plan project, with the first prompt of the next
+page, [Load data into Storage](/getting-started/load/):
+
+<video autoplay loop muted playsinline controls poster="/getting-started/project/where-kai-poster.png" aria-label="Screen recording in a new project, with a numbered caption above each step: on the Storage page, click Kai Agent at the top right; paste the load prompt into the chat and press Enter; Kai works on it (sped up), then asks before creating the first data source: click Approve. Kai creates it, opens it on the left and asks again before adding the first row.">
+  <source src="/getting-started/project/where-kai.mp4" type="video/mp4" />
+</video>
+
+{/* Moved here on 2026-10-13 from the "The whole guide with Kai" page, which went when the tabbed
+flow became the final one (notes/getting-started/DECISIONS.md 2026-10-13). This page is where the
+reader checks Kai Agent is there, right before the first Prompt tab, and it has no other clip.
+Recorded 2026-10-09 in a new Free Plan project (6429). Approve was clicked on camera, and the
+configuration it created went to Trash. The account e-mail was blanked and the avatar hidden, and
+Vision OCR over every frame and the poster found no e-mail. How it was recorded and edited:
+notes/getting-started/DECISIONS.md, 2026-10-09 and 2026-10-26. */}
+
+Not having Kai does not block the build: the loading, the SQL and the flow each carry a UI path and
+a CLI path in full, and the questions can be asked in SQL in a workspace. Without Kai the app is
+your own code in a Git repository; its page links where that is covered.
+
+**Next:** [Load data into Storage](/getting-started/load/).
+
+## If it goes wrong
+
+<details>
+<summary>The sign-up email never arrives</summary>
+
+Check spam, then try again. A half-finished registration does not block a retry with the same
+address.
+
+</details>
+
+<details>
+<summary>You sign in and see no project</summary>
+
+You are on the wrong stack, or your invite is still pending. The **Login** button on keboola.com
+opens a sign-in page whose stack picker starts on **AWS · United States · us-east-1**. A Free Plan
+project is under **Google Cloud · United States · us-east4**, so pick that one, or open
+`https://connection.us-east4.gcp.keboola.com` directly, and sign in with the account you signed up
+with. For a project you were invited to, confirm the exact URL with whoever invited you.
+{/* Login page read 2026-10-05 (connection.keboola.com/admin/): the picker's default is AWS United
+   States us-east-1; Google Cloud → United States → us-east4 carries the PAY AS YOU GO tag.
+   keboola.com: Try Now → us-east4 wizard, Login → connection.keboola.com. */}
+
+</details>
+
+<details>
+<summary>Your company uses SSO</summary>
+
+Sign in through your organization's link rather than creating a new account; a fresh Free Plan
+project will not have access to your team's data.
+
+</details>
