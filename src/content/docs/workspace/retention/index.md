@@ -6,8 +6,8 @@ description: Unused Snowflake and BigQuery workspaces are warned, deactivated an
 
 From 9 November 2026, Keboola cleans up unused Snowflake and BigQuery workspaces automatically. A workspace
 nobody has used for six months is first warned, then deactivated, and finally deleted. You get an e-mail
-before each step, and using a workspace keeps it. See also the
-[changelog announcement](https://changelog.keboola.com/unused-workspaces-will-be-cleaned-up-automatically/).
+at each step, and using a workspace keeps it. See also the
+[changelog announcement](https://www.keboola.com/changelog/unused-workspaces-will-be-cleaned-up-automatically).
 
 ## Which Workspaces Are Affected
 
@@ -36,7 +36,8 @@ Any of the following resets the six-month period:
 
 Opening the workspace detail in Keboola without connecting to it does **not** count.
 
-Activity is checked several times a day, so a login is usually reflected within a few hours.
+Activity is checked every three hours, so a login is usually reflected within about three hours. Because of
+that delay, use the workspace at least a day before the deactivation date rather than on the day itself.
 
 ## Timeline
 
@@ -49,9 +50,10 @@ Activity is checked several times a day, so a login is usually reflected within 
 All dates in the e-mails are in UTC. Using the workspace any time before the deactivation date cancels
 the warning and the workspace stays active.
 
-The first warnings are sent organization by organization between 9 and 18 November 2026. Workspaces that
-have already been unused for a long time are included, so the first deactivations happen in December 2026
-and the first deletions no sooner than March 2027.
+The first warnings are sent organization by organization over the rollout period. Workspaces that have
+already been unused for a long time are included from the start, so the first deactivations follow 30 days
+after an organization's warning and the first deletions three months after that. The rollout dates are in
+the [changelog announcement](https://www.keboola.com/changelog/unused-workspaces-will-be-cleaned-up-automatically).
 
 ## E-mails
 
@@ -89,7 +91,8 @@ support ticket for the reactivation. Delete still works.
 ## Keeping a Workspace
 
 Use the workspace before the deactivation date in the e-mail: connect to it with the SQL Editor or a SQL
-client, or run a job that loads data into it. Nothing else is needed; the warning is cancelled automatically.
+client, or run a job that loads data into it or reads data from it (see [What Counts as Use](#what-counts-as-use)).
+Nothing else is needed; the warning is cancelled automatically.
 
 If you no longer need the workspace, you can delete it yourself at any time.
 
@@ -109,13 +112,15 @@ password fail with this message:
 Workspace "<workspaceId>" was deactivated because it had not been used for a long time. Contact Keboola support to have it reactivated, or delete it.
 ```
 
-Deleting a deactivated workspace still works.
-
 ## What Is Deleted
 
-Deletion removes the workspace schema or dataset, all data in it and its database user. Component
-configurations are kept; only the empty entry of a SQL workspace (sandbox) is removed together with its last
-workspace. Tables in Storage are not affected.
+Deletion removes the workspace schema or dataset, all data in it and its database user. Tables in Storage are
+not affected.
+
+Configurations of other components are kept — a workspace created by a writer or a transformation is deleted,
+but the writer or transformation configuration itself stays, including its code. The one exception is the SQL
+workspace (sandbox) configuration: it is only a wrapper around the sandbox, so once its last workspace is
+deleted, the configuration is moved to trash as well.
 
 ## Exceptions
 
