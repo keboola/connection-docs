@@ -80,7 +80,7 @@ When using **Get from Git repository** as your code source, fill in the reposito
 
 - **Repository URL** — Supports both HTTPS and SSH formats.
 - **Repository Visibility & Authentication** — Choose one of:
-  - **Public – None** — Public repository, no credentials needed.
+  - **None (public repository or organization GitHub App)** — No credentials stored. Use it for a public repository or with the organization GitHub App.
   - **Private – Personal Access Token** — The token is encrypted in Keboola Storage.
   - **Private – SSH Key** — The private key is encrypted in Keboola Storage.
 - **Organization GitHub App** — Select **Use the organization's GitHub App** to clone a private GitHub repository
