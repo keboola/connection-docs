@@ -60,7 +60,7 @@ In case your AI assistant supports remote connection, you can connect to Keboola
 3. Once you save the settings and refresh your AI assistant, you will be prompted to authenticate with your Keboola account, then choose which project(s) to work in (see [Choosing Your Project(s)](#choosing-your-projects) below).
 
 :::note
-When using the remote server with OAuth, you get the permissions that match your role in Keboola. If you wish to control permissions more granularly, run the server locally and specify your own **Storage Token** and **Workspace Schema** — see [Running the MCP Server Locally](#running-the-mcp-server-locally).
+When using the remote server with OAuth, you get the permissions that match your role in Keboola. If you wish to control permissions more granularly, run the server locally with a personal access token you control and your own **Workspace Schema** — see [Running the MCP Server Locally](#running-the-mcp-server-locally).
 :::
 
 ### Choosing Your Project(s)
@@ -354,7 +354,7 @@ The sections below cover running the server locally and integrating it programma
 While MCP clients like Cursor or Claude typically manage the MCP server automatically, you might want to run the Keboola MCP Server locally for development, testing, or when using a custom client. You can run it via Docker or via the `uv`/`uvx` command.
 
 :::caution
-**Storage Token Deprecation:** Configuring the local server with a static `KBC_STORAGE_TOKEN`, as shown below, is deprecated in favor of the browser-based `login` command (see [Authenticating Without a Static Storage Token](#authenticating-without-a-static-storage-token) below). It still works today — there is a deprecation period while existing setups migrate — but support for it will be removed in a future release.
+**Storage Token Deprecation:** Starting with version 2.0.0, the MCP server no longer accepts a project-bound Storage API token, that is a token which does not start with `kbc_at_` or `kbc_pat_`, as a credential. A server that receives one refuses the request with "A bare per-project Storage API token is no longer accepted." Sign in with the browser-based `login` command (see [Authenticating Without a Static Storage Token](#authenticating-without-a-static-storage-token) below), or give the server a Keboola access or personal access token in `KBC_STORAGE_TOKEN` together with `KBC_PROJECT_ID` (see [Migrating from a Storage token](#migrating-from-a-storage-token)). The remote server with OAuth is not affected.
 :::
 
 ### Using Docker (recommended)
@@ -372,18 +372,20 @@ Before proceeding, ensure you have Docker installed on your system. You can find
     *   **For Snowflake users:**
         ```bash
         docker run -it --rm \
-          -e KBC_STORAGE_TOKEN="YOUR_KEBOOLA_STORAGE_TOKEN" \
+          -e KBC_STORAGE_TOKEN="YOUR_KEBOOLA_ACCESS_TOKEN" \
+          -e KBC_PROJECT_ID="YOUR_PROJECT_ID" \
           -e KBC_WORKSPACE_SCHEMA="YOUR_WORKSPACE_SCHEMA" \
           keboola/mcp-server:latest \
           --api-url https://connection.YOUR_REGION.keboola.com
         ```
-        Replace `YOUR_KEBOOLA_STORAGE_TOKEN`, `YOUR_WORKSPACE_SCHEMA`, and `https://connection.YOUR_REGION.keboola.com` with your actual values.
+        Replace `YOUR_KEBOOLA_ACCESS_TOKEN`, `YOUR_PROJECT_ID`, `YOUR_WORKSPACE_SCHEMA`, and `https://connection.YOUR_REGION.keboola.com` with your actual values.
 
     *   **For BigQuery users (requires volume mount for credentials):**
         ```bash
         # Ensure your Google Cloud credentials JSON file is accessible
         docker run -it --rm \
-          -e KBC_STORAGE_TOKEN="YOUR_KEBOOLA_STORAGE_TOKEN" \
+          -e KBC_STORAGE_TOKEN="YOUR_KEBOOLA_ACCESS_TOKEN" \
+          -e KBC_PROJECT_ID="YOUR_PROJECT_ID" \
           -e KBC_WORKSPACE_SCHEMA="YOUR_WORKSPACE_SCHEMA" \
           -e GOOGLE_APPLICATION_CREDENTIALS="/creds/credentials.json" \
           -v /local/path/to/your/credentials.json:/creds/credentials.json \
@@ -408,12 +410,14 @@ If your MCP client (like Cursor) supports defining a Docker command for an MCP s
         "-it",
         "--rm",
         "-e", "KBC_STORAGE_TOKEN",
+        "-e", "KBC_PROJECT_ID",
         "-e", "KBC_WORKSPACE_SCHEMA",
         "keboola/mcp-server:latest",
         "--api-url", "https://connection.YOUR_REGION.keboola.com"
       ],
       "env": {
-        "KBC_STORAGE_TOKEN": "YOUR_KEBOOLA_STORAGE_TOKEN",
+        "KBC_STORAGE_TOKEN": "YOUR_KEBOOLA_ACCESS_TOKEN",
+        "KBC_PROJECT_ID": "YOUR_PROJECT_ID",
         "KBC_WORKSPACE_SCHEMA": "YOUR_WORKSPACE_SCHEMA"
       }
     }
@@ -423,8 +427,8 @@ If your MCP client (like Cursor) supports defining a Docker command for an MCP s
 
 **Note:**
 * Ensure Docker is running on your system.
-* Replace placeholders like `YOUR_KEBOOLA_STORAGE_TOKEN`, `YOUR_WORKSPACE_SCHEMA`, and the Keboola API URL.
-* The client (Cursor) passes the `KBC_STORAGE_TOKEN` and `KBC_WORKSPACE_SCHEMA` from its `env` block to the `docker run` command through the `-e` flags. The `--api-url` is passed directly as an argument to the `keboola/mcp-server` entrypoint.
+* Replace placeholders like `YOUR_KEBOOLA_ACCESS_TOKEN`, `YOUR_PROJECT_ID`, `YOUR_WORKSPACE_SCHEMA`, and the Keboola API URL.
+* The client (Cursor) passes the `KBC_STORAGE_TOKEN`, `KBC_PROJECT_ID` and `KBC_WORKSPACE_SCHEMA` from its `env` block to the `docker run` command through the `-e` flags. The `--api-url` is passed directly as an argument to the `keboola/mcp-server` entrypoint.
 
 ### Using the uv command
 
@@ -432,7 +436,8 @@ The primary way to run the server locally without Docker is by using `uv` or `uv
 
 1. **Set up environment variables:**  
    Before running the server, you need to configure the following environment variables:
-   * `KBC_STORAGE_TOKEN`: Your Keboola Storage API token.
+   * `KBC_STORAGE_TOKEN`: A Keboola access token (`kbc_at_`) or personal access token (`kbc_pat_`). A project-bound Storage API token is no longer accepted.
+   * `KBC_PROJECT_ID`: The ID of the project to work in.
    * `KBC_WORKSPACE_SCHEMA`: Your Keboola project's workspace schema (for SQL queries).
    * `KBC_STORAGE_API_URL`: Your Keboola instance API URL (e.g., `https://connection.keboola.com` or `https://connection.YOUR_REGION.keboola.com`).
    * `KBC_BRANCH_ID` (optional): a development branch ID to scope operations to; defaults to the production branch.
@@ -470,7 +475,15 @@ This saves a stack-wide session to `~/.keboola/mcp/credentials.json` (readable o
 | `login --show-token` | Print the current session token (debugging) |
 | `logout [--api-url <url>] [--all]` | Remove the stored session for a stack (or all stacks) |
 
-For containers or CI where a browser login isn't possible, supply a Keboola [access or personal access token](/management/project/tokens/) directly via `KBC_STORAGE_TOKEN`, together with `KBC_PROJECT_ID` to select the project. These stack-wide programmatic tokens are prefixed `kbc_at_` (access token) or `kbc_pat_` (personal access token); a legacy project-bound Storage token does not need `KBC_PROJECT_ID`, since the project is already encoded in the token itself.
+For containers or CI where a browser login isn't possible, supply a Keboola [access or personal access token](/management/project/tokens/) directly via `KBC_STORAGE_TOKEN`, together with `KBC_PROJECT_ID` to select the project. These stack-wide programmatic tokens are prefixed `kbc_at_` (access token) or `kbc_pat_` (personal access token); a project-bound Storage API token, which has neither prefix, is no longer accepted.
+
+### Migrating from a Storage token
+
+| If you use today | Use instead |
+|---|---|
+| A project Storage API token in `KBC_STORAGE_TOKEN` | Run `login` (browser), or put a `kbc_pat_` personal access token or a `kbc_at_` access token in `KBC_STORAGE_TOKEN` and set `KBC_PROJECT_ID` |
+| A Storage API token in a container or CI job | A personal access token or an access token in `KBC_STORAGE_TOKEN`, plus `KBC_PROJECT_ID` |
+| The remote server with OAuth | Nothing, it is not affected |
 
 ### Connecting a client to a localhost instance
 
@@ -485,7 +498,7 @@ If you are running the Keboola MCP Server locally using `uvx`, you can configure
 
 1. Open Cursor settings.
 2. Navigate to the MCP section within settings.
-3. Add or configure your Keboola project. Provide your `KBC_STORAGE_TOKEN`, `KBC_WORKSPACE_SCHEMA` and the API URL.
+3. Add or configure your Keboola project. Provide your `KBC_STORAGE_TOKEN`, `KBC_PROJECT_ID`, `KBC_WORKSPACE_SCHEMA` and the API URL.
 
 Example `mcp_servers.json` snippet:
 
@@ -499,7 +512,8 @@ Example `mcp_servers.json` snippet:
         "--api-url", "https://connection.YOUR_REGION.keboola.com"
       ],
       "env": {
-        "KBC_STORAGE_TOKEN": "your_keboola_storage_token",
+        "KBC_STORAGE_TOKEN": "your_keboola_access_token",
+        "KBC_PROJECT_ID": "your_project_id",
         "KBC_WORKSPACE_SCHEMA": "your_workspace_schema"
       }
     }
