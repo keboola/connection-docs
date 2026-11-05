@@ -117,9 +117,8 @@ Workspace "<workspaceId>" was deactivated because it had not been used for a lon
 Deletion removes the workspace schema or dataset, all data in it and its database user. Tables in Storage are
 not affected.
 
-Configurations of other components are kept — a workspace created by a writer or a transformation is deleted,
-but the writer or transformation configuration itself stays, including its code. The one exception is the SQL
-workspace (sandbox) configuration: it is only a wrapper around the sandbox, so once its last workspace is
+Configurations of other components are kept — a workspace created by a writer is deleted, but the writer
+configuration itself stays. The one exception is the SQL workspace (sandbox) configuration: it is only a wrapper around the sandbox, so once its last workspace is
 deleted, the configuration is moved to trash as well.
 
 ## Exceptions
