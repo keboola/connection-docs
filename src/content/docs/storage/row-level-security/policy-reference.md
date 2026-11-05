@@ -87,7 +87,7 @@ Column names are matched exactly, including case.
 
 Instead of a fixed value, a condition can use the reader's own identity:
 
-- `{"$identity": "email"}` as a `value` is the reader's email. It exists only when the identity provider verified the email. A rule that uses it cannot be applied to a reader without one: an end user of a Data App gets an empty result for the table, and an administrator is refused (HTTP 403).
+- `{"$identity": "email"}` as a `value` is the reader's email, lowercased. It exists only when the identity provider verified the email. The column value is compared as stored: store the emails in the column in lowercase and without spaces, or the rows do not match. A rule that uses it cannot be applied to a reader without one: an end user of a Data App gets an empty result for the table, and an administrator is refused (HTTP 403).
 - `{"$identity": "groups"}` as `values` is the reader's list of groups.
 
 ```json
@@ -192,7 +192,7 @@ Both groups have the same commands. `--rules` accepts JSON, `@file` or `-` for s
 | `rls schema`, `cls schema` | Print the live JSON Schema of the policy from the Metastore |
 | `rls create`, `cls create` | Create the policy of one table (`--table-id`, `--rules`; `rls create` also takes `--default`) |
 | `rls update`, `cls update` | Change only the options you pass |
-| `rls delete`, `cls delete` | Delete a policy. In a governed workspace a table without any policy is refused |
+| `rls delete`, `cls delete` | Delete a policy. In a governed workspace a table without any policy is refused. A policy that a workspace binding lists cannot be deleted (HTTP 409): to delete a policy a Data App uses, remove it from `rlsPolicies`, redeploy the app and archive its older deployments first, because each deployment keeps its own binding |
 | `rls setup` | Guided setup in a terminal: pick tables, build a condition, preview, write |
 
 Useful options of `create` and `update`: `--scope targeted|organization`, `--target-project` (repeatable) and `--dialect snowflake|bigquery`. Without a `--default`, a reader that no rule selects is refused.
