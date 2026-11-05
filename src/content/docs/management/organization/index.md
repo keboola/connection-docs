@@ -115,3 +115,27 @@ without MFA is shown when enabling the MFA requirement for the entire organizati
 The organization page will show that MFA is required:
 
 ![Screenshot -- MFA Required](/management/organization/organization-8.png)
+
+## Connect GitHub
+Connect your GitHub organization to let [dbt transformations](/transformations/dbt/transformation/#dbt-project-repository),
+[Custom Python](/components/applications/custom-python/#git-configuration), and [Apps](/data-apps/getting-started/)
+clone private repositories through the Keboola GitHub App. Configurations then store no personal access token or SSH key;
+Keboola gets a short-lived token from the App each time it clones the repository.
+
+Keboola has already registered the GitHub App for your stack. You only install it on your GitHub organization
+and connect that GitHub organization to your Keboola organization.
+
+You need to be both an organization admin in Keboola and an owner of the GitHub organization.
+
+1. Open the **GitHub** tab of your organization: `https://connection.<stack>/control/organizations/<organization-id>?tab=github`.
+2. Click **Install GitHub App** and install the App on your GitHub organization. Select the repositories
+   Keboola can clone, or all repositories.
+3. Click **Connect GitHub organization**, enter a name, and leave **GitHub Enterprise host** empty for github.com.
+4. Click **Continue to GitHub**, sign in, and authorize the App.
+
+The connected GitHub organization appears in the list, with the GitHub account and the user who connected it.
+Click **Disconnect** to remove the connection. Configurations that use it then fail to clone the repository.
+
+If the connection fails, the tab shows why, for example when the App is not installed on the GitHub organization
+or when you are not its owner. When the App is installed on several GitHub organizations you own,
+pick the one to connect.
