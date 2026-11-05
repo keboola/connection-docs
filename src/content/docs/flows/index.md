@@ -252,6 +252,8 @@ click **Set Up Schedule**. The dialog works in UTC and previews the next runs be
 
 **Scheduling:** Commonly, flows are set to run at specific times. To avoid busy periods in a shared environment, consider scheduling slightly off-peak for smoother execution.
 
+*Daylight saving time: Schedules follow the local time of the chosen timezone. On the day clocks change, a schedule set within the repeated hour runs twice, and one set within the skipped hour doesn't run at all.*
+
 **Triggers:** Set flows to automatically start when certain Storage tables are updated (ideal for managing dependencies across projects). Your projects will stay synchronized and run efficiently.
 
 *Note on Triggers: If table updates happen during the cool-down period, the trigger is suppressed, but the tables are marked as ready. Therefore, if all configured tables are updated during the cool-down period, the flow is not scheduled at that time — but once the cool-down expires and any table is updated (causing the trigger to be evaluated), the system recognizes that all tables are already up to date and runs the flow immediately.*
