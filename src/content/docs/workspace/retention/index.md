@@ -99,9 +99,9 @@ If you no longer need the workspace, you can delete it yourself at any time.
 ## Getting a Deactivated Workspace Back
 
 A deactivated workspace can be reactivated only by Keboola support. Project administrators cannot do it.
-[Contact support](/management/support/) before the deletion date and include the workspace ID (it is also in
-the error message you get when connecting). After reactivation, you can connect right away and the six-month
-period starts again from that day.
+[Contact support](/management/support/) before the deletion date and include the workspace ID. You find it in
+the workspace detail and in **Project Settings > All workspaces**. After reactivation, you can connect right
+away and the six-month period starts again from that day.
 
 A deleted workspace cannot be restored.
 
