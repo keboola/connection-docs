@@ -851,6 +851,9 @@ items:
       - url: /workspace/sql-editor/
         title: SQL Editor
 
+      - url: /workspace/retention/
+        title: Workspace Retention
+
       - url: /workspace/jdbc-driver/
         title: Keboola JDBC Driver
         items:
