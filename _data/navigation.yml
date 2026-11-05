@@ -738,6 +738,12 @@ items:
       - url: /storage/byobq/
         title: Bring Your Own BigQuery
 
+      - url: /storage/row-level-security/
+        title: Row- and Column-Level Security
+        items:
+          - url: /storage/row-level-security/policy-reference/
+            title: Policy Reference
+
       - url: /storage/api/
         title: Storage API
         items:

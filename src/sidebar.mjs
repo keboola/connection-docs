@@ -556,6 +556,14 @@ export const sidebar = [
       },
       { slug: "storage/byobq" },
       {
+        label: "Row- and Column-Level Security",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "storage/row-level-security" },
+          { slug: "storage/row-level-security/policy-reference" },
+        ],
+      },
+      {
         label: "Storage API",
         collapsed: true,
         items: [
