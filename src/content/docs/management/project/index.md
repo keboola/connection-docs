@@ -1,5 +1,6 @@
 ---
 title: Project Settings
+description: The Project Settings page provides general information about your project.
 slug: 'management/project'
 ---
 

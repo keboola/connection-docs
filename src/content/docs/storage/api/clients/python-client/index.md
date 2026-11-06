@@ -1,5 +1,6 @@
 ---
 title: Python Client Library
+description: The Python client library is a Storage API client which you can use in your Python code. The current implementation supports all basic data manipulations.
 slug: 'storage/api/clients/python-client'
 redirect_from:
     - /integrate/storage/python-client/

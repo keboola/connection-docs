@@ -1,5 +1,6 @@
 ---
 title: TDE Exporter
+description: TDE Exporter exports tables from Keboola Storage into the TDE file format (Tableau Data Extract).
 slug: 'storage/api/tde-exporter'
 redirect_from:
     - /integrate/storage/api/tde-exporter/

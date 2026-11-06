@@ -1,5 +1,6 @@
 ---
 title: Dark Sky
+description: 'Deprecated: the Dark Sky API shut down in 2023, so this connector no longer works. Move existing configurations to the Weather API connector.'
 slug: 'components/extractors/other/dark-sky'
 redirect_from:
     - /extractors/other/dark-sky/

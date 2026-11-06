@@ -1,5 +1,6 @@
 ---
 title: Azure Cosmos DB
+description: The Cosmos DB data source connector allows you to fetch data from the NoSQL Azure Cosmos DB using the SQL API.
 slug: 'components/extractors/database/cosmosdb'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Child Jobs
+description: 'Run a nested job for each parent record — child job placeholders, filters, and how child results map back to the parent.'
 slug: 'components/extractors/generic-extractor/configuration/config/jobs/children'
 redirect_from:
     - /extend/generic-extractor/configuration/config/jobs/children/

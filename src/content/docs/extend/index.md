@@ -1,5 +1,6 @@
 ---
 title: Extending Keboola
+description: As an open system consisting of many built-in, interoperating components, such as Storage or Extractors, Keboola can be easily extended.
 slug: 'extend'
 ---
 

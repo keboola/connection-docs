@@ -1,5 +1,6 @@
 ---
 title: Manually Importing and Exporting Data
+description: Keboola Table Storage (Tables) and Keboola File Storage (File Uploads) are heavily connected together.
 slug: 'storage/api/import-export'
 redirect_from:
     - /integrate/storage/api/import-export/

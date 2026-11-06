@@ -1,5 +1,6 @@
 ---
 title: OneDrive Excel Sheets
+description: This data source connector loads Excel sheets from Microsoft OneDrive and stores them as tables in a bucket in your current project.
 slug: 'components/extractors/storage/onedrive-excel-sheets'
 redirect_from:
     - /components/extractors/storage/onedrive/

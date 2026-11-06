@@ -1,5 +1,6 @@
 ---
 title: Table Import & Export
+description: All tables imported to and exported from Storage go through Files.
 slug: 'storage/tables/uploads'
 ---
 

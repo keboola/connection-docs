@@ -1,5 +1,6 @@
 ---
 title: Python Transformation
+description: Python transformations complement SQL transformations where computations or other operations are too difficult.
 slug: 'transformations/python-plain'
 redirect_from:
     - /transformations/python/

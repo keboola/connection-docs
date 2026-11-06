@@ -1,5 +1,6 @@
 ---
 title: Time Doctor 2
+description: This data source connector uses the Time Doctor 2 API to import data from Time Doctor 2.
 slug: 'components/extractors/other/time-doctor-2'
 redirect_from:
     - /extractors/other/time-doctor-2/

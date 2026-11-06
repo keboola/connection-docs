@@ -1,5 +1,6 @@
 ---
 title: Generic Writer Configuration
+description: This component allows you to write data to a specified endpoint in a specified format. It currently supports single table and single endpoint per configuration.
 slug: 'components/writers/generic-writer/configuration'
 redirect_from:
     - /extend/generic-writer/configuration/

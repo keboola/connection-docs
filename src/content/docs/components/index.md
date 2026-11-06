@@ -1,5 +1,6 @@
 ---
 title: Components
+description: In the Keboola platform, most of the data processing functions are implemented in Components.
 slug: 'components'
 redirect_from:
     - /storage/configurations/

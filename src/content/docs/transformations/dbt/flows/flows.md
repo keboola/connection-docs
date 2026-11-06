@@ -1,5 +1,6 @@
 ---
 title: Usage in Flows
+description: All dbt related components behave in the same way as any other component in Keboola does.
 slug: 'transformations/dbt/flows'
 ---
 

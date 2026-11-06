@@ -1,5 +1,6 @@
 ---
 title: Generic Extractor Configuration
+description: 'An overview of every Generic Extractor configuration section, and how the api, config, jobs, and mappings parts fit together.'
 slug: 'components/extractors/generic-extractor/configuration'
 redirect_from:
     - /extend/generic-extractor/configuration/

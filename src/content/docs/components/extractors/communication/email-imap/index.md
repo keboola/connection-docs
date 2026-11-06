@@ -1,5 +1,6 @@
 ---
 title: IMAP Email Contents and Attachments
+description: Download email contents and attachments from an IMAP mailbox, filtered by search query, folder and date.
 slug: 'components/extractors/communication/email-imap'
 redirect_from:
     - /extractors/communication/email-imap/

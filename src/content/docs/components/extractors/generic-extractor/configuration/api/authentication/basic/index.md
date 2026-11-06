@@ -1,5 +1,6 @@
 ---
 title: Basic Authentication
+description: Basic Authentication provides the HTTP Basic Authentication method.
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/basic'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/basic/

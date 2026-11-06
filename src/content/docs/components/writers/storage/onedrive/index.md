@@ -1,5 +1,6 @@
 ---
 title: OneDrive Excel Sheets
+description: This data destination connector exports tables from your Storage tables as Excel sheets to Microsoft OneDrive.
 slug: 'components/writers/storage/onedrive'
 redirect_from:
     - /writers/storage/onedrive/

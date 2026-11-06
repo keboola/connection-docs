@@ -1,5 +1,6 @@
 ---
 title: YouTube Reporting
+description: This data source connector uses the YouTube Reporting API to create and run reports that provide insights into the performance of your YouTube content.
 slug: 'components/extractors/social/youtube-reporting'
 redirect_from:
     - /extractors/social/youtube-reporting/

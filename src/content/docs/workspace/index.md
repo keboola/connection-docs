@@ -1,5 +1,6 @@
 ---
 title: Workspace
+description: A workspace serves several purposes and can be used as an interactive development environment (IDE) to create transformations.
 slug: 'workspace'
 redirect_from:
   - /transformations/sandbox/
