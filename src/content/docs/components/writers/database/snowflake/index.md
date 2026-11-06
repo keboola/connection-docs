@@ -1,6 +1,7 @@
 ---
 title: Snowflake
 slug: 'components/writers/database/snowflake'
+description: 'Write Keboola tables to your own Snowflake database or, on projects with their own Snowflake backend, a Keboola-provisioned schema to share with services.'
 redirect_from:
     - /writers/database/snowflake/
 ---
@@ -11,6 +12,8 @@ This data destination connector sends data to a [Snowflake](https://www.snowflak
 to an existing Snowflake database, or to a new database it provisions to you. The latter case is available **only for projects using own Snowflake backend** ([KBDB](/storage/#keboola-brings-database-kbdb)/[BYODB](/storage/#bring-your-own-database-byodb)) and is useful for sharing your data in form of an SQL database with some service.
 For example, you can use it to send data to [Tableau](https://www.tableau.com/), [PowerBI](https://powerbi.microsoft.com/en-us/), etc.
 Projects using [Multi-tenant](/storage/#multi-tenant-mt) Snowflake backend can use [Data Gateway](/components/applications/data-gateway/) component instead.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Snowflake** data destination connector.

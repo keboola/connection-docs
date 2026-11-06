@@ -1,6 +1,7 @@
 ---
 title: Tableau TDE
 slug: 'components/writers/bi-tools/tableau'
+description: 'Write Keboola tables to Tableau TDE files with column types and filters, then download them or upload them to Tableau Server, Dropbox or Google Drive.'
 redirect_from:
     - /writers/bi-tools/tableau/
 ---
@@ -21,6 +22,8 @@ Both approaches are interchangeable though.
 New to data destination connectors? [Send a table to Google Sheets](/getting-started/write/) in
 Getting Started walks through the pattern on a simpler destination first. You can also watch our
 [Tableau Integration Demo](https://www.youtube.com/watch?v=FS1nndJ0vyQ) on YouTube.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Tableau** connector.
