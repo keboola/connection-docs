@@ -9,6 +9,10 @@ redirect_from:
 
 
 
+:::caution[Storage token deprecation]
+Starting with version 2.0.0, planned for 1 December 2026, the Keboola MCP Server no longer accepts a project Storage API token in any form: not in `KBC_STORAGE_TOKEN`, `--storage-token` or an `X-StorageAPI-Token` header, and not as any token without the `kbc_at_` or `kbc_pat_` prefix. The server takes its credential only from a [`login`](#signing-in-to-the-local-server) session or, over HTTP, from an `Authorization: Bearer` header carrying a Keboola access token (`kbc_at_`) or personal access token (`kbc_pat_`). Until then the old settings keep working and the server logs a deprecation warning. See [Migrating from a Storage token](#migrating-from-a-storage-token). The remote server with OAuth is not affected.
+:::
+
 Connect your MCP clients and AI assistants to your **Keboola Project** and give them the powers of a Keboola Expert user:
 
 - **[Cursor](#using-with-cursor)** - Direct deeplink installation
@@ -60,7 +64,7 @@ In case your AI assistant supports remote connection, you can connect to Keboola
 3. Once you save the settings and refresh your AI assistant, you will be prompted to authenticate with your Keboola account, then choose which project(s) to work in (see [Choosing Your Project(s)](#choosing-your-projects) below).
 
 :::note
-When using the remote server with OAuth, you get the permissions that match your role in Keboola. If you wish to control permissions more granularly, run the server locally and specify your own **Storage Token** and **Workspace Schema** — see [Running the MCP Server Locally](#running-the-mcp-server-locally).
+When using the remote server with OAuth, you get the permissions that match your role in Keboola. If you wish to control permissions more granularly, run the server locally with a personal access token you control and your own **Workspace Schema** — see [Running the MCP Server Locally](#running-the-mcp-server-locally).
 :::
 
 ### Choosing Your Project(s)
@@ -353,10 +357,6 @@ The sections below cover running the server locally and integrating it programma
 
 While MCP clients like Cursor or Claude typically manage the MCP server automatically, you might want to run the Keboola MCP Server locally for development, testing, or when using a custom client. You can run it via Docker or via the `uv`/`uvx` command.
 
-:::caution
-**Storage Token Deprecation:** Configuring the local server with a static `KBC_STORAGE_TOKEN`, as shown below, is deprecated in favor of the browser-based `login` command (see [Authenticating Without a Static Storage Token](#authenticating-without-a-static-storage-token) below). It still works today — there is a deprecation period while existing setups migrate — but support for it will be removed in a future release.
-:::
-
 ### Using Docker (recommended)
 
 For a consistent and isolated environment, running the Keboola MCP Server via [Docker](https://docker.com/get-started/) is often the recommended approach for local execution, especially if you don't want to manage Python environments directly or are integrating with clients that can manage Docker containers.
@@ -369,52 +369,45 @@ Before proceeding, ensure you have Docker installed on your system. You can find
     ```
 2.  **Run the Docker container:**
 
+    A container cannot open a browser, so it runs in `Streamable HTTP` mode and starts without a credential. Your client sends the token with each request (see [Connecting a client to a localhost instance](#connecting-a-client-to-a-localhost-instance)).
+
     *   **For Snowflake users:**
         ```bash
         docker run -it --rm \
-          -e KBC_STORAGE_TOKEN="YOUR_KEBOOLA_STORAGE_TOKEN" \
+          -p 127.0.0.1:8000:8000 \
           -e KBC_WORKSPACE_SCHEMA="YOUR_WORKSPACE_SCHEMA" \
           keboola/mcp-server:latest \
-          --api-url https://connection.YOUR_REGION.keboola.com
+          --api-url https://connection.YOUR_REGION.keboola.com \
+          --transport streamable-http --host 0.0.0.0
         ```
-        Replace `YOUR_KEBOOLA_STORAGE_TOKEN`, `YOUR_WORKSPACE_SCHEMA`, and `https://connection.YOUR_REGION.keboola.com` with your actual values.
+        Replace `YOUR_WORKSPACE_SCHEMA` and `https://connection.YOUR_REGION.keboola.com` with your actual values.
 
     *   **For BigQuery users (requires volume mount for credentials):**
         ```bash
         # Ensure your Google Cloud credentials JSON file is accessible
         docker run -it --rm \
-          -e KBC_STORAGE_TOKEN="YOUR_KEBOOLA_STORAGE_TOKEN" \
+          -p 127.0.0.1:8000:8000 \
           -e KBC_WORKSPACE_SCHEMA="YOUR_WORKSPACE_SCHEMA" \
           -e GOOGLE_APPLICATION_CREDENTIALS="/creds/credentials.json" \
           -v /local/path/to/your/credentials.json:/creds/credentials.json \
           keboola/mcp-server:latest \
-          --api-url https://connection.YOUR_REGION.keboola.com
+          --api-url https://connection.YOUR_REGION.keboola.com \
+          --transport streamable-http --host 0.0.0.0
         ```
         Replace placeholders and ensure `/local/path/to/your/credentials.json` points to your actual credentials file on your host machine.
 
-    The `--rm` flag ensures the container is removed when it stops. The server inside Docker will typically listen on `stdio` by default, which is suitable for clients that can invoke and manage Docker commands.
+    The `--rm` flag ensures the container is removed when it stops. The server listens on `http://localhost:8000/mcp`.
 
-**Example: Configuring Cursor IDE to use Docker for Keboola MCP Server:**
-
-If your MCP client (like Cursor) supports defining a Docker command for an MCP server, the configuration might look like this:
+**Example: configuring Cursor IDE to connect to the Docker container:**
 
 ```json
 {
   "mcpServers": {
     "keboola": {
-      "command": "docker",
-      "args": [
-        "run",
-        "-it",
-        "--rm",
-        "-e", "KBC_STORAGE_TOKEN",
-        "-e", "KBC_WORKSPACE_SCHEMA",
-        "keboola/mcp-server:latest",
-        "--api-url", "https://connection.YOUR_REGION.keboola.com"
-      ],
-      "env": {
-        "KBC_STORAGE_TOKEN": "YOUR_KEBOOLA_STORAGE_TOKEN",
-        "KBC_WORKSPACE_SCHEMA": "YOUR_WORKSPACE_SCHEMA"
+      "url": "http://localhost:8000/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_KEBOOLA_ACCESS_TOKEN",
+        "X-KBC-ProjectId": "YOUR_PROJECT_ID"
       }
     }
   }
@@ -423,21 +416,21 @@ If your MCP client (like Cursor) supports defining a Docker command for an MCP s
 
 **Note:**
 * Ensure Docker is running on your system.
-* Replace placeholders like `YOUR_KEBOOLA_STORAGE_TOKEN`, `YOUR_WORKSPACE_SCHEMA`, and the Keboola API URL.
-* The client (Cursor) passes the `KBC_STORAGE_TOKEN` and `KBC_WORKSPACE_SCHEMA` from its `env` block to the `docker run` command through the `-e` flags. The `--api-url` is passed directly as an argument to the `keboola/mcp-server` entrypoint.
+* `YOUR_KEBOOLA_ACCESS_TOKEN` is a Keboola access token (`kbc_at_`) or [personal access token](/management/project/tokens/) (`kbc_pat_`); `YOUR_PROJECT_ID` selects the project it works in.
+* The token travels in the request header, so it never has to be stored in the container.
 
 ### Using the uv command
 
 The primary way to run the server locally without Docker is by using `uv` or `uvx` to execute the `keboola_mcp_server` package. More information about the server is available in its [Keboola MCP Server GitHub repository](https://github.com/keboola/mcp-server). Make sure you have Python 3.10+ and `uv` installed.
 
-1. **Set up environment variables:**  
-   Before running the server, you need to configure the following environment variables:
-   * `KBC_STORAGE_TOKEN`: Your Keboola Storage API token.
-   * `KBC_WORKSPACE_SCHEMA`: Your Keboola project's workspace schema (for SQL queries).
+1. **Sign in and set up environment variables:**  
+   Sign in once with `login` (see [Signing in to the Local Server](#signing-in-to-the-local-server)); the server needs no token in its environment. Then configure the following environment variables:
    * `KBC_STORAGE_API_URL`: Your Keboola instance API URL (e.g., `https://connection.keboola.com` or `https://connection.YOUR_REGION.keboola.com`).
+   * `KBC_WORKSPACE_SCHEMA`: Your Keboola project's workspace schema (for SQL queries).
+   * `KBC_PROJECT_ID` (optional): the ID of the project to work in; otherwise you choose it in the conversation.
    * `KBC_BRANCH_ID` (optional): a development branch ID to scope operations to; defaults to the production branch.
 
-   Refer to the [Keboola Tokens](/management/project/tokens/) and [Keboola workspace manipulation](/getting-started/transform/workspace/) for detailed instructions on obtaining these values.
+   Refer to the [Keboola workspace manipulation](/getting-started/transform/workspace/) page for detailed instructions on obtaining these values.
 
    **1.1. Additional Setup for BigQuery Users**  
    If your Keboola project uses BigQuery as its backend, you will also need to set up the `GOOGLE_APPLICATION_CREDENTIALS` environment variable. This variable should point to the JSON file containing your Google Cloud service account key that has the necessary permissions to access your BigQuery data.
@@ -453,9 +446,9 @@ uvx keboola_mcp_server --api-url $KBC_STORAGE_API_URL
 
 The `KBC_STORAGE_API_URL` was set as an environment variable but can also be provided manually via the `--api-url` flag. The command starts the server communicating via `stdio`. To run the server in `Streamable HTTP` mode (listening on a network host/port such as `localhost:8000`), pass the appropriate flags to `keboola_mcp_server`. For day-to-day use with clients like Claude or Cursor you usually do not need to run this command manually, as they handle the server lifecycle.
 
-### Authenticating Without a Static Storage Token
+### Signing in to the Local Server
 
-Instead of setting a static `KBC_STORAGE_TOKEN`, you can sign in once with your browser; the server stores the session and refreshes it automatically:
+Sign in once with your browser; the server stores the session and refreshes it automatically:
 
 ```bash
 uvx keboola_mcp_server login --api-url https://connection.YOUR_REGION.keboola.com
@@ -467,17 +460,27 @@ This saves a stack-wide session to `~/.keboola/mcp/credentials.json` (readable o
 |---------|--------------|
 | `login --api-url <url>` | Sign in to a stack |
 | `login --force` | Sign in again / switch account |
+| `login --pat` | Create a personal access token, for example for a container or a CI job |
 | `login --show-token` | Print the current session token (debugging) |
 | `logout [--api-url <url>] [--all]` | Remove the stored session for a stack (or all stacks) |
 
-For containers or CI where a browser login isn't possible, supply a Keboola [access or personal access token](/management/project/tokens/) directly via `KBC_STORAGE_TOKEN`, together with `KBC_PROJECT_ID` to select the project. These stack-wide programmatic tokens are prefixed `kbc_at_` (access token) or `kbc_pat_` (personal access token); a legacy project-bound Storage token does not need `KBC_PROJECT_ID`, since the project is already encoded in the token itself.
+For containers or CI where a browser login isn't possible, run the server in `Streamable HTTP` mode and send a Keboola [access or personal access token](/management/project/tokens/) in an `Authorization: Bearer` header, together with `X-KBC-ProjectId` to select the project, with each request. These stack-wide programmatic tokens are prefixed `kbc_at_` (access token) or `kbc_pat_` (personal access token).
+
+### Migrating from a Storage token
+
+| If you use today | Use instead |
+|---|---|
+| A project Storage API token in `KBC_STORAGE_TOKEN`, `--storage-token` or an `X-StorageAPI-Token` header | Run `login` (browser), or send a personal access token (`kbc_pat_`) in an `Authorization: Bearer` header together with `X-KBC-ProjectId` |
+| A `kbc_at_` or `kbc_pat_` token in `KBC_STORAGE_TOKEN` | The same: `login`, or the `Authorization` header. The environment variable is no longer read |
+| A Storage API token in a container or CI job | Run the server with `--transport streamable-http` and send the `Authorization` and `X-KBC-ProjectId` headers with each request |
+| The remote server with OAuth | Nothing, it is not affected |
 
 ### Connecting a client to a localhost instance
 
 When you run the Keboola MCP Server manually, it will typically listen on `stdio` or on a specific HTTP port if configured for `Streamable HTTP`.
 
 * **`stdio`-based clients:** Configure the client application to launch the local `keboola_mcp_server` executable and communicate over standard input/output.
-* **`Streamable HTTP`-based clients:** If you start the server in HTTP mode, your client should connect to the specified host and port (e.g., `http://localhost:8000/mcp?storage_token=XXX&workspace_schema=YYY`).
+* **`Streamable HTTP`-based clients:** If you start the server in HTTP mode, your client should connect to the specified host and port (e.g., `http://localhost:8000/mcp`) and send an `Authorization: Bearer` header with your access token and an `X-KBC-ProjectId` header with the project ID.
 
 **Example: connecting Cursor IDE to a local `uvx` instance**
 
@@ -485,7 +488,7 @@ If you are running the Keboola MCP Server locally using `uvx`, you can configure
 
 1. Open Cursor settings.
 2. Navigate to the MCP section within settings.
-3. Add or configure your Keboola project. Provide your `KBC_STORAGE_TOKEN`, `KBC_WORKSPACE_SCHEMA` and the API URL.
+3. Add or configure your Keboola project. Provide your `KBC_WORKSPACE_SCHEMA` and the API URL; the server uses the session saved by `login`.
 
 Example `mcp_servers.json` snippet:
 
@@ -499,7 +502,6 @@ Example `mcp_servers.json` snippet:
         "--api-url", "https://connection.YOUR_REGION.keboola.com"
       ],
       "env": {
-        "KBC_STORAGE_TOKEN": "your_keboola_storage_token",
         "KBC_WORKSPACE_SCHEMA": "your_workspace_schema"
       }
     }
@@ -507,7 +509,7 @@ Example `mcp_servers.json` snippet:
 }
 ```
 
-> You can use this link to get the above configuration template into your Cursor: [![Install MCP Server using uvx](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJjb21tYW5kIjoidXZ4IGtlYm9vbGFfbWNwX3NlcnZlciAtLWFwaS11cmwgaHR0cHM6Ly9jb25uZWN0aW9uLllPVVJfUkVHSU9OLmtlYm9vbGEuY29tIiwiZW52Ijp7IktCQ19TVE9SQUdFX1RPS0VOIjoieW91cl9rZWJvb2xhX3N0b3JhZ2VfdG9rZW4iLCJLQkNfV09SS1NQQUNFX1NDSEVNQSI6InlvdXJfd29ya3NwYWNlX3NjaGVtYSJ9fQ%3D%3D)
+> You can use this link to get the above configuration template into your Cursor: [![Install MCP Server using uvx](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJjb21tYW5kIjoidXZ4IGtlYm9vbGFfbWNwX3NlcnZlciAtLWFwaS11cmwgaHR0cHM6Ly9jb25uZWN0aW9uLllPVVJfUkVHSU9OLmtlYm9vbGEuY29tIiwiZW52Ijp7IktCQ19XT1JLU1BBQ0VfU0NIRU1BIjoieW91cl93b3Jrc3BhY2Vfc2NoZW1hIn19)
 
 ## Programmatic Integration
 
