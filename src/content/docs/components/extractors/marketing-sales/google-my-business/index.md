@@ -1,6 +1,7 @@
 ---
 title: Google My Business
 slug: 'components/extractors/marketing-sales/google-my-business'
+description: 'Collect daily metrics, reviews, media and questions for your businesses on a Google Business profile, choosing endpoints, a date range and the load type.'
 redirect_from:
     - /extractors/marketing-sales/google-my-business/
 ---
@@ -8,6 +9,8 @@ redirect_from:
 
 
 This data source connector allows you to collect daily metrics, reviews, media and questions for your businesses that have a [Google Business profile](https://www.google.com/business/).
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Google My Business** connector.

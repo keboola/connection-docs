@@ -1,6 +1,7 @@
 ---
 title: Babelforce
 slug: 'components/extractors/marketing-sales/babelforce'
+description: 'Import all call data from the Babelforce call center platform with an API Access ID and token, using the Basic template, always as incremental loads.'
 redirect_from:
     - /extractors/marketing-sales/babelforce/
 ---
@@ -8,6 +9,8 @@ redirect_from:
 
 
 This data source connector uses the Babelforce [REST API](https://www.babelforce.com/rest-api-power/) to import data from [Babelforce](https://www.babelforce.com/), a cloud call center platform.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Babelforce** connector.
