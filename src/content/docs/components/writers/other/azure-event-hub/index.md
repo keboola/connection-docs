@@ -30,9 +30,10 @@ Fill in the **Name**, and, optionally, the **Description**. Then click **Add Row
 
 ![Screenshot - Add Row Modal](/components/writers/other/azure-event-hub/add-row-modal.png)
 
-Click **New Table Input** to add one table to the [Input Mapping](/transformations/mappings/).
+Click **Add Table Input** to add one table to the [Input Mapping](/transformations/mappings/).
 
 ![Screenshot - Configuration Row](/components/writers/other/azure-event-hub/add-table.png)
+<!-- VERIFY(Nikita): reshoot this screenshot; it still shows the old New Table Input button, now Add Table Input. -->
 
 Fill in the **Source** table. You can also fill in other fields. Then click **Add Input**.
 
