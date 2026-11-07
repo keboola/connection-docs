@@ -7,13 +7,16 @@ slug: 'storage/tables/backups'
 
 There are two methods available for backing up and restoring data: 
 
-1. Time travel restore – available only for the Snowflake backend
+1. Time travel restore – available for the Snowflake and BigQuery backends
 2. Snapshots – available for all backends
 
 ![Screenshot - Storage Backups](/storage/tables/snap-restore.png)
 
 ## Time Travel Restore
-Every project with a Snowflake backend can create an exact replica of a table at any point in time up to the [limit set](/management/project/) for the project.
+Projects with a Snowflake or BigQuery backend can create an exact replica of a table at any point in time up to the [limit set](/management/project/) for the project.
+<!-- VERIFY(owner): how far back time travel reaches differs by backend. On Snowflake it follows the project's data-retention setting; on BigQuery the ceiling is the dataset's own time-travel window, which BigQuery caps at 7 days (2-7 configurable). Confirm what a BigQuery project is actually allowed before documenting a number here. -->
+
+Time travel restore is not available on [Pay As You Go](/management/payg-project/) projects.
 To create a replica, first, use the calendar to select a time point. The table will be replicated as it was at that time point.
 Then, select the bucket to use for the newly created table, and give it a name.
 

@@ -23,6 +23,14 @@ table. In that case, the columns from the imported table will be added to the ex
 Table and column names can contain only alphanumeric characters. Dash and 
 underscores are allowed. Column names must not start or end with dash `-` or underscore 
 character `_`.
+<!-- VERIFY(owner): the June storage audit (PRDCT-356) reports this is wrong for COLUMN names
+     specifically — that dashes are rejected by ColumnNameValidator.php, and that a column name
+     is capped at 64 characters while a table name allows 96 (neither limit is documented here).
+     That validator lives in the private keboola/connection repo, so the claim could not be
+     confirmed from public sources and the text above is deliberately left unchanged rather than
+     guessed. Someone with connection access should settle it: if dashes are in fact invalid for
+     columns, this sentence is actively misleading anyone naming columns. -->
+
 
 When you select a table from any bucket in Storage, detailed information about the table will be displayed
 at the top of the screen. This is what we refer to as the **table detail** throughout our documentation.
