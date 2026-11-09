@@ -22,7 +22,7 @@ These are the key benefits of using the Native Data Types feature:
 
 ## Current Drawbacks
 Using the Native Data Types feature also has its drawbacks:
-- Data types in typed tables cannot be modified after creation. The only exception is [widening a text column](#widening-a-text-column). For any other change, you must recreate the table. This limitation applies to both the UI and the API. See [How to Change Column Types](/storage/tables/data-types/#changing-types-of-existing-typed-columns).
+- The data type of a column in a typed table cannot be changed after creation. To change a type, you must create a new column or recreate the table. See [How to Change Column Types](/storage/tables/data-types/#changing-types-of-existing-typed-columns). Some other alterations, such as increasing the length or precision of a column, are possible; see [Changing Column Definitions](/storage/tables/#changing-column-definitions).
 - Keboola does not perform any type conversion during data loading. Your data must exactly match the column type defined in the table within Storage.
 - Loading data with incompatible types will result in a failure.
 
@@ -96,7 +96,7 @@ Specifying native types using Keboola’s [base types](/storage/tables/data-type
 ```
 
 ### Changing Types of Existing Typed Columns
-You **cannot change the type of a column in a typed table once it has been created**. The only exception is [widening a text column](#widening-a-text-column). Otherwise, there are multiple workarounds to address this limitation:
+You **cannot change the type of a column in a typed table once it has been created**. You can still [widen a text column](#widening-a-text-column) and make the other alterations listed in [Changing Column Definitions](/storage/tables/#changing-column-definitions). For any other change, there are multiple workarounds to address this limitation:
 
 **For tables using full load:** Drop the table and create a new one with the correct types. Then, load the data into the newly created table.
 
