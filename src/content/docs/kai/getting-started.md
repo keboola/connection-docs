@@ -8,8 +8,7 @@ description: Enable Kai in your project, open the chat with keyboard shortcuts, 
 
 ## Access
 
-<!-- VERIFY(Jordan): single-tenant stack availability. The kai-assistant service is live on all five multi-tenant stacks (checked 2026-08-25 via each stack's public service index); whether single-tenant stacks get Kai is not publicly checkable. If they do, widen the sentence below. -->
-Kai is now in **Public Beta** and available to all users on all [multi-tenant stacks](/overview/#stacks).
+Kai is **generally available** to all users in supported stacks.
 
 ### Enabling Kai
 
