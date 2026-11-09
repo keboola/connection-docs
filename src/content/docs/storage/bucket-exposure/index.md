@@ -400,7 +400,6 @@ persisted alias is created or replaced in the bucket.
 
 If adding a new table to the shares fails, the table operation still succeeds, and the bucket's
 events show a warning that the share sync failed.
-<!-- VERIFY(vb): the sync after a table or alias create, and its warning event, depend on DMD-2501 (Task 2.4 of the Snowflake Bucket Exposure RFC); drop this note once it is merged and deployed. -->
 
 To repair the shares, open the exposure, click **Edit** and **Save** with the account list
 unchanged. A save that succeeds adds all current tables and views of the bucket to the shares.
