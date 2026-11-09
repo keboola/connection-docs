@@ -173,7 +173,7 @@ test('plugin: an inline HTML badge in a paragraph gets the hint but no arrow cla
   assert.equal(close.value, `${HINT}</a>`);
 });
 
-test('plugin: an inline HTML link around a picture and text keeps the arrow class', () => {
+test('plugin: an inline HTML link around an image and text keeps the arrow class', () => {
   const open = raw('<a href="https://example.com">');
   run(el('p', {}, [open, raw('<img src="/x.svg" alt="">'), text(' GitHub'), raw('</a>')]));
   assert.match(open.value, /class="kbc-external"/);
