@@ -85,7 +85,7 @@ Descriptions are Markdown, within the [size limit](#descriptions-in-your-backend
 Saving a description in the UI turns off the **Managed by Keboola** switch of the table, so Keboola components stop
 updating the descriptions of the table and all its columns. You can turn it on again from the same box.
 The description of an alias shows the description of its source table and is read-only, as are the descriptions of
-tables in buckets backed by an external schema.
+tables in buckets backed by an external schema (see [Descriptions of External Tables](#descriptions-of-external-tables)).
 
 ### Set Descriptions Through the API
 Send the table `description`, and a description for each column, when you
@@ -116,13 +116,55 @@ update, which is also what the Storage UI and components use. An update with a c
 1,024 characters fails, so keep BigQuery column descriptions within the limit.
 
 Descriptions are not written to the backend for:
-- aliases that are not materialized as a view, tables in [linked buckets](/catalog/), and tables
-  in buckets backed by an external schema;
+- aliases that are not materialized as a view, and tables in [linked buckets](/catalog/);
+- tables in buckets backed by an external schema: their description comes from the source, and nothing is written
+  back to it (see [Descriptions of External Tables](#descriptions-of-external-tables));
 - projects on other backends.
 
 Aliases that synchronize columns with their source read the description of the table they point to; an alias's
 own table description takes precedence. A materialized alias view carries the resolved description as its comment
 (Snowflake) or description (BigQuery), and is updated when a description changes.
+
+### Descriptions of External Tables
+In [external buckets](/storage/byodb/external-buckets/) (a registered Snowflake schema or Secure Data Share, or a
+BigQuery external dataset), the source owns the descriptions. When you register the bucket, and on every refresh that
+re-reads a table, Storage takes the table and column descriptions from the source: the Snowflake `COMMENT` or the
+BigQuery description. A changed comment updates the description. A removed or empty comment clears it. Nothing is
+ever written back to the source.
+
+- **Read-only:** the descriptions are read-only in the Storage UI. To change one, edit the comment in Snowflake or
+  BigQuery and refresh the bucket.
+- **API:** the [definition update](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition)
+  of the table or a column rejects a changed description with HTTP 400 and the error code
+  `storage.tables.externalDescriptionNotEditable`. An unchanged description is accepted, and the other fields of the
+  request are applied. `KBC.description` metadata of the `user` provider stays writable but does not change the
+  description.
+- **Events:** a refresh that changes descriptions emits `storage.tableDescriptionChanged` (with `description` and
+  `oldDescription`) and `storage.columnDescriptionChanged` (with `columnDescriptions`, a list of `{column, old, new}`).
+- **Existing buckets:** a refresh re-reads only the tables that changed in the source since the last refresh. Buckets
+  registered before November 10, 2026 therefore get a description only once a table's comment changes. To load the
+  descriptions of all tables of such a bucket, contact [Keboola support](/management/support/), which runs a one-time
+  full refresh. Newly registered buckets get the descriptions right away.
+- **Limits:** a comment longer than 65,535 bytes is skipped, and the stored description is kept. On Snowflake, the
+  comments of one schema are read up to a total limit. When a schema exceeds it, the remaining tables get no
+  description, keep their existing one, and the register or refresh returns a warning that lists them. Characters
+  outside the Basic Multilingual Plane, such as emoji, are stored as `?`.
+- **Linked buckets and aliases** of external tables show the description of their source.
+
+### Descriptions in Workspaces and Data Gateway
+Storage table and column descriptions are written as Snowflake comments on the tables loaded into
+[Snowflake workspaces](/workspace/). SQL clients, the MCP server and Kai therefore see the same context as Storage.
+
+- A [`COPY` load](/transformations/mappings/#loading-type-snowflake-and-bigquery) writes the comments when it creates
+  the workspace table. An incremental load into an existing table keeps the comments the table already has.
+- A `CLONE` load keeps the comments of the Storage table.
+- The input mapping can set its own table or column description for a workspace load, in the input mapping editor
+  in the UI. The description in Storage stays unchanged. An empty description in the input mapping falls back to the
+  Storage description.
+- [Data Gateway](/components/applications/data-gateway/): the comments reach the reader account through the share.
+  Existing tables get them on their next Data Gateway run.
+
+The `VIEW` load type and the Snowflake and BigQuery writers do not carry descriptions yet.
 
 ### Relation to KBC.description Metadata
 The description in the table definition is the source of truth. For compatibility, Storage mirrors it into the
