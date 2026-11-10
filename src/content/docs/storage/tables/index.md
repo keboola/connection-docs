@@ -136,8 +136,8 @@ refresh the bucket. The [definition update](https://api.keboola.com/?service=sto
 rejects a changed description with HTTP 400 and the error code `storage.tables.externalDescriptionNotEditable`.
 
 Newly registered buckets get the descriptions right away. Buckets registered before November 10, 2026 get them only
-for tables whose comment changes later. To load them for all tables, contact [Keboola support](/management/support/),
-which runs a one-time full refresh.
+for tables whose comment changes later. To load them for all tables, open the bucket, choose **Refresh bucket** and
+check **Reload all tables**. If you run into a problem, contact [Keboola support](/management/support/).
 
 A refresh that changes a description emits the `storage.tableDescriptionChanged` or `storage.columnDescriptionChanged`
 event. Comments longer than 65,535 bytes are skipped, and characters such as emoji are stored as `?`.
