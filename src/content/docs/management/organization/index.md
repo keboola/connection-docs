@@ -1,6 +1,5 @@
 ---
 title: Organizations
-description: 'Manage a Keboola organization — admins, members, projects, and organization-level settings.'
 slug: 'management/organization'
 ---
 
