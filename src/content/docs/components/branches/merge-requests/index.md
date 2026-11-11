@@ -154,13 +154,13 @@ your branch, reconcile the affected configurations yourself, and then submit the
 A merged request is kept in the [list](#the-merge-request-lifecycle) with the **Merged** status, and you
 can **Download Changelog** from its row for a record of exactly what was applied.
 
+Because a merge produces new [configuration versions](/components/#configuration-versions) in production,
+no configuration change is lost: if a merged change causes problems, you can open the affected configuration
+and roll it back to its previous version, restoring the pre-merge state.
+
 A successful merge also **deletes the development branch**, including its buckets, tables, and workspaces.
 Only the configuration changes reach production; if you still need data from the branch, export it before
 you merge.
-
-Because a merge produces new [configuration versions](/components/#configuration-versions) in production,
-nothing is lost: if a merged change causes problems, you can open the affected configuration and roll it
-back to its previous version, restoring the pre-merge state.
 
 ## Merge Requests in Kai, the MCP Server, and the CLI
 
