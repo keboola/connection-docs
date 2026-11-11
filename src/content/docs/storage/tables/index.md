@@ -139,8 +139,17 @@ Newly registered buckets get the descriptions right away. Buckets registered bef
 for tables whose comment changes later. To load them for all tables, open the bucket, choose **Refresh bucket** and
 check **Reload all tables**. If you run into a problem, contact [Keboola support](/management/support/).
 
+Descriptions you wrote in Keboola earlier are replaced by the source comment when the table is refreshed. If the
+source has no comment, the description is cleared; in a Secure Data Share bucket it is kept.
+
 A refresh that changes a description emits the `storage.tableDescriptionChanged` or `storage.columnDescriptionChanged`
-event. Comments longer than 65,535 bytes are skipped, and characters such as emoji are stored as `?`.
+event. The event, listed among the events of the bucket and of the table, contains both the previous and the new
+text, up to 8,000 characters each. Comments longer than 65,535 bytes are skipped, and characters such as emoji are
+stored as `?`.
+
+A `KBC.description` metadata row written through the
+[metadata API](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/metadata)
+is not changed by a refresh. The UI does not show it, but it stays readable through the Storage API.
 
 ### Descriptions in Workspaces and Data Gateway
 Storage table and column descriptions are written to the tables loaded into Snowflake and BigQuery
