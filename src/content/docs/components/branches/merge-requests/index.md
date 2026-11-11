@@ -172,13 +172,13 @@ The same flow is available outside the UI:
   approve, request changes, resolve conflicts, and merge.
 - **MCP Server** — the [merge request tools](/ai/mcp-server/#available-tools) list, create, review, approve,
   and merge requests and resolve their conflicts. They appear only in projects with Branches 2.0. Anyone can
-  read merge requests; every other operation (creating or updating a request, requesting or giving a review,
-  resolving conflicts, merging) requires the **Admin** or **Share**
-  [project role](/management/project/users/#user-roles) of those projects. Creating a request needs a session scoped to the
+  read merge requests; creating or updating a request, requesting or giving a review, resolving conflicts, and
+  merging require the **Admin** or **Share** [project role](/management/project/users/#user-roles). Creating a
+  request needs a session scoped to the
   [development branch](/ai/mcp-server/#development-branches); the other operations also work from a
   production session when you name the merge request. See the
   [tool reference](https://github.com/keboola/mcp-server/blob/main/TOOLS.md) for the full list.
-- **Keboola Agent CLI** — `kbagent merge-request` offers the same operations from the command line, for
+- **Keboola Agent CLI** — `kbagent merge-request` offers the same workflow from the command line, for
   example `kbagent merge-request create --title "..."` to open a request for the current branch and
   `kbagent merge-request merge` to merge it. Run `kbagent merge-request --help` for the full list, or see
   the [kbagent repository](https://github.com/keboola/cli).
