@@ -556,6 +556,14 @@ export const sidebar = [
       },
       { slug: "storage/byobq" },
       {
+        label: "Row- and Column-Level Security",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "storage/row-level-security" },
+          { slug: "storage/row-level-security/policy-reference" },
+        ],
+      },
+      {
         label: "Storage API",
         collapsed: true,
         items: [
@@ -637,6 +645,7 @@ export const sidebar = [
       { label: "Overview", slug: "workspace" },
       { slug: "workspace/snowflake-workspaces-access-changes" },
       { slug: "workspace/sql-editor" },
+      { slug: "workspace/retention" },
       {
         label: "Keboola JDBC Driver",
         collapsed: true,

@@ -213,10 +213,13 @@ To connect to a [BigQuery](https://cloud.google.com/bigquery) workspace with an 
 ### Workspace Lifecycle
 When a workspace is created, it enters the **Active** state and can be used. 
 
-- Database (Snowflake and BigQuery) workspaces are billed by the runtime of queries executed in them. As such, we leave them in active state until you delete them. 
+- Database (Snowflake and BigQuery) workspaces are billed by the runtime of queries executed in them. They stay active until you delete them, unless nobody uses them for six months; such workspaces are first warned, then deactivated and later deleted automatically, see [Workspace Retention](/workspace/retention/).
 - JupyterLab workspaces are billed by their running time. They can be terminated and resumed, in order to reduce running time while preserving your work. 
 
 ![Workspace - States](/workspace/workspace-states.svg)
+
+The diagram does not show the **Deactivated** state that retention introduces for Snowflake and BigQuery
+workspaces; see [Workspace Retention](/workspace/retention/).
 
 Workspace termination can be done manually or it is done automatically after 1 hour period of inactivity (if auto sleep feature is supported and enabled). 
 Inactivity is measured from the last save of any notebook in JupyterLab. When a workspace is terminated, it is switched off

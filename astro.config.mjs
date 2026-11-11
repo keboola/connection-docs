@@ -6,6 +6,7 @@ import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
 import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
+import externalLinks from './src/integrations/external-links.mjs';
 import pagefindTitles from './src/integrations/pagefind-titles.mjs';
 import { remarkStripComments } from './src/integrations/strip-comments.mjs';
 
@@ -20,6 +21,8 @@ export default defineConfig({
   },
   markdown: {
     remarkPlugins: [remarkStripComments, beaconTransforms],
+    // Links that leave help.keboola.com open in a new tab; see the plugin's header.
+    rehypePlugins: [externalLinks],
   },
   integrations: [
     redirectFrom(),

@@ -32,6 +32,11 @@ Model Context Protocol server integration for seamless communication between AI 
 Describe your data in business terms — datasets, metrics, relationships, glossary terms, and business rules — so AI assistants understand what your data means, not just how it is stored.
 [Learn more about the Semantic Layer →](/ai/semantic-layer/)
 
+### Row- and Column-Level Security
+
+Restrict which rows and columns of a Storage table each reader sees, including an AI assistant working through the MCP Server. Policies are written once and enforced on every query.
+[Learn more about row- and column-level security →](/storage/row-level-security/)
+
 ### Machine-readable API index
 
 Each stack publishes its API index at `https://api.<stack>/apis.json`; what it contains and how to use it is described under [APIs](/overview/api/).

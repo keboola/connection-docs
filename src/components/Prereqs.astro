@@ -36,6 +36,8 @@
 
 import { Icon } from '@astrojs/starlight/components';
 import { LABELS, SHARED, TABS } from './prereqs.mjs';
+// set:html skips the rehype plugin that opens external links in a new tab, so these strings go through it here
+import { externalizeHtml } from '../integrations/external-links.mjs';
 
 interface Props {
   /** Shared "You need" items, in the order they should appear. */
@@ -80,14 +82,14 @@ const ownItems = Astro.slots.has('default') ? (await Astro.slots.render('default
         {from && (
           <p class="fromto__card">
             <span class="fromto__label">{LABELS.from}</span>
-            <span set:html={from} />
+            <span set:html={externalizeHtml(from)} />
           </p>
         )}
         {from && to && <span class="fromto__arrow" aria-hidden="true">→</span>}
         {to && (
           <p class="fromto__card fromto__card--to">
             <span class="fromto__label">{LABELS.to}</span>
-            <span set:html={to} />
+            <span set:html={externalizeHtml(to)} />
           </p>
         )}
       </div>
@@ -98,8 +100,8 @@ const ownItems = Astro.slots.has('default') ? (await Astro.slots.render('default
       <Fragment>
         <p class="prereqs__group">{LABELS.needs}</p>
         <ul class="prereqs__list">
-          {items.map((key) => <li set:html={SHARED[key]} />)}
-          <Fragment set:html={ownItems} />
+          {items.map((key) => <li set:html={externalizeHtml(SHARED[key])} />)}
+          <Fragment set:html={externalizeHtml(ownItems)} />
         </ul>
       </Fragment>
     )
@@ -126,7 +128,7 @@ const ownItems = Astro.slots.has('default') ? (await Astro.slots.render('default
                 {t.key === 'cli' && <span class="prereqs__glyph" aria-hidden="true">&gt;_</span>}
                 {t.label}
               </span>
-              <span set:html={t.html} />
+              <span set:html={externalizeHtml(t.html)} />
             </li>
           ))}
         </ul>

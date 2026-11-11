@@ -961,6 +961,7 @@ tables:
       - "auditLog.admin.activation"
       - "auditLog.admin.addNewU2fDevice"
       - "auditLog.admin.allSessionsRevoked"
+      - "auditLog.admin.browserSessionChainRevoked"
       - "auditLog.admin.changePassword"
       - "auditLog.admin.deleted"
       - "auditLog.admin.deviceAuthorizationApproved"
