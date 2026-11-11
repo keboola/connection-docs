@@ -257,6 +257,7 @@ Don't worry about remembering command names — your AI client handles that. Jus
 - **Semantic layer** – Explore the project's semantic models and validate queries against them. See [Semantic Layer](/ai/semantic-layer/).  
 - **Jobs** – Start, monitor, and debug execution flows.  
 - **Flows** – Create and manage flows (including conditional flows) that orchestrate your components.  
+- **Merge requests** – Create, review, approve, and merge [merge requests](/components/branches/merge-requests/) for development branches, and resolve their conflicts. Available in projects with Branches 2.0; write operations require the Admin or Share project role.  
 - **Data Apps** – Create, deploy, and manage Streamlit and Python/JS apps.  
 - **Search & Discovery** – Find components, configurations, and objects across your project.  
 - **Project & OAuth** – Read project info and set up OAuth authorizations for components.  
@@ -347,7 +348,7 @@ To keep an AI agent's changes off production, you can scope the MCP server to a 
 - **Remote server:** send the `X-Branch-Id` HTTP header with your branch ID (set by the client, like the tool-authorization headers above).
 - **Local server:** set the `KBC_BRANCH_ID` environment variable.
 
-Without it, the server operates on the production branch.
+Without it, the server operates on the production branch. Creating a [merge request](/components/branches/merge-requests/#merge-requests-in-kai-the-mcp-server-and-the-cli) requires a branch-scoped session; reviewing, merging, and resolving conflicts also work from production when the merge request ID is given.
 
 :::note[The rest of this page is for developers]
 The sections below cover running the server locally and integrating it programmatically. If you just want to connect an AI client, you're already done above — skip ahead, or hand these to your AI agent to set up for you.

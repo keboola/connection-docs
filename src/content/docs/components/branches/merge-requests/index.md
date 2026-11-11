@@ -15,8 +15,6 @@ Git-based development — while keeping everything inside your Keboola project.
 :::caution[Branches 2.0]
 Merge requests are part of the **Branches 2.0** feature. If you don't see them in your project,
 enable Branches 2.0 in your **project settings** or contact **Keboola support** to have it turned on.
-
-Merge requests are not yet integrated with **Kai** (the AI assistant) — that integration is in progress.
 :::
 
 :::tip
@@ -156,9 +154,33 @@ your branch, reconcile the affected configurations yourself, and then submit the
 A merged request is kept in the [list](#the-merge-request-lifecycle) with the **Merged** status, and you
 can **Download Changelog** from its row for a record of exactly what was applied.
 
+A successful merge also **deletes the development branch**, including its buckets, tables, and workspaces.
+Only the configuration changes reach production; if you still need data from the branch, export it before
+you merge.
+
 Because a merge produces new [configuration versions](/components/#configuration-versions) in production,
 nothing is lost: if a merged change causes problems, you can open the affected configuration and roll it
 back to its previous version, restoring the pre-merge state.
+
+## Merge Requests in Kai, the MCP Server, and the CLI
+
+The same flow is available outside the UI:
+
+- **Kai** — in your development branch, ask Kai to create a merge request for your changes. If the project
+  requires no approvals, Kai can merge it right away. While a merge request is **In Review** or **Ready to
+  Merge**, the branch is read-only and Kai is not available in it; open Kai in production to approve, request
+  changes, resolve conflicts, and merge.
+- **MCP Server** — the [merge request tools](/ai/mcp-server/#available-tools) list, create, review, approve,
+  and merge requests and resolve their conflicts. They appear only in projects with Branches 2.0. Anyone can
+  read merge requests; creating, approving, resolving, and merging require the **Admin** or **Share**
+  [project role](/management/project/users/#user-roles). Creating a request needs a session scoped to the
+  [development branch](/ai/mcp-server/#development-branches); the other operations also work from a
+  production session when you name the merge request. See the
+  [tool reference](https://github.com/keboola/mcp-server/blob/main/TOOLS.md) for the full list.
+- **Keboola Agent CLI** — `kbagent merge-request` offers the same operations from the command line, for
+  example `kbagent merge-request create --title "..."` to open a request for the current branch and
+  `kbagent merge-request merge` to merge it. Run `kbagent merge-request --help` for the full list, or see
+  the [kbagent repository](https://github.com/keboola/cli).
 
 ## Requiring Review (Branch Protection)
 
