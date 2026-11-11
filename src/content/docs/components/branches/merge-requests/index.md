@@ -167,13 +167,14 @@ back to its previous version, restoring the pre-merge state.
 The same flow is available outside the UI:
 
 - **Kai** — in your development branch, ask Kai to create a merge request for your changes. If the project
-  requires no approvals, Kai can merge it right away. While a merge request is **In Review** or **Ready to
-  Merge**, the branch is read-only and Kai is not available in it; open Kai in production to approve, request
-  changes, resolve conflicts, and merge.
+  requires no approvals, Kai can merge it right away. While a merge request is **In Review** or approved
+  (**Ready to Merge**), the branch is read-only and Kai is not available in it; open Kai in production to
+  approve, request changes, resolve conflicts, and merge.
 - **MCP Server** — the [merge request tools](/ai/mcp-server/#available-tools) list, create, review, approve,
   and merge requests and resolve their conflicts. They appear only in projects with Branches 2.0. Anyone can
-  read merge requests; creating, approving, resolving, and merging require the **Admin** or **Share**
-  [project role](/management/project/users/#user-roles). Creating a request needs a session scoped to the
+  read merge requests; every other operation (creating or updating a request, requesting or giving a review,
+  resolving conflicts, merging) requires the **Admin** or **Share**
+  [project role](/management/project/users/#user-roles) of those projects. Creating a request needs a session scoped to the
   [development branch](/ai/mcp-server/#development-branches); the other operations also work from a
   production session when you name the merge request. See the
   [tool reference](https://github.com/keboola/mcp-server/blob/main/TOOLS.md) for the full list.
