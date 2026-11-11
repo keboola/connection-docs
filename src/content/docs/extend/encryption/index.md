@@ -16,6 +16,8 @@ Decryption occurs solely during the serialization of configuration to the Docker
 configuration file. The decrypted data are stored on the Docker host drive and are promptly
 deleted after the container's completion. The component code exclusively accesses the decrypted data.
 
+<!-- Reference-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
+
 ## UI Interaction
 
 When saving arbitrary configuration data, if a key is prefixed with the `#` character, the associated value is automatically encrypted.

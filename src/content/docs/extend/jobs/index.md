@@ -301,3 +301,7 @@ that usually come up alongside it:
 Component jobs are not the only asynchronous operations. [Storage jobs](https://api.keboola.com/?service=storage),
 created for instance by [asynchronous imports](https://api.keboola.com/?service=storage)
 and exports, follow the same idea with their own details.
+
+---
+
+**Next:** [Encryption →](/extend/encryption/)

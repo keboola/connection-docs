@@ -1,6 +1,7 @@
 ---
 title: Code Pattern Quick Start
 slug: 'extend/component/code-patterns/tutorial'
+description: 'Build a code pattern component on top of the component quick start, test its generate action through the API and attach it to a transformation.'
 ---
 
 
@@ -9,6 +10,8 @@ Their behavior is specified in their  [interface](/extend/component/code-pattern
 
 The instructions below refer to the general [component quick start](/extend/component/tutorial/), 
 highlighting the steps specific to code patterns.
+
+<!-- How-to-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ## Creating Component
 First, follow the common steps for [creating a component](/extend/component/tutorial/):

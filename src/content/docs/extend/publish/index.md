@@ -1,6 +1,7 @@
 ---
 title: Publish Component
 slug: 'extend/publish'
+description: 'Request publication of a component in the Developer Portal and meet the review rules for its name, descriptions, icon, configuration schema and error handling.'
 redirect_from:
     - /extend/registration/checklist/
     - /extend/registration/
@@ -20,6 +21,8 @@ That being said, any Keboola user can use any component, unless
 If you have not yet created your component, please go through the [tutorial](/extend/component/tutorial/), which will
 navigate you through creating an account in the [Developer Portal](https://components.keboola.com/) and
 [initializing the component](/extend/component/tutorial/).
+
+<!-- How-to-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ## Publishing Component
 A non-published component can be used without limitations, but it is not offered in the Keboola UI. It can only be used via
@@ -122,3 +125,7 @@ the **Component Limits**.
 ### Checklist
 
 Before requesting to publish a component, please check all rules using [this checklist](/extend/publish/checklist).
+
+---
+
+**Next:** [Checklist →](/extend/publish/checklist/)
