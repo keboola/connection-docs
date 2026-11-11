@@ -1,6 +1,5 @@
 ---
 title: "Part 5: Ad-Hoc Data Analysis"
-lastUpdated: 2026-08-05
 slug: 'tutorial/ad-hoc'
 ---
 

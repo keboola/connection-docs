@@ -1,6 +1,5 @@
 ---
 title: "Part 4: Flow Automation"
-lastUpdated: 2023-12-23
 slug: 'tutorial/automate'
 ---
 

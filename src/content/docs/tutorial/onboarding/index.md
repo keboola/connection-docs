@@ -1,6 +1,5 @@
 ---
 title: Keboola Platform Onboarding
-lastUpdated: 2026-06-03
 slug: 'tutorial/onboarding'
 ---
 

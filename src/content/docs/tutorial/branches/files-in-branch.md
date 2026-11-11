@@ -1,6 +1,5 @@
 ---
 title: Working with Files in Branch
-lastUpdated: 2026-03-18
 slug: 'tutorial/branches/files-in-branch'
 ---
 

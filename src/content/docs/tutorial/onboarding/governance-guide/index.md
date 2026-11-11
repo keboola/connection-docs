@@ -1,6 +1,5 @@
 ---
 title: Keboola Governance Guide
-lastUpdated: 2024-02-01
 slug: 'tutorial/onboarding/governance-guide'
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Part 3: Writing Data"
-lastUpdated: 2023-12-23
 slug: 'tutorial/write'
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Streamlit apps
-lastUpdated: 2026-07-27
 slug: 'data-apps/streamlit'
 description: Build and manage Streamlit apps in Keboola — a Python-only framework for quick data tools.
 redirect_from:

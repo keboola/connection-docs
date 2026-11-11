@@ -1,6 +1,5 @@
 ---
 title: Working with Tables in Branch
-lastUpdated: 2026-03-18
 slug: 'tutorial/branches/tables-in-branch'
 ---
 

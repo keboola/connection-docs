@@ -1,6 +1,5 @@
 ---
 title: Keboola Getting Started Tutorial
-lastUpdated: 2026-06-03
 slug: 'tutorial'
 redirect_from:
   - /getting-started/

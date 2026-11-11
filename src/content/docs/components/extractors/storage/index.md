@@ -1,6 +1,5 @@
 ---
 title: Storage Data Source Connectors
-lastUpdated: 2026-08-04
 slug: 'components/extractors/storage'
 redirect_from:
     - /extractors/storage/

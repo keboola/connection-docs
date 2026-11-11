@@ -1,6 +1,5 @@
 ---
 title: Using a Workspace
-lastUpdated: 2026-02-19
 slug: 'tutorial/manipulate/workspace'
 ---
 

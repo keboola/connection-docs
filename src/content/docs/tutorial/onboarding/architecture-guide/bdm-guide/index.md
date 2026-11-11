@@ -1,6 +1,5 @@
 ---
 title: Business Data Model Guide
-lastUpdated: 2024-02-08
 slug: 'tutorial/onboarding/architecture-guide/bdm-guide'
 ---
 

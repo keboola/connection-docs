@@ -11,6 +11,7 @@
     "astro": "astro",
     "gen:sidebar": "node scripts/convert-nav.mjs",
     "check:cli": "node scripts/check-cli-reference.mjs",
+    "test": "node --test scripts/*.test.ts",
     "gen:ogimage": "node scripts/make-og-image.mjs",
     "gen:lastupdated": "node scripts/gen-last-updated.mjs",
     "check:lastupdated": "node scripts/gen-last-updated.mjs --check"
