@@ -10,6 +10,8 @@ description: 'Run the optional kbagent Web UI — a local browser dashboard for 
 
 Prefer clicking to typing? [kbagent](/cli/) ships an optional **Web UI** — a local browser dashboard over the same projects and data the CLI manages. It runs on your machine, talks only to your Keboola stacks, and boots already authenticated from your kbagent config.
 
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Start it
 
 The Web UI needs the server extras. Install (or reinstall) kbagent with them, then serve:
@@ -48,3 +50,5 @@ The Web UI is handy for browsing and monitoring at a glance. For scripting, mult
 ---
 
 That's the tour. Jump back to the [CLI overview](/cli/) or dive into a [how-to guide](/cli/workflows/).
+
+**Next:** [Troubleshooting →](/cli/troubleshooting/)

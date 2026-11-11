@@ -1,6 +1,7 @@
 ---
 title: Snowflake Transformation
 slug: 'transformations/snowflake-plain'
+description: 'Write Snowflake SQL transformations in Keboola, with their query limits, abort variable, backend sizes, case sensitivity, data types and timestamp handling.'
 redirect_from:
   - /transformations/snowflake/
 ---

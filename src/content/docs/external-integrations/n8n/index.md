@@ -1,6 +1,7 @@
 ---
 title: n8n Integration
 slug: 'external-integrations/n8n'
+description: 'Install the Keboola node in self-hosted n8n, connect it with a Storage API token, and build workflows that read from or write to Keboola tables.'
 ---
 
 
@@ -10,6 +11,8 @@ Connect Keboola with n8n to automate workflows, trigger data pipelines, and inte
 [n8n](https://n8n.io) is an open-source workflow automation tool. With the Keboola integration for n8n, you can orchestrate data pipelines, move data between systems, and embed Keboola into your broader automation ecosystem.
 
 In this guide, you'll learn how to set up the Keboola node in n8n, connect it to your project, and start building workflows.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prerequisites
 

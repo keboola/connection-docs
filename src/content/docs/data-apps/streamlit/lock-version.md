@@ -17,6 +17,8 @@ This page applies to [Streamlit](/data-apps/streamlit/) apps only. New apps run 
 
 This guide explains how to lock package versions in Streamlit applications in Keboola, covering both deployment methods: from code and from a Git repository.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Why lock package versions?
 
 Locking package versions is essential for:
@@ -168,3 +170,7 @@ These apply to both deployment methods:
 - **Test locally:** verify the app works with the locked versions locally before deploying to Keboola.
 - **Match environments:** use the same Python version locally as Keboola to prevent version mismatches.
 - **Document:** keep track of why specific versions are pinned to help future maintenance.
+
+---
+
+**Next:** [Streamlit design guide →](/data-apps/streamlit/design-guide/)

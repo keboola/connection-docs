@@ -1,6 +1,7 @@
 ---
 title: Keboola User Documentation
 slug: ''
+description: 'Start here to find the Keboola overview, the getting started tutorial, support, and the main sections of the Keboola user documentation.'
 ---
 
 Welcome to the Keboola documentation—a comprehensive resource offering step-by-step guidance and reference information to help users
