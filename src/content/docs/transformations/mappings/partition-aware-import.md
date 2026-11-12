@@ -1,10 +1,10 @@
 ---
-title: Cut what incremental loads read with partition-aware import (BigQuery)
+title: Reduce the BigQuery cost of incremental loads with partition-aware import
 slug: 'transformations/mappings/partition-aware-import'
 sidebar:
   label: Partition-Aware Import
 description: 'Make incremental loads into a large partitioned BigQuery table read and bill only the partitions the new rows touch: requirements, setup and how to check it is used.'
-search_keywords: [partition-aware import, partitioned table, BigQuery partitions, incremental load cost, deduplication]
+search_keywords: [partition-aware import, partitioned table, BigQuery partitions, partition pruning, bytes processed, incremental load cost, deduplication]
 ---
 
 On BigQuery, partition-aware import makes an incremental load deduplicate only against the partitions the new rows
