@@ -1,5 +1,6 @@
 ---
 title: Account Management
+description: Account management allows you to configure your own account.
 slug: 'management/account'
 ---
 

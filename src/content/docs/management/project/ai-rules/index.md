@@ -1,5 +1,6 @@
 ---
 title: AI Rules
+description: The AI Rules section allows users to define specific instructions for AI functionality within Keboola platform.
 slug: 'management/project/ai-rules'
 ---
 

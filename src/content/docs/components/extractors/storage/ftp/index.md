@@ -1,5 +1,6 @@
 ---
 title: FTP 
+description: The FTP data source connector loads a single, or multiple CSV files from FTP, FTPS and SFTP servers, and stores them in Keboola Storage.
 slug: 'components/extractors/storage/ftp'
 redirect_from:
     - /extractors/storage/ftp/

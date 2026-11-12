@@ -1,5 +1,6 @@
 ---
 title: Security & Privacy
+description: Kai is designed with enterprise security in mind. This page explains how your data is protected.
 slug: 'kai/security-and-privacy'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Login
+description: Use the Login authentication to send a one-time login request to obtain temporary credentials for authentication of all the other API requests.
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/login'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/login/

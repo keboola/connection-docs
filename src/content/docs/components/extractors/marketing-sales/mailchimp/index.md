@@ -1,5 +1,6 @@
 ---
 title: Mailchimp
+description: The Mailchimp data source connector uses the Mailchimp API to extract data from mailing lists sent by the Mailchimp service.
 slug: 'components/extractors/marketing-sales/mailchimp'
 redirect_from:
     - /extractors/marketing-sales/mailchimp/

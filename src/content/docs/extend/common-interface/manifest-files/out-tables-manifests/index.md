@@ -1,5 +1,6 @@
 ---
 title: /data/out/tables manifests
+description: An output table manifest sets options for transferring a table to Storage. The following examples list available manifest fields; all of them are optional.
 slug: 'extend/common-interface/manifest-files/out-tables-manifests'
 ---
 

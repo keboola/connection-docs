@@ -1,5 +1,6 @@
 ---
 title: Running Jobs in Parallel
+description: All components that support configuration rows — typically data source and destination connectors — can optionally run their row jobs in parallel.
 slug: 'components/running-jobs-in-parallel'
 ---
 

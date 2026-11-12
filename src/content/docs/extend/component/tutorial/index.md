@@ -1,5 +1,6 @@
 ---
 title: Component Quick Start
+description: 'Create a Hello, World! component: register it, set up a deployment account and CI, then build it and run it in Keboola.'
 slug: 'extend/component/tutorial'
 redirect_from:
     - /extend/docker/quick-start/

@@ -1,5 +1,6 @@
 ---
 title: Exasol
+description: Send tables from Keboola Storage to an Exasol database and set how each table loads.
 slug: 'components/writers/database/exasol'
 redirect_from:
     - /writers/database/exasol/

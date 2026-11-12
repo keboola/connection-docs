@@ -1,5 +1,6 @@
 ---
 title: Bearer Token Authentication
+description: Bearer token authentication sends a token in the Authorization header of each API request.
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/bearer_token'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/bearer_token/

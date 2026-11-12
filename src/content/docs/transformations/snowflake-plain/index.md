@@ -1,5 +1,6 @@
 ---
 title: Snowflake Transformation
+description: 'Run SQL transformations in Snowflake: limits, aborting a run, dynamic backends, and best practices for case sensitivity, data types and timestamps.'
 slug: 'transformations/snowflake-plain'
 redirect_from:
   - /transformations/snowflake/

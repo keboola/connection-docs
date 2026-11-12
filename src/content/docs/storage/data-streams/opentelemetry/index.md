@@ -1,5 +1,6 @@
 ---
 title: OpenTelemetry (OTLP) Data Streams
+description: OpenTelemetry is an open-source observability framework that captures three types of signals from your web apps, APIs, and services.
 slug: 'storage/data-streams/opentelemetry'
 ---
 

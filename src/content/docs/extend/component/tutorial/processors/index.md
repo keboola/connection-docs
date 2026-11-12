@@ -1,5 +1,6 @@
 ---
 title: Processors
+description: 'Add processors to a component configuration — optional pre- and post-processing steps that save you writing the same handling into every component.'
 slug: 'extend/component/tutorial/processors'
 ---
 

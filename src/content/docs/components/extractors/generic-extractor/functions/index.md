@@ -1,5 +1,6 @@
 ---
 title: Functions
+description: Functions are simple pre-defined functions that allow you to add extra flexibility when needed.
 slug: 'components/extractors/generic-extractor/functions'
 redirect_from:
     - /extend/generic-extractor/functions/

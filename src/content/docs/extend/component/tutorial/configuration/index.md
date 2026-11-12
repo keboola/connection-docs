@@ -1,5 +1,6 @@
 ---
 title: Configuration
+description: Pass configuration parameters to your component, read them in the source code, and give them a form in the UI.
 slug: 'extend/component/tutorial/configuration'
 ---
 

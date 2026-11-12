@@ -1,5 +1,6 @@
 ---
 title: Generic Writer
+description: Generic Writer is a Keboola component that allows you to send any type of HTTP requests with or without data to arbitrary HTTP endpoints.
 slug: 'components/writers/generic-writer'
 redirect_from:
     - /extend/generic-writer/

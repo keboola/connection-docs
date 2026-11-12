@@ -1,5 +1,6 @@
 ---
 title: Okta
+description: Fetch users, user types and devices from Okta, in backfill mode or incrementally.
 slug: 'components/extractors/other/okta'
 redirect_from:
     - /extractors/other/okta/

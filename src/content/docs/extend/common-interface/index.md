@@ -1,5 +1,6 @@
 ---
 title: Common Interface
+description: 'The contract between your component and Keboola: input and output folders, the configuration file, manifests and environment variables.'
 slug: 'extend/common-interface'
 ---
 

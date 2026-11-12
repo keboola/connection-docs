@@ -1,5 +1,6 @@
 ---
 title: GoodData
+description: This data destination connector sends tables into a GoodData project.
 slug: 'components/writers/bi-tools/gooddata'
 redirect_from:
     - /writers/bi-tools/gooddata/

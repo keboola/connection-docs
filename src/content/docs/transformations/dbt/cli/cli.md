@@ -1,5 +1,6 @@
 ---
 title: dbt CLI
+description: 'Develop dbt transformations locally with the Keboola CLI: set up the project, run, test and debug models, and use workspaces.'
 slug: 'transformations/dbt/cli'
 ---
 

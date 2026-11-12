@@ -1,5 +1,6 @@
 ---
 title: Google Data Usage Policy
+description: Keboola, our platform, is the host of smaller application components that interact with various Google APIs and services.
 slug: 'overview/google-data-policy'
 ---
 

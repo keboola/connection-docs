@@ -1,5 +1,6 @@
 ---
 title: SFTP
+description: This data destination connector allows you to write tables and files to a remote SFTP server.
 slug: 'components/writers/storage/sftp'
 redirect_from:
     - /writers/storage/sftp/
