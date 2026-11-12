@@ -2131,6 +2131,152 @@ Delete a branch metadata entry by its numeric ID.
 | `--yes` / `-y` |  | Skip confirmation prompt |
 | `--branch` `<str>` |  | Branch ID or "default" for the main branch |
 
+## `merge-request`
+
+Merge requests: merge a development branch into production with review (Branches 2.0, non-SOX)
+
+### `kbagent merge-request list`
+
+List the project's merge requests, newest first.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--state` `<str>` |  | Show only merge requests in this state (client-side filter). Accepted: approved, canceled, closed, development, in_development, in_merge, in_review, merged, published, rejected |
+
+### `kbagent merge-request detail`
+
+Show one merge request: readiness, blockers, reviewers, change log, conflicts.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+| `--activity-log` |  | Include the merge request's activity log |
+
+### `kbagent merge-request conflicts`
+
+List the configurations changed on both sides (computed live by the backend).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+
+### `kbagent merge-request diff`
+
+Three-way diff of one conflicting configuration, classified per path.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+| `--component-id` `<str>` | yes | Component ID |
+| `--config-id` `<str>` | yes | Configuration ID |
+| `--format` `<str>` |  | short (long values elided) | full (print every value whole) |
+| `--output` `<path>` |  | Write the resolution candidate (your branch's content, ready to edit) to this file; hand it back with `merge-request resolve --resolved @FILE` |
+
+### `kbagent merge-request create`
+
+Open a merge request from a development branch into production.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--title` `<str>` | yes | Merge request title |
+| `--branch` `<int>` |  | Source dev branch ID (default: the active branch set via `branch use`) |
+| `--description` `<str>` |  | Description (on update: an empty string clears it) |
+| `--reviewer-id` `<int>` |  | Reviewer user ID (repeatable; ids from `project member-list`). On update the given set REPLACES the current reviewers -- it never appends |
+| `--external-id` `<str>` |  | Free-form correlation id, e.g. a ticket (max 255 chars) |
+
+### `kbagent merge-request update`
+
+Change a merge request's title, description, reviewers or external id.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+| `--title` `<str>` |  | Merge request title |
+| `--description` `<str>` |  | Description (on update: an empty string clears it) |
+| `--reviewer-id` `<int>` |  | Reviewer user ID (repeatable; ids from `project member-list`). On update the given set REPLACES the current reviewers -- it never appends |
+| `--external-id` `<str>` |  | Free-form correlation id, e.g. a ticket (max 255 chars) |
+
+### `kbagent merge-request request-review`
+
+Send the merge request for review (destructive: it moves the MR toward production).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+
+### `kbagent merge-request approve`
+
+Add your approval (destructive: the last approval is what a merge waits for).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+
+### `kbagent merge-request request-changes`
+
+Send the merge request back to development; existing approvals are removed.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+| `--reason` `<str>` |  | Why (max 1000 characters) |
+
+### `kbagent merge-request auto-merge`
+
+Arm or disarm automatic merging of this merge request (destructive).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+| `--strategy` `<str>` | yes | immediately | scheduled | none. `immediately` and `scheduled` ARM: once the merge request is approved, the backend merges it into production on its own -- no `merge` call involved. `none` disarms |
+| `--at` `<str>` |  | When to auto-merge (ISO 8601); required with --strategy scheduled |
+| `--yes` / `-y` |  | Skip confirmation prompt |
+
+### `kbagent merge-request merge`
+
+Merge the merge request into production and delete its source branch.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+| `--yes` / `-y` |  | Skip confirmation prompt |
+
+### `kbagent merge-request resolve`
+
+Resolve one conflicting configuration (destructive: it removes a merge blocker).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` |  | Project alias (default: KBAGENT_PROJECT, then the `project use` pin, then the sole project) |
+| `--merge-request-id` / `--id` `<int>` |  | Merge request ID. Omit to use the merge request of --branch, or of the active branch (`branch use`) |
+| `--branch` `<int>` |  | Dev branch ID whose merge request to use (default: the active branch set via `branch use`). Mutually exclusive with --merge-request-id |
+| `--component-id` `<str>` | yes | Component ID |
+| `--config-id` `<str>` | yes | Configuration ID |
+| `--take` `<str>` |  | ours (keep your branch's content) | theirs (adopt production's) | delete. Mutually exclusive with --resolved |
+| `--resolved` `<str>` |  | A hand-authored resolution: JSON inline, @file, or - for stdin. Start from `merge-request diff --output FILE`; the body must carry name, description, isDisabled, configuration and rows (rebase REPLACES the whole configuration) |
+| `--resolved-file` `<path>` |  | Read the hand-authored resolution JSON from a file (- for stdin) |
+| `--change-description` `<str>` |  | Version message for the rebased configuration |
+
 ## `workspace`
 
 Workspace lifecycle for SQL debugging
