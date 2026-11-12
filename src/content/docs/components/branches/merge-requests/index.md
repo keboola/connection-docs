@@ -146,8 +146,18 @@ in your branch.
 
 ![Screenshot - Three-way merge conflict resolution](/components/branches/merge-requests/figures/conflict-resolution-3way.png)
 
-Alternatively, use **Pull from Prod** in the branch switcher to bring the current production state into
-your branch, reconcile the affected configurations yourself, and then submit the merge request again.
+### Which options work in which state
+
+Production can change at any time before the merge, so a conflict can also appear after the request was
+sent for review or approved. What you can use depends on the state of the request:
+
+- **Resolve** and **Keep production version** work in every state, including **In Review** and
+  **Ready to Merge**. They update only the conflicting configuration in your branch.
+- **Pull from Prod** and editing configurations yourself need a writable branch. While the request is
+  **In Review** or **Ready to Merge**, the branch is read-only. To make it writable again, have a reviewer
+  **Reject** the request, or **Cancel Request** and submit a new one when you are done. Then use
+  **Pull from Prod** in the branch switcher, reconcile the affected configurations, and submit the merge
+  request again.
 
 ## After a Merge
 
@@ -172,15 +182,20 @@ The same flow is available outside the UI:
   approve, request changes, resolve conflicts, and merge.
 - **MCP Server** — the [merge request tools](/ai/mcp-server/#available-tools) list, create, review, approve,
   and merge requests and resolve their conflicts. They appear only in projects with Branches 2.0. Anyone can
-  read merge requests; creating or updating a request, requesting or giving a review, resolving conflicts, and
-  merging require the **Admin** or **Share** [project role](/management/project/users/#user-roles). Creating a
+  read merge requests. With a Storage API token, creating or updating a request, requesting or giving a review,
+  resolving conflicts, and merging require the **Admin** or **Share**
+  [project role](/management/project/users/#user-roles). With OAuth sign-in, the MCP server does not check the
+  role and your permissions in the project apply. Creating a
   request needs a session scoped to the
   [development branch](/ai/mcp-server/#development-branches); the other operations also work from a
   production session when you name the merge request. See the
   [tool reference](https://github.com/keboola/mcp-server/blob/main/TOOLS.md) for the full list.
-- **Keboola Agent CLI** — `kbagent merge-request` offers the same workflow from the command line, for
-  example `kbagent merge-request create --title "..."` to open a request for the current branch and
-  `kbagent merge-request merge` to merge it. Run `kbagent merge-request --help` for the full list, or see
+- **Keboola Agent CLI** — `kbagent merge-request` offers the same workflow from the command line. The
+  request is opened for the current branch: the one you pinned with `kbagent branch use`, or the one you
+  pass with `--branch <id>`. Without either, `create` has no source branch. A typical run:
+  `kbagent merge-request create --title "..."` opens the request, `kbagent merge-request request-review`
+  sends it for review, a reviewer runs `kbagent merge-request approve` where approvals are required, and
+  `kbagent merge-request merge` merges it. Run `kbagent merge-request --help` for the full list, or see
   the [kbagent repository](https://github.com/keboola/cli).
 
 ## Requiring Review (Branch Protection)

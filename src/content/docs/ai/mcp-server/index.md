@@ -257,7 +257,7 @@ Don't worry about remembering command names — your AI client handles that. Jus
 - **Semantic layer** – Explore the project's semantic models and validate queries against them. See [Semantic Layer](/ai/semantic-layer/).  
 - **Jobs** – Start, monitor, and debug execution flows.  
 - **Flows** – Create and manage flows (including conditional flows) that orchestrate your components.  
-- **Merge requests** – Create, review, approve, and merge [merge requests](/components/branches/merge-requests/) for development branches, and resolve their conflicts. Available in projects with Branches 2.0; write operations require the Admin or Share project role.  
+- **Merge requests** – Create, review, approve, and merge [merge requests](/components/branches/merge-requests/) for development branches, and resolve their conflicts. Available in projects with Branches 2.0. With a Storage API token, write operations require the Admin or Share project role; with OAuth sign-in, your permissions in the project apply.  
 - **Data Apps** – Create, deploy, and manage Streamlit and Python/JS apps.  
 - **Search & Discovery** – Find components, configurations, and objects across your project.  
 - **Project & OAuth** – Read project info and set up OAuth authorizations for components.  
