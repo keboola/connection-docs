@@ -205,3 +205,43 @@ CREATE TABLE "ctas_table" (
 ) AS SELECT * FROM "typed_table";
 ```
 
+## Data Types in the Table Definition
+The column data types of a [typed table](/storage/tables/data-types/) are part of the same table definition as the
+descriptions. For each column the definition holds the `type`, `nullable` and, where they apply, `length` and
+`default`, next to the column's `basetype`. The table detail returns them, and the
+[table list](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list) returns them
+with `include=definition`. The stored type is the one the backend reports: a column created as `INT` on Snowflake
+is returned with `type` `NUMBER`, `length` `38,0` and `basetype` `INTEGER`.
+
+- **Non-typed tables:** the definition of a non-typed table carries descriptions only. Type information for
+  such a table exists only as `KBC.datatype.*` [metadata](#metadata), for example `KBC.datatype.basetype`.
+- **Aliases:** an alias that synchronizes its columns with its source shows the types of the source table for
+  the columns of the alias.
+- **Table list:** for some tables the table list returns `definition` as `null`. Use the table detail for those
+  tables; the [table list reference](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list)
+  lists the cases.
+
+### Changing Column Definitions
+The data type of a typed column cannot be changed. On Snowflake and BigQuery you can
+[update the table definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition)
+to change some column properties. The table shows which alterations each backend supports:
+
+| Alteration | Snowflake | BigQuery |
+|---|---|---|
+| Change the data type | No | No |
+| Increase text length | Yes | Yes |
+| Decrease text length | No | No |
+| Increase numeric precision | Yes | Yes |
+| Decrease numeric precision | No | No |
+| Change numeric scale | No | Yes |
+| Make a column nullable | Yes | Yes |
+| Make a column required | Yes | No |
+| Add a default | No | Yes |
+| Change a default | No | Yes |
+| Drop a default | Yes | Yes |
+
+### Relation to KBC.datatype Metadata
+For a typed table the definition is the source of truth for the types. Storage still keeps `KBC.datatype.*` copies
+under the `storage` provider for compatibility, and `KBC.datatype.*` rows written by other providers do not change
+the definition of a typed table. New integrations should read the types from the `definition` of the table, not from
+the metadata.
