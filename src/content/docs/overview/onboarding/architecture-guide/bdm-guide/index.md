@@ -147,7 +147,7 @@ can have the same tag / one object can have many tags).
 #### Transitivity
 Transitivity ensues when there are multiple paths from a child (or object on the right of the board) to a parent (or object somewhere more to the left 
 of the board). Those are generally undesirable signs of situations where an object represents multiple different entities. Drill in to find out why 
-they’re popping up. The only situation when we (reluctantly) let them pass is when there is NO scenario in hell where these multiple paths could lead to different
+they’re popping up. We let them pass only when there is no scenario in which these multiple paths could lead to different
 “parents.” That usually means we have either self-reference or a hidden M: N problem.
 
 #### Missing links
@@ -195,9 +195,8 @@ This basic template works in most subscription contexts (think Software as a Ser
 ![BDM Subscription](/overview/onboarding/architecture-guide/bdm-guide/bdm-subscription.png)
 
 ### Customer Relationship Management
-That title looked better than “CRM,” but that’s what it means. Various CRM systems are notorious for how they take simple concepts and make the data very
-complicated. Again, that means a trap and future headache if you try to take the data as-is without a bit of thought given to it beforehand (looking at you, 
-Tableau SFDC connector!).
+CRM systems are notorious for turning simple concepts into complicated data. Take that data as-is, without thinking it through first,
+and you’ve set a trap for your future self.
 
 ![CRM](/overview/onboarding/architecture-guide/bdm-guide/crm-bdm.png)
 
