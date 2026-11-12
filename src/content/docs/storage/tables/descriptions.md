@@ -97,7 +97,7 @@ Storage table and column descriptions are written to the tables loaded into Snow
 [workspaces](/workspace/): as a Snowflake `COMMENT` or a BigQuery description. SQL clients, the MCP server and Kai
 therefore see the same context as Storage.
 
-- A [`COPY` load](/transformations/mappings/#loading-type-snowflake-and-bigquery) writes the descriptions when it
+- A [`COPY` load](/transformations/mappings/input/#loading-type-snowflake-and-bigquery) writes the descriptions when it
   creates the workspace table. An incremental load into an existing table keeps the descriptions it already has.
 - A `CLONE` load keeps the descriptions of the source table on Snowflake and gets the Storage descriptions on BigQuery.
 - The input mapping can set its own table or column description for a workspace load, in the input mapping editor

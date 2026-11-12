@@ -178,7 +178,7 @@ Once mapped, the table icon in the Working Tables section changes to **OM** (Out
 ### Writing Directly to Storage (Direct Mode)
 
 On Snowflake and BigQuery workspaces, you can skip the copy step altogether and let the workspace write straight
-into a Storage table using [Direct Mode output mapping](/transformations/mappings/#direct-mode-output-mapping).
+into a Storage table using [Direct Mode output mapping](/transformations/mappings/direct-mode/).
 
 1.  In the **Working Tables** section, click the three dots next to a working table and select
     **Create writable table**.
@@ -196,7 +196,7 @@ the mapping, which also revokes the workspace's write access.
 :::caution
 In Direct Mode, you are responsible for deduplication, data types, and error handling — Keboola performs no
 validation on direct writes. Read the
-[good and bad practices](/transformations/mappings/#good-practices) before using it in production.
+[good and bad practices](/transformations/mappings/direct-mode/set-up/#good-practices) before using it in production.
 :::
 
 ### Saving Queries as a Transformation

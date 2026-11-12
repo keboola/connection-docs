@@ -1,83 +1,76 @@
 ---
-title: Input Mapping
+title: Input mapping options
 slug: 'transformations/mappings/input'
+sidebar:
+  label: Input Mapping
 description: 'Input mapping options: the tables and files a transformation reads, filters, data types, load types (CLONE, COPY, VIEW), read-only input mapping and the _timestamp column.'
+search_keywords: [input mapping, load type, clone, read-only input mapping, _timestamp, changed in last, data filter]
 ---
 
-The input mapping decides which Storage tables and files a transformation gets and how they are loaded. For what mapping is and why it exists, see [How input and output mapping work](/transformations/mappings/).
+Every option of a transformation's input mapping: which Storage tables and files it reads and how they are loaded.
+For what mapping is and why it exists, see [How input and output mapping work](/transformations/mappings/); for the
+results side, see [Output mapping options](/transformations/mappings/output/).
 
-## Input Mapping
-Both [Storage tables](/storage/tables/) and [Storage files](/storage/files/) can be used in the input mapping of a transformation.
-The common first choice is to use an input mapping with tables.
+<!-- Reference-type page. Split from the former single mappings page (PRDCT-376), text carried over from main 2026-11-12. -->
 
-### Table Input Mapping
-Depending on the transformation backend, the table input mapping process can do the following:
+## Table input mapping
 
-- **Database Staging**: Copy the selected tables to *tables* in a newly created *database* schema. If you have not selected any tables and [read-only input mappings](/transformations/mappings/#read-only-input-mapping) are enabled, you can access them automatically in the workspace. In this case the tables are not copied.
-- **File Staging**: Export the selected tables to *CSV files* and copy them to a designated staging *Storage* 
-(not to be confused with a [file mapping](/transformations/mappings/#file-input-mapping), as we're still working with tables).
-
-Depending on the transformation types, you can either build your transformations working 
-with database tables or with CSV files. Furthermore, the CSV files can be placed locally with the transformation
-script or they can be placed on a remote storage such as [Amazon S3](https://aws.amazon.com/s3/) or 
-[Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/).
-The supported database type is [Snowflake](https://www.snowflake.com/).
+A table input mapping copies the selected Storage tables to the transformation's staging area, as database tables or
+as CSV files depending on the backend (see [Input mapping](/transformations/mappings/#input-mapping)). If you have not
+selected any tables and [read-only input mappings](#read-only-input-mapping) are enabled, you can access the tables
+automatically in the workspace. In this case the tables are not copied.
 
 ![Table Input mapping](/transformations/mappings/table-input-mapping.png)
 
 *See an example of [setting up an input mapping](/getting-started/transform/#set-it-up) in our tutorial — in the **UI** tab.*
 
-#### Options
+### Options
 
 :::caution
 When using table with native data types, following options will not be available.
 :::
 
-
-- **Source** — Select a table or a bucket in Storage as the source table for your transformation. If you select 
-a bucket, it is the equivalent of selecting all tables currently present in the bucket. It does not automatically 
+- **Source** — Select a table or a bucket in Storage as the source table for your transformation. If you select
+a bucket, it is the equivalent of selecting all tables currently present in the bucket. It does not automatically
 add future tables to the selection.
-- **File name** / **Table Name** — Enter the destination name of the mapping that is the *Source* table/file 
-name to be used inside the transformation. This is an arbitrary name you'd like to use as a reference for the table 
-inside the transformation script (it fills in automatically, but it can be changed). For **File Staging**, it is a good 
-idea to add the `.csv` extension. For **Database Staging**, the table name is automatically quoted, which means you can 
+- **File name** / **Table Name** — Enter the destination name of the mapping that is the *Source* table/file
+name to be used inside the transformation. This is an arbitrary name you'd like to use as a reference for the table
+inside the transformation script (it fills in automatically, but it can be changed). For **File Staging**, it is a good
+idea to add the `.csv` extension. For **Database Staging**, the table name is automatically quoted, which means you can
 use an arbitrary name. It also means that they may be case sensitive, for instance, if the destination is in Snowflake staging.
-- **Columns** — Select specific columns if you do not want to import them all; 
+- **Columns** — Select specific columns if you do not want to import them all;
 this saves processing time for larger tables.
-- **Changed in last** — If you use [incremental processing](/storage/tables/#incremental-processing), 
-this comes in handy; import only rows changed or created within the selected time period. 
+- **Changed in last** — If you use [incremental processing](/storage/tables/#incremental-processing),
+this comes in handy; import only rows changed or created within the selected time period.
 The supported time dimensions are `minutes`, `hours`, and `days`.
-- **Data filter** — Filter source rows to the rows that match this single-column multiple-values filter. 
+- **Data filter** — Filter source rows to the rows that match this single-column multiple-values filter.
 When used together with *Changed in last*, the returned rows must match both conditions.
 - **Data types** — Configure [data types](#data-types).
 
-If the terms *source* and *destination* look confusing, consult the image below. We always use them in a specific
-context. That means input mapping destination is the same file as the source for a transformation script.
+### Data types
 
-![Source vs. destination](/transformations/mappings/source-destination.svg)
-
-#### Data types
 :::caution
 When selecting user defined data types the transformation jobs can take longer than usual because new typed table will be created in the background before materializing in output into final output table
 :::
 
 The data types option allows you to configure settings of data types for the destination table. Data types are applicable only
 for destinations in **database staging**. Select *User defined* to configure data types for individual columns. The types
-are pre-configured with data types stored in the [table metadata](/storage/tables/data-types/). The **Type**, **Length**, 
-and **Nullable** options define the destination table structure in the staging database. 
+are pre-configured with data types stored in the [table metadata](/storage/tables/data-types/). The **Type**, **Length**,
+and **Nullable** options define the destination table structure in the staging database.
 
-The option **Convert empty values to null** adds additional processing which is particularly important for non-string columns. 
-All data in Storage tables are stored in string columns, and empty values (be it true `NULL` values, or empty strings) are stored 
-as empty strings. When converting such values back to, for example, `INTEGER` or `TIMESTAMP`, they have to be converted to true 
+The option **Convert empty values to null** adds additional processing which is particularly important for non-string columns.
+All data in Storage tables are stored in string columns, and empty values (be it true `NULL` values, or empty strings) are stored
+as empty strings. When converting such values back to, for example, `INTEGER` or `TIMESTAMP`, they have to be converted to true
 SQL `NULL` values to be successfully inserted.
 
 ![Data Types Setting](/transformations/mappings/data-types.png)
 
-The pre-set data types are only suggestions, you can change them to your liking. You can also use the three dots menu to bulk set 
-the types. Beware, however, that if a column contains values not matching the type, the entire load (and transformation) will 
-fail. In such a case, it's reasonable to revert to `VARCHAR` types -- for example, by setting **Data types** to **None**. 
+The pre-set data types are only suggestions, you can change them to your liking. You can also use the three dots menu to bulk set
+the types. Beware, however, that if a column contains values not matching the type, the entire load (and transformation) will
+fail. In such a case, it's reasonable to revert to `VARCHAR` types -- for example, by setting **Data types** to **None**.
 
-#### Loading type (Snowflake and BigQuery)
+### Loading type (Snowflake and BigQuery)
+
 When working with large tables, it may become important to understand how the tables are loaded into a staging
 database. Keboola uses three loading strategies — `COPY`, `CLONE`, and `VIEW` — plus an `AUTO` mode (the default)
 that picks the best available strategy for each table:
@@ -117,6 +110,8 @@ strategy per table with the **Load type** option above.
 Keboola is gradually disabling this feature across all BigQuery projects, with the rollout completing by **July 15, 2026**.
 After that, `CLONE` becomes the default load type on BigQuery for everyone.
 :::
+<!-- VERIFY(Nikita): the rollout date above (July 15, 2026) has passed; check whether the feature is gone everywhere and
+     the note can say CLONE is the BigQuery default, or whether the rollout slipped. -->
 
 This might present a dilemma when loading huge tables. A logical approach when trying to speed up loading a large table would
 be setting data types and adding filters to copy only the necessary ones. You might find out, however, that at some point, it's
@@ -136,39 +131,8 @@ Clone table:
 The `CLONE` mapping will execute almost instantly for a table of any size (typically under 10 seconds)
 as it physically does not move any data.
 
-On the other hand, you can use a [read-only input mapping](/transformations/mappings/#read-only-input-mapping) which makes all the buckets and tables available with read access,
-so there is no need to clone the tables into a new schema. You can simply read from these buckets and tables in the transformation.
-This function is automatically enabled in transformations.
+### _timestamp system column
 
-##### Read-only input mapping
-
-*Note: You must be using [new transformations](/transformations/) to see this feature.*
-
-When **read-only input mappings** are enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets).
-Alias tables are materialized as database VIEWs and are fully accessible via read-only input mappings — including filtered aliases and aliases from linked buckets.
-   
-There is no need to set anything for a **read-only input mapping** in **transformations**, all tables in Storage are automatically accessible in the transformation.
-This also applies to linked buckets. *Note that buckets and tables belong
-to another project, so you need to access the tables using the fully qualified identifier, including the database and schema, in the source project.*
-
-Users can enable or disable read-only access to the storage in **user workspaces** and the **Snowflake data destination**. If read-only access is disabled, users must define an input mapping as they typically do.
-
-![Storage](/transformations/mappings/storage.png)
-
-You have read access to all the tables in your project's Storage directly on the underlying backend. However, this means you need to use the internal ID of a bucket (`in.c-main` instead of `main` as you see in the UI). 
-
-![Read Only Input Mapping in transformation](/transformations/mappings/read-only-transformation.png)
-
-In the transformation code (Snowflake), we select from the table **"in.c-main"."users"** and create a new table: `create table "cities" as select "city" from "in.c-main"."users";`.
-Depending on the backend, the SQL format is different. More info regarding access to individual tables depending on the backend can be found in the documentation of those individual backends ( [Snowflake](/transformations/snowflake-plain/#bucket-objects-for-read-only-input-mapping), [BigQuery](/transformations/bigquery/#bucket-objects-for-read-only-input-mapping) ).
-
-As you can see, a **read-only input mapping** allows you to read a table created in Storage directly in the transformation.
-
-![Read Only Input Mapping Storage](/transformations/mappings/read-only-trasnformation-storage.png)
-
-
-
-#### _timestamp system column
 A cloned table is an exact copy of the source table, including the `_timestamp` system column.
 This column is used internally by Keboola for comparison with the value of the *Changed in last* filter.
 
@@ -190,25 +154,57 @@ in the input mapping to exclude it automatically, or drop it manually:
 
 In Snowflake:
 
-	`ALTER TABLE "my-table" DROP COLUMN "_timestamp";`
+```sql
+ALTER TABLE "my-table" DROP COLUMN "_timestamp";
+```
 
 In BigQuery:
 
-	`ALTER TABLE my-table DROP COLUMN _timestamp;`
+```sql
+ALTER TABLE my-table DROP COLUMN _timestamp;
+```
 
 The `_timestamp` column is not present on tables loaded using the copy method.
 
-### File Input Mapping
-The file input mapping process exports the selected files from [file Storage](/storage/files/) and copies them to the 
+## Read-only input mapping
+
+*Note: You must be using [new transformations](/transformations/) to see this feature.*
+
+When **read-only input mappings** are enabled, you automatically have read access to all buckets and tables in the project (this also applies to linked buckets).
+Alias tables are materialized as database VIEWs and are fully accessible via read-only input mappings — including filtered aliases and aliases from linked buckets.
+
+There is no need to set anything for a **read-only input mapping** in **transformations**, all tables in Storage are automatically accessible in the transformation.
+This also applies to linked buckets. *Note that buckets and tables belong
+to another project, so you need to access the tables using the fully qualified identifier, including the database and schema, in the source project.*
+
+Users can enable or disable read-only access to the storage in **user workspaces** and the **Snowflake data destination**. If read-only access is disabled, users must define an input mapping as they typically do.
+
+![Storage](/transformations/mappings/storage.png)
+
+You have read access to all the tables in your project's Storage directly on the underlying backend. However, this means you need to use the internal ID of a bucket (`in.c-main` instead of `main` as you see in the UI).
+
+![Read Only Input Mapping in transformation](/transformations/mappings/read-only-transformation.png)
+
+In the transformation code (Snowflake), we select from the table **"in.c-main"."users"** and create a new table: `create table "cities" as select "city" from "in.c-main"."users";`.
+Depending on the backend, the SQL format is different. More info regarding access to individual tables depending on the backend can be found in the documentation of those individual backends ( [Snowflake](/transformations/snowflake-plain/#bucket-objects-for-read-only-input-mapping), [BigQuery](/transformations/bigquery/#bucket-objects-for-read-only-input-mapping) ).
+
+As you can see, a **read-only input mapping** allows you to read a table created in Storage directly in the transformation.
+
+![Read Only Input Mapping Storage](/transformations/mappings/read-only-trasnformation-storage.png)
+
+## File input mapping
+
+The file input mapping process exports the selected files from [file Storage](/storage/files/) and copies them to the
 staging Storage. Depending on the transformation, this can be either a drive local to the transformation
-or a remote storage such as [Amazon S3](https://aws.amazon.com/s3/) or 
-[Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/). A file input mapping cannot operate 
-with storage tables, but it comes in handy for processing files that cannot be converted to tables (binary files, 
+or a remote storage such as [Amazon S3](https://aws.amazon.com/s3/) or
+[Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/). A file input mapping cannot operate
+with storage tables, but it comes in handy for processing files that cannot be converted to tables (binary files,
 malformed files, etc.) or, for example, to work with pre-trained models that you can use in a transformation.
 
 ![File Input Mapping](/transformations/mappings/file-input-mapping.png)
 
-#### Options
+### Options
+
 - **Tags** — [tags](/storage/files/#uploading-file) used to select files.
 - **Changed Since** — the time range for selecting files. Either a static range (e.g. `30 minutes`) or *Since last successful run* for incremental processing (see below). With a static range, a file must satisfy **both** the tags **and** the range to be selected.
 - **Query** *(deprecated, do not use)* — legacy option for a customized [Elastic query](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-query-string-query.html#query-string-syntax).
@@ -218,7 +214,7 @@ malformed files, etc.) or, for example, to work with pre-trained models that you
 *Processed Tags* and *Query* are deprecated and not compatible with [development branches](/getting-started/branches/). New configurations should not use them, and the UI no longer offers them. Existing configurations continue to work; affected projects will be contacted before any breaking change.
 :::
 
-#### Incremental file processing
+### Incremental file processing
 
 Incremental processing is active when **Changed Since** is set to *Since last successful run*. In this mode, the configuration stores a reference to the newest file matching the specified tags. The next run continues with files newer than that reference, so the transformation is automatically fed only the files that have not yet been processed.
 

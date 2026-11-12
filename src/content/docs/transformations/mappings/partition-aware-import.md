@@ -1,19 +1,23 @@
 ---
-title: Partition-Aware Import
+title: Speed up incremental loads with partition-aware import (BigQuery)
 slug: 'transformations/mappings/partition-aware-import'
-description: 'Make incremental loads into a large partitioned BigQuery table read and bill only the partitions the new rows touch: requirements, setup and how to check it.'
+sidebar:
+  label: Partition-Aware Import
+description: 'Make incremental loads into a large partitioned BigQuery table read and bill only the partitions the new rows touch: requirements, setup and how to check it is used.'
+search_keywords: [partition-aware import, partitioned table, BigQuery partitions, incremental load cost, deduplication]
 ---
 
-On BigQuery, partition-aware import makes an incremental load deduplicate only against the partitions the new rows belong to, instead of reading the whole destination table.
+On BigQuery, partition-aware import makes an incremental load deduplicate only against the partitions the new rows
+belong to, so BigQuery reads (and bills) those partitions instead of the whole destination table. It is an option of
+the [table output mapping](/transformations/mappings/output/#table-output-mapping).
 
-#### Partition-aware import (BigQuery)
+<!-- How-to-type page. Split from the former single mappings page (PRDCT-376), text carried over from main 2026-11-12. -->
+
+## How it works
 
 On an incremental load with a primary key, Keboola deduplicates the new rows against the destination table. On a large
-table, this step reads the whole destination table even when the new rows touch only a few days. **Partition-aware
-import** limits the deduplication to the destination partitions that the new rows actually belong to, so BigQuery
-reads (and bills) only those partitions.
-
-##### How it works
+table, this step reads the whole destination table even when the new rows touch only a few days. With partition-aware
+import:
 
 1. Before deduplication, Keboola reads the distinct values of the destination's partitioning column from the loaded data.
 2. It adds a filter on that column to the deduplication statement, for example
@@ -23,7 +27,10 @@ reads (and bills) only those partitions.
 
 The data loaded into the table is the same as without the option; only the amount of data BigQuery reads changes.
 
-##### Requirements
+It helps most when each load touches a small part of a large table, typically daily or hourly loads that write only
+recent dates. If a load contains rows spread across most partitions, the filter saves little.
+
+## Before you start
 
 The option takes effect only when **all** of the following conditions are met. If any of them is not met, the load
 runs as before, without an error.
@@ -42,7 +49,9 @@ runs as before, without an error.
   deduplication runs without the filter. This does not lift BigQuery's own limit on the number of partitions a single
   job can modify.
 
-##### Setting it up
+## Set it up
+
+**Goal:** an incremental output mapping whose deduplication reads only the partitions it loads into.
 
 1. **Partition the destination table.** Partitioning is set when a table is created; it cannot be added to an existing
    table.
@@ -72,12 +81,9 @@ runs as before, without an error.
    }
    ```
 
-##### When it helps
+**Result:** the next incremental load reads only the destination partitions that its rows belong to.
 
-It helps most when each load touches a small part of a large table, typically daily or hourly loads that write only
-recent dates. If a load contains rows spread across most partitions, the filter saves little.
-
-##### Checking that it is used
+## Check that it is used
 
 - The parameters of the storage import job and the `storage.tableImportStarted` and `storage.tableImportDone` events of
   the job show `partitionAwareImport: true`. This only confirms that the option was enabled for the load, not that the

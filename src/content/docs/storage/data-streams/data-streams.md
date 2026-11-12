@@ -68,7 +68,7 @@ If you need unique rows (e.g., one row per event ID), it is up to you to decide 
 deduplication is required and to handle it **downstream**: create a
 [deduplication transformation](/storage/tables/incremental-loading/#primary-key-deduplication) that reads the stream
 table and writes the result to a new table where the
-[output mapping](/transformations/mappings/#output-mapping) primary key performs the
+[output mapping](/transformations/mappings/output/) primary key performs the
 deduplication on load. Schedule it to run regularly with a [conditional flow](/flows/).
 [Kai](/kai/) can help you build both the transformation and the scheduled flow.
 :::
