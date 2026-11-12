@@ -971,8 +971,8 @@ nav.sidebar {
 /* A link that leaves the docs opens in a new tab (src/integrations/external-links.mjs).
    The arrow says so; screen readers get the hidden "(opens in a new tab)" text
    instead, so the arrow itself is announced as nothing. */
-.sl-markdown-content a.kbc-external::after,
-.prereqs a.kbc-external::after {
+/* Prereqs boxes render inside .sl-markdown-content, so this covers them too. */
+.sl-markdown-content a.kbc-external::after {
   content: '\2197';
   content: '\2197' / '';
   display: inline-block;
