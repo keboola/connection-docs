@@ -1,6 +1,7 @@
 ---
 title: Google BigQuery
 slug: 'components/writers/database/bigquery'
+description: 'Write Keboola tables to a Google BigQuery dataset with a service account JSON key, then set table names, column data types and full or incremental load.'
 redirect_from:
     - /writers/database/bigquery/
 
@@ -9,6 +10,8 @@ redirect_from:
 
 
 This data destination connector sends data to a [Google BigQuery](https://cloud.google.com/bigquery/) dataset.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Create Service Account
 To access and write to your BigQuery dataset, you need to set up a Google Service Account. 
