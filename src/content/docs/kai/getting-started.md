@@ -1,6 +1,7 @@
 ---
 title: Getting Started with Kai
 slug: 'kai/getting-started'
+description: Enable Kai in your project, open the chat with keyboard shortcuts, and send your first prompts.
 ---
 
 
@@ -11,7 +12,7 @@ Kai is **generally available** to all users in supported stacks.
 
 ### Enabling Kai
 
-Every user can see the Kai button in their project (on supported stacks). To enable Kai:
+Every user can see the Kai button in their project. To enable Kai:
 
 - **Organization Admins** can enable the feature directly from the chat screen when first clicking the Kai button.
 - **Other users** need to ask their Organization Admin to enable the feature, or [contact Keboola Support](mailto:support@keboola.com) for assistance.
@@ -23,8 +24,9 @@ Click the **Kai Agent** button in your project's top bar, or use keyboard shortc
 
 | Shortcut | Action |
 |----------|--------|
-| **A** | Open the chat window (shows recent conversation) |
+| **A** | Open or close the chat window (opens with your recent conversation) |
 | **Shift + A** | Open a new chat |
+| **]** | Switch the open chat between the side panel and the expanded view |
 
 ![Kai open in a project](/kai/kai-open.png)
 
@@ -79,7 +81,7 @@ Each request shows the exact parameters Kai will use.
 
 You have three options:
 
-- **Approve** — run this action once.
+- **Approve** — run this action once. Shortcut: **Cmd/Ctrl + Enter**.
 - **Decline** — do not run it.
 - **Always allow** — run it, and stop asking for that tool in future.
 
