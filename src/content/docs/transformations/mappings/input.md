@@ -40,7 +40,7 @@ idea to add the `.csv` extension. For **Database Staging**, the table name is au
 use an arbitrary name. It also means that they may be case sensitive, for instance, if the destination is in Snowflake staging.
 - **Columns** — Select specific columns if you do not want to import them all;
 this saves processing time for larger tables.
-- **Changed in last** — If you use [incremental processing](/storage/tables/#incremental-processing),
+- **Changed in last** — If you use [incremental processing](/storage/tables/incremental-loading/#incremental-processing),
 this comes in handy; import only rows changed or created within the selected time period.
 The supported time dimensions are `minutes`, `hours`, and `days`.
 - **Data filter** — Filter source rows to the rows that match this single-column multiple-values filter.
@@ -137,8 +137,8 @@ A cloned table is an exact copy of the source table, including the `_timestamp` 
 This column is used internally by Keboola for comparison with the value of the *Changed in last* filter.
 
 The column type differs by backend: `TIMESTAMP_NTZ(9)` on Snowflake and `TIMESTAMP` on BigQuery.
-The value contains the [last change of the row](/storage/tables/#manual-incremental-processing).
-You can use this column to set up [incremental processing](/storage/tables/#incremental-processing),
+The value contains the [last change of the row](/storage/tables/incremental-loading/#manual-incremental-processing).
+You can use this column to set up [incremental processing](/storage/tables/incremental-loading/#incremental-processing),
 i.e., to replace the role of the **Changed in Last** filter in the input mapping (which you can't use with a clone mapping).
 
 **Important: The _timestamp column cannot be imported back to Storage.**
