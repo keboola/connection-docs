@@ -16,11 +16,12 @@ SQL that stays correct without Keboola's deduplication. What Direct Mode is and 
 ## Before you start
 
 - Direct Mode is a **private beta**: ask [Keboola Support](/management/support/) to enable it for your project.
+  <!-- VERIFY(Nikita): same open question as on direct-mode/index.md: the toggle was seen in a new Free Plan project with no Support request. -->
 - The project runs on **Snowflake** or **BigQuery**.
-- The destination table already exists in Storage, in a bucket that is not read-only, external or linked from
-  another project.
+- In a transformation or workspace, the destination table already exists in Storage (the SQL Editor can create it
+  for you). Its bucket must not be read-only, external or linked from another project.
 - On a development branch, the project has [Branched storage](/components/branches/); without it, Direct Mode writes
-  change production data.
+  from a branch change production data on Snowflake.
 
 ## In a transformation
 
@@ -65,6 +66,9 @@ others use the standard copy strategy.
 In a **standalone Snowflake or BigQuery workspace**, open the **Output Mapping** section in the workspace detail,
 add an output, and select **Direct Mode**.
 
+As in a transformation, pick an existing Storage table as the destination, and to change the mode of a mapping,
+delete it and create a new one.
+
 **Result:** the write privileges are granted as soon as you save the mapping, so your very next query can write to
 the table.
 
@@ -86,6 +90,8 @@ the workspace can write to it right away. Use the three-dots menu there to remov
 workspace's write access).
 
 ## Good practices
+
+The examples below use Snowflake syntax.
 
 **Write idempotent SQL.** Because there is no automatic rollback on failure, your SQL should be safe
 to re-run. Use patterns like `MERGE` or `DELETE` + `INSERT` within a transaction:

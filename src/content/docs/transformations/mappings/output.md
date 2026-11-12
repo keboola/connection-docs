@@ -124,4 +124,4 @@ Only the files stored directly in the `out/files/` directory can be mapped, subd
 - **Permanent** - This option makes the file stay in the file Storage, until you delete it manually.
 If unchecked, the target file will be deleted after 15 days.
 
-**Next:** [Speed up incremental loads with partition-aware import →](/transformations/mappings/partition-aware-import/)
+**Next:** [Partition-aware import (BigQuery) →](/transformations/mappings/partition-aware-import/)

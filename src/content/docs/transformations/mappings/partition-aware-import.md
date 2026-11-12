@@ -1,5 +1,5 @@
 ---
-title: Speed up incremental loads with partition-aware import (BigQuery)
+title: Cut what incremental loads read with partition-aware import (BigQuery)
 slug: 'transformations/mappings/partition-aware-import'
 sidebar:
   label: Partition-Aware Import
@@ -58,9 +58,13 @@ runs as before, without an error.
     - New table: create it with [kbagent](/cli/) (`kbagent storage create-table` with `--time-partitioning-type` and
       `--time-partitioning-field`, or the `--range-partitioning-*` options), or with the
       [table definition API](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition)
-      (`timePartitioning` or `rangePartitioning`).
+      (`timePartitioning` or `rangePartitioning`). Always set the partitioning column
+      (`--time-partitioning-field` in kbagent): without it the table is partitioned by ingestion time, which
+      partition-aware import does not support.
     - Existing table: create a partitioned copy with `kbagent storage create-table --source-table-id`, then replace
-      the original with `kbagent storage swap-tables`. See the [kbagent command reference](/cli/commands/).
+      the original with `kbagent storage swap-tables`. The swap always runs in a branch (`--branch`, or the one set
+      by `kbagent branch use`), and aliases are not transferred: they keep pointing at the old position and show
+      the other table's data after the swap. See the [kbagent command reference](/cli/commands/).
 2. **Include the partitioning column in the primary key**, both on the table (`--primary-key` when creating it) and in
    the output mapping. This changes the deduplication: two rows with the same key but a different partitioning value
    (e.g., a different `date`) are kept as two rows.
@@ -81,7 +85,7 @@ runs as before, without an error.
    }
    ```
 
-**Result:** the next incremental load reads only the destination partitions that its rows belong to.
+**Result:** when all the conditions in [Before you start](#before-you-start) are met, the next incremental load reads only the destination partitions that its rows belong to.
 
 ## Check that it is used
 

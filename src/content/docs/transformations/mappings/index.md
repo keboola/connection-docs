@@ -84,7 +84,8 @@ How to address the tables is in
 
 On Snowflake and BigQuery, Keboola loads each input table in one of three ways: `CLONE` moves no data and finishes in
 near-constant time, `COPY` makes a full physical copy, and `VIEW` reads the data live from its source. The default,
-`AUTO`, picks the fastest one the table allows. Filters, data types and incremental loading need `COPY`, so for a
+`AUTO`, picks the best one the table allows (on BigQuery projects that still have the default-`VIEW` feature,
+tables load as `VIEW`). Filters, data types and incremental loading need `COPY`, so for a
 huge table it can be faster to drop them, clone the table and filter inside the transformation. The details are in
 [Loading type](/transformations/mappings/input/#loading-type-snowflake-and-bigquery).
 
