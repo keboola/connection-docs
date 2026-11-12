@@ -1,12 +1,12 @@
 ---
 title: 'Keboola Platform Usage Blueprint'
 slug: 'overview/onboarding/usage-blueprint'
-description: 'Capture who uses Keboola for what, which data flows where, and how success is measured — the document that anchors your platform rollout.'
+description: 'Capture who uses Keboola for what, which data flows where, and how success is measured, in the document that anchors your platform rollout.'
 redirect_from:
   - /tutorial/onboarding/usage-blueprint/
 ---
 
-> Welcome to your personalized Keboola Platform Usage Blueprint Document! 
+> The Keboola Platform Usage Blueprint Document is a template for your organization's own Keboola guidelines.
 > 
 > *This detailed guide helps you create your own documentation, explaining each part and what to include.
 > It's designed to fit your organization's specific needs and values. You'll find helpful notes throughout to make customization easy.
@@ -16,8 +16,8 @@ redirect_from:
 
 
 
-## Getting Access to the Keboola Platform 
-### Keboola Administration
+## Getting access to the Keboola platform 
+### Keboola administration
 > *At the start, choose a few people (usually 2 to 4, depending on how big your organization is) to be your Keboola organization administrators.
 > They'll have the power to set up new Keboola projects and add the first users. It's best to keep this group small.*
 
@@ -55,7 +55,8 @@ To join an existing Keboola project, reach out to the **project owner** directly
 > - Azure North Europe: [https://connection.north-europe.azure.keboola.com/admin/](https://connection.north-europe.azure.keboola.com/admin)
 > - AWS EU: [https://connection.eu-central-1.keboola.com/admin](https://connection.eu-central-1.keboola.com/admin)
 > - AWS US: [https://connection.keboola.com/admin](https://connection.keboola.com/admin)
-> - GCP EU: [https://connection.us-east4.gcp.keboola.com/admin](https://connection.us-east4.gcp.keboola.com/admin)
+> - GCP US: [https://connection.us-east4.gcp.keboola.com/admin](https://connection.us-east4.gcp.keboola.com/admin)
+> - GCP EU: [https://connection.europe-west3.gcp.keboola.com/admin](https://connection.europe-west3.gcp.keboola.com/admin)
 > - Single tenant stack: All relevant information is available within your Production Design document.
 
 Navigate to the login site of the Keboola platform here: [https://connection.keboola.com/admin](https://connection.keboola.com/admin). 
@@ -78,7 +79,7 @@ Or, project owners can remove the terminated user themselves.
 ***Note:** Removing a user from a project will not affect any configurations they set up. 
 All their configurations will remain usable and functional after the user is removed.*
 
-### Project Naming Conventions
+### Project naming conventions
 > *It is a good idea to establish and follow a convention for creating project names so they are clear and show what the project is about.
 > We suggest some of the typical conventions below. See the [Multi-Project Architecture Guide](/overview/onboarding/architecture-guide/)
 > for more on how to name different project levels, stages, etc.*
@@ -94,11 +95,11 @@ In the **Project Name**, we capitalize the first letter of each word, except for
 Here are examples of how we name projects:
 
 - `[10]{Sales}[EU] Financial Reporting`
-- `[00]{Sales} Corporate Rrofiling`
+- `[00]{Sales} Corporate Profiling`
 - `[20]{HR}[GLOBAL] Compensation and Benefits Planning`
 
-## Keboola Project Rules and Principles
-### Managing Project Users
+## Keboola project rules and principles
+### Managing project users
 > *As mentioned before, a project owner is mainly responsible for managing project users. Keboola has different roles for project users.*
 
 The project owner needs to ensure users are added with the right roles. Keboola user roles are documented [here](/management/project/users/#user-roles). 
@@ -107,7 +108,7 @@ Usually, users are invited as project admins or with a sharing role unless they 
 
 To invite or remove a user from your project, follow the steps in the [Keboola documentation](/management/project/users/#inviting-user).
 
-### Naming Conventions
+### Naming conventions
 > *Using naming conventions for all Keboola components is recommended to keep your project well organized, comprehensible, and simpler to manage and navigate.
 > The guidelines below are just suggestions, as there is no universally recognized best practice for naming.*
 
@@ -195,7 +196,7 @@ Here are some tips:
 3. Include links to related objects or other parts of the project, e.g., `Keep in sync with the [original transformation](https://connection.keboola.com/admin/projects/xx/transformations/bucket/1234/transformation/1)`.
 4. Consider mentioning the original owner of the configuration, even though this can be seen in the version history.
 
-### Sharing Data via Data Catalog
+### Sharing data via Data Catalog
 > *This depends on your multi-project architecture. Here’s a guide for a system with multiple project layers.*
 
 Only users with `organization admin` or `share` role permissions can share buckets. 
@@ -220,7 +221,7 @@ In the example below, we use levels 00, 10, 15, and 20 as equivalents to L0, L1,
 **Linking buckets**
 - Buckets from other projects are always in the `IN` stage, prefixed with `SHARED` and a reference to the input project.
 
-### Using Development Branches
+### Using development branches
 > *[Development branches](/components/branches/) are separate areas for independently developing or modifying configurations for a specific purpose.
 > Changes made within a branch become accessible to other branches or projects only after they are merged into production.*
 >
@@ -234,7 +235,7 @@ Run components like data source connectors, applications, and transformations in
 
 Be careful with data destination connectors, as they can still overwrite production data.
 
-## Security Principles
+## Security principles
 > *Include your organization’s specific security principles here. The platform might not directly enforce some,
 > but Organization admins can monitor them using telemetry data.*
 >
@@ -246,10 +247,12 @@ Be careful with data destination connectors, as they can still overwrite product
 - Don’t store sensitive information like passwords, tokens, or keys in plain text in configurations (e.g., don’t use a Python transformation for integration with an API that requires a token authentication).
 - Consult the project owner before using data destination connectors to write data out of projects.
   
-### Admin Project
+### Admin project
 > *For organizations with multiple projects, creating a dedicated admin project is helpful. This is a central hub for administrators to manage
 > and analyze telemetry data. Find more details in the [Keboola Governance Guide](/overview/onboarding/governance-guide/).*
 
 Our admin project link: [https://connection.keboola.com/admin/projects/XXX](https://connection.keboola.com/admin/projects/)
 
 The project extracts the organization's telemetry data and prepares it for visualization and reporting.
+
+**Next:** [Multi-Project Architecture Guide →](/overview/onboarding/architecture-guide/)

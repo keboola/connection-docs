@@ -11,22 +11,22 @@ apps, or transformations, this guide outlines key best practices to improve your
 
 
 
-## Extracting from Data Sources
-### Use the Right Credentials
+## Extracting from data sources
+### Use the right credentials
 When using Keboola's source connectors, correct authorization is important: credentials and connection details for source databases or tokens and API keys for 
 services. It's best to use technical user credentials made just for Keboola integrations to prevent problems with permission, account changes, or password resets 
 that personal credentials might cause.
 
-### Access Data Sources
+### Access data sources
 Make sure Keboola can reach the data sources you want to use. Databases on internal servers or in private clouds might not be accessible by default. In such 
 cases, whitelist Keboola's IP addresses, establish an SSH tunnel (if supported by the Keboola component), or request that Keboola set up a VPN server. Your data 
 source's administrators, owners, and Keboola's support team can solve any access problems.
 
-### Choose What to Extract
+### Choose what to extract
 Before pulling data from sources like MS SQL Server, PostgreSQL, MySQL, Google Analytics, or Facebook Ads, think carefully about what you really need. Don't waste 
 credits. Start with a small batch to check its usefulness before fully replicating your data source's history.
 
-### Fetch and Load Incrementally
+### Fetch and load incrementally
 **Incremental fetching:** Keboola allows data to be fetched in increments, which is useful for large datasets to save time compared to full extractions. This can 
 be done through specific parameters or Keboola’s database connectors.
 
@@ -35,7 +35,7 @@ add new ones. Without a primary key, data is simply appended.
 
 ***Note:** Some connectors handle incremental fetching and loading automatically; it is typically indicated in their configuration UI.*
 
-### Optimize with Parallelization 
+### Optimize with parallelization 
 To improve your pipeline's runtime, consider using parallelization to run multiple configurations at the same time. Keep in mind that parallelization aims 
 to speed up execution rather than save costs, as each job uses credits independently.
 
@@ -57,12 +57,12 @@ While component jobs often interact with Keboola Storage, it's important to note
 limit, but [Storage jobs](/storage/jobs/) do, typically capped at 10 parallel jobs but adjustable through Keboola Support. In environments with many users, 
 component jobs may queue for Storage job availability, affecting runtime.
 
-## Developing a Transformation
-### Set Up Workspaces
+## Developing a transformation
+### Set up workspaces
 Jumping straight into coding within the transformations UI might not be the most efficient approach due to execution overhead. Instead, start with a workspace to 
 develop and test your scripts, moving them to a transformation configuration only when they're ready. This strategy helps optimize credit usage.
 
-### Handle Inputs and Outputs
+### Handle inputs and outputs
 Transformations are executed in isolated workspaces, requiring you to use input mappings to access Keboola Storage data. After running your script, output 
 mappings determine which data returns to Storage. For instance, to run a simple SQL script like:
 
@@ -88,10 +88,10 @@ FROM "MyInputTable";
 ```
 3. Ensure the new table is included in your output mapping and can be loaded into Storage after the transformation runs.
 
-### Snowflake's Case Sensitivity
+### Snowflake's case sensitivity
 Remember, Snowflake treats table names as case-sensitive. Use **double-quotes** to avoid errors, like FROM "MyInputTable" instead of FROM MyInputTable.
 
-### Process Incrementally
+### Process incrementally
 Use incremental processing in both input and output mappings to handle data more efficiently, similar to how you manage data in data source connectors.
 
 **Input mapping increments:** To have your transformation handle data in increments, you need input tables generated using incremental loading. This approach
@@ -104,20 +104,20 @@ Python or R.
 **Output mapping increments:** Similar to data source connectors, you can opt for incremental loading in the output mapping, with or without a primary key. This 
 choice allows for either updating existing records (upserting) or simply adding new records (appending).
 
-### Use Variables
+### Use variables
 Variables are placeholders for values frequently used in your transformation scripts, which is especially useful for common filter conditions.
 By defining a value as a variable, you can easily update it in one spot rather than changing it everywhere it appears. Check out more details on using variables
 [here](/components/variables/).
 
 ***Note:** For complex setups, you can even set variables dynamically through API calls when running components.*
 
-### Reuse Code via Shared Codes
+### Reuse code via shared codes
 Often, you'll find certain code patterns or functions repeated in various transformations for specific tasks. To simplify this, use
 [shared code](/transformations/shared-code/), a feature that lets you store and manage these common
 script segments in one place. Changes to shared codes automatically update in every transformation that uses them, keeping your projects 
 consistent and easier to manage.
 
-### Choose the Backend Size
+### Choose the backend size
 **Snowflake SQL transformations:** Users can choose between small (default), medium, or large Snowflake warehouses, balancing performance against cost. 
 Performance generally scales up with size, but costs do, too. 
 
@@ -127,7 +127,7 @@ reduces runtime. More details on costs can be found [here](/management/project/l
 **Python and R transformations:** The choice of backend size affects the memory available for processing data. A larger backend is often necessary for handling 
 larger datasets or when memory limits are reached rather than for potential speed gains.
 
-### Select Columns Carefully
+### Select columns carefully
 Avoid using `SELECT *` in your queries. Instead, list out the columns you need. Using SELECT * could lead to problems if columns in the database change. 
 Listing columns enhances your query's safety and readability, ensuring you're clear about which data you're using and avoiding issues with your results.
 
@@ -136,8 +136,8 @@ Use development branches for any changes or new additions to ensure a controlled
 secure. For more on development branches, see this [guide](/getting-started/branches/).
 :::
 
-## Automating Your Flow
-### Execute Tasks in Parallel
+## Automating your flow
+### Execute tasks in parallel
 In your Flows, you can streamline processing by grouping multiple tasks within one step, also known as a phase. These tasks then run independently in parallel, 
 enhancing overall efficiency. Each subsequent phase starts only after the previous one completes all its tasks.
 
@@ -147,48 +147,48 @@ If too many tasks are scheduled in a single phase, you may exceed the available 
 is recommended to avoid reaching Storage capacity limits. You can, of course, configure your flows to execute more jobs in parallel. Keboola will then concurrently execute the jobs to the maximum 
 extent possible based on available resources.*
 
-### Handle Failures
-In Flows, failure handling is expressed through [conditions](/flows/#conditions) — branch on task or phase status (success, failure, warning) to run fallback logic, send notifications, or end the flow.
+### Handle failures
+In Flows, failure handling is expressed through [conditions](/flows/#conditions): branch on task or phase status (success, failure, warning) to run fallback logic, send notifications, or end the flow.
 Combined with [automatic retries](/flows/#retry), you can recover from transient errors without manual intervention.
 
-### Set Up Notifications
+### Set up notifications
 Stay on top of your flow's performance by setting up notifications for errors or long run times. Consider using a group email to keep the whole team informed 
 and responsive to any issues.
 
-### Automate Execution
+### Automate execution
 **Scheduling:** Commonly, flows are set to run at specific times. To avoid busy periods in a shared environment, consider scheduling slightly off-peak, 
 like at 0:15 am, for smoother execution.
 
 **Triggers:** Set flows to automatically start when certain Storage tables are updated, which is ideal for managing dependencies across projects. This ensures 
 your projects stay in sync and run efficiently.
 
-## Writing to Data Destinations
+## Writing to data destinations
 Writing data to a destination shares some common practices with data extraction, such as [using the right credentials](#use-the-right-credentials), 
 ensuring [data source accessibility](#access-data-sources), and [using parallelization](#optimize-with-parallelization).
 However, additional factors are crucial in this context.
 
-### Ensure Proper Permissions
+### Ensure proper permissions
 Similar to [extracting data](#extracting-from-data-sources), writing data requires having the right [permissions](#use-the-right-credentials). 
 Often, specific rights are needed, which may not be widely available to all organization members. Errors during data write operations usually 
 indicate permission issues. The Keboola support team is ready to help identify the needed permissions.
 
-### Manage Data Access
+### Manage data access
 When data is written to a destination, you're extending access to users with rights to that destination. It's vital to carefully manage who gets access to ensure 
 data isn't shared with unintended parties.
 
-### Process Incrementally
+### Process incrementally
 Incremental processing, which writes only the changed data since the last execution, is key to efficient data writing. This method is especially useful in Keboola 
 for maintaining performance and resource efficiency. Some database components offer an **Automatic Incremental Load** feature, using an internal state file to 
 track changes and perform upsert operations intelligently.
 
-### Write Data Cautiously
+### Write data cautiously
 Understand the impact of writing data to a destination. While Keboola can easily restore data in case of issues, the same may not be true for the destination. 
 Restoring data at the destination can be difficult or impossible, so proceed with caution to avoid irreversible data loss.
 
-## Job Logs and Error Troubleshooting
+## Job logs and error troubleshooting
 Errors are a common part of development, whether you're experienced or new. Here are some tips for effectively troubleshooting errors.
 
-### Understand Job Logs
+### Understand job logs
 Job logs offer crucial details on job executions, such as who ran the job, when it was run, and how long it took.
 
 **Mapping section:** 
@@ -199,15 +199,15 @@ operation doesn't generate new tables in Keboola.
 **Log details:** 
 This section breaks down each action in the job, helping pinpoint where failures occurred for easier debugging.
 
-### Let AI Explain Errors
+### Let AI explain errors
 Enable **AI Error Explanation** in project settings to understand errors better. It uses AI to simplify error messages, offering direct insights 
 on what to fix.
 
-### Internal and Application Errors
+### Internal and application errors
 If you see the "Internal Error" or "Application Error" messages, contact the Keboola support team. These errors mean deeper issues; our support team 
 will dig into platform logs to help solve them.
 
-### Debug Keboola Jobs
+### Debug Keboola jobs
 Keboola jobs, from data extraction to transformations, often involve moving data to and from Keboola Storage, usually through files like CSVs. To help pinpoint 
 errors, you can turn on Debug Mode in your user settings. This adds an option in component settings for running a debug job, which goes through the job's steps 
 but stops before loading data into Keboola Storage, preventing data mishaps.
@@ -220,3 +220,5 @@ Discover a powerful Keboola feature: access and editing of any configuration's r
 access, simply add /raw to the URL. This advanced option is great for detailed settings, like using processors, providing a versatile way to tailor configurations 
 to your specific needs. Explore /raw mode to unlock enhanced control over your Keboola projects.
 :::
+
+**Next:** [Keboola Governance Guide →](/overview/onboarding/governance-guide/)

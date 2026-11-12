@@ -1,23 +1,21 @@
 ---
 title: 'Multi-Project Architecture Guide'
 slug: 'overview/onboarding/architecture-guide'
-description: 'Choose how to split your work across Keboola projects — vertical, horizontal, split or hybrid designs — and understand the trade-offs of each.'
+description: 'Choose how to split your work across Keboola projects (vertical, horizontal or hybrid split designs) and understand the trade-offs of each.'
 redirect_from:
   - /tutorial/onboarding/architecture-guide/
 ---
 
 
 
-Welcome to the Multi-Project Architecture Guide!
-
 This guide helps you effectively organize your Keboola projects, sharing successful strategies for clients of all sizes. You'll learn about various project 
 setups that meet your organizational needs and gain insights to tailor your Keboola projects for maximum efficiency and success.
 
 :::tip
-For the platform concept behind this — what multi-project architecture is and a worked example — see [Multi-Project Architecture](/catalog/multi-project/).
+For the platform concept behind this (what multi-project architecture is, with a worked example), see [Multi-Project Architecture](/catalog/multi-project/).
 :::
 
-## Single Keboola Project 
+## Single Keboola project 
 A **Keboola project** is the starting point for using the **Keboola Platform**, acting as a self-contained environment for managing access, data pipelines, 
 storage, and processes. It provides a structured framework for distributing tasks and access across teams, ensuring efficient data governance.
 
@@ -42,7 +40,7 @@ Organizations may transition to a **multi-project architecture** within Keboola 
 sophisticated data solution by splitting responsibilities across multiple projects. This approach aligns with modern data management strategies, such as data mesh 
 and democratization, by maintaining integrated yet isolated environments to avoid bottlenecks typically encountered with centralized BI teams.
 
-## Multi-Project Architecture (MPA)
+## Multi-project architecture (MPA)
 MPA is a design strategy that divides data processing tasks among multiple function-specific Keboola projects. It transforms a single-project focus on Extract, Transform, and Load (ETL) processes into a structured data platform, enhancing organizational data management. This approach clarifies the role, simplifies access control, and supports tailored data usage and governance.
 
 These are the key benefits of MPA:
@@ -56,12 +54,12 @@ on a dedicated marketing project.
 6. **Scalability and Future Growth:** Prepares the architecture for scalable expansion and adaptability.   
 7. **Responsive Architecture Design:** Enables agile adjustments to evolving data management requirements.
    
-### Assessing MPA Necessity
+### Assessing MPA necessity
 To determine if MPA suits your organization, consider the following:
 
 1. **Do you want to separate data extraction?**  
 Streamline data acquisition with a dedicated project (e.g., L0 or Staging project) to enhance collaboration.
-2. **Do you have diverse data sources?**  ne
+2. **Do you have diverse data sources?**  
 Process varying data sources (e.g., marketing, CRM, sales, accounting) in distinct projects for clearer management.
 3. **Do you have unique team requirements?**  
 Cater to different teams, branches, or country-specific needs with isolated projects.
@@ -101,13 +99,13 @@ organizing projects around key domains, ensuring consolidation at appropriate le
 See our [**BDM methodology guide**](/overview/onboarding/architecture-guide/bdm-guide/) for more information.
 :::
 
-## MPA Design Strategies
+## MPA design strategies
 MPA designs typically follow a vertical, horizontal, or hybrid approach:
 
 ![Vertical and Horizontal Split Design](/overview/onboarding/architecture-guide/split-design.png)
 <div align="center">Vertical and Horizontal Split Design</div>
 
-### Vertical Split Design
+### Vertical split design
 The vertical split design assigns distinct pipeline stages to specific teams, typically reflecting the shift from core engineering/IT to business functions 
 within an organization. 
 
@@ -141,25 +139,25 @@ by the data team.*
 ![Vertical Split Design](/overview/onboarding/architecture-guide/vertical-design.png)
 <div align="center">Vertical Split Design Example</div>
 
-**L0 – Acquisition**
+**L0: Acquisition**
 - Extracts data from Salesforce, Zendesk, MySQL database, Google Analytics, and Exponea.
 - Performs initial data quality checks to ensure that extracted data is in the expected shape and quality.
 
-**L1 – Core Processing**
+**L1: Core Processing**
 - Integrates L0 data into a single model for further preparation and processing.
 - Cleans and processes data for analysis.
 
-**L2 – Data Marts**
+**L2: Data Marts**
 - Hosts projects for creating data marts used by businesses and other users.
 - Makes data accessible through visualization and reporting tools.
 
-**LX – Telemetry & Governance**
+**LX: Telemetry & Governance**
 - Maintains a dedicated project for analyzing Keboola’s telemetry and metadata for a comprehensive platform management and oversight.
 
-### Horizontal Split Design
+### Horizontal split design
 The horizontal split design segments data pipelines and infrastructure by organizational units, such as departments and circles, enabling tailored data processing 
 for distinct use cases. This setup allows each unit to oversee its data workflow independently using specialized knowledge.
-For example, the marketing departement can exclusively maintain a marketing data catalog, taking advantage of their domain knowledge.
+For example, the marketing department can exclusively maintain a marketing data catalog, taking advantage of their domain knowledge.
 
 **Horizontal split design is ideal when:**
 1. **Entities operate independently:** Suitable for units functioning autonomously with complete control over their data workflows.
@@ -198,7 +196,7 @@ For example, the marketing departement can exclusively maintain a marketing data
 
 ***Note**: This approach excels when units can independently handle their data, aligning with specific departmental requirements and domain knowledge.*
 
-### Hybrid Split Design
+### Hybrid split design
 The hybrid split design combines vertical and horizontal approaches within the data environment, offering a versatile solution for organizations.
 It enables vertical segregation of data extraction and integration from processing and consumption while also allowing the horizontal split of one or more 
 vertical layers to create isolated environments for individual business units, departments, or teams.
@@ -225,3 +223,5 @@ vertical layers to create isolated environments for individual business units, d
 
 ![Hybrid Split Design](/overview/onboarding/architecture-guide/hybrid-design.png)
 <div align="center">Hybrid Split Design Example</div>
+
+**Next:** [Business Data Model Guide →](/overview/onboarding/architecture-guide/bdm-guide/)

@@ -8,20 +8,18 @@ redirect_from:
 
 
 
-Welcome to the Business Data Model (BDM) Guide!
-
 This guide offers a thorough overview of BDM, helping you apply it to your data management strategies. If you are a newcomer or looking to enhance
 your existing practices, here is the essential information and actionable tips to maximize the benefits of BDM in your operations.
 
-## What Is BDM?
+## What is BDM?
 BDM is fundamentally conceptual, distinct from database designs, entity relationship diagrams (ERD), or database performance considerations. 
 It operates on a higher level, focusing on the abstract representation of a business's data landscape without being tied to specific technologies.
 
 A BDM describes a business in the data language, independent of the underlying technology. It defines and describes “objects,”
-“properties,” and “values” that are key to the business operation, providing language that simplifies any steps that follow – including decisions about
+“properties,” and “values” that are key to the business operation, providing language that simplifies any steps that follow, including decisions about
 technical implementations and integrations.
 
-## Why BDM and What Happens Without It?
+## Why BDM and what happens without it?
 Adopting BDM follows the principle of “slow down to speed up.” We have often seen what happens when an eager analyst just “looks 
 at the data,” sees what’s in there, and builds reporting logic on top of it. That’s how data and logic silos are created, and being left to its devices, 
 this approach creates a maze of isolated solutions that becomes incredibly unwieldy as the complexity grows.
@@ -29,13 +27,13 @@ this approach creates a maze of isolated solutions that becomes incredibly unwie
 One can argue that BDM is nothing new. The terms Logical Data Model or Conceptual Data Model have been used over time, and consulting companies are
 selling their building services. While the concept is similar, the technique differs, making it available for any business. 
 
-By keeping the process simple, we remove the excuse why not to do it. The temptations presented by self-serve BI tools – they just start working with data 
-approach – are showing their shortcomings just a little later. We see multiple definitions of the same objects, disagreements on the meaning of fairly simple 
+By keeping the process simple, we remove the excuse why not to do it. The temptations presented by self-serve BI tools (the “just start working with data” 
+approach) are showing their shortcomings just a little later. We see multiple definitions of the same objects, disagreements on the meaning of fairly simple 
 concepts and words, business logic baked into code all over the place, and pieces of technology serving single “critical” processes that are nearly impossible to 
 retire later.
 
-## Principles of Building a BDM
-### What You Need
+## Principles of building a BDM
+### What you need
 First of all, you need the right people. BDM is way too important to be left just to the techies. Bring an executive responsible for the area you’re describing,
 and ideally, their boss. Having someone technically inclined from the company helps, mainly for buy-in during later stages. However, their presence is not
 as essential at the end of the day.
@@ -47,7 +45,7 @@ While we always digitize the model once it’s at least initially laid out, and 
 engaging in person. Often, the first workshop happens on-site, and we follow up with one or two rounds that can be remote, 
 using the digital drawing to collaborate.
 
-### Step 0 – Round Up
+### Step 0: Round up
 In complex organizations and processes, the BDM gets complicated. An e-commerce operation that wants to cover everything from marketing to logistics and
 fulfillment in one go can easily end up with 90+ data objects. Define the area you will cover in the first round and keep it contained.
 
@@ -60,12 +58,12 @@ pain and low-hanging fruit opportunity to deliver value (often marketing and att
 It's inevitable that during the following phases, the team will encroach on some of those “no-go” areas. Just call it out, put the Post-it on the side, 
 or mark it visibly as something that no more time is being spent on.
 
-### Step 1 – Storm
+### Step 1: Storm
 We will create as many “objects” as possible during this step. Remember that whatever existing systems are in place or planned are 
 irrelevant. Don’t limit yourself to “what we have data about today,” etc. Work diligently to get your audience out of that mindset 
 (sometimes difficult with a technical audience, but necessary).  
 
-Let’s stick to the e-commerce example. Everyone grabs a marker and a stack of Post-its (use the same color of Post-its for everyone – may we suggest yellow?). 
+Let’s stick to the e-commerce example. Everyone grabs a marker and a stack of Post-its (use the same color of Post-its for everyone; may we suggest yellow?). 
 Then we’ll start talking about the business. It rolls quite simply. Someone says that there is “Order” and writes it down. Someone else says that 
 “Order has Lines,” on those are “Products” and they belong to “Brands”. Three Post-its are used. Brainstorming rules apply, everything goes, and
 there’s no editing or arguing, only adding. 
@@ -82,7 +80,7 @@ within the boundaries laid out in Step 0. If you’re struggling to get going at
 - Who are the key stakeholders?
 - What types of customers exist in the business?
 
-### Step 2 – Edit & Define
+### Step 2: Edit & define
 Bring on the whiteboard. Hopefully, it’s clear by this point. Start putting things on. First, the location doesn’t matter, but with practice, you will recognize
 patterns (and you’ll put “customer-like” objects to the left and “transaction-like” objects to the right, which will save time later. Whenever putting 
 a new Post-it on the board, go through these three steps:
@@ -96,11 +94,11 @@ Is this an object (going to the left) or a “transaction” (going to the right
 and possibly a numerical value. A transaction is not an object; it's an interaction between a few (“order” is an object; it exists independently). 
 
 “Order receipt” is a transaction, an event, or something that happened to/with the “order” object (we received it). Some objects will lose that status in this step. 
-For example, if you have an “eye color” Post-it because it came out of the Storming stage – is it an object or a property of one? Or “Price,” 
+For example, if you have an “eye color” Post-it because it came out of the Storming stage, is it an object or a property of one? Or “Price,” 
 is that an object or a value?
 
 This is when the two other colors of the Post-its become handy. Use one for “properties” and one for “key values”. When demoting an object to a property or value, 
-just rewrite the name on a Post-it of the appropriate color, discard the original, and place the new one on the board near the object it's related to – property 
+just rewrite the name on a Post-it of the appropriate color, discard the original, and place the new one on the board near the object it's related to: property 
 on the left, value on the right of it.
 
 #### Rename & clarify
@@ -108,7 +106,8 @@ Except for very simple use cases and very small teams, inevitably, there will be
 on what a particular object is. Our favorite example is a “customer” which often suffers from both problems.
 
 We may have Post-its saying “customer,” or “contact,” or “person,” or “subscriber,” or “e-mail.” They may or may not be the same thing. 
-Can a “person” . Still, chances are all this can (and should) be reduced into one or two objects and perhaps a property.
+Can a “person” have more “e-mails”? Is “customer” only a “type” or a “status” of a person? The nuances depend on the particular business, its habits 
+and terminology. Still, chances are all this can (and should) be reduced into one or two objects and perhaps a property.
 
 The second issue is a definition. Who is a customer? Someone who is in our system? Someone who placed an order? Someone who paid us? Someone who took a delivery?
 Often, every department has its understanding of some terms. This is the time to clarify and define. 
@@ -122,14 +121,14 @@ points of view. It's very easy to “steamroll” the participants and insert th
 At the end of this step, we have clear groups and well-defined objects on the board. The reality is that we often find out during this step 
 (and any of the following ones) that we forgot an object. Can we add it? Absolutely. Go ahead. More is better.
 
-### Step 3 – Organize
+### Step 3: Organize
 ![Organize](/overview/onboarding/architecture-guide/bdm-guide/post-its-step3.png)
 
 At this point, we have more or less logically arranged groups of Post-its on the whiteboard. The goal of this step is to get from a more or less logically
 arranged model to an accurate, highly arranged model. This means just moving the groups around a bit and drawing arrows between them.
 Take a higher-altitude view and ignore the properties and values for a moment. How do the major objects relate to each other?
 
-#### Parent – child
+#### Parent-child
 Most relationships will be parent-child or, in data relations, one-to-many A.K.A. 1:M. Different words for the same thing. 
 A customer has (or can have) multiple orders, but each order belongs just to one customer. Each shipment belongs to a particular order, but one order can be
 shipped in multiple packages. An order has multiple products on it. But each product… Wait a minute.
@@ -151,13 +150,13 @@ they’re popping up. We let them pass only when there is no scenario in which t
 “parents.” That usually means we have either self-reference or a hidden M: N problem.
 
 #### Missing links
-Sometimes, we get stuck with a relationship that is 1:M, which is all good, but something is missing. That is usually exactly what is happening - we’re missing 
+Sometimes, we get stuck with a relationship that is 1:M, which is all good, but something is missing. That is usually exactly what is happening: we’re missing 
 an object. Either we forgot about it, or it was never defined in the first place; it's not uncommon for us to name such an object and just see the “aha” moment on 
 the faces of the customers, even though we’re the outsiders and they (think they) know their business inside out. The customer may say: “But we don’t have data 
 for that!” Don’t let that derail you. If it exists, we can infer its existence, and sooner or later, a change will happen to the business providing the 
 data because it makes sense.
 
-### Step 4 – Test
+### Step 4: Test
 ![Test](/overview/onboarding/architecture-guide/bdm-guide/post-its-step4.png)
 
 Testing the BDM (congratulations, you have version 0.1 on the board by now) is purely language and mental exercise. Throw business questions at it, 
@@ -165,13 +164,13 @@ and answer them using the language on the board while pointing to the objects yo
 times Quantity on Order Lines that refer to Products Attributed to that Category. If you’re missing an object, something is wrong. If you’re not 
 following an arrow (against the direction is permissible) at any given point, something is wrong. Question it and drill in.
 
-### Step 5 – Iterate
+### Step 5: Iterate
 So, we’re reasonably happy with it. The question is: what is missing? Depending on the complexity, time of day, quality of coffee served, etc., you may 
 get an enthusiastic response or an exhausted “looks good to me” answer. If the former, go at it; if the latter, let people sleep on it and reconvene roughly 
 a week later.
 
-## Examples & Templates
-### Using Templates
+## Examples & templates
+### Using templates
 What follows is a section of templates or patterns that tend to repeat themselves. After all, there are only so many ways to describe invoice or 
 recurring revenue business. Avoid the temptation of just using them as they are without going through the process. What makes a business unique is how they 
 think about their business, and forcing standards or templates means we’re reducing them to a clone, denying them (and ourselves) the chance of 
@@ -181,27 +180,29 @@ Knowing the examples doesn’t make you an expert. The ability to create your ow
 involvement in it have a value of their own, even if you end up with a 1:1 image of a template. It's not about creating the BDM; it’s about making the 
 customer understand and buy into it.
 
-### Survey Data
+### Survey data
 Most survey systems and their API suffer from the age of Excel. The data coming out is not very useful in structure and requires heavy transformation, 
 even though the BDM is rather simple. It’s questions and answers. As such, it creates a great example of the usefulness of BDM. We would design ourselves in 
 the corner very quickly, trying to work with the data as is.
 
 ![Survey Data](/overview/onboarding/architecture-guide/bdm-guide/bdm-survey.png)
 
-### Subscription (Recurring Revenue) Business
+### Subscription (recurring revenue) business
 Regardless of the service or widget, there is a benefit in looking at most businesses through the lens of “recurring revenue.” 
 This basic template works in most subscription contexts (think Software as a Service, magazine subscription, gym membership, and everything in between).
 
 ![BDM Subscription](/overview/onboarding/architecture-guide/bdm-guide/bdm-subscription.png)
 
-### Customer Relationship Management
+### Customer relationship management
 CRM systems are notorious for turning simple concepts into complicated data. Take that data as-is, without thinking it through first,
 and you’ve set a trap for your future self.
 
 ![CRM](/overview/onboarding/architecture-guide/bdm-guide/crm-bdm.png)
 
-### e-Commerce – Marketing Side
+### E-commerce: marketing side
 An e-commerce operation is a data-heavy affair. As mentioned above, we can carve out the orders, the marketing, 
 or the logistics side. Each of them is a project of its own. This one is looking at the marketing side.
 
 ![eCommerce](/overview/onboarding/architecture-guide/bdm-guide/bdm-ecommerce-marketing.png)
+
+**Next:** [Cheat Sheet: Best Practices →](/overview/onboarding/cheat-sheet/)
