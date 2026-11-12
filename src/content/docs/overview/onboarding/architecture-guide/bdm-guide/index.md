@@ -166,7 +166,7 @@ times Quantity on Order Lines that refer to Products Attributed to that Category
 following an arrow (against the direction is permissible) at any given point, something is wrong. Question it and drill in.
 
 ### Step 5 – Iterate
-So, we’re reasonably happy with it. The question is: what is missing? Depending on the complexity and how long the session has run, you may 
+So, we’re reasonably happy with it. The question is: what is missing? Depending on the complexity, time of day, quality of coffee served, etc., you may 
 get an enthusiastic response or an exhausted “looks good to me” answer. If the former, go at it; if the latter, let people sleep on it and reconvene roughly 
 a week later.
 
@@ -195,8 +195,8 @@ This basic template works in most subscription contexts (think Software as a Ser
 ![BDM Subscription](/overview/onboarding/architecture-guide/bdm-guide/bdm-subscription.png)
 
 ### Customer Relationship Management
-CRM systems often store simple concepts in complicated data structures. If you load that data as-is, without designing the model first,
-the complexity follows you into every transformation and report.
+CRM systems are notorious for turning simple concepts into complicated data. Take that data as-is, without thinking it through first,
+and you’ve set a trap for your future self.
 
 ![CRM](/overview/onboarding/architecture-guide/bdm-guide/crm-bdm.png)
 
