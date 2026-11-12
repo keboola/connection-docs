@@ -1,6 +1,7 @@
 ---
 title: SSH Proxy Configuration
 slug: 'components/extractors/generic-extractor/configuration/ssh-proxy'
+description: 'Set up an SSH proxy for Generic Extractor to reach HTTP endpoints in a private network: proxy server, SSH key pair and the sshProxy configuration.'
 redirect_from:
     - /extend/generic-extractor/configuration/ssh-proxy/
 ---

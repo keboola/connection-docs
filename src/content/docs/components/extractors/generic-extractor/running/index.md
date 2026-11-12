@@ -1,6 +1,7 @@
 ---
 title: Running Generic Extractor
 slug: 'components/extractors/generic-extractor/running'
+description: 'Turn on debug mode to see every request Generic Extractor sends, run it locally in Docker with a config.json, and run the documented examples.'
 redirect_from:
     - /extend/generic-extractor/running/
 ---
@@ -155,3 +156,7 @@ To run the examples:
 - Or run all examples by executing `./run-samples.sh`.
 
 If you want to create your own example, follow the instructions in the [mock server repository](https://github.com/keboola/ex-generic-mock-server/blob/master/README.md#creating-examples).
+
+---
+
+**Next:** [Publishing Component →](/components/extractors/generic-extractor/publish/)

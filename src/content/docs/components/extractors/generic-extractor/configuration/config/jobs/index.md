@@ -1,6 +1,7 @@
 ---
 title: Jobs
 slug: 'components/extractors/generic-extractor/configuration/config/jobs'
+description: 'The jobs key in Generic Extractor: describe the API resources to extract with endpoint, method, request parameters, dataField, dataType and scroller.'
 redirect_from:
     - /extend/generic-extractor/configuration/config/jobs/
 ---
@@ -1038,7 +1039,7 @@ setting in this case is `contacts[].properties`.
 See [example [EX014]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/014-skip-flatten-nested).
 
 <!--
-TODO: Un-comment this when this is fixed: https://github.com/keboola/generic-extractor/issues/59
+TODO(Nikita): Un-comment this when this is fixed: https://github.com/keboola/generic-extractor/issues/59
 
 ### Skip boolean conversion
 If you have an API response like this:

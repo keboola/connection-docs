@@ -1,6 +1,7 @@
 ---
 title: IP Addresses
 slug: 'components/ip-addresses'
+description: 'The IP addresses Keboola uses on each stack to reach your systems, so you can allow them in your firewall, and the JSON file that lists them.'
 redirect_from:
     - /extractors/ip-addresses/
 
@@ -22,6 +23,8 @@ Below are listed the available [Keboola Stack endpoints](/overview/api/#stacks-a
 For ease of identification, our outbound IP addresses on AWS stacks (except for legacy services) now have reverse DNS records. 
 Each IP address has a unique name like `outbound-if-issue-contact-support-at-keboola-com.keboola.com`, embedding a reference for a support email. 
 This enhancement helps us promptly tackle network issues or unauthorized access. 
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## connection.keboola.com
 For projects in the default AWS US [region](/overview/#stacks) (AWS region `us-east-1`), 

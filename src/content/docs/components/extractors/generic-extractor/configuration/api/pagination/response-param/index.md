@@ -1,6 +1,7 @@
 ---
 title: Response Parameter Scroller
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/response-param'
+description: 'Configure the response.param pagination method in Generic Extractor for APIs that return a value in the response to send in the next request.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/response-param/
 ---

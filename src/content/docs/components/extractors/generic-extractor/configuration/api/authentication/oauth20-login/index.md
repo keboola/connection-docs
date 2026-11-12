@@ -1,6 +1,7 @@
 ---
 title: Login Using OAuth 2.0 Authentication
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth20-login'
+description: 'The oauth20.login type in Generic Extractor, not yet supported, pairs OAuth 2.0 with a login request for temporary credentials, with a Google example.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth20-login/
 ---

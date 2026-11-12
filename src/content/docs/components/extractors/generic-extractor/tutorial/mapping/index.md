@@ -1,6 +1,7 @@
 ---
 title: Mapping Tutorial
 slug: 'components/extractors/generic-extractor/tutorial/mapping'
+description: 'Generic Extractor tutorial on mapping: clean up the MailChimp response, set a primary key and nesting level, and add the parent campaign ID as a column.'
 redirect_from:
     - /extend/generic-extractor/tutorial/mapping/
 ---

@@ -6,6 +6,8 @@ redirect_from:
 ---
 
 
+This page walks through importing a table into Storage and exporting one by hand with the Storage API, with curl commands and a Python script for the import. It is for anyone calling the API directly; the rest of the API is covered under [Storage API](/storage/api/).
+
 ## Working with Data
 Keboola Table Storage (Tables) and Keboola File Storage (File Uploads) are heavily connected together.
 Keboola File Storage is technically a layer on top of the Amazon S3 service, and Keboola Table

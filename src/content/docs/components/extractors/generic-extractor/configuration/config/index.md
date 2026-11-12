@@ -1,6 +1,7 @@
 ---
 title: Extraction Configuration
 slug: 'components/extractors/generic-extractor/configuration/config'
+description: 'The config section of Generic Extractor holds jobs, mappings, output bucket, HTTP headers, incremental output, user data and compatibility level.'
 redirect_from:
     - /extend/generic-extractor/configuration/config/
 ---
