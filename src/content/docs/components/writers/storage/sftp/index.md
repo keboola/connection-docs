@@ -26,7 +26,7 @@ __Save__ the SFTP parameters and continue to the
 
 __Add__ the new row and fill in the [tables](/transformations/mappings/#table-input-mapping) 
 and [files](/transformations/mappings/#file-input-mapping) you want to write to the SFTP server.
-Add new tables with the **New Table Input** button. Once added, the tables will show up in the Table Input Mapping.
+Add new tables with the **Add Table Input** button. Once added, the tables will show up in the Table Input Mapping.
 Add new files with the **New File Input** button. You can add files using 
 [file tags](/transformations/mappings/#file-input-mapping).
 
@@ -42,5 +42,6 @@ If you want to add [processors](https://developers.keboola.com/extend/component/
 to the files or tables before the input, you can specify these in the processor configuration window.
 
 ![Screenshot - New row configuration](/components/writers/storage/sftp/rowconfig.png) 
+<!-- VERIFY(Nikita): reshoot this screenshot; it still shows the old New Table Input button, now Add Table Input. -->
 
 
