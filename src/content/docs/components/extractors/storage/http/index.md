@@ -1,6 +1,7 @@
 ---
 title: HTTP
 slug: 'components/extractors/storage/http'
+description: 'Download a CSV file or a ZIP or GZ archive from an HTTP or HTTPS base URL into a Keboola table, one file per configuration row.'
 redirect_from:
     - /extractors/storage/http/
 ---
@@ -8,6 +9,8 @@ redirect_from:
 
 
 This data source connector loads a single CSV file from an HTTP/HTTPS URL and stores it in Storage.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **HTTP** connector.

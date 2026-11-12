@@ -1,6 +1,7 @@
 ---
 title: FileMaker
 slug: 'components/extractors/database/filemaker'
+description: 'Extract layout data and layout metadata from FileMaker databases through the FileMaker Data API with a host URL, username and password.'
 ---
 
 
@@ -8,6 +9,8 @@ slug: 'components/extractors/database/filemaker'
 FileMaker is a cross-platform relational database application from Claris International.
 
 This component extracts layout data from [FileMaker](https://www.claris.com/filemaker/) relational databases using the [FileMaker Data API](https://help.claris.com/en/data-api-guide/content/write-data-api-calls.html).
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 
 ## Configuration

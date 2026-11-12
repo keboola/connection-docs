@@ -1,6 +1,7 @@
 ---
 title: Azure Datalake Gen 2
 slug: 'components/extractors/storage/azure-datalake-gen2'
+description: 'Load CSV files from an Azure Datalake Gen2 file system into Keboola tables with an account name and key, and set wildcards and CSV options.'
 redirect_from:
     - /extractors/other/azure-datalake-gen2/
 ---
@@ -12,6 +13,8 @@ in Keboola Storage.
 
 After creating a new configuration, select the files you want to extract from Azure Datalake Gen 2 and determine how
 you save them to Keboola Storage. 
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Azure Datalake Gen 2** connector.

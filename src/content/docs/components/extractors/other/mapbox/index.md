@@ -1,12 +1,15 @@
 ---
 title: Mapbox
 slug: 'components/extractors/other/mapbox'
+description: 'Enrich coordinates in an input table with Mapbox Isochrone areas or Matrix travel times and distances, using a Mapbox API token and per-endpoint parameters.'
 ---
 
 
 
 This data source connector enriches input data using outputs from the [Mapbox API](https://docs.mapbox.com/api/overview/) and currently supports two endpoints: Isochrone and Matrix.
 The first computes areas accessible within the same travel time and distance; the latter endpoint provides travel times or distances between numerous points.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prerequisites
 Before configuring the connector, you must get a [Mapbox API token](https://docs.mapbox.com/help/getting-started/access-tokens/).

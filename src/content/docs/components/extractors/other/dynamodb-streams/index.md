@@ -1,6 +1,7 @@
 ---
 title: DynamoDB Streams
 slug: 'components/extractors/other/dynamodb-streams'
+description: 'Download data from DynamoDB Streams with an AWS access key ID and secret, region and table name, in back-fill mode or incrementally using a state file.'
 redirect_from:
     - /extractors/other/dynamodb-streams/
 ---
@@ -9,6 +10,8 @@ redirect_from:
 
 This data source connector downloads data from DynamoDB Streams. It supports back-fill mode and incremental fetching.
 To fetch data in increments, it uses a state file.
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prerequisites
 

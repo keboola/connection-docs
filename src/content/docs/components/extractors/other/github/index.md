@@ -1,6 +1,7 @@
 ---
 title: GitHub
 slug: 'components/extractors/other/github'
+description: 'Import organizations, members, teams, repositories, issues and commits from GitHub with an authorized account, in Smart Mode (incremental) or Full Mode.'
 redirect_from:
     - /extractors/other/github/
 ---
@@ -9,6 +10,8 @@ redirect_from:
 
 The GitHub data source connector uses the [GitHub API](https://developer.github.com/v3/) to import data from [GitHub](https://github.com/)
 to Keboola.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **GitHub** connector.

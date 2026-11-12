@@ -1,6 +1,7 @@
 ---
 title: Instagram
 slug: 'components/extractors/social/instagram'
+description: 'Extract Instagram Business Account media, comments and insights through a connected Facebook page, with queries that set the endpoint and fields.'
 redirect_from:
     - /extractors/social/instagram/
 ---
@@ -14,6 +15,8 @@ and metrics from [Instagram Business Accounts](https://business.instagram.com/ge
 In order to access a business account's data, users have to authorize a Facebook account and choose a Facebook page 
 that is connected to an [Instagram Business Account](https://business.instagram.com/getting-started). The rest of 
 the configuration process is almost identical to configuring the [Facebook](/components/extractors/social/facebook/) connector.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 Before you begin, make sure you have a Facebook page, a role on that page, and an Instagram account. The Facebook 

@@ -1,6 +1,7 @@
 ---
 title: MS Outlook IMAP Email Content and Attachments (Office 365)
 slug: 'components/extractors/communication/ms-outlook'
+description: 'Download emails and attachments from Office 365 Outlook accounts over IMAP after you authorize, then filter them by search query, folder and date.'
 redirect_from:
     - /extractors/communication/ms-outlook/
 ---
@@ -8,6 +9,8 @@ redirect_from:
 
 
 The Microsoft Outlook extractor for Office 365 is based on IMAP. It allows you to download emails and their attachments from Office 365 accounts.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Authorization
 [Create a new configuration](/components/#creating-component-configuration) for the **MS Outlook** extractor.

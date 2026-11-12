@@ -1,6 +1,7 @@
 ---
 title: Dark Sky
 slug: 'components/extractors/other/dark-sky'
+description: 'The Dark Sky connector no longer works since its API ended in March 2023; see the input and output of existing configurations, or move to Weather API.'
 redirect_from:
     - /extractors/other/dark-sky/
 
@@ -17,6 +18,8 @@ If you still have a Dark Sky configuration, it will fail. Remove it, or switch t
 This data source connector looked up the weather anywhere on the globe, returning hour-by-hour or day-by-day observations going back decades. Data were provided by the Dark Sky API.
 
 To configure the connector, you provided tables with locations, your Dark Sky API key, the units to use, and a desired forecast granularity.
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## API Secret Key
 The connector authenticated with a Dark Sky API Secret key. **New keys are no longer issued** — the sign-up and documentation pages now redirect to Apple's WeatherKit announcement.

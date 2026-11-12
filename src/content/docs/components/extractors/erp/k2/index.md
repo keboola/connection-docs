@@ -1,12 +1,15 @@
 ---
 title: K2
 slug: 'components/extractors/erp/k2'
+description: 'Fetch K2 ERP data objects through the K2 API with a username, password and optional SSH tunnel, in full load or in incremental load between two dates.'
 ---
 
 
 
 K2 is an ERP information system for managing production, inventory, financials, and more.
 This component fetches defined data objects from the K2 API.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Authorization Configuration
 

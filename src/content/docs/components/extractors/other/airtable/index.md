@@ -1,6 +1,7 @@
 ---
 title: Airtable
 slug: 'components/extractors/other/airtable'
+description: 'Fetch tables from an Airtable base with a read-only personal access token, filter records with a formula, and choose full or incremental load.'
 ---
 
 
@@ -8,6 +9,8 @@ slug: 'components/extractors/other/airtable'
 Airtable is an easy-to-use yet powerful database service that allows you to quickly create, organize, and collaborate on any project.
 
 This data source connector allows you to fetch data from any Airtable base tables.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prerequisites
 
