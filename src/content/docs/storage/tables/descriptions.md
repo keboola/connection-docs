@@ -3,6 +3,7 @@ title: Table and column descriptions
 slug: 'storage/tables/descriptions'
 sidebar:
   label: Descriptions
+search_keywords: [description, column description, table description, comment, COMMENT, KBC.description]
 description: 'Table and column descriptions in Storage: editing them in the UI and API, size limits per backend, external tables, workspaces, Data Gateway and KBC.description metadata.'
 ---
 

@@ -1,10 +1,13 @@
 ---
 title: Primary keys and incremental loading
 slug: 'storage/tables/incremental-loading'
+sidebar:
+  label: Primary Keys & Incremental Loading
+search_keywords: [primary key, deduplication, incremental load, upsert, incremental processing, changed in last, _timestamp]
 description: 'How data lands in a Storage table: primary keys and deduplication, incremental loads, the _timestamp column with native data types, and automatic and manual incremental processing.'
 ---
 
-How data lands in a [table](/storage/tables/) depends on two settings: whether the table has a **primary key**, and whether the load is **incremental**. This page explains both, with worked examples, plus **incremental processing**: letting components read only the rows that changed since their last run. To set a primary key in the UI, see [Manage tables](/storage/tables/manage/#set-or-remove-a-primary-key).
+How data lands in a [table](/storage/tables/) depends on two settings: whether the table has a **primary key**, and whether the load is **incremental**. This page explains both, with worked examples, plus **incremental processing**: letting components read only the rows that changed since their last successful run, or within a time window. To set a primary key in the UI, see [Manage tables](/storage/tables/manage/#set-or-remove-a-primary-key).
 
 <!-- Explanation-type page. Split from the former single tables page (PRDCT-486, first cut in #1010); text carried over from main 2026-11-12. -->
 
@@ -78,7 +81,7 @@ their uniqueness is checked and the data are de-duplicated. The result table loo
 Again, the order of rows in the imported file is not important and is not kept.
 In our example, the rows `John,34,$340` and `Darla,60,$600000` were discarded.
 
-### Incremental Loading
+## Incremental Loading
 When a primary key is defined on a column, it is also possible to take advantage of incremental loads.
 If you load data into a table incrementally, new rows will be added and existing rows will be updated
 unless they are completely identical to the existing rows. No rows will be deleted.
@@ -114,7 +117,7 @@ The above applies only when **incremental load** is used.
 When an incremental load is not used, the contents of the target table are cleared before the load. When a primary key
 is not defined and an incremental load is used, it simply appends the data to the table and does not update anything.
 
-#### Difference between tables with [native datatypes](/storage/tables/data-types/) and string tables
+### Difference between tables with [native datatypes](/storage/tables/data-types/) and string tables
 
 <!-- VERIFY(Nikita): the _timestamp update semantics for native-types tables below were flagged for review in #1010 and never confirmed. -->
 There is significant change when loading incrementally into table with native datatypes on. If a table does not have native datatypes enabled during incremental loading, the `_timestamp` column is updated based on the primary key only when a value in the row changes. In tables with native datatypes, the `_timestamp` column is updated every time when duplicate primary keys are imported. This behavior has an impact on [incremental processing](#incremental-processing). When rows with duplicate primary keys are imported into tables with native types, they are treated as new rows. 
@@ -196,13 +199,13 @@ Here we can see a **significant change in the incremental load**. The `_timestam
 | added row = new _timestamp =>        |9|Josh|BA-AB-11| 6624     |2004-10-04| **1669221874** |
 | added row = new _timestamp =>        |10|Arthur|EE-FF-66| 596      |2021-04-06| **1669221874** |
 
-### Incremental Processing
+## Incremental Processing
 When a table is loaded incrementally, the update time of each row is recorded internally. This information
 can be later used in input mapping of many components (especially [transformations](/transformations/mappings/#input-mapping)).
 Incremental processing is available in two flavors — *automatic* and *manual*. Incremental processing makes sense only for
 components reading data from the Storage (e.g., transformations and writers). Note that this is not supported for all components yet.
 
-#### Automatic incremental processing
+### Automatic incremental processing
 With automatic incremental processing, the component will receive only data modified from the last **successful** run of that component.
 Extending the [above example](#incremental-loading) — if you have a table with a primary key defined on the column `name`:
 
@@ -255,7 +258,7 @@ Click the event to show its detail; the `changedSince` parameter shows the date 
 
 ![Screenshot - Automatic Incremental Processing Event Detail](/storage/tables/adaptive-events-2.png)
 
-#### Manual incremental processing
+### Manual incremental processing
 When the [Automatic Incremental Processing](#automatic-incremental-processing) feature is not available, or you
 need greater control of the processing, you may specify the `Changed in last` option.
 This enables the component to process only a specified increment of the data:

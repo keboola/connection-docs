@@ -73,7 +73,8 @@ metadata.
 
 Each table may have a **primary key** that identifies its rows: values are deduplicated on load, and with
 **incremental loading** new rows are added and existing rows updated instead of the table being cleared. Components
-can then use **incremental processing** to read only the rows changed since their last run. How this works, with
+can then use **incremental processing** to read only the rows changed since their last successful run, or within a
+time window you set. How this works, with
 examples, is in [Primary keys and incremental loading](/storage/tables/incremental-loading/).
 
 ## This section
