@@ -19,7 +19,7 @@ Then click the **New Table** button to add a new table:
 
 ![Screenshot - Add Table Step 1](/components/writers/storage/google-drive/google-drive-1.png)
 
-Select a table from Storage. You may also specify additional filters as well as [incremental processing](/storage/tables/#incremental-processing).
+Select a table from Storage. You may also specify additional filters as well as [incremental processing](/storage/tables/incremental-loading/#incremental-processing).
 All options may be modified later. Click **Next** to select how to load the table to Google Drive:
 
 ![Screenshot - Add Table Step 2](/components/writers/storage/google-drive/google-drive-2.png)

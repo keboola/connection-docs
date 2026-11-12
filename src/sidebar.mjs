@@ -539,6 +539,9 @@ export const sidebar = [
         collapsed: true,
         items: [
           { label: "Overview", slug: "storage/tables" },
+          { slug: "storage/tables/manage" },
+          { slug: "storage/tables/incremental-loading" },
+          { slug: "storage/tables/descriptions" },
           { slug: "storage/tables/data-types" },
           { slug: "storage/tables/csv-files" },
           { slug: "storage/tables/uploads" },

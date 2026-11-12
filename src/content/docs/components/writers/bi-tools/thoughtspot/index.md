@@ -58,4 +58,4 @@ In the **Full Load** mode, the table is completely overwritten including the tab
 using the [`DROP`](https://docs.thoughtspot.com/software/latest/tql-cli-commands) command and it is recreated.
 
 Additionally, you can specify a **primary key** for the table, a simple column **data filter**, and a filter for
-[incremental processing](/storage/tables/#incremental-processing).
+[incremental processing](/storage/tables/incremental-loading/#incremental-processing).

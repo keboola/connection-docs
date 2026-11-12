@@ -64,7 +64,7 @@ visible in Keboola.
 
 Table and column descriptions come from the comments in the source: the Snowflake `COMMENT` or the BigQuery
 description. They are read-only in Keboola and are updated when you register or refresh the bucket. Learn more in
-[Descriptions of External Tables](/storage/tables/#descriptions-of-external-tables).
+[Descriptions of External Tables](/storage/tables/descriptions/#descriptions-of-external-tables).
 
 External datasets can be used in an [input mapping](/transformations/mappings/#input-mapping). If you would like to disable usage of External datasets in input mapping, reach out to our support to disable it.
 They are also accessible via the [read-only input mapping](/transformations/mappings/#read-only-input-mapping).

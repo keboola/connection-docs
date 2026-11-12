@@ -1,6 +1,7 @@
 ---
 title: Native Data Types
 slug: 'storage/tables/data-types'
+description: 'Native data types in Storage tables: typed vs. non-typed tables, base types, defining and changing column types, NULL handling, and the data types in the table definition.'
 ---
 
 
@@ -22,7 +23,7 @@ These are the key benefits of using the Native Data Types feature:
 
 ## Current Drawbacks
 Using the Native Data Types feature also has its drawbacks:
-- The data type of a column in a typed table cannot be changed after creation. To change a type, you must create a new column or recreate the table. See [How to Change Column Types](/storage/tables/data-types/#changing-types-of-existing-typed-columns). Some other alterations, such as increasing the length or precision of a column, are possible; see [Changing Column Definitions](/storage/tables/#changing-column-definitions).
+- The data type of a column in a typed table cannot be changed after creation. To change a type, you must create a new column or recreate the table. See [How to Change Column Types](/storage/tables/data-types/#changing-types-of-existing-typed-columns). Some other alterations, such as increasing the length or precision of a column, are possible; see [Changing Column Definitions](#changing-column-definitions).
 - Keboola does not perform any type conversion during data loading. Your data must exactly match the column type defined in the table within Storage.
 - Loading data with incompatible types will result in a failure.
 
@@ -142,7 +143,7 @@ Execute the transformation and wait for it to complete.
 **Step 4: Verify the Schema**  
 Once the transformation is finished, check the schema of the newly created table, `typed_table`. It should now include the appropriate data types.
 
-***Note:** [Incremental loading](/storage/tables/#incremental-loading) cannot be used when creating a typed table in this manner.*
+***Note:** [Incremental loading](/storage/tables/incremental-loading/#incremental-loading) cannot be used when creating a typed table in this manner.*
 
 ## Incremental Loading
 The behavior of incremental loading differs between **typed** and **non-typed tables**:
@@ -150,7 +151,7 @@ The behavior of incremental loading differs between **typed** and **non-typed ta
 - **Typed tables:** Only the columns in the table's **primary key** are compared to detect changes.
 - **Non-typed tables:** The entire row is compared, and rows are updated if **any value** has changed.
 
-For more information, refer to our documentation on [incremental loading](/storage/tables/#difference-between-tables-with-native-datatypes-and-string-tables).
+For more information, refer to our documentation on [incremental loading](/storage/tables/incremental-loading/#difference-between-tables-with-native-datatypes-and-string-tables).
 
 ## Handling NULLs
 Data can contain `NULL` values or empty strings, which are converted differently based on the processing backend.
@@ -205,3 +206,45 @@ CREATE TABLE "ctas_table" (
 ) AS SELECT * FROM "typed_table";
 ```
 
+## Data Types in the Table Definition
+The column data types of a [typed table](/storage/tables/data-types/) are part of the same table definition as the
+descriptions. For each column the definition holds the `type`, `nullable` and, where they apply, `length` and
+`default`, next to the column's `basetype`. The table detail returns them, and the
+[table list](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list) returns them
+with `include=definition`. The stored type is the one the backend reports: a column created as `INT` on Snowflake
+is returned with `type` `NUMBER`, `length` `38,0` and `basetype` `INTEGER`.
+
+- **Non-typed tables:** the definition of a non-typed table carries descriptions only. Type information for
+  such a table exists only as `KBC.datatype.*` [metadata](/storage/tables/#metadata), for example `KBC.datatype.basetype`.
+- **Aliases:** an alias that synchronizes its columns with its source shows the types of the source table for
+  the columns of the alias.
+- **Table list:** for some tables the table list returns `definition` as `null`. Use the table detail for those
+  tables; the [table list reference](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list)
+  lists the cases.
+
+### Changing Column Definitions
+The data type of a typed column cannot be changed. On Snowflake and BigQuery you can
+[update the table definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition)
+to change some column properties. The table shows which alterations each backend supports:
+
+| Alteration | Snowflake | BigQuery |
+|---|---|---|
+| Change the data type | No | No |
+| Increase text length | Yes | Yes |
+| Decrease text length | No | No |
+| Increase numeric precision | Yes | Yes |
+| Decrease numeric precision | No | No |
+| Change numeric scale | No | Yes |
+| Make a column nullable | Yes | Yes |
+| Make a column required | Yes | No |
+| Add a default | No | Yes |
+| Change a default | No | Yes |
+| Drop a default | Yes | Yes |
+
+### Relation to KBC.datatype Metadata
+For a typed table the definition is the source of truth for the types. Storage still keeps `KBC.datatype.*` copies
+under the `storage` provider for compatibility, and `KBC.datatype.*` rows written by other providers do not change
+the definition of a typed table. New integrations should read the types from the `definition` of the table, not from
+the metadata.
+
+**Next:** [CSV files →](/storage/tables/csv-files/)

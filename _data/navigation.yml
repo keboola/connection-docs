@@ -714,6 +714,15 @@ items:
       - url: /storage/tables/
         title: Tables & Aliases
         items:
+          - url: /storage/tables/manage/
+            title: Manage Tables
+
+          - url: /storage/tables/incremental-loading/
+            title: Primary Keys & Incremental Loading
+
+          - url: /storage/tables/descriptions/
+            title: Descriptions
+
           - url: /storage/tables/data-types/
             title: Data Types
 
