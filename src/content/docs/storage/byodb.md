@@ -14,7 +14,7 @@ For the integration to work, your Snowflake account must be accessible from a su
 To access Keboola-managed data, you should use only the provided roles and avoid granting permissions on Keboola-managed resources.
 
 #### Read-only access to project storage
-If your project has the [read-only input mapping](/transformations/mappings/#read-only-input-mapping) feature enabled, then a role `KEBOOLA_<PROJECT_ID>_RO` (for example `KEBOOLA_5762_RO`) is provided for each project. 
+If your project has the [read-only input mapping](/transformations/mappings/input/#read-only-input-mapping) feature enabled, then a role `KEBOOLA_<PROJECT_ID>_RO` (for example `KEBOOLA_5762_RO`) is provided for each project. 
 This role grants read-only access to all the schemas and tables in the project. You can assign this role to any of your roles or users to allow access to the project's storage.
 
 #### Read-only access without granting roles in Snowflake

@@ -252,8 +252,8 @@ and reconnect from there.
 
 ### Loading Data
 To load arbitrary data into the workspace, configure a
-[table input mapping](/transformations/mappings/#table-input-mapping) or
-[file input mapping](/transformations/mappings/#file-input-mapping) (or both) and click the **Load Data** button.
+[table input mapping](/transformations/mappings/input/#table-input-mapping) or
+[file input mapping](/transformations/mappings/input/#file-input-mapping) (or both) and click the **Load Data** button.
 
 ![Workspace - Load Data](/workspace/load-data.png)
 
@@ -272,7 +272,7 @@ advantage of [alias tables](/storage/tables/#aliases) and prepare buckets with t
 
 *Note: You must be using [new transformations](/transformations/) to see this feature.*
 
-The workspace also supports **read-only input mappings**, as described in the [mapping section](/transformations/mappings/#read-only-input-mapping).
+The workspace also supports **read-only input mappings**, as described in the [mapping section](/transformations/mappings/input/#read-only-input-mapping).
 For each **workspace** or **Snowflake writer** (data destination) configuration, users can choose whether to use a **read-only input mapping**.
 
 Note that **there are security implications**. If you enable a **read-only input mapping** for a workspace, then it has access to all the data in the project. 
@@ -293,8 +293,8 @@ For example, say your bucket `in.c-customers` is linked from bucket `in.c-crm-ex
 
 ### Unloading Data
 You can also unload data from the Python and R workspaces. To unload data, configure 
-[Table Output Mapping](/transformations/mappings/#table-output-mapping)
-or [File Output Mapping](/transformations/mappings/#file-output-mapping) (or both) and click **Unload Data** button.
+[Table Output Mapping](/transformations/mappings/output/#table-output-mapping)
+or [File Output Mapping](/transformations/mappings/output/#file-output-mapping) (or both) and click **Unload Data** button.
 
 ![Workspace - Unload Data](/workspace/unload-data.png)
 
@@ -306,7 +306,7 @@ For Snowflake and BigQuery workspaces, you can also export a single table direct
 [Exporting Workspace Tables to Files](/workspace/table-export/) for details.
 
 Snowflake and BigQuery workspaces can also skip unloading entirely and write to a Storage table directly with
-[Direct Mode output mapping](/transformations/mappings/#direct-mode-output-mapping). The workspace gets write
+[Direct Mode output mapping](/transformations/mappings/direct-mode/). The workspace gets write
 access to the selected table as soon as the mapping is saved, so no **Unload Data** run is needed.
 
 ### Data Persistency (beta)

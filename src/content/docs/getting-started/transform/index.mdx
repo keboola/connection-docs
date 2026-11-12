@@ -63,9 +63,9 @@ tab", nothing else; notes/getting-started/CONSERVATION-REPORT.md, 2026-09-29. */
 
 ![Screenshot - A new BigQuery transformation, Boolabean staffing outlook: empty Table Input Mapping and Table Output Mapping sections with their add buttons, above an empty Queries section offering Create Multiple Queries](/getting-started/transform/mapping.png)
 
-- **Mappings decide what goes in and out.** [Input mapping](/transformations/mappings/#input-mapping)
+- **Mappings decide what goes in and out.** [Input mapping](/transformations/mappings/input/)
   copies in what you list (Kai's builds read it in place);
-  [output mapping](/transformations/mappings/#output-mapping) writes back only what you name, so
+  [output mapping](/transformations/mappings/output/) writes back only what you name, so
   nothing else in Storage changes and Keboola can track lineage.
 - **Table names matter, bucket names do not.** The SQL reads `sales`, `weather_daily`, `staffing`,
   `stores` and `forecast` (not `products`); keep those names in the input mapping, or edit the
@@ -239,7 +239,7 @@ You should end up with five inputs, listed as **Source Table → Input Table**:
 
 Input mapping has more to it: incremental processing with **Changed in Last**, column filters,
 data filters. None of it is needed here; see
-[input mapping](/transformations/mappings/#input-mapping) when you have a large table to process.
+[input mapping](/transformations/mappings/input/) when you have a large table to process.
 
 **Set the output mapping**
 
@@ -247,8 +247,8 @@ data filters. None of it is needed here; see
 
    Output mapping opens in **Guided Mode**, the standard, copy-based mapping the steps below
    describe. If your project also shows **Direct Mode**, ignore it here: that writes straight to
-   Storage and is a [private beta](/transformations/mappings/#direct-mode-output-mapping).
-   {/* VERIFY(Nikita): transformations/mappings/index.md says Direct Mode is a private beta that
+   Storage and is a [private beta](/transformations/mappings/direct-mode/).
+   {/* VERIFY(Nikita): transformations/mappings/direct-mode/index.md says Direct Mode is a private beta that
    Support has to enable, yet the toggle was visible in a brand-new Free Plan project (6211,
    2026-08-19) with no such request. Either that gate has changed or the mappings page is stale.
    Seen again in Free Plan project 6375 on 2026-10-01, with the UPPERCASE suggestion of step 2,
@@ -486,7 +486,7 @@ FORMAT_DATE('%a') returning Mon/Tue like Snowflake's DAYNAME, and that every col
 (the 2026-08-19 lesson from project 6211: a bare column name that matches a table name resolves to
 the range variable and comparisons then fail with "STRUCT<...> vs STRING"). The 2026-08-25 note
 about `SELECT * EXCEPT (_timestamp)` still applies: _timestamp appears only on CLONE-staged inputs
-(transformations/mappings/index.md), and EXCEPT on an absent column is itself an error, so the
+(transformations/mappings/input.md), and EXCEPT on an absent column is itself an error, so the
 block does not use it. */}
 
 Back on the transformation's page after you save, **Queries** shows your SQL as the one code in
@@ -720,7 +720,7 @@ side, so nothing joins. Compare the two expressions character by character.
 Your input tables were staged by *cloning*, which copies Keboola's internal `_timestamp` column
 along with the data, and that column cannot be written back to Storage. It is not backend-specific
 and it is not a problem with the query. The clean fix is the **`dropTimestampColumn`** option on the
-input mapping; see [the `_timestamp` system column](/transformations/mappings/#_timestamp-system-column).
+input mapping; see [the `_timestamp` system column](/transformations/mappings/input/#_timestamp-system-column).
 
 </details>
 

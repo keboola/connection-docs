@@ -66,9 +66,9 @@ Table and column descriptions come from the comments in the source: the Snowflak
 description. They are read-only in Keboola and are updated when you register or refresh the bucket. Learn more in
 [Descriptions of External Tables](/storage/tables/descriptions/#descriptions-of-external-tables).
 
-External datasets can be used in an [input mapping](/transformations/mappings/#input-mapping). If you would like to disable usage of External datasets in input mapping, reach out to our support to disable it.
-They are also accessible via the [read-only input mapping](/transformations/mappings/#read-only-input-mapping).
-Keep in mind that external buckets cannot be used in an [output mapping](/transformations/mappings/#output-mapping) as they are not writable.
+External datasets can be used in an [input mapping](/transformations/mappings/input/). If you would like to disable usage of External datasets in input mapping, reach out to our support to disable it.
+They are also accessible via the [read-only input mapping](/transformations/mappings/input/#read-only-input-mapping).
+Keep in mind that external buckets cannot be used in an [output mapping](/transformations/mappings/output/) as they are not writable.
 
 #### Auto-Refresh
 

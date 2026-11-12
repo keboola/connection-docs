@@ -42,7 +42,7 @@ destination project.
 
 ### Important
 - The internal timestamp for all data rows will be set to the date of the migration. So, if you are using incremental loads 
-based on [Changed in last](/transformations/mappings/#input-mapping) in 
+based on [Changed in last](/transformations/mappings/input/) in 
 transformations or data destination connectors, it will fetch all data on the first run.
 - Creation dates and authors of all configurations will be modified.
 - Orchestration IDs will be changed.

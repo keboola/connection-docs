@@ -277,7 +277,7 @@ The tables element in a configuration of the **output mapping** is an array and 
   - `enclosure`
   - `write_always`
   - `partition_aware_import` - BigQuery only; limits the deduplication of an incremental load to the destination partitions
-    present in the loaded data (see [Partition-aware import](/transformations/mappings/#partition-aware-import-bigquery))
+    present in the loaded data (see [Partition-aware import](/transformations/mappings/partition-aware-import/))
 
 #### Input mapping — basic
 Download tables `in.c-ex-salesforce.Leads` and `in.c-ex-salesforce.Accounts` to `/data/tables/in/leads.csv`
@@ -770,7 +770,7 @@ If that file is not present in the `/data/out/files` folder, an error will be th
 [development branches](/extend/common-interface/development-branches/), because a job running in a
 development branch cannot write tags back to files in production storage. New configurations should not
 use it, and the UI no longer offers it. Existing configurations continue to work. To process files
-incrementally, use [incremental file processing](/transformations/mappings/#incremental-file-processing)
+incrementally, use [incremental file processing](/transformations/mappings/input/#incremental-file-processing)
 instead.
 
 The following describes the legacy `processed_tags` behavior, retained for reference only.

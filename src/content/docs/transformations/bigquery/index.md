@@ -117,7 +117,7 @@ Because BQ transformations always run in a new session (and new dataset), you ca
 
 ## Bucket Objects for Read-Only Input Mapping
 
-For more information on how a **read-only input mapping** works, visit the [link](/transformations/mappings/#read-only-input-mapping).
+For more information on how a **read-only input mapping** works, visit the [link](/transformations/mappings/input/#read-only-input-mapping).
 
 Buckets in BigQuery are represented by datasets. A bucket's dataset name is derived from its ID by replacing the dots and dashes with underscores; for example, the bucket `in.c-main` is the dataset `in_c_main`. You can list all available datasets by querying `INFORMATION_SCHEMA.SCHEMATA` or by browsing them in the BigQuery console.
 
