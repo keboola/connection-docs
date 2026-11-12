@@ -1,11 +1,14 @@
 ---
 title: Available Metrics
 slug: 'components/extractors/marketing-sales/adform-dsp-reports/available-metrics'
+description: 'Look up every metric available to Adform DSP Reports, with its key, category, display format, description and specs metadata, as the Adform API returns it.'
 ---
 
 
 
 Note that this list can be retrieved also via this [API call](https://api.adform.com/help/guides/how-to-report-on-campaigns/reporting-stats/metrics):
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 
 ```json

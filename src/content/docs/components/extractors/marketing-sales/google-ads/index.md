@@ -1,6 +1,7 @@
 ---
 title: Google Ads
 slug: 'components/extractors/marketing-sales/google-ads'
+description: 'Import Google Ads reports by writing GAQL queries for your customer ID, with optional since and until dates and a primary key for each output table.'
 redirect_from:
     - /extractors/marketing-sales/google-adwords-reports/
     - /components/extractors/marketing-sales/google-adwords-reports/
@@ -11,6 +12,8 @@ redirect_from:
 
 This data source connector allows you to import data from Google Ads.
 If you do not have a Google Ads manager account, follow this [guide](https://support.google.com/google-ads/answer/7459399?hl=en) to set it up.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Google Ads** connector.

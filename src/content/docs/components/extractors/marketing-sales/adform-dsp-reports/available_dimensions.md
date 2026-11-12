@@ -1,11 +1,14 @@
 ---
 title: Available Dimensions
 slug: 'components/extractors/marketing-sales/adform-dsp-reports/available-dimensions'
+description: 'Look up every dimension available to Adform DSP Reports, with its key, category, display name and description, as the Adform metadata API returns it.'
 redirect_from:
     - /extractors/marketing-sales/adform-dsp-reports/available-dimensions/
 ---
 
 Note that this list can be retrieved also via this [API call](https://api.adform.com/help/references/buyer-solutions/reporting/metadata/dimensions): 
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ```json
 [

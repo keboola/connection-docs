@@ -1,6 +1,7 @@
 ---
 title: Criteo
 slug: 'components/extractors/marketing-sales/criteo'
+description: 'Extract Criteo ad performance reports with the client ID and secret of your own Criteo developer app, choosing dimensions, metrics, currency and date range.'
 redirect_from:
     - /extractors/marketing-sales/criteo/
 ---
@@ -8,6 +9,8 @@ redirect_from:
 
 
 This data source connector uses the Criteo Marketing Solutions API to extract data on ad performance.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Getting Credentials
 

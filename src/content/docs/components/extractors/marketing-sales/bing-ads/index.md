@@ -1,6 +1,7 @@
 ---
 title: Microsoft Advertising (Bing Ads)
 slug: 'components/extractors/marketing-sales/bing-ads'
+description: 'Extract Microsoft Advertising (Bing Ads) campaign entities or reports with your account and customer IDs, using report presets or your own columns.'
 redirect_from:
     - /extractors/marketing-sales/bing-ads/
 
@@ -11,6 +12,8 @@ redirect_from:
 The [Microsoft Advertising (Bing Ads)](https://ads.microsoft.com/) data source connector supports the extraction of either campaign entity data or various types of
 available reports. In the case of reports, you can specify your own set of columns and the primary key to use in Keboola Storage,
 but there are also presets of columns and appropriate primary keys available.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prerequisites
 
