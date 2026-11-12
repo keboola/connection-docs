@@ -4,7 +4,9 @@ slug: 'storage/tables/incremental-loading'
 description: 'How data lands in a Storage table: primary keys and deduplication, incremental loads, the _timestamp column with native data types, and automatic and manual incremental processing.'
 ---
 
-How data lands in a [table](/storage/tables/) depends on two settings: whether the table has a **primary key**, and whether the load is **incremental**.
+How data lands in a [table](/storage/tables/) depends on two settings: whether the table has a **primary key**, and whether the load is **incremental**. This page explains both, with worked examples, plus **incremental processing**: letting components read only the rows that changed since their last run. To set a primary key in the UI, see [Manage tables](/storage/tables/manage/#set-or-remove-a-primary-key).
+
+<!-- Explanation-type page. Split from the former single tables page (PRDCT-486, first cut in #1010); text carried over from main 2026-11-12. -->
 
 ## Primary Keys
 Each table may have a **primary key** defined on one or more columns. A primary key represents an
@@ -20,19 +22,7 @@ the primary key on a column which contains duplicates — you will receive the f
 
     Cannot create new primary key, duplicate values in primary key columns
 
-If you want to manually set a primary key on a table, you can do so in **Storage**:
-
-![Screenshot - Create Primary Key](/storage/tables/create-primary-key-1.png)
-
-Then select the columns you wish to add to the primary key:
-
-![Screenshot - Select columns](/storage/tables/create-primary-key-2.png)
-
-To remove an existing primary key, click the **bin** icon:
-
-![Screenshot - Remove Primary Key](/storage/tables/remove-primary-key.png)
-
-***Note:** Be aware that creating or removing the primary key can take some time on large tables.*
+To set or remove a primary key in the UI, see [Set or remove a primary key](/storage/tables/manage/#set-or-remove-a-primary-key).
 
 ### Primary Key Deduplication
 When a primary key is defined on a column, the value of that column is guaranteed to be **unique** in that table.
@@ -126,7 +116,8 @@ is not defined and an incremental load is used, it simply appends the data to th
 
 #### Difference between tables with [native datatypes](/storage/tables/data-types/) and string tables
 
-There is significant change when loading incrementally into table with native datatypes on. If a table does not have native datatypes enabled during incremental loading, the `_timestamp` column is updated based on the primary key only when a value in the row changes. In tables with native datatypes, the `_timestamp` column is updated every time when duplicate primary keys are imported. This behavior has an impact on [incremental processing](/storage/tables/#incremental-processing). When rows with duplicate primary keys are imported into tables with native types, they are treated as new rows. 
+<!-- VERIFY(Nikita): the _timestamp update semantics for native-types tables below were flagged for review in #1010 and never confirmed. -->
+There is significant change when loading incrementally into table with native datatypes on. If a table does not have native datatypes enabled during incremental loading, the `_timestamp` column is updated based on the primary key only when a value in the row changes. In tables with native datatypes, the `_timestamp` column is updated every time when duplicate primary keys are imported. This behavior has an impact on [incremental processing](#incremental-processing). When rows with duplicate primary keys are imported into tables with native types, they are treated as new rows. 
 
 **Example:**
 

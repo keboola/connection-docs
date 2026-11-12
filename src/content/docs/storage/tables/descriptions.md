@@ -1,17 +1,20 @@
 ---
 title: Table and column descriptions
 slug: 'storage/tables/descriptions'
+sidebar:
+  label: Descriptions
 description: 'Table and column descriptions in Storage: editing them in the UI and API, size limits per backend, external tables, workspaces, Data Gateway and KBC.description metadata.'
 ---
 
-Every Storage table and column can carry a description. This page lists where descriptions come from, where they are written and their limits.
+Every Storage table and column can carry a description. This page lists where descriptions come from, where they are written, and their limits.
 
-## Descriptions
+<!-- Reference-type page. Split from the former single tables page (PRDCT-486); text carried over from main 2026-11-12. -->
+
 Tables and columns carry a description that is part of the
 [table definition](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-bucketId-/tables-definition).
 It is the text shown for the table and its columns in Storage and returned by the API as `description`.
 
-### Edit Descriptions in the Storage UI
+## Edit Descriptions in the Storage UI
 On Snowflake and BigQuery projects, open a bucket and then a table.
 - **Table description:** on the **Overview** tab, the **Table Description** box has an **Add description** button.
   An existing description opens for editing when you click it.
@@ -24,7 +27,7 @@ updating the descriptions of the table and all its columns. You can turn it on a
 The description of an alias shows the description of its source table and is read-only, as are the descriptions of
 tables in buckets backed by an external schema (see [Descriptions of External Tables](#descriptions-of-external-tables)).
 
-### Set Descriptions Through the API
+## Set Descriptions Through the API
 Send the table `description`, and a description for each column, when you
 [create a table with a definition](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-bucketId-/tables-definition)
 or [update its definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition).
@@ -33,7 +36,7 @@ table, it is the column's `description`.
 The [table list](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list)
 returns the table description and, with `include=definition`, the column descriptions.
 
-### Descriptions in Your Backend
+## Descriptions in Your Backend
 On Snowflake and BigQuery projects the descriptions are written to the database itself: a Snowflake `COMMENT` on
 the table and its columns, and the BigQuery table and column description. Storage writes them when the table is
 created and whenever a description changes. You can therefore see the same text in a SQL client or in the
@@ -62,7 +65,7 @@ Aliases that synchronize columns with their source read the description of the t
 own table description takes precedence. A materialized alias view carries the resolved description as its comment
 (Snowflake) or description (BigQuery), and is updated when a description changes.
 
-### Descriptions of External Tables
+## Descriptions of External Tables
 In [external buckets](/storage/byodb/external-buckets/) (a registered Snowflake schema or Secure Data Share, or a
 BigQuery external dataset), the source owns the descriptions. When you register the bucket, and on every refresh,
 Storage takes the table and column descriptions from the source comments: the Snowflake `COMMENT` or the BigQuery
@@ -88,7 +91,7 @@ A `KBC.description` metadata row written through the
 [metadata API](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/metadata)
 is not changed by a refresh. The UI does not show it, but it stays readable through the Storage API.
 
-### Descriptions in Workspaces and Data Gateway
+## Descriptions in Workspaces and Data Gateway
 Storage table and column descriptions are written to the tables loaded into Snowflake and BigQuery
 [workspaces](/workspace/): as a Snowflake `COMMENT` or a BigQuery description. SQL clients, the MCP server and Kai
 therefore see the same context as Storage.
@@ -104,9 +107,9 @@ therefore see the same context as Storage.
 
 The `VIEW` load type and the Snowflake and BigQuery writers do not carry descriptions yet.
 
-### Relation to KBC.description Metadata
+## Relation to KBC.description Metadata
 The description in the table definition is the source of truth. For compatibility, Storage mirrors it into the
-`KBC.description` [metadata](#metadata) under the `storage` provider. A `KBC.description` written by another provider
+`KBC.description` [metadata](/storage/tables/#metadata) under the `storage` provider. A `KBC.description` written by another provider
 (for example a component) is only a fallback, used when the table or column has no description from the user or from
 Storage. For a typed table whose description field in the table definition is empty, the table detail falls back to the
 `KBC.description` that Storage wrote; the

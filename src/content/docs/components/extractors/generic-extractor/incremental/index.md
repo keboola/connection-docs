@@ -14,7 +14,7 @@ Extracting data incrementally is universally beneficial — it **speeds up the e
 
 ## Options
 After you have incrementally extracted data from an API, the data must be 
-[incrementally loaded](/storage/tables/#incremental-loading)
+[incrementally loaded](/storage/tables/incremental-loading/#incremental-loading)
 into Storage. To do that, simply set `"incrementalOutput": true` in the `config` section. 
 
 There are, however, a number of implications in the incremental loads. It essentially boils downs to the following use cases, 
@@ -23,7 +23,7 @@ depending on what kind of data you are importing (extracting from an API):
 - The imported data contains only **added entries**. When `incrementalOutput` is turned on, the data will be 
 simply appended to the target table in Storage. Turning `incrementalOutput` to false probably makes no sense 
 because the table will contain only the new entries.
-- The imported data contains **added and modified entries**. When `incrementalOutput` is turned on, set a primary key on the table so that new rows are added and existing [rows are updated](/storage/tables/#primary-key-deduplication). 
+- The imported data contains **added and modified entries**. When `incrementalOutput` is turned on, set a primary key on the table so that new rows are added and existing [rows are updated](/storage/tables/incremental-loading/#primary-key-deduplication). 
 If the primary key is not set, the modified entries will be duplicated in the target table. Turning 
 `incrementalOutput` to false probably makes no sense because the table will contain only the new entries.
 - The imported data contains **all rows**. In this case, set a primary key for the table or turn 

@@ -1,6 +1,7 @@
 ---
 title: Native Data Types
 slug: 'storage/tables/data-types'
+description: 'Native data types in Storage tables: typed vs. non-typed tables, base types, defining and changing column types, NULL handling, and the data types in the table definition.'
 ---
 
 
@@ -22,7 +23,7 @@ These are the key benefits of using the Native Data Types feature:
 
 ## Current Drawbacks
 Using the Native Data Types feature also has its drawbacks:
-- The data type of a column in a typed table cannot be changed after creation. To change a type, you must create a new column or recreate the table. See [How to Change Column Types](/storage/tables/data-types/#changing-types-of-existing-typed-columns). Some other alterations, such as increasing the length or precision of a column, are possible; see [Changing Column Definitions](/storage/tables/#changing-column-definitions).
+- The data type of a column in a typed table cannot be changed after creation. To change a type, you must create a new column or recreate the table. See [How to Change Column Types](/storage/tables/data-types/#changing-types-of-existing-typed-columns). Some other alterations, such as increasing the length or precision of a column, are possible; see [Changing Column Definitions](#changing-column-definitions).
 - Keboola does not perform any type conversion during data loading. Your data must exactly match the column type defined in the table within Storage.
 - Loading data with incompatible types will result in a failure.
 
@@ -142,7 +143,7 @@ Execute the transformation and wait for it to complete.
 **Step 4: Verify the Schema**  
 Once the transformation is finished, check the schema of the newly created table, `typed_table`. It should now include the appropriate data types.
 
-***Note:** [Incremental loading](/storage/tables/#incremental-loading) cannot be used when creating a typed table in this manner.*
+***Note:** [Incremental loading](/storage/tables/incremental-loading/#incremental-loading) cannot be used when creating a typed table in this manner.*
 
 ## Incremental Loading
 The behavior of incremental loading differs between **typed** and **non-typed tables**:
@@ -150,7 +151,7 @@ The behavior of incremental loading differs between **typed** and **non-typed ta
 - **Typed tables:** Only the columns in the table's **primary key** are compared to detect changes.
 - **Non-typed tables:** The entire row is compared, and rows are updated if **any value** has changed.
 
-For more information, refer to our documentation on [incremental loading](/storage/tables/#difference-between-tables-with-native-datatypes-and-string-tables).
+For more information, refer to our documentation on [incremental loading](/storage/tables/incremental-loading/#difference-between-tables-with-native-datatypes-and-string-tables).
 
 ## Handling NULLs
 Data can contain `NULL` values or empty strings, which are converted differently based on the processing backend.
@@ -214,7 +215,7 @@ with `include=definition`. The stored type is the one the backend reports: a col
 is returned with `type` `NUMBER`, `length` `38,0` and `basetype` `INTEGER`.
 
 - **Non-typed tables:** the definition of a non-typed table carries descriptions only. Type information for
-  such a table exists only as `KBC.datatype.*` [metadata](#metadata), for example `KBC.datatype.basetype`.
+  such a table exists only as `KBC.datatype.*` [metadata](/storage/tables/#metadata), for example `KBC.datatype.basetype`.
 - **Aliases:** an alias that synchronizes its columns with its source shows the types of the source table for
   the columns of the alias.
 - **Table list:** for some tables the table list returns `definition` as `null`. Use the table detail for those
@@ -245,3 +246,5 @@ For a typed table the definition is the source of truth for the types. Storage s
 under the `storage` provider for compatibility, and `KBC.datatype.*` rows written by other providers do not change
 the definition of a typed table. New integrations should read the types from the `definition` of the table, not from
 the metadata.
+
+**Next:** [CSV files →](/storage/tables/csv-files/)
