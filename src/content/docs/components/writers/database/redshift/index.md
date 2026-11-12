@@ -1,5 +1,6 @@
 ---
 title: Redshift
+lastUpdated: 2026-08-04
 slug: 'components/writers/database/redshift'
 redirect_from:
     - /writers/database/redshift/

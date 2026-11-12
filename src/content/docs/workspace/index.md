@@ -1,5 +1,6 @@
 ---
 title: Workspace
+lastUpdated: 2026-08-04
 slug: 'workspace'
 redirect_from:
   - /transformations/sandbox/

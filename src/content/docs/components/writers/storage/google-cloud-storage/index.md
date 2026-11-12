@@ -1,5 +1,6 @@
 ---
 title: Google Cloud Storage
+lastUpdated: 2024-02-29
 slug: 'components/writers/storage/google-cloud-storage'
 redirect_from:
     - /writers/storage/google-cloud-storage/

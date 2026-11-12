@@ -1,5 +1,6 @@
 ---
 title: Notifications
+lastUpdated: 2026-08-05
 slug: 'management/notifications'
 ---
 

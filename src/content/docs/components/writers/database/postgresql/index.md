@@ -1,5 +1,6 @@
 ---
 title: PostgreSQL
+lastUpdated: 2026-08-04
 slug: 'components/writers/database/postgresql'
 redirect_from:
     - /writers/database/postgresql/

@@ -1,5 +1,6 @@
 ---
 title: Customer IO
+lastUpdated: 2024-02-28
 slug: 'components/extractors/marketing-sales/customerio'
 ---
 

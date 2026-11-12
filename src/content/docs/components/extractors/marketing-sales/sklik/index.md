@@ -1,5 +1,6 @@
 ---
 title: Sklik
+lastUpdated: 2026-02-19
 slug: 'components/extractors/marketing-sales/sklik'
 redirect_from:
     - /extractors/marketing-sales/sklik/

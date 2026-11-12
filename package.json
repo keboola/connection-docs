@@ -3,6 +3,9 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
+    "gen:ogimage": "node scripts/make-og-image.mjs",
+    "gen:lastupdated": "node scripts/gen-last-updated.mjs",
+    "check:lastupdated": "node scripts/gen-last-updated.mjs --check",
     "dev": "astro dev",
     "start": "astro dev",
     "prebuild": "rm -rf .astro node_modules/.astro",

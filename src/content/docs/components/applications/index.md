@@ -1,5 +1,6 @@
 ---
 title: Applications
+lastUpdated: 2024-02-23
 slug: 'components/applications'
 redirect_from:
     - /manipulation/applications/

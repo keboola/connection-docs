@@ -1,5 +1,6 @@
 ---
 title: Google Sheets
+lastUpdated: 2026-06-19
 slug: 'components/writers/storage/google-sheets'
 redirect_from:
     - /writers/storage/google-sheets/

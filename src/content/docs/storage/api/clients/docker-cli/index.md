@@ -1,5 +1,6 @@
 ---
 title: Storage Docker CLI Client
+lastUpdated: 2026-08-25
 slug: 'storage/api/clients/docker-cli'
 redirect_from:
     - /integrate/storage/docker-cli-client/

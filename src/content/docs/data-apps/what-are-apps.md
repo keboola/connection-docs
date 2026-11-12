@@ -1,5 +1,6 @@
 ---
 title: What are Keboola apps
+lastUpdated: 2026-07-27
 slug: 'data-apps/what-are-apps'
 description: Understand what Keboola apps are — Python/JS applications that run inside your project on governed data — and how they're hosted.
 ---

@@ -1,5 +1,6 @@
 ---
 title: AI Kit
+lastUpdated: 2026-09-01
 slug: 'ai/ai-kit'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: kbagent with AI agents
+lastUpdated: 2026-09-02
 slug: 'cli/for-agents'
 sidebar:
   label: Use with AI Agents

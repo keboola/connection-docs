@@ -1,5 +1,6 @@
 ---
 title: Functions
+lastUpdated: 2026-09-15
 slug: 'components/extractors/generic-extractor/functions'
 redirect_from:
     - /extend/generic-extractor/functions/

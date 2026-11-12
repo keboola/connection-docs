@@ -1,5 +1,6 @@
 ---
 title: /data/in/tables manifests
+lastUpdated: 2026-08-04
 slug: 'extend/common-interface/manifest-files/in-tables-manifests'
 ---
 

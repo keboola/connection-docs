@@ -1,5 +1,6 @@
 ---
 title: IMAP Email Contents and Attachments
+lastUpdated: 2026-06-19
 slug: 'components/extractors/communication/email-imap'
 redirect_from:
     - /extractors/communication/email-imap/

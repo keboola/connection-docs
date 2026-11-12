@@ -1,5 +1,6 @@
 ---
 title: Python Transformation
+lastUpdated: 2026-09-16
 slug: 'transformations/python-plain'
 redirect_from:
     - /transformations/python/

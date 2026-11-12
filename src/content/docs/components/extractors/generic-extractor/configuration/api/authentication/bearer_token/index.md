@@ -1,5 +1,6 @@
 ---
 title: Bearer Token Authentication
+lastUpdated: 2026-08-05
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/bearer_token'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/bearer_token/

@@ -1,5 +1,6 @@
 ---
 title: R Implementation Notes
+lastUpdated: 2026-08-04
 slug: 'extend/component/implementation/r'
 redirect_from:
     - /extend/custom-science/r/

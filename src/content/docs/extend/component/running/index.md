@@ -1,5 +1,6 @@
 ---
 title: Running Components
+lastUpdated: 2026-09-16
 slug: 'extend/component/running'
 redirect_from:
     - /extend/docker/running/

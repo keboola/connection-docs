@@ -1,5 +1,6 @@
 ---
 title: ECB Currency Rates
+lastUpdated: 2024-02-28
 slug: 'components/extractors/other/currency-rates'
 redirect_from:
     - /extractors/other/currency-rates/

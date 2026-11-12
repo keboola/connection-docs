@@ -1,5 +1,6 @@
 ---
 title: BigCommerce
+lastUpdated: 2024-02-28
 slug: 'components/extractors/marketing-sales/bigcommerce'
 redirect_from:
     - /extractors/marketing-sales/bigcommerce/

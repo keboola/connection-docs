@@ -1,5 +1,6 @@
 ---
 title: Weather API
+lastUpdated: 2024-02-23
 slug: 'components/extractors/other/weather-api'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Microsoft Advertising (Bing Ads)
+lastUpdated: 2024-09-26
 slug: 'components/extractors/marketing-sales/bing-ads'
 redirect_from:
     - /extractors/marketing-sales/bing-ads/

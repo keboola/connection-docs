@@ -1,5 +1,6 @@
 ---
 title: Security & Privacy
+lastUpdated: 2026-09-10
 slug: 'kai/security-and-privacy'
 ---
 

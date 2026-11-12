@@ -1,5 +1,6 @@
 ---
 title: Page Number Scroller
+lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/pagenum'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/pagenum/

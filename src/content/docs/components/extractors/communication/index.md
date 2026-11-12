@@ -1,5 +1,6 @@
 ---
 title: Communication Data Source Connectors
+lastUpdated: 2026-06-19
 slug: 'components/extractors/communication'
 redirect_from:
     - /extractors/communication/

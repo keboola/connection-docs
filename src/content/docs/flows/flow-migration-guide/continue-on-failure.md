@@ -1,5 +1,6 @@
 ---
 title: Continue on Failure in Conditional Flows
+lastUpdated: 2026-07-30
 slug: 'flows/flow-migration-guide/continue-on-failure'
 description: >-
   Conditional Flows have no per-task Continue on Failure toggle. The Legacy Flow

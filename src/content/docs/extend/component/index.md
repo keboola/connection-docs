@@ -1,5 +1,6 @@
 ---
 title: Components
+lastUpdated: 2026-08-08
 slug: 'extend/component'
 redirect_from:
     - /extend/docker/

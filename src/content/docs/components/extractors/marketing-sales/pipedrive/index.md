@@ -1,5 +1,6 @@
 ---
 title: Pipedrive
+lastUpdated: 2026-08-05
 slug: 'components/extractors/marketing-sales/pipedrive'
 redirect_from:
     - /extractors/marketing-sales/pipedrive/

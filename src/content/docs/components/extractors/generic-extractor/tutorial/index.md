@@ -1,5 +1,6 @@
 ---
 title: Generic Extractor Tutorial
+lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/tutorial'
 redirect_from:
     - /extend/generic-extractor/tutorial/

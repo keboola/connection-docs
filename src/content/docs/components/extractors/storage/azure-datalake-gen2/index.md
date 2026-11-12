@@ -1,5 +1,6 @@
 ---
 title: Azure Datalake Gen 2
+lastUpdated: 2026-06-19
 slug: 'components/extractors/storage/azure-datalake-gen2'
 redirect_from:
     - /extractors/other/azure-datalake-gen2/

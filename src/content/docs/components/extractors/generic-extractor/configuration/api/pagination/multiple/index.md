@@ -1,5 +1,6 @@
 ---
 title: Multiple Scrollers
+lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/multiple'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/multiple/

@@ -1,5 +1,6 @@
 ---
 title: Configuration File Specification
+lastUpdated: 2026-09-16
 slug: 'extend/common-interface/config-file'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Code Pattern Interface
+lastUpdated: 2026-09-16
 slug: 'extend/component/code-patterns/interface'
 ---
 

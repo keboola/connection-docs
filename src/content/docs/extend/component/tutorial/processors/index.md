@@ -1,5 +1,6 @@
 ---
 title: Processors
+lastUpdated: 2026-07-27
 slug: 'extend/component/tutorial/processors'
 ---
 

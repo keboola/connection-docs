@@ -1,5 +1,6 @@
 ---
 title: Running Generic Extractor
+lastUpdated: 2026-09-16
 slug: 'components/extractors/generic-extractor/running'
 redirect_from:
     - /extend/generic-extractor/running/

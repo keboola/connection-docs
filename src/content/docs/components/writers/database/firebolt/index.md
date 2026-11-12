@@ -1,5 +1,6 @@
 ---
 title: Firebolt
+lastUpdated: 2026-08-04
 slug: 'components/writers/database/firebolt'
 redirect_from:
     - /writers/database/firebolt/

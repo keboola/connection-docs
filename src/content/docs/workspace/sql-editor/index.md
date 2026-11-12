@@ -1,5 +1,6 @@
 ---
 title: SQL Editor
+lastUpdated: 2026-08-08
 slug: 'workspace/sql-editor'
 redirect_from:
   - /transformations/sql-editor/

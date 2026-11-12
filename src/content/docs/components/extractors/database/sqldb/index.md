@@ -1,5 +1,6 @@
 ---
 title: Relational Sync Data Source Connectors for SQL Databases
+lastUpdated: 2026-02-19
 slug: 'components/extractors/database/sqldb'
 redirect_from:
     - /extractors/database/sqldb/

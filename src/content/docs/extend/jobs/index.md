@@ -1,5 +1,6 @@
 ---
 title: Component Jobs
+lastUpdated: 2026-09-16
 slug: 'extend/jobs'
 description: "Run a component or a flow through the Queue API, poll the job until it finishes, run a debug job, and read what the job object tells you about states, hierarchy and runtime settings."
 redirect_from:

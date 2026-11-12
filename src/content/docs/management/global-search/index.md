@@ -1,5 +1,6 @@
 ---
 title: Global Search
+lastUpdated: 2026-06-22
 slug: 'management/global-search'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Data Destination Connectors
+lastUpdated: 2026-08-05
 slug: 'components/writers'
 redirect_from:
     - /writers/

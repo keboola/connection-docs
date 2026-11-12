@@ -1,5 +1,6 @@
 ---
 title: Instagram
+lastUpdated: 2026-08-04
 slug: 'components/extractors/social/instagram'
 redirect_from:
     - /extractors/social/instagram/

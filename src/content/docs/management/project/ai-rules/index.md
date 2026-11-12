@@ -1,5 +1,6 @@
 ---
 title: AI Rules
+lastUpdated: 2025-05-07
 slug: 'management/project/ai-rules'
 ---
 

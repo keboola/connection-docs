@@ -1,5 +1,6 @@
 ---
 title: AWS S3
+lastUpdated: 2024-03-06
 slug: 'components/writers/storage/aws-s3'
 redirect_from:
     - /writers/storage/aws-s3/

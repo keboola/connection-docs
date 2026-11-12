@@ -1,5 +1,6 @@
 ---
 title: OpenTelemetry (OTLP) Data Streams
+lastUpdated: 2026-08-03
 slug: 'storage/data-streams/opentelemetry'
 ---
 

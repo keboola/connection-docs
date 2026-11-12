@@ -1,5 +1,6 @@
 ---
 title: Looker
+lastUpdated: 2026-06-19
 slug: 'components/writers/bi-tools/looker'
 redirect_from:
     - /writers/bi-tools/looker/

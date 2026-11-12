@@ -1,5 +1,6 @@
 ---
 title: Marketing/Sales Data Source Connectors 
+lastUpdated: 2026-06-19
 slug: 'components/extractors/marketing-sales'
 redirect_from:
     - /extractors/marketing-sales/

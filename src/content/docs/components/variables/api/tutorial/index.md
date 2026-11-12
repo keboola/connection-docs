@@ -1,5 +1,6 @@
 ---
 title: Variables Tutorial
+lastUpdated: 2026-08-19
 slug: 'components/variables/api/tutorial'
 description: Walk through parametrizing a component configuration with variables end to end, using the API.
 redirect_from:

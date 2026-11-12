@@ -1,5 +1,6 @@
 ---
 title: Project Users
+lastUpdated: 2026-06-03
 slug: 'management/project/users'
 redirect_from:
   - /management/users/

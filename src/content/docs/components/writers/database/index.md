@@ -1,5 +1,6 @@
 ---
 title: Database Data Destination Connectors
+lastUpdated: 2026-08-04
 slug: 'components/writers/database'
 redirect_from:
     - /writers/database/

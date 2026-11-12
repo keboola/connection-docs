@@ -1,5 +1,6 @@
 ---
 title: Google Analytics 4 (GA4)
+lastUpdated: 2026-08-04
 slug: 'components/extractors/marketing-sales/google-analytics'
 redirect_from:
     - /extractors/marketing-sales/google-analytics/

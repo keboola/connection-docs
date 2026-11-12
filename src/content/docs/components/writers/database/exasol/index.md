@@ -1,5 +1,6 @@
 ---
 title: Exasol
+lastUpdated: 2026-08-04
 slug: 'components/writers/database/exasol'
 redirect_from:
     - /writers/database/exasol/

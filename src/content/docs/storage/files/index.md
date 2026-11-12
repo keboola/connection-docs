@@ -1,5 +1,6 @@
 ---
 title: Files
+lastUpdated: 2026-08-04
 slug: 'storage/files'
 redirect_from:
     - /storage/file-uploads/

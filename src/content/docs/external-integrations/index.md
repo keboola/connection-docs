@@ -1,5 +1,6 @@
 ---
 title: External Integrations
+lastUpdated: 2026-09-16
 slug: 'external-integrations'
 ---
 

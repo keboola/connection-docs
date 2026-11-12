@@ -1,5 +1,6 @@
 ---
 title: MongoDB
+lastUpdated: 2024-11-01
 slug: 'components/extractors/database/mongodb'
 redirect_from:
     - /extractors/database/mongodb/

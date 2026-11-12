@@ -1,5 +1,6 @@
 ---
 title: Market Vision
+lastUpdated: 2024-02-28
 slug: 'components/extractors/marketing-sales/market-vision'
 redirect_from:
     - /extractors/marketing-sales/market-vision/

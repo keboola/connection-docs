@@ -1,5 +1,6 @@
 ---
 title: Pay As You Go (Free Plan)
+lastUpdated: 2026-02-19
 slug: 'management/payg-project'
 description: 'The limits of a Free Plan project, its free monthly minutes and how to buy more, how to upgrade it to a standard project, and when an inactive one is deleted.'
 ---

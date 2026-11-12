@@ -1,5 +1,6 @@
 ---
 title: Manually Importing and Exporting Data
+lastUpdated: 2026-09-16
 slug: 'storage/api/import-export'
 redirect_from:
     - /integrate/storage/api/import-export/

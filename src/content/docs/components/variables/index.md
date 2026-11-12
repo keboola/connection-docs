@@ -1,5 +1,6 @@
 ---
 title: Variables
+lastUpdated: 2026-08-08
 slug: 'components/variables'
 description: Parametrize a component configuration with placeholders, define variables inside a flow, and drive one from the other.
 redirect_from:

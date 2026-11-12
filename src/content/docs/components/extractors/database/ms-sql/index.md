@@ -1,5 +1,6 @@
 ---
 title: Microsoft SQL
+lastUpdated: 2026-08-04
 slug: 'components/extractors/database/microsoft-sql'
 ---
 

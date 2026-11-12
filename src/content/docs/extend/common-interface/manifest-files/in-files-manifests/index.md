@@ -1,5 +1,6 @@
 ---
 title: /data/in/files manifests
+lastUpdated: 2026-07-27
 slug: 'extend/common-interface/manifest-files/in-files-manifests'
 ---
 

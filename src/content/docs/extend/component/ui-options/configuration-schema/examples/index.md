@@ -1,5 +1,6 @@
 ---
 title: UI Element Examples
+lastUpdated: 2026-09-16
 slug: 'extend/component/ui-options/configuration-schema/examples'
 
 ---

@@ -1,5 +1,6 @@
 ---
 title: Publish and share
+lastUpdated: 2026-07-27
 slug: 'data-apps/publish-and-share'
 description: Publish a Keboola app and share it with your team or external users.
 ---

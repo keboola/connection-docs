@@ -1,5 +1,6 @@
 ---
 title: GitHub
+lastUpdated: 2026-08-05
 slug: 'components/extractors/other/github'
 redirect_from:
     - /extractors/other/github/

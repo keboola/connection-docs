@@ -1,5 +1,6 @@
 ---
 title: Pingdom
+lastUpdated: 2026-08-05
 slug: 'components/extractors/other/pingdom'
 redirect_from:
     - /extractors/other/pingdom/
