@@ -35,7 +35,8 @@ src/
                   # AskKaiDrawer, Prereqs, StageStrip, …)
   styles/custom.css  # all UI/CSS customization
   integrations/   # custom Astro integrations: redirect-from, beacon-transforms,
-                  # page-markdown (the "View as Markdown" twin), pagefind-titles
+                  # page-markdown (the "View as Markdown" twin), pagefind-titles,
+                  # image-dimensions (width/height on public/ images)
   sidebar.mjs     # generated from _data/navigation.yml
 public/           # static assets served as-is (images, favicon, llms)
 api/chat.ts       # "Ask Kai" backend (Vercel function → Keboola AI Service)
@@ -86,7 +87,9 @@ Beta notice.
 ```
 
 Images: place them under `public/<section>/` and reference them with an absolute
-path (`![Alt](/section/page/image.png)`). Click-to-zoom is automatic.
+path (`![Alt](/section/page/image.png)`). Click-to-zoom is automatic. The build
+adds each image's width and height. If an image path doesn't exist in the build,
+the build fails in CI (locally it only warns).
 
 ### Moving, merging or deleting a page
 
