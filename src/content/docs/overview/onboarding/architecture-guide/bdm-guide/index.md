@@ -147,7 +147,7 @@ can have the same tag / one object can have many tags).
 #### Transitivity
 Transitivity ensues when there are multiple paths from a child (or object on the right of the board) to a parent (or object somewhere more to the left 
 of the board). Those are generally undesirable signs of situations where an object represents multiple different entities. Drill in to find out why 
-they’re popping up. The only situation when we (reluctantly) let them pass is when there is NO scenario in hell where these multiple paths could lead to different
+they’re popping up. We let them pass only when there is no scenario in which these multiple paths could lead to different
 “parents.” That usually means we have either self-reference or a hidden M: N problem.
 
 #### Missing links
@@ -166,7 +166,7 @@ times Quantity on Order Lines that refer to Products Attributed to that Category
 following an arrow (against the direction is permissible) at any given point, something is wrong. Question it and drill in.
 
 ### Step 5 – Iterate
-So, we’re reasonably happy with it. The question is: what is missing? Depending on the complexity, time of day, quality of coffee served, etc., you may 
+So, we’re reasonably happy with it. The question is: what is missing? Depending on the complexity and how long the session has run, you may 
 get an enthusiastic response or an exhausted “looks good to me” answer. If the former, go at it; if the latter, let people sleep on it and reconvene roughly 
 a week later.
 
@@ -195,9 +195,8 @@ This basic template works in most subscription contexts (think Software as a Ser
 ![BDM Subscription](/overview/onboarding/architecture-guide/bdm-guide/bdm-subscription.png)
 
 ### Customer Relationship Management
-That title looked better than “CRM,” but that’s what it means. Various CRM systems are notorious for how they take simple concepts and make the data very
-complicated. Again, that means a trap and future headache if you try to take the data as-is without a bit of thought given to it beforehand (looking at you, 
-Tableau SFDC connector!).
+CRM systems often store simple concepts in complicated data structures. If you load that data as-is, without designing the model first,
+the complexity follows you into every transformation and report.
 
 ![CRM](/overview/onboarding/architecture-guide/bdm-guide/crm-bdm.png)
 
