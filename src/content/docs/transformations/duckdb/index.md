@@ -76,11 +76,8 @@ These actions are available from the transformation configuration page and are h
 ## Dynamic Backends
 
 DuckDB runs in-process on the **data science backend** — the same container infrastructure that runs
-Python and R transformations — not on a SQL data warehouse. Two things follow from this, and both
-affect cost:
-
-- A DuckDB job is billed as a **Data Science job**, not as a SQL job, even though you write SQL in it.
-- The backend size sets the memory of that container, not the size of a warehouse.
+Python and R transformations — not on a SQL data warehouse. The backend size sets the memory of
+that container, not the size of a warehouse.
 
 You can change the backend size to allocate more memory for your transformation. The following sizes are available:
 
@@ -93,9 +90,9 @@ You can change the backend size to allocate more memory for your transformation.
 
 Start with the **Small** backend and scale up as needed based on your dataset size and query complexity.
 
-For the credit rate of each size, see the **Data Science job / workspace** rows in
-[Project Limits](/management/project/limits/#project-power--time-credits). Do not use the **SQL job**
-rates to estimate DuckDB cost — those apply to Snowflake and BigQuery transformations.
+A DuckDB job has its own credit rates, not the **Data Science job** rates of Python and R. For the
+rate of each size, see the **DuckDB transformation job** rows in
+[Project Limits](/management/project/limits/#project-power--time-credits).
 
 ***Note:** Dynamic backends are not available if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).*
 
@@ -359,7 +356,7 @@ FROM "pipeline_stages";
 **Choose DuckDB for:**
 - Ad-hoc analysis and small to medium datasets
 - Rapid prototyping of transformations
-- Projects with limited budgets — DuckDB bills at data science rates, far below SQL warehouse rates (see [Dynamic Backends](#dynamic-backends))
+- Workloads that fit on a single node — before you move a job to save cost, compare the hourly rates in [Project Limits](/management/project/limits/#project-power--time-credits) and the run time on your own data; the same job can take longer on DuckDB than on Snowflake
 - Datasets under a few terabytes
 - Development and testing
 
