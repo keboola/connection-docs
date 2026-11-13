@@ -1,6 +1,6 @@
 # kbagent command reference
 
-Generated from kbagent v0.91.0 by `scripts/gen_command_reference.py`.
+Generated from kbagent v0.100.5 by `scripts/gen_command_reference.py`.
 Derived from the CLI's own command tree -- do not edit by hand.
 
 ## Global options
@@ -16,6 +16,7 @@ Available on every command:
 | `--config-dir` `<str>` |  | Override config directory path. |
 | `--deny-writes` |  | Session-only firewall: block write, destructive, AND admin operations (the wide net -- project add/remove/edit, org setup, storage writes and deletes, etc.). Merges with any persisted policy. |
 | `--deny-destructive` |  | Session-only firewall: block ONLY data-destructive operations (storage delete-table/delete-bucket/delete-column, job terminate, branch delete, etc.). Admin ops like 'project remove' and 'org setup' are NOT blocked -- use --deny-writes for the wide net. |
+| `--conversation-id` `<str>` |  | Conversation/session ID sent as the X-Conversation-ID header on every API request (platform observability). Equivalent to setting KBAGENT_CONVERSATION_ID, and takes precedence over it. Exists because agent harnesses do not persist shell state between tool calls, so a standalone `export` cannot set it -- and prefixing every command with `export ...` stops the command matching a `Bash(kbagent ...)` permission allow-rule. |
 | `--allow-env-manage-token` |  | Read KBC_MANAGE_API_TOKEN from the environment. Without this flag the env var is ignored (with a warning) and an interactive TTY prompt is required. Default-deny since 0.29.0; closes the AI-exfiltration risk where subprocesses inherit the manage token. |
 | `--install-completion` |  | Install completion for the current shell. |
 | `--show-completion` |  | Show completion for the current shell, to copy it or customize the installation. |
@@ -125,9 +126,25 @@ Add a new Keboola project connection.
 
 | Option | Required | Description |
 |---|---|---|
-| `--project` `<str>` | yes | Human-friendly name for this project |
+| `--project` / `--alias` `<str>` | yes | Human-friendly name for this project |
 | `--url` `<str>` |  | Keboola stack URL |
-| `--token` `<str>` |  | Storage API token (also via KBC_TOKEN env var) |
+| `--token` `<str>` |  | Storage API token. Also settable via KBC_TOKEN. Prefer --token-stdin: a token passed here lands in your shell history and in a process listing. |
+| `--token-stdin` |  | Read the token from stdin instead of --token. On a TTY this is a hidden prompt (Enter to confirm); on a pipe it reads until EOF (e.g. `printf '%s' "$TOKEN" | kbagent project edit --project P --token-stdin`). The token stays out of your shell history and out of a process listing. |
+| `--token-file` `<file>` |  | Read the token from this file. kbagent deletes the file after the command succeeds -- pass --keep-token-file to keep it. Deleting a file removes the directory entry, not the bytes on disk. Give the file mode 0600. |
+| `--token-env` `<str>` |  | Read the token from the environment variable with this name, e.g. `--token-env CI_KBC_TOKEN`. kbagent reads no variable unless you name it. Use this in CI, where the runner sets the variable from a secret. |
+| `--keep-token-file` |  | Keep the --token-file file instead of deleting it. Use this for a read-only mount, or for a file you read more than once. |
+
+### `kbagent project create`
+
+Create a brand-new Keboola project -- no account, no token needed.
+
+| Option | Required | Description |
+|---|---|---|
+| `--url` `<str>` | yes | Keboola stack URL to create the project on (required -- never guessed) |
+| `--project` / `--alias` `<str>` |  | Local alias for the new project (default: from its name) |
+| `--name` `<str>` |  | Name for the new Keboola project |
+| `--backend` `<snowflake|bigquery>` |  | Storage backend (default: the stack's own default) |
+| `--sync-backend-init` |  | Wait for the storage backend to be initialized before answering, instead of letting the stack finish it in the background |
 
 ### `kbagent project list`
 
@@ -149,7 +166,11 @@ Edit an existing Keboola project connection.
 |---|---|---|
 | `--project` `<str>` | yes | Alias of the project to edit |
 | `--url` `<str>` |  | New Keboola stack URL |
-| `--token` `<str>` |  | New Storage API token. On a project registered by 'kbagent auth login' this deliberately converts it to a static-token project, which 'kbagent auth logout --remove-projects' no longer cleans up; a warning says so. |
+| `--token` `<str>` |  | New Storage API token. On a project registered by 'kbagent auth login' this deliberately converts it to a static-token project, which 'kbagent auth logout --remove-projects' no longer cleans up; a warning says so. Prefer --token-stdin: a token passed here lands in your shell history and in a process listing. |
+| `--token-stdin` |  | Read the token from stdin instead of --token. On a TTY this is a hidden prompt (Enter to confirm); on a pipe it reads until EOF (e.g. `printf '%s' "$TOKEN" | kbagent project edit --project P --token-stdin`). The token stays out of your shell history and out of a process listing. |
+| `--token-file` `<file>` |  | Read the token from this file. kbagent deletes the file after the command succeeds -- pass --keep-token-file to keep it. Deleting a file removes the directory entry, not the bytes on disk. Give the file mode 0600. |
+| `--token-env` `<str>` |  | Read the token from the environment variable with this name, e.g. `--token-env CI_KBC_TOKEN`. kbagent reads no variable unless you name it. Use this in CI, where the runner sets the variable from a secret. |
+| `--keep-token-file` |  | Keep the --token-file file instead of deleting it. Use this for a read-only mount, or for a file you read more than once. |
 | `--new-alias` `<str>` |  | Rename the project alias. Updates the config.json projects key AND the default_project field if it matched. Renames the nested sync directory <cwd>/<old-alias>/ when present (with -2-suffix collision handling). Lineage cache (if any) is NOT auto-updated; rebuild with 'kbagent lineage build' after the rename. |
 | `--dry-run` |  | Preview the edit without mutating state. Validates --new-alias, detects collision against existing projects, predicts the disk-rename method (git_mv vs shutil_move), and surfaces the lineage-cache warning if any -- all read-only. Errors (collision, invalid format) raise the same exit codes as the live path. No API call is made for --token in dry-run mode. |
 
@@ -160,6 +181,7 @@ Test connectivity to connected Keboola projects.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Check only this project (default: all) |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 
 ### `kbagent project refresh`
 
@@ -168,7 +190,7 @@ Refresh expired or invalid Storage API tokens.
 | Option | Required | Description |
 |---|---|---|
 | `--project` / `-p` `<str>` |  | Refresh token for a specific project |
-| `--all` |  | Refresh all projects with invalid tokens |
+| `--all` / `--all-projects` |  | Refresh all projects with invalid tokens |
 | `--dry-run` |  | Preview what would be refreshed without making changes |
 | `--force` |  | Refresh even if token is valid |
 | `--yes` / `-y` |  | Skip confirmation prompt |
@@ -202,8 +224,8 @@ Set the Keboola dashboard project description (markdown).
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` | yes | Project alias to update |
-| `--text` `<str>` |  | Inline description string |
-| `--file` `<path>` |  | Read description from a UTF-8 markdown file |
+| `--text` / `--description` `<str>` |  | Inline description string |
+| `--file` / `--description-file` `<path>` |  | Read description from a UTF-8 markdown file (- for stdin) |
 | `--stdin` |  | Read description from standard input |
 
 ### `kbagent project info`
@@ -224,7 +246,7 @@ Invite a user (or many users via CSV) to one or more projects.
 | `--email` / `-e` `<str>` |  | Email address of the user to invite |
 | `--role` / `-r` `<admin|guest|readOnly|share>` |  | Role to grant: admin | guest | readOnly | share |
 | `--reason` `<str>` |  | Optional human-readable reason attached to the invitation |
-| `--from-csv` `<path>` |  | CSV file with columns email, project (alias or numeric ID), role[, reason] |
+| `--from-csv` / `--file` `<path>` |  | CSV file with columns email, project (alias or numeric ID), role[, reason] |
 | `--default-role` `<admin|guest|readOnly|share>` |  | Role to apply when a CSV row has no role column |
 | `--workers` `<int-range>` |  | Parallel workers for --from-csv (default 8) |
 | `--dry-run` |  | Preview without sending invitations |
@@ -289,6 +311,7 @@ Set up projects and register them in the kbagent config.
 |---|---|---|
 | `--org-id` `<int>` |  | Organization ID (requires org-admin manage token) |
 | `--project-ids` `<str>` |  | Comma-separated project IDs (works with Personal Access Token) |
+| `--project-id` `<int>` |  | Project ID (repeat for more projects); merged with --project-ids |
 | `--url` `<str>` | yes | Keboola stack URL (e.g. https://connection.keboola.com) |
 | `--dry-run` |  | Preview what would happen without making changes |
 | `--yes` / `-y` |  | Skip confirmation prompt |
@@ -397,7 +420,7 @@ List the project's Storage API tokens (no secrets -- those are mint-only).
 |---|---|---|
 | `--project` / `-p` `<str>` | yes | Project alias |
 | `--with-last-used` |  | Derive each token's last activity (one extra API call PER TOKEN) and sort dormant-first |
-| `--columns` `<str>` |  | Table columns to show, in order (repeat for multiple). Available: id, description, created, refreshed, expires, master, created_by, last_used, last_used_event. Human output only -- --json is unaffected. |
+| `--columns` / `--column` `<str>` |  | Table columns to show, in order (repeat for multiple). Available: id, description, created, refreshed, expires, master, created_by, last_used, last_used_event. Human output only -- --json is unaffected. |
 
 ### `kbagent token delete`
 
@@ -430,6 +453,7 @@ Show the current PAYG credit balance for one or more projects.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias (repeatable; omit for all registered projects) |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 
 ## `component`
 
@@ -442,6 +466,7 @@ List available components from connected projects.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias to query (can be repeated for multiple projects) |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. No effect with --query: --query searches only the default project. |
 | `--type` `<str>` |  | Filter by component type: extractor, writer, transformation, application |
 | `--query` / `-q` `<str>` |  | Search query to filter components by name or description |
 
@@ -452,7 +477,7 @@ Show detailed information about a specific component.
 | Option | Required | Description |
 |---|---|---|
 | `--component-id` `<str>` | yes | Component ID (e.g. keboola.ex-db-snowflake) |
-| `--project` `<str>` |  | Project alias (uses first available if not set) |
+| `--project` `<str>` |  | Project alias (defaults to the pinned default project) |
 
 ### `kbagent component sync-action`
 
@@ -467,6 +492,7 @@ Run a synchronous component action such as testConnection.
 | `--project` `<str>` | yes | Project alias |
 | `--branch` `<int>` |  | Run in a specific dev branch ID (defaults to active branch) |
 | `--config-data` `<str>` |  | Explicit configData JSON: inline, @file.json, or - for stdin (skips config fetch) |
+| `--config-data-file` `<path>` |  | Read the explicit configData JSON from a file, - for stdin (skips config fetch) |
 | `--timeout` `<int>` |  | Request timeout in seconds for the action call (long actions e.g. getTables) |
 
 ## `config`
@@ -480,6 +506,7 @@ List configurations from connected projects.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias to query (can be repeated for multiple projects) |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 | `--component-type` `<str>` |  | Filter by component type: extractor, writer, transformation, application |
 | `--component-id` `<str>` |  | Filter by specific component ID (e.g. keboola.ex-db-snowflake) |
 | `--branch` `<int>` |  | List configs from a specific dev branch ID (defaults to active branch) |
@@ -504,7 +531,7 @@ Show sample configuration JSON examples for a component.
 | Option | Required | Description |
 |---|---|---|
 | `--component-id` `<str>` | yes | Component ID (e.g. keboola.ex-google-drive) |
-| `--project` `<str>` |  | Project alias (uses first available if not set) |
+| `--project` `<str>` |  | Project alias (defaults to the pinned default project) |
 | `--row` |  | Show row configuration examples only |
 
 ### `kbagent config search`
@@ -515,6 +542,7 @@ Search through configuration bodies for a string or pattern.
 |---|---|---|
 | `--query` / `-q` `<str>` | yes | Search string or regex pattern |
 | `--project` `<str>` |  | Project alias to search (can be repeated for multiple projects) |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 | `--component-type` `<str>` |  | Filter by component type: extractor, writer, transformation, application |
 | `--component-id` `<str>` |  | Filter by specific component ID (e.g. keboola.ex-db-snowflake) |
 | `--ignore-case` / `-i` |  | Case-insensitive matching |
@@ -533,7 +561,7 @@ Update a configuration's metadata and/or content.
 | `--name` `<str>` |  | New configuration name |
 | `--description` `<str>` |  | New configuration description |
 | `--configuration` `<str>` |  | Configuration JSON: inline, @file.json, or - for stdin |
-| `--configuration-file` `<path>` |  | Path to a JSON file with configuration content |
+| `--configuration-file` `<path>` |  | Path to a JSON file with configuration content (- for stdin) |
 | `--set` `<str>` |  | Set a nested value: PATH VALUE (e.g. --set 'parameters.db.host=new-host') |
 | `--merge` |  | Deep-merge into existing config instead of replacing |
 | `--change-description` `<str>` |  | Version changeDescription for the audit trail (default: auto-generated) |
@@ -594,7 +622,7 @@ Generate boilerplate configuration files for a Keboola component, optionally cre
 | `--no-files` |  | With --push: skip writing/printing scaffold; only POST to API (FIIA-style one-shot) |
 | `--description` `<str>` |  | Configuration description (used with --push) |
 | `--configuration` `<str>` |  | Override the configuration body to POST (used with --push): JSON inline, @file, or - for stdin |
-| `--configuration-file` `<path>` |  | Override the configuration body from a JSON file (used with --push) |
+| `--configuration-file` `<path>` |  | Override the configuration body from a JSON file, - for stdin (used with --push) |
 | `--no-validate` |  | Skip schema validation against the component's AI Service spec (used with --push) |
 | `--branch` `<int>` |  | Create in a specific dev branch (used with --push; defaults to active branch) |
 | `--dry-run` |  | With --push: show planned POST + validation result without creating |
@@ -713,6 +741,7 @@ Create a new configuration row.
 | `--name` `<str>` | yes | Row name |
 | `--description` `<str>` |  | Row description |
 | `--configuration` `<str>` |  | Row configuration JSON: inline, @file.json, or - for stdin |
+| `--configuration-file` `<path>` |  | Read the row configuration JSON from a file (- for stdin) |
 | `--is-disabled` |  | Create the row in disabled state (excluded from job runs) |
 | `--branch` `<int>` |  | Create in a specific dev branch ID (defaults to active branch) |
 | `--allow-plaintext-on-encrypt-failure` |  | Allow write even if secret encryption fails (DANGEROUS: secrets stored as plaintext) |
@@ -730,6 +759,7 @@ Update an existing configuration row.
 | `--name` `<str>` |  | New row name |
 | `--description` `<str>` |  | New row description |
 | `--configuration` `<str>` |  | Row configuration JSON: inline, @file.json, or - for stdin |
+| `--configuration-file` `<path>` |  | Read the row configuration JSON from a file (- for stdin) |
 | `--set` `<str>` |  | Set a nested value: PATH=VALUE (e.g. --set 'parameters.table=orders') |
 | `--merge` |  | Deep-merge into existing row config instead of replacing |
 | `--change-description` `<str>` |  | Version changeDescription for the audit trail (default: auto-generated) |
@@ -773,7 +803,8 @@ Overwrite the runtime ``state`` dict of a configuration or one of its rows.
 | `--project` `<str>` | yes | Project alias |
 | `--component-id` `<str>` | yes | Component ID |
 | `--config-id` `<str>` | yes | Configuration ID |
-| `--state` `<str>` | yes | New state as inline JSON object, @file, or - for stdin |
+| `--state` `<str>` |  | New state as inline JSON object, @file, or - for stdin |
+| `--state-file` `<path>` |  | Read the new state JSON object from a file (- for stdin) |
 | `--row-id` `<str>` |  | Write this row's state instead of the config's root state |
 | `--branch` `<int>` |  | Dev branch ID (defaults to active branch) |
 | `--dry-run` |  | Show what would change without applying |
@@ -808,6 +839,7 @@ Requires master token.
 | `--component-id` `<str>` | yes | Component ID (e.g. keboola.ex-google-drive) |
 | `--config-id` `<str>` | yes | Configuration ID to authorize |
 | `--redirect-url` `<str>` |  | Optional URL to return to after the OAuth flow completes (sets returnUrl query param) |
+| `--no-open` |  | Only print the authorization URL, do not open a browser |
 
 ### `kbagent config restore`
 
@@ -841,6 +873,7 @@ List data apps across one or more registered projects.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias to query (repeatable). None = all projects. |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 | `--branch` `<int>` |  | Storage branch ID for the config-name lookup (defaults to production). |
 
 ### `kbagent data-app detail`
@@ -862,7 +895,7 @@ Create a Keboola data app end-to-end (POST + encrypt + PUT + deploy).
 | `--project` `<str>` | yes | Project alias |
 | `--name` `<str>` | yes | Display name shown in the Keboola UI |
 | `--description` `<str>` |  | Long-form description (markdown). Mutually exclusive with --description-file. |
-| `--description-file` `<path>` |  | Read description from a file. Mutually exclusive with --description. |
+| `--description-file` `<path>` |  | Read description from a file (- for stdin). Mutually exclusive with --description. |
 | `--slug` `<str>` | yes | URL slug (lowercase alphanumeric, hyphens; 2-64 chars) |
 | `--git-repo` `<str>` |  | External git repository URL to deploy from. Required unless --use-managed-git-repo is set (mutually exclusive with it). |
 | `--use-managed-git-repo` |  | Provision an empty Keboola-managed git repository for the app instead of cloning an external one. Mints code via `data-app git-credentials-create`, then push + deploy. Mutually exclusive with --git-repo and all --git-* auth flags. |
@@ -883,6 +916,8 @@ Create a Keboola data app end-to-end (POST + encrypt + PUT + deploy).
 | `--timeout` `<float>` |  | Maximum seconds to wait for state == running (default 300). |
 | `--keep-on-failure` |  | Keep the orphan deployment shell if PUT or initial deploy fails (forensics). |
 | `--dry-run` |  | Print the three request bodies without making any API call. |
+| `--copy` |  | Copy the data-app password to the clipboard at once, without the terminal prompt. The only way to copy it when there is no terminal (an AI agent, CI) or with --json. On create / deploy it needs --wait. |
+| `--reveal` |  | Print the data-app password (human and --json output). For scripts and CI; in an AI agent session the password then goes into the chat history. On create / deploy it needs --wait. |
 
 ### `kbagent data-app deploy`
 
@@ -896,6 +931,9 @@ Deploy the latest Storage config (the §9 redeploy contract).
 | `--wait` |  | Block until running or error. |
 | `--timeout` `<float>` |  | Max seconds to wait. |
 | `--branch` `<int>` |  | Storage branch for reading the latest version (defaults to production). |
+| `--git-branch` `<str>` |  | Git branch to clone. Used only when deploy writes the git block of a pure managed repo; otherwise it has no effect. Without it, deploy writes main for a never-deployed app and stops with an error for a deployed one. |
+| `--copy` |  | Copy the data-app password to the clipboard at once, without the terminal prompt. The only way to copy it when there is no terminal (an AI agent, CI) or with --json. On create / deploy it needs --wait. |
+| `--reveal` |  | Print the data-app password (human and --json output). For scripts and CI; in an AI agent session the password then goes into the chat history. On create / deploy it needs --wait. |
 
 ### `kbagent data-app start`
 
@@ -928,15 +966,6 @@ Delete the deployment AND the Storage config (cascade, irreversible).
 | `--project` `<str>` | yes | Project alias |
 | `--app-id` `<str>` | yes | Data Science numeric app id |
 | `--yes` / `-y` |  | Skip the confirmation prompt. |
-
-### `kbagent data-app password`
-
-Retrieve the simpleAuth password for a password-gated data app.
-
-| Option | Required | Description |
-|---|---|---|
-| `--project` `<str>` | yes | Project alias |
-| `--app-id` `<str>` | yes | Data Science numeric app id |
 
 ### `kbagent data-app logs`
 
@@ -1015,7 +1044,7 @@ Encrypt and write app-runtime secrets to the linked Storage config.
 | `--project` `<str>` | yes | Project alias |
 | `--app-id` `<str>` | yes | Data Science numeric app id |
 | `--secret` `<str>` |  | One or more '#KEY=VALUE' plaintext entries. Repeatable. Mutually exclusive with --secrets-file. |
-| `--secrets-file` `<file>` |  | Path to a JSON file mapping '#KEY' -> 'plaintext value'. |
+| `--secrets-file` / `--secret-file` `<file>` |  | Path to a JSON file mapping '#KEY' -> 'plaintext value' (- for stdin). |
 | `--branch` `<int>` |  | Storage branch ID for the linked config (defaults to production). |
 | `--allow-plaintext-on-encrypt-failure` |  | Bootstrap/debug only: write the value as-is if the Encryption API did not return a project-scoped ciphertext. NEVER use in production. |
 | `--dry-run` |  | Show the encryption request and Storage PUT body without making either call. |
@@ -1056,6 +1085,18 @@ Remove one or more app-runtime secrets.
 | `--yes` / `-y` |  | Skip the confirmation prompt. |
 | `--dry-run` |  | Preview the Storage PUT body without making the call. |
 
+### `kbagent data-app password`
+
+Copy the password of a password-protected data app to the clipboard.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--app-id` `<str>` | yes | Data Science numeric app id |
+| `--copy` |  | Copy the data-app password to the clipboard at once, without the terminal prompt. The only way to copy it when there is no terminal (an AI agent, CI) or with --json. On create / deploy it needs --wait. |
+| `--reveal` |  | Print the data-app password (human and --json output). For scripts and CI; in an AI agent session the password then goes into the chat history. On create / deploy it needs --wait. |
+| `--open` |  | Also open the app URL in the browser. |
+
 ## `job`
 
 Browse job history and run jobs
@@ -1067,6 +1108,7 @@ List jobs from connected projects.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias to query (can be repeated for multiple projects) |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 | `--component-id` `<str>` |  | Filter by component ID (e.g. keboola.ex-db-snowflake) |
 | `--config-id` `<str>` |  | Filter by configuration ID (requires --component-id) |
 | `--status` `<str>` |  | Filter by job status: processing, terminated, cancelled, success, error |
@@ -1133,7 +1175,8 @@ List storage buckets with sharing/linked bucket information.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias (can be repeated for multiple projects) |
-| `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
+| `--branch` `<int>` |  | Dev branch ID (defaults to production, even after 'branch use') |
 
 ### `kbagent storage bucket-detail`
 
@@ -1143,7 +1186,7 @@ Show detailed bucket info including backend-native direct access paths.
 |---|---|---|
 | `--project` `<str>` | yes | Project alias |
 | `--bucket-id` `<str>` | yes | Bucket ID (e.g. in.c-db) |
-| `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
+| `--branch` `<int>` |  | Dev branch ID (defaults to production, even after 'branch use') |
 
 ### `kbagent storage tables`
 
@@ -1152,8 +1195,9 @@ List storage tables from one or more projects.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias (can be repeated for multiple projects). Omit to query all connected projects in parallel. |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 | `--bucket-id` `<str>` |  | Filter tables by bucket ID (applied independently per project) |
-| `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
+| `--branch` `<int>` |  | Dev branch ID (defaults to production, even after 'branch use') |
 | `--include-usage` |  | Also report which configurations read or write each table, from their storage input/output mapping. Costs one extra component listing per project (not per table), but that listing carries every configuration body -- expect it to be slow in a big project. |
 
 ### `kbagent storage table-detail`
@@ -1164,7 +1208,7 @@ Show detailed table info including columns, types and physical layout.
 |---|---|---|
 | `--project` `<str>` | yes | Project alias |
 | `--table-id` `<str>` | yes | Table ID (e.g. 'in.c-my-bucket.my-table') |
-| `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
+| `--branch` `<int>` |  | Dev branch ID (defaults to production, even after 'branch use') |
 
 ### `kbagent storage create-bucket`
 
@@ -1190,10 +1234,10 @@ Create a new storage table with typed columns.
 | `--name` `<str>` | yes | Table name |
 | `--column` `<str>` |  | Column as 'name:TYPE' or 'name:TYPE(length)'. Repeatable. Base types: STRING, INTEGER, NUMERIC, FLOAT, BOOLEAN, DATE, TIMESTAMP. Native types are passed through to the Storage API (e.g. 'pk:VARCHAR(40)', 'amount:NUMERIC(18,2)', 'ts:TIMESTAMP_TZ', 'meta:VARIANT'). Required unless --source-table-id is given; the two are mutually exclusive. |
 | `--primary-key` `<str>` |  | Primary key column name. Can be repeated. |
-| `--not-null` `<str>` |  | Column name to mark NOT NULL. Can be repeated. Must match a --column name. |
+| `--not-null` / `--not-null-column` `<str>` |  | Column name to mark NOT NULL. Can be repeated. Must match a --column name. |
 | `--default` `<str>` |  | Column default as 'name=value'. Can be repeated. Boolean values must be lowercase ('true'/'false') per Keboola API validation. |
 | `--source-table-id` `<str>` |  | Create the table by copying an existing table's data into the requested partition/clustering layout (BigQuery only). The column definition is derived from the source, so --column must not be used. Pair with 'swap-tables' to repartition a populated table in place. |
-| `--source-branch-id` `<int>` |  | Branch ID the source table is resolved in (defaults to the request branch). |
+| `--source-branch-id` `<int>` |  | Branch ID the source table is resolved in (defaults to the request branch). 0 means production. |
 | `--time-partitioning-type` `<str>` |  | BigQuery time partitioning type, e.g. DAY, HOUR, MONTH, YEAR. |
 | `--time-partitioning-field` `<str>` |  | Column used for time partitioning (defaults to ingestion time if omitted). |
 | `--time-partitioning-expiration-ms` `<str>` |  | Milliseconds to keep storage for a partition (BigQuery). |
@@ -1204,10 +1248,11 @@ Create a new storage table with typed columns.
 | `--clustering-field` `<str>` |  | Column used for clustering (BigQuery). Repeatable. |
 | `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
 | `--if-not-exists` |  | Treat a duplicate-display-name failure as a successful no-op when the table already exists at the expected id. Safe for parallel workers (FIIA scaffold pattern). A different table with the same display name still surfaces the original error. |
+| `--timeout` `<float>` |  | Seconds to wait for the create job. A --source-table-id copy moves real data; on timeout the job KEEPS RUNNING server-side -- kbagent stops watching, it does not cancel. |
 
 ### `kbagent storage upload-table`
 
-Upload a CSV file into a storage table.
+Upload a CSV (or gzipped CSV) file into a storage table.
 
 | Option | Required | Description |
 |---|---|---|
@@ -1219,6 +1264,9 @@ Upload a CSV file into a storage table.
 | `--enclosure` `<str>` |  | CSV value enclosure character (default: '"')' |
 | `--auto-create` / `--no-auto-create` |  | Auto-create bucket and table if they don't exist (default: on). Columns are inferred as STRING from the CSV header row. |
 | `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
+| `--wait` / `--no-wait` |  | Wait for the Storage import job to finish (default). --no-wait returns as soon as the job is queued and prints its job ID; follow it with `storage job-detail --wait`. The upload of the file itself is always awaited. |
+| `--timeout` `<float>` |  | Seconds to wait for the import job (default: 600). On timeout the import keeps running server-side; the error names its job ID. |
+| `--progress` |  | Always report transfer progress on stderr (percent, speed, elapsed, ETA), also with --json and without a terminal: a bar on a terminal, otherwise one line every 10s. stdout is untouched. |
 
 ### `kbagent storage download-table`
 
@@ -1229,7 +1277,7 @@ Export a storage table to a local CSV file.
 | `--project` `<str>` | yes | Project alias |
 | `--table-id` `<str>` | yes | Table ID to export (e.g. 'in.c-my-bucket.my-table') |
 | `--output` `<str>` |  | Output path. Default mode: file path (e.g. table.csv). With --keep-slices: directory path (default ./{project}/{table_id}.csv/). |
-| `--columns` `<str>` |  | Column names to export (repeat for multiple: --columns col1 --columns col2) |
+| `--columns` / `--column` `<str>` |  | Column names to export (repeat for multiple: --columns col1 --columns col2) |
 | `--limit` `<int>` |  | Max number of rows to export |
 | `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
 | `--keep-slices` |  | Save each slice as its own file under --output (treated as a directory). Avoids the concat pass, matches the parquet download layout, and is the analytical-workflow-friendly option for DuckDB, polars, Spark. A _columns.csv sidecar holds the column order. |
@@ -1238,6 +1286,7 @@ Export a storage table to a local CSV file.
 | `--where-value` `<str>` |  | Value(s) for --where-column (repeat for multiple: matched as OR). |
 | `--changed-since` `<str>` |  | Only rows imported since this time (unix ts or strtotime, e.g. '-2 days'). |
 | `--changed-until` `<str>` |  | Only rows imported up to this time (unix ts or strtotime). |
+| `--progress` |  | Always report transfer progress on stderr (percent, speed, elapsed, ETA), also with --json and without a terminal: a bar on a terminal, otherwise one line every 10s. stdout is untouched. |
 
 ### `kbagent storage delete-table`
 
@@ -1303,6 +1352,7 @@ Swap two storage tables (any branch, including the default/production branch).
 | `--branch` `<int>` |  | Branch ID. Required; defaults to the active branch set via 'kbagent branch use'. Any branch works, including the default/production branch -- a default-branch swap is how a typed rebuild is applied to production. |
 | `--dry-run` |  | Show what would be swapped without executing |
 | `--yes` / `-y` |  | Skip confirmation prompt |
+| `--timeout` `<float>` |  | Seconds to wait for the storage job. On timeout the job KEEPS RUNNING server-side -- kbagent stops watching, it does not cancel. |
 
 ### `kbagent storage clone-table`
 
@@ -1312,21 +1362,8 @@ Clone (pull) a production table into a development branch.
 |---|---|---|
 | `--project` `<str>` | yes | Project alias |
 | `--table-id` `<str>` | yes | Table ID to pull into the branch (e.g. 'in.c-bucket.table') |
-| `--branch` `<int>` |  | Target dev branch ID. Required; defaults to the active branch set via 'kbagent branch use'. The pull is one-way: default -> branch. |
+| `--branch` `<int>` |  | Target dev branch ID. Required; defaults to the active branch set via 'kbagent branch use'. The pull is one-way: default -> branch. 0 (production) is refused: the target must be a dev branch. |
 | `--dry-run` |  | Show what would be pulled without executing |
-
-### `kbagent storage delete-bucket`
-
-Delete one or more storage buckets.
-
-| Option | Required | Description |
-|---|---|---|
-| `--project` `<str>` | yes | Project alias |
-| `--bucket-id` `<str>` | yes | Bucket ID to delete (e.g. 'in.c-my-bucket'). Can be repeated. |
-| `--force` |  | Force delete even if bucket contains tables (cascade) |
-| `--dry-run` |  | Show what would be deleted without executing |
-| `--yes` / `-y` |  | Skip confirmation prompt |
-| `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
 
 ### `kbagent storage files`
 
@@ -1339,7 +1376,7 @@ List Storage Files with optional tag filtering.
 | `--limit` `<int>` |  | Max number of files to return |
 | `--offset` `<int>` |  | Pagination offset |
 | `--query` / `-q` `<str>` |  | Full-text search on file name |
-| `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
+| `--branch` `<int>` |  | Dev branch ID (defaults to production, even after 'branch use') |
 
 ### `kbagent storage file-detail`
 
@@ -1362,6 +1399,7 @@ Upload a local file to Storage Files.
 | `--tag` `<str>` |  | Tag to assign (repeat for multiple: --tag a --tag b) |
 | `--permanent` |  | Make file permanent (not auto-deleted after 15 days) |
 | `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
+| `--progress` |  | Always report transfer progress on stderr (percent, speed, elapsed, ETA), also with --json and without a terminal: a bar on a terminal, otherwise one line every 10s. stdout is untouched. |
 
 ### `kbagent storage file-download`
 
@@ -1373,6 +1411,7 @@ Download a Storage File to local disk.
 | `--file-id` `<int>` |  | Storage file ID to download |
 | `--tag` `<str>` |  | Download latest file matching tags (repeat for AND: --tag a --tag b) |
 | `--output` / `-o` `<str>` |  | Output file path (default: original filename) |
+| `--progress` |  | Always report transfer progress on stderr (percent, speed, elapsed, ETA), also with --json and without a terminal: a bar on a terminal, otherwise one line every 10s. stdout is untouched. |
 
 ### `kbagent storage file-tag`
 
@@ -1384,17 +1423,6 @@ Add and/or remove tags on a Storage File.
 | `--file-id` `<int>` | yes | Storage file ID |
 | `--add` `<str>` |  | Tag to add (repeat for multiple: --add a --add b) |
 | `--remove` `<str>` |  | Tag to remove (repeat for multiple: --remove a --remove b) |
-
-### `kbagent storage file-delete`
-
-Delete one or more Storage Files.
-
-| Option | Required | Description |
-|---|---|---|
-| `--project` `<str>` | yes | Project alias |
-| `--file-id` `<int>` | yes | Storage file ID to delete (repeat for multiple) |
-| `--dry-run` |  | Show what would be deleted without executing |
-| `--yes` / `-y` |  | Skip confirmation prompt |
 
 ### `kbagent storage load-file`
 
@@ -1409,6 +1437,8 @@ Load a Storage File into a table.
 | `--delimiter` `<str>` |  | CSV column delimiter |
 | `--enclosure` `<str>` |  | CSV value enclosure character |
 | `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
+| `--wait` / `--no-wait` |  | Wait for the Storage import job to finish (default). --no-wait returns as soon as the job is queued and prints its job ID; follow it with `storage job-detail --wait`. The upload of the file itself is always awaited. |
+| `--timeout` `<float>` |  | Seconds to wait for the import job (default: 600). On timeout the import keeps running server-side; the error names its job ID. |
 
 ### `kbagent storage unload-table`
 
@@ -1418,7 +1448,7 @@ Export a table to a Storage File.
 |---|---|---|
 | `--project` `<str>` | yes | Project alias |
 | `--table-id` `<str>` | yes | Table ID to export (e.g. 'in.c-my-bucket.my-table') |
-| `--columns` `<str>` |  | Column names to export (repeat for multiple) |
+| `--columns` / `--column` `<str>` |  | Column names to export (repeat for multiple) |
 | `--limit` `<int>` |  | Max number of rows to export |
 | `--tag` `<str>` |  | Tag to apply to the exported file (repeat for multiple) |
 | `--download` |  | Also download the exported file locally |
@@ -1426,6 +1456,7 @@ Export a table to a Storage File.
 | `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
 | `--file-type` `<str>` |  | Output format: 'csv' (default) or 'parquet'. Parquet output is always sliced; with --download each slice is saved as its own file under --output (treated as a directory). |
 | `--keep-slices` |  | CSV-only with --download: write each slice as its own file under --output (treated as a directory) instead of concatenating into a single CSV. Mirrors the parquet download layout. Ignored for parquet (always sliced) and for non-sliced exports. |
+| `--progress` |  | Always report transfer progress on stderr (percent, speed, elapsed, ETA), also with --json and without a terminal: a bar on a terminal, otherwise one line every 10s. stdout is untouched. |
 
 ### `kbagent storage snapshots`
 
@@ -1490,8 +1521,8 @@ Set the description on a storage bucket.
 |---|---|---|
 | `--project` `<str>` | yes | Project alias |
 | `--bucket-id` `<str>` | yes | Bucket ID (e.g. 'in.c-my-bucket') |
-| `--text` `<str>` |  | Description text (inline) |
-| `--file` `<path>` |  | Path to a file containing the description |
+| `--text` / `--description` `<str>` |  | Description text (inline) |
+| `--file` / `--description-file` `<path>` |  | Path to a file containing the description (- for stdin) |
 | `--stdin` |  | Read description from standard input |
 | `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
 
@@ -1503,8 +1534,8 @@ Set the description on a storage table.
 |---|---|---|
 | `--project` `<str>` | yes | Project alias |
 | `--table-id` `<str>` | yes | Table ID (e.g. 'in.c-my-bucket.my-table') |
-| `--text` `<str>` |  | Description text (inline) |
-| `--file` `<path>` |  | Path to a file containing the description |
+| `--text` / `--description` `<str>` |  | Description text (inline) |
+| `--file` / `--description-file` `<path>` |  | Path to a file containing the description (- for stdin) |
 | `--stdin` |  | Read description from standard input |
 | `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
 
@@ -1526,7 +1557,7 @@ Apply descriptions to buckets, tables, and columns from a YAML file.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` | yes | Project alias |
-| `--from-file` `<path>` | yes | Path to a YAML file with bucket/table/column descriptions |
+| `--from-file` / `--file` `<path>` | yes | Path to a YAML file with bucket/table/column descriptions |
 | `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
 
 ### `kbagent storage describe-migrate`
@@ -1542,6 +1573,41 @@ Convert legacy KBC.column.* descriptions to the native definition endpoint.
 | `--dry-run` |  | Show what would be migrated without writing |
 | `--yes` / `-y` |  | Skip confirmation prompt |
 | `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
+
+### `kbagent storage job-detail`
+
+Show a Storage job -- status, table, rows imported, timing, error.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--job-id` `<int>` | yes | Storage job ID (e.g. from `upload-table --no-wait`) |
+| `--wait` |  | Poll until the job finishes (success or error) |
+| `--timeout` `<float>` |  | Seconds to wait; requires --wait (default: 600) |
+
+### `kbagent storage delete-bucket`
+
+Delete one or more storage buckets.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--bucket-id` `<str>` | yes | Bucket ID to delete (e.g. 'in.c-my-bucket'). Can be repeated. |
+| `--force` |  | Force delete even if bucket contains tables (cascade). Never deletes a shared bucket. |
+| `--dry-run` |  | Show what would be deleted without executing |
+| `--yes` / `-y` |  | Skip confirmation prompt |
+| `--branch` `<int>` |  | Dev branch ID (defaults to active branch if set via 'branch use') |
+
+### `kbagent storage file-delete`
+
+Delete one or more Storage Files.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--file-id` `<int>` | yes | Storage file ID to delete (repeat for multiple) |
+| `--dry-run` |  | Show what would be deleted without executing |
+| `--yes` / `-y` |  | Skip confirmation prompt |
 
 ## `stream`
 
@@ -1578,6 +1644,7 @@ Show a source's endpoints, protocol, and destination tables.
 |---|---|---|
 | `source_id` (positional) |  | |
 | `--project` / `-p` `<str>` | yes | Project alias |
+| `--source-id` `<str>` |  | Source id; the same as the SOURCE_ID argument |
 | `--name` / `-n` `<str>` |  | Look up the source by name |
 | `--branch` `<str>` |  | Branch ref (default branch if unset) |
 | `--reveal` |  | Print the full endpoint incl. secret |
@@ -1588,8 +1655,9 @@ Delete a Data Streams source (destructive).
 
 | Option | Required | Description |
 |---|---|---|
-| `source_id` (positional) | yes | |
+| `source_id` (positional) |  | |
 | `--project` / `-p` `<str>` | yes | Project alias |
+| `--source-id` `<str>` |  | Source id to delete; the same as the SOURCE_ID argument |
 | `--branch` `<str>` |  | Branch ref (default branch if unset) |
 | `--force` |  | Alias for --yes (skip confirmation) |
 | `--dry-run` |  | Preview without deleting |
@@ -1606,6 +1674,7 @@ List shared buckets available for linking.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias (repeatable). Omit to query all projects. |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 
 ### `kbagent sharing share`
 
@@ -1618,6 +1687,8 @@ Enable sharing on a bucket.
 | `--type` `<str>` | yes | Sharing type: 'organization' (all org members), 'organization-project' (all project members in org), 'selected-projects' (specific projects, use --target-project-ids), 'selected-users' (specific users, use --target-users). |
 | `--target-project-ids` `<str>` |  | Comma-separated project IDs (required for --type selected-projects). |
 | `--target-users` `<str>` |  | Comma-separated email addresses (required for --type selected-users). |
+| `--target-project` `<int>` |  | Project ID to share with (repeat for more projects); merged with --target-project-ids. |
+| `--target-user` `<str>` |  | Email address to share with (repeat for more users); merged with --target-users. |
 
 ### `kbagent sharing unshare`
 
@@ -1648,6 +1719,8 @@ Remove a linked bucket from a project.
 |---|---|---|
 | `--project` `<str>` | yes | Project alias containing the linked bucket. |
 | `--bucket-id` `<str>` | yes | Linked bucket ID to remove (e.g. in.c-shared-data). |
+| `--dry-run` |  | Check that the bucket is a linked bucket and show what would be deleted |
+| `--yes` / `-y` |  | Accepted for kbagent 1.x compatibility; this command does not ask for confirmation |
 
 ### `kbagent sharing edges`
 
@@ -1656,6 +1729,7 @@ Show cross-project data flow edges via bucket sharing.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias to query (can be repeated for multiple projects). |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 
 ## `lineage`
 
@@ -1678,7 +1752,7 @@ Show what's in a cached lineage graph.
 
 | Option | Required | Description |
 |---|---|---|
-| `--load` / `-l` `<path>` | yes | Lineage JSON cache file (from `lineage build`). |
+| `--load` / `--file` / `-l` `<path>` | yes | Lineage JSON cache file (from `lineage build`). |
 
 ### `kbagent lineage show`
 
@@ -1686,14 +1760,14 @@ Query upstream/downstream dependencies from a cached lineage graph.
 
 | Option | Required | Description |
 |---|---|---|
-| `--load` / `-l` `<path>` | yes | Lineage JSON cache file (from `lineage build`). |
+| `--load` / `--file` / `-l` `<path>` | yes | Lineage JSON cache file (from `lineage build`). |
 | `--upstream` `<str>` |  | Show upstream dependencies. Use 'project:table_id' or just 'table_id'. |
 | `--downstream` `<str>` |  | Show downstream dependents. Use 'project:table_id' or just 'table_id'. |
-| `--column` / `-c` `<str>` |  | Trace a specific column (use with --upstream/--downstream). |
-| `--columns` |  | Show column-level mapping detail on edges. |
+| `--column` / `-c` `<str>` |  | Trace one column of a TABLE hop by hop (text or --json only). Follows column mappings recorded by `lineage build --ai`; stops, and says so, where no mapping is known. |
+| `--columns` |  | Show column detail: mappings per edge in the text tree, column lists in mermaid/html table nodes (-f er always lists columns). |
 | `--project` / `-p` `<str>` |  | Project alias filter for queries. |
-| `--depth` `<int>` |  | Max traversal depth (default: 10). |
-| `--format` / `-f` `<str>` |  | Output format: text, mermaid, html, or er (entity-relationship). |
+| `--depth` `<int>` |  | Max traversal depth (default: 3 for -f html, else 10). |
+| `--format` / `-f` `<str>` |  | Output format: text, mermaid, html, or er (entity-relationship, always with table columns). |
 
 ### `kbagent lineage server`
 
@@ -1701,7 +1775,7 @@ Start a local web server with interactive lineage browser.
 
 | Option | Required | Description |
 |---|---|---|
-| `--load` / `-l` `<path>` | yes | Lineage JSON cache file (from `lineage build`). |
+| `--load` / `--file` / `-l` `<path>` | yes | Lineage JSON cache file (from `lineage build`). |
 | `--port` `<int>` |  | Port to serve on. |
 | `--host` `<str>` |  | Host to bind to. |
 
@@ -1773,7 +1847,7 @@ Ask the Keboola documentation a natural language question.
 | Option | Required | Description |
 |---|---|---|
 | `question` (positional) | yes | |
-| `--project` `<str>` |  | Project alias (uses first available if not set) |
+| `--project` `<str>` |  | Project alias (defaults to the pinned default project) |
 
 ## `transformation`
 
@@ -1788,7 +1862,7 @@ Create a SQL transformation from a SQL script.
 | `--project` `<str>` |  | Project alias |
 | `--name` `<str>` | yes | Transformation name |
 | `--sql` `<str>` |  | SQL text (semicolon-separated statements). Mutually exclusive with --sql-file. |
-| `--sql-file` `<path>` |  | Read SQL from a file. Mutually exclusive with --sql. |
+| `--sql-file` `<path>` |  | Read SQL from a file (- for stdin). Mutually exclusive with --sql. |
 | `--created-table` `<str>` |  | Table name created by the SQL (repeatable). Each is mapped to out.c-<derived-bucket>.<table> in the output mapping. |
 | `--component-id` `<str>` |  | SQL transformation component ID (keboola.snowflake-transformation or keboola.google-bigquery-transformation). Default: derived from the project's default backend. |
 | `--description` `<str>` |  | Configuration description |
@@ -1818,8 +1892,9 @@ Edit a SQL transformation's blocks/codes with positional operations.
 | `--branch` `<int>` |  | Edit in a specific dev branch ID (defaults to active branch) |
 | `--change-description` `<str>` | yes | Human-readable summary of this change (stored in config version history) |
 | `--op` `<str>` |  | Operation as inline JSON (repeatable, applied in order). Ops: add_block, remove_block, rename_block, add_code, remove_code, rename_code, set_code, add_script, str_replace. Example: '{"op": "set_code", "block_id": "b0", "code_id": "b0.c0", "script": "SELECT 1;"}'. IDs come from `transformation show`. Mutually exclusive with --op-file. |
-| `--op-file` `<path>` |  | Read operations from a JSON file containing an array of op objects. |
+| `--op-file` `<path>` |  | Read operations from a JSON file containing an array of op objects (- for stdin). |
 | `--storage` `<str>` |  | FULL REPLACEMENT of configuration.storage (inline JSON, @file, or - for stdin). Include every input/output mapping you want to keep -- the existing storage block is overwritten wholesale. |
+| `--storage-file` `<path>` |  | Read the FULL REPLACEMENT of configuration.storage from a JSON file (- for stdin). |
 | `--dry-run` |  | Apply ops locally and print the resulting tree without writing |
 
 ## `flow`
@@ -1833,6 +1908,7 @@ List conditional flows (keboola.flow) across projects.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias (repeatable for multiple projects; omit for all) |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 | `--branch` `<int>` |  | Dev branch ID (per-project; requires single --project) |
 | `--with-schedules` |  | Enrich each flow row with the cron schedules that target it (one extra API call per project, NOT per flow). |
 
@@ -1869,7 +1945,8 @@ Validate a conditional-flow definition (schema + semantic checks).
 
 | Option | Required | Description |
 |---|---|---|
-| `--file` `<str>` | yes | YAML/JSON flow definition to validate (@file, -, or inline). |
+| `--file` / `--definition` `<str>` |  | YAML/JSON flow definition to validate (@file, -, or inline). |
+| `--definition-file` `<path>` |  | Read the YAML/JSON flow definition from a file (- for stdin). |
 | `--project` `<str>` |  | Project alias -- fetch the live JSON Schema from the stack for full structural + semantic validation. Without it, only semantic checks run. |
 
 ### `kbagent flow new`
@@ -1881,7 +1958,8 @@ Create a new conditional-flow (keboola.flow) configuration.
 | `--project` `<str>` | yes | Project alias |
 | `--name` `<str>` | yes | Flow name |
 | `--description` `<str>` |  | Optional description |
-| `--file` `<str>` |  | YAML/JSON flow definition (@file, -, or inline). Run 'kbagent flow schema' to see the expected format. |
+| `--file` / `--definition` `<str>` |  | YAML/JSON flow definition (@file, -, or inline). Run 'kbagent flow schema' to see the expected format. |
+| `--definition-file` `<path>` |  | Read the YAML/JSON flow definition from a file (- for stdin). |
 | `--branch` `<int>` |  | Dev branch ID |
 
 ### `kbagent flow update`
@@ -1894,7 +1972,8 @@ Update a flow's name, description, or phases/tasks.
 | `--flow-id` `<str>` | yes | Flow configuration ID |
 | `--name` `<str>` |  | New flow name |
 | `--description` `<str>` |  | New description |
-| `--file` `<str>` |  | YAML/JSON flow definition to replace phases + tasks (@file, -, or inline) |
+| `--file` / `--definition` `<str>` |  | YAML/JSON flow definition to replace phases + tasks (@file, -, or inline) |
+| `--definition-file` `<path>` |  | Read the YAML/JSON flow definition from a file (- for stdin). |
 | `--branch` `<int>` |  | Dev branch ID |
 
 ### `kbagent flow delete`
@@ -1935,6 +2014,16 @@ Remove all schedules bound to a flow (deletes keboola.scheduler configs).
 | `--dry-run` |  | List the scheduler configs that would be removed without executing |
 | `--yes` / `-y` |  | Skip confirmation prompt |
 
+### `kbagent flow triggers`
+
+Show every trigger kbagent can see for a flow (cron + table triggers).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias |
+| `--flow-id` `<str>` | yes | Flow configuration ID |
+| `--branch` `<int>` |  | Dev branch ID. Narrows the CRON half only -- the Storage triggers route is production-only and has no branch-scoped variant. |
+
 ## `schedule`
 
 Discover and audit cron schedules across projects (keboola.scheduler)
@@ -1946,6 +2035,7 @@ List cron schedules (keboola.scheduler configs) across projects.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias (repeatable; omit for all registered projects) |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 | `--enabled-only` |  | Only show schedules whose state is 'enabled' |
 | `--branch` `<int>` |  | Dev branch ID (requires single --project) |
 
@@ -1966,6 +2056,7 @@ Audit schedules by cron window or job-freshness.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias (repeatable; omit for all projects) |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 | `--cron-window` `<str>` |  | Only include schedules firing entirely inside an hour window, e.g. '02:00-04:00'. Hour-field approximation -- see gotchas.md. |
 | `--not-run-since` `<int>` |  | Only include schedules whose parent config has not produced a job in the last N days (or never ran). Pass 0 to force the last_run_at lookup for every row without applying a staleness filter. NOTE: Queue API is not branch-aware -- combining with --branch still compares against production jobs. |
 | `--branch` `<int>` |  | Dev branch ID (requires single --project) |
@@ -1981,6 +2072,7 @@ List notification subscriptions (Flow Notifications tab) across projects.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias (repeatable; omit for all registered projects) |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 | `--event` `<str>` |  | Event name filter, e.g. 'job-failed'. Known events: job-failed, job-succeeded, job-succeeded-with-warning, job-processing-long, phase-job-failed, phase-job-succeeded, phase-job-succeeded-with-warning, phase-job-processing-long. Not validated against that list -- the service may add more. |
 | `--component-id` `<str>` |  | Only subscriptions filtering on this component (e.g. keboola.flow) |
 | `--config-id` `<str>` |  | Only subscriptions filtering on this configuration ID |
@@ -2042,6 +2134,7 @@ List development branches from connected projects.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias to query (can be repeated for multiple projects) |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 
 ### `kbagent branch create`
 
@@ -2081,7 +2174,7 @@ Delete a development branch.
 
 ### `kbagent branch merge`
 
-Get the KBC UI merge URL for a development branch.
+[DEPRECATED] Get the KBC UI merge URL for a development branch.
 
 | Option | Required | Description |
 |---|---|---|
@@ -2115,8 +2208,8 @@ Set a metadata key/value on a branch.
 |---|---|---|
 | `--project` `<str>` | yes | Project alias |
 | `--key` `<str>` | yes | Metadata key to set |
-| `--text` `<str>` |  | Inline string value |
-| `--file` `<path>` |  | Read value from a UTF-8 text file |
+| `--text` / `--value` `<str>` |  | Inline string value |
+| `--file` / `--value-file` `<path>` |  | Read value from a UTF-8 text file (- for stdin) |
 | `--stdin` |  | Read value from standard input |
 | `--branch` `<str>` |  | Branch ID or "default" for the main branch |
 
@@ -2291,7 +2384,7 @@ Create a new workspace.
 | `--name` `<str>` |  | Name for the workspace (shown in Keboola UI) |
 | `--backend` `<str>` |  | Workspace backend (auto-detected from project if omitted) |
 | `--read-only` / `--no-read-only` |  | Whether the workspace has read-only storage access |
-| `--ui` |  | Create via Queue job (slower ~15s, visible in Keboola UI) |
+| `--ui` |  | Fails on current SaaS stacks: the keboola.sandboxes component no longer provisions SQL workspaces, so the job ends in WORKSPACE_NOT_FOUND and the attempt is rolled back (#755). Works only on stacks where that component still provisions them: creates via Queue job (~15s), visible in the Keboola UI |
 
 ### `kbagent workspace list`
 
@@ -2300,8 +2393,9 @@ List workspaces from connected projects.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` |  | Project alias to query (can be repeated for multiple projects) |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 | `--orphaned` |  | Show only orphaned workspaces (keboola.sandboxes config missing) |
-| `--branch` `<int>` |  | Dev branch ID. Read-only command -- ignores the alias's active branch by default (mirrors `storage buckets`); pass --branch to opt in. Requires exactly one --project. |
+| `--branch` `<int>` |  | Dev branch ID. Defaults to each project's active branch (`kbagent branch use`), else production. Requires exactly one --project. |
 | `--qs-compatible` |  | Show only workspaces whose loginType is known to work with the Query Service AND that are read-only -- the canonical shape for a data-app. |
 
 ### `kbagent workspace detail`
@@ -2312,7 +2406,7 @@ Show workspace details (password NOT included).
 |---|---|---|
 | `--project` `<str>` | yes | Project alias |
 | `--workspace-id` `<int>` | yes | Workspace ID |
-| `--branch` `<int>` |  | Dev branch ID. Read-only command -- ignores the alias's active branch by default (mirrors `storage bucket-detail`); pass --branch to opt in. |
+| `--branch` `<int>` |  | Dev branch ID. Defaults to the alias's active branch (`kbagent branch use`), else production. |
 
 ### `kbagent workspace delete`
 
@@ -2340,7 +2434,7 @@ Load tables into a workspace.
 |---|---|---|
 | `--project` `<str>` | yes | Project alias |
 | `--workspace-id` `<int>` | yes | Workspace ID |
-| `--tables` `<str>` | yes | Table ID to load (can be repeated, e.g. in.c-bucket.table-name) |
+| `--tables` / `--table-id` `<str>` | yes | Table ID to load (can be repeated, e.g. in.c-bucket.table-name) |
 | `--preserve` |  | Keep existing tables in the workspace (default: clear before loading) |
 | `--load-type` `<str>` |  | clone|copy|view. Default (omitted) is auto: a zero-copy CLONE for every table the workspace backend can clone, COPY for the rest. An explicit value is sent as-is; an ineligible combination is rejected by the API with the exact reason. |
 | `--force` |  | Skip the size guard that asks before COPYing a table larger than 1 GB. |
@@ -2355,7 +2449,7 @@ Execute SQL query in a workspace via Query Service.
 | `--project` `<str>` | yes | Project alias |
 | `--workspace-id` `<int>` | yes | Workspace ID |
 | `--sql` `<str>` |  | SQL statement to execute |
-| `--file` `<path>` |  | Path to a .sql file to execute |
+| `--file` / `--sql-file` `<path>` |  | Path to a .sql file to execute (- for stdin) |
 | `--transactional` |  | Wrap query in a transaction |
 | `--full` |  | Fetch the complete result set via CSV export (slower). Default fetches a fast inline page capped by --limit. |
 | `--limit` `<int-range>` |  | Max rows to fetch via the fast inline path (ignored with --full). |
@@ -2366,7 +2460,8 @@ Garbage-collect orphaned workspaces.
 
 | Option | Required | Description |
 |---|---|---|
-| `--project` `<str>` |  | Project alias to query (can be repeated). None = all projects. |
+| `--project` `<str>` |  | Project alias to clean up (can be repeated). Required unless --all-projects. |
+| `--all-projects` |  | Clean up every registered project |
 | `--dry-run` |  | List orphaned workspaces without deleting them |
 | `--yes` / `-y` |  | Skip confirmation prompt |
 
@@ -2396,6 +2491,7 @@ Initialize a sync working directory for a Keboola project.
 | `--directory` / `-d` `<path>` |  | Target directory for the project files |
 | `--git-branching` |  | Enable git-branching mode (maps git branches to Keboola branches) |
 | `--adopt-existing` |  | Adopt an existing .keboola/manifest.json (e.g. written by kbc) instead of failing. Validates the manifest's project_id against the alias and normalises the file. Idempotent. |
+| `--with-workspaces` |  | Also sync shared SQL workspaces (keboola.sandboxes). |
 
 ### `kbagent sync pull`
 
@@ -2446,7 +2542,7 @@ Push local configuration changes to a Keboola project.
 | `--all-projects` |  | Push all configured projects in parallel |
 | `--directory` / `-d` `<path>` |  | Project root directory (must contain .keboola/) |
 | `--dry-run` |  | Show what would be pushed without actually pushing |
-| `--force` |  | Allow deletion of remote configs that were removed locally |
+| `--force` |  | Delete remote configs and rows whose local files were removed (for a SQL workspace also its SQL editor sessions). Without it push skips those deletions and lists them. |
 | `--allow-plaintext-on-encrypt-failure` |  | Allow push even if secret encryption fails (DANGEROUS: secrets stored as plaintext) |
 | `--branch` `<int>` |  | Dev branch ID. Overrides the manifest / 'branch use' active branch for this single invocation. Requires exactly one --project. When no '<branch_name>/' subtree exists on disk, the default tree (main/) is promoted to this branch. |
 | `--no-name-drift-warnings` |  | Suppress the cosmetic name_drift_warnings array in the result envelope (the underlying detection still runs). |
@@ -2464,7 +2560,8 @@ Clone a reference project into a fresh target, parameterised by overrides.
 | `--variable-values` `<path>` |  | JSON/YAML file mapping {variable_name: value} to override keboola.variables rows |
 | `--instance-rename` `<path>` |  | JSON/YAML file mapping {old_path_prefix: new_path_prefix} to rename config dirs |
 | `--dry-run` |  | Apply overrides and show the would-be diff without pushing |
-| `--branch` `<int>` |  | Target dev branch id (defaults to the target project's production branch) |
+| `--branch` `<int>` |  | Target dev branch id (default: the target's 'branch use' branch, else production) |
+| `--create-buckets` / `--no-create-buckets` |  | Create the reference tree's storage buckets in the target -- on by default, --no-create-buckets skips it. Tables and their data are never copied. |
 
 ### `kbagent sync branch-link`
 
@@ -2505,7 +2602,8 @@ Encrypt #-prefixed secret values for a Keboola component.
 |---|---|---|
 | `--project` `<str>` | yes | Project alias |
 | `--component-id` `<str>` | yes | Keboola component ID (e.g. keboola.python-transformation-v2) |
-| `--input` `<str>` | yes | JSON to encrypt: inline JSON, @file.json, or - for stdin |
+| `--input` / `--values` `<str>` |  | JSON to encrypt: inline JSON, @file.json, or - for stdin |
+| `--values-file` `<path>` |  | Read the JSON object to encrypt from a file (- for stdin) |
 | `--output-file` `<path>` |  | Write result to file (0600 permissions) instead of stdout |
 
 ## `semantic-layer`
@@ -2531,6 +2629,7 @@ Build a semantic-layer model from a list of storage tables (non-interactive).
 | `--project` `<str>` | yes | Target project alias |
 | `--model` `<str>` |  | Update this existing model (name or UUID). If omitted, a new model is created. |
 | `--tables` `<str>` |  | Comma-separated tableIds to base the model on (required). |
+| `--table-id` `<str>` |  | Table ID to base the model on (repeat for more tables); merged with --tables. |
 | `--name` `<str>` |  | Model name when creating (default: kbagent_build_model). |
 | `--dry-run` |  | Print the generated JSON + validation, no POST. |
 | `--keep-on-failure` |  | Keep partially-pushed model + children on failure (forensics). Default: rollback in reverse PUSH_ORDER + delete the model if we created it. |
@@ -2549,8 +2648,11 @@ Promote a model from one project to another (NEW + overwrite CHANGED; never dele
 | `--from-model` `<str>` |  | Source model name or UUID (defaults to sole) |
 | `--to-model` `<str>` |  | Target model name or UUID (defaults to sole) |
 | `--types` `<str>` |  | Comma-separated subset (datasets,metrics,relationships,glossary,constraints) |
+| `--type` `<str>` |  | Item type to copy (repeat for more types); merged with --types. |
 | `--dry-run` |  | Classify NEW/IDENTICAL/CHANGED without writing |
 | `--yes` / `-y` |  | Skip the cross-project confirmation prompt |
+| `--scope` `<project|organization|targeted>` |  | Visibility of the NEW items: 'project', 'organization' or 'targeted'. Omitted: the target model's own scope, as with `add <kind>`. |
+| `--target-project` `<str>` |  | Project alias or ID that can see the new items (repeatable or comma-separated; --scope targeted only). |
 
 ### `kbagent semantic-layer import`
 
@@ -2562,9 +2664,12 @@ Replay a snapshot into a project.
 | `--file` `<path>` | yes | Snapshot JSON file (output of `semantic-layer export`) |
 | `--model` `<str>` |  | Target model name or UUID (defaults to the sole model) |
 | `--types` `<str>` |  | Comma-separated subset to import: datasets,metrics,relationships,glossary,constraints |
+| `--type` `<str>` |  | Item type to import (repeat for more types); merged with --types. |
 | `--dry-run` |  | Plan the import without calling any write API |
-| `--overwrite` |  | DELETE+POST conflicting items (default: skip) |
+| `--overwrite` |  | Update conflicting items in place (default: skip) |
 | `--yes` / `-y` |  | Skip confirmation (alias for default SKIP behavior) |
+| `--scope` `<project|organization|targeted>` |  | Visibility of the NEW items: 'project', 'organization' or 'targeted'. Omitted: the target model's own scope, as with `add <kind>`. |
+| `--target-project` `<str>` |  | Project alias or ID that can see the new items (repeatable or comma-separated; --scope targeted only). |
 
 ### `kbagent semantic-layer show`
 
@@ -2657,6 +2762,8 @@ Create a new semantic-layer model.
 | `--name` `<str>` | yes | Model name (unique within project) |
 | `--description` `<str>` |  | Optional description |
 | `--sql-dialect` `<str>` |  | SQL dialect (default: Snowflake) |
+| `--scope` `<project|organization|targeted>` |  | Visibility: 'project' (default, owner only), 'organization' (every project in the org), or 'targeted' (owner + explicit --target-project grants). |
+| `--target-project` `<str>` |  | Project alias or ID to grant visibility to (repeatable or comma-separated; --scope targeted only). |
 
 ### `kbagent semantic-layer model delete`
 
@@ -2681,10 +2788,12 @@ Add a metric to a semantic-layer model.
 | `--dataset` `<str>` | yes | Dataset tableId this metric belongs to |
 | `--description` `<str>` |  | Optional description |
 | `--yes` / `-y` |  | Skip the dataset-mismatch warning |
+| `--scope` `<project|organization|targeted>` |  | Visibility: 'project' (owner only), 'organization' (every project in the org), or 'targeted' (owner + --target-project grants). Default: the model's own scope. |
+| `--target-project` `<str>` |  | Project alias or ID to grant visibility to (repeatable or comma-separated; --scope targeted only). |
 
 ### `kbagent semantic-layer add dataset`
 
-Add a dataset (FQN derived from tableId).
+Add a dataset (FQN read from the table's Storage location).
 
 | Option | Required | Description |
 |---|---|---|
@@ -2696,6 +2805,9 @@ Add a dataset (FQN derived from tableId).
 | `--grain` `<str>` |  | Grain description |
 | `--primary-key` `<str>` |  | Repeat for multi-col PK |
 | `--deep-fields` |  | Fetch storage schema and synthesise fields[] with role heuristics. |
+| `--fqn` `<str>` |  | Store this fqn verbatim instead of reading the table's warehouse location from Storage, e.g. '"DB"."out.c-bucket"."table"'. |
+| `--scope` `<project|organization|targeted>` |  | Visibility: 'project' (owner only), 'organization' (every project in the org), or 'targeted' (owner + --target-project grants). Default: the model's own scope. |
+| `--target-project` `<str>` |  | Project alias or ID to grant visibility to (repeatable or comma-separated; --scope targeted only). |
 
 ### `kbagent semantic-layer add relationship`
 
@@ -2710,6 +2822,8 @@ Add a relationship between two datasets.
 | `--to` `<str>` | yes | Target dataset tableId |
 | `--on` `<str>` | yes | Join condition |
 | `--type` `<str>` |  | Join type: 'left' or 'inner'. |
+| `--scope` `<project|organization|targeted>` |  | Visibility: 'project' (owner only), 'organization' (every project in the org), or 'targeted' (owner + --target-project grants). Default: the model's own scope. |
+| `--target-project` `<str>` |  | Project alias or ID to grant visibility to (repeatable or comma-separated; --scope targeted only). |
 
 ### `kbagent semantic-layer add constraint`
 
@@ -2722,8 +2836,11 @@ Add a constraint.
 | `--name` `<str>` | yes | Constraint name (regex ^[a-z][a-z0-9_]*$). For the 4-band health convention end with _critical / _warning / _healthy / _review. |
 | `--constraint-type` `<str>` | yes | One of: inequality|equality|range|composition|exclusion|temporal|conditional. |
 | `--rule` `<str>` | yes | Rule expression STRING (e.g. "value >= 0"). NOT an object. |
-| `--metrics` `<str>` | yes | Comma-separated list of metric names this constraint applies to. |
+| `--metrics` `<str>` |  | Comma-separated list of metric names this constraint applies to. |
+| `--metric` `<str>` |  | Metric name this constraint applies to (repeat for more metrics); merged with --metrics. |
 | `--severity` `<str>` |  | One of: error|warning|info (the 3-level API enum). |
+| `--scope` `<project|organization|targeted>` |  | Visibility: 'project' (owner only), 'organization' (every project in the org), or 'targeted' (owner + --target-project grants). Default: the model's own scope. |
+| `--target-project` `<str>` |  | Project alias or ID to grant visibility to (repeatable or comma-separated; --scope targeted only). |
 
 ### `kbagent semantic-layer add glossary`
 
@@ -2734,7 +2851,9 @@ Add a glossary term.
 | `--project` `<str>` | yes | Project alias |
 | `--model` `<str>` |  | Model name or UUID |
 | `--term` `<str>` | yes | Glossary term |
-| `--definition` `<str>` |  | Optional definition |
+| `--definition` `<str>` | yes | Definition of the term (the metastore requires one) |
+| `--scope` `<project|organization|targeted>` |  | Visibility: 'project' (owner only), 'organization' (every project in the org), or 'targeted' (owner + --target-project grants). Default: the model's own scope. |
+| `--target-project` `<str>` |  | Project alias or ID to grant visibility to (repeatable or comma-separated; --scope targeted only). |
 
 ### `kbagent semantic-layer edit metric`
 
@@ -2766,7 +2885,7 @@ Edit a dataset (no cascade — metric.dataset uses tableId, not name).
 
 ### `kbagent semantic-layer edit constraint`
 
-Edit a constraint (DELETE+POST, with local validators).
+Edit a constraint (in-place update, with local validators).
 
 | Option | Required | Description |
 |---|---|---|
@@ -2778,10 +2897,11 @@ Edit a constraint (DELETE+POST, with local validators).
 | `--new-constraint-type` `<str>` |  | Replace constraintType (closed enum) |
 | `--new-severity` `<str>` |  | Replace severity (error|warning|info) |
 | `--new-metrics` `<str>` |  | Comma-separated list of metric names |
+| `--new-metric` `<str>` |  | Replace the metric names (repeat for more metrics); merged with --new-metrics |
 
 ### `kbagent semantic-layer edit relationship`
 
-Edit a relationship (DELETE+POST).
+Edit a relationship (in-place update).
 
 | Option | Required | Description |
 |---|---|---|
@@ -2878,7 +2998,7 @@ Fetch one record (all members) by ``--id`` or by ``--dimension``.
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` | yes | Project alias |
-| `--id` `<str>` |  | Record UUID |
+| `--id` / `--reference-data-id` `<str>` |  | Record UUID |
 | `--dimension` `<str>` |  | Dimension name (project-unique; instead of --id) |
 
 ### `kbagent semantic-layer reference-data set`
@@ -2890,7 +3010,8 @@ Create or replace a reference-data record (keyed by dimension).
 | `--project` `<str>` | yes | Project alias |
 | `--model` `<str>` |  | Model name or UUID |
 | `--dimension` `<str>` | yes | Dimension name, e.g. 'chart_of_accounts' |
-| `--members-file` `<str>` | yes | Path to a JSON array of member objects ('-' reads stdin). |
+| `--members-file` `<str>` |  | Path to a JSON array of member objects ('-' reads stdin). |
+| `--members` `<str>` |  | JSON array of member objects, inline (instead of --members-file). |
 | `--dataset-id` `<str>` |  | Optional tableId of the descriptive dataset (e.g. DIM_COA) |
 | `--description` `<str>` |  | Optional description |
 
@@ -2901,8 +3022,96 @@ Delete a reference-data record by UUID (server-side soft-delete).
 | Option | Required | Description |
 |---|---|---|
 | `--project` `<str>` | yes | Project alias |
-| `--id` `<str>` | yes | Record UUID |
+| `--id` / `--reference-data-id` `<str>` | yes | Record UUID |
 | `--yes` / `-y` |  | Skip the confirm prompt |
+
+### `kbagent semantic-layer scope get`
+
+Show an item's current scope, target-project grants, and pending elevation.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Owning project alias |
+| `--type` `<model|dataset|metric|relationship|constraint|glossary>` | yes | Semantic item type |
+| `--context-id` `<str>` | yes | Item UUID |
+
+### `kbagent semantic-layer scope add`
+
+Add target projects to a targeted-scope item (merges with the current grants).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Owning project alias |
+| `--type` `<model|dataset|metric|relationship|constraint|glossary>` | yes | Semantic item type |
+| `--context-id` `<str>` | yes | Item UUID |
+| `--target-project` `<str>` |  | Project alias or ID (repeatable, or comma-separated). |
+
+### `kbagent semantic-layer scope remove`
+
+Remove target projects from a targeted-scope item (merges with the current grants).
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Owning project alias |
+| `--type` `<model|dataset|metric|relationship|constraint|glossary>` | yes | Semantic item type |
+| `--context-id` `<str>` | yes | Item UUID |
+| `--target-project` `<str>` |  | Project alias or ID (repeatable, or comma-separated). |
+
+### `kbagent semantic-layer scope set`
+
+Write an item's scope: elevate to organization, or replace/clear its target projects.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Owning project alias |
+| `--type` `<model|dataset|metric|relationship|constraint|glossary>` | yes | Semantic item type |
+| `--context-id` `<str>` | yes | Item UUID |
+| `--scope` `<organization>` |  | Step the item up to organization scope. Requires org-admin; ONE-WAY, no downgrade. |
+| `--target-project` `<str>` |  | Project alias or ID (repeatable, or comma-separated). |
+| `--clear` |  | Clear every target project. |
+| `--dry-run` |  | Show the change without applying it. |
+| `--yes` / `-y` |  | Skip the elevation confirmation. |
+
+### `kbagent semantic-layer scope request-create`
+
+Flag a project-scoped item as awaiting an org-admin's step-up decision.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Owning project alias |
+| `--type` `<model|dataset|metric|relationship|constraint|glossary>` | yes | Semantic item type |
+| `--context-id` `<str>` | yes | Item UUID |
+
+### `kbagent semantic-layer scope request-delete`
+
+Withdraw a pending scope-elevation request.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Owning project alias |
+| `--type` `<model|dataset|metric|relationship|constraint|glossary>` | yes | Semantic item type |
+| `--context-id` `<str>` | yes | Item UUID |
+
+### `kbagent semantic-layer scope request-cancel`
+
+Withdraw a pending scope-elevation request.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Owning project alias |
+| `--type` `<model|dataset|metric|relationship|constraint|glossary>` | yes | Semantic item type |
+| `--context-id` `<str>` | yes | Item UUID |
+
+### `kbagent semantic-layer scope request-list`
+
+List items of --type awaiting an org-admin's elevation decision, across the org.
+
+| Option | Required | Description |
+|---|---|---|
+| `--project` `<str>` | yes | Project alias (org-admin token) |
+| `--type` `<model|dataset|metric|relationship|constraint|glossary>` | yes | Semantic item type |
+| `--limit` `<int-range>` |  | Max results |
+| `--offset` `<int-range>` |  | Skip this many results |
 
 ## `http`
 
@@ -2925,6 +3134,7 @@ POST to an endpoint on the running kbagent serve.
 |---|---|---|
 | `path` (positional) | yes | |
 | `--body` / `-d` `<str>` |  | JSON body: inline JSON, @file.json, or - for stdin |
+| `--body-file` `<path>` |  | Read the JSON body from a file (- for stdin) |
 | `--timeout` `<float>` |  | Request timeout (seconds) |
 
 ### `kbagent http patch`
@@ -2935,6 +3145,7 @@ PATCH an endpoint on the running kbagent serve.
 |---|---|---|
 | `path` (positional) | yes | |
 | `--body` / `-d` `<str>` |  | JSON body: inline JSON, @file.json, or - for stdin |
+| `--body-file` `<path>` |  | Read the JSON body from a file (- for stdin) |
 | `--timeout` `<float>` |  | Request timeout (seconds) |
 
 ### `kbagent http delete`
@@ -2975,7 +3186,8 @@ Register a new scheduled task.
 | `--manual` |  | Skip cron firing -- only run when triggered manually or as downstream. |
 | `--enabled` / `--disabled` |  | Initial enabled state. |
 | `--type` `<str>` |  | Action type when not using --from-file: ai_agent|cli_command |
-| `--from-file` `<str>` |  | Full action JSON ({"type": "...", "params": {...}}). PATH, @path, or - for stdin. |
+| `--from-file` / `--definition` `<str>` |  | Full action JSON ({"type": "...", "params": {...}}): inline, @path, or - for stdin. |
+| `--definition-file` `<path>` |  | Read the full action JSON from a file (- for stdin). |
 | `--cli` `<str>` |  | ai_agent: claude|codex|gemini |
 | `--prompt` `<str>` |  | ai_agent: prompt body |
 | `--extra-arg` `<str>` |  | ai_agent: extra CLI arg (repeatable). Forwarded to claude/codex/gemini. |
@@ -3022,6 +3234,7 @@ Trigger a task immediately (does not wait for the next cron firing).
 | `--stream` |  | Stream events live (each event on its own line / NDJSON in --json mode). |
 | `--runtime-prompt` `<str>` |  | ai_agent: ad-hoc text appended to the persisted prompt for this run only. |
 | `--runtime-input` `<str>` |  | JSON input merged into the action params for this run only. Inline, @path, or -. |
+| `--runtime-input-file` `<path>` |  | Read the runtime input JSON from a file (- for stdin). |
 
 ### `kbagent agent runs`
 
@@ -3064,7 +3277,8 @@ Execute an action ad-hoc (no persistence, no scheduling).
 | `--name` `<str>` |  | Name shown in event init payload. |
 | `--stream` |  | Stream events live instead of returning the final run record. |
 | `--type` `<str>` |  | ai_agent|cli_command |
-| `--from-file` `<str>` |  | Action JSON (or @path / -). |
+| `--from-file` / `--definition` `<str>` |  | Action JSON (or @path / -). |
+| `--definition-file` `<path>` |  | Read the action JSON from a file (- for stdin). |
 | `--cli` `<str>` |  |  |
 | `--prompt` `<str>` |  |  |
 | `--extra-arg` `<str>` |  |  |
@@ -3122,7 +3336,7 @@ Create (register) a new app in the Developer Portal.
 | Option | Required | Description |
 |---|---|---|
 | `--vendor` `<str>` | yes |  |
-| `--data` `<str>` | yes | Path to JSON payload, or '-' for stdin |
+| `--data` / `--data-file` `<str>` | yes | Path to JSON payload, or '-' for stdin |
 | `--identity` `<str>` |  |  |
 | `--dry-run` |  |  |
 
@@ -3133,7 +3347,7 @@ Patch one or more properties of an existing Developer Portal app.
 | Option | Required | Description |
 |---|---|---|
 | `--app` `<str>` | yes |  |
-| `--data` `<str>` |  |  |
+| `--data` / `--data-file` `<str>` |  |  |
 | `--property` `<str>` |  |  |
 | `--value` `<str>` |  |  |
 | `--value-file` `<str>` |  |  |
@@ -3261,7 +3475,8 @@ Update kbagent to the latest version.
 
 | Option | Required | Description |
 |---|---|---|
-| `--beta` |  | Opt into pre-release versions (beta / rc). Without this flag (the default) and without KBAGENT_INCLUDE_PRERELEASE=1 in env, the GitHub /releases/latest endpoint -- which filters out prereleases server-side -- is used, so a beta release will never silently install. With --beta, the resolver opts into PEP 440 prereleases (``uv --prerelease=allow`` / ``pip --pre``). |
+| `--beta` |  | Opt into pre-release versions (beta / rc). Without this flag (the default) and without KBAGENT_INCLUDE_PRERELEASE=1 in env, every release marked as a pre-release on GitHub is skipped, so a beta release will never silently install. With --beta, the newest pre-release is installed from its own release; its dependencies stay on stable versions. --beta never installs a new major version without --major. |
+| `--major` |  | Install the next major version now (for example 0.x -> 1.x). Without this flag kbagent stays on the running major version until 28 days after the next major is released, then updates itself. The new major is installed after this command exits, once no kbagent process runs. |
 
 ### `kbagent changelog`
 
@@ -3270,7 +3485,7 @@ Show recent changelog (what changed in each version).
 | Option | Required | Description |
 |---|---|---|
 | `--limit` / `-n` `<int-range>` |  | Number of versions to show. |
-| `--full` / `-v` |  | Show complete notes for each version (default: one-line summary). |
+| `--full` / `-v` |  | Show complete notes for each version (default: headlines of the BREAKING and first notes). |
 
 ### `kbagent context`
 
@@ -3304,6 +3519,7 @@ Search for items (tables, buckets, configs, flows, …) by name or content.
 |---|---|---|
 | `query` (positional) | yes | |
 | `--project` / `-p` `<str>` |  | Project alias to search (repeatable; defaults to all projects). |
+| `--all-projects` |  | Read all registered projects. Until 1.0.0 the same as omitting --project; from 1.0.0 an omitted --project reads only the default project. Cannot be used with --project. |
 | `--type` / `-t` `<str>` |  | Item type to restrict results. Repeatable. Valid values: table, bucket, config, flow, data-app, transformation. |
 | `--search-type` `<str>` |  | Search mode. ``textual`` (default) searches item names via the Storage API. ``config-based`` scans full configuration JSON bodies. Both modes match case-insensitively. |
 | `--limit` / `-l` `<int-range>` |  | Maximum number of results per project (textual search only, 1-100). |
