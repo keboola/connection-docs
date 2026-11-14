@@ -342,6 +342,9 @@ the primary key must match. Feel free to use a multi-column primary key.
 - **Partition-aware import** *(BigQuery only)* — When Incremental loading and a primary key are set, limits the
 deduplication to the destination partitions the new rows belong to, so BigQuery does not read the whole destination
 table. It requires a partitioned destination table; see [Partition-aware import](#partition-aware-import-bigquery).
+- **Import method** *(Snowflake only)* — Chooses how Snowflake writes the loaded data into the destination table:
+one `MERGE` or `INSERT OVERWRITE` statement, or the multi-statement deduplication. Leave it at **Platform default**
+unless you need a specific method; see [Import method](#import-method-snowflake).
 
 **Important:** Multiple output mappings can be created for your transformation. Each source table can be used only once however.
 
@@ -424,6 +427,62 @@ recent dates. If a load contains rows spread across most partitions, the filter 
 - Whether the filter was applied shows in the BigQuery job history of the project: the deduplication statement
   (`MERGE`, or `UPDATE`, `DELETE`, and `INSERT`) contains the filter on the partitioning column, and its bytes processed
   drop accordingly.
+
+#### Import method (Snowflake)
+
+When a table output mapping loads data into a Snowflake Storage table, Keboola writes it into the destination table
+with one of two methods. The **Import method** option of the table output mapping chooses which one.
+
+| Option | How Snowflake writes the table |
+|---|---|
+| **Platform default** | Keboola chooses the method for the project. This is multi statement, unless Keboola has enabled the optimized Snowflake import for your project, in which case it is single statement. |
+| **Single statement (MERGE / INSERT OVERWRITE)** | Applies the load as one statement: `MERGE` for an incremental load, `INSERT OVERWRITE` for a full load. |
+| **Multi statement (legacy deduplication)** | Uses a separate deduplication table and several statements that update the destination table and insert the new rows. |
+
+##### Differences in the result
+
+Both methods load the same data with one exception. On an **incremental** load from a Snowflake staging database
+(a SQL transformation or a workspace), a primary-key column can contain both `NULL` and an empty string (`''`):
+
+- **Single statement** treats `NULL` and `''` as the same key value and keeps one row.
+- **Multi statement** treats them as different values and keeps both rows.
+
+Full loads and loads from CSV files (File Staging) give the same result with either method.
+
+##### Where the option applies
+
+The option is shown in the table output mapping, for any source type, when all of the following conditions are met:
+
+- The project uses the Snowflake backend.
+- The mapping does not use a direct grant (`unload_strategy: direct-grant`); such a table is not imported at all.
+- [Deduplication Strategy](#options-2) is not set to **Insert**, which skips deduplication.
+
+When a condition stops being met, for example after you switch Deduplication Strategy to **Insert**, the UI removes the
+option from the mapping when you save it.
+
+The option has no effect when the output mapping creates the destination table by its first load and the table
+columns are not known in advance. The table is new and empty, so there is nothing to deduplicate against.
+
+##### Setting it in the configuration
+
+In the configuration JSON, the option is stored as `import_method`, with the value `auto`, `single_statement`, or
+`multi_statement`:
+
+```json
+{
+  "source": "out_product_prices",
+  "destination": "out.c-prices.out_product_prices",
+  "incremental": true,
+  "primary_key": ["product_id", "date"],
+  "import_method": "single_statement"
+}
+```
+
+- `auto` is the platform default. **Platform default** in the UI does not write the key to the configuration.
+- The key is accepted on the Snowflake backend only. An explicit `single_statement` or `multi_statement` for a table in
+  a bucket on another backend makes the import fail with an error (`storage.tables.importMethodNotSupported`).
+- A component can also set `import_method` in its output table [manifest](/extend/common-interface/manifest-files/out-tables-manifests/).
+  A value set in the output mapping, including `auto`, takes precedence over the value in the manifest.
 
 
 ### File Output Mapping
