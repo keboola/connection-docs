@@ -435,7 +435,7 @@ with one of two methods. The **Import method** option of the table output mappin
 
 | Option | How Snowflake writes the table |
 |---|---|
-| **Platform default** | Keboola chooses the method for the project. This is multi statement, unless Keboola has enabled the optimized Snowflake import for your project, in which case it is single statement. |
+| **Platform default** | The output mapping does not set a method. If the component sets `import_method` in its output table manifest, that method is used. Otherwise Keboola chooses the method for the project: multi statement, unless Keboola has enabled the optimized Snowflake import for your project, in which case it is single statement. |
 | **Single statement (MERGE / INSERT OVERWRITE)** | Applies the load as one statement: `MERGE` for an incremental load, `INSERT OVERWRITE` for a full load. |
 | **Multi statement (legacy deduplication)** | Uses a separate deduplication table and several statements that update the destination table and insert the new rows. |
 
@@ -478,11 +478,14 @@ In the configuration JSON, the option is stored as `import_method`, with the val
 }
 ```
 
-- `auto` is the platform default. **Platform default** in the UI does not write the key to the configuration.
+- **Platform default** in the UI leaves the key out of the configuration.
 - The key is accepted on the Snowflake backend only. An explicit `single_statement` or `multi_statement` for a table in
   a bucket on another backend makes the import fail with an error (`storage.tables.importMethodNotSupported`).
 - A component can also set `import_method` in its output table [manifest](/extend/common-interface/manifest-files/out-tables-manifests/).
-  A value set in the output mapping, including `auto`, takes precedence over the value in the manifest.
+  When the output mapping has no `import_method`, the value from the manifest is used. A value set in the output
+  mapping takes precedence over the manifest.
+- `auto` stands for the platform default, as if neither the output mapping nor the manifest set a method. The UI does
+  not write it; set it in the configuration JSON only when you need to override a method set by the manifest.
 
 
 ### File Output Mapping
