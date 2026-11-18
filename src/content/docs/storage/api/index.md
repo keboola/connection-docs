@@ -1,5 +1,6 @@
 ---
 title: Storage API
+description: 'Where to start with the Storage API: its most important functions, with links to each, and to the general Keboola API introduction.'
 slug: 'storage/api'
 redirect_from:
     - /integrate/storage/

@@ -1,5 +1,6 @@
 ---
 title: Data Streams Tutorial
+description: Set up a data stream that loads GitHub issue events from a webhook into a Storage table.
 slug: 'storage/data-streams/tutorial'
 redirect_from:
     - /integrate/data-streams/tutorial/

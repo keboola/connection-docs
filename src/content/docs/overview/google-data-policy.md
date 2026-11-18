@@ -1,5 +1,6 @@
 ---
 title: Google Data Usage Policy
+description: 'Keboola''s Google Data Usage Policy for the data source and destination connectors that work with Google APIs and services.'
 slug: 'overview/google-data-policy'
 ---
 

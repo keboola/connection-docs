@@ -1,6 +1,7 @@
 ---
 title: Google Drive
 slug: 'components/writers/storage/google-drive'
+description: 'Write Keboola tables to Google Drive as CSV or Google Sheets files, updating one file or creating a new file with each run.'
 redirect_from:
     - /writers/storage/google-drive/
 ---
@@ -11,6 +12,8 @@ This data destination connector sends tables as CSV files into a single [Google 
 It allows you to write entire tables as CSV files, or Google Sheets files. To write tables as partial modifications
 to an existing sheet, use the [Google Sheets data destination connector](/components/writers/storage/google-sheets/). Writing tables as CSV files
 is not bound by [Google Sheets limits](https://spreadsheetpoint.com/google-sheets-limitations/).
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Google Drive** data destination connector.

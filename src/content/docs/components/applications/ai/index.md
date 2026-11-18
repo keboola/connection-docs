@@ -1,5 +1,6 @@
 ---
 title: AI Applications
+description: 'Which AI applications Keboola offers, such as Generative AI, which processes your input data with a custom prompt.'
 slug: 'components/applications/ai'
 redirect_from:
     - /applications/ai/

@@ -1,5 +1,6 @@
 ---
 title: Bring Your Own Database (BYODB)
+description: 'Host your Keboola project data in your own Snowflake or BigQuery account: access from outside, backend sizes, rules for Keboola-created objects, and limits.'
 slug: 'storage/byodb'
 ---
 

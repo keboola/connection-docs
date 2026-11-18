@@ -1,5 +1,6 @@
 ---
 title: Data Catalog
+description: 'Catalog gives an overview of the data shared to and from your project.'
 slug: 'catalog'
 redirect_from:
   - /storage/buckets/sharing/
