@@ -1,6 +1,5 @@
 ---
 title: Synapse
-description: This data destination connector sends data to an Azure Synapse database and is only available on the Azure Keboola stacks.
 slug: 'components/writers/database/synapse'
 description: 'Write Keboola tables to an Azure Synapse database on Azure stacks with a dedicated login, then set column types and full or incremental load.'
 redirect_from:

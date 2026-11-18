@@ -1,6 +1,5 @@
 ---
 title: Generic Writer Configuration
-description: This component allows you to write data to a specified endpoint in a specified format. It currently supports single table and single endpoint per configuration.
 slug: 'components/writers/generic-writer/configuration'
 description: 'Look up each Generic Writer parameter that sets the API URL and authentication, the request method and path, how table rows map to JSON, and dynamic functions.'
 redirect_from:

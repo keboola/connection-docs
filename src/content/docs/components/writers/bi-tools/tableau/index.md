@@ -1,6 +1,5 @@
 ---
 title: Tableau TDE
-description: There is a wide range of options for sending data to the Tableau ecosystem.
 slug: 'components/writers/bi-tools/tableau'
 description: 'Write Keboola tables to Tableau TDE files with column types and filters, then download them or upload them to Tableau Server, Dropbox or Google Drive.'
 redirect_from:

@@ -1,6 +1,5 @@
 ---
 title: AWS S3
-description: This data destination connector allows you to write CSV files into a single AWS S3 bucket.
 slug: 'components/writers/storage/aws-s3'
 description: 'Write Keboola tables as CSV files to an AWS S3 bucket, authenticating with an IAM user access key or an AWS role with s3:PutObject permission.'
 redirect_from:

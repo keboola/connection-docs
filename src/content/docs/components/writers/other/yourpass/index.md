@@ -1,6 +1,5 @@
 ---
 title: YourPass
-description: 'Create and update mobile wallet passes in YourPass — boarding passes, loyalty cards, and tickets — from Keboola data.'
 slug: 'components/writers/other/yourpass'
 description: 'Create, update or delete YourPass mobile wallet passes from a Keboola table through the YourPass API, using your account credentials and the required columns.'
 redirect_from:

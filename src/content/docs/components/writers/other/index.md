@@ -1,6 +1,5 @@
 ---
 title: Other Data Destination Connectors
-description: 'Data destination connectors that do not fit the database, storage, or BI categories — the long tail of delivery targets.'
 slug: 'components/writers/other'
 description: 'Send Keboola data where no BI, database or storage connector fits, such as events to Azure Event Hubs, passes to YourPass, or any HTTP endpoint.'
 redirect_from:

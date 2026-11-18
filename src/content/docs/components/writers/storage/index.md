@@ -1,6 +1,5 @@
 ---
 title: Storage Data Destination Connectors
-description: 'Data destination connectors for object and file storage — deliver Keboola output to S3, Azure Blob Storage, and similar targets.'
 slug: 'components/writers/storage'
 description: 'Pick the connector that writes tables or files to AWS S3, Dropbox, Google Cloud Storage, Google Drive and Sheets, OneDrive, SFTP or another Keboola project.'
 redirect_from:

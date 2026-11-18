@@ -1,6 +1,5 @@
 ---
 title: Azure Event Hub
-description: This data destination connector allows you to publish events to the Azure Event Hubs.
 slug: 'components/writers/other/azure-event-hub'
 description: 'Publish Keboola table rows to Azure Event Hubs with a connection string and hub name, sending each row as JSON or the value of one column.'
 redirect_from:

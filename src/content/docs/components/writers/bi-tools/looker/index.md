@@ -1,6 +1,5 @@
 ---
 title: Looker
-description: This data destination connector pushes data to your Looker instance where it creates a new LookML project.
 slug: 'components/writers/bi-tools/looker'
 description: 'Push Keboola tables to Looker as a new LookML project through a Snowflake workspace, with a Looker API client ID and secret and optional foreign keys.'
 redirect_from:

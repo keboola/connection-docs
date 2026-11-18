@@ -1,6 +1,5 @@
 ---
 title: Business Intelligence
-description: 'Data destination connectors for BI and analytics tools — send processed Keboola data to the platforms your reports run on.'
 slug: 'components/writers/bi-tools'
 description: 'Send Keboola tables to GoodData, Looker, Tableau or ThoughtSpot, or give BI tools read-only access through Data Gateway or a Snowflake or BigQuery workspace.'
 redirect_from:

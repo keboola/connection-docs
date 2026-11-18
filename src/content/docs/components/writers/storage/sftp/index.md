@@ -1,6 +1,5 @@
 ---
 title: SFTP
-description: This data destination connector allows you to write tables and files to a remote SFTP server.
 slug: 'components/writers/storage/sftp'
 description: 'Write Keboola tables and files to an SFTP server with a password or private key, set the remote path, and optionally add a timestamp to file names.'
 redirect_from:

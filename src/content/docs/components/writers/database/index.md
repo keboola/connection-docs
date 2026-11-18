@@ -1,6 +1,5 @@
 ---
 title: Database Data Destination Connectors
-description: Data destination connectors export data from Keboola to SQL databases.
 slug: 'components/writers/database'
 description: 'Pick the connector that sends Keboola tables to BigQuery, Exasol, Firebolt, MySQL, Oracle, PostgreSQL, Redshift, Snowflake, SQL Server or Synapse.'
 redirect_from:

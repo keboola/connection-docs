@@ -1,6 +1,5 @@
 ---
 title: Generic Writer Configuration Examples
-description: "This configuration sends the POST request to https://example.com/test/[[id]] where [[id]] is a column expected in the input table."
 slug: 'components/writers/generic-writer/configuration-examples'
 description: 'Copy sample Generic Writer configurations that iterate over rows, send batch events to Exponea, user events to Customer.io and notifications to Slack.'
 redirect_from:

@@ -1,6 +1,5 @@
 ---
 title: GoodData
-description: This data destination connector sends tables into a GoodData project.
 slug: 'components/writers/bi-tools/gooddata'
 description: 'Write Keboola tables to a GoodData project and let the connector build its logical data model from the column types and date dimensions you set.'
 redirect_from:

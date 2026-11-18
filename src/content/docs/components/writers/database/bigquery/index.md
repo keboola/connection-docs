@@ -1,6 +1,5 @@
 ---
 title: Google BigQuery
-description: This data destination connector sends data to a Google BigQuery dataset.
 slug: 'components/writers/database/bigquery'
 description: 'Write Keboola tables to a Google BigQuery dataset with a service account JSON key, then set table names, column data types and full or incremental load.'
 redirect_from:

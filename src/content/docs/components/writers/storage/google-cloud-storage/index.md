@@ -1,6 +1,5 @@
 ---
 title: Google Cloud Storage
-description: This data destination connector sends tables as CSV or other files to a Google Cloud Storage bucket.
 slug: 'components/writers/storage/google-cloud-storage'
 description: 'Write Keboola tables and files to a Google Cloud Storage bucket, authorized with a service account key or instant authorization.'
 redirect_from:

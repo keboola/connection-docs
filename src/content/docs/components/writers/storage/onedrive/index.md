@@ -1,6 +1,5 @@
 ---
 title: OneDrive Excel Sheets
-description: This data destination connector exports tables from your Storage tables as Excel sheets to Microsoft OneDrive.
 slug: 'components/writers/storage/onedrive'
 description: 'Write Keboola tables to an Excel worksheet in OneDrive, Office 365 or SharePoint, pick or create the workbook and worksheet, and overwrite or append rows.'
 redirect_from:

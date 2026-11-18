@@ -1,6 +1,5 @@
 ---
 title: Snowflake
-description: This data destination connector sends data to a Snowflake database.
 slug: 'components/writers/database/snowflake'
 description: 'Write Keboola tables to your own Snowflake database or, on projects with their own Snowflake backend, a Keboola-provisioned schema to share with services.'
 redirect_from:

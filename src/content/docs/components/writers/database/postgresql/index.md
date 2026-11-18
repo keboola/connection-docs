@@ -1,6 +1,5 @@
 ---
 title: PostgreSQL
-description: This data destination connector sends data to a PostgreSQL database.
 slug: 'components/writers/database/postgresql'
 description: 'Write Keboola tables to a PostgreSQL database and schema with dedicated credentials or an SSH tunnel, then set column types and full or incremental load.'
 redirect_from:

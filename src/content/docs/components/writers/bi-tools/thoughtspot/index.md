@@ -1,6 +1,5 @@
 ---
 title: ThoughtSpot
-description: This data destination connector sends data to the ThoughtSpot platform.
 slug: 'components/writers/bi-tools/thoughtspot'
 description: 'Load Keboola tables into ThoughtSpot with database and SSH credentials, then set column types, the table type, and full or incremental load.'
 redirect_from:

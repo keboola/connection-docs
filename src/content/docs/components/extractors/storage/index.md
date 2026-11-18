@@ -1,6 +1,5 @@
 ---
 title: Storage Data Source Connectors
-description: 'Data source connectors for object and file storage — import files from S3, Azure Blob Storage, HTTP, and similar sources.'
 slug: 'components/extractors/storage'
 description: 'Pick the connector that imports data into Keboola from AWS S3, Azure Datalake Gen2, FTP, Google Drive, HTTP, OneDrive or another Keboola project.'
 redirect_from:
