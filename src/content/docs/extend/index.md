@@ -1,6 +1,6 @@
 ---
 title: Extending Keboola
-description: As an open system consisting of many built-in, interoperating components, such as Storage or Extractors, Keboola can be easily extended.
+description: 'Extend Keboola with your own code: a component or a Generic Extractor connector, and what that offers customers, external companies, and data scientists.'
 slug: 'extend'
 ---
 

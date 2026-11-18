@@ -1,6 +1,6 @@
 ---
 title: Buckets
-description: 'Buckets are containers for tables in Storage, organized into two stages: in for input data and out for processed data.'
+description: 'Create a Storage bucket in the in or out stage, choose its backend, review a bucket''s details, and use buckets to share tables.'
 slug: 'storage/buckets'
 ---
 
