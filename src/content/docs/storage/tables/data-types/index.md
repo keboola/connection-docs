@@ -113,16 +113,18 @@ You **cannot change the type of a column in a typed table once it has been creat
 **Important:** Always verify other configurations that depend on the table to avoid schema mismatches. Also, pay special attention to writers (data destination connectors), particularly if the table already exists in the destination system. Mismatched schemas between the source and destination can lead to errors.
 :::
 
-#### Widening a Text Column
-The **length** of a text column (`VARCHAR` on Snowflake, `STRING(n)` on BigQuery) can be increased in place. If a Snowflake transformation redefines an existing column with a longer length, for example from `VARCHAR(2)` to `VARCHAR(50)`, Storage widens the column instead of failing the load. It is a metadata-only change, so existing rows are preserved, for both full and incremental loads. The type itself still cannot be changed this way.
+#### Widening a text column
+You can increase the length of a text column (`VARCHAR` on Snowflake, `STRING(n)` on BigQuery) in place. When a Snowflake transformation redefines an existing column with a longer length, for example `VARCHAR(2)` as `VARCHAR(50)`, Storage widens the column and the load succeeds. Only the column's metadata changes, so the existing rows stay, in full and incremental loads alike. The column's type still cannot change this way.
+
+<!-- VERIFY(Storage owner): that the load path widens the column (not only the column definition endpoint), for full and incremental loads, and on BigQuery too. Reproduced by a customer on production Snowflake; the widen-only rule is in php-table-backend-utils (SnowflakeTableQueryBuilder, CANNOT_DECREASE_LENGTH), the load path is not in public code. -->
 
 :::caution
-**Widening is one-way.** Once a column has been widened to `VARCHAR(50)`, a load that declares the original `VARCHAR(2)` fails, because loading a shorter length into a longer column is not supported.
+Widening is one-way. Once a column is `VARCHAR(50)`, a load that declares it as `VARCHAR(2)` fails, because Storage cannot decrease a column's length.
 
-As a result, `VARCHAR(n)` written in a transformation is not a durable constraint: the length that is enforced is always the **current definition of the column in Storage**, not the one in your latest query. If you rely on a maximum width being enforced, [create the table as typed first](#how-to-create-a-typed-table) and keep that definition as the source of truth.
+So a `VARCHAR(n)` in a transformation does not set a lasting limit. Storage enforces the column's current definition, whatever your latest query declares. To enforce a maximum width, [create the table as typed first](#how-to-create-a-typed-table) and treat that definition as the source of truth.
 :::
 
-The same length change, together with a column's nullability and default value, can also be made explicitly through the [update column definition endpoint](https://api.keboola.com/?service=storage#put-/v2/storage/tables/-id-/columns/-column-/definition) of the Storage API, without running a transformation.
+To change the length without running a transformation, call the Storage API's [update column definition endpoint](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-id-/columns/-column-/definition). It can also make a column nullable and drop a default; adding or changing a default works on BigQuery only. [Changing Column Definitions](/storage/tables/#changing-column-definitions) lists what each backend allows.
 
 ### How to Create a Typed Table Based on a Non-Typed Table
 If you have a non-typed table, `non_typed_table`, with undefined data types and want to convert it into a typed table, follow these steps:
