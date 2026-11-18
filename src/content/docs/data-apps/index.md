@@ -31,7 +31,7 @@ On both routes, a Python/JS app ends up in a Git repository, either one Keboola 
 
 ## Run and share
 
-Every app has its own settings page in **Apps**: who can open it ([Authentication](/data-apps/authentication/) — public, password, or your company SSO), its URL and how to [publish and share](/data-apps/publish-and-share/) it, and operational settings like backend size and auto-sleep ([Reference](/data-apps/reference/)). Deploying and redeploying is one click; logs are right on the app's detail. Once it's live, [Operate and update an app](/data-apps/operate/) covers the day-to-day work and [Troubleshooting](/data-apps/troubleshooting/) covers the days it goes wrong.
+Every app has its own settings page in **Apps**: who can open it ([Authentication](/data-apps/authentication/) — public, password, or your company SSO), its URL and how to [publish and share](/data-apps/publish-and-share/) it, and operational settings like backend size and auto-sleep ([Reference](/data-apps/reference/)). Deploying and redeploying is one click; logs are right on the app's detail. Once it's live, [Operate and update an app](/data-apps/operate/) covers the day-to-day work and [Troubleshooting](/data-apps/troubleshooting/) covers the days it goes wrong. To show each user of an app only the rows and columns they may read, see [Row- and column-level security](/storage/row-level-security/).
 
 ## Beyond dashboards
 
