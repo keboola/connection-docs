@@ -17,6 +17,19 @@ Components are divided into the following categories:
 All components, regardless of their category, behave the same way. To use a component, you have to create a **configuration** first. A configuration sets the necessary parameters for each 
 component (e.g., credentials and other specifications of what to do). Then, it can be run — a **job** is created and does the actual work.
 
+## Finding a Component
+
+To see the components available to you and add one to your project, follow [Creating Component Configuration](#creating-component-configuration). To browse the catalog outside your project, see the [Keboola Developer Portal](https://components.keboola.com/components). You do not need the portal to use components.
+
+If no component connects to the system you need, you have several options:
+
+- Write your own Python code in the [Custom Python](/components/applications/custom-python/) component to call external APIs or push data to third-party systems.
+- Connect to a REST API without code using the [Generic Extractor](/components/extractors/generic-extractor/).
+- Ask [Kai](/kai/), the AI assistant in your project, to help you set up the integration or use your own AI assistant through the [Keboola MCP Server](/ai/mcp-server/).
+- Build your own component and register it in the [Developer Portal](https://components.keboola.com/); see the [developer guide](/extend/component/).
+
+To adjust a component's input or output files without changing its code, use [processors](/extend/component/processors/).
+
 ## Component Release Stages
 Our components are released at different stages and labeled to indicate the quality and production readiness level. We strive to deliver the highest-quality components. 
 Our goal is to unlock as many interesting integrations as possible, benefiting all our customers. The component release grades allow us to manage the release process effectively 
