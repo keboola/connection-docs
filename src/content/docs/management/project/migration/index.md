@@ -1,6 +1,6 @@
 ---
 title: Migration between stacks
-description: 'Keboola runs on several stacks, and each stack is a completely independent set of Keboola services.'
+description: 'Move a project to another stack with Keboola Support: the migration steps, what is migrated and what is not, and what to set up again in the new project.'
 slug: 'management/project/migration'
 ---
 
