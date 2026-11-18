@@ -5,6 +5,8 @@ redirect_from:
     - /extend/generic-extractor/configuration/api/
 ---
 
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 *To configure your first Generic Extractor, follow our [tutorial](/components/extractors/generic-extractor/tutorial/basic/).*
 *Use [Parameter Map](/components/extractors/generic-extractor/map/) to help you navigate among various
@@ -92,7 +94,7 @@ Authentication (authorization) needs to be configured for any API which is not p
 Because there are many authorization methods used by different APIs, there are also many
 [configuration options](/components/extractors/generic-extractor/configuration/api/authentication/).
 
-## Retry Configuration
+## Retry configuration
 By default, Generic Extractor **automatically retries failed HTTP requests** — repeatedly, and on most errors.
 This is one of the big advantages over writing your own extractor from scratch. Tweak the retry setting to optimize
 the speed of an extraction or to avoid unwanted flooding of the API.
@@ -124,7 +126,7 @@ There are two retry strategies:
 - Either the API sends a `Retry-After` header (or its equivalent), or
 - Generic Extractor uses an [exponential backoff algorithm](https://en.wikipedia.org/wiki/Exponential_backoff).
 
-### API Retry Strategy
+### API retry strategy
 Per the HTTP specification, the API may send the [`Retry-After`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After)
 header which should contain number of seconds to pause/sleep before the next request. Generic Extractor
 supports some extensions to this. First, the *Retry Header* name may be customized. Second, the header
@@ -138,7 +140,7 @@ time of the next request
 The second and third options are often called **Rate Limit Reset** as they describe when the next successful request
 can be made (i.e., the limit is reset).
 
-### Backoff Strategy
+### Backoff strategy
 The exponential backoff in Generic Extractor is defined as `truncate(2^(retry\_number - 1)) * 1000` seconds.
 This means that the first retry (zero-based index) will be after 0 seconds (`(2^(0-1)) = 0.5`, truncated to 0).
 The retry delays are the following:
@@ -179,7 +181,7 @@ in the [debug](/components/extractors/generic-extractor/running/#debug-mode) mes
 If the exponential backoff is used, you will see its sequence of times.
 See an [example](/components/extractors/generic-extractor/configuration/api/#retry-configuration).
 
-## Default HTTP Options
+## Default HTTP options
 The `http` configuration option allows you to set the timeouts, default headers and parameters sent with each API call
 (defined later in the [`jobs` section](/components/extractors/generic-extractor/configuration/config/jobs/#request-parameters)).
 
@@ -199,7 +201,7 @@ the headers and values are their values — for instance:
 
 See the full [example](/components/extractors/generic-extractor/configuration/api/#default-headers).
 
-### Request Parameters
+### Request parameters
 The `http.defaultOptions.params` configuration allows you to **set the
 [request parameters](/components/extractors/generic-extractor/tutorial/rest/#url) to be
 sent with each API request**. The same rules apply as to the
@@ -207,7 +209,7 @@ sent with each API request**. The same rules apply as to the
 
 See an [example](/components/extractors/generic-extractor/configuration/api/#default-headers).
 
-### Required Headers
+### Required headers
 Similar to the `http.headers` option, the `http.requiredHeaders` option allows you to **set the HTTP header
 for every API request**. The difference is that the `requiredHeaders` configuration specifies **only the header names**.
 The actual values must be provided in the [`config`](/components/extractors/generic-extractor/configuration/config/)
@@ -238,7 +240,7 @@ Failing to provide the header values in the `config` section will cause an error
 
 See the full [example](/components/extractors/generic-extractor/configuration/api/#required-headers).
 
-### Ignore Errors
+### Ignore errors
 The `ignoreErrors` option allows you to force Generic Extractor to ignore certain extraction errors.
 The option lists HTTP codes for which any errors occurring during downloading
 and JSON parsing the response will be ignored. The `ignoreErrors` option error is an array of HTTP
@@ -272,7 +274,7 @@ API implementations and should not be used blindly if other solutions may be app
 [`responseFilter`](/components/extractors/generic-extractor/configuration/config/jobs/#response-filter). When ignoring errors,
 **you might miss even those errors that require your attention.**
 
-### Connect Timeout
+### Connect timeout
 
 The `connectTimeout` option is a float describing the number of seconds to wait while trying to connect to a server. 
 Default value is `30` seconds. Use `0` to wait indefinitely, we do not recommend it.
@@ -283,7 +285,7 @@ Default value is `30` seconds. Use `0` to wait indefinitely, we do not recommend
 }
 ```
 
-### Request Timeout
+### Request timeout
 
 The `requestTimeout` option is a float describing the total timeout of the request in seconds.
 Default value is `300` seconds. Use `0` to wait indefinitely, we do not recommend it. 
@@ -296,7 +298,7 @@ Default value is `300` seconds. Use `0` to wait indefinitely, we do not recommen
 
 ## Examples
 
-### Retry Configuration
+### Retry configuration
 Assume that you have an API which implements throttling in the following way: when
 the number of requests is exceeded, it returns an empty response with the status code `202` and
 a timestamp when a new requests can be made in the `X-RetryAfter` HTTP header.
@@ -321,7 +323,7 @@ Notice that it is necessary to add the response code `202` to the existing defau
 
 See [example [EX037]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/037-retry-header).
 
-### Default Headers
+### Default headers
 Assume that you have an API which returns a JSON response only if the client sends an
 `Accept: application/json` header. Additionally, if the client sends an
 `Accept-Encoding: gzip` header, the HTTP transmission will be compressed (and thus faster).
@@ -341,7 +343,7 @@ The following configuration sends both headers with every API request:
 
 See [example [EX038]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/038-default-headers).
 
-### Default Parameters
+### Default parameters
 Assume that you have an API requiring all requests to contain a filter
 for the account to which they belong. This is done by passing the `account=XXX` parameter.
 The following configuration sends the parameter with every API request:
@@ -364,7 +366,7 @@ may also be used.
 
 See [example [EX039]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/039-default-parameters).
 
-### Required Headers
+### Required headers
 Assume that an API requires the header `X-AppKey` to be sent with each
 API request. The following API configuration can be used:
 

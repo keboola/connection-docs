@@ -5,11 +5,11 @@ slug: 'ai/ai-kit'
 
 
 
-AI Kit is a plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development. It helps developers build Keboola components, data apps, and maintain code quality using AI-powered tools.
+AI Kit is a plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development. It helps developers build Keboola components and apps, and maintain code quality using AI-powered tools.
 
-AI Kit is designed for developers who use AI coding assistants like Claude Code to work with Keboola projects. It provides seven plugins that cover different aspects of Keboola development, from building production-ready components and data applications to driving your projects from the terminal and modelling your semantic layer.
+AI Kit is designed for developers who use AI coding assistants like Claude Code to work with Keboola projects. It provides seven plugins that cover different aspects of Keboola development, from building production-ready components and apps to driving your projects from the terminal and modelling your semantic layer.
 
-The toolkit includes specialized AI agents that understand Keboola's architecture, best practices, and development patterns. These agents can help you create new components from scratch, implement configuration schemas, build data apps, review a project for SQL and security problems, and automate common development workflows.
+The toolkit includes specialized AI agents that understand Keboola's architecture, best practices, and development patterns. These agents can help you create new components from scratch, implement configuration schemas, build apps, review a project for SQL and security problems, and automate common development workflows.
 
 ## Installation
 
@@ -33,7 +33,9 @@ After installation, enable the plugins you need:
 
 `keboola-claude-kit` is the marketplace name this repository publishes, and the one to install Keboola plugins from.
 
-<!-- Plugin list, names and versions read from keboola/ai-kit .claude-plugin/marketplace.json on 2026-08-26: component-developer 3.3.2, dataapp-developer 1.5.1, kbagent 0.91.0, keboola-cli 1.1.1, keboola-git 1.0.1, powerbi-to-sl 1.0.0, sl-toolkit 3.0.0. There is no `developer` plugin. -->
+Those are Claude Code commands. Claude Desktop, Cursor, VS Code and the ChatGPT app add the marketplace through their own screens; [kbagent with AI agents](/cli/for-agents/#set-up-your-client) has the route for each, and any plugin below installs the same way.
+
+<!-- Plugin list, names and versions read from keboola/ai-kit .claude-plugin/marketplace.json on 2026-09-25 (marketplace 1.14.0, commit e2c0b62): component-developer 3.3.2, dataapp-developer 1.6.3, kbagent 0.94.0, keboola-cli 1.1.1, keboola-git 1.1.0, powerbi-to-sl 1.0.0, sl-toolkit 3.0.0. There is no `developer` plugin. -->
 
 ## Available Plugins
 
@@ -79,7 +81,7 @@ The Keboola CLI Plugin is a project management and review toolkit built on the o
 
 ### Keboola Git Plugin
 
-The Keboola Git Plugin works with Keboola-managed Git (Forgejo) repositories for Python/JS data apps, which can host their source in Keboola rather than GitHub. It provisions repositories, mints push credentials, and copies source between GitHub and Keboola git through the kbagent CLI. It also carries the 15 MB push cap and the build-at-deploy workaround it forces.
+The Keboola Git Plugin works with Keboola-managed Git (Forgejo) repositories for Python/JS apps, which can host their source in Keboola rather than GitHub. It provisions repositories, mints push credentials, and copies source between GitHub and Keboola git through the kbagent CLI. It also carries the 15 MB push cap and the build-at-deploy workaround it forces.
 
 [View Keboola Git Plugin Documentation on GitHub](https://github.com/keboola/ai-kit/tree/main/plugins/keboola-git)
 
@@ -97,11 +99,11 @@ The `powerbi-to-sl` plugin migrates an existing Microsoft Power BI semantic mode
 
 ### Data App Developer Plugin
 
-The Data App Developer Plugin is a specialized toolkit for building production-ready Streamlit data apps for Keboola deployment. It features a systematic validate, build, and verify workflow that ensures features work correctly the first time.
+The Data App Developer Plugin teaches an AI client to build, deploy and debug Keboola apps, both Python/JS and Streamlit. Its main skill, `dataapp-development`, covers choosing the app type, the repository layout, Storage access, authentication, styling and deployment. The agent works through either the Keboola MCP Server or kbagent, one of them per session. For the whole flow from one prompt to a deployed app, see [Build an app locally](/data-apps/build-locally/#with-an-ai-agent).
 
 **Workflow:**
 
-The plugin enforces a three-phase development workflow. In the **Validate** phase, it checks table schemas and queries sample data using the Keboola MCP Server to verify assumptions before writing code. In the **Build** phase, it implements features following SQL-first architecture patterns that push computation to the database. In the **Verify** phase, it tests the app in a browser and captures screenshots using Playwright MCP to prove everything works.
+The plugin enforces a three-phase development workflow. In the **Validate** phase, it checks table schemas and queries sample data through the Keboola MCP Server or kbagent to verify assumptions before writing code. In the **Build** phase, it implements features following SQL-first architecture patterns that push computation to the database. In the **Verify** phase, it tests the app in a browser and captures screenshots using Playwright MCP to prove everything works.
 
 **Key Features:**
 
@@ -122,11 +124,11 @@ The agent will automatically validate the schema, query distinct values, create 
 
 ## Best Practices
 
-When using AI Kit, start with the appropriate plugin for your task. Use the Component Developer Plugin when building new Keboola components or adding features to existing ones, the Data App Developer Plugin when creating or modifying data apps, the kbagent Plugin to drive your projects from the terminal, and the Semantic Layer Toolkit when modelling metrics.
+When using AI Kit, start with the appropriate plugin for your task. Use the Component Developer Plugin when building new Keboola components or adding features to existing ones, the Data App Developer Plugin when creating or modifying apps, the kbagent Plugin to drive your projects from the terminal, and the Semantic Layer Toolkit when modelling metrics.
 
 For component development, always follow the two-PR workflow strategy: create a base PR with the cookiecutter-generated structure, then a separate implementation PR with your custom logic. This prevents premature CI/CD triggers.
 
-For data app development, always validate your data assumptions before writing code. The validate-build-verify workflow eliminates debugging cycles by catching issues early.
+For app development, always validate your data assumptions before writing code. The validate-build-verify workflow eliminates debugging cycles by catching issues early.
 
 ## Resources
 

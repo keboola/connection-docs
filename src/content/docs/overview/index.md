@@ -1,12 +1,19 @@
 ---
 title: Keboola Overview
 slug: 'overview'
+description: "What Keboola is and how its parts fit together: deployment options, architecture, governance, extending the platform, and the terms you meet everywhere, including stacks, jobs, tokens and the APIs."
+redirect_from:
+    - /integrate/
+    - /overview/repositories/
 ---
 
 
 
 Keboola is a cloud-based platform for all your data integration, transformation, and orchestration needs. 
 Designed for data engineers, analysts, and scientists, Keboola **simplifies data processes, enabling efficient management and insightful analysis**. 
+
+*This page explains what the platform is made of. To build something with it instead, work
+through [Getting Started](/getting-started/): a running pipeline in about 30 minutes with Kai, plus sign-up.*
 
 Key features of Keboola:
 - **Data Integration:** Effortlessly extract data from various sources like databases, cloud services, and APIs. Load it seamlessly into destinations of your choice for comprehensive analysis.
@@ -27,7 +34,7 @@ Keboola supports various deployment models to suit your specific needs:
 
 ## Keboola Architecture
 Keboola organizes accounts by [**projects**](/management/project/), offering a single project on the [Free Plan](/management/payg-project/) and multiple projects 
-under its subscription models. This [**multi-project architecture**](/tutorial/onboarding/architecture-guide/) supports a Data Mesh strategy and a customizable 
+under its subscription models. This [**multi-project architecture**](/overview/onboarding/architecture-guide/) supports a Data Mesh strategy and a customizable 
 data warehouse structure for various needs and use cases.
 
 The following diagram illustrates the structure of a single Keboola project, composed of various categorized components described below.
@@ -42,11 +49,11 @@ to gather data from various sources. They can connect to APIs of external servic
 [Storage](/storage/) is the central component in Keboola responsible for data management and access. It comprises two sections: 
 
 - [File Storage](/storage/files/), with all raw files uploaded to your project, and
-- [Table Storage](https://help.keboola.com/storage/tables/), where all data tables are organized into buckets, further categorized into in and out stages.
+- [Table Storage](/storage/tables/), where all data tables are organized into buckets, further categorized into in and out stages.
 
 This component acts as a middle layer that works with various [backend](/transformations/#backends) database systems like 
 [Snowflake](https://www.snowflake.com/), [BigQuery](https://cloud.google.com/bigquery/),
-[and others](https://help.keboola.com/transformations/#backends). It provides a key Storage API for working with data, 
+[and others](/transformations/#backends). It provides a key Storage API for working with data, 
 making it easier to connect with other parts of the system and third-party applications.
 
 ### Transformations & Workspaces
@@ -159,7 +166,7 @@ A stack is an entirely independent, full instance of Keboola platform services. 
 multiple Keboola accounts.
 
 Each stack uses a different network with a different set of **dedicated** [IP addresses](/components/ip-addresses/). 
-Our [developer documentation](https://developers.keboola.com/overview/api/#stacks-and-endpoints) describes how to handle multiple stacks 
+Our [developer documentation](/overview/api/#stacks-and-endpoints) describes how to handle multiple stacks 
 when working with the API in more detail.
 
 Single-tenant stacks are available for a single enterprise customer with a domain name in the form `connection.CUSTOMER_NAME.keboola.com`.
