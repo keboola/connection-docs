@@ -8,9 +8,8 @@ redirect_from:
 
 
 
-This data source connector uses the [Market Vision API](https://reporting.marketvision-spring.com/api/v1/documentation) to
-extract Market Vision [projects](https://reporting.marketvision-spring.com/api/v1/documentation#List_of_Projects_150)
-and their corresponding Forms, Questions, Categories, and Fieldsets.
+The connector calls the [Market Vision API](https://reporting.marketvision-spring.com/api/v1/documentation), starting from its
+[projects](https://reporting.marketvision-spring.com/api/v1/documentation#List_of_Projects_150) endpoint.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

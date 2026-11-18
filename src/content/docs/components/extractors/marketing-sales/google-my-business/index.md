@@ -8,7 +8,7 @@ redirect_from:
 
 
 
-This data source connector allows you to collect daily metrics, reviews, media and questions for your businesses that have a [Google Business profile](https://www.google.com/business/).
+The Google account you authorize must have access to every [Google Business profile](https://www.google.com/business/) location you want to read.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

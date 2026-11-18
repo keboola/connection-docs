@@ -8,8 +8,7 @@ redirect_from:
 
 
 
-This data source connector uses the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1) to import data 
-from [Pipedrive](https://www.pipedrive.com/en-gb).
+The connector calls the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1).
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

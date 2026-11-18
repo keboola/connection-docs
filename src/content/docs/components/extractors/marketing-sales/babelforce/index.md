@@ -8,7 +8,7 @@ redirect_from:
 
 
 
-This data source connector uses the Babelforce [REST API](https://www.babelforce.com/rest-api-power/) to import data from [Babelforce](https://www.babelforce.com/), a cloud call center platform.
+The connector calls the [Babelforce](https://www.babelforce.com/) [REST API](https://www.babelforce.com/rest-api-power/).
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

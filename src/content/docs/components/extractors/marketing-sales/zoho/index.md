@@ -6,7 +6,7 @@ description: 'Extract Zoho CRM module records through the Bulk Read API with an 
 
 
 
-This data source uses the [Zoho Bulk Read APIs](https://www.zoho.com/crm/developer/docs/api/v2/bulk-read/overview.html) to extract data from Zoho CRM modules.
+The connector calls the [Zoho Bulk Read APIs](https://www.zoho.com/crm/developer/docs/api/v2/bulk-read/overview.html).
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

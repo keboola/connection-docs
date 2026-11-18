@@ -6,8 +6,7 @@ description: 'Extract campaigns, segments, messages, customers and activities fr
 
 
 
-The Customer IO data source connector uses the [Customer IO Beta API](https://customer.io/docs/api/#tag/betaOverview) 
-to extract customers, campaigns, segments, and activities from your [Customer.io account](https://customer.io/). 
+The connector calls the [Customer IO Beta API](https://customer.io/docs/api/#tag/betaOverview) of your [Customer.io account](https://customer.io/).
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

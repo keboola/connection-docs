@@ -8,9 +8,9 @@ redirect_from:
 
 
 
-This data source connector uses the [Facebook Marketing API](https://developers.facebook.com/docs/marketing-api/reference) to
-extract Facebook Ad Account [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup)
-(including adsets, campaigns), as well as [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights).
+Ads, ad sets and campaigns come from the [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup) endpoint of the
+[Facebook Marketing API](https://developers.facebook.com/docs/marketing-api/reference), and insights from
+[ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights).
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Facebook Ads** connector.

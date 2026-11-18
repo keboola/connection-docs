@@ -9,7 +9,7 @@ redirect_from:
 
 
 
-This data source connector allows you to export report data from Google Ad Manager.
+Setting it up takes two steps: link a Google service account to your Google Ad Manager account, then add one configuration row per report.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

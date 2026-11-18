@@ -8,7 +8,7 @@ redirect_from:
 
 
 
-This data source connector downloads data about brands, customers, orders, and products in your BigCommerce store.
+Setting it up takes two steps: create an API account in BigCommerce, then enter its API path and token in Keboola.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
