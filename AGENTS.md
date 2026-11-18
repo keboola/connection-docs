@@ -101,8 +101,15 @@ Use it only for detail that helps an agent answer a support question but would
 clutter the page for people: exact error messages, what to check first, edge
 cases. Everything else is normal text, which agents read too. Hidden is not
 private: the repo and the twin are public, so nothing confidential, internal or
-customer-specific goes in. A block that is never closed fails the build. See
-`src/integrations/agent-only.mjs`.
+customer-specific goes in.
+
+Put the block at the top level of the page (not inside a list or quote), and
+don't nest other `:::` blocks in it. If the note contains a code sample with a
+`:::` line, open the block with more colons than that line (`::::agent` …
+`::::`), or the `:::` ends the block early. The build fails, naming the file and
+line, when a block is never closed, contains another `:::` block (usually a
+forgotten closing `:::`), is cut by a `:::` in a code sample, or is written with
+too few colons (`::agent`). See `src/integrations/agent-only.mjs`.
 
 Images: place them under `public/<section>/` and reference them with an absolute
 path (`![Alt](/section/page/image.png)`). Click-to-zoom is automatic.
