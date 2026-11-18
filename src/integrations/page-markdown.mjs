@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, linksToText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
 import { stripHtmlComments, collapseBlankLines } from './strip-comments.mjs';
+import { renderAgentBlocks, agentBlockTexts, findAgentLeaks } from './agent-only.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
 import { courseListText, courseBarText } from '../components/getting-started/course.mjs';
 import { sampleText } from '../components/getting-started/sample.mjs';
@@ -446,6 +447,7 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
         let written = 0;
         let skipped = 0;
         const index = [];
+        const agentPages = []; // pages with :::agent blocks, for the leak check below
 
         for (const file of findMarkdownFiles(contentDir)) {
           const content = readFileSync(file, 'utf-8');
@@ -478,8 +480,12 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
           const isMdx = extname(file) === '.mdx';
           const raw = stripFrontmatter(content);
           // authors' notes (VERIFY markers, where a claim was checked) stay in the source; comments
-          // and blank lines inside fenced code are content and survive (strip-comments.mjs)
-          const body = stripHtmlComments(isMdx ? stripMdx(raw) : raw).trim();
+          // and blank lines inside fenced code are content and survive (strip-comments.mjs).
+          // :::agent blocks, dropped from the HTML, are kept here as a labelled quote (agent-only.mjs).
+          const source = stripHtmlComments(isMdx ? stripMdx(raw) : raw);
+          const agentTexts = agentBlockTexts(source, file);
+          if (agentTexts.length) agentPages.push({ slug: fm.slug, texts: agentTexts });
+          const body = renderAgentBlocks(source, file).trim();
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });
@@ -488,6 +494,13 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
         }
 
         logger.info(`Emitted ${written} raw-markdown pages (${skipped} skipped)`);
+
+        // :::agent notes belong to the markdown twin only. If one reached a web page,
+        // remarkAgentOnly did not run, and Starlight rendered the block as a plain <div>.
+        const leaks = findAgentLeaks(outDir, agentPages);
+        if (leaks.length) {
+          throw new Error(`:::agent block rendered on the web page of: ${leaks.join(', ')}`);
+        }
 
         if (site) {
           index.sort((a, b) => a.slug.localeCompare(b.slug));

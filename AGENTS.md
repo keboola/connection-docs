@@ -35,7 +35,8 @@ src/
                   # AskKaiDrawer, Prereqs, StageStrip, …)
   styles/custom.css  # all UI/CSS customization
   integrations/   # custom Astro integrations: redirect-from, beacon-transforms,
-                  # page-markdown (the "View as Markdown" twin), pagefind-titles
+                  # page-markdown (the "View as Markdown" twin), pagefind-titles,
+                  # agent-only (:::agent blocks, twin only)
   sidebar.mjs     # generated from _data/navigation.yml
 public/           # static assets served as-is (images, favicon, llms)
 api/chat.ts       # "Ask Kai" backend (Vercel function → Keboola AI Service)
@@ -84,6 +85,24 @@ Helpful info.
 Beta notice.
 :::
 ```
+
+Notes for AI agents only: a `:::agent` block is left out of the web page (and
+search) and appears in the page's markdown twin (`<slug>/index.md`, "View as
+Markdown", llms.txt) as a quote labelled "Note for agents":
+
+```markdown
+:::agent
+If the user sees "Bucket sharing is not enabled", check the organization's
+data sharing setting first. It is not a project permission.
+:::
+```
+
+Use it only for detail that helps an agent answer a support question but would
+clutter the page for people: exact error messages, what to check first, edge
+cases. Everything else is normal text, which agents read too. Hidden is not
+private: the repo and the twin are public, so nothing confidential, internal or
+customer-specific goes in. A block that is never closed fails the build. See
+`src/integrations/agent-only.mjs`.
 
 Images: place them under `public/<section>/` and reference them with an absolute
 path (`![Alt](/section/page/image.png)`). Click-to-zoom is automatic.
