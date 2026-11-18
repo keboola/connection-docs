@@ -1,6 +1,6 @@
 ---
 title: Migration between stacks
-description: Keboola is available in multiple stacks. Each stack instance is completely independent set of Keboola services.
+description: 'Keboola runs on several stacks, and each stack is a completely independent set of Keboola services.'
 slug: 'management/project/migration'
 ---
 

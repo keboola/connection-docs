@@ -1,6 +1,6 @@
 ---
 title: Oracle Transformation
-description: The Oracle database is a multi-model database management system produced and is marketed by Oracle Corporation.
+description: 'Oracle Database is a multi-model database management system developed and marketed by Oracle Corporation.'
 slug: 'transformations/oracle'
 ---
 

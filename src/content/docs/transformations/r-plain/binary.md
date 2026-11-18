@@ -1,6 +1,6 @@
 ---
 title: Using Binary Files
-description: Inside an R transformation, pre-computed models can be used. These models of your data behaviour are great for predictions, among other things.
+description: 'An R transformation can use pre-computed models of your data''s behavior, for predictions among other uses.'
 slug: 'transformations/r-plain/binary'
 redirect_from:
     - /manipulation/transformations/r/binary/

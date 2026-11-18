@@ -1,6 +1,6 @@
 ---
 title: Data Catalog
-description: The data catalog represents an overview of data shared to and from the project.
+description: 'Catalog gives an overview of the data shared to and from your project.'
 slug: 'catalog'
 redirect_from:
   - /storage/buckets/sharing/
