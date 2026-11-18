@@ -1,6 +1,8 @@
 ---
 title: Project Limits
 slug: 'management/project/limits'
+search_keywords: [limits]
+description: Business and platform limits of a Keboola project - time credits (PPU) per job type, Apps pricing, storage size, and platform quotas.
 redirect_from:
   - /management/limits/
 ---
@@ -29,12 +31,12 @@ You can also request an upgrade by clicking the **Request Increase** button crea
 
 Business limits vary based on your contract (refer to it to see which ones apply in your case):
 
-- **Projects** --- the number of Keboola projects (workspaces dedicated for data use cases)
-- **Users** --- the number of [project users](/management/project/users).
+- **Projects** — the number of Keboola projects (workspaces dedicated for data use cases)
+- **Users** — the number of [project users](/management/project/users).
 [Keboola support users](/management/support/#keboola-support-users) do not count towards this number, 
 and neither do [tokens](/management/project/tokens). 
-- **Project Power** --- measured in [Time Credits/Units](#project-power---time-credits)
-- **Storage size** --- the sum of the sizes of the tables in your [Table Storage](/storage)
+- **Project Power** — measured in [Time Credits/Units](#project-power--time-credits)
+- **Storage size** — the sum of the sizes of the tables in your [Table Storage](/storage)
 
 ### Project Power -- Time Credits
 
@@ -43,13 +45,26 @@ Measured in milliseconds, presented in hours (1 hour = 3,600 seconds). Every job
 based on 
 
 - elapsed time of the job (in seconds), 
-- types of jobs (workspace, SQL, Python, and R transformations), and 
+- types of jobs (workspaces, SQL, Python, R, DuckDB, and dbt transformations), and 
 - backend performance: XSmall, Small, Medium, Large.
 
 Types:
 - **KBC** - Generic type of PPU used in the projects.
 - **SQL** - PPU used for SQL transformation jobs, in case the customer is using [BYODB](/storage/byodb) and has a separate product for SQL jobs.
 - **CDC** - PPU used for CDC extractor jobs, in case the customer is using [CDC](/components/extractors/database/#change-data-capture-cdc) and has a separate product for CDC jobs.
+
+**Which job type does your work bill as?**
+
+| What you run                                                              | Billed as                           |
+|---------------------------------------------------------------------------|-------------------------------------|
+| Snowflake or BigQuery transformation, SQL workspace, Query Service (JDBC) | SQL job / workspace / Query service |
+| Python, R, or DuckDB transformation; Python or R (JupyterLab) workspace   | Data Science job / workspace        |
+| dbt transformation                                                        | dbt job                             |
+| App                                                                       | Apps                                |
+| Data source component                                                     | Data source job                     |
+| Data destination component                                                | Data destination job                |
+
+The other job types in the table below are named for the feature that produces them. Apps have their own rates, under [Apps pricing](#apps-pricing).
 
 Below you will find an overview of time credits consumed by individual Keboola job types. 
 If you need more information, please contact your CSM.
@@ -80,33 +95,81 @@ If you need more information, please contact your CSM.
 | Large                                 | 1 hour                  | **32**                |
 | **Data Gateway job**                  | 1 GB out                | **0.2**               |
 | **AppStore Apps**                     | 1 hour                  | **1**                 |
-| **DataApps**                          |                         |                       |
-| XSmall                                | 1 hour                  | **0.1**               |
-| Small                                 | 1 hour                  | **0.2**               |
-| Medium                                | 1 hour                  | **0.5**               |
-| Large                                 | 1 hour                  | **1**                 |
 
 **Types of backend sizes used for jobs**
 
+| Backend size                          | Specification                                   |
+|---------------------------------------|-------------------------------------------------|
 | SMALL (SQL)                           | Snowflake SMALL DWH or equivalent               |
 | MEDIUM (SQL)                          | Snowflake MEDIUM DWH                            |
 | LARGE (SQL)                           | Snowflake LARGE DWH                             |
-| XSMALL (Python,R, Components)         | 8 GB RAM, 1 CPU cores, 150GB SSD, shared        |
-| SMALL (Python,R, Components, DataApp) | 16 GB RAM, 2 CPU cores, 150GB SSD, shared       |
-| MEDIUM (Python,R, Components)         | 32 GB RAM, 4 CPU cores, 150GB SSD, shared       |
-| LARGE (Python,R, Components)          | 114 GB RAM, 14 CPU cores, 1TB SSD, dedicated    |
+| XSMALL (Python, R, DuckDB, Components)         | 8 GB RAM, 1 CPU cores, 150GB SSD, shared     |
+| SMALL (Python, R, DuckDB, Components)         | 16 GB RAM, 2 CPU cores, 150GB SSD, shared    |
+| MEDIUM (Python, R, DuckDB, Components)         | 32 GB RAM, 4 CPU cores, 150GB SSD, shared    |
+| LARGE (Python, R, DuckDB, Components)          | 114 GB RAM, 14 CPU cores, 1TB SSD, dedicated |
 | SMALL (dbt)                           | Snowflake SMALL DWH or equivalent               |
 | REMOTE (dbt)                          | Using user's remote DWH                         |
+
+#### <span data-pagefind-weight="5">Apps pricing</span>
+
+<!-- The weight lifts this heading in site search, so a search for "apps pricing" finds this section. -->
+
+<span id="apps"></span>
+An app uses time credits while it's awake, including the idle wait before it sleeps, at an hourly rate set by its framework and backend size. A sleeping app uses none.
+
+| Framework and backend size | Time credits per hour |
+|----------------------------|-----------------------|
+| Python/JS, XSmall          | **0.3**               |
+| Python/JS, Small           | **0.6**               |
+| Python/JS, Medium          | **1.2**               |
+| Python/JS, Large           | **2.4**               |
+| Streamlit, XSmall          | **0.1**               |
+| Streamlit, Small           | **0.2**               |
+| Streamlit, Medium          | **0.5**               |
+| Streamlit, Large           | **1**                 |
+
+The Python/JS rates apply from October 15, 2026. Until then, Python/JS apps use the same rates as Streamlit apps.
+
+<!-- VERIFY(Miro): the effective date, and whether existing Python/JS apps switch on it too. TODO(human-review, Nikita): remove this note after October 15, 2026. -->
+
+<span id="apps-backend-sizes"></span>
+**Backend sizes for Apps**
+
+You pick the size in the **Backend Size** field of the deploy wizard, each time you deploy or start the app. The time credits for each size are in the table above.
+
+| Backend size | Specification                                  |
+|--------------|------------------------------------------------|
+| XSmall       | 8 GB RAM, 1 CPU core, 1 TB SSD, shared         |
+| Small        | 16 GB RAM, 2 CPU cores, 1 TB SSD, shared       |
+| Medium       | 32 GB RAM, 4 CPU cores, 1 TB SSD, shared       |
+| Large        | 114 GB RAM, 14 CPU cores, 1 TB SSD, dedicated  |
+
+<!-- VERIFY(Miro): if Apps pods move to dynamic resource allocation ("up to 8 GB"), should this table say "up to"? -->
+
+<!-- VERIFY(Miro): the picker's Large label says "1TB dedicated", without "SSD". Does the Large backend have an SSD? -->
+
+#### Kai Agent
+
+[Kai](/kai/) has no fixed rate in the tables above. Each time Kai finishes a reply, the
+charge is derived from what that reply actually cost to produce — the language model
+tokens it consumed and the infrastructure it ran on. A median conversation, counting
+every reply it takes to reach a result, costs about **1.1 PPUs**, and simple work —
+writing a query, exploring a project, creating a transformation — runs three to four
+conversations per PPU. New organizations start with a one-time
+[free allowance](/kai/pricing/#free-allowance-for-new-organizations) of 300 PPU for Kai,
+shared across all their projects. See
+[Kai Pricing and Limits](/kai/pricing/) for typical figures per piece of work and for how Kai
+spend is tracked and capped.
 
 ### Storage Size
 The storage size is the sum of the sizes of the tables in your [table Storage](/storage/). 
 [Aliases](/storage/tables/#aliases) and [linked buckets](/catalog/) do 
 not count towards this number, and neither do [files](/storage/files/).
 
-The table storage size is measured as it is reported by the underlying [backend](/storage/#backend-properties). 
+The table storage size is measured as it is reported by the underlying [backend](/storage/#storage-data). 
 This means that the reported size is substantially smaller than the size of imported raw CSV files, thanks to 
 compression used by the database backend. This also means that reported sizes of the same data may differ slightly 
-across projects with different [backends](/storage/#backend-properties) (or between buckets in a project
+across projects with different [backends](/storage/#storage-data) (or between buckets in a project
 with mixed backends).
 
 ## Platform Limits

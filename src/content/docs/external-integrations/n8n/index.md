@@ -107,7 +107,7 @@ If you need functionality that isn’t covered by the node’s built-in actions,
 
 ## Resources
 
-- [Keboola API Documentation](https://developers.keboola.com/overview/api)
+- [Keboola API Documentation](/overview/api/)
 - [n8n Documentation](https://docs.n8n.io)
 - [n8n Community Nodes Guide](https://docs.n8n.io/integrations/#community-nodes)
 - [NPM Package](https://www.npmjs.com/package/@keboola/n8n-nodes-keboola)

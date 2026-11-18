@@ -1,6 +1,7 @@
 ---
 title: ThoughtSpot
 slug: 'components/writers/bi-tools/thoughtspot'
+description: 'Load Keboola tables into ThoughtSpot with database and SSH credentials, then set column types, the table type, and full or incremental load.'
 redirect_from:
     - /writers/bi-tools/thoughtspot/
 ---
@@ -8,6 +9,8 @@ redirect_from:
 
 
 This data destination connector sends data to the [ThoughtSpot](https://www.thoughtspot.com/product) platform.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **ThoughtSpot** data destination connector.
@@ -45,7 +48,7 @@ more details on designing the data schema.
 
 ![Screenshot - Table Type](/components/writers/bi-tools/thoughtspot/thoughtspot-5.png)
 
-There are two main options how the data destination connector can write data to tables --- **Full Load** mode and **Incremental Load** mode.
+There are two main options how the data destination connector can write data to tables — **Full Load** mode and **Incremental Load** mode.
 
 ![Screenshot - Table Options](/components/writers/bi-tools/thoughtspot/thoughtspot-6.png)
 

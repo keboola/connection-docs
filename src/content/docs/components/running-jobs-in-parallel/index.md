@@ -5,7 +5,7 @@ slug: 'components/running-jobs-in-parallel'
 
 
 
-All components that support [configuration rows](/components/#configuration-rows) — typically data source and destination connectors — can optionally run their row jobs in parallel. The **parallelism** setting controls how many row jobs execute concurrently within a single configuration.
+In components that support [configuration rows](/components/#configuration-rows) — typically data source and destination connectors — every row runs as its own job. The **parallelism** setting controls how many of these row jobs execute concurrently within a single configuration.
 
 Understanding what this setting does — and what it doesn't — helps you make better decisions about performance and cost.
 
@@ -15,7 +15,7 @@ Parallelism defines the **maximum number of row jobs that may run at the same ti
 
 **Parallelism is an upper limit, not a guarantee.** The actual number of concurrently running jobs may be lower than your configured value. Jobs that cannot start immediately are placed into a **waiting** state — this is normal behavior, not an error.
 
-This setting is optional. The default is **Parallel jobs: Off**, which means rows are processed one at a time.
+The default and minimum value is **1**: rows run one after another, each in its own job.
 
 **Example:** A configuration has five rows and parallelism set to 2. The rows are processed in three consecutive sets — (2 + 2 + 1) — with the jobs in each set running in parallel.
 
@@ -37,12 +37,10 @@ This is not a flaw — it is how Keboola ensures stability and data consistency 
 
 ## Job States and Billing
 
-Every job passes through predictable states:
-
-**waiting** → **processing** → **success** / **error**
+Every job passes through the states listed on the [Jobs API](/extend/jobs/#job-status) page; for billing, two of them matter:
 
 **How billing relates to job state:**
-- Jobs in the **waiting** state are not billed at the job level. A job only consumes [credits](/management/project/limits/#project-power) once it starts **processing**.
+- Jobs in the **waiting** state are not billed at the job level. A job only consumes [credits](/management/project/limits/#project-power--time-credits) once it starts **processing**.
 - Jobs in the **processing** state are billed based on compute resources consumed.
 
 **Important — container runtime billing:** Some components run inside a container that orchestrates multiple child jobs. In these cases, the parent container may continue running and accumulating runtime costs even while individual child jobs are in the waiting state. Setting very high parallelism in a container-based component does not pause the container while jobs queue — the container remains active throughout.

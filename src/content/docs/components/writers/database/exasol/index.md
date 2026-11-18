@@ -1,6 +1,7 @@
 ---
 title: Exasol
 slug: 'components/writers/database/exasol'
+description: 'Write Keboola tables to Exasol SaaS with a personal access token or to a self-hosted Exasol with a password, then set column types and load mode.'
 redirect_from:
     - /writers/database/exasol/
 ---
@@ -8,6 +9,8 @@ redirect_from:
 
 
 This data destination connector sends data to a [Exasol](https://www.exasol.com/) database.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Exasol** data destination connector.
@@ -46,7 +49,7 @@ from the data source and may not be the best choice for the data destination.
 When you are done configuring the columns, don't forget to **save** the settings.
 
 ### Load Settings
-At the top of the page, you can specify the target table name and additional load options. There are three main loading options --- **Full Load**, **Automatic Incremental Load**, and **Manual Incremental Load**.
+At the top of the page, you can specify the target table name and additional load options. There are three main loading options — **Full Load**, **Automatic Incremental Load**, and **Manual Incremental Load**.
 
 ![Screenshot - Main page](/components/writers/database/exasol/load_settings.png)
 

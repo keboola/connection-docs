@@ -19,7 +19,7 @@ Then click **Authorize Account** to [authorize the configuration](/components/#a
 
 Select the **configuration template** and save the configuration. 
 There is only one Google Calendar template available so far -- *Get data from Google Calendar*. All your Google Calendar data will be downloaded.
-You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
 
 ![Google Calendar - Save Configuration](/components/extractors/communication/google-calendar/google-calendar-2.png)
 

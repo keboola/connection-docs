@@ -1,5 +1,6 @@
 ---
 title: Organizations
+description: 'Manage a Keboola organization: its admins, members, projects and settings, and the GitHub connection its projects clone private repositories through.'
 slug: 'management/organization'
 ---
 
@@ -24,7 +25,7 @@ Depending on your contract details and permissions, the `Organizations` feature 
 *Note: If you do not see the `Organizations` section in your account settings,
 you are not a member of any organization.*
 
-To see the organization a project is assigned to, go to **Users & Settings** --- the tab
+To see the organization a project is assigned to, go to **Users & Settings** — the tab
 [**Settings**](/management/project/).
 <br> To see all organizations you are a member of, go to [**Account Settings**](/management/account/).
 
@@ -36,14 +37,14 @@ An **organization admin** (also referred to as an organization member) is a user
 ### What Organization Admins Can Do
 Organization admins have the following capabilities:
 
-- **Project Access** --- Join and leave any project within the organization without requiring an invitation. This makes it easy for organization admins to provide support or oversight across multiple projects.
-- **Create New Projects** --- Set up new Keboola projects within the organization.
-- **Manage Data Sharing** --- Share and manage [shared buckets](/catalog/#sharing-types) across projects in the organization. Organization admins can share buckets to all organization members and manage bucket sharing settings.
-- **Manage Organization Members** --- Invite new members to the organization and remove existing members.
-- **Organization Settings** --- Configure organization-wide settings such as [Auto Join](#auto-join) and [MFA requirements](#require-mfa).
-- **Billing Access** --- View and edit billing details for the organization.
-- **Support Access Control** --- Allow or restrict [Keboola Support](/management/support/#require-approval-for-support-access) from joining projects in the organization.
-- **Development Branches** --- In projects with [protected default branches](/components/branches/), organization admins have additional permissions to manage development branches even without a specific project role.
+- **Project Access** — Join and leave any project within the organization without requiring an invitation. This makes it easy for organization admins to provide support or oversight across multiple projects.
+- **Create New Projects** — Set up new Keboola projects within the organization.
+- **Manage Data Sharing** — Share and manage [shared buckets](/catalog/#sharing-types) across projects in the organization. Organization admins can share buckets to all organization members and manage bucket sharing settings.
+- **Manage Organization Members** — Invite new members to the organization and remove existing members.
+- **Organization Settings** — Configure organization-wide settings such as [Auto Join](#auto-join) and [MFA requirements](#require-mfa).
+- **Billing Access** — View and edit billing details for the organization.
+- **Support Access Control** — Allow or restrict [Keboola Support](/management/support/#require-approval-for-support-access) from joining projects in the organization.
+- **Development Branches** — In projects with [protected default branches](/components/branches/), organization admins have additional permissions to manage development branches even without a specific project role.
 
 ### Organization Admin vs. Project Roles
 It is important to understand that organization admin status is separate from [project user roles](/management/project/users/#user-roles). Being an organization admin does not automatically grant you a role within individual projects. However, organization admins can join any project in the organization at will.
@@ -90,7 +91,7 @@ Project templates differ mainly in the project expiration time. Some may be subj
 ## Organization Settings
 
 ### Auto Join 
-Some organizations may prefer to explicitly approve [access](/management/project/users/#who-can-access-a-project) 
+Some organizations may prefer to explicitly approve [access](/management/project/users/#who-can-access-project) 
 to their project by the [support team](/management/support/#require-approval-for-support-access). 
 To disable Auto Join and require approval for support accounts, click the **Change** link to modify the settings:
 
@@ -115,3 +116,51 @@ without MFA is shown when enabling the MFA requirement for the entire organizati
 The organization page will show that MFA is required:
 
 ![Screenshot -- MFA Required](/management/organization/organization-8.png)
+
+## Connect GitHub
+Connect your GitHub organization to let [dbt transformations](/transformations/dbt/transformation/#dbt-project-repository),
+[Custom Python](/components/applications/custom-python/#git-configuration), and [Apps](/data-apps/getting-started/)
+clone private repositories through the Keboola GitHub App. Configurations then store no personal access token or SSH key;
+Keboola gets a short-lived token from the App each time it clones the repository.
+
+Keboola has already registered the GitHub App for your stack. You only install it on your GitHub organization
+and connect that GitHub organization to your Keboola organization.
+
+You need to be both an organization admin in Keboola and an owner of the GitHub organization.
+
+1. Open the **GitHub** tab of your organization: `https://connection.<stack>/control/organizations/<organization-id>?tab=github`.
+2. Click **Install GitHub App** and install the App on your GitHub organization. Select the repositories
+   Keboola can clone, or all repositories. GitHub shows the permissions the App asks for
+   (see [What the App can access](#what-the-app-can-access)).
+3. Click **Connect GitHub organization**, enter a name, and leave **GitHub Enterprise host** empty for github.com.
+4. Click **Continue to GitHub**, sign in, and authorize the App.
+
+The connected GitHub organization appears in the list, with the GitHub account and the user who connected it.
+Click **Disconnect** to remove the connection. Configurations that use it then fail to clone the repository.
+
+If the connection fails, the tab shows why, for example when the App is not installed on the GitHub organization
+or when you are not its owner. When the App is installed on several GitHub organizations you own,
+pick the one to connect.
+
+### What the App can access
+
+When you install the App, GitHub asks you to approve these permissions:
+
+| Permission | Access |
+|---|---|
+| Repository permissions → **Contents** | Read and write |
+| Repository permissions → **Pull requests** | Read and write |
+| Organization permissions → **Members** | Read-only, used only while you connect, to check that you own the GitHub organization |
+
+The tokens Keboola gets for dbt transformations, Custom Python and Apps are read-only. Each token covers
+the one repository a configuration uses, can only read its contents, and expires after about an hour.
+Keboola stores no GitHub credentials of the person who connected the organization.
+
+The App reaches only the repositories you select on GitHub. To limit it, choose **Only select repositories**
+when you install the App and pick the repositories your configurations use. You can change the selection later
+in your GitHub organization's settings, under **GitHub Apps**. A configuration whose repository is not selected
+fails to clone it.
+
+If your GitHub organization installed the App before it asked for write access, GitHub asks an owner of
+the GitHub organization to approve the new permissions. Until an owner approves them, the App keeps read-only
+access to the repositories, and cloning works as before.

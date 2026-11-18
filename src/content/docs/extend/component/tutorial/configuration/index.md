@@ -77,7 +77,7 @@ initialized by reading the `data` directory (`CommonInterface()`). Its property 
 configuration parameters as a dictionary. Apart from that the [Python library](https://github.com/keboola/python-component)
  provides methods to handle input / output files and many more (see [here](/extend/component/implementation/python/) for more information). 
 
-Similar library is currently available also for the [R language](https://github.com/keboola/r-docker-application). 
+A similar library is available for the [R language](https://github.com/keboola/r-docker-application). 
 It does no magic or rocket science, so you can read the [config file](/extend/common-interface/config-file/) directly if you wish.
 
 Commit and push the code in your repository and tag it with a [normal version tag](https://semver.org/#spec-item-2).
@@ -133,7 +133,7 @@ configuration, the following schema can be created:
 
 In the schema the two properties `sound` and `repeat` are declared along with the specification
 of their form input fields.
-You can test the above schema [online](http://jeremydorn.com/json-editor/) ([alternative](https://mozilla-services.github.io/react-jsonschema-form/)) and verify that the
+You can test the above schema [online](https://www.jeremydorn.com/json-editor/) ([alternative](https://mozilla-services.github.io/react-jsonschema-form/)) and verify that the
 form generated from it produces the desired JSON structure. Once satisfied with the result,
 simply paste the schema into the **Configuration schema** in your component properties in the
 [Developer Portal](https://components.keboola.com/).

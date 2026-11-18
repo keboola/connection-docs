@@ -5,7 +5,7 @@ slug: 'storage'
 
 
 
-*See our [Getting Started](/tutorial/load/) tutorial for instructions on how to use Storage.*
+*See our [Getting Started](/getting-started/load/) tutorial for instructions on how to use Storage.*
 
 As the central [Keboola subsystem](/overview/), Storage manages everything related to **storing** data and **accessing** it.
 It is implemented as a layer on top of database engines that we use as our backends
@@ -22,8 +22,8 @@ It is also recorded in [Events](/management/project/tokens/#token-events) and
 ## Storage Data
 The Storage component manages all data stored in each Keboola project:
 
-- [Data tables](/storage/tables/) (Table Storage) --- organized into [buckets](/storage/buckets/)
-- [Data files](/storage/files/) (File Storage) --- all raw files uploaded to your project
+- [Data tables](/storage/tables/) (Table Storage) — organized into [buckets](/storage/buckets/)
+- [Data files](/storage/files/) (File Storage) — all raw files uploaded to your project
 - [Component configurations](/components/)
 
 Different storage technologies are used for the above data:

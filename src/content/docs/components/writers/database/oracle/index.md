@@ -1,6 +1,7 @@
 ---
 title: Oracle
 slug: 'components/writers/database/oracle'
+description: 'Write Keboola tables to an Oracle database with a host, user and service name, then set column types and full or incremental load.'
 redirect_from:
     - /writers/database/oracle/
 ---
@@ -8,6 +9,8 @@ redirect_from:
 
 
 This data destination connector sends data to an [Oracle](https://www.oracle.com/database/) database.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Oracle** data destination connector.
@@ -48,7 +51,7 @@ When done configuring the columns, don't forget to **save** the settings.
 
 ### Load Options
 At the top of the page, you can specify the target table name and additional load options. There are two main options how the connector
-can write data to tables --- **Full Load** and **Incremental Load**.
+can write data to tables — **Full Load** and **Incremental Load**.
 
 ![Screenshot - Table Options](/components/writers/database/oracle/oracle-6.png)
 

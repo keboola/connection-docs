@@ -31,9 +31,9 @@ Before you create any complex components, be sure to read about
 [configurations](/storage/api/configurations/) and [processors](/extend/component/processors/)
 as they can substantially simplify your component code. We also recommend that you use our
 [common interface](/extend/common-interface/) library, which is available for
-[Python](/extend/component/implementation/python/#using-the-kbc-package),
-[R](/extend/component/implementation/r/#using-the-kbc-package),
-and [PHP](/extend/component/implementation/php/#using-the-kbc-package).
+[Python](/extend/component/implementation/python/#using-keboola-python-package),
+[R](/extend/component/implementation/r/#using-keboola-package),
+and [PHP](/extend/component/implementation/php/#using-keboola-package).
 You may use any Docker image you see fit. We recommend to base your images on those from an [official repository](https://hub.docker.com/search?q=&type=image)
 because they are the most stable ones.
 
@@ -71,7 +71,7 @@ the component exit code is correct. On the other hand, the user error is suppose
 Also keep in mind that the output of the components (job events) serve to pass only informational and error messages; **no data** can be passed through.
 The event message size is limited (about 64KB). If the limit is exceeded, the message will be trimmed. If the component produces
 obscene amount (dozens of MBs) of output in a very short time, it may be terminated with an internal error.
-Also make sure your component does not use any [output buffering](#language-specific-notes), otherwise all events will be cached after the application finishes.
+Also make sure your component does not use any output buffering, otherwise all events will be cached after the application finishes.
 
 ## Implementing Processors
 [Processors](/extend/component/processors/)
@@ -120,7 +120,7 @@ you can, for example, rely on
 - the CSV file being orthogonal.
 
 If the above conditions are not met, then another processor should be added before yours. I.e. you should keep the
-processor simple and delegate the assumptions to other processors (and [**document** them](#publishing-a-processor)). If possible the
+processor simple and delegate the assumptions to other processors (and [**document** them](#publishing-processor)). If possible the
 processor should also assume that the CSV files are headless and stored in arbitrary sub-folders. When implemented with this assumption
 the processor will support [sliced tables](/extend/common-interface/folders/#sliced-tables).
 

@@ -52,7 +52,7 @@ When running the request with valid parameters, you should receive a response si
 }
 ```
 
-This means an [asynchronous job](/integrate/jobs/) for preparing the archive has been created.
+This means an [asynchronous job](/extend/jobs/) for preparing the archive has been created.
 If curious, view the job progress under **Jobs** in Keboola.
 When the job finishes, you'll see a `stage_0.zip` file uploaded to your project.
 
@@ -147,7 +147,7 @@ to launch [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) instead. The [
 ensure that the container runs in an interactive mode.
 You can then inspect the container contents: 'ls /data/'.
 
-### Step 4 -- Modify
+### Step 5 -- Modify
 Chances are that you want to modify the component code often. If you modify the component code, you have to rebuild the
 docker image. To avoid the slow and tedious work, run the image with the following command:
 

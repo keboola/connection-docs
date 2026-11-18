@@ -24,6 +24,6 @@ There are two templates available:
 - **Basic** -- downloads organizations, persons, users, pipelines, activities, stages, etc.
 - **Extended** -- downloads also deals and additional fields to the above.
 
-When done, **save** the configuration. You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+When done, **save** the configuration. You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
 
 **Important:** Data is always imported incrementally.

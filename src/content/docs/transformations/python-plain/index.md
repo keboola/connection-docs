@@ -11,7 +11,7 @@ redirect_from:
 other operations are too difficult. Common data operations like joining, sorting, or grouping are still easier and 
 faster to do in [SQL Transformations](/transformations/#backends).
 
-***Warning:** Python transformations have **no facility for encrypting secrets**. Any credential you place in transformation code — API keys, passwords, tokens, connection strings — is stored as **plaintext** in the configuration. It is not encrypted at rest, it is readable by anyone with access to the project's configuration, and it is included when the configuration is processed by features such as the AI **Generate description**. **Do not put credentials in transformation code.** Instead, store them in the [Custom Python](/components/applications/custom-python/) application, where any parameter whose key starts with `#` is [encrypted](https://developers.keboola.com/overview/encryption/) and made available to your code as an environment variable at runtime.*
+***Warning:** Python transformations have **no facility for encrypting secrets**. Any credential you place in transformation code — API keys, passwords, tokens, connection strings — is stored as **plaintext** in the configuration. It is not encrypted at rest, it is readable by anyone with access to the project's configuration, and it is included when the configuration is processed by features such as the AI **Generate description**. **Do not put credentials in transformation code.** Instead, store them in the [Custom Python](/components/applications/custom-python/) application, where any parameter whose key starts with `#` is [encrypted](/extend/encryption/) and made available to your code as an environment variable at runtime.*
 
 ## Environment
 The Python script is running in an isolated [environment](https://developers.keboola.com/extend/#component).
@@ -93,6 +93,8 @@ To speed it up, you can change the backend size in the configuration. Python tra
 ![Screenshot - Backend size configuration](/transformations/python-plain/backend-size.png)
 
 Scaling up the backend size allocates more resources to speed up your transformation, which impacts [time credits consumption](/management/project/limits/#project-power--time-credits).
+Python transformations run on the data science backend, so they are billed at the
+**Data Science job / workspace** rates, not the SQL job rates.
 
 ***Note:** Dynamic backends are not available to you if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).*
 
@@ -105,7 +107,7 @@ you can develop the transformation script locally.
 
 The script itself is expected to be in the `data` directory. The script name is arbitrary. The `data` directory name
 is also arbitrary, we use it as general reference to the above folder structure. It is possible to use relative 
-directories --- the current directory of the transformation is always the `data` directory. That means you can move 
+directories — the current directory of the transformation is always the `data` directory. That means you can move 
 the script to a Keboola transformation with no changes. To develop a Python transformation 
 that takes a [sample CSV file](/transformations/python-plain/source.csv) locally, follow these steps:
 

@@ -1,6 +1,7 @@
 ---
 title: Synapse
 slug: 'components/writers/database/synapse'
+description: 'Write Keboola tables to an Azure Synapse database on Azure stacks with a dedicated login, then set column types and full or incremental load.'
 redirect_from:
     - /writers/database/synapse/
 ---
@@ -9,6 +10,8 @@ redirect_from:
 
 This data destination connector sends data to an [Azure Synapse](https://azure.microsoft.com/en-us/services/synapse-analytics/) 
 database and is **only available on the Azure [Keboola stacks](/overview/#stacks).**
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Synapse** data destination connector. Start
@@ -73,7 +76,7 @@ When done configuring the columns, don't forget to **save** the settings.
 
 ### Load Options
 At the top of the page, you can specify the target table name and additional load options. There are two main 
-options how the connector can write data to tables --- **Full Load** and **Incremental Load**.
+options how the connector can write data to tables — **Full Load** and **Incremental Load**.
 
 ![Screenshot - Table Options](/components/writers/database/synapse/synapse-5.png)
 

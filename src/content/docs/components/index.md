@@ -17,6 +17,19 @@ Components are divided into the following categories:
 All components, regardless of their category, behave the same way. To use a component, you have to create a **configuration** first. A configuration sets the necessary parameters for each 
 component (e.g., credentials and other specifications of what to do). Then, it can be run — a **job** is created and does the actual work.
 
+## Finding a Component
+
+To see the components available to you and add one to your project, follow [Creating Component Configuration](#creating-component-configuration). To browse the catalog outside your project, see the [Keboola Developer Portal](https://components.keboola.com/components). You do not need the portal to use components.
+
+If no component connects to the system you need, you have several options:
+
+- Write your own Python code in the [Custom Python](/components/applications/custom-python/) component to call external APIs or push data to third-party systems.
+- Connect to a REST API without code using the [Generic Extractor](/components/extractors/generic-extractor/).
+- Ask [Kai](/kai/), the AI assistant in your project, to help you set up the integration or use your own AI assistant through the [Keboola MCP Server](/ai/mcp-server/).
+- Build your own component and register it in the [Developer Portal](https://components.keboola.com/); see the [developer guide](/extend/component/).
+
+To adjust a component's input or output files without changing its code, use [processors](/extend/component/processors/).
+
 ## Component Release Stages
 Our components are released at different stages and labeled to indicate the quality and production readiness level. We strive to deliver the highest-quality components. 
 Our goal is to unlock as many interesting integrations as possible, benefiting all our customers. The component release grades allow us to manage the release process effectively 
@@ -138,7 +151,7 @@ The [developer guide](https://developers.keboola.com/integrate/storage/api/confi
 **Important**: Component configurations do not count towards your project quota.
 
 The version list is unlimited. Configuration versions are also created when the configurations are manipulated 
-programmatically using [the API](https://developers.keboola.com/overview/api/). In other words, all configuration modifications are recorded.
+programmatically using [the API](/overview/api/). In other words, all configuration modifications are recorded.
 
 ### Compare Versions
 You can compare adjacent versions by clicking the *compare* icon:
@@ -151,7 +164,7 @@ The differences between the raw JSON configurations are displayed when you compa
 
 When you roll back a configuration, a new version is created. This means you never lose any version of
 a configuration, and there is always an option to get back to it. Configuration versions are also created when 
-the configurations are manipulated programmatically via [the API](https://developers.keboola.com/overview/api/).
+the configurations are manipulated programmatically via [the API](/overview/api/).
 
 ### Rollback Version
 If you need to return to an older version of the configuration, you can also roll back to it (the other option is to make its copy).
@@ -249,7 +262,7 @@ configuration.*
 All components (usually data source and destination connectors) that support configuration rows now have the option to set job parallelism at the configuration level.
 This means you can control the speed of an extraction or writing process and specify which scenarios you want to speed up.
 
-This setting is optional, with the default option being **Parallel jobs: Off**.
+Each row runs as its own job. The default (and minimum) parallelism is **1**, which runs the rows one after another.
 
 **Example:** If your configuration has five rows and you set the parallelism to 2, the five jobs will be processed in three consecutive sets (2 + 2 + 1). The jobs within each set will run in parallel.
 

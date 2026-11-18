@@ -1,0 +1,7 @@
+store_id,store_name,city,latitude,longitude,seats,terrace_seats,opened_on
+S01,Boolabean Vinohrady,Prague,50.0755,14.4426,38,24,2019-04-02
+S02,Boolabean Zelný trh,Brno,49.1928,16.6083,30,18,2020-09-14
+S03,Boolabean Stodolní,Ostrava,49.8352,18.2833,26,0,2022-02-21
+S04,Boolabean Republiky,Plzeň,49.7475,13.3776,22,12,2023-06-05
+S05,Boolabean Horní,Olomouc,49.5938,17.2509,24,14,2024-03-18
+S06,Boolabean Soukenné,Liberec,50.7663,15.0562,20,0,2025-05-26

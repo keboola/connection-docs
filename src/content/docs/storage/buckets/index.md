@@ -5,12 +5,12 @@ slug: 'storage/buckets'
 
 Buckets are containers for tables in Storage. They are further organized into the following two **stages**:
 
-1. **in** --- for input data (usually data source connector results)
-2. **out** --- for processed data (usually results of transformations or applications)
+1. **in** — for input data (usually data source connector results)
+2. **out** — for processed data (usually results of transformations or applications)
 
 The distinction between the input and output stages is purely conventional differentiation between raw and processed data.
 When creating a new bucket, select one of the stages and a suitable [database backend](/storage/#storage-backend-types-and-features) based on its properties.
-For information on how to load data into Storage, see the corresponding part of our [tutorial](/tutorial/load/).
+For information on how to load data into Storage, see the corresponding part of our [tutorial](/getting-started/load/).
 
 ![Screenshot - Create bucket](/storage/buckets/create-bucket.png)
 

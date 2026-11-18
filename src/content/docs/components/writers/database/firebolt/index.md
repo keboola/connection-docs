@@ -1,6 +1,7 @@
 ---
 title: Firebolt
 slug: 'components/writers/database/firebolt'
+description: 'Write Keboola tables to a Firebolt database through an S3 staging bucket, and set column types, fact or dimension tables, load mode and Firebolt indexes.'
 redirect_from:
     - /writers/database/firebolt/
 ---
@@ -47,7 +48,7 @@ from the data source and may not be the best choice for the data destination.
 When you are done configuring the columns, don't forget to **save** the settings.
 
 ### Input Table Settings
-At the top of the page, you can specify the target table name and additional load options. There are three main options for loading the data from Storage --- **Full Load**, **Automatic Incremental Load**, and **Manual Incremental Load**.
+At the top of the page, you can specify the target table name and additional load options. There are three main options for loading the data from Storage — **Full Load**, **Automatic Incremental Load**, and **Manual Incremental Load**.
 
 ![Screenshot - Main page](/components/writers/database/firebolt/firebolt-load.png)
 
