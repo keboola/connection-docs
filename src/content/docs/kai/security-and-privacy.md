@@ -1,6 +1,6 @@
 ---
 title: Security & Privacy
-description: 'How Kai handles your data: it is never used for AI training, which AI provider processes it, access control, compliance, and security best practices.'
+description: 'How Kai handles your data: data use and model training, the AI provider, access and control, compliance, terms, and security best practices.'
 slug: 'kai/security-and-privacy'
 ---
 
