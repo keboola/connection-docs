@@ -12,7 +12,7 @@ Kai is **generally available** to all users in supported stacks.
 
 ### Enabling Kai
 
-Every user can see the Kai button in their project. To enable Kai:
+On a supported stack, every user can see the **Kai Agent** button in their project. To enable Kai:
 
 - **Organization Admins** can enable the feature directly from the chat screen when first clicking the Kai button.
 - **Other users** need to ask their Organization Admin to enable the feature, or [contact Keboola Support](mailto:support@keboola.com) for assistance.
