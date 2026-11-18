@@ -11,10 +11,10 @@ Your data platform now has a command line an AI can drive. **kbagent** connects 
 
 It's just as comfortable in your own hands: one tool for every project from the terminal, every command scriptable, with structured JSON output throughout.
 
-<!-- Source: keboola/cli README + docs. Mirrored into help docs; TODO: repo→docs sync mechanism (Jordan). -->
+<!-- Source: keboola/cli README + docs. Mirrored into help docs; TODO(Jordan): repo→docs sync mechanism. -->
 
 :::note
-**Looking for Keboola as Code (`kbc`)?** That is a different, older tool — it syncs a project into local
+Looking for Keboola as Code (`kbc`)? It is a different, older tool that syncs a project into local
 definition files. It shares no commands, configuration or install path with kbagent, and it is not
 documented here. If you still use it, it lives at [keboola/keboola-as-code](https://github.com/keboola/keboola-as-code).
 

@@ -15,7 +15,7 @@ you need are below.
 
 ### Install
 
-**macOS** — via [Homebrew](https://docs.brew.sh/Installation.html):
+**macOS**, with [Homebrew](https://docs.brew.sh/Installation.html):
 
 ```bash
 brew tap keboola/keboola-cli
@@ -58,21 +58,36 @@ sudo apk add keboola-cli
 kbc --version
 ```
 
-**Windows** — with [WinGet](https://apps.microsoft.com/detail/9NBLGGH4NNS1), [Chocolatey](https://chocolatey.org/install) or [Scoop](https://scoop.sh/):
+**Windows**, with one of [WinGet](https://apps.microsoft.com/detail/9NBLGGH4NNS1), [Chocolatey](https://chocolatey.org/install) or [Scoop](https://scoop.sh/):
 
 ```shell
-winget install Keboola.KeboolaCLI
+winget install --id=Keboola.KeboolaCLI -e
+```
+
+```shell
 choco install keboola-cli
-scoop bucket add keboola https://github.com/keboola/scoop-keboola-cli.git && scoop install keboola/keboola-cli
+```
+
+```shell
+scoop bucket add keboola https://github.com/keboola/scoop-keboola-cli.git
+scoop install keboola/keboola-cli
 ```
 
 An [MSI installer](https://cli-dist.keboola.com/?prefix=msi/) and [precompiled binaries](https://cli-dist.keboola.com/?prefix=zip/) are also available.
 
 ### Upgrade
 
-Use your package manager's upgrade command — `brew upgrade keboola-cli`, `sudo apt-get install keboola-cli`,
-`sudo dnf update keboola-cli`, `apk add --upgrade keboola-cli`, `winget upgrade Keboola.KeboolaCLI`,
-`choco upgrade keboola-cli` or `scoop update keboola/keboola-cli` — then confirm:
+Upgrade with the package manager you installed it with, then check the version:
+
+| Platform | Command |
+|---|---|
+| macOS | `brew upgrade keboola-cli` |
+| Debian / Ubuntu | `sudo apt-get update && sudo apt-get install --only-upgrade keboola-cli` |
+| Fedora | `sudo dnf upgrade keboola-cli` |
+| Alpine | `sudo apk update && sudo apk upgrade keboola-cli` |
+| Windows (WinGet) | `winget upgrade --id=Keboola.KeboolaCLI -e` |
+| Windows (Chocolatey) | `choco upgrade keboola-cli` |
+| Windows (Scoop) | `scoop update keboola/keboola-cli` |
 
 ```bash
 kbc --version
