@@ -1,6 +1,5 @@
 ---
 title: Conditional Flows
-description: 'Flows build automated data pipelines with conditional logic, branching, retries and error handling.'
 slug: 'flows'
 redirect_from:
     - /flows/conditional-flows/

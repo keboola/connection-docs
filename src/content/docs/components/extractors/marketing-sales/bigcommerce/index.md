@@ -1,6 +1,5 @@
 ---
 title: BigCommerce
-description: This data source connector downloads data about brands, customers, orders, and products in your BigCommerce store.
 slug: 'components/extractors/marketing-sales/bigcommerce'
 redirect_from:
     - /extractors/marketing-sales/bigcommerce/

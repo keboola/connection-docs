@@ -1,6 +1,5 @@
 ---
 title: HTTP
-description: This data source connector loads a single CSV file from an HTTP/HTTPS URL and stores it in Storage.
 slug: 'components/extractors/storage/http'
 redirect_from:
     - /extractors/storage/http/

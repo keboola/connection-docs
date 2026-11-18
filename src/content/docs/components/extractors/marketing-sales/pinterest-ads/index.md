@@ -1,6 +1,5 @@
 ---
 title: Pinterest Ads
-description: 'Import Pinterest Ads analytics reports, custom-defined or from existing report templates, into Keboola Storage.'
 slug: 'components/extractors/marketing-sales/pinterest-ads'
 ---
 

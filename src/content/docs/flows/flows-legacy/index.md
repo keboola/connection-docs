@@ -1,6 +1,5 @@
 ---
 title: Legacy Flows
-description: Reference for the legacy Flow Builder, which Conditional Flows replace, and how to migrate an existing legacy flow.
 slug: 'flows/flows-legacy'
 redirect_from:
     - /orchestrator/

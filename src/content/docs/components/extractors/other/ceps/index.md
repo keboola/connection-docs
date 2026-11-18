@@ -1,6 +1,5 @@
 ---
 title: ČEPS
-description: 'Extract publicly available Czech electricity transmission system data from the ČEPS API into Storage.'
 slug: 'components/extractors/other/ceps'
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Microsoft SQL
-description: MS SQL is a relational database management system that stores and retrieves data as requested by other software applications.
 slug: 'components/extractors/database/microsoft-sql'
 ---
 

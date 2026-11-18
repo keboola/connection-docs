@@ -1,6 +1,5 @@
 ---
 title: External Integrations
-description: 'Connect Keboola to the tools and workflows you already use, through the REST API, the MCP server or ready-made workflow platforms.'
 slug: 'external-integrations'
 ---
 

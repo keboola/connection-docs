@@ -1,6 +1,5 @@
 ---
 title: Stripe
-description: This data source connector uses the Stripe API to import almost all data from Stripe.
 slug: 'components/extractors/other/stripe'
 redirect_from:
     - /extractors/other/stripe/

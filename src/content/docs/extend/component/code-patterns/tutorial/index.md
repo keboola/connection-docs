@@ -1,6 +1,5 @@
 ---
 title: Code Pattern Quick Start
-description: Code patterns are a special type of component. Their behavior is specified in their interface.
 slug: 'extend/component/code-patterns/tutorial'
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: ChartMogul
-description: The ChartMogul data source connector fetches data from the ChartMogul API.
 slug: 'components/extractors/marketing-sales/chartmogul'
 redirect_from:
     - /extractors/marketing-sales/chartmogul/

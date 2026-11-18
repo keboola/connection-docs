@@ -1,6 +1,5 @@
 ---
 title: Salesforce
-description: This data source connector allows you to import data from Salesforce via the Bulk API.
 slug: 'components/extractors/marketing-sales/salesforce'
 redirect_from:
     - /extractors/marketing-sales/salesforce/

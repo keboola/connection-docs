@@ -1,6 +1,5 @@
 ---
 title: Google Ad Manager 
-description: This data source connector allows you to export report data from Google Ad Manager.
 slug: 'components/extractors/marketing-sales/google-ad-manager'
 redirect_from:
     - /extractors/marketing-sales/google-ad-manager/

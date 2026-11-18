@@ -1,6 +1,5 @@
 ---
 title: Shoptet Permalink
-description: This data source connector allows you to download data from Shoptet permalinks.
 slug: 'components/extractors/marketing-sales/shoptet'
 redirect_from:
     - /extractors/marketing-sales/shoptet/

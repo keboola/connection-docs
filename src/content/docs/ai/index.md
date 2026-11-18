@@ -1,6 +1,5 @@
 ---
 title: AI Features
-description: "Keboola's AI-powered capabilities help you build, optimize, and automate your data pipelines with intelligent assistance."
 slug: 'ai'
 ---
 

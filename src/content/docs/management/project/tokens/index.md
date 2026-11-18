@@ -1,6 +1,5 @@
 ---
 title: API Tokens
-description: 'Authorize every operation in a Keboola project with API tokens: creating, limiting and refreshing Storage API tokens.'
 slug: 'management/project/tokens'
 redirect_from:
   - /storage/tokens/

@@ -1,6 +1,5 @@
 ---
 title: Processors
-description: Processors are additional components which may be used before or after running an arbitrary component (extractor, writer, etc.).
 slug: 'extend/component/processors'
 redirect_from:
     - /integrate/docker-runner/processors/

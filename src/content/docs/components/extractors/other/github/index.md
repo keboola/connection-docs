@@ -1,6 +1,5 @@
 ---
 title: GitHub
-description: The GitHub data source connector uses the GitHub API to import data from GitHub to Keboola.
 slug: 'components/extractors/other/github'
 redirect_from:
     - /extractors/other/github/

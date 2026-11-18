@@ -1,6 +1,5 @@
 ---
 title: DuckDB Transformation
-description: DuckDB is an in-process analytical database designed for fast SQL analytics. It brings several advantages to Keboola transformations.
 slug: 'transformations/duckdb'
 ---
 

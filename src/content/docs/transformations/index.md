@@ -1,6 +1,5 @@
 ---
 title: Transformations
-description: 'Transformations manipulate data in your project, and every transformation works on a copy of the data from Storage.'
 slug: 'transformations'
 redirect_from:
     - /manipulation/transformations/

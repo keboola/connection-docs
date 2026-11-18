@@ -1,6 +1,5 @@
 ---
 title: Social Data Source Connectors
-description: 'Data source connectors that bring pages, posts, comments and audience insights from social platforms into Storage.'
 slug: 'components/extractors/social'
 redirect_from:
     - /extractors/social/

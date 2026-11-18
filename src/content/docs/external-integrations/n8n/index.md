@@ -1,6 +1,5 @@
 ---
 title: n8n Integration
-description: "Connect Keboola with n8n to automate workflows, trigger data pipelines, and integrate Keboola's data platform with hundreds of other services."
 slug: 'external-integrations/n8n'
 ---
 

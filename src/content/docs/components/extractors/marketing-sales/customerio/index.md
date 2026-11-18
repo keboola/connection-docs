@@ -1,6 +1,5 @@
 ---
 title: Customer IO
-description: The Customer IO data source connector uses the Customer IO Beta API to extract customers, campaigns, segments, and activities from your Customer.io account.
 slug: 'components/extractors/marketing-sales/customerio'
 ---
 

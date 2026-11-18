@@ -1,6 +1,5 @@
 ---
 title: IMAP Query Syntax
-description: Reference of the IMAP search keywords the Email IMAP connector accepts, with an example of combining multiple keywords in one query.
 slug: 'components/extractors/communication/email-imap/query-syntax'
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Airtable
-description: 'Import data from Airtable, a database service for creating and organizing projects and collaborating on them.'
 slug: 'components/extractors/other/airtable'
 ---
 

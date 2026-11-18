@@ -1,6 +1,5 @@
 ---
 title: Configuration File Specification
-description: Configuration files are one of the possible channels for exchanging data between components and Keboola.
 slug: 'extend/common-interface/config-file'
 ---
 
