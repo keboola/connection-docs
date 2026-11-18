@@ -23,24 +23,6 @@ auto-approved the moment you submit it, so you can merge immediately. You get th
 audit trail without the review overhead. See [Requiring Review](#requiring-review-branch-protection).
 :::
 
-## The Merge Request Lifecycle
-
-Every merge request moves through a set of states, shown as filters at the top of the
-**Merge Requests** list:
-
-- **In Review** — submitted and waiting for the required number of approvals.
-- **Ready to Merge** — approved and ready to be merged into production (either manually or automatically).
-- **Merged** — the changes have been applied to production.
-- **Rejected** — a reviewer requested changes; go back to the branch, adjust, and resubmit.
-- **Closed** — the request was cancelled without merging.
-
-You can reach the list at any time from the branch switcher (**Merge Requests**) or from the project menu.
-
-![Screenshot - Merge Requests list](/components/branches/merge-requests/figures/merge-requests-list.png)
-
-Each row shows the request name and description, its status, who created it and when, a link to the
-changed configurations, and the reviews collected so far.
-
 ## Reviewing Your Branch Changes
 
 Before you submit anything, switch into your development branch and open **Changes** from the
@@ -158,19 +140,6 @@ sent for review or approved. What you can use depends on the state of the reques
   **Reject** the request, or **Cancel Request** and submit a new one when you are done. Then use
   **Pull from Prod** in the branch switcher, reconcile the affected configurations, and submit the merge
   request again.
-
-## After a Merge
-
-A merged request is kept in the [list](#the-merge-request-lifecycle) with the **Merged** status, and you
-can **Download Changelog** from its row for a record of exactly what was applied.
-
-Because a merge produces new [configuration versions](/components/#configuration-versions) in production,
-no configuration change is lost: if a merged change causes problems, you can open the affected configuration
-and roll it back to its previous version, restoring the pre-merge state.
-
-A successful merge also **deletes the development branch**, including its buckets, tables, and workspaces.
-Only the configuration changes reach production; if you still need data from the branch, export it before
-you merge.
 
 ## Merge Requests in Kai, the MCP Server, and the CLI
 

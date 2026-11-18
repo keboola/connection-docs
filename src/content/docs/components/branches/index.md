@@ -54,14 +54,6 @@ With Branched Storage:
 
 ![Screenshot - Branched Storage in Storage UI](/components/branches/branched_storage.png)
 
-### Enabling Branched Storage
-
-Branched Storage is enabled per project in **Project Settings**. Look for the **Branched storage** toggle under the Features section.
-
-![Screenshot - Branched Storage Toggle](/components/branches/feature-branched-storage.png)
-
-Once enabled, all new branches in that project will automatically use the isolated storage model.
-
 ### How It Behaves in Practice
 
 When you create a branch and run a job:
@@ -84,35 +76,38 @@ are materialized in the branch's own storage. Your production `out.c-visits` rem
 This allows you to test the entire pipeline with real data, in complete isolation from production, without duplicating
 all storage content at branch creation.
 
-## Creating a Branch
-
-If you have your configurations ready in production and want to create a branch to test some changes, click on your project's name
-at the top of the screen. Then click on the green icon **New** displayed next to your project's name.
-
-![Screenshot - Create Development Branch](/getting-started/branches/figures/08-create-dev-branch.png)
-
-Name your new branch and click **Create Development Branch** to open it.
-
-![Screenshot - Name Development Branch](/getting-started/branches/figures/09-name-dev-branch.png)
-
-The branch will appear right below the name of your production project.
-
-![Screenshot - Created Development Branch](/getting-started/branches/figures/10-dev-branch-created.png)
-
-Now you can start modifying your configurations, run them, and analyze the results.
-
-If you want to learn more about working in a branch, follow our [tutorial](/getting-started/branches/).
-
-## Closing a Branch
-
-Before you merge your development branch back to production, check a detailed [diff of the configuration changes](/getting-started/branches/project-diff/).
-
-You can end your branch's lifecycle in two ways:
-
-- **Deleting** — if you do not wish to use the changes you've made and want to simply discard them. The data associated with the branch is discarded when the branch is deleted.
-- [**Merging into production**](/getting-started/branches/merge-to-production/) — all changes in the configurations are brought back to the respective production configurations. All the changes are applied at once (after you approve them) and produce new [versions](/components/#configuration-versions) of the respective configurations. In the merge dialog, you choose whether to delete the branch or keep it for further reference after merging. Projects with [**Branches 2.0**](/components/branches/merge-requests/) enabled merge through a [merge request](/components/branches/merge-requests/), which lets you review the configuration diff and, if the project requires it, collect approvals before the changes reach production; a merged request always deletes the branch.
-
 ***Important:** All of this happens within the same project, enabling collaboration with other project members on the modifications.*
+
+## The Merge Request Lifecycle
+
+Every merge request moves through a set of states, shown as filters at the top of the
+**Merge Requests** list:
+
+- **In Review** — submitted and waiting for the required number of approvals.
+- **Ready to Merge** — approved and ready to be merged into production (either manually or automatically).
+- **Merged** — the changes have been applied to production.
+- **Rejected** — a reviewer requested changes; go back to the branch, adjust, and resubmit.
+- **Closed** — the request was cancelled without merging.
+
+You can reach the list at any time from the branch switcher (**Merge Requests**) or from the project menu.
+
+![Screenshot - Merge Requests list](/components/branches/merge-requests/figures/merge-requests-list.png)
+
+Each row shows the request name and description, its status, who created it and when, a link to the
+changed configurations, and the reviews collected so far.
+
+## After a Merge
+
+A merged request is kept in the [list](#the-merge-request-lifecycle) with the **Merged** status, and you
+can **Download Changelog** from its row for a record of exactly what was applied.
+
+Because a merge produces new [configuration versions](/components/#configuration-versions) in production,
+no configuration change is lost: if a merged change causes problems, you can open the affected configuration
+and roll it back to its previous version, restoring the pre-merge state.
+
+A successful merge also **deletes the development branch**, including its buckets, tables, and workspaces.
+Only the configuration changes reach production; if you still need data from the branch, export it before
+you merge.
 
 ## Component Considerations
 
