@@ -1,6 +1,6 @@
 ---
 title: Jobs
-description: 'Define what Generic Extractor requests — endpoint, HTTP method, request parameters, data type and data field, response filters, and how responses are merged.'
+description: 'Define what Generic Extractor requests: endpoint, HTTP method, request parameters, data type and data field, response filters, and how responses are merged.'
 slug: 'components/extractors/generic-extractor/configuration/config/jobs'
 redirect_from:
     - /extend/generic-extractor/configuration/config/jobs/
@@ -1039,7 +1039,7 @@ setting in this case is `contacts[].properties`.
 See [example [EX014]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/014-skip-flatten-nested).
 
 <!--
-TODO: Un-comment this when this is fixed: https://github.com/keboola/generic-extractor/issues/59
+TODO(Matyáš Jirát): Un-comment this when https://github.com/keboola/generic-extractor/issues/59 is fixed (the repository is archived; say if the example should go instead).
 
 ### Skip boolean conversion
 If you have an API response like this:

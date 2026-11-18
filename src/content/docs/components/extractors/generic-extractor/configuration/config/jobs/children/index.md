@@ -1,6 +1,6 @@
 ---
 title: Child Jobs
-description: 'Run a nested job for each parent record — child job placeholders, filters, and how child results map back to the parent.'
+description: 'Run a nested job for each parent record: child job placeholders, filters, and how child results map back to the parent.'
 slug: 'components/extractors/generic-extractor/configuration/config/jobs/children'
 redirect_from:
     - /extend/generic-extractor/configuration/config/jobs/children/
@@ -95,7 +95,7 @@ are result objects in the parent API response. The `XXX` will be replaced by the
 of each individual response. Placeholders must be used in child jobs so that each child job sends a different API request.
 
 <!--
-TODO: Un-comment this when this https://github.com/keboola/generic-extractor/issues/49 is fixed.
+TODO(Matyáš Jirát): Un-comment this when https://github.com/keboola/generic-extractor/issues/49 is fixed (the repository is archived; say if the example should go instead).
 
 The `placeholders` object can be specified as an object whose values are strings with the paths. It is
 also possible to use a more complicated structure where the value is another object with `path` property.

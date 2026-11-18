@@ -1,6 +1,6 @@
 ---
 title: Notifications
-description: Notifications in Keboola can be set up at various levels — from individual jobs and flows within a project to organization-wide credit usage.
+description: 'Notifications in Keboola can be set up at several levels, from individual jobs and flows in a project to organization-wide credit usage.'
 slug: 'management/notifications'
 ---
 
@@ -48,7 +48,7 @@ dropdown or type any address.
 
 ***Important:** Notifications are not supported in development branches. Always set error status notifications for scheduled production flows.*
 
-<!-- VERIFY(owner): four claims on this page predate this PR and no public source confirms them.
+<!-- VERIFY(Ondřej Jodas): four claims on this page predate this PR and no public source confirms them.
      1. The averaging window for the processing-overtime event (docs have said "last 20 executions")
         and whether it counts only successful runs.
      2. Manual-run routing: does the user who started the flow REPLACE the configured recipients or
