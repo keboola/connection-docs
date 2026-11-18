@@ -11,7 +11,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { stripMdx, stripSearchMarkup, twinBody } from '../src/integrations/page-markdown.mjs';
-import { fenceTracker } from '../src/integrations/strip-comments.mjs';
+import { fenceTracker, stripHtmlComments } from '../src/integrations/strip-comments.mjs';
 
 const prereqs = (inner: string) =>
   `<Prereqs needs={['project']} tabs={3} groupLabel="For this page">\n${inner}\n</Prereqs>\n\nBody.`;
@@ -168,4 +168,13 @@ test('a span sample in a code span that runs onto the next line stays as written
 test('a code span does not reach past a blank line', () => {
   const md = 'A stray ` tick.\n\n<span data-pagefind-weight="5">y</span> and a ` tick.';
   assert.equal(stripSearchMarkup(md), 'A stray ` tick.\n\ny and a ` tick.');
+});
+
+test('a CRLF page keeps its code samples as written', () => {
+  const inCode = fenceTracker();
+  assert.deepEqual(['```r\r', 'x\r', '```\r', 'after\r'].map(inCode), [true, true, true, false]);
+  const comment = ['```html\r', '<!-- sample -->\r', '```\r', ''].join('\n');
+  assert.equal(stripHtmlComments(comment), comment);
+  const span = ['~~~html\r', '<span data-pagefind-weight="5">Title</span>\r', '~~~\r'].join('\n');
+  assert.equal(stripSearchMarkup(span), span);
 });

@@ -41,10 +41,11 @@ export function remarkStripComments() {
 /**
  * The fence a line opens a code block with (``` or ~~~, any length), or null.
  * A backtick fence's info string may not hold a backtick (CommonMark), so
- * "```x``` text" is an inline code span, not a fence.
+ * "```x``` text" is an inline code span, not a fence. A CRLF line's "\r" is
+ * not part of the info string (`.` does not match it, so `$` would fail).
  */
 export function fenceOpener(line) {
-  const m = line.match(/^\s*(`{3,}|~{3,})(.*)$/);
+  const m = line.replace(/\r$/, '').match(/^\s*(`{3,}|~{3,})(.*)$/);
   if (!m || (m[1][0] === '`' && m[2].includes('`'))) return null;
   return m[1];
 }
