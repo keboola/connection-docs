@@ -1,7 +1,6 @@
 ---
 title: Getting Started with Kai
 slug: 'kai/getting-started'
-description: Enable Kai in your project, open the chat with keyboard shortcuts, and send your first prompts.
 ---
 
 
