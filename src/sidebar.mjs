@@ -512,6 +512,7 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "catalog" },
+      { slug: "catalog/share-and-link" },
       { slug: "catalog/multi-project" },
     ],
   },

@@ -114,7 +114,7 @@ WHERE `source` = "mql";
 :::
 
 ## Sharing an External Dataset
-It is possible to share an external dataset using the same process as [any other Storage bucket](/catalog/#enable-sharing). Once the bucket is shared, the refresh operation is only available in the source project (the project where the external dataset was registered). Currently, it is possible to share entire buckets, not specific tables within them.
+It is possible to share an external dataset using the same process as [any other Storage bucket](/catalog/share-and-link/#share-a-bucket). Once the bucket is shared, the refresh operation is only available in the source project (the project where the external dataset was registered). Currently, it is possible to share entire buckets, not specific tables within them.
 
 ### Snowflake
 Sharing a Snowflake external dataset works out of the box — no additional configuration is required beyond the standard bucket sharing flow.

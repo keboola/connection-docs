@@ -10,6 +10,8 @@ Keboola is a very versatile platform and can be used in many different ways. Whe
 and destination systems, or when some of them are very complex or difficult to set up, you might consider splitting the
 traditional extract-load process into isolated projects.
 
+<!-- Explanation-type page. Source: keboola/connection-docs history, checked 2026-11-19. Content is unchanged; only the page shape was edited. -->
+
 Let's say that you have a large source database and you want to provide that to data scientists. While it is 
 very easy for a data scientist to set up a database data source connector and get all the data, it might not be a good 
 *long-term* solution -- for example: 
@@ -30,7 +32,7 @@ anything else really.
 This page explains the concept with a worked example. For a guided walkthrough of *when and how* to adopt it for your organization, see the [Multi-Project Architecture Guide](/overview/onboarding/architecture-guide/).
 :::
 
-## Example Scenario
+## Example scenario
 Let's say that you have an existing Keboola project that contains:
 
 - Oracle database data source connector with the following configurations:
@@ -46,7 +48,7 @@ Let's say that you have an existing Keboola project that contains:
     - There are three Google Analytics accounts. One -- for the main site -- is managed by the IT department, the other two are managed by the marketing department (The IT department does not want to allow the marketing department to access the main site.).
 - A bunch of transformations generating reports and writers.
 
-### Single Project
+### Single project
 The following schema shows the configurations and data exchanged between them:
 
 ![Schema -- Single project](/catalog/multi-project/multi-project-1.png)
@@ -56,7 +58,7 @@ The important part is that nothing prevents you from setting up all those compon
 you don't want everyone to be responsible for everything. Multi-project architecture is just that -- a way to divide 
 responsibilities, separate concerns and build interfaces.
 
-### Multi Project
+### Multi project
 The following image illustrates the usage pattern change:
 
 ![Schema -- Multi project](/catalog/multi-project/multi-project-2.png)
@@ -97,3 +99,7 @@ it is completely unconstrained. For a smaller company, having only the major sou
 might be sufficient. A large corporation might need a deeper separation, so the following schema might be more appropriate: 
 
 ![Schema -- Large Multi-project](/catalog/multi-project/schema-3.png)
+
+---
+
+**Next:** [Multi-Project Architecture Guide →](/overview/onboarding/architecture-guide/)
