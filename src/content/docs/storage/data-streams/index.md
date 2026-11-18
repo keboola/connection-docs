@@ -32,57 +32,6 @@ When creating a data stream, you choose a **source type** that determines how da
 ## How It Works
 The Data Streams feature receives messages via HTTP and saves them into the database once predefined conditions (e.g., record count, total size, or time) are met. The service uses Keboola's [Stream API](https://stream.keboola.com/v1/documentation/) for efficient data management. [Learn more](/storage/data-streams/reference/)
 
-### Create a Data Stream
-Follow these steps to create a data stream:
-
-- Navigate to **Storage > Data Streams** and click **Create Data Stream**.
-- **Choose a source type** — either **HTTP** (generic webhook) or **OpenTelemetry (OTLP)**.
-- **Name the data stream**, e.g., "my-first-data-stream." The name of the table will be filled automatically based on the stream name, but you can change it if needed.
-- Once the stream is created, you can **add a description** for better orientation within the project.
-
-### Configure an HTTP Data Stream
-#### Data stream URL
-For every data stream, a unique "Data Stream URL" is generated. You can use it in your application to send events. This URL cannot be changed.
-
-#### Table statistics
-This dashboard shows the status of data waiting for import vs. imported data.
-
-![Screenshot - Data Streams Table Statistics](/storage/data-streams/data-streams-pic1.png)
-
-#### Table settings
-In your table settings, you can:
-
-- Change the name of the stream.
-- Add a column or define your own structure using the PATH or JSONNET template. [Learn more](/storage/data-streams/reference/#template-jsonnet)
-- Edit column names (available only if you create a new table within the stream).
-- Delete a column (available only if you create a new table within the stream).
-
-:::caution
-**Important:** Changing the table's name will create a new table, and the stream will import data into that table.
-:::
-
-:::note[No primary key support]
-Data streams do **not** support primary keys — every incoming event is **appended** to the
-table and no deduplication happens on import.
-
-If you need unique rows (e.g., one row per event ID), it is up to you to decide whether
-deduplication is required and to handle it **downstream**: create a
-[deduplication transformation](/storage/tables/#primary-key-deduplication) that reads the stream
-table and writes the result to a new table where the
-[output mapping](/transformations/mappings/#output-mapping) primary key performs the
-deduplication on load. Schedule it to run regularly with a [conditional flow](/flows/).
-[Kai](/kai/) can help you build both the transformation and the scheduled flow.
-:::
-
-#### Sample codes for integration
-For easier use, we've prepared a few examples of how to send data to a stream using Python, Javascript, and Bash.
-
-#### Import conditions
-In this section, you can set a few conditions for importing data. Whichever condition is met first triggers an import into the destination table — you can set the interval, the size of the imported data, or the number of imported records. [Learn more](/storage/data-streams/reference/#conditions)
-
-#### Payload test
-Here, you can simulate your payload and test it instantly with a table preview to see how the data will be imported before deploying it into production. The same check is available over the API through the [payload test endpoint](/storage/data-streams/reference/#test-a-payload).
-
 ### Configure an OpenTelemetry (OTLP) Data Stream
 
 Choosing the **OpenTelemetry (OTLP)** source type turns Keboola into a drop-in [OTLP/HTTP](https://opentelemetry.io/docs/specs/otlp/#otlphttp) endpoint. Any official OpenTelemetry SDK or collector can export directly to Keboola, and the incoming telemetry data lands in Storage — queryable alongside your business data.
@@ -91,6 +40,25 @@ When you create an OTLP data stream, the app sets up a destination table per sig
 
 For full setup instructions, SDK examples, use cases, and configuration details, see the dedicated **[OpenTelemetry (OTLP) Data Streams](/storage/data-streams/opentelemetry/)** page.
 
+[OpenTelemetry](https://opentelemetry.io/) is an open-source observability framework that captures three types of signals from your web apps, APIs, and services:
+
+- **Logs** — application events and errors (e.g., failed requests, warnings, debug messages).
+- **Metrics** — performance measurements over time (e.g., request latency, CPU usage, error rates).
+- **Traces** — end-to-end request flows across services (e.g., an API call that touches multiple microservices).
+
+Choosing the **OpenTelemetry (OTLP)** source type when [creating a data stream](/storage/data-streams/) turns Keboola into a drop-in [OTLP/HTTP](https://opentelemetry.io/docs/specs/otlp/#otlphttp) endpoint. Any official OpenTelemetry SDK or collector can export directly to Keboola, and the incoming telemetry data lands in Storage — queryable alongside your business data.
+
+## Why Send Telemetry to Keboola?
+
+Your web apps, APIs, and services already generate telemetry data. Typically, this data lives in a dedicated monitoring tool (e.g., Datadog, New Relic, Grafana) while your business data lives in Keboola. When you need to understand how application performance affects business outcomes, you have to export data, build custom pipelines, or switch between tools.
+
+With OTLP source support in Data Streams, your telemetry and business data live side by side in Keboola Storage. This lets you:
+
+- **Correlate application errors with revenue impact** — join error logs with transaction records to see how outages affect orders.
+- **Connect API latency to conversion rates** — analyze whether slow response times cause drop-offs in user workflows.
+- **Track deployment activity alongside business KPIs** — measure whether a new release improved or degraded key metrics.
+- **Monitor LLM agent or pipeline performance** — trace AI agent activity and cost alongside product usage data.
+
 ## Pricing
 Data Streams pricing varies based on the number of streams and the volume of ingested data. Please contact our support team for more details.
 
@@ -98,3 +66,5 @@ Data Streams pricing varies based on the number of streams and the volume of ing
 For the Stream API, column types, mapping templates, import conditions, and delivery guarantees, see the
 [Data Streams Reference](/storage/data-streams/reference/). For an end-to-end example (ingesting GitHub
 webhook events), follow the [Data Streams Tutorial](/storage/data-streams/tutorial/).
+
+**Next:** [Data Streams Tutorial →](/storage/data-streams/tutorial/)

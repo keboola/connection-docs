@@ -34,11 +34,18 @@ data are not affected — ingest is authenticated by the secret embedded in the 
 | `name` | string | Name of the column. Names must be unique. |
 | `type` | string | The type of the column. Available types and their descriptions are listed below. |
 
-***Note:** Data streams do not support primary keys. Every incoming event is appended to the
-destination table and no deduplication happens on import. If you need unique rows (e.g., one row
-per event ID), handle deduplication downstream: create a deduplication transformation that reads
-the stream table and writes the result to a new table whose output mapping primary key performs
-the deduplication on load, and schedule it to run regularly with a conditional flow.*
+:::note[No primary key support]
+Data streams do **not** support primary keys — every incoming event is **appended** to the
+table and no deduplication happens on import.
+
+If you need unique rows (e.g., one row per event ID), it is up to you to decide whether
+deduplication is required and to handle it **downstream**: create a
+[deduplication transformation](/storage/tables/#primary-key-deduplication) that reads the stream
+table and writes the result to a new table where the
+[output mapping](/transformations/mappings/#output-mapping) primary key performs the
+deduplication on load. Schedule it to run regularly with a [conditional flow](/flows/).
+[Kai](/kai/) can help you build both the transformation and the scheduled flow.
+:::
 
 The available column types are:
 
@@ -162,18 +169,6 @@ For an HTTP source, the request body is the raw payload a client would send, tre
 
 For an OTLP source, the body must be a single **already-flattened OTLP record** — not a protobuf batch and not the multi-record envelope an OTel SDK sends. The `?signal=` query parameter (`logs`, `metrics`, or `traces`; defaults to `logs`) selects which signal the request simulates, and sinks whose [`allowedSignals`](/storage/data-streams/opentelemetry/#routing-signals-to-tables) filter rejects that signal are omitted from the result, exactly as they would be skipped during real ingestion.
 
-## Delivery Guarantees
-
-Depending on your use case, you may require different delivery guarantees for your stream. Follow the guidelines below to ensure the desired outcome.
-
-### At Most Once
-
-To ensure that no record is delivered twice, make sure the client doesn't retry when sending the records. In this case, it's beneficial to use the setting endpoints to set `"storage.level.local.encoding.sync.wait"` to `false` to increase throughput.
-
-### At Least Once
-
-To ensure that every record is delivered at least once, the client needs to implement retries when sending the records. Also, use the setting endpoints to confirm that `"storage.level.local.encoding.sync.wait"` is set to `true` (default behavior). Note that this setting guarantees that the record is written to the local disk.
-
 ## Tokens
 
 A token is generated for each source sink. These tokens have the minimum possible scope: `write` permission for the bucket in which the destination table is
@@ -183,23 +178,6 @@ stored, plus read access to all file uploads (staging storage is implemented wit
 `[_internal] Stream Sink <source-id>/<sink-id>`.
 
 These tokens should not be deleted or refreshed manually. To refresh a token, you can disable and re-enable the sink.
-
-## Kafka Integration
-To connect Keboola with [Apache Kafka®](https://kafka.apache.org/) and ingest data from Kafka topics via data streams, use the Kafka Connect HTTP Sink Connector
-to establish a communication channel between Kafka and Keboola.
-
-The Kafka Connect HTTP Sink Connector acts as a bridge, seamlessly integrating Kafka with Keboola's Data Stream HTTP API. Here's a breakdown of the process:
-
-- Data Consumption: The connector continuously reads data records from one or more Kafka topics.
-- Batching: Events can be efficiently grouped based on a predefined maximum size (batch.max.size).
-- API Interaction: Data is sent as a POST request in JSON format to Keboola's Data Stream API URL.
-
-**Key Points to Remember:**
-
-- This integration relies on the Kafka Connect HTTP Sink Connector, which requires configuration on the Kafka side.
-- Data records from Kafka topics are transformed into strings before being sent to Keboola.
-- The target Keboola API URL corresponds to the data stream created in Keboola.
-- Only POST HTTP methods are supported for data ingestion.
 
 ## Next Steps
 
