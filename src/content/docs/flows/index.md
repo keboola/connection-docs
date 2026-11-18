@@ -58,6 +58,10 @@ overriding a [variable](/components/variables/#task-parameters-on-a-single-task)
 
 ![The Task Parameters editor, pre-filled with the task's type, mode, componentId, and configId](/flows/task-parameters-modal.png)
 
+### Start an app
+
+A Keboola [app](/data-apps/) can be a task too: pick it on the **Apps** tab when you add a component. Put it after the tasks that update its data: by default, each run restarts the app so it loads the fresh tables. What the task does and how to configure it: [Start the app from a flow](/data-apps/operate/#start-the-app-from-a-flow).
+
 ## Conditions
 
 ### 1. Conditional Logic (IF statements)
