@@ -46,10 +46,10 @@ BigQuery console.
 Storage accepts descriptions up to 65,535 bytes (fewer characters for non-ASCII text) and stores the full text,
 which stays available through the Storage API. The backend receives only the part within its own limit:
 
-| Backend | Longest description written to the backend |
-|---|---|
-| Snowflake | 16,384 characters |
-| BigQuery | 1,024 characters |
+| Backend | Table description | Column description |
+|---|---|---|
+| Snowflake | 16,384 characters | 16,384 characters |
+| BigQuery | 16,384 characters | 1,024 characters |
 
 <!-- TODO(DMD-2640): remove the exception below once Storage truncates column descriptions before writing them to BigQuery. -->
 Exception: on BigQuery, column descriptions are not truncated when you save them through the table definition
