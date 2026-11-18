@@ -1,6 +1,6 @@
 ---
 title: Development branches
-description: Development branches are a feature for managing change in Keboola projects.
+description: 'How a Common Interface component runs in a development branch: the branch context, input and output mapping, configuration state, and external resources.'
 slug: 'extend/common-interface/development-branches'
 ---
 

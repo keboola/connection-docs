@@ -1,6 +1,6 @@
 ---
 title: Code Patterns
-description: Code Patterns are a special type of component. They generate code for transformations, implement the generate action, and use the configuration format.
+description: 'Build a Code Pattern, a component that generates transformation code. Start here for its generate action and configuration format.'
 slug: 'extend/component/code-patterns'
 ---
 

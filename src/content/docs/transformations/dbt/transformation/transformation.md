@@ -1,6 +1,6 @@
 ---
 title: dbt transformation
-description: The required connection parameters for your remote data warehouse vary depending on the selected backend type.
+description: 'Configure a dbt transformation: database connection, project repository, execution steps, freshness, artifacts, output mapping, debug runs, and project docs.'
 slug: 'transformations/dbt/transformation'
 ---
 

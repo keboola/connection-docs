@@ -1,6 +1,6 @@
 ---
 title: dbt Transformation
-description: dbt™ is a transformation workflow that lets teams deploy analytics code quickly and collaboratively.
+description: 'How Keboola runs dbt: the prerequisites, and which dbt component fits each use case.'
 slug: 'transformations/dbt'
 ---
 

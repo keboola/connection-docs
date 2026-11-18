@@ -1,6 +1,6 @@
 ---
 title: Usage in Flows
-description: All dbt related components behave in the same way as any other component in Keboola does.
+description: 'Add dbt components to a flow like any other component, with a schedule and notifications.'
 slug: 'transformations/dbt/flows'
 ---
 

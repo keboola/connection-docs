@@ -1,6 +1,6 @@
 ---
 title: Notifications
-description: 'Notifications in Keboola can be set up at several levels, from individual jobs and flows in a project to organization-wide credit usage.'
+description: 'The notification types for flows, jobs, apps, and credit usage, how to set up flow, job, and app notifications, and how webhook delivery works.'
 slug: 'management/notifications'
 ---
 

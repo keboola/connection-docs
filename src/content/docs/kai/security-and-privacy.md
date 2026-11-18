@@ -1,6 +1,6 @@
 ---
 title: Security & Privacy
-description: Kai is designed with enterprise security in mind. This page explains how your data is protected.
+description: 'How Kai handles your data: it is never used for AI training, which AI provider processes it, access control, compliance, and security best practices.'
 slug: 'kai/security-and-privacy'
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Actions
-description: Actions provide a way to execute very quick tasks in a single Component, using a single code base.
+description: 'Synchronous component actions for quick tasks beside the default run job: the use case, running them, return values, error handling, and limits.'
 slug: 'extend/common-interface/actions'
 ---
 

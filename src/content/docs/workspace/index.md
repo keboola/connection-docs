@@ -1,6 +1,6 @@
 ---
 title: Workspace
-description: A workspace serves several purposes and can be used as an interactive development environment (IDE) to create transformations.
+description: 'What workspaces are for, connecting to one, loading and unloading data, their lifecycle, and using them to develop transformations or for analysis.'
 slug: 'workspace'
 redirect_from:
   - /transformations/sandbox/

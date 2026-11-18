@@ -1,6 +1,6 @@
 ---
 title: Default Configuration
-description: To make configuring a component easier for users, you can provide a default configuration for it.
+description: 'Set a default configuration or default row configuration in the Developer Portal so new configurations of your component start prefilled.'
 slug: 'extend/component/ui-options/default-configuration'
 ---
 

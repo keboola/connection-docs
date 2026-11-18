@@ -1,6 +1,6 @@
 ---
 title: Files
-description: The File Storage is available in the Files section of Storage and contains all raw files uploaded to your project.
+description: 'What File Storage holds, how to upload a file, file links, and file limits.'
 slug: 'storage/files'
 redirect_from:
     - /storage/file-uploads/

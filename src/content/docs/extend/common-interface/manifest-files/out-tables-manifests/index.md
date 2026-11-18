@@ -1,6 +1,6 @@
 ---
 title: /data/out/tables manifests
-description: An output table manifest sets options for transferring a table to Storage. The following examples list available manifest fields; all of them are optional.
+description: 'The optional fields of a /data/out/tables manifest, such as destination and columns, which control how your component''s table loads to Storage.'
 slug: 'extend/common-interface/manifest-files/out-tables-manifests'
 ---
 

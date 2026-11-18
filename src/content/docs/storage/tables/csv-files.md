@@ -1,6 +1,6 @@
 ---
 title: CSV Files
-description: All data imported to and exported from Storage has to be in the CSV format.
+description: 'The CSV format Storage accepts on import and produces on export, and how to export CSV from Microsoft Excel and open it there.'
 slug: 'storage/tables/csv-files'
 ---
 

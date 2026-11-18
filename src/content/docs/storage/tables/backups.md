@@ -1,6 +1,6 @@
 ---
 title: Backups and Restorations
-description: There are two methods available for backing up and restoring data.
+description: 'Restore Storage tables with time travel on the Snowflake backend, or back them up and restore them with table snapshots on any backend.'
 slug: 'storage/tables/backups'
 ---
 

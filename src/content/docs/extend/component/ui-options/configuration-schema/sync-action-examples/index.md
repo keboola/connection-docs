@@ -1,6 +1,6 @@
 ---
 title: Sync Action UI Elements Examples
-description: Some UI elements use sync actions to get some values dynamically from the component code. This section provides a list of the elements currently supported.
+description: 'UI elements that call a component''s sync actions: dynamically loaded dropdowns, a validation button, a connection test, and autoload.'
 slug: 'extend/component/ui-options/configuration-schema/sync-action-examples'
 
 ---

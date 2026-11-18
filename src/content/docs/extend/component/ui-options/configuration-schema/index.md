@@ -1,6 +1,6 @@
 ---
 title: Configuration Schema
-description: The default input for a component configuration is a JSON text area.
+description: 'Define a JSON schema so the Keboola UI shows a form instead of a JSON text area: formats, options, the live schema editor, AI Kit, and examples.'
 slug: 'extend/component/ui-options/configuration-schema'
 redirect_from:
     - /extend/registration/configuration-schema/

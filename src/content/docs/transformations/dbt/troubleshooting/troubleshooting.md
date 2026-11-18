@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-description: Debugging connection failures in remote workspaces is often complex because we lack access to the source code.
+description: 'Fix dbt connection failures in remote workspaces, including an authentication method that does not match the one in profiles.yml.'
 slug: 'transformations/dbt/troubleshooting'
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Project Settings
-description: The Project Settings page provides general information about your project.
+description: 'What the Project Settings page shows and controls: project details, users, API tokens, CLI sync, features, AI rules, and the MCP server.'
 slug: 'management/project'
 ---
 

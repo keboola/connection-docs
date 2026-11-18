@@ -1,6 +1,6 @@
 ---
 title: Kai Best Practices
-description: Kai knows your schema but not your business rules. Include domain context for better results.
+description: 'Tips for working with Kai: give business context, plan before building, iterate, be specific, use dev branches, manage context, and keep security in mind.'
 slug: 'kai/best-practices'
 ---
 

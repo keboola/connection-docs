@@ -1,6 +1,6 @@
 ---
 title: Data Folders Specification
-description: Data folders are one of the possible channels to exchange data between your component and Keboola.
+description: 'The /data folder layout a component reads input from and writes output to, and exchanging data via S3, ABS, and database or file system workspaces.'
 slug: 'extend/common-interface/folders'
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Account Management
-description: Account management allows you to configure your own account.
+description: 'Manage your own Keboola account: password, multi-factor authentication, project invitations, Management API tokens, promo codes, and user sessions.'
 slug: 'management/account'
 ---
 

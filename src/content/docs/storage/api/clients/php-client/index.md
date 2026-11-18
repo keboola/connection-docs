@@ -1,6 +1,6 @@
 ---
 title: Storage PHP Client Library
-description: The Storage API PHP client library is a portable command line client providing the most complete Storage API implementation.
+description: 'Install the Storage API PHP client with Composer and use it in PHP scripts to create tables, import data fully or incrementally, and export data.'
 slug: 'storage/api/clients/php-client'
 redirect_from:
     - /integrate/storage/php-client/

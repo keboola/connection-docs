@@ -1,6 +1,6 @@
 ---
 title: Storage API
-description: If you are new to Keboola, you should make yourself familiar with the Storage component before you start using it.
+description: 'Where to start with the Storage API: its most important functions, with links to each, and to the general Keboola API introduction.'
 slug: 'storage/api'
 redirect_from:
     - /integrate/storage/

@@ -1,6 +1,6 @@
 ---
 title: OAuth Interface Specification
-description: OAuth Broker API integration provides a safe way to retrieve stored authorizations.
+description: 'How a component gets OAuth credentials stored in the OAuth Broker API: initialize, authorize, and receive the decrypted credentials in its configuration.'
 slug: 'extend/common-interface/oauth'
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: UI Options
-description: Each component needs to specify how its user interface (UI) will look.
+description: 'The UI options that give a component its configuration UI: genericDockerUI and its parts for table and file mapping, processors, and authorization.'
 slug: 'extend/component/ui-options'
 ---
 

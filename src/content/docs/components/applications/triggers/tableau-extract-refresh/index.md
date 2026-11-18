@@ -1,6 +1,6 @@
 ---
 title: Tableau Extract Refresh Trigger
-description: The Tableau Extract Refresh Trigger application triggers extract refresh tasks on Tableau data sources and workbooks directly from a Keboola flow.
+description: 'Refresh Tableau extracts from a flow with a personal access token: full or incremental refresh, poll mode, continue on error, and a sample configuration.'
 slug: 'components/applications/triggers/tableau-extract-refresh'
 ---
 

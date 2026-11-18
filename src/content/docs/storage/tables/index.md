@@ -1,6 +1,6 @@
 ---
 title: Tables
-description: The Table Storage for your project is available under the Tables tab in the Storage section.
+description: 'Work with Storage tables: aliases, metadata, table and column descriptions, data types, primary keys, incremental loading, and truncating or deleting rows.'
 slug: 'storage/tables'
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Snowflake Secure Data Sharing
-description: This guide explains how to share a database and its objects with one or more accounts by creating a share.
+description: 'Share Snowflake data with other accounts through a share: the producer and consumer workflows, role requirements, and the limits of imported databases.'
 slug: 'storage/byodb/snowflake-secure-data-sharing'
 ---
 

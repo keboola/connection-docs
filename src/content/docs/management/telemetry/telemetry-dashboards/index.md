@@ -1,6 +1,6 @@
 ---
 title: Telemetry Dashboards
-description: The telemetry dashboards help you understand how your Keboola projects and organization consume resources.
+description: 'Read the Project Consumption, Organization Usage, and Activity Center telemetry dashboards: key terms, KPIs, consumption charts, health, and jobs monitoring.'
 slug: 'management/telemetry/telemetry-dashboards'
 ---
 

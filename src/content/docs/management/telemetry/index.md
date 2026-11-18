@@ -1,6 +1,6 @@
 ---
 title: Telemetry
-description: In Keboola, customers are provided with three levels of detail for telemetry data and two ways to use the data.
+description: 'Telemetry data in Keboola: raw data from the Telemetry Data connector or the dashboards, in project, organization, or Activity Center mode, and credit emails.'
 slug: 'management/telemetry'
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Migration Guide
-description: This guide walks you through migrating an existing Legacy Flow to the new Conditional Flow engine.
+description: 'Migrate a Legacy Flow to a Conditional Flow: preview and review the converted flow, then run the migration. The original flow is kept and disabled.'
 slug: 'flows/flow-migration-guide'
 ---
 

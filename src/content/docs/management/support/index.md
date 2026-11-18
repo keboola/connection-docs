@@ -1,6 +1,6 @@
 ---
 title: Keboola Support
-description: There are multiple ways to obtain support from within your project (if you cannot access your account at all, see below).
+description: 'Get help from Keboola support from inside your project, control support users'' access to it, and what to do if you are locked out of Keboola.'
 slug: 'management/support'
 ---
 

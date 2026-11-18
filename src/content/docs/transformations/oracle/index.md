@@ -1,6 +1,6 @@
 ---
 title: Oracle Transformation
-description: 'Oracle Database is a multi-model database management system developed and marketed by Oracle Corporation.'
+description: 'Set up an Oracle transformation: an example SQL script that creates a user and schema with read and write privileges for Keboola.'
 slug: 'transformations/oracle'
 ---
 

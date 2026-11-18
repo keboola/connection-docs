@@ -1,6 +1,6 @@
 ---
 title: Kai Python Client
-description: The Kai Python Client is an official Python library for interacting with the Kai API programmatically.
+description: 'Install and use the Kai Python Client, an async library and command-line tool for the Kai API, and integrate Kai into apps or use it with Claude Code.'
 slug: 'kai/python-client'
 ---
 

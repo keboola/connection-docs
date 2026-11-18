@@ -1,6 +1,6 @@
 ---
 title: Data Gateway
-description: This application allows you to share data in read-only mode with third-party BI and visualization tools.
+description: 'Share Storage tables read-only with BI tools through a Snowflake reader account: setup, loading data, privileges for dedicated Snowflake accounts, and limits.'
 slug: 'components/applications/data-gateway'
 redirect_from:
     - /applications/data-gateway/

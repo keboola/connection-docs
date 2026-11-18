@@ -1,6 +1,6 @@
 ---
 title: AI Applications
-description: AI applications are used to generate, process, or enrich data via custom models or 3rd-party AI API services.
+description: 'Which AI applications Keboola offers. Generative AI processes your input data with a custom prompt through OpenAI or Azure OpenAI.'
 slug: 'components/applications/ai'
 redirect_from:
     - /applications/ai/
