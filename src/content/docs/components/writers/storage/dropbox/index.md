@@ -1,6 +1,7 @@
 ---
 title: Dropbox
 slug: 'components/writers/storage/dropbox'
+description: 'Write Keboola tables and files to an authorized Dropbox account, into the Apps/Keboola Connection Writer V2 folder or a subfolder you set.'
 redirect_from:
     - /writers/storage/dropbox/
 ---
@@ -8,6 +9,8 @@ redirect_from:
 
 
 This data destination connector sends tables as CSV or other files into a single [Dropbox](https://www.dropbox.com/) account.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Dropbox** data destination connector.

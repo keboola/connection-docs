@@ -27,7 +27,7 @@ In the following **examples**, use the sample [graph-source.csv](/transformation
 
 ## Example 1 -- Output of a single file
 
-Create a [new R transformation](/tutorial/manipulate/), and add the **graph-source** table
+Create a [new R transformation](/getting-started/transform/), and add the **graph-source** table
 in the input mapping. There is no output mapping.
 
 ![Screenshot - Configure transformations](/transformations/r-plain/graph-source-2.png)
