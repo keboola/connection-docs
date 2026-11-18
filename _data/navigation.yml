@@ -726,11 +726,14 @@ items:
           - url: /storage/tables/data-types/
             title: Data Types
 
+          - url: /storage/tables/data-types/reference/
+            title: Data Types Reference
+
           - url: /storage/tables/csv-files/
             title: CSV Files
 
-          - url: /storage/tables/uploads/
-            title: Table Import/Export
+          - url: /storage/tables/csv-files/excel/
+            title: CSV in Excel
 
           - url: /storage/tables/backups/
             title: Backups and Restorations

@@ -104,4 +104,55 @@ To delete rows before each incremental load of a transformation instead, use the
 **Delete rows** option of the [transformation output mapping](/transformations/mappings/#output-mapping), with Incremental
 loading enabled.
 
+## Changing Types of Existing Typed Columns
+You **cannot change the type of a column in a typed table once it has been created**. However, there are multiple workarounds to address this limitation:
+
+**For tables using full load:** Drop the table and create a new one with the correct types. Then, load the data into the newly created table.
+
+**For tables loaded incrementally:** You will need to create a new column with the desired type and migrate the data step by step:
+   - Assume you have a column `date` of type `VARCHAR` in a typed table, and you want to change it to `TIMESTAMP`.
+   - Start by adding a new column named `date_timestamp` of type `TIMESTAMP` to the table.
+   - Update all jobs filling the table to populate both the new column (`date_timestamp`) and the existing column (`date`).
+   - Run an ad-hoc transformation to copy data from `date` to `date_timestamp` for the existing rows.
+   - Gradually update all configurations and references to use `date_timestamp` instead of `date`.
+   - Once all references are updated and the old column is no longer in use, you can safely remove the `date` column.
+
+
+:::caution
+**Important:** Always verify other configurations that depend on the table to avoid schema mismatches. Also, pay special attention to writers (data destination connectors), particularly if the table already exists in the destination system. Mismatched schemas between the source and destination can lead to errors.
+:::
+
+## How to Create a Typed Table Based on a Non-Typed Table
+If you have a non-typed table, `non_typed_table`, with undefined data types and want to convert it into a typed table, follow these steps:
+
+**Step 1: Set Up the Transformation** 
+- Create a new transformation in Keboola.
+- Choose `non_typed_table` as the input table in the input mapping section (you can also rely on [read-only input mapping](/transformations/#read-only-input-mapping)).
+- In the output mapping section, define the output table as `typed_table`. Ensure that the output table does not exist; otherwise, it will not be created as a typed table.
+
+![Screenshot - Typed Table Transformation](/storage/tables/data-types/typed-table-transformation.png)
+
+**Step 2: Define the Query**   
+In the queries section, write an SQL query to transform the column types. Use proper casting for each column to match the desired data types.
+
+For example, if you need to format a date column, include the appropriate SQL casting or formatting function in your query.
+
+```
+CREATE TABLE "typed_table" AS
+    SELECT 
+        CAST(ntt."id" AS VARCHAR(64)) AS "id",
+        CAST(ntt."id_profile" AS INTEGER) AS "id_profile",
+        TO_TIMESTAMP(ntt."date", 'DD.MM.YYYY"T"HH24:MI:SS') AS "date",
+        CAST(ntt."amount" AS INTEGER) AS "amount"
+    FROM "non_typed_table" AS ntt;
+```
+
+**Step 3: Run the Transformation**  
+Execute the transformation and wait for it to complete.
+
+**Step 4: Verify the Schema**  
+Once the transformation is finished, check the schema of the newly created table, `typed_table`. It should now include the appropriate data types.
+
+***Note:** [Incremental loading](/storage/tables/incremental-loading/#incremental-loading) cannot be used when creating a typed table in this manner.*
+
 **Next:** [Primary keys and incremental loading →](/storage/tables/incremental-loading/)
