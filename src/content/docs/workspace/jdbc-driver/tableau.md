@@ -1,5 +1,6 @@
 ---
 title: Tableau Desktop Installation Guide
+lastUpdated: 2026-06-30
 slug: 'workspace/jdbc-driver/tableau'
 description: Install the Keboola JDBC driver in Tableau Desktop using the Other Databases (JDBC) connector.
 ---

@@ -1,5 +1,6 @@
 ---
 title: Environment Specification
+lastUpdated: 2026-09-16
 slug: 'extend/common-interface/environment'
 ---
 

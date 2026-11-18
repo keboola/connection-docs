@@ -1,5 +1,6 @@
 ---
 title: Synapse
+lastUpdated: 2026-08-04
 slug: 'components/writers/database/synapse'
 description: 'Write Keboola tables to an Azure Synapse database on Azure stacks with a dedicated login, then set column types and full or incremental load.'
 redirect_from:

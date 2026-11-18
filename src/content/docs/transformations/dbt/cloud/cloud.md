@@ -1,5 +1,6 @@
 ---
 title: dbt Cloud
+lastUpdated: 2026-06-22
 slug: 'transformations/dbt/cloud'
 ---
 

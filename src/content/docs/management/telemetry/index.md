@@ -1,5 +1,6 @@
 ---
 title: Telemetry
+lastUpdated: 2025-07-04
 slug: 'management/telemetry'
 ---
 

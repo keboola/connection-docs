@@ -1,5 +1,6 @@
 ---
 title: What3words Augmentation
+lastUpdated: 2026-02-19
 slug: 'components/extractors/other/what3words'
 redirect_from:
     - /extractors/other/what3words/

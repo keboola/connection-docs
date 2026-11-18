@@ -1,5 +1,6 @@
 ---
 title: Snowflake Transformation
+lastUpdated: 2026-09-16
 slug: 'transformations/snowflake-plain'
 redirect_from:
   - /transformations/snowflake/

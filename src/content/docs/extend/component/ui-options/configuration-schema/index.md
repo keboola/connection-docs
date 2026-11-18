@@ -1,5 +1,6 @@
 ---
 title: Configuration Schema
+lastUpdated: 2026-08-07
 slug: 'extend/component/ui-options/configuration-schema'
 redirect_from:
     - /extend/registration/configuration-schema/

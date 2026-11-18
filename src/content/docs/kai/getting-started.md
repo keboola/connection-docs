@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Kai
+lastUpdated: 2026-09-22
 slug: 'kai/getting-started'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: DataGrip Installation Guide
+lastUpdated: 2026-06-30
 slug: 'workspace/jdbc-driver/datagrip'
 description: Install the Keboola JDBC driver in DataGrip (and other JetBrains IDEs) and connect to a Keboola project.
 ---

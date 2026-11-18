@@ -1,5 +1,6 @@
 ---
 title: SQL Server
+lastUpdated: 2026-08-04
 slug: 'components/writers/database/mssql'
 description: 'Write Keboola tables to a Microsoft SQL Server database, map columns to SQL Server types, choose full or incremental load, and see how binary values convert.'
 redirect_from:

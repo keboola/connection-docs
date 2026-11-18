@@ -1,5 +1,6 @@
 ---
 title: TDE Exporter
+lastUpdated: 2026-09-16
 slug: 'storage/api/tde-exporter'
 redirect_from:
     - /integrate/storage/api/tde-exporter/

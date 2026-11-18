@@ -1,5 +1,6 @@
 ---
 title: /data/out/tables manifests with Native Types
+lastUpdated: 2026-08-03
 slug: 'extend/common-interface/manifest-files/out-tables-manifests-native-types'
 ---
 

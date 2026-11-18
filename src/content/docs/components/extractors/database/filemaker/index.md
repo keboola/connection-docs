@@ -1,5 +1,6 @@
 ---
 title: FileMaker
+lastUpdated: 2025-03-06
 slug: 'components/extractors/database/filemaker'
 ---
 

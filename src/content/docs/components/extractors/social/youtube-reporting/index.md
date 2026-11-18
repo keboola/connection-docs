@@ -1,5 +1,6 @@
 ---
 title: YouTube Reporting
+lastUpdated: 2026-06-22
 slug: 'components/extractors/social/youtube-reporting'
 redirect_from:
     - /extractors/social/youtube-reporting/

@@ -1,5 +1,6 @@
 ---
 title: Response Parameter Scroller
+lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/response-param'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/response-param/

@@ -1,5 +1,6 @@
 ---
 title: Oracle
+lastUpdated: 2026-08-04
 slug: 'components/writers/database/oracle'
 description: 'Write Keboola tables to an Oracle database with a host, user and service name, then set column types and full or incremental load.'
 redirect_from:

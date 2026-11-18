@@ -1,5 +1,6 @@
 ---
 title: Intercom
+lastUpdated: 2026-08-07
 slug: 'components/extractors/communication/intercom'
 redirect_from:
     - /extractors/communication/intercom/

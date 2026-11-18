@@ -1,5 +1,6 @@
 ---
 title: Adform DSP Reports
+lastUpdated: 2024-02-28
 slug: 'components/extractors/marketing-sales/adform-dsp-reports'
 redirect_from:
     - /extractors/marketing-sales/adform-dsp-reports/

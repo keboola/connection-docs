@@ -1,5 +1,6 @@
 ---
 title: Airtable
+lastUpdated: 2024-02-28
 slug: 'components/extractors/other/airtable'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Google Cloud Storage
+lastUpdated: 2024-02-29
 slug: 'components/writers/storage/google-cloud-storage'
 description: 'Write Keboola tables and files to a Google Cloud Storage bucket, authorized with a service account key or instant authorization.'
 redirect_from:

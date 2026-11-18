@@ -1,5 +1,6 @@
 ---
 title: Kai Settings
+lastUpdated: 2026-09-03
 slug: 'kai/settings'
 description: Configure Kai's tool permissions, system instructions, context files (knowledge files), and skill files — in the UI or programmatically via the Storage Files API.
 ---

@@ -1,5 +1,6 @@
 ---
 title: Telemetry Dashboards
+lastUpdated: 2026-08-04
 slug: 'management/telemetry/telemetry-dashboards'
 ---
 

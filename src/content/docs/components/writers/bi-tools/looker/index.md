@@ -1,5 +1,6 @@
 ---
 title: Looker
+lastUpdated: 2026-06-19
 slug: 'components/writers/bi-tools/looker'
 description: 'Push Keboola tables to Looker as a new LookML project through a Snowflake workspace, with a Looker API client ID and secret and optional foreign keys.'
 redirect_from:

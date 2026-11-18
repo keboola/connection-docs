@@ -1,5 +1,6 @@
 ---
 title: Merge Requests
+lastUpdated: 2026-07-22
 slug: 'components/branches/merge-requests'
 description: Review, approve, and merge development branch changes into production using merge requests.
 ---

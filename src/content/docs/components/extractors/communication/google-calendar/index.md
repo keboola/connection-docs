@@ -1,5 +1,6 @@
 ---
 title: Google Calendar
+lastUpdated: 2026-08-05
 slug: 'components/extractors/communication/google-calendar'
 redirect_from:
     - /extractors/communication/google-calendar/

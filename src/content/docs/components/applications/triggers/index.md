@@ -1,5 +1,6 @@
 ---
 title: Trigger Applications
+lastUpdated: 2026-06-03
 slug: 'components/applications/triggers'
 redirect_from:
     - /applications/triggers/

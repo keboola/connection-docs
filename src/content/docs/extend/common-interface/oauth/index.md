@@ -1,5 +1,6 @@
 ---
 title: OAuth Interface Specification
+lastUpdated: 2026-07-27
 slug: 'extend/common-interface/oauth'
 ---
 

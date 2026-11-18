@@ -1,5 +1,6 @@
 ---
 title: Kai Python Client
+lastUpdated: 2026-07-10
 slug: 'kai/python-client'
 ---
 

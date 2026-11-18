@@ -1,5 +1,6 @@
 ---
 title: Generic Extractor Parameter Map
+lastUpdated: 2026-08-05
 slug: 'components/extractors/generic-extractor/map'
 redirect_from:
     - /extend/generic-extractor/map/

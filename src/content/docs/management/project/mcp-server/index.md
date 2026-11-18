@@ -1,5 +1,6 @@
 ---
 title: MCP Server
+lastUpdated: 2025-06-09
 slug: 'management/project/mcp-server'
 ---
 

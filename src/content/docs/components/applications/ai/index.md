@@ -1,5 +1,6 @@
 ---
 title: AI Applications
+lastUpdated: 2023-10-25
 slug: 'components/applications/ai'
 redirect_from:
     - /applications/ai/

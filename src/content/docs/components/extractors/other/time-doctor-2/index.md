@@ -1,5 +1,6 @@
 ---
 title: Time Doctor 2
+lastUpdated: 2024-02-28
 slug: 'components/extractors/other/time-doctor-2'
 redirect_from:
     - /extractors/other/time-doctor-2/

@@ -1,5 +1,6 @@
 ---
 title: R Transformation
+lastUpdated: 2026-09-15
 slug: 'transformations/r-plain'
 redirect_from:
   - /transformations/r/

@@ -1,5 +1,6 @@
 ---
 title: Slack
+lastUpdated: 2026-08-05
 slug: 'components/extractors/communication/slack'
 redirect_from:
     - /extractors/communication/slack/

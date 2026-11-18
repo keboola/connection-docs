@@ -1,5 +1,6 @@
 ---
 title: OneDrive Files
+lastUpdated: 2026-06-19
 slug: 'components/extractors/storage/onedrive-files'
 ---
 

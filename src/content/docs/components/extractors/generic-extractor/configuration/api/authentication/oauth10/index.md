@@ -1,5 +1,6 @@
 ---
 title: OAuth 1.0 Authentication
+lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth10'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth10/

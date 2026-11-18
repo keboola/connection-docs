@@ -1,5 +1,6 @@
 ---
 title: Migration between stacks
+lastUpdated: 2026-06-03
 slug: 'management/project/migration'
 ---
 

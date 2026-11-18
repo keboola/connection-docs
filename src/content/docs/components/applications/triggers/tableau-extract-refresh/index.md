@@ -1,5 +1,6 @@
 ---
 title: Tableau Extract Refresh Trigger
+lastUpdated: 2026-09-18
 slug: 'components/applications/triggers/tableau-extract-refresh'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: REST HTTP API Introduction
+lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/tutorial/rest'
 redirect_from:
     - /extend/generic-extractor/tutorial/rest/

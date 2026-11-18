@@ -1,5 +1,6 @@
 ---
 title: Azure Cosmos DB
+lastUpdated: 2024-02-28
 slug: 'components/extractors/database/cosmosdb'
 ---
 

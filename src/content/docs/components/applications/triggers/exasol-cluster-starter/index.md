@@ -1,5 +1,6 @@
 ---
 title: Exasol Cluster Starter
+lastUpdated: 2022-04-06
 slug: 'components/applications/triggers/exasol-cluster-starter'
 ---
 

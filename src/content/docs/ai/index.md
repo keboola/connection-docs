@@ -1,5 +1,6 @@
 ---
 title: AI Features
+lastUpdated: 2026-08-28
 slug: 'ai'
 ---
 

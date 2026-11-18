@@ -1,5 +1,6 @@
 ---
 title: Kai Use Cases & Examples
+lastUpdated: 2026-09-07
 slug: 'kai/use-cases'
 ---
 

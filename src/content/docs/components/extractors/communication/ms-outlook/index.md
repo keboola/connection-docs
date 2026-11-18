@@ -1,5 +1,6 @@
 ---
 title: MS Outlook IMAP Email Content and Attachments (Office 365)
+lastUpdated: 2026-06-19
 slug: 'components/extractors/communication/ms-outlook'
 redirect_from:
     - /extractors/communication/ms-outlook/

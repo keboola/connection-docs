@@ -1,5 +1,6 @@
 ---
 title: ChartMogul
+lastUpdated: 2024-01-23
 slug: 'components/extractors/marketing-sales/chartmogul'
 redirect_from:
     - /extractors/marketing-sales/chartmogul/

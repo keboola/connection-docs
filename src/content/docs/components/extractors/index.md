@@ -1,5 +1,6 @@
 ---
 title: Data Source Connectors
+lastUpdated: 2026-06-03
 slug: 'components/extractors'
 redirect_from:
     - /extractors/

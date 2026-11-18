@@ -1,5 +1,6 @@
 ---
 title: Google Sheets
+lastUpdated: 2026-06-19
 slug: 'components/writers/storage/google-sheets'
 description: 'Write Keboola tables into worksheets of a Google Sheets spreadsheet, overwriting the sheet or appending rows; Google Sheets limits the document size.'
 redirect_from:

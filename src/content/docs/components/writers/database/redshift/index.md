@@ -1,5 +1,6 @@
 ---
 title: Redshift
+lastUpdated: 2026-08-04
 slug: 'components/writers/database/redshift'
 description: 'Write Keboola tables to your own Amazon Redshift database or one Keboola provisions, then share that database with Looker, Power BI, Qlik or Tableau.'
 redirect_from:

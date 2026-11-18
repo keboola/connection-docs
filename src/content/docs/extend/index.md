@@ -1,5 +1,6 @@
 ---
 title: Extending Keboola
+lastUpdated: 2026-07-27
 slug: 'extend'
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Publish Component
+lastUpdated: 2026-09-16
 slug: 'extend/publish'
 redirect_from:
     - /extend/registration/checklist/

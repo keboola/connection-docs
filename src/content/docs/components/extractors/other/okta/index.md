@@ -1,5 +1,6 @@
 ---
 title: Okta
+lastUpdated: 2023-05-24
 slug: 'components/extractors/other/okta'
 redirect_from:
     - /extractors/other/okta/

@@ -1,5 +1,6 @@
 ---
 title: SSH Proxy Configuration
+lastUpdated: 2026-08-25
 slug: 'components/extractors/generic-extractor/configuration/ssh-proxy'
 redirect_from:
     - /extend/generic-extractor/configuration/ssh-proxy/

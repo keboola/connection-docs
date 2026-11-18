@@ -1,5 +1,6 @@
 ---
 title: CSV Files
+lastUpdated: 2026-08-04
 slug: 'storage/tables/csv-files'
 ---
 

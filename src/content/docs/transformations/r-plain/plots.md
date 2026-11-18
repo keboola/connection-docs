@@ -1,5 +1,6 @@
 ---
 title: Plots & Graphs
+lastUpdated: 2025-07-04
 slug: 'transformations/r-plain/plots'
 redirect_from:
     - /manipulation/transformations/r/plots/

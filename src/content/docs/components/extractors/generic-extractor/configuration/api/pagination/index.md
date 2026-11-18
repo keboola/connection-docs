@@ -1,5 +1,6 @@
 ---
 title: Pagination
+lastUpdated: 2026-08-25
 slug: 'components/extractors/generic-extractor/configuration/api/pagination'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/

@@ -1,5 +1,6 @@
 ---
 title: OAuth 2.0 Authentication
+lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth20'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth20/

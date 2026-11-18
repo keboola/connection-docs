@@ -1,5 +1,6 @@
 ---
 title: Table Import & Export
+lastUpdated: 2026-06-22
 slug: 'storage/tables/uploads'
 ---
 

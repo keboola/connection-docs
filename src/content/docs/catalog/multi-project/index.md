@@ -1,5 +1,6 @@
 ---
 title: Multi-Project Architecture
+lastUpdated: 2026-08-07
 slug: 'catalog/multi-project'
 ---
 

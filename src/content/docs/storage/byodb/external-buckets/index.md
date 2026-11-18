@@ -1,5 +1,6 @@
 ---
 title: External Datasets
+lastUpdated: 2026-06-22
 slug: 'storage/byodb/external-buckets'
 ---
 

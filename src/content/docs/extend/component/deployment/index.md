@@ -1,5 +1,6 @@
 ---
 title: Deployment
+lastUpdated: 2026-08-04
 slug: 'extend/component/deployment'
 redirect_from:
   - /extend/docker/tutorial/automated-build/

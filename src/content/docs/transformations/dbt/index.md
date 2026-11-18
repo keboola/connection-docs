@@ -1,5 +1,6 @@
 ---
 title: dbt Transformation
+lastUpdated: 2026-06-22
 slug: 'transformations/dbt'
 ---
 

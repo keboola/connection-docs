@@ -1,5 +1,6 @@
 ---
 title: Criteo
+lastUpdated: 2026-06-19
 slug: 'components/extractors/marketing-sales/criteo'
 redirect_from:
     - /extractors/marketing-sales/criteo/

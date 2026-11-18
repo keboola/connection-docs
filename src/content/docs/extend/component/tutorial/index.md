@@ -1,5 +1,6 @@
 ---
 title: Component Quick Start
+lastUpdated: 2026-08-04
 slug: 'extend/component/tutorial'
 redirect_from:
     - /extend/docker/quick-start/
