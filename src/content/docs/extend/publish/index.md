@@ -1,6 +1,6 @@
 ---
 title: Publish Component
-description: As described in the architecture overview, Keboola consists of many different components.
+description: 'Only components published in the Keboola Component List are generally available, and the list is managed in the Developer Portal.'
 slug: 'extend/publish'
 redirect_from:
     - /extend/registration/checklist/

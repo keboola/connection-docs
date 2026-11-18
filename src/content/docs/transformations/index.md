@@ -1,6 +1,6 @@
 ---
 title: Transformations
-description: Go to our Getting Started tutorial to create your first transformation and learn how transformations are an integral part of the Keboola workflow.
+description: 'Transformations manipulate data in your project, and every transformation works on a copy of the data from Storage.'
 slug: 'transformations'
 redirect_from:
     - /manipulation/transformations/

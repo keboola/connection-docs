@@ -1,6 +1,6 @@
 ---
 title: Implementation Notes
-description: 'Good practices for writing component code — the conventions to follow across all components, and what a component must satisfy before it can be published.'
+description: 'Good practices for writing component code: the conventions to follow in every component, especially one you want to publish.'
 slug: 'extend/component/implementation'
 redirect_from:
     - /extend/docker/images/

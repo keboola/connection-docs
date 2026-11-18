@@ -1,6 +1,6 @@
 ---
 title: Buckets
-description: Buckets are containers for tables in Storage. They are further organized into the following two stages.
+description: 'Buckets are containers for tables in Storage, organized into two stages: in for input data and out for processed data.'
 slug: 'storage/buckets'
 ---
 

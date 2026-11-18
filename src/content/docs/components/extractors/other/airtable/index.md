@@ -1,6 +1,6 @@
 ---
 title: Airtable
-description: Airtable is an easy-to-use yet powerful database service that allows you to quickly create, organize, and collaborate on any project.
+description: 'Import data from Airtable, a database service for creating and organizing projects and collaborating on them.'
 slug: 'components/extractors/other/airtable'
 ---
 

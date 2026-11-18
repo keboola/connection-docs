@@ -1,6 +1,6 @@
 ---
 title: Development Branches
-description: If you already know how development branches work in general and want to create and start using your first branch, go to our Getting Started tutorial.
+description: 'Development branches let you change component configurations without interfering with running configurations or automated pipelines.'
 slug: 'components/branches'
 ---
 

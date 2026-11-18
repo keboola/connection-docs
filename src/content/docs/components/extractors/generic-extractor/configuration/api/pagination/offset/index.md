@@ -1,6 +1,6 @@
 ---
 title: Offset Scroller
-description: 'Page through an API by item offset, SQL style — the Offset scroller''s limit and offset parameters, and when to use it instead of page numbers.'
+description: 'Page through an API by item offset, SQL style, with the Offset scroller: its limit and offset parameters, and when to use it instead of page numbers.'
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/offset'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/offset/

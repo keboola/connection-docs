@@ -1,6 +1,6 @@
 ---
 title: Logging Specification
-description: There are two main, mutually exclusive, ways in which your component can display events Keboola end-users.
+description: 'Display events to Keboola end-users from your component, through standard output and standard error or a Graylog GELF logger.'
 slug: 'extend/common-interface/logging'
 ---
 

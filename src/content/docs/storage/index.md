@@ -1,6 +1,6 @@
 ---
 title: Storage
-description: See our Getting Started tutorial for instructions on how to use Storage.
+description: 'Storage is the central Keboola subsystem that stores your data and manages access to it, on top of Snowflake or BigQuery.'
 slug: 'storage'
 ---
 

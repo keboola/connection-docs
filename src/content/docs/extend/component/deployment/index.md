@@ -1,6 +1,6 @@
 ---
 title: Deployment
-description: If you created your component according to the tutorial, you already have a deployment pipeline set up.
+description: 'How a component''s deployment pipeline works: a build on every push, an image pushed to the registry on every tag, and alternative setups.'
 slug: 'extend/component/deployment'
 redirect_from:
   - /extend/docker/tutorial/automated-build/

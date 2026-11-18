@@ -1,6 +1,6 @@
 ---
 title: External Integrations
-description: "Keboola's external integration capabilities let you seamlessly extend the platform with your existing tools and workflows."
+description: 'Connect Keboola to the tools and workflows you already use, through the REST API, the MCP server or ready-made workflow platforms.'
 slug: 'external-integrations'
 ---
 

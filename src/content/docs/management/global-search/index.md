@@ -1,6 +1,6 @@
 ---
 title: Global Search
-description: Global Search is an enhancement of the existing search functionality within Keboola.
+description: 'Search for entities by name across all projects in your organization, including projects you have no direct access to.'
 slug: 'management/global-search'
 ---
 
