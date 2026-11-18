@@ -1,5 +1,6 @@
 ---
 title: /data/out/tables manifests with Native Types
+description: 'Output table manifest fields for Native Types, such as the schema field for typed columns, plus the dataTypeSupport levels, base types, and type conversions.'
 slug: 'extend/common-interface/manifest-files/out-tables-manifests-native-types'
 ---
 

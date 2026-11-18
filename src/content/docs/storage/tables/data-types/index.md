@@ -1,5 +1,6 @@
 ---
 title: Native Data Types
+description: 'Native data types carry each column''s data type from the source into Storage.'
 slug: 'storage/tables/data-types'
 ---
 

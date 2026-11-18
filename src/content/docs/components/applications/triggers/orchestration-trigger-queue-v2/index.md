@@ -1,5 +1,6 @@
 ---
 title: Orchestration Trigger
+description: 'Trigger Conditional or Legacy Flows from another Keboola project: how to authorize and configure the Orchestration Trigger application.'
 slug: 'components/applications/triggers/orchestration-trigger-queue-v2'
 ---
 

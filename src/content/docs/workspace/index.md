@@ -1,5 +1,6 @@
 ---
 title: Workspace
+description: 'What workspaces are for, connecting to one, loading and unloading data, their lifecycle, and using them to develop transformations or for analysis.'
 slug: 'workspace'
 redirect_from:
   - /transformations/sandbox/

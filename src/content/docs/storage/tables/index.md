@@ -1,5 +1,6 @@
 ---
 title: Tables
+description: 'Work with Storage tables: aliases, metadata, table and column descriptions, data types, primary keys, incremental loading, and truncating or deleting rows.'
 slug: 'storage/tables'
 ---
 
