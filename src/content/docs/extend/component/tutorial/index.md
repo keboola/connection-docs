@@ -100,7 +100,7 @@ you can create a component, the most convenient way is to use one of our templat
 pip install cookiecutter
 ```
 
-<!-- VERIFY(owner): cookiecutter prompts verified against keboola/cookiecutter-python-component cookiecutter.json, 2026-09-02. template_variant is now __template_variant (computed, not prompted); component_short_description and component_long_description no longer exist as prompts. -->
+<!-- Source: cookiecutter prompts verified against keboola/cookiecutter-python-component cookiecutter.json, 2026-09-02, re-checked 2026-11-18 at 169a4d1. template_variant is now __template_variant (computed, not prompted); component_short_description and component_long_description no longer exist as prompts. -->
 **Usage**
 
 1. Run ```bash
@@ -113,8 +113,8 @@ cookiecutter gh:keboola/cookiecutter-python-component```
     - `repository_folder_name` - (OPT) Name of the destination folder. By default `component-<normalized component name>`.
 
     Short and long descriptions are not prompted for — edit `component_config/component_short_description.md` and `component_config/component_long_description.md` in the generated repository.
-3. Set up CI environment variables (see [CI Setup](#ci-setup) below)
-4. Navigate to newly created folder and run `git push`. The CI pipeline (action) should be now executed. If you add a tag to the commit, component will be pushed to your Developer Portal.
+3. Set up the CI secrets and variables (see [CI Setup](#ci-setup) below)
+4. Navigate to newly created folder and push the `main` branch (`git push -u origin main`). This does not start the CI pipeline: the workflow ignores pushes to `main`. To build and deploy, tag the commit on `main` with a version number without a `v` prefix and push the tag, for example `git tag 0.1.0 && git push origin 0.1.0`. The component is deployed to your Developer Portal only for an `X.Y.Z` tag on the default branch; pushes to any other branch run the pipeline without the deploy step.
 5. Modify the code in `src/component.py` and `src/configuration.py` as you like.
     - You can set the configuration parameters in `data/config.json`
     - You can execute the component via normal local environment without docker installed.
@@ -123,17 +123,18 @@ cookiecutter gh:keboola/cookiecutter-python-component```
  More information on the template [here](https://github.com/keboola/cookiecutter-python-component)
    
 ## CI Setup
- - Bitbucket: Enable [pipelines](https://confluence.atlassian.com/bitbucket/get-started-with-bitbucket-pipelines-792298921.html) in the repository.
-    - For Github: Check that the [workflows are enabled](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow).
-      The actions are present in `.github/workflows/` folder. 
- - Set `KBC_DEVELOPERPORTAL_APP` env variable (dev portal app id)
+ - Check that the GitHub [workflows are enabled](https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow).
+   The workflow is `.github/workflows/push.yml`; it calls the shared [keboola/component-ci](https://github.com/keboola/component-ci) pipeline.
+ - The component ID and vendor need no setup: `push.yml` already passes them to the pipeline as the `app_id` (`<vendor>.<component ID>`) and `vendor` inputs, filled in from the `dev_portal_vendor_name` and `dev_portal_component_id` you entered above.
  
- In case it is not set on the account level, set also other required dev portal env variables:
+ In the repository settings (**Settings** > **Secrets and variables** > **Actions**), set:
  
- - `KBC_DEVELOPERPORTAL_PASSWORD` - service account password
- - `KBC_DEVELOPERPORTAL_USERNAME` - service account username
- - `KBC_DEVELOPERPORTAL_VENDOR` - dev portal vendor
- - `KBC_STORAGE_TOKEN` - (optional) in case you wish to run KBC automated tests
+ - `KBC_DEVELOPERPORTAL_USERNAME` - a variable with the service account username
+ - `KBC_DEVELOPERPORTAL_PASSWORD` - a secret with the service account password
+ - `DOCKERHUB_USER` and `DOCKERHUB_TOKEN` - secrets with a Docker Hub username and access token; the pipeline logs in to Docker Hub before it pushes the image
+ - `KBC_STORAGE_TOKEN` - (optional) a secret, in case you wish to run KBC automated tests
+
+ `push.yml` hands these to the pipeline with `secrets: inherit`, which works only for repositories in the `keboola` GitHub organization. In any other organization, list the secrets explicitly under `secrets:` and pass the username as the `kbc_developerportal_username` input instead of the variable, as shown in the "External vendors" section of the [component-ci README](https://github.com/keboola/component-ci).
 
 [https://github.com/keboola/cookiecutter-python-component](https://github.com/keboola/cookiecutter-python-component)
 
