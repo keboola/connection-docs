@@ -14,10 +14,16 @@
  * navigator.sendBeacon so the core signal isn't lost. Submissions POST to
  * /api/feedback. All styling lives in custom.css (no <style> here). The client
  * script (re)initialises on astro:page-load to survive view transitions.
+ *
+ * The thumb icons are Lucide's thumbs-up / thumbs-down (lucide.dev, ISC license,
+ * Copyright (c) Lucide Contributors).
  */
+
+// The page's Markdown file, so a feedback issue can link to its source.
+const { source = '' } = Astro.props as { source?: string };
 ---
 
-<section class="b-feedback" data-feedback hidden>
+<section class="b-feedback" data-feedback data-source={source} hidden>
   <p class="b-feedback-q">Was this page helpful?</p>
 
   <div class="b-feedback-buttons" data-fb-verdicts>
@@ -75,6 +81,11 @@
   <p class="b-feedback-thanks" data-fb-thanks role="status" tabindex="-1" hidden>
     Thank you for helping improve Keboola's documentation!
   </p>
+  <!-- Shown after a 👎 for missing information or an unsolved problem, when Kai
+       is available. Opens AskKaiDrawer through its kbc:ask-kai event. -->
+  <button type="button" class="b-feedback-kai" data-fb-kai hidden>
+    Ask Kai about this page
+  </button>
 </section>
 
 <script>
@@ -156,10 +167,14 @@
     const honeypot = root.querySelector<HTMLInputElement>('[data-fb-hp]')!;
     const submitBtn = root.querySelector<HTMLButtonElement>('[data-fb-submit]')!;
     const thanks = root.querySelector<HTMLElement>('[data-fb-thanks]')!;
+    const kaiBtn = root.querySelector<HTMLButtonElement>('[data-fb-kai]')!;
 
     let verdict: 'up' | 'down' | null = null;
     let reason = '';
     let submitted = false;
+    // What the last leave beacon reported, so a bfcache round trip without a
+    // change doesn't send (and log) the same vote again.
+    let beaconSent = '';
     // One id per widget. A thumb sent on pagehide and a later Submit (after a
     // Back restore from the bfcache) share it, so the two rows read as one.
     let sid = '';
@@ -188,6 +203,7 @@
         path: location.pathname,
         title: document.title,
         sid,
+        source: root.dataset.source ?? '',
         hp: honeypot.value,
         ...extra,
       });
@@ -204,6 +220,27 @@
       try {
         localStorage.setItem(storageKey(), '1');
       } catch {}
+      offerKai();
+    }
+
+    // The docs didn't answer the reader's question, so offer the assistant that
+    // might. Same availability gate as the drawer itself (AskKaiDrawer.astro).
+    function offerKai() {
+      if (verdict !== 'down' || (reason !== 'missing-info' && reason !== 'didnt-solve')) return;
+      let kai = false;
+      try {
+        kai = sessionStorage.getItem('kbc-kai-enabled') === 'true';
+      } catch {}
+      if (!kai) return;
+      // The reader's comment stays out of the question: the server scrubs
+      // secrets from it, this client-side prompt would not. They can paste
+      // what they need into Kai themselves.
+      const page = document.title.split(' | ')[0];
+      const question = `I was reading "${page}" (${location.pathname}) and didn't find what I needed. Can you help?`;
+      kaiBtn.hidden = false;
+      kaiBtn.addEventListener('click', () => {
+        document.dispatchEvent(new CustomEvent('kbc:ask-kai', { detail: { prefill: question } }));
+      });
     }
 
     function selectReason(value: string, optionEl: HTMLElement) {
@@ -280,6 +317,8 @@
     function flushOnLeave() {
       if (!verdict || submitted) return;
       submitted = true; // guard against double-send
+      if (beaconSent === `${verdict}|${reason}`) return;
+      beaconSent = `${verdict}|${reason}`;
       try {
         navigator.sendBeacon(
           `${apiBase}/api/feedback`,
@@ -293,11 +332,19 @@
     // the swap brings a fresh widget that registers its own pair. Without the
     // removal each navigation would leave a live listener behind holding this
     // closure's verdict, and they would all fire on the eventual unload.
+    // A Back restore from the bfcache brings the page back with the form still
+    // open, after pagehide already sent the thumb. Re-arm, so a verdict changed
+    // after the restore is sent too (same sid, so it replaces the earlier row).
+    function onPageShow(e: PageTransitionEvent) {
+      if (e.persisted && thanks.hidden) submitted = false;
+    }
     function onBeforeSwap() {
       flushOnLeave();
       window.removeEventListener('pagehide', flushOnLeave);
+      window.removeEventListener('pageshow', onPageShow);
     }
     window.addEventListener('pagehide', flushOnLeave);
+    window.addEventListener('pageshow', onPageShow);
     document.addEventListener('astro:before-swap', onBeforeSwap, { once: true });
   }
 

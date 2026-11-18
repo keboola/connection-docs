@@ -1,6 +1,7 @@
 ---
 title: Tableau TDE
 slug: 'components/writers/bi-tools/tableau'
+description: 'Write Keboola tables to Tableau TDE files with column types and filters, then download them or upload them to Tableau Server, Dropbox or Google Drive.'
 redirect_from:
     - /writers/bi-tools/tableau/
 ---
@@ -18,8 +19,11 @@ to be used together with [Tableau Desktop](https://www.tableau.com/products/desk
 together with [Tableau Online](https://www.tableau.com/products/cloud-bi) and also for larger data sets.
 Both approaches are interchangeable though.
 
-Our Getting Started tutorial will guide you through the process of [writing data
-from Keboola to Tableau](/tutorial/write/). You can also watch our [Tableau Integration Demo](https://www.youtube.com/watch?v=FS1nndJ0vyQ) on YouTube.
+New to data destination connectors? [Send a table to Google Sheets](/getting-started/write/) in
+Getting Started walks through the pattern on a simpler destination first. You can also watch our
+[Tableau Integration Demo](https://www.youtube.com/watch?v=FS1nndJ0vyQ) on YouTube.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **Tableau** connector.
