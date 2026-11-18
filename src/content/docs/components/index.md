@@ -1,7 +1,6 @@
 ---
 title: Components
 slug: 'components'
-description: 'How Keboola components and their configurations work, including release stages, creating a configuration, versions, rows, authorization and debug mode.'
 redirect_from:
     - /storage/configurations/
 ---
