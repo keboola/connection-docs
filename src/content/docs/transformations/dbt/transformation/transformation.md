@@ -21,6 +21,10 @@ The required connection parameters for your remote data warehouse vary depending
 
 First, you must define a repository by specifying the URL (ending with GIT) and entering the access credentials if required.
 
+For a private repository on GitHub, you can choose **Organization GitHub connection** instead of an access token or SSH key.
+dbt then clones the repository through your organization's GitHub App, and the configuration stores no credentials.
+An organization admin has to [connect the GitHub organization](/management/organization/#connect-github) first.
+
 ![](imgs/2776563898.png)
 
 After saving a configuration, click **Load Branches** to select the desired branch. Don't forget to click **Save**.
