@@ -66,7 +66,7 @@ Source data types are mapped to a destination using a **base type**. The current
 
 For detailed mappings, please refer to the [conversion table](https://developers.keboola.com/extend/common-interface/manifest-files/out-tables-manifests-native-types/#data-type-conversions). You can also view the extracted data types in the [storage table](/storage/tables/) detail.
 
-Because this list is deliberately small, when a component describes its output with base types, a source type that has no equivalent among them (for example `TIME`, `INTERVAL`, `UUID`, `BLOB`, `JSON`, arrays, or structs) arrives in Storage as `STRING`. Components that write the backend's own types instead are not limited in this way. Length, precision, and scale are only carried over when the source type actually holds them. If the source engine discards them, they cannot be reconstructed later. See [output data types in DuckDB transformations](/transformations/duckdb/#output-data-types) for a concrete example of both cases.
+When a component describes its output with base types, a source type that has none of them as an equivalent (for example `TIME`, `INTERVAL`, `UUID`, `BLOB`, `JSON`, arrays, or structs) has to be mapped to one; the DuckDB transformation maps all of these to `STRING`. Length, precision, and scale are carried over only when the source type holds them. If the source engine discards them, they cannot be reconstructed later. See [output data types in DuckDB transformations](/transformations/duckdb/#output-data-types) for a concrete example of both cases.
 
 ### How to Define Data Types
 
@@ -113,10 +113,10 @@ You **cannot change the type of a column in a typed table once it has been creat
 **Important:** Always verify other configurations that depend on the table to avoid schema mismatches. Also, pay special attention to writers (data destination connectors), particularly if the table already exists in the destination system. Mismatched schemas between the source and destination can lead to errors.
 :::
 
-#### Widening a text column
+#### Widening a Text Column
 You can increase the length of a text column (`VARCHAR` on Snowflake, `STRING(n)` on BigQuery) in place. When a Snowflake transformation redefines an existing column with a longer length, for example `VARCHAR(2)` as `VARCHAR(50)`, Storage widens the column and the load succeeds. Only the column's metadata changes, so the existing rows stay, in full and incremental loads alike. The column's type still cannot change this way.
 
-<!-- VERIFY(Storage owner): that the load path widens the column (not only the column definition endpoint), for full and incremental loads, and on BigQuery too. Reproduced by a customer on production Snowflake; the widen-only rule is in php-table-backend-utils (SnowflakeTableQueryBuilder, CANNOT_DECREASE_LENGTH), the load path is not in public code. -->
+<!-- VERIFY(Storage owner): that the load path widens the column (not only the column definition endpoint), for full and incremental loads, and on BigQuery transformations too; and whether a load that declares STRING with no length (as the DuckDB transformation does) widens a typed VARCHAR(n) column to full width or fails, which decides whether the DuckDB page's create-it-typed-first tip holds. Reproduced by a customer on production Snowflake; the widen-only rule is in php-table-backend-utils (SnowflakeTableQueryBuilder, CANNOT_DECREASE_LENGTH), the load path is not in public code. -->
 
 :::caution
 Widening is one-way. Once a column is `VARCHAR(50)`, a load that declares it as `VARCHAR(2)` fails, because Storage cannot decrease a column's length.

@@ -156,7 +156,7 @@ When a transformation finishes, the component reads the schema of each output ta
 | `TIMESTAMP`, `TIMESTAMP WITH TIME ZONE` | `TIMESTAMP` | Storage default precision (`TIMESTAMP_NTZ(9)` on Snowflake) |
 | `TIMESTAMP_S`, `TIMESTAMP_MS`, `TIMESTAMP_NS` | `TIMESTAMP` | Precision `0`, `3`, and `9` respectively |
 | `VARCHAR`, `CHAR`, `BPCHAR`, `TEXT`, `STRING` | `STRING` | Length is not carried over, see below |
-| Everything else, including `FLOAT`/`REAL`, `TIME`, `INTERVAL`, `UUID`, `BLOB`, `JSON`, arrays, `STRUCT`, `MAP`, `ENUM` | `STRING` | |
+| Everything else, including `FLOAT`/`REAL`, `TIME`, `INTERVAL`, `UUID`, `BLOB`, `JSON`, arrays, `STRUCT`, `MAP`, `ENUM` | `STRING` | Arrays of a parameterized type are the exception, see the caution below |
 
 ### Types with no Keboola equivalent become strings
 
