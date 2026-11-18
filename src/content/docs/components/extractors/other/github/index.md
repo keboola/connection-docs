@@ -8,8 +8,7 @@ redirect_from:
 
 
 
-The GitHub data source connector uses the [GitHub API](https://developer.github.com/v3/) to import data from [GitHub](https://github.com/)
-to Keboola.
+The connector calls the [GitHub API](https://developer.github.com/v3/).
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

@@ -8,7 +8,7 @@ redirect_from:
 
 
 
-This data source connector uses the [Stripe API](https://stripe.com/docs/api) to import almost all data from [Stripe](https://stripe.com/).
+The connector calls the [Stripe API](https://stripe.com/docs/api).
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

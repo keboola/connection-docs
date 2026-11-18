@@ -8,9 +8,7 @@ redirect_from:
 
 
 
-This data source connector helps you import data from [Pingdom](https://www.pingdom.com/).
-
-Pingdom is a service for monitoring the uptime and performance of your servers, websites, and web applications.
+[Pingdom](https://www.pingdom.com/) is a service for monitoring the uptime and performance of your servers, websites, and web applications.
 
 ## Create a New Application API Key
 Before you can start configuring your Pingdom connector, you must obtain an application key. To do that, log in to your account on the [Pingdom](https://www.pingdom.com/) site.

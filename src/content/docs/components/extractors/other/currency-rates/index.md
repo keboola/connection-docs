@@ -8,10 +8,7 @@ redirect_from:
 
 
 
-This data source connector uses the [Fixer API](https://fixer.io/documentation) to download currency exchange rates as published by 
-the European Central Bank (ECB).
-
-The exchange rates are available from a base currency to 42 destination currencies for all **working days** from 4th January 1999. 
+The connector calls the [Fixer API](https://fixer.io/documentation) for the rates the European Central Bank (ECB) publishes.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

@@ -8,8 +8,7 @@ redirect_from:
 
 
 
-The Slack data source connector uses the [Slack API](https://api.slack.com/methods) to fetch data from [Slack](https://slack.com/)
-and to bring it to Keboola.
+The connector calls the [Slack API](https://api.slack.com/methods).
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

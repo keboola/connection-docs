@@ -6,9 +6,10 @@ description: 'Fetch rows from Azure Table storage or the Cosmos DB Table API wit
 
 
 
-The Azure Storage Table data source connector allows you to fetch data from the
-- [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) or the
-- [Azure Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
+The connector reads from either of these services:
+
+- [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables)
+- [Azure Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction)
 
 If you want to use
 - the [Cosmos DB Mongo DB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction), use the [MongoDB data source connector](/components/extractors/database/mongodb/).

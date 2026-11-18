@@ -8,7 +8,7 @@ redirect_from:
 
 
 
-This data source connector uses the [Time Doctor 2 API](https://api2.timedoctor.com/) to import data from Time Doctor 2.
+The connector calls the [Time Doctor 2 API](https://api2.timedoctor.com/).
 
 <!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

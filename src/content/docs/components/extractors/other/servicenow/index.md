@@ -8,7 +8,7 @@ redirect_from:
 
 
 
-This data source connector fetches data from ServiceNow tables. It supports backfill mode and also incremental fetching.
+The ServiceNow user you connect with needs roles that can read the tables you want to fetch.
 
 <!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

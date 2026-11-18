@@ -8,7 +8,7 @@ redirect_from:
 
 
 
-The Gmail Messages data source connector allows you to fetch data from your Gmail account.
+Setting it up takes two steps: authorize the Gmail account, then write the queries that pick the messages. The connector stores what it finds in four tables: queries, messages, headers and parts.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

@@ -8,7 +8,7 @@ redirect_from:
 
 
 
-The Microsoft Outlook extractor for Office 365 is based on IMAP. It allows you to download emails and their attachments from Office 365 accounts.
+The IMAP settings connect to one mailbox, and each configuration row picks which emails to download and whether to keep their content, their attachments or both.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 

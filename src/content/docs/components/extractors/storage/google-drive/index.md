@@ -9,8 +9,7 @@ redirect_from:
 
 
 
-This data source connector loads sheets from Google Drive Sheets and stores them as tables in a bucket in your
-current project.
+Each sheet you select lands as its own table in one bucket of the current project.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
