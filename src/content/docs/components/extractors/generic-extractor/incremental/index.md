@@ -1,6 +1,5 @@
 ---
 title: Incremental Loading
-description: 'Fetch only new or changed records with Generic Extractor, using incremental output into Storage and the saved config state, to cut run time, API load and credits.'
 slug: 'components/extractors/generic-extractor/incremental'
 redirect_from:
     - /extend/generic-extractor/incremental/

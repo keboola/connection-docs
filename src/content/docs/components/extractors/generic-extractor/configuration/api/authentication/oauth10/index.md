@@ -1,6 +1,5 @@
 ---
 title: OAuth 1.0 Authentication
-description: 'The OAuth 1.0 settings for Generic Extractor: the credentials the method expects and how the request signature is assembled.'
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth10'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth10/

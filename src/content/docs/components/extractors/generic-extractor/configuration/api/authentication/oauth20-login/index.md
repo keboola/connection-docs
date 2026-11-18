@@ -1,6 +1,5 @@
 ---
 title: Login Using OAuth 2.0 Authentication
-description: 'The OAuth 2.0 Login settings for Generic Extractor: a one-time login request returns temporary credentials that sign the later requests.'
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth20-login'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth20-login/

@@ -1,6 +1,5 @@
 ---
 title: Database Data Source Connectors
-description: Data source connectors import and integrate data from external sources into the Keboola environment.
 slug: 'components/extractors/database'
 redirect_from:
   - /extractors/database/

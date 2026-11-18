@@ -1,6 +1,5 @@
 ---
 title: Publish Generic Extractor
-description: It is possible to publish a Generic Extractor configuration as a completely separate component.
 slug: 'components/extractors/generic-extractor/publish'
 redirect_from:
     - /extend/generic-extractor/publish/

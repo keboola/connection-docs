@@ -1,6 +1,5 @@
 ---
 title: dbt Cloud Job Trigger
-description: The dbt Cloud Job Trigger is used for triggering dbt Cloud jobs.
 slug: 'components/applications/triggers/dbt-cloud-job-trigger'
 ---
 
