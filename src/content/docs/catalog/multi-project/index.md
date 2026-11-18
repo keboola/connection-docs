@@ -26,7 +26,7 @@ analyzing and writing data. The projects structure can follow the organization s
 anything else really.
 
 :::tip
-This page explains the concept with a worked example. For a guided walkthrough of *when and how* to adopt it for your organization, see the [Multi-Project Architecture Guide](/tutorial/onboarding/architecture-guide/).
+This page explains the concept with a worked example. For a guided walkthrough of *when and how* to adopt it for your organization, see the [Multi-Project Architecture Guide](/overview/onboarding/architecture-guide/).
 :::
 
 ## Example Scenario

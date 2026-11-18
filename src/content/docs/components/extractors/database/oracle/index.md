@@ -1,11 +1,12 @@
 ---
 title: Oracle
 slug: 'components/extractors/database/oracle'
+description: 'The Oracle connector syncs data from an Oracle database into Keboola with queries, supports timestamp-based CDC and is set up like other database connectors.'
 ---
 
 
 
-Use the Oracle connector to sync data from an Oracle database into Keboola by running queries against it. Its setup matches the other [database connectors](/components/extractors/database/); the shared steps are in [Initial setup](/components/extractors/database/sqldb/#initial-setup).
+Keboola reads Oracle with a query-based connector. The log-based CDC connectors cover MySQL and PostgreSQL only; [Database Data Source Connectors](/components/extractors/database/) compares the two approaches.
 
 ## Query-Based connector
 
@@ -15,6 +16,6 @@ It is the simplest approach suitable for most use cases and allows for  [time-st
 They are all [configured](/components/extractors/database/sqldb/#initial-setup) in the same way and 
 have an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). 
 
-Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/). 
+Their basic configuration is also part of [Load from a database](/getting-started/load/database/) in Getting Started.
 
 

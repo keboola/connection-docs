@@ -1,0 +1,330 @@
+---
+title: 'Build an app'
+slug: 'getting-started/app'
+description: 'Turn the staffing outlook into a shareable grid app, six cafés by seven days with the short-handed cells in red, described to Kai in one prompt and published from the builder.'
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import PageMeta from '../../../../components/getting-started/PageMeta.astro';
+import Prereqs from '../../../../components/Prereqs.astro';
+import PathIntro from '../../../../components/getting-started/PathIntro.astro';
+import CourseLine from '../../../../components/getting-started/CourseLine.astro';
+import FlowStrip from '../../../../components/getting-started/FlowStrip.astro';
+
+<PageMeta genre="Tutorial" />
+
+<CourseLine current="app" />
+
+A chat answer reaches only the person who asked. The manager of the Brno café wants to glance at
+next week on Monday morning and see which day is red.
+
+{/* Tutorial-type page. The flow as it runs now, 2026-10-01 in Free Plan project 6375 (us-east4,
+BigQuery), with the prompt below word for word and a read-only watcher on the Storage API: an
+empty project's Apps page is the builder itself (no Create App click); with an app in the project
+the list's button reads "Create app". On send the builder created a "New App" configuration at
+once, renamed it "Staffing Outlook" 45 s later, created a draft configuration, seeded its Git
+branch, booted the preview container, and wrote and pushed the code, with no approval card. The
+chat ended "Draft ready / Not live yet" with a Deploy button and the chips "Publish to
+production" and "Make changes...". The first preview had the right grid but no red cells while
+Kai's summary claimed three (short_handed reached the app as "1" or an empty string); one message
+fixed it. Publishing merged the draft into main and brought the page's first two approval cards
+(storage access for the production app, then the deploy); the app came up Active (Python / JS,
+XSmall, sleep 15 minutes, Basic (Password)) and the draft was deleted without a card. The
+builder's chat printed its Git remote with a credential in it during "Seed draft branch": keep
+that step out of any screenshot.
+
+Before that, in project 264 (2026-09-09 to 09-23), publishing never produced an Active app: the
+generated app had no keboola-config/nginx/, and the managed Git credentials expired. The CLI /
+API tab dates from 2026-09-15: `data-app list` and `deploy --wait` ran against 264 (kbagent
+v0.93.1); `start`, `logs` and `password` come from the command reference and have not been run
+here. The full history, with the run IDs for the Apps team, is in notes/getting-started/DECISIONS.md
+(2026-10-26). */}
+
+<Prereqs needs={['project']} tabs={3}>
+  <span slot="from"><code>staffing_outlook</code> exists in Storage.</span>
+  <span slot="to">the grid as a private draft you can open and refine and, if you publish it, an app at its own URL behind a password.</span>
+  <li>
+    <strong>Apps in the project's navigation.</strong> No Apps there? Skip this
+    page; the flow on the next page does not need the app.
+  </li>
+  <li>
+    <strong>A table to build from:</strong> <code>staffing_outlook</code> from{' '}
+    <a href="/getting-started/transform/">Transform data</a>, or any table of yours with a few
+    numeric columns. The note below says what to adapt.
+  </li>
+  <span slot="prompt">
+    Kai, from <strong>Apps</strong> (<strong>Create app</strong> once the project has an app), on supported stacks. A new Free
+    Plan project has it from the start; elsewhere an organization admin switches it on once: see
+    <a href="/kai/getting-started/">Get started with Kai</a>.
+  </span>
+  <span slot="ui">
+    a Git repository and your own Streamlit or Python/JS code. The UI tab points to where that is
+    covered.
+  </span>
+  <span slot="cli">
+    <a href="/cli/getting-started/">kbagent</a>, connected with write access, and the app you built
+    on the Prompt tab.
+  </span>
+</Prereqs>
+
+<PathIntro tabs={3} manual={false} approvals={false} yours="deciding who gets the URL and the password" />
+
+{/* Closed 2026-10-01: the Free Plan includes data apps. In Free Plan project 6375 the builder made
+the draft, Publish to production deployed it, and the app came up Active. The box keeps the skip
+line for projects whose navigation has no Apps. approvals={false} because the PathIntro line says
+Kai asks before each change, which the builder does not: the steps below say when it asks. */}
+
+<details>
+<summary>Arriving from the Apps announcement, with a table of your own?</summary>
+
+The prompt below names this guide's table *and its columns*, so with a table of your own you adapt
+both, and the checks further down describe our data rather than yours. If you would rather start
+from nothing, [Build your first app with Kai](/data-apps/getting-started/) does that without a
+tutorial dataset.
+
+</details>
+
+## What an app is
+
+<FlowStrip steps="A table in Storage|A small web app that runs inside Keboola and reads it|A URL you send to whoever you choose" label="What an app is" />
+
+A grid, a dashboard or an explorer. Like everything else in this guide it is a component, so it can
+sit in a flow; the [Apps section](/data-apps/) covers it in full.
+
+## Set it up
+
+<Tabs syncKey="howto">
+<TabItem label="Prompt">
+
+Describing an app is a one-paragraph job, and the Apps section has Kai wired in as the primary way
+to build one ([Build your first app with Kai](/data-apps/getting-started/)).
+
+1. Open **Apps** in the navigation. In a project with no apps yet, that page is the builder itself:
+   **Build web apps from your Keboola data** and a field that says *Describe what you want to
+   build...*. Once the project has an app, the page lists it, with a **Create app** button for the
+   next one. The ways to bring your own code sit below the field; the **UI** tab says where they
+   are covered.
+
+2. Describe the app and send it:
+
+   ```text title="Prompt" wrap
+   Build a data app from the table out.c-Boolabean-staffing-outlook.staffing_outlook. Show one grid: a row per café (store_name and city) and a column per forecast date, in date order. Each cell shows expected_units_per_person as the big number, with the weekday, forecast_temp_c and forecast_rain_mm in small text underneath. Colour a cell red when short_handed is true and leave the other cells neutral. Above the grid, one caption line: how many café-days in the table are short-handed. No filters, no other charts, no sidebar.
+   ```
+
+   Saying what *not* to build is half the prompt: left to itself Kai adds filters and a second
+   chart. Kai also names the app, *Staffing Outlook* in our run; the **Apps** list shows what it
+   called yours.
+
+3. Kai builds a **draft** of the app without asking first: it creates the app, writes the code and
+   starts a live preview, and nothing is published until you say so. The builder shows the chat on
+   the left and **Preview** and **Code** on the right; when it is done, the chat ends with **Draft
+   ready**, *Not live yet*. Expect about five minutes to a grid you can look at. Not what you
+   wanted? Say so in the same chat, and the draft updates.
+
+   ![Screenshot - The Apps builder right after the prompt is sent: the prompt in the chat on the left with Kai thinking, and on the right a New App with Preview and Code tabs and an empty pane that says the app will appear there](/getting-started/app/kai-builder.png)
+
+4. Check the preview itself: six rows, seven columns, one big number per cell, red where `short_handed` is true, and the caption's count matching the red cells. If it
+   does not match, say so in the same chat; the draft updates in place. In our Free Plan run the
+   first preview had no red cells and a caption saying none were short-handed, while Kai's summary
+   said three; one message in the same chat, naming the three rows, fixed it (the fold under
+   **If it goes wrong** has one to copy). Ours, on a week with three red days:
+
+   ![Screenshot - The grid in the draft preview: six cafés by seven days from 1 to 7 October, three red cells (Vinohrady on Thursday, Zelný trh on Monday and Tuesday) under the caption 3 short-handed café-days in this outlook](/getting-started/app/grid-preview.png)
+
+   Weather data by [Open-Meteo.com](https://open-meteo.com/) ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)).
+
+   {/* Draft preview iframe captured 2026-10-01 in Free Plan project 6375 at 2x, after the
+   one-message fix; replaces the 264 capture of 2026-09-14 (two red cells, another week). Same week
+   as the run's other screenshots. */}
+
+5. **Optional, to share it:** first ask Kai in the same chat to put Open-Meteo's credit in the
+   app, since the grid's numbers come from their forecast:
+
+   ```text title="Prompt" wrap
+   Under the grid, add the line "Weather data by Open-Meteo.com (CC BY 4.0)", with Open-Meteo.com linking to https://open-meteo.com/ and CC BY 4.0 linking to https://creativecommons.org/licenses/by/4.0/.
+   ```
+
+   Then click **Publish to Production** in the builder, the step the Apps pages describe in
+   [Publish to production](/data-apps/getting-started/#step-5--publish-to-production). If the
+   builder shows only **Deploy** there, send `Publish to production` in the chat instead: in our
+   Free Plan run that was one of Kai's *What's next?* suggestions, and picking it published the
+   app. Kai moves the draft's code into the app and asks twice, the first approvals on this page:
+   once to give the published app access to Storage, and once to deploy it. A few minutes later the
+   app's own page (**Apps**, then the app) says **Active** and offers **Open**: a dialog with the
+   app's address, its password and an **Open app** button
+   ([App actions](/data-apps/reference/#app-actions)). The grid sits behind the password from the
+   app's **Authentication** setting, **Basic (Password)** by default. This worked in our Free Plan
+   project; in an older project of ours the deploy failed, and **If it goes wrong** below has the
+   reasons. The draft preview is enough to finish the page. To remove the app later, open **More
+   actions** (**⋮**) on its page and pick **Delete app**.
+
+   {/* VERIFY(Nikita): main's Apps page (data-apps/getting-started, verified 2026-10-07) and its
+   builder screenshot show a Publish to Production button, and the 6375 run published through the
+   What's next? chip of that name. In the 2026-10-08 run (Free Plan project 6425) the builder showed
+   Deploy in its header and on the Draft ready card, the chips had no Publish to production, and
+   Kai's recap in the Kai Agent chat said "Click Deploy in the app's Builder to publish it". Not yet
+   run: typing "Publish to production" in the chat rather than picking the chip, what that Deploy
+   does, and the credit prompt above. */}
+
+**Check:** the draft preview (or the app itself, through **Open**, once deployed) shows the grid, and its caption's
+count equals both the number of red cells and the number of rows where `short_handed` is true in
+Storage. The count moves with the forecast. The sample's history is one summer, so a week under
+18 °C has no red cells at all, and on cold, dry days most cafés have no figure to show; that is the
+right answer for such a week, and the fold on red cells below says how to test the colouring
+anyway.
+
+While the builder chat is open, also ask Kai:
+`Does this app read staffing_outlook on every request, or only when it starts?` The weekly flow on
+the next page rebuilds the table but does not restart the app. Ours reads it on every request. An
+app that reads it only when it starts still shows a new week once it has slept and started again.
+To be sure, ask Kai in the same chat to make yours read the table on every request. If the app is
+already published, click **Publish to Production** again so the live app gets the change.
+
+</TabItem>
+<TabItem label="UI">
+
+Building an app by hand means a Git repository and your own Streamlit or Python/JS code, a real
+development workflow rather than a form. It has its own pages:
+[create an app manually](/data-apps/getting-started/#create-an-app-manually) for the UI flow, and
+[Build locally](/data-apps/build-locally/) for the repo-based workflow. Finish the guide with the
+**Prompt** tab first; come back when the app you want is one the description field cannot hold.
+
+</TabItem>
+<TabItem label="CLI / API">
+
+The app itself is written by Kai in the builder. No command turns a paragraph into a grid.
+What `kbagent` does is the part you repeat: listing apps, deploying the version Storage
+holds, waking one that has gone to sleep, and reading its log when it will not start.
+
+```bash
+kbagent data-app list --project docs-demo
+```
+
+That prints each app with its numeric **app ID**, its state and its URL. `kbagent data-app detail
+--project docs-demo --app-id <app-id>` adds the Storage **configuration ID**, a different
+identifier.
+
+With the app ID, a deploy of the latest saved configuration is one command:
+
+```bash
+kbagent data-app deploy --project docs-demo --app-id <app-id> --wait
+```
+
+`--wait` blocks until the container is running or the deploy fails.
+
+Four more worth knowing:
+
+```bash
+kbagent data-app start --project docs-demo --app-id <app-id>
+```
+
+```bash
+kbagent data-app logs --project docs-demo --app-id <app-id>
+```
+
+```bash
+kbagent data-app runs --project docs-demo --app-id <app-id>
+```
+
+```bash
+kbagent data-app password --project docs-demo --app-id <app-id>
+```
+
+`start` wakes an app that auto-suspended, `logs` is the app's own output, `runs` lists each
+start with the container's startup log, which is where a failed deploy actually explains itself,
+and `password` prints the Basic-auth password for the URL, the one thing to keep out of a
+screenshot or a chat.
+
+</TabItem>
+</Tabs>
+
+## If it goes wrong
+
+<details>
+<summary>The grid is empty, or shows another table</summary>
+
+On a cold, dry day most cells have no figure by design: under 18 °C with no rain, five of the six
+cafés have no summer history to average ([Transform](/getting-started/transform/) explains). If the
+whole grid is empty or shows other data, the app is reading the wrong table. Give Kai the full
+table ID, `out.c-Boolabean-staffing-outlook.staffing_outlook`, in the same chat and let the draft
+update.
+
+</details>
+
+<details>
+<summary>The red cells do not match the caption</summary>
+
+Kai coloured on a threshold of its own instead of the `short_handed` column. Tell it to use the
+column; the transformation already decided what red means, and the app should not decide again.
+
+</details>
+
+<details>
+<summary>No cell is red, and the caption says none are short-handed</summary>
+
+If Storage has no rows where `short_handed` is true, the grid is right: a week under 18 °C flags
+nothing. If it has some, the app read the column wrong. In our Free Plan run it reached the app as
+`1` or an empty string rather than true or false, so nothing matched, while Kai's own summary in
+the chat still said three cells were red. Say what you see in the same chat, for example like this
+(ours also named the three rows):
+
+```text title="Prompt" wrap
+The preview shows no red cells, but staffing_outlook has rows where short_handed is true. Check how short_handed arrives in the app, then colour those cells red and make the caption count them.
+```
+
+In a week with nothing flagged you can still test the colouring: ask Kai in the same chat how the
+app reads `short_handed`. It should turn whatever arrives (in our run the text `1` or an empty
+string) into true or false before it colours a cell.
+
+</details>
+
+<details>
+<summary>The production deploy fails, and Terminal Logs says the app is not running</summary>
+
+The draft ran, so the code works; the production container did not come up. The job's own error is
+usually just *Internal Server Error occurred*, which says nothing. The reason is in the container's
+startup log: on the app's **All Runs** tab, open the failed run, or from a terminal run
+`kbagent data-app runs --project docs-demo --app-id <app-id>` (your project's alias, as in the CLI
+tab). Two causes have shown up in our older project, and neither is your grid (the same deploy
+worked in a new Free Plan project):
+
+- `App must have keboola-config/nginx/ directory`: the repository Kai wrote has no nginx
+  configuration, which a Python/JS app needs in production. The draft does not, because it runs in
+  dev mode.
+- `Authentication failed for https://git.<stack>/keboola/app-<id>.git` with *Credentials are
+  incorrect or have expired*: the app's managed Git credentials have expired, so the container
+  cannot clone its own code.
+
+One failed start is enough for the platform to disable the app, even though its page says it
+"failed to start automatically multiple times"; the page then offers **Start**. Since Kai built
+this app, open it in the builder and click **Fix with Kai**: Kai reads the logs and recent runs,
+tells you what it found before it changes anything, then deploys the fix and starts the app. By
+hand, [The app doesn't start](/data-apps/troubleshooting/#the-app-doesnt-start) has the fix for the
+missing nginx configuration, and [Sleeping and waking](/data-apps/troubleshooting/#sleeping-and-waking)
+how to start a disabled app again. For the expired credentials, redeploy; if it happens again,
+report it to [Support](/management/support/) with the job ID. The rest of the pipeline
+is unaffected: the table is rebuilt every week whether or not the app is up, and the draft
+preview still shows it.
+
+</details>
+
+<details>
+<summary>Nothing happens for a minute after you open the app</summary>
+
+It went to sleep. Apps stop after a while without visitors (**Auto Sleep** on the app's page; ours
+was set to fifteen minutes) and wake on the next request, which is the wait you are seeing. While
+it sleeps, the Apps list and the app's page say **Stopped**, and the page offers **Start**.
+
+</details>
+
+## Going further
+
+- [Publish and share](/data-apps/publish-and-share/): authentication options beyond the default
+  password, and who can reach the URL.
+- [Authentication](/data-apps/authentication/): who can open the app. **Basic (Password)** is the
+  default. Every other gate (OIDC with Auth0, Google Cloud, Microsoft Entra ID or Okta, or GitHub,
+  GitLab and JumpCloud) needs a client you register in that provider's own console, which neither
+  Kai nor `kbagent` does for you; `kbagent data-app create --auth` offers only `password` or
+  `public`.
+- [Build locally](/data-apps/build-locally/): the Git-based workflow once an app outgrows its
+  first description.

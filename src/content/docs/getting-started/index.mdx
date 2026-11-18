@@ -1,0 +1,152 @@
+---
+title: 'Getting started with Keboola'
+slug: 'getting-started'
+description: 'Build one working, scheduled pipeline: load six tables, join five of them with SQL, ask the result a question, turn it into an app, and have it rebuild itself every week.'
+redirect_from:
+  - /tutorial/
+---
+
+import PageMeta from '../../../components/getting-started/PageMeta.astro';
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import Prereqs from '../../../components/Prereqs.astro';
+import CourseLine from '../../../components/getting-started/CourseLine.astro';
+import FromTo from '../../../components/getting-started/FromTo.astro';
+
+<PageMeta genre="Tutorial" time="about 30 minutes with Kai, plus sign-up and reading" />
+
+Your data lives in more places than one: files, a spreadsheet someone keeps, an API, a database.
+Keboola is where you bring it together and shape it with SQL. Once you have a project, Kai, its AI
+assistant, can do the work from what you tell it in plain language: it loads your data, answers
+questions about it, and turns the answer into an app, asking for your approval along the way. The
+pipeline then reruns by itself every week. This guide does each of those once, on a small sample,
+so you can do them on your own data.
+
+<video autoplay loop muted playsinline poster="/getting-started/hub-explainer-poster.png" aria-label="How Keboola works, as four numbered dots on a line: your idea, tell Kai, Kai loads your data, Kai builds the app. Then a card beside the words Want to build: the app this guide builds, a grid of six cafés by seven days with three red cells, for an app like this one; a store dashboard switched to the last 12 months, for an interactive dashboard; and a café staffing planner at 31 °C on a Saturday, for a what-if simulator. Under them: Go through the guide and try it yourself.">
+  <source src="/getting-started/hub-explainer.mp4" type="video/mp4" />
+</video>
+
+The café grid in the clip uses weather data by [Open-Meteo.com](https://open-meteo.com/)
+([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)).
+
+{/* Hub order (2026-09-23) and the clip's render notes, previously here in full, moved to
+notes/getting-started/DECISIONS.md 2026-10-12 ("Hub authoring notes"). Clip: hub-explainer.mp4, notes/getting-started/DECISIONS.md 2026-10-07.
+VERIFY(Jordan): two decisions of 21 Aug, the clip in three acts and the question frame as its poster,
+changed with the clips since 2026-09-23; on 6 Oct he asked only for pace and content. */}
+
+<FromTo from="you have heard of Keboola and have nothing set up." to="a scheduled pipeline and an app, in a project you created or joined." />
+
+The sample is six cafés: five files (a summer of sales, the rosters, the weather) and next week's
+forecast from a public API that needs no account. The moves are the same on your own tables. Every
+step works toward one question: **Which day next week will leave a café short-handed?** By the
+fifth page a grid answers it, and every Monday the answer is rebuilt on the new forecast. The grid
+is one kind of app; Kai builds interactive dashboards and what-if simulators the same way, from a
+description you write ([What you can build](/data-apps/what-are-apps/#what-you-can-build)).
+
+<Prereqs needs={[]}>
+  <li>
+    <strong>An email address</strong> to create a free project on the first page, or an invite
+    to your company's project. A free project is enough.
+  </li>
+  <li>
+    <strong>A browser.</strong> Every step after the first also has a Prompt way and a terminal way;{' '}
+    <a href="#how-every-page-works">How every page works</a> says what those need.
+  </li>
+</Prereqs>
+
+{/* The box replaced a sentence on 2026-09-24 ("Everything here can be done in the browser with
+nothing installed; the command-line way on each page needs kbagent. A free project is enough to
+begin."), because Nikita asked for the concrete things a reader needs rather than prose about them.
+The three Free Plan questions that stood here are answered by the 2026-10-01 run in project 6375
+(us-east4): the Free Plan includes data apps (built, published and deployed), Kai is on its stack
+from the first login, and the weekly flow uses about three runtime minutes a run, which is why the
+schedule is weekly (automate/ has the box). The first item said the guide's Prompt path ran on
+a Free Plan project; since 2026-10-09 only project/'s Free Plan item says it (the UI and CLI tabs
+were not rerun there). The sentence used to say "covers all of it" and linked the wizard; it
+links Get a project now, so a reader meets the invite and SSO advice before a sign-up form.
+Fact-checker and guide-tester, 2026-09-23. */}
+
+## What you get
+
+<CourseLine layout="list" />
+
+Read the steps in order, or land on any one of them: each page says where you should be, what it
+needs, and how to tell it worked.
+
+## How every page works
+
+Every page with a task on it offers that task three ways:
+
+- **Prompt**: paste it into **Kai Agent**, the assistant in the project's top bar, and watch it build;
+  the app's prompt goes into the field on the **Apps** page instead.
+  [Create or join a project](/getting-started/project/#check-it-worked) says how to tell you have it,
+  and shows it at work.
+- **UI**: the same task click by click, to see where each setting lives.
+- **CLI / API**: the same task from a terminal with [kbagent](/cli/), with the raw request where
+  there is no command for it.
+
+Pick a tab once and every page after it opens on the same one:
+
+![Choosing the CLI / API tab on one page, then opening the next page in the guide, which is already showing its CLI / API tab](/getting-started/tab-sync.gif)
+
+Where one of the three cannot do the job (a signup form, a Google consent screen, a branch merge),
+the page says so rather than showing an empty tab.
+
+### Approvals and plan mode
+
+{/* Moved here from PathIntro.astro on 2026-09-29: the component printed this on every task page
+(179 words each, the block in David Esner's screenshot). Every page links here now. */}
+
+**In the chat, Kai asks before each change it makes:** an approval card shows exactly what it is
+about to write or run, with **Approve**, **Decline** and **Always allow**. Questions that only read
+do not ask, and neither do tools set to **Always allow**; a new account has two write tools set
+that way, both for apps. In the chat, an approval left unanswered for about five minutes counts as
+declined: Kai says so, and you ask it to try again. The Apps builder asks less: it builds a draft
+of the app, code and preview included, without asking, and when you publish it asks twice, once
+for the app's access to Storage and once to deploy it.
+
+<details>
+<summary>Fewer approvals, plan mode, and undoing a step</summary>
+
+- **If confirming each one gets tiring,** pre-approve tools in
+  [tool permissions](/kai/settings/#tool-permissions): the gear in the Kai panel, then **Tools**.
+- **Plan mode is a different thing.** With **Plan mode** from the **+** menu in the chat's message
+  field, Kai writes the steps down and asks you to approve the plan before it starts, and then
+  still asks for each change. Use it when you want to read the plan first, not to save clicks.
+- **Most of it can be undone.** If a step builds something other than the page describes, say so
+  in the same Kai chat, or edit the configuration by hand. Every configuration Kai creates or
+  changes keeps a **Versions** tab, and **Restore this version** on an earlier row takes it back;
+  **Delete configuration** removes one you do not want, into **Trash**. Restoring a version changes
+  the configuration only: tables a job already wrote stay as they are. The weekly schedule is a
+  configuration of its own, outside the flow's versions, and an app's versions record its
+  settings, not the code Kai wrote.
+
+  ![Screenshot - The Versions tab of the Boolabean sales configuration: one version per change Kai made, from Configuration created to the fifth row added, with the Restore this version tooltip on an earlier row](/getting-started/kai-undo-versions.png)
+
+</details>
+
+## Where to start instead
+
+This guide is the browser path, prompt first. Three others start from the same place:
+
+<CardGrid>
+<LinkCard title="kbagent CLI" href="/cli/getting-started/" description="The same operations from a terminal, scriptable and agent-friendly." />
+<LinkCard title="MCP server" href="/ai/mcp-server/" description="Connect your own AI assistant or IDE to a Keboola project." />
+<LinkCard title="Build your first app with Kai" href="/data-apps/getting-started/" description="Go straight to an app on data you already have." />
+</CardGrid>
+
+## Going further
+
+Optional side trips, none of them needed to finish the guide:
+
+- **[Send a table to Google Sheets](/getting-started/write/)**: the result where people read it.
+- **[Load from Google Sheets](/getting-started/load/googlesheets/)** or
+  **[from a database](/getting-started/load/database/)**: sources behind credentials.
+- **[Use a workspace](/getting-started/transform/workspace/)**: test SQL on a copy of the data first.
+- **[Ad-hoc data analysis](/getting-started/ad-hoc/)**: a Python or R notebook instead of a pipeline.
+- **[Development branches](/getting-started/branches/)**: change a running project safely.
+
+## If you are planning a rollout, not learning the tool
+
+This guide is for one person building one pipeline. For introducing Keboola to a team, with
+project architecture, a data model, naming conventions and governance, start with
+[Platform Onboarding](/overview/onboarding/) instead.
