@@ -6,15 +6,15 @@ redirect_from:
   - /tutorial/onboarding/governance-guide/
 ---
 
-Welcome to the Keboola Governance Guide! Here, we cover everything you need to know about managing and monitoring your use of our platform, 
+This guide covers everything you need to know about managing and monitoring your use of our platform, 
 including operating costs and adhering to security and other rules you've set in your [Keboola Platform Usage Blueprint](/overview/onboarding/usage-blueprint/).
 
 **If you have any questions or need further assistance, our support team is here for you.**
 
 
 
-## Understanding Platform Activity
-### Using Telemetry Data
+## Understanding platform activity
+### Using telemetry data
 Keboola collects metadata about every operation on the platform, including how components are set up, how users interact, and every job that runs.
 This metadata is processed into a user-friendly [telemetry data model](/components/extractors/other/telemetry-data). You can check it out via a special 
 connector called Telemetry Data.
@@ -29,7 +29,7 @@ Get in touch with our support team or your account manager. They'll switch on th
 The Activity Center add-on represents an advanced feature within the Telemetry Data connector for those who have it included in their contract. 
 It gives a deeper look into your data, showing **detailed metadata** about each component, like storage details, user **activities**, and **specifics regarding job** inputs and outputs. This extra detail is great for closely tracking your data's journey and advanced usage analysis.
 
-### Monitoring and Analysis
+### Monitoring and analysis
 You can quickly check basic usage stats on the **Project Consumption** page of your project dashboard, including:
 
 - Consumed credits
@@ -64,7 +64,7 @@ While certain metrics might need additional SQL queries, you can quickly get man
 
 With these custom metrics, you get a fuller picture of your platform's operation. You can make better decisions and manage resources more effectively.
 
-## Best Practices for Data Management
+## Best practices for data management
 
 Recognizing that the needs and requirements of individual organizations vary widely, the platform refrains from providing a one-size-fits-all solution. 
 Instead, it offers seamless integration with third-party data catalog and lineage visualization tools like Informatica, Collibra, DataHub, 
@@ -80,7 +80,7 @@ To make the most of your data management:
 By following these best practices, you can enhance your data management capabilities, integrate specialized tools as needed, and ensure that your organization's 
 unique requirements are met effectively.
 
-### Understanding Your Data's Journey
+### Understanding your data's journey
 To learn more about data lineage, check out our [blog post](https://www.keboola.com/blog/how-to-get-started-with-data-lineage).
 
 Keboola's telemetry data includes detailed tables about your data, such as table columns, descriptions, and data types. You can format this information to work

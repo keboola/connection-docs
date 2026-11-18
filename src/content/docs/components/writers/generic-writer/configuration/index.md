@@ -2,6 +2,7 @@
 title: Generic Writer Configuration
 description: This component allows you to write data to a specified endpoint in a specified format. It currently supports single table and single endpoint per configuration.
 slug: 'components/writers/generic-writer/configuration'
+description: 'Look up each Generic Writer parameter that sets the API URL and authentication, the request method and path, how table rows map to JSON, and dynamic functions.'
 redirect_from:
     - /extend/generic-writer/configuration/
 ---
@@ -17,6 +18,8 @@ The data can be sent in two ways:
    iterations specified in the input data. By default 1 row = 1 iteration. This allows to change the endpoint
    dynamically based on the input using placeholders: `www.example.com/api/user/[[id]]`. Or sending data with different
    user parameters that are present in the input table.
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ### Configuration parameters
 

@@ -2,6 +2,7 @@
 title: ThoughtSpot
 description: This data destination connector sends data to the ThoughtSpot platform.
 slug: 'components/writers/bi-tools/thoughtspot'
+description: 'Load Keboola tables into ThoughtSpot with database and SSH credentials, then set column types, the table type, and full or incremental load.'
 redirect_from:
     - /writers/bi-tools/thoughtspot/
 ---
@@ -9,6 +10,8 @@ redirect_from:
 
 
 This data destination connector sends data to the [ThoughtSpot](https://www.thoughtspot.com/product) platform.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **ThoughtSpot** data destination connector.

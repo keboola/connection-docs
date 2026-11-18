@@ -2,6 +2,7 @@
 title: YourPass
 description: 'Create and update mobile wallet passes in YourPass — boarding passes, loyalty cards, and tickets — from Keboola data.'
 slug: 'components/writers/other/yourpass'
+description: 'Create, update or delete YourPass mobile wallet passes from a Keboola table through the YourPass API, using your account credentials and the required columns.'
 redirect_from:
     - /writers/other/yourpass/
 ---
@@ -12,6 +13,8 @@ YourPass enables users to create passes for mobile wallets; e.g., for boarding p
 
 The YourPass data destination connector uses the [YourPass API](https://doc.yourpass.eu/) to
 create/delete/update [YourPass](https://www.yourpass.eu/) passes.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 

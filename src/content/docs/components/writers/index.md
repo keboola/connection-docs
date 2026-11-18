@@ -2,6 +2,7 @@
 title: Data Destination Connectors
 description: 'Data destination connectors deliver processed data out of Keboola into the systems where it gets used — what types exist and how to work with them.'
 slug: 'components/writers'
+description: 'Data destination connectors send data from Keboola to BI tools, databases, storage services and other systems; a configuration usually serves one destination.'
 redirect_from:
     - /writers/
 
@@ -9,6 +10,8 @@ redirect_from:
 
 Data destination connectors are [Keboola components](/overview/) that take transformed and processed **output data from Keboola**
 and deliver it **into its final destination:** the systems and applications where the data gets used/**consumed**.
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Types of Data Destination Connectors
 We integrate your data into most of the top market systems.

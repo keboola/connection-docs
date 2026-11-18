@@ -2,10 +2,15 @@
 title: Generic Writer Configuration Examples
 description: "This configuration sends the POST request to https://example.com/test/[[id]] where [[id]] is a column expected in the input table."
 slug: 'components/writers/generic-writer/configuration-examples'
+description: 'Copy sample Generic Writer configurations that iterate over rows, send batch events to Exponea, user events to Customer.io and notifications to Slack.'
 redirect_from:
     - /extend/generic-writer/configuration-examples/
 ---
 
+
+These sample [Generic Writer](/components/writers/generic-writer/) configurations show the JSON for four cases, and two of them also show an input table and the request it produces. [Generic Writer Configuration](/components/writers/generic-writer/configuration/) describes every option they use.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ### Configuration Example – Iterations
 

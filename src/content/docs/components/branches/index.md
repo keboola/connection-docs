@@ -37,7 +37,7 @@ with prefixed bucket names (like `in.c-1234-bucket`), each branch gets its own f
 Production data is never touched, and no data is copied up front — a copy is created only when you actually write to or modify a table within the branch.
 
 :::tip
-Branched Storage is available for projects running on <strong>Snowflake</strong>. If your project uses BigQuery, the classic prefix-based model still applies — Branched Storage support for BigQuery is coming.
+Branched Storage is available for projects running on <strong>Snowflake</strong> and <strong>BigQuery</strong>. Projects without Branched Storage enabled, and projects on other backends, use the classic prefix-based model.
 :::
 
 ### Why It Matters
@@ -77,7 +77,7 @@ When you delete or merge the branch, the branched storage is cleaned up accordin
 In production, you might have a data source connector that extracts data into a bucket `in.c-requests`, and a transformation
 that reads from it and writes results to `out.c-visits`.
 
-When you switch to a branch on a **Snowflake project with Branched Storage enabled**, no data is copied immediately.
+When you switch to a branch in a **project with Branched Storage enabled**, no data is copied immediately.
 The branch reads from production Storage until you run a job that writes data — at that point, only the affected tables
 are materialized in the branch's own storage. Your production `out.c-visits` remains untouched throughout.
 
@@ -110,7 +110,7 @@ Before you merge your development branch back to production, check a detailed [d
 You can end your branch's lifecycle in two ways:
 
 - **Deleting** — if you do not wish to use the changes you've made and want to simply discard them. The data associated with the branch is discarded when the branch is deleted.
-- [**Merging into production**](/getting-started/branches/merge-to-production/) — all changes in the configurations are brought back to the respective production configurations. All the changes are applied at once (after you approve them) and produce new [versions](/components/#configuration-versions) of the respective configurations. The branch can be either deleted or kept for further reference after merging. Projects with [**Branches 2.0**](/components/branches/merge-requests/) enabled merge through a [merge request](/components/branches/merge-requests/), which lets you review the configuration diff and, if the project requires it, collect approvals before the changes reach production.
+- [**Merging into production**](/getting-started/branches/merge-to-production/) — all changes in the configurations are brought back to the respective production configurations. All the changes are applied at once (after you approve them) and produce new [versions](/components/#configuration-versions) of the respective configurations. In the merge dialog, you choose whether to delete the branch or keep it for further reference after merging. Projects with [**Branches 2.0**](/components/branches/merge-requests/) enabled merge through a [merge request](/components/branches/merge-requests/), which lets you review the configuration diff and, if the project requires it, collect approvals before the changes reach production; a merged request always deletes the branch.
 
 ***Important:** All of this happens within the same project, enabling collaboration with other project members on the modifications.*
 
