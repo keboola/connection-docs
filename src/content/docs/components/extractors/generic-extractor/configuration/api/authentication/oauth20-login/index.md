@@ -9,7 +9,7 @@ redirect_from:
 
 
 **Note** that this configuration option is not yet supported and the test endpoint button will not work.
-<!-- VERIFY(Ondřej Popelka): this banner says the method is not yet supported, but PRDCT-377 (5e8e8307) argues it is implemented in keboola/generic-extractor. Confirm, then keep or drop the banner. The description stays neutral until then. -->
+<!-- VERIFY(Ondřej Popelka): this banner says the method is not yet supported, but keboola/generic-extractor may already implement it. Confirm, then keep or drop the banner, and update the page description to match. -->
 
 The OAuth Login method is useful when you need to send a one-time **login request** to obtain temporary credentials
 for authentication of all the other API requests. A sample OAuth Login authentication looks like this:
