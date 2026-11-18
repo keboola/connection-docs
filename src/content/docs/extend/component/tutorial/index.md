@@ -114,7 +114,7 @@ cookiecutter gh:keboola/cookiecutter-python-component```
 
     Short and long descriptions are not prompted for — edit `component_config/component_short_description.md` and `component_config/component_long_description.md` in the generated repository.
 3. Set up the CI secrets and variables (see [CI Setup](#ci-setup) below)
-4. Navigate to newly created folder and push the `main` branch (`git push -u origin main`). This does not start the CI pipeline: the workflow ignores pushes to `main`. To build and deploy, tag the commit on `main` with a version number without a `v` prefix and push the tag, for example `git tag 0.1.0 && git push origin 0.1.0`. The component is deployed to your Developer Portal only for an `X.Y.Z` tag on the default branch; pushes to any other branch run the pipeline without the deploy step.
+4. Navigate to the newly created folder. The template has already made a `git` repository on `main` with an initial commit; if you left `repository_url` empty, first add your GitHub repository as the remote (`git remote add origin <your repository URL>`). Push the `main` branch (`git push -u origin main`). This does not start the CI pipeline: the workflow ignores pushes to `main`. To build and deploy, tag the commit on `main` with a version number without a `v` prefix and push the tag after `main`, for example `git tag 0.1.0 && git push origin 0.1.0`. The component is deployed to your Developer Portal only for an `X.Y.Z` tag on the default branch; pushes to any other branch run the pipeline without the deploy step.
 5. Modify the code in `src/component.py` and `src/configuration.py` as you like.
     - You can set the configuration parameters in `data/config.json`
     - You can execute the component via normal local environment without docker installed.
@@ -127,12 +127,12 @@ cookiecutter gh:keboola/cookiecutter-python-component```
    The workflow is `.github/workflows/push.yml`; it calls the shared [keboola/component-ci](https://github.com/keboola/component-ci) pipeline.
  - The component ID and vendor need no setup: `push.yml` already passes them to the pipeline as the `app_id` (`<vendor>.<component ID>`) and `vendor` inputs, filled in from the `dev_portal_vendor_name` and `dev_portal_component_id` you entered above.
  
- In the repository settings (**Settings** > **Secrets and variables** > **Actions**), set:
+ Unless they are already set at the organization level, set the following in the repository settings (**Settings** > **Secrets and variables** > **Actions**). Repositories in the `keboola` GitHub organization get them from organization-level secrets and variables.
  
  - `KBC_DEVELOPERPORTAL_USERNAME` - a variable with the service account username
  - `KBC_DEVELOPERPORTAL_PASSWORD` - a secret with the service account password
  - `DOCKERHUB_USER` and `DOCKERHUB_TOKEN` - secrets with a Docker Hub username and access token; the pipeline logs in to Docker Hub before it pushes the image
- - `KBC_STORAGE_TOKEN` - (optional) a secret, in case you wish to run KBC automated tests
+ - `KBC_STORAGE_TOKEN` - (optional) a secret, in case you wish to run KBC automated tests; also add the test configuration IDs to `push.yml` as the `kbc_test_configs` input (space-separated)
 
  `push.yml` hands these to the pipeline with `secrets: inherit`, which works only for repositories in the `keboola` GitHub organization. In any other organization, list the secrets explicitly under `secrets:` and pass the username as the `kbc_developerportal_username` input instead of the variable, as shown in the "External vendors" section of the [component-ci README](https://github.com/keboola/component-ci).
 
