@@ -1,6 +1,7 @@
 ---
 title: PostgreSQL
 slug: 'components/extractors/database/postgresql'
+description: 'Sync PostgreSQL data into Keboola with the query-based connector or log-based CDC, including snapshots, publications, server setup and connector settings.'
 ---
 
 
@@ -21,7 +22,7 @@ It is the simplest approach suitable for most use cases and allows for [time-sta
 They are all [configured](/components/extractors/database/sqldb/#initial-setup) in the same way and 
 have an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). 
 
-Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/). 
+Their basic configuration is also part of [Load from a database](/getting-started/load/database/) in Getting Started.
 
 ## PostgreSQL Log-Based CDC
 

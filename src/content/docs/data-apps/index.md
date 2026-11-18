@@ -31,13 +31,15 @@ On both routes, a Python/JS app ends up in a Git repository, either one Keboola 
 
 ## Run and share
 
-Every app has its own settings page in **Apps**: who can open it ([Authentication](/data-apps/authentication/) — public, password, or your company SSO), its URL and how to [publish and share](/data-apps/publish-and-share/) it, and operational settings like backend size and auto-sleep ([Reference](/data-apps/reference/)). Deploying and redeploying is one click; logs are right on the app's detail. Once it's live, [Operate and update an app](/data-apps/operate/) covers the day-to-day work and [Troubleshooting](/data-apps/troubleshooting/) covers the days it goes wrong.
+Every app has its own settings page in **Apps**: who can open it ([Authentication](/data-apps/authentication/) — public, password, or your company SSO), its URL and how to [publish and share](/data-apps/publish-and-share/) it, and operational settings like backend size and auto-sleep ([Reference](/data-apps/reference/)). Deploying and redeploying is one click; logs are right on the app's detail. Once it's live, [Operate and update an app](/data-apps/operate/) covers the day-to-day work and [Troubleshooting](/data-apps/troubleshooting/) covers the days it goes wrong. To show each user of an app only the rows and columns they may read, see [Row- and column-level security](/storage/row-level-security/).
 
 ## Beyond dashboards
 
 Apps go far beyond dashboards — live data narratives, internal tools, configurators, even games. These three were built with Kai during Keboola's internal app competition; each turns real data into something interactive and genuinely useful, built the same way you'd build an everyday internal tool: describe what you want to Kai, on top of your Storage data.
 
-*The links below open real, running apps that sleep when idle — the first load may take a few seconds to wake.*
+*The links below open real, running apps. They sleep when idle, so the first load can take about a minute while the app wakes.*
+
+<!-- Checked 2026-10-06 and 2026-10-07 by polling each example until it answered 200: about 74 minutes after our last request, 24 s (Seasonal), 33 s (Color Season Analyzer) and 64 s (Flight Shockwave); about 22 hours after it, 27 s, 37 s and 62 s. -->
 
 ### Seasonal — when and where to travel
 

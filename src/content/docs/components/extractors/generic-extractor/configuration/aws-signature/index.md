@@ -1,6 +1,7 @@
 ---
 title: AWS Signature
 slug: 'components/extractors/generic-extractor/configuration/aws-signature'
+description: 'Sign Generic Extractor API requests with AWS Signature Version 4 using aws.signature credentials: accessKeyId, #secretKey, serviceName and regionName.'
 redirect_from:
     - /extend/generic-extractor/configuration/aws-signature/
 ---
