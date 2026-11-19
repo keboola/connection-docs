@@ -1,6 +1,6 @@
 ---
 title: Data Catalog
-description: 'How Keboola projects share Storage buckets through the Data Catalog: shared and linked buckets, datashare owners, sharing types and constraints.'
+description: 'Shared and linked buckets in the Keboola Data Catalog: how projects in one organization share Storage data, with sharing types, owners and constraints.'
 slug: 'catalog'
 redirect_from:
   - /storage/buckets/sharing/
@@ -8,17 +8,15 @@ redirect_from:
 
 
 
-The Data Catalog gives an overview of the data shared to and from your project: the buckets you share with other projects in your organization, and the buckets they share with you. To share or link a bucket, follow [Share and link buckets](/catalog/share-and-link/); for the pattern of splitting work across several projects, read [Multi-project architecture](/catalog/multi-project/).
+The Data Catalog gives an overview of the data shared to and from your project: the buckets you share with other projects in your organization, and the buckets they share with you. This page explains the terms and rules for anyone who shares or links buckets; for the steps, follow [Share and link buckets](/catalog/share-and-link/), and for the pattern of splitting work across several projects, read [Multi-project architecture](/catalog/multi-project/).
 
 <!-- Explanation-type page. Source: the former single Data Catalog page (keboola/connection-docs history), checked 2026-11-19. Facts are carried over from that page and not re-checked against the product. -->
+
+## When to share through the catalog
 
 There are generally numerous options
 to share data (ranging from CSV exports to writing to a dedicated database). The data catalog
 allows you to share data in a very _efficient_, _controlled_ and _auditable_ way.
-
-_Note: The original feature called Shared Buckets is now integrated into our Data Catalog._
-
-## When to share through the catalog
 
 Sharing data via the data catalog is useful in numerous ways -- for example:
 
@@ -34,7 +32,7 @@ Sharing data via the data catalog is useful in numerous ways -- for example:
   same data.
 - You might want to use [**Multi-project architecture**](/catalog/multi-project/).
 
-To share a bucket with people outside Keboola, in BigQuery or Snowflake, use [Bucket Exposure](/storage/bucket-exposure/).
+To share a bucket with people outside Keboola, in BigQuery or Snowflake, use [Bucket Exposure](/storage/bucket-exposure/), a beta feature whose page lists the projects that can use it.
 
 ## Terms
 
@@ -44,13 +42,17 @@ The following terminology is used:
 - **Linked bucket** — reference to a shared bucket in any of the destination projects.
 - **Datashare Owner** — person responsible for the shared bucket; this helps with governance and accountability.
 
+You can share an existing bucket or create a new one from selected tables. Both options are technically the same, the choice depends purely on whether you prepared the data in advance (an existing bucket) or not (create a new bucket).
+
 All changes and events in a shared bucket are propagated to its linked buckets; any tables you create in the shared bucket become immediately available in the destination projects. Data size and rows are counted only in the source project. Metadata changes, such as bucket color and description, are also propagated to linked buckets.
+
+The original feature called Shared Buckets is now integrated into the Data Catalog.
 
 ## What the catalog shows
 
-The Data Catalog shows shared buckets in a list view, a table that you can sort and filter. The **All**, **Linked** and **Mine** buttons filter the list, and **Mine** shows the buckets you own. Click a column header to sort by Name, Datashare Owner, Size, etc., and use the search box to find specific buckets by name or description. You can also edit descriptions and customize bucket colors directly from the catalog, and assign a Datashare Owner to a bucket to show who is responsible for the shared data. The steps are in [Edit a shared bucket's metadata](/catalog/share-and-link/#edit-a-shared-buckets-metadata).
+The Data Catalog shows shared buckets in a list view, a table that you can filter, sort and search. [Link a shared bucket](/catalog/share-and-link/#link-a-shared-bucket) describes the controls. You can also edit descriptions and customize bucket colors directly from the catalog, and assign a Datashare Owner to a bucket to show who is responsible for the shared data. The steps are in [Edit a shared bucket's metadata](/catalog/share-and-link/#edit-a-shared-buckets-metadata).
 
-<!-- VERIFY(Nikita): this paragraph merges two passages that announced a new list view "instead of the previous grid view". Confirm that the catalog still opens as a list, that the filter buttons read All, Linked and Mine, and that Name, Datashare Owner and Size are sortable columns. -->
+<!-- VERIFY(Nikita): the old page announced this as a new list view "instead of the previous grid view". Confirm that the catalog still opens as a list that can be filtered, sorted and searched. The filter and column names are on the Share and link buckets page, with their own check. -->
 
 ## Constraints
 

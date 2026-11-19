@@ -4,11 +4,13 @@ description: 'Share a Storage bucket or selected tables through the Data Catalog
 slug: 'catalog/share-and-link'
 ---
 
-Each recipe on this page is self-contained: a goal, the steps and the result. For what shared and linked buckets are, who can manage them and which projects can take part, read the [Data Catalog](/catalog/) overview and its [constraints](/catalog/#constraints) first.
+Each recipe on this page is self-contained: a goal, the steps and the result. For what shared and linked buckets are, and for the full list of [constraints](/catalog/#constraints), read the [Data Catalog](/catalog/) overview.
 
 <!-- How-to-type page. Source: the former single Data Catalog page (keboola/connection-docs history), checked 2026-11-19. Steps are carried over from that page and not re-run in the product. -->
 
-<!-- VERIFY(Nikita): the labels on this page (SHARE BUCKET, Share existing bucket, Select tables, Create Alias, Shared with you, Link, Edit Sharing, Disable) and all 14 screenshots come from the 2019 to 2020 UI. Check each label against the current Data Catalog. -->
+**Before you start:** to manage shared buckets, your user account must be an [organization member](/management/organization/) or a project administrator with the [share role](/management/project/users/#user-roles) assigned. Source and destination projects must belong to the same organization (and region).
+
+<!-- VERIFY(Nikita): the labels on this page and all 14 screenshots come from the 2019 to 2020 UI. Check each label against the current Data Catalog: Data Catalog (the old page said "Catalog" in the share step and "Data Catalog" elsewhere), SHARE BUCKET, Share existing bucket, Select tables, Create Alias, Shared with you, Link, Edit Sharing, Disable. The old text names no control for the following actions, so the steps leave them out. Add them from the live UI: the button that confirms the share in both variants, the control that opens the link dialog, where Create Alias sits and how to turn on column synchronization, a save step after Edit Sharing, where Disable sits, and where each result can be checked. -->
 
 ## Share a bucket
 
@@ -18,10 +20,9 @@ Each recipe on this page is self-contained: a goal, the steps and the result. Fo
 
    ![Screenshot -- Enable sharing](/catalog/catalog-1.png)
 
-2. Choose whether you want to share an existing bucket or create a new one. Both options are technically the same, the choice
-   depends purely on whether you prepared the data in advance (an existing bucket) or not (create a new bucket).
+2. Decide which option fits: **Share existing bucket** for a bucket you prepared in advance, or **Select tables** to have a new bucket created from the tables you pick.
 
-Then follow one of the two variants below.
+Then follow the matching variant below.
 
 ### Share an existing bucket
 
@@ -38,7 +39,7 @@ you have chosen.
 
 ![Screenshot -- View sharing](/catalog/catalog-4.png)
 
-### Share a new bucket
+### Share selected tables
 
 1. Choose the **Select tables** option.
 
@@ -56,9 +57,11 @@ you have chosen.
 
 ![Screenshot -- Bucket Result](/catalog/catalog-9.png)
 
-To change sharing settings, share the newly [created bucket again](#share-an-existing-bucket). The newly selected settings will overwrite the old ones. <!-- VERIFY(Nikita): the Edit Sharing button is described as the way to change sharing settings for a bucket shared as existing. Confirm whether a bucket created with Select tables still has to be shared again, or whether Edit Sharing works for it too. -->
+To change sharing settings, share the newly [created bucket again](#share-an-existing-bucket). The newly selected settings will overwrite the old ones. For the **Edit Sharing** button, see [Edit a shared bucket's metadata](#edit-a-shared-buckets-metadata). <!-- VERIFY(Nikita): the old page contradicts itself here. This sentence says to share the bucket again to change its sharing settings, while the Edit Sharing sentence, now in "Edit a shared bucket's metadata", says that button changes them. Confirm which holds for a bucket created with Select tables. -->
 
-### Add tables to a shared bucket
+## Add tables to a shared bucket
+
+**Goal:** add more tables to a bucket you already share.
 
 To extend an existing shared bucket with additional tables, you don't need to delete the bucket and recreate it. Instead,
 create an [alias](/storage/tables/#aliases) of the table and set the shared bucket as the destination. Here is how to do so:
@@ -79,7 +82,9 @@ create an [alias](/storage/tables/#aliases) of the table and set the shared buck
 
    ![Screenshot -- Link Bucket Start](/catalog/catalog-10.png)
 
-2. Enter a name of the bucket as you'd like to see it in the current project and **Link** the bucket.
+2. Find the bucket you want to link. To narrow the list, filter it with the **All**, **Linked** and **Mine** buttons (**Mine** shows the buckets you own), click a column header to sort by Name, Datashare Owner, Size, etc., or use the search box to find specific buckets by name or description. <!-- VERIFY(Nikita): the old page contradicts itself here. Its link steps and screenshots use a "Shared with you" tab, while its list-view passage describes All, Linked and Mine filter buttons. Confirm which of the two the current catalog has, the button labels, and that Name, Datashare Owner and Size are sortable columns. -->
+
+3. Enter a name of the bucket as you'd like to see it in the current project and **Link** the bucket.
 
    ![Screenshot -- Link Bucket](/catalog/catalog-11.png)
 
@@ -117,7 +122,7 @@ You can see the detail of the shared bucket with a link to the source project (i
 
    ![Screenshot -- Disable Sharing](/catalog/catalog-14.png)
 
-**Result:** the bucket is no longer shared. <!-- VERIFY(Nikita): the earlier page gave no result for this step. Confirm what Disable does while the bucket is still linked in other projects. The constraints say a linked bucket cannot be deleted until its links are removed. -->
+**Result:** if no other project has linked the bucket, it is no longer shared. If the bucket is linked in other projects, read the [constraints](/catalog/#constraints) first: you cannot delete a shared bucket that has been linked until all the links are removed. <!-- VERIFY(Nikita): the old page gave no result for this step, and the constraint quoted here is about deleting a linked bucket. Confirm what Disable does while the bucket is still linked in other projects. -->
 
 ---
 

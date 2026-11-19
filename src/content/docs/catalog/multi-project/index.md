@@ -8,7 +8,7 @@ slug: 'catalog/multi-project'
 
 Keboola is a very versatile platform and can be used in many different ways. When you deal with a larger number of source 
 and destination systems, or when some of them are very complex or difficult to set up, you might consider splitting the
-traditional extract-load process into isolated projects.
+traditional extract-load process into isolated projects that share data through the [Data Catalog](/catalog/).
 
 <!-- Explanation-type page. Source: keboola/connection-docs history, checked 2026-11-19. Content is unchanged; only the page shape was edited. -->
 
