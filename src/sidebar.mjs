@@ -643,9 +643,10 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "workspace" },
-      { slug: "workspace/snowflake-workspaces-access-changes" },
+      { slug: "workspace/create" },
+      { slug: "workspace/connect" },
       { slug: "workspace/sql-editor" },
-      { slug: "workspace/retention" },
+      { slug: "workspace/sql-editor/use" },
       {
         label: "Keboola JDBC Driver",
         collapsed: true,
@@ -656,6 +657,9 @@ export const sidebar = [
           { slug: "workspace/jdbc-driver/tableau" },
         ],
       },
+      { slug: "workspace/table-export" },
+      { slug: "workspace/retention" },
+      { slug: "workspace/snowflake-workspaces-access-changes" },
     ],
   },
   {

@@ -1,12 +1,16 @@
 ---
 title: Tableau Desktop Installation Guide
 slug: 'workspace/jdbc-driver/tableau'
-description: Install the Keboola JDBC driver in Tableau Desktop using the Other Databases (JDBC) connector.
+description: Put the Keboola JDBC driver in Tableau's drivers folder, connect with a Storage API token in the Password field, and run a first query.
 ---
 
 
 
 This guide walks you through installing the Keboola JDBC driver in [Tableau Desktop](https://www.tableau.com/products/desktop) using the generic **Other Databases (JDBC)** connector.
+
+<!-- How-to-type page. Source: the page as it stood on main; shape only, content unchanged, checked 2026-11-19. -->
+
+**Goal:** Tableau Desktop connected to your Keboola project through the [Keboola JDBC driver](/workspace/jdbc-driver/).
 
 :::note
 Tableau's JDBC connector has no UI for custom driver properties. Supply the Storage API token in the **Password** field — the driver accepts it there so the token stays out of the JDBC URL. (Tableau stores the URL as plaintext in saved/published data sources, but treats the password as a credential.)
@@ -63,7 +67,7 @@ In the data source pane, switch to **New Custom SQL** and run:
 SELECT * FROM _keboola.buckets LIMIT 10
 ```
 
-This returns one row per bucket in your project and confirms the driver is wired up. `_keboola.buckets` is one of five virtual tables exposing Keboola platform metadata (`components`, `events`, `jobs`, `tables`, `buckets`).
+**Result:** this returns one row per bucket in your project and confirms the driver is wired up. `_keboola.buckets` is one of five virtual tables exposing Keboola platform metadata (`components`, `events`, `jobs`, `tables`, `buckets`).
 
 To browse real Snowflake tables, pick a database and schema from the left-hand pane — Tableau will populate them via standard JDBC metadata calls.
 
@@ -78,3 +82,5 @@ To browse real Snowflake tables, pick a database and schema from the left-hand p
 ## Need Help?
 
 For further help, reach out via [Keboola Support](/management/support/).
+
+**Next:** [Exporting workspace tables to files →](/workspace/table-export/)

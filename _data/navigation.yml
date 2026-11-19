@@ -845,14 +845,17 @@ items:
   - url: /workspace/
     title: Workspaces
     items:
-      - url: /workspace/snowflake-workspaces-access-changes/
-        title: Snowflake Workspaces Access Changes
+      - url: /workspace/create/
+        title: Create a Workspace
+
+      - url: /workspace/connect/
+        title: Connect
 
       - url: /workspace/sql-editor/
         title: SQL Editor
 
-      - url: /workspace/retention/
-        title: Workspace Retention
+      - url: /workspace/sql-editor/use/
+        title: Use the SQL Editor
 
       - url: /workspace/jdbc-driver/
         title: Keboola JDBC Driver
@@ -863,6 +866,15 @@ items:
             title: DataGrip
           - url: /workspace/jdbc-driver/tableau/
             title: Tableau
+
+      - url: /workspace/table-export/
+        title: Table Export
+
+      - url: /workspace/retention/
+        title: Workspace Retention
+
+      - url: /workspace/snowflake-workspaces-access-changes/
+        title: Snowflake Workspaces Access Changes
 
   - url: /management/
     title: Management

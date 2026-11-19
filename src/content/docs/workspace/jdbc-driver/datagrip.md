@@ -1,12 +1,16 @@
 ---
 title: DataGrip Installation Guide
 slug: 'workspace/jdbc-driver/datagrip'
-description: Install the Keboola JDBC driver in DataGrip (and other JetBrains IDEs) and connect to a Keboola project.
+description: Register the Keboola JDBC driver in DataGrip or another JetBrains IDE, create a data source with a Storage API token, and run a first query.
 ---
 
 
 
 This guide walks you through installing the Keboola JDBC driver in [DataGrip](https://www.jetbrains.com/datagrip/) and connecting to a Keboola project. The same flow works for any JetBrains IDE with the **Database Tools and SQL** plugin (IntelliJ Ultimate, PyCharm Professional, etc.).
+
+<!-- How-to-type page. Source: the page as it stood on main; shape only, content unchanged, checked 2026-11-19. -->
+
+**Goal:** DataGrip connected to your Keboola project through the [Keboola JDBC driver](/workspace/jdbc-driver/), ready to run SQL.
 
 ## Prerequisites
 
@@ -65,7 +69,7 @@ KEBOOLA HELP;
 SELECT * FROM _keboola.buckets LIMIT 10;
 ```
 
-`KEBOOLA HELP` lists every Keboola-specific command. `_keboola.buckets` is one of five virtual tables exposing platform metadata (`components`, `events`, `jobs`, `tables`, `buckets`).
+**Result:** the output confirms the driver is wired up correctly. `KEBOOLA HELP` lists every Keboola-specific command. `_keboola.buckets` is one of five virtual tables exposing platform metadata (`components`, `events`, `jobs`, `tables`, `buckets`).
 
 ## Troubleshooting
 
@@ -77,3 +81,5 @@ SELECT * FROM _keboola.buckets LIMIT 10;
 ## Need Help?
 
 For further help, reach out via [Keboola Support](/management/support/).
+
+**Next:** [Tableau Desktop installation guide →](/workspace/jdbc-driver/tableau/)

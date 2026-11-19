@@ -1,12 +1,16 @@
 ---
 title: DBeaver Installation Guide
 slug: 'workspace/jdbc-driver/dbeaver'
-description: Install the Keboola JDBC driver in DBeaver and connect to a Keboola project.
+description: Register the Keboola JDBC driver in DBeaver, create a connection with a Storage API token, run a first query and fix the usual connection errors.
 ---
 
 
 
 This guide walks you through installing the Keboola JDBC driver in [DBeaver](https://dbeaver.io/) and connecting to a Keboola project.
+
+<!-- How-to-type page. Source: the page as it stood on main; shape only, content unchanged, checked 2026-11-19. -->
+
+**Goal:** DBeaver connected to your Keboola project through the [Keboola JDBC driver](/workspace/jdbc-driver/), ready to run SQL.
 
 ## Prerequisites
 
@@ -71,7 +75,7 @@ KEBOOLA HELP;
 SELECT * FROM _keboola.buckets LIMIT 10;
 ```
 
-`KEBOOLA HELP` lists every Keboola-specific command. `_keboola.buckets` is one of five virtual tables exposing platform metadata (`components`, `events`, `jobs`, `tables`, `buckets`).
+**Result:** the output confirms the driver is wired up correctly. `KEBOOLA HELP` lists every Keboola-specific command. `_keboola.buckets` is one of five virtual tables exposing platform metadata (`components`, `events`, `jobs`, `tables`, `buckets`).
 
 ## Troubleshooting
 
@@ -83,3 +87,5 @@ SELECT * FROM _keboola.buckets LIMIT 10;
 ## Need Help?
 
 For further help, reach out via [Keboola Support](/management/support/).
+
+**Next:** [DataGrip installation guide →](/workspace/jdbc-driver/datagrip/)
