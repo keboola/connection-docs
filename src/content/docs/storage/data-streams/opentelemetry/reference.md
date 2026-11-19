@@ -1,12 +1,16 @@
 ---
 title: OpenTelemetry (OTLP) streams reference
 slug: 'storage/data-streams/opentelemetry/reference'
+sidebar:
+  label: OpenTelemetry reference
 description: 'Destination tables of an OTLP data stream, signal routing, the fields each signal offers to column mappings, nested attributes, and SQL query examples.'
 ---
 
-What an OTLP data stream writes to Storage, and how to query it.
+This page describes the data an OTLP data stream produces once it is running. To create a stream and connect an SDK, see [Send OpenTelemetry (OTLP) data to Keboola](/storage/data-streams/opentelemetry/); for column types and the Stream API, see the [Data Streams reference](/storage/data-streams/reference/).
 
-## Destination Tables
+<!-- Reference-type page. Source: the OpenTelemetry page as it stood before the 2026-11-19 section split. Text moved, fields and queries not re-checked against the product. -->
+
+## Destination tables
 
 An OTLP data stream writes one destination table per signal, each set up with a default column mapping when you create the stream in the app:
 
@@ -16,13 +20,13 @@ An OTLP data stream writes one destination table per signal, each set up with a 
 | **metrics** | Metric data points (counters, gauges, histograms, etc.). |
 | **traces** | Distributed trace spans with timing and context. |
 
-### Routing Signals to Tables
+### Routing signals to tables
 
 The three tables are three ordinary [sinks](/storage/data-streams/reference/) on one OTLP source. What sends each signal to the right table is the sink's `allowedSignals` filter — an array holding any of `logs`, `metrics`, and `traces`. A sink with `allowedSignals: ["logs"]` only ever receives log records; a sink with an empty `allowedSignals` (the default) accepts **all three** signals into one table. HTTP sources ignore the field entirely.
 
 Because these are normal sinks, you can add a fourth sink with its own filter and mapping — for example, error logs projected into a narrow table for a dashboard — without touching the three defaults.
 
-### Fields Available to Column Mappings
+### Fields available to column mappings
 
 Each incoming log record, metric data point, or span is flattened into one JSON record, and your column mapping picks fields out of it with the `path` and `template` [column types](/storage/data-streams/reference/#columns). These are the fields each signal produces:
 
@@ -52,7 +56,7 @@ Each incoming log record, metric data point, or span is flattened into one JSON 
 
 `sum`, `min`, and `max` are only present when the data point actually sets them.
 
-### Attributes Stay Nested
+### Attributes stay nested
 
 Attributes are **not** flattened into dot-notation top-level fields. `attributes`, `resource`, and `scope` are nested objects whose keys keep their original dotted OTLP names — `service.name`, `host.name`, `k8s.pod.name`, `deployment.environment`, `http.status_code`, and so on. Because the dot is part of the key rather than a path separator, read them with a `template` column instead of a `path` column:
 
@@ -71,9 +75,11 @@ The same pattern works for `Body('attributes')['user.id']` and `Body('scope')['n
 
 Every sink's mapping is editable independently of the others, so you can extend one signal's table without touching the rest. If you would rather not enumerate fields, a [`body` column](/storage/data-streams/reference/#columns) stores the entire flattened record as JSON, and you can keep it next to the columns you do want projected out. Use the [payload test endpoint](/storage/data-streams/reference/#test-a-payload), or the in-app **Payload test**, to check a mapping against a sample record before pointing a real SDK at the source.
 
-## Use Cases
+## Query examples
 
-### Joining Error Logs with Business Data
+The examples on this page assume the column names produced by the default mappings and use Snowflake syntax; adjust both to your own mapping and [backend](/storage/tables/data-types/).
+
+### Joining error logs with business data
 
 Once your telemetry data is in Keboola Storage, you can query it alongside any other table. For example, to find how API errors affected revenue:
 
@@ -88,9 +94,7 @@ WHERE logs."severity_text" = 'ERROR'
 GROUP BY date
 ```
 
-The examples on this page assume the column names produced by the default mappings and use Snowflake syntax; adjust both to your own mapping and [backend](/storage/tables/data-types/).
-
-### Monitoring Deployment Impact
+### Monitoring deployment impact
 
 Track how deployments affect error rates by correlating deployment timestamps with trace data:
 
@@ -108,9 +112,9 @@ GROUP BY 1, 2, 3
 ORDER BY hour DESC
 ```
 
-`status_code` carries the OTLP span status verbatim — `Unset`, `Ok`, or `Error` — so match it case-sensitively. The `deployment_environment` and `service` columns here come from the `deployment.environment` and `service.name` resource attributes; see [Attributes Stay Nested](#attributes-stay-nested) for how to map them.
+`status_code` carries the OTLP span status verbatim — `Unset`, `Ok`, or `Error` — so match it case-sensitively. The `deployment_environment` and `service` columns here come from the `deployment.environment` and `service.name` resource attributes; see [Attributes stay nested](#attributes-stay-nested) for how to map them.
 
-### LLM Observability
+### LLM observability
 
 If your application uses LLM APIs, instrument them with OpenTelemetry to track token usage, latency, and costs alongside product metrics.
 
@@ -153,12 +157,11 @@ GROUP BY 1, 2
 ORDER BY total_tokens DESC
 ```
 
-## Technical Reference
+## Specifications and API
 
 - [OpenTelemetry Protocol Specification](https://opentelemetry.io/docs/specs/otlp/)
 - [OTLP/HTTP Transport](https://opentelemetry.io/docs/specs/otlp/#otlphttp)
 - [OpenTelemetry SDK environment variables](https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/)
 - [Keboola Stream API Documentation](https://stream.keboola.com/v1/documentation/)
-- [Data Streams Reference](/storage/data-streams/reference/)
 
-**Next:** [Data Streams Reference →](/storage/data-streams/reference/)
+**Next:** [Data Streams reference →](/storage/data-streams/reference/)
