@@ -1,10 +1,17 @@
 ---
-title: Native Data Types
+title: Native data types
 slug: 'storage/tables/data-types'
-description: 'Native data types in Storage tables: typed vs. non-typed tables, base types, defining and changing column types, NULL handling, and the data types in the table definition.'
+sidebar:
+  label: Data Types
+description: 'What native data types and typed tables are in Keboola Storage, their benefits and drawbacks, and the ways a typed table gets created.'
+search_keywords: [native data types, typed table, non-typed table, automatic data types, column types]
 ---
 
+With native data types, a Storage table keeps the data type of each column, such as NUMERIC, BOOLEAN or DATE, instead of storing every value as text. This page explains what that gives you and how typed tables get created. Base types, NULL handling and the table definition are in the [data types reference](/storage/tables/data-types/reference/), and the steps for changing a column type are in [Manage tables](/storage/tables/manage/#change-a-column-type-in-a-typed-table).
 
+<!-- Explanation-type page. Source: the former single data types page on main; text carried over and checked against it 2026-11-19. -->
+
+## What native data types are
 
 The **Native Data Types** feature streamlines the process of **propagating data types** from the source to the storage. With Keboola Native Data Types, the system automatically maintains data types throughout the pipeline, eliminating the need for manual intervention and reducing errors in data processing. 
 
@@ -12,7 +19,7 @@ For example, when a user imports a large dataset with predefined data types, suc
 
 Non-typed tables without native data types are labeled in the UI with a badge: **non-typed**.
 
-## Key Benefits
+## Key benefits
 These are the key benefits of using the Native Data Types feature:
 - **Automatic Data Type Preservation:** Data types from the source are automatically respected, reducing the need for manual adjustments in Storage.
 - **Faster Data Handling:** Native data types enable more efficient data manipulation, as well as faster loading and unloading, improving overall performance.
@@ -21,13 +28,13 @@ These are the key benefits of using the Native Data Types feature:
 - **Improved Workspace Loading:** Loading data into a workspace is significantly faster than loading into a table without native data types, eliminating the need for additional casting.
 - **Typed Columns in Workspaces:** Tables **accessed in a workspace** via the [read-only input mapping](/workspace/#read-only-input-mapping) already have typed columns, ensuring seamless data handling.
 
-## Current Drawbacks
+## Current drawbacks
 Using the Native Data Types feature also has its drawbacks:
-- The data type of a column in a typed table cannot be changed after creation. To change a type, you must create a new column or recreate the table. See [How to Change Column Types](/storage/tables/data-types/#changing-types-of-existing-typed-columns). Some other alterations, such as increasing the length or precision of a column, are possible; see [Changing Column Definitions](#changing-column-definitions).
+- The data type of a column in a typed table cannot be changed after creation. To change a type, you must create a new column or recreate the table. See [Change a column type in a typed table](/storage/tables/manage/#change-a-column-type-in-a-typed-table). Some other alterations, such as increasing the length or precision of a column, are possible; see [Changing column definitions](/storage/tables/data-types/reference/#changing-column-definitions).
 - Keboola does not perform any type conversion during data loading. Your data must exactly match the column type defined in the table within Storage.
 - Loading data with incompatible types will result in a failure.
 
-## How It Works
+## How it works
 By default, all new tables are created as typed tables if the component supports this feature. Non-typed tables are labeled in the Storage UI with the label NON-TYPED. 
 
 You can configure the data type behavior in the UI component configuration settings. If the component supports this feature, you will see the option **Automatic data types** in the right menu, which can be toggled ON and OFF. 
@@ -38,14 +45,14 @@ In transformations, this option is not available. Instead, you define the data t
 
 **Important:** Existing tables will not be affected by this feature. Also, if you do not see the **Automatic data types** option in the sidebar, it means the component does not support this feature.
 
-### How to Create a Typed Table
+### How typed tables are created
 The Native Data Types feature allows tables to be created with data types that match the original source or storage backend. Here’s how you can create typed tables:
 - **Manually via API**  
-You can manually create typed tables using the [tables-definition endpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition). Ensure that the data types align with the storage backend (e.g., Snowflake, BigQuery) used in your project. Alternatively, [base types](/storage/tables/data-types/#base-types) can be used for compatibility.
+You can manually create typed tables using the [tables-definition endpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition). Ensure that the data types align with the storage backend (e.g., Snowflake, BigQuery) used in your project. Alternatively, [base types](/storage/tables/data-types/reference/#base-types) can be used for compatibility.
 - **Using a Component**  
 Extractors and transformations that match the storage backend (e.g., Snowflake SQL transformation on a Snowflake storage backend) will automatically create typed tables in Storage:
   - **Matching Storage Backend:** Database extractors and transformations create storage tables using the same data types as the backend.
-  - **Mismatching Storage Backend:** Extractors use base types to ensure compatibility. [Learn more.](/storage/tables/data-types/#base-types)
+  - **Mismatching Storage Backend:** Extractors use base types to ensure compatibility. [Learn more.](/storage/tables/data-types/reference/#base-types)
 
 
 :::caution
@@ -62,7 +69,7 @@ To ensure typed tables are imported correctly into Storage, define your table in
 
 ![Screenshot - Create a Table](/storage/tables/data-types/create-table.png)
 
-## Incremental Loading
+## Incremental loading
 The behavior of incremental loading differs between **typed** and **non-typed tables**:
 
 - **Typed tables:** Only the columns in the table's **primary key** are compared to detect changes.

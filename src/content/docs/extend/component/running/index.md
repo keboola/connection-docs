@@ -80,7 +80,7 @@ There are two main variants of the Run Job API call useful for debugging purpose
 The [Run Job](https://api.keboola.com/?service=job-queue#post-/jobs) API call is useful for obtaining an
 environment configuration for a component. It will create a snapshot of the
 [data folder](/extend/common-interface/folders/)
-(including input mapping and configuration files) and then it will upload the snapshot to the [Files section](/storage/file-uploads/)
+(including input mapping and configuration files) and then it will upload the snapshot to the [Files section](/storage/files/)
 of Storage. Then the component will be run and another snapshot will be created with the resulting contents of the data directory.
 This gives you snapshots of the data directory before and after a component is run. The debug
 API call does not write any tables or files (other than the archive) to the Keboola project, so it is very safe to run. Note however that

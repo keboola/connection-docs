@@ -520,20 +520,6 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "storage" },
-      { slug: "storage/buckets" },
-      { slug: "storage/bucket-exposure" },
-      {
-        label: "Data Streams",
-        collapsed: true,
-        items: [
-          { label: "Overview", slug: "storage/data-streams" },
-          { slug: "storage/data-streams/opentelemetry" },
-          { slug: "storage/data-streams/reference" },
-          { slug: "storage/data-streams/tutorial" },
-        ],
-      },
-      { slug: "storage/files" },
-      { slug: "storage/jobs" },
       {
         label: "Tables & Aliases",
         collapsed: true,
@@ -547,6 +533,20 @@ export const sidebar = [
           { slug: "storage/tables/csv-files" },
           { slug: "storage/tables/csv-files/excel" },
           { slug: "storage/tables/backups" },
+        ],
+      },
+      { slug: "storage/buckets" },
+      { slug: "storage/files" },
+      { slug: "storage/jobs" },
+      { slug: "storage/bucket-exposure" },
+      {
+        label: "Data Streams",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "storage/data-streams" },
+          { slug: "storage/data-streams/opentelemetry" },
+          { slug: "storage/data-streams/reference" },
+          { slug: "storage/data-streams/tutorial" },
         ],
       },
       {

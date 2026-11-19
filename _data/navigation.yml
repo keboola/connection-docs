@@ -689,28 +689,6 @@ items:
   - url: /storage/
     title: Storage
     items:
-      - url: /storage/buckets/
-        title: Buckets
-
-      - url: /storage/bucket-exposure/
-        title: Bucket Exposure
-
-      - url: /storage/data-streams/
-        title: Data Streams
-        items:
-          - url: /storage/data-streams/opentelemetry/
-            title: OpenTelemetry (OTLP)
-          - url: /storage/data-streams/reference/
-            title: Reference
-          - url: /storage/data-streams/tutorial/
-            title: Tutorial
-
-      - url: /storage/files/
-        title: Files
-
-      - url: /storage/jobs/
-        title: Jobs
-
       - url: /storage/tables/
         title: Tables & Aliases
         items:
@@ -737,6 +715,28 @@ items:
 
           - url: /storage/tables/backups/
             title: Backups and Restorations
+
+      - url: /storage/buckets/
+        title: Buckets
+
+      - url: /storage/files/
+        title: Files
+
+      - url: /storage/jobs/
+        title: Jobs
+
+      - url: /storage/bucket-exposure/
+        title: Bucket Exposure
+
+      - url: /storage/data-streams/
+        title: Data Streams
+        items:
+          - url: /storage/data-streams/opentelemetry/
+            title: OpenTelemetry (OTLP)
+          - url: /storage/data-streams/reference/
+            title: Reference
+          - url: /storage/data-streams/tutorial/
+            title: Tutorial
 
       - url: /storage/byodb/
         title: Bring Your Own Database

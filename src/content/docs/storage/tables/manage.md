@@ -3,17 +3,18 @@ title: Manage tables
 slug: 'storage/tables/manage'
 sidebar:
   label: Manage Tables
-description: 'Manage Storage tables in the UI: create an alias table, set or remove a primary key, truncate a table, and delete rows.'
-search_keywords: [create alias, alias table, primary key, set primary key, truncate table, delete rows, empty table]
+description: 'Manage Storage tables: create an alias, set or remove a primary key, truncate a table, delete rows, change a column type, and make a typed table.'
+search_keywords: [create alias, alias table, primary key, set primary key, truncate table, delete rows, empty table, change column type, change data type, typed table, non-typed table]
 ---
 
-Step-by-step tasks for an existing Storage table, all from its table detail. What tables, aliases and primary keys
-are is explained in [Tables in Storage](/storage/tables/) and
-[Primary keys and incremental loading](/storage/tables/incremental-loading/).
+Step-by-step tasks for an existing Storage table. The first four start from its table detail; the last two change
+column data types. What tables, aliases and primary keys are is explained in [Tables in Storage](/storage/tables/) and
+[Primary keys and incremental loading](/storage/tables/incremental-loading/), and typed tables in
+[Native data types](/storage/tables/data-types/).
 
-<!-- How-to-type page. Split from the former single tables page (PRDCT-486). The Storage tab and Delete rows labels were checked live in #1010; the rest is carried over from main 2026-11-12. -->
+<!-- How-to-type page. Split from the former single tables page (PRDCT-486). The Storage tab and Delete rows labels were checked live in #1010; the rest is carried over from main 2026-11-12. The two data type tasks come from the former data types page, carried over 2026-11-19. -->
 
-Every task starts the same way: open **Storage → Tables & Buckets**, open the bucket, and select the table. Its
+The first four tasks start the same way: open **Storage → Tables & Buckets**, open the bucket, and select the table. Its
 **table detail** opens at the top of the screen, with a three-dots menu on the right.
 
 ## Create an alias table
@@ -104,54 +105,63 @@ To delete rows before each incremental load of a transformation instead, use the
 **Delete rows** option of the [transformation output mapping](/transformations/mappings/#output-mapping), with Incremental
 loading enabled.
 
-## Changing Types of Existing Typed Columns
-You **cannot change the type of a column in a typed table once it has been created**. However, there are multiple workarounds to address this limitation:
+## Change a column type in a typed table
+
+**Goal:** a column of a typed table holds its data in a different data type.
+
+You **cannot change the type of a column in a typed table once it has been created**. However, there are multiple workarounds to address this limitation.
+Some other alterations, such as increasing the length or precision of a column, are possible without a workaround; see
+[Changing column definitions](/storage/tables/data-types/reference/#changing-column-definitions).
 
 **For tables using full load:** Drop the table and create a new one with the correct types. Then, load the data into the newly created table.
 
-**For tables loaded incrementally:** You will need to create a new column with the desired type and migrate the data step by step:
-   - Assume you have a column `date` of type `VARCHAR` in a typed table, and you want to change it to `TIMESTAMP`.
-   - Start by adding a new column named `date_timestamp` of type `TIMESTAMP` to the table.
-   - Update all jobs filling the table to populate both the new column (`date_timestamp`) and the existing column (`date`).
-   - Run an ad-hoc transformation to copy data from `date` to `date_timestamp` for the existing rows.
-   - Gradually update all configurations and references to use `date_timestamp` instead of `date`.
-   - Once all references are updated and the old column is no longer in use, you can safely remove the `date` column.
+**For tables loaded incrementally:** You will need to create a new column with the desired type and migrate the data step by step.
+Assume you have a column `date` of type `VARCHAR` in a typed table, and you want to change it to `TIMESTAMP`.
 
+1. Start by adding a new column named `date_timestamp` of type `TIMESTAMP` to the table.
+2. Update all jobs filling the table to populate both the new column (`date_timestamp`) and the existing column (`date`).
+3. Run an ad-hoc transformation to copy data from `date` to `date_timestamp` for the existing rows.
+4. Gradually update all configurations and references to use `date_timestamp` instead of `date`.
+5. Once all references are updated and the old column is no longer in use, you can safely remove the `date` column.
 
 :::caution
 **Important:** Always verify other configurations that depend on the table to avoid schema mismatches. Also, pay special attention to writers (data destination connectors), particularly if the table already exists in the destination system. Mismatched schemas between the source and destination can lead to errors.
 :::
 
-## How to Create a Typed Table Based on a Non-Typed Table
+**Result:** the table holds the data in a column of the new type (`date_timestamp` in the example), and nothing reads
+the old column anymore.
+
+## Create a typed table from a non-typed table
+
+**Goal:** a new typed table with the data of an existing non-typed table.
+
 If you have a non-typed table, `non_typed_table`, with undefined data types and want to convert it into a typed table, follow these steps:
 
-**Step 1: Set Up the Transformation** 
-- Create a new transformation in Keboola.
-- Choose `non_typed_table` as the input table in the input mapping section (you can also rely on [read-only input mapping](/transformations/#read-only-input-mapping)).
-- In the output mapping section, define the output table as `typed_table`. Ensure that the output table does not exist; otherwise, it will not be created as a typed table.
+1. **Set up the transformation.**
+   - Create a new transformation in Keboola.
+   - Choose `non_typed_table` as the input table in the input mapping section (you can also rely on [read-only input mapping](/transformations/#read-only-input-mapping)).
+   - In the output mapping section, define the output table as `typed_table`. Ensure that the output table does not exist; otherwise, it will not be created as a typed table.
 
-![Screenshot - Typed Table Transformation](/storage/tables/data-types/typed-table-transformation.png)
+   ![Screenshot - Typed Table Transformation](/storage/tables/data-types/typed-table-transformation.png)
 
-**Step 2: Define the Query**   
-In the queries section, write an SQL query to transform the column types. Use proper casting for each column to match the desired data types.
+2. **Define the query.** In the queries section, write an SQL query to transform the column types. Use proper casting for each column to match the desired data types.
 
-For example, if you need to format a date column, include the appropriate SQL casting or formatting function in your query.
+   For example, if you need to format a date column, include the appropriate SQL casting or formatting function in your query.
 
-```
-CREATE TABLE "typed_table" AS
-    SELECT 
-        CAST(ntt."id" AS VARCHAR(64)) AS "id",
-        CAST(ntt."id_profile" AS INTEGER) AS "id_profile",
-        TO_TIMESTAMP(ntt."date", 'DD.MM.YYYY"T"HH24:MI:SS') AS "date",
-        CAST(ntt."amount" AS INTEGER) AS "amount"
-    FROM "non_typed_table" AS ntt;
-```
+   ```sql
+   CREATE TABLE "typed_table" AS
+       SELECT 
+           CAST(ntt."id" AS VARCHAR(64)) AS "id",
+           CAST(ntt."id_profile" AS INTEGER) AS "id_profile",
+           TO_TIMESTAMP(ntt."date", 'DD.MM.YYYY"T"HH24:MI:SS') AS "date",
+           CAST(ntt."amount" AS INTEGER) AS "amount"
+       FROM "non_typed_table" AS ntt;
+   ```
 
-**Step 3: Run the Transformation**  
-Execute the transformation and wait for it to complete.
+3. **Run the transformation.** Execute the transformation and wait for it to complete.
+4. **Verify the schema.** Once the transformation is finished, check the schema of the newly created table, `typed_table`.
 
-**Step 4: Verify the Schema**  
-Once the transformation is finished, check the schema of the newly created table, `typed_table`. It should now include the appropriate data types.
+**Result:** `typed_table` is a new typed table. It should now include the appropriate data types.
 
 ***Note:** [Incremental loading](/storage/tables/incremental-loading/#incremental-loading) cannot be used when creating a typed table in this manner.*
 

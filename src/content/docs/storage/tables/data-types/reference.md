@@ -1,17 +1,22 @@
 ---
 title: Data types reference
 slug: 'storage/tables/data-types/reference'
-description: 'Reference for column data types in Storage: base types, how to define a type, NULL handling per backend, and the data types in the table definition.'
+sidebar:
+  label: Data Types Reference
+description: 'Column data types in Storage: the base types, two ways to define a type, how NULL and empty values load per backend, and the table definition.'
+search_keywords: [base types, basetype, 'NULL', null values, empty string, treatValuesAsNull, table definition, KBC.datatype]
 ---
 
-Base types, NULL handling and the data types in the table definition, for [native data types](/storage/tables/data-types/).
+Look up how Storage represents column data types: the base types, the two ways to define a type, how `NULL` and empty values load on each backend, and what the table definition holds. What typed tables are and when to use them is in [Native data types](/storage/tables/data-types/).
 
-## Base Types
+<!-- Reference-type page. Source: the former single data types page on main; text carried over and checked against it 2026-11-19. -->
+
+## Base types
 Source data types are mapped to a destination using a **base type**. The current base types are `STRING`, `INTEGER`, `NUMERIC`, `FLOAT`, `BOOLEAN`, `DATE`, and `TIMESTAMP`. For example, a MySQL extractor may store a column with the data type `BIGINT`. This type is mapped to the `INTEGER` base type, ensuring high interoperability between components. 
 
 For detailed mappings, please refer to the [conversion table](https://developers.keboola.com/extend/common-interface/manifest-files/out-tables-manifests-native-types/#data-type-conversions). You can also view the extracted data types in the [storage table](/storage/tables/) detail.
 
-### How to Define Data Types
+### How to define data types
 
 #### Using actual data types of the storage backend
 For example, in the case of Snowflake, you can create a column with a specific type like `TIMESTAMP_NTZ` or `DECIMAL(20,2)`. This approach allows you to define all details of the data type, including precision and scale. An example of such a column definition in a table-definition API endpoint call might look like this:
@@ -29,7 +34,7 @@ For example, in the case of Snowflake, you can create a column with a specific t
 ```
 
 #### Using Keboola-provided base types
-Specifying native types using Keboola’s [base types](/storage/tables/data-types/#base-types) is ideal for component-provided types, as these are storage backend agnostic. This method ensures compatibility across different storage backends. Additionally, base types can also be used when defining tables via the table-definition API endpoint. The definition format is as follows:
+Specifying native types using Keboola’s [base types](#base-types) is ideal for component-provided types, as these are storage backend agnostic. This method ensures compatibility across different storage backends. Additionally, base types can also be used when defining tables via the table-definition API endpoint. The definition format is as follows:
 
 ```
 {
@@ -41,7 +46,7 @@ Specifying native types using Keboola’s [base types](/storage/tables/data-type
 ## Handling NULLs
 Data can contain `NULL` values or empty strings, which are converted differently based on the processing backend.
 
-### CSV Format: Unquoted vs Quoted Empty Values
+### CSV format: unquoted vs quoted empty values
 In CSV files, there are two ways to represent an empty value:
 
 - **Unquoted empty** (`,,`) — the field is completely absent between delimiters
@@ -49,7 +54,7 @@ In CSV files, there are two ways to represent an empty value:
 
 This distinction matters because backends treat them differently.
 
-### Backend Behavior
+### Backend behavior
 
 | CSV value | Snowflake (STRING) | BigQuery (STRING) | BigQuery (INT64/NUMERIC) |
 |---|---|---|---|
@@ -62,7 +67,7 @@ This means the **same CSV file** can produce different NULL semantics depending 
 
 **Note:** This is a behavior of BigQuery's CSV parser, not Keboola Storage. BigQuery does not provide any option (similar to Snowflake's `EMPTY_FIELD_AS_NULL`) to change how quoted empty strings are handled during CSV loading. There is no available workaround at the BigQuery level.
 
-### The `treatValuesAsNull` Parameter
+### The `treatValuesAsNull` parameter
 When importing data, you can use the `treatValuesAsNull` parameter to specify which values should be treated as `NULL`. For example, `treatValuesAsNull: [""]` tells the system to treat empty strings as `NULL`.
 
 However, in BigQuery, this parameter maps to BigQuery’s native [`nullMarker`](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#csv-options) CSV load option, which **only applies to unquoted CSV fields**. Quoted values bypass the null marker check entirely — this is a limitation of BigQuery’s CSV parser, not Keboola Storage.
@@ -76,7 +81,7 @@ In practice:
 
 If your data source (e.g., a database extractor) writes `NULL` values as `""` instead of `,,`, string columns will contain empty strings instead of `NULL` in BigQuery, while numeric columns will still show `NULL` due to type coercion. To ensure correct NULL handling, the data source must represent NULL values as unquoted empty fields (`,,`) in the CSV.
 
-### NULL and Incremental Loading
+### NULL and incremental loading
 Columns without native types are always `VARCHAR NOT NULL`. This means you don’t need to worry about specific `NULL` behavior. However, this changes with typed columns. 
 
 In most databases, `NULL` does not equal `NULL` (`NULL == NULL` is not `TRUE`, but `NULL`). This behavior can disrupt the incremental loading process, where columns are compared to detect changes.
@@ -91,7 +96,7 @@ CREATE TABLE "ctas_table" (
 ) AS SELECT * FROM "typed_table";
 ```
 
-## Data Types in the Table Definition
+## Data types in the table definition
 The column data types of a [typed table](/storage/tables/data-types/) are part of the same table definition as the
 descriptions. For each column the definition holds the `type`, `nullable` and, where they apply, `length` and
 `default`, next to the column's `basetype`. The table detail returns them, and the
@@ -107,7 +112,7 @@ is returned with `type` `NUMBER`, `length` `38,0` and `basetype` `INTEGER`.
   tables; the [table list reference](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/table-list)
   lists the cases.
 
-### Changing Column Definitions
+### Changing column definitions
 The data type of a typed column cannot be changed. On Snowflake and BigQuery you can
 [update the table definition](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition)
 to change some column properties. The table shows which alterations each backend supports:
@@ -126,7 +131,7 @@ to change some column properties. The table shows which alterations each backend
 | Change a default | No | Yes |
 | Drop a default | Yes | Yes |
 
-### Relation to KBC.datatype Metadata
+### Relation to KBC.datatype metadata
 For a typed table the definition is the source of truth for the types. Storage still keeps `KBC.datatype.*` copies
 under the `storage` provider for compatibility, and `KBC.datatype.*` rows written by other providers do not change
 the definition of a typed table. New integrations should read the types from the `definition` of the table, not from

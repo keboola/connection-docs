@@ -3,7 +3,7 @@ title: Tables in Storage
 slug: 'storage/tables'
 sidebar:
   label: Tables
-description: 'What a Storage table is: buckets, importing into an existing table, table and column naming rules, alias tables, metadata, and how primary keys and incremental loading fit in.'
+description: 'What a Storage table is: importing into an existing table, naming rules, alias tables, metadata, and how primary keys and incremental loading fit in.'
 search_keywords: [table, tables, alias, alias table, metadata, column names, table detail]
 ---
 
@@ -79,12 +79,17 @@ examples, is in [Primary keys and incremental loading](/storage/tables/increment
 
 ## This section
 
-- [Manage tables](/storage/tables/manage/): create an alias, set a primary key, truncate a table, delete rows.
+- [Manage tables](/storage/tables/manage/): create an alias, set a primary key, truncate a table, delete rows, change a
+  column type.
 - [Primary keys and incremental loading](/storage/tables/incremental-loading/): deduplication, incremental loads and
   incremental processing.
 - [Table and column descriptions](/storage/tables/descriptions/): where descriptions come from and their limits.
-- [Data types](/storage/tables/data-types/): native data types and the table definition.
-- [CSV files](/storage/tables/csv-files/), [Table import and export](/storage/tables/uploads/) and
-  [Backups and restorations](/storage/tables/backups/).
+- [Native data types](/storage/tables/data-types/): what typed tables are and how they get created.
+- [Data types reference](/storage/tables/data-types/reference/): base types, NULL handling and the table definition.
+- [CSV files](/storage/tables/csv-files/): the format Storage accepts and the format it produces.
+- [CSV files in Excel](/storage/tables/csv-files/excel/): export a sheet for Storage, open an exported table.
+- [Back up and restore tables](/storage/tables/backups/): time travel restore and snapshots.
+
+Table imports and exports pass through File Storage: see [Files in Storage](/storage/files/).
 
 **Next:** [Manage tables →](/storage/tables/manage/)

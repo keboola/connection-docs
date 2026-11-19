@@ -1,12 +1,14 @@
 ---
 title: Storage
-description: 'Storage is the central Keboola subsystem that stores your data and manages access to it, on top of Snowflake or BigQuery.'
 slug: 'storage'
+description: 'What Keboola Storage is and what you can do with it: tables and buckets, files, the Snowflake and BigQuery backends, and a map of the Storage docs.'
 ---
 
+Storage is where a Keboola project keeps its data: tables organized into buckets, raw files, and component configurations. This page says what Storage is, what you can do with it and which backend types exist, and maps the rest of the section. For instructions on how to use Storage, see our [Getting Started](/getting-started/load/) tutorial.
 
+<!-- Overview-hub page. Source: the Storage page on main, text carried over and checked against it 2026-11-19. The lists of what you can do and of the section pages follow the Storage pages as they are on this branch. -->
 
-*See our [Getting Started](/getting-started/load/) tutorial for instructions on how to use Storage.*
+## What Storage is
 
 As the central [Keboola subsystem](/overview/), Storage manages everything related to **storing** data and **accessing** it.
 It is implemented as a layer on top of database engines that we use as our backends
@@ -15,12 +17,25 @@ By default all new [Pay As You Go projects](/management/payg-project/) use the B
 
 As with all other Keboola components, everything that can be done through the UI can be also done programmatically
 via the [Storage API](https://api.keboola.com/?service=storage).
-See our [developers guide](https://developers.keboola.com/integrate/storage/) to learn more.
+See the [Storage API guide](/storage/api/) to learn more.
 Every Storage operation must be authorized via a [token](/management/project/tokens/).
 It is also recorded in [Events](/management/project/tokens/#token-events) and
 [Jobs](/management/jobs/).
 
-## Storage Data
+## What you can do
+
+- Keep data in [tables](/storage/tables/), grouped into [buckets](/storage/buckets/). A table can have aliases, a primary key and [incremental loading](/storage/tables/incremental-loading/).
+- Keep column types with [native data types](/storage/tables/data-types/), and document tables and columns with [descriptions](/storage/tables/descriptions/).
+- Upload any file to [Files](/storage/files/), tag it and pass it on with a link. Table imports and exports pass through Files too.
+- Get a table back as it was at an earlier time with [time travel restore or snapshots](/storage/tables/backups/).
+- See every load into and unload from a table in [Storage jobs](/storage/jobs/).
+- Receive streaming event data straight into Storage with [Data Streams](/storage/data-streams/), with no data source connector to set up.
+- Share buckets with other projects through the [Data Catalog](/catalog/), or with people outside your project through [Bucket Exposure](/storage/bucket-exposure/) (beta).
+- Limit which rows and columns a reader sees with [row- and column-level security](/storage/row-level-security/) (beta). It applies your policies to queries from the MCP Server, Data Apps and the Keboola CLI.
+- Keep project data in your own Snowflake or BigQuery account with [Bring Your Own Database](/storage/byodb/).
+- Work with Storage from code: everything that can be done through the UI can also be done through the [Storage API](/storage/api/).
+
+## Storage data
 The Storage component manages all data stored in each Keboola project:
 
 - [Data tables](/storage/tables/) (Table Storage) — organized into [buckets](/storage/buckets/)
@@ -35,7 +50,7 @@ Different storage technologies are used for the above data:
 The database system behind the Table Storage is referred to as a **backend**.
 Data in Table Storage is internally stored in a **database backend** (project backend).
 
-### Storage Backend Types and Features
+### Storage backend types and features
 There are multiple types of storage backend configurations you can choose from, and each has its own features and limitations.
 
 #### Multi-tenant (MT)
@@ -62,4 +77,26 @@ To learn more about the BYODB setup, please refer to the [BigQuery](/storage/byo
 
 ---
 
-If you have any questions regarding the backend types or need help with the setup, please contact our [support](/management/support/).
+If you have any questions regarding the backend types or need help with the setup, contact our [support](/management/support/).
+
+## This section
+
+The pages are listed in the order of the navigation.
+
+1. **[Tables](/storage/tables/)**: what a table and an alias are, and the rules every table follows. Under it:
+   - [Manage tables](/storage/tables/manage/): create an alias, set a primary key, truncate a table, delete rows, change a column type.
+   - [Primary keys and incremental loading](/storage/tables/incremental-loading/): deduplication, incremental loads and incremental processing.
+   - [Table and column descriptions](/storage/tables/descriptions/): where descriptions come from and their limits.
+   - [Native data types](/storage/tables/data-types/) and the [data types reference](/storage/tables/data-types/reference/): typed tables, base types, NULL handling and the table definition.
+   - [CSV files](/storage/tables/csv-files/) and [CSV files in Excel](/storage/tables/csv-files/excel/): the format Storage accepts and produces, and how to move data to and from Excel.
+   - [Back up and restore tables](/storage/tables/backups/): time travel restore and snapshots.
+2. **[Buckets](/storage/buckets/)**: the in and out stages, creating a bucket and opening its detail.
+3. **[Files](/storage/files/)**: upload a file, pass it on with a link, export a table as one file, and the file limits.
+4. **[Storage jobs](/storage/jobs/)**: open the low-level record of table loads and unloads and find the file a job loaded.
+5. **[Bucket Exposure](/storage/bucket-exposure/)** (beta): share a bucket with people outside your project, in their own BigQuery or through Snowflake grants and shares.
+6. **[Data Streams](/storage/data-streams/)**: receive events over HTTP or OpenTelemetry straight into Storage.
+7. **[Bring Your Own Database](/storage/byodb/)** and **[Bring Your Own BigQuery](/storage/byobq/)**: host project data in your own Snowflake or BigQuery account, and the Google Cloud setup for connecting BigQuery.
+8. **[Row- and column-level security](/storage/row-level-security/)** (beta): policies that limit which rows and columns a reader sees.
+9. **[Storage API](/storage/api/)**: tables, files, buckets and component configurations through the API, with the importer service and the API clients.
+
+**Next:** [Tables in Storage →](/storage/tables/)
