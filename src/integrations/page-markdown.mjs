@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, linksToText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
 import { stripHtmlComments, collapseBlankLines, fenceTracker, fenceOpener, closesFence } from './strip-comments.mjs';
-import { renderAgentBlocks, agentBlockTexts, findAgentLeaks } from './agent-only.mjs';
+import { processAgentBlocks, findAgentLeaks } from './agent-only.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
 import { courseListText, courseBarText } from '../components/getting-started/course.mjs';
 import { sampleText } from '../components/getting-started/sample.mjs';
@@ -432,7 +432,16 @@ export function twinSource(content, isMdx) {
  * fails a test.
  */
 export function twinBody(content, isMdx, file = 'page') {
-  return stripSearchMarkup(renderAgentBlocks(twinSource(content, isMdx), file)).trim();
+  return twinParts(content, isMdx, file).body;
+}
+
+/**
+ * twinBody plus the text of the page's agent blocks, from a single parse, so the
+ * build can check that none of them reached the HTML without parsing twice.
+ */
+export function twinParts(content, isMdx, file = 'page') {
+  const { markdown, texts } = processAgentBlocks(twinSource(content, isMdx), file);
+  return { body: stripSearchMarkup(markdown).trim(), agentTexts: texts };
 }
 
 /**
@@ -553,10 +562,9 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
 
           const isMdx = extname(file) === '.mdx';
           // :::agent blocks, dropped from the HTML, become a labelled quote here (agent-only.mjs);
-          // their text is kept for the leak check after the loop.
-          const agentTexts = agentBlockTexts(twinSource(content, isMdx), file);
+          // their text is kept for the leak check after the loop. One parse serves both.
+          const { body, agentTexts } = twinParts(content, isMdx, file);
           if (agentTexts.length) agentPages.push({ slug: fm.slug, texts: agentTexts });
-          const body = twinBody(content, isMdx, file);
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });

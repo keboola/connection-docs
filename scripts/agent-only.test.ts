@@ -14,7 +14,7 @@ import remarkDirective from 'remark-directive';
 import {
   remarkAgentOnly, renderAgentBlocks, agentBlockTexts, findAgentLeaks, AGENT_LABEL,
 } from '../src/integrations/agent-only.mjs';
-import { twinBody } from '../src/integrations/page-markdown.mjs';
+import { twinBody, twinParts } from '../src/integrations/page-markdown.mjs';
 
 const page = [
   'Tables can be shared across projects.',
@@ -112,6 +112,12 @@ test('a block inside a list fails', () => {
 test('twinBody runs the agent step for every page', () => {
   const src = ['---', 'title: T', '---', 'Body.', '', ':::agent', 'Note.', ':::'].join('\n');
   assert.equal(twinBody(src, false), `Body.\n\n> ${AGENT_LABEL}\n>\n> Note.`);
+});
+
+test('twinParts gives the twin body and the block texts from one parse', () => {
+  const src = ['---', 'title: T', '---', 'Body.', '', ':::agent', 'Note.', ':::'].join('\n');
+  assert.deepEqual(twinParts(src, false), { body: `Body.\n\n> ${AGENT_LABEL}\n>\n> Note.`, agentTexts: ['Note.'] });
+  assert.deepEqual(twinParts('---\ntitle: T\n---\nNo notes here.', false), { body: 'No notes here.', agentTexts: [] });
 });
 
 test('the build guard flags a page whose HTML shows the note, however it is marked up', () => {

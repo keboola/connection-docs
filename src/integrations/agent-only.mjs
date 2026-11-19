@@ -74,6 +74,9 @@ const CLOSING_CODE_FENCE = /\n[ \t]*(`{3,}|~{3,})[ \t]*$/;
  * the twin and the page could read differently.
  */
 export function findAgentBlocks(markdown, file = 'page') {
+  // Most pages have no agent block: skip the parse. Any spelling the checks below
+  // care about (:::agent, :::Agent, ::agent, :agent) contains ":agent".
+  if (!/:agent/i.test(markdown)) return [];
   const tree = parser.parse(markdown);
   const blocks = [];
   const fail = (node, why) => {
@@ -119,22 +122,33 @@ export function findAgentBlocks(markdown, file = 'page') {
   return blocks;
 }
 
-/** Rebuild the markdown with every agent block turned into a labelled quote. */
-export function renderAgentBlocks(markdown, file = 'page') {
+/**
+ * One parse of a page, for both uses: `markdown` rebuilt with every agent block
+ * turned into a labelled quote, and `texts`, each block's content without the
+ * fences (for the leak check).
+ */
+export function processAgentBlocks(markdown, file = 'page') {
   let out = '';
   let at = 0;
+  const texts = [];
   for (const b of findAgentBlocks(markdown, file)) {
     const inner = markdown.slice(b.innerStart, b.innerEnd);
+    texts.push(inner);
     const quoted = inner.split('\n').map((line) => (line.trim() ? `> ${line}` : '>'));
     out += markdown.slice(at, b.start) + [`> ${AGENT_LABEL}`, '>', ...quoted].join('\n');
     at = b.end;
   }
-  return out + markdown.slice(at);
+  return { markdown: out + markdown.slice(at), texts };
+}
+
+/** Rebuild the markdown with every agent block turned into a labelled quote. */
+export function renderAgentBlocks(markdown, file = 'page') {
+  return processAgentBlocks(markdown, file).markdown;
 }
 
 /** The text of each agent block in a page, without the fences. */
 export function agentBlockTexts(markdown, file = 'page') {
-  return findAgentBlocks(markdown, file).map((b) => markdown.slice(b.innerStart, b.innerEnd));
+  return processAgentBlocks(markdown, file).texts;
 }
 
 /**
