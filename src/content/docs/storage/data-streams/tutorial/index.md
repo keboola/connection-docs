@@ -9,7 +9,7 @@ redirect_from:
     - /integrate/push-data/tutorial/
 ---
 
-In this tutorial, we will set up a data stream for the [`issues`](https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issues) event from GitHub Webhooks. This will allow you to monitor and analyze activity related to issues in any of your GitHub repositories.
+In this tutorial, we will set up a [data stream](/storage/data-streams/) for the [`issues`](https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issues) event from GitHub Webhooks. This will allow you to monitor and analyze activity related to issues in any of your GitHub repositories.
 
 <!-- Tutorial-type page. Source: the Stream API OpenAPI specification, as the note below says. Not re-run during the 2026-11-19 section split. -->
 
@@ -214,7 +214,7 @@ curl --request DELETE "https://stream.keboola.com/v1/branches/default/sources/gi
 
 ## See also
 
-- [Data Streams Reference](/storage/data-streams/reference/)
+- [Data Streams reference](/storage/data-streams/reference/)
 - [Stream API Reference](https://stream.keboola.com/v1/documentation/)
 
 **Next:** [Create and configure a data stream →](/storage/data-streams/create/)

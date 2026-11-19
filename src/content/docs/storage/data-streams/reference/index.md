@@ -1,5 +1,5 @@
 ---
-title: Data Streams Reference
+title: Data Streams reference
 description: 'Technical reference for Data Streams: sources and sinks in the Stream API, column types, mapping templates, import conditions, payload test, tokens, and limits.'
 slug: 'storage/data-streams/reference'
 sidebar:

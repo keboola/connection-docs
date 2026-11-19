@@ -28,6 +28,7 @@ Any official OpenTelemetry SDK or collector can export to an OTLP data stream; t
 **Goal:** your SDK or collector exports telemetry to the stream.
 
 1. Open the OTLP source detail page. It provides:
+   {/* VERIFY(Nikita): the step does not say how to reach the source detail page. Check the click path from Storage > Data Streams and add it. */}
    - **Endpoint URL** with a one-click copy button.
    - **Environment variable snippet** ready to paste into your application or deployment configuration.
    - **Table statistics** for each destination table (logs, metrics, traces), showing waiting vs. imported data.
@@ -58,6 +59,8 @@ Any official OpenTelemetry SDK or collector can export to an OTLP data stream; t
     export OTEL_SERVICE_NAME="my-python-service"
     python my_app.py
     ```
+
+    {/* VERIFY(Nikita): check whether `python my_app.py` exports anything when the app does not set up a tracer, meter or logger provider itself. Only the API, the SDK and the exporter are installed here. If it does not, say what the reader has to add. */}
   </TabItem>
   <TabItem label="Node.js">
     Install the OpenTelemetry API and the zero-code auto-instrumentation package:
@@ -87,6 +90,8 @@ Any official OpenTelemetry SDK or collector can export to an OTLP data stream; t
     export OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
     export OTEL_SERVICE_NAME="my-go-service"
     ```
+
+    {/* VERIFY(Nikita): this tab installs packages and sets environment variables, then stops. Check what code a Go application needs before it exports anything, and whether the Result below ("automatically pick them up") holds for Go. */}
   </TabItem>
   <TabItem label="Collector">
     If you already run an [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/), add Keboola as an OTLP/HTTP exporter in your collector configuration:
@@ -108,6 +113,8 @@ Any official OpenTelemetry SDK or collector can export to an OTLP data stream; t
     ```
 
     This approach lets you fan out telemetry to both your existing monitoring backend and Keboola simultaneously.
+
+    {/* VERIFY(Nikita): the pipelines in this snippet list no receivers, and a pipeline's exporters list written this way would replace the exporters the reader already has. Check how the snippet should be merged into an existing collector configuration. */}
   </TabItem>
 </Tabs>
 
@@ -117,13 +124,15 @@ The endpoint URL is a **base** URL. The SDK appends `/v1/logs`, `/v1/metrics`, o
 
 **Result:** Once these variables are set, any official OpenTelemetry SDK will automatically pick them up and begin exporting telemetry data to your Keboola project.
 
-## Keeping the secret out of your logs
+## Keep the secret out of your logs
 
 **Goal:** the source's secret travels in a request header and stays out of URLs.
 
 The endpoint URL shown in the app embeds the source's 48-character secret as its last path segment. That is convenient — a single string configures any SDK — but URLs end up in access logs, CDN logs, and APM traces.
 
 The API therefore returns the same endpoint in two forms in the source detail (`GET /v1/branches/{branchId}/sources/{sourceId}`):
+
+{/* VERIFY(Nikita): the call is given without a host or an auth header. Check both (the tutorial uses the Stream API host and X-StorageApi-Token) and add a full request. */}
 
 | Field | Value | How to authenticate |
 |---|---|---|
@@ -151,6 +160,8 @@ For anything beyond a quick test, prefer the header form:
 
 1. Wait until the stream's [import conditions](/storage/data-streams/reference/#conditions) are met (by default within about a minute). Records become available in Storage once they are.
 2. Check the **Table statistics** on the source detail page to confirm data is flowing.
+
+{/* VERIFY(Nikita): "within about a minute" against the reference defaults, a 30-second upload to staging followed by a 1-minute import interval. Check the delay a reader should expect. */}
 
 **Result:** **Table statistics** shows imported data for the destination tables. For the fields each table can hold and for query examples, see the [OpenTelemetry reference](/storage/data-streams/opentelemetry/reference/).
 

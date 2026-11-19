@@ -1,18 +1,18 @@
 ---
 title: Data Streams
-description: 'What Data Streams are and how they work: the HTTP and OpenTelemetry (OTLP) source types, how events reach a Storage table, pricing, and a map of the section.'
+description: 'What Data Streams are and how they work: the HTTP and OpenTelemetry (OTLP) source types, how events reach a Storage table, and a map of the section.'
 slug: 'storage/data-streams'
 redirect_from:
     - /integrate/data-streams/
     - /integrate/push-data/
 ---
 
-Keboola's Data Streams feature allows users to receive streaming event data directly into Keboola Storage without needing additional steps, such as setting up a data source, using middleware, or developing a custom component. It simplifies the process and enables ad hoc messaging from your system to Keboola Storage.
+Keboola's Data Streams feature allows users to receive streaming event data directly into Keboola Storage without needing additional steps, such as setting up a data source, using middleware, or developing a custom component. To try it end to end, follow the [tutorial](/storage/data-streams/tutorial/); to set up a stream in the app, see [Create and configure a data stream](/storage/data-streams/create/); for column types and the Stream API, see the [reference](/storage/data-streams/reference/).
 
 <!-- Explanation-type page. Source: this page and the OpenTelemetry page as they stood before the 2026-11-19 section split. Text moved, facts not re-checked against the product. -->
 
 ## Key benefits
-The most important benefits of the Data Streams feature include:
+The feature simplifies the process and enables ad hoc messaging from your system to Keboola Storage. The most important benefits of the Data Streams feature include:
 
 - **Real-Time Data Ingestion:** Stream events in near-real time for immediate access to data and actionable insights.
 - **Scalable Infrastructure:** Efficiently handle millions of events per day, ensuring seamless scalability.
@@ -34,8 +34,6 @@ The Data Streams feature receives messages via HTTP and saves them into the data
 
 Every incoming event is appended to the destination table. Data streams have no primary keys, so nothing is deduplicated on import. [No primary keys](/storage/data-streams/reference/#no-primary-keys) in the reference describes how to deduplicate downstream.
 
-To set up a stream in the app, see [Create and configure a data stream](/storage/data-streams/create/).
-
 ## OpenTelemetry (OTLP) streams
 
 [OpenTelemetry](https://opentelemetry.io/) is an open-source observability framework that captures three types of signals from your web apps, APIs, and services:
@@ -46,9 +44,7 @@ To set up a stream in the app, see [Create and configure a data stream](/storage
 
 Choosing the **OpenTelemetry (OTLP)** source type when [creating a data stream](/storage/data-streams/create/) turns Keboola into a drop-in [OTLP/HTTP](https://opentelemetry.io/docs/specs/otlp/#otlphttp) endpoint. Any official OpenTelemetry SDK or collector can export directly to Keboola, and the incoming telemetry data lands in Storage — queryable alongside your business data.
 
-When you create an OTLP data stream, the app sets up a destination table per signal (**logs**, **metrics**, **traces**) with a default column mapping, so there is nothing to map by hand before you start sending data.
-
-To set one up, see [Send OpenTelemetry (OTLP) data to Keboola](/storage/data-streams/opentelemetry/). For the tables, fields and query examples, see the [OpenTelemetry reference](/storage/data-streams/opentelemetry/reference/).
+To set one up, see [Send OpenTelemetry (OTLP) data to Keboola](/storage/data-streams/opentelemetry/). For the tables a stream writes, their fields and query examples, see the [OpenTelemetry reference](/storage/data-streams/opentelemetry/reference/).
 
 ### Why send telemetry to Keboola?
 
