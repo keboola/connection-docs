@@ -2,8 +2,8 @@
 title: Back up and restore tables
 slug: 'storage/tables/backups'
 sidebar:
-  label: Backups and Restorations
-description: 'Restore a Storage table to an earlier point in time with time travel on Snowflake, or copy and revert it with table snapshots on any backend.'
+  label: Back Up and Restore
+description: 'Restore a Storage table to an earlier point in time with time travel on Snowflake, or copy it with table snapshots on any backend.'
 search_keywords: [backup, restore, time travel, snapshot, table snapshot, revert table, copy table]
 ---
 
@@ -42,12 +42,13 @@ as `2023-03-23 00:00 +0200`, which is an hour earlier than you intended. To fix 
 That will be correctly interpreted as `2023-03-23 01:00 +0200`, which is equivalent to `2023-03-23 00:00 +0100`, the time you want to restore from.
 :::
 
-## Copy or revert a table with a snapshot
+## Copy a table with a snapshot
 
 **Goal:** a copy of a table's contents, taken now, that you can turn into a new table right away or later.
 
 To physically copy a table, utilize the **Create Snapshot** feature. This feature creates a copy of the table contents at the time the snapshot is created, 
 which can be used immediately to produce a physical copy of the table or later, to revert the table to its previous state.
+<!-- VERIFY(Nikita): the steps below only create a new table from a snapshot. Check whether a snapshot can also restore the original table in place, and how. -->
 
 Table snapshots are useful when **experimenting** with data source connectors and transformations, or when **refactoring** your project. You can create a copy of your output table, conduct experiments, 
 and then compare the new output table with the original to ensure your output remains consistent. They can also be used as a workaround to renaming tables because this feature is not available yet.

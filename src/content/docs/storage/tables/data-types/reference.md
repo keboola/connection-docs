@@ -16,7 +16,7 @@ Source data types are mapped to a destination using a **base type**. The current
 
 For detailed mappings, please refer to the [conversion table](https://developers.keboola.com/extend/common-interface/manifest-files/out-tables-manifests-native-types/#data-type-conversions). You can also view the extracted data types in the [storage table](/storage/tables/) detail.
 
-### How to define data types
+### Ways to define a type
 
 #### Using actual data types of the storage backend
 For example, in the case of Snowflake, you can create a column with a specific type like `TIMESTAMP_NTZ` or `DECIMAL(20,2)`. This approach allows you to define all details of the data type, including precision and scale. An example of such a column definition in a table-definition API endpoint call might look like this:

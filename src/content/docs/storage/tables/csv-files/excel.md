@@ -11,7 +11,7 @@ Two tasks for moving data between Microsoft Excel and Storage. The format Storag
 
 <!-- How-to-type page. Source: the Excel sections of the former CSV files page on main; text carried over and checked against it 2026-11-19. The Excel and Notepad steps were not re-run. -->
 
-<!-- VERIFY(Nikita): both tasks describe an older Excel on Windows. Current Excel can save as "CSV UTF-8 (Comma delimited)" and imports with Data > From Text/CSV. Check whether the Notepad conversion and the import wizard steps should be replaced. -->
+<!-- VERIFY(Nikita): both tasks describe an older Excel on Windows. Current Excel can save as "CSV UTF-8 (Comma delimited)" and imports with Data > From Text/CSV. The old import wizard sets the encoding in a "File origin" field, where this page says "Unicode UTF-8". Check whether the Notepad conversion and the import wizard steps should be replaced. -->
 
 ## Export an Excel sheet as a file for Storage
 
@@ -33,6 +33,7 @@ but without using any non-standard Windows tools, the quickest is this:
    ![Screenshot -- Excel Export - Notepad Convert](/storage/tables/excel-export-2.png)
 
 3. Import the resulting file `import-data.txt.csv` into Keboola Storage as a tab delimited file:
+   <!-- VERIFY(Nikita): the old text names no upload control or delimiter field for this import, and the file name `import-data.txt.csv` appears only in the screenshot. Check the current import dialog. -->
 
    ![Screenshot -- Excel Export - KBC Import](/storage/tables/excel-export-3.png)
 
@@ -42,7 +43,7 @@ but without using any non-standard Windows tools, the quickest is this:
 
 ## Open a CSV file from Storage in Excel
 
-**Goal:** a table exported from Storage, open in an Excel workbook with its columns and characters intact.
+**Goal:** a table exported from Storage, open in an Excel workbook.
 
 The easiest way to import the CSV file exported from Keboola into Microsoft Excel is this:
 

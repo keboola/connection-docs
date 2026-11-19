@@ -21,7 +21,7 @@ running and finished (what tables were modified, how much data was transferred a
 what events occurred during the job execution).
 - [**Storage Jobs**](/management/jobs/#storage-jobs) — track all data
 which were uploaded/downloaded into your project.
-- [**Table Snapshots**](/storage/tables/backups/#copy-or-revert-a-table-with-a-snapshot) — allow you to revert data
+- [**Table Snapshots**](/storage/tables/backups/#copy-a-table-with-a-snapshot) — allow you to revert data
 to an earlier version (either revert the contents of a table or copy the table into another one).
 - [**Data Takeout**](/management/project/export/) — allows you to get your data back from us; in Keboola, you are
 always the sole owner of your data. Data Takeout is especially useful for proof-of-concept projects.

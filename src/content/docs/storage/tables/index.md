@@ -10,7 +10,7 @@ search_keywords: [table, tables, alias, alias table, metadata, column names, tab
 Tables hold your project's data in Storage. This page explains what a table and an alias are and the rules every
 table follows. For tasks such as creating an alias or deleting rows, see [Manage tables](/storage/tables/manage/).
 
-<!-- Explanation-type page. Split from the former single tables page (PRDCT-486); text carried over from main 2026-11-12, tab name live-verified in #1010. -->
+<!-- Explanation-type page. Split from the former single tables page; text carried over from main 2026-11-12, tab name live-verified in #1010. -->
 
 ## What a table is
 

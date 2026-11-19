@@ -714,7 +714,7 @@ items:
             title: CSV in Excel
 
           - url: /storage/tables/backups/
-            title: Backups and Restorations
+            title: Back Up and Restore
 
       - url: /storage/buckets/
         title: Buckets

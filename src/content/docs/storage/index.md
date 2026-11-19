@@ -27,20 +27,17 @@ It is also recorded in [Events](/management/project/tokens/#token-events) and
 - Keep data in [tables](/storage/tables/), grouped into [buckets](/storage/buckets/). A table can have aliases, a primary key and [incremental loading](/storage/tables/incremental-loading/).
 - Keep column types with [native data types](/storage/tables/data-types/), and document tables and columns with [descriptions](/storage/tables/descriptions/).
 - Upload any file to [Files](/storage/files/), tag it and pass it on with a link. Table imports and exports pass through Files too.
-- Get a table back as it was at an earlier time with [time travel restore or snapshots](/storage/tables/backups/).
+- Recreate a table as it was at an earlier time, as a new table, with [time travel restore or snapshots](/storage/tables/backups/).
 - See every load into and unload from a table in [Storage jobs](/storage/jobs/).
 - Receive streaming event data straight into Storage with [Data Streams](/storage/data-streams/), with no data source connector to set up.
 - Share buckets with other projects through the [Data Catalog](/catalog/), or with people outside your project through [Bucket Exposure](/storage/bucket-exposure/) (beta).
-- Limit which rows and columns a reader sees with [row- and column-level security](/storage/row-level-security/) (beta). It applies your policies to queries from the MCP Server, Data Apps and the Keboola CLI.
+- Limit which rows and columns a reader sees with [row- and column-level security](/storage/row-level-security/) (beta). It applies your policies to queries through [governed workspaces](/storage/row-level-security/#what-is-protected).
 - Keep project data in your own Snowflake or BigQuery account with [Bring Your Own Database](/storage/byodb/).
 - Work with Storage from code: everything that can be done through the UI can also be done through the [Storage API](/storage/api/).
 
 ## Storage data
-The Storage component manages all data stored in each Keboola project:
-
-- [Data tables](/storage/tables/) (Table Storage) — organized into [buckets](/storage/buckets/)
-- [Data files](/storage/files/) (File Storage) — all raw files uploaded to your project
-- [Component configurations](/components/)
+The Storage component manages all data stored in each Keboola project: data tables (Table Storage), organized into
+buckets; data files (File Storage), all raw files uploaded to your project; and [component configurations](/components/).
 
 Different storage technologies are used for the above data:
 
@@ -49,6 +46,30 @@ Different storage technologies are used for the above data:
 
 The database system behind the Table Storage is referred to as a **backend**.
 Data in Table Storage is internally stored in a **database backend** (project backend).
+
+### How tables pass through File Storage
+File Storage also contains files with data exported from tables. These are created when you request to export a table from *Table Storage*. The *File Storage* serves two main purposes:
+
+1. Files can be used to store an arbitrary file.
+2. Every data table file is stored in Files before it is processed and pushed into a table.
+
+All tables imported to and exported from Storage go through Files.
+
+When a table is **imported** into Storage by any means (manually, through a data source connector, or as a result of running an application),
+the CSV file is first stored in *Files* and only then imported to an actual table. 
+This means that the Storage Files contain a history of data uploaded to the Storage Tables. 
+It is useful mainly in the two following cases:
+
+1. [Reverting table](/storage/tables/) content to a particular imported version
+2. Analyzing how something got into a table (useful mainly for incremental loads)
+
+Every time a table is **exported** from Storage, the process is reversed: first, a file is
+created in *Files* and then it is actually downloaded from there. This does not apply when exporting
+Storage tables manually though.
+Beware, however, that due to the nature of database exports, the exported table may be **sliced** and require
+[substantial effort to reconstruct](/storage/api/import-export/#working-with-sliced-files).
+
+To find the file behind an import, open the import job in [Storage jobs](/storage/jobs/#find-the-file-a-job-loaded) and click its **File ID**.
 
 ### Storage backend types and features
 There are multiple types of storage backend configurations you can choose from, and each has its own features and limitations.

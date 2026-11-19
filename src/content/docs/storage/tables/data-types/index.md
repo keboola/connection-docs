@@ -46,9 +46,9 @@ In transformations, this option is not available. Instead, you define the data t
 **Important:** Existing tables will not be affected by this feature. Also, if you do not see the **Automatic data types** option in the sidebar, it means the component does not support this feature.
 
 ### How typed tables are created
-The Native Data Types feature allows tables to be created with data types that match the original source or storage backend. Here’s how you can create typed tables:
+The Native Data Types feature allows tables to be created with data types that match the original source or storage backend. Typed tables are created in two ways:
 - **Manually via API**  
-You can manually create typed tables using the [tables-definition endpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition). Ensure that the data types align with the storage backend (e.g., Snowflake, BigQuery) used in your project. Alternatively, [base types](/storage/tables/data-types/reference/#base-types) can be used for compatibility.
+Typed tables can be created manually with the [tables-definition endpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition). The data types must align with the storage backend (e.g., Snowflake, BigQuery) used in your project. Alternatively, [base types](/storage/tables/data-types/reference/#base-types) can be used for compatibility.
 - **Using a Component**  
 Extractors and transformations that match the storage backend (e.g., Snowflake SQL transformation on a Snowflake storage backend) will automatically create typed tables in Storage:
   - **Matching Storage Backend:** Database extractors and transformations create storage tables using the same data types as the backend.
@@ -56,18 +56,8 @@ Extractors and transformations that match the storage backend (e.g., Snowflake S
 
 
 :::caution
-**Important:** When a table is created, it defaults to the lengths and precisions specific to the Storage backend. For instance, in Snowflake, the NUMBER base type defaults to NUMBER(38,9), which might differ from the source database column type, such as NUMBER(10,2). To avoid this limitation, follow the steps below.
+**Important:** When a table is created, it defaults to the lengths and precisions specific to the Storage backend. For instance, in Snowflake, the NUMBER base type defaults to NUMBER(38,9), which might differ from the source database column type, such as NUMBER(10,2). A table created in advance keeps the lengths and precisions you define: see [Keep the lengths and precisions of a typed table](/storage/tables/manage/#keep-the-lengths-and-precisions-of-a-typed-table).
 :::
-
-To avoid the limitation:
-- Manually create the table in advance using the [Table Definition API](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition), specifying the correct lengths and precisions.
-- Subsequent jobs writing data to this table will respect your defined schema as long as it matches the expected structure.
-- Be cautious when dropping and recreating tables. If a job creates a table, it will default to the base type with backend-specific defaults, which might not align with your source.
-
-**Example:**  
-To ensure typed tables are imported correctly into Storage, define your table in a Snowflake SQL transformation, adhering to the desired schema and data types:
-
-![Screenshot - Create a Table](/storage/tables/data-types/create-table.png)
 
 ## Incremental loading
 The behavior of incremental loading differs between **typed** and **non-typed tables**:

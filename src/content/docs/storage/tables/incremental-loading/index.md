@@ -4,12 +4,12 @@ slug: 'storage/tables/incremental-loading'
 sidebar:
   label: Primary Keys & Incremental Loading
 search_keywords: [primary key, deduplication, incremental load, upsert, incremental processing, changed in last, _timestamp]
-description: 'How data lands in a Storage table: primary keys and deduplication, incremental loads, the _timestamp column with native data types, and automatic and manual incremental processing.'
+description: 'Primary keys and deduplication in Storage tables, incremental loads, the _timestamp column of typed tables, and automatic and manual incremental processing.'
 ---
 
 How data lands in a [table](/storage/tables/) depends on two settings: whether the table has a **primary key**, and whether the load is **incremental**. This page explains both, with worked examples, plus **incremental processing**: letting components read only the rows that changed since their last successful run, or within a time window. To set a primary key in the UI, see [Manage tables](/storage/tables/manage/#set-or-remove-a-primary-key).
 
-<!-- Explanation-type page. Split from the former single tables page (PRDCT-486, first cut in #1010); text carried over from main 2026-11-12. -->
+<!-- Explanation-type page. Split from the former single tables page (first cut in #1010); text carried over from main 2026-11-12. -->
 
 ## Primary Keys
 Each table may have a **primary key** defined on one or more columns. A primary key represents an

@@ -4,15 +4,15 @@ slug: 'storage/tables/manage'
 sidebar:
   label: Manage Tables
 description: 'Manage Storage tables: create an alias, set or remove a primary key, truncate a table, delete rows, change a column type, and make a typed table.'
-search_keywords: [create alias, alias table, primary key, set primary key, truncate table, delete rows, empty table, change column type, change data type, typed table, non-typed table]
+search_keywords: [create alias, alias table, primary key, set primary key, truncate table, delete rows, empty table, change column type, change data type, typed table, non-typed table, precision, length]
 ---
 
-Step-by-step tasks for an existing Storage table. The first four start from its table detail; the last two change
+Step-by-step tasks for an existing Storage table. The first four start from its table detail; the last three deal with
 column data types. What tables, aliases and primary keys are is explained in [Tables in Storage](/storage/tables/) and
 [Primary keys and incremental loading](/storage/tables/incremental-loading/), and typed tables in
 [Native data types](/storage/tables/data-types/).
 
-<!-- How-to-type page. Split from the former single tables page (PRDCT-486). The Storage tab and Delete rows labels were checked live in #1010; the rest is carried over from main 2026-11-12. The two data type tasks come from the former data types page, carried over 2026-11-19. -->
+<!-- How-to-type page. Split from the former single tables page. The Storage tab and Delete rows labels were checked live in #1010; the rest is carried over from main 2026-11-12. The three data type tasks come from the former data types page, carried over 2026-11-19. -->
 
 The first four tasks start the same way: open **Storage → Tables & Buckets**, open the bucket, and select the table. Its
 **table detail** opens at the top of the screen, with a three-dots menu on the right.
@@ -70,10 +70,8 @@ some time on large tables.
 
 Truncating removes all records from a table while preserving its schema (column structure and metadata). Primary
 keys and metadata remain without change. It is highly efficient especially when replacing an entire dataset. Use it
-for:
-- Replacing data completely (e.g., daily refresh of customer records).
-- Ensuring clean data ingestion without duplication.
-- Automating scheduled table resets (e.g., overwriting temporary datasets).
+to replace data completely (e.g., a daily refresh of customer records), to ensure clean data ingestion without
+duplication, or to automate scheduled table resets (e.g., overwriting temporary datasets).
 
 1. Open the table (**Storage → Tables & Buckets** → bucket → table). In the table detail, click the three dots on the right side of the screen. A drop-down menu will display.
 2. Select **Truncate table**. A warning information will display.
@@ -85,10 +83,8 @@ for:
 
 **Goal:** remove only the records that match your filters and keep the rest of the table intact.
 
-Unlike truncating, deleting rows selectively removes only matching records. You can apply multiple filters in a
-single execution, such as:
-- Rows changed within a specific period.
-- Rows containing a specific value in a given column.
+Unlike truncating, deleting rows selectively removes only matching records, and one execution can apply multiple
+filters, such as rows changed within a specific period or rows containing a specific value in a given column.
 
 Typical uses are removing outdated records (e.g., inactive customers), correcting erroneous data entries, and
 synchronizing data with external systems (e.g., deleting stale records).
@@ -105,6 +101,28 @@ To delete rows before each incremental load of a transformation instead, use the
 **Delete rows** option of the [transformation output mapping](/transformations/mappings/#output-mapping), with Incremental
 loading enabled.
 
+## Keep the lengths and precisions of a typed table
+
+**Goal:** a typed table whose columns keep the lengths and precisions you define, such as NUMBER(10,2), instead of the
+Storage backend defaults.
+
+When a job creates a table, it defaults to the lengths and precisions specific to the Storage backend (see
+[Native data types](/storage/tables/data-types/#how-typed-tables-are-created)). To avoid the limitation:
+
+1. Manually create the table in advance using the [Table Definition API](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition), specifying the correct lengths and precisions.
+
+   **Example:** To ensure typed tables are imported correctly into Storage, define your table in a Snowflake SQL transformation, adhering to the desired schema and data types:
+
+   ![Screenshot - Create a Table](/storage/tables/data-types/create-table.png)
+
+2. Run the jobs that write to the table. Subsequent jobs writing data to this table will respect your defined schema as long as it matches the expected structure.
+
+:::caution
+Be cautious when dropping and recreating tables. If a job creates a table, it will default to the base type with backend-specific defaults, which might not align with your source.
+:::
+
+**Result:** the table keeps the lengths and precisions you defined, as long as the data written to it matches that structure.
+
 ## Change a column type in a typed table
 
 **Goal:** a column of a typed table holds its data in a different data type.
@@ -119,8 +137,10 @@ Some other alterations, such as increasing the length or precision of a column, 
 Assume you have a column `date` of type `VARCHAR` in a typed table, and you want to change it to `TIMESTAMP`.
 
 1. Add a new column named `date_timestamp` of type `TIMESTAMP` to the table.
+   <!-- VERIFY(Nikita): the old text names no control for adding a column (step 1), removing a column (step 5) or dropping and recreating a table (full load). Check where each is done in the UI or API. -->
 2. Update all jobs filling the table to populate both the new column (`date_timestamp`) and the existing column (`date`).
 3. Run an ad-hoc transformation to copy data from `date` to `date_timestamp` for the existing rows.
+   <!-- VERIFY(Nikita): the old text gives no output mapping or SQL for writing back into the same table. Check how the transformation updates the existing rows (incremental output with the primary key?). -->
 4. Gradually update all configurations and references to use `date_timestamp` instead of `date`.
 5. Once all references are updated and the old column is no longer in use, you can safely remove the `date` column.
 
@@ -128,8 +148,9 @@ Assume you have a column `date` of type `VARCHAR` in a typed table, and you want
 **Important:** Always verify other configurations that depend on the table to avoid schema mismatches. Also, pay special attention to writers (data destination connectors), particularly if the table already exists in the destination system. Mismatched schemas between the source and destination can lead to errors.
 :::
 
-**Result:** the table holds the data in a column of the new type (`date_timestamp` in the example), and nothing reads
-the old column anymore.
+**Result:** for a full-load table, a new table with the correct types holds the data. For a table loaded incrementally,
+the `date_timestamp` column of type `TIMESTAMP` holds the data of every row, all configurations use it, and the `date`
+column is removed.
 
 ## Create a typed table from a non-typed table
 
@@ -138,9 +159,10 @@ the old column anymore.
 If you have a non-typed table, `non_typed_table`, with undefined data types and want to convert it into a typed table, follow these steps:
 
 1. **Set up the transformation.**
-   - Create a new transformation in Keboola.
+   - Create a new transformation in Keboola. The query in step 2 is for a Snowflake SQL transformation.
    - Choose `non_typed_table` as the input table in the input mapping section (you can also rely on [read-only input mapping](/transformations/#read-only-input-mapping)).
-   - In the output mapping section, define the output table as `typed_table`. Ensure that the output table does not exist; otherwise, it will not be created as a typed table.
+   - In the output mapping section, define the output table as `typed_table`, the table your query creates. Ensure that the output table does not exist; otherwise, it will not be created as a typed table.
+     <!-- VERIFY(Nikita): the old text names only `typed_table`. Check whether that is the output mapping source, the destination table in Storage, or both, and which bucket the destination is in. -->
 
    ![Screenshot - Typed Table Transformation](/storage/tables/data-types/typed-table-transformation.png)
 
@@ -160,6 +182,7 @@ If you have a non-typed table, `non_typed_table`, with undefined data types and 
 
 3. **Run the transformation.** Execute the transformation and wait for it to complete.
 4. **Verify the schema.** Once the transformation is finished, check the schema of the newly created table, `typed_table`.
+   <!-- VERIFY(Nikita): the old text names no place to check the schema. Check which tab of the table detail shows the column types. -->
 
 **Result:** `typed_table` is a new typed table. It should now include the appropriate data types.
 
