@@ -28,7 +28,8 @@ feature.
 - **If your taxonomy enforces fine-grained access control, a read grant for each of those projects.**
   `roles/datacatalog.categoryFineGrainedReader` on the taxonomy for each project allowed to see the data
   (`principalSet://cloudresourcemanager.googleapis.com/projects/{project number}/type/ServiceAccount`). Without it,
-  cloning, copying, branch pulls, previews, exports and incremental loads of a tagged table fail in that project with
+  cloning, copying, branch pulls, creating a table from it, previews, exports and incremental loads of a tagged table
+  fail in that project with
   `storage.backend.policyTagAccessDenied`. Keboola never grants this role itself. See
   [Fine-grained access](/storage/byodb/bigquery-policy-tags/#fine-grained-access).
 
@@ -41,12 +42,6 @@ Keboola does not enable the backend and tells you what to fix.
 
 To add a project later, ask Keboola to switch it on. If your taxonomy enforces fine-grained access, grant that project the
 read role first; Keboola warns when it is missing.
-
-## Known issue: incremental loads into existing workspace tables
-
-An incremental load from Storage into a workspace table that already exists can be refused right after the feature is
-switched on. This affects only that one case; most input mappings never see it. See
-[Known gaps](/storage/byodb/bigquery-policy-tags/#known-gaps) for the scope and the fix.
 
 ## Changing the setup later
 

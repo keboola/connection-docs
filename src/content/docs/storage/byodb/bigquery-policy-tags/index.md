@@ -15,9 +15,9 @@ the feature.
 
 With policy-tag support turned on, Keboola does three things:
 
-- It keeps the policy tag when it pulls a protected table into a development branch or loads it into a workspace
-  (clone or copy, including from a linked bucket), and a Storage load into an existing tagged table keeps that table's
-  tags. Other paths, such as transformation outputs, are listed in
+- It keeps the policy tag when it pulls a protected table into a development branch, loads it into a workspace
+  (clone or copy, including from a linked bucket), or creates a table from it with the Storage API. A Storage load into
+  an existing tagged table keeps that table's tags. Other paths, such as transformation outputs, are listed in
   [What this feature does not cover](#what-this-feature-does-not-cover).
 - When it cannot keep the tag on one of those copies, it refuses to make the copy.
 - It reports each column's protection state in the table detail.
@@ -39,16 +39,29 @@ The feature is switched on at two levels, and Keboola support handles both on re
   You can start with one project and add more later; adding a project needs nothing on your side beyond asking for it.
 
 For a linked bucket, the project that decides is the one that makes the copy, not the one that shares the data. Turning
-the feature on in a project affects the next copy; tables already copied without tags are not re-tagged.
+the feature on in a project affects the next copy. Tables already copied without tags are not re-tagged, except a
+workspace table that a later incremental load reaches (see
+[Incremental loads into an existing workspace table](#incremental-loads-into-an-existing-workspace-table)).
 
 ## How it works
 
-Keboola carries the tag over when it pulls a table into a development branch or loads it into a workspace within your
-backend, including from a linked bucket. Other paths, such as snapshot restore, are listed in
-[What this feature does not cover](#what-this-feature-does-not-cover). The destination is created already protected,
+Keboola carries the tag over on these copies within your backend:
+
+- pulling a table into a development branch;
+- loading a table into a workspace, as a clone or a copy, including from a linked bucket;
+- creating a table from another table with the Storage API (the
+  [tables-definition endpoint](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition)
+  with a `source`).
+
+Other paths, such as snapshot restore, are listed in
+[What this feature does not cover](#what-this-feature-does-not-cover). A new destination is created already protected,
 before any row reaches it.
 
 Columns are matched by name. A column renamed in an input mapping keeps its tag under the new name.
+
+A workspace's service account can edit the tables in its workspace, but it does not own the workspace dataset. It
+cannot remove a tag that Keboola carried over, or replace it with another one. Workspaces created before this role
+was introduced are an exception; see [Known gaps](#known-gaps).
 
 When Keboola cannot keep the protection, the job fails and names the affected columns. Nothing is copied, and a table the
 job was about to replace stays as it was. The job fails as a user error, so Keboola does not retry it. Typical reasons:
@@ -57,8 +70,24 @@ job was about to replace stays as it was. The job fails as a user error, so Kebo
 - The tag comes from a taxonomy in another region, or from a taxonomy other than the one you named for the backend. BigQuery
   checks the project service account's permission on that tag's taxonomy, and the setter role is granted only on yours.
 - The source is a view that renames, computes or joins a protected column, so Keboola cannot trace where the column
-  comes from. A view that passes a protected column through under its own name is copied with the tag.
+  comes from. A view that passes a protected column through under its own name is copied with the tag. The same holds
+  for an [alias](/storage/tables/#aliases): an alias of a tagged table is copied with the tag, and a filtered alias of
+  a tagged table is refused.
 - Keboola cannot read the source, or the project's service account lacks a grant that the copy needs.
+
+### Incremental loads into an existing workspace table
+
+A workspace table that existed before the feature was switched on, or before its source was tagged, has no tags. The
+next incremental load from a tagged source adds the source's tags to those columns before it adds any rows, and records
+a `storage.workspacePolicyTagsAdded` event. The new rows land in a protected column, and the rows already in the table
+are protected from then on. The tags stay even if the load then fails, for example because the project may not read
+the tagged column.
+
+Keboola never replaces an existing tag. If a column of the workspace table already carries a different tag than its
+source, the load fails with `storage.workspace.policyTagMismatch` before it writes anything, and the project records a
+`storage.workspacePolicyTagMismatch` event. This happens when the source's tag changed after an earlier load tagged the
+workspace table, or when the tag was set on the workspace table directly. A workspace table that carries a tag its
+source does not have is left alone, and the load proceeds.
 
 ## What you grant
 
@@ -89,7 +118,7 @@ account, so the project needs that role to copy tagged data.
 
 Without it, the project cannot:
 
-- clone or copy a table with a tagged column, or pull it into a development branch;
+- clone or copy a table with a tagged column, pull it into a development branch, or create a table from it;
 - preview or export it;
 - load it incrementally, because the merge reads the tagged column. Only a full load succeeds.
 
@@ -134,7 +163,8 @@ the source table, the destination table and the columns involved.
 |---|---|---|
 | `storage.policyTagsNotPropagated` | A protected column was copied without its tag, because Keboola could not carry the protection over on this copy. Usually the backend is not enabled, or the project does not have the feature turned on. | Ask for the feature if copies must stay protected, and check who can read the copy. |
 | `storage.policyTagPropagationFailed` | Keboola tried to keep the tag, failed, and copied nothing. | Read the error in the event, fix its cause, and run the job again. |
-| `storage.workspacePolicyTagMismatch` | An incremental load was refused, because the existing workspace table is less protected than its source. | Run that load once as a full load with overwrite (incremental off, overwrite on); the workspace table is replaced with one that carries the tags. See [Known gaps](#known-gaps). |
+| `storage.workspacePolicyTagsAdded` | An incremental load added the source's tags to columns of an existing workspace table that had no tag. The tags stay even if the load that follows fails. | Nothing. The event records which columns are protected from now on. |
+| `storage.workspacePolicyTagMismatch` | An incremental load was refused, because a column of the existing workspace table carries a different tag than its source. Keboola does not replace an existing tag. | Change or remove that tag on the workspace table in BigQuery, then run the load again. This needs BigQuery rights that the workspace's own credentials do not have. See [Incremental loads into an existing workspace table](#incremental-loads-into-an-existing-workspace-table). |
 
 ## What this feature does not cover
 
@@ -162,26 +192,13 @@ Policy-tag support keeps protection on the copies Keboola makes within your BigQ
 
 ## Known gaps
 
-- **An incremental load into an existing workspace table can be refused.** This concerns one case only: an incremental
-  load from Storage into a workspace table that already exists, as in a persistent workspace or an incremental input
-  mapping. Full loads, clone loads and workspace tables created after the feature was switched on are not affected, so
-  most transformation input mappings never see it.
-
-  Keboola attaches tags to a workspace table only when it creates the table. A table that existed before the feature was
-  switched on has no tags, and adding protected rows to it would expose them, so Keboola refuses the load. The job fails
-  before it writes anything, names the affected columns, and the project records a `storage.workspacePolicyTagMismatch`
-  event. The same happens when a source gets tagged after the workspace table that receives it incrementally was
-  created.
-
-  To fix it, run that load once as a full load with overwrite (incremental off, overwrite on). Keboola replaces the
-  workspace table with one that carries the source's tags, and incremental loads work again from the next run. A full
-  load without overwrite into an existing workspace table is refused. A fix that tags the existing table instead of
-  refusing the load is planned.
-- **A workspace can remove or replace a tag on its own tables.** A workspace's service account owns the tables in its
-  workspace, so it can remove a carried-over tag from one of them, or replace it with another tag from your taxonomy. If
-  your taxonomy enforces fine-grained access, the workspace can then read that column of its copy. This exposes nothing
+- **An older workspace can still remove or replace a tag on its own tables.** A workspace's service account used to own
+  its workspace dataset, which let it remove a carried-over tag or replace it with another tag from your taxonomy. New
+  workspaces get an editor role that cannot do either. Workspaces created before that change keep the owner role until
+  Keboola migrates them on your backend; ask Keboola support for the migration. Until then, if your taxonomy enforces
+  fine-grained access, such a workspace can remove the tag and then read that column of its copy. This exposes nothing
   beyond what the project could already read when the project holds the Fine-Grained Reader role, but the copy is no
-  longer protected, for example when it is exported. A fix is planned.
+  longer protected, for example when it is exported.
 - **Anyone allowed to read a tagged column can copy it without the tag.** A policy tag restricts reading, not copying.
   A principal that holds the Fine-Grained Reader role, inside or outside Keboola, can write the values to a new table that
   carries no tag. This is how BigQuery policy tags work, and Keboola cannot prevent it.
