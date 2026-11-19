@@ -16,7 +16,7 @@ Projects using [Multi-tenant](/storage/#multi-tenant-mt) Snowflake backend can u
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Snowflake** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Snowflake** data destination connector.
 
 The first step is to **set up credentials**:
 

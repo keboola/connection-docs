@@ -1,5 +1,6 @@
 ---
 title: dbt Cloud Job Trigger
+description: 'Trigger a dbt Cloud job from Keboola: account ID, job ID and API key, a custom cause message, and waiting for the run to store its result and artifacts.'
 slug: 'components/applications/triggers/dbt-cloud-job-trigger'
 ---
 
@@ -7,8 +8,10 @@ slug: 'components/applications/triggers/dbt-cloud-job-trigger'
 
 The dbt Cloud Job Trigger is used for triggering [dbt Cloud](https://www.getdbt.com/product/what-is-dbt) jobs.
 
+<!-- Reference-type page. Type declared in the 2026-11-19 section rework; the content is unchanged and was not re-checked against the component. -->
+
 ## Create New Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **dbt Cloud Job Trigger** application.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **dbt Cloud Job Trigger** application.
 Then fill in your Account ID, Job ID and API key. You also have the option to choose a custom Cause message to identify the trigger.
 It saves the response from [triggerRun](https://docs.getdbt.com/dbt-cloud/api-v2#tag/Jobs/operation/triggerRun) into the table dbt_cloud_trigger.
 If you check the **Wait for result** option, the component will wait for the job to finish for the maximum time set via the **Max wait time** field after it has been triggered. Then it will store the result of [getRunById](https://docs.getdbt.com/dbt-cloud/api-v2#tag/Runs/operation/getRunById) into the table dbt_cloud_run. It will also store all available artifacts, unless you turn that off with **Don't store artifacts**.

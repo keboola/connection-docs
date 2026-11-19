@@ -12,8 +12,8 @@ calendars available in your account, including events and their details (organiz
 notifications, attachments, description, etc.). It can also be used for downloading Google owned calendars with all national holidays.
 
 ## Create New Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Calendar** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Calendar** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 ![Google Calendar - Authorize Account](/components/extractors/communication/google-calendar/google-calendar-1.png)
 

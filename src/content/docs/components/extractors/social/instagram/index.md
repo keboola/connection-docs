@@ -19,8 +19,8 @@ the configuration process is almost identical to configuring the [Facebook](/com
 Before you begin, make sure you have a Facebook page, a role on that page, and an Instagram account. The Facebook 
 page needs to be [connected to the Instagram Business Account](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/get-started/).
 
-[Create a new configuration](/components/#creating-component-configuration) of the **Instagram** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with a Facebook account 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Instagram** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/) with a Facebook account 
 with access to the Facebook page you have the Instagram Business Account connected to.
 You will be asked for the `instagram_basic,instagram_manage_insights,pages_show_list` [permissions](https://developers.facebook.com/docs/facebook-login/permissions).
 Optionally, you can use `Direct token insert` to specify a manually generated access token.

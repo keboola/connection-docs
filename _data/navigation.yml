@@ -164,17 +164,39 @@ items:
   - url: /components/
     title: Components
     items:
+      - url: /components/configurations/
+        title: Configurations
+
+      - url: /components/authorization/
+        title: Authorization
+
+      - url: /components/debug-mode/
+        title: Debug Mode
+
       - url: /components/running-jobs-in-parallel/
         title: Running Jobs in Parallel
 
       - url: /components/variables/
         title: Variables
         items:
+          - url: /components/variables/use/
+            title: Use Variables
           - url: /components/variables/api/
             title: Variables Through the API
             items:
               - url: /components/variables/api/tutorial/
                 title: Tutorial
+
+      - url: /components/branches/
+        title: Development Branches
+        items:
+          - url: /components/branches/manage/
+            title: Manage Branches
+          - url: /components/branches/merge-requests/
+            title: Merge Requests
+
+      - url: /components/ip-addresses/
+        title: IP Addresses
 
       - url: /components/extractors/
         title: Data Source Connectors
@@ -661,6 +683,10 @@ items:
                 title: dbt Cloud Job Trigger
               - url: /components/applications/triggers/deepnote-notebook-execution-trigger/
                 title: Deepnote Notebook Execution Trigger
+              - url: /components/applications/triggers/powerbi-refresh/
+                title: Power BI Refresh
+              - url: /components/applications/triggers/tableau-extract-refresh/
+                title: Tableau Extract Refresh Trigger
           - url: /components/applications/custom-python/
             title: Custom Python
           - url: /components/applications/data-gateway/
@@ -670,15 +696,6 @@ items:
             items:
               - url: /components/applications/ai/generative-ai/
                 title: Generative AI
-
-      - url: /components/branches/
-        title: Development Branches
-        items:
-          - url: /components/branches/merge-requests/
-            title: Merge Requests
-
-      - url: /components/ip-addresses/
-        title: IP Addresses
 
   - url: /catalog/
     title: Data Catalog

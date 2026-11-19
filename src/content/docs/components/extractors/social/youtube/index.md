@@ -15,8 +15,8 @@ about your YouTube channels or your YouTube activity. It is ideal for obtaining 
 [YouTube Reporting](/components/extractors/social/youtube-reporting/) or the [Google Analytics](/components/extractors/marketing-sales/google-analytics/) data source connectors for such purposes.*
 
 ## Configuration
-To begin, [create a new configuration](/components/#creating-component-configuration) for the **YouTube** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+To begin, [create a new configuration](/components/configurations/#create-a-configuration) for the **YouTube** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 Select one of the two available **templates**: 
 

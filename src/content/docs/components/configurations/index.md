@@ -1,144 +1,193 @@
 ---
 title: Create and manage configurations
 slug: 'components/configurations'
-description: Create a component configuration, run it, describe it, compare and roll back its versions, copy it, and delete or restore it from Trash.
+sidebar:
+  label: Configurations
+description: 'Create a component configuration, run it, describe it, compare and roll back its versions, copy it, and delete or restore it from Trash.'
 ---
 
-This page shows how to create a configuration of a [component](/components/) and manage it afterwards.
+To use a [component](/components/), you create a configuration of it and run it. This page has the steps for that and for the tasks that follow. Signing in to an external service is on [Authorize a component](/components/authorization/); editing the raw JSON is on [Debug mode](/components/debug-mode/).
 
-## Creating Component Configuration
-To create a new component configuration, select *Components* from the top navigation and then select one of the component categories:
+<!-- How-to-type page. Source: the Components page as it was before the 2026-11-19 split. Text and screenshots carried over; facts not re-checked against the product. -->
 
-![Screenshot - Create Configuration](/components/configuration-1.png)
+## Create a configuration
 
-The following page lists the project's current configurations (e.g., data source connectors). To create a new configuration of a new component, 
-use the **Directory** or the **Add New Data Source** button.
+**Goal:** add a component to your project and set its parameters.
 
-![Screenshot - Extractors List](/components/configuration-2.png)
+1. Select *Components* from the top navigation and then select one of the component categories:
 
-Use the search field to find the component you want to use (the Currency Rates data source connector in this case) and then click the component tile to add it:
+   ![Screenshot - Create Configuration](/components/configuration-1.png)
 
-![Screenshot - Search Component](/components/configuration-3.png)
+2. The following page lists the project's current configurations (e.g., data source connectors). To create a new configuration of a new component,
+   use the **Directory** or the **Add New Data Source** button.
 
-The following page describes what the component does in detail and allows you to create a new configuration using the **New Configuration** button.
+   ![Screenshot - Extractors List](/components/configuration-2.png)
 
-![Screenshot - Component Detail](/components/configuration-4.png)
+3. Use the search field to find the component you want to use (the Currency Rates data source connector in this case) and then click the component tile to add it:
 
-In the dialog, enter a name for the configuration. The name is unimportant if a component has a single configuration in your project. However, the names should meaningfully distinguish one configuration from another for components with multiple configurations (e.g., configured with different credentials).
+   ![Screenshot - Search Component](/components/configuration-3.png)
 
-![Screenshot - Create Configuration](/components/configuration-5.png)
+4. The following page describes what the component does in detail and allows you to create a new configuration using the **New Configuration** button.
 
-The next page shows a form for configuring the component, this varies heavily between different components.
-Component configuration can range from trivial (as in the [Currency Rates data source connector](/components/extractors/other/currency-rates/)) to very complex ones 
-(e.g., [Google Ads data source connector](/components/extractors/marketing-sales/google-ads/)). The configuration complexity badge shown in the component list gives you a rough idea of what to expect.
+   ![Screenshot - Component Detail](/components/configuration-4.png)
 
-![Screenshot - Set Parameters](/components/configuration-6.png)
+5. In the dialog, enter a name for the configuration. The name is unimportant if a component has a single configuration in your project. However, the names should meaningfully distinguish one configuration from another for components with multiple configurations (e.g., configured with different credentials).
 
-When you set the parameters and **Save** them, you can run the component using the **Run Component** button:
+   ![Screenshot - Create Configuration](/components/configuration-5.png)
 
-![Screenshot - Run Configuration](/components/configuration-7.png)
+6. The next page shows a form for configuring the component, this varies heavily between different components.
+   Component configuration can range from trivial (as in the [Currency Rates data source connector](/components/extractors/other/currency-rates/)) to very complex ones
+   (e.g., [Google Ads data source connector](/components/extractors/marketing-sales/google-ads/)). The configuration complexity badge shown in the component list gives you a rough idea of what to expect.
 
-When you run a component, a [job](/management/jobs/) is created and subsequently executed. The right panel shows the last executed jobs with an indication of their status:
+   ![Screenshot - Set Parameters](/components/configuration-6.png)
 
-- Yellow – Running
-- Red – Failed
-- Green – Successful
+7. Set the parameters and **Save** them.
 
-You can click each job to view its [details](/management/jobs/), including the tables it reads from your project and 
-the tables it produced in your project. Its active version (the one with the green tick mark) will be used when running the configuration.
+**Result:** the configuration is saved, and you can run the component.
 
-### Configuration Description
+## Run a configuration
+
+**Goal:** run the component with the parameters you saved.
+
+1. Open the saved configuration and click the **Run Component** button:
+
+   ![Screenshot - Run Configuration](/components/configuration-7.png)
+
+2. When you run a component, a [job](/management/jobs/) is created and subsequently executed. The right panel shows the last executed jobs with an indication of their status:
+
+   - Yellow – Running
+   - Red – Failed
+   - Green – Successful
+
+3. You can click each job to view its [details](/management/jobs/), including the tables it reads from your project and
+   the tables it produced in your project.
+
+**Result:** the job does the work the configuration describes. Its active version (the one with the green tick mark) will be used when running the configuration.
+
+## Describe a configuration
+
+**Goal:** give the configuration a name and a description that say what it does.
+
 After configuring the component, it is a good practice to describe what it does.
 
-![Screenshot - Add Description button](/components/description-button.png)
+1. Open the configuration. While it has no description, the **Description** box offers two links:
 
-Click the **Add description** button to write the description manually. You can also click the **Generate description** button to have our AI service write a suggestion for you that you can modify. 
-Note that the configuration will be sent to the Microsoft Azure OpenAI service when using the [AI service](/overview#ai-assistance). Even though the contents are not used to train the model, as a best practice, 
-you should not store unencrypted secrets such as API keys and passwords in the configuration (for example, in Python transformation code). Variables and encrypted configuration parameters are automatically 
+   ![Screenshot - Add Description button](/components/description-button.png)
+
+2. Click the **Add description** button to write the description manually. You can also click the **Generate description** button to have our AI service write a suggestion for you that you can modify.
+
+   ![Screenshot - AI generated description](/components/description-generated.png)
+
+3. You can also change the configuration's name and description at any time.
+   The configuration description supports rich text formatting using [Markdown](https://www.markdownguide.org/cheat-sheet/).
+
+   ![Screenshot - Configuration Name and Description](/components/configuration-13.png)
+
+:::caution
+Note that the configuration will be sent to the Microsoft Azure OpenAI service when using the [AI service](/overview/#ai-assistance). Even though the contents are not used to train the model, as a best practice,
+you should not store unencrypted secrets such as API keys and passwords in the configuration (for example, in Python transformation code). Variables and encrypted configuration parameters are automatically
 obfuscated.
+:::
 
-![Screenshot - AI generated description](/components/description-generated.png)
+<!-- VERIFY(Nikita): which AI provider Generate description sends the configuration to. This page says Microsoft Azure OpenAI; other pages name a different provider for Kai. -->
 
-### Configuration Versions
-Configuration parameters can be changed at any time. Every change to a configuration is recorded 
-in the history of **versions**. You can also change the configuration's name and description at any time. 
-The configuration description supports rich text formatting using [Markdown](https://www.markdownguide.org/cheat-sheet/).
+**Result:** the name and the description show on the configuration and in the configuration list.
 
-![Screenshot - Configuration Name and Description](/components/configuration-13.png)
+## See the version history
 
-The bottom right panel shows a list of the configuration versions. Use the list to
+**Goal:** find the list of versions of a configuration.
 
-- copy any version.
-- compare any two successive versions.
-- roll back to an older version.
+Configuration parameters can be changed at any time. Every change to a configuration is recorded
+in the history of **versions**.
+
+1. Open the configuration.
+2. The bottom right panel shows a list of the configuration versions. Use the list to
+
+   - copy any version.
+   - compare any two successive versions.
+   - roll back to an older version.
+
+**Result:** you see every recorded change. The version list is unlimited. Configuration versions are also created when the configurations are manipulated
+programmatically using [the API](/overview/api/). In other words, all configuration modifications are recorded.
 
 All of the operations can be [accessed via an API](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs).
 The [developer guide](https://developers.keboola.com/integrate/storage/api/configurations/) explains how to work with configurations.
 
 **Important**: Component configurations do not count towards your project quota.
 
-The version list is unlimited. Configuration versions are also created when the configurations are manipulated 
-programmatically using [the API](/overview/api/). In other words, all configuration modifications are recorded.
+## Compare two versions
 
-### Compare Versions
-You can compare adjacent versions by clicking the *compare* icon:
+**Goal:** see what changed between two versions of a configuration.
 
-![Screenshot - Version List](/components/configuration-8.png)
+1. You can compare adjacent versions by clicking the *compare* icon:
 
-The differences between the raw JSON configurations are displayed when you compare the two versions. 
+   ![Screenshot - Version List](/components/configuration-8.png)
 
-![Screenshot - Version Differences](/components/configuration-9.png)
+2. Read the differences in the dialog:
 
-When you roll back a configuration, a new version is created. This means you never lose any version of
-a configuration, and there is always an option to get back to it. Configuration versions are also created when 
-the configurations are manipulated programmatically via [the API](/overview/api/).
+   ![Screenshot - Version Differences](/components/configuration-9.png)
 
-### Rollback Version
+**Result:** the differences between the raw JSON configurations are displayed when you compare the two versions.
+
+## Roll back to an earlier version
+
+**Goal:** return a configuration to the state of an older version.
+
 If you need to return to an older version of the configuration, you can also roll back to it (the other option is to make its copy).
-Rolling back a configuration version means that a new configuration version is created (and marked as active) 
+Rolling back a configuration version means that a new configuration version is created (and marked as active)
 with the contents of the selected version. A rollback is, therefore, quite a safe operation.
 
-Click the **rollback* icon next to the version you want to return to:
+1. Click the *rollback* icon next to the version you want to return to:
 
-![Screenshot - Version List](/components/configuration-18.png)
+   ![Screenshot - Version List](/components/configuration-18.png)
 
-Confirm the rollback and see the result:
+2. Confirm the rollback and see the result:
 
-![Screenshot - Configuration Rollback](/components/configuration-10.png)
+   ![Screenshot - Configuration Rollback](/components/configuration-10.png)
 
-### Copy Configuration
-You can also use the version list to create a **copy of the configuration**:
+**Result:** when you roll back a configuration, a new version is created. This means you never lose any version of
+a configuration, and there is always an option to get back to it.
 
-![Screenshot - Configuration Copy](/components/configuration-11.png)
+## Copy a configuration
 
-You can customize the name of the configuration copy:
+**Goal:** create an independent copy of a configuration from one of its versions.
 
-![Screenshot - Configuration Create Copy](/components/configuration-12.png)
+1. You can also use the version list to create a **copy of the configuration**:
 
-The copy of the configuration is created as a new isolated configuration—i.e., there is no link 
+   ![Screenshot - Configuration Copy](/components/configuration-11.png)
+
+2. You can customize the name of the configuration copy:
+
+   ![Screenshot - Configuration Create Copy](/components/configuration-12.png)
+
+**Result:** the copy of the configuration is created as a new isolated configuration—i.e., there is no link
 between the original configuration and the copy, and changes to one have no effect on the other.
-The new configuration is completely independent of the old one. You may modify or delete 
+The new configuration is completely independent of the old one. You may modify or delete
 either of them without affecting the other one.
 
-### Delete Configuration
-To delete and move a configuration to Trash, click the *bin* icon in the configuration list 
-or the **Move to Trash** button in the configuration detail. 
+## Delete and restore a configuration
 
-![Screenshot - Delete](/components/configuration-19.png)
+**Goal:** move a configuration to Trash, and bring it back or remove it for good.
 
-Each configuration moved to Trash acts as deleted: it is removed from flows, cannot be run, and is not displayed.
-You can undo the delete operation immediately, or you can restore the configuration from Trash, which is accessible from 
-the main menu.
+1. To delete and move a configuration to Trash, click the *bin* icon in the configuration list
+   or the **Move to Trash** button in the configuration detail.
 
-![Screenshot - Configuration Trash](/components/configuration-20.png)
+   ![Screenshot - Delete](/components/configuration-19.png)
 
-You can restore a deleted configuration or permanently remove it. Once deleted from Trash, no configuration can be recovered. 
-If your Trash is filled with many configurations and you want to quickly find the one you need to restore or permanently remove, 
-use the filter and search options in the upper part of the page.
+   Each configuration moved to Trash acts as deleted: it is removed from flows, cannot be run, and is not displayed.
 
-![Screenshot - Configuration Restore](/components/configuration-21.png)
+2. You can undo the delete operation immediately, or you can restore the configuration from Trash, which is accessible from
+   the main menu.
 
-When you restore a configuration, its new version is created. Therefore, you can see the complete history in the configuration versions:
+   ![Screenshot - Configuration Trash](/components/configuration-20.png)
+
+3. You can restore a deleted configuration or permanently remove it. Once deleted from Trash, no configuration can be recovered.
+   If your Trash is filled with many configurations and you want to quickly find the one you need to restore or permanently remove,
+   use the filter and search options in the upper part of the page.
+
+   ![Screenshot - Configuration Restore](/components/configuration-21.png)
+
+**Result:** when you restore a configuration, its new version is created. Therefore, you can see the complete history in the configuration versions:
 
 ![Screenshot - Configuration History](/components/configuration-22.png)
 
@@ -146,5 +195,9 @@ For technical reasons, configurations of the Orchestrator component cannot be re
 but cannot be restored:
 
 ![Screenshot - Orchestration in Trash](/components/configuration-23.png)
+
+<!-- VERIFY(Nikita): whether deleted Orchestrator configurations still cannot be restored, and whether the same holds for flows. The sentence and its screenshot date from 2019. -->
+
+---
 
 **Next:** [Authorize a component →](/components/authorization/)

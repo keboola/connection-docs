@@ -8,8 +8,10 @@ slug: 'components/applications/triggers/exasol-cluster-starter'
 
 The Exasol Cluster starter is used for starting and stopping [Exasol Cloud](https://cloud.exasol.com) clusters.
 
+<!-- How-to-type page. Type declared in the 2026-11-19 section rework; the content is unchanged and was not re-checked against the component. -->
+
 ## Create New Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Exasol Cluster Starter** Application.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Exasol Cluster Starter** Application.
 Then fill in your Personal Access token, your Account ID, the host of the cluster that you wish to start/stop, and select the 
 action you wish to perform on the cluster; either **Start** or **Stop**. Then save the configuration and run it.
 

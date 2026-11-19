@@ -11,7 +11,7 @@ This data source connector uses the [Pipedrive API](https://developers.pipedrive
 from [Pipedrive](https://www.pipedrive.com/en-gb).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Pipedrive** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Pipedrive** connector.
 
 To configure this connector, you need to provide an **API token**. You can get it by clicking the *Get API Token* link. 
 Then enter your **company domain** (if your Pipedrive is at https://keboola.pipedrive.com, your company domain is **keboola**).

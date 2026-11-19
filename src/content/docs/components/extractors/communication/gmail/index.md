@@ -10,8 +10,8 @@ redirect_from:
 The Gmail Messages data source connector allows you to fetch data from your Gmail account.
 
 ## Authorization
-[Create a new configuration](/components/#creating-component-configuration) of the **Gmail Messages** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Gmail Messages** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 **Your inbox is accessed as read only.**
 
 ![Gmail - authorize account](/components/extractors/communication/gmail/gmail-1.png)

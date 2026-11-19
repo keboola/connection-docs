@@ -11,7 +11,7 @@ The GoodData Reports data source connector uses the [GoodData API](https://help.
 reports from the [GoodData](https://www.gooddata.com/) business intelligence platform and stores the data in Keboola Storage.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **GoodData Reports** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **GoodData Reports** connector.
 Type in your GoodData host: secure.gooddata.com, keboola.eu.gooddata.com, or a custom host. Find the host
 by opening the report you wish to extract.
 

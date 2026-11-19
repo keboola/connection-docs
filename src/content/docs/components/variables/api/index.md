@@ -1,23 +1,24 @@
 ---
 title: Variables Through the API
 slug: 'components/variables/api'
-description: Define, override, and resolve configuration variables through the API, and drive them from a flow.
+description: 'Reference for configuration variables in the API: the variable configuration, values and their rules, the delimiter, flow overrides, and the evaluation order.'
 redirect_from:
     - /integrate/variables/
     - /transformations/variables/api/
 ---
 
-
 **Variables** are placeholders used in [configurations](/storage/api/configurations/). Their value is 
 resolved at [job runtime](/extend/jobs/). 
+
+<!-- Reference-type page. Source: this page as it was before the 2026-11-19 rework. Text carried over; facts not re-checked against the API. -->
 
 **Important:** Make sure you're familiar with the [Configuration API](/storage/api/configurations/) and 
 the [Job API](/extend/jobs/) before reading on.
 
-See [Tutorial](/components/variables/api/tutorial) for step-by-step example.
+See [Tutorial](/components/variables/api/tutorial/) for step-by-step example.
 
 This page covers variables **through the API**. To define and use them in the UI instead,
-see [Variables](/components/variables/).
+see [Use variables](/components/variables/use/); for what the two kinds of variables are, see [Variables](/components/variables/).
 
 ## Introduction
 When using variables, the configuration is treated as a [Moustache template](https://mustache.github.io/mustache.5.html). 
@@ -39,9 +40,9 @@ the ID `transformation`; it can still be used in a specific transformation -- e.
 or `keboola.snowflake-transformation`, etc.), and a flow configuration of either type
 (`keboola.flow` or the legacy `keboola.orchestrator`). A flow does not carry placeholders of its
 own — it *supplies* values to the configurations it runs, which is covered in
-[Driving Variables from a Flow](#driving-variables-from-a-flow).
+[Driving variables from a flow](#driving-variables-from-a-flow).
 
-## Variable Configuration
+## Variable configuration
 A *variable configuration* is a standard configuration tied to a special dedicated `keboola.variables` component. 
 The variable configuration defines names of variables to be replaced in the main configuration. You can create 
 the configuration using the 
@@ -65,7 +66,7 @@ This is an example of the contents of such a configuration:
 
 Each variable declares a `type` — a free-form label describing the value's data type (for example, `string` or `int`). It is used by the UI; the resolver substitutes the value into the configuration as text regardless of the declared type.
 
-## Main Configuration
+## Main configuration
 When you create a variable configuration, you'll obtain an ID of the configuration - e.g., `807940806`. 
 In the *main configuration*, you have to reference the *variable configuration* ID using the `variables_id` node. 
 Then you can use the variables in the configuration body:
@@ -101,7 +102,7 @@ Then you can use the variables in the configuration body:
 
 ```
 
-## Variable Values 
+## Variable values
 You can either store the variable values as [configuration rows](/storage/api/configurations/#configuration-rows) of the 
 *variable configuration* and provide the row ID of the stored values at run time, or you can provide the variable values directly at run 
 time. There are three options how you can provide values to the variables:
@@ -123,6 +124,7 @@ The structure of variable values, regardless of whether it is stored in configur
 }
 ```
 
+### Rules for providing values
 Following the rules for running a job, you always **have to** provide values for the defined variables. 
 Note that it is important which variables are *defined* in the variable configuration, not which
 variables you actually use in the main configuration. For example, the main configuration references a variable 
@@ -139,7 +141,7 @@ The second rule is that the three options of passing values are mutually exclusi
 If no default values are set and none of the `variableValuesId` or `variableValuesData` is provided, an error 
 will be raised.
 
-## Variable Delimiter
+## Variable delimiter
 The default variable delimiter is `{{` and `}}`. If the delimiter interferes with your code, it can
 be changed as per the [Moustache docs](https://mustache.github.io/mustache.5.html). For example the 
 following piece of code
@@ -158,11 +160,11 @@ will be interpreted as (assuming the variables `alias=batman` and `size=big` are
 }
 ```
 
-## Driving Variables from a Flow
+## Driving variables from a flow
 A flow does not contain placeholders of its own. It *supplies* values to the configurations it
 runs, and the mechanism differs between the two flow types.
 
-### Conditional Flows
+### Conditional flows
 In a conditional flow (the `keboola.flow` component), a flow declares its own variables with a **variable task** — `"type": "variable"` with
 either a fixed `value` or a computed `source`. When a job task runs, those flow variables are
 merged into the component's variables, and a flow variable replaces a value **only for a name the
@@ -189,10 +191,10 @@ read by the flow runner and is not passed to the job.
 
 To set a value on one task without declaring a flow variable, put `variableValuesId` or
 `variableValuesData` in the task's advanced parameters; the payload is the same as for
-[running a job](/components/variables/api/#step-4--run-job). See
-[Variables](/components/variables/#driving-a-configuration-variable-from-a-flow) for the UI path.
+[running a job](/components/variables/api/tutorial/#step-4-run-a-job). See
+[Override a variable on one flow task](/components/variables/use/#override-a-variable-on-one-flow-task) for the UI path.
 
-### Legacy Flows
+### Legacy flows
 Legacy flows (the `keboola.orchestrator` component) carry variable values on the task itself, and
 accept values for an entire run.
 
@@ -205,7 +207,7 @@ This applies to **legacy** flows only. New flows use `keboola.flow`, described a
 - Variables can be entered when running an orchestration.
 
 Entering variable values in task configurations allows the orchestration to run configurations with
-variables; the parameters are identical to [running a job](/components/variables/api/#step-4--run-job).
+variables; the parameters are identical to [running a job](/components/variables/api/tutorial/#step-4-run-a-job).
 When running an orchestration, you can also provide variable values for the whole run, and those
 override the ones set on individual tasks.
 
@@ -217,7 +219,56 @@ task-level and run-level overrides as unverified for this component, and prefer 
 path above.
 :::
 
-#### Step 5 -- Create Orchestration
+A worked example of both, kept from the older documentation, is in
+[Legacy example: an orchestration with variables](#legacy-example-an-orchestration-with-variables) at the end of this page.
+
+## Variables evaluation sequence
+There is a number of places where variable values can be provided (either as a reference to an existing row with 
+values or as an array of `values`):
+
+- Parameters in the component job itself
+- Default values stored in configuration (`variables_values_id` property)
+- For legacy flows only: parameters supplied when the orchestration is run, and parameters in an
+  orchestration task's `task` setting
+
+In a conditional flow, a matching-name [flow variable](#conditional-flows) is a further source of a
+value; it is merged by the flow runner before the job starts.
+
+The following diagram shows the parameters mentioned on this page and to what they refer to:
+
+![Screenshot -- Properties references](/components/variables/api/variables.svg)
+
+In a nutshell, `variableValuesId` always refers to the row of the variable configuration associated with the 
+main configuration. The main configuration is referenced in the `config` parameter. From another point of view,
+the `config` parameter represents the configuration (either a component or a flow) to be run.
+Note that in stored configurations snake_case is used instead of camelCase.
+
+The following rules describe the evaluation sequence:
+
+- Values provided in job parameters override the stored values.
+- In a legacy flow, values provided when the orchestration is run override the stored values in
+  `task`, and values in `task` override values stored in the component configuration.
+- `variableValuesData` and `variableValuesId` can't be used together, so neither of them takes precedence. A reference to stored values can't be mixed with providing the values inline. 
+- If no values are provided anywhere, the default values are used. If no default values are present, an error is raised.
+
+## Shared code
+Shared code is the sibling feature that substitutes *code* rather than *values*, using the same
+Moustache syntax and the `keboola.shared-code` component. Its API — creating a piece with the
+create-configuration call and referencing it with `shared_code_id` / `shared_code_row_ids` — is
+documented in [Shared Code via the API](/transformations/shared-code/#shared-code-via-the-api).
+
+## Legacy example: an orchestration with variables
+
+:::caution[Legacy]
+This section applies to **legacy** flows (the `keboola.orchestrator` component) only, and it carries the
+unverified claim described under [Legacy flows](#legacy-flows). The two steps continue the Python transformation example,
+Steps 1 to 4, in the [tutorial](/components/variables/api/tutorial/#second-example-a-python-transformation): the IDs below refer to the
+configurations created there.
+:::
+
+<!-- VERIFY(Nikita): do keboola.orchestrator tasks and orchestration runs still accept variableValuesId and variableValuesData? The public task schema lists no variable fields. Decide whether Steps 5 and 6 stay, get corrected, or go. -->
+
+### Step 5: create the orchestration
 You have to use the 
 [Create Configuration API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs)
 to create a configuration of the `keboola.orchestrator` component. 
@@ -251,18 +302,18 @@ You can use the following data in the configuration:
 ```
 
 The contents of the `task` property are identical to the body 
-of the [run job API call](/components/variables/api/#step-4--run-job). Here, the value `807943784` refers to the ID 
+of the [run job API call](/components/variables/api/tutorial/#step-4-run-a-job). Here, the value `807943784` refers to the ID 
 of the main configuration, and `807952812` refers to the ID of the configuration row with variable values.
 You can use the `variableValuesData` field in the same manner.
 Creating the above configuration will return a response containing the configuration ID, e.g., `807969959`.
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#9f2f9da0-59eb-4f33-a206-e5add24725d1).
 
-#### Step 6 -- Run Orchestration
+### Step 6: run the orchestration
 When running an orchestration which contains configurations referencing variables, you have to provide their
 values. You can either rely on the stored values (either at the component configuration or in the orchestration task) 
 or you can provide the values at runtime.
 
-##### Option 1 -- Rely on stored values
+#### Option 1: rely on stored values
 Use the [Run Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) 
 to run an orchestration. In its simplest form, the request body needs to contain just the ID of the orchestration
 (obtained in the previous step):
@@ -277,11 +328,11 @@ to run an orchestration. In its simplest form, the request body needs to contain
 
 As long as the variable values can be found somewhere, this is sufficient. See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#3ebdc3f5-a940-4f0d-860b-ec311f704a7e).
 
-##### Option 2 -- Provide values
+#### Option 2: provide values
 Use the [Run Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) 
 to run an orchestration. Additionally, you can use the `variableValuesId` or `variableValuesData` property 
 to override variable values set to individual tasks. The calling convention is the same as shown in the 
-[basic job run](/components/variables/api/#step-4--run-job). The same rules also apply, notably that you can't 
+[basic job run](/components/variables/api/tutorial/#step-4-run-a-job). The same rules also apply, notably that you can't 
 use `variableValuesId` and `variableValuesData` together. 
 A sample request body:
 
@@ -307,38 +358,6 @@ A sample request body:
 
 See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#f4fcf7af-afbe-4c29-999e-0f4c50aa477b).
 
-## Variables Evaluation Sequence
-There is a number of places where variable values can be provided (either as a reference to an existing row with 
-values or as an array of `values`):
+---
 
-- Parameters in the component job itself
-- Default values stored in configuration (`variables_values_id` property)
-- For legacy flows only: parameters supplied when the orchestration is run, and parameters in an
-  orchestration task's `task` setting
-
-In a conditional flow, a matching-name [flow variable](#conditional-flows) is a further source of a
-value; it is merged by the flow runner before the job starts.
-
-The following diagram shows the parameters mentioned on this page and to what they refer to:
-
-![Screenshot -- Properties references](/components/variables/api/variables.svg)
-
-In a nutshell, `variableValuesId` always refers to the row of the variable configuration associated with the 
-main configuration. The main configuration is referenced in the `config` parameter. From another point of view,
-the `config` parameter represents the configuration (either a component or a flow) to be run.
-Note that in stored configurations snake_case is used instead of camelCase.
-
-The following rules describe the evaluation sequence:
-
-- Values provided in job parameters override the stored values.
-- In a legacy flow, values provided when the orchestration is run override the stored values in
-  `task`, and values in `task` override values stored in the component configuration.
-- `variableValuesData` and `variableValuesId` can't be used together, so neither of them takes precedence. A reference to stored values can't be mixed with providing the values inline. 
-- If no values are provided anywhere, the default values are used. If no default values are present, an error is raised.
-
-## Shared Code
-Shared code is the sibling feature that substitutes *code* rather than *values*, using the same
-Moustache syntax and the `keboola.shared-code` component. Its API — creating a piece with the
-create-configuration call and referencing it with `shared_code_id` / `shared_code_row_ids` — is
-documented in [Shared Code via the API](/transformations/shared-code/#shared-code-via-the-api).
-
+**Next:** [Variables tutorial →](/components/variables/api/tutorial/)

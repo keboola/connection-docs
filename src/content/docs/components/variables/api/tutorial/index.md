@@ -1,18 +1,21 @@
 ---
 title: Variables Tutorial
 slug: 'components/variables/api/tutorial'
-description: Walk through parametrizing a component configuration with variables end to end, using the API.
+description: 'Two worked examples of variables through the API: a Generic Extractor run with curl, and a Python transformation run with default, stored and inline values.'
 redirect_from:
     - /integrate/variables/tutorial/
     - /transformations/variables/api/tutorial/
 ---
 
-
 This tutorial will guide you through basic usage of [Variables](/components/variables/api/) in the component configuration.
 The result will be the parametrized configuration of the [Generic Extractor](/components/extractors/generic-extractor/),
 but this approach can be applied to any component. 
 
+<!-- Tutorial-type page. Source: this page and the Python transformation example from Variables Through the API, as they were before the 2026-11-19 rework. Text carried over; the calls were not re-run. -->
+
 In the examples, we use the `curl` console tool to interact with our APIs.
+
+A [second example](#second-example-a-python-transformation) then runs a Python transformation three times: with default values, with stored values, and with values passed in the job.
 
 ## Define API endpoints
 
@@ -210,10 +213,12 @@ A note about the replaced variables is in the job logs.
 
 See the [Variables documentation](/components/variables/api/#variable-values) for more information.
 
-## Example Using Python Transformations
+## Second example: a Python transformation
 In this example, we will configure a Python transformation using variables.
 
-### Step 1 -- Create Variable Configuration
+It starts the same way as the example above, with different variables (`alias` and `size`). Then it adds what that example leaves out: default values stored in a configuration row, and the three ways to pass values when you run a job.
+
+### Step 1: create the variable configuration
 Use the [Create Configuration API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs) 
 for the `keboola.variables` component with the following content:
 
@@ -234,7 +239,7 @@ for the `keboola.variables` component with the following content:
 
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#16a5d721-b6a4-4daa-9196-8e90250ed16b).
 
-### Step 2 -- Create Default Values for Variables
+### Step 2: create default values for the variables
 Note that this step is optional -- you can use variables without default values.
 In the previous step, you obtained an ID of the variable configuration. Use the 
 [Create Configuration Row API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-/rows).
@@ -257,7 +262,7 @@ Use the ID of the variable configuration and `keboola.variables` as a component.
 
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#72de2851-1853-4fe3-bec3-856fcc9e2270)
 
-### Step 3 -- Create Main Configuration
+### Step 3: create the main configuration
 Now it is time to create the actual configuration which will contain a Python transformation.
 Use the following configuration body. The `storage` section describes the standard [input](/extend/common-interface/config-file/#input-mapping--basic) 
 and [output](/extend/common-interface/config-file/#output-mapping--basic) mapping.
@@ -304,8 +309,8 @@ and [output](/extend/common-interface/config-file/#output-mapping--basic) mappin
 
 ```
 
-The `variables_id` property contains the ID of the [variable configuration](/components/variables/api/#step-1--create-variable-configuration) - e.g., `807968875`. The
-`variables_values_id` property is optional and contains the ID of the [row with default values](/components/variables/api/#step-2--create-default-values-for-variables) - e.g., `807952812`.
+The `variables_id` property contains the ID of the [variable configuration](#step-1-create-the-variable-configuration) - e.g., `807968875`. The
+`variables_values_id` property is optional and contains the ID of the [row with default values](#step-2-create-default-values-for-the-variables) - e.g., `807952812`.
 The `parameters` section contains a script with the following Python code:
 
 ```python
@@ -334,14 +339,17 @@ prints the contents of the configuration file to output.
 
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#732e4b66-4f2d-46ab-80ba-7a7d07ddb94b).
 
-### Step 4 -- Run Job
+### Step 4: run a job
 There are three options for providing variable values when running a job:
 
 - Relying on default variables
 - Providing ID of values using the `variableValuesId` property in job parameters
 - Providing values using the `variableValuesData` property in job parameters
 
-#### Option 1 -- Rely on default variables
+Which values you have to provide, and which combinations raise an error, is in
+[Rules for providing values](/components/variables/api/#rules-for-providing-values).
+
+#### Option 1: rely on default variables
 If you created the default values, you can now directly run the job. Use the [Create Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs)
 with the following body:
 
@@ -353,9 +361,9 @@ with the following body:
 }
 ```
 
-The `config` property contains the ID of the [main configuration](/components/variables/api/#step-3--create-main-configuration).
+The `config` property contains the ID of the [main configuration](#step-3-create-the-main-configuration).
 Before executing the API call, you have to create the source table. Unless you modified the mapping in the 
-[example](/components/variables/api/#step-3--create-main-configuration), you have to create a bucket named
+[example](#step-3-create-the-main-configuration), you have to create a bucket named
 **variable-testing** in the **in** stage. Then create a table called **batman** with columns  **COUNTRY** 
 and **CARS**. You can use this [sample CSV file](/components/variables/api/countries.csv).
 
@@ -434,8 +442,8 @@ where you can verify that the variables were replaced.
 ```
 </details>
 
-#### Option 2 -- Run a job with stored values
-Similarly to the [default values](/components/variables/api/#step-2--create-default-values-for-variables), 
+#### Option 2: run a job with stored values
+Similarly to the [default values](#step-2-create-default-values-for-the-variables), 
 you can store another set of values. Let's add another configuration row to the *existing* variable configuration:
 
 ```json
@@ -478,7 +486,7 @@ The output table now contains:
 |FinlandWATMAN|33582324200|
 |ItalyWATMAN|413938774200|
 
-#### Option 3 -- Run a job with inline values
+#### Option 3: run a job with inline values
 The last option to provide the values for variables is to enter them directly when running a job. 
 Variable values are entered in the `variableValuesData` property:
 
@@ -511,3 +519,7 @@ The output table will contain:
 |Belgiumbatman|6293781scatman|
 |Finlandbatman|3358232scatman|
 |Italybatman|41393877scatman|
+
+---
+
+**Next:** [Development branches →](/components/branches/)

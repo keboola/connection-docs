@@ -20,9 +20,11 @@ The Generative AI application lets you query large language models using data fr
 - [Hugging Face](https://huggingface.co/docs/inference-providers) — also needs an **Endpoint URL** on each row
 - Google — available on the US stack only
 
+<!-- How-to-type page. Type declared in the 2026-11-19 section rework; the content is unchanged and was not re-checked against the component. -->
+
 ## Create New Configuration
 
-[Set up a new configuration](/components/#creating-component-configuration) for the **Generative AI** application.
+[Set up a new configuration](/components/configurations/#create-a-configuration) for the **Generative AI** application.
 
 :::note
 Look for **Generative AI**, not "OpenAI". The older **OpenAI** application is deprecated and no longer appears in the new-component list; if you have an existing OpenAI configuration, it keeps working, but new configurations are created from **Generative AI**.

@@ -15,8 +15,8 @@ endpoint and the [Sitemaps](https://developers.google.com/webmaster-tools/v1/sit
 endpoint.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Search Console** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization).
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Search Console** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/).
 
 ![Screenshot - Component Config](/components/extractors/other/google-search-console/auth.png)
 

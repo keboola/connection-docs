@@ -20,7 +20,7 @@ Therefore, it is a good idea to set up the data source connector in a [**schedul
 :::
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Email Attachments** data source connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Email Attachments** data source connector.
 Each configuration corresponds to a single target email address. If you need 
 to import emails into different tables, it is advisable to create more configurations.
 An email address for sending attachments will be generated when the configuration is created. Use it to send 

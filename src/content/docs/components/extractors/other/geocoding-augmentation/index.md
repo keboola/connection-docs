@@ -10,7 +10,7 @@ redirect_from:
 This data source connector provides detailed data for locations specified by their names, addresses, or coordinates.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Geocoding Augmentation** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Geocoding Augmentation** connector.
 
 ### Augment Locations
 In this case, specify the location. The data source connector will fetch its geographical latitude and longitude 

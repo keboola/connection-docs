@@ -11,7 +11,7 @@ redirect_from:
 This data destination connector sends data to a [Firebolt](https://www.firebolt.io/) database.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Firebolt** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Firebolt** data destination connector.
 
 The first step is to **set up credentials**:
 

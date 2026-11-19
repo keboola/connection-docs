@@ -12,7 +12,7 @@ Version 4.2 may work, though it is not guaranteed, and lower version are not sup
 Follow these steps to configure it.
 
 ## Set Up Database Credentials
-[Create a new configuration](/components/#creating-component-configuration), click **Set Up Database Credentials**, and complete the form. 
+[Create a new configuration](/components/configurations/#create-a-configuration), click **Set Up Database Credentials**, and complete the form. 
 Then test the credentials and save them. Optionally, set up an [SSH tunnel](/components/extractors/database/#connecting-to-database).
 
 ![MongoDB new credentials](/components/extractors/database/mongodb/mongodb-1.png)

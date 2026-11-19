@@ -33,8 +33,8 @@ There are two distinct "incremental" concepts in this connector:
 | **Incremental date fetching** | The connector fetches only data **since the last successful run** instead of re-downloading a fixed date range each time. | **Optional** — controlled by the "Incremental load" checkbox in the date range settings. |
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Analytics** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization).
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Analytics** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/).
 Select the desired Google Analytics account and GA4 properties from which you would like to extract data.
 
 ![Screenshot - Intro Page](/components/extractors/marketing-sales/google-analytics/google-analytics-1.png)

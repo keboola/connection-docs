@@ -20,7 +20,7 @@ Both should be numbers in the format of `391827251`.
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **Microsoft Advertising (Bing Ads)**
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Microsoft Advertising (Bing Ads)**
 connector.
 
 ### Global Configuration

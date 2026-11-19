@@ -29,7 +29,7 @@ To obtain your API key, follow these steps in your ChartMogul web app:
 - Then, select **API Keys**.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **ChartMogul** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **ChartMogul** connector.
 
 ### Row Configuration
 

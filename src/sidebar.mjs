@@ -135,12 +135,16 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "components" },
+      { slug: "components/configurations" },
+      { slug: "components/authorization" },
+      { slug: "components/debug-mode" },
       { slug: "components/running-jobs-in-parallel" },
       {
         label: "Variables",
         collapsed: true,
         items: [
           { label: "Overview", slug: "components/variables" },
+          { slug: "components/variables/use" },
           {
             label: "Variables Through the API",
             collapsed: true,
@@ -151,6 +155,16 @@ export const sidebar = [
           },
         ],
       },
+      {
+        label: "Development Branches",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "components/branches" },
+          { slug: "components/branches/manage" },
+          { slug: "components/branches/merge-requests" },
+        ],
+      },
+      { slug: "components/ip-addresses" },
       {
         label: "Data Source Connectors",
         collapsed: true,
@@ -482,6 +496,8 @@ export const sidebar = [
               { slug: "components/applications/triggers/orchestration-trigger-queue-v2" },
               { slug: "components/applications/triggers/dbt-cloud-job-trigger" },
               { slug: "components/applications/triggers/deepnote-notebook-execution-trigger" },
+              { slug: "components/applications/triggers/powerbi-refresh" },
+              { slug: "components/applications/triggers/tableau-extract-refresh" },
             ],
           },
           { slug: "components/applications/custom-python" },
@@ -496,15 +512,6 @@ export const sidebar = [
           },
         ],
       },
-      {
-        label: "Development Branches",
-        collapsed: true,
-        items: [
-          { label: "Overview", slug: "components/branches" },
-          { slug: "components/branches/merge-requests" },
-        ],
-      },
-      { slug: "components/ip-addresses" },
     ],
   },
   {

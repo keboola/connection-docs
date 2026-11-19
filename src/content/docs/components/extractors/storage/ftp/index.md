@@ -10,7 +10,7 @@ redirect_from:
 The FTP data source connector loads a single, or multiple CSV files from FTP, FTPS and SFTP servers, and stores them in Keboola Storage.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **FTP** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **FTP** connector.
 To access the files on FTP, you need to set up access credentials.
 
 ![Screenshot - FTP extractor server configuration](/components/extractors/storage/ftp/ftp-1.png)
@@ -71,5 +71,5 @@ adds the row number in the source file.
 
 ![Screenshot - FTP extractor audit](/components/extractors/storage/ftp/ftp-6.png)
 
-The connector also supports [Debug mode](/components/#debug-mode), all supported
+The connector also supports [Debug mode](/components/debug-mode/), all supported
 parameters are described in the [GitHub repository](https://github.com/keboola/ex-ftp).

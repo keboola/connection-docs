@@ -18,8 +18,8 @@ and **[SharePoint](https://www.microsoft.com/en-us/microsoft-365/sharepoint/coll
 so with this connector, you have access to all your Excel sheets in your personal account or in your business account.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **OneDrive Excel Sheets** connector.  
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **OneDrive Excel Sheets** connector.  
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 Click **Add Table** to configure extraction.
 

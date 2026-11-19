@@ -1,13 +1,15 @@
 ---
 title: Components
 slug: 'components'
+description: 'What Keboola components are, how configurations, rows, versions and jobs fit together, what the release stages mean, and where each task is documented.'
 redirect_from:
     - /storage/configurations/
 ---
 
+In the Keboola platform, most of the data processing functions are implemented in **components**. This page explains how components, configurations and jobs fit together. To start working with one, go to [Create and manage configurations](/components/configurations/).
 
+<!-- Explanation-type page. Source: the Components page as it was before the 2026-11-19 split. Text carried over; facts not re-checked against the product. -->
 
-In the Keboola platform, most of the data processing functions are implemented in **Components**. 
 Components are divided into the following categories:
 
 - [**Data source connectors** (formerly known as extractors)](/components/extractors/) – bring data into a Keboola project.
@@ -17,9 +19,9 @@ Components are divided into the following categories:
 All components, regardless of their category, behave the same way. To use a component, you have to create a **configuration** first. A configuration sets the necessary parameters for each 
 component (e.g., credentials and other specifications of what to do). Then, it can be run — a **job** is created and does the actual work.
 
-## Finding a Component
+## Finding a component
 
-To see the components available to you and add one to your project, follow [Creating Component Configuration](#creating-component-configuration). To browse the catalog outside your project, see the [Keboola Developer Portal](https://components.keboola.com/components). You do not need the portal to use components.
+To see the components available to you and add one to your project, follow [Create a configuration](/components/configurations/#create-a-configuration). To browse the catalog outside your project, see the [Keboola Developer Portal](https://components.keboola.com/components). You do not need the portal to use components.
 
 If no component connects to the system you need, you have several options:
 
@@ -30,7 +32,7 @@ If no component connects to the system you need, you have several options:
 
 To adjust a component's input or output files without changing its code, use [processors](/extend/component/processors/).
 
-## Component Release Stages
+## Component release stages
 Our components are released at different stages and labeled to indicate the quality and production readiness level. We strive to deliver the highest-quality components. 
 Our goal is to unlock as many interesting integrations as possible, benefiting all our customers. The component release grades allow us to manage the release process effectively 
 and align expectations accurately.
@@ -79,7 +81,15 @@ Many of these are 3rd-party components. Users can add these components via their
 We may share our pre-release versions that exist in private Beta with our test user groups. In such a case, you will receive a component ID, which you can use to create the configuration. 
 These components will eventually transition to a public Beta.
 
-### Configuration Rows
+## Creating component configuration
+
+A configuration holds what a component needs to do its work: the credentials and the specification of what to read or write. A project can keep several configurations of the same component, for example with different credentials. For the steps, see [Create a configuration](/components/configurations/#create-a-configuration) and [Run a configuration](/components/configurations/#run-a-configuration).
+
+## Configuration versions
+
+Every change to a configuration is recorded as a new version, whether you make it in the UI or through the API. You can compare adjacent versions, copy any version, and roll back to an older one, as described in [See the version history](/components/configurations/#see-the-version-history).
+
+## Configuration rows
 Some components support the concept of multiple configurations sharing some of their parameters. A typical
 example is database data source connectors, where multiple tables are extracted and share the same credentials.
 In such components, the configuration contains only the credentials and tables stored in **configuration rows**.
@@ -100,7 +110,9 @@ You can add as many rows as you like; the list of configuration rows is fully se
 rows. The order is maintained during processing, so you can use this to extract the large tables first, for example. The
 order of rows does not affect your project because a Job is only finished after each row is processed.
 
-### Configuration Rows Versions
+Components that support configuration rows also let you set job parallelism at the configuration level, so you can control the speed of an extraction or writing process. For a full explanation of how parallelism interacts with system limits, billing, and when it actually helps, see [Running Jobs in Parallel](/components/running-jobs-in-parallel/).
+
+### Configuration rows versions
 Changes to configuration rows are part of the [configuration versioning](#configuration-versions). The following image shows that
 the versions in the configuration page list changes to the configuration rows – both that a table was added and that it was modified.
 
@@ -117,4 +129,25 @@ row. You can roll back a row to a previous version without interacting with the 
 ***Note:** You cannot copy a configuration row to a new configuration. You always have to copy the entire
 configuration.*
 
-For a full explanation of how parallelism interacts with system limits, billing, and when it actually helps, see [Running Jobs in Parallel](/components/running-jobs-in-parallel/).
+## Authorization
+
+Many services support OAuth. Instead of entering the service's credentials in Keboola, you are redirected to the service and authorize the component there. If the account is not yours, you can send its owner a link. Both ways are on [Authorize a component](/components/authorization/).
+
+## This section
+
+The pages read in order, from your first configuration to the connector catalogues:
+
+- [Create and manage configurations](/components/configurations/): create a configuration, run it, describe it, compare and roll back its versions, copy it, and delete or restore it.
+- [Authorize a component](/components/authorization/): sign in to an external service with OAuth, with your own account or through a link for the account owner.
+- [Debug mode](/components/debug-mode/): edit the raw JSON of a configuration and run a component under a custom tag.
+- [Running jobs in parallel](/components/running-jobs-in-parallel/): what the parallelism setting of configuration rows does, and when it helps.
+- [Variables](/components/variables/): placeholders in a configuration and variables in a flow. You can [use them in the UI](/components/variables/use/) or [through the API](/components/variables/api/).
+- [Development branches](/components/branches/): change configurations without touching production, then [create and close a branch](/components/branches/manage/) and bring the changes back, with a [merge request](/components/branches/merge-requests/) where the project uses them.
+- [IP addresses](/components/ip-addresses/): the addresses Keboola connects from, for your firewall rules.
+- [Data source connectors](/components/extractors/): the catalogue of connectors that bring data into a project.
+- [Data destination connectors](/components/writers/): the catalogue of connectors that send data to a target system.
+- [Applications](/components/applications/): components that process data, such as Custom Python, Data Gateway and the trigger applications.
+
+---
+
+**Next:** [Create and manage configurations →](/components/configurations/)

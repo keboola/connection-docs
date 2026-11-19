@@ -12,8 +12,8 @@ This data source connector loads sheets from Google Drive Sheets and stores them
 current project.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Drive** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Drive** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 Click **New Sheet** to configure extraction and **Select spreadsheet** to list accessible spreadsheets 
 in your account:
