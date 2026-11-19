@@ -1,6 +1,8 @@
 ---
 title: Debug mode
 slug: 'components/debug-mode'
+sidebar:
+  label: Debug Mode
 description: 'Open debug mode on a component configuration to edit its raw JSON, set up processors, and run the component under a custom tag.'
 ---
 

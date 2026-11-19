@@ -135,17 +135,17 @@ Many services support OAuth. Instead of entering the service's credentials in Ke
 
 ## This section
 
-The pages read in order, from your first configuration to the connector catalogues:
+The pages read in order, from your first configuration to the connector catalogs:
 
 - [Create and manage configurations](/components/configurations/): create a configuration, run it, describe it, compare and roll back its versions, copy it, and delete or restore it.
 - [Authorize a component](/components/authorization/): sign in to an external service with OAuth, with your own account or through a link for the account owner.
 - [Debug mode](/components/debug-mode/): edit the raw JSON of a configuration and run a component under a custom tag.
 - [Running jobs in parallel](/components/running-jobs-in-parallel/): what the parallelism setting of configuration rows does, and when it helps.
 - [Variables](/components/variables/): placeholders in a configuration and variables in a flow. You can [use them in the UI](/components/variables/use/) or [through the API](/components/variables/api/).
-- [Development branches](/components/branches/): change configurations without touching production, then [create and close a branch](/components/branches/manage/) and bring the changes back, with a [merge request](/components/branches/merge-requests/) where the project uses them.
+- [Development branches](/components/branches/): change configurations without touching production. Separate pages have the steps to [create, switch and close a branch](/components/branches/manage/) and to bring the changes back with a [merge request](/components/branches/merge-requests/).
 - [IP addresses](/components/ip-addresses/): the addresses Keboola connects from, for your firewall rules.
-- [Data source connectors](/components/extractors/): the catalogue of connectors that bring data into a project.
-- [Data destination connectors](/components/writers/): the catalogue of connectors that send data to a target system.
+- [Data source connectors](/components/extractors/): the catalog of connectors that bring data into a project.
+- [Data destination connectors](/components/writers/): the catalog of connectors that send data to a target system.
 - [Applications](/components/applications/): components that process data, such as Custom Python, Data Gateway and the trigger applications.
 
 ---

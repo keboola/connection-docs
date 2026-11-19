@@ -1,6 +1,8 @@
 ---
 title: Use variables
 slug: 'components/variables/use'
+sidebar:
+  label: Use Variables
 description: 'Parametrize a configuration with a variable, set static and dynamic variables in a flow, read them in a condition, and override a value on one flow task.'
 ---
 
