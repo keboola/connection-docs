@@ -84,6 +84,8 @@ SELECT * FROM _keboola.buckets LIMIT 10;
 - **"No workspaces found"** — the project has no workspace yet. Open the project in Keboola UI and create a workspace (Transformations → Workspaces).
 - **Custom stack** — replace the host in the JDBC URL with your stack hostname (e.g. `jdbc:keboola://connection.north-europe.azure.keboola.com`).
 
+<!-- VERIFY(Nikita): "Transformations → Workspaces" differs from the top-level Workspaces section the other pages of this section use. Check which path the UI shows now. -->
+
 ## Need Help?
 
 For further help, reach out via [Keboola Support](/management/support/).

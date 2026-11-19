@@ -24,8 +24,8 @@ Storage. To open the workspace in JupyterLab or a SQL tool, see [Connect to a wo
 
    ![Workspace - Select Type](/workspace/workspace-create-1.png)
 
-3. Name and optionally describe the workspace. When you create the workspace, you can also enable
-   [read-only input mapping](/workspace/#read-only-input-mapping).
+3. Name and optionally describe the workspace. Where the dialog offers **Grant read-only access to all storage
+   data**, ticking it enables [read-only input mapping](/workspace/#read-only-input-mapping).
 
    ![Workspace - Name workspace](/workspace/workspace-create-2.png)
 

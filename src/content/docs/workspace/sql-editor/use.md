@@ -13,7 +13,7 @@ transformation. Each task stands on its own. The SQL Editor page explains the pa
 
 **Goal:** an SQL workspace with the SQL Editor open on it.
 
-The SQL Editor is accessed via a dedicated SQL workspace. To get started, you must first create this workspace.
+The SQL Editor is accessed via a dedicated SQL workspace. To get started, you must first create this workspace. For the other workspace types, see [Create a workspace and load data](/workspace/create/).
 
 1.  Navigate to **Workspaces** from the main navigation menu.
 2.  Click **+ Create Workspace**.

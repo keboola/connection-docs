@@ -64,6 +64,7 @@ For these projects, use these alternatives:
 Projects with a dedicated Snowflake backend get two versions of the Snowflake workspace, **Person** and
 **Legacy Service**. They differ in how you sign in; both are described in
 [Connect to a workspace](/workspace/connect/).
+<!-- VERIFY(Nikita): the Connect page carries a marker on the Legacy Service deprecation date. If Legacy Service workspaces are gone, drop them here as well. -->
 
 ### BigQuery
 
