@@ -39,6 +39,7 @@ This dashboard shows the status of data waiting for import vs. imported data.
 In your table settings, you can:
 
 - Change the name of the stream.
+  <!-- VERIFY(Nikita): this item says "the name of the stream", but it sits under Table settings and the caution below speaks of the table's name. Check which name this setting changes. -->
 - Add a column or define your own structure using the PATH or JSONNET template. [Learn more](/storage/data-streams/reference/#template-jsonnet)
 - Edit column names (available only if you create a new table within the stream).
 - Delete a column (available only if you create a new table within the stream).
