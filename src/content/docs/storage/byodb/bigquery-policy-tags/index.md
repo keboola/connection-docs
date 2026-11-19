@@ -70,9 +70,9 @@ job was about to replace stays as it was. The job fails as a user error, so Kebo
 - The tag comes from a taxonomy in another region, or from a taxonomy other than the one you named for the backend. BigQuery
   checks the project service account's permission on that tag's taxonomy, and the setter role is granted only on yours.
 - The source is a view that renames, computes or joins a protected column, so Keboola cannot trace where the column
-  comes from. A view that passes a protected column through under its own name is copied with the tag. The same holds
-  for an [alias](/storage/tables/#aliases): an alias of a tagged table is copied with the tag, and a filtered alias of
-  a tagged table is refused.
+  comes from. A view that passes a protected column through under its own name is copied with the tag. An
+  [alias](/storage/tables/#aliases) of a tagged table is copied with the tag as well. Creating a table from a filtered
+  alias of a tagged table is refused, because the filter makes the alias such a view.
 - Keboola cannot read the source, or the project's service account lacks a grant that the copy needs.
 
 ### Incremental loads into an existing workspace table
@@ -164,7 +164,7 @@ the source table, the destination table and the columns involved.
 | `storage.policyTagsNotPropagated` | A protected column was copied without its tag, because Keboola could not carry the protection over on this copy. Usually the backend is not enabled, or the project does not have the feature turned on. | Ask for the feature if copies must stay protected, and check who can read the copy. |
 | `storage.policyTagPropagationFailed` | Keboola tried to keep the tag, failed, and copied nothing. | Read the error in the event, fix its cause, and run the job again. |
 | `storage.workspacePolicyTagsAdded` | An incremental load added the source's tags to columns of an existing workspace table that had no tag. The tags stay even if the load that follows fails. | Nothing. The event records which columns are protected from now on. |
-| `storage.workspacePolicyTagMismatch` | An incremental load was refused, because a column of the existing workspace table carries a different tag than its source. Keboola does not replace an existing tag. | Change or remove that tag on the workspace table in BigQuery, then run the load again. This needs BigQuery rights that the workspace's own credentials do not have. See [Incremental loads into an existing workspace table](#incremental-loads-into-an-existing-workspace-table). |
+| `storage.workspacePolicyTagMismatch` | An incremental load was refused, because a column of the existing workspace table carries a different tag than its source. Keboola does not replace an existing tag. | Ask someone with the rights to change policy tags in your Google Cloud project to change or remove that tag on the workspace table, then run the load again. The workspace's own credentials normally cannot change a tag. See [Incremental loads into an existing workspace table](#incremental-loads-into-an-existing-workspace-table). |
 
 ## What this feature does not cover
 

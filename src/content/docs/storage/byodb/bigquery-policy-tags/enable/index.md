@@ -28,8 +28,8 @@ feature.
 - **If your taxonomy enforces fine-grained access control, a read grant for each of those projects.**
   `roles/datacatalog.categoryFineGrainedReader` on the taxonomy for each project allowed to see the data
   (`principalSet://cloudresourcemanager.googleapis.com/projects/{project number}/type/ServiceAccount`). Without it,
-  cloning, copying, branch pulls, creating a table from it, previews, exports and incremental loads of a tagged table
-  fail in that project with
+  cloning or copying a tagged table, pulling it into a branch, creating a table from it, previewing or exporting it,
+  and loading it incrementally all fail in that project with
   `storage.backend.policyTagAccessDenied`. Keboola never grants this role itself. See
   [Fine-grained access](/storage/byodb/bigquery-policy-tags/#fine-grained-access).
 
