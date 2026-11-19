@@ -129,8 +129,8 @@ you'll see the following error:
     Server Connection Error
     A connection to the Jupyter server could not be established. JupyterLab will continue trying to reconnect. Check your network connection or Jupyter server configuration.
 
-If you see this error, please go to the list of workspaces in Keboola, resume the workspace
-and reconnect from there.
+The workspace is still there. How to resume it and get back in is in
+[Connect to a workspace](/workspace/connect/).
 
 ## Data persistency (beta)
 When this feature is enabled in a project, your data in workspaces can be kept. This way you can, when you return, start where you left off without losing data or time by importing the data again or executing scripts to get to the right stage.

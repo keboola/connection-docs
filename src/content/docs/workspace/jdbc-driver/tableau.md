@@ -1,5 +1,7 @@
 ---
 title: Tableau Desktop Installation Guide
+sidebar:
+  label: Connect Tableau
 slug: 'workspace/jdbc-driver/tableau'
 description: Put the Keboola JDBC driver in Tableau's drivers folder, connect with a Storage API token in the Password field, and run a first query.
 ---

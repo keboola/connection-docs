@@ -26,8 +26,13 @@ Open the workspace detail, then follow the tab for your workspace type or tool:
     to directly open the JupyterLab interface.
 
     ![Workspace - Python/R](/workspace/workspace-connect-pythonr.png)
+
+    If JupyterLab shows a **Server Connection Error**, the workspace has been terminated. Go to the list of
+    workspaces in Keboola, resume the workspace and reconnect from there.
   </TabItem>
   <TabItem label="SQL Editor">
+    Click **Open SQL Editor** in the workspace detail.
+
     The built-in [SQL Editor](/workspace/sql-editor/) lets you work with **Snowflake** and **Google BigQuery** workspaces directly in your browser, without connecting any external tools.
 
     :::note[Multi-tenant and Pay-As-You-Go projects (Snowflake backend)]
@@ -87,11 +92,16 @@ is connected with the credentials from the **Connect** menu.
 authentication, with the private key in the form the tool needs.
 
 1. Open the **Connect** menu on the workspace and take the Key Pair credentials. Keboola can generate the key pair
-   for you. If your tool requires a passphrase-protected private key,
-   [bring your own key pair](#bring-your-own-key-pair) instead.
-2. Keep the private key safe; see [Encrypt the private key](#encrypt-the-private-key).
-3. If your tool needs the key in `.p8` format, [convert it](#convert-the-private-key-to-p8-format).
-4. Set up key-pair authentication in your tool. Below are links to documentation for popular database IDEs used by
+   for you.
+   {/* VERIFY(Nikita): how the reader gets the private key file out of the Connect menu (download or copy), and the file name to expect. The commands below assume `private_key.pem`. */}
+2. Get the private key into the form your tool needs. The options below are alternatives, not a sequence: each one
+   starts from the unencrypted `private_key.pem` that Keboola generated.
+   - The tool accepts a `.pem` key: store it in a password manager, or
+     [encrypt it](#encrypt-the-private-key) if you keep it on disk.
+   - The tool needs a `.p8` key: [convert it](#convert-the-private-key-to-p8-format). The `.p8` file is not encrypted.
+   - The tool needs a passphrase-protected key: you can encrypt it as above, or
+     [bring your own key pair](#bring-your-own-key-pair) instead.
+3. Set up key-pair authentication in your tool. Below are links to documentation for popular database IDEs used by
    Keboola users that support Key Pair authentication.
 
    - [DBeaver Community Edition](https://community.snowflake.com/s/article/Using-Private-Key-authentication-in-DBeaver)
@@ -100,14 +110,14 @@ authentication, with the private key in the form the tool needs.
    - [VSCode/Cursor Snowflake Extension](https://docs.snowflake.com/en/user-guide/vscode-ext#sign-in-to-snowflake-with-the-vs-code-extension)
    - [VSCode/Cursor DBCode Extension](https://dbcode.io/docs/supported-databases/snowflake)
 
+   {/* VERIFY(Nikita): which values a client needs for a key-pair login (account identifier, user, role, warehouse, database, schema), and which of them the Connect menu shows. The screenshot shows Host, User, Key Pair, Database, Schema and Warehouse, and no role. */}
+
 **Result:** the tool connects to the workspace with the key pair.
 
 ### Encrypt the private key
 
 When Keboola generates the key pair, the private key is unencrypted, so we recommend using password management tools like [Keepass](https://keepass.info/) or [1Password](https://1password.com/) to store your private key for better security.
 In case you need to store the private key locally and want to protect it from unauthorized access, encrypt it using [OpenSSL](https://www.openssl.org/).
-
-If your tool requires a passphrase-protected private key, you can also [bring your own key pair](#bring-your-own-key-pair) instead.
 
 1. Open a terminal. On Windows, make sure OpenSSL is installed (e.g., via [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or [Windows binaries](https://slproweb.com/products/Win32OpenSSL.html)), and open PowerShell or Command Prompt.
 2. Run:

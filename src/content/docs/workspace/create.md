@@ -29,6 +29,8 @@ Storage. To open the workspace in JupyterLab or a SQL tool, see [Connect to a wo
 
    ![Workspace - Name workspace](/workspace/workspace-create-2.png)
 
+   <!-- VERIFY(Nikita): the steps skip the submit button and the fields the screenshot shows (Backend Version, Backend Size, Auto Sleep Timeout, Share with all project users). Check the current dialog and name the button and the fields a reader has to set. -->
+
 Creating the workspace takes a few seconds, so it will take a while before it appears:
 
 ![Workspace - Running](/workspace/workspace-create-3.png)
@@ -51,6 +53,8 @@ You can also create workspaces from transformations.
 ## Load data into a workspace
 
 **Goal:** the Storage tables and files you need, available inside the workspace.
+
+<!-- VERIFY(Nikita): how to open the workspace detail (click the name in the Workspaces list?), and where the Clean workspace before loading option sits (in the Load data dialog?). The tasks on this page start from the detail and do not say how to get there. -->
 
 1. In the workspace detail, configure a
    [table input mapping](/transformations/mappings/#table-input-mapping) or
@@ -102,7 +106,7 @@ access to the selected table as soon as the mapping is saved, so no **Unload Dat
 
 **Goal:** a new transformation that carries the input and output mapping of the workspace.
 
-Workspaces are highly useful for developing transformations.
+<!-- VERIFY(Nikita): this task assumes a JupyterLab (Python or R) workspace. Check whether SQL workspaces offer the same action, and say so either way. -->
 
 1. Configure [mappings](/transformations/mappings/) and develop a script in JupyterLab.
 2. In the workspace detail, use the **Create Transformation** button to deploy the notebook into a transformation.
@@ -115,6 +119,6 @@ Workspaces are highly useful for developing transformations.
 
 **Result:** a new transformation. Please note that only input/output mapping without the actual script is
 copied when creating transformation from a workspace.
-<!-- VERIFY(Nikita): the screenshot shows this action as "Create new transformation", next to "Copy to existing transformation". Check the current label, and whether the script really stays behind. -->
+<!-- VERIFY(Nikita): the screenshot shows this action as "Create new transformation", next to "Copy to existing transformation". Check the current label, and whether the script really stays behind. Three pages disagree on what moves to the transformation: here only the mappings, not the script; sql-editor/use says Save Queries creates a transformation with the SQL code and the output mapping; sql-editor/ says you save, then copy to a new or existing transformation, which transfers the queries, mappings and variables. -->
 
 **Next:** [Connect to a workspace →](/workspace/connect/)

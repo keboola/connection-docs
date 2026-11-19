@@ -1,5 +1,7 @@
 ---
 title: DBeaver Installation Guide
+sidebar:
+  label: Connect DBeaver
 slug: 'workspace/jdbc-driver/dbeaver'
 description: Register the Keboola JDBC driver in DBeaver, create a connection with a Storage API token, run a first query and fix the usual connection errors.
 ---
@@ -58,8 +60,8 @@ Save the jar somewhere stable on your machine — e.g. `~/keboola/keboola-jdbc-d
    | Property | Required | Description |
    |---|---|---|
    | `token` | yes | Your Keboola Storage API token |
-   | `branch` | no | Specific branch ID. Auto-detected (default branch) if omitted |
-   | `workspace` | no | Specific workspace ID. Newest workspace is auto-selected if omitted |
+
+   The optional `branch` and `workspace` properties are in [Connection properties](/workspace/jdbc-driver/#connection-properties).
 
    ![Connection — driver properties](./DBeaver_DB_2.png)
 

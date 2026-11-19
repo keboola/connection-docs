@@ -10,7 +10,7 @@ The Keboola JDBC driver lets standard SQL clients query data in your Keboola pro
 
 The driver auto-discovers your branches and workspaces, exposes virtual `_keboola.*` tables for platform metadata, adds a `KEBOOLA HELP` command, and supports full Snowflake metadata via `SHOW` commands.
 
-<!-- Explanation-type page. Source: the page as it stood on main; shape only, content unchanged, checked 2026-11-19. -->
+<!-- Reference-type page. Source: the page as it stood on main; shape only, content unchanged, checked 2026-11-19. -->
 
 :::note
 This page is about reading data **out of** Keboola from external SQL/BI clients. If you instead want to **push** data into the Tableau ecosystem from Keboola, see the [Tableau data destination connector](/components/writers/bi-tools/tableau/).

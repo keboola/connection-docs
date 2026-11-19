@@ -1,5 +1,7 @@
 ---
 title: DataGrip Installation Guide
+sidebar:
+  label: Connect DataGrip
 slug: 'workspace/jdbc-driver/datagrip'
 description: Register the Keboola JDBC driver in DataGrip or another JetBrains IDE, create a data source with a Storage API token, and run a first query.
 ---
@@ -54,8 +56,8 @@ Save it somewhere stable on your machine — e.g. `~/keboola/keboola-jdbc-driver
    | Property | Required | Description |
    |---|---|---|
    | `token` | yes | Your Keboola Storage API token |
-   | `branch` | no | Specific branch ID. Auto-detected (default branch) if omitted |
-   | `workspace` | no | Specific workspace ID. Newest workspace is auto-selected if omitted |
+
+   The optional `branch` and `workspace` properties are in [Connection properties](/workspace/jdbc-driver/#connection-properties).
 
 4. Click **Test Connection**. On success, **OK**.
 

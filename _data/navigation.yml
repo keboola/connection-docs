@@ -861,11 +861,11 @@ items:
         title: Keboola JDBC Driver
         items:
           - url: /workspace/jdbc-driver/dbeaver/
-            title: DBeaver
+            title: Connect DBeaver
           - url: /workspace/jdbc-driver/datagrip/
-            title: DataGrip
+            title: Connect DataGrip
           - url: /workspace/jdbc-driver/tableau/
-            title: Tableau
+            title: Connect Tableau
 
       - url: /workspace/table-export/
         title: Table Export

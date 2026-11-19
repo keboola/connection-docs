@@ -77,6 +77,8 @@ Variables behave consistently across both Workspaces and Transformations:
 
 In a Workspace, you can create variables and use them in your SQL queries. When you save the Workspace (which also saves its queries), you can then copy it to a new or existing Transformation. This action transfers the queries, input/output mapping, and all associated variables.
 
+<!-- VERIFY(Nikita): three pages disagree on how a workspace becomes a transformation. Here you save, then copy to a new or existing transformation, and the queries, mappings and variables move. sql-editor/use says Save Queries itself creates a new transformation with the SQL code and the output mapping. workspace/create says only the input and output mapping is copied, not the script. -->
+
 In a Transformation, you can also create variables and reference them in your transformation queries. You can then copy the Transformation to a Workspace, which brings over its queries, mappings, and variables.
 
 :::note[Variables are not shared automatically]

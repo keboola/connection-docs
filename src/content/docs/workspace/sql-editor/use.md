@@ -5,7 +5,8 @@ description: 'Tasks in the SQL Editor: create an SQL workspace, run queries, exp
 ---
 
 This page has the step-by-step tasks in the [SQL Editor](/workspace/sql-editor/), from the first workspace to a saved
-transformation. Each task stands on its own. The SQL Editor page explains the panes, sessions and workspace sharing.
+transformation. Each task after the first starts with the SQL Editor open on your workspace: in the workspace
+detail, click **Open SQL Editor**. The SQL Editor page explains the panes, sessions and workspace sharing.
 
 <!-- How-to-type page. Source: the former single SQL Editor page on main; split by type, text carried over, checked 2026-11-19. -->
 
@@ -75,12 +76,41 @@ To quickly inspect the contents of a table in the Storage Explorer:
 
 After executing a query, you can view detailed information about previously run queries in the results pane by clicking **QUERY HISTORY**.
 
+## Reuse shared code
+
+**Goal:** a predefined query from Shared Code in your code block, either copied or linked.
+
+Shared Code allows you to reuse predefined SQL queries across multiple transformations or query blocks. This promotes consistency and simplifies maintenance.
+
+The shared code must exist already. To create it, see [Shared Code](/transformations/shared-code/).
+
+1. In the SQL code editor block, click the **Select Shared Code** link.
+
+   ![Select Shared Code button](/workspace/sql-editor/26-select-shared-code.jpg)
+
+2. In the "Add Shared Code" dialog, select the desired code from the dropdown (e.g., `Aggregate`).
+
+   ![Shared Code dialog showing Aggregate selection](/workspace/sql-editor/27-add-shared-code-dialog.jpg)
+
+3. Pick one of the two options for using shared code:
+   *   **Use Inline:** The SQL text of the shared code is copied directly into your transformation block. You can then freely edit and modify the code locally. This is equivalent to copy-pasting the code.
+   *   **Use as Shared Code (Linking):** The code block is linked to the original shared code template.
+
+**Result:** the shared code is in your block. When linking shared code:
+
+*   The code block appears labeled **SHARED CODE**.
+*   Any updates made to the original shared code template will automatically propagate to this transformation block.
+*   The code within the block is read-only (uneditable), ensuring integrity with the shared template.
+
+If you need to make modifications to the code for a specific transformation, you must use the **Use Inline** option.
+
 ## Export a query result
 
 **Goal:** a query result downloaded as a CSV file.
 
 1.  Run the query.
 2.  Select **Export Query result** and choose your preferred format:
+    <!-- VERIFY(Nikita): where Export Query result sits (results pane toolbar, a menu on the code block?). The page has no screenshot of it. -->
     *   CSV: standard comma-separated values
     *   CSV (gzip): compressed CSV for large exports
 
@@ -146,6 +176,7 @@ The SQL Editor supports creating persistent tables that are saved back into Kebo
 To create a persistent table, you must convert your `SELECT` statements into `CREATE TABLE AS SELECT` statements, specifying a temporary output table name. These tables are automatically created in the workspace schema upon successful execution.
 
 1.  Define a new table using `CREATE TABLE "out" AS SELECT ...`
+    <!-- VERIFY(Nikita): the statement is a placeholder on the old page too. Add a complete example for Snowflake and BigQuery, or say it is a pattern. -->
 
     ![SQL Editor - SQL code block showing CREATE TABLE AS SELECT syntax](/workspace/sql-editor/11-create-table-select.jpg)
 
@@ -170,6 +201,9 @@ Once temporary working tables are created, you must map them to a destination in
 ## Write directly to Storage (Direct Mode)
 
 **Goal:** a Storage table the workspace writes to directly, with no copy step.
+
+Direct Mode output mapping is a private beta: [Keboola Support](/management/support/) must enable it for your project,
+as the [mappings page](/transformations/mappings/#direct-mode-output-mapping) says.
 
 On Snowflake and BigQuery workspaces, you can skip the copy step altogether and let the workspace write straight
 into a Storage table using [Direct Mode output mapping](/transformations/mappings/#direct-mode-output-mapping).
@@ -205,30 +239,6 @@ validation on direct writes. Read the
 
 **Result:** this action saves the SQL code and the output mapping configuration, creating a new Transformation component in your project.
 
-## Reuse shared code
-
-**Goal:** a predefined query from Shared Code in your code block, either copied or linked.
-
-Shared Code allows you to reuse predefined SQL queries across multiple transformations or query blocks. This promotes consistency and simplifies maintenance.
-
-1. In the SQL code editor block, click the **Select Shared Code** link.
-
-   ![Select Shared Code button](/workspace/sql-editor/26-select-shared-code.jpg)
-
-2. In the "Add Shared Code" dialog, select the desired code from the dropdown (e.g., `Aggregate`).
-
-   ![Shared Code dialog showing Aggregate selection](/workspace/sql-editor/27-add-shared-code-dialog.jpg)
-
-3. Pick one of the two options for using shared code:
-   *   **Use Inline:** The SQL text of the shared code is copied directly into your transformation block. You can then freely edit and modify the code locally. This is equivalent to copy-pasting the code.
-   *   **Use as Shared Code (Linking):** The code block is linked to the original shared code template.
-
-**Result:** the shared code is in your block. When linking shared code:
-
-*   The code block appears labeled **SHARED CODE**.
-*   Any updates made to the original shared code template will automatically propagate to this transformation block.
-*   The code within the block is read-only (uneditable), ensuring integrity with the shared template.
-
-If you need to make modifications to the code for a specific transformation, you must use the **Use Inline** option.
+<!-- VERIFY(Nikita): three pages disagree on how a workspace becomes a transformation. Here Save Queries creates a new transformation with the SQL code and the output mapping. sql-editor/ says you save, then copy to a new or existing transformation, which moves the queries, mappings and variables. workspace/create says only the input and output mapping is copied, not the script. -->
 
 **Next:** [Keboola JDBC driver →](/workspace/jdbc-driver/)
