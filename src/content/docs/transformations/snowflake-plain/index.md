@@ -24,7 +24,7 @@ Snowflake is a cloud database and, as such, brings continuous updates and behavi
 interested in those changes, please follow the official [Snowflake release notes](https://docs.snowflake.com/en/release-notes/overview).
 
 When loading data to a Snowflake transformation, beware that there are two different
-methods: [copy and clone](/transformations/mappings/#loading-type-snowflake-and-bigquery).
+methods: [copy and clone](/transformations/mappings/input/#loading-type-snowflake-and-bigquery).
 
 ## Aborting Transformation Execution
 In some cases, you may need to abort the transformation execution and exit with an error message. 
@@ -242,7 +242,7 @@ SELECT
 
 ## Bucket Objects for Read-Only Input Mapping
 
-For more information on how a **read-only input mapping** works, visit the [link](/transformations/mappings/#read-only-input-mapping).
+For more information on how a **read-only input mapping** works, visit the [link](/transformations/mappings/input/#read-only-input-mapping).
 Buckets in Snowflake are represented by schemas. You can find all available schemas for your account by calling `SHOW SCHEMAS IN ACCOUNT;`. Each schema represents a bucket.
 Alias tables are materialized as database VIEWs and are accessible via read-only input mappings — including filtered aliases and aliases from linked buckets.
 For a linked bucket, the schema is available in another database. That is, to access this linked bucket you have to include the database name of the project from which the bucket is linked. 

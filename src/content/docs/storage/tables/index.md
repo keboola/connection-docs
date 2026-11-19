@@ -45,7 +45,7 @@ An alias does not contain any actual data; it is simply a link to some already e
 Therefore, an alias cannot be written to, and its size does not count toward your project quota.
 
 Alias tables are automatically materialized as physical database VIEWs. This makes them fully accessible in workspaces and
-transformations via [read-only storage access](/transformations/mappings/#read-only-input-mapping) — no input mapping configuration is required.
+transformations via [read-only storage access](/transformations/mappings/input/#read-only-input-mapping) — no input mapping configuration is required.
 Filtered aliases are also supported; the filter condition is enforced as a `WHERE` clause in the VIEW.
 In [linked buckets](/catalog/), alias VIEWs from the source project are automatically mirrored to the destination project,
 making them immediately queryable there as well.

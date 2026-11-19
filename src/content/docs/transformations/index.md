@@ -18,7 +18,7 @@ In Keboola, all transformations operate on a copy of the data from Storage
 in a safe and isolated environment. This improves the safety, repeatability, and traceability of all data operations.
 The process of isolating data is called [**mapping**](/transformations/mappings/).
 The mapping process copies input data from permanent project Storage into a 
-[**staging**](/transformations/mappings/#table-input-mapping) area, representing ephemeral Storage to run the transformation **script**.
+[**staging**](/transformations/mappings/input/#table-input-mapping) area, representing ephemeral Storage to run the transformation **script**.
 A transformation [**backend**](/transformations/#backends) executes the transformation script. To ease the [development](/transformations/#developing-transformations) 
 of the transformation script, all transformations are **automatically versioned**, and you can use a **workspace**
 that provides a copy of the environment and can be run interactively.
@@ -264,6 +264,6 @@ When triggered
 
 ## Read-Only Input Mapping
 
-With the [read-only input mapping](/transformations/mappings/#read-only-input-mapping) feature, you can access all buckets (your own or linked) in transformations. Your transformation user
+With the [read-only input mapping](/transformations/mappings/input/#read-only-input-mapping) feature, you can access all buckets (your own or linked) in transformations. Your transformation user
 has read-only access to buckets (and their tables), so you can access such data. So, there is no need to specify standard input mapping 
 for your transformations. The name of the backend object (database, schema, etc.) depends on the backend you use, and it contains the bucket ID (not the bucket name).

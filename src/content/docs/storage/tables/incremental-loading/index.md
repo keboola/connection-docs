@@ -14,7 +14,7 @@ How data lands in a [table](/storage/tables/) depends on two settings: whether t
 ## Primary Keys
 Each table may have a **primary key** defined on one or more columns. A primary key represents an
 identifier of each row in the table. Each primary key can be defined manually on a table or as part of
-[output mapping](/transformations/mappings/#output-mapping) of
+[output mapping](/transformations/mappings/output/) of
 [transformations](/transformations/) and [applications](/components/applications/).
 The settings on both places must match, otherwise you will receive an error:
 
@@ -201,7 +201,7 @@ Here we can see a **significant change in the incremental load**. The `_timestam
 
 ## Incremental Processing
 When a table is loaded incrementally, the update time of each row is recorded internally. This information
-can be later used in input mapping of many components (especially [transformations](/transformations/mappings/#input-mapping)).
+can be later used in input mapping of many components (especially [transformations](/transformations/mappings/input/)).
 Incremental processing is available in two flavors — *automatic* and *manual*. Incremental processing makes sense only for
 components reading data from the Storage (e.g., transformations and writers). Note that this is not supported for all components yet.
 

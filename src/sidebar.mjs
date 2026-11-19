@@ -595,7 +595,18 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "transformations" },
-      { slug: "transformations/mappings" },
+      {
+        label: "Input and Output Mapping",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "transformations/mappings" },
+          { slug: "transformations/mappings/input" },
+          { slug: "transformations/mappings/output" },
+          { slug: "transformations/mappings/partition-aware-import" },
+          { slug: "transformations/mappings/direct-mode" },
+          { slug: "transformations/mappings/direct-mode/set-up" },
+        ],
+      },
       { slug: "transformations/shared-code" },
       {
         label: "dbt Transformation",

@@ -780,7 +780,22 @@ items:
     title: Transformations
     items:
       - url: /transformations/mappings/
-        title: Mappings
+        title: Input and Output Mapping
+        items:
+          - url: /transformations/mappings/input/
+            title: Input Mapping
+
+          - url: /transformations/mappings/output/
+            title: Output Mapping
+
+          - url: /transformations/mappings/partition-aware-import/
+            title: Partition-Aware Import
+
+          - url: /transformations/mappings/direct-mode/
+            title: Direct Mode
+
+          - url: /transformations/mappings/direct-mode/set-up/
+            title: Set Up Direct Mode
         
       - url: /transformations/shared-code/
         title: Shared Code
