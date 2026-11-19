@@ -37,7 +37,7 @@ To find the file behind an import, open the import job in [Storage jobs](/storag
 
 **Goal:** an arbitrary file stored in your project, with the tags and the retention you choose.
 
-1. To store an arbitrary file, select the Files tab in Storage and then click **Upload File** in the top right corner.
+1. Select the Files tab in Storage and then click **Upload File** in the top right corner.
    <!-- VERIFY(Nikita): the screenshot below shows the button as "Upload files". Check the current label. -->
 
    ![Screenshot - File uploads](/storage/files/files.png)
@@ -116,8 +116,8 @@ Beware, however, that due to the nature of database exports, the exported table 
 [substantial effort to reconstruct](https://developers.keboola.com/integrate/storage/api/import-export/#working-with-sliced-files).
 
 1. Open the [table detail](/storage/tables/#what-a-table-is) of the table.
-2. To make sure your tables are exported as merged files, always use the **Export** feature in
-   the **Action** tab of the table detail:
+2. Use the **Export** feature in the **Action** tab of the table detail. To make sure your tables are exported as
+   merged files, always export them this way:
    <!-- VERIFY(Nikita): the screenshot below shows an older UI with an "Actions" menu. Check where Export is in the current table detail. -->
 
    ![Screenshot - Export table](/storage/tables/table-export.png)

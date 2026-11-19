@@ -36,7 +36,7 @@ Keboola records all data uploaded into your project.
 
    ![Screenshot - Storage Jobs](/storage/jobs/storage-jobs.png)
 
-2. When you click an **importTable** job, you'll see the Storage job detail:
+2. Click an **importTable** job. You'll see the Storage job detail:
    <!-- VERIFY(Nikita): the screenshots show the operation as "tableImport", not "importTable". Check which name the UI uses. -->
 
    ![Screenshot - Storage Job Detail](/storage/jobs/storage-jobs-detail.png)
@@ -48,7 +48,7 @@ Keboola records all data uploaded into your project.
 **Goal:** the data file behind a table import, to download it, import it into other tables, or revert to an older table version.
 
 1. Open the detail of the import job, as described above.
-2. Clicking **File ID** will take you to the **Files** section in **Storage**, where all data pushed into your Keboola project is stored.
+2. Click **File ID**. This will take you to the **Files** section in **Storage**, where all data pushed into your Keboola project is stored.
 
    ![Screenshot - Files](/storage/jobs/storage-file-uploads.png)
 

@@ -118,7 +118,7 @@ Some other alterations, such as increasing the length or precision of a column, 
 **For tables loaded incrementally:** You will need to create a new column with the desired type and migrate the data step by step.
 Assume you have a column `date` of type `VARCHAR` in a typed table, and you want to change it to `TIMESTAMP`.
 
-1. Start by adding a new column named `date_timestamp` of type `TIMESTAMP` to the table.
+1. Add a new column named `date_timestamp` of type `TIMESTAMP` to the table.
 2. Update all jobs filling the table to populate both the new column (`date_timestamp`) and the existing column (`date`).
 3. Run an ad-hoc transformation to copy data from `date` to `date_timestamp` for the existing rows.
 4. Gradually update all configurations and references to use `date_timestamp` instead of `date`.

@@ -21,8 +21,8 @@ Every project with a Snowflake backend can create an exact replica of a table at
 
 1. Open the table detail, go to the **Snapshot and Restore** tab and, under **Time Travel Restore**, click **Restore table**.
    <!-- VERIFY(Nikita): the tab and button names in steps 1 and 4 come from the 2019 screenshots. Check them in the current UI. -->
-2. To create a replica, first, use the calendar to select a time point. The table will be replicated as it was at that time point.
-3. Then, select the bucket to use for the newly created table, and give it a name.
+2. Use the calendar to select a time point. The table will be replicated as it was at that time point.
+3. Select the bucket to use for the newly created table, and give it a name.
 4. Click **Create**.
 
 ![Screenshot - Time Travel Restore](/storage/tables/time-travel-restore.png)

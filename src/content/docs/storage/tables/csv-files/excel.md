@@ -28,11 +28,11 @@ but without using any non-standard Windows tools, the quickest is this:
 
    This will produce a tab-delimited file in UTF-16 encoding, which you can convert in Windows Notepad.
 
-2. Simply open the file in Notepad, and without making any modifications, save it with `UTF-8` encoding (and .csv extension):
+2. Open the file in Notepad and, without making any modifications, save it with `UTF-8` encoding (and .csv extension):
 
    ![Screenshot -- Excel Export - Notepad Convert](/storage/tables/excel-export-2.png)
 
-3. The resulting file `import-data.txt.csv` can now be imported into Keboola Storage as a tab delimited file.
+3. Import the resulting file `import-data.txt.csv` into Keboola Storage as a tab delimited file:
 
    ![Screenshot -- Excel Export - KBC Import](/storage/tables/excel-export-3.png)
 
@@ -44,8 +44,9 @@ but without using any non-standard Windows tools, the quickest is this:
 
 **Goal:** a table exported from Storage, open in an Excel workbook with its columns and characters intact.
 
-1. The easiest way to import the CSV file exported from Keboola into Microsoft Excel is by starting Excel and opening
-   a **blank workbook**.
+The easiest way to import the CSV file exported from Keboola into Microsoft Excel is this:
+
+1. Start Excel and open a **blank workbook**.
 2. Use the **Data** -- **From Text** function and select the exported file:
 
    ![Screenshot -- Excel Import -- Select file](/storage/tables/excel-import-1.png)
