@@ -50,7 +50,7 @@ based on
 
 Types:
 - **KBC** - Generic type of PPU used in the projects.
-- **SQL** - PPU used for SQL transformation jobs, in case the customer is using [BYODB](/storage/byodb) and has a separate product for SQL jobs.
+- **SQL** - PPU used for SQL and DuckDB transformation jobs, in case the customer is using [BYODB](/storage/byodb) and has a separate product for SQL jobs.
 - **CDC** - PPU used for CDC extractor jobs, in case the customer is using [CDC](/components/extractors/database/#change-data-capture-cdc) and has a separate product for CDC jobs.
 
 **Which job type does your work bill as?**
@@ -58,7 +58,8 @@ Types:
 | What you run                                                              | Billed as                           |
 |---------------------------------------------------------------------------|-------------------------------------|
 | Snowflake or BigQuery transformation, SQL workspace, Query Service (JDBC) | SQL job / workspace / Query service |
-| Python, R, or DuckDB transformation; Python or R (JupyterLab) workspace   | Data Science job / workspace        |
+| DuckDB transformation                                                     | DuckDB transformation job           |
+| Python or R transformation; Python or R (JupyterLab) workspace            | Data Science job / workspace        |
 | dbt transformation                                                        | dbt job                             |
 | App                                                                       | Apps                                |
 | Data source component                                                     | Data source job                     |
@@ -82,6 +83,11 @@ If you need more information, please contact your CSM.
 | Small                                 | 1 hour                  | **0.4**               |
 | Medium                                | 1 hour                  | **0.6**               |
 | Large                                 | 1 hour                  | **2**                 |
+| **DuckDB transformation job**         |                         |                       |
+| XSmall                                | 1 hour                  | **2**                 |
+| Small                                 | 1 hour                  | **4.5**               |
+| Medium                                | 1 hour                  | **9**                 |
+| Large                                 | 1 hour                  | **18**                |
 | **dbt job**                           |                         |                       |
 | Small                                 | 1 hour                  | **6**                 |
 | Remote                                | 1 hour                  | **2**                 |
