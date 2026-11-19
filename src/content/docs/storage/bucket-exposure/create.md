@@ -1,14 +1,16 @@
 ---
-title: Create and manage bucket exposures
+title: Create and manage a bucket exposure for BigQuery
 slug: 'storage/bucket-exposure/create'
 sidebar:
-  label: Create and Manage
+  label: BigQuery Exposures
 description: 'Create a bucket exposure for BigQuery subscribers, then find, edit or delete it. Covers the dialog fields, the listing ID and who may create one.'
 ---
 
 Share a bucket through [Bucket Exposure](/storage/bucket-exposure/) from the bucket detail in **Storage**, then change or remove the exposure under **Data Catalog**. The dialog described here is the BigQuery one. On a Snowflake project it asks for other fields: see [Snowflake grant mode](/storage/bucket-exposure/snowflake-grant/) and [Snowflake share mode](/storage/bucket-exposure/snowflake-share/).
 
 <!-- How-to-type page. Source: the "Creating an Exposure" and "Managing Your Exposures" sections of the Bucket Exposure page as it stood on main before the split. Structure checked 2026-11-19, facts not re-verified. -->
+
+Bucket Exposure is in beta and has to be enabled for your project: see the note at the top of the [Bucket Exposure overview](/storage/bucket-exposure/).
 
 ## Create an exposure
 
@@ -73,6 +75,7 @@ permission required to share a bucket inside Keboola.
    ![Edit bucket exposure dialog](/storage/bucket-exposure/figures/bucket-exposure-edit-modal.png)
 
 2. Change the exposure name, description, or the list of subscribers, and save.
+   <!-- VERIFY(Nikita): name the control that saves the edit dialog (the create dialog uses **Create**). -->
    The **BigQuery listing ID** is shown but cannot be edited — changing it would break the
    connection for everyone already subscribed.
 

@@ -1,6 +1,6 @@
 ---
 title: Bucket Exposure
-description: 'When to use Bucket Exposure on BigQuery or Snowflake, how it differs from Data Catalog and External Datasets, what subscribers see, and what to keep in mind.'
+description: 'When to use Bucket Exposure, how it differs from Data Catalog and External Datasets, what BigQuery subscribers see, and what to keep in mind on each backend.'
 slug: 'storage/bucket-exposure'
 ---
 
@@ -12,7 +12,7 @@ Contact Keboola support to have it enabled for your project.
 :::
 
 **Bucket Exposure** lets you share data from a Keboola bucket with people outside your
-Keboola project — directly inside their own Google BigQuery environment. No exports, no
+Keboola project — directly inside their own Google BigQuery environment, or in Snowflake. No exports, no
 data copies, no manual handoffs.
 
 <!-- Explanation-type page. Source: the Bucket Exposure page as it stood on main before the split into this page and three how-to pages. Structure checked 2026-11-19, facts not re-verified. -->
@@ -26,7 +26,7 @@ On **Snowflake**, an exposure either gives existing roles in your own Snowflake 
 access to the bucket ([Snowflake grant mode](/storage/bucket-exposure/snowflake-grant/)), or shares the bucket with
 other Snowflake accounts ([Snowflake share mode](/storage/bucket-exposure/snowflake-share/)).
 
-To set up an exposure, follow [Create and manage bucket exposures](/storage/bucket-exposure/create/) or the page of the Snowflake mode you need.
+To set up an exposure, follow [Create and manage a bucket exposure for BigQuery](/storage/bucket-exposure/create/) or the page of the Snowflake mode you need.
 
 ## When to use Bucket Exposure
 
@@ -57,7 +57,7 @@ Typical scenarios:
 | [**External Datasets**](/storage/byodb/external-buckets/) | Register a BigQuery dataset **you already own** as a bucket inside Keboola. | Keboola users only. |
 | **Bucket Exposure** | Share a Keboola-owned bucket **out into BigQuery** for people who don't use Keboola. | Anyone with a Google account or Google Group. |
 
-<!-- VERIFY(Nikita): this table names only BigQuery. The External Datasets page says a Snowflake schema can be registered too, and this page now describes two Snowflake modes of Bucket Exposure. Check whether the External Datasets and Bucket Exposure rows, and the "registered from BigQuery" note under "Things to keep in mind", should name Snowflake as well. -->
+<!-- VERIFY(Nikita): this table names only BigQuery. The External Datasets pages show that a Snowflake schema can be registered as an external dataset too, and this page describes two Snowflake modes of Bucket Exposure. Check whether the External Datasets and Bucket Exposure rows, and the "registered from BigQuery" note under "Things to keep in mind", should name Snowflake as well. -->
 
 Bucket Exposure and Data Catalog sharing are independent — you can do both on the same
 bucket if you want.
@@ -91,6 +91,8 @@ copy of the data on their side — it stays in your project.
   bucket with other Snowflake accounts ([Snowflake share mode](/storage/bucket-exposure/snowflake-share/)).
   Each mode has its own list: [grant mode](/storage/bucket-exposure/snowflake-grant/#things-to-keep-in-mind-on-snowflake)
   and [share mode](/storage/bucket-exposure/snowflake-share/#things-to-keep-in-mind-in-share-mode).
+- **One mode per exposure.** On Snowflake, you pick grant mode or share mode when you create the exposure,
+  and you cannot change it later. To switch, delete the exposure and create a new one.
 - **Manage subscribers from Keboola.** If you or someone else edits the listing's
   permissions directly in the GCP Console, those changes will be overwritten the next time
   the exposure is updated from Keboola. Keboola is the single source of truth.
@@ -100,7 +102,7 @@ copy of the data on their side — it stays in your project.
 
 ## This section
 
-- [Create and manage bucket exposures](/storage/bucket-exposure/create/): create an exposure for BigQuery subscribers, then find, edit or delete it.
+- [Create and manage a bucket exposure for BigQuery](/storage/bucket-exposure/create/): create an exposure for BigQuery subscribers, then find, edit or delete it.
 - [Snowflake grant mode](/storage/bucket-exposure/snowflake-grant/): give roles that exist in your own Snowflake account read access to one bucket.
 - [Snowflake share mode](/storage/bucket-exposure/snowflake-share/): share one bucket with other Snowflake accounts, and the SQL the consumer runs there.
 
@@ -140,4 +142,4 @@ the listing and subscribe to it.
 
 ---
 
-**Next:** [Create and manage bucket exposures →](/storage/bucket-exposure/create/)
+**Next:** [Create and manage a bucket exposure for BigQuery →](/storage/bucket-exposure/create/)

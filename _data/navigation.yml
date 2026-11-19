@@ -696,7 +696,7 @@ items:
         title: Bucket Exposure
         items:
           - url: /storage/bucket-exposure/create/
-            title: Create and Manage
+            title: BigQuery Exposures
 
           - url: /storage/bucket-exposure/snowflake-grant/
             title: Snowflake Grant Mode
@@ -739,7 +739,7 @@ items:
         title: Bring Your Own Database
         items:
           - url: /storage/byobq/
-            title: Bring Your Own BigQuery
+            title: Connect Your Own BigQuery
 
           - url: /storage/byodb/external-buckets/
             title: External Datasets
@@ -748,7 +748,7 @@ items:
                 title: Register and Use
 
           - url: /storage/byodb/snowflake-secure-data-sharing/
-            title: Snowflake Secure Data Sharing
+            title: Import a Snowflake Share
 
       - url: /storage/row-level-security/
         title: Row- and Column-Level Security

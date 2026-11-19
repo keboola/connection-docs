@@ -1,16 +1,20 @@
 ---
-title: How to Connect BigQuery
+title: Connect your own BigQuery
+sidebar:
+  label: Connect Your Own BigQuery
 description: 'Set up the Google Cloud resources for connecting your own BigQuery to Keboola: folder, project, service account and permissions.'
 slug: 'storage/byobq'
 ---
+
+This guide is for the Google Cloud administrator of an organization that runs its Keboola projects on its own BigQuery ([Bring Your Own Database](/storage/byodb/)). The registration at the end also needs a Keboola Management API token with super admin privileges.
+
+<!-- How-to-type page. Source: this page as it stood on main; headings moved one level down, and the lede, Goal and Result lines added; steps unchanged. Structure checked 2026-11-19, facts not re-verified. -->
 
 This guide is designed to walk you through the essential processes of setting up and configuring various Google Cloud resources for connecting your BigQuery 
 and related services to your Keboola project. From creating a dedicated folder in your Google organization to creating a project and a service account, 
 each section is tailored to ensure a smooth and efficient setup.
 
-<!-- How-to-type page. Source: this page as it stood on main; headings moved one level down and Goal and Result lines added, steps unchanged. Structure checked 2026-11-19, facts not re-verified. -->
-
-BigQuery is one of the two backends of [Bring Your Own Database](/storage/byodb/); that page lists the BigQuery limits to plan for.
+Before you start, check the [BigQuery limits](/storage/byodb/#bigquery-limitations) on the BYODB page.
 
 ![How to connect BigQuery](/storage/byobq/pic.png)
 

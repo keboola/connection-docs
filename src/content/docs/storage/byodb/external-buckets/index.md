@@ -11,7 +11,7 @@ If you operate Keboola in Bring-Your-Own-Database (BYODB) mode using your own da
 The implementation of **External Datasets requires the [BYODB](/storage/byodb/) to be enabled first**.
 Unless specified otherwise, this description refers to the implementation of Snowflake and BigQuery.
 
-To register an external dataset, refresh it, query it, share it or remove it, follow [Register an external dataset](/storage/byodb/external-buckets/register/).
+To register an external dataset, refresh it, query it, share it or remove it, follow [Register and use an external dataset](/storage/byodb/external-buckets/register/).
 
 ## What is an external dataset?
 Storage in Keboola is organized into [buckets](/storage/buckets/). An external dataset is a special type of bucket wherein Keboola does not manage 
@@ -35,10 +35,8 @@ appropriate `WHERE` conditions are necessary.
 
 ## Using an external dataset
 
-Tables and views added to the schema or dataset after registration become visible in Keboola after a refresh. See [Refresh an external dataset](/storage/byodb/external-buckets/register/#refresh-an-external-dataset).
-
 Table and column descriptions come from the comments in the source: the Snowflake `COMMENT` or the BigQuery
-description. They are read-only in Keboola and are updated when you register or refresh the bucket. Learn more in
+description. They are read-only in Keboola and are updated when you register or [refresh](/storage/byodb/external-buckets/register/#refresh-an-external-dataset) the bucket. Learn more in
 [Descriptions of External Tables](/storage/tables/#descriptions-of-external-tables).
 
 External datasets can be used in an [input mapping](/transformations/mappings/#input-mapping). If you would like to disable usage of External datasets in input mapping, reach out to our support to disable it.
@@ -60,17 +58,8 @@ Keep in mind that external buckets cannot be used in an [output mapping](/transf
 * Table names can't be longer than **92 characters** and can contain only **alphanumeric** characters, **dashes**, and **underscores**. Tables that do not meet these requirements **will be ignored**.
 * Table names are not case-sensitive. You cannot create two tables with the same name that differ only in letter case.
 * [Creating snapshots](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/snapshots) from tables in external buckets is not supported.
-* A read-only input mapping with an external dataset has a limitation. If you delete and recreate a registered table in the source schema, our [read-only input mapping](/workspace/#read-only-input-mapping) will lose access to this table. This occurs because we aim to limit clients from having excessive permissions, such as [OWNERSHIP](https://docs.snowflake.com/en/sql-reference/sql/grant-privilege#restrictions-and-limitations), on their external schemas. **However, manually refreshing the bucket addresses this issue.** <br> To permanently resolve this issue, you can manually grant the read-only input mapping role future access to your tables and views as illustrated below: <br>
-```
-GRANT SELECT ON FUTURE TABLES IN SCHEMA "REPORTING"."sales_schema" TO ROLE KEBOOLA_8_RO;
-GRANT SELECT ON FUTURE VIEWS IN SCHEMA "REPORTING"."sales_schema" TO ROLE KEBOOLA_8_RO;
-GRANT SELECT ON FUTURE EXTERNAL TABLES IN SCHEMA "REPORTING"."sales_schema" TO ROLE KEBOOLA_8_RO;
-```
-<br>
-Ensure the role name follows the pattern in the picture and is suffixed with `_RO`.
-
-<!-- VERIFY(Nikita): the sentence above points at a picture that is not on this page. The figures folder holds an unused registration screenshot (3-snflk.png) that shows a role named KEBOOLA_8, which may be the picture meant. Either restore a picture or state the pattern in words (the BYODB page gives it as KEBOOLA_<PROJECT_ID>_RO). -->
+* A read-only input mapping with an external dataset has a limitation. If you delete and recreate a registered table in the source schema, our [read-only input mapping](/workspace/#read-only-input-mapping) will lose access to this table. This occurs because we aim to limit clients from having excessive permissions, such as [OWNERSHIP](https://docs.snowflake.com/en/sql-reference/sql/grant-privilege#restrictions-and-limitations), on their external schemas. **However, manually refreshing the bucket addresses this issue.** To resolve it permanently, [grant the read-only role future access](/storage/byodb/external-buckets/register/#keep-read-only-input-mapping-access-to-recreated-tables) to your tables and views.
 
 ---
 
-**Next:** [Register an external dataset →](/storage/byodb/external-buckets/register/)
+**Next:** [Register and use an external dataset →](/storage/byodb/external-buckets/register/)

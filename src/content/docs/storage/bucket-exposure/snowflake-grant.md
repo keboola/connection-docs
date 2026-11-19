@@ -18,7 +18,7 @@ Grant mode is available only when the project's Snowflake backend is **your own 
 ([BYODB](/storage/byodb/)), or an account Keboola runs for your organization alone. It is not
 available on Keboola's shared Snowflake accounts or in Snowflake Partner Connect projects.
 
-To share the bucket with other Snowflake accounts instead, use [share mode](/storage/bucket-exposure/snowflake-share/).
+To share the bucket with other Snowflake accounts instead, use [share mode](/storage/bucket-exposure/snowflake-share/). Bucket Exposure is in beta and has to be enabled for your project: see the note at the top of the [Bucket Exposure overview](/storage/bucket-exposure/).
 
 ## Create a grant-mode exposure
 
@@ -33,21 +33,23 @@ To share the bucket with other Snowflake accounts instead, use [share mode](/sto
      project. Choose **Grant to roles**.
    - **Grantee roles** *(optional)* — the roles that should read the bucket, one per line.
 
+   Grantee roles must follow these rules:
+
+   - The role must **already exist** in the account. Keboola does not create roles. If a role
+     is missing, the job fails, names the role, and grants nothing.
+   - Use **unquoted** role names: letters, digits, `_` and `$`, starting with a letter or `_`
+     (not with a digit or `$`).
+     Names are converted to upper case, which matches every role created without quotes.
+     Quoted, case-sensitive role names such as `"analyst"` are not supported.
+   - At most 100 roles per exposure.
+   - These roles are refused: `PUBLIC`, the Snowflake system roles (`ACCOUNTADMIN`, `ORGADMIN`,
+     `SECURITYADMIN`, `SYSADMIN`, `USERADMIN`, `GLOBALORGADMIN`), the roles Keboola creates in
+     the account (project, read-only, workspace and share roles, all named with the stack's
+     prefix), and the backend's administrative role.
+
+   You pick the mode once: see [One mode per exposure](/storage/bucket-exposure/#things-to-keep-in-mind).
+
 3. Click **Create**.
-
-Grantee roles must follow these rules:
-
-- The role must **already exist** in the account. Keboola does not create roles. If a role
-  is missing, the job fails, names the role, and grants nothing.
-- Use **unquoted** role names: letters, digits, `_` and `$`, starting with a letter or `_`
-  (not with a digit or `$`).
-  Names are converted to upper case, which matches every role created without quotes.
-  Quoted, case-sensitive role names such as `"analyst"` are not supported.
-- At most 100 roles per exposure.
-- These roles are refused: `PUBLIC`, the Snowflake system roles (`ACCOUNTADMIN`, `ORGADMIN`,
-  `SECURITYADMIN`, `SYSADMIN`, `USERADMIN`, `GLOBALORGADMIN`), the roles Keboola creates in
-  the account (project, read-only, workspace and share roles, all named with the stack's
-  prefix), and the backend's administrative role.
 
 **Result:** After the job finishes, the exposure detail shows the **Snowflake object**: the granted
 schema as `"<DATABASE>"."<SCHEMA>"`. Give that name and the role to the people who will
@@ -120,6 +122,8 @@ SHOW GRANTS TO ROLE DATABRICKS_READER;
 SHOW FUTURE GRANTS TO ROLE DATABRICKS_READER;
 ```
 
+`DATABRICKS_READER` is an example: replace it with the grantee role you want to check.
+
 **Result:** While the role is a grantee, the first statement lists `USAGE` on the project database and
 on the bucket schema and `SELECT` on each table and view in the bucket; the second lists the
 future `SELECT` grants on tables and views in the schema. After you remove the role, the
@@ -139,8 +143,8 @@ only grant this exposure leaves behind is `USAGE` on the project database.
   queries are not tagged by Keboola.
 - **Subscriptions are BigQuery only.** The *Subscriptions* view of an exposure does not
   apply to Snowflake.
-- **One mode per exposure.** You pick grant mode or share mode when you create the exposure,
-  and you cannot change it later. To switch, delete the exposure and create a new one.
+- **One mode per exposure** applies to both Snowflake modes: see
+  [Things to keep in mind](/storage/bucket-exposure/#things-to-keep-in-mind) on the overview.
 
 ---
 

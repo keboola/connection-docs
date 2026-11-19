@@ -6,21 +6,25 @@ sidebar:
 description: 'Turn on row-level and column-level security: use a governed workspace, write policies with the CLI, an AI assistant or the API, and govern a Data App.'
 ---
 
-Setting up [row-level and column-level security](/storage/row-level-security/) takes three steps: send queries through a governed workspace, write a policy for each table, and check the result as the reader. A Data App needs two more settings. What a policy can contain is in the [policy reference](/storage/row-level-security/policy-reference/).
+Setting up [row-level and column-level security](/storage/row-level-security/) takes three steps: send queries through a governed workspace, write a policy for each table, and check the result as the reader. A Data App needs two more steps. What a policy can contain is in the [policy reference](/storage/row-level-security/policy-reference/).
 
 <!-- How-to-type page. Source: the "Set it up" and "Data Apps" sections of the row-level security page and the "Create a policy" sections of the policy reference, as they stood on main before the split. Structure checked 2026-11-19, facts not re-verified. -->
+
+Row- and column-level security is in beta: see the note at the top of the [overview](/storage/row-level-security/) for the backends it is verified on.
 
 ## 1. Make sure queries go through a governed workspace
 
 **Goal:** have a governed workspace that serves the queries of your readers.
 
 - **MCP Server:** ask Keboola support to enable the `row-level-security` project feature. With it, the MCP Server creates its workspace as governed and sends `query_data` through Query Service. Workspaces that already exist are not changed or converted.
-- **Your own workspace:** create one with the login type `governed`. With the [Keboola CLI](/cli/), a governed workspace has no password or key, so there is nothing to save:
+- **Your own workspace:** create one with the login type `governed`. With the [Keboola CLI](/cli/) (Snowflake only: on BigQuery, see [Limitations](/storage/row-level-security/#limitations)), a governed workspace has no password or key, so there is nothing to save:
 
 <!-- kbagent-check: skip-next -->
 ```bash
 kbagent --json workspace create --project my-project --name governed-ws --governed
 ```
+
+`my-project` is an example: in this command and the ones below, replace it with the alias your project has in kbagent (see [Connections and config](/cli/concepts/#connections-and-config)).
 
 **Result:** Queries to a governed workspace read the Storage table by its bucket name, for example `SELECT * FROM "in.c-crm"."orders"` on Snowflake. Unqualified table names are refused.
 
@@ -60,6 +64,8 @@ kbagent cls create --project my-project --table-id in.c-crm.orders --rules @cls-
 ```
 
 The rule files are described in the [policy reference](/storage/row-level-security/policy-reference/).
+
+<!-- VERIFY(Nikita): show what `rls-rules.json` and `cls-rules.json` contain. Is it the `rules` array alone, or an object with `rules` (and `default`)? The policy reference examples show both shapes. -->
 
 The CLI refuses a rule that selects by `principal` or email before anything is written. It also checks the dialect against the project backend and reports every problem it finds.
 
@@ -107,6 +113,8 @@ curl -sS "https://metastore.<stack>.keboola.com/api/v1/repository/rls-policy" \
 
 A rule that selects by email is rejected by the schema validation (HTTP `422`), and a second policy of the same kind for the same table is rejected as a duplicate (HTTP `409`).
 
+<!-- VERIFY(Nikita): explain `"branch": "main"` (a branch name or ID, and is it required?), say where `$KBC_STORAGE_TOKEN` comes from (the project administrator's master Storage token?), and show the success response: status code and body, including the policy `id` that a Data App lists. -->
+
 **Result:** Whichever way you used, each protected table now has an `rls-policy`, a `cls-policy` or both. `rls list` and `cls list` show them.
 
 ## 3. Check it as the reader
@@ -114,6 +122,8 @@ A rule that selects by email is rejected by the schema validation (HTTP `422`), 
 **Goal:** confirm that a reader gets exactly what the policy allows.
 
 Query a protected table the way the reader does and compare the result with what the policy should allow. Your own identity matters here: an administrator behind a Storage token is matched by the subject `keboola|<your administrator ID>` and is not exempt, so you need a rule for yourself to see anything. The [policy reference](/storage/row-level-security/policy-reference/#who-a-rule-selects) shows where to find your ID.
+
+<!-- VERIFY(Nikita): this step gives no query to run. Add the command a reader uses, for example a kbagent command or a Query Service request against the governed workspace. -->
 
 **Result:** The query returns only the rows and columns the policy allows for that reader. If it is refused, or comes back empty when it should not, see [What users see](/storage/row-level-security/#what-users-see).
 
@@ -137,6 +147,8 @@ A Data App protected by single sign-on (OIDC) is the case where policies are a h
 }
 ```
 
+<!-- VERIFY(Nikita): say where to edit `runtime.workspace` (the app's settings in the UI, kbagent, or the API) and how to redeploy the app afterwards. -->
+
 - Each list has 1 to 100 policy IDs. An empty list `[]` is refused: remove the key instead. Put a policy in the list of its own kind; the lists are not interchangeable.
 - Only the listed policies apply to the app. A changed list takes effect after you redeploy the app.
 - The app must use single sign-on. The platform rejects the configuration (HTTP 400 when you update or deploy the app) if it has a public path or a provider other than single sign-on, so a password-protected app cannot be governed.
@@ -154,6 +166,8 @@ auth = AppUserToken(user_token, storage_token=StorageToken(app_storage_token))
 const auth = { type: 'app-user-token', token: userToken, storageToken: appStorageToken };
 // pass it to createQueryServiceClient({ baseUrl, auth }) from '@keboola/api-client/queryService'
 ```
+
+<!-- VERIFY(Nikita): say where the app gets `user_token` (read from the `X-Kbc-App-User-Token` header of each incoming request?) and `app_storage_token` (an environment variable of the app?). -->
 
 The Python client is `keboola-query-service` 0.4.0 or later, the JavaScript client is `@keboola/api-client` 52.0.0 or later. Both send the user token in `X-Kbc-App-User-Token` and the app token in `X-StorageAPI-Token`, and both raise a `RowLevelSecurityError` when a query is refused.
 
