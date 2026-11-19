@@ -17,6 +17,7 @@ As the application uses Snowflake database backend, there are a couple of prereq
 - The project must be using Snowflake database backend to support reader account creation.
 - The tool accessing the data must support Snowflake as a data source.
 - The tool accessing the data must support [Key-pair authentication](https://docs.snowflake.com/en/user-guide/key-pair-auth).
+- On a dedicated Snowflake backend, the Keboola root user needs additional privileges before you can use Data Gateway. Your Snowflake account admin sets them up as described in [Grant privileges on a dedicated Snowflake account](#grant-privileges-on-a-dedicated-snowflake-account).
 
 ## Set up the read-only workspace
 

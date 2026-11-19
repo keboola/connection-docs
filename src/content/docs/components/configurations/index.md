@@ -43,6 +43,8 @@ To use a [component](/components/), you create a configuration of it and run it.
 
 7. Set the parameters and **Save** them.
 
+<!-- VERIFY(Nikita): three controls this page never names. Step 1: which component categories the Components menu lists today. Step 5: the button that confirms the name dialog. Describe a configuration, step 3: where you rename a configuration. -->
+
 **Result:** the configuration is saved, and you can run the component.
 
 ## Run a configuration
@@ -52,6 +54,8 @@ To use a [component](/components/), you create a configuration of it and run it.
 1. Open the saved configuration and click the **Run Component** button:
 
    ![Screenshot - Run Configuration](/components/configuration-7.png)
+
+   <!-- VERIFY(Nikita): this page calls the button Run Component, while the Debug mode page and its screenshots say Run Job. Confirm the current label in each view. -->
 
 2. When you run a component, a [job](/management/jobs/) is created and subsequently executed. The right panel shows the last executed jobs with an indication of their status:
 
@@ -74,7 +78,7 @@ After configuring the component, it is a good practice to describe what it does.
 
    ![Screenshot - Add Description button](/components/description-button.png)
 
-2. Click the **Add description** button to write the description manually. You can also click the **Generate description** button to have our AI service write a suggestion for you that you can modify.
+2. Click the **Add description** link to write the description manually. You can also click the **Generate description** link to have our AI service write a suggestion for you that you can modify.
 
    ![Screenshot - AI generated description](/components/description-generated.png)
 
@@ -91,7 +95,7 @@ obfuscated.
 
 <!-- VERIFY(Nikita): which AI provider Generate description sends the configuration to. This page says Microsoft Azure OpenAI; other pages name a different provider for Kai. -->
 
-**Result:** the name and the description show on the configuration and in the configuration list.
+**Result:** the name and the description show on the configuration.
 
 ## See the version history
 
@@ -160,6 +164,8 @@ a configuration, and there is always an option to get back to it.
 
    ![Screenshot - Configuration Create Copy](/components/configuration-12.png)
 
+   <!-- VERIFY(Nikita): name the Copy control in the version list (step 1) and the button that confirms the copy (step 2). The page shows them only in 2019 screenshots. -->
+
 **Result:** the copy of the configuration is created as a new isolated configuration—i.e., there is no link
 between the original configuration and the copy, and changes to one have no effect on the other.
 The new configuration is completely independent of the old one. You may modify or delete
@@ -186,6 +192,8 @@ either of them without affecting the other one.
    use the filter and search options in the upper part of the page.
 
    ![Screenshot - Configuration Restore](/components/configuration-21.png)
+
+   <!-- VERIFY(Nikita): name the main-menu item that opens Trash (step 2) and the Restore and permanent-delete controls in Trash (step 3). -->
 
 **Result:** when you restore a configuration, its new version is created. Therefore, you can see the complete history in the configuration versions:
 

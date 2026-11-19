@@ -6,16 +6,15 @@ redirect_from:
     - /manipulation/applications/
 ---
 
-Applications are without any doubt more powerful than [Transformations](/transformations/). 
+Applications are **predefined blocks with set functionality**, which can be customized or parametrized to some extent.
 They further enrich your data and add value to it in new ways. 
-At the same time, they are more difficult to create. 
+At the same time, they are more difficult to create than [transformations](/transformations/).
 
 <!-- Explanation-type page. Source: this page as it was before the 2026-11-19 rework, plus the ledes of its child pages for the section map. Older claims are kept and marked for the owner. -->
 
 This page explains what applications are and how they compare with transformations. The applications that have a page of their own are listed in [This section](#this-section).
 
-As **predefined blocks with set functionality**, which can be customized or parametrized to some extent, 
-they can perform really advanced tasks, such as sentiment analysis, association discovery, or 
+They can perform really advanced tasks, such as sentiment analysis, association discovery, or 
 histogram grouping. They can also enhance data by calling on 3rd party services to bring in additional data 
 such as Weather or Exchange Rates. 
 

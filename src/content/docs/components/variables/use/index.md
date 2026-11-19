@@ -10,7 +10,7 @@ This page has the steps for both kinds of [variables](/components/variables/) in
 
 <!-- How-to-type page. Source: the Variables page as it was before the 2026-11-19 split. Text and screenshots carried over; facts not re-checked against the product. -->
 
-The flow sections below walk through how to set up and use variables from the UI; each step also shows the JSON shape generated behind the scenes for template authors and API users.
+The flow sections below walk through how to set up and use variables from the UI. The JSON shape generated behind the scenes, for template authors and API users, is in [Flow variable tasks](/components/variables/api/#flow-variable-tasks).
 
 ## Parametrize a configuration with a variable
 
@@ -37,6 +37,8 @@ The flow sections below walk through how to set up and use variables from the UI
 4. When you run a transformation, you can provide a runtime override of the default value:
 
    ![Screenshot - Running Transformation](/components/variables/variables-run.png)
+
+   <!-- VERIFY(Nikita): say where on a configuration you define a variable and its default (step 3), and name the field or dialog for the run-time override (step 4). Both screenshots are from about 2021. -->
 
 **Result:** the transformation runs with the default value, or with the override you entered for that run.
 
@@ -65,123 +67,15 @@ A **Static Value** is a fixed text or number you enter directly. Useful for thre
 
 ![Set Variable panel with Static Value selected](/flows/conditional-flows-variables-static-set.png)
 
-**JSON equivalent** (useful when authoring a flow as a template or via the API). The `value` field is
-a string in the flow schema, so quote numbers — an unquoted `3600` fails validation:
-
-```json
-{
-  "type": "variable",
-  "name": "max_duration",
-  "value": "3600"
-}
-```
-
 ### Dynamic value
 
-A **Dynamic Value** is computed at run time from a task result, an earlier phase, or a built-in function (see [Date & Time function](#date--time-function) below). When you pick this type, the value picker lets you browse the outputs of tasks that ran earlier in the flow. You can pick any field from the job's result tree — for example `result.output.tables`, `result.artifacts`, `result.images`, `result.configVersion`, `result.errorMessage`, and many more.
+A **Dynamic Value** is computed at run time from a task result, an earlier phase, or a built-in function (see [Date & time function](/components/variables/api/#date--time-function)). When you pick this type, the value picker lets you browse the outputs of tasks that ran earlier in the flow. You can pick any field from the job's result tree — for example `result.output.tables`, `result.artifacts`, `result.images`, `result.configVersion`, `result.errorMessage`, and many more.
 
 ![Set Variable panel in Conditional Flow](/flows/conditional-flows-variables-set.png)
 
 If a task produces **multiple output tables**, the picker also offers aggregations across all of them: **Sum**, **Minimum**, **Maximum**, and **Average** of a numeric field. For example, `Sum of importedRowsCount` returns the total number of rows imported by an HTTP data source across every output table.
 
 ![Dynamic Value picker showing task result tree with aggregations](/flows/conditional-flows-variables-picker.png)
-
-:::caution
-**Aggregations are not functions.** The Sum / Minimum / Maximum / Average options are not built-in functions — the `function` enum only accepts `COUNT` and `DATE`. The picker implements each aggregation as a [JMESPath](https://jmespath.org/) expression placed in the task `value` field rather than a `function` block. When authoring a flow via the API or as a template, write the aggregation directly in `value`:
-
-- **Sum** → `sum(job.result.output.tables[].importedRowsCount)`
-- **Minimum** → `min(job.result.output.tables[].importedRowsCount)`
-- **Maximum** → `max(job.result.output.tables[].importedRowsCount)`
-- **Average** → `avg(job.result.output.tables[].importedRowsCount)`
-:::
-
-**JSON equivalent** — behind the scenes the aggregation is stored as a `source` definition. For example, `Sum of importedRowsCount` can be expressed as a JMESPath aggregation in the task `value`. Note that the picker tree displays paths rooted at `result.*` (for example `result.output.tables`), while the generated `value` expression is rooted at `job.result.*`:
-
-```json
-{
-  "type": "variable",
-  "name": "total_imported_rows",
-  "source": {
-    "type": "task",
-    "task": "extract-data",
-    "value": "sum(job.result.output.tables[].importedRowsCount)"
-  }
-}
-```
-
-`COUNT` and `DATE` are the only functions exposed via the `function` block (see [Date & Time function](#date--time-function) below); they take their inputs as `operands`. `COUNT` counts the items a JMESPath expression returns — for example, the number of output tables a task produced:
-
-```json
-{
-  "type": "variable",
-  "name": "table_count",
-  "source": {
-    "type": "function",
-    "function": "COUNT",
-    "operands": [
-      {
-        "type": "task",
-        "task": "extract-data",
-        "value": "job.result.output.tables"
-      }
-    ]
-  }
-}
-```
-
-The `value` field accepts [JMESPath](https://jmespath.org/) expressions, so you can filter and extract specific items from the task result instead of just walking the tree. For example, picking the name of a particular output table by its ID:
-
-```json
-{
-  "type": "task",
-  "task": "97288",
-  "value": "job.result.output.tables[?id=='out.c-test.example'][].name | [0]"
-}
-```
-
-### Date & time function
-
-Returns the date/time formatted according to the specified format string, available formats:
-[https://www.php.net/manual/en/datetime.format.php](https://www.php.net/manual/en/datetime.format.php).
-
-This example returns the full textual representation of the current month, such as "July" or "August".
-
-```json
-{
- "type": "function",
- "function": "DATE",
- "operands": [
-   {
-     "type": "const",
-     "value": "F"
-   }
- ]
-}
-```
-
-**Example of creating a variable with the current timestamp:**
-
-```json
-{
- "id": "set-timestamp",
- "name": "Set Timestamp Variable",
- "phase": "init",
- "task": {
-   "type": "variable",
-   "name": "current_timestamp",
-   "source": {
-     "type": "function",
-     "function": "DATE",
-     "operands": [
-       {
-         "type": "const",
-         "value": "U"
-       }
-     ]
-   }
- }
-}
-```
 
 ## Use a variable in a condition
 
@@ -193,6 +87,8 @@ Once a variable has been set in an earlier phase, any later **Condition** can co
 2. Choose an operator (Greater than, Equals, Contains, …).
 3. Provide a comparison value — a constant, or another value picked from the tree.
 4. Set the THEN and ELSE actions: **Continue To** an existing phase, or end the flow.
+
+<!-- VERIFY(Nikita): the steps start in an IF row that already exists. Add how to add a Condition to the flow, where the comparison value is typed in step 3, and how to save the flow. -->
 
 ![IF/THEN/ELSE condition referencing a task result](/flows/conditional-flows-variables-condition.png)
 

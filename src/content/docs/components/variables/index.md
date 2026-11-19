@@ -8,6 +8,8 @@ redirect_from:
 
 Keboola has two kinds of variables. They are separate mechanisms that meet in one place — when a
 flow runs a component — and this page covers both, plus the bridge between them.
+For the steps in the UI, see [Use variables](/components/variables/use/).
+To define, override, or read variables programmatically, see [Variables Through the API](/components/variables/api/).
 
 <!-- Explanation-type page. Source: the Variables page as it was before the 2026-11-19 split. Text carried over; facts not re-checked against the product. -->
 
@@ -19,8 +21,6 @@ flow runs a component — and this page covers both, plus the bridge between the
 You do not need a flow to use configuration variables — a single transformation with a default
 value works on its own. Start there if that is all you need.
 
-For the steps in the UI, see [Use variables](/components/variables/use/).
-To define, override, or read variables programmatically, see [Variables Through the API](/components/variables/api/).
 For sharing *code* rather than values between transformations, see
 [Shared Code](/transformations/shared-code/).
 

@@ -18,6 +18,8 @@ Debug mode shows the JSON behind a [component configuration](/components/configu
 
    ![Screenshot - Advanced](/components/configuration-24.png)
 
+   <!-- VERIFY(Nikita): say where the Debug mode link sits on a configuration (the screenshot shows the right-hand panel of a configuration row), and link "the component repository" in step 2, or say where a reader finds it. -->
+
 2. By editing the full JSON configuration, you can set up the component (all options are
    described in the component repository) and the processors (to learn more about processors,
    see the [Developers Docs](https://developers.keboola.com/extend/docker-runner/processors/)).
@@ -36,6 +38,8 @@ In most cases, you will not need to use this option directly. However, our team 
 
 1. In debug mode, open the menu next to **Run Job** and select **Run custom tag**.
 2. In the **Set Tag** dialog, enter the tag and click **Run With Tag**.
+
+<!-- VERIFY(Nikita): these steps say Run Job, as the screenshots do, while Create and manage configurations calls the button Run Component. Confirm whether debug mode has its own label. -->
 
 <p align="center" class="image-popup">
   <img src="/components/configuration-25.png" width="45%">

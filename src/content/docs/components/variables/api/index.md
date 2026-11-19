@@ -166,7 +166,7 @@ runs, and the mechanism differs between the two flow types.
 
 ### Conditional flows
 In a conditional flow (the `keboola.flow` component), a flow declares its own variables with a **variable task** — `"type": "variable"` with
-either a fixed `value` or a computed `source`. When a job task runs, those flow variables are
+either a fixed `value` or a computed `source` (see [Flow variable tasks](#flow-variable-tasks)). When a job task runs, those flow variables are
 merged into the component's variables, and a flow variable replaces a value **only for a name the
 variable configuration already declares**. Names the configuration does not declare are ignored.
 
@@ -222,6 +222,124 @@ path above.
 A worked example of both, kept from the older documentation, is in
 [Legacy example: an orchestration with variables](#legacy-example-an-orchestration-with-variables) at the end of this page.
 
+## Flow variable tasks
+
+A flow sets a variable with a variable task, `"type": "variable"`, which holds either a fixed `value` or a computed `source`.
+The UI steps are in [Set a variable in a flow](/components/variables/use/#set-a-variable-in-a-flow); this section shows the
+JSON they generate, for template authors and API users.
+
+### Static value
+
+**JSON equivalent** (useful when authoring a flow as a template or via the API). The `value` field is
+a string in the flow schema, so quote numbers — an unquoted `3600` fails validation:
+
+```json
+{
+  "type": "variable",
+  "name": "max_duration",
+  "value": "3600"
+}
+```
+
+### Dynamic value
+
+:::caution
+**Aggregations are not functions.** The Sum / Minimum / Maximum / Average options are not built-in functions — the `function` enum only accepts `COUNT` and `DATE`. The picker implements each aggregation as a [JMESPath](https://jmespath.org/) expression placed in the task `value` field rather than a `function` block. When authoring a flow via the API or as a template, write the aggregation directly in `value`:
+
+- **Sum** → `sum(job.result.output.tables[].importedRowsCount)`
+- **Minimum** → `min(job.result.output.tables[].importedRowsCount)`
+- **Maximum** → `max(job.result.output.tables[].importedRowsCount)`
+- **Average** → `avg(job.result.output.tables[].importedRowsCount)`
+:::
+
+**JSON equivalent** — behind the scenes the aggregation is stored as a `source` definition. For example, `Sum of importedRowsCount` can be expressed as a JMESPath aggregation in the task `value`. Note that the picker tree displays paths rooted at `result.*` (for example `result.output.tables`), while the generated `value` expression is rooted at `job.result.*`:
+
+```json
+{
+  "type": "variable",
+  "name": "total_imported_rows",
+  "source": {
+    "type": "task",
+    "task": "extract-data",
+    "value": "sum(job.result.output.tables[].importedRowsCount)"
+  }
+}
+```
+
+`COUNT` and `DATE` are the only functions exposed via the `function` block (see [Date & Time function](#date--time-function) below); they take their inputs as `operands`. `COUNT` counts the items a JMESPath expression returns — for example, the number of output tables a task produced:
+
+```json
+{
+  "type": "variable",
+  "name": "table_count",
+  "source": {
+    "type": "function",
+    "function": "COUNT",
+    "operands": [
+      {
+        "type": "task",
+        "task": "extract-data",
+        "value": "job.result.output.tables"
+      }
+    ]
+  }
+}
+```
+
+The `value` field accepts [JMESPath](https://jmespath.org/) expressions, so you can filter and extract specific items from the task result instead of just walking the tree. For example, picking the name of a particular output table by its ID:
+
+```json
+{
+  "type": "task",
+  "task": "97288",
+  "value": "job.result.output.tables[?id=='out.c-test.example'][].name | [0]"
+}
+```
+
+### Date & time function
+
+Returns the date/time formatted according to the specified format string, available formats:
+[https://www.php.net/manual/en/datetime.format.php](https://www.php.net/manual/en/datetime.format.php).
+
+This example returns the full textual representation of the current month, such as "July" or "August".
+
+```json
+{
+ "type": "function",
+ "function": "DATE",
+ "operands": [
+   {
+     "type": "const",
+     "value": "F"
+   }
+ ]
+}
+```
+
+**Example of creating a variable with the current timestamp:**
+
+```json
+{
+ "id": "set-timestamp",
+ "name": "Set Timestamp Variable",
+ "phase": "init",
+ "task": {
+   "type": "variable",
+   "name": "current_timestamp",
+   "source": {
+     "type": "function",
+     "function": "DATE",
+     "operands": [
+       {
+         "type": "const",
+         "value": "U"
+       }
+     ]
+   }
+ }
+}
+```
+
 ## Variables evaluation sequence
 There is a number of places where variable values can be provided (either as a reference to an existing row with 
 values or as an array of `values`):
@@ -261,14 +379,14 @@ documented in [Shared Code via the API](/transformations/shared-code/#shared-cod
 
 :::caution[Legacy]
 This section applies to **legacy** flows (the `keboola.orchestrator` component) only, and it carries the
-unverified claim described under [Legacy flows](#legacy-flows). The two steps continue the Python transformation example,
-Steps 1 to 4, in the [tutorial](/components/variables/api/tutorial/#second-example-a-python-transformation): the IDs below refer to the
+unverified claim described under [Legacy flows](#legacy-flows). It continues
+[part 2 of the tutorial](/components/variables/api/tutorial/#part-2-stored-default-values-and-run-time-overrides): the IDs below refer to the
 configurations created there.
 :::
 
-<!-- VERIFY(Nikita): do keboola.orchestrator tasks and orchestration runs still accept variableValuesId and variableValuesData? The public task schema lists no variable fields. Decide whether Steps 5 and 6 stay, get corrected, or go. -->
+<!-- VERIFY(Nikita): do keboola.orchestrator tasks and orchestration runs still accept variableValuesId and variableValuesData? The public task schema lists no variable fields. Decide whether this legacy example stays, gets corrected, or goes. -->
 
-### Step 5: create the orchestration
+### Legacy: create the orchestration
 You have to use the 
 [Create Configuration API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs)
 to create a configuration of the `keboola.orchestrator` component. 
@@ -308,12 +426,12 @@ You can use the `variableValuesData` field in the same manner.
 Creating the above configuration will return a response containing the configuration ID, e.g., `807969959`.
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#9f2f9da0-59eb-4f33-a206-e5add24725d1).
 
-### Step 6: run the orchestration
+### Legacy: run the orchestration
 When running an orchestration which contains configurations referencing variables, you have to provide their
 values. You can either rely on the stored values (either at the component configuration or in the orchestration task) 
 or you can provide the values at runtime.
 
-#### Option 1: rely on stored values
+#### Run it with stored values
 Use the [Run Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) 
 to run an orchestration. In its simplest form, the request body needs to contain just the ID of the orchestration
 (obtained in the previous step):
@@ -328,7 +446,7 @@ to run an orchestration. In its simplest form, the request body needs to contain
 
 As long as the variable values can be found somewhere, this is sufficient. See [an example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#3ebdc3f5-a940-4f0d-860b-ec311f704a7e).
 
-#### Option 2: provide values
+#### Run it with values in the request
 Use the [Run Job API call](https://api.keboola.com/?service=job-queue#job-queue/tag/jobs/POST/jobs) 
 to run an orchestration. Additionally, you can use the `variableValuesId` or `variableValuesData` property 
 to override variable values set to individual tasks. The calling convention is the same as shown in the 

@@ -6,16 +6,16 @@ sidebar:
 description: 'Authorize a component configuration with OAuth, with your own account or through a link you send to the account owner, and reset an authorization.'
 ---
 
-Many services support authorization using the [OAuth protocol](https://en.wikipedia.org/wiki/OAuth). For you (as the end user),
-this means that the service does not require entering credentials (username, password, token, etc.). Instead, you are
-redirected to the service itself, where you authorize the Keboola component. Then, you are redirected back to
-Keboola, where you can set other parameters and run the configuration.
+This page shows how to authorize a [component](/components/) configuration against an external service: with your own account, through a link you send to the account owner, and how to reset an authorization. The authorization is only valid for the configuration in which it was created and its **copies**. To create the configuration first, see [Create and manage configurations](/components/configurations/); to edit its JSON, see [Debug mode](/components/debug-mode/).
 
 <!-- How-to-type page. Source: the Components page as it was before the 2026-11-19 split. Text and screenshots carried over; facts not re-checked against the product. -->
 
-OAuth authorization is a very secure authorization method in which you don't have to hand over the
+Many services support authorization using the [OAuth protocol](https://en.wikipedia.org/wiki/OAuth). For you (as the end user),
+this means that the service does not require entering credentials (username, password, token, etc.). Instead, you are
+redirected to the service itself, where you authorize the Keboola component. Then, you are redirected back to
+Keboola, where you can set other parameters and run the configuration. OAuth authorization is a very secure authorization method in which you don't have to hand over the
 credentials to your account. The consumer—the Keboola component—obtains only the minimal required
-access. The authorization is only valid for the configuration in which it was created and its **copies**.
+access.
 
 The OAuth authorization process begins with the **Authorize** button (in this example, the
 [Google Calendar data source connector](/components/extractors/communication/google-calendar/) is shown):
@@ -26,8 +26,6 @@ In the next step, you can choose the authorization method:
 
 - **Instant**: Use this method if you have direct access to the account; the authorization will be done immediately.
 - **External**: If you need to authorize access to the service from someone who does not have an account in Keboola, you can generate an external link, which will guide them through this process.
-
-If you have not created the configuration yet, start with [Create a configuration](/components/configurations/#create-a-configuration).
 
 ## Authorize with your own account
 
@@ -81,6 +79,8 @@ In such cases, you can ask the account owner to authorize the component configur
    ![Screenshot - Service Authorization](/components/authorization-3.png)
 
 **Result:** the configuration is authorized with the owner's account, and the owner never had to share the credentials.
+
+<!-- VERIFY(Nikita): name the button that generates the link (step 2 shows it only in a 2019 screenshot), and say how the person who sent the link sees that the owner has finished. -->
 
 ## Reset an authorization
 

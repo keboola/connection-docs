@@ -7,7 +7,7 @@ redirect_from:
 
 ---
 
-Triggers are applications that generate an action in a specified service. 
+Triggers are [applications](/components/applications/) that generate an action in a specified service. 
 For example, triggering the creation of a report in a 3rd party system, or starting a computation engine for a 3rd party database.
 
 <!-- Explanation-type page. Source: this page as it was before the 2026-11-19 rework, plus the ledes of its child pages. Facts not re-checked against the components. -->

@@ -24,6 +24,8 @@ The Generative AI application lets you query large language models using data fr
 
 ## Create New Configuration
 
+**Goal:** send data from your project to a large language model with a prompt, and store the output in Storage.
+
 [Set up a new configuration](/components/configurations/#create-a-configuration) for the **Generative AI** application.
 
 :::note
@@ -54,3 +56,5 @@ Upon completing these steps, click the **Add Row** button and provide a name for
 3. In the **Prompt Templates** section, pick a **Prompt Template** to load it, then copy it into the **Prompt** field as a starting point.
 4. The **Prompt** field determines the prompt and data input format. Use the placeholder [[INPUT_COLUMN]] to reference an input column. Ensure your input table includes the mentioned column.
 5. In the **Destination** section, select a name for your Storage table. Optionally, you can configure incremental load settings. If primary keys are designated, rows in the destination table will be updated. Without primary keys, new rows will be added.
+
+**Result:** the configuration has a row that sends your prompt, with the input column it references, to the selected model and writes the output to the Storage table named in **Destination**.

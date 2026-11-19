@@ -80,13 +80,13 @@ are materialized in the branch's own storage. Your production `out.c-visits` rem
 This allows you to test the entire pipeline with real data, in complete isolation from production, without duplicating
 all storage content at branch creation.
 
-***Important:** All of this happens within the same project, enabling collaboration with other project members on the modifications.*
-
 ## The merge request lifecycle
 
 A branch ends in one of two ways: you delete it, or you merge it into production
 (see [Close a branch](/components/branches/manage/#close-a-branch)). In projects with Branches 2.0 enabled, the merge goes
 through a [merge request](/components/branches/merge-requests/).
+
+***Important:** All of this happens within the same project, enabling collaboration with other project members on the modifications.*
 
 Every merge request moves through a set of states, shown as filters at the top of the
 **Merge Requests** list:
@@ -106,16 +106,23 @@ changed configurations, and the reviews collected so far.
 
 ## After a merge
 
-A merged request is kept in the [list](#the-merge-request-lifecycle) with the **Merged** status, and you
-can **Download Changelog** from its row for a record of exactly what was applied.
+When you merge a branch, all changes in the configurations are brought back to the respective production configurations.
+All the changes are applied at once (after you approve them) and produce new
+[versions](/components/configurations/#see-the-version-history) of the respective configurations.
 
 Because a merge produces new [configuration versions](/components/configurations/#see-the-version-history) in production,
 no configuration change is lost: if a merged change causes problems, you can open the affected configuration
 and roll it back to its previous version, restoring the pre-merge state.
 
-A successful merge also **deletes the development branch**, including its buckets, tables, and workspaces.
-Only the configuration changes reach production; if you still need data from the branch, export it before
-you merge.
+What happens to the branch depends on how you merge:
+
+- In a direct merge, you choose in the merge dialog whether to delete the branch or keep it for further reference after merging.
+- In projects with [Branches 2.0](/components/branches/merge-requests/), the merge goes through a merge request, which lets you review
+  the configuration diff and, if the project requires it, collect approvals before the changes reach production. A merged
+  request always deletes the branch: a successful merge **deletes the development branch**, including its buckets, tables,
+  and workspaces. Only the configuration changes reach production; if you still need data from the branch, export it before
+  you merge. The merged request is kept in the [list](#the-merge-request-lifecycle) with the **Merged** status, and you
+  can **Download Changelog** from its row for a record of exactly what was applied.
 
 ## Component considerations
 

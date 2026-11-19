@@ -32,55 +32,6 @@ If no component connects to the system you need, you have several options:
 
 To adjust a component's input or output files without changing its code, use [processors](/extend/component/processors/).
 
-## Component release stages
-Our components are released at different stages and labeled to indicate the quality and production readiness level. We strive to deliver the highest-quality components. 
-Our goal is to unlock as many interesting integrations as possible, benefiting all our customers. The component release grades allow us to manage the release process effectively 
-and align expectations accurately.
-
-|   | Experimental | Beta | Production (GA) |
-|---|---|---|---|
-| **Availability** | Available either in the UI or per request | Listed in the official component list and available to all customers | Listed in the  official component list and available to all customers |
-| **Support & SLA** | No or limited SLA | Officially supported by Keboola's Standard SLA – in active development | Officially supported by Keboola's Standard SLA |
-| **Production-ready** | Functional, but only for limited use cases<br/><br>Experimental component, not advisable for business-critical processes<br/><br>May not ever move to Beta/GA | Yes – with limitations<br/><br>Will eventually move to GA<br>(e.g., still in the process of fine-tuning, tested on fewer production use cases, may contain less robust documentation) | Yes<br/><br>Stable version, tested on many production use cases<br/><br>Fully documented |
-| **Updates & Maintenance** | Breaking changes may be introduced (It is still possible to fix certain versions to avoid BC issues)<br/><br>Maintenance may end at any time → may be deprecated | Monitored via standard processes<br/><br>Always backward-compatible changes<br/><br>In active development | Monitored via standard processes<br/><br>Always backward-compatible changes, announced via standard channels |
-
-### Production (GA)
-This version is stable and has been well-tested by numerous customers in many production scenarios. GA (General Availability) versions feature comprehensive documentation 
-and components with a low error rate, making them suitable for mission-critical production use cases. 
-
-All potential updates to the component are guaranteed to be backward compatible.
-
-### Beta
-Components are available to all customers. These components are usually early additions and may still be in rapid development.
-
-All changes are backward compatible. 
-
-**Limitations:**
-
-- Because in the early stages, these components are used in fewer projects. Minor bugs, though promptly fixed within the standard SLA, may appear more frequently.
-- The range of features might not be exhaustive and will likely expand through backward-compatible updates.
-- Documentation may be less comprehensive than in the GA version, often given as README.md files.
-- These components may pose limitations, like pending Google verification, verification status-related rate limits, etc.
-
-### Experimental
-Developed for specific use cases but not tested in various scenarios, these highly experimental components are functional. When used in untested scenarios, 
-they may contain undiscovered bugs and impose other limitations, such as rate limiting, reliance on less stable proprietary libraries, dependency on the source website structure (scraping),
-and others. 
-
-Experimental components may not progress to the Beta and GA stages.
-
-Nevertheless, these components can address obscure use cases and deliver unique integrations. Their code is public so they can serve as a foundation for custom forks, 
-including Generic Extractor configurations.
-
-Many of these components also serve our internal purposes, and we decided to share them publicly to benefit our community.
-
-### Private / Unlisted
-Some components are still unlisted for various reasons. Each stack's full list of components is accessible via the public [Storage API index call](https://api.keboola.com/?service=storage#get-/v2/storage). 
-Many of these are 3rd-party components. Users can add these components via their ID, but we cannot guarantee their functionality. 
-
-We may share our pre-release versions that exist in private Beta with our test user groups. In such a case, you will receive a component ID, which you can use to create the configuration. 
-These components will eventually transition to a public Beta.
-
 ## Creating component configuration
 
 A configuration holds what a component needs to do its work: the credentials and the specification of what to read or write. A project can keep several configurations of the same component, for example with different credentials. For the steps, see [Create a configuration](/components/configurations/#create-a-configuration) and [Run a configuration](/components/configurations/#run-a-configuration).
@@ -132,6 +83,55 @@ configuration.*
 ## Authorization
 
 Many services support OAuth. Instead of entering the service's credentials in Keboola, you are redirected to the service and authorize the component there. If the account is not yours, you can send its owner a link. Both ways are on [Authorize a component](/components/authorization/).
+
+## Component release stages
+Our components are released at different stages and labeled to indicate the quality and production readiness level. We strive to deliver the highest-quality components. 
+Our goal is to unlock as many interesting integrations as possible, benefiting all our customers. The component release grades allow us to manage the release process effectively 
+and align expectations accurately.
+
+|   | Experimental | Beta | Production (GA) |
+|---|---|---|---|
+| **Availability** | Available either in the UI or per request | Listed in the official component list and available to all customers | Listed in the  official component list and available to all customers |
+| **Support & SLA** | No or limited SLA | Officially supported by Keboola's Standard SLA – in active development | Officially supported by Keboola's Standard SLA |
+| **Production-ready** | Functional, but only for limited use cases<br/><br>Experimental component, not advisable for business-critical processes<br/><br>May not ever move to Beta/GA | Yes – with limitations<br/><br>Will eventually move to GA<br>(e.g., still in the process of fine-tuning, tested on fewer production use cases, may contain less robust documentation) | Yes<br/><br>Stable version, tested on many production use cases<br/><br>Fully documented |
+| **Updates & Maintenance** | Breaking changes may be introduced (It is still possible to fix certain versions to avoid BC issues)<br/><br>Maintenance may end at any time → may be deprecated | Monitored via standard processes<br/><br>Always backward-compatible changes<br/><br>In active development | Monitored via standard processes<br/><br>Always backward-compatible changes, announced via standard channels |
+
+### Production (GA)
+This version is stable and has been well-tested by numerous customers in many production scenarios. GA (General Availability) versions feature comprehensive documentation 
+and components with a low error rate, making them suitable for mission-critical production use cases. 
+
+All potential updates to the component are guaranteed to be backward compatible.
+
+### Beta
+Components are available to all customers. These components are usually early additions and may still be in rapid development.
+
+All changes are backward compatible. 
+
+**Limitations:**
+
+- Because in the early stages, these components are used in fewer projects. Minor bugs, though promptly fixed within the standard SLA, may appear more frequently.
+- The range of features might not be exhaustive and will likely expand through backward-compatible updates.
+- Documentation may be less comprehensive than in the GA version, often given as README.md files.
+- These components may pose limitations, like pending Google verification, verification status-related rate limits, etc.
+
+### Experimental
+Developed for specific use cases but not tested in various scenarios, these highly experimental components are functional. When used in untested scenarios, 
+they may contain undiscovered bugs and impose other limitations, such as rate limiting, reliance on less stable proprietary libraries, dependency on the source website structure (scraping),
+and others. 
+
+Experimental components may not progress to the Beta and GA stages.
+
+Nevertheless, these components can address obscure use cases and deliver unique integrations. Their code is public so they can serve as a foundation for custom forks, 
+including Generic Extractor configurations.
+
+Many of these components also serve our internal purposes, and we decided to share them publicly to benefit our community.
+
+### Private / Unlisted
+Some components are still unlisted for various reasons. Each stack's full list of components is accessible via the public [Storage API index call](https://api.keboola.com/?service=storage#get-/v2/storage). 
+Many of these are 3rd-party components. Users can add these components via their ID, but we cannot guarantee their functionality. 
+
+We may share our pre-release versions that exist in private Beta with our test user groups. In such a case, you will receive a component ID, which you can use to create the configuration. 
+These components will eventually transition to a public Beta.
 
 ## This section
 

@@ -15,6 +15,9 @@ This page has the steps for the life of a [development branch](/components/branc
 **Goal:** give every new branch in the project its own isolated storage.
 
 1. Branched Storage is enabled per project in **Project Settings**. Open them.
+
+   <!-- VERIFY(Nikita): no page says how to open Project Settings. Name the menu or icon here; the Branch Protection step on the Merge Requests page uses the same path. -->
+
 2. Look for the **Branched storage** toggle under the Features section and turn it on.
 
    ![Screenshot - Branched Storage Toggle](/components/branches/feature-branched-storage.png)
@@ -25,8 +28,8 @@ This page has the steps for the life of a [development branch](/components/branc
 
 **Goal:** get a branch in which you can change and run configurations without touching production.
 
-1. If you have your configurations ready in production and want to create a branch to test some changes, click on your project's name
-   at the top of the screen. Then click on the green icon **New** displayed next to your project's name.
+1. If you have your configurations ready in production and want to create a branch to test some changes, open the branch switcher:
+   click on your project's name at the top of the screen. Then click on the green icon **New** displayed next to your project's name.
 
    ![Screenshot - Create Development Branch](/getting-started/branches/figures/08-create-dev-branch.png)
 
@@ -48,12 +51,12 @@ If you want to learn more about working in a branch, follow our [tutorial](/gett
 
 **Goal:** move from production into a branch, or back.
 
-1. Open the branch switcher at the top of the screen.
+1. Open the branch switcher: click on your project's name at the top of the screen.
 2. Under **Switch To**, select **Production** or the branch you want.
 
 **Result:** the project opens in what you selected, and the switcher lists it under **Current**.
 
-<!-- VERIFY(Nikita): these steps are read from the branch switcher screenshot on the Merge Requests page (Current, Switch To). No earlier page described switching. Confirm the labels. -->
+<!-- VERIFY(Nikita): these steps are read from the branch switcher screenshot on the Merge Requests page (Current, Switch To). No earlier page described switching. Confirm the labels. That screenshot also shows the switcher as its own control next to the project name, while the Create screenshots open it from the project name: confirm what to click in both tasks. -->
 
 ## Close a branch
 
@@ -62,8 +65,10 @@ If you want to learn more about working in a branch, follow our [tutorial](/gett
 1. Before you merge your development branch back to production, check a detailed [diff of the configuration changes](/getting-started/branches/project-diff/).
 2. You can end your branch's lifecycle in two ways:
 
-   - **Deleting** — if you do not wish to use the changes you've made and want to simply discard them. The data associated with the branch is discarded when the branch is deleted.
-   - [**Merging into production**](/getting-started/branches/merge-to-production/) — all changes in the configurations are brought back to the respective production configurations. All the changes are applied at once (after you approve them) and produce new [versions](/components/configurations/#see-the-version-history) of the respective configurations. In the merge dialog, you choose whether to delete the branch or keep it for further reference after merging. Projects with [**Branches 2.0**](/components/branches/merge-requests/) enabled merge through a [merge request](/components/branches/merge-requests/), which lets you review the configuration diff and, if the project requires it, collect approvals before the changes reach production; a merged request always deletes the branch.
+   - **Deleting**: if you do not wish to use the changes you've made and want to simply discard them. The data associated with the branch is discarded when the branch is deleted.
+   - [**Merging into production**](/getting-started/branches/merge-to-production/): bring the configuration changes back to production, directly or, in projects with Branches 2.0, through a [merge request](/components/branches/merge-requests/). What a merge changes, and whether the branch survives it, is in [After a merge](/components/branches/#after-a-merge).
+
+   <!-- VERIFY(Nikita): no page says where the control to delete a branch is. Name it and add the step. -->
 
 **Result:** a deleted branch takes its data with it. A merged branch leaves new versions of the changed configurations in production; what else a merge leaves behind is described in [After a merge](/components/branches/#after-a-merge).
 
