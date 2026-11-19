@@ -6,6 +6,10 @@ slug: 'storage/byodb'
 
 In some instances, you can use your own Snowflake/BigQuery account to host data from Keboola. Currently, this option is only supported for the Snowflake and BigQuery backends.  
 
+<!-- Reference-type page. Source: this page as it stood on main; only the links to the sibling pages are new. Structure checked 2026-11-19, facts not re-verified. -->
+
+To set up the BigQuery backend, follow [How to connect BigQuery](/storage/byobq/). To work with data that already sits in your warehouse, see [External Datasets](/storage/byodb/external-buckets/) and [Snowflake Secure Data Sharing](/storage/byodb/snowflake-secure-data-sharing/).
+
 ## Snowflake
 For the integration to work, your Snowflake account must be accessible from a subset of [our IP addresses](/components/ip-addresses/).
 
@@ -70,3 +74,7 @@ By default, you can have up to **100** service accounts per project to control r
 ----
 
 Additional BigQuery backend limits can be found here: [BigQuery API Quotas and Limits](https://cloud.google.com/bigquery/quotas#api_request_quotas).
+
+---
+
+**Next:** [How to connect BigQuery →](/storage/byobq/)

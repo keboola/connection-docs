@@ -694,6 +694,15 @@ items:
 
       - url: /storage/bucket-exposure/
         title: Bucket Exposure
+        items:
+          - url: /storage/bucket-exposure/create/
+            title: Create and Manage
+
+          - url: /storage/bucket-exposure/snowflake-grant/
+            title: Snowflake Grant Mode
+
+          - url: /storage/bucket-exposure/snowflake-share/
+            title: Snowflake Share Mode
 
       - url: /storage/data-streams/
         title: Data Streams
@@ -729,18 +738,24 @@ items:
       - url: /storage/byodb/
         title: Bring Your Own Database
         items:
+          - url: /storage/byobq/
+            title: Bring Your Own BigQuery
+
           - url: /storage/byodb/external-buckets/
             title: External Datasets
+            items:
+              - url: /storage/byodb/external-buckets/register/
+                title: Register and Use
 
           - url: /storage/byodb/snowflake-secure-data-sharing/
             title: Snowflake Secure Data Sharing
 
-      - url: /storage/byobq/
-        title: Bring Your Own BigQuery
-
       - url: /storage/row-level-security/
         title: Row- and Column-Level Security
         items:
+          - url: /storage/row-level-security/set-up/
+            title: Set Up
+
           - url: /storage/row-level-security/policy-reference/
             title: Policy Reference
 

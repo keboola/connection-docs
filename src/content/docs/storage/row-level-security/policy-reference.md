@@ -1,10 +1,12 @@
 ---
 title: Policy Reference
 slug: 'storage/row-level-security/policy-reference'
-description: Write row-level and column-level security policies — how rules select readers, the condition language, how policies combine, examples, and the Keboola CLI and API calls that create them.
+description: 'The format of row-level and column-level security policies: rule selectors, the condition language, how rules and policies combine, scope, and examples.'
 ---
 
-This page describes the policies behind [row-level and column-level security](/storage/row-level-security/): what a policy contains, how a rule selects its readers, and how to create one.
+This page describes the policies behind [row-level and column-level security](/storage/row-level-security/): what a policy contains and how a rule selects its readers. To create one with the Keboola CLI or the API, follow [Set up row-level and column-level security](/storage/row-level-security/set-up/#2-write-the-policies).
+
+<!-- Reference-type page. Source: the policy reference as it stood on main before its "Create a policy" sections moved to the set-up page. Structure checked 2026-11-19, facts not re-verified. -->
 
 ## A policy
 
@@ -184,5 +186,10 @@ A reference table that every identified reader may read in full needs a policy t
 ## See also
 
 - [Row-level and column-level security](/storage/row-level-security/): what is protected, deny by default, limitations
+- [Set up row-level and column-level security](/storage/row-level-security/set-up/): the Keboola CLI commands and API calls that create a policy
 - [Keboola CLI](/cli/)
 - [MCP Server](/ai/mcp-server/)
+
+---
+
+**Next:** [Storage API →](/storage/api/)

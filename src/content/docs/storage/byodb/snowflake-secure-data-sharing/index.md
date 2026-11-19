@@ -8,9 +8,9 @@ slug: 'storage/byodb/snowflake-secure-data-sharing'
 Important: This feature is currently available in BETA.
 :::
 
-
-
 This guide explains how to share a database and its objects with one or more accounts by creating a share. Currently, Keboola supports granting privileges directly to a share, specifically for tables, external tables, views, secure views, and secure materialized views. For further reference, consult the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/data-sharing-gs#grant-privileges-directly-to-a-share).
+
+<!-- How-to-type page. Source: this page as it stood on main; only the link to the register page is new. Structure checked 2026-11-19, facts not re-verified. -->
 
 The process involves **two roles**:
 
@@ -114,5 +114,9 @@ While sharing data can greatly enhance collaboration, certain object types and p
 - Masking policies will not be applied after sharing with other Keboola projects.
 
 ## Final Step
-You can now register the schema in the newly created database as an external dataset in Keboola, enabling seamless data integration. Use `<CONSUMER_DATABASE_NAME>` as the database name and 
+You can now [register the schema](/storage/byodb/external-buckets/register/) in the newly created database as an external dataset in Keboola, enabling seamless data integration. Use `<CONSUMER_DATABASE_NAME>` as the database name and 
 the schema present in this database. When registering, don't forget to check the `Secure Data Share` checkbox.
+
+---
+
+**Next:** [Row-level and column-level security →](/storage/row-level-security/)

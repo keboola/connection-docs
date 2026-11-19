@@ -1,14 +1,18 @@
 ---
 title: Set up row-level and column-level security
 slug: 'storage/row-level-security/set-up'
+sidebar:
+  label: Set Up
 description: 'Turn on row-level and column-level security: use a governed workspace, write policies with the CLI, an AI assistant or the API, and govern a Data App.'
 ---
 
-This page shows how to set up [row-level and column-level security](/storage/row-level-security/) for a project and for a Data App.
+Setting up [row-level and column-level security](/storage/row-level-security/) takes three steps: send queries through a governed workspace, write a policy for each table, and check the result as the reader. A Data App needs two more settings. What a policy can contain is in the [policy reference](/storage/row-level-security/policy-reference/).
 
-## Set it up
+<!-- How-to-type page. Source: the "Set it up" and "Data Apps" sections of the row-level security page and the "Create a policy" sections of the policy reference, as they stood on main before the split. Structure checked 2026-11-19, facts not re-verified. -->
 
-### 1. Make sure queries go through a governed workspace
+## 1. Make sure queries go through a governed workspace
+
+**Goal:** have a governed workspace that serves the queries of your readers.
 
 - **MCP Server:** ask Keboola support to enable the `row-level-security` project feature. With it, the MCP Server creates its workspace as governed and sends `query_data` through Query Service. Workspaces that already exist are not changed or converted.
 - **Your own workspace:** create one with the login type `governed`. With the [Keboola CLI](/cli/), a governed workspace has no password or key, so there is nothing to save:
@@ -18,39 +22,19 @@ This page shows how to set up [row-level and column-level security](/storage/row
 kbagent --json workspace create --project my-project --name governed-ws --governed
 ```
 
-Queries to a governed workspace read the Storage table by its bucket name, for example `SELECT * FROM "in.c-crm"."orders"` on Snowflake. Unqualified table names are refused.
+**Result:** Queries to a governed workspace read the Storage table by its bucket name, for example `SELECT * FROM "in.c-crm"."orders"` on Snowflake. Unqualified table names are refused.
 
-### 2. Write the policies
+## 2. Write the policies
+
+**Goal:** give every table that readers should see a policy.
 
 Write policies before you switch a project over: a governed workspace shows no data until a policy allows it. Policies are written by a project administrator (master Storage token). Sharing a policy with other projects or applying it to the whole organization needs the organization administrator role.
 
 You can write policies in three ways. They all create the same `rls-policy` and `cls-policy` objects.
 
-**With the Keboola CLI.** The `rls` and `cls` command groups create, list, update and delete policies. Add `--dry-run` to preview the result without writing anything.
+### Create a policy with the Keboola CLI
 
-<!-- kbagent-check: skip-next -->
-```bash
-kbagent rls create --project my-project --table-id in.c-crm.orders \
-  --rules @rls-rules.json --default '{"false": true}' --dry-run
-```
-
-The rule files are described in the [policy reference](/storage/row-level-security/policy-reference/), together with the column-level commands (`cls create` and friends) and the other commands (`list`, `detail`, `update`, `delete`, `schema` and the guided `rls setup`).
-
-**With an AI assistant.** The `kbagent` plugin of [AI Kit](/ai/ai-kit/) teaches an assistant these commands (the plugin is installed with `/plugin install kbagent@keboola-claude-kit`). You can describe the goal in plain words, for example:
-
-> Protect the table `in.c-crm.orders` so that people in the group `eu-analysts` see only the rows with `region` equal to `EU`, and let the administrator with ID 1234 see all rows. Show me the dry run first.
-
-Ask the assistant to run the dry run and show it to you before it writes. Commands that write are subject to the CLI's [permission settings](/cli/); an agent that runs them with `--json` is not asked for a confirmation, so the dry run is your check.
-
-**With the API.** Policies are objects in the Keboola Metastore, so you can create them with `curl` and an administrator's Storage token. The [policy reference](/storage/row-level-security/policy-reference/#create-a-policy-with-the-api) has the requests.
-
-### 3. Check it as the reader
-
-Query a protected table the way the reader does and compare the result with what the policy should allow. Your own identity matters here: an administrator behind a Storage token is matched by the subject `keboola|<your administrator ID>` and is not exempt, so you need a rule for yourself to see anything. The [policy reference](/storage/row-level-security/policy-reference/#who-a-rule-selects) shows where to find your ID.
-
-## Create a policy with the Keboola CLI
-
-Both groups have the same commands. `--rules` accepts JSON, `@file` or `-` for standard input. Add `--dry-run` to any command that writes to see the result without writing it.
+The `rls` and `cls` command groups create, list, update and delete policies. Both groups have the same commands. `--rules` accepts JSON, `@file` or `-` for standard input. Add `--dry-run` to any command that writes to see the result without writing it.
 
 | Command | What it does |
 |---|---|
@@ -66,7 +50,8 @@ Useful options of `create` and `update`: `--scope targeted|organization`, `--tar
 
 <!-- kbagent-check: skip-next -->
 ```bash
-kbagent rls create --project my-project --table-id in.c-crm.orders --rules @rls-rules.json --default '{"false": true}' --dry-run
+kbagent rls create --project my-project --table-id in.c-crm.orders \
+  --rules @rls-rules.json --default '{"false": true}' --dry-run
 ```
 
 <!-- kbagent-check: skip-next -->
@@ -74,13 +59,23 @@ kbagent rls create --project my-project --table-id in.c-crm.orders --rules @rls-
 kbagent cls create --project my-project --table-id in.c-crm.orders --rules @cls-rules.json --yes
 ```
 
+The rule files are described in the [policy reference](/storage/row-level-security/policy-reference/).
+
 The CLI refuses a rule that selects by `principal` or email before anything is written. It also checks the dialect against the project backend and reports every problem it finds.
 
-## Create a policy with the API
+### Create a policy with an AI assistant
 
-Policies are objects of the Keboola Metastore. Its address is the address of your stack with `connection.` replaced by `metastore.`, for example `https://metastore.<stack>.keboola.com`. Authenticate with the project administrator's Storage token in the `X-StorageApi-Token` header.
+The `kbagent` plugin of [AI Kit](/ai/ai-kit/) teaches an assistant these commands (the plugin is installed with `/plugin install kbagent@keboola-claude-kit`). You can describe the goal in plain words, for example:
 
-The `name` of the object is the table ID, and a project can have one policy of each kind per table. The `rules` and `default` in `data` are the ones from the examples above.
+> Protect the table `in.c-crm.orders` so that people in the group `eu-analysts` see only the rows with `region` equal to `EU`, and let the administrator with ID 1234 see all rows. Show me the dry run first.
+
+Ask the assistant to run the dry run and show it to you before it writes. Commands that write are subject to the CLI's [permission settings](/cli/); an agent that runs them with `--json` is not asked for a confirmation, so the dry run is your check.
+
+### Create a policy with the API
+
+Policies are objects of the Keboola Metastore, so you can create them with `curl` and an administrator's Storage token. The Metastore address is the address of your stack with `connection.` replaced by `metastore.`, for example `https://metastore.<stack>.keboola.com`. Authenticate with the project administrator's Storage token in the `X-StorageApi-Token` header.
+
+The `name` of the object is the table ID, and a project can have one policy of each kind per table. The `rules` and `default` in `data` are the ones from the [examples in the policy reference](/storage/row-level-security/policy-reference/#examples).
 
 ```bash
 curl -sS -X POST "https://metastore.<stack>.keboola.com/api/v1/repository/rls-policy" \
@@ -112,7 +107,19 @@ curl -sS "https://metastore.<stack>.keboola.com/api/v1/repository/rls-policy" \
 
 A rule that selects by email is rejected by the schema validation (HTTP `422`), and a second policy of the same kind for the same table is rejected as a duplicate (HTTP `409`).
 
-## Data Apps
+**Result:** Whichever way you used, each protected table now has an `rls-policy`, a `cls-policy` or both. `rls list` and `cls list` show them.
+
+## 3. Check it as the reader
+
+**Goal:** confirm that a reader gets exactly what the policy allows.
+
+Query a protected table the way the reader does and compare the result with what the policy should allow. Your own identity matters here: an administrator behind a Storage token is matched by the subject `keboola|<your administrator ID>` and is not exempt, so you need a rule for yourself to see anything. The [policy reference](/storage/row-level-security/policy-reference/#who-a-rule-selects) shows where to find your ID.
+
+**Result:** The query returns only the rows and columns the policy allows for that reader. If it is refused, or comes back empty when it should not, see [What users see](/storage/row-level-security/#what-users-see).
+
+## Apply policies to a Data App
+
+**Goal:** make a Data App return only the rows and columns its policies allow for the signed-in user.
 
 A Data App protected by single sign-on (OIDC) is the case where policies are a hard boundary. The proxy that sits in front of the app signs a token with the user's identity and groups and sends it with each request in the `X-Kbc-App-User-Token` header. The app has to pass that header to Query Service with every query, together with the app's own Storage token. See [Data Apps authentication](/data-apps/authentication/) for how users sign in.
 
@@ -149,6 +156,8 @@ const auth = { type: 'app-user-token', token: userToken, storageToken: appStorag
 ```
 
 The Python client is `keboola-query-service` 0.4.0 or later, the JavaScript client is `@keboola/api-client` 52.0.0 or later. Both send the user token in `X-Kbc-App-User-Token` and the app token in `X-StorageAPI-Token`, and both raise a `RowLevelSecurityError` when a query is refused.
+
+**Result:** After a redeploy, the queries of the app run under the listed policies with the identity of the signed-in user.
 
 A query that carries only the app's Storage token, without the user token, is refused (HTTP 403, `Row-level security does not allow this query`). So is a background job without a signed-in user.
 

@@ -1,6 +1,6 @@
 ---
 title: Bucket Exposure
-description: 'Share a bucket with people outside your project in their own BigQuery: when to use it, creating and managing exposures, Snowflake grant and share modes, FAQ.'
+description: 'When to use Bucket Exposure on BigQuery or Snowflake, how it differs from Data Catalog and External Datasets, what subscribers see, and what to keep in mind.'
 slug: 'storage/bucket-exposure'
 ---
 
@@ -11,11 +11,11 @@ account Keboola runs for your organization alone.
 Contact Keboola support to have it enabled for your project.
 :::
 
-
-
 **Bucket Exposure** lets you share data from a Keboola bucket with people outside your
 Keboola project — directly inside their own Google BigQuery environment. No exports, no
 data copies, no manual handoffs.
+
+<!-- Explanation-type page. Source: the Bucket Exposure page as it stood on main before the split into this page and three how-to pages. Structure checked 2026-11-19, facts not re-verified. -->
 
 You pick a bucket, give it a friendly name, and list who should have access. Those people
 or teams see the data appear in their BigQuery, and they can query it just like any other
@@ -23,10 +23,12 @@ dataset. The data is **always live**: as soon as it changes in Keboola, the new 
 visible to them.
 
 On **Snowflake**, an exposure either gives existing roles in your own Snowflake account read
-access to the bucket ([Snowflake Grant Mode](#snowflake-grant-mode)), or shares the bucket with
-other Snowflake accounts ([Snowflake Share Mode](#snowflake-share-mode)).
+access to the bucket ([Snowflake grant mode](/storage/bucket-exposure/snowflake-grant/)), or shares the bucket with
+other Snowflake accounts ([Snowflake share mode](/storage/bucket-exposure/snowflake-share/)).
 
-## When to Use Bucket Exposure
+To set up an exposure, follow [Create and manage bucket exposures](/storage/bucket-exposure/create/) or the page of the Snowflake mode you need.
+
+## When to use Bucket Exposure
 
 Bucket Exposure is the right choice when:
 
@@ -47,7 +49,7 @@ Typical scenarios:
 - A **finance team** needs to give their **external auditors** a read-only view of
   specific reconciliation data, with the ability to revoke access at the end of the audit.
 
-## How It Differs From Other Sharing Features
+## How it differs from other sharing features
 
 | Feature | What it does | Who can access |
 |---------|--------------|----------------|
@@ -55,27 +57,27 @@ Typical scenarios:
 | [**External Datasets**](/storage/byodb/external-buckets/) | Register a BigQuery dataset **you already own** as a bucket inside Keboola. | Keboola users only. |
 | **Bucket Exposure** | Share a Keboola-owned bucket **out into BigQuery** for people who don't use Keboola. | Anyone with a Google account or Google Group. |
 
+<!-- VERIFY(Nikita): this table names only BigQuery. The External Datasets page says a Snowflake schema can be registered too, and this page now describes two Snowflake modes of Bucket Exposure. Check whether the External Datasets and Bucket Exposure rows, and the "registered from BigQuery" note under "Things to keep in mind", should name Snowflake as well. -->
+
 Bucket Exposure and Data Catalog sharing are independent — you can do both on the same
 bucket if you want.
 
-## What Your Subscribers See
+## What your subscribers see
 
 Your subscribers do **not** need a Keboola account. Everything happens for them inside the
-**Google Cloud Console**:
+**Google Cloud Console**. They open **BigQuery → Analytics Hub** in the GCP Console, go to
+**Search listings** and find your exposure by name. Then they click **Subscribe**, pick a
+destination project, and choose a name for the linked dataset.
 
-1. They open **BigQuery → Analytics Hub** in the GCP Console.
-2. They go to **Search listings** and find your exposure by name.
-3. They click **Subscribe**, pick a destination project, and choose a name for the linked
-   dataset.
-4. A **linked dataset** appears in their BigQuery project. From their point of view, it
-   behaves like any normal BigQuery dataset — they can query it, join it with their own
-   tables, use it in dashboards, etc. — except they cannot modify it.
+A **linked dataset** appears in their BigQuery project. From their point of view, it
+behaves like any normal BigQuery dataset: they can query it, join it with their own
+tables, use it in dashboards, etc. The one exception is that they cannot modify it.
 
 The data they see is always live. Whenever the data in your Keboola bucket changes (a new
 load, a transformation, a deletion), their queries reflect it on the next run. There is no
 copy of the data on their side — it stays in your project.
 
-## Things to Keep in Mind
+## Things to keep in mind
 
 - **One exposure per bucket.** Each bucket can have at most one exposure. If you need to
   share different slices of data with different audiences, create separate buckets.
@@ -85,14 +87,22 @@ copy of the data on their side — it stays in your project.
   [linked buckets](/catalog/) (already shared from another Keboola project) or
   [external datasets](/storage/byodb/external-buckets/) (registered from BigQuery).
 - **BigQuery, and Snowflake on your own account.** On Snowflake, an exposure grants roles
-  in your account read access ([Snowflake Grant Mode](#snowflake-grant-mode)) or shares the
-  bucket with other Snowflake accounts ([Snowflake Share Mode](#snowflake-share-mode)).
+  in your account read access ([Snowflake grant mode](/storage/bucket-exposure/snowflake-grant/)) or shares the
+  bucket with other Snowflake accounts ([Snowflake share mode](/storage/bucket-exposure/snowflake-share/)).
+  Each mode has its own list: [grant mode](/storage/bucket-exposure/snowflake-grant/#things-to-keep-in-mind-on-snowflake)
+  and [share mode](/storage/bucket-exposure/snowflake-share/#things-to-keep-in-mind-in-share-mode).
 - **Manage subscribers from Keboola.** If you or someone else edits the listing's
   permissions directly in the GCP Console, those changes will be overwritten the next time
   the exposure is updated from Keboola. Keboola is the single source of truth.
 - **Costs.** There is no extra storage cost — the data is not copied. Your subscribers
   pay for the queries they run in their own GCP project; you continue to pay for the
   storage in yours.
+
+## This section
+
+- [Create and manage bucket exposures](/storage/bucket-exposure/create/): create an exposure for BigQuery subscribers, then find, edit or delete it.
+- [Snowflake grant mode](/storage/bucket-exposure/snowflake-grant/): give roles that exist in your own Snowflake account read access to one bucket.
+- [Snowflake share mode](/storage/bucket-exposure/snowflake-share/): share one bucket with other Snowflake accounts, and the SQL the consumer runs there.
 
 ## FAQ
 
@@ -114,16 +124,20 @@ in BigQuery.
 
 **Q: Can I take away access from a single subscriber?**
 Yes. Open the exposure detail, click **Edit**, remove the subscriber from the list, and
-save. The change is immediate.
+save. The change is immediate. See [Edit an exposure](/storage/bucket-exposure/create/#edit-an-exposure).
 
 **Q: Will this work for Snowflake projects?**
 Yes, for projects on your own Snowflake account. The exposure either gives roles in that
-account read access to the bucket ([Snowflake Grant Mode](#snowflake-grant-mode)) or shares
+account read access to the bucket ([Snowflake grant mode](/storage/bucket-exposure/snowflake-grant/)) or shares
 the bucket with other Snowflake accounts in the same region and cloud
-([Snowflake Share Mode](#snowflake-share-mode)).
+([Snowflake share mode](/storage/bucket-exposure/snowflake-share/)).
 
 **Q: What do my subscribers need on their side?**
 A Google account or a Google Group that you've added as a subscriber, and access to any
 GCP project where they can create a linked dataset. They do not need any Keboola license
 or special Analytics Hub permissions — Keboola grants them everything they need to view
 the listing and subscribe to it.
+
+---
+
+**Next:** [Create and manage bucket exposures →](/storage/bucket-exposure/create/)
