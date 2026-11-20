@@ -343,7 +343,7 @@ the primary key must match. Feel free to use a multi-column primary key.
 deduplication to the destination partitions the new rows belong to, so BigQuery does not read the whole destination
 table. It requires a partitioned destination table; see [Partition-aware import](#partition-aware-import-bigquery).
 - **Import method** *(Snowflake only)* — Chooses how Snowflake writes the loaded data into the destination table:
-in one statement (`MERGE` or `INSERT OVERWRITE`), or in several statements through a deduplication table. Leave it at
+in one statement (`MERGE` or `INSERT OVERWRITE`), or in several statements. Leave it at
 **Platform default** unless you need a specific method; see [Import method](#import-method-snowflake).
 
 **Important:** Multiple output mappings can be created for your transformation. Each source table can be used only once however.
@@ -437,7 +437,7 @@ to the platform (**Platform default**, `auto` in the configuration JSON).
 | Option | How Snowflake writes the table |
 |---|---|
 | **Platform default** | The output mapping does not set a method. If the component sets `import_method` in its output table manifest, that method is used. Otherwise Keboola chooses the method for the project: multi statement, unless Keboola has enabled the optimized Snowflake import for your project, in which case it is single statement. |
-| **Single statement (MERGE / INSERT OVERWRITE)** | Incremental load: one `MERGE` that updates the existing rows and inserts the new ones. Full load: one `INSERT OVERWRITE` that replaces the table content. |
+| **Single statement (MERGE / INSERT OVERWRITE)** | Incremental load: one `MERGE` that updates the existing rows and inserts the new ones. Full load: one `INSERT OVERWRITE` that replaces the table content; when the table has a primary key, the statement itself keeps one row per primary-key value. |
 | **Multi statement (legacy deduplication)** | Incremental load: the new rows are deduplicated in a separate table, then several statements update the existing rows and insert the new ones. Full load: the new rows are deduplicated in a separate table (when the table has a primary key), then one transaction truncates the destination table and inserts the rows. Like single statement, a full load replaces the table content; it is not an upsert. |
 
 To see which method a load used, open the `storage.tableImportStarted` event of the import job. On Snowflake it shows
@@ -454,14 +454,16 @@ primary-key column can contain both `NULL` and an empty string (`''`):
 - **Single statement** treats `NULL` and `''` as the same key value and keeps one row.
 - **Multi statement** treats them as different values and keeps both rows.
 
-Full loads and loads from CSV files (File Staging) give the same result with either method.
+Full loads give the same result with either method: both keep one row per primary-key value, and both treat `NULL`
+and `''` as different values. Loads from CSV files (File Staging) also give the same result with either method.
 
 ##### Where the option applies
 
 The option is shown in the table output mapping, for any source type, when all of the following conditions are met:
 
 - The project uses the Snowflake backend.
-- The mapping does not use a direct grant (`unload_strategy: direct-grant`); such a table is not imported at all.
+- The mapping does not use a [direct grant](#direct-mode-output-mapping) (`unload_strategy: direct-grant`); such a
+  table is not imported at all.
 - [Deduplication Strategy](#deduplication-strategy) is not set to **Insert**, which skips deduplication.
 
 When a condition stops being met, for example after you switch Deduplication Strategy to **Insert**, the UI removes the
@@ -487,7 +489,7 @@ In the configuration JSON, the option is stored as `import_method`, with the val
 
 - **Platform default** in the UI leaves the key out of the configuration. A missing key and `auto` mean the same.
 - `auto` is safe on every backend. An explicit `single_statement` or `multi_statement` for a table in a bucket on
-  another backend than Snowflake makes the import fail with an error (`storage.tables.importMethodNotSupported`).
+  a backend other than Snowflake makes the import fail with an error (`storage.tables.importMethodNotSupported`).
 - A component can also set `import_method` in its output table
   [manifest](/extend/common-interface/manifest-files/out-tables-manifests/#import-method). With a missing key or `auto`
   in the output mapping, the method from the manifest is used. `single_statement` or `multi_statement` in the output

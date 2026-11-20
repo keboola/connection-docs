@@ -47,28 +47,6 @@ The options will cause the specified rows to be deleted from the source table be
 table is imported. See an [example](/extend/common-interface/config-file/#output-mapping--delete-rows).
 Using this option makes sense only with [incremental loads](/components/extractors/generic-extractor/incremental/).
 
-## Import method
-
-On the Snowflake backend, the `import_method` field chooses how Snowflake writes the destination table:
-
-```json
-{
-  ...
-  "import_method": "single_statement"
-}
-```
-
-- `auto` (the same as omitting the field) uses the platform default for the project.
-- `single_statement` writes the table with one `MERGE` (incremental load) or `INSERT OVERWRITE` (full load).
-- `multi_statement` deduplicates the rows in a separate table and writes the table with several statements.
-
-An explicit `single_statement` or `multi_statement` for a table in a bucket on another backend than Snowflake makes the
-import fail with an error (`storage.tables.importMethodNotSupported`); `auto` is safe on every backend.
-
-The value in the manifest is used when the end-user output mapping has no `import_method` or has `auto`. A
-`single_statement` or `multi_statement` in the output mapping takes precedence over the manifest. See
-[Import method](/transformations/mappings/#import-method-snowflake) for how the methods differ.
-
 The `metadata` and `column_metadata` fields allow you to set
 Metadata for the table and its columns.
 The `metadata` field corresponds to the [Table Metadata API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/metadata).
@@ -99,3 +77,25 @@ filled by the Id of the running component (e.g., `keboola.ex-db-snowflake`).
   }
 }
 ```
+
+## Import method
+
+On the Snowflake backend, the `import_method` field chooses how Snowflake writes the destination table:
+
+```json
+{
+  ...
+  "import_method": "single_statement"
+}
+```
+
+- `auto` (the same as omitting the field) uses the platform default for the project.
+- `single_statement` writes the table with one `MERGE` (incremental load) or `INSERT OVERWRITE` (full load).
+- `multi_statement` writes the table with several statements.
+
+An explicit `single_statement` or `multi_statement` for a table in a bucket on a backend other than Snowflake makes
+the import fail with an error (`storage.tables.importMethodNotSupported`); `auto` is safe on every backend.
+
+The value in the manifest is used when the end-user output mapping has no `import_method` or has `auto`. A
+`single_statement` or `multi_statement` in the output mapping takes precedence over the manifest. See
+[Import method](/transformations/mappings/#import-method-snowflake) for how the methods differ.
