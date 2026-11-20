@@ -10,7 +10,7 @@ Each recipe on this page is self-contained: a goal, the steps and the result. Fo
 
 **Before you start:** to manage shared buckets, your user account must be an [organization member](/management/organization/) or a project administrator with the [share role](/management/project/users/#user-roles) assigned. Source and destination projects must belong to the same organization (and region).
 
-<!-- VERIFY(Nikita): the labels on this page come from the 2019 to 2020 UI. Checked 2026-11-20 in the UI of project 264: the section is called Data Catalog, and the list has the filter buttons All, Linked and Mine (there is no Shared with you tab). Still unknown, because Share bucket is disabled for that role and nothing is shared with or from project 264: SHARE BUCKET, Share existing bucket, Select tables, Create Alias, Link, Edit Sharing, Disable, the button that confirms the share in both variants, the control that opens the link dialog, where Create Alias sits and how to turn on column synchronization, a save step after Edit Sharing, where Disable sits, and where each result can be checked. Needs a user with the share role or another project. -->
+<!-- VERIFY(Nikita): the labels on this page come from the 2019 to 2020 UI. Checked 2026-11-20 in the UI of project 264: the section is called Data Catalog, and the list has the filter buttons All, Linked and Mine (there is no Shared with you tab). The start button is Share bucket (Data Catalog top right, and in the bucket's ⋮ menu), disabled with "You don't have permission to share data" for a project Admin without Organization admin; the bucket detail shows Sharing: Disabled (click to enable). + Create alias table and Synchronize columns with the source table were seen on a non-shared bucket. Still unknown, because sharing is disabled for that role and nothing is shared with or from project 264: Share existing bucket, Select tables, the button that confirms the share in both variants, Link and the control that opens it, Edit Sharing and a save step after it, Disable and where it sits, and where each result can be checked. Needs a user with the right to share, or another project. -->
 
 <!-- TODO(human-review, Nikita): all 14 screenshots on this page show the old UI (for example a Shared with you tab, and no All / Linked / Mine filters or Who can use it column) and need replacing with current ones. -->
 
@@ -18,7 +18,7 @@ Each recipe on this page is self-contained: a goal, the steps and the result. Fo
 
 **Goal:** make data from your project available to other projects in your organization.
 
-1. Go to **Data Catalog** and click **SHARE BUCKET**.
+1. Go to **Data Catalog** and click **Share bucket** (top right).
 
    ![Screenshot -- Enable sharing](/catalog/catalog-1.png)
 
@@ -68,11 +68,11 @@ To change sharing settings, share the newly [created bucket again](#share-an-exi
 To extend an existing shared bucket with additional tables, you don't need to delete the bucket and recreate it. Instead,
 create an [alias](/storage/tables/#aliases) of the table and set the shared bucket as the destination. Here is how to do so:
 
-1. Go to **Storage → Tables** and locate the table you want to add.
+1. In **Storage**, open the shared bucket and click **+ Create alias table**.
 
-2. Click **Create Alias**.
-
-3. **Select the shared bucket** as the destination. Ensure automatic synchronization of the columns is enabled.
+2. In the **Create Alias Table in Bucket** dialog, select the **Source table** and enter a **Name**. Keep
+   **Synchronize columns with the source table** checked (the default), and click **Create alias table**.
+   <!-- Checked 2026-11-20 in the UI of project 264: the bucket page has + Add Table and + Create alias table; the dialog has Source table*, Name*, Filtering (optional), Columns with Synchronize columns with the source table (checked by default) and Create alias table. -->
 
 **Result:** once created in the shared bucket, the alias will immediately appear in all linked projects.
 
