@@ -47,7 +47,7 @@ or use the [support form](/management/support/) inside your project.
 - [www.keboola.com](https://www.keboola.com/): our main web page
 - [blog.keboola.com](https://blog.keboola.com/): something to read for data analysts
 - [500.keboola.com](https://500.keboola.com/): something to read for tech geeks
-- [developers.keboola.com](https://developers.keboola.com): documentation for extending or integrating Keboola
+- [Extending Keboola](/extend/): documentation for building your own components and working with the APIs
 - [components.keboola.com](https://components.keboola.com): the Keboola Developer Portal, where you can browse public components or register your own
 
 ## We Highly Appreciate Your Input!
