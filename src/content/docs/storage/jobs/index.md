@@ -31,13 +31,12 @@ tables, and then, for example, adjust flow triggers to avoid concurrency issues.
 
 Keboola records all data uploaded into your project.
 
-1. Go to **Storage** and click the **Jobs** tab:
-   <!-- VERIFY(Nikita): the screenshots on this page show an older UI. A newer screenshot on the Files page names the tab "Storage Jobs". Check the current tab name. -->
+1. Go to **Storage** and click the **Storage Jobs** tab:
+   <!-- Checked 2026-11-20: tab "Storage Jobs", Aug 2024 screenshot storage/files/files.png and getting-started/project. The screenshots on this page date from 2019. -->
 
    ![Screenshot - Storage Jobs](/storage/jobs/storage-jobs.png)
 
-2. Click an **importTable** job. You'll see the Storage job detail:
-   <!-- VERIFY(Nikita): the screenshots show the operation as "tableImport", not "importTable". Check which name the UI uses. -->
+2. Click a **tableImport** job. You'll see the Storage job detail:
 
    ![Screenshot - Storage Job Detail](/storage/jobs/storage-jobs-detail.png)
 

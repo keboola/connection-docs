@@ -109,7 +109,7 @@ Storage backend defaults.
 When a job creates a table, it defaults to the lengths and precisions specific to the Storage backend (see
 [Native data types](/storage/tables/data-types/#how-typed-tables-are-created)). To avoid the limitation:
 
-1. Manually create the table in advance using the [Table Definition API](https://keboola.docs.apiary.io/#reference/tables/create-table-definition/create-new-table-definition), specifying the correct lengths and precisions.
+1. Manually create the table in advance using the [Table Definition API](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-bucketId-/tables-definition), specifying the correct lengths and precisions.
 
    **Example:** To ensure typed tables are imported correctly into Storage, define your table in a Snowflake SQL transformation, adhering to the desired schema and data types:
 
@@ -131,18 +131,18 @@ You **cannot change the type of a column in a typed table once it has been creat
 Some other alterations, such as increasing the length or precision of a column, are possible without a workaround; see
 [Changing column definitions](/storage/tables/data-types/reference/#changing-column-definitions).
 
-**For tables using full load:** Drop the table and create a new one with the correct types. Then, load the data into the newly created table.
+**For tables using full load:** Drop the table and create a new one with the correct types ([Table Definition API](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-bucketId-/tables-definition)). Then, load the data into the newly created table.
 
 **For tables loaded incrementally:** You will need to create a new column with the desired type and migrate the data step by step.
 Assume you have a column `date` of type `VARCHAR` in a typed table, and you want to change it to `TIMESTAMP`.
 
-1. Add a new column named `date_timestamp` of type `TIMESTAMP` to the table.
-   <!-- VERIFY(Nikita): the old text names no control for adding a column (step 1), removing a column (step 5) or dropping and recreating a table (full load). Check where each is done in the UI or API. -->
+1. Add a new column named `date_timestamp` of type `TIMESTAMP` to the table ([Add column to table](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/columns), with `definition` and `basetype`).
+   <!-- Checked 2026-11-20: add column, delete column and table definition endpoints, Storage API OpenAPI. UI controls not checked. -->
 2. Update all jobs filling the table to populate both the new column (`date_timestamp`) and the existing column (`date`).
-3. Run an ad-hoc transformation to copy data from `date` to `date_timestamp` for the existing rows.
-   <!-- VERIFY(Nikita): the old text gives no output mapping or SQL for writing back into the same table. Check how the transformation updates the existing rows (incremental output with the primary key?). -->
+3. Run an ad-hoc transformation that reads the table, fills `date_timestamp` from `date` for the existing rows, and writes every column back to the same table: in its output mapping, set the table as **Destination**, check **Incremental**, and set the table's **Primary key**, so each row replaces the row with the same key. Without a primary key, the rows are appended instead.
+   <!-- Checked 2026-11-20: write-back via incremental output mapping with primary key, transformations/mappings and incremental-loading pages. SQL not given. -->
 4. Gradually update all configurations and references to use `date_timestamp` instead of `date`.
-5. Once all references are updated and the old column is no longer in use, you can safely remove the `date` column.
+5. Once all references are updated and the old column is no longer in use, you can safely remove the `date` column ([Delete column from table](https://api.keboola.com/?service=storage#delete-/v2/storage/branch/-branchId-/tables/-tableId-/columns/-columnName-)).
 
 :::caution
 **Important:** Always verify other configurations that depend on the table to avoid schema mismatches. Also, pay special attention to writers (data destination connectors), particularly if the table already exists in the destination system. Mismatched schemas between the source and destination can lead to errors.
@@ -161,8 +161,8 @@ If you have a non-typed table, `non_typed_table`, with undefined data types and 
 1. **Set up the transformation.**
    - Create a new transformation in Keboola. The query in step 2 is for a Snowflake SQL transformation.
    - Choose `non_typed_table` as the input table in the input mapping section (you can also rely on [read-only input mapping](/transformations/#read-only-input-mapping)).
-   - In the output mapping section, define the output table as `typed_table`, the table your query creates. Ensure that the output table does not exist; otherwise, it will not be created as a typed table.
-     <!-- VERIFY(Nikita): the old text names only `typed_table`. Check whether that is the output mapping source, the destination table in Storage, or both, and which bucket the destination is in. -->
+   - In the output mapping section, add a table output with `typed_table` (the table your query creates) as the output table, and a Storage destination table that does not exist yet; otherwise, it will not be created as a typed table. In the screenshot, the destination is `typed_table` in the bucket `typed-table-transformation`.
+     <!-- Checked 2026-11-20: output table typed_table → destination typed-table-transformation / typed_table, screenshot typed-table-transformation.png. -->
 
    ![Screenshot - Typed Table Transformation](/storage/tables/data-types/typed-table-transformation.png)
 

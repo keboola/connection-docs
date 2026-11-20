@@ -46,13 +46,14 @@ That will be correctly interpreted as `2023-03-23 01:00 +0200`, which is equival
 
 **Goal:** a copy of a table's contents, taken now, that you can turn into a new table right away or later.
 
-To physically copy a table, utilize the **Create Snapshot** feature. This feature creates a copy of the table contents at the time the snapshot is created, 
-which can be used immediately to produce a physical copy of the table or later, to revert the table to its previous state.
-<!-- VERIFY(Nikita): the steps below only create a new table from a snapshot. Check whether a snapshot can also restore the original table in place, and how. -->
+To physically copy a table, utilize the **Create Snapshot** feature. This feature creates a copy of the table contents at the time the snapshot is created.
+From it you can create a new table, right away or later; a snapshot does not restore the original table in place.
+<!-- Checked 2026-11-20: Storage API creates a table from a snapshot (tables-async with snapshotId); no in-place restore endpoint exists. -->
 
 Table snapshots are useful when **experimenting** with data source connectors and transformations, or when **refactoring** your project. You can create a copy of your output table, conduct experiments, 
-and then compare the new output table with the original to ensure your output remains consistent. They can also be used as a workaround to renaming tables because this feature is not available yet.
-<!-- VERIFY(Nikita): "renaming tables ... is not available yet" may be out of date. Check whether tables can be renamed now. -->
+and then compare the new output table with the original to ensure your output remains consistent.
+To rename a table, change its display name ([Update a table](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-)); its table ID stays the same.
+<!-- Checked 2026-11-20: Storage API renames a table through its display name, the only updatable table property (OpenAPI TableUpdateRequest). UI control not checked. -->
 
 1. Open the table detail, go to the **Snapshot and Restore** tab and, under **Snapshots**, click **Create snapshot**.
    <!-- VERIFY(Nikita): the tab, button and icon names in steps 1 to 3 come from the 2019 screenshots. Check them in the current UI. -->

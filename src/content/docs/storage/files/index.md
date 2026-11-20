@@ -21,8 +21,8 @@ tables. How tables pass through Files is explained in the [Storage overview](/st
 
 **Goal:** an arbitrary file stored in your project, with the tags and the retention you choose.
 
-1. Select the Files tab in Storage and then click **Upload File** in the top right corner.
-   <!-- VERIFY(Nikita): the screenshots show this button as "Upload files" and the dialog button in step 3 as "Start upload", disabled until a file is selected. Step 3 is read off that screenshot. Check both labels in the current UI. -->
+1. Select the **Files** tab in Storage and then click **Upload Files** in the top right corner.
+   <!-- Checked 2026-11-20: button "Upload Files", dialog "Upload new files", checkbox "Store permanently", button "Start upload" (active once a file is selected), read from the Aug 2024 screenshots files.png and files-detail.png. -->
 
    ![Screenshot - File uploads](/storage/files/files.png)
 
@@ -34,9 +34,9 @@ tables. How tables pass through Files is explained in the [Storage overview](/st
    separating individual tags by pressing Enter. The tags can be used for filtering files later.
 
    To avoid files being automatically deleted after 15 days (by default) and to keep them permanently,
-   do not forget to tick the respective checkbox.
+   tick **Store permanently**.
 
-3. Click **Start upload**.
+3. Click **Start upload**. It is active once a file is selected.
 
 **Result:** the file is listed in Files under the ID it got on upload.
 
@@ -53,15 +53,17 @@ they uploaded themselves.
 
 **Goal:** download a file from Files, get a link to it that you can pass on, or delete it.
 
-1. Select the Files tab in Storage and find the file.
-   <!-- VERIFY(Nikita): this step is inferred; the old page had none. Check how a reader finds a file in the list (the screenshot shows a search box). -->
+1. Select the **Files** tab in Storage and find the file in the list. The search box above the list filters it; its placeholder, `tags:tag`, shows how to search by tag.
+   <!-- Checked 2026-11-20: search box "Search: tags:tag" above the Files list, Aug 2024 screenshot files.png. -->
 2. For each file in Files, you can
 
-   - *copy* its download link,
-   - *download* the file, and
-   - *delete* the file.
+   - *copy* its download link with the copy icon next to the file name,
+   - *download* the file with the download icon at the right end of its row, and
+   - *delete* the file with the bin icon beside it.
 
-   <!-- VERIFY(Nikita): the text names no controls for copy, download and delete. The screenshot marks a copy icon next to the file name and two icons at the right of the row. Check the control names. -->
+   The download and bin icons appear when you point at the row.
+
+   <!-- Checked 2026-11-20: copy icon by the file name, download and bin icons at the row end on hover, Aug 2024 screenshot files-download-file.png; tooltip names not read. -->
 
    ![Screenshot - File upload detail](/storage/files/files-download-file.png)
 
