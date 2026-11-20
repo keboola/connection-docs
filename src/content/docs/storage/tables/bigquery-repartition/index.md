@@ -32,8 +32,10 @@ This guide applies to the BigQuery backend. To set the layout of a table that do
   table with more than 4,000 distinct days in the partitioning column, use `MONTH` instead of `DAY`.
 - **Writers.** The copy is a snapshot. Storage does not block a write that lands between the copy and the swap, and
   such a write is lost. Stop every writer of the table for the duration: loads, Direct Mode output mapping writes and
-  streaming writers. A running DML statement on the table blocks the swap. BigQuery can refuse the swap for about
-  5 hours after the last streaming write.
+  streaming writers. A running DML statement on the table blocks the swap. Rows that were streamed recently can be
+  invisible to the copy for up to 90 minutes, and BigQuery refuses to rename a table for about 5 hours after the last
+  streaming write, sometimes longer. Start the copy after the streaming buffer is empty, and the swap after BigQuery
+  allows the rename.
 - **Objects outside Storage.** Table-level IAM bindings and row access policies that were set directly in BigQuery
   stay with the physical table, so after the swap they are on the old table. Search indexes are dropped by the swap.
   Record them before you start, apply the IAM bindings and the row access policies to the copy before the swap, and
