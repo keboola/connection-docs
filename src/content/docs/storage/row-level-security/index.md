@@ -78,7 +78,8 @@ For the end users of a [Data App](/data-apps/) who sign in through single sign-o
 - Alias tables have not been verified with policies yet. Do not rely on a policy for them.
 - Projects with a protected default branch (SOX) are not supported.
 - Row-level security of a Data App works on Snowflake projects only. A governed app can only read: it runs `SELECT` statements and nothing else, so an app that writes to its Storage Access tables fails on its inserts, updates and deletes.
-- On BigQuery, create the governed workspace with the MCP Server or the API. The `--governed` flag of `kbagent workspace create` does not support BigQuery yet.
+- On BigQuery, create the governed workspace with the MCP Server, the API, or `kbagent workspace create --governed` (Keboola CLI 1.2.0 or later).
+<!-- Checked 2026-11-20: keboola/cli supports --governed on Snowflake and BigQuery since 1.2.0 (changelog #892, #922; GOVERNED_WORKSPACE_BACKENDS in constants.py). -->
 - Column policies are an allowlist of visible columns. Masking a column's values is not supported.
 - The project feature `row-level-security` is checked by the MCP Server and by the Data App settings page of the Keboola UI only. A workspace you create with the login type `governed` is enforced regardless of the feature.
 

@@ -38,7 +38,7 @@ You can write policies in three ways. They all create the same `rls-policy` and 
 
 ### Create a policy with the Keboola CLI
 
-The `rls` and `cls` command groups create, list, update and delete policies. Both groups have the same commands. `--rules` accepts JSON, `@file` or `-` for standard input. Add `--dry-run` to any command that writes to see the result without writing it.
+The `rls` and `cls` command groups create, list, update and delete policies. Both groups have the same commands. `--rules` takes the rules as JSON text; to use a file, pass its contents, for example `--rules "$(cat rls-rules.json)"`. Add `--dry-run` to any command that writes to see the result without writing it.
 
 | Command | What it does |
 |---|---|
