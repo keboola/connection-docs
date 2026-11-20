@@ -80,6 +80,8 @@ kbagent --json storage table-detail --project my-project --table-id out.c-traffi
 ```
 
 - The row count equals the row count of the original. A difference means that a write landed after the copy.
+- For a table over 5 TiB, the row count of each partition also equals the row count of the same values of the
+  partitioning column in the original.
 - The columns, their types and the primary key are the same.
 - `definition.timePartitioning`, `definition.rangePartitioning` and `definition.clustering` show the requested layout.
 - Each column that is protected by a policy tag on the original is protected on the copy.
