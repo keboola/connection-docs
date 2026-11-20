@@ -64,8 +64,8 @@ It is useful mainly in the two following cases:
 2. Analyzing how something got into a table (useful mainly for incremental loads)
 
 Every time a table is **exported** from Storage, the process is reversed: first, a file is
-created in *Files* and then it is actually downloaded from there. This does not apply when exporting
-Storage tables manually though.
+created in *Files* and then it is actually downloaded from there.
+<!-- Checked 2026-11-20: live in project 264, every table export through the Storage API, including a plain download of the table, created a sliced file tagged table-export in Files. The old "does not apply when exporting Storage tables manually" was dropped; whether the UI Export button merges the slices is left to files/index.md. -->
 Beware, however, that due to the nature of database exports, the exported table may be **sliced** and require
 [substantial effort to reconstruct](/storage/api/import-export/#working-with-sliced-files).
 

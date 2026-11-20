@@ -109,7 +109,7 @@ The [Storage overview](/storage/#how-tables-pass-through-file-storage) explains 
    ![Screenshot - Export table](/storage/tables/table-export.png)
 
 **Result:** one merged CSV file with the table data.
-<!-- VERIFY(Nikita): the Storage overview says table exports pass through Files and may be sliced, but that this "does not apply when exporting Storage tables manually". This recipe promises one merged file from a manual Export. Check whether a manual export can still arrive sliced, and whether it passes through Files at all. -->
+<!-- VERIFY(Nikita): checked 2026-11-20 in project 264: a table export through the Storage API always creates a file in Files, sliced on Snowflake even for a 3-row table. Still open: whether the UI Export in the table detail hands the reader one merged CSV, as this Result says. -->
 
 ## Limits
 

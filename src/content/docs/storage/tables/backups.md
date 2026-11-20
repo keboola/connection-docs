@@ -48,7 +48,7 @@ That will be correctly interpreted as `2023-03-23 01:00 +0200`, which is equival
 
 To physically copy a table, utilize the **Create Snapshot** feature. This feature creates a copy of the table contents at the time the snapshot is created.
 From it you can create a new table, right away or later; a snapshot does not restore the original table in place.
-<!-- Checked 2026-11-20: Storage API creates a table from a snapshot (tables-async with snapshotId); no in-place restore endpoint exists. -->
+<!-- Checked 2026-11-20: Storage API creates a table from a snapshot (tables-async with snapshotId); no in-place restore endpoint exists. Live in project 264: creating a table from a snapshot under the source table's name fails ("already has the same display name"); under a new name it succeeds. -->
 
 Table snapshots are useful when **experimenting** with data source connectors and transformations, or when **refactoring** your project. You can create a copy of your output table, conduct experiments, 
 and then compare the new output table with the original to ensure your output remains consistent.

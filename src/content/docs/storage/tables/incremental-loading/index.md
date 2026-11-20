@@ -119,7 +119,7 @@ is not defined and an incremental load is used, it simply appends the data to th
 
 ### Difference between tables with [native datatypes](/storage/tables/data-types/) and string tables
 
-<!-- VERIFY(Nikita): the _timestamp update semantics for native-types tables below were flagged for review in #1010 and never confirmed. -->
+<!-- VERIFY(Nikita): live check 2026-11-20 in project 264 (Snowflake, native types, primary key id) contradicts this section: an incremental load that re-imported unchanged rows left their _timestamp as it was (changedSince after the load returned only the rows whose values changed), the same as for string tables. Ask the Storage team whether the behaviour changed since 2022 or differs on BigQuery, then rewrite or drop this subsection and its A2/A3 example. -->
 There is significant change when loading incrementally into table with native datatypes on. If a table does not have native datatypes enabled during incremental loading, the `_timestamp` column is updated based on the primary key only when a value in the row changes. In tables with native datatypes, the `_timestamp` column is updated every time when duplicate primary keys are imported. This behavior has an impact on [incremental processing](#incremental-processing). When rows with duplicate primary keys are imported into tables with native types, they are treated as new rows. 
 
 **Example:**
