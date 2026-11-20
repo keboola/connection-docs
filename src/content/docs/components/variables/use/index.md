@@ -30,15 +30,15 @@ The flow sections below walk through how to set up and use variables from the UI
    	SELECT "first", "second" * {{ multiplier }} AS "larger_second" FROM "source";
    ```
 
-3. In the configuration's **Variables** section, click **New Variable**, enter the name (`multiplier`) and its default value:
+3. In the configuration's **Variables** section, click **New variable**. In the new row, fill in **Variable name** (`multiplier`) and **Default value**, then click **Save**:
 
    ![Screenshot - Variables Configuration](/components/variables/variables-setting.png)
 
-4. When you run the transformation, click **Run Component**. The dialog's **Variables** section lets you override the default value for this run:
+4. Click **Run transformation**. In the dialog, expand the **Variables** block to override the default value for this run, then click **Run**:
 
    ![Screenshot - Running Transformation](/components/variables/variables-run.png)
 
-   <!-- VERIFY(Nikita): both screenshots are from about 2021; confirm the New Variable form and the Run Component dialog still look like them. -->
+   <!-- Checked 2026-11-20 in the UI of project 264: the Variables section has Import and New variable; a new variable is an inline row with Variable name, Default value, Discard and Save, not a modal. Run transformation opens a dialog with a collapsible Variables block, one field per variable, and Run. VERIFY(Nikita): both screenshots are from about 2021 and were not compared with the current UI; replace them if they show a modal form. -->
 
 **Result:** the transformation runs with the default value, or with the override you entered for that run.
 
@@ -83,12 +83,15 @@ If a task produces **multiple output tables**, the picker also offers aggregatio
 
 Once a variable has been set in an earlier phase, any later **Condition** can compare its value against a constant, against another variable, or against a task result.
 
-1. In the IF row, click the value picker and choose a variable, a task result, or a phase result from an earlier phase.
-2. Choose an operator (Greater than, Equals, Contains, …).
-3. Provide a comparison value — a constant, or another value picked from the tree.
-4. Set the THEN and ELSE actions: **Continue To** an existing phase, or end the flow.
+1. In the flow builder, click **+** under a phase and select **Conditions** in the **ADD TASK** menu. (**Conditions** appears only once the flow has its first phase.)
+2. In the **Conditions** sidebar, click **Add Condition**. **Condition 1** opens with an **If** row.
+3. In the **If** row, click **Select condition subject** and choose a variable, a task result, or a phase result from an earlier phase (tabs **Phases / Tasks**, **Variables** and **Functions**).
+4. Choose an operator (**Is**, Greater than, Contains, …).
+5. In the field to the right of the operator, provide the comparison value: a constant, or another value picked from the tree (for a job status, **Select status**). Use **Add AND** or **Add OR** to combine more comparisons.
+6. Set **Then** and **Else**: **Continue To** an existing phase or a **New phase name**, or **End Flow**.
+7. Click **Save** in the header to save the flow.
 
-<!-- VERIFY(Nikita): the steps start in an IF row that already exists. Add how to add a Condition to the flow, where the comparison value is typed in step 3, and how to save the flow. -->
+<!-- Checked 2026-11-20 in the UI of project 264: + under a phase opens the ADD TASK menu with Component, Conditions, Notification and Variable; Conditions shows only after the first phase exists. The Conditions sidebar has Add Condition, which adds Condition 1 with an If row (Select condition subject, operator, value field), Add AND and Add OR, Then (Continue To a phase or New phase name) and Else (End Flow). The flow is saved with Save in the header, next to Cancel changes. -->
 
 ![IF/THEN/ELSE condition referencing a task result](/flows/conditional-flows-variables-condition.png)
 

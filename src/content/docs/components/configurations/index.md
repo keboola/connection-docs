@@ -43,7 +43,7 @@ To use a [component](/components/), you create a configuration of it and run it.
 
 7. Set the parameters and **Save** them.
 
-<!-- VERIFY(Nikita): Describe a configuration, step 3: where you rename a configuration. Screenshots configuration-1.png and configuration-2.png show the older UI and need replacing. -->
+<!-- Checked 2026-11-20 in the UI of project 264: clicking the configuration name in the header opens the inline field Configuration name with Save and Cancel. TODO(human-review, Nikita): screenshots configuration-1.png and configuration-2.png show the older UI and need replacing. -->
 
 **Result:** the configuration is saved, and you can run the component.
 
@@ -82,7 +82,7 @@ After configuring the component, it is a good practice to describe what it does.
 
    ![Screenshot - AI generated description](/components/description-generated.png)
 
-3. You can also change the configuration's name and description at any time.
+3. You can also change the configuration's name and description at any time. To rename it, click the configuration name in the header, edit it in the **Configuration name** field and click **Save**.
    The configuration description supports rich text formatting using [Markdown](https://www.markdownguide.org/cheat-sheet/).
 
    ![Screenshot - Configuration Name and Description](/components/configuration-13.png)
@@ -156,15 +156,15 @@ a configuration, and there is always an option to get back to it.
 
 **Goal:** create an independent copy of a configuration from one of its versions.
 
-1. On the **Versions** tab, click the copy icon at the end of a version's row to create a **copy of the configuration** from that version. To copy the current version, you can also click **Copy configuration** in the right-hand panel of the configuration.
+1. On the **Versions** tab, click the **Copy to new configuration** icon at the end of a version's row to create a **copy of the configuration** from that version. To copy the current version, you can also click **Copy configuration** in the right-hand panel of the configuration.
 
    ![Screenshot - Configuration Copy](/components/configuration-11.png)
 
-2. You can customize the name of the configuration copy:
+2. In the **Version Copy** dialog, set **New configuration name** and optionally a **Folder**, then click **Copy configuration**:
 
    ![Screenshot - Configuration Create Copy](/components/configuration-12.png)
 
-   <!-- VERIFY(Nikita): name the button that confirms the copy dialog (step 2); it shows only in a 2019 screenshot. -->
+   <!-- Checked 2026-11-20 in the UI of project 264: the Versions row icon Copy to new configuration opens the dialog Version Copy with New configuration name and Folder (optional), confirmed by Copy configuration. The row also has Show raw configuration, Compare with previous and Restore this version. -->
 
 **Result:** the copy of the configuration is created as a new isolated configuration—i.e., there is no link
 between the original configuration and the copy, and changes to one have no effect on the other.
@@ -182,29 +182,27 @@ either of them without affecting the other one.
 
    Each configuration moved to Trash acts as deleted: it is removed from flows, cannot be run, and is not displayed.
 
-2. You can undo the delete operation immediately, or you can restore the configuration from Trash, which is accessible from
-   the main menu.
+2. You can undo the delete operation immediately, or you can restore the configuration from Trash: in the sidebar, click **Trash**. The **Recently Deleted** page opens, with the filters **All** and **Created by me**.
 
    ![Screenshot - Configuration Trash](/components/configuration-20.png)
 
-3. You can restore a deleted configuration or permanently remove it. Once deleted from Trash, no configuration can be recovered.
+3. In a configuration's row, click **Restore Configuration** to restore it, or **Delete Forever** to remove it permanently (confirm with **Delete**). To act on several at once, select them and use **Restore** or **Delete Forever** in the bulk bar; **Empty Trash** (top right) removes everything. Once deleted from Trash, no configuration can be recovered.
    If your Trash is filled with many configurations and you want to quickly find the one you need to restore or permanently remove,
    use the filter and search options in the upper part of the page.
 
    ![Screenshot - Configuration Restore](/components/configuration-21.png)
 
-   <!-- VERIFY(Nikita): name the main-menu item that opens Trash (step 2) and the Restore and permanent-delete controls in Trash (step 3). -->
+   <!-- Checked 2026-11-20 in the UI of project 264: the sidebar item Trash opens Recently Deleted (filters All and Created by me, button Empty Trash); rows have Restore Configuration and Delete Forever, the bulk bar has Restore and Delete Forever, and the Delete Forever dialog has Cancel and Delete. -->
 
 **Result:** when you restore a configuration, its new version is created. Therefore, you can see the complete history in the configuration versions:
 
 ![Screenshot - Configuration History](/components/configuration-22.png)
 
-Deleted conditional flows can be restored from Trash like any other configuration. Configurations of the legacy Orchestrator component
-are shown in Trash too; the screenshot below, from 2019, shows them without a restore option:
+Deleted conditional flows can be restored from Trash like any other configuration. Legacy flows are listed in Trash in their own **Flow** section, but they cannot be restored: **Restore Configuration** is disabled there, because legacy flows can no longer be created in the project, and the section's bulk bar offers only **Delete Forever**. The screenshot below, from 2019, shows the older Trash:
 
 ![Screenshot - Orchestration in Trash](/components/configuration-23.png)
 
-<!-- Checked 2026-11-20: live in project 264, a keboola.flow configuration deleted with the API was listed in Trash and restored with the API. VERIFY(Nikita): whether the UI still refuses to restore legacy keboola.orchestrator configurations (they are listed in the trash API); not tested to avoid touching existing project objects. -->
+<!-- Checked 2026-11-20: live in project 264, a keboola.flow configuration deleted with the API was listed in Trash and restored with the API. In the UI of project 264, the legacy Flow section of Trash has Restore Configuration disabled, with the tooltip "Legacy Flows can no longer be created in this project, so a deleted one cannot be restored.", and its bulk bar has only Delete Forever. TODO(human-review, Nikita): the screenshot is from 2019 and needs replacing. -->
 
 ---
 

@@ -210,6 +210,8 @@ The same flow is available outside the UI:
 
    ![Screenshot - Branch Protection settings](/components/branches/merge-requests/figures/branch-protection.png)
 
+   <!-- VERIFY(Nikita): on 2026-11-20 Branch Protection was not found in the UI of project 264: not in Project settings (Project, Users, Features, …), not under Features, and not in the branch switcher, in production or inside a branch. It may be role- or feature-gated. Confirm who sees Branch Protection and where. -->
+
 2. Set the options:
 
    - **Required approvals** — the number of approvals a merge request needs before it can be merged.

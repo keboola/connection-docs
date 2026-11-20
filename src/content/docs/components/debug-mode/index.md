@@ -37,7 +37,7 @@ In most cases, you will not need to use this option directly. However, our team 
 1. In debug mode, open the menu next to **Run Job** and select **Run custom tag**.
 2. In the **Set Tag** dialog, enter the tag and click **Run With Tag**.
 
-<!-- VERIFY(Nikita): these steps say Run Job, as the screenshots do, while Create and manage configurations calls the button Run Component. Confirm whether debug mode has its own label. -->
+<!-- Checked 2026-11-20 in the UI of project 264: Debug mode (right panel) opens a full-screen editor with the tabs Update Configuration and Update State; its run button is Run Job, with Run debug job and Run custom tag in the dropdown, next to a Save split button. Outside debug mode the button is Run Component (Run transformation for transformations). -->
 
 <p align="center" class="image-popup">
   <img src="/components/configuration-25.png" width="45%">

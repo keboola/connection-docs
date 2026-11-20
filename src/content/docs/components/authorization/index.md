@@ -33,7 +33,7 @@ In the next step, you can choose the authorization method:
 
 Instant authorization requires you to log in to the service you want to use.
 
-1. In the configuration, click **Authorize** and choose **Instant** authorization.
+1. In the configuration, click **Authorize Account**. The **Authorize** dialog opens on the **Instant authorization** tab.
 2. With instant authorization, you have to enter a name describing the account you're going to use:
 
    ![Screenshot - Instant Authorization](/components/authorization-1.png)
@@ -54,8 +54,8 @@ service *account owner* can't share the credentials with you. For example,
 they may belong to a different company or department, or sharing the credentials would leak some permissions.
 In such cases, you can ask the account owner to authorize the component configuration for you.
 
-1. In the configuration, click **Authorize** and choose **External** authorization.
-2. The first step is to generate the authorization link:
+1. In the configuration, click **Authorize Account**, and in the **Authorize** dialog open the **External authorization** tab.
+2. Click **Generate Link** to generate the authorization link:
 
    ![Screenshot - Generate link](/components/authorization-4.png)
 
@@ -78,9 +78,9 @@ In such cases, you can ask the account owner to authorize the component configur
 
    ![Screenshot - Service Authorization](/components/authorization-3.png)
 
-**Result:** the configuration is authorized with the owner's account, and the owner never had to share the credentials.
+**Result:** the configuration is authorized with the owner's account, and the owner never had to share the credentials. In the configuration, the **Authorization** panel shows the badge **Authorized**; expand it to see the authorized account and the date.
 
-<!-- VERIFY(Nikita): name the button that generates the link (step 2 shows it only in a 2019 screenshot), and say how the person who sent the link sees that the owner has finished. -->
+<!-- Checked 2026-11-20 in the UI of project 264: Authorize Account opens the Authorize dialog with the tabs Instant authorization, External authorization, Custom authorization and Service account; the External authorization tab has the Generate Link button and says the link is valid for 48 hours and is not stored. An authorized configuration shows the badge Authorized on its Authorization panel, with the account, the date and a Reset button when expanded. The screenshots are from 2019 and need replacing. -->
 
 ## Reset an authorization
 
