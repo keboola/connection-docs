@@ -67,6 +67,8 @@ Source data types are mapped to a destination using a **base type**. The current
 
 For detailed mappings, please refer to the [conversion table](https://developers.keboola.com/extend/common-interface/manifest-files/out-tables-manifests-native-types/#data-type-conversions). You can also view the extracted data types in the [storage table](/storage/tables/) detail.
 
+When a component describes its output with base types, a source type that has none of them as an equivalent (for example `TIME`, `INTERVAL`, `UUID`, `BLOB`, `JSON`, arrays, or structs) has to be mapped to one; the DuckDB transformation maps all of these to `STRING`. Length, precision, and scale are carried over only when the source type holds them. If the source engine discards them, they cannot be reconstructed later. See [output data types in DuckDB transformations](/transformations/duckdb/#output-data-types) for a concrete example of both cases.
+
 ### How to Define Data Types
 
 #### Using actual data types of the storage backend
@@ -95,7 +97,7 @@ Specifying native types using Keboola’s [base types](/storage/tables/data-type
 ```
 
 ### Changing Types of Existing Typed Columns
-You **cannot change the type of a column in a typed table once it has been created**. However, there are multiple workarounds to address this limitation:
+You **cannot change the type of a column in a typed table once it has been created**. You can still [widen a text column](#widening-a-text-column) and make the other alterations listed in [Changing Column Definitions](/storage/tables/#changing-column-definitions). For any other change, there are multiple workarounds to address this limitation:
 
 **For tables using full load:** Drop the table and create a new one with the correct types. Then, load the data into the newly created table.
 
@@ -111,6 +113,19 @@ You **cannot change the type of a column in a typed table once it has been creat
 :::caution
 **Important:** Always verify other configurations that depend on the table to avoid schema mismatches. Also, pay special attention to writers (data destination connectors), particularly if the table already exists in the destination system. Mismatched schemas between the source and destination can lead to errors.
 :::
+
+#### Widening a Text Column
+You can increase the length of a text column (`VARCHAR` on Snowflake, `STRING(n)` on BigQuery) in place. When a Snowflake transformation redefines an existing column with a longer length, for example `VARCHAR(2)` as `VARCHAR(50)`, Storage widens the column and the load succeeds. Only the column's metadata changes, so the existing rows stay, in full and incremental loads alike. The column's type still cannot change this way.
+
+<!-- VERIFY(Storage owner): that the load path widens the column (not only the column definition endpoint), for full and incremental loads, and on BigQuery transformations too; and whether a load that declares STRING with no length (as the DuckDB transformation does) widens a typed VARCHAR(n) column to full width or fails, which decides whether the DuckDB page's create-it-typed-first tip holds. Reproduced by a customer on production Snowflake; the widen-only rule is in php-table-backend-utils (SnowflakeTableQueryBuilder, CANNOT_DECREASE_LENGTH), the load path is not in public code. -->
+
+:::caution
+Widening is one-way. Once a column is `VARCHAR(50)`, a load that declares it as `VARCHAR(2)` fails, because Storage cannot decrease a column's length.
+
+So a `VARCHAR(n)` in a transformation does not set a lasting limit. Storage enforces the column's current definition, whatever your latest query declares. To enforce a maximum width, [create the table as typed first](#how-to-create-a-typed-table) and treat that definition as the source of truth.
+:::
+
+To change the length without running a transformation, call the Storage API's [update column definition endpoint](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-id-/columns/-column-/definition). It can also make a column nullable and drop a default; adding or changing a default works on BigQuery only. [Changing Column Definitions](/storage/tables/#changing-column-definitions) lists what each backend allows.
 
 ### How to Create a Typed Table Based on a Non-Typed Table
 If you have a non-typed table, `non_typed_table`, with undefined data types and want to convert it into a typed table, follow these steps:
