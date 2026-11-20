@@ -77,11 +77,9 @@ To browse real Snowflake tables, pick a database and schema from the left-hand p
 
 - **"Required driver not found"** — the jar isn't in the Tableau drivers directory, or Tableau wasn't restarted after dropping it in. Confirm the path matches the table above and relaunch Tableau.
 - **Authentication or 403 errors** — your token is likely bucket-scoped. Verify by hitting `https://connection.keboola.com/v2/storage/tokens/verify` with header `X-StorageApi-Token: <your-token>`; a bucket-scoped token will not see workspaces. Create a non-scoped token per the [Storage API token](/workspace/jdbc-driver/#prerequisites-storage-api-token) section.
-- **"No workspaces found"** — the project has no workspace yet. Open the project in Keboola UI and create a workspace (Transformations → Workspaces).
+- **"No workspaces found"** — the project has no workspace yet. Open the project in Keboola UI and create a workspace (**Workspaces** in the top navigation, then **+ Create Workspace**).
 - **Custom stack** — replace the host in the JDBC URL with your stack hostname (e.g. `jdbc:keboola://connection.north-europe.azure.keboola.com`). Keep supplying the token in the **Password** field, not in the URL.
 - **Generic "An error occurred" with no details** — Tableau swallows JDBC error messages. Run the same connection in DBeaver to see the real error, then fix and retry in Tableau.
-
-<!-- VERIFY(Nikita): "Transformations → Workspaces" differs from the top-level Workspaces section the other pages of this section use. Check which path the UI shows now. -->
 
 ## Need Help?
 

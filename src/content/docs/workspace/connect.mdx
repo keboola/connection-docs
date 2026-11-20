@@ -110,7 +110,10 @@ authentication, with the private key in the form the tool needs.
    - [VSCode/Cursor Snowflake Extension](https://docs.snowflake.com/en/user-guide/vscode-ext#sign-in-to-snowflake-with-the-vs-code-extension)
    - [VSCode/Cursor DBCode Extension](https://dbcode.io/docs/supported-databases/snowflake)
 
-   {/* VERIFY(Nikita): which values a client needs for a key-pair login (account identifier, user, role, warehouse, database, schema), and which of them the Connect menu shows. The screenshot shows Host, User, Key Pair, Database, Schema and Warehouse, and no role. */}
+   The **Connect** menu shows the values the tool needs besides the private key: **Host**, **User**, **Database**,
+   **Schema** and **Warehouse**. Where the tool asks for an account identifier, use the Host without
+   `.snowflakecomputing.com`. The menu shows no role, and you do not need to set one.
+   {/* Checked 2026-11-20: fields from workspace-connect-snowflake-person.png; account derivation and no-role profile from the kbc CLI dbt generator (keboola-as-code pkg/lib/operation/dbt/generate). */}
 
 **Result:** the tool connects to the workspace with the key pair.
 

@@ -24,12 +24,18 @@ Storage. To open the workspace in JupyterLab or a SQL tool, see [Connect to a wo
 
    ![Workspace - Select Type](/workspace/workspace-create-1.png)
 
-3. Name and optionally describe the workspace. Where the dialog offers **Grant read-only access to all storage
-   data**, ticking it enables [read-only input mapping](/workspace/#read-only-input-mapping).
+3. Enter a **Name** and, optionally, a **Description**. The other fields depend on the workspace type and come
+   with a default: a Python or R workspace has **Backend Version**, **Backend Size**, **Auto Sleep Timeout** and
+   **Share with all project users**; a Snowflake SQL workspace has **Backend Size** and **Authentication Type**.
+   Where the dialog offers **Grant read-only access to all storage data**, ticking it enables
+   [read-only input mapping](/workspace/#read-only-input-mapping); where it shows a **Read-Only Access** note
+   instead, the workspace gets read-only access to all project data by default.
 
    ![Workspace - Name workspace](/workspace/workspace-create-2.png)
 
-   <!-- VERIFY(Nikita): the steps skip the submit button and the fields the screenshot shows (Backend Version, Backend Size, Auto Sleep Timeout, Share with all project users). Check the current dialog and name the button and the fields a reader has to set. -->
+4. Click **Create Workspace**.
+
+<!-- Checked 2026-11-20: field and button names from workspace-create-2.png and sql-editor/02-create-workspace-action.jpg. -->
 
 Creating the workspace takes a few seconds, so it will take a while before it appears:
 
@@ -54,12 +60,13 @@ You can also create workspaces from transformations.
 
 **Goal:** the Storage tables and files you need, available inside the workspace.
 
-<!-- VERIFY(Nikita): how to open the workspace detail (click the name in the Workspaces list?), and where the Clean workspace before loading option sits (in the Load data dialog?). The tasks on this page start from the detail and do not say how to get there. -->
+To open the workspace detail, click the workspace name in the **Workspaces** list.
+<!-- VERIFY(Nikita): where the Clean workspace before loading option sits (in the Load data dialog?). -->
 
 1. In the workspace detail, configure a
    [table input mapping](/transformations/mappings/#table-input-mapping) or
    [file input mapping](/transformations/mappings/#file-input-mapping) (or both).
-2. Click the **Load Data** button.
+2. Click **Load data**.
 
    ![Workspace - Load Data](/workspace/load-data.png)
 
@@ -88,7 +95,7 @@ valuable results, or when you trained a new model which you'd like to use in tra
 1. In the workspace detail, configure a
    [Table Output Mapping](/transformations/mappings/#table-output-mapping)
    or [File Output Mapping](/transformations/mappings/#file-output-mapping) (or both).
-2. Click the **Unload Data** button.
+2. Click **Unload data**.
 
    ![Workspace - Unload Data](/workspace/unload-data.png)
 
@@ -100,25 +107,29 @@ For Snowflake and BigQuery workspaces, you can also export a single table direct
 
 Snowflake and BigQuery workspaces can also skip unloading entirely and write to a Storage table directly with
 [Direct Mode output mapping](/transformations/mappings/#direct-mode-output-mapping). The workspace gets write
-access to the selected table as soon as the mapping is saved, so no **Unload Data** run is needed.
+access to the selected table as soon as the mapping is saved, so no **Unload data** run is needed.
 
 ## Create a transformation from a workspace
 
 **Goal:** a new transformation that carries the input and output mapping of the workspace.
 
-<!-- VERIFY(Nikita): this task assumes a JupyterLab (Python or R) workspace. Check whether SQL workspaces offer the same action, and say so either way. -->
+Python and Snowflake SQL workspaces both have this action in the workspace detail.
+<!-- Checked 2026-11-20: actions shown for Python (create-transformation-1.png) and Snowflake (sql-editor/03-workspace-details-open-editor.jpg); R and BigQuery not pictured. -->
 
-1. Configure [mappings](/transformations/mappings/) and develop a script in JupyterLab.
-2. In the workspace detail, use the **Create Transformation** button to deploy the notebook into a transformation.
+1. Configure [mappings](/transformations/mappings/) and develop your script in JupyterLab or your queries in the
+   [SQL Editor](/workspace/sql-editor/).
+2. In the workspace detail, click **Create new transformation**. To add the workspace to a transformation you
+   already have, click **Copy to existing transformation** instead.
 
    ![Workspace - Create Transformation](/workspace/create-transformation-1.png)
 
-3. Enter the name of the new transformation:
+3. Enter the name of the new transformation and click **Create Transformation**.
 
    ![Workspace - Create Transformation](/workspace/create-transformation-2.png)
 
-**Result:** a new transformation. Please note that only input/output mapping without the actual script is
-copied when creating transformation from a workspace.
-<!-- VERIFY(Nikita): the screenshot shows this action as "Create new transformation", next to "Copy to existing transformation". Check the current label, and whether the script really stays behind. Three pages disagree on what moves to the transformation: here only the mappings, not the script; sql-editor/use says Save Queries creates a transformation with the SQL code and the output mapping; sql-editor/ says you save, then copy to a new or existing transformation, which transfers the queries, mappings and variables. -->
+**Result:** a new transformation with the input and output mapping of the workspace. From a Python or R workspace,
+the notebook script is not copied. From an SQL workspace, the saved queries and variables are copied as well; see
+[Variables](/workspace/sql-editor/#variables).
+<!-- VERIFY(Nikita): the "notebook script is not copied" rule for Python/R comes only from the old page; confirm it once in the UI. -->
 
 **Next:** [Connect to a workspace →](/workspace/connect/)

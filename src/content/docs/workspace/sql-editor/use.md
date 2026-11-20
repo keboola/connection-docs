@@ -175,8 +175,18 @@ The SQL Editor supports creating persistent tables that are saved back into Kebo
 
 To create a persistent table, you must convert your `SELECT` statements into `CREATE TABLE AS SELECT` statements, specifying a temporary output table name. These tables are automatically created in the workspace schema upon successful execution.
 
-1.  Define a new table using `CREATE TABLE "out" AS SELECT ...`
-    <!-- VERIFY(Nikita): the statement is a placeholder on the old page too. Add a complete example for Snowflake and BigQuery, or say it is a pattern. -->
+1.  Define a new table with a `CREATE TABLE … AS SELECT` statement. Insert the source table name with
+    **Place name in editor**. On Snowflake:
+
+    ```sql
+    CREATE TABLE "out" AS SELECT * FROM "<database>"."<bucket>"."<table>";
+    ```
+
+    On BigQuery, quote names with backticks:
+
+    ```sql
+    CREATE TABLE `out` AS SELECT * FROM `<dataset>`.`<table>`;
+    ```
 
     ![SQL Editor - SQL code block showing CREATE TABLE AS SELECT syntax](/workspace/sql-editor/11-create-table-select.jpg)
 
@@ -229,16 +239,15 @@ validation on direct writes. Read the
 
 ## Save queries as a transformation
 
-**Goal:** the SQL logic and the output mapping saved as a transformation in your project.
+**Goal:** your queries saved in the workspace, then turned into a transformation with the workspace's mappings.
 
 1.  Click **SAVE QUERIES** in the top right corner.
 
     ![SQL Editor - Save Queries button menu](/workspace/sql-editor/15-save-queries-button.jpg)
 
-2.  Select **Save with description** (or **Save** if no new queries were added).
+2.  To add a note to the version, open the arrow next to the button and select **Save with description** instead.
+3.  Close the editor and, in the workspace detail, click **Create new transformation**, or **Copy to existing transformation** to update one you have. See [Create a transformation from a workspace](/workspace/create/#create-a-transformation-from-a-workspace).
 
-**Result:** this action saves the SQL code and the output mapping configuration, creating a new Transformation component in your project.
-
-<!-- VERIFY(Nikita): three pages disagree on how a workspace becomes a transformation. Here Save Queries creates a new transformation with the SQL code and the output mapping. sql-editor/ says you save, then copy to a new or existing transformation, which moves the queries, mappings and variables. workspace/create says only the input and output mapping is copied, not the script. -->
+**Result:** a transformation with your saved queries, the input and output mapping and the variables of the workspace.
 
 **Next:** [Keboola JDBC driver →](/workspace/jdbc-driver/)

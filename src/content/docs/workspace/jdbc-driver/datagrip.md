@@ -77,10 +77,8 @@ SELECT * FROM _keboola.buckets LIMIT 10;
 
 - **"Property 'token' is required"** — the token wasn't added under the **Advanced** tab. Re-open the data source and add it.
 - **Authentication or 403 errors** — your token is likely bucket-scoped. Verify by hitting `https://connection.keboola.com/v2/storage/tokens/verify` with header `X-StorageApi-Token: <your-token>`; a bucket-scoped token will not see workspaces. Create a non-scoped token per the [Storage API token](/workspace/jdbc-driver/#prerequisites-storage-api-token) section.
-- **"No workspaces found"** — the project has no workspace yet. Open the project in Keboola UI and create a workspace (Transformations → Workspaces).
+- **"No workspaces found"** — the project has no workspace yet. Open the project in Keboola UI and create a workspace (**Workspaces** in the top navigation, then **+ Create Workspace**).
 - **Custom stack** — replace the host in the JDBC URL with your stack hostname (e.g. `jdbc:keboola://connection.north-europe.azure.keboola.com`).
-
-<!-- VERIFY(Nikita): "Transformations → Workspaces" differs from the top-level Workspaces section the other pages of this section use. Check which path the UI shows now. -->
 
 ## Need Help?
 
