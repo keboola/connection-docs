@@ -38,7 +38,8 @@ The flow sections below walk through how to set up and use variables from the UI
 
    ![Screenshot - Running Transformation](/components/variables/variables-run.png)
 
-   <!-- Checked 2026-11-20 in the UI of project 264: the Variables section has Import and New variable; a new variable is an inline row with Variable name, Default value, Discard and Save, not a modal. Run transformation opens a dialog with a collapsible Variables block, one field per variable, and Run. VERIFY(Nikita): both screenshots are from about 2021 and were not compared with the current UI; replace them if they show a modal form. -->
+   <!-- Checked 2026-11-20 in the UI of project 264: the Variables section has Import and New variable; a new variable is an inline row with Variable name, Default value, Discard and Save, not a modal. Run transformation opens a dialog with a collapsible Variables block, one field per variable, and Run. Compared on 2026-11-20 with the current UI: both screenshots show the old UI (top navigation with Orchestrations, upper-case RUN COMPONENT and NEW VARIABLE, a tick-and-cross input instead of Discard and Save, no Import; the run screenshot shows Run Component and RUN). -->
+   <!-- TODO(human-review, Nikita): replace variables-setting.png and variables-run.png with shots of the inline New variable row and the Run transformation dialog. -->
 
 **Result:** the transformation runs with the default value, or with the override you entered for that run.
 

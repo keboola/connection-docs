@@ -210,7 +210,7 @@ The same flow is available outside the UI:
 
    ![Screenshot - Branch Protection settings](/components/branches/merge-requests/figures/branch-protection.png)
 
-   <!-- VERIFY(Nikita): on 2026-11-20 Branch Protection was not found in the UI of project 264: not in Project settings (Project, Users, Features, …), not under Features, and not in the branch switcher, in production or inside a branch. It may be role- or feature-gated. Confirm who sees Branch Protection and where. -->
+   <!-- VERIFY(Nikita): on 2026-11-20 Branch Protection was not found in the UI of project 264: not in Project settings (Project, Users, Features, …), not under Features, and not in the branch switcher, in production or inside a branch. A second search the same day also found nothing in Project settings → Features (AI Component Suggestions, Branched storage, Branches 2.0, External Datasets, Kai, Native Data Types), Users, My Account & Organizations or the user menu; the checking user was a project Admin without Organization admin. It may be visible only to organization admins or behind a feature. Confirm who sees Branch Protection and where. -->
 
 2. Set the options:
 
