@@ -55,17 +55,18 @@ Useful options of `create` and `update`: `--scope targeted|organization`, `--tar
 <!-- kbagent-check: skip-next -->
 ```bash
 kbagent rls create --project my-project --table-id in.c-crm.orders \
-  --rules @rls-rules.json --default '{"false": true}' --dry-run
+  --rules "$(cat rls-rules.json)" --default '{"false": true}' --dry-run
 ```
 
 <!-- kbagent-check: skip-next -->
 ```bash
-kbagent cls create --project my-project --table-id in.c-crm.orders --rules @cls-rules.json --yes
+kbagent cls create --project my-project --table-id in.c-crm.orders --rules "$(cat cls-rules.json)" --yes
 ```
 
 The rule files are described in the [policy reference](/storage/row-level-security/policy-reference/).
 
 Each file holds only the `rules` array, for example `[{"groups": ["eu-analysts"], "condition": {"column": "region", "op": "eq", "value": "EU"}}]`. In `cls-rules.json` each rule has `visible_columns` instead of `condition`. Pass a row policy's `default` with `--default`, not in the file. From a policy reference example, copy only the value of `rules`.
+<!-- Checked 2026-11-20 with kbagent 1.4.1 in project 264 (rls create --dry-run): an array is accepted and compiled; an object with `rules` is refused ("--rules must be a JSON array"); `--rules @file` and `--rules -` are refused ("--rules takes JSON text"), so the commands pass the file's text. The rule schema fetched live from the metastore (kbagent rls schema) requires `table` and `rules`, each rule `condition` plus `groups` or `subjects`; `default` is a separate field. -->
 
 The CLI refuses a rule that selects by `principal` or email before anything is written. It also checks the dialect against the project backend and reports every problem it finds.
 
