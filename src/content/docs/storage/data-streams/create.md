@@ -58,7 +58,16 @@ Work through these tasks in order for a new HTTP stream, or jump to the one you 
 
 Depending on your use case, you may require different delivery guarantees for your stream. Follow the guidelines below to ensure the desired outcome. Both rely on the [settings endpoints](/storage/data-streams/reference/#source-and-sink-settings).
 
-<!-- VERIFY(Nikita): the two options name a settings key but no request. Check the host, the auth header and the PATCH body that set storage.level.local.encoding.sync.wait, and add an example. -->
+Both settings are changed with one request. For example, to turn off the wait for a source (all its sinks):
+
+```bash
+curl --request PATCH "https://stream.keboola.com/v1/branches/default/sources/<sourceId>/settings" \
+     --header "Content-Type: application/json" \
+     --header "X-StorageApi-Token: <master token of an admin user>" \
+     --data '{"settings": [{"key": "storage.level.local.encoding.sync.wait", "value": false}]}'
+```
+
+The call returns `202 Accepted` with a task; poll the task's `url` until it finishes. To change one sink only, send the same body to `/v1/branches/default/sources/<sourceId>/sinks/<sinkId>/settings`. Send `"value": null` to return to the default (`true`). Replace `stream.keboola.com` with your [stack's](/overview/#stacks) Stream API host.
 
 ### At most once
 
@@ -81,9 +90,9 @@ To connect Keboola with [Apache Kafka®](https://kafka.apache.org/) and ingest d
 1. [Create an HTTP data stream](#create-a-data-stream) and copy its Data Stream URL. The target Keboola API URL corresponds to the data stream created in Keboola.
 2. Configure the Kafka Connect HTTP Sink Connector. This integration relies on the connector, which requires configuration on the Kafka side:
    - Send the data to the Data Stream URL as a POST request. Only POST HTTP methods are supported for data ingestion.
-   - To batch, set a maximum size (`batch.max.size`). Events can be efficiently grouped based on a predefined maximum size.
+   - Send one Kafka record per request: leave batching off, or set the batch size (`batch.max.size`) to 1. A data stream stores each request body as one record, so a batch of several Kafka records lands in the table as a single row.
 
-<!-- VERIFY(Nikita): this section names no vendor or product for the Kafka Connect HTTP Sink Connector, and no connector property besides batch.max.size. Check which connector is meant, the property names for the target URL and the POST method, and how a batch larger than 1 is stored: the reference says an HTTP source treats one request body as a single record. -->
+<!-- VERIFY(Nikita): which HTTP Sink connector is meant (Aiven http-connector-for-apache-kafka uses http.url and batching.enabled; Confluent HTTP Sink uses its own property names)? Name it and its target-URL property. -->
 
 **Result:** The connector continuously reads data records from one or more Kafka topics and sends the data as a POST request in JSON format to Keboola's Data Stream API URL. Data records from Kafka topics are transformed into strings before being sent to Keboola.
 
