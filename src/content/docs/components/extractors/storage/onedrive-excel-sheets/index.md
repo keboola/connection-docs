@@ -1,6 +1,7 @@
 ---
 title: OneDrive Excel Sheets
 slug: 'components/extractors/storage/onedrive-excel-sheets'
+description: 'Import Excel worksheets from OneDrive, Office 365 or SharePoint into Keboola tables by picking the workbook and worksheet with the file picker.'
 redirect_from:
     - /components/extractors/storage/onedrive/
 ---
@@ -16,6 +17,8 @@ cloud storage integrates
 **[Office365](https://www.office.com/)**
 and **[SharePoint](https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration)** sites,
 so with this connector, you have access to all your Excel sheets in your personal account or in your business account.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **OneDrive Excel Sheets** connector.  
