@@ -750,6 +750,12 @@ items:
           - url: /storage/byodb/snowflake-secure-data-sharing/
             title: Import a Snowflake Share
 
+          - url: /storage/byodb/bigquery-policy-tags/
+            title: BigQuery policy tags
+            items:
+              - url: /storage/byodb/bigquery-policy-tags/enable/
+                title: Enable BigQuery policy tags
+
       - url: /storage/row-level-security/
         title: Row- and Column-Level Security
         items:

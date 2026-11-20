@@ -123,4 +123,4 @@ the schema present in this database. When registering, don't forget to check the
 
 ---
 
-**Next:** [Row-level and column-level security →](/storage/row-level-security/)
+**Next:** [BigQuery policy tags →](/storage/byodb/bigquery-policy-tags/)

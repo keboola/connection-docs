@@ -569,6 +569,14 @@ export const sidebar = [
             ],
           },
           { slug: "storage/byodb/snowflake-secure-data-sharing" },
+          {
+            label: "BigQuery policy tags",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "storage/byodb/bigquery-policy-tags" },
+              { slug: "storage/byodb/bigquery-policy-tags/enable" },
+            ],
+          },
         ],
       },
       {

@@ -15,6 +15,7 @@ With BYODB, the Storage of your Keboola project lives in a Snowflake or BigQuery
 - [Connect your own BigQuery](/storage/byobq/): create the Google Cloud folder, project, service account and bucket, and register them in Keboola.
 - [External Datasets](/storage/byodb/external-buckets/): read data that already sits in your warehouse as a read-only bucket, and [register and use one](/storage/byodb/external-buckets/register/).
 - [Import a Snowflake share](/storage/byodb/snowflake-secure-data-sharing/): create a database from a share of another Snowflake account and register its schema as an external dataset.
+- [BigQuery policy tags](/storage/byodb/bigquery-policy-tags/): keep the column protection of BigQuery policy tags on the copies Keboola makes within your backend, and [enable it](/storage/byodb/bigquery-policy-tags/enable/).
 
 The rest of this page lists what to know about each backend: access from outside, backend sizes, the rules for objects Keboola creates, and limits.
 
@@ -58,6 +59,11 @@ possibly as low as [1 second](https://docs.snowflake.com/en/sql-reference/sql/al
 ### Schema of Objects in Snowflake Account Used as Keboola Backend
 
 ![Snowflake account schema](/storage/byodb/schema.png)
+
+## BigQuery policy tags
+If you protect columns with BigQuery policy tags, Keboola can keep that protection on the copies it makes within your
+BigQuery backend. See
+[BigQuery policy tags](/storage/byodb/bigquery-policy-tags/).
 
 ## BigQuery Limitations
 Google Cloud Computing services, including BigQuery, have introduced several limitations on their services, impacting Keboola, especially for customers using their own BigQuery or
