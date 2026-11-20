@@ -40,8 +40,10 @@ const KBC_TOKEN = process.env.KBC_STORAGE_API_TOKEN || '';
 
 // ─── HTTP / SSE plumbing ─────────────────────────────────────────────────
 
-async function readJsonBody(req: VercelRequest): Promise<ChatRequest> {
-  if (req.body && typeof req.body === 'object') return req.body as ChatRequest;
+async function readJsonBody(req: VercelRequest): Promise<unknown> {
+  // Vercel has already parsed a JSON body, including `null` or a bare number;
+  // the caller decides what is a valid request.
+  if (req.body !== undefined && typeof req.body !== 'string') return req.body;
   if (typeof req.body === 'string' && req.body) return JSON.parse(req.body);
   const chunks: Buffer[] = [];
   for await (const chunk of req as any) chunks.push(chunk as Buffer);
@@ -49,19 +51,83 @@ async function readJsonBody(req: VercelRequest): Promise<ChatRequest> {
   return raw ? JSON.parse(raw) : { message: '' };
 }
 
+// Longest question the widget will forward upstream — the proxy runs on a
+// shared Storage token, so don't let arbitrary payload sizes burn AI quota.
+// Keep in sync with the textarea's maxlength in src/components/AskKaiDrawer.astro
+// (scripts/chat-handler.test.ts checks it).
+export const MAX_MESSAGE_CHARS = 2_000;
+
+/**
+ * Origins allowed to call this proxy from a browser: the same allowlist as
+ * api/feedback.ts.
+ *
+ * Production and preview builds call `/api/chat` same-origin (AskKaiDrawer's
+ * apiBase is empty), and same-origin requests need no CORS header at all. The
+ * only cross-origin caller is `astro dev` on localhost, which points apiBase at
+ * a deployed function. No *.vercel.app pattern belongs here: anyone can deploy
+ * a page there, and it would get to script this shared-token proxy.
+ */
+const ALLOWED_ORIGIN = /^https:\/\/help\.keboola\.com$|^http:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/;
+
+function corsOrigin(req: VercelRequest): string | null {
+  const origin = typeof req.headers.origin === 'string' ? req.headers.origin : '';
+  return origin && ALLOWED_ORIGIN.test(origin) ? origin : null;
+}
+
+function setCors(req: VercelRequest, res: VercelResponse) {
+  const origin = corsOrigin(req);
+  if (!origin) return;
+  res.setHeader('access-control-allow-origin', origin);
+  res.setHeader('vary', 'origin');
+  res.setHeader('access-control-allow-headers', 'content-type');
+  res.setHeader('access-control-allow-methods', 'POST, OPTIONS');
+}
+
+/**
+ * Per-IP question limit. CORS is a browser control and stops nothing from curl,
+ * and every question spends AI quota on the shared Storage token.
+ *
+ * The counters live in one function instance, so they are a backstop, not the
+ * limit: a Vercel Firewall rule on /api/chat is what holds across instances.
+ * What this guarantees is that one warm instance can't be looped for free.
+ * Same pattern as api/feedback.ts (clientIp / allowIssue).
+ */
+const IP_WINDOW_MS = 10 * 60 * 1000;
+const IP_MAX_QUESTIONS = 20;
+const ipHits = new Map<string, number[]>();
+
+function clientIp(req: VercelRequest): string {
+  const fwd = req.headers['x-forwarded-for'];
+  const first = (Array.isArray(fwd) ? fwd[0] : fwd || '').split(',')[0].trim();
+  return first || 'unknown';
+}
+
+export function allowQuestion(ip: string, now = Date.now()): boolean {
+  const recent = (ipHits.get(ip) ?? []).filter((t) => now - t < IP_WINDOW_MS);
+  if (recent.length >= IP_MAX_QUESTIONS) {
+    ipHits.set(ip, recent);
+    return false;
+  }
+  recent.push(now);
+  ipHits.set(ip, recent);
+  // Keep the map from growing without bound on a long-lived instance.
+  if (ipHits.size > 10_000) {
+    for (const [k, v] of ipHits) if (!v.some((t) => now - t < IP_WINDOW_MS)) ipHits.delete(k);
+  }
+  return true;
+}
+
 function writeSse(res: VercelResponse, data: unknown) {
   res.write(`data: ${JSON.stringify(data)}\n\n`);
 }
 
-function setupSse(res: VercelResponse) {
+function setupSse(req: VercelRequest, res: VercelResponse) {
   res.statusCode = 200;
   res.setHeader('content-type', 'text/event-stream; charset=utf-8');
   res.setHeader('cache-control', 'no-cache, no-transform');
   res.setHeader('connection', 'keep-alive');
   res.setHeader('x-accel-buffering', 'no');
-  res.setHeader('access-control-allow-origin', '*');
-  res.setHeader('access-control-allow-headers', 'content-type');
-  res.setHeader('access-control-allow-methods', 'POST, OPTIONS');
+  setCors(req, res);
 }
 
 // ─── AI Service client ───────────────────────────────────────────────────
@@ -172,8 +238,12 @@ function labelForUrl(url: string): string {
 
 // ─── Docs-question handler ───────────────────────────────────────────────
 
-async function handleDocsQuestion(message: string, res: VercelResponse) {
-  setupSse(res);
+async function handleDocsQuestion(
+  req: VercelRequest,
+  message: string,
+  res: VercelResponse,
+) {
+  setupSse(req, res);
   writeSse(res, { type: 'session', sessionId: `ai-${Date.now()}` });
   writeSse(res, {
     type: 'progress',
@@ -186,15 +256,34 @@ async function handleDocsQuestion(message: string, res: VercelResponse) {
 
   let answer: DocsAnswer | null = null;
 
+  // The reader closed the drawer, sent a new question, or left the page: stop
+  // spending the shared token on an answer nobody will read.
+  const clientGone = new AbortController();
+  res.on('close', () => {
+    if (!res.writableFinished) clientGone.abort();
+  });
+
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    if (Date.now() - startedAt > budgetMs) break;
+    if (clientGone.signal.aborted) break;
+    const remainingBudget = budgetMs - (Date.now() - startedAt);
+    if (remainingBudget <= 0) break;
     try {
-      answer = await askDocsQuestion(message);
+      // Abort the in-flight fetch when the remaining budget runs out — without
+      // this, one hung upstream connection blows straight past the 15s budget.
+      answer = await askDocsQuestion(
+        message,
+        AbortSignal.any([clientGone.signal, AbortSignal.timeout(remainingBudget)]),
+      );
       break;
     } catch (e: any) {
-      const msg = String(e?.message || '');
+      const msg = String(e?.message || e?.name || '');
+      // The per-attempt timeout is the whole remaining budget, so a timeout
+      // or abort means there is no time left to retry in: stop instead of
+      // announcing a retry that can't happen.
+      if (e?.name === 'TimeoutError' || e?.name === 'AbortError') break;
       // Retry only on transient cold-start / upstream errors.
-      const isTransient = /HTTP 5\d\d/.test(msg) || /fetch failed|ECONN|ETIMEDOUT/i.test(msg);
+      const isTransient =
+        /HTTP 5\d\d/.test(msg) || /fetch failed|ECONN|ETIMEDOUT/i.test(msg);
       if (!isTransient || attempt >= maxAttempts) break;
       writeSse(res, {
         type: 'progress',
@@ -206,6 +295,11 @@ async function handleDocsQuestion(message: string, res: VercelResponse) {
         setTimeout(r, Math.min(2000, Math.max(500, remaining / 4))),
       );
     }
+  }
+
+  if (clientGone.signal.aborted) {
+    res.end();
+    return;
   }
 
   if (!answer) {
@@ -238,8 +332,12 @@ async function handleDocsQuestion(message: string, res: VercelResponse) {
 
 // ─── Stub handler (used when the AI Service env isn't configured) ────────
 
-async function handleStub(message: string, res: VercelResponse) {
-  setupSse(res);
+async function handleStub(
+  req: VercelRequest,
+  message: string,
+  res: VercelResponse,
+) {
+  setupSse(req, res);
   writeSse(res, { type: 'session', sessionId: 'stub' });
   const reply =
     `Ask Kai is wiring up. Once the AI Service env (AI_SERVICE_URL + ` +
@@ -259,9 +357,7 @@ async function handleStub(message: string, res: VercelResponse) {
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'OPTIONS') {
     res.statusCode = 204;
-    res.setHeader('access-control-allow-origin', '*');
-    res.setHeader('access-control-allow-headers', 'content-type');
-    res.setHeader('access-control-allow-methods', 'POST, OPTIONS');
+    setCors(req, res);
     res.setHeader('access-control-max-age', '86400');
     res.end();
     return;
@@ -271,7 +367,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'GET') {
     res.statusCode = 200;
     res.setHeader('content-type', 'application/json');
-    res.setHeader('access-control-allow-origin', '*');
+    setCors(req, res);
     res.setHeader('cache-control', 'no-store');
     res.end(JSON.stringify({ enabled: Boolean(AI_SERVICE_URL && KBC_TOKEN) }));
     return;
@@ -283,7 +379,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  let body: ChatRequest;
+  let body: unknown;
   try {
     body = await readJsonBody(req);
   } catch {
@@ -293,29 +389,59 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  const message = (body.message || '').trim();
+  // A JSON body of `null`, a number, or a non-string `message` is a bad
+  // request, not a crash: these lines run outside the try/catch below.
+  const raw = body && typeof body === 'object' ? (body as ChatRequest).message : undefined;
+  const message = typeof raw === 'string' ? raw.trim() : '';
   if (!message) {
     res.statusCode = 400;
     res.setHeader('content-type', 'application/json');
     res.end(JSON.stringify({ error: 'message is required' }));
     return;
   }
+  if (message.length > MAX_MESSAGE_CHARS) {
+    res.statusCode = 400;
+    res.setHeader('content-type', 'application/json');
+    res.end(
+      JSON.stringify({
+        error: `message is too long (max ${MAX_MESSAGE_CHARS} characters)`,
+      }),
+    );
+    return;
+  }
+
+  if (!allowQuestion(clientIp(req))) {
+    console.warn('[chat] per-IP rate limit hit');
+    res.statusCode = 429;
+    res.setHeader('content-type', 'application/json');
+    res.setHeader('retry-after', String(IP_WINDOW_MS / 1000));
+    setCors(req, res);
+    res.end(
+      JSON.stringify({
+        error: 'Too many questions in a short time. Wait a few minutes and try again.',
+      }),
+    );
+    return;
+  }
 
   try {
     if (AI_SERVICE_URL && KBC_TOKEN) {
-      await handleDocsQuestion(message, res);
+      await handleDocsQuestion(req, message, res);
     } else {
-      await handleStub(message, res);
+      await handleStub(req, message, res);
     }
   } catch (err: any) {
+    // Log the real error server-side; never echo internals to the client.
+    console.error('chat handler failed:', err);
+    const generic = 'Something went wrong answering your question. Please try again.';
     if (res.headersSent) {
-      writeSse(res, { type: 'error', message: err?.message ?? String(err) });
+      writeSse(res, { type: 'error', message: generic });
       writeSse(res, { type: 'done' });
       res.end();
     } else {
       res.statusCode = 500;
       res.setHeader('content-type', 'application/json');
-      res.end(JSON.stringify({ error: err?.message ?? String(err) }));
+      res.end(JSON.stringify({ error: generic }));
     }
   }
 }
