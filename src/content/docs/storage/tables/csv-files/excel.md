@@ -32,8 +32,10 @@ but without using any non-standard Windows tools, the quickest is this:
 
    ![Screenshot -- Excel Export - Notepad Convert](/storage/tables/excel-export-2.png)
 
-3. Import the resulting file `import-data.txt.csv` into Keboola Storage as a tab delimited file:
-   <!-- VERIFY(Nikita): the old text names no upload control or delimiter field for this import, and the file name `import-data.txt.csv` appears only in the screenshot. Check the current import dialog. -->
+3. Import the resulting file into Keboola Storage as a tab-delimited file: open the bucket, click **Add Table**, and on
+   the **Upload CSV File** tab select the file under **CSV file** (drag and drop or **Select File**). Enter a
+   **Table Name**, replace the **Delimiter** (`,` by default) with a tab, and click **Create table**.
+   <!-- Checked 2026-11-20 in the UI of project 264: bucket → Add Table → dialog Create New Table in Bucket … → tab Upload CSV File with CSV file* (drag and drop or Select File, max 2 GB), Table Name*, Delimiter* (default ","), Enclosure (default '"'), Primary Key (optional) → Create table. The dialog notes that uploaded tables are non-typed; for a typed table, use the Create New Table tab first. Not checked: how a tab is typed into the Delimiter field. -->
 
    ![Screenshot -- Excel Export - KBC Import](/storage/tables/excel-export-3.png)
 

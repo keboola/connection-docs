@@ -9,9 +9,10 @@ search_keywords: [backup, restore, time travel, snapshot, table snapshot, revert
 
 There are two methods available for backing up and restoring data: time travel restore, available only for the Snowflake backend, and snapshots, available for all backends. This page shows both. Each starts from the table detail of the table you want to restore or copy.
 
-<!-- How-to-type page. Source: the former backups page on main; text carried over and checked against it 2026-11-19. Tab and button names in the steps are read from the screenshots, which date from 2019. -->
+<!-- How-to-type page. Source: the former backups page on main; text carried over and checked against it 2026-11-19. Tab, menu and button names in the steps were checked in the UI of project 264 on 2026-11-20; the screenshots date from 2019. -->
 
 ![Screenshot - Storage Backups](/storage/tables/snap-restore.png)
+<!-- TODO(human-review, Nikita): this screenshot shows the "Snapshot and Restore" tab, which no longer exists (checked 2026-11-20 in project 264: the table detail has a Snapshots tab, and time travel is under ⋮ → Restore). Replace or drop it. -->
 
 ## Restore a table with time travel
 
@@ -19,15 +20,18 @@ There are two methods available for backing up and restoring data: time travel r
 
 Every project with a Snowflake backend can create an exact replica of a table at any point in time up to the [limit set](/management/project/) for the project.
 
-1. Open the table detail, go to the **Snapshot and Restore** tab and, under **Time Travel Restore**, click **Restore table**.
-   <!-- VERIFY(Nikita): the tab and button names in steps 1 and 4 come from the 2019 screenshots. Check them in the current UI. -->
-2. Use the calendar to select a time point. The table will be replicated as it was at that time point.
-3. Select the bucket to use for the newly created table, and give it a name.
-4. Click **Create**.
+1. Open the table detail, click **⋮** (**More actions**, top right) and select **Restore**. The dialog
+   **Restore Table Using Time Travel** opens.
+   <!-- Checked 2026-11-20 in the UI of project 264: time travel is no longer a tab; ⋮ → Restore opens the dialog Restore Table Using Time Travel with Replication Date*, Table Name* and Destination Bucket*, and the button Create table. The dialog notes that the limit is the project's data retention and that data types must be re-created. -->
+2. In **Replication Date**, pick the time point (format `YYYY-MM-DDTHH:mm`). The table will be replicated as it was at that time point.
+3. Check the **Table Name** (prefilled as `<table>_<YYYYMMDDHHMMSS>`) and select the **Destination Bucket** for the new table.
+4. Click **Create table**.
 
 ![Screenshot - Time Travel Restore](/storage/tables/time-travel-restore.png)
+<!-- TODO(human-review, Nikita): screenshot from 2019; replace it with the current Restore Table Using Time Travel dialog. -->
 
-**Result:** a new table in the bucket you selected, with the data as it was at the selected time point.
+**Result:** a new table in the bucket you selected, with the data as it was at the selected time point. Data types are
+not carried over: re-create them on the new table.
 
 :::caution[The restore time uses your current time zone]
 The time input is interpreted as the wall clock in your current local timezone.
@@ -55,16 +59,17 @@ and then compare the new output table with the original to ensure your output re
 To rename a table, change its display name ([Update a table](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-)); its table ID stays the same.
 <!-- Checked 2026-11-20: Storage API renames a table through its display name, the only updatable table property (OpenAPI TableUpdateRequest). UI control not checked. -->
 
-1. Open the table detail, go to the **Snapshot and Restore** tab and, under **Snapshots**, click **Create snapshot**.
-   <!-- VERIFY(Nikita): the tab, button and icon names in steps 1 to 3 come from the 2019 screenshots. Check them in the current UI. -->
-2. Enter a description and click **Create**.
+1. Open the table detail, click **⋮** (**More actions**, top right) and select **Create snapshot**.
+2. In the **Create Snapshot** dialog, optionally enter a **Description**, and click **Create snapshot**.
+   <!-- Checked 2026-11-20 in the UI of project 264: ⋮ → Create snapshot → dialog Create Snapshot with Description (optional) → Create snapshot. The Snapshots tab is a list only (columns Snapshot / Created; empty state "No snapshots created yet"). -->
 
    ![Screenshot - Create Snapshot](/storage/tables/snapshot-create.png)
 
-3. To create a table from a snapshot, find it in the list of snapshots on the same tab and click its restore icon. New tables can be created from any snapshot.
+3. To create a table from a snapshot, open the **Snapshots** tab of the table detail, find the snapshot in the list and click its restore icon. New tables can be created from any snapshot.
+   <!-- VERIFY(Nikita): the name of the icon that creates a table from a snapshot; no table in project 264 had a snapshot, so the row action was not seen. Both screenshots in these steps date from 2019. -->
 
    ![Screenshot - Storage Snapshots List](/storage/tables/snapshot-restore.png)
 
-**Result:** the snapshot is in the list on the **Snapshot and Restore** tab, and a table created from it holds the contents the table had when the snapshot was taken.
+**Result:** the snapshot is in the list on the **Snapshots** tab, and a table created from it holds the contents the table had when the snapshot was taken.
 
 **Next:** [Buckets →](/storage/buckets/)

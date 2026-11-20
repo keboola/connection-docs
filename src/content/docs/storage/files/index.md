@@ -102,14 +102,20 @@ An exported table may be **sliced** and require [substantial effort to reconstru
 The [Storage overview](/storage/#how-tables-pass-through-file-storage) explains how exports pass through Files.
 
 1. Open the [table detail](/storage/tables/#what-a-table-is) of the table.
-2. Use the **Export** feature in the **Action** tab of the table detail. To make sure your tables are exported as
-   merged files, always export them this way:
-   <!-- VERIFY(Nikita): the screenshot below shows an older UI with an "Actions" menu. Check where Export is in the current table detail, what the reader clicks after it, and where the merged file appears: the step ends on the screenshot. -->
+2. Click **⋮** (**More actions**, top right) and select **Export table**. To make sure your tables are exported as
+   merged files, always export them this way.
+3. In the **Export table** dialog, choose the **File Format**: **GZIP (CSV)** (the default), **CSV** or **XLSX**, and
+   click **Export**.
+   <!-- Checked 2026-11-20 in the UI of project 264: ⋮ (More actions) → Export table → dialog Export table with File Format GZIP (CSV) / CSV / XLSX → Export. The table list also has a bulk Export button. -->
 
    ![Screenshot - Export table](/storage/tables/table-export.png)
+   <!-- TODO(human-review, Nikita): this screenshot shows the older UI with an "Actions" menu; replace it with the current ⋮ → Export table dialog. -->
+4. Wait while the table header shows **Preparing export**. When the toast "Table … is ready to download." appears,
+   click **Download Now**.
 
-**Result:** one merged CSV file with the table data.
-<!-- VERIFY(Nikita): checked 2026-11-20 in project 264: a table export through the Storage API always creates a file in Files, sliced on Snowflake even for a 3-row table. Still open: whether the UI Export in the table detail hands the reader one merged CSV, as this Result says. -->
+**Result:** one merged file with the table data, downloaded in the format you chose. The export is also kept in
+**Storage → Files** as a `.csv.gz` file.
+<!-- Checked 2026-11-20 in the UI of project 264: after Export the header shows Preparing export, then the toast "Table … is ready to download." with Download Now / Dismiss. Storage → Files then lists two .csv.gz files: one tagged table-export (expires in 1 day) and one storage-merged-export (expires in 14 days). Earlier API check: a table export through the Storage API creates a file in Files, sliced on Snowflake even for a 3-row table. -->
 
 ## Limits
 

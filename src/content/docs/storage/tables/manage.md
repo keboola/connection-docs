@@ -181,8 +181,9 @@ If you have a non-typed table, `non_typed_table`, with undefined data types and 
    ```
 
 3. **Run the transformation.** Execute the transformation and wait for it to complete.
-4. **Verify the schema.** Once the transformation is finished, check the schema of the newly created table, `typed_table`.
-   <!-- VERIFY(Nikita): the old text names no place to check the schema. Check which tab of the table detail shows the column types. -->
+4. **Verify the schema.** Once the transformation is finished, open the table detail of `typed_table` and go to the
+   **Schema** tab. The **Data type** column shows each column's type, for example `STRING (19), Nullable`.
+   <!-- Checked 2026-11-20 in the UI of project 264: a typed table's detail has the tabs Overview / Schema / Events / Data Sample / Snapshots / Usage; Schema lists Column / Data type / Description and has an Add column button. -->
 
 **Result:** `typed_table` is a new typed table. It should now include the appropriate data types.
 
