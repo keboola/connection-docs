@@ -201,6 +201,8 @@ For anything beyond a quick test, prefer the header form:
 
 3. If your exporter sends a malformed `Authorization` header, percent-encode the space: `Authorization=Bearer%20<otlp.secret>`. `OTEL_EXPORTER_OTLP_HEADERS` values are specified as W3C Baggage, and SDKs differ in how strictly they decode them.
 
+{/* Checked 2026-11-20 in project 264 with the Python SDK (opentelemetry-sdk 1.45): spans sent with the secret in the URL, with `Authorization=Bearer <secret>` and with `Bearer%20<secret>` all reached the traces table; the secret was 48 characters. */}
+
 **Result:** Both forms accept exactly the same traffic. Note that an HTTP source's secret cannot be used against the OTLP endpoints, or vice versa — secrets are scoped to the transport.
 
 ## Verify data ingestion
@@ -210,7 +212,7 @@ For anything beyond a quick test, prefer the header form:
 1. Wait until the stream's [import conditions](/storage/data-streams/reference/#conditions) are met (by default within about a minute). Records become available in Storage once they are.
 2. Check the **Table statistics** on the source detail page to confirm data is flowing.
 
-{/* Checked 2026-11-20: default import trigger is 1 minute since the file opened (target import config and filerotation conditions in keboola-as-code); slices are uploaded on file rotation, so the 30 s staging step does not add to it. Expect about a minute plus the Storage import job. */}
+{/* Checked 2026-11-20: default import trigger is 1 minute since the file opened (target import config and filerotation conditions in keboola-as-code); slices are uploaded on file rotation, so the 30 s staging step does not add to it. Expect about a minute plus the Storage import job. Live in project 264: three spans sent at 14:31:56 UTC were in the traces table by 14:32:41, under a minute. */}
 
 **Result:** **Table statistics** shows imported data for the destination tables. For the fields each table can hold and for query examples, see the [OpenTelemetry reference](/storage/data-streams/opentelemetry/reference/).
 
