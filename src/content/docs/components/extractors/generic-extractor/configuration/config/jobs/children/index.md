@@ -1,6 +1,7 @@
 ---
 title: Child Jobs
 slug: 'components/extractors/generic-extractor/configuration/config/jobs/children'
+description: 'Configure child jobs in Generic Extractor to extract sub-resources of an API resource, with placeholders and a filter, nested to any depth.'
 redirect_from:
     - /extend/generic-extractor/configuration/config/jobs/children/
 ---
