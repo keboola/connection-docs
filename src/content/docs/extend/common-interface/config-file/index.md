@@ -278,6 +278,9 @@ The tables element in a configuration of the **output mapping** is an array and 
   - `write_always`
   - `partition_aware_import` - BigQuery only; limits the deduplication of an incremental load to the destination partitions
     present in the loaded data (see [Partition-aware import](/transformations/mappings/#partition-aware-import-bigquery))
+  - `time_partitioning`, `range_partitioning`, `clustering` - BigQuery only; the partitioning and the clustering of the
+    destination table when the output mapping creates it
+    (see [BigQuery partitioning and clustering](/transformations/mappings/bigquery-partitioning-clustering/))
 
 #### Input mapping — basic
 Download tables `in.c-ex-salesforce.Leads` and `in.c-ex-salesforce.Accounts` to `/data/tables/in/leads.csv`

@@ -342,6 +342,9 @@ the primary key must match. Feel free to use a multi-column primary key.
 - **Partition-aware import** *(BigQuery only)* — When Incremental loading and a primary key are set, limits the
 deduplication to the destination partitions the new rows belong to, so BigQuery does not read the whole destination
 table. It requires a partitioned destination table; see [Partition-aware import](#partition-aware-import-bigquery).
+- **Partitioning and clustering** *(BigQuery only)* — Sets the partitioning and the clustering of the destination
+table when the output mapping creates it. The layout of an existing table is not changed; see
+[BigQuery partitioning and clustering](/transformations/mappings/bigquery-partitioning-clustering/).
 
 **Important:** Multiple output mappings can be created for your transformation. Each source table can be used only once however.
 

@@ -543,6 +543,7 @@ export const sidebar = [
           { slug: "storage/tables/csv-files" },
           { slug: "storage/tables/uploads" },
           { slug: "storage/tables/backups" },
+          { slug: "storage/tables/bigquery-repartition" },
         ],
       },
       {
@@ -600,7 +601,14 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "transformations" },
-      { slug: "transformations/mappings" },
+      {
+        label: "Mappings",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "transformations/mappings" },
+          { slug: "transformations/mappings/bigquery-partitioning-clustering" },
+        ],
+      },
       { slug: "transformations/shared-code" },
       {
         label: "dbt Transformation",
