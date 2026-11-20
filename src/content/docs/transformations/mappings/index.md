@@ -345,6 +345,9 @@ table. It requires a partitioned destination table; see [Partition-aware import]
 - **Import method** *(Snowflake only)* — Chooses how Snowflake writes the loaded data into the destination table:
 in one statement (`MERGE` or `INSERT OVERWRITE`), or in several statements. Leave it at
 **Platform default** unless you need a specific method; see [Import method](#import-method-snowflake).
+- **Partitioning and clustering** *(BigQuery only)* — Sets the partitioning and the clustering of the destination
+table when the output mapping creates it. The layout of an existing table is not changed; see
+[BigQuery partitioning and clustering](/transformations/mappings/bigquery-partitioning-clustering/).
 
 **Important:** Multiple output mappings can be created for your transformation. Each source table can be used only once however.
 

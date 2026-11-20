@@ -112,6 +112,28 @@ Each object in the `schema` array represents one column:
 }
 ```
 
+On the BigQuery backend, the `time_partitioning`, `range_partitioning` and `clustering` fields set the partitioning
+and the clustering of the table when output mapping creates it. See
+[BigQuery partitioning and clustering](/transformations/mappings/bigquery-partitioning-clustering/).
+
+```json
+{
+    "destination": "out.c-main.events",
+    "schema": [
+        {
+            "name": "event_date",
+            "data_type": { "base": { "type": "DATE" } }
+        },
+        {
+            "name": "country",
+            "data_type": { "base": { "type": "STRING" } }
+        }
+    ],
+    "time_partitioning": { "type": "DAY", "field": "event_date" },
+    "clustering": { "fields": ["country"] }
+}
+```
+
 ## Base Types
 Source data types are mapped to a destination using a **base type**. The current base types are
 [`STRING`](#string), [`INTEGER`](#integer), [`NUMERIC`](#numeric), [`FLOAT`](#float), [`BOOLEAN`](#boolean),
