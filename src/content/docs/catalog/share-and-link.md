@@ -10,7 +10,9 @@ Each recipe on this page is self-contained: a goal, the steps and the result. Fo
 
 **Before you start:** to manage shared buckets, your user account must be an [organization member](/management/organization/) or a project administrator with the [share role](/management/project/users/#user-roles) assigned. Source and destination projects must belong to the same organization (and region).
 
-<!-- VERIFY(Nikita): the labels on this page and all 14 screenshots come from the 2019 to 2020 UI. Check each label against the current Data Catalog: Data Catalog (the old page said "Catalog" in the share step and "Data Catalog" elsewhere), SHARE BUCKET, Share existing bucket, Select tables, Create Alias, Shared with you, Link, Edit Sharing, Disable. The old text names no control for the following actions, so the steps leave them out. Add them from the live UI: the button that confirms the share in both variants, the control that opens the link dialog, where Create Alias sits and how to turn on column synchronization, a save step after Edit Sharing, where Disable sits, and where each result can be checked. -->
+<!-- VERIFY(Nikita): the labels on this page come from the 2019 to 2020 UI. Checked 2026-11-20 in the UI of project 264: the section is called Data Catalog, and the list has the filter buttons All, Linked and Mine (there is no Shared with you tab). Still unknown, because Share bucket is disabled for that role and nothing is shared with or from project 264: SHARE BUCKET, Share existing bucket, Select tables, Create Alias, Link, Edit Sharing, Disable, the button that confirms the share in both variants, the control that opens the link dialog, where Create Alias sits and how to turn on column synchronization, a save step after Edit Sharing, where Disable sits, and where each result can be checked. Needs a user with the share role or another project. -->
+
+<!-- TODO(human-review, Nikita): all 14 screenshots on this page show the old UI (for example a Shared with you tab, and no All / Linked / Mine filters or Who can use it column) and need replacing with current ones. -->
 
 ## Share a bucket
 
@@ -57,7 +59,7 @@ you have chosen.
 
 ![Screenshot -- Bucket Result](/catalog/catalog-9.png)
 
-To change sharing settings, share the newly [created bucket again](#share-an-existing-bucket). The newly selected settings will overwrite the old ones. For the **Edit Sharing** button, see [Edit a shared bucket's metadata](#edit-a-shared-buckets-metadata). <!-- VERIFY(Nikita): the old page contradicts itself here. This sentence says to share the bucket again to change its sharing settings, while the Edit Sharing sentence, now in "Edit a shared bucket's metadata", says that button changes them. Confirm which holds for a bucket created with Select tables. -->
+To change sharing settings, share the newly [created bucket again](#share-an-existing-bucket). The newly selected settings will overwrite the old ones. For the **Edit Sharing** button, see [Edit a shared bucket's metadata](#edit-a-shared-buckets-metadata). <!-- VERIFY(Nikita): the old page contradicts itself here. This sentence says to share the bucket again to change its sharing settings, while the Edit Sharing sentence, now in "Edit a shared bucket's metadata", says that button changes them. Confirm which holds for a bucket created with Select tables. Not checkable in project 264 on 2026-11-20: nothing is shared from that project and Share bucket is disabled for that role, so Edit Sharing does not appear. -->
 
 ## Add tables to a shared bucket
 
@@ -78,11 +80,11 @@ create an [alias](/storage/tables/#aliases) of the table and set the shared buck
 
 **Goal:** bring a bucket that another project shares into your own project.
 
-1. Go to **Data Catalog** and open the **Shared with you** tab. You link a shared bucket into your project from there.
+1. Go to **Data Catalog**. You link a shared bucket into your project from there.
 
    ![Screenshot -- Link Bucket Start](/catalog/catalog-10.png)
 
-2. Find the bucket you want to link. To narrow the list, filter it with the **All**, **Linked** and **Mine** buttons (**Mine** shows the buckets you own), click a column header to sort by Name, Datashare Owner, Size, etc., or use the search box to find specific buckets by name or description. <!-- VERIFY(Nikita): the old page contradicts itself here. Its link steps and screenshots use a "Shared with you" tab, while its list-view passage describes All, Linked and Mine filter buttons. Confirm which of the two the current catalog has, the button labels, and that Name, Datashare Owner and Size are sortable columns. -->
+2. Find the bucket you want to link. To narrow the list, filter it with the **All**, **Linked** and **Mine** buttons (**Mine** shows the buckets you own), click the **Name** or **Who can use it** column header to sort, or use the search box (**Search buckets, semantic models and metrics**) to find specific buckets. <!-- Checked 2026-11-20 in the UI of project 264: there is no Shared with you tab; the list has the filter buttons All, Linked and Mine; Name and Who can use it are the sortable columns; there are no Datashare Owner and Size columns. The old text said the search finds buckets "by name or description"; the current search box reads "Search buckets, semantic models and metrics". -->
 
 3. Enter a name of the bucket as you'd like to see it in the current project and **Link** the bucket.
 

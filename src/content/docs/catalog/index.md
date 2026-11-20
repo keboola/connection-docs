@@ -52,7 +52,7 @@ The original feature called Shared Buckets is now integrated into the Data Catal
 
 The Data Catalog shows shared buckets in a list view, a table that you can filter, sort and search. [Link a shared bucket](/catalog/share-and-link/#link-a-shared-bucket) describes the controls. You can also edit descriptions and customize bucket colors directly from the catalog, and assign a Datashare Owner to a bucket to show who is responsible for the shared data. The steps are in [Edit a shared bucket's metadata](/catalog/share-and-link/#edit-a-shared-buckets-metadata).
 
-<!-- VERIFY(Nikita): the old page announced this as a new list view "instead of the previous grid view". Confirm that the catalog still opens as a list that can be filtered, sorted and searched. The filter and column names are on the Share and link buckets page, with their own check. -->
+<!-- Checked 2026-11-20 in the UI of project 264: the Data Catalog opens as a table, not cards, with the columns Name (sortable), Who can use it (sortable), Semantic models and Status, the filter buttons All, Linked and Mine, and a search box "Search buckets, semantic models and metrics". -->
 
 ## Constraints
 
@@ -70,7 +70,7 @@ There are some constraints to how shared buckets can be used:
 
 There are several options how you can share data:
 
-- **Project Members** -- To the **entire [organization](/management/organization/)**. Any user of any project **in the organization** can link the data bucket. <!-- VERIFY(Nikita): the meaning of the four types matches the API (share-organization-project / share-organization / share-to-projects / share-to-users, checked 2026-11-20); confirm the four labels in the sharing dialog's "Shared with" list. -->
+- **Project Members** -- To the **entire [organization](/management/organization/)**. Any user of any project **in the organization** can link the data bucket. <!-- VERIFY(Nikita): the meaning of the four types matches the API (share-organization-project / share-organization / share-to-projects / share-to-users, checked 2026-11-20); confirm the four labels in the sharing dialog's "Shared with" list. Not checkable in project 264 on 2026-11-20: Share bucket is disabled for that role ("You don't have permission to share data."), so this needs a user with the share role or another project. -->
 - **Organization Members** -- To **administrators of the organization**. Any user of any project **in the organization** can link the data bucket provided that they are also an administrator of the organization.
 - **Selected Projects** -- To **specified projects**. Any user of the listed projects **in the organization** can link the data bucket.
 - **Selected Users** -- To **specified users**. Any listed users **in the organization** can link the data bucket.
