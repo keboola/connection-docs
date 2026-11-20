@@ -1,5 +1,6 @@
 ---
 title: Storage PHP Client Library
+description: 'Install the Storage API PHP client with Composer and use it in PHP scripts to create tables, import data fully or incrementally, and export data.'
 slug: 'storage/api/clients/php-client'
 redirect_from:
     - /integrate/storage/php-client/

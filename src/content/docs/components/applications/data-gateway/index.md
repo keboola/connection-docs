@@ -1,5 +1,6 @@
 ---
 title: Data Gateway
+description: 'Share Storage tables read-only with BI tools through a Snowflake reader account: setup, loading data, privileges for dedicated Snowflake accounts, and limits.'
 slug: 'components/applications/data-gateway'
 redirect_from:
     - /applications/data-gateway/
