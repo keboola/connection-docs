@@ -19,6 +19,8 @@
  *   4. everything else, in Pagefind's order, except that among Pagefind's
  *      first 30, pages whose title or URL has some of the words move up,
  *      rarer words counting more ("create app" → the Apps pages).
+ * Then, among the first 20 results of group 4, pages where most matched words
+ * are only prefix matches ("Apple" for "apps") move to the end.
  * Inside each group, shallower pages come first, so a section hub beats its
  * sub-pages, then shorter titles, then Pagefind's order. The home page is left
  * out: its title "Keboola User Documentation" would win "users".
@@ -150,7 +152,40 @@ async function rerank(response, term) {
       (a.tier ? a.depth - b.depth || a.titleLength - b.titleLength : b.partial - a.partial) ||
       a.index - b.index,
   );
-  return { ...response, results: ranked.map((r) => r.result) };
+  return { ...response, results: await demotePrefixOnly(ranked, queryWords) };
+}
+
+// How many of the first results without a title or URL match get their text
+// checked. Each check downloads one ~3 KB fragment, which the UI reuses when
+// it renders the result.
+const PREFIX_CHECK_DEPTH = 20;
+
+// Pagefind always matches the last query word as a prefix, so "apps" finds
+// Dark Sky through "Apple", "apples" and "appKey". Among the first results
+// that the title tiers didn't place, move down every page where most of the
+// matched words aren't the query words themselves.
+async function demotePrefixOnly(ranked, queryWords) {
+  const checked = ranked.filter((r) => r.tier === 0).slice(0, PREFIX_CHECK_DEPTH);
+  const weak = new Set(
+    (
+      await Promise.all(
+        checked.map(async (r) => {
+          const loaded = r.result.data();
+          r.result.data = () => loaded;
+          const data = await loaded.catch(() => null);
+          if (!data?.locations?.length) return null;
+          const contentWords = data.content.split(/\s+/);
+          const exact = data.locations.filter((location) =>
+            words(contentWords[location] ?? '').some((w) => queryWords.includes(w)),
+          ).length;
+          return exact * 2 < data.locations.length ? r : null;
+        }),
+      )
+    ).filter(Boolean),
+  );
+  return [...ranked.filter((r) => !weak.has(r)), ...ranked.filter((r) => weak.has(r))].map(
+    (r) => r.result,
+  );
 }
 
 export async function search(term, options) {
