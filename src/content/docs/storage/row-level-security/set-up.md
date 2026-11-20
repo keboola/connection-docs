@@ -161,9 +161,9 @@ kbagent config update --project my-project --component-id keboola.data-apps --co
 kbagent data-app deploy --project my-project --app-id <app-id> --wait
 ```
 
-`--merge` replaces each list you pass; to remove a list, update the configuration without that key.
+`--merge` replaces each list you pass; to remove a list, update the configuration without that key. The Data App settings in the UI have no editor for these lists, so set them with the CLI or the API.
 
-<!-- VERIFY(Nikita): is there a UI editor for `runtime` in the Data App settings? -->
+<!-- Checked 2026-11-20 in the UI of project 264: no editor for `rlsPolicies` or `clsPolicies`. The Data App tabs are Overview, Advanced settings, Deployments, All Runs, Terminal logs and Versions; Advanced settings has only Environment variables, Table Input Mapping, File Input Mapping and Storage access / Writable Tables; the ⋯ menu has Duplicate, Automate, Debug mode and Delete app. Editing the raw configuration JSON in Debug mode was not tried. -->
 
 - Each list has 1 to 100 policy IDs. An empty list `[]` is refused: remove the key instead. Put a policy in the list of its own kind; the lists are not interchangeable.
 - Only the listed policies apply to the app. A changed list takes effect after you redeploy the app.
