@@ -14,12 +14,12 @@ To use a [component](/components/), you create a configuration of it and run it.
 
 **Goal:** add a component to your project and set its parameters.
 
-1. Select *Components* from the top navigation and then select one of the component categories:
+1. Select **Components** from the top navigation.
 
    ![Screenshot - Create Configuration](/components/configuration-1.png)
 
 2. The following page lists the project's current configurations (e.g., data source connectors). To create a new configuration of a new component,
-   use the **Directory** or the **Add New Data Source** button.
+   click **Add Component**.
 
    ![Screenshot - Extractors List](/components/configuration-2.png)
 
@@ -31,7 +31,7 @@ To use a [component](/components/), you create a configuration of it and run it.
 
    ![Screenshot - Component Detail](/components/configuration-4.png)
 
-5. In the dialog, enter a name for the configuration. The name is unimportant if a component has a single configuration in your project. However, the names should meaningfully distinguish one configuration from another for components with multiple configurations (e.g., configured with different credentials).
+5. In the dialog, enter a name for the configuration. The name is unimportant if a component has a single configuration in your project. However, the names should meaningfully distinguish one configuration from another for components with multiple configurations (e.g., configured with different credentials). Then click **Create Configuration**.
 
    ![Screenshot - Create Configuration](/components/configuration-5.png)
 
@@ -43,7 +43,7 @@ To use a [component](/components/), you create a configuration of it and run it.
 
 7. Set the parameters and **Save** them.
 
-<!-- VERIFY(Nikita): three controls this page never names. Step 1: which component categories the Components menu lists today. Step 5: the button that confirms the name dialog. Describe a configuration, step 3: where you rename a configuration. -->
+<!-- VERIFY(Nikita): Describe a configuration, step 3: where you rename a configuration. Screenshots configuration-1.png and configuration-2.png show the older UI and need replacing. -->
 
 **Result:** the configuration is saved, and you can run the component.
 
@@ -55,7 +55,7 @@ To use a [component](/components/), you create a configuration of it and run it.
 
    ![Screenshot - Run Configuration](/components/configuration-7.png)
 
-   <!-- VERIFY(Nikita): this page calls the button Run Component, while the Debug mode page and its screenshots say Run Job. Confirm the current label in each view. -->
+   <!-- Checked 2026-11-20: the configuration page's run button is Run Component (getting-started/load/05-run.png); debug mode's label is tracked on the Debug mode page. -->
 
 2. When you run a component, a [job](/management/jobs/) is created and subsequently executed. The right panel shows the last executed jobs with an indication of their status:
 
@@ -105,7 +105,7 @@ Configuration parameters can be changed at any time. Every change to a configura
 in the history of **versions**.
 
 1. Open the configuration.
-2. The bottom right panel shows a list of the configuration versions. Use the list to
+2. Open the **Versions** tab, which lists the configuration versions. Use the list to
 
    - copy any version.
    - compare any two successive versions.
@@ -156,7 +156,7 @@ a configuration, and there is always an option to get back to it.
 
 **Goal:** create an independent copy of a configuration from one of its versions.
 
-1. You can also use the version list to create a **copy of the configuration**:
+1. On the **Versions** tab, click the copy icon at the end of a version's row to create a **copy of the configuration** from that version. To copy the current version, you can also click **Copy configuration** in the right-hand panel of the configuration.
 
    ![Screenshot - Configuration Copy](/components/configuration-11.png)
 
@@ -164,7 +164,7 @@ a configuration, and there is always an option to get back to it.
 
    ![Screenshot - Configuration Create Copy](/components/configuration-12.png)
 
-   <!-- VERIFY(Nikita): name the Copy control in the version list (step 1) and the button that confirms the copy (step 2). The page shows them only in 2019 screenshots. -->
+   <!-- VERIFY(Nikita): name the button that confirms the copy dialog (step 2); it shows only in a 2019 screenshot. -->
 
 **Result:** the copy of the configuration is created as a new isolated configuration—i.e., there is no link
 between the original configuration and the copy, and changes to one have no effect on the other.

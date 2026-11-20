@@ -51,8 +51,7 @@ Application and Transformations share many common properties. However, they diff
 
 **Shared Properties:**
 
-- Both Transformations and Applications can be used in your orchestrations in exactly the same way.
-  <!-- VERIFY(Nikita): "orchestrations" is the older name. Confirm that this should now read "flows". -->
+- Both Transformations and Applications can be used in your [flows](/flows/) in exactly the same way.
 - The code of most R and Python Transformations can be used in Applications and vice versa, with none or
 very few modifications.
 - The Keboola programming interfaces for Applications and Transformations are highly similar.
@@ -65,8 +64,7 @@ use Application.
 - Transformations are versioned as changes in the configuration in the Keboola project.
 Applications are versioned externally.
 - Applications can be created for you by 3rd parties, with some or even no access to your Keboola project.
-- There are also some [technical differences](https://developers.keboola.com/extend/custom-science/#technical-differences) between the two.
-  <!-- VERIFY(Nikita): this link goes to the Custom Science page of the developer docs. Confirm that the page and the anchor still exist, or name a current target. -->
+- How applications are built, and how their data interface compares with that of transformations, is described in [Components](/extend/component/) in the developer documentation.
 
 When deciding between the two, consider your capabilities, available resources and the
 complexity of the task you need to perform. For more details, go to our [Developer Documentation](https://developers.keboola.com/extend/).

@@ -195,14 +195,18 @@ EOF
 
 ### Check the job result
 
-The run-job call returns a job object that includes its `id` and `status`. Poll the job by its ID to follow progress:
+The run-job call returns a job object that includes its `id` and `status`. Save the job `id` from the result to the environment variable:
+
+```shell
+export JOB_ID="..."
+```
+
+Poll the job by its ID to follow progress:
 
 ```shell
 curl --header "X-StorageApi-Token: $TOKEN" \
-     "$JOB_QUEUE_HOST/jobs/{jobId}"
+     "$JOB_QUEUE_HOST/jobs/$JOB_ID"
 ```
-
-<!-- VERIFY(Nikita): {jobId} is a placeholder that no step fills. Earlier steps save each ID with export; add the same for the job ID from the run response, or tell the reader to paste it. -->
 
 The `status` progresses from `processing` to `success` when the job finishes (or `error` on failure, with details in the `result` field).
 
@@ -316,7 +320,8 @@ and [output](/extend/common-interface/config-file/#output-mapping--basic) mappin
 The `variables_id` property contains the ID of the [variable configuration](#step-1-create-the-variable-configuration) - e.g., `807968875`. The
 `variables_values_id` property is optional and contains the ID of the [row with default values](#step-2-create-default-values-for-the-variables) - e.g., `807952812`.
 
-<!-- VERIFY(Nikita): the configuration IDs in part 2 are hard-coded examples and do not line up (variables_id 807968875 here, 807940806 on the reference page, main configuration 807943784 in the runs). Say that readers put in their own IDs, as part 1 does with export. -->
+The IDs in part 2 (`807968875`, `807952812`, `807943784`, `807957572`) are examples from one project, and other pages use different ones. Put in the IDs that your own calls return: the variable configuration from Step 1, the values row from Step 2, the main configuration from Step 3 and the second values row from Run 2.
+
 The `parameters` section contains a script with the following Python code:
 
 ```python
@@ -464,10 +469,8 @@ you can store another set of values. Let's add another configuration row to the 
 ```
 
 See an [example](https://documenter.getpostman.com/view/3086797/77h845D?version=latest#fbe487b5-cd68-4318-8219-7c067ebef795). 
-You will obtain an ID of the row. Then create a table called **watman** with 
+You will obtain an ID of the row. Then create a table called **WATMAN** with
 columns  **COUNTRY** and **CARS**. You can use this [sample CSV file](/components/variables/api/countries.csv).
-
-<!-- VERIFY(Nikita): the stored row sets alias to WATMAN, so the input mapping reads in.c-variable-testing.WATMAN, but this step creates a table called watman. Confirm whether the case matters and fix one of them. -->
 
 Run a job with parameters and provide the ID of the main configuration in the `config` property and 
 the ID of the value row in `variableValuesId`:

@@ -30,15 +30,15 @@ The flow sections below walk through how to set up and use variables from the UI
    	SELECT "first", "second" * {{ multiplier }} AS "larger_second" FROM "source";
    ```
 
-3. When you define a variable, you have to provide its default value:
+3. In the configuration's **Variables** section, click **New Variable**, enter the name (`multiplier`) and its default value:
 
    ![Screenshot - Variables Configuration](/components/variables/variables-setting.png)
 
-4. When you run a transformation, you can provide a runtime override of the default value:
+4. When you run the transformation, click **Run Component**. The dialog's **Variables** section lets you override the default value for this run:
 
    ![Screenshot - Running Transformation](/components/variables/variables-run.png)
 
-   <!-- VERIFY(Nikita): say where on a configuration you define a variable and its default (step 3), and name the field or dialog for the run-time override (step 4). Both screenshots are from about 2021. -->
+   <!-- VERIFY(Nikita): both screenshots are from about 2021; confirm the New Variable form and the Run Component dialog still look like them. -->
 
 **Result:** the transformation runs with the default value, or with the override you entered for that run.
 

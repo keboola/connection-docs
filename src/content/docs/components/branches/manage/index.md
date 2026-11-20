@@ -14,9 +14,7 @@ This page has the steps for the life of a [development branch](/components/branc
 
 **Goal:** give every new branch in the project its own isolated storage.
 
-1. Branched Storage is enabled per project in **Project Settings**. Open them.
-
-   <!-- VERIFY(Nikita): no page says how to open Project Settings. Name the menu or icon here; the Branch Protection step on the Merge Requests page uses the same path. -->
+1. Branched Storage is enabled per project in [Project Settings](/management/project/): click your avatar icon at the upper right corner and select **Project Settings**.
 
 2. Look for the **Branched storage** toggle under the Features section and turn it on.
 
@@ -28,8 +26,7 @@ This page has the steps for the life of a [development branch](/components/branc
 
 **Goal:** get a branch in which you can change and run configurations without touching production.
 
-1. If you have your configurations ready in production and want to create a branch to test some changes, open the branch switcher:
-   click on your project's name at the top of the screen. Then click on the green icon **New** displayed next to your project's name.
+1. If you have your configurations ready in production and want to create a branch to test some changes, open the branch switcher in the top bar, to the right of the project name, and click **New Development Branch**.
 
    ![Screenshot - Create Development Branch](/getting-started/branches/figures/08-create-dev-branch.png)
 
@@ -45,18 +42,18 @@ Now you can start modifying your configurations, run them, and analyze the resul
 
 If you want to learn more about working in a branch, follow our [tutorial](/getting-started/branches/).
 
-<!-- VERIFY(Nikita): the create steps and their three screenshots show an older project menu. The branch switcher screenshot on the Merge Requests page has a New Development Branch item instead. Confirm which path is current. -->
+<!-- VERIFY(Nikita): the three screenshots above show the older top-menu UI and need replacing; confirm the name dialog's button (old screenshot: Create Development Branch) and where the new branch shows (Result line). -->
 
 ## Switch between a branch and production
 
 **Goal:** move from production into a branch, or back.
 
-1. Open the branch switcher: click on your project's name at the top of the screen.
+1. Open the branch switcher: in the top bar, click the branch control to the right of the project name.
 2. Under **Switch To**, select **Production** or the branch you want.
 
 **Result:** the project opens in what you selected, and the switcher lists it under **Current**.
 
-<!-- VERIFY(Nikita): these steps are read from the branch switcher screenshot on the Merge Requests page (Current, Switch To). No earlier page described switching. Confirm the labels. That screenshot also shows the switcher as its own control next to the project name, while the Create screenshots open it from the project name: confirm what to click in both tasks. -->
+<!-- VERIFY(Nikita): the screenshot shows the branch control only from inside a branch; confirm how it is labelled while you are in production. -->
 
 ## Close a branch
 
