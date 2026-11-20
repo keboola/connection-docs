@@ -74,8 +74,7 @@ permission required to share a bucket inside Keboola.
 
    ![Edit bucket exposure dialog](/storage/bucket-exposure/figures/bucket-exposure-edit-modal.png)
 
-2. Change the exposure name, description, or the list of subscribers, and save.
-   <!-- VERIFY(Nikita): name the control that saves the edit dialog (the create dialog uses **Create**). -->
+2. Change the exposure name, description, or the list of subscribers, and click **Save**.
    The **BigQuery listing ID** is shown but cannot be edited — changing it would break the
    connection for everyone already subscribed.
 

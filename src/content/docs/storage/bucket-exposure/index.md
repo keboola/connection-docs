@@ -54,10 +54,8 @@ Typical scenarios:
 | Feature | What it does | Who can access |
 |---------|--------------|----------------|
 | [**Data Catalog**](/catalog/) | Share a bucket with another **Keboola project** in the same organization. | Keboola users only. |
-| [**External Datasets**](/storage/byodb/external-buckets/) | Register a BigQuery dataset **you already own** as a bucket inside Keboola. | Keboola users only. |
-| **Bucket Exposure** | Share a Keboola-owned bucket **out into BigQuery** for people who don't use Keboola. | Anyone with a Google account or Google Group. |
-
-<!-- VERIFY(Nikita): this table names only BigQuery. The External Datasets pages show that a Snowflake schema can be registered as an external dataset too, and this page describes two Snowflake modes of Bucket Exposure. Check whether the External Datasets and Bucket Exposure rows, and the "registered from BigQuery" note under "Things to keep in mind", should name Snowflake as well. -->
+| [**External Datasets**](/storage/byodb/external-buckets/) | Register a Snowflake schema or BigQuery dataset **you already own** as a bucket inside Keboola. | Keboola users only. |
+| **Bucket Exposure** | Share a Keboola-owned bucket **out of Keboola**, into BigQuery or Snowflake, for people who don't use Keboola. | BigQuery: anyone with a Google account or Google Group. Snowflake: existing roles in your Snowflake account, or other Snowflake accounts in the same region and cloud. |
 
 Bucket Exposure and Data Catalog sharing are independent — you can do both on the same
 bucket if you want.
@@ -85,7 +83,8 @@ copy of the data on their side — it stays in your project.
   re-share the data.
 - **Regular buckets only.** You can expose buckets that Keboola owns. You cannot expose
   [linked buckets](/catalog/) (already shared from another Keboola project) or
-  [external datasets](/storage/byodb/external-buckets/) (registered from BigQuery).
+  [external datasets](/storage/byodb/external-buckets/) (registered from your own Snowflake or BigQuery).
+  <!-- VERIFY(Nikita): confirm that "Regular buckets only" also rules out exposing Snowflake external datasets. -->
 - **BigQuery, and Snowflake on your own account.** On Snowflake, an exposure grants roles
   in your account read access ([Snowflake grant mode](/storage/bucket-exposure/snowflake-grant/)) or shares the
   bucket with other Snowflake accounts ([Snowflake share mode](/storage/bucket-exposure/snowflake-share/)).

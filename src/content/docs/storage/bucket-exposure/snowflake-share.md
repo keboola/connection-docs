@@ -189,10 +189,17 @@ were part of the setup, the job fails with an error that names that role:
 
 - On **your own account** ([BYODB](/storage/byodb/)), an `ACCOUNTADMIN` of the account runs the
   two `GRANT ... WITH GRANT OPTION` statements the error shows, then you create the exposure
-  again.
+  again:
+
+  ```sql
+  GRANT CREATE SHARE ON ACCOUNT TO ROLE <ROLE> WITH GRANT OPTION;
+  GRANT MANAGE SHARE TARGET ON ACCOUNT TO ROLE <ROLE> WITH GRANT OPTION;
+  ```
+
+  Replace `<ROLE>` with the administrative role the error names (typically `KEBOOLA_STORAGE`).
 - On an account **Keboola runs for your organization**, contact Keboola support.
 
-<!-- VERIFY(Nikita): the page does not show the two `GRANT ... WITH GRANT OPTION` statements that the error names. Add them, or the error text, so an ACCOUNTADMIN can run them without the failed job at hand. -->
+<!-- Checked 2026-11-20: statements match the Data Gateway setup page (components/applications/data-gateway/index.md); the error text itself is not public. -->
 
 ### What a consumer account gets
 

@@ -20,12 +20,12 @@ An external dataset can be registered in the Storage of a project. The dialog wi
 
 <Tabs syncKey="backend">
   <TabItem label="Snowflake">
-    1. Go to **Storage > Register External Dataset**.
+    1. Go to **Storage > Register External Data**.
     2. Fill in the **name** of the new bucket, **database** name, and **schema** name. Click **Next Step**.
-    3. Keboola will then generate a code that you can use to grant Keboola correct access to the schema in your Snowflake. Use it to grant the access.
+    3. Keboola then shows `GRANT` statements for your database and schema. Log in to Snowflake (for example, open a worksheet) with a role that can grant `USAGE` on the database and schema and `SELECT` on all and future tables and views in the schema, and run the statements.
     4. Once access has been granted, click **Register Dataset** to start using it.
 
-    {/* VERIFY(Nikita): say where to run the generated code (a Snowflake worksheet?) and with which role. An older dialog screenshot in this page's figures folder, 3-snflk.png, asks to log in as an account that can grant usage on the schema and database and select on all and future tables in the schema. */}
+    {/* Checked 2026-11-20: role and statements from the registration dialog screenshot 3-snflk.png (older dialog; re-check against the current one). */}
 
     :::note
     **Note:** This set of permissions grants the Keboola service account read-only access to the data.
@@ -36,12 +36,12 @@ An external dataset can be registered in the Storage of a project. The dialog wi
     :::
   </TabItem>
   <TabItem label="BigQuery">
-    1. Go to **Storage > Register External Dataset**.
+    1. Go to **Storage > Register External Data**.
     2. Fill in the **name** of the new dataset and **dataset** name. Click **Next Step**.
-    3. Keboola will generate a code that you can use to grant Keboola correct access to the dataset in BigQuery. Use it to grant the access.
+    3. Keboola then shows how to share the dataset with it through Analytics Hub. In your GCP project, open **BigQuery → Analytics Hub** (enable the Analytics Hub API if needed). Create an exchange in the same region or multi-region as the Keboola project, using the display name the dialog gives, and add the Keboola service account the dialog shows as a subscriber. In that exchange, create a listing whose shared dataset is the dataset you are registering. Open the listing detail, copy its URL from the browser and paste it into the dialog's **URL** field.
     4. Once access has been granted, click **Register Dataset** to start using it.
 
-    {/* VERIFY(Nikita): the BigQuery steps do not say that registration needs an Analytics Hub exchange and listing. An older dialog screenshot in this page's figures folder, 3-bq.png, asks the reader to create an exchange and a listing in Analytics Hub, add the Keboola service account as a subscriber and paste the listing URL. The sharing section below also mentions a listing. Say where to run the generated code and with which role, and add the listing step if it still applies. */}
+    {/* VERIFY(Nikita): name the GCP role the reader needs to create the Analytics Hub exchange and listing. */}
 
     :::note
     **Note:** By adding the Keboola service account as a subscriber, you enable read-only access to the data.
@@ -72,13 +72,11 @@ If you later add additional tables or views, you must manually **refresh** the S
 
 You can enable **Auto-refresh** for external buckets using a cron scheduler. Auto-refresh ensures that your external dataset remains synced with the source schema and prevents pipelines from failing due to outdated metadata.
 
-1. To configure Auto-refresh, navigate to the bucket detail and click on the **Auto-Refresh** tab.
+1. To configure Auto-refresh, open the bucket detail and click **Setup** next to *Auto-refresh*.
 
    ![Auto-refresh configuration](/storage/byodb/external-buckets/figures/autorefresh-1.png)
 
-2. Here you can set up a cron schedule that determines how often the bucket metadata will be refreshed automatically.
-
-   {/* VERIFY(Nikita): name the schedule field and the control that saves it, and give the cron format (fields, time zone). */}
+2. In **Auto-refresh Settings**, choose how often under **Every** (for example *Day*) and the time under **at** (**Hours**, **Minutes**). Times are in UTC; **Schedule Preview** lists the next runs. Click **Add**. The schedule appears under **Scheduled Tasks**, where **Delete** removes it.
 
    ![Auto-refresh schedule](/storage/byodb/external-buckets/figures/autorefresh-2.png)
 
@@ -110,10 +108,7 @@ A refresh of the bucket restores the access each time (see [Limitations](/storag
 
 <Tabs syncKey="backend">
   <TabItem label="Snowflake">
-    External datasets cannot be used in an input mapping as they are not copied into your transformation 
-    workspace. You need to reference them in your transformation using a fully qualified name.
-
-    {/* VERIFY(Nikita): the sentence above says external datasets cannot be used in an input mapping. The External Datasets page says they can be used in an input mapping and in the read-only input mapping. A docs commit of 2025-02-17, "External buckets are now allowed in Input Mapping", added that statement, so this sentence is likely stale. Check and drop it if so. */}
+    External datasets can be used in an input mapping (see [Using an external dataset](/storage/byodb/external-buckets/#using-an-external-dataset)). You can also reference them in your transformation by a fully qualified name, as in this example.
 
     In the following example, it is assumed that you've created an external dataset called `users_reporting` that references the `sales_emea` schema in the database 
     `REPORTING`. The schema contains a table called `users`. Now you want to create a new table `MQL_USERS` that contains only users sourced from 
@@ -143,7 +138,7 @@ A refresh of the bucket restores the access each time (see [Limitations](/storag
     (`sales_emea`). However, there are no technical limitations; they can have the same name. 
     :::
 
-    {/* VERIFY(Nikita): the page used `users-reporting` as the bucket name and `users_reporting` as the BigQuery dataset; both now read `users_reporting`. BigQuery dataset names cannot contain dashes. If Keboola turns dashes in the bucket name into underscores, say so here. */}
+    {/* Checked 2026-11-20: example uses an underscore-only bucket name, so dataset = bucket name holds; dash-to-underscore conversion is suggested by mcp-server workspace.py, not confirmed for external buckets. */}
   </TabItem>
 </Tabs>
 
@@ -196,9 +191,7 @@ It is possible to share an external dataset using the same process as [any other
 
 Removing an external dataset is as simple as removing any other Storage bucket.
 
-1. Simply delete it in the UI or via API.
-
-   {/* VERIFY(Nikita): name the delete control (bucket detail or the Storage list) and the API call. */}
+1. In **Storage**, open the **⋯** menu of the bucket and choose **Delete bucket**, or call the Storage API: `DELETE /v2/storage/buckets/{bucket_id}`.
 
 **Result:** The Storage bucket will be removed from the project, but the schema in the database will remain untouched. Any rights that you have granted to Keboola during the registration will be revoked.
 
