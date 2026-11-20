@@ -10,7 +10,7 @@ redirect_from:
 
 This data destination connector allows you to write CSV files into a single AWS S3 bucket. After creating a new configuration, select the files
 you want to write to AWS S3. You also need to set up the proper permissions on AWS. You can set up AWS credentials or create an AWS role.
-The connector supports additional [processor configuration](https://developers.keboola.com/extend/component/processors/) via the JSON editor.
+The connector supports additional [processor configuration](/extend/component/processors/) via the JSON editor.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
