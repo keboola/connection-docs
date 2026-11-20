@@ -65,8 +65,9 @@ To rename a table, change its display name ([Update a table](https://api.keboola
 
    ![Screenshot - Create Snapshot](/storage/tables/snapshot-create.png)
 
-3. To create a table from a snapshot, open the **Snapshots** tab of the table detail, find the snapshot in the list and click its restore icon. New tables can be created from any snapshot.
-   <!-- VERIFY(Nikita): the name of the icon that creates a table from a snapshot; no table in project 264 had a snapshot, so the row action was not seen. Both screenshots in these steps date from 2019. -->
+3. To create a table from a snapshot, open the **Snapshots** tab of the table detail and, in the snapshot's row, click **Restore** (the curved-arrow icon). In the **Create Table from Snapshot** dialog, select the **Destination Bucket**, check the **Table Name** (prefilled as `<table>_<snapshot ID>`) and click **Create table**. New tables can be created from any snapshot.
+   <!-- Checked 2026-11-20 in the UI of project 264 on a temporary table: the Snapshots row has the icons Restore (curved arrow) and Delete (bin); Restore opens Create Table from Snapshot <ID> ("Restores a table from this snapshot.") with Destination Bucket*, Table Name* (default <table>_<snapshot ID>) and Create table, closed with ×. -->
+   <!-- TODO(human-review, Nikita): both screenshots in these steps date from 2019; replace them with the current ⋮ → Create snapshot dialog and the Snapshots tab. -->
 
    ![Screenshot - Storage Snapshots List](/storage/tables/snapshot-restore.png)
 
