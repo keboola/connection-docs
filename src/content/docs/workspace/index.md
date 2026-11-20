@@ -64,7 +64,7 @@ For these projects, use these alternatives:
 Projects with a dedicated Snowflake backend get two versions of the Snowflake workspace, **Person** and
 **Legacy Service**. They differ in how you sign in; both are described in
 [Connect to a workspace](/workspace/connect/).
-<!-- VERIFY(Nikita): the Connect page carries a marker on the Legacy Service deprecation date. If Legacy Service workspaces are gone, drop them here as well. -->
+<!-- VERIFY(Nikita): the Connect page carries a marker on the Legacy Service deprecation date. If Legacy Service workspaces are gone, drop them here as well. Evidence 2026-11-20: of the 25 workspaces in project 264, 21 use snowflake-service-keypair, 2 snowflake-person-sso and 2 none; none uses a password (Legacy Service) login. -->
 
 ### BigQuery
 
