@@ -122,7 +122,7 @@ You can see the detail of the shared bucket with a link to the source project (i
 
    ![Screenshot -- Disable Sharing](/catalog/catalog-14.png)
 
-**Result:** if no other project has linked the bucket, it is no longer shared. If the bucket is linked in other projects, read the [constraints](/catalog/#constraints) first: you cannot delete a shared bucket that has been linked until all the links are removed. <!-- VERIFY(Nikita): the old page gave no result for this step, and the constraint quoted here is about deleting a linked bucket. Confirm what Disable does while the bucket is still linked in other projects. -->
+**Result:** the bucket is no longer shared. While other projects still link the bucket, sharing cannot be disabled: the links have to be removed first. See also the [constraints](/catalog/#constraints). <!-- Checked 2026-11-20: unsharing fails while linked buckets exist, per the Keboola CLI (kbagent sharing unshare) docs; whether the UI offers to remove the links itself was not checked. -->
 
 ---
 

@@ -70,7 +70,7 @@ There are some constraints to how shared buckets can be used:
 
 There are several options how you can share data:
 
-- **Project Members** -- To the **entire [organization](/management/organization/)**. Any user of any project **in the organization** can link the data bucket. <!-- VERIFY(Nikita): confirm that the Project Members type shares to the entire organization, as written here, and that the four type names match the sharing dialog. -->
+- **Project Members** -- To the **entire [organization](/management/organization/)**. Any user of any project **in the organization** can link the data bucket. <!-- VERIFY(Nikita): the meaning of the four types matches the API (share-organization-project / share-organization / share-to-projects / share-to-users, checked 2026-11-20); confirm the four labels in the sharing dialog's "Shared with" list. -->
 - **Organization Members** -- To **administrators of the organization**. Any user of any project **in the organization** can link the data bucket provided that they are also an administrator of the organization.
 - **Selected Projects** -- To **specified projects**. Any user of the listed projects **in the organization** can link the data bucket.
 - **Selected Users** -- To **specified users**. Any listed users **in the organization** can link the data bucket.
