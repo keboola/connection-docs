@@ -19,7 +19,7 @@ Work through these tasks in order for a new HTTP stream, or jump to the one you 
 3. **Name the data stream**, e.g., "my-first-data-stream." The name of the table will be filled automatically based on the stream name, but you can change it if needed.
 4. Once the stream is created, you can **add a description** for better orientation within the project.
 
-<!-- VERIFY(Nikita): the steps name no button that confirms the dialog. The OTLP flow says "Click Create"; check that the HTTP flow uses the same button, and add the step. -->
+<!-- VERIFY(Nikita): the steps name no button that confirms the dialog. The OTLP flow says "Click Create"; check that the HTTP flow uses the same button, and add the step. Not checked in project 264 on 2026-11-20: Storage → Data Streams shows the placeholder "Unlock the Power of Real-Time Data" with Unlock Data Streams and How it works, and Unlock Data Streams was not clicked. The same day, kbagent stream create-source created a source in that project through the Stream API. Decide whether this page should mention Unlock Data Streams. -->
 
 **Result:** The stream is created. Configure an HTTP stream as described below. For an OTLP stream, continue with [Send OpenTelemetry (OTLP) data to Keboola](/storage/data-streams/opentelemetry/).
 
