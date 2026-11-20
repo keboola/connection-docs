@@ -20,7 +20,7 @@ Create an Airtable PAT token:
 
 ## Configuration Guide
 
-1. [Create a new configuration](/components/#creating-component-configuration) of the Airtable data source.
+1. [Create a new configuration](/components/configurations/#create-a-configuration) of the Airtable data source.
 2. In the authorization section, enter the obtained PAT token. See the [Prerequisites](#prerequisites) section.
 3. Create a new configuration row.
 4. Select a base ID. To reload available bases, click the **Reload Available Base IDs** button.

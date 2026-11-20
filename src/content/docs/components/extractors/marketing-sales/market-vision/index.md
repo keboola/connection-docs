@@ -16,7 +16,7 @@ The component has backfill implemented, meaning that if not all data could be fe
 amounts of data, it will be fetched in the following runs.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Market Vision** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Market Vision** connector.
 Then fill in the **Access/API Token** to authorize the configuration. The process to get the Access Token is 
 done via an [API request](https://reporting.marketvision-spring.com/api/v1/documentation#Generate_token_18).
 

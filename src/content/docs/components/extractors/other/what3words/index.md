@@ -12,7 +12,7 @@ Before using the connector, you need to [obtain a what3words API key](https://de
 Notice that each translated address requires one API call.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **What3words Augmentation** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **What3words Augmentation** connector.
 
 ## Augment What3words Address
 In this mode of operation, you identify [what3words](https://what3words.com/about) addresses, and the connector

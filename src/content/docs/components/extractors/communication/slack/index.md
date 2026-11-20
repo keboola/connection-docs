@@ -11,8 +11,8 @@ The Slack data source connector uses the [Slack API](https://api.slack.com/metho
 and to bring it to Keboola.
 
 ## Create New Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Slack** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Slack** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 Select the template you wish to use:
 

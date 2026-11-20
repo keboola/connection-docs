@@ -33,7 +33,7 @@ in Keboola.
 ![Pingdom API key](/components/extractors/other/pingdom/05-pingdom-api-key.png)
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Pingdom** data source.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Pingdom** data source.
 Provide credentials of your Pingdom account and the Application Key.
 
 - **Email address** -- your account login name

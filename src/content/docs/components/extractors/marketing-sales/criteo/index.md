@@ -30,7 +30,7 @@ To create a Criteo developer app and get a client ID and a client secret, take t
 Now you can use the client ID and client secret obtained from the text file.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Criteo** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Criteo** connector.
 
 To configure this connector, you need to provide an API **Client ID** and a **Client secret**. Then click **Add Row**
 to create a new report to download.

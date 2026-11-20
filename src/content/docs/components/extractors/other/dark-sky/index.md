@@ -24,7 +24,7 @@ The connector authenticated with a Dark Sky API Secret key. **New keys are no lo
 ![Screenshot - Dark Sky API key](/components/extractors/other/dark-sky/dark-sky-token.png)
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Dark Sky** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Dark Sky** connector.
 
 The connector fetches weather conditions for locations provided by you in one or more tables.
 Each table must contain the following columns in this particular order:

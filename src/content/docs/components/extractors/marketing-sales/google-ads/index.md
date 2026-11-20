@@ -13,8 +13,8 @@ This data source connector allows you to import data from Google Ads.
 If you do not have a Google Ads manager account, follow this [guide](https://support.google.com/google-ads/answer/7459399?hl=en) to set it up.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Ads** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Ads** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 To run the connector, specify your [customer ID](https://support.google.com/google-ads/answer/1704344?hl=en).
 

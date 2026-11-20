@@ -26,7 +26,7 @@ you can refresh it -- the current token will be deactivated and a new token will
 If you want to extract from multiple buckets, you'll have to create multiple tokens and multiple configurations.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Storage** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Keboola Storage** connector.
 Select the region of the *source project*, and paste the token you generated in the *source project*.
 
 ![Screenshot - Source Project](/components/extractors/storage/storage-api/storage-api-2.png)

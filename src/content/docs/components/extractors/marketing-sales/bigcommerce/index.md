@@ -13,7 +13,7 @@ This data source connector downloads data about brands, customers, orders, and p
 You need a V2/V3 API access token with read-only OAuth scope and know your API path. You can find more information on how to obtain these in [this guide](https://support.bigcommerce.com/s/article/Store-API-Accounts?language=en_US#creating).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **BigCommerce** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **BigCommerce** connector.
 
 ### Global Configuration
 

@@ -50,7 +50,7 @@ Sleep and wake behaviour in detail, including the wakeup error page: [Sleep and 
 
 ## See what changed, and go back
 
-The **Versions** tab lists the app's configuration history: who changed what, and when. An app is a component configuration like any other, so you can compare versions and [roll back](/components/#rollback-version) to an earlier one. A rollback changes the configuration only, so redeploy afterwards to put the old settings back in service.
+The **Versions** tab lists the app's configuration history: who changed what, and when. An app is a component configuration like any other, so you can compare versions and [roll back](/components/configurations/#roll-back-to-an-earlier-version) to an earlier one. A rollback changes the configuration only, so redeploy afterwards to put the old settings back in service.
 
 Code changes are tracked separately from configuration: for a Kai-built app they're in the Builder's chat and drafts, and for your own repository they're in your Git history.
 

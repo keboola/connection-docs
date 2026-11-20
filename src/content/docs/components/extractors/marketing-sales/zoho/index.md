@@ -17,9 +17,9 @@ The supported endpoints are:
 If you need additional endpoints, please submit your request to [ideas.keboola.com](https://ideas.keboola.com/).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Zoho** data source connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Zoho** data source connector.
 
-Click **Authorize Account** to [authorize the configuration](/components/#authorization) with access to the Zoho CRM data you want to extract. Then, select 
+Click **Authorize Account** to [authorize the configuration](/components/authorization/) with access to the Zoho CRM data you want to extract. Then, select 
 a [data center](https://help.zoho.com/portal/en/kb/commerce/user-guide/getting-started-with-zoho-commerce/articles/data-centers) of your Zoho instance during the authorization process.
 
 Once done, you must enter the **account's user email address (`user_email`)** you used to generate the Self Client.

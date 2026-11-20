@@ -22,7 +22,7 @@ The link will look something like this:
 You can find more information on how to set up the export in [Shoptet documentation](https://podpora.shoptet.cz/hc/cs/articles/360003161791-Export-produkt%C5%AF).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Shoptet** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Shoptet** connector.
 
 - Set the shop name.
 - Set the Base URL of the store.

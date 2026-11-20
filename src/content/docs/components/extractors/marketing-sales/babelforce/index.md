@@ -10,7 +10,7 @@ redirect_from:
 This data source connector uses the Babelforce [REST API](https://www.babelforce.com/rest-api-power/) to import data from [Babelforce](https://www.babelforce.com/), a cloud call center platform.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Babelforce** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Babelforce** connector.
 
 To configure this connector, you need to provide an API **Access ID**, and an **API token**.
 Select the **configuration template** and save the configuration. 

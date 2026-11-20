@@ -14,7 +14,7 @@ a defined scope in [your account settings](https://fly.customer.io/settings/api_
 Learn more about [bearer authorization in Customer.io](https://customer.io/docs/managing-credentials).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Customer IO** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Customer IO** connector.
 
 Then insert the **API key** you obtained from Customer.io.
 

@@ -43,7 +43,7 @@ API tokens are created
 1. automatically when joining a project (master token).
 2. automatically when creating a new configuration of certain components (for example, flows).
 3. automatically when running a JupyterLab workspace.
-4. automatically when using [external OAuth](/components/#external-authorization) authorization.
+4. automatically when using [external OAuth](/components/authorization/#ask-the-account-owner-to-authorize) authorization.
 5. manually when needed.
 
 Automatically created tokens have the lowest possible permissions for their task and also set expiration if possible.
@@ -123,7 +123,7 @@ sure that they can use only that particular component in that particular bucket.
 reconfigure it — e.g., update the extraction queries (but only via the API).
 Also, writing to a limited set of buckets is a good way of preventing accidentally overwriting data.
 
-You can also specify if a token is allowed to delete configurations in [Trash](/components/#delete-configuration) by 
+You can also specify if a token is allowed to delete configurations in [Trash](/components/configurations/#delete-and-restore-a-configuration) by 
 selecting **Full Access** for Trash. This is rarely needed.
 
 ## Refreshing Token

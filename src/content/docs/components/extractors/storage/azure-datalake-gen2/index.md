@@ -14,7 +14,7 @@ After creating a new configuration, select the files you want to extract from Az
 you save them to Keboola Storage. 
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Azure Datalake Gen 2** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Azure Datalake Gen 2** connector.
 
 In order to access the files in Azure Datalake Gen2, you need to prepare an account name, account key, and file system.
 

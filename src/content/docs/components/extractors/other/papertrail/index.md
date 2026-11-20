@@ -13,7 +13,7 @@ to import events matching the specified query from [Papertrail](https://www.pape
 (logs from apps, servers, and cloud services).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Papertrail** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Papertrail** connector.
 
 To configure the connector, you need to provide a Papertrail API token, enter a search query and select a retention period.
 Then select the data you wish to extract.

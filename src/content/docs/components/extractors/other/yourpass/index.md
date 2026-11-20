@@ -13,7 +13,7 @@ The YourPass data source connector uses the [YourPass API](https://doc.yourpass.
 to Keboola.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **YourPasss** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **YourPasss** connector.
 
 ### Authorization Configuration
 

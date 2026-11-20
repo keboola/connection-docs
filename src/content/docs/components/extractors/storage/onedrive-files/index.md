@@ -11,9 +11,9 @@ The Microsoft OneDrive cloud storage integrates with the [Office365](https://www
 This connector lets you access all your files in your personal or business account.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **OneDrive Files** connector.  
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **OneDrive Files** connector.  
 
-Then, click **Authorize Account** to [authorize the configuration](/components/#authorization).
+Then, click **Authorize Account** to [authorize the configuration](/components/authorization/).
 
 ### Account Type
 Next, go to the **account configuration** section and select the **Account Type** you are using:

@@ -27,7 +27,7 @@ Export setup:
 
 ### Component Setup
 
-[Create a new configuration](/components/#creating-component-configuration) of the **AWS Cost Usage Reports** connector.  
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **AWS Cost Usage Reports** connector.  
 
 Fill in the **AWS config** containing your S3 bucket details and credentials as set up in the AWS console.
 

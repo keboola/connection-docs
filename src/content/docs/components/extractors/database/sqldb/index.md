@@ -24,7 +24,7 @@ avoid exposing your database server to the Internet.
 ***Note:** Our [tutorial](/getting-started/load/database/) also includes a quick introduction to extracting data from the Snowflake Database Server.*
 
 ## Initial Setup
-After you [create a configuration](/components/#creating-component-configuration), the first step is to configure database credentials using the **Set Up Credentials First** button:
+After you [create a configuration](/components/configurations/#create-a-configuration), the first step is to configure database credentials using the **Set Up Credentials First** button:
 
 ![Screenshot - Configure Credentials Start](/components/extractors/database/sqldb/sqldb-1.png)
 

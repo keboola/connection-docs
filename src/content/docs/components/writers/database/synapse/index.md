@@ -14,7 +14,7 @@ database and is **only available on the Azure [Keboola stacks](/overview/#stacks
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Synapse** data destination connector. Start
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Synapse** data destination connector. Start
 with **setting up database credentials** and provide a *host name*, *port*, *user name*, *password*, *database
 name*, and a *schema*.
 

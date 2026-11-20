@@ -84,10 +84,10 @@ Choose according to your taste and available libraries.
 ***Note:** Switching between SQL backends requires updating the code into the corresponding SQL dialect.*
 
 ## Developing Transformations
-Transformation scripts are stored in [configurations](/components/#creating-component-configuration), and as such, 
+Transformation scripts are stored in [configurations](/components/configurations/#create-a-configuration), and as such, 
 they share common properties and functions. Particularly important is that all changes are automatically
-[versioned](/components/#configuration-versions), and you can always [roll back](/components/#rollback-version) 
-a configuration or [copy](/components/#copy-configuration) a version to a new transformation.
+[versioned](/components/configurations/#see-the-version-history), and you can always [roll back](/components/configurations/#roll-back-to-an-earlier-version) 
+a configuration or [copy](/components/configurations/#copy-a-configuration) a version to a new transformation.
 
 You can easily develop transformations using the [workspace](/workspace/). It allows you to run 
 and play with your arbitrary transformation scripts on copies of your tables
