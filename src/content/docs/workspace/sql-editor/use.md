@@ -108,11 +108,11 @@ If you need to make modifications to the code for a specific transformation, you
 
 **Goal:** a query result downloaded as a CSV file.
 
-1.  Run the query.
-2.  Select **Export Query result** and choose your preferred format:
-    <!-- VERIFY(Nikita): where Export Query result sits (results pane toolbar, a menu on the code block?). The page has no screenshot of it. -->
-    *   CSV: standard comma-separated values
-    *   CSV (gzip): compressed CSV for large exports
+1.  Click **Run**.
+2.  In the results panel toolbar, click **Export Results** and choose a format:
+    <!-- Checked 2026-11-20 in the UI of project 264: after Run, the results panel toolbar has the icon Export Results (next to Query Details, Query history and Close results panel), with Export as CSV / Export as CSV (Gzip). -->
+    *   **Export as CSV**: standard comma-separated values
+    *   **Export as CSV (Gzip)**: compressed CSV for large exports
 
 **Result:** your query results are downloaded as a CSV-formatted file.
 

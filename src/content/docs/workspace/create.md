@@ -61,14 +61,17 @@ You can also create workspaces from transformations.
 **Goal:** the Storage tables and files you need, available inside the workspace.
 
 To open the workspace detail, click the workspace name in the **Workspaces** list.
-<!-- VERIFY(Nikita): where the Clean workspace before loading option sits (in the Load data dialog?). -->
 
 1. In the workspace detail, configure a
    [table input mapping](/transformations/mappings/#table-input-mapping) or
    [file input mapping](/transformations/mappings/#file-input-mapping) (or both).
-2. Click **Load data**.
+2. In the right panel, click **Load data**. It is enabled only when the workspace has an input mapping.
 
    ![Workspace - Load Data](/workspace/load-data.png)
+
+3. In the **Load Data to Workspace** dialog, choose the **Operation**: **Preserve non-conflicting tables** or
+   **Clean workspace before loading** (the default). Click **Load data**.
+   <!-- Checked 2026-11-20 in the UI of project 264: right panel Load data (enabled only with an input mapping) opens the dialog Load Data to Workspace; Operation: Preserve non-conflicting tables / Clean workspace before loading (default); button Load data. -->
 
 When loading data into a workspace, you can specify entire buckets, which can be especially
 useful when you are not sure what tables you'll need in your work. You can also take
@@ -78,7 +81,7 @@ advantage of [alias tables](/storage/tables/#aliases) and prepare buckets with t
 
 ### Clean workspace before loading
 
-When loading data, you have the option to **Clean workspace before loading**. When this option is enabled, Keboola removes all **tables** and **views** from the workspace schema before loading the new data. However, the following objects are **not** removed and will persist across loads:
+In the **Load Data to Workspace** dialog, you have the option to **Clean workspace before loading**. When this option is enabled, Keboola removes all **tables** and **views** from the workspace schema before loading the new data. However, the following objects are **not** removed and will persist across loads:
 
 - **Stored procedures**
 - **User-defined functions (UDFs)**
@@ -130,6 +133,6 @@ Python and Snowflake SQL workspaces both have this action in the workspace detai
 **Result:** a new transformation with the input and output mapping of the workspace. From a Python or R workspace,
 the notebook script is not copied. From an SQL workspace, the saved queries and variables are copied as well; see
 [Variables](/workspace/sql-editor/#variables).
-<!-- VERIFY(Nikita): the "notebook script is not copied" rule for Python/R comes only from the old page; confirm it once in the UI. -->
+<!-- Checked 2026-11-20 in the UI of project 264, Snowflake only: dialog Create Transformation ("You are about to create a new transformation from the workspace …"), fields Name* and Description (optional), button Create Transformation. VERIFY(Nikita): the dialog does not say what is copied; confirm the "notebook script is not copied" rule for Python/R (not checked: no such workspace in 264, starting one costs credits). -->
 
 **Next:** [Connect to a workspace →](/workspace/connect/)

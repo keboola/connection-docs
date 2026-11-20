@@ -93,7 +93,7 @@ authentication, with the private key in the form the tool needs.
 
 1. Open the **Connect** menu on the workspace and take the Key Pair credentials. Keboola can generate the key pair
    for you.
-   {/* VERIFY(Nikita): how the reader gets the private key file out of the Connect menu (download or copy), and the file name to expect. The commands below assume `private_key.pem`. */}
+   {/* VERIFY(Nikita): checked 2026-11-20 in the UI of project 264: the Snowflake workspace detail has no Connect button and no key download or copy. Workspace Parameters shows Authentication Type: SSO / Key Pair Authentication; the banner "Connect from your SQL client…" links Set up SQL client connection, which leads to Project settings, SQL clients (JDBC) (JDBC driver and Storage API token, no key). No key dialog appeared when a new workspace was created either. Still open: whether and where the private key and Reset Key Pair exist, and the file name to expect. The commands below assume `private_key.pem`. */}
 2. Get the private key into the form your tool needs. The options below are alternatives, not a sequence: each one
    starts from the unencrypted `private_key.pem` that Keboola generated.
    - The tool accepts a `.pem` key: store it in a password manager, or
