@@ -199,12 +199,12 @@ either of them without affecting the other one.
 
 ![Screenshot - Configuration History](/components/configuration-22.png)
 
-For technical reasons, configurations of the Orchestrator component cannot be restored when deleted. They will still be shown in Trash
-but cannot be restored:
+Deleted conditional flows can be restored from Trash like any other configuration. Configurations of the legacy Orchestrator component
+are shown in Trash too; the screenshot below, from 2019, shows them without a restore option:
 
 ![Screenshot - Orchestration in Trash](/components/configuration-23.png)
 
-<!-- VERIFY(Nikita): whether deleted Orchestrator configurations still cannot be restored, and whether the same holds for flows. The sentence and its screenshot date from 2019. -->
+<!-- Checked 2026-11-20: live in project 264, a keboola.flow configuration deleted with the API was listed in Trash and restored with the API. VERIFY(Nikita): whether the UI still refuses to restore legacy keboola.orchestrator configurations (they are listed in the trash API); not tested to avoid touching existing project objects. -->
 
 ---
 
