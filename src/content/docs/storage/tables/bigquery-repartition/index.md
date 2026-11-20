@@ -127,6 +127,9 @@ kbagent storage delete-table --project my-project --table-id out.c-traffic.traff
 kbagent storage delete-table --project my-project --table-id out.c-traffic.traffic_deal_repart --yes
 ```
 
+After the old table is deleted, it can be restored within its time travel window (2 to 7 days). After that, the only
+way back is the 7-day fail-safe of BigQuery, which needs a request to Google support.
+
 ## Change the clustering in place
 
 The [table definition update](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition)
