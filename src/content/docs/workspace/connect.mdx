@@ -91,11 +91,14 @@ is connected with the credentials from the **Connect** menu.
 **Goal:** a database client or BI tool connected to a **Person** type Snowflake workspace with key-pair
 authentication, with the private key in the form the tool needs.
 
-1. Open the **Connect** menu on the workspace and take the Key Pair credentials. Keboola can generate the key pair
-   for you.
-   {/* VERIFY(Nikita): checked 2026-11-20 in the UI of project 264: the Snowflake workspace detail has no Connect button and no key download or copy. Workspace Parameters shows Authentication Type: SSO / Key Pair Authentication; the banner "Connect from your SQL client…" links Set up SQL client connection, which leads to Project settings, SQL clients (JDBC) (JDBC driver and Storage API token, no key). No key dialog appeared when a new workspace was created either. Still open: whether and where the private key and Reset Key Pair exist, and the file name to expect. The commands below assume `private_key.pem`. */}
+1. In the workspace detail, click the **Workspace ID** value to open **Workspace Credentials** (**Host**, **User**,
+   **Key Pair**, **Database**, **Schema**, **Warehouse**). Under **Key Pair**, either click **Reset Key Pair** and
+   confirm with **Reset Private Key**, so that Keboola generates a new key pair and downloads the private key (the
+   previous key pair stops working), or click **Use Own Key** to set your own public key.
+   {/* Checked 2026-11-20 in the UI of project 264 on a temporary Snowflake SQL workspace: no Connect button; the Workspace ID value (tooltip "Show workspace connection details") opens Workspace Credentials with Host, User, Key Pair (masked, with Reset Key Pair and Use Own Key), Database, Schema and Warehouse. Reset Key Pair asks "Reset the workspace key pair? The current key pair stops working. The new private key downloads automatically." (Cancel / Reset Private Key); Use Own Key opens Use Your Own Public Key (Public key, select file, Set Public Key). The create form offers no choice of authentication. VERIFY(Nikita): the name and extension of the downloaded private key file (the commands below assume `private_key.pem`); not confirmed, the reset was not run. */}
 2. Get the private key into the form your tool needs. The options below are alternatives, not a sequence: each one
-   starts from the unencrypted `private_key.pem` that Keboola generated.
+   starts from the unencrypted private key that **Reset Private Key** downloaded (the commands below call it
+   `private_key.pem`). If you used **Use Own Key**, your tool already has your own private key.
    - The tool accepts a `.pem` key: store it in a password manager, or
      [encrypt it](#encrypt-the-private-key) if you keep it on disk.
    - The tool needs a `.p8` key: [convert it](#convert-the-private-key-to-p8-format). The `.p8` file is not encrypted.

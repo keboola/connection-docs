@@ -126,13 +126,14 @@ Python and Snowflake SQL workspaces both have this action in the workspace detai
 
    ![Workspace - Create Transformation](/workspace/create-transformation-1.png)
 
-3. Enter the name of the new transformation and click **Create Transformation**.
+3. In the **Create Transformation** dialog, enter the **Name** and optionally a **Description**; for a
+   Python workspace, the name is prefilled with the workspace name and you can pick a **Backend Version**. Click **Create Transformation**.
 
    ![Workspace - Create Transformation](/workspace/create-transformation-2.png)
 
 **Result:** a new transformation with the input and output mapping of the workspace. From a Python or R workspace,
 the notebook script is not copied. From an SQL workspace, the saved queries and variables are copied as well; see
 [Variables](/workspace/sql-editor/#variables).
-<!-- Checked 2026-11-20 in the UI of project 264, Snowflake only: dialog Create Transformation ("You are about to create a new transformation from the workspace …"), fields Name* and Description (optional), button Create Transformation. VERIFY(Nikita): the dialog does not say what is copied; confirm the "notebook script is not copied" rule for Python/R (not checked: no such workspace in 264, starting one costs credits). -->
+<!-- Checked 2026-11-20 in the UI of project 264, Snowflake and Python (temporary workspaces): the Python dialog adds Backend Version (optional, default Python 3.10.10); otherwise dialog Create Transformation ("You are about to create a new transformation from the workspace …"), fields Name* and Description (optional), button Create Transformation. VERIFY(Nikita): the dialog does not say what is copied; confirm the "notebook script is not copied" rule for Python/R (the Python dialog does not say either). -->
 
 **Next:** [Connect to a workspace →](/workspace/connect/)
