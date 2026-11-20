@@ -209,3 +209,7 @@ Policy-tag support keeps protection on the copies Keboola makes within your BigQ
   BigQuery checks that permission on the taxonomy of each tag. A copy that Keboola rebuilds with a tag from another
   taxonomy therefore fails. Keep every tag on data Keboola copies in that taxonomy. Support for several taxonomies on one
   backend is planned.
+
+---
+
+**Next:** [Enable BigQuery policy tags →](/storage/byodb/bigquery-policy-tags/enable/)
