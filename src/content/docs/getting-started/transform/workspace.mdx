@@ -197,10 +197,10 @@ tell you the host, database, schema and user afterwards, but never the key.
 **Load the tables**
 
 ```bash
-kbagent workspace load --project docs-demo --workspace-id <workspace-id> --tables out.c-Boolabean-staffing-outlook.staffing_outlook
+kbagent workspace load --project docs-demo --workspace-id <workspace-id> --table-id out.c-Boolabean-staffing-outlook.staffing_outlook
 ```
 
-Repeat `--tables` for each one. The load clears the workspace first unless you add `--preserve`,
+Repeat `--table-id` for each one. The load clears the workspace first unless you add `--preserve`,
 which is the difference between refreshing a copy and adding to it.
 
 **Run your SQL**

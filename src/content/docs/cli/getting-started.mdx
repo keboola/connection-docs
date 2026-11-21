@@ -134,7 +134,7 @@ Both commands need a real terminal. There is no headless path through `auth logi
 ### Or register one project with a token
 
 ```bash
-kbagent project add --project prod --url https://connection.keboola.com --token YOUR_TOKEN
+kbagent project add --alias prod --url https://connection.keboola.com --token YOUR_TOKEN
 ```
 
 `project add` is the static-token route. It reads the token from `--token`, or from `KBC_TOKEN` if you'd rather keep it off the command line. With neither, it prompts with hidden input, so the value never lands in your shell history. That prompt needs a TTY an agent's tool-run shell does not have.
@@ -207,7 +207,7 @@ kbagent search "shopify"
 
 ```bash
 KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
-  org setup --project-ids 901,9621 --url https://connection.keboola.com --yes
+  org setup --project-id 901 --project-id 9621 --url https://connection.keboola.com --yes
 ```
 
 **A whole organization** (org admin) — kbagent registers every project and mints per-project tokens:
@@ -217,7 +217,7 @@ KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
   org setup --org-id 123 --url https://connection.keboola.com --yes
 ```
 
-{/* Verified vs v0.66.1 (Padak review): --allow-env-manage-token required to read KBC_MANAGE_API_TOKEN (default-deny since 0.29.0); --org-id / --project-ids / --yes correct; --token-expires-in lives on `project refresh`, not org setup. */}
+{/* Verified vs v0.66.1 (Padak review): --allow-env-manage-token required to read KBC_MANAGE_API_TOKEN (default-deny since 0.29.0); --org-id / --project-id (repeatable) / --yes correct; re-checked against kbagent 1.4.1 on 2026-11-21; --token-expires-in lives on `project refresh`, not org setup. */}
 
 Read commands then fan out across every connected project — see [multi-project](/cli/concepts/#multi-project-and-stacks).
 

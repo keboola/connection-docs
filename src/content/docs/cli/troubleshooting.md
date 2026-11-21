@@ -28,11 +28,10 @@ uvx --from 'git+https://github.com/keboola/cli' kbagent --version
 
 **Cause:** the Storage API token registered for the project was revoked, expired, or mistyped.
 
-**Fix:** create a fresh token in the Keboola UI and re-register the project:
+**Fix:** create a fresh token in the Keboola UI and give it to the project you already registered:
 
 ```bash
-kbagent project add --project prod \
-  --url https://connection.keboola.com --token NEW_TOKEN
+kbagent project edit --project prod --token NEW_TOKEN
 ```
 
 For projects onboarded via `org setup`, `kbagent project refresh` re-mints the project token instead.

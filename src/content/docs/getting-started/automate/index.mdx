@@ -314,11 +314,11 @@ keboola.ex-http` finds the two connectors again, and the same command with the t
 Check the file before it reaches the project, then create it:
 
 ```bash
-kbagent flow validate --project docs-demo --file @flow.yaml
+kbagent flow validate --project docs-demo --definition-file flow.yaml
 ```
 
 ```bash
-kbagent flow new --project docs-demo --name "Boolabean morning outlook" --file @flow.yaml
+kbagent flow new --project docs-demo --name "Boolabean morning outlook" --definition-file flow.yaml
 ```
 
 It prints the flow's configuration ID, which the next two commands take as `<flow-id>`;

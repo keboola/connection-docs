@@ -65,7 +65,8 @@ $ kbagent --json project list
 
 ## Development
 
-- **`branch`** — `list`, `create`, `use`, `reset`, `delete`, `merge`, plus branch `metadata-*`.
+- **`branch`** — `list`, `create`, `use`, `reset`, `delete`, plus branch `metadata-*`.
+- **`merge-request`** — `list`, `detail`, `conflicts`, `diff`, `create`, `update`, `request-review`, `approve`, `request-changes`, `auto-merge`, `merge`, `resolve` (`branch merge` was removed in 1.0.0).
 - **`workspace`** — `create`, `list`, `detail`, `delete`, `password`, `load`, `query`, `from-transformation`, `gc`.
 - **`sync`** — `init`, `pull`, `status`, `diff`, `push`, `clone`, `branch-link/unlink/status`.
 - **`encrypt`** — `values` (one-way encrypt `#`-prefixed secrets).

@@ -42,9 +42,9 @@ switches to another one, and `kbagent branch reset` puts you back in production.
 commands are the exception: they report production unless you pass `--branch` explicitly, which
 keeps `storage tables` from quietly answering about a branch you forgot you were in.
 
-The merge is the gap. `kbagent branch merge` hands you the URL of the merge screen rather than
-merging anything, because the diff and the partial-merge choices on the pages below are where the
-decision is made. `kbagent branch delete --branch <branch-id>` removes a branch afterwards.
+To merge, open a merge request: `kbagent merge-request create --title "<title>"` from the active
+branch, then `kbagent merge-request merge` once it is approved. The diff and the partial-merge
+choices on the pages below are in the Keboola UI. `kbagent branch delete --branch <branch-id>` removes a branch afterwards.
 
 :::caution[Public Beta]
 This feature is currently in public beta. Please provide feedback using the feedback button in your project.
