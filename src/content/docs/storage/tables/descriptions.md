@@ -24,7 +24,14 @@ On Snowflake and BigQuery projects, open a bucket and then a table.
 
 Descriptions are Markdown, within the [size limit](#descriptions-in-your-backend), and are saved with **Save**.
 Saving a description in the UI turns off the **Managed by Keboola** switch of the table, so Keboola components stop
-updating the descriptions of the table and all its columns. You can turn it on again from the same box.
+updating the descriptions of the table and all its columns.
+
+To return to the descriptions from the source, turn the switch on again in the **Table Description** box.
+Turning it on changes no description by itself:
+- The next run of a component that writes the table replaces the descriptions with the values it provides.
+- This applies to the table and all its columns at once, so your other edits are replaced too.
+- A description that the component does not provide stays as it is.
+
 The description of an alias shows the description of its source table and is read-only, as are the descriptions of
 tables in buckets backed by an external schema (see [Descriptions of External Tables](#descriptions-of-external-tables)).
 

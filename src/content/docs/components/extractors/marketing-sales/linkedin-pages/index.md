@@ -28,6 +28,7 @@ To configure this connector, you need to authenticate with a **LinkedIn Profile*
     - Posts to download data about posts, their comments, and their likes.
     - Enumerated Types to download tables of enumerated types used in other data tables.
     - Organizations to download data about organizations themselves.
+ - **Download Post Statistics (post_statistics)** - [OPT] Only for **Posts**. Also downloads the statistics of each post into the table `post_statistics`, as a snapshot dated by the day of the run. Off by default. See [Post Statistics](#post-statistics) below.
  - **Sync Options (sync_options)** [REQ] - Options pertaining to only time-bound data extraction:
     - **Date From (date_from)** - [REQ] Date from which data is downloaded. Either date in `YYYY-MM-DD` format or dateparser string; i.e., `5 days ago`, `1 month ago`, `yesterday`, etc. You can also set this as `last run`, which will fetch data from the last run of the component; if no previous successful run exists, all data since LinkedIn launch (2003-05-05) are downloaded. Values always get rounded down to the beginning of the day.
     - **Date To (date_to)** - [REQ] Date to which data is downloaded. Either date in `YYYY-MM-DD` format or dateparser string; i.e., `5 days ago`, `1 week ago`, `now`, etc. Values always get rounded down to the beginning of the day.
@@ -39,3 +40,23 @@ To configure this connector, you need to authenticate with a **LinkedIn Profile*
 
 ![LinkedIn Pages - Global Configuration](/components/extractors/marketing-sales/linkedin-pages/linkedin-pages-1.png)
 ![LinkedIn Pages - Row Configuration](/components/extractors/marketing-sales/linkedin-pages/linkedin-pages-2.png)
+
+## Post Statistics
+When **Download Post Statistics** is enabled, the **Posts** row also downloads the [share statistics](https://learn.microsoft.com/en-us/linkedin/marketing/community-management/organizations/share-statistics) of each post into the table `post_statistics`. The table contains these columns:
+
+ - `post_urn` - the post ID, the same as `id` in the `posts` table
+ - `snapshot_date` - the day of the run (UTC)
+ - `impressionCount` - impressions
+ - `uniqueImpressionsCount` - unique impressions (members reached)
+ - `clickCount`, `likeCount`, `commentCount`, `shareCount` - clicks, reactions, comments and reposts
+ - `engagement` - the engagement rate: (clicks + reactions + comments + reposts) / impressions
+
+LinkedIn provides only current totals for each post, not daily values. Each run therefore saves a snapshot of those totals, dated by the day of the run. The primary key is `post_urn` and `snapshot_date`. With incremental load, the snapshots build a history, and the daily change for a post is the difference between two consecutive snapshots. Running the row more than once on the same day overwrites that day's snapshot. The history starts on the day the option is first enabled; earlier days cannot be filled in.
+
+Notes on the values:
+
+ - `likeCount`, `commentCount` and `shareCount` are lifetime totals.
+ - `impressionCount`, `uniqueImpressionsCount` and `clickCount` cover a rolling window of roughly the last 12 months. For posts older than that, they count only the recent activity and can decrease between snapshots.
+ - The "engagements" count shown in LinkedIn analytics is the sum `clickCount + likeCount + commentCount + shareCount`.
+ - Only organic activity is included; sponsored activity is not counted.
+ - Posts without any activity in the 12-month window are not returned.
