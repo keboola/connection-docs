@@ -4,12 +4,12 @@ slug: 'storage/tables/incremental-loading'
 sidebar:
   label: Primary Keys & Incremental Loading
 search_keywords: [primary key, deduplication, incremental load, upsert, incremental processing, changed in last, _timestamp]
-description: 'How data lands in a Storage table: primary keys and deduplication, incremental loads, the _timestamp column with native data types, and automatic and manual incremental processing.'
+description: 'Primary keys and deduplication in Storage tables, incremental loads, the _timestamp column of typed tables, and automatic and manual incremental processing.'
 ---
 
 How data lands in a [table](/storage/tables/) depends on two settings: whether the table has a **primary key**, and whether the load is **incremental**. This page explains both, with worked examples, plus **incremental processing**: letting components read only the rows that changed since their last successful run, or within a time window. To set a primary key in the UI, see [Manage tables](/storage/tables/manage/#set-or-remove-a-primary-key).
 
-<!-- Explanation-type page. Split from the former single tables page (PRDCT-486, first cut in #1010); text carried over from main 2026-11-12. -->
+<!-- Explanation-type page. Split from the former single tables page (first cut in #1010); text carried over from main 2026-11-12. -->
 
 ## Primary Keys
 Each table may have a **primary key** defined on one or more columns. A primary key represents an
@@ -119,7 +119,7 @@ is not defined and an incremental load is used, it simply appends the data to th
 
 ### Difference between tables with [native datatypes](/storage/tables/data-types/) and string tables
 
-<!-- VERIFY(Nikita): the _timestamp update semantics for native-types tables below were flagged for review in #1010 and never confirmed. -->
+<!-- VERIFY(Nikita): live check 2026-11-20 in project 264 (Snowflake, native types, primary key id) contradicts this section: an incremental load that re-imported unchanged rows left their _timestamp as it was (changedSince after the load returned only the rows whose values changed), the same as for string tables. Ask the Storage team whether the behaviour changed since 2022 or differs on BigQuery, then rewrite or drop this subsection and its A2/A3 example. -->
 There is significant change when loading incrementally into table with native datatypes on. If a table does not have native datatypes enabled during incremental loading, the `_timestamp` column is updated based on the primary key only when a value in the row changes. In tables with native datatypes, the `_timestamp` column is updated every time when duplicate primary keys are imported. This behavior has an impact on [incremental processing](#incremental-processing). When rows with duplicate primary keys are imported into tables with native types, they are treated as new rows. 
 
 **Example:**
