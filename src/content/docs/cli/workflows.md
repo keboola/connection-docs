@@ -42,7 +42,7 @@ kbagent sync branch-link --project analytics
 
 With no `--branch-id`/`--branch-name`, `branch-link` maps your **current git branch** to a Keboola branch of the same name, creating it if it doesn't exist — check out a git branch and you're on the matching dev branch.
 
-**Result:** your edits live on the branch; production is untouched until you merge. Once the merge request is approved, `kbagent merge-request merge --project analytics` merges it into production and deletes the branch; `kbagent branch reset` puts you back in production.
+**Result:** your edits live on the branch; production is untouched until you merge. Merge requests need a project with Branches 2.0 (the `branches-merge-requests` feature); without it, `merge-request` commands fail with `FEATURE_NOT_ENABLED` and you merge in the Keboola UI. Once the merge request has the approvals the project requires, `kbagent merge-request merge --project analytics --branch <branch-id> --yes` merges the whole branch into production, deletes it, and resets the active branch to production.
 
 ## Version your configs with GitOps
 
@@ -70,7 +70,7 @@ kbagent sync pull --project analytics    # configs as local files
 # edit the files (or let your coding agent do it)
 kbagent sync diff --project analytics    # review exactly what changes
 kbagent sync push --project analytics    # apply to the dev branch
-kbagent merge-request create --project analytics --title "Warehouse migration"   # for review
+kbagent merge-request create --project analytics --title "Warehouse migration"   # for review (Branches 2.0)
 ```
 
 **Result:** the change happened across the org, was reviewable as a diff, and production stayed safe behind the branch — the workflow the UI can't do.
