@@ -162,7 +162,7 @@ new clustering is applied.
 
 ## kbagent skill
 
-The kbagent plugin for Claude Code (see [kbagent for AI agents](/cli/for-agents/#claude-code-plugin)) contains the
+The kbagent plugin for Claude Code (see [kbagent for AI agents](/cli/for-agents/#the-kbagent-plugin)) contains the
 skill
 [kbagent-bigquery-repartition](https://github.com/keboola/cli/tree/main/plugins/kbagent/skills/kbagent-bigquery-repartition).
 It runs the copy and swap procedure for one table and adds the steps that this guide only names: the preflight record
