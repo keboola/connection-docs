@@ -1,5 +1,6 @@
 ---
 title: Power BI Refresh
+description: 'Refresh Power BI datasets at the end of a flow: authorize, find the dataset ID, and create one configuration per Power BI workspace.'
 slug: 'components/applications/triggers/powerbi-refresh'
 ---
 

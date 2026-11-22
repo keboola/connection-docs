@@ -1,5 +1,6 @@
 ---
 title: Management
+description: 'Overview of managing a Keboola project: data governance and jobs, user types, project status and deletion, support, and the maintenance window.'
 slug: 'management'
 redirect_from:
   - /getting-started/management/

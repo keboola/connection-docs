@@ -9,6 +9,7 @@ import beaconTransforms from './src/integrations/beacon-transforms.mjs';
 import externalLinks from './src/integrations/external-links.mjs';
 import pagefindTitles from './src/integrations/pagefind-titles.mjs';
 import { remarkStripComments } from './src/integrations/strip-comments.mjs';
+import { remarkAgentOnly } from './src/integrations/agent-only.mjs';
 
 /* Shared so the llms.txt heading cannot drift from the site's own title. */
 const SITE_TITLE = 'Keboola User Documentation';
@@ -24,7 +25,8 @@ export default defineConfig({
     format: 'directory',
   },
   markdown: {
-    remarkPlugins: [remarkStripComments, beaconTransforms],
+    // :::agent blocks are for the markdown twin only; see agent-only.mjs.
+    remarkPlugins: [remarkStripComments, remarkAgentOnly, beaconTransforms],
     // Links that leave help.keboola.com open in a new tab; see the plugin's header.
     rehypePlugins: [externalLinks],
   },
