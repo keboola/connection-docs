@@ -10,6 +10,8 @@ This component lets you run custom Python code directly in Keboola. Use it to ca
 process files, push data to third-party systems, or build any integration that isn't covered by an existing connector —
 all without leaving Keboola.
 
+<!-- Reference-type page. Type declared in the 2026-11-19 section rework; the content is unchanged and was not re-checked against the component. -->
+
 ![Screenshot - Custom Python Component Overview](/components/applications/custom-python/custom-python-0.png)
 
 ## When to Use Custom Python
@@ -30,7 +32,7 @@ all without leaving Keboola.
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **Custom Python** application.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Custom Python** application.
 
 ### Python Version
 

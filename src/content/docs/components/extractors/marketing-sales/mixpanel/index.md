@@ -19,7 +19,7 @@ search_keywords: [mixpanel]
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **MixPanel** data source connector. The connector has no rows; one configuration is one export.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **MixPanel** data source connector. The connector has no rows; one configuration is one export.
 
 | Field | Description |
 |---|---|

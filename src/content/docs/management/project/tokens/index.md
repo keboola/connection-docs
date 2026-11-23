@@ -1,6 +1,7 @@
 ---
 title: API Tokens
 slug: 'management/project/tokens'
+description: 'Learn what Keboola API tokens are, how master tokens differ from limited ones, and how to create, refresh and share a token with restricted access.'
 redirect_from:
   - /storage/tokens/
 ---
@@ -27,6 +28,8 @@ Tokens can be managed from the **Project Settings > API Tokens** page.
 
 ![Screenshot - Storage Tokens](/management/project/tokens/API_tokens.png)
 
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Master Tokens
 Tokens that belong to project administrators are called **master tokens**. Their description is 
 the email of the user they belong to. Master tokens cannot be modified, shared or deleted. 
@@ -43,7 +46,7 @@ API tokens are created
 1. automatically when joining a project (master token).
 2. automatically when creating a new configuration of certain components (for example, flows).
 3. automatically when running a JupyterLab workspace.
-4. automatically when using [external OAuth](/components/#external-authorization) authorization.
+4. automatically when using [external OAuth](/components/authorization/#ask-the-account-owner-to-authorize) authorization.
 5. manually when needed.
 
 Automatically created tokens have the lowest possible permissions for their task and also set expiration if possible.
@@ -123,7 +126,7 @@ sure that they can use only that particular component in that particular bucket.
 reconfigure it — e.g., update the extraction queries (but only via the API).
 Also, writing to a limited set of buckets is a good way of preventing accidentally overwriting data.
 
-You can also specify if a token is allowed to delete configurations in [Trash](/components/#delete-configuration) by 
+You can also specify if a token is allowed to delete configurations in [Trash](/components/configurations/#delete-and-restore-a-configuration) by 
 selecting **Full Access** for Trash. This is rarely needed.
 
 ## Refreshing Token
@@ -186,3 +189,7 @@ The link to the Storage API Console is available at the token retrieval page as 
 - [AWS US Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.keboola.com)
 - [AWS EU Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.eu-central-1.keboola.com)
 - [Azure EU Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.north-europe.azure.keboola.com)
+
+---
+
+**Next:** [Limits & Project Power →](/management/project/limits/)

@@ -1,6 +1,7 @@
 ---
 title: HTTP
 slug: 'components/extractors/storage/http'
+description: 'Download a CSV file or a ZIP or GZ archive from an HTTP or HTTPS base URL into a Keboola table, one file per configuration row.'
 redirect_from:
     - /extractors/storage/http/
 ---
@@ -9,8 +10,10 @@ redirect_from:
 
 This data source connector loads a single CSV file from an HTTP/HTTPS URL and stores it in Storage.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **HTTP** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **HTTP** connector.
 
 Open **Base URL and Connection Options** and enter a base URL -- the prefix for all downloaded CSV files from a given website
 *(for example, `https://help.keboola.com`; you can then test the extraction on our sample tables)*.
@@ -45,7 +48,7 @@ want to load one of our tutorial tables, enter its path, e.g., `/getting-started
 
 - The initial value in **Table name** is derived from the row name. You can change it at any time; however,
 the [Storage bucket](/storage/buckets/) where the table will be saved to cannot be changed.
-- **Incremental load** will turn on [incremental loading to Storage](/storage/tables/#incremental-loading). The result of the
+- **Incremental load** will turn on [incremental loading to Storage](/storage/tables/incremental-loading/#incremental-loading). The result of the
 incremental load depends on other settings (mainly **Primary Key**).
 - **Delimiter** and **Enclosure** specify the CSV settings.
 
@@ -62,5 +65,5 @@ The **Read Header** option defaults to *Read the header from the file(s) header*
 
 **Primary Key** can be used to specify the primary key in Storage, which can be used with **Incremental Load**. 
 
-The data source connector also supports [Debug mode](/components/#debug-mode), all supported
+The data source connector also supports [Debug mode](/components/debug-mode/), all supported
 parameters are described in the [GitHub repository](https://github.com/keboola/http-extractor).

@@ -1,6 +1,7 @@
 ---
 title: Input and Output Mapping
 slug: 'transformations/mappings'
+description: 'Set up input and output mapping for a transformation, including load types, read-only input mapping, partition-aware import and Direct Mode output mapping.'
 search_keywords: [input mapping, output mapping]
 ---
 
@@ -84,7 +85,7 @@ idea to add the `.csv` extension. For **Database Staging**, the table name is au
 use an arbitrary name. It also means that they may be case sensitive, for instance, if the destination is in Snowflake staging.
 - **Columns** — Select specific columns if you do not want to import them all; 
 this saves processing time for larger tables.
-- **Changed in last** — If you use [incremental processing](/storage/tables/#incremental-processing), 
+- **Changed in last** — If you use [incremental processing](/storage/tables/incremental-loading/#incremental-processing), 
 this comes in handy; import only rows changed or created within the selected time period. 
 The supported time dimensions are `minutes`, `hours`, and `days`.
 - **Data filter** — Filter source rows to the rows that match this single-column multiple-values filter. 
@@ -213,8 +214,8 @@ A cloned table is an exact copy of the source table, including the `_timestamp` 
 This column is used internally by Keboola for comparison with the value of the *Changed in last* filter.
 
 The column type differs by backend: `TIMESTAMP_NTZ(9)` on Snowflake and `TIMESTAMP` on BigQuery.
-The value contains the [last change of the row](/storage/tables/#manual-incremental-processing).
-You can use this column to set up [incremental processing](/storage/tables/#incremental-processing),
+The value contains the [last change of the row](/storage/tables/incremental-loading/#manual-incremental-processing).
+You can use this column to set up [incremental processing](/storage/tables/incremental-loading/#incremental-processing),
 i.e., to replace the role of the **Changed in Last** filter in the input mapping (which you can't use with a clone mapping).
 
 **Important: The _timestamp column cannot be imported back to Storage.**
@@ -249,7 +250,7 @@ malformed files, etc.) or, for example, to work with pre-trained models that you
 ![File Input Mapping](/transformations/mappings/file-input-mapping.png)
 
 #### Options
-- **Tags** — [tags](/storage/files/#uploading-file) used to select files.
+- **Tags** — [tags](/storage/files/#upload-a-file) used to select files.
 - **Changed Since** — the time range for selecting files. Either a static range (e.g. `30 minutes`) or *Since last successful run* for incremental processing (see below). With a static range, a file must satisfy **both** the tags **and** the range to be selected.
 - **Query** *(deprecated, do not use)* — legacy option for a customized [Elastic query](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-query-string-query.html#query-string-syntax).
 - **Processed Tags** *(deprecated, do not use)* — legacy option that assigned tags to input files after the transformation finished, used to process files incrementally.
@@ -304,8 +305,8 @@ the results of your transformation (i.e., contents of the Output Mapping *source
 - **Incremental** — Check this option to make sure that in case the *Destination* table already exists, 
 it is not overwritten, but resulting data is appended to it. However, any existing row having the same primary key 
 as a new row will be replaced. See the description of 
-[incremental loading](/storage/tables/#incremental-loading) for a detailed explanation and examples.
-- **Primary key** — The [primary key](/storage/tables/#primary-keys) of the destination table; if the table already exists, 
+[incremental loading](/storage/tables/incremental-loading/#incremental-loading) for a detailed explanation and examples.
+- **Primary key** — The [primary key](/storage/tables/incremental-loading/#primary-keys) of the destination table; if the table already exists, 
 the primary key must match. Feel free to use a multi-column primary key.
 - <span id="deduplication-strategy"></span>**Deduplication Strategy** — This allows to switch in Snowflake transformations from the default load Upsert to Insert. Upsert option uses deduplication based on primary keys and ensures data quality. By switching to Insert, the load performs faster but skips deduplication and type casting - meaning you are responsible for uniqueness and correct data types. As this option is for high data maturity users, you can ask our support to enable this for your project as Deduplication Strategy is under feature flag.
 -  **Delete rows** — When Incremental loading is enabled, you can delete specific rows from the destination table before importing new data into the Storage. This gives you precise control over incremental updates. There are 2 options you can use:
