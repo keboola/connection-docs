@@ -1,15 +1,17 @@
 ---
 title: Market Vision
 slug: 'components/extractors/marketing-sales/market-vision'
+description: 'Extract Market Vision projects with their forms, questions, categories and fieldsets using an API token, loaded incrementally with backfill across runs.'
 redirect_from:
     - /extractors/marketing-sales/market-vision/
 ---
 
 
 
-This data source connector uses the [Market Vision API](https://reporting.marketvision-spring.com/api/v1/documentation) to
-extract Market Vision [projects](https://reporting.marketvision-spring.com/api/v1/documentation#List_of_Projects_150)
-and their corresponding Forms, Questions, Categories, and Fieldsets.
+The connector calls the [Market Vision API](https://reporting.marketvision-spring.com/api/v1/documentation), starting from its
+[projects](https://reporting.marketvision-spring.com/api/v1/documentation#List_of_Projects_150) endpoint.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 The data is extracted incrementally, so only data that has been changed since the last run is fetched. 
 The component has backfill implemented, meaning that if not all data could be fetched in the first run due to large 

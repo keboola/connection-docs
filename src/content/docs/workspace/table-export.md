@@ -1,6 +1,7 @@
 ---
 title: Exporting Workspace Tables to Files
 slug: 'workspace/table-export'
+description: 'Export a table from a Snowflake or BigQuery workspace to File Storage through the Storage API, with the request fields, response and limitations.'
 ---
 
 
@@ -17,6 +18,8 @@ Currently supported backends:
 
 - **Snowflake**
 - **BigQuery**
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Endpoint
 

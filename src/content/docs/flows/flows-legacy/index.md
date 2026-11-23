@@ -1,6 +1,7 @@
 ---
 title: Legacy Flows
 slug: 'flows/flows-legacy'
+description: 'Build, schedule and monitor a flow in the Legacy Flow Builder, which Conditional Flows are replacing.'
 redirect_from:
     - /orchestrator/
     - /orchestrator/design/
@@ -17,6 +18,8 @@ redirect_from:
 :::caution
 **Important:** This is the Legacy Flow Builder. It is being replaced by [Conditional Flows](/flows/), which offer conditional logic, branching, retries, and more robust error handling. We recommend using [Conditional Flows](/flows/) for all new workflows. An automatic migration from Legacy Flows to Conditional Flows is planned.
 :::
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Migration to Conditional Flows
 
@@ -153,3 +156,7 @@ In the tab **All Runs**, you can check how your flow is running with a detailed 
 In **Jobs** you’ll see how the flow runs and triggers each individual component sequentially. The status updates in real-time. 
 Once the last of your data source connectors finishes, the transformations will be triggered. After they complete, the data destination connector(s) will run, and the flow will be finalized. 
 In the end, you’ll see either a **Success** message or an error notification if something went wrong.
+
+---
+
+**Next:** [Migration Guide →](/flows/flow-migration-guide/)

@@ -1,6 +1,8 @@
 ---
-title: Snowflake Secure Data Sharing
-description: 'Share Snowflake data with other accounts through a share: the producer and consumer workflows, role requirements, and the limits of imported databases.'
+title: Import a Snowflake share (Secure Data Sharing)
+sidebar:
+  label: Import a Snowflake Share
+description: 'Bring data another Snowflake account shares with you into Keboola: the producer and consumer steps, role requirements, limits, and registering the schema.'
 slug: 'storage/byodb/snowflake-secure-data-sharing'
 ---
 
@@ -8,9 +10,11 @@ slug: 'storage/byodb/snowflake-secure-data-sharing'
 Important: This feature is currently available in BETA.
 :::
 
+This guide shows how to import a Snowflake share into Keboola: the producer account shares a database, your consumer account creates a database from the share, and you register its schema as an [external dataset](/storage/byodb/external-buckets/). To share a Keboola bucket with other Snowflake accounts instead, use [Bucket Exposure in share mode](/storage/bucket-exposure/snowflake-share/).
 
+<!-- How-to-type page. Source: this page as it stood on main; the lede and the link to the register page are new, and the two limitations sections are merged. Structure checked 2026-11-19, facts not re-verified. -->
 
-This guide explains how to share a database and its objects with one or more accounts by creating a share. Currently, Keboola supports granting privileges directly to a share, specifically for tables, external tables, views, secure views, and secure materialized views. For further reference, consult the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/data-sharing-gs#grant-privileges-directly-to-a-share).
+The producer shares a database and its objects with one or more accounts by creating a share. Currently, Keboola supports granting privileges directly to a share, specifically for tables, external tables, views, secure views, and secure materialized views. For further reference, consult the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/data-sharing-gs#grant-privileges-directly-to-a-share).
 
 The process involves **two roles**:
 
@@ -68,17 +72,6 @@ To use the shared data, follow these steps to create and configure a database fr
 ### Role Requirements
 To perform these tasks, use the `ACCOUNTADMIN` role or a role with the `IMPORT SHARE` global privilege. For more details, see [Enable non-ACCOUNTADMIN roles to perform data sharing tasks](https://docs.snowflake.com/en/user-guide/security-access-privileges-shares).
 
-### Limitations of Imported Databases
-Imported databases have the following restrictions:
-* **Read-only**: Consumers can query data but cannot modify it or create new objects.
-* Unsupported actions include:
-  * Cloning imported databases, schemas, or tables.
-  * Using Time Travel for imported databases or their objects.
-  * Editing comments for imported databases.
-* They cannot be:
-  * Re-shared with other accounts.
-  * Replicated.
-
 ### Viewing Available Shares
 Use the web interface or SQL to view available shares:
 ```sql
@@ -113,6 +106,21 @@ While sharing data can greatly enhance collaboration, certain object types and p
 - Supported objects exclude secure user-defined functions (UDFs) and Apache Iceberg™ tables.
 - Masking policies will not be applied after sharing with other Keboola projects.
 
+### Limitations of Imported Databases
+Imported databases have the following restrictions:
+* **Read-only**: Consumers can query data but cannot modify it or create new objects.
+* Unsupported actions include:
+  * Cloning imported databases, schemas, or tables.
+  * Using Time Travel for imported databases or their objects.
+  * Editing comments for imported databases.
+* They cannot be:
+  * Re-shared with other accounts.
+  * Replicated.
+
 ## Final Step
-You can now register the schema in the newly created database as an external dataset in Keboola, enabling seamless data integration. Use `<CONSUMER_DATABASE_NAME>` as the database name and 
+You can now [register the schema](/storage/byodb/external-buckets/register/) in the newly created database as an external dataset in Keboola, enabling seamless data integration. Use `<CONSUMER_DATABASE_NAME>` as the database name and 
 the schema present in this database. When registering, don't forget to check the `Secure Data Share` checkbox.
+
+---
+
+**Next:** [BigQuery policy tags →](/storage/byodb/bigquery-policy-tags/)
