@@ -4,12 +4,12 @@ slug: 'storage/tables/descriptions'
 sidebar:
   label: Descriptions
 search_keywords: [description, column description, table description, comment, COMMENT, KBC.description]
-description: 'Table and column descriptions in Storage: editing them in the UI and API, size limits per backend, external tables, workspaces, Data Gateway and KBC.description metadata.'
+description: 'Table and column descriptions in Storage: UI and API editing, size limits per backend, external tables, workspaces, Data Gateway and KBC.description metadata.'
 ---
 
 Every Storage table and column can carry a description. This page lists where descriptions come from, where they are written, and their limits.
 
-<!-- Reference-type page. Split from the former single tables page (PRDCT-486); text carried over from main 2026-11-12. -->
+<!-- Reference-type page. Split from the former single tables page; text carried over from main 2026-11-12. -->
 
 Tables and columns carry a description that is part of the
 [table definition](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-bucketId-/tables-definition).

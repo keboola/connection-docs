@@ -6,6 +6,8 @@ slug: 'storage/buckets'
 
 Buckets are containers for tables in Storage. They are further organized into the following two **stages**:
 
+<!-- How-to-type page. Source: the Buckets page on main; body unchanged, checked against it 2026-11-19. Not yet in recipe form. -->
+
 1. **in** — for input data (usually data source connector results)
 2. **out** — for processed data (usually results of transformations or applications)
 
@@ -20,3 +22,5 @@ To review information about an existing bucket, hover over the bucket name and s
 ![Screenshot - Bucket information](/storage/buckets/bucket-info.png)
 
 Apart from being used for organizing tables, buckets can also be used for [sharing tables](/catalog/).
+
+**Next:** [Files in Storage →](/storage/files/)

@@ -709,8 +709,41 @@ items:
   - url: /storage/
     title: Storage
     items:
+      - url: /storage/tables/
+        title: Tables & Aliases
+        items:
+          - url: /storage/tables/manage/
+            title: Manage Tables
+
+          - url: /storage/tables/incremental-loading/
+            title: Primary Keys & Incremental Loading
+
+          - url: /storage/tables/descriptions/
+            title: Descriptions
+
+          - url: /storage/tables/data-types/
+            title: Data Types
+
+          - url: /storage/tables/data-types/reference/
+            title: Data Types Reference
+
+          - url: /storage/tables/csv-files/
+            title: CSV Files
+
+          - url: /storage/tables/csv-files/excel/
+            title: CSV in Excel
+
+          - url: /storage/tables/backups/
+            title: Back Up and Restore
+
       - url: /storage/buckets/
         title: Buckets
+
+      - url: /storage/files/
+        title: Files
+
+      - url: /storage/jobs/
+        title: Jobs
 
       - url: /storage/bucket-exposure/
         title: Bucket Exposure
@@ -737,36 +770,6 @@ items:
             title: OpenTelemetry reference
           - url: /storage/data-streams/reference/
             title: Reference
-
-      - url: /storage/files/
-        title: Files
-
-      - url: /storage/jobs/
-        title: Jobs
-
-      - url: /storage/tables/
-        title: Tables & Aliases
-        items:
-          - url: /storage/tables/manage/
-            title: Manage Tables
-
-          - url: /storage/tables/incremental-loading/
-            title: Primary Keys & Incremental Loading
-
-          - url: /storage/tables/descriptions/
-            title: Descriptions
-
-          - url: /storage/tables/data-types/
-            title: Data Types
-
-          - url: /storage/tables/csv-files/
-            title: CSV Files
-
-          - url: /storage/tables/uploads/
-            title: Table Import/Export
-
-          - url: /storage/tables/backups/
-            title: Backups and Restorations
 
       - url: /storage/byodb/
         title: Bring Your Own Database

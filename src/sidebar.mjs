@@ -528,7 +528,24 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "storage" },
+      {
+        label: "Tables & Aliases",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "storage/tables" },
+          { slug: "storage/tables/manage" },
+          { slug: "storage/tables/incremental-loading" },
+          { slug: "storage/tables/descriptions" },
+          { slug: "storage/tables/data-types" },
+          { slug: "storage/tables/data-types/reference" },
+          { slug: "storage/tables/csv-files" },
+          { slug: "storage/tables/csv-files/excel" },
+          { slug: "storage/tables/backups" },
+        ],
+      },
       { slug: "storage/buckets" },
+      { slug: "storage/files" },
+      { slug: "storage/jobs" },
       {
         label: "Bucket Exposure",
         collapsed: true,
@@ -549,22 +566,6 @@ export const sidebar = [
           { slug: "storage/data-streams/opentelemetry" },
           { slug: "storage/data-streams/opentelemetry/reference" },
           { slug: "storage/data-streams/reference" },
-        ],
-      },
-      { slug: "storage/files" },
-      { slug: "storage/jobs" },
-      {
-        label: "Tables & Aliases",
-        collapsed: true,
-        items: [
-          { label: "Overview", slug: "storage/tables" },
-          { slug: "storage/tables/manage" },
-          { slug: "storage/tables/incremental-loading" },
-          { slug: "storage/tables/descriptions" },
-          { slug: "storage/tables/data-types" },
-          { slug: "storage/tables/csv-files" },
-          { slug: "storage/tables/uploads" },
-          { slug: "storage/tables/backups" },
         ],
       },
       {
