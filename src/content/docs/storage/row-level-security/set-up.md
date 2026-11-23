@@ -3,20 +3,36 @@ title: Set up row-level and column-level security
 slug: 'storage/row-level-security/set-up'
 sidebar:
   label: Set Up
-description: 'Turn on row-level and column-level security: use a governed workspace, write policies with the CLI, an AI assistant or the API, and govern a Data App.'
+description: 'Turn on row-level and column-level security: turn on the feature, use a governed workspace, write policies in the UI, with the CLI, an AI assistant or the API, and govern a Data App.'
 ---
 
-Setting up [row-level and column-level security](/storage/row-level-security/) takes three steps: send queries through a governed workspace, write a policy for each table, and check the result as the reader. A Data App needs two more steps. What a policy can contain is in the [policy reference](/storage/row-level-security/policy-reference/).
+<!-- Public beta facts checked 2026-11-23. -->
+
+Setting up [row-level and column-level security](/storage/row-level-security/) takes four steps: turn on the feature, send queries through a governed workspace, write a policy for each table, and check the result as the reader. A Data App needs two more steps. What a policy can contain is in the [policy reference](/storage/row-level-security/policy-reference/).
 
 <!-- How-to-type page. Source: the "Set it up" and "Data Apps" sections of the row-level security page and the "Create a policy" sections of the policy reference, as they stood on main before the split. Structure checked 2026-11-19, facts not re-verified. -->
 
-Row- and column-level security is in beta: see the note at the top of the [overview](/storage/row-level-security/) for the backends it is verified on.
+:::caution[Public Beta]
+Row-level and column-level security for Data Apps is in free public beta until 28 February 2027. A project admin can turn it on in **Project settings → Features**. After the beta it becomes a paid add-on; your Customer Success Manager will share the details. See the [overview](/storage/row-level-security/) for what the beta covers.
+:::
 
-## 1. Make sure queries go through a governed workspace
+## 1. Turn on the feature
+
+**Goal:** enable row-level security for the project.
+
+A project admin opens **Project settings → Features**, finds `row-level-security` and turns it on. During the beta you do this yourself; after the beta only Keboola can enable it.
+
+**Result:** The project has the `row-level-security` feature. It unlocks:
+
+- **Data access** in Project settings, where you write row policies.
+- The **Row-level security** box in the **Advanced settings** tab of each Data App, where you pick the policies the app runs under.
+- A governed workspace for the [MCP Server](/ai/mcp-server/).
+
+## 2. Make sure queries go through a governed workspace
 
 **Goal:** have a governed workspace that serves the queries of your readers.
 
-- **MCP Server:** ask Keboola support to enable the `row-level-security` project feature. With it, the MCP Server creates its workspace as governed and sends `query_data` through Query Service. Workspaces that already exist are not changed or converted.
+- **MCP Server:** with the `row-level-security` feature on, the MCP Server creates its workspace as governed and sends `query_data` through Query Service. Workspaces that already exist are not changed or converted.
 - **Your own workspace:** create one with the login type `governed`. With the [Keboola CLI](/cli/) (Snowflake or BigQuery), a governed workspace has no password or key, so there is nothing to save:
 
 <!-- kbagent-check: skip-next -->
@@ -28,13 +44,25 @@ kbagent --json workspace create --project my-project --name governed-ws --govern
 
 **Result:** Queries to a governed workspace read the Storage table by its bucket name, for example `SELECT * FROM "in.c-crm"."orders"` on Snowflake. Unqualified table names are refused.
 
-## 2. Write the policies
+## 3. Write the policies
 
 **Goal:** give every table that readers should see a policy.
 
 Write policies before you switch a project over: a governed workspace shows no data until a policy allows it. Policies are written by a project administrator (master Storage token). Sharing a policy with other projects or applying it to the whole organization needs the organization administrator role.
 
-You can write policies in three ways. They all create the same `rls-policy` and `cls-policy` objects.
+You can write policies in four ways. They all create the same `rls-policy` and `cls-policy` objects.
+
+### Create a policy in the Keboola UI
+
+**Project settings → Data access** lists the row policies of the project: the table, who sees which rows, the apps the policy applies to and the last change. Each policy also shows its change history.
+
+To create a row policy, click **New policy** and go through three steps:
+
+1. **Table:** pick the table to protect.
+2. **Who sees which rows:** add rules. The conditions of a rule are joined by AND; presets fill in common rules.
+3. **Apps:** pick the Data Apps the policy applies to.
+
+The UI creates row policies (`rls-policy`) only. Write column policies with the Keboola CLI, an AI assistant or the API. A rule with OR or nested conditions opens as raw JSON in the editor.
 
 ### Create a policy with the Keboola CLI
 
@@ -120,7 +148,7 @@ A rule that selects by email is rejected by the schema validation (HTTP `422`), 
 
 **Result:** Whichever way you used, each protected table now has an `rls-policy`, a `cls-policy` or both. `rls list` and `cls list` show them.
 
-## 3. Check it as the reader
+## 4. Check it as the reader
 
 **Goal:** confirm that a reader gets exactly what the policy allows.
 
@@ -141,7 +169,11 @@ kbagent workspace query --project my-project --workspace-id <governed-workspace-
 
 A Data App protected by single sign-on (OIDC) is the case where policies are a hard boundary. The proxy that sits in front of the app signs a token with the user's identity and groups and sends it with each request in the `X-Kbc-App-User-Token` header. The app has to pass that header to Query Service with every query, together with the app's own Storage token. See [Data Apps authentication](/data-apps/authentication/) for how users sign in.
 
-**1. List the policies of the app.** Set `runtime.workspace.rlsPolicies` in the app configuration to the IDs of the row policies that apply to the app, and `runtime.workspace.clsPolicies` to the IDs of the column policies (the `id` of each `rls-policy` and `cls-policy`; `rls list`, `cls list` or the Metastore API return them). The two lists are independent: you can set one or both. The workspace must be enabled:
+**1. Pick the policies of the app.**
+
+In the Keboola UI, open the app's **Advanced settings** tab and find the **Row-level security** box. Switch it on and pick the row policies and the column policies the app runs under. As the box says: each visitor sees only the rows the row policies allow and the columns the column policies allow, and a column policy alone opens a table to the readers it names (all rows, only its columns). The box also names the app's input tables that no listed policy covers. The change applies from the next deployment, so redeploy the app.
+
+With the API or the CLI, set `runtime.workspace.rlsPolicies` in the app configuration to the IDs of the row policies that apply to the app, and `runtime.workspace.clsPolicies` to the IDs of the column policies (the `id` of each `rls-policy` and `cls-policy`; `rls list`, `cls list` or the Metastore API return them). The two lists are independent: you can set one or both. The workspace must be enabled:
 
 ```json
 {
@@ -161,16 +193,16 @@ kbagent config update --project my-project --component-id keboola.data-apps --co
 kbagent data-app deploy --project my-project --app-id <app-id> --wait
 ```
 
-`--merge` replaces each list you pass; to remove a list, update the configuration without that key. The Data App settings in the UI have no editor for these lists, so set them with the CLI or the API.
-
-<!-- Checked 2026-11-20 in the UI of project 264: no editor for `rlsPolicies` or `clsPolicies`. The Data App tabs are Overview, Advanced settings, Deployments, All Runs, Terminal logs and Versions; Advanced settings has only Environment variables, Table Input Mapping, File Input Mapping and Storage access / Writable Tables; the ⋯ menu has Duplicate, Automate, Debug mode and Delete app. Editing the raw configuration JSON in Debug mode was not tried. -->
+`--merge` replaces each list you pass; to remove a list, update the configuration without that key. The **Row-level security** box in the **Advanced settings** tab edits the same two lists.
 
 - Each list has 1 to 100 policy IDs. An empty list `[]` is refused: remove the key instead. Put a policy in the list of its own kind; the lists are not interchangeable.
 - Only the listed policies apply to the app. A changed list takes effect after you redeploy the app.
 - The app must use single sign-on. The platform rejects the configuration (HTTP 400 when you update or deploy the app) if it has a public path or a provider other than single sign-on, so a password-protected app cannot be governed.
 - **An app with neither `rlsPolicies` nor `clsPolicies` is not governed and reads every row and column.** This is the most likely misconfiguration: check that the option is set before you rely on a policy. An app is governed when either list is set.
 
-**2. Forward the user's token.** The Query Service clients do it for you:
+**2. Forward the user's token.** For a JavaScript (Node) app, the simplest way is `@keboola/api-client/sdk/dataAppServer` from `@keboola/api-client` 53.0.0 or later. It sets up the app's server: it sends each request's signed-in user to Query Service with the app's Storage token, gives you `workspace.runQuery(sql)`, and provides Express middleware and an error handler that answers a row-level security refusal with HTTP 403.
+
+At a lower level, the Query Service clients forward the token for you:
 
 ```python
 from keboola_query_service import AppUserToken, StorageToken
@@ -185,7 +217,7 @@ const auth = { type: 'app-user-token', token: userToken, storageToken: appStorag
 
 `user_token` is the value of the `X-Kbc-App-User-Token` header of the incoming request. The proxy sets a fresh token on every request and it expires within minutes, so read it per request instead of caching it. `app_storage_token` is the app's `KBC_TOKEN` environment variable, which the platform injects.
 
-The Python client is `keboola-query-service` 0.4.0 or later, the JavaScript client is `@keboola/api-client` 52.0.0 or later. Both send the user token in `X-Kbc-App-User-Token` and the app token in `X-StorageAPI-Token`, and both raise a `RowLevelSecurityError` when a query is refused.
+The Python client is `keboola-query-service` 0.4.0 or later, the JavaScript client is `@keboola/api-client` 52.0.0 or later. This beta covers Python and JavaScript apps that use these clients; Streamlit apps are not covered yet. Both clients send the user token in `X-Kbc-App-User-Token` and the app token in `X-StorageAPI-Token`, and both raise a `RowLevelSecurityError` when a query is refused.
 
 **Result:** After a redeploy, the queries of the app run under the listed policies with the identity of the signed-in user.
 
