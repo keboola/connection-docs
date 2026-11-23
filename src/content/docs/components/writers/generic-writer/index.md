@@ -1,6 +1,7 @@
 ---
 title: Generic Writer
 slug: 'components/writers/generic-writer'
+description: 'Generic Writer sends data from one table to one HTTP endpoint per configuration, all at once or row by row, for webhooks, notifications and API updates.'
 redirect_from:
     - /extend/generic-writer/
 ---
@@ -12,6 +13,8 @@ It is a counterpart to the [Generic Extractor](/components/extractors/generic-ex
 
 The core concepts and configuration of the writer are also quite similar to the Generic Extractor, so it should be easy to 
 configure for anyone familiar with the extractor.
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Generic Writer Requirements
 The requirements are the same as for the [Generic Extractor](/components/extractors/generic-extractor/#generic-extractor-requirements).
@@ -48,3 +51,7 @@ allows you to leverage secure [encrypted parameters](/extend/encryption/) and dy
 
 For real configuration examples, see the [configuration examples section](/components/writers/generic-writer/configuration-examples/)
  or the collection of [functional examples](https://bitbucket.org/kds_consulting_team/kds-team.wr-generic/src/master/docs/examples/).
+
+---
+
+**Next:** [Configuration →](/components/writers/generic-writer/configuration/)

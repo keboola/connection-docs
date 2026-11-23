@@ -1,6 +1,7 @@
 ---
 title: Google Analytics 4 (GA4)
 slug: 'components/extractors/marketing-sales/google-analytics'
+description: 'Extract Google Analytics 4 data through the Data API with queries built from metrics, dimensions and date ranges, plus filters, anti-sampling and custom OAuth.'
 redirect_from:
     - /extractors/marketing-sales/google-analytics/
 

@@ -1,6 +1,7 @@
 ---
 title: ČEPS
 slug: 'components/extractors/other/ceps'
+description: 'Extract public Czech electricity transmission data from the ČEPS API for a date range, picking endpoints and granularity; each endpoint loads its own table.'
 ---
 
 
@@ -9,6 +10,8 @@ slug: 'components/extractors/other/ceps'
 This component enables you to extract publicly available data from the Ceps API. More information on the data
 itself can be found on the [Ceps Data Website](https://www.ceps.cz/cs/data).
 
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/#creating-component-configuration) of the **ČEPS** data source connector.

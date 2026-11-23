@@ -1,6 +1,7 @@
 ---
 title: Telemetry Data
 slug: 'components/extractors/other/telemetry-data'
+description: 'Every table and column the Telemetry Data connector extracts about your project or organization in project, organization and Activity Center modes.'
 redirect_from:
     - /extractors/other/telemetry-data/
 
@@ -19,6 +20,8 @@ The Telemetry Data connector allows you to retrieve data about your project or y
 It helps you monitor activities and usage in your Keboola projects. It also aids Keboola in calculating your project's consumption.
 
 If you don't need to work directly with the data or would like to see it in graphical form in Keboola, you can check the [Telemetry Dashboards](/management/telemetry/telemetry-dashboards).
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 To configure the data source connector, select one of the following modes:

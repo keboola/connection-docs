@@ -1,13 +1,16 @@
 ---
 title: Gmail Messages
 slug: 'components/extractors/communication/gmail'
+description: 'Fetch Gmail messages, headers and message parts into Keboola with read-only access, a search query, and your own OAuth credentials if Google blocks the app.'
 redirect_from:
     - /extractors/communication/gmail/
 ---
 
 
 
-The Gmail Messages data source connector allows you to fetch data from your Gmail account.
+Setting it up takes two steps: authorize the Gmail account, then write the queries that pick the messages. The connector stores what it finds in four tables: queries, messages, headers and parts.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Authorization
 [Create a new configuration](/components/#creating-component-configuration) of the **Gmail Messages** connector.
