@@ -1,5 +1,6 @@
 ---
 title: Data Streams
+description: 'Receive streaming event data straight into Keboola Storage, with no data source connector, middleware or extra pipeline steps to set up.'
 slug: 'storage/data-streams'
 redirect_from:
     - /integrate/data-streams/

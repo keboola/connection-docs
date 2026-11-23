@@ -279,6 +279,10 @@ The tables element in a configuration of the **output mapping** is an array and 
   - `write_always`
   - `partition_aware_import` - BigQuery only; limits the deduplication of an incremental load to the destination partitions
     present in the loaded data (see [Partition-aware import](/transformations/mappings/#partition-aware-import-bigquery))
+  - `import_method` - `auto` (default), `single_statement` or `multi_statement`; chooses how Snowflake writes the
+    destination table. `auto` is safe on every backend; `single_statement` or `multi_statement` for a table in a
+    non-Snowflake bucket fails with `storage.tables.importMethodNotSupported`
+    (see [Import method](/transformations/mappings/#import-method-snowflake))
 
 #### Input mapping — basic
 Download tables `in.c-ex-salesforce.Leads` and `in.c-ex-salesforce.Accounts` to `/data/tables/in/leads.csv`

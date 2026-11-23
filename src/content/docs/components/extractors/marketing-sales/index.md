@@ -1,5 +1,6 @@
 ---
 title: Marketing/Sales Data Source Connectors 
+description: 'Data source connectors that bring data from ad networks, CRMs and campaign analytics into Storage.'
 slug: 'components/extractors/marketing-sales'
 redirect_from:
     - /extractors/marketing-sales/

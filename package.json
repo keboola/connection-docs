@@ -19,8 +19,12 @@
     "@astrojs/starlight": "^0.42",
     "astro": "^7.2.10",
     "marked": "^18.0.4",
+    "remark-directive": "^4.0.0",
+    "remark-parse": "^11.0.0",
     "sharp": "^0.35",
-    "starlight-image-zoom": "^0.16"
+    "starlight-image-zoom": "^0.16",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.2.0"
   },
   "devDependencies": {
     "@vercel/node": "^5.10.2",

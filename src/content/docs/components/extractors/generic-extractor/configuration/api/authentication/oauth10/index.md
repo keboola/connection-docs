@@ -10,6 +10,7 @@ redirect_from:
 
 
 **Note** that this configuration option is not yet supported and the test endpoint button will not work.
+<!-- VERIFY(Ondřej Popelka): this banner says the method is not yet supported, but keboola/generic-extractor may already implement it. Confirm, then keep or drop the banner, and update the page description to match. -->
 
 OAuth 1.0 authentication is one of the [two OAuth methods](/components/extractors/generic-extractor/configuration/api/authentication/#oauth) and
 is supported only for [published components](/components/extractors/generic-extractor/publish/).
