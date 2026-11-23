@@ -50,3 +50,7 @@ read role first; Keboola warns when it is missing.
 - **Turning it off.** Keboola can disable the backend immediately. Nothing changes on your taxonomy; the grants stay
   until you remove them.
 - **Removing grants.** Keboola does not detect a grant removed after enablement. Copies of protected columns then fail.
+
+---
+
+**Next:** [Row-level and column-level security →](/storage/row-level-security/)
