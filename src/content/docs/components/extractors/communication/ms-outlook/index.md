@@ -1,14 +1,15 @@
 ---
 title: MS Outlook IMAP Email Content and Attachments (Office 365)
 slug: 'components/extractors/communication/ms-outlook'
-description: 'Download emails and attachments from Office 365 Outlook accounts over IMAP after you authorize, then filter them by search query, folder and date.'
+description: 'Download emails and attachments from Office 365 Outlook mailboxes after you authorize, then filter them by search query, folder and date.'
 redirect_from:
     - /extractors/communication/ms-outlook/
 ---
 
 
 
-The IMAP settings connect to one mailbox, and each configuration row picks which emails to download and whether to keep their content, their attachments or both.
+The connection settings connect to one mailbox, and each configuration row picks which emails to download and whether to keep their content, their attachments or both.
+<!-- VERIFY(Nikita): the catalog entry kds-team.ex-ms-outlook-email-content (checked 2026-11-23) says the connector uses IMAP or the Microsoft Graph API and documents Graph API filter and KQL search modes; this page covers IMAP only. Add the Graph API method. -->
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
