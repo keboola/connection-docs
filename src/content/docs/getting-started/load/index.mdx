@@ -366,8 +366,11 @@ Repeat for `products`, `sales`, `staffing` and `weather_daily`, changing the nam
 the folder together. Then run the configuration and wait for the job:
 
 ```bash
-kbagent job run --project docs-demo --component-id keboola.ex-http --config-id <config-id> --wait
+kbagent job run --project docs-demo --component-id keboola.ex-http --config-id <config-id> --wait --timeout 900
 ```
+
+`--wait` gives up after five minutes by default and then stops the job, and this one can take
+longer, so `--timeout 900` gives it fifteen.
 
 **Add the forecast**
 

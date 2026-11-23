@@ -29,7 +29,7 @@ kbagent registers each project and mints a per-project Storage token. **Result:*
 
 ```bash
 kbagent branch create --project analytics --name "experiment"   # creates and activates
-kbagent config update --project analytics --config-id 456 ...    # targets the branch
+kbagent config update --project analytics --component-id <component-id> --config-id 456 ...    # targets the branch
 kbagent merge-request create --project analytics --title "Experiment"   # open a merge request
 ```
 
@@ -109,7 +109,7 @@ kbagent agent list               # what's scheduled
 kbagent agent runs --task-id <task-id>   # past runs (drill in with run-detail / run-events)
 ```
 
-**Result:** every Monday at 6:00 an agent reviews the weekend's failures and writes up the triage — a standing task nobody has to remember. `agent cron-preview` shows the upcoming firing times. Scheduled firing lives in the server: keep `kbagent serve` running (task management and ad-hoc `agent run` work without it).
+**Result:** every Monday at 6:00 UTC an agent reviews the weekend's failures and writes up the triage — a standing task nobody has to remember. `agent cron-preview` shows the upcoming firing times. Scheduled firing lives in the server: keep `kbagent serve` running (task management and ad-hoc `agent run` work without it).
 
 ## Debug transformation SQL from the terminal
 
@@ -120,7 +120,7 @@ kbagent workspace from-transformation --project prod \
   --component-id keboola.snowflake-transformation --config-id 123
 # → prints the new workspace's ID; loaded with the transformation's inputs
 kbagent workspace query --project prod --workspace-id <id> \
-  --sql "SELECT count(*) FROM orders"
+  --sql 'SELECT count(*) FROM "orders"'
 ```
 
 **Result:** the query runs in an isolated SQL workspace with the same data your transformation sees; iterate freely, production never notices. `workspace gc` cleans up idle workspaces.
@@ -154,6 +154,8 @@ kbagent encrypt values --project prod \
 kbagent --deny-writes config list         # reads only, this session
 kbagent init --from-global --read-only    # a read-only local workspace
 ```
+
+`init --from-global` copies project tokens, not a browser sign-in. If you signed in with `kbagent auth login`, the local workspace has no session and its reads fail; use the session flags such as `--deny-writes` instead.
 
 See [Use with AI agents](/cli/for-agents/) for the full sandboxing story.
 

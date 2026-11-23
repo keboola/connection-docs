@@ -28,9 +28,11 @@ Available on every command:
 
 ```console
 $ kbagent --json project list
-{ "status": "ok", "data": [ { "alias": "docs-demo", "project_name": "L0 - Shopify",
-  "project_id": 264, "stack_url": "https://connection.europe-west3.gcp.keboola.com",
-  "is_default": true, "org_id": 56 } ] }
+{ "status": "ok", "schema_version": "1.0", "exit_code": 0,
+  "data": [ { "alias": "docs-demo", "project_name": "L0 - Shopify", "project_id": 264,
+    "stack_url": "https://connection.europe-west3.gcp.keboola.com", "token": "kbc-.../264",
+    "auth_mode": "session", "is_default": true, "active_branch_id": null,
+    "org_id": null, "org_name": null } ] }
 ```
 
 ## Setup & info

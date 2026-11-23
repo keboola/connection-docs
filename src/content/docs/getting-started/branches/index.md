@@ -38,9 +38,10 @@ kbagent branch create --project docs-demo --name "Try the new transformation"
 
 Creating a branch also activates it, so the commands that follow act inside it rather than in
 production. `kbagent branch list` shows what exists, `kbagent branch use --branch <branch-id>`
-switches to another one, and `kbagent branch reset` puts you back in production. Read-only
-commands are the exception: they report production unless you pass `--branch` explicitly, which
-keeps `storage tables` from quietly answering about a branch you forgot you were in.
+switches to another one, and `kbagent branch reset` puts you back in production. Storage reads
+are the exception: `storage tables` and `storage buckets` report production unless you pass
+`--branch` explicitly, so they don't quietly answer about a branch you forgot you were in.
+`config list` follows the active branch.
 
 The merge on the pages below, with its diff and partial-merge choices, happens in the Keboola UI;
 `kbagent branch delete --branch <branch-id>` removes a branch you kept afterwards. On a project
