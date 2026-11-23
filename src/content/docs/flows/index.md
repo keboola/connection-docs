@@ -5,7 +5,6 @@ description: 'Build a conditional flow in Keboola with phases, parallel tasks, c
 redirect_from:
     - /flows/conditional-flows/
     - /transformations/dbt/flows/
-    - /transformations/dbt/flows/flows/
     - /automate/
     - /integrate/orchestrator/
 ---
