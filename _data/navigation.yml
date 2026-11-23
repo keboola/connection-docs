@@ -910,9 +910,9 @@ items:
 
       - url: /workspace/sql-editor/
         title: SQL Editor
-
-      - url: /workspace/sql-editor/use/
-        title: Use the SQL Editor
+        items:
+          - url: /workspace/sql-editor/use/
+            title: Use the SQL Editor
 
       - url: /workspace/jdbc-driver/
         title: Keboola JDBC Driver

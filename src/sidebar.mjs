@@ -684,8 +684,14 @@ export const sidebar = [
       { label: "Overview", slug: "workspace" },
       { slug: "workspace/create" },
       { slug: "workspace/connect" },
-      { slug: "workspace/sql-editor" },
-      { slug: "workspace/sql-editor/use" },
+      {
+        label: "SQL Editor",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "workspace/sql-editor" },
+          { slug: "workspace/sql-editor/use" },
+        ],
+      },
       {
         label: "Keboola JDBC Driver",
         collapsed: true,
