@@ -6,6 +6,7 @@ search_keywords: [mcp, mcp server]
 redirect_from:
     - /external-integrations/mcp-server/
     - /integrate/mcp/
+    - /management/project/mcp-server/
 ---
 
 

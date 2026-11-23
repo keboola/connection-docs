@@ -4,6 +4,8 @@ slug: 'flows'
 description: 'Build a conditional flow in Keboola with phases, parallel tasks, conditions, retries and notifications, then run it, schedule it and check its run history.'
 redirect_from:
     - /flows/conditional-flows/
+    - /transformations/dbt/flows/
+    - /transformations/dbt/flows/flows/
     - /automate/
     - /integrate/orchestrator/
 ---

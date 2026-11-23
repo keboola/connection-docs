@@ -770,9 +770,6 @@ items:
               - url: /transformations/dbt/cloud/
                 title: dbt Cloud Support
 
-              - url: /transformations/dbt/flows/
-                title: Usage in Flows
-
               - url: /transformations/dbt/troubleshooting/
                 title: Troubleshooting
 
@@ -1114,9 +1111,6 @@ items:
 
               - url: /management/project/ai-rules/
                 title: AI Rules
-
-              - url: /management/project/mcp-server/
-                title: MCP Server
 
           - url: /management/payg-project/
             title: Free Plan
