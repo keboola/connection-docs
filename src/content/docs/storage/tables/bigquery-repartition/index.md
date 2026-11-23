@@ -142,12 +142,15 @@ accepts `clustering` for a BigQuery table. Send a `PUT` to
 { "clustering": { "fields": ["country_code"] } }
 ```
 
+The request is asynchronous. The API answers with HTTP 202 and a Storage job; wait for the job to finish. The table
+detail shows the new clustering after the job succeeds.
+
 - `fields` lists 1 to 4 existing columns of the table in clustering order.
 - `"clustering": null` removes the clustering.
 - A request without `clustering` leaves the clustering unchanged.
-- The request is rejected with 422 on other backends, for an alias, and for an unknown column or more than 4 columns.
-  For a table in a linked bucket it is rejected with 403. Change the clustering on the source table; an alias and a
-  linked bucket read the same physical table.
+- The request is rejected with 422 on other backends, for an alias, and for an unknown column, a column listed twice
+  or more than 4 columns. For a table in a linked bucket it is rejected with 403. Change the clustering on the source
+  table; an alias and a linked bucket read the same physical table.
 - The partitioning cannot be changed this way.
 
 BigQuery applies the new clustering to data written after the change. Rows that are already in the table keep their
