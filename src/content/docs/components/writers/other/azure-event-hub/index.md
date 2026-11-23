@@ -19,7 +19,7 @@ There are two **mapping modes**:
  - **`column_value` mode**: message is the value of the specified column, from the table's row
  
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Azure Event Hub** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Azure Event Hub** connector.
 
 Fill in the **Connection String** and **Event Hub Name**. Then click **Save**.
 

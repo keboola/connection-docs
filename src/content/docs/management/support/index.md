@@ -1,5 +1,6 @@
 ---
 title: Keboola Support
+description: 'Get help from Keboola support from inside your project, control support users'' access to it, and what to do if you are locked out of Keboola.'
 slug: 'management/support'
 ---
 

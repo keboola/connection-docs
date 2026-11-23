@@ -34,7 +34,7 @@ The credentials are stored encrypted. No Keboola OAuth broker or partner registr
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **UKG HR** data source connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **UKG HR** data source connector.
 
 ### Connection
 
