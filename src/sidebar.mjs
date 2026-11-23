@@ -522,7 +522,16 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "storage" },
       { slug: "storage/buckets" },
-      { slug: "storage/bucket-exposure" },
+      {
+        label: "Bucket Exposure",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "storage/bucket-exposure" },
+          { slug: "storage/bucket-exposure/create" },
+          { slug: "storage/bucket-exposure/snowflake-grant" },
+          { slug: "storage/bucket-exposure/snowflake-share" },
+        ],
+      },
       {
         label: "Data Streams",
         collapsed: true,
@@ -551,16 +560,32 @@ export const sidebar = [
         collapsed: true,
         items: [
           { label: "Overview", slug: "storage/byodb" },
-          { slug: "storage/byodb/external-buckets" },
+          { slug: "storage/byobq" },
+          {
+            label: "External Datasets",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "storage/byodb/external-buckets" },
+              { slug: "storage/byodb/external-buckets/register" },
+            ],
+          },
           { slug: "storage/byodb/snowflake-secure-data-sharing" },
+          {
+            label: "BigQuery policy tags",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "storage/byodb/bigquery-policy-tags" },
+              { slug: "storage/byodb/bigquery-policy-tags/enable" },
+            ],
+          },
         ],
       },
-      { slug: "storage/byobq" },
       {
         label: "Row- and Column-Level Security",
         collapsed: true,
         items: [
           { label: "Overview", slug: "storage/row-level-security" },
+          { slug: "storage/row-level-security/set-up" },
           { slug: "storage/row-level-security/policy-reference" },
         ],
       },
