@@ -1,5 +1,6 @@
 ---
 title: Snowflake Secure Data Sharing
+description: 'Share Snowflake data with other accounts through a share: the producer and consumer workflows, role requirements, and the limits of imported databases.'
 slug: 'storage/byodb/snowflake-secure-data-sharing'
 ---
 

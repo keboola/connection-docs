@@ -1,5 +1,6 @@
 ---
 title: OpenTelemetry (OTLP) Data Streams
+description: 'Send logs, metrics, and traces from your apps to Keboola Storage over OTLP: create the data stream, set up your SDK or collector, and route signals to tables.'
 slug: 'storage/data-streams/opentelemetry'
 ---
 

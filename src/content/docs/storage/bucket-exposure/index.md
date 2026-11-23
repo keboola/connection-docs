@@ -1,5 +1,6 @@
 ---
 title: Bucket Exposure
+description: 'Share a bucket with people outside your project in their own BigQuery: when to use it, creating and managing exposures, Snowflake grant and share modes, FAQ.'
 slug: 'storage/bucket-exposure'
 ---
 

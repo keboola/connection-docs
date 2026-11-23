@@ -1,5 +1,6 @@
 ---
 title: Security & Privacy
+description: 'How Kai handles your data: data use and model training, the AI provider, access and control, compliance, terms, and security best practices.'
 slug: 'kai/security-and-privacy'
 ---
 

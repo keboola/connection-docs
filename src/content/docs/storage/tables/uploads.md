@@ -1,5 +1,6 @@
 ---
 title: Table Import & Export
+description: 'How table imports and exports pass through File Storage, which keeps an upload history, and why exported tables can be sliced.'
 slug: 'storage/tables/uploads'
 ---
 
