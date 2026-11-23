@@ -88,8 +88,8 @@ when the job runs. Clustering works on such a table.
 | The destination table does not exist and its columns are known | The table is created with the requested layout. |
 | The destination table does not exist and its columns are not known (no `columns` and no `schema` in the output mapping or in the manifest) | The job fails with a user error: `Cannot create table "..." with the option(s) "...": the columns of the table are unknown. Set "columns" or "schema" in the output mapping or in the manifest.` |
 | The destination table exists with the requested layout | The data is loaded as usual. |
-| The destination table exists with a different layout | The data is loaded as usual and the layout of the table is not changed. The job logs a warning that names the current layout, the requested layout and the keys that differ. |
-| The destination table exists and the output mapping has none of the three keys | The data is loaded as usual. A missing key means that the output mapping does not request a layout, so a table partitioned by other means never causes the warning. |
+| The destination table exists with a different layout | The data is loaded as usual and the layout of the table is not changed. The job logs a message that names the current layout, the requested layout and the keys that differ. |
+| The destination table exists and the output mapping has none of the three keys | The data is loaded as usual. A missing key means that the output mapping does not request a layout, so a table partitioned by other means never causes that message. |
 | The output table uses [Direct Mode](#direct-mode-output-mapping) | The keys are ignored and the job logs a warning. |
 | The destination bucket is on another backend than BigQuery | The keys are not sent to Storage and have no effect. The data is loaded as usual and the job logs a warning. |
 
