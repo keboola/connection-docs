@@ -519,6 +519,7 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "catalog" },
+      { slug: "catalog/share-and-link" },
       { slug: "catalog/multi-project" },
     ],
   },
@@ -528,15 +529,26 @@ export const sidebar = [
     items: [
       { label: "Overview", slug: "storage" },
       { slug: "storage/buckets" },
-      { slug: "storage/bucket-exposure" },
+      {
+        label: "Bucket Exposure",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "storage/bucket-exposure" },
+          { slug: "storage/bucket-exposure/create" },
+          { slug: "storage/bucket-exposure/snowflake-grant" },
+          { slug: "storage/bucket-exposure/snowflake-share" },
+        ],
+      },
       {
         label: "Data Streams",
         collapsed: true,
         items: [
           { label: "Overview", slug: "storage/data-streams" },
-          { slug: "storage/data-streams/opentelemetry" },
-          { slug: "storage/data-streams/reference" },
           { slug: "storage/data-streams/tutorial" },
+          { slug: "storage/data-streams/create" },
+          { slug: "storage/data-streams/opentelemetry" },
+          { slug: "storage/data-streams/opentelemetry/reference" },
+          { slug: "storage/data-streams/reference" },
         ],
       },
       { slug: "storage/files" },
@@ -557,7 +569,15 @@ export const sidebar = [
         collapsed: true,
         items: [
           { label: "Overview", slug: "storage/byodb" },
-          { slug: "storage/byodb/external-buckets" },
+          { slug: "storage/byobq" },
+          {
+            label: "External Datasets",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "storage/byodb/external-buckets" },
+              { slug: "storage/byodb/external-buckets/register" },
+            ],
+          },
           { slug: "storage/byodb/snowflake-secure-data-sharing" },
           {
             label: "BigQuery policy tags",
@@ -569,12 +589,12 @@ export const sidebar = [
           },
         ],
       },
-      { slug: "storage/byobq" },
       {
         label: "Row- and Column-Level Security",
         collapsed: true,
         items: [
           { label: "Overview", slug: "storage/row-level-security" },
+          { slug: "storage/row-level-security/set-up" },
           { slug: "storage/row-level-security/policy-reference" },
         ],
       },
@@ -658,9 +678,10 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "workspace" },
-      { slug: "workspace/snowflake-workspaces-access-changes" },
+      { slug: "workspace/create" },
+      { slug: "workspace/connect" },
       { slug: "workspace/sql-editor" },
-      { slug: "workspace/retention" },
+      { slug: "workspace/sql-editor/use" },
       {
         label: "Keboola JDBC Driver",
         collapsed: true,
@@ -671,6 +692,9 @@ export const sidebar = [
           { slug: "workspace/jdbc-driver/tableau" },
         ],
       },
+      { slug: "workspace/table-export" },
+      { slug: "workspace/retention" },
+      { slug: "workspace/snowflake-workspaces-access-changes" },
     ],
   },
   {

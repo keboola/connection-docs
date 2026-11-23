@@ -700,6 +700,9 @@ items:
   - url: /catalog/
     title: Data Catalog
     items:
+      - url: /catalog/share-and-link/
+        title: Share and link buckets
+
       - url: /catalog/multi-project/
         title: Multi-Project Architecture
 
@@ -711,16 +714,29 @@ items:
 
       - url: /storage/bucket-exposure/
         title: Bucket Exposure
+        items:
+          - url: /storage/bucket-exposure/create/
+            title: BigQuery Exposures
+
+          - url: /storage/bucket-exposure/snowflake-grant/
+            title: Snowflake Grant Mode
+
+          - url: /storage/bucket-exposure/snowflake-share/
+            title: Snowflake Share Mode
 
       - url: /storage/data-streams/
         title: Data Streams
         items:
-          - url: /storage/data-streams/opentelemetry/
-            title: OpenTelemetry (OTLP)
-          - url: /storage/data-streams/reference/
-            title: Reference
           - url: /storage/data-streams/tutorial/
             title: Tutorial
+          - url: /storage/data-streams/create/
+            title: Create a stream
+          - url: /storage/data-streams/opentelemetry/
+            title: OpenTelemetry (OTLP)
+          - url: /storage/data-streams/opentelemetry/reference/
+            title: OpenTelemetry reference
+          - url: /storage/data-streams/reference/
+            title: Reference
 
       - url: /storage/files/
         title: Files
@@ -746,11 +762,17 @@ items:
       - url: /storage/byodb/
         title: Bring Your Own Database
         items:
+          - url: /storage/byobq/
+            title: Connect Your Own BigQuery
+
           - url: /storage/byodb/external-buckets/
             title: External Datasets
+            items:
+              - url: /storage/byodb/external-buckets/register/
+                title: Register and Use
 
           - url: /storage/byodb/snowflake-secure-data-sharing/
-            title: Snowflake Secure Data Sharing
+            title: Import a Snowflake Share
 
           - url: /storage/byodb/bigquery-policy-tags/
             title: BigQuery policy tags
@@ -758,12 +780,12 @@ items:
               - url: /storage/byodb/bigquery-policy-tags/enable/
                 title: Enable BigQuery policy tags
 
-      - url: /storage/byobq/
-        title: Bring Your Own BigQuery
-
       - url: /storage/row-level-security/
         title: Row- and Column-Level Security
         items:
+          - url: /storage/row-level-security/set-up/
+            title: Set Up
+
           - url: /storage/row-level-security/policy-reference/
             title: Policy Reference
 
@@ -868,24 +890,36 @@ items:
   - url: /workspace/
     title: Workspaces
     items:
-      - url: /workspace/snowflake-workspaces-access-changes/
-        title: Snowflake Workspaces Access Changes
+      - url: /workspace/create/
+        title: Create a Workspace
+
+      - url: /workspace/connect/
+        title: Connect
 
       - url: /workspace/sql-editor/
         title: SQL Editor
 
-      - url: /workspace/retention/
-        title: Workspace Retention
+      - url: /workspace/sql-editor/use/
+        title: Use the SQL Editor
 
       - url: /workspace/jdbc-driver/
         title: Keboola JDBC Driver
         items:
           - url: /workspace/jdbc-driver/dbeaver/
-            title: DBeaver
+            title: Connect DBeaver
           - url: /workspace/jdbc-driver/datagrip/
-            title: DataGrip
+            title: Connect DataGrip
           - url: /workspace/jdbc-driver/tableau/
-            title: Tableau
+            title: Connect Tableau
+
+      - url: /workspace/table-export/
+        title: Table Export
+
+      - url: /workspace/retention/
+        title: Workspace Retention
+
+      - url: /workspace/snowflake-workspaces-access-changes/
+        title: Snowflake Workspaces Access Changes
 
   - url: /management/
     title: Management
