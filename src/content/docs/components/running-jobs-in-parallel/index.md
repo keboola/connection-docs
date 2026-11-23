@@ -1,6 +1,7 @@
 ---
 title: Running Jobs in Parallel
 slug: 'components/running-jobs-in-parallel'
+description: 'How the parallelism setting runs configuration rows as concurrent jobs, why fewer may run at once, how waiting jobs are billed, and when it helps.'
 ---
 
 
@@ -8,6 +9,8 @@ slug: 'components/running-jobs-in-parallel'
 In components that support [configuration rows](/components/#configuration-rows) — typically data source and destination connectors — every row runs as its own job. The **parallelism** setting controls how many of these row jobs execute concurrently within a single configuration.
 
 Understanding what this setting does — and what it doesn't — helps you make better decisions about performance and cost.
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## What Parallelism Means
 

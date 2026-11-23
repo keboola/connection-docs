@@ -1,6 +1,7 @@
 ---
 title: Azure Cosmos DB
 slug: 'components/extractors/database/cosmosdb'
+description: 'Fetch items from Azure Cosmos DB over the SQL API with an endpoint, database ID and key, in raw or mapping mode, with a generated or custom query.'
 ---
 
 

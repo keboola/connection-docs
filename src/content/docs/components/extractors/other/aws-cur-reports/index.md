@@ -1,12 +1,14 @@
 ---
 title: AWS Cost Usage Reports
 slug: 'components/extractors/other/aws-cu-reports'
+description: 'Download AWS Cost Usage Reports (CUR) that AWS exports to an S3 bucket as CSV, choosing the report prefix, a date range and whether to load only new files.'
 ---
 
 
 
-This data source connector downloads [AWS Cost Usage Reports](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html) 
-exported to S3 in CSV format.
+AWS describes how it produces these exports in [What are AWS Cost and Usage Reports?](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html)
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 

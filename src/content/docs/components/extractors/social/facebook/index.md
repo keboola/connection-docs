@@ -1,6 +1,7 @@
 ---
 title: Facebook Pages
 slug: 'components/extractors/social/facebook'
+description: 'Extract your Facebook Pages feed, comments, likes and Insights through the Graph API with queries that set the endpoint, fields and date range.'
 redirect_from:
     - /extractors/social/facebook/
 
@@ -8,9 +9,11 @@ redirect_from:
 
 
 
-This data source connector uses the [Facebook Graph API](https://developers.facebook.com/docs/graph-api) to extract 
-your Facebook Pages [feed](https://developers.facebook.com/docs/graph-api/reference/page/feed) 
-(including comments, likes, etc.), as well as Page or Page post [Insights](https://developers.facebook.com/docs/graph-api/reference/insights).
+The feed, comments and likes come from the Page [feed](https://developers.facebook.com/docs/graph-api/reference/page/feed) endpoint of the
+[Facebook Graph API](https://developers.facebook.com/docs/graph-api), and Page or Page post metrics from
+[Insights](https://developers.facebook.com/docs/graph-api/reference/insights).
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Facebook Pages** connector.

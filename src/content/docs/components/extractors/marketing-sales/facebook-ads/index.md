@@ -1,15 +1,16 @@
 ---
 title: Facebook Ads
 slug: 'components/extractors/marketing-sales/facebook-ads'
+description: 'Extract ads, ad sets, campaigns and ads insights from Facebook Ad Accounts through the Marketing API, with queries that set the endpoint, fields and dates.'
 redirect_from:
     - /extractors/marketing-sales/facebook-ads/
 ---
 
 
 
-This data source connector uses the [Facebook Marketing API](https://developers.facebook.com/docs/marketing-api/reference) to
-extract Facebook Ad Account [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup)
-(including adsets, campaigns), as well as [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights).
+Ads, ad sets and campaigns come from the [ads](https://developers.facebook.com/docs/marketing-api/reference/adgroup) endpoint of the
+[Facebook Marketing API](https://developers.facebook.com/docs/marketing-api/reference), and insights from
+[ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights).
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Facebook Ads** connector.

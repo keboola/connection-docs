@@ -2,11 +2,14 @@
 title: dbt Cloud Job Trigger
 description: 'Trigger a dbt Cloud job from Keboola: account ID, job ID and API key, a custom cause message, and waiting for the run to store its result and artifacts.'
 slug: 'components/applications/triggers/dbt-cloud-job-trigger'
+description: 'Trigger a dbt Cloud job from Keboola with your account ID, job ID and API key, optionally wait for the run, and store its results and artifacts.'
 ---
 
 
 
-The dbt Cloud Job Trigger is used for triggering [dbt Cloud](https://www.getdbt.com/product/what-is-dbt) jobs.
+The job itself runs in [dbt Cloud](https://www.getdbt.com/product/what-is-dbt). The trigger starts it through the dbt Cloud API and records the response in the `dbt_cloud_trigger` table.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 <!-- Reference-type page. Type declared in the 2026-11-19 section rework; the content is unchanged and was not re-checked against the component. -->
 
@@ -33,4 +36,6 @@ You can find out how to get a service account token in the [dbt Cloud documentat
 ## Notes on Artifacts Usage 
 In order to be able to use Keboola artifacts, the project must have the ```artifact``` feature enabled. You can find more information about this in [Keboola's docs](/extend/common-interface/artifacts/).
 
+---
 
+**Next:** [Deepnote Notebook Execution Trigger →](/components/applications/triggers/deepnote-notebook-execution-trigger/)

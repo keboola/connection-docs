@@ -1,6 +1,7 @@
 ---
 title: Google Ad Manager 
 slug: 'components/extractors/marketing-sales/google-ad-manager'
+description: 'Export Google Ad Manager report data with a Google service account key, setting the report type, dimensions, metrics, ad unit view and date range.'
 redirect_from:
     - /extractors/marketing-sales/google-ad-manager/
 
@@ -8,7 +9,9 @@ redirect_from:
 
 
 
-This data source connector allows you to export report data from Google Ad Manager.
+Setting it up takes two steps: link a Google service account to your Google Ad Manager account, then add one configuration row per report.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Authorization Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Ad Manager** connector. 

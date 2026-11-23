@@ -1,13 +1,16 @@
 ---
 title: FTP 
 slug: 'components/extractors/storage/ftp'
+description: 'Load CSV files from FTP, FTPS or SFTP servers into Keboola tables with a password or private key, and pick files with a path or glob pattern.'
 redirect_from:
     - /extractors/storage/ftp/
 ---
 
 
 
-The FTP data source connector loads a single, or multiple CSV files from FTP, FTPS and SFTP servers, and stores them in Keboola Storage.
+Set up the connection once, then add a table for each file or group of files you want to load.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **FTP** connector.
