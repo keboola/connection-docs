@@ -56,7 +56,7 @@ or
 
 **Goal:** store a value in a flow so that later tasks and conditions can read it.
 
-1. In a phase, click the **+** icon and choose **Set Variable**. The Set Variable panel opens on the right.
+1. In a phase, click the **+** icon and choose **Variable** in the **ADD TASK** menu. The variable panel opens on the right.
 2. Enter a **Variable Name** — this is the identifier other tasks will use to reference the value.
 3. Choose a **Variable Type** — either [Static Value](#static-value) or [Dynamic Value](#dynamic-value).
 

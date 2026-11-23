@@ -36,7 +36,7 @@ Instant authorization requires you to log in to the service you want to use.
 1. In the configuration, click **Authorize Account**. The **Authorize** dialog opens on the **Instant authorization** tab.
 2. With instant authorization, you have to enter a name describing the account you're going to use:
 
-   ![Screenshot - Instant Authorization](/components/authorization-1.png)
+   ![Screenshot - Instant Authorization](/components/authorization-2.png)
 
 3. Next, you are taken to the actual authorization screen. This is provided by the service itself and varies widely.
    In the example below, the authorization for Google Calendar is shown.

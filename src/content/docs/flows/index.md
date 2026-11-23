@@ -96,7 +96,7 @@ You can use logical operators (AND) and (OR) to combine multiple statements with
 
 ### 3. What the Condition Compares (Subject)
 
-Every statement starts with a **subject** - the thing the flow looks at. The picker offers two tabs: **Phases / Tasks** and **Variables** (see [Using Variables in Conditions](/components/variables/use/#use-a-variable-in-a-condition)).
+Every statement starts with a **subject** - the thing the flow looks at. The picker offers three tabs: **Phases / Tasks**, **Variables** and **Functions** (see [Using Variables in Conditions](/components/variables/use/#use-a-variable-in-a-condition)).
 
 In the **Phases / Tasks** tab you can choose:
 

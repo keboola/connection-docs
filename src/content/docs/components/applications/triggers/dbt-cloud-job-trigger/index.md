@@ -1,6 +1,5 @@
 ---
 title: dbt Cloud Job Trigger
-description: 'Trigger a dbt Cloud job from Keboola: account ID, job ID and API key, a custom cause message, and waiting for the run to store its result and artifacts.'
 slug: 'components/applications/triggers/dbt-cloud-job-trigger'
 description: 'Trigger a dbt Cloud job from Keboola with your account ID, job ID and API key, optionally wait for the run, and store its results and artifacts.'
 ---
@@ -10,8 +9,6 @@ description: 'Trigger a dbt Cloud job from Keboola with your account ID, job ID 
 The job itself runs in [dbt Cloud](https://www.getdbt.com/product/what-is-dbt). The trigger starts it through the dbt Cloud API and records the response in the `dbt_cloud_trigger` table.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
-
-<!-- Reference-type page. Type declared in the 2026-11-19 section rework; the content is unchanged and was not re-checked against the component. -->
 
 ## Create New Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **dbt Cloud Job Trigger** application.
