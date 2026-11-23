@@ -52,6 +52,7 @@ Open the workspace detail, then follow the tab for your workspace type or tool:
     We provide two versions of [Snowflake](https://www.snowflake.com/) workspaces with different authentication options for projects with dedicated Snowflake backends.
 
     **Person** type workspace uses `SSO` and `Key Pair` authentication methods. To connect using:
+    {/* VERIFY(Nikita): on 2026-11-20 a Snowflake SQL workspace in project 264 had no Connect button or menu: the detail had Open SQL Editor, and the Workspace ID value opened Workspace Credentials. Check where SSO login to Snowsight starts, and the Connect wording in the Python/R, Legacy Service and BigQuery tabs. */}
 
     - `SSO` - use the **Connect** button in the **Connect** menu to login to Snowflake's [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight-homepage) web interface.
     - `Key Pair` - use your favorite database client or other third-party tool and the Key Pair credentials provided in the **Connect** menu. Keboola can generate the key pair for you, or you can [bring your own](#bring-your-own-key-pair) and register only the public key.
@@ -84,7 +85,7 @@ Open the workspace detail, then follow the tab for your workspace type or tool:
 </Tabs>
 
 **Result:** you are in the workspace. JupyterLab, the SQL Editor or Snowsight is open in your browser, or your client
-is connected with the credentials from the **Connect** menu.
+is connected with the credentials from the workspace detail.
 
 ## Use a Snowflake key pair with your own tools
 
@@ -113,9 +114,9 @@ authentication, with the private key in the form the tool needs.
    - [VSCode/Cursor Snowflake Extension](https://docs.snowflake.com/en/user-guide/vscode-ext#sign-in-to-snowflake-with-the-vs-code-extension)
    - [VSCode/Cursor DBCode Extension](https://dbcode.io/docs/supported-databases/snowflake)
 
-   The **Connect** menu shows the values the tool needs besides the private key: **Host**, **User**, **Database**,
+   **Workspace Credentials** shows the values the tool needs besides the private key: **Host**, **User**, **Database**,
    **Schema** and **Warehouse**. Where the tool asks for an account identifier, use the Host without
-   `.snowflakecomputing.com`. The menu shows no role, and you do not need to set one.
+   `.snowflakecomputing.com`. No role is shown, and you do not need to set one.
    {/* Checked 2026-11-20: fields from workspace-connect-snowflake-person.png; account derivation and no-role profile from the kbc CLI dbt generator (keboola-as-code pkg/lib/operation/dbt/generate). */}
 
 **Result:** the tool connects to the workspace with the key pair.
@@ -150,7 +151,7 @@ Some third-party tools (such as SAS CI360) require a passphrase-protected privat
    openssl rsa -in private_key_encrypted.pem -pubout -out public_key.pem
    ```
 
-2. To register the key, open the **Connect** menu on your workspace and use **Use Own Key** next to **Reset Key Pair**, then paste the contents of `public_key.pem` or drop the file onto the field.
+2. To register the key, click the **Workspace ID** value in the workspace detail to open **Workspace Credentials**, and use **Use Own Key** next to **Reset Key Pair**, then paste the contents of `public_key.pem` or drop the file onto the field.
 
 The key must be an RSA key of at least 2048 bits, in PEM (`-----BEGIN PUBLIC KEY-----`) or base64-encoded DER format. Convert a PKCS #1 key with `openssl rsa -RSAPublicKey_in -in public_key.pem -pubout`, or an OpenSSH one with `ssh-keygen -e -m PKCS8 -f public_key.pub`.
 

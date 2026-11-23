@@ -26,7 +26,8 @@ Storage. To open the workspace in JupyterLab or a SQL tool, see [Connect to a wo
 
 3. Enter a **Name** and, optionally, a **Description**. The other fields depend on the workspace type and come
    with a default: a Python or R workspace has **Backend Version**, **Backend Size**, **Auto Sleep Timeout** and
-   **Share with all project users**; a Snowflake SQL workspace has **Backend Size** and **Authentication Type**.
+   **Share with all project users**; a Snowflake SQL workspace has **Folder** and **Share with all project users**, and no choice of authentication.
+   <!-- Checked 2026-11-20 in the UI of project 264: the New Snowflake SQL Workspace form had Name, Description, Folder, Share with all project users and Create Workspace. VERIFY(Nikita): whether projects with dynamic backends also show Backend Size there. -->
    Where the dialog offers **Grant read-only access to all storage data**, ticking it enables
    [read-only input mapping](/workspace/#read-only-input-mapping); where it shows a **Read-Only Access** note
    instead, the workspace gets read-only access to all project data by default.

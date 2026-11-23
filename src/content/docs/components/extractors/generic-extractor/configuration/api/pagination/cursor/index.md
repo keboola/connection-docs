@@ -1,6 +1,7 @@
 ---
 title: Cursor Scroller
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/cursor'
+description: 'Configure the cursor pagination method in Generic Extractor for APIs that expect a cursor to the last item received, with idKey, param, increment and reverse.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/cursor/
 ---

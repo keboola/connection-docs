@@ -1,12 +1,15 @@
 ---
 title: Debugging
 slug: 'extend/component/tutorial/debugging'
+description: 'Debug a component by downloading its data folder from a debug job, running the image locally with docker run, and trying a test image tag through the API.'
 ---
 
 
 Because all components [run in an isolated environment](/extend/job-queue/), it may be harder to debug them. There is no way to
 examine the component while it is running. However, there are some options how the production environment can be
 replicated locally, so that you can analyze what is happening if something is not right.
+
+<!-- Tutorial-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ## Checking Errors and Version
 There are two [types of errors](/extend/common-interface/environment/#return-values). In the case of

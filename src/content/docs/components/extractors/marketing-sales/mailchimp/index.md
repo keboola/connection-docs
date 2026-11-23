@@ -1,6 +1,7 @@
 ---
 title: Mailchimp
 slug: 'components/extractors/marketing-sales/mailchimp'
+description: 'Extract lists and members, campaigns, automations and reports from Mailchimp with your data center, username and API key, choosing a configuration template.'
 redirect_from:
     - /extractors/marketing-sales/mailchimp/
 ---
@@ -10,6 +11,8 @@ redirect_from:
 The Mailchimp data source connector uses the [Mailchimp API](https://mailchimp.com/developer/) to extract data from
 mailing lists sent by the [Mailchimp](https://mailchimp.com/) service. It downloads configured reports for all specified accounts,
 importing data such as list and members, campaigns, automations, reports, reports with click details, member activity, etc.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 Before you start, have a working [Mailchimp](https://login.mailchimp.com/signup/) account filled with [data](https://us13.admin.mailchimp.com/campaigns/)
 and an API key.

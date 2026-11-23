@@ -1,11 +1,14 @@
 ---
 title: Google Display & Video 360
 slug: 'components/extractors/marketing-sales/google-dv360'
+description: 'Run existing Display & Video 360 reports or define new ones in the configuration, through the Google Bid Manager API, and load the results into Storage.'
 ---
 
 
 
 [Google Display & Video 360](https://marketingplatform.google.com/about/display-video-360/) is an integrated solution for end-to-end advertising campaigns.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 This data source connector uses the Google Bid Manager API to create and run reports that measure the results of Display & Video 360 advertising campaigns. 
 It automates data retrieval from [Display & Video 360 Reports](https://marketingplatform.google.com/about/display-video-360/), allowing you to run
