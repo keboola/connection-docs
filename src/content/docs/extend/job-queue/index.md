@@ -1,6 +1,7 @@
 ---
 title: Job Queue
 slug: 'extend/job-queue'
+description: 'Explains how Job Queue runs a component image and handles its authentication, isolation and data mapping, and lists the configuration nodes it reads.'
 redirect_from:
     - /extend/docker-runner/
 ---
@@ -18,6 +19,8 @@ following a set of rules that will allow you to integrate the application into K
 There is a [predefined interface](/extend/common-interface/) with Job Queue, consisting
 mainly of a [folder structure](/extend/common-interface/folders/) and a [serialized configuration file](/extend/common-interface/config-file/).
 All [components](/extend/component/), including our internal R and Python Transformations, are run using Job Queue.
+
+<!-- Explanation-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ## Workflow
 The Job Queue functionality can be described in the following steps:
@@ -86,3 +89,7 @@ pins the Docker image tag that jobs of this configuration run, which is the usua
 - `authorization` — OAuth authorization [injected to the configuration](/extend/common-interface/oauth/); not stored in the component configuration
 - `image_parameters` — an arbitrary object passed from the [component](/extend/component/); not stored in the component configuration
 - `action` — an [action](/extend/common-interface/actions/) being executed; not stored in the component configuration
+
+---
+
+**Next:** [Component Jobs →](/extend/jobs/)

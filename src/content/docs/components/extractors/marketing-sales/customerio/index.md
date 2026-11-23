@@ -1,12 +1,14 @@
 ---
 title: Customer IO
 slug: 'components/extractors/marketing-sales/customerio'
+description: 'Extract campaigns, segments, messages, customers and activities from Customer.io with an App API key, and choose how activity data is parsed into tables.'
 ---
 
 
 
-The Customer IO data source connector uses the [Customer IO Beta API](https://customer.io/docs/api/#tag/betaOverview) 
-to extract customers, campaigns, segments, and activities from your [Customer.io account](https://customer.io/). 
+The connector calls the [Customer IO Beta API](https://customer.io/docs/api/#tag/betaOverview) of your [Customer.io account](https://customer.io/).
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Get API Key
 To use this connector, you need a bearer token, known as an App API Key from Customer.io. You can generate a key with 
