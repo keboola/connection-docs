@@ -203,8 +203,8 @@ already [prepared the data directory](#preparing-data-folder).
 The next step is to obtain the repository settings and credentials from the
 [Developer Portal](https://components.keboola.com/). You can either use the [API](https://api.keboola.com/?service=developer-portal) or
 the [CLI](https://github.com/keboola/developer-portal-cli-v2). The CLI is easier to use. First set your service account credentials
-in the environment. Use the service account you created for your component on its **Service accounts** page
-in the Developer Portal:
+in the environment. Use a service account of your vendor, from the vendor's **Service accounts** page in the Developer Portal
+(see [Creating Deployment Account](/extend/component/tutorial/#creating-deployment-account)):
 
     export KBC_DEVELOPERPORTAL_USERNAME=<vendor>+<service-account-name>
     export KBC_DEVELOPERPORTAL_PASSWORD=<service-account-password>
