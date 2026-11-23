@@ -1,5 +1,6 @@
 ---
 title: Applications
+description: 'Applications enrich your data and add value to it in new ways, beyond what transformations do.'
 slug: 'components/applications'
 redirect_from:
     - /manipulation/applications/

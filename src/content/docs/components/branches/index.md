@@ -1,5 +1,6 @@
 ---
 title: Development Branches
+description: 'Development branches let you change component configurations without interfering with running configurations or automated pipelines.'
 slug: 'components/branches'
 ---
 
