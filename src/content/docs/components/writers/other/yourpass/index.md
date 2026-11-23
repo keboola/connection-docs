@@ -17,7 +17,7 @@ create/delete/update [YourPass](https://www.yourpass.eu/) passes.
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **YourPass** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **YourPass** data destination connector.
 
 ### Authorization Configuration
 

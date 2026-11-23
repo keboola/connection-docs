@@ -1,20 +1,22 @@
 ---
 title: Azure Storage Table
 slug: 'components/extractors/database/azure-storage-table'
+description: 'Fetch rows from Azure Table storage or the Cosmos DB Table API with a connection string, in raw or mapping mode, with optional incremental fetching.'
 ---
 
 
 
-The Azure Storage Table data source connector allows you to fetch data from the
-- [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) or the
-- [Azure Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
+The connector reads from either of these services:
+
+- [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables)
+- [Azure Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction)
 
 If you want to use
 - the [Cosmos DB Mongo DB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction), use the [MongoDB data source connector](/components/extractors/database/mongodb/).
 - the [Cosmos DB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api), use the [CosmosDB data source connector](/components/extractors/database/cosmosdb/).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Azure Storage Table** connector.  
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Azure Storage Table** connector.  
 
 Fill in the **Connection String**. Then click **Save**.
 

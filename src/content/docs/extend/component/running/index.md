@@ -1,6 +1,7 @@
 ---
 title: Running Components
 slug: 'extend/component/running'
+description: 'Run a component image locally with docker run, get its data folder from a debug job, and pull a production image from its AWS ECR repository.'
 redirect_from:
     - /extend/docker/running/
     - /extend/common-interface/sandbox/
@@ -202,15 +203,16 @@ already [prepared the data directory](#preparing-data-folder).
 The next step is to obtain the repository settings and credentials from the
 [Developer Portal](https://components.keboola.com/). You can either use the [API](https://api.keboola.com/?service=developer-portal) or
 the [CLI](https://github.com/keboola/developer-portal-cli-v2). The CLI is easier to use. First set your service account credentials
-in the environment:
+in the environment. Use a service account of your vendor, from the vendor's **Service accounts** page in the Developer Portal
+(see [Creating Deployment Account](/extend/component/tutorial/#creating-deployment-account)):
 
-    export KBC_DEVELOPERPORTAL_USERNAME=keboola-test+ex_docs_tutorial_travis
-    export KBC_DEVELOPERPORTAL_PASSWORD=RFlYs3HnDkbzyXIUkdPFRMubiCK-FTjy5-tNXrdzRX3qEBLvDQjnxFtAJGzg6UO.
+    export KBC_DEVELOPERPORTAL_USERNAME=<vendor>+<service-account-name>
+    export KBC_DEVELOPERPORTAL_PASSWORD=<service-account-password>
 
 or
 
-    SET KBC_DEVELOPERPORTAL_USERNAME=keboola-test+ex_docs_tutorial_travis
-    SET KBC_DEVELOPERPORTAL_PASSWORD=RFlYs3HnDkbzyXIUkdPFRMubiCK-FTjy5-tNXrdzRX3qEBLvDQjnxFtAJGzg6UO.
+    SET KBC_DEVELOPERPORTAL_USERNAME=<vendor>+<service-account-name>
+    SET KBC_DEVELOPERPORTAL_PASSWORD=<service-account-password>
 
 on Windows. Then run the command to obtain the component repository:
 

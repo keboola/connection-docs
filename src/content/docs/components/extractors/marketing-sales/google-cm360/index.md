@@ -1,12 +1,15 @@
 ---
 title: Google Campaign Manager 360
 slug: 'components/extractors/marketing-sales/google-cm360'
+description: 'Retrieve Campaign Manager 360 reports from several ad accounts by running existing reports, using one as a template, or defining a report in the UI.'
 ---
 
 
 
 [Google Campaign Manager 360](https://support.google.com/campaignmanager/answer/2709362?hl=en) orchestrates digital advertising campaigns, offering precise ad placements across multiple
 channels. 
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 This connector enables easy retrieval of Campaign Manager 360 reports **from multiple ad accounts** and provides versatile report management functionalities:
 

@@ -13,7 +13,7 @@ This data destination connector sends data to the [ThoughtSpot](https://www.thou
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **ThoughtSpot** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **ThoughtSpot** data destination connector.
 Then **Set Up Credentials**. You need to provide a [*host name*](https://docs.thoughtspot.com/software/latest/dataflow-jdbc-reference), 
 *user name*, *password*, *database name*, *schema*, *SSH user*, and *SSH password*.
 The connector uses the [TSLOAD CLI tool](https://docs.thoughtspot.com/software/latest/tsload-connector) 

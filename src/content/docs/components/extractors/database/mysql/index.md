@@ -1,6 +1,7 @@
 ---
 title: MySQL
 slug: 'components/extractors/database/mysql'
+description: 'Sync MySQL, MariaDB or Aurora data into Keboola with the query-based connector or log-based CDC, and set up the user, binlog and GTIDs that CDC needs.'
 ---
 
 

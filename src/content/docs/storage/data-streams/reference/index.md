@@ -1,15 +1,17 @@
 ---
-title: Data Streams Reference
-description: 'Technical reference for Data Streams: the Stream API, column types, mapping templates, import conditions and delivery guarantees.'
+title: Data Streams reference
+description: 'Technical reference for Data Streams: sources and sinks in the Stream API, column types, mapping templates, import conditions, payload test, tokens, and limits.'
 slug: 'storage/data-streams/reference'
+sidebar:
+  label: Reference
 redirect_from:
     - /integrate/data-streams/overview/
     - /integrate/push-data/overview/
 ---
 
-This is the technical reference for the [Data Streams](/storage/data-streams/) feature—the underlying Stream API,
-column types, mapping templates, import conditions, and delivery guarantees. For the concept and the in-app setup,
-start with the [Data Streams](/storage/data-streams/) page.
+Use this page when you define a stream through the Stream API or edit its column mapping. For the concept, start with [Data Streams](/storage/data-streams/); for the in-app setup, delivery guarantees and Kafka, see [Create and configure a data stream](/storage/data-streams/create/); for a worked example over the API, follow the [tutorial](/storage/data-streams/tutorial/).
+
+<!-- Reference-type page. Source: this page as it stood before the 2026-11-19 section split; the Stream API OpenAPI specification linked below is the source of truth. Text moved, values not re-checked. -->
 
 ![Data Streams diagram](/storage/data-streams/reference/push_data.drawio.png)
 
@@ -17,7 +19,7 @@ A source represents an endpoint for receiving events.
 
 Sources are managed using the Stream API. See the full [Stream API reference](https://stream.keboola.com/v1/documentation/) and its [OpenAPI specification](https://stream.keboola.com/v1/documentation/openapi3.json).
 
-Events are received via HTTP. Each source can be associated with up to 100 `sinks`, which represent `mappings` from event data to `columns` in a destination `table`. Data may be mapped using pre-defined mappings or a custom `template`. A branch may hold up to 100 sources, and a sink mapping up to 100 columns.
+Events are received via HTTP. Each source can be associated with `sinks`, which represent `mappings` from event data to `columns` in a destination `table`. Data may be mapped using pre-defined mappings or a custom `template`. For how many sources, sinks, and columns you can have, see [Limits](#limits).
 
 :::note[Admin token required for writes]
 All write operations on the Stream API (creating, updating, deleting, enabling, and disabling
@@ -34,11 +36,7 @@ data are not affected — ingest is authenticated by the secret embedded in the 
 | `name` | string | Name of the column. Names must be unique. |
 | `type` | string | The type of the column. Available types and their descriptions are listed below. |
 
-***Note:** Data streams do not support primary keys. Every incoming event is appended to the
-destination table and no deduplication happens on import. If you need unique rows (e.g., one row
-per event ID), handle deduplication downstream: create a deduplication transformation that reads
-the stream table and writes the result to a new table whose output mapping primary key performs
-the deduplication on load, and schedule it to run regularly with a conditional flow.*
+Data streams do not support primary keys; see [No primary keys](#no-primary-keys).
 
 The available column types are:
 
@@ -55,7 +53,7 @@ The available column types are:
 The same column types apply to both source types. For an **OTLP** source, the "event body" a mapping
 sees is the single flattened record the service derives from each log record, metric data point, or
 span — so `body` stores that record as JSON, and `path`/`template` address its fields. See
-[Fields Available to Column Mappings](/storage/data-streams/opentelemetry/#fields-available-to-column-mappings)
+[Fields available to column mappings](/storage/data-streams/opentelemetry/reference/#fields-available-to-column-mappings)
 for the field list per signal.
 
 ### Path
@@ -154,25 +152,15 @@ The import conditions mentioned above can be accessed using the [`GET /v1/branch
 
 Same settings also exist for a sink. Use the [`GET /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/GetSinkSettings) endpoint and the [`PATCH /v1/branches/{branchId}/sources/{sourceId}/sinks/{sinkId}/settings`](https://stream.keboola.com/v1/documentation/#/configuration/UpdateSinkSettings) endpoint in that case.
 
+The same endpoints carry `storage.level.local.encoding.sync.wait`. To pick between at-most-once and at-least-once delivery with it, see [Choose a delivery guarantee](/storage/data-streams/create/#choose-a-delivery-guarantee).
+
 ## Test a Payload
 
 The in-app **Payload test** is backed by the [`POST /v1/branches/{branchId}/sources/{sourceId}/test`](https://stream.keboola.com/v1/documentation/#/test/TestSource) endpoint. Post a sample payload and the API renders it through every sink's mapping, returning the destination `tableId` and the resulting column values for each sink — **without storing anything**. This is the fastest way to check a `path` or `jsonnet` template before pointing a real client at the source.
 
 For an HTTP source, the request body is the raw payload a client would send, treated as a single record.
 
-For an OTLP source, the body must be a single **already-flattened OTLP record** — not a protobuf batch and not the multi-record envelope an OTel SDK sends. The `?signal=` query parameter (`logs`, `metrics`, or `traces`; defaults to `logs`) selects which signal the request simulates, and sinks whose [`allowedSignals`](/storage/data-streams/opentelemetry/#routing-signals-to-tables) filter rejects that signal are omitted from the result, exactly as they would be skipped during real ingestion.
-
-## Delivery Guarantees
-
-Depending on your use case, you may require different delivery guarantees for your stream. Follow the guidelines below to ensure the desired outcome.
-
-### At Most Once
-
-To ensure that no record is delivered twice, make sure the client doesn't retry when sending the records. In this case, it's beneficial to use the setting endpoints to set `"storage.level.local.encoding.sync.wait"` to `false` to increase throughput.
-
-### At Least Once
-
-To ensure that every record is delivered at least once, the client needs to implement retries when sending the records. Also, use the setting endpoints to confirm that `"storage.level.local.encoding.sync.wait"` is set to `true` (default behavior). Note that this setting guarantees that the record is written to the local disk.
+For an OTLP source, the body must be a single **already-flattened OTLP record** — not a protobuf batch and not the multi-record envelope an OTel SDK sends. The `?signal=` query parameter (`logs`, `metrics`, or `traces`; defaults to `logs`) selects which signal the request simulates, and sinks whose [`allowedSignals`](/storage/data-streams/opentelemetry/reference/#routing-signals-to-tables) filter rejects that signal are omitted from the result, exactly as they would be skipped during real ingestion.
 
 ## Tokens
 
@@ -184,24 +172,23 @@ stored, plus read access to all file uploads (staging storage is implemented wit
 
 These tokens should not be deleted or refreshed manually. To refresh a token, you can disable and re-enable the sink.
 
-## Kafka Integration
-To connect Keboola with [Apache Kafka®](https://kafka.apache.org/) and ingest data from Kafka topics via data streams, use the Kafka Connect HTTP Sink Connector
-to establish a communication channel between Kafka and Keboola.
+## Limits
 
-The Kafka Connect HTTP Sink Connector acts as a bridge, seamlessly integrating Kafka with Keboola's Data Stream HTTP API. Here's a breakdown of the process:
+- A branch may hold up to 100 sources.
+- Each source can be associated with up to 100 sinks.
+- A sink mapping may hold up to 100 columns.
 
-- Data Consumption: The connector continuously reads data records from one or more Kafka topics.
-- Batching: Events can be efficiently grouped based on a predefined maximum size (batch.max.size).
-- API Interaction: Data is sent as a POST request in JSON format to Keboola's Data Stream API URL.
+### No primary keys
 
-**Key Points to Remember:**
+Data streams do **not** support primary keys — every incoming event is **appended** to the
+table and no deduplication happens on import.
 
-- This integration relies on the Kafka Connect HTTP Sink Connector, which requires configuration on the Kafka side.
-- Data records from Kafka topics are transformed into strings before being sent to Keboola.
-- The target Keboola API URL corresponds to the data stream created in Keboola.
-- Only POST HTTP methods are supported for data ingestion.
+If you need unique rows (e.g., one row per event ID), it is up to you to decide whether
+deduplication is required and to handle it **downstream**: create a
+[deduplication transformation](/storage/tables/incremental-loading/#primary-key-deduplication) that reads the stream
+table and writes the result to a new table where the
+[output mapping](/transformations/mappings/#output-mapping) primary key performs the
+deduplication on load. Schedule it to run regularly with a [conditional flow](/flows/).
+[Kai](/kai/) can help you build both the transformation and the scheduled flow.
 
-## Next Steps
-
-- [Data Streams Tutorial](/storage/data-streams/tutorial/)
-- [Stream API Reference](https://stream.keboola.com/v1/documentation/)
+**Next:** [Files →](/storage/files/)

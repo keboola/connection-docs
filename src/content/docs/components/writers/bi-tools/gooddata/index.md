@@ -21,7 +21,7 @@ the connector.
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **GoodData** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **GoodData** connector.
 
 The first step is to configure the GoodData project that will be used for writing:
 
