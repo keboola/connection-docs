@@ -1,6 +1,7 @@
 ---
 title: Keboola Storage
 slug: 'components/extractors/storage/storage-api'
+description: 'Copy tables from one bucket of another Keboola project, even in another organization or region, with a read-only token for that bucket.'
 redirect_from:
     - /extractors/storage/storage-api/
 ---
@@ -10,6 +11,8 @@ redirect_from:
 This data source connector loads single or multiple tables from a Keboola project and stores them in a bucket in your
 current project. The component can be used in situations where [Data Catalog](/catalog/)
 cannot, e.g., when moving data between two different [organizations](/management/organization) or regions.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prepare API Token
 The connector requires an [API Token](/management/project/tokens/) with **read-only** access to a **single bucket**. 
@@ -26,7 +29,7 @@ you can refresh it -- the current token will be deactivated and a new token will
 If you want to extract from multiple buckets, you'll have to create multiple tokens and multiple configurations.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Storage** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Keboola Storage** connector.
 Select the region of the *source project*, and paste the token you generated in the *source project*.
 
 ![Screenshot - Source Project](/components/extractors/storage/storage-api/storage-api-2.png)

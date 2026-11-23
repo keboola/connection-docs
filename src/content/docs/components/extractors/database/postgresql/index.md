@@ -1,6 +1,7 @@
 ---
 title: PostgreSQL
 slug: 'components/extractors/database/postgresql'
+description: 'Sync PostgreSQL data into Keboola with the query-based connector or log-based CDC, including snapshots, publications, server setup and connector settings.'
 ---
 
 

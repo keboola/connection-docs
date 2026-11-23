@@ -14,7 +14,7 @@ This data destination connector sends data to a [PostgreSQL](https://www.postgre
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **PostgreSQL** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **PostgreSQL** data destination connector.
 
 The first step is to **Set Up Database Credentials**.
 You need to provide a *host name*, *user name*, *password*, *database name*, and *schema*.

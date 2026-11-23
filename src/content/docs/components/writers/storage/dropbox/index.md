@@ -13,8 +13,8 @@ This data destination connector sends tables as CSV or other files into a single
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Dropbox** data destination connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Dropbox** data destination connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 You may specify Storage [tables](/storage/tables/) or [files](/storage/files/) to be written to the target Dropbox account. 
 

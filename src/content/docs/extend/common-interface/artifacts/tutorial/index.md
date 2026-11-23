@@ -218,7 +218,7 @@ The configuration producing artifact needs to be in a phase that precedes the co
     ```
 
 3. Now put each of the configurations into a [Legacy Flow](/flows/flows-legacy/) (orchestration): "Artifacts shared Producer" into phase 1 and "Artifacts shared Consumer" into phase 2.
-   <!-- VERIFY(owner): do shared artifacts also work between tasks of a Conditional Flow (keboola.flow)? If yes, this example and its screenshot should use the Flows UI (2026-09-09 review). -->
+   <!-- VERIFY(Nikita): do shared artifacts also work between tasks of a Conditional Flow (keboola.flow)? If yes, this example and its screenshot should use the Flows UI (2026-09-09 review). -->
 
    ![Artifacts orchestration](/extend/common-interface/artifacts/artifacts-tutorial-4.png)
 

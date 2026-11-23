@@ -25,7 +25,7 @@ which were uploaded/downloaded into your project.
 to an earlier version (either revert the contents of a table or copy the table into another one).
 - [**Data Takeout**](/management/project/export/) — allows you to get your data back from us; in Keboola, you are
 always the sole owner of your data. Data Takeout is especially useful for proof-of-concept projects.
-- [**Trash tab**](/components/#delete-configuration) — allows you to list and restore deleted configurations.
+- [**Trash tab**](/components/configurations/#delete-and-restore-a-configuration) — allows you to list and restore deleted configurations.
 
 ### User Management
 There are three types of Keboola [project users](/management/project/users/):

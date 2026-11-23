@@ -1,6 +1,7 @@
 ---
 title: Relational Sync Data Source Connectors for SQL Databases
 slug: 'components/extractors/database/sqldb'
+description: 'Set up a query-based SQL database connector, select tables or write an advanced-mode query, and read the notes for MySQL, SQL Server, Snowflake and others.'
 redirect_from:
     - /extractors/database/sqldb/
 
@@ -23,8 +24,10 @@ avoid exposing your database server to the Internet.
 
 ***Note:** Our [tutorial](/getting-started/load/database/) also includes a quick introduction to extracting data from the Snowflake Database Server.*
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Initial Setup
-After you [create a configuration](/components/#creating-component-configuration), the first step is to configure database credentials using the **Set Up Credentials First** button:
+After you [create a configuration](/components/configurations/#create-a-configuration), the first step is to configure database credentials using the **Set Up Credentials First** button:
 
 ![Screenshot - Configure Credentials Start](/components/extractors/database/sqldb/sqldb-1.png)
 
