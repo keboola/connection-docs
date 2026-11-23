@@ -18,7 +18,7 @@ Then click **Authorize Account** to [authorize the configuration](/components/au
 
 Select the template you wish to use:
 
-- Smart Mode -- using this mode you always get just missing data (recommended), loads data [incrementally](/storage/tables/#incremental-loading).
+- Smart Mode -- using this mode you always get just missing data (recommended), loads data [incrementally](/storage/tables/incremental-loading/#incremental-loading).
 - Full Mode -- using this mode you always get everything.
 
 You can download:
