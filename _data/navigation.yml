@@ -710,12 +710,16 @@ items:
       - url: /storage/data-streams/
         title: Data Streams
         items:
-          - url: /storage/data-streams/opentelemetry/
-            title: OpenTelemetry (OTLP)
-          - url: /storage/data-streams/reference/
-            title: Reference
           - url: /storage/data-streams/tutorial/
             title: Tutorial
+          - url: /storage/data-streams/create/
+            title: Create a stream
+          - url: /storage/data-streams/opentelemetry/
+            title: OpenTelemetry (OTLP)
+          - url: /storage/data-streams/opentelemetry/reference/
+            title: OpenTelemetry reference
+          - url: /storage/data-streams/reference/
+            title: Reference
 
       - url: /storage/files/
         title: Files

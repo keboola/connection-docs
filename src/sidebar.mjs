@@ -537,9 +537,11 @@ export const sidebar = [
         collapsed: true,
         items: [
           { label: "Overview", slug: "storage/data-streams" },
-          { slug: "storage/data-streams/opentelemetry" },
-          { slug: "storage/data-streams/reference" },
           { slug: "storage/data-streams/tutorial" },
+          { slug: "storage/data-streams/create" },
+          { slug: "storage/data-streams/opentelemetry" },
+          { slug: "storage/data-streams/opentelemetry/reference" },
+          { slug: "storage/data-streams/reference" },
         ],
       },
       { slug: "storage/files" },
