@@ -8,8 +8,6 @@ redirect_from:
 
 <!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
 
-Bearer token authentication sends a token in the `Authorization` header of each API request.
-
 This method is available through UI. You can select the `Bearer Token` method and fill in the token.
 
 ![img.png](/components/extractors/generic-extractor/configuration/api/authentication/bearer.png)

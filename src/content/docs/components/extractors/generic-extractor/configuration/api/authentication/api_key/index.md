@@ -8,9 +8,7 @@ redirect_from:
 
 <!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
 
-API Key token authentication sends a token in either a header or query parameter of each API request.
-
-E.g., Headers: `X-StorageApi-Token:your_token`
+For example, the token can go in the header `X-StorageApi-Token:your_token`.
 
 This method is available through UI. You can select the `Api Key Auth` method and fill in the token.
 

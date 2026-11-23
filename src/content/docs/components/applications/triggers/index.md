@@ -1,5 +1,6 @@
 ---
 title: Trigger Applications
+description: 'The trigger applications in Keboola, which start an action in another service, such as creating a report or starting a computation engine.'
 slug: 'components/applications/triggers'
 redirect_from:
     - /applications/triggers/

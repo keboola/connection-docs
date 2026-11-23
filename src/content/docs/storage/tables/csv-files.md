@@ -1,5 +1,6 @@
 ---
 title: CSV Files
+description: 'The CSV format Storage accepts on import and produces on export, and how to export CSV from Microsoft Excel and open it there.'
 slug: 'storage/tables/csv-files'
 ---
 

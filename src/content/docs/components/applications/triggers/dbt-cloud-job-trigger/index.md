@@ -6,7 +6,7 @@ description: 'Trigger a dbt Cloud job from Keboola with your account ID, job ID 
 
 
 
-The dbt Cloud Job Trigger is used for triggering [dbt Cloud](https://www.getdbt.com/product/what-is-dbt) jobs.
+The job itself runs in [dbt Cloud](https://www.getdbt.com/product/what-is-dbt). The trigger starts it through the dbt Cloud API and records the response in the `dbt_cloud_trigger` table.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
