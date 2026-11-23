@@ -14,7 +14,7 @@ a specified SOQL query, or by selecting a Salesforce object and getting all data
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Salesforce V2** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Salesforce V2** connector.
 
 ### Authorization
 The connector supports three authentication methods. Select the appropriate **Login Method** based on your Salesforce setup and security requirements.

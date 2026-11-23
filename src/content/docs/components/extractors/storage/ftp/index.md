@@ -13,7 +13,7 @@ Set up the connection once, then add a table for each file or group of files you
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **FTP** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **FTP** connector.
 To access the files on FTP, you need to set up access credentials.
 
 ![Screenshot - FTP extractor server configuration](/components/extractors/storage/ftp/ftp-1.png)
@@ -74,5 +74,5 @@ adds the row number in the source file.
 
 ![Screenshot - FTP extractor audit](/components/extractors/storage/ftp/ftp-6.png)
 
-The connector also supports [Debug mode](/components/#debug-mode), all supported
+The connector also supports [Debug mode](/components/debug-mode/), all supported
 parameters are described in the [GitHub repository](https://github.com/keboola/ex-ftp).

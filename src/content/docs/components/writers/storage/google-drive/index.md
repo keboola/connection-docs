@@ -16,8 +16,8 @@ is not bound by [Google Sheets limits](https://spreadsheetpoint.com/google-sheet
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Drive** data destination connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Drive** data destination connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 Then click the **New Table** button to add a new table:
 
 ![Screenshot - Add Table Step 1](/components/writers/storage/google-drive/google-drive-1.png)

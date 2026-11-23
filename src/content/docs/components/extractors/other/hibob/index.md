@@ -21,7 +21,7 @@ Once you have acquired these credentials, you can proceed with the configuration
 
 ## Configuration Guide
 
-1. [Create a new configuration](/components/#creating-component-configuration) for the HiBob connector.
+1. [Create a new configuration](/components/configurations/#create-a-configuration) for the HiBob connector.
 2. In the authorization section, enter the Service User ID and Service User Token.
 3. Select which endpoints you want to fetch.
 4. You have the option to set the `Human readable` parameter, which makes the API return object names instead of IDs.

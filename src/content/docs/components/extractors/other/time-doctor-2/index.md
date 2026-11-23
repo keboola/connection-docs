@@ -13,7 +13,7 @@ The connector calls the [Time Doctor 2 API](https://api2.timedoctor.com/).
 <!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Time Doctor 2** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Time Doctor 2** connector.
 You need to provide an email address and the password of a user with appropriate access rights.
 
 To configure what data you want to extract, you can use the following parameters:

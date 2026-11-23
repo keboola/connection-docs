@@ -16,7 +16,7 @@ If you want to use
 - the [Cosmos DB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api), use the [CosmosDB data source connector](/components/extractors/database/cosmosdb/).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Azure Storage Table** connector.  
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Azure Storage Table** connector.  
 
 Fill in the **Connection String**. Then click **Save**.
 

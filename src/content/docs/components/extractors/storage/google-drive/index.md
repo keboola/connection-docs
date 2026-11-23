@@ -14,8 +14,8 @@ Each sheet you select lands as its own table in one bucket of the current projec
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Drive** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Drive** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 Click **New Sheet** to configure extraction and **Select spreadsheet** to list accessible spreadsheets 
 in your account:

@@ -14,9 +14,9 @@ This connector lets you access all your files in your personal or business accou
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **OneDrive Files** connector.  
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **OneDrive Files** connector.  
 
-Then, click **Authorize Account** to [authorize the configuration](/components/#authorization).
+Then, click **Authorize Account** to [authorize the configuration](/components/authorization/).
 
 ### Account Type
 Next, go to the **account configuration** section and select the **Account Type** you are using:

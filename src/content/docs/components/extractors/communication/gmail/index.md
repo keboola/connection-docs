@@ -13,8 +13,8 @@ Setting it up takes two steps: authorize the Gmail account, then write the queri
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Authorization
-[Create a new configuration](/components/#creating-component-configuration) of the **Gmail Messages** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Gmail Messages** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 **Your inbox is accessed as read only.**
 
 ![Gmail - authorize account](/components/extractors/communication/gmail/gmail-1.png)

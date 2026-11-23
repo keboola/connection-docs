@@ -17,7 +17,7 @@ API [key](https://napoveda.sklik.cz/pokrocila-prace-s-daty/sklik-api/). Select S
 in the top right corner of the screen. The API key is on the bottom of the Account Settings page. Copy it to your clipboard.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Sklik** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Sklik** connector.
 
 Then provide your API key:
 

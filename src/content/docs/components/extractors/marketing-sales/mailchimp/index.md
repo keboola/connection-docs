@@ -22,7 +22,7 @@ To gain access to the Mailchimp API, log in to [Mailchimp](https://mailchimp.com
 It will look like this: c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Mailchimp** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Mailchimp** connector.
 
 Fill in the **data center** for your account, your account **username** and the **API key**:
 Optionally name the **storage bucket** where your results will be stored.

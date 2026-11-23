@@ -13,7 +13,7 @@ The connector calls the [Fixer API](https://fixer.io/documentation) for the rate
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **ECB Currency Rates** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **ECB Currency Rates** connector.
 
 From the dropdown list, select the source currency you wish to use. It is the only thing you need to do to configure this connector. 
 

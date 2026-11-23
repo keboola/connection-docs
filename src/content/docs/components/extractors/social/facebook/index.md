@@ -16,8 +16,8 @@ The feed, comments and likes come from the Page [feed](https://developers.facebo
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Facebook Pages** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with access to the Facebook Page you want to extract.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Facebook Pages** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/) with access to the Facebook Page you want to extract.
 You will be asked for the `read_insights,public_profile,pages_show_list,manage_pages` [permissions](https://developers.facebook.com/docs/facebook-login/permissions).
 Optionally, you can use `Direct token insert` to specify a manually generated access token.
 

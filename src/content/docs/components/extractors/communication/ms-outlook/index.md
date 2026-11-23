@@ -14,8 +14,8 @@ The connection settings connect to one mailbox, and each configuration row picks
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Authorization
-[Create a new configuration](/components/#creating-component-configuration) for the **MS Outlook** extractor.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization).
+[Create a new configuration](/components/configurations/#create-a-configuration) for the **MS Outlook** extractor.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/).
 
 ## IMAP Settings
 To configure the connection, please specify the following parameters in IMAP Settings:

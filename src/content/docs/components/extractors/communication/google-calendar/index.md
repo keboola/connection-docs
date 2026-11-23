@@ -15,8 +15,8 @@ notifications, attachments, description, etc.). It can also be used for download
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Create New Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Calendar** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Calendar** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 ![Google Calendar - Authorize Account](/components/extractors/communication/google-calendar/google-calendar-1.png)
 

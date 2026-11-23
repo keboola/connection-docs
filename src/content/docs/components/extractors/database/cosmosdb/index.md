@@ -11,7 +11,7 @@ using the [SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-qu
 If your CosmosDB instance uses the [MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction), you should use the [MongoDB data source connector](/components/extractors/database/mongodb/) instead.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **CosmosDB** data source connector.  
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **CosmosDB** data source connector.  
 
 Fill in the **Endpoint**, **Database ID** and **Key**. Then click **Save**.
 

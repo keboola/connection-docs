@@ -14,7 +14,7 @@ This component extracts layout data from [FileMaker](https://www.claris.com/file
 
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **FileMaker** data source connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **FileMaker** data source connector.
 
 
 ### Prepare the FileMaker Database 

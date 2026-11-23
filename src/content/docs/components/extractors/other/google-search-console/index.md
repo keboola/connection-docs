@@ -18,8 +18,8 @@ endpoint.
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Search Console** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization).
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Search Console** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/).
 
 ![Screenshot - Component Config](/components/extractors/other/google-search-console/auth.png)
 

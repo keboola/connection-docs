@@ -14,7 +14,7 @@ Setting it up takes two steps: link a Google service account to your Google Ad M
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Authorization Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Ad Manager** connector. 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Ad Manager** connector. 
 To authenticate the component you must create a Google Service Account and link it to the Google Ad Manager account in the API settings. 
 Next fill in the authorization parameters into the corresponding fields in the user interface: the client email, private key, network code,
 and token URI that are specified in the JSON service account key. 

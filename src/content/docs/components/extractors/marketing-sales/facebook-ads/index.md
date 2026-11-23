@@ -13,8 +13,8 @@ Ads, ad sets and campaigns come from the [ads](https://developers.facebook.com/d
 [ads insights](https://developers.facebook.com/docs/marketing-api/reference/adgroup/insights).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Facebook Ads** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with access to the Ad Account you want to extract.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Facebook Ads** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/) with access to the Ad Account you want to extract.
 You will be asked for the `public_profile,ads_management` [permissions](https://developers.facebook.com/docs/facebook-login/permissions). 
 Optionally, you can use `Direct token insert` to specify a manually generated access token.
 

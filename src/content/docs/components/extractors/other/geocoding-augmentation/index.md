@@ -13,7 +13,7 @@ This data source connector provides detailed data for locations specified by the
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Geocoding Augmentation** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Geocoding Augmentation** connector.
 
 ### Augment Locations
 In this case, specify the location. The data source connector will fetch its geographical latitude and longitude 

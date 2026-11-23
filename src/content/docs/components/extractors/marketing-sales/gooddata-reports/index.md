@@ -14,7 +14,7 @@ reports from the [GoodData](https://www.gooddata.com/) business intelligence pla
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **GoodData Reports** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **GoodData Reports** connector.
 Type in your GoodData host: secure.gooddata.com, keboola.eu.gooddata.com, or a custom host. Find the host
 by opening the report you wish to extract.
 

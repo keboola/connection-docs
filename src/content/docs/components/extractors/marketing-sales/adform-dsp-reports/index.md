@@ -34,7 +34,7 @@ You will then receive your **client secret** and **client ID**. They will be use
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the Adform DSP Reports connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the Adform DSP Reports connector.
 
 First insert the **API client secret** and **API client ID** that you obtained from Adform (Adform client credentials for a registered 
 app with the `Client credentials flow` enabled).

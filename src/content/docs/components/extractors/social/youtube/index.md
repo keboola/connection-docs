@@ -17,8 +17,8 @@ The connector calls the [YouTube Data API](https://developers.google.com/youtube
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-To begin, [create a new configuration](/components/#creating-component-configuration) for the **YouTube** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+To begin, [create a new configuration](/components/configurations/#create-a-configuration) for the **YouTube** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 Select one of the two available **templates**: 
 

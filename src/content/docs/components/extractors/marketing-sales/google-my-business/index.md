@@ -13,8 +13,8 @@ The Google account you authorize must have access to every [Google Business prof
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google My Business** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google My Business** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 Please ensure that your account has the right to access the locations you are interested in. For a list of available locations for your Google Account, please visit [business.google.com/locations](https://business.google.com/locations).
 

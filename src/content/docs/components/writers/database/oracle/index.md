@@ -13,7 +13,7 @@ This data destination connector sends data to an [Oracle](https://www.oracle.com
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Oracle** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Oracle** data destination connector.
 
 The first step is to **Set Up Database Credentials**.
 You need to provide a *host name*, *user name*, *password*, and a *service name*.

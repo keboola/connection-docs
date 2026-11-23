@@ -13,7 +13,7 @@ This data source connector downloads data from the [LinkedIn Pages API](https://
 <!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **LinkedIn Pages** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **LinkedIn Pages** connector.
 
 ### Global Configuration
 To configure this connector, you need to authenticate with a **LinkedIn Profile** using OAuth. More info on this topic can be found in [LinkedIn API Documentation](https://learn.microsoft.com/en-us/linkedin/shared/authentication/getting-access).
