@@ -217,7 +217,24 @@ const auth = { type: 'app-user-token', token: userToken, storageToken: appStorag
 
 `user_token` is the value of the `X-Kbc-App-User-Token` header of the incoming request. The proxy sets a fresh token on every request and it expires within minutes, so read it per request instead of caching it. `app_storage_token` is the app's `KBC_TOKEN` environment variable, which the platform injects.
 
-The Python client is `keboola-query-service` 0.4.0 or later, the JavaScript client is `@keboola/api-client` 52.0.0 or later. This beta covers Python and JavaScript apps that use these clients; Streamlit apps are not covered yet. Both clients send the user token in `X-Kbc-App-User-Token` and the app token in `X-StorageAPI-Token`, and both raise a `RowLevelSecurityError` when a query is refused.
+The Python client is `keboola-query-service` 0.4.0 or later, the JavaScript client `@keboola/api-client` 52.0.0 or later, and Streamlit apps use `keboola-streamlit` 0.4.0 or later. The Python and JavaScript clients send the user token in `X-Kbc-App-User-Token` and the app token in `X-StorageAPI-Token`, and both raise a `RowLevelSecurityError` when a query is refused.
+
+**Streamlit apps.** With `keboola-streamlit` 0.4.0 or later, `query_service_execute_query` sends the user token (`X-Kbc-App-User-Token`) together with the app's Storage token with every Query Service request. It also keeps the user token fresh: the token lives 5 minutes, and the library refreshes it through the apps proxy. A refused query shows "You have no access to this data." and is not retried. Since 0.5.0, `get_workspace()` returns `governed`, and when the workspace is governed and the request has no user token, the query is not sent and the app shows "This app's data needs a signed-in user."
+
+**Key every `st.cache_data` cache per user.** Streamlit's cache is shared by all users of the app, so in a governed workspace it would give one user's rows to the next. Pass `get_app_user_key()` (the token's `idp` and `sub`) as a cache argument whose name does not start with `_`:
+
+```python
+import streamlit as st
+from keboola_streamlit import KeboolaStreamlit
+
+keboola = KeboolaStreamlit(root_url=URL, token=TOKEN)
+
+@st.cache_data(ttl=300)
+def load_orders(user):
+    return keboola.query_service_execute_query('SELECT * FROM "in.c-crm"."orders"')
+
+orders = load_orders(keboola.get_app_user_key())
+```
 
 **Result:** After a redeploy, the queries of the app run under the listed policies with the identity of the signed-in user.
 

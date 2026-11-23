@@ -81,13 +81,14 @@ For the end users of a [Data App](/data-apps/) who sign in through single sign-o
 - On Snowflake, a table of a linked bucket (a bucket shared from another project) cannot be read in a governed workspace: Query Service refuses it for every reader, because the table lives in the database of the source project. Until linked buckets are supported, load the data into a table of your own project and write the policy for that table.
 - Alias tables have not been verified with policies yet. Do not rely on a policy for them.
 - Projects with a protected default branch (SOX) are not supported.
-- This beta covers Python and JavaScript apps that use the Query Service clients described in [Apply policies to a Data App](/storage/row-level-security/set-up/#apply-policies-to-a-data-app); Streamlit apps are not covered yet.
+- A governed app must forward the signed-in user's token to Query Service. The clients in [Apply policies to a Data App](/storage/row-level-security/set-up/#apply-policies-to-a-data-app) do this for Python, JavaScript and Streamlit apps.
 - In a project with the `row-level-security` feature, the **Kai in the app** setting of a Data App stays off.
 - A governed app can only read: it runs `SELECT` statements and nothing else, so an app that writes to its Storage Access tables fails on its inserts, updates and deletes.
 <!-- kbagent-check: skip-next -->
 - On BigQuery, create the governed workspace with the MCP Server, the API, or `kbagent workspace create --governed` (Keboola CLI 1.2.0 or later).
 <!-- Checked 2026-11-20: keboola/cli supports --governed on Snowflake and BigQuery since 1.2.0 (changelog #892, #922; GOVERNED_WORKSPACE_BACKENDS in constants.py). -->
 - Column policies are an allowlist of visible columns. Masking a column's values is not supported.
+- Range conditions (`gt`, `gte`, `lt`, `lte`) compare the values as text on columns stored as text, which is the default for Keboola tables (untyped tables). For example `"10" >= "2"` is false, so a numeric or date range on such a column can hide or show the wrong rows without an error. Use a typed table for columns you filter by range, or use `eq` or `in` conditions.
 - The project feature `row-level-security` is checked by the MCP Server and by the Data App settings page of the Keboola UI only. A workspace you create with the login type `governed` is enforced regardless of the feature.
 
 ## This section

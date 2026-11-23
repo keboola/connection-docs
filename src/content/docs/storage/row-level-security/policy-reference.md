@@ -60,7 +60,7 @@ A condition is a filter on the rows of the table. It is built from the following
 {"column": "status", "op": "eq", "value": "active"}
 ```
 
-Comparison operators are `eq`, `ne`, `gt`, `gte`, `lt` and `lte`, with a string, number or boolean `value`.
+Comparison operators are `eq`, `ne`, `gt`, `gte`, `lt` and `lte`, with a string, number or boolean `value`. On a column stored as text, which is the default for Keboola tables, `gt`, `gte`, `lt` and `lte` compare the values as text, so a numeric or date range can return the wrong rows: see [Limitations](/storage/row-level-security/#limitations).
 
 ```json
 {"column": "region", "op": "in", "values": ["EU", "US"]}
