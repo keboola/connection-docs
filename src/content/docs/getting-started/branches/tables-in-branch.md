@@ -1,6 +1,6 @@
 ---
 title: 'Work with tables in a branch'
-lastUpdated: 2026-09-23
+lastUpdated: 2026-11-24
 slug: 'getting-started/branches/tables-in-branch'
 description: 'See how buckets and tables behave inside a development branch, and how branch table names differ from their production counterparts.'
 redirect_from:

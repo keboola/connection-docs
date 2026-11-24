@@ -1,6 +1,6 @@
 ---
 title: 'Merge to production'
-lastUpdated: 2026-09-23
+lastUpdated: 2026-11-24
 slug: 'getting-started/branches/merge-to-production'
 description: 'Merge a development branch back into production, all at once or configuration by configuration, and verify the result.'
 redirect_from:
