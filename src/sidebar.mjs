@@ -135,12 +135,16 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "components" },
+      { slug: "components/configurations" },
+      { slug: "components/authorization" },
+      { slug: "components/debug-mode" },
       { slug: "components/running-jobs-in-parallel" },
       {
         label: "Variables",
         collapsed: true,
         items: [
           { label: "Overview", slug: "components/variables" },
+          { slug: "components/variables/use" },
           {
             label: "Variables Through the API",
             collapsed: true,
@@ -151,6 +155,16 @@ export const sidebar = [
           },
         ],
       },
+      {
+        label: "Development Branches",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "components/branches" },
+          { slug: "components/branches/manage" },
+          { slug: "components/branches/merge-requests" },
+        ],
+      },
+      { slug: "components/ip-addresses" },
       {
         label: "Data Source Connectors",
         collapsed: true,
@@ -482,6 +496,8 @@ export const sidebar = [
               { slug: "components/applications/triggers/orchestration-trigger-queue-v2" },
               { slug: "components/applications/triggers/dbt-cloud-job-trigger" },
               { slug: "components/applications/triggers/deepnote-notebook-execution-trigger" },
+              { slug: "components/applications/triggers/powerbi-refresh" },
+              { slug: "components/applications/triggers/tableau-extract-refresh" },
             ],
           },
           { slug: "components/applications/custom-python" },
@@ -496,15 +512,6 @@ export const sidebar = [
           },
         ],
       },
-      {
-        label: "Development Branches",
-        collapsed: true,
-        items: [
-          { label: "Overview", slug: "components/branches" },
-          { slug: "components/branches/merge-requests" },
-        ],
-      },
-      { slug: "components/ip-addresses" },
     ],
   },
   {
@@ -512,6 +519,7 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "catalog" },
+      { slug: "catalog/share-and-link" },
       { slug: "catalog/multi-project" },
     ],
   },
@@ -520,29 +528,44 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "storage" },
-      { slug: "storage/buckets" },
-      { slug: "storage/bucket-exposure" },
-      {
-        label: "Data Streams",
-        collapsed: true,
-        items: [
-          { label: "Overview", slug: "storage/data-streams" },
-          { slug: "storage/data-streams/opentelemetry" },
-          { slug: "storage/data-streams/reference" },
-          { slug: "storage/data-streams/tutorial" },
-        ],
-      },
-      { slug: "storage/files" },
-      { slug: "storage/jobs" },
       {
         label: "Tables & Aliases",
         collapsed: true,
         items: [
           { label: "Overview", slug: "storage/tables" },
+          { slug: "storage/tables/manage" },
+          { slug: "storage/tables/incremental-loading" },
+          { slug: "storage/tables/descriptions" },
           { slug: "storage/tables/data-types" },
+          { slug: "storage/tables/data-types/reference" },
           { slug: "storage/tables/csv-files" },
-          { slug: "storage/tables/uploads" },
+          { slug: "storage/tables/csv-files/excel" },
           { slug: "storage/tables/backups" },
+        ],
+      },
+      { slug: "storage/buckets" },
+      { slug: "storage/files" },
+      { slug: "storage/jobs" },
+      {
+        label: "Bucket Exposure",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "storage/bucket-exposure" },
+          { slug: "storage/bucket-exposure/create" },
+          { slug: "storage/bucket-exposure/snowflake-grant" },
+          { slug: "storage/bucket-exposure/snowflake-share" },
+        ],
+      },
+      {
+        label: "Data Streams",
+        collapsed: true,
+        items: [
+          { label: "Overview", slug: "storage/data-streams" },
+          { slug: "storage/data-streams/tutorial" },
+          { slug: "storage/data-streams/create" },
+          { slug: "storage/data-streams/opentelemetry" },
+          { slug: "storage/data-streams/opentelemetry/reference" },
+          { slug: "storage/data-streams/reference" },
         ],
       },
       {
@@ -550,16 +573,32 @@ export const sidebar = [
         collapsed: true,
         items: [
           { label: "Overview", slug: "storage/byodb" },
-          { slug: "storage/byodb/external-buckets" },
+          { slug: "storage/byobq" },
+          {
+            label: "External Datasets",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "storage/byodb/external-buckets" },
+              { slug: "storage/byodb/external-buckets/register" },
+            ],
+          },
           { slug: "storage/byodb/snowflake-secure-data-sharing" },
+          {
+            label: "BigQuery policy tags",
+            collapsed: true,
+            items: [
+              { label: "Overview", slug: "storage/byodb/bigquery-policy-tags" },
+              { slug: "storage/byodb/bigquery-policy-tags/enable" },
+            ],
+          },
         ],
       },
-      { slug: "storage/byobq" },
       {
         label: "Row- and Column-Level Security",
         collapsed: true,
         items: [
           { label: "Overview", slug: "storage/row-level-security" },
+          { slug: "storage/row-level-security/set-up" },
           { slug: "storage/row-level-security/policy-reference" },
         ],
       },
@@ -643,9 +682,10 @@ export const sidebar = [
     collapsed: true,
     items: [
       { label: "Overview", slug: "workspace" },
-      { slug: "workspace/snowflake-workspaces-access-changes" },
+      { slug: "workspace/create" },
+      { slug: "workspace/connect" },
       { slug: "workspace/sql-editor" },
-      { slug: "workspace/retention" },
+      { slug: "workspace/sql-editor/use" },
       {
         label: "Keboola JDBC Driver",
         collapsed: true,
@@ -656,6 +696,9 @@ export const sidebar = [
           { slug: "workspace/jdbc-driver/tableau" },
         ],
       },
+      { slug: "workspace/table-export" },
+      { slug: "workspace/retention" },
+      { slug: "workspace/snowflake-workspaces-access-changes" },
     ],
   },
   {

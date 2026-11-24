@@ -1,6 +1,7 @@
 ---
 title: Data Source Connectors
 slug: 'components/extractors'
+description: 'Data source connectors import data from APIs, databases and storage services into Keboola; get the data in first and shape it in Keboola afterwards.'
 redirect_from:
     - /extractors/
 
@@ -9,6 +10,8 @@ redirect_from:
 
 
 Data source connectors (formerly known as extractors) are [Keboola components](/components/) used for **importing data from external sources into Keboola**.
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Types of Data Source Connectors
 Typically, data source connectors connect to [APIs](https://en.wikipedia.org/wiki/Application_programming_interface#Web_APIs)
