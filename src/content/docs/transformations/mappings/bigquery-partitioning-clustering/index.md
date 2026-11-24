@@ -9,8 +9,9 @@ partitioning and the clustering of the destination table. The layout is applied 
 table. Output mapping never changes the layout of a table that already exists; to convert an existing table, see
 [Repartition a BigQuery table](/storage/tables/bigquery-repartition/).
 
-In the UI, the table output mapping of a BigQuery project has fields for these options. The same options can be
-written in the configuration JSON, and a component can set them in the manifest of its output table.
+In the UI, the table output mapping of a BigQuery project has fields for these options (see
+[Editor in the UI](#editor-in-the-ui)). The same options can be written in the configuration JSON, and a component
+can set them in the manifest of its output table.
 
 ## Options
 
@@ -98,12 +99,25 @@ not compare the partitioning.
 
 A full load and an incremental load both keep the layout of the destination table.
 
+## Editor in the UI
+
+The table output mapping editor checks the options before the job runs:
+
+- When the destination table exists with a different layout than the output mapping requests, the editor shows a
+  warning and offers **Use the table's layout**, which fills in the layout of the table. Only the keys that the
+  output mapping sets are compared, as in [Behavior](#behavior).
+- When the destination table exists, the editor reads the column types from the table. A `STRING` column selected
+  for partitioning gets a warning, and a `DATE` column does not offer **Hour**. When the destination table does not
+  exist yet, the column types are unknown and the editor shows no hint.
+- An invalid integer range shows the reason under the fields, and **Save** stays disabled.
+
 ## Direct Mode output mapping
 
 A [Direct Mode output mapping](/transformations/mappings/#direct-mode-output-mapping)
 (`unload_strategy: direct-grant`) does not create its destination table. The transformation writes into a table that
 already exists, so output mapping has no table to apply the layout to. Create the table with the layout beforehand:
 
+- in the UI (see [Create a table with a layout in the UI](#create-a-table-with-a-layout-in-the-ui)),
 - with [kbagent](/cli/): `kbagent storage create-table` with the `--time-partitioning-*`, `--range-partitioning-*`
   and `--clustering-field` options (see the [command reference](/cli/commands/)), or
 - with the
@@ -112,6 +126,18 @@ already exists, so output mapping has no table to apply the layout to. Create th
 
 When a Direct Mode output table carries one of the three keys, the job logs this warning and continues:
 `Output table "..." has unload_strategy "direct-grant": output mapping does not create the table and ignores "...". Create the table with this layout through the Storage API beforehand.`
+
+## Create a table with a layout in the UI
+
+In **Storage**, open a bucket, click **Add Table** and select **Create New Table**. In a BigQuery bucket, the dialog
+has a **Partitioning & Clustering** section:
+
+- Time partitioning offers the `DATE`, `DATETIME` and `TIMESTAMP` columns that are defined in the dialog, or
+  ingestion time.
+- Integer range partitioning offers the `INTEGER` columns that are defined in the dialog.
+- Clustering takes up to 4 of the defined columns, in clustering order.
+
+**Upload CSV File** has no such section, because that table is created without native data types.
 
 ## Manifest
 

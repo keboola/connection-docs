@@ -113,6 +113,11 @@ table ID, so it reads the new table.
 - Check the layout in the detail of the original table ID.
 - Create the search indexes again.
 - Read every alias of the table and compare its columns and its row count with the table.
+- Align the output mappings that load the table: set `time_partitioning`, `range_partitioning` and `clustering` to
+  the new layout, or remove them. An output mapping that still requests the old layout loads the data and the table
+  keeps its new layout, but every job logs a message that the table has a different layout. In the UI, the output
+  mapping editor shows a warning with **Use the table's layout**, which fills in the layout of the table. Save the
+  configuration afterwards.
 - Resume the writers and check that the next load succeeds and keeps the layout.
 - When the table is loaded incrementally and its primary key contains the partitioning column, enable
   [Partition-aware import](/transformations/mappings/#partition-aware-import-bigquery) in the output mapping that
@@ -134,6 +139,21 @@ way back is the 7-day fail-safe of BigQuery, which needs a request to Google sup
 
 ## Change the clustering in place
 
+Change the clustering of a BigQuery table in the UI or through the Storage API.
+
+### In the UI
+
+1. In **Storage**, open the table. On the **Overview** tab, click the pencil next to **Clustering**. The
+   **Change clustering** dialog opens. It lists the configurations that load the table.
+2. Select 1 to 4 columns in clustering order and save. To remove the clustering, click **Remove clustering** and
+   confirm.
+3. When an output mapping of a listed configuration sets `clustering`, set it to the new value or remove it.
+   Otherwise each job of that configuration logs a message that the table has a different layout.
+
+The pencil is not available for an alias and for a table in a linked bucket.
+
+### Through the API
+
 The [table definition update](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-tableId-/definition)
 accepts `clustering` for a BigQuery table. Send a `PUT` to
 `/v2/storage/tables/out.c-traffic.traffic_deal/definition` with this body:
@@ -152,6 +172,8 @@ detail shows the new clustering after the job succeeds.
   or more than 4 columns. For a table in a linked bucket it is rejected with 403. Change the clustering on the source
   table; an alias and a linked bucket read the same physical table.
 - The partitioning cannot be changed this way.
+
+### Existing rows
 
 BigQuery applies the new clustering to data written after the change. Rows that are already in the table keep their
 order until they are rewritten:
