@@ -14,7 +14,7 @@ This data destination connector sends data to a [MySQL](https://www.mysql.com/pr
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **MySQL** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **MySQL** data destination connector.
 
 The first step is to **Set Up Database Credentials**.
 You need to provide a *host name*, *user name*, *password*, and a *database name* (MySQL [*schema*](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_schema)).
@@ -68,4 +68,4 @@ This means that if the database is used by other applications which acquire tabl
 freeze waiting for the locks to be released.
 
 Additionally, you can specify a **primary key** of the table, a simple column **data filter**, and a filter for
-[incremental processing](/storage/tables/#incremental-processing).
+[incremental processing](/storage/tables/incremental-loading/#incremental-processing).

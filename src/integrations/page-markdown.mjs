@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, linksToText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
 import { stripHtmlComments, collapseBlankLines, fenceTracker, fenceOpener, closesFence } from './strip-comments.mjs';
+import { processAgentBlocks, findAgentLeaks } from './agent-only.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
 import { courseListText, courseBarText } from '../components/getting-started/course.mjs';
 import { sampleText } from '../components/getting-started/sample.mjs';
@@ -413,16 +414,34 @@ function stripFrontmatter(content) {
 }
 
 /**
- * The body of a page's markdown twin, from the page source: frontmatter off,
- * .mdx reduced to markdown, authors' comments and search markup dropped. The
- * build calls this for every page; scripts/page-markdown.test.ts runs it too,
- * so a step dropped from the chain fails a test.
+ * A page's source as the twin starts from it: frontmatter off, .mdx reduced to
+ * markdown, authors' comments dropped. Agent blocks are still in it.
  */
-export function twinBody(content, isMdx) {
+export function twinSource(content, isMdx) {
   const raw = stripFrontmatter(content);
   // authors' notes (VERIFY markers, where a claim was checked) stay in the source; comments
   // and blank lines inside fenced code are content and survive (strip-comments.mjs)
-  return stripSearchMarkup(stripHtmlComments(isMdx ? stripMdx(raw) : raw)).trim();
+  return stripHtmlComments(isMdx ? stripMdx(raw) : raw);
+}
+
+/**
+ * The body of a page's markdown twin, from the page source: twinSource, then
+ * :::agent blocks turned into a labelled quote (agent-only.mjs; the web page
+ * drops them) and search markup dropped. The build calls this for every page;
+ * scripts/page-markdown.test.ts runs it too, so a step dropped from the chain
+ * fails a test.
+ */
+export function twinBody(content, isMdx, file = 'page') {
+  return twinParts(content, isMdx, file).body;
+}
+
+/**
+ * twinBody plus the text of the page's agent blocks, from a single parse, so the
+ * build can check that none of them reached the HTML without parsing twice.
+ */
+export function twinParts(content, isMdx, file = 'page') {
+  const { markdown, texts } = processAgentBlocks(twinSource(content, isMdx), file);
+  return { body: stripSearchMarkup(markdown).trim(), agentTexts: texts };
 }
 
 /**
@@ -511,6 +530,7 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
         let written = 0;
         let skipped = 0;
         const index = [];
+        const agentPages = []; // pages with :::agent blocks, for the leak check below
 
         for (const file of findMarkdownFiles(contentDir)) {
           const content = readFileSync(file, 'utf-8');
@@ -540,7 +560,11 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
             continue;
           }
 
-          const body = twinBody(content, extname(file) === '.mdx');
+          const isMdx = extname(file) === '.mdx';
+          // :::agent blocks, dropped from the HTML, become a labelled quote here (agent-only.mjs);
+          // their text is kept for the leak check after the loop. One parse serves both.
+          const { body, agentTexts } = twinParts(content, isMdx, file);
+          if (agentTexts.length) agentPages.push({ slug: fm.slug, texts: agentTexts });
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
 
           mkdirSync(mdDir, { recursive: true });
@@ -549,6 +573,13 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
         }
 
         logger.info(`Emitted ${written} raw-markdown pages (${skipped} skipped)`);
+
+        // :::agent notes belong to the markdown twin only. If one reached a web page,
+        // remarkAgentOnly did not run, and Starlight rendered the block as a plain <div>.
+        const leaks = findAgentLeaks(outDir, agentPages);
+        if (leaks.length) {
+          throw new Error(`:::agent block rendered on the web page of: ${leaks.join(', ')}`);
+        }
 
         if (site) {
           index.sort((a, b) => a.slug.localeCompare(b.slug));
