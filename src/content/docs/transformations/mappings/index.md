@@ -367,8 +367,9 @@ reads (and bills) only those partitions.
    partition.
 3. BigQuery prunes all other partitions of the destination table.
 
-Loaded values that fall outside the table's partition ranges (BigQuery keeps such rows in its `__UNPARTITIONED__`
-partition) are handled as well; the load result is the same.
+Loaded IDs outside the table's partition ranges (below the range start, or at or above the range end) do not switch
+the option off. BigQuery keeps such rows in its `__UNPARTITIONED__` partition, so the import then reads that partition
+too, in addition to the partitions of the in-range IDs.
 
 The data loaded into the table is the same as without the option; only the amount of data BigQuery reads changes.
 
