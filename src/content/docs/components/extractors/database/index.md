@@ -83,26 +83,32 @@ and through it to the database server.
 
 #### 1. Set Up an SSH Proxy Server
 
-Here is a very basic example [Dockerfile](https://docs.docker.com/engine/reference/builder/). All it does is run
-an `sshd` daemon and expose port 22. You can, of course, set this up on your system in a similar way without using
-Docker.
+Here is a basic example [Dockerfile](https://docs.docker.com/reference/dockerfile/). It runs an `sshd` daemon on
+port 22 with one user, `keboola`, who can log in only with a key. Root login and password login are turned off.
+You can set up the same thing on your server without Docker.
 
 ```dockerfile
-FROM ubuntu:14.04
+FROM ubuntu:24.04
 
-RUN apt-get update
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends openssh-server \
+ && rm -rf /var/lib/apt/lists/* \
+ && mkdir -p /run/sshd
 
-RUN apt-get install -y openssh-server
-RUN mkdir /var/run/sshd
+# The user the connector logs in as. '*' means the user has no password, so only a key works.
+RUN useradd --create-home --shell /bin/bash keboola \
+ && usermod -p '*' keboola \
+ && mkdir -p /home/keboola/.ssh \
+ && chmod 700 /home/keboola/.ssh \
+ && chown keboola:keboola /home/keboola/.ssh
 
-RUN echo 'root:root' |chpasswd
-
-RUN sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+# Key login only: no root login, no passwords.
+RUN printf 'PermitRootLogin no\nPasswordAuthentication no\nKbdInteractiveAuthentication no\nPubkeyAuthentication yes\n' \
+      > /etc/ssh/sshd_config.d/keboola.conf
 
 EXPOSE 22
 
-CMD    ["/usr/sbin/sshd", "-D"]
+CMD ["/usr/sbin/sshd", "-D", "-e"]
 ```
 
 This server should be in the same private network where your database server resides, and it must be publicly
@@ -110,18 +116,21 @@ accessible from the internet via SSH. The default port for SSH is 22, but you ca
 
 For more information about setting up SSH on your server, see:
 
-- [OpenSSH configuration](https://help.ubuntu.com/community/SSH/OpenSSH/Configuring)
-- [Dockerized SSH service](https://docs.docker.com/engine/examples/running_ssh_service/)
+- [OpenSSH server on Ubuntu](https://documentation.ubuntu.com/server/how-to/security/openssh-server/)
+- [All `sshd_config` options](https://man.openbsd.org/sshd_config)
+<!-- Checked 2026-11-24: PermitRootLogin, PasswordAuthentication, KbdInteractiveAuthentication and PubkeyAuthentication are sshd_config options (man.openbsd.org/sshd_config). Not built and run here (no Docker on the checking machine). VERIFY(Nikita): build the Dockerfile once and log in with a key. -->
 
 #### 2. Generate an SSH Key Pair
 
 Set up or edit your database connector in Keboola. Go to **Database Credentials** and check **Enable SSH Tunnel**.
-Generate an SSH key pair and copy the public key to your *SSH proxy server*. Paste it into the *public.key* file
-and then append it to the `authorized_keys` file:
+Generate an SSH key pair and copy the public key to your *SSH proxy server*. Open a shell on the server as the SSH
+user (for the Docker example above: `docker exec -it -u keboola <container> bash`), paste the key into the
+*public.key* file and then append it to the `authorized_keys` file:
 
 ```bash
-mkdir ~/.ssh
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
 cat public.key >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
 ```
 
 #### 3. Set Up the Database Connector
