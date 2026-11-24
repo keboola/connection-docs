@@ -31,14 +31,33 @@ const SCHEME = /^[a-z][a-z0-9+.-]*:/i;
 // a code span: a run of N backticks closed by the next run of exactly N
 const CODE_SPAN = /(?<!`)(`+)(?!`)[\s\S]*?(?<!`)\1(?!`)/g;
 
-/** A link target made absolute against the page URL; a target with a scheme is left alone. */
-export function absoluteUrl(target, pageUrl) {
+// A file the page shows or offers (an image, a video, a download), not another page.
+const ASSET = /\.(png|jpe?g|gif|webp|avif|svg|mp4|webm|mov|pdf|zip|csv|json|ya?ml|txt)(?:[?#][^\s]*)?$/i;
+
+/**
+ * A link target made absolute; a target with a scheme is left alone. Page links resolve against
+ * the page URL. A relative file (`./shot.png`) resolves against `assetBase`, the folder of the
+ * page's source file: that is where Astro reads it and where its public/ copy lives, and it
+ * differs from the page URL whenever the slug isn't the file's own path (`dbeaver.md` is served
+ * at /…/dbeaver/, its `./DBeaver_DB_1.png` sits next to the file).
+ */
+export function absoluteUrl(target, pageUrl, assetBase = pageUrl) {
   if (!target || SCHEME.test(target) || target.startsWith('//')) return target;
+  const base = !/^[/#]/.test(target) && ASSET.test(target) ? assetBase : pageUrl;
   try {
-    return new URL(target, pageUrl).href;
+    return new URL(target, base).href;
   } catch {
     return target;
   }
+}
+
+// `[//]: # (note)`, Markdown's comment idiom: like an HTML comment, it stays out of the twin.
+const MD_COMMENT = /^[ \t]{0,3}\[\/\/\]:[ \t]*#(?:[ \t]*(?:\([^\n]*\)|"[^\n]*"|'[^\n]*'))?[ \t]*\r?$/;
+
+/** Drop `[//]: # (…)` comment lines outside fenced code. */
+export function dropMarkdownComments(markdown) {
+  const inCode = fenceTracker();
+  return markdown.split('\n').filter((l) => inCode(l) || !MD_COMMENT.test(l)).join('\n');
 }
 
 /**
@@ -74,8 +93,8 @@ export function mapProse(markdown, fn) {
 }
 
 /** Make every link and image target in prose absolute. */
-export function absoluteLinks(markdown, pageUrl) {
-  const abs = (t) => absoluteUrl(t, pageUrl);
+export function absoluteLinks(markdown, pageUrl, assetBase = pageUrl) {
+  const abs = (t) => absoluteUrl(t, pageUrl, assetBase);
   const target = (open, t) => (t.startsWith('<') ? `${open}<${abs(t.slice(1, -1))}>` : `${open}${abs(t)}`);
   return mapProse(markdown, (text) =>
     text
@@ -139,7 +158,7 @@ export function dropWidgets(markdown) {
 }
 
 /** All of the above: widgets and asides first, then the links they leave. */
-export function cleanTwin(markdown, pageUrl) {
-  const out = asidesToQuotes(dropWidgets(markdown));
-  return collapseBlankLines(pageUrl ? absoluteLinks(out, pageUrl) : out);
+export function cleanTwin(markdown, pageUrl, assetBase = pageUrl) {
+  const out = asidesToQuotes(dropWidgets(dropMarkdownComments(markdown)));
+  return collapseBlankLines(pageUrl ? absoluteLinks(out, pageUrl, assetBase) : out);
 }

@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSync } from 'node:fs';
-import { join, extname } from 'node:path';
+import { join, extname, dirname, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, linksToText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
@@ -440,10 +440,10 @@ export function twinBody(content, isMdx, file = 'page') {
  * twinBody plus the text of the page's agent blocks, from a single parse, so the
  * build can check that none of them reached the HTML without parsing twice.
  */
-export function twinParts(content, isMdx, file = 'page', { pageUrl } = {}) {
+export function twinParts(content, isMdx, file = 'page', { pageUrl, assetBase } = {}) {
   const { markdown, texts } = processAgentBlocks(twinSource(content, isMdx), file);
   // asides as quotes, browser-only markup out, and (with the page's URL) absolute links
-  return { body: cleanTwin(stripSearchMarkup(markdown), pageUrl).trim(), agentTexts: texts };
+  return { body: cleanTwin(stripSearchMarkup(markdown), pageUrl, assetBase ?? pageUrl).trim(), agentTexts: texts };
 }
 
 /**
@@ -640,7 +640,10 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
           // :::agent blocks, dropped from the HTML, become a labelled quote here (agent-only.mjs);
           // their text is kept for the leak check after the loop. One parse serves both.
           const pageUrl = site ? new URL(fm.slug ? `/${fm.slug}/` : '/', site).href : undefined;
-          const { body, agentTexts } = twinParts(content, isMdx, file, { pageUrl });
+          // relative files (`./shot.png`) sit next to the source file, not under the page's slug
+          const fileDir = relative(contentDir, dirname(file)).split(sep).join('/');
+          const assetBase = site ? new URL(fileDir ? `/${fileDir}/` : '/', site).href : undefined;
+          const { body, agentTexts } = twinParts(content, isMdx, file, { pageUrl, assetBase });
           if (agentTexts.length) agentPages.push({ slug: fm.slug, texts: agentTexts });
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
           full.push({ slug: fm.slug, title: fm.title ?? fm.slug, body });

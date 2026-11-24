@@ -14,6 +14,21 @@ test('root-relative, page-relative and same-page links become absolute', () => {
   assert.equal(out, 'See [Buckets](https://help.keboola.com/storage/buckets/), ![a](https://help.keboola.com/storage/tables/x.png), [up](https://help.keboola.com/storage/files/) and [here](https://help.keboola.com/storage/tables/#limits).');
 });
 
+test('a relative file resolves against its source folder, a page link against the page', () => {
+  // workspace/jdbc-driver/dbeaver.md is served at /workspace/jdbc-driver/dbeaver/; its screenshots sit beside the file
+  const page = 'https://help.keboola.com/workspace/jdbc-driver/dbeaver/';
+  const files = 'https://help.keboola.com/workspace/jdbc-driver/';
+  assert.equal(
+    absoluteLinks('![s](./DBeaver_DB_1.png) <img src="shot.webp"> [next](../datagrip/) [here](#setup) [abs](/a.png)', page, files),
+    '![s](https://help.keboola.com/workspace/jdbc-driver/DBeaver_DB_1.png) <img src="https://help.keboola.com/workspace/jdbc-driver/shot.webp"> [next](https://help.keboola.com/workspace/jdbc-driver/datagrip/) [here](https://help.keboola.com/workspace/jdbc-driver/dbeaver/#setup) [abs](https://help.keboola.com/a.png)',
+  );
+});
+
+test('[//]: # comment lines stay out of the twin, except in code', () => {
+  const src = 'Intro.\n\n[//]: # (### Hidden draft)\n\n[//]: # ()\n[//]: # (```sql)\n\n```md\n[//]: # (kept in a sample)\n```\n\nAfter.';
+  assert.equal(cleanTwin(src), 'Intro.\n\n```md\n[//]: # (kept in a sample)\n```\n\nAfter.');
+});
+
 test('links with a scheme, titles and angle brackets', () => {
   assert.equal(absoluteLinks('[k](https://keboola.com/) [m](mailto:a@b.c) [c](cursor://x/y)', PAGE), '[k](https://keboola.com/) [m](mailto:a@b.c) [c](cursor://x/y)');
   assert.equal(absoluteLinks('[t](/a/ "Title")', PAGE), '[t](https://help.keboola.com/a/ "Title")');
