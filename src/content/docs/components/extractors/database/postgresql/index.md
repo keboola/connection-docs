@@ -1,6 +1,7 @@
 ---
 title: PostgreSQL
 slug: 'components/extractors/database/postgresql'
+description: 'Sync PostgreSQL data into Keboola with the query-based connector or log-based CDC, including snapshots, publications, server setup and connector settings.'
 ---
 
 
@@ -15,13 +16,13 @@ Our connectors support the most recent versions of PostgreSQL. You may choose di
 
 ## Query-Based Connector
 
-This is a [standard connector](https://components.keboola.com/components/keboola.ex-db-mysql) that performs queries against the source database to sync data. 
+This is a [standard connector](https://components.keboola.com/components/keboola.ex-db-pgsql) that performs queries against the source database to sync data. 
 It is the simplest approach suitable for most use cases and allows for [time-stamp based](/components/extractors/database/#incremental-fetching) CDC replication.
 
 They are all [configured](/components/extractors/database/sqldb/#initial-setup) in the same way and 
 have an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). 
 
-Their basic configuration is also part of the [Tutorial - Loading Data with Database Extractor](/tutorial/load/database/). 
+Their basic configuration is also part of [Load from a database](/getting-started/load/database/) in Getting Started.
 
 ## PostgreSQL Log-Based CDC
 
@@ -100,7 +101,7 @@ Each result table includes the following system columns:
 
 ### Data Type Mapping
 
-MySQL datatypes are mapped to [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/#base-types) as follows:
+MySQL datatypes are mapped to [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/reference/#base-types) as follows:
 
 Based on the selected JSON file, the `base_type` column in the table will be updated accordingly:
 

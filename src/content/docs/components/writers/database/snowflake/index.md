@@ -1,6 +1,7 @@
 ---
 title: Snowflake
 slug: 'components/writers/database/snowflake'
+description: 'Write Keboola tables to your own Snowflake database or, on projects with their own Snowflake backend, a Keboola-provisioned schema to share with services.'
 redirect_from:
     - /writers/database/snowflake/
 ---
@@ -12,8 +13,10 @@ to an existing Snowflake database, or to a new database it provisions to you. Th
 For example, you can use it to send data to [Tableau](https://www.tableau.com/), [PowerBI](https://powerbi.microsoft.com/en-us/), etc.
 Projects using [Multi-tenant](/storage/#multi-tenant-mt) Snowflake backend can use [Data Gateway](/components/applications/data-gateway/) component instead.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Snowflake** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Snowflake** data destination connector.
 
 The first step is to **set up credentials**:
 
@@ -95,7 +98,7 @@ using the [`ALTER SWAP`](https://docs.snowflake.com/en/sql-reference/sql/alter-t
 the shortest unavailability of the target table. However, this operation still drops the table.
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a **Data changed in last** filter for
-[incremental processing](/storage/tables/#incremental-processing).
+[incremental processing](/storage/tables/incremental-loading/#incremental-processing).
 
 **Data changed in last** filter is not available when using **Automatic incremental load**, as the component will use the last run date to determine the data to be loaded.
 

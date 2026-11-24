@@ -1,5 +1,6 @@
 ---
 title: Development branches
+description: 'How a Common Interface component runs in a development branch: the branch context, input and output mapping, configuration state, and external resources.'
 slug: 'extend/common-interface/development-branches'
 ---
 

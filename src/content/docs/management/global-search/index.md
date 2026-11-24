@@ -1,5 +1,6 @@
 ---
 title: Global Search
+description: 'Search entity names, and table column names, across every project in your organization: entity types, filters, matching, sharing results, and limits.'
 slug: 'management/global-search'
 ---
 

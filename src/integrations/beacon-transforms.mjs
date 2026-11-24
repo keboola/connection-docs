@@ -557,6 +557,14 @@ function transformGlossaryList(tree) {
       if (!para?.children?.length) continue;
       const [term, ...rest] = para.children;
       if (!rest.length) continue;
+      // The em dash is only the delimiter that identifies this shape in Markdown.
+      // Once the list is a 2-col grid, the columns do the separating, so strip it —
+      // otherwise every definition renders as "— definition".
+      if (rest[0].type === 'text') {
+        rest[0].value = rest[0].value.replace(/^\s*(—|–|--|-)\s+/, '');
+        if (!rest[0].value) rest.shift();
+      }
+      if (!rest.length) continue;
       para.children = [
         term,
         {

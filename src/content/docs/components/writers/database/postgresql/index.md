@@ -1,6 +1,7 @@
 ---
 title: PostgreSQL
 slug: 'components/writers/database/postgresql'
+description: 'Write Keboola tables to a PostgreSQL database and schema with dedicated credentials or an SSH tunnel, then set column types and full or incremental load.'
 redirect_from:
     - /writers/database/postgresql/
 
@@ -10,8 +11,10 @@ redirect_from:
 
 This data destination connector sends data to a [PostgreSQL](https://www.postgresql.org/) database.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **PostgreSQL** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **PostgreSQL** data destination connector.
 
 The first step is to **Set Up Database Credentials**.
 You need to provide a *host name*, *user name*, *password*, *database name*, and *schema*.
@@ -68,4 +71,4 @@ freeze waiting for the locks to be released. This will be recorded in the connec
     Table "account" is locked by 1 transactions, waiting for them to finish
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
-[incremental processing](/storage/tables/#incremental-processing).
+[incremental processing](/storage/tables/incremental-loading/#incremental-processing).

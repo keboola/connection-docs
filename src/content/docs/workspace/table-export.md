@@ -1,13 +1,16 @@
 ---
 title: Exporting Workspace Tables to Files
 slug: 'workspace/table-export'
+sidebar:
+  label: Table Export
+description: 'Reference for the workspace table-export call of the Storage API: the endpoint, request fields, the job response, Snowflake and BigQuery notes, and limitations.'
 ---
-
-
 
 You can export a table that lives in a Snowflake or BigQuery workspace schema to [File Storage](/storage/files/)
 via the Storage API. The export runs as an asynchronous storage job, and the job result contains the file ID of the
 exported file, which can then be downloaded like any other Keboola file.
+
+<!-- Reference-type page. Source: the page as it stood on main; shape only, content unchanged, checked 2026-11-19. -->
 
 This is useful when you build data in a workspace (for example, via the [SQL Editor](/workspace/sql-editor/) or a
 custom integration) and need to move the resulting table outside of the workspace without going through Storage
@@ -17,6 +20,7 @@ Currently supported backends:
 
 - **Snowflake**
 - **BigQuery**
+
 
 ## Endpoint
 
@@ -55,7 +59,7 @@ finishes, its `results` contain the ID of the exported file:
 }
 ```
 
-Download the file with the standard [file download](/integrate/storage/api/importer/#download-a-file) flow.
+Download the file with the standard [file download](/storage/api/import-export/) flow.
 
 ## Backend-Specific Notes
 
@@ -69,13 +73,15 @@ Download the file with the standard [file download](/integrate/storage/api/impor
 - Supports **CSV** and **Parquet**.
 - Available for BigQuery projects only; the exported file always lands in the project's GCS file storage.
 
+## API Reference
+
+See the full request/response specification in the
+[Storage API reference](https://keboolastorageapi.docs.apiary.io/#reference/workspaces/export-table-from-workspace/export-table-from-workspace).
+
 ## Limitations
 
 - The workspace must be a **table workspace**. File/Python/R workspaces are not supported.
 - **Reader account** workspaces cannot export data through this endpoint.
 - The workspace must use a supported backend (Snowflake or BigQuery).
 
-## API Reference
-
-See the full request/response specification in the
-[Storage API reference](https://keboolastorageapi.docs.apiary.io/#reference/workspaces/export-table-from-workspace/export-table-from-workspace).
+**Next:** [Workspace retention →](/workspace/retention/)
