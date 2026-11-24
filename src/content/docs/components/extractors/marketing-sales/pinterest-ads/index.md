@@ -1,5 +1,6 @@
 ---
 title: Pinterest Ads
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/pinterest-ads'
 description: 'Download Pinterest ad analytics reports from several ad accounts by defining a custom report or using an existing report template, with a time range.'
 ---

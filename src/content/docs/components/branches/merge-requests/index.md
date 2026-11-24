@@ -1,5 +1,6 @@
 ---
 title: Merge Requests
+lastUpdated: 2026-11-20
 slug: 'components/branches/merge-requests'
 description: 'Review the changes in a development branch, send them as a merge request, approve and merge it, resolve conflicts, and require review with branch protection.'
 ---

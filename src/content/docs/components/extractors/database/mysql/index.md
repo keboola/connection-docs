@@ -1,5 +1,6 @@
 ---
 title: MySQL
+lastUpdated: 2026-11-19
 slug: 'components/extractors/database/mysql'
 description: 'Sync MySQL, MariaDB or Aurora data into Keboola with the query-based connector or log-based CDC, and set up the user, binlog and GTIDs that CDC needs.'
 ---
@@ -125,7 +126,7 @@ underlying [Debezium Schema Change Topic](https://debezium.io/documentation/refe
 
 ### Data Type Mapping
 
-MySQL data types are mapped to [Keboola Base Types](https://help.keboola.com/storage/tables/data-types/reference/#base-types) as follows:
+MySQL data types are mapped to [Keboola Base Types](/storage/tables/data-types/reference/#base-types) as follows:
 
 | Source Type | Base Type | Note                                                                 |
 |-------------|-----------|----------------------------------------------------------------------|
@@ -512,7 +513,7 @@ set @@global.binlog_row_value_options="" ;
 #### SSH tunnel
 
 You may opt to use an SSH Tunnel to secure your connection. Find detailed instructions for setting up an SSH tunnel in
-the [developer documentation](https://developers.keboola.com/integrate/database/). While setting up an SSH tunnel requires some work, it is the most reliable and secure
+the [database connectors overview](/components/extractors/database/#setting-up-an-ssh-tunnel). While setting up an SSH tunnel requires some work, it is the most reliable and secure
 option for connecting to your database server.
 
 ### Data Source
@@ -559,7 +560,7 @@ There are two types of masks available:
 The connector masks the length of string columns in the output data. 
 The string is replaced with the specified number of  `*` characters.
 
-See the original [Debezium docs](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-column-mask-with-length-chars).
+See the original [Debezium docs](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-property-column-mask-with-length-chars).
 
 #### Hash Mask
 
@@ -571,7 +572,7 @@ Supported hash functions are described in the [MessageDigest section](https://do
 
 ***Note:** The hashing strategy version 2 is used to ensure fidelity across job runs and configurations.*
 
-See the original [Debezium docs](https://debezium.io/documentation/reference/stable/connectors/postgresql.html#postgresql-property-column-mask-hash).
+See the original [Debezium docs](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-property-column-mask-hash).
 
 ### Sync Options
 

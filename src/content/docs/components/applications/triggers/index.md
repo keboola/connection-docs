@@ -1,5 +1,6 @@
 ---
 title: Trigger Applications
+lastUpdated: 2026-11-19
 description: 'What trigger applications do and which ones are documented: dbt Cloud, Deepnote, Exasol, flows in other projects, and Power BI and Tableau refreshes.'
 slug: 'components/applications/triggers'
 redirect_from:

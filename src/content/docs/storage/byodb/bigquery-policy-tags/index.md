@@ -1,5 +1,6 @@
 ---
 title: BigQuery policy tags
+lastUpdated: 2026-11-19
 slug: 'storage/byodb/bigquery-policy-tags'
 description: Keep BigQuery column-level access control on the copies Keboola makes of a protected table within your BigQuery backend.
 ---

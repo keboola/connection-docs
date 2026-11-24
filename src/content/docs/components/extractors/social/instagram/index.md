@@ -1,5 +1,6 @@
 ---
 title: Instagram
+lastUpdated: 2026-11-19
 slug: 'components/extractors/social/instagram'
 description: 'Extract Instagram Business Account media, comments and insights through a connected Facebook page, with queries that set the endpoint and fields.'
 redirect_from:

@@ -1,5 +1,6 @@
 ---
 title: Connect your own BigQuery
+lastUpdated: 2026-11-19
 sidebar:
   label: Connect Your Own BigQuery
 description: 'Set up the Google Cloud resources for connecting your own BigQuery to Keboola: folder, project, service account and permissions.'

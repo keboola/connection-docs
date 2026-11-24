@@ -1,5 +1,6 @@
 ---
 title: Use the SQL Editor
+lastUpdated: 2026-11-20
 slug: 'workspace/sql-editor/use'
 description: 'Tasks in the SQL Editor: create an SQL workspace, run queries, export results, add table mappings, reuse shared code, and save queries as a transformation.'
 ---

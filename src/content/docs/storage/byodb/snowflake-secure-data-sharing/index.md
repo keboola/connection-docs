@@ -1,5 +1,6 @@
 ---
 title: Import a Snowflake share (Secure Data Sharing)
+lastUpdated: 2026-11-19
 sidebar:
   label: Import a Snowflake Share
 description: 'Bring data another Snowflake account shares with you into Keboola: the producer and consumer steps, role requirements, limits, and registering the schema.'

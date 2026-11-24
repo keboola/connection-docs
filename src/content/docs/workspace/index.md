@@ -1,5 +1,6 @@
 ---
 title: Workspaces
+lastUpdated: 2026-11-20
 description: 'What a Keboola workspace is for, the Python, R, Snowflake and BigQuery types, the workspace lifecycle, read-only access to Storage, and a map of the section.'
 slug: 'workspace'
 redirect_from:

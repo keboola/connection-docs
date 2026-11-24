@@ -1,5 +1,6 @@
 ---
 title: Configuration File Specification
+lastUpdated: 2026-11-20
 slug: 'extend/common-interface/config-file'
 description: 'Lists the config.json root nodes (storage, parameters, image_parameters, authorization, action), how the state file works, and mapping examples.'
 ---

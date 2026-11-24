@@ -1,5 +1,6 @@
 ---
 title: IMAP Email Contents and Attachments
+lastUpdated: 2026-10-14
 slug: 'components/extractors/communication/email-imap'
 description: 'Download email contents and attachments over IMAP with basic authentication, filter them with IMAP queries, and store attachments as files or tables.'
 redirect_from:

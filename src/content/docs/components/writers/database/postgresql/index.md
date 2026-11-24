@@ -1,5 +1,6 @@
 ---
 title: PostgreSQL
+lastUpdated: 2026-11-19
 slug: 'components/writers/database/postgresql'
 description: 'Write Keboola tables to a PostgreSQL database and schema with dedicated credentials or an SSH tunnel, then set column types and full or incremental load.'
 redirect_from:

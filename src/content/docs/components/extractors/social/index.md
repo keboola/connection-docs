@@ -1,5 +1,6 @@
 ---
 title: Social Data Source Connectors
+lastUpdated: 2026-10-14
 slug: 'components/extractors/social'
 description: 'Pick the connector that imports data from Facebook Pages, Instagram, YouTube or YouTube Reporting into Keboola.'
 redirect_from:
