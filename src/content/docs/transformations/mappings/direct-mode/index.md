@@ -1,5 +1,6 @@
 ---
 title: Direct Mode output mapping
+lastUpdated: 2026-11-12
 slug: 'transformations/mappings/direct-mode'
 sidebar:
   label: Direct Mode

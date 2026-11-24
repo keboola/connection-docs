@@ -1,5 +1,6 @@
 ---
 title: Set up Direct Mode output mapping
+lastUpdated: 2026-11-12
 slug: 'transformations/mappings/direct-mode/set-up'
 sidebar:
   label: Set Up Direct Mode

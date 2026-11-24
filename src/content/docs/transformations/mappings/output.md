@@ -1,5 +1,6 @@
 ---
 title: Output mapping options
+lastUpdated: 2026-11-12
 slug: 'transformations/mappings/output'
 sidebar:
   label: Output Mapping

@@ -1,5 +1,6 @@
 ---
 title: Reduce the BigQuery cost of incremental loads with partition-aware import
+lastUpdated: 2026-11-12
 slug: 'transformations/mappings/partition-aware-import'
 sidebar:
   label: Partition-Aware Import

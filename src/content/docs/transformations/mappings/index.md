@@ -1,5 +1,6 @@
 ---
 title: How input and output mapping work
+lastUpdated: 2026-11-20
 slug: 'transformations/mappings'
 sidebar:
   label: Input and Output Mapping

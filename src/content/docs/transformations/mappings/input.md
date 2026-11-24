@@ -1,5 +1,6 @@
 ---
 title: Input mapping options
+lastUpdated: 2026-11-12
 slug: 'transformations/mappings/input'
 sidebar:
   label: Input Mapping
