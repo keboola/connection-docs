@@ -4,14 +4,15 @@ slug: 'storage/row-level-security'
 description: 'How row-level and column-level security works in Keboola: what policies protect, who they apply to, deny by default, what readers see, and the limitations.'
 ---
 
-:::caution[Beta]
-Row- and column-level security (RLS/CLS) is in beta. It works on Snowflake. On BigQuery, governed workspaces can
-be created in production, but it has not been verified end to end on a production stack yet.
+:::caution[Public Beta]
+Row-level and column-level security is in free public beta until 28 February 2027. A project admin can turn it on in **Project settings → Features**. After the beta it becomes a paid add-on; your Customer Success Manager will share the details.
+
+It works on Snowflake and BigQuery.
 :::
 
 Row-level security (RLS) limits **which rows** of a table a reader can see. Column-level security (CLS) limits **which columns**. You describe both in *policies* stored with your project. Keboola applies them to every query that runs through a *governed workspace*, so an AI assistant, a Data App user or a script can only read the part of a table the policy allows.
 
-<!-- Explanation-type page. Source: the row-level security page as it stood on main before the split into this page and a how-to page. Structure checked 2026-11-19, facts not re-verified. -->
+<!-- Explanation-type page. Source: the row-level security page as it stood on main before the split into this page and a how-to page. Structure checked 2026-11-19; public beta facts checked 2026-11-23. -->
 
 For example, one policy lets the `eu-analysts` group see only the rows where `region` is `EU`, and another hides the `salary` column from everyone except a named administrator.
 
@@ -25,7 +26,7 @@ Policies are enforced by Query Service on queries sent to a **governed workspace
 |---|---|
 | [MCP Server](/ai/mcp-server/) session of a project administrator (`query_data`), when the project has the `row-level-security` feature | Yes |
 | A script, the [Keboola CLI](/cli/) or another client that queries a governed workspace through Query Service | Yes |
-| End users of a [Data App](/data-apps/) signed in through single sign-on (OIDC) | Yes, when the app lists policies in its configuration and passes the user's token to Query Service (see [Apply policies to a Data App](/storage/row-level-security/set-up/#apply-policies-to-a-data-app)) |
+| End users of a [Data App](/data-apps/) signed in through single sign-on (OIDC) | Yes, when the app runs under policies (set in the **Row-level security** box of its **Advanced settings** tab or in its configuration) and passes the user's token to Query Service (see [Apply policies to a Data App](/storage/row-level-security/set-up/#apply-policies-to-a-data-app)) |
 | Transformations, component runs, the SQL editor, ordinary workspaces, table exports | **No** |
 
 :::caution[What this is, and what it is not]
@@ -36,8 +37,9 @@ Data that is copied out of a governed table is not governed: transformation outp
 
 ## How it works
 
-- You write **policies**, one per protected table. A policy is a list of *rules*; each rule selects readers and says which rows or columns they get. See the [policy reference](/storage/row-level-security/policy-reference/).
-- A **governed workspace** serves the queries. The MCP Server creates its own governed workspace when the project has the `row-level-security` feature. You can also create one yourself: see [Make sure queries go through a governed workspace](/storage/row-level-security/set-up/#1-make-sure-queries-go-through-a-governed-workspace).
+- A project admin turns on the `row-level-security` feature in **Project settings → Features**. This adds **Data access** to Project settings and a **Row-level security** box to the **Advanced settings** tab of each Data App.
+- You write **policies**, one per protected table. A policy is a list of *rules*; each rule selects readers and says which rows or columns they get. Row policies can be written in **Project settings → Data access**; both kinds can be written with the Keboola CLI, an AI assistant or the API. See the [policy reference](/storage/row-level-security/policy-reference/).
+- A **governed workspace** serves the queries. The MCP Server creates its own governed workspace when the project has the `row-level-security` feature. You can also create one yourself: see [Make sure queries go through a governed workspace](/storage/row-level-security/set-up/#2-make-sure-queries-go-through-a-governed-workspace).
 - For every query, Query Service identifies the reader, looks up the policies of the tables the query uses and rewrites the query so it can only return the allowed rows and columns.
 
 ### Deny by default
@@ -67,7 +69,7 @@ A different failure is the HTTP 503 `Row-level security could not be applied to 
 
 ## Data Apps
 
-For the end users of a [Data App](/data-apps/) who sign in through single sign-on (OIDC), policies are a hard boundary. The app lists its policies in its configuration and passes each user's token to Query Service. To configure both, see [Apply policies to a Data App](/storage/row-level-security/set-up/#apply-policies-to-a-data-app).
+For the end users of a [Data App](/data-apps/) who sign in through single sign-on (OIDC), policies are a hard boundary. You pick the app's policies in the **Row-level security** box of its **Advanced settings** tab (or list them in its configuration), and the app passes each user's token to Query Service. To configure both, see [Apply policies to a Data App](/storage/row-level-security/set-up/#apply-policies-to-a-data-app).
 
 ## Limitations
 
@@ -77,15 +79,18 @@ For the end users of a [Data App](/data-apps/) who sign in through single sign-o
 - On Snowflake, a table of a linked bucket (a bucket shared from another project) cannot be read in a governed workspace: Query Service refuses it for every reader, because the table lives in the database of the source project. Until linked buckets are supported, load the data into a table of your own project and write the policy for that table.
 - Alias tables have not been verified with policies yet. Do not rely on a policy for them.
 - Projects with a protected default branch (SOX) are not supported.
-- Row-level security of a Data App works on Snowflake projects only. A governed app can only read: it runs `SELECT` statements and nothing else, so an app that writes to its Storage Access tables fails on its inserts, updates and deletes.
+- A governed app must forward the signed-in user's token to Query Service. The clients in [Apply policies to a Data App](/storage/row-level-security/set-up/#apply-policies-to-a-data-app) do this for Python, JavaScript and Streamlit apps.
+- In a project with the `row-level-security` feature, the **Kai in the app** setting of a Data App stays off.
+- A governed app can only read: it runs `SELECT` statements and nothing else, so an app that writes to its Storage Access tables fails on its inserts, updates and deletes.
 - On BigQuery, create the governed workspace with the MCP Server, the API, or the `--governed` flag of `kbagent workspace create` (Keboola CLI 1.2.0 or later).
 <!-- Checked 2026-11-20: keboola/cli supports --governed on Snowflake and BigQuery since 1.2.0 (changelog #892, #922; GOVERNED_WORKSPACE_BACKENDS in constants.py). -->
 - Column policies are an allowlist of visible columns. Masking a column's values is not supported.
-- The project feature `row-level-security` is checked by the MCP Server and by the Data App settings page of the Keboola UI only. A workspace you create with the login type `governed` is enforced regardless of the feature.
+- Range conditions (`gt`, `gte`, `lt`, `lte`) compare the values as text on columns stored as text, which is the default for Keboola tables (untyped tables). For example `"10" >= "2"` is false, so a numeric range, or a range on dates that are not in ISO format (`YYYY-MM-DD`), on such a column can hide or show the wrong rows without an error. Use a typed table for columns you filter by range, or use `eq` or `in` conditions.
+- The project feature `row-level-security` is checked by the MCP Server and by the Keboola UI (**Data access** in Project settings and the **Row-level security** box of a Data App) only. A workspace you create with the login type `governed` is enforced regardless of the feature.
 
 ## This section
 
-- [Set up row-level and column-level security](/storage/row-level-security/set-up/): create a governed workspace, write policies with the Keboola CLI, an AI assistant or the API, check them as the reader, and govern a Data App.
+- [Set up row-level and column-level security](/storage/row-level-security/set-up/): turn on the feature, create a governed workspace, write policies in the Keboola UI, with the Keboola CLI, an AI assistant or the API, check them as the reader, and govern a Data App.
 - [Policy reference](/storage/row-level-security/policy-reference/): what a policy contains, how a rule selects its readers, the condition language, how policies combine, and examples.
 
 ## Related
