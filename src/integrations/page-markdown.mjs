@@ -1,10 +1,11 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSync } from 'node:fs';
-import { join, extname } from 'node:path';
+import { join, extname, dirname, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, linksToText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
 import { stripHtmlComments, collapseBlankLines, fenceTracker, fenceOpener, closesFence } from './strip-comments.mjs';
 import { processAgentBlocks, findAgentLeaks } from './agent-only.mjs';
+import { cleanTwin } from './twin-cleanup.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
 import { courseListText, courseBarText } from '../components/getting-started/course.mjs';
 import { sampleText } from '../components/getting-started/sample.mjs';
@@ -439,9 +440,10 @@ export function twinBody(content, isMdx, file = 'page') {
  * twinBody plus the text of the page's agent blocks, from a single parse, so the
  * build can check that none of them reached the HTML without parsing twice.
  */
-export function twinParts(content, isMdx, file = 'page') {
+export function twinParts(content, isMdx, file = 'page', { pageUrl, assetBase } = {}) {
   const { markdown, texts } = processAgentBlocks(twinSource(content, isMdx), file);
-  return { body: stripSearchMarkup(markdown).trim(), agentTexts: texts };
+  // asides as quotes, browser-only markup out, and (with the page's URL) absolute links
+  return { body: cleanTwin(stripSearchMarkup(markdown), pageUrl, assetBase ?? pageUrl).trim(), agentTexts: texts };
 }
 
 /**
@@ -644,7 +646,11 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
           const isMdx = extname(file) === '.mdx';
           // :::agent blocks, dropped from the HTML, become a labelled quote here (agent-only.mjs);
           // their text is kept for the leak check after the loop. One parse serves both.
-          const { body, agentTexts } = twinParts(content, isMdx, file);
+          const pageUrl = site ? new URL(fm.slug ? `/${fm.slug}/` : '/', site).href : undefined;
+          // relative files (`./shot.png`) sit next to the source file, not under the page's slug
+          const fileDir = relative(contentDir, dirname(file)).split(sep).join('/');
+          const assetBase = site ? new URL(fileDir ? `/${fileDir}/` : '/', site).href : undefined;
+          const { body, agentTexts } = twinParts(content, isMdx, file, { pageUrl, assetBase });
           if (agentTexts.length) agentPages.push({ slug: fm.slug, texts: agentTexts });
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
           full.push({ slug: fm.slug, title: fm.title ?? fm.slug, body });
