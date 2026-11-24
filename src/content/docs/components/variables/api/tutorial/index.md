@@ -1,5 +1,6 @@
 ---
 title: Variables Tutorial
+lastUpdated: 2026-11-20
 slug: 'components/variables/api/tutorial'
 description: 'Use variables through the API in two parts: run a Generic Extractor with values in the job, then a Python transformation with default, stored and inline values.'
 redirect_from:

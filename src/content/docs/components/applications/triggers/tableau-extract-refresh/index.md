@@ -1,5 +1,6 @@
 ---
 title: Tableau Extract Refresh Trigger
+lastUpdated: 2026-11-19
 description: 'Refresh Tableau extracts from a flow with a personal access token: full or incremental refresh, poll mode, continue on error, and a sample configuration.'
 slug: 'components/applications/triggers/tableau-extract-refresh'
 ---

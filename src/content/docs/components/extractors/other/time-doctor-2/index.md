@@ -1,5 +1,6 @@
 ---
 title: Time Doctor 2
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/time-doctor-2'
 description: 'Import users, worklogs, edit time, time use, projects and tasks from Time Doctor 2 with a user email and password and a from and to time range.'
 redirect_from:

@@ -1,5 +1,6 @@
 ---
 title: Telemetry
+lastUpdated: 2026-11-18
 description: 'Telemetry data in Keboola: raw data from the Telemetry Data connector or the dashboards, in project, organization, or Activity Center mode, and credit emails.'
 slug: 'management/telemetry'
 ---

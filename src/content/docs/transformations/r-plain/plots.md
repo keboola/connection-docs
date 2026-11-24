@@ -1,5 +1,6 @@
 ---
 title: Plots & Graphs
+lastUpdated: 2026-11-18
 description: 'Save R plots to Storage by writing them to out/files, with an optional manifest for tags, in three examples including ggplot.'
 slug: 'transformations/r-plain/plots'
 redirect_from:

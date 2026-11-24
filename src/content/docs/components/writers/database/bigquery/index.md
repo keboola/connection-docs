@@ -1,5 +1,6 @@
 ---
 title: Google BigQuery
+lastUpdated: 2026-11-19
 slug: 'components/writers/database/bigquery'
 description: 'Write Keboola tables to a Google BigQuery dataset with a service account JSON key, then set table names, column data types and full or incremental load.'
 redirect_from:

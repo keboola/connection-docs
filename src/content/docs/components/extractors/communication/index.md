@@ -1,5 +1,6 @@
 ---
 title: Communication Data Source Connectors
+lastUpdated: 2026-10-14
 slug: 'components/extractors/communication'
 description: 'Pick the connector that imports email attachments, Gmail messages, Google Calendar events, IMAP or Outlook email, Intercom or Slack data into Keboola.'
 redirect_from:

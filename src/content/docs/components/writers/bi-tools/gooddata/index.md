@@ -1,5 +1,6 @@
 ---
 title: GoodData
+lastUpdated: 2026-11-19
 slug: 'components/writers/bi-tools/gooddata'
 description: 'Write Keboola tables to a GoodData project and let the connector build its logical data model from the column types and date dimensions you set.'
 redirect_from:

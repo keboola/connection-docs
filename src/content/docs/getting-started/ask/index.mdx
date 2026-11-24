@@ -1,5 +1,6 @@
 ---
 title: 'Explore your data'
+lastUpdated: 2026-11-24
 slug: 'getting-started/ask'
 description: 'Put the question to your own data: Kai reads the table you built and answers it in plain words, then answers the follow-up.'
 ---
@@ -57,7 +58,7 @@ narrowed to the flagged rows; it is not a new claim, but it has not been run in 
   default, so expect an answer, not an approval card, unless this project's
   [tool permissions](/kai/settings/#tool-permissions) are set to ask.
 
-The question and Kai's answer in a Free Plan project, in the week the screenshots in this guide
+The question and Kai's answer in a [Free Plan](/management/payg-project/) project, in the week the screenshots in this guide
 come from:
 
 ![Screenshot - The Kai chat with the question about staffing_outlook and the start of Kai's answer: Vinohrady in Prague is short-handed on Thursday, its warmest day, and Zelný trh in Brno on Monday and Tuesday, where the forecast is much like the rest of its week and the roster is two people instead of three](/getting-started/ask/kai-ask.png)
@@ -200,7 +201,7 @@ Storage's own **Data Sample** tab answers the simpler half without a workspace a
 <TabItem label="CLI / API">
 
 `kbagent kai ask` puts the same question from a terminal and prints the answer, tables and all. It
-is one shot: no chat to keep, nothing created. It needs kbagent connected through
+is one shot: no chat to keep, nothing created. It needs [kbagent](/cli/) connected through
 `kbagent project add` with an admin (master) token; a connection made with `kbagent auth login`
 does not reach Kai.
 
@@ -209,7 +210,7 @@ kbagent kai ask --project docs-demo -m "Using out.c-Boolabean-staffing-outlook.s
 ```
 
 Name the table by its full Storage ID rather than the short name the transformation used: the
-short name only exists inside a transformation's input mapping.
+short name only exists inside a transformation's [input mapping](/transformations/mappings/).
 
 For a conversation rather than a single question, `kbagent kai chat -m "…"` returns a chat ID and
 `--chat-id` continues it.

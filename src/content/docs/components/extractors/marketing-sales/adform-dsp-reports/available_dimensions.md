@@ -1,5 +1,6 @@
 ---
 title: Available Dimensions
+lastUpdated: 2026-10-14
 slug: 'components/extractors/marketing-sales/adform-dsp-reports/available-dimensions'
 description: 'Look up every dimension available to Adform DSP Reports, with its key, category, display name and description, as the Adform metadata API returns it.'
 redirect_from:

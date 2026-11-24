@@ -1,5 +1,6 @@
 ---
 title: AWS Cost Usage Reports
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/aws-cu-reports'
 description: 'Download AWS Cost Usage Reports (CUR) that AWS exports to an S3 bucket as CSV, choosing the report prefix, a date range and whether to load only new files.'
 ---

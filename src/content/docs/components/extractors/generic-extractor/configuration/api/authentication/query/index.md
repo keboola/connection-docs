@@ -1,5 +1,6 @@
 ---
 title: Query Authentication
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/query'
 description: 'Set up query authentication in Generic Extractor: credentials such as API tokens and signatures sent as query parameters in the request URL.'
 redirect_from:

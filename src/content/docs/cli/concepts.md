@@ -1,5 +1,6 @@
 ---
 title: How kbagent works
+lastUpdated: 2026-11-23
 slug: 'cli/concepts'
 sidebar:
   label: How It Works
@@ -27,7 +28,7 @@ kbagent doesn't log in interactively. You register **connections** — a project
 
 ## Multi-project and stacks
 
-A single kbagent install can hold **many projects across many stacks** (US/EU, AWS/Azure/GCP). Commands accept `--project <alias>`; set a default with `kbagent project use`. Read commands like `search`, `job list`, and `lineage` can fan out across **all** connected projects at once — the reason kbagent is useful for organization-wide audits, not just one project.
+A single kbagent install can hold **many projects across many stacks** (US/EU, AWS/Azure/GCP). Commands accept `--project <alias>`; set a default with `kbagent project use`. Read commands like `search`, `job list` and `config list` fan out across **all** connected projects at once with `--all-projects` (by default they read the active project) — the reason kbagent is useful for organization-wide audits, not just one project.
 
 You connect projects one at a time (`project add`, a Storage token each) or in bulk (`org setup` with a Manage API token, which registers every project and mints per-project tokens).
 

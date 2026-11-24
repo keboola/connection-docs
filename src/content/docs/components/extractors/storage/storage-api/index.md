@@ -1,5 +1,6 @@
 ---
 title: Keboola Storage
+lastUpdated: 2026-11-19
 slug: 'components/extractors/storage/storage-api'
 description: 'Copy tables from one bucket of another Keboola project, even in another organization or region, with a read-only token for that bucket.'
 redirect_from:

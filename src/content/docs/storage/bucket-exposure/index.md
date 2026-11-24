@@ -1,5 +1,6 @@
 ---
 title: Bucket Exposure
+lastUpdated: 2026-11-20
 description: 'When to use Bucket Exposure, how it differs from Data Catalog and External Datasets, what BigQuery subscribers see, and what to keep in mind on each backend.'
 slug: 'storage/bucket-exposure'
 ---

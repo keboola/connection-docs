@@ -1,5 +1,6 @@
 ---
 title: Market Vision
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/market-vision'
 description: 'Extract Market Vision projects with their forms, questions, categories and fieldsets using an API token, loaded incrementally with backfill across runs.'
 redirect_from:
