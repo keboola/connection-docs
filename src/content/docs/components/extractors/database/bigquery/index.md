@@ -1,5 +1,6 @@
 ---
 title: Google BigQuery
+lastUpdated: 2026-11-19
 description: Run queries in Google BigQuery and load the results into Storage tables, or as Avro files with the files variant.
 slug: 'components/extractors/database/bigquery'
 redirect_from:

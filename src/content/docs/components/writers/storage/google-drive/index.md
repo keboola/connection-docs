@@ -1,5 +1,6 @@
 ---
 title: Google Drive
+lastUpdated: 2026-11-19
 slug: 'components/writers/storage/google-drive'
 description: 'Write Keboola tables to Google Drive as CSV or Google Sheets files, updating one file or creating a new file with each run.'
 redirect_from:

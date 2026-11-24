@@ -1,5 +1,6 @@
 ---
 title: Jobs
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/configuration/config/jobs'
 description: 'The jobs key in Generic Extractor: describe the API resources to extract with endpoint, method, request parameters, dataField, dataType and scroller.'
 redirect_from:

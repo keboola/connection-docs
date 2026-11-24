@@ -1,5 +1,6 @@
 ---
 title: Variables Through the API
+lastUpdated: 2026-11-19
 slug: 'components/variables/api'
 description: 'Reference for configuration variables in the API: the variable configuration, values and their rules, the delimiter, flow overrides, and the evaluation order.'
 redirect_from:

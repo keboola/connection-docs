@@ -1,5 +1,6 @@
 ---
 title: Running Components
+lastUpdated: 2026-11-23
 slug: 'extend/component/running'
 description: 'Run a component image locally with docker run, get its data folder from a debug job, and pull a production image from its AWS ECR repository.'
 redirect_from:

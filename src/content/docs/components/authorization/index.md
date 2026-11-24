@@ -1,5 +1,6 @@
 ---
 title: Authorize a component
+lastUpdated: 2026-11-23
 slug: 'components/authorization'
 sidebar:
   label: Authorization

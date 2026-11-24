@@ -1,5 +1,6 @@
 ---
 title: ECB Currency Rates
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/currency-rates'
 description: 'Download ECB exchange rates from EUR, GBP or USD to 42 currencies for every working day since 4 January 1999, through the Fixer API.'
 redirect_from:

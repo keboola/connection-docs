@@ -1,5 +1,6 @@
 ---
 title: Transformations
+lastUpdated: 2026-11-19
 slug: 'transformations'
 description: 'Learn how Keboola transformations work, how input and output mapping keep them isolated from Storage, which backends run them, and how to develop them.'
 redirect_from:

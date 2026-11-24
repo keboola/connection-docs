@@ -1,5 +1,6 @@
 ---
 title: Data Catalog
+lastUpdated: 2026-11-20
 description: 'Shared and linked buckets in the Keboola Data Catalog: how projects in one organization share Storage data, with sharing types, owners and constraints.'
 slug: 'catalog'
 redirect_from:

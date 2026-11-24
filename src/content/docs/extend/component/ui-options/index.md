@@ -1,5 +1,6 @@
 ---
 title: UI Options
+lastUpdated: 2026-11-18
 description: 'The UI options that give a component its configuration UI: genericDockerUI and its parts for table and file mapping, processors, and authorization.'
 slug: 'extend/component/ui-options'
 ---

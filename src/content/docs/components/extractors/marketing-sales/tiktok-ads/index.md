@@ -1,5 +1,6 @@
 ---
 title: TikTok Ads
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/tiktok-ads'
 description: 'Extract TikTok ad performance reports through the Marketing Reports API, choosing advertiser IDs, report type, data level, dimensions, metrics and date range.'
 ---

@@ -1,5 +1,6 @@
 ---
 title: Response URL Scroller
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/response-url'
 description: 'Configure the response.url pagination method in Generic Extractor for APIs that return the URL of the next page, such as JSON API: urlKey and its options.'
 redirect_from:

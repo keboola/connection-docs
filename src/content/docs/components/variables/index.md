@@ -1,5 +1,6 @@
 ---
 title: Variables
+lastUpdated: 2026-11-19
 slug: 'components/variables'
 description: 'The two kinds of variables in Keboola, configuration variables and flow variables: what each is for, and how a flow sets the value of a configuration variable.'
 redirect_from:

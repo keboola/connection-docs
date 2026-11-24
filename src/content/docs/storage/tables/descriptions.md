@@ -1,5 +1,6 @@
 ---
 title: Table and column descriptions
+lastUpdated: 2026-11-19
 slug: 'storage/tables/descriptions'
 sidebar:
   label: Descriptions

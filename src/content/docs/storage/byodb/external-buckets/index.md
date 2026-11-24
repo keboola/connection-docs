@@ -1,5 +1,6 @@
 ---
 title: External Datasets
+lastUpdated: 2026-11-19
 description: 'What an external dataset is: a read-only bucket mapped to a Snowflake schema or BigQuery dataset you own. Covers BigLake tables, mappings and limitations.'
 slug: 'storage/byodb/external-buckets'
 ---

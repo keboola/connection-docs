@@ -1,5 +1,6 @@
 ---
 title: Default Configuration
+lastUpdated: 2026-11-18
 description: 'Set a default configuration or default row configuration in the Developer Portal so new configurations of your component start prefilled.'
 slug: 'extend/component/ui-options/default-configuration'
 ---

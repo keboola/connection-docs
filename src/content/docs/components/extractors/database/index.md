@@ -1,5 +1,6 @@
 ---
 title: Database Data Source Connectors
+lastUpdated: 2026-11-12
 slug: 'components/extractors/database'
 description: 'Choose query-based or log-based connectors for SQL and NoSQL databases, connect over an SSH tunnel, and fetch changes with CDC or incremental fetching.'
 redirect_from:
