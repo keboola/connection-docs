@@ -32,7 +32,7 @@ You can schedule and run dbt code in three environment types:
 *   Orchestrate dbt Cloud jobs and extract details from the dbt Cloud API.
 
 
-All components can be used in the flows, thus orchestrated with data pipeline definitions.
+All dbt components can be added to a [flow](/flows/) like any other component, with a schedule and notifications, and orchestrated with the rest of your data pipeline.
 
 <table data-layout="wide">
 <tbody>
