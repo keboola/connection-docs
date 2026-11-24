@@ -1,5 +1,6 @@
 ---
 title: mPOHODA
+lastUpdated: 2026-11-19
 slug: 'components/writers/erp/mpohoda'
 description: Create invoices, orders, offers, business partners and other records in the mPOHODA cloud accounting API from Keboola tables, with a results table per run.
 search_keywords: [pohoda, stormware, mpohoda]

@@ -1,5 +1,6 @@
 ---
 title: Papertrail
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/papertrail'
 description: 'Import Papertrail log events that match a search query, over a retention period of 1 day to 1 month, with a Papertrail API token; loads are incremental.'
 redirect_from:

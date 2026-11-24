@@ -1,5 +1,6 @@
 ---
 title: dbt transformation
+lastUpdated: 2026-11-18
 description: 'Configure a dbt transformation: database connection, project repository, execution steps, freshness, artifacts, output mapping, debug runs, and project docs.'
 slug: 'transformations/dbt/transformation'
 ---

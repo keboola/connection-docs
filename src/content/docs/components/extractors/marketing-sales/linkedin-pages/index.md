@@ -1,5 +1,6 @@
 ---
 title: LinkedIn Pages 
+lastUpdated: 2026-11-20
 slug: 'components/extractors/marketing-sales/linkedin-pages'
 description: 'Look up the LinkedIn Pages connector settings for organization IDs, endpoints for page, follower and share statistics or posts, sync dates and load type.'
 redirect_from:

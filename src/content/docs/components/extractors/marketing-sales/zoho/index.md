@@ -1,5 +1,6 @@
 ---
 title: Zoho
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/zoho'
 description: 'Extract Zoho CRM module records through the Bulk Read API with an authorized account and your user email, choosing fields, sync mode and load mode.'
 ---

@@ -1,5 +1,6 @@
 ---
 title: Processors
+lastUpdated: 2026-10-13
 slug: 'extend/component/processors'
 description: 'Add processors to the before or after array of a component configuration through the Storage API, set their parameters and version tag, and chain them.'
 redirect_from:

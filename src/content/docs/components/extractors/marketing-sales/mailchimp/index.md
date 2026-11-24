@@ -1,5 +1,6 @@
 ---
 title: Mailchimp
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/mailchimp'
 description: 'Extract lists and members, campaigns, automations and reports from Mailchimp with your data center, username and API key, choosing a configuration template.'
 redirect_from:

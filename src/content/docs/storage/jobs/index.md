@@ -1,5 +1,6 @@
 ---
 title: Storage jobs
+lastUpdated: 2026-11-20
 slug: 'storage/jobs'
 sidebar:
   label: Jobs

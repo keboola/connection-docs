@@ -1,5 +1,6 @@
 ---
 title: Google Search Console
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/google-search-console'
 description: 'Extract Search Analytics and Sitemaps data for domains linked to your Google account, with dimensions, date ranges, filter groups and incremental load.'
 redirect_from:

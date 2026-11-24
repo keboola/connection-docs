@@ -1,5 +1,6 @@
 ---
 title: Notifications
+lastUpdated: 2026-11-18
 description: 'The notification types for flows, jobs, apps, and credit usage, how to set up flow, job, and app notifications, and how webhook delivery works.'
 slug: 'management/notifications'
 ---

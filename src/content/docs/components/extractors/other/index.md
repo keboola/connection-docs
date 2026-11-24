@@ -1,5 +1,6 @@
 ---
 title: Other Data Source Connectors
+lastUpdated: 2026-10-12
 description: 'Data source connectors that do not fit the database, storage, marketing, social, ERP, or communication categories.'
 slug: 'components/extractors/other'
 redirect_from:

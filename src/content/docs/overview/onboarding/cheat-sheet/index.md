@@ -1,5 +1,6 @@
 ---
 title: "Cheat Sheet: Best Practices"
+lastUpdated: 2026-11-12
 slug: 'overview/onboarding/cheat-sheet'
 description: 'Naming conventions, project structure, parallelization, incremental loads and development-branch habits that keep a Keboola project maintainable.'
 redirect_from:

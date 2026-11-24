@@ -1,5 +1,6 @@
 ---
 title: DuckDB Transformation
+lastUpdated: 2026-11-18
 slug: 'transformations/duckdb'
 description: 'Create a DuckDB transformation in Keboola, choose its backend size and input options, and write SQL that suits its block-based parallel execution.'
 ---
@@ -137,10 +138,57 @@ so aggregate functions and type-specific operations work as expected.
 
 ![Screenshot - Successful Job With Type Inference](/transformations/duckdb/job-success.png)
 
-The output table then contains properly typed columns:
+The output table then contains typed columns instead of strings:
 
 ![Screenshot - Output Table With Typed Columns](/transformations/duckdb/output-typed-columns.png)
 
+The column types come from the mapping in [Output data types](#output-data-types), and they can differ from the casts in your SQL.
+
+## Output data types
+
+When a transformation finishes, the component reads the schema of each output table from DuckDB and translates it into Keboola [base types](/storage/tables/data-types/reference/#base-types), which Storage then turns into backend types (for example `TIMESTAMP` becomes `TIMESTAMP_NTZ` on Snowflake).
+
+| DuckDB type | Keboola base type | Notes |
+|---|---|---|
+| `TINYINT`, `SMALLINT`, `INTEGER`, `BIGINT`, `HUGEINT` and their unsigned variants | `INTEGER` | |
+| `DECIMAL(p,s)`, `NUMERIC(p,s)` | `NUMERIC` | Precision and scale are carried over |
+| `DOUBLE` | `FLOAT` | |
+| `BOOLEAN` | `BOOLEAN` | |
+| `DATE` | `DATE` | |
+| `TIMESTAMP`, `TIMESTAMP WITH TIME ZONE` | `TIMESTAMP` | Storage default precision (`TIMESTAMP_NTZ(9)` on Snowflake) |
+| `TIMESTAMP_S`, `TIMESTAMP_MS`, `TIMESTAMP_NS` | `TIMESTAMP` | Precision `0`, `3`, and `9` respectively |
+| `VARCHAR`, `CHAR`, `BPCHAR`, `TEXT`, `STRING` | `STRING` | Length is not carried over, see below |
+| Everything else, including `FLOAT`/`REAL`, `TIME`, `INTERVAL`, `UUID`, `BLOB`, `JSON`, arrays, `STRUCT`, `MAP`, `ENUM` | `STRING` | Arrays of a parameterized type are the exception, see the caution below |
+
+### Types with no Keboola equivalent become strings
+
+The base types are `STRING`, `INTEGER`, `NUMERIC`, `FLOAT`, `BOOLEAN`, `DATE` and `TIMESTAMP`, so a `TIME`, `INTERVAL` or `JSON` column lands in Storage as text. If you need such a value typed downstream, split it into supported types in the transformation: a `TIME` into hour and minute integers, for example, or a `JSON` document into columns.
+
+### Single-precision floats arrive as strings
+
+DuckDB's own `FLOAT` (alias `REAL`) is a 4-byte single-precision float. The Keboola `FLOAT` base type comes from DuckDB `DOUBLE`, as the table shows. DuckDB reports a `REAL` column as `FLOAT` too, and the mapping has no entry for `FLOAT`, so such a column arrives as text. Cast single-precision values to `DOUBLE` or `DECIMAL(p,s)` if you need a numeric column in Storage.
+
+### The length of `VARCHAR(n)` is lost
+
+DuckDB [ignores the length of a `VARCHAR`](https://duckdb.org/docs/stable/sql/data_types/text) and accepts `VARCHAR(n)` only for compatibility. When the component reads the output schema, the length is already gone, so a column cast as `VARCHAR(2)` reaches Storage as a full-width string (`VARCHAR(16777216)` on Snowflake).
+
+:::tip
+To enforce a maximum width or a specific timestamp precision, [create the output table as a typed table](/storage/tables/manage/#keep-the-lengths-and-precisions-of-a-typed-table) with the definition you want before you run the transformation. The transformation loads into the existing definition and leaves it as it is, so a value that is too long fails the job. On Snowflake the error reads:
+
+```
+An exception occurred while executing a query: User character length limit (2) exceeded by string 'ABCDEF'
+```
+:::
+
+<!-- VERIFY(Storage owner): the full-width VARCHAR(16777216) on Snowflake and the error text above come from a customer's production project (support ticket screenshots), not from public code. -->
+
+The definition the table already has in Storage always applies. The component never declares a length for string columns, so an existing column keeps its original definition, and a change in the mapping or in your casts shows up only on a newly created output table. [Changing types of existing typed columns](/storage/tables/manage/#change-a-column-type-in-a-typed-table) lists the workarounds.
+
+:::caution
+Arrays of a parameterized type are a known gap. DuckDB reports such a column as `DECIMAL(10,2)[]`, and the component reads only the leading type name, so it declares the column as `NUMERIC(10,2)`. The exported value is still an array literal, and the load fails on the type mismatch. Cast arrays and other nested values to text, for example `CAST("my_array" AS VARCHAR)`.
+:::
+
+<!-- VERIFY(Storage owner): that the load fails on the array/NUMERIC mismatch; the declared NUMERIC(10,2) follows from component-duckdb-transformation src/component.py, the failure was not reproduced. -->
 ## Example
 
 To create a simple DuckDB transformation, follow these steps:
@@ -271,6 +319,8 @@ FROM "source";
 ```
 
 When **Infer input table data types** is enabled, DuckDB automatically infers the correct types and you can use them directly.
+
+[Output data types](#output-data-types) lists the types your output tables get in Storage.
 
 ### Memory Management for Large Datasets
 

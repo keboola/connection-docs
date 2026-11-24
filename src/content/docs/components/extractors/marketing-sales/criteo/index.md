@@ -1,5 +1,6 @@
 ---
 title: Criteo
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/criteo'
 description: 'Extract Criteo ad performance reports with the client ID and secret of your own Criteo developer app, choosing dimensions, metrics, currency and date range.'
 redirect_from:

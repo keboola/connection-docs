@@ -1,5 +1,6 @@
 ---
 title: Use variables
+lastUpdated: 2026-11-23
 slug: 'components/variables/use'
 sidebar:
   label: Use Variables

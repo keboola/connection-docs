@@ -1,5 +1,6 @@
 ---
 title: What3words Augmentation
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/what3words'
 description: 'Translate what3words addresses to latitude and longitude, or coordinates to what3words addresses, with a what3words API key; each address costs one API call.'
 redirect_from:

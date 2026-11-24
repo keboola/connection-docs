@@ -1,5 +1,6 @@
 ---
 title: Geocoding Augmentation
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/geocoding-augmentation'
 description: 'Add latitude and longitude to place names or addresses, or find the closest place for coordinates, using Google Maps, OpenStreetMap or another provider.'
 redirect_from:

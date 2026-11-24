@@ -1,5 +1,6 @@
 ---
 title: SuiteProjects Pro
+lastUpdated: 2026-11-19
 slug: 'components/extractors/erp/suiteprojects-pro'
 description: Extract projects, tasks, time entries, invoices, approvals and about 160 other object types from NetSuite SuiteProjects Pro, formerly OpenAir, through its XML API.
 search_keywords: [openair, netsuite openair, suiteprojects]

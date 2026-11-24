@@ -1,5 +1,6 @@
 ---
 title: SQL Editor
+lastUpdated: 2026-11-20
 description: 'What the Keboola SQL Editor is: the Table Explorer and code blocks, how sessions and variables behave, and what users of a shared workspace do and do not share.'
 slug: 'workspace/sql-editor'
 redirect_from:

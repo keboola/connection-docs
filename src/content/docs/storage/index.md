@@ -1,5 +1,6 @@
 ---
 title: Storage
+lastUpdated: 2026-11-20
 slug: 'storage'
 description: 'What Keboola Storage is and what you can do with it: tables and buckets, files, the Snowflake and BigQuery backends, and a map of the Storage docs.'
 ---

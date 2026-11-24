@@ -1,5 +1,6 @@
 ---
 title: POHODA mServer
+lastUpdated: 2026-11-19
 slug: 'components/writers/erp/pohoda-mserver'
 description: Write address book entries, invoices, orders, stock and other agendas into STORMWARE POHODA through its mServer XML API, with line items and the document numbers POHODA assigns.
 search_keywords: [pohoda, stormware, mserver]
