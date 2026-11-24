@@ -1,5 +1,7 @@
 ---
 title: Sync Action UI Elements Examples
+lastUpdated: 2026-11-18
+description: 'UI elements that call a component''s sync actions: dynamically loaded dropdowns, a validation button, a connection test, and autoload.'
 slug: 'extend/component/ui-options/configuration-schema/sync-action-examples'
 
 ---

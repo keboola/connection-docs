@@ -1,6 +1,8 @@
 ---
 title: Publish Generic Extractor
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/publish'
+description: 'Publish a Generic Extractor configuration as a separate component: design a configuration schema, register it in the Developer Portal, reuse it in projects.'
 redirect_from:
     - /extend/generic-extractor/publish/
     - /extend/generic-extractor/registration/

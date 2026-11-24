@@ -1,5 +1,6 @@
 ---
 title: LangSmith Traces
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/langsmith-traces'
 description: Extract the run history and feedback of your LangSmith projects into two incremental Storage tables.
 search_keywords: [langsmith, langchain, traces]
@@ -21,7 +22,7 @@ This connector is experimental. Its configuration and output may still change. S
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **LangSmith Traces** data source connector. The connector has no rows; one configuration is one extraction.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **LangSmith Traces** data source connector. The connector has no rows; one configuration is one extraction.
 
 ### Credentials
 

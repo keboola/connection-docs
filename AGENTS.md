@@ -6,7 +6,7 @@ site. Read this before making changes.
 ## What this is
 
 The official Keboola product documentation, served at help.keboola.com. Built
-with Astro 6 + Starlight. Content is Markdown (a few pages are MDX); the site
+with Astro 7 + Starlight. Content is Markdown (a few pages are MDX); the site
 builds to static HTML with full-text search (Pagefind), redirects, and a
 generated sidebar. The repo is public, so everything committed is readable by
 anyone, comments included.
@@ -35,11 +35,13 @@ src/
                   # AskKaiDrawer, Prereqs, StageStrip, …)
   styles/custom.css  # all UI/CSS customization
   integrations/   # custom Astro integrations: redirect-from, beacon-transforms,
-                  # page-markdown (the "View as Markdown" twin), pagefind-titles
+                  # page-markdown (the "View as Markdown" twin), pagefind-titles,
+                  # agent-only (:::agent blocks, twin only)
   sidebar.mjs     # generated from _data/navigation.yml
 public/           # static assets served as-is (images, favicon, llms)
 api/chat.ts       # "Ask Kai" backend (Vercel function → Keboola AI Service)
 api/feedback.ts   # "Was this page helpful?" backend (Vercel function → Linear issues)
+api/log-ingest.ts # Vercel log drain → Keboola Data Stream (people vs AI agents)
 scripts/
   convert-nav.mjs          # builds src/sidebar.mjs from _data/navigation.yml
   audit-phase2.mjs         # read-only link/image/heading/table audit of dist/
@@ -84,6 +86,31 @@ Helpful info.
 Beta notice.
 :::
 ```
+
+Notes for AI agents only: a `:::agent` block is left out of the web page (and
+search) and appears in the page's markdown twin (`<slug>/index.md`, "View as
+Markdown", llms.txt) as a quote labelled "Note for agents":
+
+```markdown
+:::agent
+If the user sees "Bucket sharing is not enabled", check the organization's
+data sharing setting first. It is not a project permission.
+:::
+```
+
+Use it only for detail that helps an agent answer a support question but would
+clutter the page for people: exact error messages, what to check first, edge
+cases. Everything else is normal text, which agents read too. Hidden is not
+private: the repo and the twin are public, so nothing confidential, internal or
+customer-specific goes in.
+
+Put the block at the top level of the page (not inside a list or quote), and
+don't nest other `:::` blocks in it. If the note contains a code sample with a
+`:::` line, open the block with more colons than that line (`::::agent` …
+`::::`), or the `:::` ends the block early. The build fails, naming the file and
+line, when a block is never closed, contains another `:::` block (usually a
+forgotten closing `:::`), is cut by a `:::` in a code sample, or is written with
+too few colons (`::agent`). See `src/integrations/agent-only.mjs`.
 
 Images: place them under `public/<section>/` and reference them with an absolute
 path (`![Alt](/section/page/image.png)`). Click-to-zoom is automatic.
@@ -154,6 +181,14 @@ CI runs `npm run check:cli` and `npm run build` on every PR. Run both locally fi
   `FEEDBACK_INGEST_URL`) the widget hides itself. A revoked key leaves it
   visible, and comments then reach only the function logs as
   `[feedback] undelivered comment`. Tests: `npm test`.
+- `api/log-ingest.ts` receives the Vercel log drain (team settings → Drains,
+  Logs, project connection-docs only, source `static` only, so the function's
+  own invocation logs don't loop back) and forwards page, `.md` and `llms.txt`
+  requests to a Keboola Data Stream, with hashed IPs and no query strings. It
+  needs `LOG_INGEST_SECRET` (the drain's signature secret), `LOG_INGEST_URL` and
+  `LOG_INGEST_IP_SALT`, and answers 503 while any is missing. Rows carry the
+  drain entry `id`; a retried batch arrives twice, so keep one row per id.
+  Tests: `npm test`.
 
 ## Don't run
 

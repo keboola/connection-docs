@@ -1,5 +1,7 @@
 ---
 title: OAuth Interface Specification
+lastUpdated: 2026-11-18
+description: 'How a component gets OAuth credentials stored in the OAuth Broker API: initialize, authorize, and receive the decrypted credentials in its configuration.'
 slug: 'extend/common-interface/oauth'
 ---
 

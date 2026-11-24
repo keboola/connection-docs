@@ -1,6 +1,8 @@
 ---
 title: Airtable
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/airtable'
+description: 'Fetch tables from an Airtable base with a read-only personal access token, filter records with a formula, and choose full or incremental load.'
 ---
 
 
@@ -8,6 +10,8 @@ slug: 'components/extractors/other/airtable'
 Airtable is an easy-to-use yet powerful database service that allows you to quickly create, organize, and collaborate on any project.
 
 This data source connector allows you to fetch data from any Airtable base tables.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prerequisites
 
@@ -20,7 +24,7 @@ Create an Airtable PAT token:
 
 ## Configuration Guide
 
-1. [Create a new configuration](/components/#creating-component-configuration) of the Airtable data source.
+1. [Create a new configuration](/components/configurations/#create-a-configuration) of the Airtable data source.
 2. In the authorization section, enter the obtained PAT token. See the [Prerequisites](#prerequisites) section.
 3. Create a new configuration row.
 4. Select a base ID. To reload available bases, click the **Reload Available Base IDs** button.

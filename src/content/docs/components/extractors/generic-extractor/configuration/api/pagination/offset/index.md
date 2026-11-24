@@ -1,6 +1,8 @@
 ---
 title: Offset Scroller
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/offset'
+description: 'Configure the offset pagination method in Generic Extractor for APIs that page by item offset and page size: limit, limitParam and offsetParam.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/offset/
 ---

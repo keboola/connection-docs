@@ -1,6 +1,8 @@
 ---
 title: OAuth 2.0 Authentication
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth20'
+description: 'Configure OAuth 2.0 authentication in Generic Extractor with the oauth20 type: format, headers and query parameters, with bearer and HMAC examples.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth20/
 ---

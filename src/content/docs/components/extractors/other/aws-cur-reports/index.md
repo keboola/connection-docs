@@ -1,12 +1,15 @@
 ---
 title: AWS Cost Usage Reports
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/aws-cu-reports'
+description: 'Download AWS Cost Usage Reports (CUR) that AWS exports to an S3 bucket as CSV, choosing the report prefix, a date range and whether to load only new files.'
 ---
 
 
 
-This data source connector downloads [AWS Cost Usage Reports](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html) 
-exported to S3 in CSV format.
+AWS describes how it produces these exports in [What are AWS Cost and Usage Reports?](https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html)
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
 
@@ -27,7 +30,7 @@ Export setup:
 
 ### Component Setup
 
-[Create a new configuration](/components/#creating-component-configuration) of the **AWS Cost Usage Reports** connector.  
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **AWS Cost Usage Reports** connector.  
 
 Fill in the **AWS config** containing your S3 bucket details and credentials as set up in the AWS console.
 
@@ -55,7 +58,7 @@ and copy the path of the report folder.
 
 ![AWS configuration](/components/extractors/other/aws-cur-reports/report_config.png)
 
-If the [**Incremental Load**](/storage/tables/#incremental-loading) is set to true, the new data will be appended to the old ones. 
+If the [**Incremental Load**](/storage/tables/incremental-loading/#incremental-loading) is set to true, the new data will be appended to the old ones. 
 This way you can import new data, e.g., from today, without deleting the data imported before.
 
 ## Output Table
