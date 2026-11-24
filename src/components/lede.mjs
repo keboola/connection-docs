@@ -82,7 +82,8 @@ export function ledeRepeatsBody(description, body) {
   const lede = plainText(description).replace(/[.:!?]+$/, '');
   if (!lede) return false;
   const para = plainText(firstParagraph(body));
-  if (para.startsWith(lede)) return true;
+  // the description must end where a word of the paragraph ends ("Kai is generally avail" is no repeat)
+  if (para.startsWith(lede) && !/^[\p{L}\p{N}]/u.test(para.slice(lede.length))) return true;
   const cutShort = !/[.!?]["')\]]*$/.test(para);
   return cutShort && para.length >= 40 && lede.startsWith(para);
 }

@@ -46,6 +46,11 @@ test('a summary that starts with a complete first paragraph stays as the lede', 
   );
 });
 
+test('a description that stops mid-word is not the paragraph repeated', () => {
+  assert.equal(ledeRepeatsBody('Kai is generally avail', 'Kai is generally available in every project.\n'), false);
+  assert.equal(ledeRepeatsBody('Kai is generally available', 'Kai is generally available in every project.\n'), true);
+});
+
 test('a short first paragraph does not swallow an unrelated description', () => {
   assert.equal(ledeRepeatsBody('Kai is generally available in every project.', 'Kai is\n'), false);
 });
