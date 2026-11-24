@@ -193,8 +193,11 @@ test('llms.txt links each page to its markdown twin', () => {
 test('llms.txt keeps the HTML link for a page whose twin was not written', () => {
   const out = buildLlmsTxt('https://help.keboola.com', 'Docs', [
     { slug: 'a', title: 'A', description: '', twin: false },
+    { slug: 'b', title: 'B', description: 'About B.', twin: false },
   ]);
-  assert.match(out, /- \[A\]\(https:\/\/help\.keboola\.com\/a\/\) \(HTML page, no Markdown copy\)$/m);
+  // llmstxt.org shape: `- [name](url): notes`, with the marker inside the notes
+  assert.match(out, /^- \[A\]\(https:\/\/help\.keboola\.com\/a\/\): HTML page, no Markdown copy\.$/m);
+  assert.match(out, /^- \[B\]\(https:\/\/help\.keboola\.com\/b\/\): HTML page, no Markdown copy\. About B\.$/m);
 });
 
 test('llms-full.txt holds every page, and each section gets its own file', () => {
