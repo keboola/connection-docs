@@ -1,7 +1,8 @@
 ---
 title: Operate and update an app
+lastUpdated: 2026-11-23
 slug: 'data-apps/operate'
-description: "Day-to-day work on a deployed Keboola app: read its state, ship a code change, change settings, stop and start it, rotate a secret, delete it."
+description: "Day-to-day work on a deployed Keboola app: read its state, ship a code change, change settings, stop and start it, start it from a flow, rotate a secret, delete it."
 ---
 
 Once an app is deployed, everything you do with it starts on its page under **Apps**. This page walks through the routine tasks; [Apps reference](/data-apps/reference/) has the full list of settings and actions.
@@ -10,24 +11,26 @@ Deploying, starting, stopping, deleting and setting secrets also work from a ter
 
 ## Read the app's state
 
-<!-- VERIFY(Michal Ševčík): on 2026-09-29 a Python/JS app built with kbagent (project 264, App ID 74021867) showed Edit with Kai in the header, running and stopped, and Duplicate with Kai, Automate, Debug mode and Delete app in the ⋯ menu while stopped, not Modify with Kai and Copy app. The 2026-07-10 screenshots of the Kai-built app 74016144 show Modify with Kai and Copy app. Renamed since, or does it depend on who built the app? The stopped app also showed Open App next to Start App. -->
-
-The header shows the app's status and the one or two actions that make sense for it: **Deploy App** for an app that has never run, **Start App** for a stopped one, **Open App** and **Redeploy App** for a running one, and **Modify with Kai** on apps Kai built. The **⋯** menu holds the rest, and its contents depend on the state too: **Copy app**, **Automate** (add it to a flow), **Debug mode** and **Delete app** are always there, with **Suspend app** on a running app.
+The header shows the app's status and the actions that make sense for it: **Deploy** for an app that has never run, **Start** for a stopped or sleeping one, **Redeploy** for a running one, and **Open** once the app has been deployed. A Python/JS app with a [Keboola-managed repository](/data-apps/what-are-apps/#two-ways-to-run-an-app) also gets **Edit with Kai** if you can edit the app and [Kai can build apps](/kai/getting-started/#enabling-kai) in the project. The **⋮** (More actions) menu holds the rest: **Duplicate with Kai** (**Duplicate** on apps without a Keboola-managed repository), **Automate** (start it on a schedule), **Debug mode** and **Delete app**, plus **Pause app** while the app is running (**Cancel start** while it's starting).
 
 The tabs below the header split the app's life into views: **Overview** (the app's settings and its App URL), **Advanced Settings** (environment variables and secrets, theme, data mappings), **All Runs** (every start attempt), **Terminal Logs** (stdout and stderr while it runs), **Versions** (the configuration history), and **Drafts** while Kai has a draft open. The **App Info** panel on the right shows the backend version and size, the auto-sleep timeout, the last change, the owner, and the App ID.
+
+The **Overview** also tells you which kind of repository the app has. An app with a Keboola-managed repository says "The code of this app is stored in a Keboola-managed Git repository" there; any other app has a **Git Repository** or **Code Source** section in its place.
 
 ## Ship a code change
 
 How depends on where the code lives; see [Two ways to run an app](/data-apps/what-are-apps/#two-ways-to-run-an-app).
 
-- **Kai built the app.** Click **Modify with Kai** and describe the change. Kai works in a draft with its own live preview; when you're happy, publish it to production. The production app keeps serving the old version until you do. Details: [Build your first app with Kai](/data-apps/getting-started/#how-drafts-become-production).
-- **Your own repository.** Push to the branch set under **Git Repository** on the app's page, then click **Redeploy App**. Keboola clones that branch again, runs your repository's `keboola-config/setup.sh` if it has one, and starts the new version. Push alone changes nothing. The app can report **stopped** for a moment while it restarts, so give it a reload before you worry.
+- **A Keboola-managed repository.** Every app the Kai builder creates has one. Click **Edit with Kai** and describe the change. Kai works in a draft with its own live preview; when you're happy, publish it to production. The production app keeps serving the old version until you do. Details: [Build your first app with Kai](/data-apps/getting-started/#how-drafts-become-production). Without Kai, push to the managed repository yourself ([Change the app later](/data-apps/build-locally/#change-the-app-later) shows how), then redeploy as in the next bullet.
+- **Your own repository.** Push to the branch set under **Git Repository** on the app's page, then click **Redeploy** (**Start** if the app is sleeping or stopped). Keboola clones that branch again, runs your repository's `keboola-config/setup.sh` if it has one, and starts the new version. Push alone changes nothing. The app can report **stopped** for a moment while it restarts, so give it a reload before you worry.
+
+<!-- VERIFY(Nikita): in the 2026-10-01 UI build, Start and Redeploy send the same request (patchApp with desiredState running, restartIfRunning and the saved configVersion). Not yet tried on a sleeping app after a push: does Start clone the branch again, or reuse the setup from the last deploy? The same applies to build-locally's "Sync to your project" step 4. -->
 
 From a terminal, a redeploy is `kbagent data-app deploy --project <alias> --app-id <id> --wait`.
 
 ## Change settings
 
-Authentication, secrets, environment variables and the Git branch are edited on the app's page; the backend size and the inactivity timeout are chosen in the deploy wizard each time you deploy or start the app. Nothing you edit on the page takes effect until the app runs again, so after saving click **Redeploy App** on a running app or **Start App** on a stopped one. The wizard asks for backend version, backend size and inactivity timeout every time; keep the current values unless you mean to change them.
+Authentication, secrets, environment variables and the Git branch are edited on the app's page; the backend size and the inactivity timeout are set in the deploy wizard ([pay-as-you-go](/management/payg-project/) projects have no backend size field). Nothing you edit on the page takes effect until the app runs again, so after saving click **Redeploy** on a running app or **Start** on a stopped or sleeping one. **Redeploy** opens the wizard with the current backend version, backend size and inactivity timeout in a collapsed **Deploy settings** section; keep them unless you mean to change them. **Start** skips the wizard and uses the saved values, unless Kai has undeployed drafts of the app. To change the size or timeout of a stopped or sleeping app, start it, then redeploy.
 
 Secrets deserve one note: after you save one, the field is masked, and revealing it shows an encrypted value starting with `KBC::ProjectSecure`. That's the secret stored [encrypted](/extend/encryption/), not a replacement, and the rest of the prefix depends on which cloud your stack runs on. To rotate it, paste the new value over the encrypted one and redeploy. How secret names become environment variables: [Secrets](/data-apps/reference/#secrets).
 
@@ -36,24 +39,64 @@ From a terminal: `kbagent data-app secrets-set --project <alias> --app-id <id> -
 ## Stop, start, sleep
 
 - **Sleeping** is automatic. After the inactivity timeout (five minutes to 30 days, set in the deploy wizard) the app suspends; the next visit wakes it and shows a short **waking up** page. You pay only for time the app is awake or waiting to suspend.
-- **Stopping** is deliberate: **⋯ → Suspend app** stops the container and keeps the configuration, so the app stops serving until you bring it back with **Start App**. Use this when an app should be off for days; sleeping already covers being idle overnight.
-- **Redeploy App** restarts a running app with the current configuration and, for apps on your own repository, the current branch head.
+- **A failed start** is the exception. If a deploy or start of a stopped or sleeping app fails, Keboola stops trying, and visits no longer wake the app. Fix the cause, then click **Start**, which turns waking on visits back on (`kbagent data-app deploy` starts the app from a terminal). [Troubleshooting](/data-apps/troubleshooting/#sleeping-and-waking) has the steps.
+- **Pausing** is deliberate: **⋮ → Pause app**, confirmed with **Pause now**, puts a running app to sleep right away, before its inactivity timeout runs out. The app's page shows **Pausing**, then **Sleeping**, with **Start** in the header, and the Apps list shows **Sleeping** too. It keeps the configuration and, like any sleeping app, wakes on the next visit or when you click **Start**. Use it when nobody needs the app for a while, so you don't pay for the rest of the timeout.
+- **Redeploy** restarts a running app with the current configuration and, for apps on your own repository, the current branch head.
 
-From a terminal: `kbagent data-app stop` and `kbagent data-app start`, both with `--project` and `--app-id`.
+<!-- Checked 2026-10-14 in project 264 on app 74022982 through the UI: after Pause now the page badge reads Pausing, then Sleeping (not Stopped); Start shows Starting, then Deploying, then Running. Earlier: checked 2026-10-08 in project 264 on a temporary app (74023248, deleted afterwards) through the data-science API: one failed start from stopped (StartupProbeFailed, repository without keboola-config/) set autoRestartEnabled to false and showed the disabled warning; a visit got "This app is not running" and did not wake it. After pointing it at keboola/data-app-python-js-hello-world, clicking Start set autoRestartEnabled back to true at once, and after Pause app a visit woke it (503 "Starting" page, state starting). A failed redeploy of the running app kept the old version running with autoRestartEnabled true. Not tested separately: an app asleep after its inactivity timeout (treated like a paused one), and whether kbagent data-app deploy restores autoRestartEnabled the way Start does. -->
+
+From a terminal: `kbagent data-app stop`, which does what **Pause app** does, and `kbagent data-app start`, both with `--project` and `--app-id`. `start` keeps the configuration version the app was last deployed with, so after a fix use `kbagent data-app deploy` instead.
 
 Sleep and wake behaviour in detail, including the wakeup error page: [Sleep and resume](/data-apps/reference/#sleep-and-resume).
 
 ## See what changed, and go back
 
-The **Versions** tab lists the app's configuration history: who changed what, and when. An app is a component configuration like any other, so you can compare versions and [roll back](/components/#rollback-version) to an earlier one. A rollback changes the configuration only, so redeploy afterwards to put the old settings back in service.
+The **Versions** tab lists the app's configuration history: who changed what, and when. An app is a component configuration like any other, so you can compare versions and [roll back](/components/configurations/#roll-back-to-an-earlier-version) to an earlier one. A rollback changes the configuration only, so redeploy afterwards to put the old settings back in service.
 
 Code changes are tracked separately from configuration: for a Kai-built app they're in the Builder's chat and drafts, and for your own repository they're in your Git history.
 
 ## Copy, automate, delete
 
-- **Copy app** duplicates the configuration into a new app, so you can try a change without touching the one people use.
-- **Automate** adds the app to a flow, for example to redeploy it after the data it reads has been refreshed.
-- **Delete app** stops the app and deletes its configuration. The App URL stops working immediately; there is no undo. The terminal equivalent, `kbagent data-app delete`, says the same thing in its own words: cascade, irreversible.
+- **Duplicate with Kai** has Kai copy an app with a Keboola-managed repository, so you can try a change without touching the one people use. It opens a new Kai chat and asks Kai to copy the app. The request tells Kai to check whether a copy is possible, to say what carries over and what you'll have to set up again, and to make the copy only once you confirm. Only Kai can copy these apps, so the item is disabled when Kai isn't available.
+- **Duplicate** does the same for any other app. It copies the app's code (or its repository and branch) and settings into a new app, which starts undeployed and gets its own address when you deploy it. If the app runs from your own repository, the copy deploys the same branch, so switch the copy to a branch of its own before you push experiments.
+- **Automate** creates a flow that starts the app on a schedule. In its dialog, name the flow (leave the name blank for "Scheduled" plus the app's name), pick the schedule and click **Automate**. The schedule is preset to **Once per hour**, which starts the app every hour, restarting it with a new build if it's running. For a time of day you choose, pick **Custom schedule**; times follow the timezone shown next to **Schedule**, UTC unless you change it. A started app still goes back to sleep after its inactivity timeout if nobody opens it. The new flow has the app as its only task and is listed with your other [flows](/flows/); [Start the app from a flow](#start-the-app-from-a-flow) explains what that task does. Only the **Admin** and **Share** [roles](/management/project/users/#user-roles) see **Automate**.
+- **Delete app** stops the app and deletes its configuration. The App URL stops working immediately; there is no undo. The terminal equivalent, `kbagent data-app delete`, asks for confirmation ("This deletes the deployment AND the Storage config (irreversible)"); in a script, add `--yes`. It stops the deployments and moves the configuration to the trash, but restoring that configuration does not bring the app back, and the URL is retired for good. <!-- Checked 2026-11-23 with kbagent 1.4.1 on a throwaway app in project 264 (created with --no-deploy): without a terminal, delete stops with CONFIRMATION_REQUIRED; with --yes it prints "Its deployments are stopped and the Storage config is in the trash; the URL is permanently retired." `config restore` brought the configuration back, but `data-app detail` still answered "App not found". -->
+
+## Start the app from a flow
+
+Add the app to a [flow](/flows/) when it should start after other work, for example after the transformation that refreshes the tables in its [Input Mapping](/data-apps/reference/#input-mapping). **Automate** builds a flow with the app as its only task; to add the app to a flow you already have:
+
+1. Open the flow and click **+** where the app should run, then **Component**.
+2. Switch to the **Apps** tab, or search for the app's name, and select the app.
+3. Save the flow.
+
+When the flow runs, the task starts a stopped or sleeping app and restarts a running one. Unlike **Redeploy**, it keeps the configuration the app was last deployed with:
+
+- Keboola builds the app again from the latest code in its repository, the current head of the branch for an app on your own repository. It keeps the configuration version the app was last deployed with and the package versions frozen in earlier builds, so settings saved since the last deploy still need a **Redeploy**.
+- The app loads its Input Mapping again and gets a new `KBC_TOKEN`.
+- The task waits until the app is running, up to five minutes. If a stopped or sleeping app fails to start or doesn't make it in time, the task fails, and so does an app that was deleted. Use a [condition](/flows/#conditions), such as [Continue on Failure](/flows/#4-continue-on-failure), if the rest of the flow should go on.
+- A running app can report **running** for the whole restart, so its task may finish before the new build is live, and a failed rebuild doesn't fail the task. Don't count on the new build in the next task.
+
+The flows **Automate** creates use the same task, so each scheduled run restarts the app with a new build. People keep using the old build until the new one is ready, and if the new build fails, the old one keeps running. Open sessions may have to reconnect when the new build takes over.
+
+In the flow's configuration, the task runs the **Data App Control** component, `keboola.data-app-control`, with the **App ID** from the app's **App Info** panel and no `configId`:
+
+```json
+{
+  "type": "job",
+  "componentId": "keboola.data-app-control",
+  "configData": {
+    "parameters": {
+      "appId": "<App ID>"
+    }
+  },
+  "mode": "run"
+}
+```
+
+To only start a stopped or sleeping app and leave a running one alone, add `"forceRestart": false` to `configData.parameters`. In the flow builder, select the task and click **Set advanced parameters** at the bottom of its panel; through the API, edit the flow's configuration. A running app then keeps its build and its `KBC_TOKEN`. A stopped or sleeping app still starts and loads its Input Mapping again, but from its last build, not from the latest code.
+
+If the task shows `keboola.data-apps` with a `configId` instead, it was added before the app was first deployed or on a stack without Data App Control. It restarts the app the same way, but `forceRestart` has no effect there. Deploy the app, then remove the task and add the app again.
 
 ## When something is off
 

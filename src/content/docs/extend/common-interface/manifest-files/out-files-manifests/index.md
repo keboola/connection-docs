@@ -1,5 +1,7 @@
 ---
 title: /data/out/files manifests
+lastUpdated: 2026-11-18
+description: 'The optional fields of a /data/out/files manifest, which set tags, permanence, encryption, and notification for a file your component uploads.'
 slug: 'extend/common-interface/manifest-files/out-files-manifests'
 ---
 

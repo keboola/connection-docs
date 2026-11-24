@@ -1,6 +1,8 @@
 ---
 title: Configuration File Specification
+lastUpdated: 2026-11-20
 slug: 'extend/common-interface/config-file'
+description: 'Lists the config.json root nodes (storage, parameters, image_parameters, authorization, action), how the state file works, and mapping examples.'
 ---
 
 
@@ -175,7 +177,7 @@ If you read the configuration through the Component configuration API call, you'
 
 That means the contents of the state file are nested inside the `component` node. There
 is also a `storage` node, which is related to the 
-[Automatic incremental processing](/storage/tables/#automatic-incremental-processing).
+[Automatic incremental processing](/storage/tables/incremental-loading/#automatic-incremental-processing).
 
 You need to maintain the above structure when manually changing the configuration via the API.
 
@@ -276,6 +278,12 @@ The tables element in a configuration of the **output mapping** is an array and 
   - `delimiter`
   - `enclosure`
   - `write_always`
+  - `partition_aware_import` - BigQuery only; limits the deduplication of an incremental load to the destination partitions
+    present in the loaded data (see [Partition-aware import](/transformations/mappings/#partition-aware-import-bigquery))
+  - `import_method` - `auto` (default), `single_statement` or `multi_statement`; chooses how Snowflake writes the
+    destination table. `auto` is safe on every backend; `single_statement` or `multi_statement` for a table in a
+    non-Snowflake bucket fails with `storage.tables.importMethodNotSupported`
+    (see [Import method](/transformations/mappings/#import-method-snowflake))
 
 #### Input mapping — basic
 Download tables `in.c-ex-salesforce.Leads` and `in.c-ex-salesforce.Accounts` to `/data/tables/in/leads.csv`

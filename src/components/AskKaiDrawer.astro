@@ -472,6 +472,13 @@
     document.addEventListener('astro:page-load', ensureSearchKaiCta);
 
     // ─── Wire triggers ───────────────────────────────────────────────
+    // Other components open the drawer with a suggested question by
+    // dispatching `kbc:ask-kai` with { detail: { prefill } }. A draft the
+    // reader already typed wins over the suggestion.
+    document.addEventListener('kbc:ask-kai', (e) => {
+      const prefill = (e as CustomEvent<{ prefill?: string }>).detail?.prefill;
+      openDrawer(input.value.trim() ? undefined : prefill);
+    });
     document.addEventListener('click', (e) => {
       const t = e.target as HTMLElement | null;
       if (!t) return;

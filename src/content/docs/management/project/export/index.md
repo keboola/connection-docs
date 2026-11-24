@@ -1,5 +1,7 @@
 ---
 title: Data Takeout
+lastUpdated: 2026-11-18
+description: 'Export your whole project with Data Takeout: prepare the project, run the export, see what data you get, and the security considerations.'
 slug: 'management/project/export'
 redirect_from:
   - /management/project-export/

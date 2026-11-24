@@ -1,5 +1,6 @@
 ---
 title: kbagent command reference
+lastUpdated: 2026-11-23
 slug: 'cli/commands'
 sidebar:
   label: Command Reference
@@ -28,9 +29,11 @@ Available on every command:
 
 ```console
 $ kbagent --json project list
-{ "status": "ok", "data": [ { "alias": "docs-demo", "project_name": "L0 - Shopify",
-  "project_id": 264, "stack_url": "https://connection.europe-west3.gcp.keboola.com",
-  "is_default": true, "org_id": 56 } ] }
+{ "status": "ok", "schema_version": "1.0", "exit_code": 0,
+  "data": [ { "alias": "docs-demo", "project_name": "L0 - Shopify", "project_id": 264,
+    "stack_url": "https://connection.europe-west3.gcp.keboola.com", "token": "kbc-.../264",
+    "auth_mode": "session", "is_default": true, "active_branch_id": null,
+    "org_id": null, "org_name": null } ] }
 ```
 
 ## Setup & info
@@ -65,7 +68,8 @@ $ kbagent --json project list
 
 ## Development
 
-- **`branch`** — `list`, `create`, `use`, `reset`, `delete`, `merge`, plus branch `metadata-*`.
+- **`branch`** — `list`, `create`, `use`, `reset`, `delete`, plus branch `metadata-*`.
+- **`merge-request`** — `list`, `detail`, `conflicts`, `diff`, `create`, `update`, `request-review`, `approve`, `request-changes`, `auto-merge`, `merge`, `resolve` (`branch merge` was removed in 1.0.0).
 - **`workspace`** — `create`, `list`, `detail`, `delete`, `password`, `load`, `query`, `from-transformation`, `gc`.
 - **`sync`** — `init`, `pull`, `status`, `diff`, `push`, `clone`, `branch-link/unlink/status`.
 - **`encrypt`** — `values` (one-way encrypt `#`-prefixed secrets).

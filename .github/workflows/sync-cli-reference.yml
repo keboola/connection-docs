@@ -1,9 +1,17 @@
 name: "Sync CLI command reference"
 
-# Fetches the generated command reference from the latest keboola/cli release
+# Fetches the generated command reference from the newest keboola/cli release
 # (built from the CLI's own command tree — keboola/cli#500) and opens a PR
-# when it changed. The PR diff reads as the CLI changelog since the last sync;
-# the body carries the docs-freshness report against the new reference.
+# when it changed.
+#
+# "Newest" means the highest semantic version among published, non-prerelease
+# releases that carry a command-reference.md asset. It is NOT GitHub's
+# releases/latest, which can point at an older line (it pointed at v0.100.5
+# while v1.x was out, and the sync kept proposing a rollback). The step also
+# never replaces the reference with an older version than the repo has.
+#
+# The PR diff reads as the CLI changelog since the last sync; the body
+# carries the docs-freshness report against the new reference.
 #
 # NOTE: PRs opened with the default GITHUB_TOKEN do not trigger pull_request
 # workflows (a documented GitHub limitation), so branch.yml won't run on the
@@ -31,12 +39,35 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: "Fetch latest command reference"
+      - name: "Fetch newest command reference"
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          mkdir -p _data/cli
-          curl -fsSL --retry 3 \
-            https://github.com/keboola/cli/releases/latest/download/command-reference.md \
-            -o _data/cli/command-reference.md
+          set -euo pipefail
+          ref=_data/cli/command-reference.md
+          # Highest X.Y.Z tag among published, non-prerelease releases that ship the asset.
+          tag=$(gh api --paginate "repos/keboola/cli/releases?per_page=100" \
+                  --jq '.[] | select((.draft or .prerelease) | not)
+                        | select(any(.assets[]; .name == "command-reference.md"))
+                        | .tag_name' \
+                | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n1 || true)
+          if [ -z "$tag" ]; then
+            echo "::error::No keboola/cli release with a command-reference.md asset found"
+            exit 1
+          fi
+          # Version the repo has now (empty if the file is missing).
+          current=$(grep -m1 -oE 'Generated from kbagent v[0-9][0-9.]*' "$ref" 2>/dev/null | grep -oE 'v[0-9][0-9.]*' || true)
+          echo "Newest release: $tag; repo has: ${current:-none}"
+          if [ -n "$current" ] && [ "$(printf '%s\n' "${current#v}" "${tag#v}" | sort -V | tail -n1)" != "${tag#v}" ]; then
+            echo "::notice::Newest release $tag is older than $current in the repo; keeping the current reference"
+          else
+            mkdir -p _data/cli
+            curl -fsSL --retry 3 \
+              "https://github.com/keboola/cli/releases/download/${tag}/command-reference.md" \
+              -o "$ref"
+          fi
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
       - name: "Extract CLI version"
         id: ver
         run: |
@@ -61,8 +92,9 @@ jobs:
           commit-message: "chore: sync CLI command reference (${{ steps.ver.outputs.version }})"
           title: "chore: sync CLI command reference (${{ steps.ver.outputs.version }})"
           body: |
-            Automated sync of `_data/cli/command-reference.md` from the latest
-            [keboola/cli release](https://github.com/keboola/cli/releases/latest).
+            Automated sync of `_data/cli/command-reference.md` from the newest
+            keboola/cli release by version,
+            [${{ steps.release.outputs.tag }}](https://github.com/keboola/cli/releases/tag/${{ steps.release.outputs.tag }}).
             The diff is effectively the CLI changelog since the last sync.
 
             **Freshness check: ${{ steps.check.outputs.status }}**

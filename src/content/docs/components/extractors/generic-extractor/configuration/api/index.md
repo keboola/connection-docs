@@ -1,6 +1,8 @@
 ---
 title: API Configuration
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/configuration/api'
+description: 'The api section of a Generic Extractor configuration sets the base URL, certificates, pagination, authentication, retries, default headers and timeouts.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/
 ---

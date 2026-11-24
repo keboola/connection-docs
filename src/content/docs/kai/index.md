@@ -1,5 +1,7 @@
 ---
 title: Kai - AI Assistant
+lastUpdated: 2026-11-18
+description: 'What Kai can do in your project, why to use it, how it differs from the Keboola MCP Server, how to get started, and where to find security and support details.'
 slug: 'kai'
 ---
 

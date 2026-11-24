@@ -1,12 +1,19 @@
 ---
 title: DBeaver Installation Guide
+lastUpdated: 2026-11-20
+sidebar:
+  label: Connect DBeaver
 slug: 'workspace/jdbc-driver/dbeaver'
-description: Install the Keboola JDBC driver in DBeaver and connect to a Keboola project.
+description: Register the Keboola JDBC driver in DBeaver, create a connection with a Storage API token, run a first query and fix the usual connection errors.
 ---
 
 
 
 This guide walks you through installing the Keboola JDBC driver in [DBeaver](https://dbeaver.io/) and connecting to a Keboola project.
+
+<!-- How-to-type page. Source: the page as it stood on main; shape only, content unchanged, checked 2026-11-19. -->
+
+**Goal:** DBeaver connected to your Keboola project through the [Keboola JDBC driver](/workspace/jdbc-driver/), ready to run SQL.
 
 ## Prerequisites
 
@@ -54,8 +61,8 @@ Save the jar somewhere stable on your machine — e.g. `~/keboola/keboola-jdbc-d
    | Property | Required | Description |
    |---|---|---|
    | `token` | yes | Your Keboola Storage API token |
-   | `branch` | no | Specific branch ID. Auto-detected (default branch) if omitted |
-   | `workspace` | no | Specific workspace ID. Newest workspace is auto-selected if omitted |
+
+   The optional `branch` and `workspace` properties are in [Connection properties](/workspace/jdbc-driver/#connection-properties).
 
    ![Connection — driver properties](./DBeaver_DB_2.png)
 
@@ -71,15 +78,17 @@ KEBOOLA HELP;
 SELECT * FROM _keboola.buckets LIMIT 10;
 ```
 
-`KEBOOLA HELP` lists every Keboola-specific command. `_keboola.buckets` is one of five virtual tables exposing platform metadata (`components`, `events`, `jobs`, `tables`, `buckets`).
+**Result:** the output confirms the driver is wired up correctly. `KEBOOLA HELP` lists every Keboola-specific command. `_keboola.buckets` is one of five virtual tables exposing platform metadata (`components`, `events`, `jobs`, `tables`, `buckets`).
 
 ## Troubleshooting
 
 - **"Property 'token' is required"** — the token wasn't added under Driver properties. Re-open the connection settings and add it.
 - **Authentication or 403 errors** — your token is likely bucket-scoped. Verify by hitting `https://connection.keboola.com/v2/storage/tokens/verify` with header `X-StorageApi-Token: <your-token>`; a bucket-scoped token will not see workspaces. Create a non-scoped token per the [Storage API token](/workspace/jdbc-driver/#prerequisites-storage-api-token) section.
-- **"No workspaces found"** — the project has no workspace yet. Open the project in Keboola UI and create a workspace (Transformations → Workspaces).
+- **"No workspaces found"** — the project has no workspace yet. Open the project in Keboola UI and create a workspace (**Workspaces** in the top navigation, then **+ Create Workspace**).
 - **Custom stack** — replace the host in the JDBC URL with your stack hostname (e.g. `jdbc:keboola://connection.north-europe.azure.keboola.com`).
 
 ## Need Help?
 
 For further help, reach out via [Keboola Support](/management/support/).
+
+**Next:** [DataGrip installation guide →](/workspace/jdbc-driver/datagrip/)

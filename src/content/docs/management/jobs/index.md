@@ -1,5 +1,6 @@
 ---
 title: Jobs
+lastUpdated: 2026-10-13
 slug: 'management/jobs'
 description: Track component jobs in Keboola — the jobs log and search syntax, the job lifecycle and states, waiting and parallelism limits, and how to terminate a running job.
 ---
@@ -20,6 +21,8 @@ All jobs are logged and their tracked history is virtually unlimited. Click on a
 - what exact parameters were used for the job (this might be useful when working with the [API](/extend/jobs/#working-with-the-jobs-api)).
 
 ![Screenshot - Jobs Detail](/management/jobs/jobs-detail.png)
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Searching the jobs log
 
@@ -60,7 +63,7 @@ Using the search box and advanced patterns you can easily find job based on vari
 For the API side of jobs (create, poll, debug, the job object), see [Jobs API](/extend/jobs/).
 
 ## Running Jobs
-Jobs are either run [manually from any configuration](/tutorial/) or automatically by the 
+Jobs are either run [manually from any configuration](/getting-started/) or automatically by the 
 [flow](/flows/) at a scheduled time. In either case, a job moves from `created` or `waiting` through `processing` to a final state; the full list of states and what each one means is on the [Jobs API](/extend/jobs/#job-status) page.
 
 Until a job is finished (i.e., it is waiting or processing), it can be terminated:

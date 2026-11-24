@@ -1,6 +1,8 @@
 ---
 title: Facebook Pages
+lastUpdated: 2026-11-19
 slug: 'components/extractors/social/facebook'
+description: 'Extract your Facebook Pages feed, comments, likes and Insights through the Graph API with queries that set the endpoint, fields and date range.'
 redirect_from:
     - /extractors/social/facebook/
 
@@ -8,13 +10,15 @@ redirect_from:
 
 
 
-This data source connector uses the [Facebook Graph API](https://developers.facebook.com/docs/graph-api) to extract 
-your Facebook Pages [feed](https://developers.facebook.com/docs/graph-api/reference/page/feed) 
-(including comments, likes, etc.), as well as Page or Page post [Insights](https://developers.facebook.com/docs/graph-api/reference/insights).
+The feed, comments and likes come from the Page [feed](https://developers.facebook.com/docs/graph-api/reference/page/feed) endpoint of the
+[Facebook Graph API](https://developers.facebook.com/docs/graph-api), and Page or Page post metrics from
+[Insights](https://developers.facebook.com/docs/graph-api/reference/insights).
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Facebook Pages** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with access to the Facebook Page you want to extract.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Facebook Pages** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/) with access to the Facebook Page you want to extract.
 You will be asked for the `read_insights,public_profile,pages_show_list,manage_pages` [permissions](https://developers.facebook.com/docs/facebook-login/permissions).
 Optionally, you can use `Direct token insert` to specify a manually generated access token.
 

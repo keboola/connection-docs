@@ -1,5 +1,7 @@
 ---
 title: Project Users
+lastUpdated: 2026-11-19
+description: Invite users to a project, give them a role, change or remove their access, and set up sign-in with Google or multi-factor authentication.
 slug: 'management/project/users'
 redirect_from:
   - /management/users/
@@ -32,7 +34,7 @@ There are the following user roles available:
     - delete the project;
     - manage users;
     - manage [API tokens](/management/project/tokens/);
-    - permanently remove configurations in [trash](/components/#delete-configuration);
+    - permanently remove configurations in [trash](/components/configurations/#delete-and-restore-a-configuration);
     - create an external authorization link; and
     - change the name, the schedule, and the disabled status of an existing flow.
 - **ReadOnly** – the user can view all project data, but **cannot**
