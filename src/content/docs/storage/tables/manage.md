@@ -128,8 +128,8 @@ Be cautious when dropping and recreating tables. If a job creates a table, it wi
 **Goal:** a column of a typed table holds its data in a different data type.
 
 You **cannot change the type of a column in a typed table once it has been created**. However, there are multiple workarounds to address this limitation.
-Some other alterations, such as increasing the length or precision of a column, are possible without a workaround; see
-[Changing column definitions](/storage/tables/data-types/reference/#changing-column-definitions).
+You can still [widen a text column](#widen-a-text-column) and make the other alterations listed in
+[Changing column definitions](/storage/tables/data-types/reference/#changing-column-definitions) without a workaround.
 
 **For tables using full load:** Drop the table and create a new one with the correct types ([Table Definition API](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-bucketId-/tables-definition)). Then, load the data into the newly created table.
 
@@ -151,6 +151,24 @@ Assume you have a column `date` of type `VARCHAR` in a typed table, and you want
 **Result:** for a full-load table, a new table with the correct types holds the data. For a table loaded incrementally,
 the `date_timestamp` column of type `TIMESTAMP` holds the data of every row, all configurations use it, and the `date`
 column is removed.
+
+## Widen a text column
+
+**Goal:** a text column of a typed table holds longer values than it was created for.
+
+You can increase the length of a text column (`VARCHAR` on Snowflake, `STRING(n)` on BigQuery) in place. When a Snowflake transformation redefines an existing column with a longer length, for example `VARCHAR(2)` as `VARCHAR(50)`, Storage widens the column and the load succeeds. Only the column's metadata changes, so the existing rows stay, in full and incremental loads alike. The column's type still cannot change this way.
+
+<!-- VERIFY(Storage owner): that the load path widens the column (not only the column definition endpoint), for full and incremental loads, and on BigQuery transformations too; and whether a load that declares STRING with no length (as the DuckDB transformation does) widens a typed VARCHAR(n) column to full width or fails, which decides whether the DuckDB page's create-it-typed-first tip holds. Reproduced by a customer on production Snowflake; the widen-only rule is in php-table-backend-utils (SnowflakeTableQueryBuilder, CANNOT_DECREASE_LENGTH), the load path is not in public code. -->
+
+:::caution
+Widening is one-way. Once a column is `VARCHAR(50)`, a load that declares it as `VARCHAR(2)` fails, because Storage cannot decrease a column's length.
+
+So a `VARCHAR(n)` in a transformation does not set a lasting limit. Storage enforces the column's current definition, whatever your latest query declares. To enforce a maximum width, [create the table as typed first](#keep-the-lengths-and-precisions-of-a-typed-table) and treat that definition as the source of truth.
+:::
+
+To change the length without running a transformation, call the Storage API's [update column definition endpoint](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-id-/columns/-column-/definition). It can also make a column nullable and drop a default; adding or changing a default works on BigQuery only. [Changing column definitions](/storage/tables/data-types/reference/#changing-column-definitions) lists what each backend allows.
+
+**Result:** the column accepts the longer values, and the rows already in the table are unchanged.
 
 ## Create a typed table from a non-typed table
 
