@@ -14,24 +14,23 @@
 // component tags. Returns '' when the body has no prose paragraph.
 export function firstParagraph(body) {
   if (!body) return '';
-  const lines = body.split(/\r?\n/);
+  // Frontmatter only when the block is YAML keys: a body (PageTitle passes one without its
+  // frontmatter) may open with a `---` rule, and that is not frontmatter.
+  const fm = body.match(/^\s*---\r?\n(?:(?:[A-Za-z_][\w-]*:.*|[ \t]+.*|[ \t]*)\r?\n)*?---[ \t]*(?:\r?\n|$)/);
+  const lines = body.slice(fm ? fm[0].length : 0).split(/\r?\n/);
   const parts = [];
   let fence = null;
   let comment = null;
-  let admonition = 0;
-  let frontmatter = false;
-  let seenAny = false;
+  const admonitions = []; // colon count of each open `:::name` / `::::agent` block
 
   for (const raw of lines) {
     const line = raw.trim();
-    if (!seenAny && line === '---') { frontmatter = !frontmatter; continue; }
-    if (frontmatter) continue;
-    if (line) seenAny = true;
 
     if (fence) { if (line.startsWith(fence)) fence = null; continue; }
     if (comment) { if (line.includes(comment)) comment = null; continue; }
-    if (/^:::\S/.test(line)) { admonition++; continue; }
-    if (admonition) { if (line === ':::') admonition--; continue; }
+    const opens = line.match(/^(:{3,})[A-Za-z]/);
+    if (opens) { admonitions.push(opens[1].length); continue; }
+    if (admonitions.length) { if (/^:{3,}$/.test(line) && line.length >= admonitions.at(-1)) admonitions.pop(); continue; }
 
     const isBreak =
       !line ||
@@ -45,7 +44,8 @@ export function firstParagraph(body) {
       /^([-*+]|\d+[.)])\s/.test(line) ||
       /^<\/?[A-Za-z]/.test(line) ||
       /^\|/.test(line) ||
-      /^:::$/.test(line);
+      /^:::$/.test(line) ||
+      /^([-*_])(?:[ \t]*\1){2,}$/.test(line);   // a thematic break (---, ***, ___)
     if (!isBreak) { parts.push(line); continue; }
     if (parts.length) break;
 

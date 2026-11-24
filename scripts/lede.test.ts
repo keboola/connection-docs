@@ -74,6 +74,16 @@ test('first paragraph skips what renders before the prose', () => {
   assert.equal(firstParagraph(body), 'The first real paragraph continues here.');
 });
 
+test('a ::::agent block closes with its own fence, and the paragraph after it counts', () => {
+  const body = '::::agent\nA note with a sample:\n\n```md\n:::note\nx\n:::\n```\n::::\n\nThe connector reads tables into Storage.\n';
+  assert.equal(firstParagraph(body), 'The connector reads tables into Storage.');
+});
+
+test('a body that opens with a --- rule is not frontmatter', () => {
+  assert.equal(firstParagraph('---\n\nThe connector reads tables into Storage.\n'), 'The connector reads tables into Storage.');
+  assert.equal(firstParagraph("---\ntitle: T\nslug: 'a'\n---\nBody text.\n"), 'Body text.');
+});
+
 test('a body with no prose has no first paragraph', () => {
   assert.equal(firstParagraph('## Heading\n\n- a list\n'), '');
   assert.equal(ledeRepeatsBody('Anything at all.', '## Heading\n'), false);
