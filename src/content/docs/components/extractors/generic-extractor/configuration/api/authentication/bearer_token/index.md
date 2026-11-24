@@ -1,13 +1,12 @@
 ---
 title: Bearer Token Authentication
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/bearer_token'
+description: 'Set up bearer token authentication in Generic Extractor: a token sent in the Authorization header, in the UI or built with the concat function in JSON.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/bearer_token/
 ---
 
 <!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
-
-Bearer token authentication sends a token in the `Authorization` header of each API request.
 
 This method is available through UI. You can select the `Bearer Token` method and fill in the token.
 

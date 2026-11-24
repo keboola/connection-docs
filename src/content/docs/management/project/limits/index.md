@@ -20,6 +20,8 @@ these limits is either technically impossible, or it carries a risk of degraded 
 
 **Note:** These limits apply to standard Keboola projects. The limits for [pay-as-you-go projects](/management/payg-project/) might differ.
 
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Business Limits
 
 Business limits are set for each project upon entering into the subscription. 

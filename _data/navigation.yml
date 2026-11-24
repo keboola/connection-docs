@@ -1,929 +1,927 @@
 items:
-  - url: /
-    title: Home
-
-  - url: /overview/
-    title: Keboola Overview
+  - title: Start
+    collapsed: false
     items:
-      - url: /overview/onboarding/
-        title: Platform Onboarding
+      - url: /
+        title: Home
+
+      - url: /overview/
+        title: Keboola Overview
         items:
-          - url: /overview/onboarding/usage-blueprint/
-            title: Usage Blueprint
-
-          - url: /overview/onboarding/architecture-guide/
-            title: Multi-Project Architecture
+          - url: /overview/onboarding/
+            title: Platform Onboarding
             items:
-              - url: /overview/onboarding/architecture-guide/bdm-guide/
-                title: Business Data Model
+              - url: /overview/onboarding/usage-blueprint/
+                title: Usage Blueprint
 
-          - url: /overview/onboarding/cheat-sheet/
+              - url: /overview/onboarding/architecture-guide/
+                title: Multi-Project Architecture
+                items:
+                  - url: /overview/onboarding/architecture-guide/bdm-guide/
+                    title: Business Data Model
+
+              - url: /overview/onboarding/cheat-sheet/
+                title: Best Practices
+
+              - url: /overview/onboarding/governance-guide/
+                title: Governance Guide
+
+          - url: /overview/google-data-policy/
+            title: Google Data Policy
+
+      - url: /getting-started/
+        title: Getting Started
+        items:
+          - url: /getting-started/project/
+            title: Create or join a project
+
+          - url: /getting-started/load/
+            title: Load data into Storage
+
+          - url: /getting-started/transform/
+            title: Transform data
+
+          - url: /getting-started/ask/
+            title: Explore your data
+
+          - url: /getting-started/app/
+            title: Build an app
+
+          - url: /getting-started/automate/
+            title: Build and schedule a weekly flow
+
+          - url: /getting-started/check/
+            title: Check Storage and Jobs
+
+          - url: /getting-started/going-further/
+            title: Going further
+            items:
+              - url: /getting-started/write/
+                title: Send a table to Google Sheets
+
+              - url: /getting-started/load/googlesheets/
+                title: Load from Google Sheets
+
+              - url: /getting-started/load/database/
+                title: Load from a database
+
+              - url: /getting-started/transform/workspace/
+                title: Use a workspace
+
+              - url: /getting-started/ad-hoc/
+                title: Ad-hoc data analysis
+
+              - url: /getting-started/branches/
+                title: Development branches
+                items:
+                  - url: /getting-started/branches/prepare-tables/
+                    title: Prepare tables
+
+                  - url: /getting-started/branches/prepare-files/
+                    title: Prepare files
+
+                  - url: /getting-started/branches/tables-in-branch/
+                    title: Tables in a branch
+
+                  - url: /getting-started/branches/files-in-branch/
+                    title: Files in a branch
+
+                  - url: /getting-started/branches/project-diff/
+                    title: Project diff
+
+                  - url: /getting-started/branches/merge-to-production/
+                    title: Merge to production
+
+  - title: Work with data
+    collapsed: false
+    items:
+      - url: /storage/
+        title: Storage
+        items:
+          - url: /storage/tables/
+            title: Tables & Aliases
+            items:
+              - url: /storage/tables/manage/
+                title: Manage Tables
+
+              - url: /storage/tables/incremental-loading/
+                title: Primary Keys & Incremental Loading
+
+              - url: /storage/tables/descriptions/
+                title: Descriptions
+
+              - url: /storage/tables/data-types/
+                title: Data Types
+
+              - url: /storage/tables/data-types/reference/
+                title: Data Types Reference
+
+              - url: /storage/tables/csv-files/
+                title: CSV Files
+
+              - url: /storage/tables/csv-files/excel/
+                title: CSV in Excel
+
+              - url: /storage/tables/backups/
+                title: Back Up and Restore
+
+          - url: /storage/buckets/
+            title: Buckets
+
+          - url: /storage/files/
+            title: Files
+
+          - url: /storage/jobs/
+            title: Jobs
+
+          - url: /storage/bucket-exposure/
+            title: Bucket Exposure
+            items:
+              - url: /storage/bucket-exposure/create/
+                title: BigQuery Exposures
+
+              - url: /storage/bucket-exposure/snowflake-grant/
+                title: Snowflake Grant Mode
+
+              - url: /storage/bucket-exposure/snowflake-share/
+                title: Snowflake Share Mode
+
+          - url: /storage/data-streams/
+            title: Data Streams
+            items:
+              - url: /storage/data-streams/tutorial/
+                title: Tutorial
+              - url: /storage/data-streams/create/
+                title: Create a stream
+              - url: /storage/data-streams/opentelemetry/
+                title: OpenTelemetry (OTLP)
+              - url: /storage/data-streams/opentelemetry/reference/
+                title: OpenTelemetry reference
+              - url: /storage/data-streams/reference/
+                title: Reference
+
+          - url: /storage/byodb/
+            title: Bring Your Own Database
+            items:
+              - url: /storage/byobq/
+                title: Connect Your Own BigQuery
+
+              - url: /storage/byodb/external-buckets/
+                title: External Datasets
+                items:
+                  - url: /storage/byodb/external-buckets/register/
+                    title: Register and Use
+
+              - url: /storage/byodb/snowflake-secure-data-sharing/
+                title: Import a Snowflake Share
+
+              - url: /storage/byodb/bigquery-policy-tags/
+                title: BigQuery policy tags
+                items:
+                  - url: /storage/byodb/bigquery-policy-tags/enable/
+                    title: Enable BigQuery policy tags
+
+          - url: /storage/row-level-security/
+            title: Row- and Column-Level Security
+            items:
+              - url: /storage/row-level-security/set-up/
+                title: Set Up
+
+              - url: /storage/row-level-security/policy-reference/
+                title: Policy Reference
+
+          - url: /storage/api/
+            title: Storage API
+            items:
+              - url: /storage/api/configurations/
+                title: Configurations
+              - url: /storage/api/import-export/
+                title: Import & Export
+              - url: /storage/api/importer/
+                title: API Importer
+              - url: /storage/api/tde-exporter/
+                title: TDE Exporter
+              - url: /storage/api/clients/
+                title: API Clients
+                items:
+                  - url: /storage/api/clients/python-client/
+                    title: Python client
+                  - url: /storage/api/clients/r-client/
+                    title: R client
+                  - url: /storage/api/clients/php-client/
+                    title: PHP client
+                  - url: /storage/api/clients/docker-cli/
+                    title: Docker CLI client
+
+      - url: /components/
+        title: Components
+        items:
+          - url: /components/configurations/
+            title: Configurations
+
+          - url: /components/authorization/
+            title: Authorization
+
+          - url: /components/debug-mode/
+            title: Debug Mode
+
+          - url: /components/running-jobs-in-parallel/
+            title: Running Jobs in Parallel
+
+          - url: /components/variables/
+            title: Variables
+            items:
+              - url: /components/variables/use/
+                title: Use Variables
+              - url: /components/variables/api/
+                title: Variables Through the API
+                items:
+                  - url: /components/variables/api/tutorial/
+                    title: Tutorial
+
+          - url: /components/branches/
+            title: Development Branches
+            items:
+              - url: /components/branches/manage/
+                title: Manage Branches
+              - url: /components/branches/merge-requests/
+                title: Merge Requests
+
+          - url: /components/ip-addresses/
+            title: IP Addresses
+
+          - url: /components/extractors/
+            title: Data Source Connectors
+            items:
+              - url: /components/extractors/communication/
+                title: Communication
+                items:
+                  - url: /components/extractors/communication/email-imap/
+                    title: IMAP Email Contents and Attachments
+
+                  - url: /components/extractors/communication/ms-outlook/
+                    title: MS Outlook (Office 365) Email Contents and Attachments
+
+                  - url: /components/extractors/communication/email-attachments/
+                    title: Email Attachments
+
+                  - url: /components/extractors/communication/gmail/
+                    title: Gmail Messages
+
+                  - url: /components/extractors/communication/google-calendar/
+                    title: Google Calendar
+
+                  - url: /components/extractors/communication/intercom/
+                    title: Intercom
+
+                  - url: /components/extractors/communication/slack/
+                    title: Slack
+
+              - url: /components/extractors/database/
+                title: Databases
+                items:
+                  - url: /components/extractors/database/mysql/
+                    title: MySQL
+
+                  - url: /components/extractors/database/postgresql/
+                    title: PostgreSQL
+
+                  - url: /components/extractors/database/oracle/
+                    title: Oracle
+
+                  - url: /components/extractors/database/azure-storage-table/
+                    title: Azure Storage Table
+
+                  - url: /components/extractors/database/cosmosdb/
+                    title: CosmosDB
+
+                  - url: /components/extractors/database/bigquery/
+                    title: Google BigQuery
+
+                  - url: /components/extractors/database/microsoft-sql/
+                    title: Microsoft SQL
+
+                  - url: /components/extractors/database/mongodb/
+                    title: MongoDB
+                    items:
+                      - url: /components/extractors/database/mongodb/mapping/
+                        title: Mapping Examples
+
+                  - url: /components/extractors/database/filemaker/
+                    title: FileMaker
+
+                  - url: /components/extractors/database/sqldb/
+                    title: SQL Databases
+
+              - url: /components/extractors/erp/
+                title: ERP
+                items:
+                  - url: /components/extractors/erp/k2/
+                    title: K2
+
+                  - url: /components/extractors/erp/mpohoda/
+                    title: mPOHODA
+
+                  - url: /components/extractors/erp/netsuite/
+                    title: NetSuite
+
+                  - url: /components/extractors/erp/pohoda-mserver/
+                    title: POHODA mServer
+
+                  - url: /components/extractors/erp/suiteprojects-pro/
+                    title: SuiteProjects Pro
+
+              - url: /components/extractors/marketing-sales/
+                title: Marketing/Sales
+                items:
+                  - url: /components/extractors/marketing-sales/adform-dsp-reports/
+                    title: Adform DSP Reports
+
+                  - url: /components/extractors/marketing-sales/babelforce/
+                    title: Babelforce
+
+                  - url: /components/extractors/marketing-sales/bigcommerce/
+                    title: BigCommerce
+
+                  - url: /components/extractors/marketing-sales/chartmogul/
+                    title: ChartMogul
+
+                  - url: /components/extractors/marketing-sales/criteo/
+                    title: Criteo
+
+                  - url: /components/extractors/marketing-sales/customerio/
+                    title: Customer IO
+
+                  - url: /components/extractors/marketing-sales/facebook-ads/
+                    title: Facebook Ads
+
+                  - url: /components/extractors/marketing-sales/gooddata-reports/
+                    title: GoodData Reports
+
+                  - url: /components/extractors/marketing-sales/google-ads/
+                    title: Google Ads
+
+                  - url: /components/extractors/marketing-sales/google-ad-manager/
+                    title: Google Ad Manager
+
+                  - url: /components/extractors/marketing-sales/google-analytics/
+                    title: Google Analytics 4 (GA4)
+
+                  - url: /components/extractors/marketing-sales/google-cm360/
+                    title: Google Campaign Manager 360
+
+                  - url: /components/extractors/marketing-sales/google-dv360/
+                    title: Google Display & Video 360
+
+                  - url: /components/extractors/marketing-sales/google-my-business/
+                    title: Google My Business
+
+                  - url: /components/extractors/marketing-sales/linkedin-pages/
+                    title: Linkedin Pages
+
+                  - url: /components/extractors/marketing-sales/mailchimp/
+                    title: Mailchimp
+
+                  - url: /components/extractors/marketing-sales/market-vision/
+                    title: Market Vision
+
+                  - url: /components/extractors/marketing-sales/bing-ads/
+                    title: Microsoft Advertising (Bing Ads)
+                    items:
+                      - url: /components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/
+                        title: Columns and primary keys of report presets
+
+                  - url: /components/extractors/marketing-sales/mixpanel/
+                    title: MixPanel
+
+                  - url: /components/extractors/marketing-sales/pinterest-ads/
+                    title: Pinterest Ads
+
+                  - url: /components/extractors/marketing-sales/pipedrive/
+                    title: Pipedrive
+
+                  - url: /components/extractors/marketing-sales/salesforce/
+                    title: Salesforce
+
+                  - url: /components/extractors/marketing-sales/shoptet/
+                    title: Shoptet
+
+                  - url: /components/extractors/marketing-sales/sklik/
+                    title: Sklik
+
+                  - url: /components/extractors/marketing-sales/tiktok-ads/
+                    title: TikTok Ads
+
+                  - url: /components/extractors/marketing-sales/zoho/
+                    title: Zoho
+
+              - url: /components/extractors/social/
+                title: Social
+                items:
+                  - url: /components/extractors/social/facebook/
+                    title: Facebook Pages
+
+                  - url: /components/extractors/social/instagram/
+                    title: Instagram
+
+                  - url: /components/extractors/social/youtube/
+                    title: YouTube Data API
+
+                  - url: /components/extractors/social/youtube-reporting/
+                    title: YouTube Reporting
+
+              - url: /components/extractors/storage/
+                title: Storage
+                items:
+                  - url: /components/extractors/storage/aws-s3/
+                    title: AWS S3
+
+                  - url: /components/extractors/storage/azure-datalake-gen2/
+                    title: Azure Datalake Gen 2
+
+                  - url: /components/extractors/storage/ftp/
+                    title: FTP
+
+                  - url: /components/extractors/storage/google-drive/
+                    title: Google Drive
+
+                  - url: /components/extractors/storage/http/
+                    title: HTTP
+
+                  - url: /components/extractors/storage/storage-api/
+                    title: Keboola Storage
+
+                  - url: /components/extractors/storage/onedrive-excel-sheets/
+                    title: OneDrive Excel Sheets
+
+                  - url: /components/extractors/storage/onedrive-files/
+                    title: OneDrive Files
+
+              - url: /components/extractors/other/
+                title: Other
+                items:
+                  - url: /components/extractors/other/airtable/
+                    title: Airtable
+
+                  - url: /components/extractors/other/aws-cu-reports/
+                    title: AWS Cost Usage Reports
+
+                  - url: /components/extractors/other/azure-cost/
+                    title: Azure Cost Management
+
+                  - url: /components/extractors/other/ceps/
+                    title: Ceps
+
+                  - url: /components/extractors/other/dark-sky/
+                    title: Dark Sky (Weather)
+
+                  - url: /components/extractors/other/dynamodb-streams/
+                    title: DynamoDB Streams
+
+                  - url: /components/extractors/other/currency-rates/
+                    title: ECB Currency Rates
+
+                  - url: /components/extractors/other/geocoding-augmentation/
+                    title: Geocoding Augmentation
+
+                  - url: /components/extractors/other/github/
+                    title: GitHub
+
+                  - url: /components/extractors/other/google-search-console/
+                    title: Google Search Console
+
+                  - url: /components/extractors/other/okta/
+                    title: Okta
+
+                  - url: /components/extractors/other/hibob/
+                    title: HiBob
+
+                  - url: /components/extractors/other/langsmith-traces/
+                    title: LangSmith Traces
+
+                  - url: /components/extractors/other/mapbox/
+                    title: Mapbox
+
+                  - url: /components/extractors/other/papertrail/
+                    title: Papertrail
+
+                  - url: /components/extractors/other/pingdom/
+                    title: Pingdom
+
+                  - url: /components/extractors/other/servicenow/
+                    title: ServiceNow
+
+                  - url: /components/extractors/other/stripe/
+                    title: Stripe
+
+                  - url: /components/extractors/other/telemetry-data/
+                    title: Telemetry Data
+
+                  - url: /components/extractors/other/time-doctor-2
+                    title: Time Doctor 2
+
+                  - url: /components/extractors/other/ukg-hr/
+                    title: UKG HR
+
+                  - url: /components/extractors/other/weather-api
+                    title: Weather API
+
+                  - url: /components/extractors/other/what3words/
+                    title: What3words Augmentation
+
+                  - url: /components/extractors/other/yourpass/
+                    title: YourPass
+
+              - url: /components/extractors/generic-extractor/
+                title: Generic Extractor
+                items:
+                  - url: /components/extractors/generic-extractor/tutorial/
+                    title: Tutorial
+                    items:
+                      - url: /components/extractors/generic-extractor/tutorial/rest/
+                        title: REST HTTP API Introduction
+                      - url: /components/extractors/generic-extractor/tutorial/json/
+                        title: JSON Introduction
+                      - url: /components/extractors/generic-extractor/tutorial/basic/
+                        title: Basic Configuration
+                      - url: /components/extractors/generic-extractor/tutorial/pagination/
+                        title: Pagination Tutorial
+                      - url: /components/extractors/generic-extractor/tutorial/jobs/
+                        title: Jobs Tutorial
+                      - url: /components/extractors/generic-extractor/tutorial/mapping/
+                        title: Mapping Tutorial
+                  - url: /components/extractors/generic-extractor/configuration/
+                    title: Configuration
+                    items:
+                      - url: /components/extractors/generic-extractor/configuration/api/
+                        title: API Configuration
+                        items:
+                          - url: /components/extractors/generic-extractor/configuration/api/pagination/
+                            title: Pagination
+                            items:
+                              - url: /components/extractors/generic-extractor/configuration/api/pagination/response-url/
+                                title: Response URL Scroller
+                              - url: /components/extractors/generic-extractor/configuration/api/pagination/response-param/
+                                title: Response Parameter Scroller
+                              - url: /components/extractors/generic-extractor/configuration/api/pagination/offset/
+                                title: Offset Scroller
+                              - url: /components/extractors/generic-extractor/configuration/api/pagination/pagenum/
+                                title: Page Number Scroller
+                              - url: /components/extractors/generic-extractor/configuration/api/pagination/cursor/
+                                title: Cursor Scroller
+                              - url: /components/extractors/generic-extractor/configuration/api/pagination/multiple/
+                                title: Multiple Scrollers
+                          - url: /components/extractors/generic-extractor/configuration/api/authentication/
+                            title: Authentication
+                            items:
+                              - url: /components/extractors/generic-extractor/configuration/api/authentication/query/
+                                title: Query
+                              - url: /components/extractors/generic-extractor/configuration/api/authentication/basic/
+                                title: Basic
+                              - url: /components/extractors/generic-extractor/configuration/api/authentication/bearer_token/
+                                title: Bearer Token
+                              - url: /components/extractors/generic-extractor/configuration/api/authentication/api_key/
+                                title: API Key
+                              - url: /components/extractors/generic-extractor/configuration/api/authentication/login/
+                                title: Login
+                              - url: /components/extractors/generic-extractor/configuration/api/authentication/oauth_cc/
+                                title: OAuth 2.0 Client Credentials
+                              - url: /components/extractors/generic-extractor/configuration/api/authentication/oauth10/
+                                title: OAuth 1.0
+                              - url: /components/extractors/generic-extractor/configuration/api/authentication/oauth20/
+                                title: OAuth 2.0
+                              - url: /components/extractors/generic-extractor/configuration/api/authentication/oauth20-login/
+                                title: Login using OAuth 2.0
+                      - url: /components/extractors/generic-extractor/configuration/config/
+                        title: Extraction Configuration
+                        items:
+                          - url: /components/extractors/generic-extractor/configuration/config/jobs/
+                            title: Jobs
+                            items:
+                              - url: /components/extractors/generic-extractor/configuration/config/jobs/children/
+                                title: Child Jobs
+                          - url: /components/extractors/generic-extractor/configuration/config/mappings/
+                            title: Mappings
+                      - url: /components/extractors/generic-extractor/configuration/iterations/
+                        title: Iterations
+                      - url: /components/extractors/generic-extractor/configuration/ssh-proxy/
+                        title: SSH Proxy Configuration
+                  - url: /components/extractors/generic-extractor/map/
+                    title: Configuration Map
+                  - url: /components/extractors/generic-extractor/functions/
+                    title: Functions
+                  - url: /components/extractors/generic-extractor/incremental/
+                    title: Incremental Extraction
+                  - url: /components/extractors/generic-extractor/running/
+                    title: Running Generic Extractor
+                  - url: /components/extractors/generic-extractor/publish/
+                    title: Publishing Component
+
+          - url: /components/writers/
+            title: Data Destination Connectors
+            items:
+              - url: /components/writers/bi-tools/
+                title: Business Intelligence
+                items:
+                  - url: /components/writers/bi-tools/gooddata/
+                    title: GoodData
+
+                  - url: /components/writers/bi-tools/looker/
+                    title: Looker
+
+                  - url: /components/writers/bi-tools/tableau/
+                    title: Tableau
+
+                  - url: /components/writers/bi-tools/thoughtspot/
+                    title: ThoughtSpot
+
+              - url: /components/writers/database/
+                title: Database
+                items:
+                  - url: /components/writers/database/bigquery/
+                    title: BigQuery
+
+                  - url: /components/writers/database/exasol/
+                    title: Exasol
+
+                  - url: /components/writers/database/firebolt/
+                    title: Firebolt
+
+                  - url: /components/writers/database/mysql/
+                    title: MySQL
+
+                  - url: /components/writers/database/oracle/
+                    title: Oracle
+
+                  - url: /components/writers/database/postgresql/
+                    title: PostgreSQL
+
+                  - url: /components/writers/database/redshift/
+                    title: Redshift
+
+                  - url: /components/writers/database/snowflake/
+                    title: Snowflake
+
+                  - url: /components/writers/database/mssql/
+                    title: SQL Server
+
+                  - url: /components/writers/database/synapse/
+                    title: Synapse
+
+              - url: /components/writers/erp/
+                title: ERP
+                items:
+                  - url: /components/writers/erp/mpohoda/
+                    title: mPOHODA
+
+                  - url: /components/writers/erp/pohoda-mserver/
+                    title: POHODA mServer
+
+              - url: /components/writers/storage/
+                title: Storage
+                items:
+                  - url: /components/writers/storage/aws-s3/
+                    title: AWS S3
+
+                  - url: /components/writers/storage/dropbox/
+                    title: Dropbox
+
+                  - url: /components/writers/storage/google-cloud-storage/
+                    title: Google Cloud Storage
+
+                  - url: /components/writers/storage/google-drive/
+                    title: Google Drive
+
+                  - url: /components/writers/storage/google-sheets/
+                    title: Google Sheets
+
+                  - url: /components/writers/storage/storage-api/
+                    title: Keboola Storage
+
+                  - url: /components/writers/storage/onedrive/
+                    title: OneDrive
+
+                  - url: /components/writers/storage/sftp/
+                    title: SFTP
+
+              - url: /components/writers/other/
+                title: Other
+                items:
+                  - url: /components/writers/other/azure-event-hub/
+                    title: Azure Event Hub
+
+                  - url: /components/writers/other/yourpass/
+                    title: YourPass
+
+              - url: /components/writers/generic-writer/
+                title: Generic Writer
+                items:
+                  - url: /components/writers/generic-writer/configuration/
+                    title: Configuration
+                  - url: /components/writers/generic-writer/configuration-examples/
+                    title: Configuration Examples
+
+          - url: /components/applications/
+            title: Applications
+            items:
+              - url: /components/applications/triggers/
+                title: Triggers
+                items:
+                  - url: /components/applications/triggers/exasol-cluster-starter/
+                    title: Exasol Cluster Starter
+                  - url: /components/applications/triggers/orchestration-trigger-queue-v2/
+                    title: Orchestration Trigger
+                  - url: /components/applications/triggers/dbt-cloud-job-trigger/
+                    title: dbt Cloud Job Trigger
+                  - url: /components/applications/triggers/deepnote-notebook-execution-trigger/
+                    title: Deepnote Notebook Execution Trigger
+                  - url: /components/applications/triggers/powerbi-refresh/
+                    title: Power BI Refresh
+                  - url: /components/applications/triggers/tableau-extract-refresh/
+                    title: Tableau Extract Refresh Trigger
+              - url: /components/applications/custom-python/
+                title: Custom Python
+              - url: /components/applications/data-gateway/
+                title: Data Gateway
+              - url: /components/applications/ai/
+                title: AI
+                items:
+                  - url: /components/applications/ai/generative-ai/
+                    title: Generative AI
+
+      - url: /transformations/
+        title: Transformations
+        items:
+          - url: /transformations/mappings/
+            title: Mappings
+        
+          - url: /transformations/shared-code/
+            title: Shared Code
+
+          - url: /transformations/dbt/
+            title: dbt Transformation
+            items:
+              - url: /transformations/dbt/cli/
+                title: CLI
+
+              - url: /transformations/dbt/transformation/
+                title: Transformation Configuration
+
+              - url: /transformations/dbt/cloud/
+                title: dbt Cloud Support
+
+              - url: /transformations/dbt/troubleshooting/
+                title: Troubleshooting
+
+          - url: /transformations/python-plain/
+            title: Python Transformations
+
+          - url: /transformations/r-plain/
+            title: R Transformations
+            items:
+              - url: /transformations/r-plain/array-splitter/
+                title: Array Splitting
+
+              - url: /transformations/r-plain/plots/
+                title: Graphs & Charts
+
+              - url: /transformations/r-plain/binary/
+                title: Using Binary Files
+
+          - url: /transformations/snowflake-plain/
+            title: Snowflake Transformations
+
+          - url: /transformations/bigquery/
+            title: BigQuery Transformations
+
+          - url: /transformations/duckdb/
+            title: DuckDB Transformations
+
+          - url: /transformations/oracle/
+            title: Oracle Transformations
+
+          - url: /transformations/code-patterns/
+            title: Code Patterns
+
+      - url: /workspace/
+        title: Workspaces
+        items:
+          - url: /workspace/create/
+            title: Create a Workspace
+
+          - url: /workspace/connect/
+            title: Connect
+
+          - url: /workspace/sql-editor/
+            title: SQL Editor
+            items:
+              - url: /workspace/sql-editor/use/
+                title: Use the SQL Editor
+
+          - url: /workspace/jdbc-driver/
+            title: Keboola JDBC Driver
+            items:
+              - url: /workspace/jdbc-driver/dbeaver/
+                title: Connect DBeaver
+              - url: /workspace/jdbc-driver/datagrip/
+                title: Connect DataGrip
+              - url: /workspace/jdbc-driver/tableau/
+                title: Connect Tableau
+
+          - url: /workspace/table-export/
+            title: Table Export
+
+          - url: /workspace/retention/
+            title: Workspace Retention
+
+          - url: /workspace/snowflake-workspaces-access-changes/
+            title: Snowflake Workspaces Access Changes
+
+      - url: /flows/
+        title: Flows
+        items:
+          - url: /flows/flows-legacy/
+            title: Legacy Flows
+
+          - url: /flows/flow-migration-guide/
+            title: Migration Guide
+
+          - url: /flows/schedule-api/
+            title: Schedule via the API
+
+      - url: /data-apps/
+        title: Apps
+        items:
+          - url: /data-apps/what-are-apps/
+            title: What are apps?
+          - title: Build
+            items:
+              - url: /data-apps/getting-started/
+                title: With Kai
+              - url: /data-apps/build-locally/
+                title: Locally
+          - title: Run & share
+            items:
+              - url: /data-apps/authentication/
+                title: Authentication
+              - url: /data-apps/publish-and-share/
+                title: Publish and share
+              - url: /data-apps/operate/
+                title: Operate and update
+              - url: /data-apps/troubleshooting/
+                title: Troubleshooting
+          - url: /data-apps/reference/
+            title: Reference
+          - url: /data-apps/streamlit/
+            title: Streamlit Apps
+            items:
+              - url: /data-apps/streamlit/lock-version/
+                title: Lock package versions
+              - url: /data-apps/streamlit/design-guide/
+                title: Streamlit design guide
+              - url: /data-apps/streamlit/migrate-to-python-js/
+                title: Migrate to Python/JS
+
+      - url: /catalog/
+        title: Data Catalog
+        items:
+          - url: /catalog/share-and-link/
+            title: Share and link buckets
+
+          - url: /catalog/multi-project/
+            title: Multi-Project Architecture
+
+  - title: AI
+    collapsed: false
+    items:
+      - url: /ai/
+        title: AI
+        label: Overview
+
+      - url: /kai/
+        title: Kai
+        items:
+          - url: /kai/getting-started/
+            title: Getting Started
+
+          - url: /kai/pricing/
+            title: Pricing and Limits
+
+          - url: /kai/settings/
+            title: Settings
+
+          - url: /kai/use-cases/
+            title: Use Cases & Examples
+
+          - url: /kai/best-practices/
             title: Best Practices
 
-          - url: /overview/onboarding/governance-guide/
-            title: Governance Guide
+          - url: /kai/security-and-privacy/
+            title: Security & Privacy
 
-      - url: /overview/google-data-policy/
-        title: Google Data Policy
+          - url: /kai/python-client/
+            title: Python Client
 
-      - url: /overview/api/
-        title: Our APIs
-
-  - url: /getting-started/
-    title: Getting Started
-    items:
-      - url: /getting-started/project/
-        title: Create or join a project
-
-      - url: /getting-started/load/
-        title: Load data into Storage
-
-      - url: /getting-started/transform/
-        title: Transform data
-
-      - url: /getting-started/ask/
-        title: Explore your data
-
-      - url: /getting-started/app/
-        title: Build an app
-
-      - url: /getting-started/automate/
-        title: Build and schedule a weekly flow
-
-      - url: /getting-started/check/
-        title: Check Storage and Jobs
-
-      - url: /getting-started/going-further/
-        title: Going further
-        items:
-          - url: /getting-started/write/
-            title: Send a table to Google Sheets
-
-          - url: /getting-started/load/googlesheets/
-            title: Load from Google Sheets
-
-          - url: /getting-started/load/database/
-            title: Load from a database
-
-          - url: /getting-started/transform/workspace/
-            title: Use a workspace
-
-          - url: /getting-started/ad-hoc/
-            title: Ad-hoc data analysis
-
-          - url: /getting-started/branches/
-            title: Development branches
-            items:
-              - url: /getting-started/branches/prepare-tables/
-                title: Prepare tables
-
-              - url: /getting-started/branches/prepare-files/
-                title: Prepare files
-
-              - url: /getting-started/branches/tables-in-branch/
-                title: Tables in a branch
-
-              - url: /getting-started/branches/files-in-branch/
-                title: Files in a branch
-
-              - url: /getting-started/branches/project-diff/
-                title: Project diff
-
-              - url: /getting-started/branches/merge-to-production/
-                title: Merge to production
-
-  - url: /kai/
-    title: Kai - AI Assistant
-    items:
-      - url: /kai/getting-started/
-        title: Getting Started
-
-      - url: /kai/pricing/
-        title: Pricing and Limits
-
-      - url: /kai/settings/
-        title: Settings
-
-      - url: /kai/use-cases/
-        title: Use Cases & Examples
-
-      - url: /kai/best-practices/
-        title: Best Practices
-
-      - url: /kai/security-and-privacy/
-        title: Security & Privacy
-
-      - url: /kai/python-client/
-        title: Python Client
-
-  - url: /flows/
-    title: Conditional Flows
-    items:
-      - url: /flows/flows-legacy/
-        title: Legacy Flows
-
-      - url: /flows/flow-migration-guide/
-        title: Migration Guide
-
-      - url: /flows/schedule-api/
-        title: Schedule via the API
-
-  - url: /data-apps/
-    title: Apps
-    items:
-      - url: /data-apps/what-are-apps/
-        title: What are apps?
-      - title: Build
-        items:
-          - url: /data-apps/getting-started/
-            title: With Kai
-          - url: /data-apps/build-locally/
-            title: Locally
-      - title: Run & share
-        items:
-          - url: /data-apps/authentication/
-            title: Authentication
-          - url: /data-apps/publish-and-share/
-            title: Publish and share
-          - url: /data-apps/operate/
-            title: Operate and update
-          - url: /data-apps/troubleshooting/
-            title: Troubleshooting
-      - url: /data-apps/reference/
-        title: Reference
-      - url: /data-apps/streamlit/
-        title: Streamlit Apps
-        items:
-          - url: /data-apps/streamlit/lock-version/
-            title: Lock package versions
-          - url: /data-apps/streamlit/design-guide/
-            title: Streamlit design guide
-          - url: /data-apps/streamlit/migrate-to-python-js/
-            title: Migrate to Python/JS
-
-  - url: /components/
-    title: Components
-    items:
-      - url: /components/running-jobs-in-parallel/
-        title: Running Jobs in Parallel
-
-      - url: /components/variables/
-        title: Variables
-        items:
-          - url: /components/variables/api/
-            title: Variables Through the API
-            items:
-              - url: /components/variables/api/tutorial/
-                title: Tutorial
-
-      - url: /components/extractors/
-        title: Data Source Connectors
-        items:
-          - url: /components/extractors/communication/
-            title: Communication
-            items:
-              - url: /components/extractors/communication/email-imap/
-                title: IMAP Email Contents and Attachments
-
-              - url: /components/extractors/communication/ms-outlook/
-                title: MS Outlook (Office 365) Email Contents and Attachments
-
-              - url: /components/extractors/communication/email-attachments/
-                title: Email Attachments
-
-              - url: /components/extractors/communication/gmail/
-                title: Gmail Messages
-
-              - url: /components/extractors/communication/google-calendar/
-                title: Google Calendar
-
-              - url: /components/extractors/communication/intercom/
-                title: Intercom
-
-              - url: /components/extractors/communication/slack/
-                title: Slack
-
-          - url: /components/extractors/database/
-            title: Databases
-            items:
-              - url: /components/extractors/database/mysql/
-                title: MySQL
-
-              - url: /components/extractors/database/postgresql/
-                title: PostgreSQL
-
-              - url: /components/extractors/database/oracle/
-                title: Oracle
-
-              - url: /components/extractors/database/azure-storage-table/
-                title: Azure Storage Table
-
-              - url: /components/extractors/database/cosmosdb/
-                title: CosmosDB
-
-              - url: /components/extractors/database/bigquery/
-                title: Google BigQuery
-
-              - url: /components/extractors/database/microsoft-sql/
-                title: Microsoft SQL
-
-              - url: /components/extractors/database/mongodb/
-                title: MongoDB
-                items:
-                  - url: /components/extractors/database/mongodb/mapping/
-                    title: Mapping Examples
-
-              - url: /components/extractors/database/filemaker/
-                title: FileMaker
-
-              - url: /components/extractors/database/sqldb/
-                title: SQL Databases
-
-          - url: /components/extractors/erp/
-            title: ERP
-            items:
-              - url: /components/extractors/erp/k2/
-                title: K2
-
-              - url: /components/extractors/erp/mpohoda/
-                title: mPOHODA
-
-              - url: /components/extractors/erp/netsuite/
-                title: NetSuite
-
-              - url: /components/extractors/erp/pohoda-mserver/
-                title: POHODA mServer
-
-              - url: /components/extractors/erp/suiteprojects-pro/
-                title: SuiteProjects Pro
-
-          - url: /components/extractors/marketing-sales/
-            title: Marketing/Sales
-            items:
-              - url: /components/extractors/marketing-sales/adform-dsp-reports/
-                title: Adform DSP Reports
-
-              - url: /components/extractors/marketing-sales/babelforce/
-                title: Babelforce
-
-              - url: /components/extractors/marketing-sales/bigcommerce/
-                title: BigCommerce
-
-              - url: /components/extractors/marketing-sales/chartmogul/
-                title: ChartMogul
-
-              - url: /components/extractors/marketing-sales/criteo/
-                title: Criteo
-
-              - url: /components/extractors/marketing-sales/customerio/
-                title: Customer IO
-
-              - url: /components/extractors/marketing-sales/facebook-ads/
-                title: Facebook Ads
-
-              - url: /components/extractors/marketing-sales/gooddata-reports/
-                title: GoodData Reports
-
-              - url: /components/extractors/marketing-sales/google-ads/
-                title: Google Ads
-
-              - url: /components/extractors/marketing-sales/google-ad-manager/
-                title: Google Ad Manager
-
-              - url: /components/extractors/marketing-sales/google-analytics/
-                title: Google Analytics 4 (GA4)
-
-              - url: /components/extractors/marketing-sales/google-cm360/
-                title: Google Campaign Manager 360
-
-              - url: /components/extractors/marketing-sales/google-dv360/
-                title: Google Display & Video 360
-
-              - url: /components/extractors/marketing-sales/google-my-business/
-                title: Google My Business
-
-              - url: /components/extractors/marketing-sales/linkedin-pages/
-                title: Linkedin Pages
-
-              - url: /components/extractors/marketing-sales/mailchimp/
-                title: Mailchimp
-
-              - url: /components/extractors/marketing-sales/market-vision/
-                title: Market Vision
-
-              - url: /components/extractors/marketing-sales/bing-ads/
-                title: Microsoft Advertising (Bing Ads)
-                items:
-                  - url: /components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/
-                    title: Columns and primary keys of report presets
-
-              - url: /components/extractors/marketing-sales/mixpanel/
-                title: MixPanel
-
-              - url: /components/extractors/marketing-sales/pinterest-ads/
-                title: Pinterest Ads
-
-              - url: /components/extractors/marketing-sales/pipedrive/
-                title: Pipedrive
-
-              - url: /components/extractors/marketing-sales/salesforce/
-                title: Salesforce
-
-              - url: /components/extractors/marketing-sales/shoptet/
-                title: Shoptet
-
-              - url: /components/extractors/marketing-sales/sklik/
-                title: Sklik
-
-              - url: /components/extractors/marketing-sales/tiktok-ads/
-                title: TikTok Ads
-
-              - url: /components/extractors/marketing-sales/zoho/
-                title: Zoho
-
-          - url: /components/extractors/social/
-            title: Social
-            items:
-              - url: /components/extractors/social/facebook/
-                title: Facebook Pages
-
-              - url: /components/extractors/social/instagram/
-                title: Instagram
-
-              - url: /components/extractors/social/youtube/
-                title: YouTube Data API
-
-              - url: /components/extractors/social/youtube-reporting/
-                title: YouTube Reporting
-
-          - url: /components/extractors/storage/
-            title: Storage
-            items:
-              - url: /components/extractors/storage/aws-s3/
-                title: AWS S3
-
-              - url: /components/extractors/storage/azure-datalake-gen2/
-                title: Azure Datalake Gen 2
-
-              - url: /components/extractors/storage/ftp/
-                title: FTP
-
-              - url: /components/extractors/storage/google-drive/
-                title: Google Drive
-
-              - url: /components/extractors/storage/http/
-                title: HTTP
-
-              - url: /components/extractors/storage/storage-api/
-                title: Keboola Storage
-
-              - url: /components/extractors/storage/onedrive-excel-sheets/
-                title: OneDrive Excel Sheets
-
-              - url: /components/extractors/storage/onedrive-files/
-                title: OneDrive Files
-
-          - url: /components/extractors/other/
-            title: Other
-            items:
-              - url: /components/extractors/other/airtable/
-                title: Airtable
-
-              - url: /components/extractors/other/aws-cu-reports/
-                title: AWS Cost Usage Reports
-
-              - url: /components/extractors/other/azure-cost/
-                title: Azure Cost Management
-
-              - url: /components/extractors/other/ceps/
-                title: Ceps
-
-              - url: /components/extractors/other/dark-sky/
-                title: Dark Sky (Weather)
-
-              - url: /components/extractors/other/dynamodb-streams/
-                title: DynamoDB Streams
-
-              - url: /components/extractors/other/currency-rates/
-                title: ECB Currency Rates
-
-              - url: /components/extractors/other/geocoding-augmentation/
-                title: Geocoding Augmentation
-
-              - url: /components/extractors/other/github/
-                title: GitHub
-
-              - url: /components/extractors/other/google-search-console/
-                title: Google Search Console
-
-              - url: /components/extractors/other/okta/
-                title: Okta
-
-              - url: /components/extractors/other/hibob/
-                title: HiBob
-
-              - url: /components/extractors/other/langsmith-traces/
-                title: LangSmith Traces
-
-              - url: /components/extractors/other/mapbox/
-                title: Mapbox
-
-              - url: /components/extractors/other/papertrail/
-                title: Papertrail
-
-              - url: /components/extractors/other/pingdom/
-                title: Pingdom
-
-              - url: /components/extractors/other/servicenow/
-                title: ServiceNow
-
-              - url: /components/extractors/other/stripe/
-                title: Stripe
-
-              - url: /components/extractors/other/telemetry-data/
-                title: Telemetry Data
-
-              - url: /components/extractors/other/time-doctor-2
-                title: Time Doctor 2
-
-              - url: /components/extractors/other/ukg-hr/
-                title: UKG HR
-
-              - url: /components/extractors/other/weather-api
-                title: Weather API
-
-              - url: /components/extractors/other/what3words/
-                title: What3words Augmentation
-
-              - url: /components/extractors/other/yourpass/
-                title: YourPass
-
-          - url: /components/extractors/generic-extractor/
-            title: Generic Extractor
-            items:
-              - url: /components/extractors/generic-extractor/tutorial/
-                title: Tutorial
-                items:
-                  - url: /components/extractors/generic-extractor/tutorial/rest/
-                    title: REST HTTP API Introduction
-                  - url: /components/extractors/generic-extractor/tutorial/json/
-                    title: JSON Introduction
-                  - url: /components/extractors/generic-extractor/tutorial/basic/
-                    title: Basic Configuration
-                  - url: /components/extractors/generic-extractor/tutorial/pagination/
-                    title: Pagination Tutorial
-                  - url: /components/extractors/generic-extractor/tutorial/jobs/
-                    title: Jobs Tutorial
-                  - url: /components/extractors/generic-extractor/tutorial/mapping/
-                    title: Mapping Tutorial
-              - url: /components/extractors/generic-extractor/configuration/
-                title: Configuration
-                items:
-                  - url: /components/extractors/generic-extractor/configuration/api/
-                    title: API Configuration
-                    items:
-                      - url: /components/extractors/generic-extractor/configuration/api/pagination/
-                        title: Pagination
-                        items:
-                          - url: /components/extractors/generic-extractor/configuration/api/pagination/response-url/
-                            title: Response URL Scroller
-                          - url: /components/extractors/generic-extractor/configuration/api/pagination/response-param/
-                            title: Response Parameter Scroller
-                          - url: /components/extractors/generic-extractor/configuration/api/pagination/offset/
-                            title: Offset Scroller
-                          - url: /components/extractors/generic-extractor/configuration/api/pagination/pagenum/
-                            title: Page Number Scroller
-                          - url: /components/extractors/generic-extractor/configuration/api/pagination/cursor/
-                            title: Cursor Scroller
-                          - url: /components/extractors/generic-extractor/configuration/api/pagination/multiple/
-                            title: Multiple Scrollers
-                      - url: /components/extractors/generic-extractor/configuration/api/authentication/
-                        title: Authentication
-                        items:
-                          - url: /components/extractors/generic-extractor/configuration/api/authentication/query/
-                            title: Query
-                          - url: /components/extractors/generic-extractor/configuration/api/authentication/basic/
-                            title: Basic
-                          - url: /components/extractors/generic-extractor/configuration/api/authentication/bearer_token/
-                            title: Bearer Token
-                          - url: /components/extractors/generic-extractor/configuration/api/authentication/api_key/
-                            title: API Key
-                          - url: /components/extractors/generic-extractor/configuration/api/authentication/login/
-                            title: Login
-                          - url: /components/extractors/generic-extractor/configuration/api/authentication/oauth_cc/
-                            title: OAuth 2.0 Client Credentials
-                          - url: /components/extractors/generic-extractor/configuration/api/authentication/oauth10/
-                            title: OAuth 1.0
-                          - url: /components/extractors/generic-extractor/configuration/api/authentication/oauth20/
-                            title: OAuth 2.0
-                          - url: /components/extractors/generic-extractor/configuration/api/authentication/oauth20-login/
-                            title: Login using OAuth 2.0
-                  - url: /components/extractors/generic-extractor/configuration/config/
-                    title: Extraction Configuration
-                    items:
-                      - url: /components/extractors/generic-extractor/configuration/config/jobs/
-                        title: Jobs
-                        items:
-                          - url: /components/extractors/generic-extractor/configuration/config/jobs/children/
-                            title: Child Jobs
-                      - url: /components/extractors/generic-extractor/configuration/config/mappings/
-                        title: Mappings
-                  - url: /components/extractors/generic-extractor/configuration/iterations/
-                    title: Iterations
-                  - url: /components/extractors/generic-extractor/configuration/ssh-proxy/
-                    title: SSH Proxy Configuration
-              - url: /components/extractors/generic-extractor/map/
-                title: Configuration Map
-              - url: /components/extractors/generic-extractor/functions/
-                title: Functions
-              - url: /components/extractors/generic-extractor/incremental/
-                title: Incremental Extraction
-              - url: /components/extractors/generic-extractor/running/
-                title: Running Generic Extractor
-              - url: /components/extractors/generic-extractor/publish/
-                title: Publishing Component
-
-      - url: /components/writers/
-        title: Data Destination Connectors
-        items:
-          - url: /components/writers/bi-tools/
-            title: Business Intelligence
-            items:
-              - url: /components/writers/bi-tools/gooddata/
-                title: GoodData
-
-              - url: /components/writers/bi-tools/looker/
-                title: Looker
-
-              - url: /components/writers/bi-tools/tableau/
-                title: Tableau
-
-              - url: /components/writers/bi-tools/thoughtspot/
-                title: ThoughtSpot
-
-          - url: /components/writers/database/
-            title: Database
-            items:
-              - url: /components/writers/database/bigquery/
-                title: BigQuery
-
-              - url: /components/writers/database/exasol/
-                title: Exasol
-
-              - url: /components/writers/database/firebolt/
-                title: Firebolt
-
-              - url: /components/writers/database/mysql/
-                title: MySQL
-
-              - url: /components/writers/database/oracle/
-                title: Oracle
-
-              - url: /components/writers/database/postgresql/
-                title: PostgreSQL
-
-              - url: /components/writers/database/redshift/
-                title: Redshift
-
-              - url: /components/writers/database/snowflake/
-                title: Snowflake
-
-              - url: /components/writers/database/mssql/
-                title: SQL Server
-
-              - url: /components/writers/database/synapse/
-                title: Synapse
-
-          - url: /components/writers/erp/
-            title: ERP
-            items:
-              - url: /components/writers/erp/mpohoda/
-                title: mPOHODA
-
-              - url: /components/writers/erp/pohoda-mserver/
-                title: POHODA mServer
-
-          - url: /components/writers/storage/
-            title: Storage
-            items:
-              - url: /components/writers/storage/aws-s3/
-                title: AWS S3
-
-              - url: /components/writers/storage/dropbox/
-                title: Dropbox
-
-              - url: /components/writers/storage/google-cloud-storage/
-                title: Google Cloud Storage
-
-              - url: /components/writers/storage/google-drive/
-                title: Google Drive
-
-              - url: /components/writers/storage/google-sheets/
-                title: Google Sheets
-
-              - url: /components/writers/storage/storage-api/
-                title: Keboola Storage
-
-              - url: /components/writers/storage/onedrive/
-                title: OneDrive
-
-              - url: /components/writers/storage/sftp/
-                title: SFTP
-
-          - url: /components/writers/other/
-            title: Other
-            items:
-              - url: /components/writers/other/azure-event-hub/
-                title: Azure Event Hub
-
-              - url: /components/writers/other/yourpass/
-                title: YourPass
-
-          - url: /components/writers/generic-writer/
-            title: Generic Writer
-            items:
-              - url: /components/writers/generic-writer/configuration/
-                title: Configuration
-              - url: /components/writers/generic-writer/configuration-examples/
-                title: Configuration Examples
-
-      - url: /components/applications/
-        title: Applications
-        items:
-          - url: /components/applications/triggers/
-            title: Triggers
-            items:
-              - url: /components/applications/triggers/exasol-cluster-starter/
-                title: Exasol Cluster Starter
-              - url: /components/applications/triggers/orchestration-trigger-queue-v2/
-                title: Orchestration Trigger
-              - url: /components/applications/triggers/dbt-cloud-job-trigger/
-                title: dbt Cloud Job Trigger
-              - url: /components/applications/triggers/deepnote-notebook-execution-trigger/
-                title: Deepnote Notebook Execution Trigger
-          - url: /components/applications/custom-python/
-            title: Custom Python
-          - url: /components/applications/data-gateway/
-            title: Data Gateway
-          - url: /components/applications/ai/
-            title: AI
-            items:
-              - url: /components/applications/ai/generative-ai/
-                title: Generative AI
-
-      - url: /components/branches/
-        title: Development Branches
-        items:
-          - url: /components/branches/merge-requests/
-            title: Merge Requests
-
-      - url: /components/ip-addresses/
-        title: IP Addresses
-
-  - url: /catalog/
-    title: Data Catalog
-    items:
-      - url: /catalog/multi-project/
-        title: Multi-Project Architecture
-
-  - url: /storage/
-    title: Storage
-    items:
-      - url: /storage/buckets/
-        title: Buckets
-
-      - url: /storage/bucket-exposure/
-        title: Bucket Exposure
-
-      - url: /storage/data-streams/
-        title: Data Streams
-        items:
-          - url: /storage/data-streams/opentelemetry/
-            title: OpenTelemetry (OTLP)
-          - url: /storage/data-streams/reference/
-            title: Reference
-          - url: /storage/data-streams/tutorial/
-            title: Tutorial
-
-      - url: /storage/files/
-        title: Files
-
-      - url: /storage/jobs/
-        title: Jobs
-
-      - url: /storage/tables/
-        title: Tables & Aliases
-        items:
-          - url: /storage/tables/data-types/
-            title: Data Types
-
-          - url: /storage/tables/csv-files/
-            title: CSV Files
-
-          - url: /storage/tables/uploads/
-            title: Table Import/Export
-
-          - url: /storage/tables/backups/
-            title: Backups and Restorations
-
-      - url: /storage/byodb/
-        title: Bring Your Own Database
-        items:
-          - url: /storage/byodb/external-buckets/
-            title: External Datasets
-
-          - url: /storage/byodb/snowflake-secure-data-sharing/
-            title: Snowflake Secure Data Sharing
-
-      - url: /storage/byobq/
-        title: Bring Your Own BigQuery
-
-      - url: /storage/row-level-security/
-        title: Row- and Column-Level Security
-        items:
-          - url: /storage/row-level-security/policy-reference/
-            title: Policy Reference
-
-      - url: /storage/api/
-        title: Storage API
-        items:
-          - url: /storage/api/configurations/
-            title: Configurations
-          - url: /storage/api/import-export/
-            title: Import & Export
-          - url: /storage/api/importer/
-            title: API Importer
-          - url: /storage/api/tde-exporter/
-            title: TDE Exporter
-          - url: /storage/api/clients/
-            title: API Clients
-            items:
-              - url: /storage/api/clients/python-client/
-                title: Python client
-              - url: /storage/api/clients/r-client/
-                title: R client
-              - url: /storage/api/clients/php-client/
-                title: PHP client
-              - url: /storage/api/clients/docker-cli/
-                title: Docker CLI client
-
-  - url: /transformations/
-    title: Transformations
-    items:
-      - url: /transformations/mappings/
-        title: Mappings
-        
-      - url: /transformations/shared-code/
-        title: Shared Code
-
-      - url: /transformations/dbt/
-        title: dbt Transformation
-        items:
-          - url: /transformations/dbt/cli/
-            title: CLI
-
-          - url: /transformations/dbt/transformation/
-            title: Transformation Configuration
-
-          - url: /transformations/dbt/cloud/
-            title: dbt Cloud Support
-
-          - url: /transformations/dbt/flows/
-            title: Usage in Flows
-
-          - url: /transformations/dbt/troubleshooting/
-            title: Troubleshooting
-
-      - url: /transformations/python-plain/
-        title: Python Transformations
-
-      - url: /transformations/r-plain/
-        title: R Transformations
-        items:
-          - url: /transformations/r-plain/array-splitter/
-            title: Array Splitting
-
-          - url: /transformations/r-plain/plots/
-            title: Graphs & Charts
-
-          - url: /transformations/r-plain/binary/
-            title: Using Binary Files
-
-      - url: /transformations/snowflake-plain/
-        title: Snowflake Transformations
-
-      - url: /transformations/bigquery/
-        title: BigQuery Transformations
-
-      - url: /transformations/duckdb/
-        title: DuckDB Transformations
-
-      - url: /transformations/oracle/
-        title: Oracle Transformations
-
-      - url: /transformations/code-patterns/
-        title: Code Patterns
-
-  - url: /cli/
-    title: CLI
-    items:
-      - url: /cli/getting-started/
-        title: Get Started
-      - url: /cli/concepts/
-        title: How It Works
-      - url: /cli/workflows/
-        title: How-to Guides
-      - url: /cli/for-agents/
-        title: Use with AI Agents
-      - url: /cli/commands/
-        title: Command Reference
-      - url: /cli/web-ui/
-        title: Web UI
-      - url: /cli/troubleshooting/
-        title: Troubleshooting
-
-  - url: /workspace/
-    title: Workspaces
-    items:
-      - url: /workspace/snowflake-workspaces-access-changes/
-        title: Snowflake Workspaces Access Changes
-
-      - url: /workspace/sql-editor/
-        title: SQL Editor
-
-      - url: /workspace/retention/
-        title: Workspace Retention
-
-      - url: /workspace/jdbc-driver/
-        title: Keboola JDBC Driver
-        items:
-          - url: /workspace/jdbc-driver/dbeaver/
-            title: DBeaver
-          - url: /workspace/jdbc-driver/datagrip/
-            title: DataGrip
-          - url: /workspace/jdbc-driver/tableau/
-            title: Tableau
-
-  - url: /management/
-    title: Management
-    items:
-      - url: /management/support/
-        title: Keboola Support
-
-      - url: /management/account/
-        title: Account
-
-      - url: /management/jobs/
-        title: Jobs
-
-      - url: /management/notifications/
-        title: Notifications
-
-      - url: /management/project/
-        title: Project
-        items:
-          - url: /management/project/users/
-            title: Users
-
-          - url: /management/project/tokens/
-            title: API Tokens
-
-          - url: /management/project/limits/
-            title: Limits & Project Power
-
-          - url: /management/project/export/
-            title: Data Takeout
-
-          - url: /management/project/migration/
-            title: Project Migration
-
-          - url: /management/project/delete/
-            title: Project Deletion
-
-          - url: /management/project/ai-rules/
-            title: AI Rules
-
-          - url: /management/project/mcp-server/
-            title: MCP Server
-
-      - url: /management/payg-project/
-        title: Free Plan
-
-      - url: /management/organization/
-        title: Organizations
-
-      - url: /management/global-search/
-        title: Global Search
-
-      - url: /management/telemetry/
-        title: Telemetry
-        items:
-          - url: /management/telemetry/telemetry-dashboards/
-            title: Telemetry Dashboards
-
-  - url: /ai/
-    title: AI Features
-    items:
       - url: /ai/ai-kit/
         title: AI Kit
 
@@ -933,117 +931,199 @@ items:
       - url: /ai/semantic-layer/
         title: Semantic Layer
 
-  - url: /extend/
-    title: Extending Keboola
+  - title: Develop and integrate
+    collapsed: false
     items:
-      - url: /extend/component/
-        title: Components
+      - url: /cli/
+        title: CLI
         items:
-          - url: /extend/component/tutorial/
-            title: Tutorial
-            items:
-              - url: /extend/component/tutorial/input-mapping/
-                title: Input Mapping
-              - url: /extend/component/tutorial/output-mapping/
-                title: Output Mapping
-              - url: /extend/component/tutorial/configuration/
-                title: Configuration
-              - url: /extend/component/tutorial/processors/
-                title: Processors
-              - url: /extend/component/tutorial/debugging/
-                title: Debugging
-          - url: /extend/component/processors/
-            title: Processors
-          - url: /extend/component/code-patterns/
-            title: Code Patterns
-            items:
-              - url: /extend/component/code-patterns/interface/
-                title: Interface
-              - url: /extend/component/code-patterns/tutorial/
-                title: Tutorial
-          - url: /extend/component/implementation/
-            title: Implementation Notes
-            items:
-              - url: /extend/component/implementation/php/
-                title: PHP Implementation Notes
-              - url: /extend/component/implementation/python/
-                title: Python Implementation Notes
-              - url: /extend/component/implementation/r/
-                title: R Implementation Notes
-          - url: /extend/component/running/
-            title: Running Components
-          - url: /extend/component/ui-options/
-            title: UI Options
-            items:
-              - url: /extend/component/ui-options/configuration-schema/
-                title: Configuration Schema
-                items:
-                  - url: /extend/component/ui-options/configuration-schema/examples
-                    title: Examples
-                  - url: /extend/component/ui-options/configuration-schema/sync-action-examples
-                    title: Sync Action Examples
-              - url: /extend/component/ui-options/default-configuration/
-                title: Default Configuration
-          - url: /extend/component/deployment/
-            title: Deployment
-      - url: /extend/common-interface/
-        title: Common Interface
-        items:
-          - url: /extend/common-interface/folders/
-            title: Data Folders
-          - url: /extend/common-interface/config-file/
-            title: Configuration File
-          - url: /extend/common-interface/environment/
-            title: Environment
-          - url: /extend/common-interface/artifacts/
-            title: Artifacts
-            items:
-              - url: /extend/common-interface/artifacts/tutorial/
-                title: Tutorial
-          - url: /extend/common-interface/manifest-files/
-            title: Manifest Files
-            items:
-              - url: /extend/common-interface/manifest-files/in-tables-manifests/
-                title: IN tables
-              - url: /extend/common-interface/manifest-files/in-files-manifests/
-                title: IN files
-              - url: /extend/common-interface/manifest-files/in-files-s3-staging/
-                title: IN files S3 staging
-              - url: /extend/common-interface/manifest-files/in-files-abs-staging/
-                title: IN files ABS staging
-              - url: /extend/common-interface/manifest-files/out-tables-manifests/
-                title: OUT tables
-              - url: /extend/common-interface/manifest-files/out-tables-manifests-native-types/
-                title: OUT tables with Native Types
-              - url: /extend/common-interface/manifest-files/out-files-manifests/
-                title: OUT files
-          - url: /extend/common-interface/oauth/
-            title: OAuth2
-          - url: /extend/common-interface/actions/
-            title: Actions
-          - url: /extend/common-interface/logging/
-            title: Logging
-          - url: /extend/common-interface/development-branches/
-            title: Development branches
-      - url: /extend/job-queue/
-        title: Job Queue
-      - url: /extend/jobs/
-        title: Component Jobs
-      - url: /extend/encryption/
-        title: Encryption
-      - url: /extend/publish/
-        title: Publishing Component
-        items:
-          - url: /extend/publish/checklist/
-            title: Checklist
-      - url: /extend/development-project/
-        title: Development Project
+          - url: /cli/getting-started/
+            title: Get Started
+          - url: /cli/concepts/
+            title: How It Works
+          - url: /cli/workflows/
+            title: How-to Guides
+          - url: /cli/for-agents/
+            title: Use with AI Agents
+          - url: /cli/commands/
+            title: Command Reference
+          - url: /cli/web-ui/
+            title: Web UI
+          - url: /cli/troubleshooting/
+            title: Troubleshooting
 
-  - url: /external-integrations/
-    title: External Integrations
+      - url: /extend/
+        title: Extending Keboola
+        items:
+          - url: /extend/component/
+            title: Build a component
+            items:
+              - url: /extend/component/tutorial/
+                title: Tutorial
+                items:
+                  - url: /extend/component/tutorial/input-mapping/
+                    title: Input Mapping
+                  - url: /extend/component/tutorial/output-mapping/
+                    title: Output Mapping
+                  - url: /extend/component/tutorial/configuration/
+                    title: Configuration
+                  - url: /extend/component/tutorial/processors/
+                    title: Processors
+                  - url: /extend/component/tutorial/debugging/
+                    title: Debugging
+              - url: /extend/component/processors/
+                title: Processors
+              - url: /extend/component/code-patterns/
+                title: Code Patterns
+                items:
+                  - url: /extend/component/code-patterns/interface/
+                    title: Interface
+                  - url: /extend/component/code-patterns/tutorial/
+                    title: Tutorial
+              - url: /extend/component/implementation/
+                title: Implementation Notes
+                items:
+                  - url: /extend/component/implementation/php/
+                    title: PHP Implementation Notes
+                  - url: /extend/component/implementation/python/
+                    title: Python Implementation Notes
+                  - url: /extend/component/implementation/r/
+                    title: R Implementation Notes
+              - url: /extend/component/running/
+                title: Running Components
+              - url: /extend/component/ui-options/
+                title: UI Options
+                items:
+                  - url: /extend/component/ui-options/configuration-schema/
+                    title: Configuration Schema
+                    items:
+                      - url: /extend/component/ui-options/configuration-schema/examples
+                        title: Examples
+                      - url: /extend/component/ui-options/configuration-schema/sync-action-examples
+                        title: Sync Action Examples
+                  - url: /extend/component/ui-options/default-configuration/
+                    title: Default Configuration
+              - url: /extend/component/deployment/
+                title: Deployment
+          - url: /extend/common-interface/
+            title: Common Interface
+            items:
+              - url: /extend/common-interface/folders/
+                title: Data Folders
+              - url: /extend/common-interface/config-file/
+                title: Configuration File
+              - url: /extend/common-interface/environment/
+                title: Environment
+              - url: /extend/common-interface/artifacts/
+                title: Artifacts
+                items:
+                  - url: /extend/common-interface/artifacts/tutorial/
+                    title: Tutorial
+              - url: /extend/common-interface/manifest-files/
+                title: Manifest Files
+                items:
+                  - url: /extend/common-interface/manifest-files/in-tables-manifests/
+                    title: IN tables
+                  - url: /extend/common-interface/manifest-files/in-files-manifests/
+                    title: IN files
+                  - url: /extend/common-interface/manifest-files/in-files-s3-staging/
+                    title: IN files S3 staging
+                  - url: /extend/common-interface/manifest-files/in-files-abs-staging/
+                    title: IN files ABS staging
+                  - url: /extend/common-interface/manifest-files/out-tables-manifests/
+                    title: OUT tables
+                  - url: /extend/common-interface/manifest-files/out-tables-manifests-native-types/
+                    title: OUT tables with Native Types
+                  - url: /extend/common-interface/manifest-files/out-files-manifests/
+                    title: OUT files
+              - url: /extend/common-interface/oauth/
+                title: OAuth2
+              - url: /extend/common-interface/actions/
+                title: Actions
+              - url: /extend/common-interface/logging/
+                title: Logging
+              - url: /extend/common-interface/development-branches/
+                title: Development branches
+          - url: /extend/job-queue/
+            title: Job Queue
+          - url: /extend/jobs/
+            title: Component Jobs
+          - url: /extend/encryption/
+            title: Encryption
+          - url: /extend/publish/
+            title: Publishing Component
+            items:
+              - url: /extend/publish/checklist/
+                title: Checklist
+          - url: /extend/development-project/
+            title: Development Project
+
+      - url: /overview/api/
+        title: APIs
+        label: APIs
+
+      - url: /external-integrations/
+        title: External Integrations
+        items:
+          - url: /external-integrations/n8n/
+            title: n8n
+
+  - title: Administer
+    collapsed: false
     items:
-      - url: /external-integrations/n8n/
-        title: n8n
+      - url: /management/
+        title: Management
+        items:
+          - url: /management/support/
+            title: Keboola Support
+
+          - url: /management/account/
+            title: Account
+
+          - url: /management/jobs/
+            title: Jobs
+
+          - url: /management/notifications/
+            title: Notifications
+
+          - url: /management/project/
+            title: Project
+            items:
+              - url: /management/project/users/
+                title: Users
+
+              - url: /management/project/tokens/
+                title: API Tokens
+
+              - url: /management/project/limits/
+                title: Limits & Project Power
+
+              - url: /management/project/export/
+                title: Data Takeout
+
+              - url: /management/project/migration/
+                title: Project Migration
+
+              - url: /management/project/delete/
+                title: Project Deletion
+
+              - url: /management/project/ai-rules/
+                title: AI Rules
+
+          - url: /management/payg-project/
+            title: Free Plan
+
+          - url: /management/organization/
+            title: Organizations
+
+          - url: /management/global-search/
+            title: Global Search
+
+          - url: /management/telemetry/
+            title: Telemetry
+            items:
+              - url: /management/telemetry/telemetry-dashboards/
+                title: Telemetry Dashboards
 
   # Not a docs-collection page (src/pages/changelog.astro): `link`, not `url`.
   - link: /changelog/

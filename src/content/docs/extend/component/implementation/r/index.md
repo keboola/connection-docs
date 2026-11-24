@@ -1,5 +1,6 @@
 ---
 title: R Implementation Notes
+description: 'Notes for writing a component in R: Docker images, working with CSV files, the Keboola R package, dynamic input and output mapping, and logging.'
 slug: 'extend/component/implementation/r'
 redirect_from:
     - /extend/custom-science/r/

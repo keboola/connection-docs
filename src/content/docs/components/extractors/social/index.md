@@ -1,6 +1,7 @@
 ---
 title: Social Data Source Connectors
 slug: 'components/extractors/social'
+description: 'Pick the connector that imports data from Facebook Pages, Instagram, YouTube or YouTube Reporting into Keboola.'
 redirect_from:
     - /extractors/social/
 
@@ -8,6 +9,8 @@ redirect_from:
 
 Data source connectors import data from external sources and integrate it to the Keboola environment.
 The following data source connectors allow access to data from social networks:
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 - [Facebook Pages](/components/extractors/social/facebook/)
 - [Instagram](/components/extractors/social/instagram/)

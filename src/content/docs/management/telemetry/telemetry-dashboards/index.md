@@ -1,5 +1,6 @@
 ---
 title: Telemetry Dashboards
+description: 'Read the Project Consumption, Organization Usage, and Activity Center telemetry dashboards: key terms, KPIs, consumption charts, health, and jobs monitoring.'
 slug: 'management/telemetry/telemetry-dashboards'
 ---
 
