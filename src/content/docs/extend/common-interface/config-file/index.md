@@ -1,6 +1,7 @@
 ---
 title: Configuration File Specification
 slug: 'extend/common-interface/config-file'
+description: 'Lists the config.json root nodes (storage, parameters, image_parameters, authorization, action), how the state file works, and mapping examples.'
 ---
 
 
@@ -175,7 +176,7 @@ If you read the configuration through the Component configuration API call, you'
 
 That means the contents of the state file are nested inside the `component` node. There
 is also a `storage` node, which is related to the 
-[Automatic incremental processing](/storage/tables/#automatic-incremental-processing).
+[Automatic incremental processing](/storage/tables/incremental-loading/#automatic-incremental-processing).
 
 You need to maintain the above structure when manually changing the configuration via the API.
 

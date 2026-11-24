@@ -41,6 +41,7 @@ src/
 public/           # static assets served as-is (images, favicon, llms)
 api/chat.ts       # "Ask Kai" backend (Vercel function → Keboola AI Service)
 api/feedback.ts   # "Was this page helpful?" backend (Vercel function → Linear issues)
+api/log-ingest.ts # Vercel log drain → Keboola Data Stream (people vs AI agents)
 scripts/
   convert-nav.mjs          # builds src/sidebar.mjs from _data/navigation.yml
   audit-phase2.mjs         # read-only link/image/heading/table audit of dist/
@@ -180,6 +181,14 @@ CI runs `npm run check:cli` and `npm run build` on every PR. Run both locally fi
   `FEEDBACK_INGEST_URL`) the widget hides itself. A revoked key leaves it
   visible, and comments then reach only the function logs as
   `[feedback] undelivered comment`. Tests: `npm test`.
+- `api/log-ingest.ts` receives the Vercel log drain (team settings → Drains,
+  Logs, project connection-docs only, source `static` only, so the function's
+  own invocation logs don't loop back) and forwards page, `.md` and `llms.txt`
+  requests to a Keboola Data Stream, with hashed IPs and no query strings. It
+  needs `LOG_INGEST_SECRET` (the drain's signature secret), `LOG_INGEST_URL` and
+  `LOG_INGEST_IP_SALT`, and answers 503 while any is missing. Rows carry the
+  drain entry `id`; a retried batch arrives twice, so keep one row per id.
+  Tests: `npm test`.
 
 ## Don't run
 
