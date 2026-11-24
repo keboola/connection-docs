@@ -1,5 +1,6 @@
 ---
 title: Buckets
+lastUpdated: 2026-11-19
 description: 'Create a Storage bucket in the in or out stage, choose its backend, review a bucket''s details, and use buckets to share tables.'
 slug: 'storage/buckets'
 ---

@@ -1,5 +1,6 @@
 ---
 title: Common Interface
+lastUpdated: 2026-10-13
 slug: 'extend/common-interface'
 description: 'Shows how a component exchanges data with Keboola through data folders, the configuration file and environment variables, and lists the memory and disk limits.'
 ---

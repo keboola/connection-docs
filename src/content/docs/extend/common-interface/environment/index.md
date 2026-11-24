@@ -1,5 +1,6 @@
 ---
 title: Environment Specification
+lastUpdated: 2026-11-18
 slug: 'extend/common-interface/environment'
 description: 'Lists the environment variables Keboola injects into a component container, such as KBC_DATADIR and KBC_CONFIGID, and what each exit code means.'
 ---

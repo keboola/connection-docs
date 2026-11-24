@@ -1,5 +1,6 @@
 ---
 title: ČEPS
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/ceps'
 description: 'Extract public Czech electricity transmission data from the ČEPS API for a date range, picking endpoints and granularity; each endpoint loads its own table.'
 ---

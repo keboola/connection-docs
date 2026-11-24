@@ -1,5 +1,6 @@
 ---
 title: Generic Writer Configuration
+lastUpdated: 2026-10-13
 slug: 'components/writers/generic-writer/configuration'
 description: 'Look up each Generic Writer parameter that sets the API URL and authentication, the request method and path, how table rows map to JSON, and dynamic functions.'
 redirect_from:

@@ -1,5 +1,6 @@
 ---
 title: Tableau Desktop Installation Guide
+lastUpdated: 2026-11-20
 sidebar:
   label: Connect Tableau
 slug: 'workspace/jdbc-driver/tableau'

@@ -1,5 +1,6 @@
 ---
 title: Organizations
+lastUpdated: 2026-11-11
 description: 'Manage a Keboola organization: its admins, members, projects and settings, and the GitHub connection its projects clone private repositories through.'
 slug: 'management/organization'
 ---

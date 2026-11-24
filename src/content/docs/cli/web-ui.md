@@ -1,5 +1,6 @@
 ---
 title: kbagent Web UI
+lastUpdated: 2026-10-13
 slug: 'cli/web-ui'
 sidebar:
   label: Web UI

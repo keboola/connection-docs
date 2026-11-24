@@ -1,5 +1,6 @@
 ---
 title: Create a workspace and load data
+lastUpdated: 2026-11-20
 slug: 'workspace/create'
 sidebar:
   label: Create a Workspace

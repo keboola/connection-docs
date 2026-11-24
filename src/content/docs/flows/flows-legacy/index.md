@@ -1,5 +1,6 @@
 ---
 title: Legacy Flows
+lastUpdated: 2026-10-13
 slug: 'flows/flows-legacy'
 description: 'Build, schedule and monitor a flow in the Legacy Flow Builder, which Conditional Flows are replacing.'
 redirect_from:

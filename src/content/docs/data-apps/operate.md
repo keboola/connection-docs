@@ -1,5 +1,6 @@
 ---
 title: Operate and update an app
+lastUpdated: 2026-11-23
 slug: 'data-apps/operate'
 description: "Day-to-day work on a deployed Keboola app: read its state, ship a code change, change settings, stop and start it, start it from a flow, rotate a secret, delete it."
 ---

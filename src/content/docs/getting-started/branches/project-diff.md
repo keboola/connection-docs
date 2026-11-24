@@ -1,5 +1,6 @@
 ---
 title: 'Review the project diff'
+lastUpdated: 2026-09-02
 slug: 'getting-started/branches/project-diff'
 description: 'Review every configuration change a development branch introduces, side by side with production, before you merge it.'
 redirect_from:

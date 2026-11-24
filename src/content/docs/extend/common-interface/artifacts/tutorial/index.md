@@ -1,5 +1,6 @@
 ---
 title: Artifacts Tutorial
+lastUpdated: 2026-10-13
 slug: 'extend/common-interface/artifacts/tutorial'
 description: "Produce and consume artifacts from a Python transformation step by step, using curl against the Storage API."
 redirect_from:
