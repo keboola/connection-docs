@@ -18,7 +18,7 @@ Row-level and column-level security is in free public beta until 28 February 202
 
 **Goal:** enable row-level security for the project.
 
-A project admin opens **Project settings → Features**, finds `row-level-security` and turns it on. During the beta you do this yourself; after the beta only Keboola can enable it.
+A project admin opens **Project settings → Features**, finds `row-level-security` and turns it on. During the beta you do this yourself.
 
 **Result:** The project has the `row-level-security` feature. It unlocks:
 
