@@ -1,6 +1,7 @@
 ---
 title: DuckDB Transformation
 slug: 'transformations/duckdb'
+description: 'Create a DuckDB transformation in Keboola, choose its backend size and input options, and write SQL that suits its block-based parallel execution.'
 ---
 
 
@@ -144,7 +145,7 @@ The column types come from the mapping in [Output data types](#output-data-types
 
 ## Output data types
 
-When a transformation finishes, the component reads the schema of each output table from DuckDB and translates it into Keboola [base types](/storage/tables/data-types/#base-types), which Storage then turns into backend types (for example `TIMESTAMP` becomes `TIMESTAMP_NTZ` on Snowflake).
+When a transformation finishes, the component reads the schema of each output table from DuckDB and translates it into Keboola [base types](/storage/tables/data-types/reference/#base-types), which Storage then turns into backend types (for example `TIMESTAMP` becomes `TIMESTAMP_NTZ` on Snowflake).
 
 | DuckDB type | Keboola base type | Notes |
 |---|---|---|
@@ -171,7 +172,7 @@ DuckDB's own `FLOAT` (alias `REAL`) is a 4-byte single-precision float. The Kebo
 DuckDB [ignores the length of a `VARCHAR`](https://duckdb.org/docs/stable/sql/data_types/text) and accepts `VARCHAR(n)` only for compatibility. When the component reads the output schema, the length is already gone, so a column cast as `VARCHAR(2)` reaches Storage as a full-width string (`VARCHAR(16777216)` on Snowflake).
 
 :::tip
-To enforce a maximum width or a specific timestamp precision, [create the output table as a typed table](/storage/tables/data-types/#how-to-create-a-typed-table) with the definition you want before you run the transformation. The transformation loads into the existing definition and leaves it as it is, so a value that is too long fails the job. On Snowflake the error reads:
+To enforce a maximum width or a specific timestamp precision, [create the output table as a typed table](/storage/tables/manage/#keep-the-lengths-and-precisions-of-a-typed-table) with the definition you want before you run the transformation. The transformation loads into the existing definition and leaves it as it is, so a value that is too long fails the job. On Snowflake the error reads:
 
 ```
 An exception occurred while executing a query: User character length limit (2) exceeded by string 'ABCDEF'
@@ -180,7 +181,7 @@ An exception occurred while executing a query: User character length limit (2) e
 
 <!-- VERIFY(Storage owner): the full-width VARCHAR(16777216) on Snowflake and the error text above come from a customer's production project (support ticket screenshots), not from public code. -->
 
-The definition the table already has in Storage always applies. The component never declares a length for string columns, so an existing column keeps its original definition, and a change in the mapping or in your casts shows up only on a newly created output table. [Changing types of existing typed columns](/storage/tables/data-types/#changing-types-of-existing-typed-columns) lists the workarounds.
+The definition the table already has in Storage always applies. The component never declares a length for string columns, so an existing column keeps its original definition, and a change in the mapping or in your casts shows up only on a newly created output table. [Changing types of existing typed columns](/storage/tables/manage/#change-a-column-type-in-a-typed-table) lists the workarounds.
 
 :::caution
 Arrays of a parameterized type are a known gap. DuckDB reports such a column as `DECIMAL(10,2)[]`, and the component reads only the leading type name, so it declares the column as `NUMERIC(10,2)`. The exported value is still an array literal, and the load fails on the type mismatch. Cast arrays and other nested values to text, for example `CAST("my_array" AS VARCHAR)`.

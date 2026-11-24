@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting
+description: 'Fix dbt connection failures in remote workspaces, including an authentication method that does not match the one in profiles.yml.'
 slug: 'transformations/dbt/troubleshooting'
 ---
 

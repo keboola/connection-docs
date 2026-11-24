@@ -1,6 +1,7 @@
 ---
 title: Environment Specification
 slug: 'extend/common-interface/environment'
+description: 'Lists the environment variables Keboola injects into a component container, such as KBC_DATADIR and KBC_CONFIGID, and what each exit code means.'
 ---
 
 
@@ -8,6 +9,8 @@ Components use several [channels](/extend/common-interface/) to exchange informa
 primarily through [structured folders](/extend/common-interface/) and [configuration files](/extend/common-interface/config-file/).
 Each component has full access to the external network.
 Below are the specific aspects of the environment in which your component operates.
+
+<!-- Reference-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ## Environment Variables
 The following environment variables are injected into the container:
@@ -21,7 +24,8 @@ The following environment variables are injected into the container:
  - `KBC_COMPONENTID`: The ID of the component.
  - `KBC_CONFIGROWID`: The ID of the configuration row, if available.
  - `KBC_BRANCHID`: The ID of the [development branch](https://api.keboola.com/?service=storage#get-/v2/storage/dev-branches/-id-).
- - `KBC_STAGING_FILE_PROVIDER`: Either `aws` or `azure`, depending on the type of [stack](/overview/api/#stacks-and-endpoints) the container is running. This value refers to the file storage used during [file import/export operations](/storage/api/import-export/).
+ - `KBC_STAGING_FILE_PROVIDER`: The file storage provider of the [stack](/overview/api/#stacks-and-endpoints) the container is running in, for example `aws` or `azure`. This value refers to the file storage used during [file import/export operations](/storage/api/import-export/).
+   <!-- VERIFY(Nikita): the value is tokenInfo.owner.fileStorageProvider (keboola/docker-bundle src/Docker/Runner/Environment.php:65), a plain string with no published enum. What does a GCP stack report (e.g. `gcp`)? If aws/azure/gcp is the full set, list them explicitly. Checked 2026-11-18. -->
  - `KBC_PROJECT_FEATURE_GATES`: A comma-separated list of feature gates activated for the current project. Feature gates are considered internal and may change or disappear without notice. We recommend checking with our support team before relying on any feature gates.
  - `KBC_COMPONENT_RUN_MODE`: Either `run` or `debug`. The value `debug` is used when the job is run in debug mode ([learn more](/extend/component/running/#debugging)). This variable can be helpful, for example, to enable more verbose logging.
  - `KBC_DATA_TYPE_SUPPORT`: Either `authoritative`, `hints`, or `none`:

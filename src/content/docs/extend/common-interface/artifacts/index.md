@@ -10,7 +10,7 @@ redirect_from:
 
 *Note: This is a preview feature and as such may change considerably in the future.* Artifacts work only in
 projects with the `artifacts` feature enabled; ask [support](mailto:support@keboola.com) to enable it.
-<!-- The feature flag is code-confirmed: docker-bundle src/Docker/Runner.php checks in_array('artifacts', $tokenInfo['owner']['features']) before download and upload. VERIFY(owner): is "preview" still the right status (2026-09-09 review)? -->
+<!-- The feature flag is code-confirmed: docker-bundle src/Docker/Runner.php checks in_array('artifacts', $tokenInfo['owner']['features']) before download and upload. VERIFY(Nikita): is "preview" still the right status (2026-09-09 review)? -->
 
 **Artifacts** are additional files that can be produced or consumed by a [component](/extend/component). 
 
@@ -40,7 +40,7 @@ Types are used in a configuration of a consumer component to specify which artif
 - **custom** - artifacts from previous runs of a different configuration. The configuration which produced the artifacts will be defined in the consumer configuration (`config_id`, `component_id` and `branch_id` in the `filter` node)
 
 - **shared** - artifacts shared within an orchestration
-<!-- VERIFY(owner): do shared artifacts also work between tasks of a Conditional Flow (keboola.flow), or only within a Legacy Flow run? Not checkable from public sources (2026-09-09 review). -->
+<!-- VERIFY(Nikita): do shared artifacts also work between tasks of a Conditional Flow (keboola.flow), or only within a Legacy Flow run? Not checkable from public sources (2026-09-09 review). -->
 
 `runs` and `custom` types are the same from the producer point of view. To produce a `shared` artifact, it has to be written into a `shared` folder. Read more in [File structure](#file-structure) section.
 

@@ -1,6 +1,7 @@
 ---
 title: Azure Datalake Gen 2
 slug: 'components/extractors/storage/azure-datalake-gen2'
+description: 'Load CSV files from an Azure Datalake Gen2 file system into Keboola tables with an account name and key, and set wildcards and CSV options.'
 redirect_from:
     - /extractors/other/azure-datalake-gen2/
 ---
@@ -13,8 +14,10 @@ in Keboola Storage.
 After creating a new configuration, select the files you want to extract from Azure Datalake Gen 2 and determine how
 you save them to Keboola Storage. 
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Azure Datalake Gen 2** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Azure Datalake Gen 2** connector.
 
 In order to access the files in Azure Datalake Gen2, you need to prepare an account name, account key, and file system.
 
@@ -70,7 +73,7 @@ The **additional source settings** section allows you to set up the following:
 
 - The initial value in **Storage Table Name** is derived from the configuration table name. You can change it at any time; however,
 the [Storage bucket](/storage/buckets/) where the table will be saved cannot be changed.
-- **Incremental Load** will turn on [incremental loading to Storage](/storage/tables/#incremental-loading). The result of the
+- **Incremental Load** will turn on [incremental loading to Storage](/storage/tables/incremental-loading/#incremental-loading). The result of the
 incremental load depends on other settings (mainly **Primary Key**).
 - **Primary Key** can be used to specify the primary key in Storage; it can be used with **Incremental Load**
 and **New Files Only** to create a configuration that incrementally loads all new files into a table in Storage.

@@ -1,10 +1,16 @@
 ---
 title: Policy Reference
 slug: 'storage/row-level-security/policy-reference'
-description: Write row-level and column-level security policies — how rules select readers, the condition language, how policies combine, examples, and the Keboola CLI and API calls that create them.
+description: 'The format of row-level and column-level security policies: rule selectors, the condition language, how rules and policies combine, scope, and examples.'
 ---
 
-This page describes the policies behind [row-level and column-level security](/storage/row-level-security/): what a policy contains, how a rule selects its readers, and how to create one.
+This page describes the policies behind [row-level and column-level security](/storage/row-level-security/): what a policy contains and how a rule selects its readers. To create one in the Keboola UI, with the Keboola CLI or the API, follow [Set up row-level and column-level security](/storage/row-level-security/set-up/#3-write-the-policies).
+
+:::caution[Public Beta]
+Row-level and column-level security is in free public beta until 28 February 2027. A project admin can turn it on in **Project settings → Features**. After the beta it becomes a paid add-on; your Customer Success Manager will share the details.
+:::
+
+<!-- Reference-type page. Source: the policy reference as it stood on main before its "Create a policy" sections moved to the set-up page. Structure checked 2026-11-19; public beta facts checked 2026-11-23. -->
 
 ## A policy
 
@@ -52,7 +58,7 @@ A condition is a filter on the rows of the table. It is built from the following
 {"column": "status", "op": "eq", "value": "active"}
 ```
 
-Comparison operators are `eq`, `ne`, `gt`, `gte`, `lt` and `lte`, with a string, number or boolean `value`.
+Comparison operators are `eq`, `ne`, `gt`, `gte`, `lt` and `lte`, with a string, number or boolean `value`. On a column stored as text, which is the default for Keboola tables, `gt`, `gte`, `lt` and `lte` compare the values as text, so a numeric range, or a range on dates that are not in ISO format (`YYYY-MM-DD`), can return the wrong rows: see [Limitations](/storage/row-level-security/#limitations).
 
 ```json
 {"column": "region", "op": "in", "values": ["EU", "US"]}
@@ -181,72 +187,13 @@ A reference table that every identified reader may read in full needs a policy t
 }
 ```
 
-## Create a policy with the Keboola CLI
-
-Both groups have the same commands. `--rules` accepts JSON, `@file` or `-` for standard input. Add `--dry-run` to any command that writes to see the result without writing it.
-
-| Command | What it does |
-|---|---|
-| `rls list`, `cls list` | List the policies of a project |
-| `rls detail`, `cls detail` | Show the rules of one policy (`--policy-id`) |
-| `rls schema`, `cls schema` | Print the live JSON Schema of the policy from the Metastore |
-| `rls create`, `cls create` | Create the policy of one table (`--table-id`, `--rules`; `rls create` also takes `--default`) |
-| `rls update`, `cls update` | Change only the options you pass |
-| `rls delete`, `cls delete` | Delete a policy. In a governed workspace a table without any policy is unreadable: an administrator gets HTTP 403, an end user of a Data App an empty result. A policy that a workspace binding lists cannot be deleted (HTTP 409): to delete a policy a Data App uses, remove it from `rlsPolicies` or `clsPolicies`, redeploy the app and archive its older deployments first, because each deployment keeps its own binding |
-| `rls setup` | Guided setup in a terminal: pick tables, build a condition, preview, write |
-
-Useful options of `create` and `update`: `--scope targeted|organization`, `--target-project` (repeatable) and `--dialect snowflake|bigquery`. Without a `--default`, a reader that no rule selects is refused.
-
-<!-- kbagent-check: skip-next -->
-```bash
-kbagent rls create --project my-project --table-id in.c-crm.orders --rules @rls-rules.json --default '{"false": true}' --dry-run
-```
-
-<!-- kbagent-check: skip-next -->
-```bash
-kbagent cls create --project my-project --table-id in.c-crm.orders --rules @cls-rules.json --yes
-```
-
-The CLI refuses a rule that selects by `principal` or email before anything is written. It also checks the dialect against the project backend and reports every problem it finds.
-
-## Create a policy with the API
-
-Policies are objects of the Keboola Metastore. Its address is the address of your stack with `connection.` replaced by `metastore.`, for example `https://metastore.<stack>.keboola.com`. Authenticate with the project administrator's Storage token in the `X-StorageApi-Token` header.
-
-The `name` of the object is the table ID, and a project can have one policy of each kind per table. The `rules` and `default` in `data` are the ones from the examples above.
-
-```bash
-curl -sS -X POST "https://metastore.<stack>.keboola.com/api/v1/repository/rls-policy" \
-  -H "X-StorageApi-Token: $KBC_STORAGE_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "in.c-crm.orders",
-    "branch": "main",
-    "scope": "targeted",
-    "data": {
-      "table": "in.c-crm.orders",
-      "rules": [
-        {
-          "groups": ["eu-analysts"],
-          "condition": {"column": "region", "op": "eq", "value": "EU"}
-        }
-      ],
-      "default": {"false": true}
-    }
-  }'
-```
-
-For a column policy post to `/api/v1/repository/cls-policy` with `"visible_columns"` in each rule instead of a `condition`, and without `default`. To list the policies visible to the project:
-
-```bash
-curl -sS "https://metastore.<stack>.keboola.com/api/v1/repository/rls-policy" \
-  -H "X-StorageApi-Token: $KBC_STORAGE_TOKEN"
-```
-
-A rule that selects by email is rejected by the schema validation (HTTP `422`), and a second policy of the same kind for the same table is rejected as a duplicate (HTTP `409`).
-
 ## See also
 
 - [Row-level and column-level security](/storage/row-level-security/): what is protected, deny by default, limitations
+- [Set up row-level and column-level security](/storage/row-level-security/set-up/): the Keboola CLI commands and API calls that create a policy
 - [Keboola CLI](/cli/)
 - [MCP Server](/ai/mcp-server/)
+
+---
+
+**Next:** [Storage API →](/storage/api/)

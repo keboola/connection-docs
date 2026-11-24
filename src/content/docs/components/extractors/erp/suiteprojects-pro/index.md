@@ -24,7 +24,7 @@ Incremental fetch is the default: after the first run, each run reads only the o
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **SuiteProjects Pro** data source connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **SuiteProjects Pro** data source connector.
 
 ### Connection
 
