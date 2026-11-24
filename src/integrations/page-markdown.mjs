@@ -459,7 +459,7 @@ export function twinParts(content, isMdx, file = 'page') {
  *
  * Exported for scripts/page-markdown.test.ts.
  */
-export function buildLlmsTxt(site, siteTitle, pages) {
+export function buildLlmsTxt(site, siteTitle, pages, { fullText = false } = {}) {
   const byTitle = new Map(pages.map((p) => [p.slug, p.title]));
   const url = (page) => {
     const path = page.slug ? `/${page.slug}/` : '/';
@@ -485,6 +485,18 @@ export function buildLlmsTxt(site, siteTitle, pages) {
     'markdown of `https://help.keboola.com/storage/`.',
     '',
   ];
+
+  // One file per section (buildLlmsFull), listed up front so an agent that
+  // wants a whole area does not fetch it page by page.
+  if (fullText) {
+    lines.push('## Whole sections in one file', '');
+    lines.push(`- [All pages](${new URL('/llms-full.txt', site).href}): every page below, in one file`);
+    for (const key of [...sections.keys()].filter(Boolean).sort()) {
+      const label = String(byTitle.get(key) ?? key).replace(/([[\]])/g, '\\$1');
+      lines.push(`- [${label}](${new URL(`/${key}/llms-full.txt`, site).href})`);
+    }
+    lines.push('');
+  }
 
   const root = sections.get('') ?? [];
   sections.delete('');
@@ -518,6 +530,54 @@ function entry(page, url) {
   return `- [${label}](${url(page)})${suffix}`;
 }
 
+/**
+ * The llms-full.txt files: every twin in one file, so an agent can take a whole
+ * section, or the whole site, in a single fetch instead of one per page (the
+ * pattern Cloudflare, Supabase and dbt publish).
+ *
+ * `/llms-full.txt` holds every page; `/<section>/llms-full.txt` holds the pages
+ * under one top-level slug, the same groups llms.txt uses. Each page starts with
+ * its `# Title` and a `URL:` line naming its HTML page, the pair a reader can
+ * split the file on (a `#` line alone could be a comment in a code sample).
+ * Pages come in slug order, as in llms.txt.
+ *
+ * Returns a map of output path (relative to the build root) to file content.
+ * Exported for scripts/page-markdown.test.ts.
+ */
+export function buildLlmsFull(site, siteTitle, pages) {
+  const sorted = [...pages].sort((a, b) => a.slug.localeCompare(b.slug));
+  const byTitle = new Map(sorted.map((p) => [p.slug, p.title]));
+  const block = (p) => [
+    `# ${p.title}`,
+    '',
+    `URL: ${new URL(p.slug ? `/${p.slug}/` : '/', site).href}`,
+    '',
+    p.body,
+    '',
+  ].join('\n');
+  const file = (heading, group) => [
+    `# ${heading}`,
+    '',
+    `> ${group.length} pages in one file. Each page starts with its title as a \`#\` heading, followed by its URL.`,
+    '',
+    ...group.map(block),
+  ].join('\n');
+
+  const files = new Map();
+  files.set('llms-full.txt', file(`${siteTitle}: all pages`, sorted));
+  const sections = new Map();
+  for (const p of sorted) {
+    const key = p.slug.split('/')[0];
+    if (!key) continue;
+    if (!sections.has(key)) sections.set(key, []);
+    sections.get(key).push(p);
+  }
+  for (const [key, group] of sections) {
+    files.set(`${key}/llms-full.txt`, file(`${siteTitle}: ${byTitle.get(key) ?? key}`, group));
+  }
+  return files;
+}
+
 export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' } = {}) {
   let site;
 
@@ -543,6 +603,7 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
         let skipped = 0;
         const index = [];
         const agentPages = []; // pages with :::agent blocks, for the leak check below
+        const full = []; // each written twin, for the llms-full.txt files
 
         for (const file of findMarkdownFiles(contentDir)) {
           const content = readFileSync(file, 'utf-8');
@@ -579,6 +640,7 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
           const { body, agentTexts } = twinParts(content, isMdx, file);
           if (agentTexts.length) agentPages.push({ slug: fm.slug, texts: agentTexts });
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
+          full.push({ slug: fm.slug, title: fm.title ?? fm.slug, body });
 
           mkdirSync(mdDir, { recursive: true });
           writeFileSync(mdFile, md);
@@ -596,8 +658,14 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
 
         if (site) {
           index.sort((a, b) => a.slug.localeCompare(b.slug));
-          writeFileSync(join(outDir, 'llms.txt'), buildLlmsTxt(site, siteTitle, index));
+          writeFileSync(join(outDir, 'llms.txt'), buildLlmsTxt(site, siteTitle, index, { fullText: true }));
           logger.info(`Wrote llms.txt indexing ${index.length} pages`);
+          const fullFiles = buildLlmsFull(site, siteTitle, full);
+          for (const [rel, text] of fullFiles) {
+            mkdirSync(join(outDir, rel, '..'), { recursive: true });
+            writeFileSync(join(outDir, rel), text);
+          }
+          logger.info(`Wrote ${fullFiles.size} llms-full.txt files (${full.length} pages)`);
         } else {
           logger.warn('No `site` configured — skipping llms.txt');
         }
