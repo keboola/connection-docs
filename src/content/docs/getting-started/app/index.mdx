@@ -90,7 +90,7 @@ tutorial dataset.
 <FlowStrip steps="A table in Storage|A small web app that runs inside Keboola and reads it|A URL you send to whoever you choose" label="What an app is" />
 
 A grid, a dashboard or an explorer. Like everything else in this guide it is a component, so it can
-sit in a flow; the [Apps section](/data-apps/) covers it in full.
+sit in a [flow](/flows/); the [Apps section](/data-apps/) covers it in full.
 
 ## Set it up
 
@@ -125,7 +125,7 @@ to build one ([Build your first app with Kai](/data-apps/getting-started/)).
    ![Screenshot - The Apps builder right after the prompt is sent: the prompt in the chat on the left with Kai thinking, and on the right a New App with Preview and Code tabs and an empty pane that says the app will appear there](/getting-started/app/kai-builder.png)
 
 4. Check the preview itself: six rows, seven columns, one big number per cell, red where `short_handed` is true, and the caption's count matching the red cells. If it
-   does not match, say so in the same chat; the draft updates in place. In our Free Plan run the
+   does not match, say so in the same chat; the draft updates in place. In our [Free Plan](/management/payg-project/) run the
    first preview had no red cells and a caption saying none were short-handed, while Kai's summary
    said three; one message in the same chat, naming the three rows, fixed it (the fold under
    **If it goes wrong** has one to copy). Ours, on a week with three red days:
@@ -194,7 +194,7 @@ development workflow rather than a form. It has its own pages:
 <TabItem label="CLI / API">
 
 The app itself is written by Kai in the builder. No command turns a paragraph into a grid.
-What `kbagent` does is the part you repeat: listing apps, deploying the version Storage
+What [`kbagent`](/cli/) does is the part you repeat: listing apps, deploying the version Storage
 holds, waking one that has gone to sleep, and reading its log when it will not start.
 
 ```bash
@@ -282,7 +282,7 @@ string) into true or false before it colours a cell.
 <details>
 <summary>The production deploy fails, and Terminal Logs says the app is not running</summary>
 
-The draft ran, so the code works; the production container did not come up. The job's own error is
+The draft ran, so the code works; the production container did not come up. The [job](/management/jobs/)'s own error is
 usually just *Internal Server Error occurred*, which says nothing. The reason is in the container's
 startup log: on the app's **All Runs** tab, open the failed run, or from a terminal run
 `kbagent data-app runs --project docs-demo --app-id <app-id>` (your project's alias, as in the CLI

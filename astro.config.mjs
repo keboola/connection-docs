@@ -1,21 +1,26 @@
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import starlight from '@astrojs/starlight';
 import starlightImageZoom from 'starlight-image-zoom';
+import sitemap from '@astrojs/sitemap';
 import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
 import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
 import externalLinks from './src/integrations/external-links.mjs';
 import pagefindTitles from './src/integrations/pagefind-titles.mjs';
+import { sitemapOptions } from './src/integrations/sitemap-lastmod.mjs';
 import { remarkStripComments } from './src/integrations/strip-comments.mjs';
 import { remarkAgentOnly } from './src/integrations/agent-only.mjs';
+
+const SITE = 'https://help.keboola.com';
 
 /* Shared so the llms.txt heading cannot drift from the site's own title. */
 const SITE_TITLE = 'Keboola User Documentation';
 
 export default defineConfig({
-  site: 'https://help.keboola.com',
+  site: SITE,
   trailingSlash: 'always',
   /* Astro 7 defaults to 'jsx', which drops the space where text and an inline
      element meet across a line break ("region at\n<a>" -> "region at<a>").
@@ -97,5 +102,8 @@ export default defineConfig({
     // Must come AFTER starlight(): it reads the Pagefind index Starlight
     // builds in the same astro:build:done hook.
     pagefindTitles(),
+    // Starlight adds this itself when the config has none; ours adds each
+    // page's lastUpdated date as <lastmod> (see sitemap-lastmod.mjs).
+    sitemap(sitemapOptions({ contentDir: fileURLToPath(new URL('./src/content/docs/', import.meta.url)), site: SITE })),
   ],
 });

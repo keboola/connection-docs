@@ -77,7 +77,7 @@ Kai asks for credentials through a secure form instead, which is its documented 
 type into that form are the ones in **The sample database** above.
 :::
 
-**Check:** three new tables, and Kai names the bucket it put them in.
+**Check:** three new tables, and Kai names the [bucket](/storage/buckets/) it put them in.
 
 </TabItem>
 <TabItem label="UI">
@@ -159,7 +159,7 @@ back out again. Add `--dry-run` to the command below to see the request and chec
 component's schema without creating anything:
 
 ```bash
-kbagent config new --project docs-demo --component-id keboola.ex-db-snowflake --name "Sample Snowflake" --push --no-files --configuration @snowflake-db.json
+kbagent config new --project docs-demo --component-id keboola.ex-db-snowflake --name "Sample Snowflake" --push --no-files --configuration-file snowflake-db.json
 ```
 
 It prints the new configuration ID. If you would rather the password never sat in a file or a
@@ -185,7 +185,7 @@ builds:
 ```
 
 ```bash
-kbagent config row-create --project docs-demo --component-id keboola.ex-db-snowflake --config-id <config-id> --name ACCOUNT --configuration @account-row.json
+kbagent config row-create --project docs-demo --component-id keboola.ex-db-snowflake --config-id <config-id> --name ACCOUNT --configuration-file account-row.json
 ```
 
 Repeat for `OPPORTUNITY` and `USER`, changing the name, the source table and the output table
@@ -224,7 +224,7 @@ The **UI** and **Prompt** paths name the bucket after the configuration, so your
 
 - **The connection is refused.** A typo in the host or the warehouse. All four of username,
   password, database and schema are the same word here, `HELP_TUTORIAL`, which is easy to read
-  past. The UI has a **Test Connection** button for this; the CLI finds out when the job runs.
+  past. The UI has a **Test Connection** button for this; the CLI finds out when the [job](/management/jobs/) runs.
 - **The job succeeds but a table is empty.** The row is pointing at a table name that exists in a
   different schema. `schema` inside `table` is per row, not inherited from the connection.
 - **You want the configuration back after deleting it.** `kbagent config delete` moves it to the

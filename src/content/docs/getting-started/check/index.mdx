@@ -14,7 +14,7 @@ import CourseLine from '../../../../components/getting-started/CourseLine.astro'
 
 <CourseLine current="check" />
 
-Everything you built leaves a trace in two places: **Storage** holds the tables, **Jobs** holds
+Everything you built leaves a trace in two places: **Storage** holds the tables, **[Jobs](/management/jobs/)** holds
 every run that produced them. This page says what should be there, and what to do when it is not.
 
 <Prereqs needs={[]}>
@@ -44,9 +44,9 @@ with three ways to do it. */}
 | Two HTTP configurations | bring the five files and the live forecast into the project | **Components** |
 | SQL transformation | joins five of the six tables into `staffing_outlook` | **Transformations** |
 | App, if your project has Apps | the grid | **Apps** |
-| Flow | runs the loads and the transformation, in order, every Monday morning | **Conditional Flows** |
+| [Flow](/flows/) | runs the loads and the transformation, in order, every Monday morning | **Conditional Flows** |
 
-In **Storage**: two `in.c-` buckets named after the connector and the configuration ID
+In **Storage**: two `in.c-` [buckets](/storage/buckets/) named after the connector and the configuration ID
 (`keboola-ex-http-…`), and one `out.c-Boolabean-staffing-outlook` bucket.
 
 To have Kai list it for you, with what each part does:
@@ -96,7 +96,7 @@ the **Conditions** rows marked **Matched** between them are the flow moving on t
 
 ![Screenshot - The flow's All Runs tab with one run expanded: Extract data 4 min 33 sec, Conditions Matched, Staffing outlook 53 sec, all Success, 5 min 38 sec in total](/getting-started/check/09-all-runs.png)
 
-- **Success** is the goal: a few minutes end to end. Ours, in a Free Plan project, took 5 min 38
+- **Success** is the goal: a few minutes end to end. Ours, in a [Free Plan](/management/payg-project/) project, took 5 min 38
   s: 4 min 33 s for the loads, about two minutes of which the jobs waited in the queue, and 53
   seconds for the transformation.
 - **Error is not all lost.** Phases run in order, so the earlier ones finished and their tables
@@ -194,6 +194,6 @@ is the [recommended ceiling](/flows/), and Support can adjust a project's limits
 </details>
 
 Failures specific to one step stay on its page: loading on [Load data into Storage](/getting-started/load/),
-SQL and mapping on [Transform data](/getting-started/transform/), and apps on
+SQL and [mapping](/transformations/mappings/) on [Transform data](/getting-started/transform/), and apps on
 [Build an app](/getting-started/app/). Failures of the spreadsheet delivery are on the
 [Send a table to Google Sheets](/getting-started/write/) side trip.

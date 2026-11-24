@@ -122,10 +122,17 @@ forecast is 42 rows: seven days for six cafés.
 
 - **Data source connectors** fetch data into Storage tables, on demand or on a schedule. There are
   [hundreds of them](/components/extractors/), and all of them end in a table.
-- **HTTP** downloads CSV files from a URL, and can be re-run, scheduled and put in a flow,
+- **HTTP** downloads CSV files from a URL, and can be re-run, scheduled and put in a [flow](/flows/),
   which [Build and schedule a weekly flow](/getting-started/automate/) depends on.
 - **Two configurations:** the five files share one, a row each. The forecast gets its own: it lives
   on another host, and the flow refreshes it every week.
+
+:::tip[New to jobs?]
+Running a configuration starts a job, which runs in the background, and the load on this page is
+your first. **Jobs** in the navigation lists every job, running or finished; open one to see the
+tables it read and wrote and what happened during the run. [Jobs](/management/jobs/) explains how
+to search that list.
+:::
 
 ## Set it up
 
@@ -151,7 +158,7 @@ Run it, then tell me the row count of each of the five tables.
 **Expect seven approvals:** the configuration, one per row, and the run. Kai reads each file's
 header itself, so the tables get the files' column names. After the run approval Kai says the job
 is running and hands the chat back; it returns with the counts on its own when the job ends, about
-six minutes later in a Free Plan project.
+six minutes later in a [Free Plan](/management/payg-project/) project.
 
 **Check:** Kai reports five tables with 6, 18, 9,761, 552 and 552 rows, and the configuration it
 links in the chat lists five entries under **Rows**. Then, in the same chat, the forecast:
@@ -367,8 +374,11 @@ Repeat for `products`, `sales`, `staffing` and `weather_daily`, changing the nam
 the folder together. Then run the configuration and wait for the job:
 
 ```bash
-kbagent job run --project docs-demo --component-id keboola.ex-http --config-id <config-id> --wait
+kbagent job run --project docs-demo --component-id keboola.ex-http --config-id <config-id> --wait --timeout 900
 ```
+
+`--wait` gives up after five minutes by default and then stops the job, and this one can take
+longer, so `--timeout 900` gives it fifteen.
 
 **Add the forecast**
 
@@ -379,7 +389,7 @@ and the four column names given explicitly instead of read from a header.
 kbagent config new --project docs-demo --component-id keboola.ex-http --name "Boolabean forecast" --push --no-files --configuration '{"parameters":{"baseUrl":"https://api.open-meteo.com/v1/"}}'
 ```
 
-The row's JSON is long, and `--configuration` takes `@file`, so put it in one:
+The row's JSON is long, and `--configuration-file` reads it from a file, so put it in one:
 
 ```json title="forecast-row.json"
 {
@@ -405,7 +415,7 @@ Nine lines skipped, not eight: the header goes too, and `columns` names the four
 place, without the header's unit suffixes.
 
 ```bash
-kbagent config row-create --project docs-demo --component-id keboola.ex-http --config-id <forecast-config-id> --name forecast --configuration @forecast-row.json
+kbagent config row-create --project docs-demo --component-id keboola.ex-http --config-id <forecast-config-id> --name forecast --configuration-file forecast-row.json
 ```
 
 ```bash
@@ -413,7 +423,7 @@ kbagent job run --project docs-demo --component-id keboola.ex-http --config-id <
 ```
 
 **Check:** the tables and their row counts, without leaving the terminal. Without `--bucket-id`
-it lists every table in the project, which is how you find the bucket the connector created:
+it lists every table in the project, which is how you find the [bucket](/storage/buckets/) the connector created:
 
 ```bash
 kbagent storage tables --project docs-demo --bucket-id in.c-keboola-ex-http-<config-id>
@@ -439,6 +449,14 @@ counts:
 - Every column arrived as text. The connector does not guess types, so the next page casts them.
 
 ![Screenshot - The Data Sample tab of the sales table, marked NON-TYPED, with the columns date, store_id, product_id, units and revenue_czk above rows of sample values](/getting-started/load/07-table-detail.png)
+
+:::tip[New to buckets?]
+A bucket holds tables in Storage, and every bucket has one of two stages: `in` for raw data, usually
+from data source connectors, and `out` for processed data, usually from transformations. The stage
+is only a convention, and it starts every table ID: these tables are in `in.c-keboola-ex-http-…`,
+and the next page writes to an `out.c-` bucket. [Buckets](/storage/buckets/) shows how to create one
+and pick its stage.
+:::
 
 <details>
 <summary>Your bucket names will differ, and what else to look at</summary>

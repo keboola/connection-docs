@@ -129,7 +129,7 @@ inside it. The connector asks for them in that order.
 
     ![Screenshot - The Select sheets from Google Drive section with Level / level picked and an arrow on Save and Run Configuration, and Load data showing Last job status Success and an arrow on the Level-level table](/getting-started/load/save-and-run.png)
 
-12. The connector creates its own output bucket and table. Click the table name to see what
+12. The connector creates its own output [bucket](/storage/buckets/) and table. Click the table name to see what
     arrived, or go to **Storage**.
 
     ![Screenshot - The Storage page with the Google Sheets data source's IN bucket expanded and red arrows on it and its table Level-level, both just updated by that configuration](/getting-started/load/storage.png)
@@ -152,7 +152,7 @@ never was. */}
 
 ## If it goes wrong
 
-- **The job fails on permissions.** The authorization was revoked or expired in the Google
+- **The [job](/management/jobs/) fails on permissions.** The authorization was revoked or expired in the Google
   account. Re-authorize the configuration; the file selection survives.
 - **The spreadsheet is not in the picker.** It belongs to a different Google account from the one
   you authorized. Authorize that account, or share the file with this one.
