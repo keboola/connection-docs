@@ -6,13 +6,11 @@ description: 'The format of row-level and column-level security policies: rule s
 
 This page describes the policies behind [row-level and column-level security](/storage/row-level-security/): what a policy contains and how a rule selects its readers. To create one in the Keboola UI, with the Keboola CLI or the API, follow [Set up row-level and column-level security](/storage/row-level-security/set-up/#3-write-the-policies).
 
-<!-- Public beta facts checked 2026-11-23. -->
-
 :::caution[Public Beta]
-Row-level and column-level security for Data Apps is in free public beta until 28 February 2027. A project admin can turn it on in **Project settings → Features**. After the beta it becomes a paid add-on; your Customer Success Manager will share the details.
+Row-level and column-level security is in free public beta until 28 February 2027. A project admin can turn it on in **Project settings → Features**. After the beta it becomes a paid add-on; your Customer Success Manager will share the details.
 :::
 
-<!-- Reference-type page. Source: the policy reference as it stood on main before its "Create a policy" sections moved to the set-up page. Structure checked 2026-11-19, facts not re-verified. -->
+<!-- Reference-type page. Source: the policy reference as it stood on main before its "Create a policy" sections moved to the set-up page. Structure checked 2026-11-19; public beta facts checked 2026-11-23. -->
 
 ## A policy
 
@@ -60,7 +58,7 @@ A condition is a filter on the rows of the table. It is built from the following
 {"column": "status", "op": "eq", "value": "active"}
 ```
 
-Comparison operators are `eq`, `ne`, `gt`, `gte`, `lt` and `lte`, with a string, number or boolean `value`. On a column stored as text, which is the default for Keboola tables, `gt`, `gte`, `lt` and `lte` compare the values as text, so a numeric or date range can return the wrong rows: see [Limitations](/storage/row-level-security/#limitations).
+Comparison operators are `eq`, `ne`, `gt`, `gte`, `lt` and `lte`, with a string, number or boolean `value`. On a column stored as text, which is the default for Keboola tables, `gt`, `gte`, `lt` and `lte` compare the values as text, so a numeric range, or a range on dates that are not in ISO format (`YYYY-MM-DD`), can return the wrong rows: see [Limitations](/storage/row-level-security/#limitations).
 
 ```json
 {"column": "region", "op": "in", "values": ["EU", "US"]}

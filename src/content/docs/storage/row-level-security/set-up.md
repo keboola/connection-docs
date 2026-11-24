@@ -6,14 +6,12 @@ sidebar:
 description: 'Turn on row-level and column-level security: turn on the feature, use a governed workspace, write policies in the UI, with the CLI, an AI assistant or the API, and govern a Data App.'
 ---
 
-<!-- Public beta facts checked 2026-11-23. -->
-
 Setting up [row-level and column-level security](/storage/row-level-security/) takes four steps: turn on the feature, send queries through a governed workspace, write a policy for each table, and check the result as the reader. A Data App needs two more steps. What a policy can contain is in the [policy reference](/storage/row-level-security/policy-reference/).
 
-<!-- How-to-type page. Source: the "Set it up" and "Data Apps" sections of the row-level security page and the "Create a policy" sections of the policy reference, as they stood on main before the split. Structure checked 2026-11-19, facts not re-verified. -->
+<!-- How-to-type page. Source: the "Set it up" and "Data Apps" sections of the row-level security page and the "Create a policy" sections of the policy reference, as they stood on main before the split. Structure checked 2026-11-19; public beta facts checked 2026-11-23. -->
 
 :::caution[Public Beta]
-Row-level and column-level security for Data Apps is in free public beta until 28 February 2027. A project admin can turn it on in **Project settings → Features**. After the beta it becomes a paid add-on; your Customer Success Manager will share the details. See the [overview](/storage/row-level-security/) for what the beta covers.
+Row-level and column-level security is in free public beta until 28 February 2027. A project admin can turn it on in **Project settings → Features**. After the beta it becomes a paid add-on; your Customer Success Manager will share the details. See the [overview](/storage/row-level-security/) for what the beta covers.
 :::
 
 ## 1. Turn on the feature
@@ -60,7 +58,7 @@ To create a row policy, click **New policy** and go through three steps:
 
 1. **Table:** pick the table to protect.
 2. **Who sees which rows:** add rules. The conditions of a rule are joined by AND; presets fill in common rules.
-3. **Apps:** pick the Data Apps the policy applies to.
+3. **Apps:** pick the Data Apps the policy applies to. Saving updates the policy lists of the apps you picked; each app uses the change from its next deployment, so redeploy it.
 
 The UI creates row policies (`rls-policy`) only. Write column policies with the Keboola CLI, an AI assistant or the API. A rule with OR or nested conditions opens as raw JSON in the editor.
 
@@ -219,13 +217,13 @@ const auth = { type: 'app-user-token', token: userToken, storageToken: appStorag
 
 The Python client is `keboola-query-service` 0.4.0 or later, the JavaScript client `@keboola/api-client` 52.0.0 or later, and Streamlit apps use `keboola-streamlit` 0.4.0 or later. The Python and JavaScript clients send the user token in `X-Kbc-App-User-Token` and the app token in `X-StorageAPI-Token`, and both raise a `RowLevelSecurityError` when a query is refused.
 
-**Streamlit apps.** With `keboola-streamlit` 0.4.0 or later, `query_service_execute_query` sends the user token (`X-Kbc-App-User-Token`) together with the app's Storage token with every Query Service request. It also keeps the user token fresh: the token lives 5 minutes, and the library refreshes it through the apps proxy. A refused query shows "You have no access to this data." and is not retried. Since 0.5.0, `get_workspace()` returns `governed`, and when the workspace is governed and the request has no user token, the query is not sent and the app shows "This app's data needs a signed-in user."
+**Streamlit apps.** With `keboola-streamlit` 0.4.0 or later, `query_service_execute_query` sends the user token (`X-Kbc-App-User-Token`) together with the app's Storage token with every Query Service request. It also keeps the user token fresh: the token lives 5 minutes, and the library refreshes it through the apps proxy. A refused query shows "You have no access to this data." and is not retried. Since 0.5.0, the package's `get_workspace()` function returns `governed`, and when the workspace is governed and the request has no user token, the query is not sent and the app shows "This app's data needs a signed-in user."
 
-**Key every `st.cache_data` cache per user.** Streamlit's cache is shared by all users of the app, so in a governed workspace it would give one user's rows to the next. Pass `get_app_user_key()` (the token's `idp` and `sub`) as a cache argument whose name does not start with `_`:
+**Key every `st.cache_data` cache per user.** Streamlit's cache is shared by all users of the app, so in a governed workspace it would give one user's rows to the next. Pass `get_app_user_key()` from `keboola_streamlit` (the token's `idp` and `sub`) as a cache argument whose name does not start with `_`:
 
 ```python
 import streamlit as st
-from keboola_streamlit import KeboolaStreamlit
+from keboola_streamlit import KeboolaStreamlit, get_app_user_key
 
 keboola = KeboolaStreamlit(root_url=URL, token=TOKEN)
 
@@ -233,7 +231,7 @@ keboola = KeboolaStreamlit(root_url=URL, token=TOKEN)
 def load_orders(user):
     return keboola.query_service_execute_query('SELECT * FROM "in.c-crm"."orders"')
 
-orders = load_orders(keboola.get_app_user_key())
+orders = load_orders(get_app_user_key())
 ```
 
 **Result:** After a redeploy, the queries of the app run under the listed policies with the identity of the signed-in user.

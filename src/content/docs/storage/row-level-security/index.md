@@ -4,17 +4,15 @@ slug: 'storage/row-level-security'
 description: 'How row-level and column-level security works in Keboola: what policies protect, who they apply to, deny by default, what readers see, and the limitations.'
 ---
 
-<!-- Public beta facts checked 2026-11-23. -->
-
 :::caution[Public Beta]
-Row-level and column-level security for Data Apps is in free public beta until 28 February 2027. A project admin can turn it on in **Project settings → Features**. After the beta it becomes a paid add-on; your Customer Success Manager will share the details.
+Row-level and column-level security is in free public beta until 28 February 2027. A project admin can turn it on in **Project settings → Features**. After the beta it becomes a paid add-on; your Customer Success Manager will share the details.
 
 It works on Snowflake and BigQuery.
 :::
 
 Row-level security (RLS) limits **which rows** of a table a reader can see. Column-level security (CLS) limits **which columns**. You describe both in *policies* stored with your project. Keboola applies them to every query that runs through a *governed workspace*, so an AI assistant, a Data App user or a script can only read the part of a table the policy allows.
 
-<!-- Explanation-type page. Source: the row-level security page as it stood on main before the split into this page and a how-to page. Structure checked 2026-11-19, facts not re-verified. -->
+<!-- Explanation-type page. Source: the row-level security page as it stood on main before the split into this page and a how-to page. Structure checked 2026-11-19; public beta facts checked 2026-11-23. -->
 
 For example, one policy lets the `eu-analysts` group see only the rows where `region` is `EU`, and another hides the `salary` column from everyone except a named administrator.
 
@@ -87,8 +85,8 @@ For the end users of a [Data App](/data-apps/) who sign in through single sign-o
 - On BigQuery, create the governed workspace with the MCP Server, the API, or the `--governed` flag of `kbagent workspace create` (Keboola CLI 1.2.0 or later).
 <!-- Checked 2026-11-20: keboola/cli supports --governed on Snowflake and BigQuery since 1.2.0 (changelog #892, #922; GOVERNED_WORKSPACE_BACKENDS in constants.py). -->
 - Column policies are an allowlist of visible columns. Masking a column's values is not supported.
-- Range conditions (`gt`, `gte`, `lt`, `lte`) compare the values as text on columns stored as text, which is the default for Keboola tables (untyped tables). For example `"10" >= "2"` is false, so a numeric or date range on such a column can hide or show the wrong rows without an error. Use a typed table for columns you filter by range, or use `eq` or `in` conditions.
-- The project feature `row-level-security` is checked by the MCP Server and by the Data App settings page of the Keboola UI only. A workspace you create with the login type `governed` is enforced regardless of the feature.
+- Range conditions (`gt`, `gte`, `lt`, `lte`) compare the values as text on columns stored as text, which is the default for Keboola tables (untyped tables). For example `"10" >= "2"` is false, so a numeric range, or a range on dates that are not in ISO format (`YYYY-MM-DD`), on such a column can hide or show the wrong rows without an error. Use a typed table for columns you filter by range, or use `eq` or `in` conditions.
+- The project feature `row-level-security` is checked by the MCP Server and by the Keboola UI (**Data access** in Project settings and the **Row-level security** box of a Data App) only. A workspace you create with the login type `governed` is enforced regardless of the feature.
 
 ## This section
 
