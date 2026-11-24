@@ -10,7 +10,7 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { stripMdx, stripSearchMarkup, twinBody } from '../src/integrations/page-markdown.mjs';
+import { buildLlmsTxt, stripMdx, stripSearchMarkup, twinBody } from '../src/integrations/page-markdown.mjs';
 import { fenceTracker, stripHtmlComments } from '../src/integrations/strip-comments.mjs';
 
 const prereqs = (inner: string) =>
@@ -177,4 +177,22 @@ test('a CRLF page keeps its code samples as written', () => {
   assert.equal(stripHtmlComments(comment), comment);
   const span = ['~~~html\r', '<span data-pagefind-weight="5">Title</span>\r', '~~~\r'].join('\n');
   assert.equal(stripSearchMarkup(span), span);
+});
+
+test('llms.txt links each page to its markdown twin', () => {
+  const out = buildLlmsTxt('https://help.keboola.com', 'Docs', [
+    { slug: '', title: 'Home', description: 'Start here.' },
+    { slug: 'storage', title: 'Storage', description: 'Tables and files.' },
+    { slug: 'storage/tables', title: 'Tables', description: '' },
+  ]);
+  assert.match(out, /- \[Home\]\(https:\/\/help\.keboola\.com\/index\.md\): Start here\./);
+  assert.match(out, /- \[Storage\]\(https:\/\/help\.keboola\.com\/storage\/index\.md\): Tables and files\./);
+  assert.match(out, /- \[Tables\]\(https:\/\/help\.keboola\.com\/storage\/tables\/index\.md\)$/m);
+});
+
+test('llms.txt keeps the HTML link for a page whose twin was not written', () => {
+  const out = buildLlmsTxt('https://help.keboola.com', 'Docs', [
+    { slug: 'a', title: 'A', description: '', twin: false },
+  ]);
+  assert.match(out, /- \[A\]\(https:\/\/help\.keboola\.com\/a\/\)$/m);
 });
