@@ -194,7 +194,7 @@ test('llms.txt keeps the HTML link for a page whose twin was not written', () =>
   const out = buildLlmsTxt('https://help.keboola.com', 'Docs', [
     { slug: 'a', title: 'A', description: '', twin: false },
   ]);
-  assert.match(out, /- \[A\]\(https:\/\/help\.keboola\.com\/a\/\)$/m);
+  assert.match(out, /- \[A\]\(https:\/\/help\.keboola\.com\/a\/\) \(HTML page, no Markdown copy\)$/m);
 });
 
 test('llms-full.txt holds every page, and each section gets its own file', () => {
@@ -221,4 +221,16 @@ test('llms.txt lists the section files when they are written', () => {
   assert.match(out, /- \[All pages\]\(https:\/\/help\.keboola\.com\/llms-full\.txt\)/);
   assert.match(out, /- \[Storage\]\(https:\/\/help\.keboola\.com\/storage\/llms-full\.txt\)/);
   assert.doesNotMatch(buildLlmsTxt('https://help.keboola.com', 'Docs', pages), /llms-full/);
+});
+
+test('llms.txt lists no section file for a section with no twin written', () => {
+  const pages = [
+    { slug: 'storage', title: 'Storage', description: '' },
+    { slug: 'faq', title: 'FAQ', description: '', twin: false },
+  ];
+  const out = buildLlmsTxt('https://help.keboola.com', 'Docs', pages, { fullText: true });
+  assert.match(out, /- \[Storage\]\(https:\/\/help\.keboola\.com\/storage\/llms-full\.txt\)/);
+  assert.doesNotMatch(out, /faq\/llms-full\.txt/);
+  // the page itself is still listed, as HTML
+  assert.match(out, /- \[FAQ\]\(https:\/\/help\.keboola\.com\/faq\/\)/);
 });

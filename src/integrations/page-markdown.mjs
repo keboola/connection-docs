@@ -488,10 +488,13 @@ export function buildLlmsTxt(site, siteTitle, pages, { fullText = false } = {}) 
 
   // One file per section (buildLlmsFull), listed up front so an agent that
   // wants a whole area does not fetch it page by page.
+  // buildLlmsFull gets the written twins only, so a section whose pages all lack
+  // a twin has no file: list just the sections that have one.
   if (fullText) {
     lines.push('## Whole sections in one file', '');
-    lines.push(`- [All pages](${new URL('/llms-full.txt', site).href}): every page below, in one file`);
-    for (const key of [...sections.keys()].filter(Boolean).sort()) {
+    lines.push(`- [All pages](${new URL('/llms-full.txt', site).href}): every Markdown page below, in one file`);
+    const withTwin = new Set(pages.filter((p) => p.twin !== false).map((p) => p.slug.split('/')[0]));
+    for (const key of [...sections.keys()].filter((k) => k && withTwin.has(k)).sort()) {
       const label = String(byTitle.get(key) ?? key).replace(/([[\]])/g, '\\$1');
       lines.push(`- [${label}](${new URL(`/${key}/llms-full.txt`, site).href})`);
     }
@@ -526,8 +529,10 @@ export function buildLlmsTxt(site, siteTitle, pages, { fullText = false } = {}) 
 function entry(page, url) {
   const label = String(page.title).replace(/([[\]])/g, '\\$1');
   const description = page.description ? String(page.description).replace(/\s+/g, ' ').trim() : '';
+  // The preamble promises Markdown behind every link; a page without a twin says it links HTML.
+  const html = page.twin === false ? ' (HTML page, no Markdown copy)' : '';
   const suffix = description ? `: ${description}` : '';
-  return `- [${label}](${url(page)})${suffix}`;
+  return `- [${label}](${url(page)})${html}${suffix}`;
 }
 
 /**
