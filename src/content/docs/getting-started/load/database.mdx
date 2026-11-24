@@ -76,7 +76,7 @@ Kai asks for credentials through a secure form instead, which is its documented 
 type into that form are the ones in **The sample database** above.
 :::
 
-**Check:** three new tables, and Kai names the bucket it put them in.
+**Check:** three new tables, and Kai names the [bucket](/storage/buckets/) it put them in.
 
 </TabItem>
 <TabItem label="UI">
@@ -223,7 +223,7 @@ The **UI** and **Prompt** paths name the bucket after the configuration, so your
 
 - **The connection is refused.** A typo in the host or the warehouse. All four of username,
   password, database and schema are the same word here, `HELP_TUTORIAL`, which is easy to read
-  past. The UI has a **Test Connection** button for this; the CLI finds out when the job runs.
+  past. The UI has a **Test Connection** button for this; the CLI finds out when the [job](/management/jobs/) runs.
 - **The job succeeds but a table is empty.** The row is pointing at a table name that exists in a
   different schema. `schema` inside `table` is per row, not inherited from the connection.
 - **You want the configuration back after deleting it.** `kbagent config delete` moves it to the

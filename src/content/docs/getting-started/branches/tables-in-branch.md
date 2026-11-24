@@ -62,7 +62,7 @@ the top menu. The production transformation still contains `LIMIT 5`. Now that y
 can be changed independently without affecting your production transformation, switch back to the branch you created 
 (`Sample branch`).
 
-Navigate to the transformation and run it. Examine the **Mapping** section in the job detail.
+Navigate to the transformation and run it. Examine the **Mapping** section in the [job](/management/jobs/) detail.
 
 ![Mapping in branch](/getting-started/branches/figures/mapping-in-branch.png)
 
@@ -70,7 +70,7 @@ Navigate to the transformation and run it. Examine the **Mapping** section in th
 
 Notice how the **Input** section shows the data loaded from the `bitcoin_price` table, even though you did not run the data source connector in this branch. When a branch version of a table does not exist, Keboola uses the production version as a fall back. 
 
-Also notice that **Output** shows the small yellow branch icon, and the name of the bucket is prefixed with a number,
+Also notice that **Output** shows the small yellow branch icon, and the name of the [bucket](/storage/buckets/) is prefixed with a number,
 `1835-bitcoin`. When you run a component in a branch and the component wants to write to Storage, the outputs do not 
 overwrite production data. Instead a **duplicate bucket prefixed with branch ID** is automatically created. Examine 
 the table and check that it indeed has 10 values as it should.
