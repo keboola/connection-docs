@@ -450,10 +450,21 @@ export function twinParts(content, isMdx, file = 'page') {
  * Grouped by top-level slug segment, and each group is titled with that
  * section's own root page ("storage" -> "Storage") rather than a slug
  * prettified by hand, so the index and the nav cannot drift apart.
+ *
+ * Each entry links to the page's markdown twin, not its HTML: an agent that
+ * follows a link gets the text without the site's navigation, scripts and
+ * styling (the llmstxt.org convention, and what Stripe and dbt do). A page
+ * whose twin was not written (`twin: false`, a slug collision) keeps its HTML
+ * link, because its index.md holds another page's text.
+ *
+ * Exported for scripts/page-markdown.test.ts.
  */
-function buildLlmsTxt(site, siteTitle, pages) {
+export function buildLlmsTxt(site, siteTitle, pages) {
   const byTitle = new Map(pages.map((p) => [p.slug, p.title]));
-  const url = (slug) => new URL(slug ? `/${slug}/` : '/', site).href;
+  const url = (page) => {
+    const path = page.slug ? `/${page.slug}/` : '/';
+    return new URL(page.twin === false ? path : `${path}index.md`, site).href;
+  };
 
   const sections = new Map();
   for (const page of pages) {
@@ -469,8 +480,9 @@ function buildLlmsTxt(site, siteTitle, pages) {
     '> transformations, flows, apps, AI features, and extending the platform with',
     '> your own components.',
     '',
-    'Every page below is also available as plain markdown by appending `index.md` to its',
-    'URL — for example `https://help.keboola.com/storage/index.md`.',
+    'Each link below opens the plain-markdown copy of a page. The same page as HTML is at',
+    'that URL without `index.md`: `https://help.keboola.com/storage/index.md` is the',
+    'markdown of `https://help.keboola.com/storage/`.',
     '',
   ];
 
@@ -502,8 +514,12 @@ function buildLlmsTxt(site, siteTitle, pages) {
 function entry(page, url) {
   const label = String(page.title).replace(/([[\]])/g, '\\$1');
   const description = page.description ? String(page.description).replace(/\s+/g, ' ').trim() : '';
-  const suffix = description ? `: ${description}` : '';
-  return `- [${label}](${url(page.slug)})${suffix}`;
+  // The preamble promises Markdown behind every link; a page without a twin says it links HTML.
+  // The marker goes into the notes, so the entry keeps the llmstxt.org shape `- [name](url): notes`.
+  const html = page.twin === false ? 'HTML page, no Markdown copy.' : '';
+  const notes = [html, description].filter(Boolean).join(' ');
+  const suffix = notes ? `: ${notes}` : '';
+  return `- [${label}](${url(page)})${suffix}`;
 }
 
 export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' } = {}) {
@@ -555,6 +571,7 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
 
           // Never clobber an existing file (e.g. two sources mapping to one slug).
           if (existsSync(mdFile)) {
+            index[index.length - 1].twin = false;
             logger.warn(`Skipping ${fm.slug || '/'} (index.md already exists)`);
             skipped++;
             continue;
