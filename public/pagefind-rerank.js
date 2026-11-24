@@ -170,9 +170,16 @@ async function demotePrefixOnly(ranked, queryWords) {
     (
       await Promise.all(
         checked.map(async (r) => {
-          const loaded = r.result.data();
+          // The UI calls data() again to render the result: hand it this load
+          // rather than a second download. A load that failed is not kept, so
+          // the UI's own call fetches the fragment again.
+          const original = r.result.data;
+          const loaded = original.call(r.result);
           r.result.data = () => loaded;
-          const data = await loaded.catch(() => null);
+          const data = await loaded.catch(() => {
+            r.result.data = original;
+            return null;
+          });
           if (!data?.locations?.length) return null;
           const contentWords = data.content.split(/\s+/);
           const exact = data.locations.filter((location) =>
