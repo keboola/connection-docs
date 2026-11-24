@@ -320,15 +320,16 @@ keboola.ex-http` finds the two connectors again, and the same command with the t
 Check the file before it reaches the project, then create it:
 
 ```bash
-kbagent flow validate --project docs-demo --file @flow.yaml
+kbagent flow validate --project docs-demo --definition-file flow.yaml
 ```
 
 ```bash
-kbagent flow new --project docs-demo --name "Boolabean morning outlook" --file @flow.yaml
+kbagent flow new --project docs-demo --name "Boolabean morning outlook" --definition-file flow.yaml
 ```
 
-It prints the flow's configuration ID, which the next two commands take as `<flow-id>`;
-`kbagent config list --project docs-demo --component-id keboola.flow` finds it again.
+The next two commands take the flow's configuration ID as `<flow-id>`. `flow new` doesn't print
+it; add `--json` to read it from `data.id`, or list it with
+`kbagent config list --project docs-demo --component-id keboola.flow`.
 
 **The schedule** is a separate configuration, and one command upserts it:
 
@@ -342,11 +343,14 @@ kbagent flow schedule --project docs-demo --flow-id <flow-id> --cron '0 6 * * 1'
 kbagent job run --project docs-demo --component-id keboola.flow --config-id <flow-id> --wait
 ```
 
-**Check:** the run's own job and one job per task:
+**Check:** the run's own job and one job per phase:
 
 ```bash
 kbagent job list --project docs-demo --component-id keboola.flow --limit 5
 ```
+
+The task jobs are listed under their own components; `kbagent job list --project docs-demo --limit 10`
+shows them all.
 
 Notifications have no command; they live in the flow's **Notifications** tab, below.
 
