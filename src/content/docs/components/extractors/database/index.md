@@ -1,14 +1,19 @@
 ---
 title: Database Data Source Connectors
+lastUpdated: 2026-11-12
 slug: 'components/extractors/database'
+description: 'Choose query-based or log-based connectors for SQL and NoSQL databases, connect over an SSH tunnel, and fetch changes with CDC or incremental fetching.'
 redirect_from:
   - /extractors/database/
+  - /integrate/database/
 
 ---
 
 
 
 Data source connectors import and integrate data from external sources into the Keboola environment.
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## SQL Databases
 
@@ -34,7 +39,7 @@ This straightforward approach suits most use cases and supports Timestamp-based 
 
 All are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and offer an [advanced mode](/components/extractors/database/sqldb/#advanced-mode).
 
-Their basic configuration is also part of the [Tutorial - Loading Data from Database](/tutorial/load/database/).
+Their basic configuration is also part of [Load from a database](/getting-started/load/database/) in Getting Started.
 
 ### Log-Based Connectors
 
@@ -55,7 +60,7 @@ database, which is quite similar to SQL databases and also supports the [advance
 
 - [MongoDB connector](/components/extractors/database/mongodb/) for the [MongoDB](https://www.mongodb.com/) database and the [CosmosDB for MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction).
 - [CosmosDB connector](/components/extractors/database/cosmosdb/) for the [CosmosDB SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-sql-api).
-- [Azure Storage Table connector](/components/extractors/database/cosmosdb/) for the [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) and the [Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
+- [Azure Storage Table connector](/components/extractors/database/azure-storage-table/) for the [Azure Table storage](https://azure.microsoft.com/en-us/services/storage/tables) and the [Cosmos DB Table API](https://docs.microsoft.com/en-us/azure/cosmos-db/table-introduction).
 
 ## Connecting to Database
 
@@ -69,8 +74,89 @@ consists of an encrypted connection created through an SSH protocol connection. 
 your database server located in your private network that you do not want to be accessed directly from the Internet. The
 SSH connection is encrypted and uses a public-private key pair for user authorization.
 
-Find detailed instructions for setting up an SSH tunnel in the [developer documentation](https://developers.keboola.com/integrate/database/).
-While setting up an SSH tunnel requires some work, it is the most reliable and secure option for connecting to your database server.
+Setting up an SSH tunnel requires some work, but it is the most reliable and secure option for connecting to your database server.
+
+### Setting Up an SSH Tunnel
+
+Before using an SSH tunnel with one of our database connectors, set up an *SSH proxy server* to act as a gateway
+to the private network where your database server resides. The connector then connects to this *SSH proxy server*
+and through it to the database server.
+
+#### 1. Set Up an SSH Proxy Server
+
+Here is a basic example [Dockerfile](https://docs.docker.com/reference/dockerfile/). It runs an `sshd` daemon on
+port 22 with one user, `keboola`, who can log in only with a key. Root login and password login are turned off.
+You can set up the same thing on your server without Docker.
+
+```dockerfile
+FROM ubuntu:24.04
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends openssh-server \
+ && rm -rf /var/lib/apt/lists/* \
+ && mkdir -p /run/sshd
+
+# The user the connector logs in as. '*' means the user has no password, so only a key works.
+RUN useradd --create-home --shell /bin/bash keboola \
+ && usermod -p '*' keboola \
+ && mkdir -p /home/keboola/.ssh \
+ && chmod 700 /home/keboola/.ssh \
+ && chown keboola:keboola /home/keboola/.ssh
+
+# Key login only: no root login, no passwords.
+RUN printf 'PermitRootLogin no\nPasswordAuthentication no\nKbdInteractiveAuthentication no\nPubkeyAuthentication yes\n' \
+      > /etc/ssh/sshd_config.d/keboola.conf
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D", "-e"]
+```
+
+This server should be in the same private network where your database server resides, and it must be publicly
+accessible from the internet via SSH. The default port for SSH is 22, but you can choose a different one.
+
+For more information about setting up SSH on your server, see:
+
+- [OpenSSH server on Ubuntu](https://documentation.ubuntu.com/server/how-to/security/openssh-server/)
+- [All `sshd_config` options](https://man.openbsd.org/sshd_config)
+<!-- Checked 2026-11-24: PermitRootLogin, PasswordAuthentication, KbdInteractiveAuthentication and PubkeyAuthentication are sshd_config options (man.openbsd.org/sshd_config). Not built and run here (no Docker on the checking machine). VERIFY(Nikita): build the Dockerfile once and log in with a key. -->
+
+#### 2. Generate an SSH Key Pair
+
+Set up or edit your database connector in Keboola. Go to **Database Credentials** and check **Enable SSH Tunnel**.
+Generate an SSH key pair and copy the public key to your *SSH proxy server*. Open a shell on the server as the SSH
+user (for the Docker example above: `docker exec -it -u keboola <container> bash`), paste the key into the
+*public.key* file and then append it to the `authorized_keys` file:
+
+```bash
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
+cat public.key >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+```
+
+#### 3. Set Up the Database Connector
+
+- **Host Name** – address of the DB server in your private network
+- **Port** – port number of the DB server
+- **Username** – DB username
+- **Password** – DB password
+- **Database** – DB name
+- **Enable SSH Tunnel** – check to enable
+- **SSH host** – public address of your *SSH proxy server*
+- **SSH user** – user on your *SSH proxy server* with the generated public key
+- **SSH port** – SSH port; the default is 22
+
+Run **Test Credentials** to check that everything is working. Different DB connectors may have different fields,
+but the principle remains the same.
+
+#### Local Tunnel
+
+You can also use your database server itself as the *SSH proxy server* and configure your database to accept
+connections only from localhost. In this case, set the **Host Name** to `127.0.0.1`.
+
+:::caution
+Do **not** use the word `localhost` — our connectors have a problem with it. Use `127.0.0.1` instead.
+:::
 
 ## Change Data Capture (CDC)
 
@@ -122,11 +208,11 @@ The rows are fetched from the source table, including the last fetched value. Th
 ideal to set the ordering column as a primary key so you don't receive duplicated rows in
 the Storage table. You can clear the stored value if you need to fetch the entire table.
 
-This incremental fetching feature is related to [**incremental loading**](/storage/tables/#incremental-loading).
+This incremental fetching feature is related to [**incremental loading**](/storage/tables/incremental-loading/#incremental-loading).
 While not required, it is recommended to turn on incremental loading when fetching data incrementally; otherwise,
 the table in Storage will contain only newly added rows. This may sound like a good idea when you want to
 process only the newly added rows. In that case, however, you should do so using
-[**incremental processing**](/storage/tables/#incremental-processing). The advantage of using incremental processing
+[**incremental processing**](/storage/tables/incremental-loading/#incremental-processing). The advantage of using incremental processing
 over having only newly added rows in a Storage table is that the table contains all loaded data, and it is not necessary
 to synchronize extraction and processing.
 
@@ -157,3 +243,7 @@ The currently supported log-based connectors:
 
 - [MySql CDC](/components/extractors/database/mysql/)
 - [PostgreSQL CDC](/components/extractors/database/postgresql/)
+
+---
+
+**Next:** [MySQL →](/components/extractors/database/mysql/)

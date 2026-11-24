@@ -1,6 +1,8 @@
 ---
 title: Google Calendar
+lastUpdated: 2026-11-19
 slug: 'components/extractors/communication/google-calendar'
+description: 'Download all calendars in your Google account with their events and details, or Google holiday calendars, after you authorize the connector.'
 redirect_from:
     - /extractors/communication/google-calendar/
 ---
@@ -11,15 +13,17 @@ The Google Calendar data source connector uses the [Google Calendar API](https:/
 calendars available in your account, including events and their details (organizer, location, attendees, reminders,
 notifications, attachments, description, etc.). It can also be used for downloading Google owned calendars with all national holidays.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Create New Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Calendar** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Calendar** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 ![Google Calendar - Authorize Account](/components/extractors/communication/google-calendar/google-calendar-1.png)
 
 Select the **configuration template** and save the configuration. 
 There is only one Google Calendar template available so far -- *Get data from Google Calendar*. All your Google Calendar data will be downloaded.
-You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
 
 ![Google Calendar - Save Configuration](/components/extractors/communication/google-calendar/google-calendar-2.png)
 

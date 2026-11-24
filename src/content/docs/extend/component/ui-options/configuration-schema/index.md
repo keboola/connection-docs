@@ -1,5 +1,7 @@
 ---
 title: Configuration Schema
+lastUpdated: 2026-11-18
+description: 'Define a JSON schema so the Keboola UI shows a form instead of a JSON text area: formats, options, the live schema editor, AI Kit, and examples.'
 slug: 'extend/component/ui-options/configuration-schema'
 redirect_from:
     - /extend/registration/configuration-schema/
@@ -66,6 +68,7 @@ The following `options` keys can be used in property definitions:
 | `options.grid_columns` | Number of grid columns (1–12) in `grid`/`grid-strict` layouts |
 | `options.grid_break` | Force a new row in grid layouts |
 | `options.editor` | CodeMirror editor options: `mode`, `lineNumbers`, `lint`, `input_height` |
+| `options.encryption_hint` | Set to `false` to hide the "properties prefixed with `#` will be encrypted" note under a JSON-mode `editor` field. See [Codemirror Editor](/extend/component/ui-options/configuration-schema/examples/#codemirror-jsonsqlpython-editor). |
 | `options.input_height` | Height for textarea fields (e.g., `"100px"`) |
 | `options.inputAttributes` | HTML input attributes (e.g., `placeholder`) |
 | `options.only_keys` | SSH editor variant showing only key fields |

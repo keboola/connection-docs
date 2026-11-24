@@ -1,6 +1,8 @@
 ---
 title: Microsoft SQL
+lastUpdated: 2026-10-14
 slug: 'components/extractors/database/microsoft-sql'
+description: 'Sync SQL Server and Azure SQL data into Keboola with queries, or with native CDC on CDC-enabled tables to capture deletions too.'
 ---
 
 
@@ -9,6 +11,8 @@ slug: 'components/extractors/database/microsoft-sql'
 
 This connector supports the most recent versions of both SQL Server and Azure SQL deployments.
 
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Default Functionality
 
 This [standard SQL database connector](/components/extractors/database/sqldb) performs queries against the source database to synchronize data. 
@@ -16,7 +20,7 @@ It offers a straightforward approach suitable for most use cases, enabling [time
 
 All SQL database connectors are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and offer an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). 
 
-For guidance on basic configuration, please refer to our tutorial: [Loading Data with Database data source connector](/tutorial/load/database/). 
+For the basic configuration, see [Load from a database](/getting-started/load/database/) in Getting Started.
 
 ## CDC (Change Data Capture) Mode
 
@@ -35,7 +39,7 @@ Upon selecting a CDC-enabled table, the `CDC Mode` option will become visible in
 
 ### Functionality
 
-Once you activate the `CDC mode`, the component will synchronize new increments using the system function [`cdc_get_net_changes](https://learn.microsoft.com/en-us/sql/relational-databases/system-functions/cdc-fn-cdc-get-net-changes-capture-instance-transact-sql?view=sql-server-ver16). 
+Once you activate the `CDC mode`, the component will synchronize new increments using the system function [`cdc_get_net_changes`](https://learn.microsoft.com/en-us/sql/relational-databases/system-functions/cdc-fn-cdc-get-net-changes-capture-instance-transact-sql?view=sql-server-ver16). 
 This utilizes dynamic boundaries based on the component state, ensuring that only the most recent changes are retrieved. The primary advantage of this method is its ability to swiftly capture all modifications, **including deletions**.
 
 The table's initial load will undergo a full sync, similar to the standard [incremental fetching](/components/extractors/database/#incremental-fetching) mode. After the initial load, CDC tables come to play.

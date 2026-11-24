@@ -1,13 +1,15 @@
 ---
 title: Transformations
+lastUpdated: 2026-11-19
 slug: 'transformations'
+description: 'Learn how Keboola transformations work, how input and output mapping keep them isolated from Storage, which backends run them, and how to develop them.'
 redirect_from:
     - /manipulation/transformations/
 ---
 
 
 
-*Go to our [Getting Started tutorial](/tutorial/manipulate/) to create your first transformation and learn how transformations 
+*Go to our [Getting Started tutorial](/getting-started/transform/) to create your first transformation and learn how transformations 
 are an integral part of the Keboola workflow.*
 
 **Transformations** allow you to manipulate data in your project. They are the tasks you want to perform
@@ -39,6 +41,8 @@ When the transformation is finished, the **output mapping** process moves the tr
 the designated tables in Storage. The **input** and **output** mappings ensure complete safety of
 the transformation processes -- the transformation always operates in an isolated workspace.
 
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Mapping
 [**Input and output mapping**](/transformations/mappings/) — separates the source data from your transformation. 
 Mapping creates a secure staging area with data copied from the [Storage tables](/storage/tables/) specified in the 
@@ -59,8 +63,9 @@ tables from the input mapping are taken, modified, and produced into the tables 
 
 A backend is the engine running the transformation script. It is a database server
 ([Snowflake](https://www.snowflake.com/),
-[BigQuery](https://cloud.google.com/bigquery),
-[DuckDB](https://duckdb.org/)),
+[BigQuery](https://cloud.google.com/bigquery)),
+an in-process database engine
+([DuckDB](https://duckdb.org/)),
 or a language interpreter 
 ([Python](https://www.python.org/about/),
 [R](https://www.r-project.org/about.html)).
@@ -83,10 +88,10 @@ Choose according to your taste and available libraries.
 ***Note:** Switching between SQL backends requires updating the code into the corresponding SQL dialect.*
 
 ## Developing Transformations
-Transformation scripts are stored in [configurations](/components/#creating-component-configuration), and as such, 
+Transformation scripts are stored in [configurations](/components/configurations/#create-a-configuration), and as such, 
 they share common properties and functions. Particularly important is that all changes are automatically
-[versioned](/components/#configuration-versions), and you can always [roll back](/components/#rollback-version) 
-a configuration or [copy](/components/#copy-configuration) a version to a new transformation.
+[versioned](/components/configurations/#see-the-version-history), and you can always [roll back](/components/configurations/#roll-back-to-an-earlier-version) 
+a configuration or [copy](/components/configurations/#copy-a-configuration) a version to a new transformation.
 
 You can easily develop transformations using the [workspace](/workspace/). It allows you to run 
 and play with your arbitrary transformation scripts on copies of your tables
@@ -197,11 +202,11 @@ Python and R transformations.
     <td>✓</td>
 </tr>
 <tr>
-    <th><a href='/transformations/variables/#shared-code'>Shared code</a></th> 
+    <th><a href='/transformations/shared-code/'>Shared code</a></th> 
     <td>✓</td>
 </tr>
 <tr>
-    <th><a href='/transformations/variables/#variables'>Variables</a></th> 
+    <th><a href='/components/variables/#configuration-variables'>Variables</a></th> 
     <td>✓</td>
 </tr>
 <tr>
@@ -217,9 +222,9 @@ standard [API](https://developers.keboola.com/integrate/storage/api/configuratio
 and run configurations and that creating your own 
 [transformation components](https://developers.keboola.com/extend/component/) is possible.
 
-Transformations support [sharing pieces of code](/transformations/variables/#shared-code), 
+Transformations support [sharing pieces of code](/transformations/shared-code/), 
 encouraging users to create reusable blocks of code. They also support 
-[variables](/transformations/variables/#variables) that can be used to parametrize transformations.
+[variables](/components/variables/#configuration-variables) that can be used to parametrize transformations.
 
 Apart from that, transformations come with [workspaces](/workspace/) (previously named Sandboxes),
 which have many new features, such as loading and unloading data with a running workspace or resuming the workspace.
@@ -266,3 +271,7 @@ When triggered
 With the [read-only input mapping](/transformations/mappings/#read-only-input-mapping) feature, you can access all buckets (your own or linked) in transformations. Your transformation user
 has read-only access to buckets (and their tables), so you can access such data. So, there is no need to specify standard input mapping 
 for your transformations. The name of the backend object (database, schema, etc.) depends on the backend you use, and it contains the bucket ID (not the bucket name).
+
+---
+
+**Next:** [Mappings →](/transformations/mappings/)

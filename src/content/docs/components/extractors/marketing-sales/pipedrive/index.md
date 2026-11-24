@@ -1,17 +1,20 @@
 ---
 title: Pipedrive
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/pipedrive'
+description: 'Import organizations, persons, activities, pipelines and, with the Extended template, deals from Pipedrive with an API token and your company domain.'
 redirect_from:
     - /extractors/marketing-sales/pipedrive/
 ---
 
 
 
-This data source connector uses the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1) to import data 
-from [Pipedrive](https://www.pipedrive.com/en-gb).
+The connector calls the [Pipedrive API](https://developers.pipedrive.com/docs/api/v1).
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Pipedrive** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Pipedrive** connector.
 
 To configure this connector, you need to provide an **API token**. You can get it by clicking the *Get API Token* link. 
 Then enter your **company domain** (if your Pipedrive is at https://keboola.pipedrive.com, your company domain is **keboola**).
@@ -24,6 +27,6 @@ There are two templates available:
 - **Basic** -- downloads organizations, persons, users, pipelines, activities, stages, etc.
 - **Extended** -- downloads also deals and additional fields to the above.
 
-When done, **save** the configuration. You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+When done, **save** the configuration. You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
 
 **Important:** Data is always imported incrementally.

@@ -1,6 +1,8 @@
 ---
 title: OneDrive Files
+lastUpdated: 2026-11-19
 slug: 'components/extractors/storage/onedrive-files'
+description: 'Download files from personal OneDrive, OneDrive for Business or SharePoint into Keboola File Storage with a file path pattern and optional tags.'
 ---
 
 
@@ -10,10 +12,12 @@ The OneDrive Files data source connector downloads files from the [Microsoft One
 The Microsoft OneDrive cloud storage integrates with the [Office365](https://www.office.com/) and [SharePoint](https://www.microsoft.com/en-us/microsoft-365/sharepoint/collaboration) sites. 
 This connector lets you access all your files in your personal or business account.
 
-## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **OneDrive Files** connector.  
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-Then, click **Authorize Account** to [authorize the configuration](/components/#authorization).
+## Configuration
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **OneDrive Files** connector.  
+
+Then, click **Authorize Account** to [authorize the configuration](/components/authorization/).
 
 ### Account Type
 Next, go to the **account configuration** section and select the **Account Type** you are using:

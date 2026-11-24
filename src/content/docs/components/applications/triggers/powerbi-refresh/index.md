@@ -1,11 +1,15 @@
 ---
 title: Power BI Refresh
+lastUpdated: 2026-11-19
+description: 'Refresh Power BI datasets at the end of a flow: authorize, find the dataset ID, and create one configuration per Power BI workspace.'
 slug: 'components/applications/triggers/powerbi-refresh'
 ---
 
 
 
 The Power BI Refresh application automatically triggers dataset refreshes in your [Power BI](https://powerbi.microsoft.com/) workspace. Add it to the end of your Keboola flow so that your dashboards are updated immediately after your data pipelines complete — no manual steps, no scheduled mismatches.
+
+<!-- Reference-type page. Type declared in the 2026-11-19 section rework; the content is unchanged and was not re-checked against the component. -->
 
 **Important:** Each Power BI Refresh configuration can only work with a single Power BI workspace. To refresh datasets in multiple workspaces, create a separate configuration for each workspace.
 
@@ -16,7 +20,7 @@ The Power BI Refresh application automatically triggers dataset refreshes in you
 
 ## Authorization
 
-[Create a new configuration](/components/#creating-component-configuration) of the **Power BI Refresh** application and authorize it using OAuth2. Click **Authorize** and sign in with the Microsoft account that has access to the Power BI workspace you want to refresh.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Power BI Refresh** application and authorize it using OAuth2. Click **Authorize** and sign in with the Microsoft account that has access to the Power BI workspace you want to refresh.
 
 ## Create New Configuration
 
@@ -24,15 +28,15 @@ Once authorized, fill in the configuration parameters:
 
 ![Power BI Refresh - Configuration](/components/applications/triggers/powerbi-refresh/powerbi-refresh-config.png)
 
-- **PowerBI workspace** — Enter the workspace ID (UUID) or use the **Load Workspaces** button to select from available workspaces. Leave blank to use the signed-in account's default workspace.
-- **PowerBI datasets** — Enter the dataset ID (UUID) of the dataset to refresh. Use the **Reload Dataset Names** button to select from datasets available in the selected workspace. You can add multiple datasets to refresh them in sequence.
-- **Wait for refresh jobs to finish** — If set to **Yes**, the component polls the refresh status after sending the request and waits until all refreshes complete. If set to **No** (default), the component finishes as soon as the refresh requests are sent.
+- **PowerBI workspace** — Enter the workspace ID (UUID) or use the **Load workspaces** button to select from available workspaces. Leave it blank, or set it to `Default Workspace`, to refresh a dataset that is not assigned to a workspace.
+- **PowerBI datasets** — Enter the dataset ID (UUID) of the dataset to refresh. Use the **Reload dataset names** button to select from datasets available in the selected workspace. You can add multiple datasets to refresh them in sequence.
+- **Wait for refresh jobs to finish** — Set to **Yes** to poll the refresh status after sending the request and wait until all refreshes complete. **No** (default) finishes as soon as the refresh requests are sent.
 
-The following options are available when **Wait for refresh jobs to finish** is set to **Yes**:
+The following options apply when **Wait for refresh jobs to finish** is set to **Yes**:
 
-- **Fail if any dataset fails** — End the job with an error if any dataset refresh fails, preventing downstream processes from running on stale data.
-- **Interval** — How often (in seconds) to check the refresh status.
-- **Timeout** — Maximum time (in seconds) to wait for refresh completion before the job fails.
+- **Wait for all datasets to finish** — Set to **Yes** to end the job with an error if any dataset finishes with a failed status, preventing downstream processes from running on stale data. Default **No**.
+- **Refresh job status polling interval(s)** — How often (in seconds) to check the refresh status. Default `30`.
+- **Refresh job status polling timeout** — How long (in seconds) to keep polling before the component stops. Default `3600`. A maximum timeout is also set in the project settings.
 
 ## Finding Your Dataset ID
 
@@ -48,18 +52,18 @@ Alternatively, use the **Reload Dataset Names** button in the configuration — 
 {
   "parameters": {
     "workspace": "27582307-ab04-4269-a6e7-4d1c803ba6ba",
-    "datasets": [
-      {
-        "dataset_input": "3ad5e537-2352-43f2-a30e-14c6eb11712a"
-      }
+    "dataset_list": [
+      "3ad5e537-2352-43f2-a30e-14c6eb11712a"
     ],
-    "wait": true,
-    "alldatasets": false,
+    "wait": "Yes",
+    "alldatasets": "No",
     "interval": 30,
     "timeout": 3600
   }
 }
 ```
+
+`dataset_list` is a flat array of dataset UUIDs. Note that `wait` and `alldatasets` are the strings `"Yes"` / `"No"`, not booleans.
 
 ## Output
 

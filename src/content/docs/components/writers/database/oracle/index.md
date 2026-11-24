@@ -1,6 +1,8 @@
 ---
 title: Oracle
+lastUpdated: 2026-11-19
 slug: 'components/writers/database/oracle'
+description: 'Write Keboola tables to an Oracle database with a host, user and service name, then set column types and full or incremental load.'
 redirect_from:
     - /writers/database/oracle/
 ---
@@ -9,8 +11,10 @@ redirect_from:
 
 This data destination connector sends data to an [Oracle](https://www.oracle.com/database/) database.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Oracle** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Oracle** data destination connector.
 
 The first step is to **Set Up Database Credentials**.
 You need to provide a *host name*, *user name*, *password*, and a *service name*.
@@ -67,4 +71,4 @@ fail with the following message:
     Query failed: 'ORA-00955: name is already used by an existing object
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
-[incremental processing](/storage/tables/#incremental-processing).
+[incremental processing](/storage/tables/incremental-loading/#incremental-processing).

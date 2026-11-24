@@ -1,6 +1,8 @@
 ---
 title: YourPass
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/yourpass'
+description: 'Import mobile wallet pass data from YourPass with your username, password and client ID, filtered by project or template ID, in sandbox or production mode.'
 redirect_from:
     - /extractors/other/yourpass/
 ---
@@ -12,8 +14,10 @@ YourPass enables users to create passes for mobile wallets; e.g., for boarding p
 The YourPass data source connector uses the [YourPass API](https://doc.yourpass.eu/) to import data from [YourPass](https://www.yourpass.eu/)
 to Keboola.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **YourPasss** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **YourPasss** connector.
 
 ### Authorization Configuration
 

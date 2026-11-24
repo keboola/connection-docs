@@ -1,15 +1,15 @@
 ---
 title: Pingdom
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/pingdom'
+description: 'Import Pingdom checks, contacts, probes, results, credits and alerts, choosing the last 24 hours or 30 days, with your account login and application API key.'
 redirect_from:
     - /extractors/other/pingdom/
 ---
 
 
 
-This data source connector helps you import data from [Pingdom](https://www.pingdom.com/).
-
-Pingdom is a service for monitoring the uptime and performance of your servers, websites, and web applications.
+[Pingdom](https://www.pingdom.com/) is a service for monitoring the uptime and performance of your servers, websites, and web applications.
 
 ## Create a New Application API Key
 Before you can start configuring your Pingdom connector, you must obtain an application key. To do that, log in to your account on the [Pingdom](https://www.pingdom.com/) site.
@@ -33,7 +33,7 @@ in Keboola.
 ![Pingdom API key](/components/extractors/other/pingdom/05-pingdom-api-key.png)
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Pingdom** data source.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Pingdom** data source.
 Provide credentials of your Pingdom account and the Application Key.
 
 - **Email address** -- your account login name
@@ -48,7 +48,7 @@ Choose the **period** you want to fetch data for.
 - `Last 3O days` -- *Pingdom API provides history only for up to 30 days before the current day*
 
 And finally, select the data **Basic** template and click on **Save**.
-You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
 
 ## Extraction Output Tables
 

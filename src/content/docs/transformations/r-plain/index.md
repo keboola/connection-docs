@@ -1,6 +1,8 @@
 ---
 title: R Transformation
+lastUpdated: 2026-10-13
 slug: 'transformations/r-plain'
+description: 'Write an R transformation that fits the Keboola environment and its limits, load packages, avoid row names in output, and develop it in a workspace or locally.'
 redirect_from:
   - /transformations/r/
 ---
@@ -99,6 +101,8 @@ To speed it up, you can change the backend size in the configuration. R transfor
 - Large
 
 Scaling up the backend size allocates more resources to speed up your transformation, which impacts [time credits consumption](/management/project/limits/#project-power--time-credits).
+R transformations run on the data science backend, so they are billed at the
+**Data Science job / workspace** rates, not the SQL job rates.
 
 ***Note:** Dynamic backends are not available to you if you are on the [Free Plan (Pay As You Go)](/management/payg-project/).*
 

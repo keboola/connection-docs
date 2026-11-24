@@ -1,6 +1,8 @@
 ---
 title: Data Destination Connectors
+lastUpdated: 2026-10-13
 slug: 'components/writers'
+description: 'Data destination connectors send data from Keboola to BI tools, databases, storage services and other systems; a configuration usually serves one destination.'
 redirect_from:
     - /writers/
 
@@ -8,6 +10,8 @@ redirect_from:
 
 Data destination connectors are [Keboola components](/overview/) that take transformed and processed **output data from Keboola**
 and deliver it **into its final destination:** the systems and applications where the data gets used/**consumed**.
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Types of Data Destination Connectors
 We integrate your data into most of the top market systems.
@@ -18,9 +22,11 @@ Data destination connectors can be grouped by their primary purpose:
 
 - **Business Intelligence**: [Tableau](/components/writers/bi-tools/tableau/), [GoodData](/components/writers/bi-tools/gooddata/), [Looker](/components/writers/bi-tools/looker/), and more
 - **Databases**: [MySQL](/components/writers/database/mysql/), [Oracle](/components/writers/database/oracle/), [PostgreSQL](/components/writers/database/postgresql/), [Amazon Redshift](/components/writers/database/redshift/), [Snowflake](/components/writers/database/snowflake/), [Synapse](/components/writers/database/synapse/), and more
+- **ERP**: [mPOHODA](/components/writers/erp/mpohoda/), [POHODA mServer](/components/writers/erp/pohoda-mserver/)
 - **Generic Storage**: [AWS S3](/components/writers/storage/aws-s3/), [Dropbox](/components/writers/storage/dropbox/), [Google Drive](/components/writers/storage/google-drive/),
 [Google Sheets](/components/writers/storage/google-sheets/), [Keboola Storage](/components/writers/storage/storage-api/), and more
 - [Other](/components/writers/other/) data destination connectors such as Azure Event Hub
+- [Generic Writer](/components/writers/generic-writer/) — sends arbitrary HTTP requests to any endpoint when no dedicated connector exists
 
 For a definitive list of usable data destination connectors, see your project **Data Destinations** section.
 
@@ -29,7 +35,7 @@ Each data destination connector can have multiple configurations. Each configura
 Even though destination connectors are generally designed for [**automated and repeated**](/flows/) data collection,
 they can be triggered manually at any time.
 
-We provide tutorials on [writing into Tableau](/tutorial/write/).
+For a worked example, see [Send a table to Google Sheets](/getting-started/write/), which walks one destination end to end.
 
 You can also watch the following videos:
 

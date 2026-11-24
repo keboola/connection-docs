@@ -1,5 +1,7 @@
 ---
 title: Kai - AI Assistant
+lastUpdated: 2026-11-18
+description: 'What Kai can do in your project, why to use it, how it differs from the Keboola MCP Server, how to get started, and where to find security and support details.'
 slug: 'kai'
 ---
 
@@ -21,6 +23,8 @@ Kai is Keboola's embedded AI assistant—a context-aware data engineering co-pil
 
 **Data Modeling** — Build analytical frameworks, dimensional models, and complex data structures.
 
+**Semantic Layer** - Build and maintain your project's [semantic layer](/ai/semantic-layer/) so every AI assistant shares the same definitions of your metrics and business terms.
+
 ## Why Use Kai?
 
 **Context-aware** — Unlike generic AI tools, Kai reads your actual job logs, configurations, and data structures to provide specific solutions.
@@ -39,7 +43,7 @@ Kai is Keboola's embedded AI assistant—a context-aware data engineering co-pil
 
 ## Getting Started
 
-Kai is now in **Public Beta** and available to all users. Look for the **KAI** button in your project's navigation bar.
+Every user on a supported stack can see the **Kai Agent** button in the project's top bar, but the feature has to be switched on first:
 
 - **Organization Admins** can enable Kai directly from the chat screen
 - **Other users** can request access from their Organization Admin or [contact Keboola Support](mailto:support@keboola.com)
@@ -53,6 +57,7 @@ Kai is now in **Public Beta** and available to all users. Look for the **KAI** b
 - [Use Cases & Examples](/kai/use-cases/)
 - [Best Practices](/kai/best-practices/)
 - [Python Client](/kai/python-client/)
+- [Semantic Layer](/ai/semantic-layer/)
 
 ## Security & Privacy
 

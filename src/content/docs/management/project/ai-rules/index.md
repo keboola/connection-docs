@@ -1,5 +1,7 @@
 ---
 title: AI Rules
+lastUpdated: 2026-11-18
+description: 'In AI Rules, you write instructions for the AI features in the Keboola platform.'
 slug: 'management/project/ai-rules'
 ---
 

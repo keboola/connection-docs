@@ -1,5 +1,7 @@
 ---
 title: Custom Python
+lastUpdated: 2026-11-19
+description: 'Run your own Python code in Keboola: pick the Python version, write code in the UI or load it from Git, and add dependencies and encrypted parameters.'
 slug: 'components/applications/custom-python'
 ---
 
@@ -8,6 +10,8 @@ slug: 'components/applications/custom-python'
 This component lets you run custom Python code directly in Keboola. Use it to call external APIs,
 process files, push data to third-party systems, or build any integration that isn't covered by an existing connector —
 all without leaving Keboola.
+
+<!-- Reference-type page. Type declared in the 2026-11-19 section rework; the content is unchanged and was not re-checked against the component. -->
 
 ![Screenshot - Custom Python Component Overview](/components/applications/custom-python/custom-python-0.png)
 
@@ -29,7 +33,7 @@ all without leaving Keboola.
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **Custom Python** application.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Custom Python** application.
 
 ### Python Version
 
@@ -80,9 +84,13 @@ When using **Get from Git repository** as your code source, fill in the reposito
 
 - **Repository URL** — Supports both HTTPS and SSH formats.
 - **Repository Visibility & Authentication** — Choose one of:
-  - **Public – None** — Public repository, no credentials needed.
+  - **None (public repository or organization GitHub App)** — No credentials stored. Use it for a public repository or with the organization GitHub App.
   - **Private – Personal Access Token** — The token is encrypted in Keboola Storage.
   - **Private – SSH Key** — The private key is encrypted in Keboola Storage.
+- **Organization GitHub App** — Select **Use the organization's GitHub App** to clone a private GitHub repository
+  through your organization's GitHub App, without storing credentials. Use an `https://` repository URL and set
+  **Repository Visibility & Authentication** to **None (public repository or organization GitHub App)**.
+  An organization admin has to [connect the GitHub organization](/management/organization/#connect-github) first.
 - **Branch Name** — The branch to check out. Defaults to `main`. Use **List Branches** to pick from the repository.
 - **Script Filename** — The Python file to run. Defaults to `main.py`. Use **List Files** to pick from the repository.
 
