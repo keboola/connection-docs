@@ -288,7 +288,7 @@ real jobs in a real project.
 
 Create a configuration in a test project and set an arbitrary table on its input.
 
-<!-- VERIFY(owner): this paragraph pointed at github.com/keboola/ex-docs-tutorial as the sample
+<!-- VERIFY(Component Factory team): this paragraph pointed at github.com/keboola/ex-docs-tutorial as the sample
      component. That repository returns 404 as of 2026-09-02. Restore the pointer if it comes back,
      or name the cookiecutter skeleton as the sample instead. -->
 

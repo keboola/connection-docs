@@ -267,7 +267,7 @@ to them too: use the [Run Job API call in debug mode](/extend/component/running/
 to obtain the data directory, and specify the full configuration through the `configData` node of
 the [Run Job API call](https://api.keboola.com/?service=job-queue#post-/jobs).
 
-<!-- VERIFY(owner): the two `docker run` recipes that stood here pulled
+<!-- VERIFY(Component Factory team): the two `docker run` recipes that stood here pulled
      quay.io/keboola/{r,python}-transformation:latest. Verified 2026-09-02: both images were last
      tagged in 2021 (python 1.6.1, 23 Aug 2021; r 2.1.0, 09 Sep 2021), keboola/python-transformation-v2
      was archived on 2026-08-06, and no public successor repository is reachable — so a reader
