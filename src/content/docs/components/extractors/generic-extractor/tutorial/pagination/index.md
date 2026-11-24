@@ -1,9 +1,13 @@
 ---
 title: Pagination Tutorial
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/tutorial/pagination'
+description: 'Generic Extractor tutorial on pagination: configure the offset method for the MailChimp API and run the extraction over several pages.'
 redirect_from:
     - /extend/generic-extractor/tutorial/pagination/
 ---
+
+<!-- Tutorial-type page. Part of the Generic Extractor tutorial chain; nav order is the reading order. -->
 
 
 Pagination breaks a result with a large number of items into separate pages and is used very commonly in 
@@ -165,3 +169,5 @@ getting incomplete data. The next two parts of our tutorial deal with setting up
 		(resources) to be extracted.
 - [Mapping](/components/extractors/generic-extractor/tutorial/mapping/) — describes how the JSON 
 		response is converted into CSV files that will be imported into Storage.
+
+**Next:** [Jobs →](/components/extractors/generic-extractor/tutorial/jobs/)

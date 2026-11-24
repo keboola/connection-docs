@@ -1,26 +1,45 @@
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import starlight from '@astrojs/starlight';
 import starlightImageZoom from 'starlight-image-zoom';
+import sitemap from '@astrojs/sitemap';
 import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
 import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
+import externalLinks from './src/integrations/external-links.mjs';
+import pagefindTitles from './src/integrations/pagefind-titles.mjs';
+import { sitemapOptions } from './src/integrations/sitemap-lastmod.mjs';
+import { remarkStripComments } from './src/integrations/strip-comments.mjs';
+import { remarkAgentOnly } from './src/integrations/agent-only.mjs';
+
+const SITE = 'https://help.keboola.com';
+
+/* Shared so the llms.txt heading cannot drift from the site's own title. */
+const SITE_TITLE = 'Keboola User Documentation';
 
 export default defineConfig({
-  site: 'https://help.keboola.com',
+  site: SITE,
   trailingSlash: 'always',
+  /* Astro 7 defaults to 'jsx', which drops the space where text and an inline
+     element meet across a line break ("region at\n<a>" -> "region at<a>").
+     `true` is the Astro 6 behaviour our .astro templates are written for. */
+  compressHTML: true,
   build: {
     format: 'directory',
   },
   markdown: {
-    remarkPlugins: [beaconTransforms],
+    // :::agent blocks are for the markdown twin only; see agent-only.mjs.
+    remarkPlugins: [remarkStripComments, remarkAgentOnly, beaconTransforms],
+    // Links that leave help.keboola.com open in a new tab; see the plugin's header.
+    rehypePlugins: [externalLinks],
   },
   integrations: [
     redirectFrom(),
-    pageMarkdown(),
+    pageMarkdown({ siteTitle: SITE_TITLE }),
     starlight({
-      title: 'Keboola User Documentation',
+      title: SITE_TITLE,
       favicon: '/favicon.ico',
       // We ship our own 404 (src/pages/404.astro) so it can drop the doc-page
       // chrome and host the InkDash game. Without this, Starlight's built-in
@@ -54,8 +73,23 @@ export default defineConfig({
         Footer: './src/components/Footer.astro',
         // Adds a header link to the Keboola API reference (api.keboola.com).
         SocialIcons: './src/components/SocialIcons.astro',
+        // Empty: PageTitle.astro already shows the date in the page's meta row,
+        // and Starlight would print it a second time in the footer.
+        LastUpdated: './src/components/LastUpdated.astro',
       },
       pagination: true,
+      // The date PageTitle.astro renders as "Updated <date>". Every page carries
+      // it in frontmatter, written by scripts/gen-last-updated.mjs — Starlight
+      // prefers that over git and never shells out for it.
+      //
+      // It has to be precomputed. Starlight's own lookup runs `git log` during
+      // the build, and on Vercel that fails on every page: a probe deployed to
+      // a preview found `.git` present and `git --version` working, but every
+      // other git command failing, `rev-parse --git-dir` included. It is not a
+      // shallow clone — `git fetch --unshallow` and publishing `safe.directory`
+      // both changed nothing (PR #1134, four preview deploys). The workflow
+      // .github/workflows/sync-last-updated.yml refreshes the dates weekly.
+      lastUpdated: true,
       editLink: {
         baseUrl: 'https://github.com/keboola/connection-docs/edit/main/',
       },
@@ -65,5 +99,11 @@ export default defineConfig({
     // pipe tables as literal text — visible corruption, and the reason no page
     // could safely be converted from .md before now.
     mdx({ gfm: true }),
+    // Must come AFTER starlight(): it reads the Pagefind index Starlight
+    // builds in the same astro:build:done hook.
+    pagefindTitles(),
+    // Starlight adds this itself when the config has none; ours adds each
+    // page's lastUpdated date as <lastmod> (see sitemap-lastmod.mjs).
+    sitemap(sitemapOptions({ contentDir: fileURLToPath(new URL('./src/content/docs/', import.meta.url)), site: SITE })),
   ],
 });

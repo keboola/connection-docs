@@ -1,16 +1,22 @@
 ---
 title: Data Streams Tutorial
+lastUpdated: 2026-11-19
+description: Set up a data stream that loads GitHub issue events from a webhook into a Storage table.
 slug: 'storage/data-streams/tutorial'
+sidebar:
+  label: Tutorial
 redirect_from:
     - /integrate/data-streams/tutorial/
     - /integrate/push-data/tutorial/
 ---
 
+In this tutorial, we will set up a [data stream](/storage/data-streams/) for the [`issues`](https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issues) event from GitHub Webhooks. This will allow you to monitor and analyze activity related to issues in any of your GitHub repositories.
+
+<!-- Tutorial-type page. Source: the Stream API OpenAPI specification, as the note below says. Not re-run during the 2026-11-19 section split. -->
+
 :::note
 The request shapes below follow the current [Stream API OpenAPI spec](https://stream.keboola.com/v1/documentation/openapi3.json) (sources + sinks model). The JSON response snippets are illustrative — copy the actual values (e.g. the ingest URL) from your own API responses.
 :::
-
-In this tutorial, we will set up a data stream for the [`issues`](https://docs.github.com/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#issues) event from GitHub Webhooks. This will allow you to monitor and analyze activity related to issues in any of your GitHub repositories.
 
 ## Prerequisites
 
@@ -207,7 +213,9 @@ curl --request DELETE "https://stream.keboola.com/v1/branches/default/sources/gi
 
 3. Optionally drop the `in.c-github` bucket in Storage if you no longer need the collected data.
 
-## Next Steps
+## See also
 
-- [Data Streams Reference](/storage/data-streams/reference/)
+- [Data Streams reference](/storage/data-streams/reference/)
 - [Stream API Reference](https://stream.keboola.com/v1/documentation/)
+
+**Next:** [Create and configure a data stream →](/storage/data-streams/create/)

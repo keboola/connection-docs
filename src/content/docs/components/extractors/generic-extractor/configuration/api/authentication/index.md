@@ -1,9 +1,13 @@
 ---
 title: Authentication
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/configuration/api/authentication'
+description: 'The authentication key in Generic Extractor supports query, basic, login and OAuth methods; the UI adds bearer token, API key and client credentials.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/
 ---
+
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
 
 *To configure your first Generic Extractor, follow our [tutorial](/components/extractors/generic-extractor/tutorial/).*
 *Use [Parameter Map](/components/extractors/generic-extractor/map/) to help you navigate among various

@@ -1,6 +1,8 @@
 ---
 title: Instagram
+lastUpdated: 2026-11-19
 slug: 'components/extractors/social/instagram'
+description: 'Extract Instagram Business Account media, comments and insights through a connected Facebook page, with queries that set the endpoint and fields.'
 redirect_from:
     - /extractors/social/instagram/
 ---
@@ -15,12 +17,14 @@ In order to access a business account's data, users have to authorize a Facebook
 that is connected to an [Instagram Business Account](https://business.instagram.com/getting-started). The rest of 
 the configuration process is almost identical to configuring the [Facebook](/components/extractors/social/facebook/) connector.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
 Before you begin, make sure you have a Facebook page, a role on that page, and an Instagram account. The Facebook 
 page needs to be [connected to the Instagram Business Account](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/get-started/).
 
-[Create a new configuration](/components/#creating-component-configuration) of the **Instagram** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with a Facebook account 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Instagram** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/) with a Facebook account 
 with access to the Facebook page you have the Instagram Business Account connected to.
 You will be asked for the `instagram_basic,instagram_manage_insights,pages_show_list` [permissions](https://developers.facebook.com/docs/facebook-login/permissions).
 Optionally, you can use `Direct token insert` to specify a manually generated access token.

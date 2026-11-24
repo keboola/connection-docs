@@ -1,6 +1,8 @@
 ---
 title: Relational Sync Data Source Connectors for SQL Databases
+lastUpdated: 2026-11-19
 slug: 'components/extractors/database/sqldb'
+description: 'Set up a query-based SQL database connector, select tables or write an advanced-mode query, and read the notes for MySQL, SQL Server, Snowflake and others.'
 redirect_from:
     - /extractors/database/sqldb/
 
@@ -21,10 +23,12 @@ in the section [Server Specific Notes](#server-specific-notes).
 Before you start configuring your SQL data source connector, consider [setting up an SSH tunnel](/components/extractors/database/#connecting-to-database) to secure your connection to your internal database and 
 avoid exposing your database server to the Internet.
 
-***Note:** Our [tutorial](/tutorial/load/database/) also includes a quick introduction to extracting data from the Snowflake Database Server.*
+***Note:** Our [tutorial](/getting-started/load/database/) also includes a quick introduction to extracting data from the Snowflake Database Server.*
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Initial Setup
-After you [create a configuration](/components/#creating-component-configuration), the first step is to configure database credentials using the **Set Up Credentials First** button:
+After you [create a configuration](/components/configurations/#create-a-configuration), the first step is to configure database credentials using the **Set Up Credentials First** button:
 
 ![Screenshot - Configure Credentials Start](/components/extractors/database/sqldb/sqldb-1.png)
 
@@ -50,10 +54,10 @@ If you want to modify the table extraction setup, click on the corresponding row
 ![Screenshot - Table Detail](/components/extractors/database/sqldb/sqldb-5.png)
 
 You can modify the source table, limit the extraction to specific columns, or change the destination table name in
-[Storage](/storage/). The table detail also allows you to define a [**primary key**](/storage/tables/#primary-keys)
-and [**incremental loading**](/storage/tables/#incremental-loading).
-We highly recommend you define a **primary key** where possible. [Primary keys](/storage/tables/#primary-keys) substantially
-speed up the data loads and further table processing. Also, [incremental loading](/storage/tables/#incremental-loading) should be used when possible, which considerably speeds up the data loads.
+[Storage](/storage/). The table detail also allows you to define a [**primary key**](/storage/tables/incremental-loading/#primary-keys)
+and [**incremental loading**](/storage/tables/incremental-loading/#incremental-loading).
+We highly recommend you define a **primary key** where possible. [Primary keys](/storage/tables/incremental-loading/#primary-keys) substantially
+speed up the data loads and further table processing. Also, [incremental loading](/storage/tables/incremental-loading/#incremental-loading) should be used when possible, which considerably speeds up the data loads.
 Both options require knowledge of the source table, so don't turn them on blindly.
 
 ### Advanced Mode

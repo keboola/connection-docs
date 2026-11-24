@@ -1,9 +1,13 @@
 ---
 title: Generic Extractor Parameter Map
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/map'
+description: 'A sample Generic Extractor configuration that shows where each option goes, including api pagination and authentication, config jobs, mappings and iterations.'
 redirect_from:
     - /extend/generic-extractor/map/
 ---
+
+<!-- Explanation-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
 
 *To configure your first Generic Extractor, follow our [tutorial](/components/extractors/generic-extractor/tutorial/).*
 
@@ -160,3 +164,7 @@ Use the following sample configuration to navigate among various **configuration
     }
 }
 ```
+
+---
+
+**Next:** [Functions →](/components/extractors/generic-extractor/functions/)

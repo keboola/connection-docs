@@ -1,9 +1,13 @@
 ---
 title: AWS Signature
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/configuration/aws-signature'
+description: 'Sign Generic Extractor API requests with AWS Signature Version 4 using aws.signature credentials: accessKeyId, #secretKey, serviceName and regionName.'
 redirect_from:
     - /extend/generic-extractor/configuration/aws-signature/
 ---
+
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
 
 
 Generic Extractor allows signing requests with [**AWS Signature Version 4**](https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
@@ -29,7 +33,7 @@ A sample AWS signature configuration looks like this:
 
 See [example [EX143]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/143-aws-signature-request).
 
-## AWS Signature Credentials
+## AWS signature credentials
 - **accessKeyId** — AWS access key ID
 - **#secretKey** — AWS secret access key
 - **serviceName** — Signing to a particular service name

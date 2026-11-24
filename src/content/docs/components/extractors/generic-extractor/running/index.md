@@ -1,9 +1,13 @@
 ---
 title: Running Generic Extractor
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/running'
+description: 'Turn on debug mode to see every request Generic Extractor sends, run it locally in Docker with a config.json, and run the documented examples.'
 redirect_from:
     - /extend/generic-extractor/running/
 ---
+
+<!-- How-to-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
 
 
 Generic Extractor is normally run from within the Keboola user interface. It can be found in the **Extractors** section
@@ -12,7 +16,7 @@ and all you need to do is provide its configuration JSON. No other settings are 
 Because creating the configuration JSON can be a non-trivial task, there are some things which can help
 you in developing the configuration.
 
-## Debug Mode
+## Debug mode
 Debug mode can be turned on by setting `"debug": true` in the `config` section of the configuration, e.g.:
 
 ```json
@@ -36,13 +40,13 @@ why something is skipped, etc.
 visible in the events. Also, debug mode considerably slows the extraction. Therefore it should never
 be turned on in production configurations.
 
-## Running Locally
+## Running locally
 If you are working on a complicated configuration, or developing a new component based on
 Generic Extractor, running every configuration from the Keboola UI may be slow and tedious.
 You may run Generic Extractor locally, provided that you have access to Docker.
 The following is **not necessary** to run or configure Generic Extractor in Keboola.
 
-### Run Built Version
+### Run built version
 Create an empty directory somewhere and in it create a `config.json` file with a
 configuration you want to execute. For example:
 
@@ -117,9 +121,9 @@ When you store such configuration in the Keboola UI, it will automatically be en
 ```
 
 The above configuration then **cannot** be run locally.
-Read more about [encryption](/overview/encryption/).
+Read more about [encryption](/extend/encryption/).
 
-### Building and Running the Image
+### Building and running the image
 To build the container from source:
 
 - Clone this repository: `git clone https://github.com/keboola/generic-extractor.git`.
@@ -137,7 +141,7 @@ To run the built container:
 Before running the extractor again, it is recommended to clear the `out` directory by
 running `docker compose run --rm extractor rm -rf data/out`.
 
-## Running Examples
+## Running examples
 [All examples](https://github.com/keboola/generic-extractor/tree/master/doc) referenced in this documentation are actually runnable against the proper API. Because
 it is difficult to find the specific API for the case (and gain access to it), you can test
 these configurations against a [mock server](https://github.com/keboola/ex-generic-mock-server).
@@ -153,3 +157,7 @@ To run the examples:
 - Or run all examples by executing `./run-samples.sh`.
 
 If you want to create your own example, follow the instructions in the [mock server repository](https://github.com/keboola/ex-generic-mock-server/blob/master/README.md#creating-examples).
+
+---
+
+**Next:** [Publishing Component →](/components/extractors/generic-extractor/publish/)

@@ -1,16 +1,20 @@
 ---
 title: Publish Generic Extractor
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/publish'
+description: 'Publish a Generic Extractor configuration as a separate component: design a configuration schema, register it in the Developer Portal, reuse it in projects.'
 redirect_from:
     - /extend/generic-extractor/publish/
     - /extend/generic-extractor/registration/
 ---
 
+<!-- How-to-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
 
 It is possible to publish a Generic Extractor configuration as a completely separate component.
 This enables sharing the API extractor between various projects and simplifies its further configuration.
 
-## Configuration Considerations
+## Configuration considerations
 Before converting your configuration to a universally available component, consider
 what values in the configuration should be provided by the end-user (typically authentication values).
 Then design a [configuration schema](/extend/component/ui-options/configuration-schema/) for setting
@@ -19,7 +23,7 @@ The values obtained from the end user will be stored in the [`config` property](
 Modify your configuration to read those values from there.
 
 Do not forget that if you prefix a value with a hash `#`, it will be
-[encrypted](/overview/encryption/) once the configuration is saved.
+[encrypted](/extend/encryption/) once the configuration is saved.
 Also, try to make the extractor [work incrementally](/components/extractors/generic-extractor/incremental/)
 if possible.
 

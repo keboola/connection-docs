@@ -1,8 +1,13 @@
 ---
 title: Conditional Flows
+lastUpdated: 2026-11-23
 slug: 'flows'
+description: 'Build a conditional flow in Keboola with phases, parallel tasks, conditions, retries and notifications, then run it, schedule it and check its run history.'
 redirect_from:
     - /flows/conditional-flows/
+    - /transformations/dbt/flows/
+    - /automate/
+    - /integrate/orchestrator/
 ---
 
 Flows allow you to build automated data pipelines with conditional logic, branching, retries, and robust error handling. You can define flows that react to the outcome of previous steps, dynamically control their next action, or even skip tasks entirely.
@@ -50,11 +55,15 @@ Select a task in the Builder to open its settings.
 
 - Failure handling is expressed through [conditions](#conditions) instead of a "Continue on Failure" toggle — you can branch on task or phase status (e.g., `if status == 'error' then ...`) to send notifications, run fallback logic, or end the flow. To let selected tasks fail while the rest of the phase must succeed, use the [Continue on Failure](#4-continue-on-failure) condition subject. See also [Retry](#retry) for automatic retries of failed tasks.
 
-- To modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**.
+- To modify the parameters sent to the underlying [API call](/extend/jobs/#run-a-job), you can set **Task Parameters**.
 Select the task and click **Set advanced parameters**. When finished, click **Set**. A common use is
-overriding a [variable](/components/variables/#task-parameters-on-a-single-task) for that one task.
+overriding a [variable](/components/variables/use/#override-a-variable-on-one-flow-task) for that one task.
 
 ![The Task Parameters editor, pre-filled with the task's type, mode, componentId, and configId](/flows/task-parameters-modal.png)
+
+### Start an app
+
+A Keboola [app](/data-apps/) can be a task too: pick it on the **Apps** tab when you add a component. Put it after the tasks that update its data: by default, each run restarts the app so it loads the fresh tables. What the task does and how to configure it: [Start the app from a flow](/data-apps/operate/#start-the-app-from-a-flow).
 
 ## Conditions
 
@@ -89,7 +98,7 @@ You can use logical operators (AND) and (OR) to combine multiple statements with
 
 ### 3. What the Condition Compares (Subject)
 
-Every statement starts with a **subject** - the thing the flow looks at. The picker offers two tabs: **Phases / Tasks** and **Variables** (see [Using Variables in Conditions](/components/variables/#using-variables-in-conditions)).
+Every statement starts with a **subject** - the thing the flow looks at. The picker offers three tabs: **Phases / Tasks**, **Variables** and **Functions** (see [Using Variables in Conditions](/components/variables/use/#use-a-variable-in-a-condition)).
 
 In the **Phases / Tasks** tab you can choose:
 
@@ -100,7 +109,7 @@ In the **Phases / Tasks** tab you can choose:
 | ***phase* > All Tasks in Phase** | Passes only when **every** task in that phase matches. |
 | ***phase* > Any Task in Phase** | Passes when **at least one** task in that phase matches. |
 | ***phase* > Continue on Failure** | Passes when **every** task in that phase succeeded, except the tasks you explicitly allow to fail. See [Continue on Failure](#4-continue-on-failure). |
-| ***phase* > *task*** | A single field from that task's job result (browse the result tree, as with [Dynamic Value](/components/variables/#dynamic-value) variables). |
+| ***phase* > *task*** | A single field from that task's job result (browse the result tree, as with [Dynamic Value](/components/variables/use/#dynamic-value) variables). |
 
 For the aggregated subjects (*Any Task in the Flow*, *All Tasks in Phase*, *Any Task in Phase*), the field is picked from a short list that applies to any task: **Job Status**, **Job Duration**, **Error Message**, **Count of output tables**, **Sum of imported rows**, and **Min of imported rows**.
 
@@ -218,6 +227,7 @@ What runs:
 
 - Only the selected tasks. **Conditions are ignored** — the selected phases run one after another, including phases in different branches of a condition, and a phase several branches lead into runs only once. Phases with nothing selected are skipped.
 - Tasks selected within one phase still run in parallel, as they do in a normal run.
+- Notification tasks: if selected, they send their notification regardless of the condition.
 - Disabled tasks and tasks with a missing, invalid, or deleted configuration cannot be selected.
 - A failed task does not stop the run — every selected task runs, and the flow's status is the status of its last phase, so check the individual tasks in the run.
 
@@ -248,6 +258,8 @@ click **Set Up Schedule**. The dialog works in UTC and previews the next runs be
 **Triggers:** Set flows to automatically start when certain Storage tables are updated (ideal for managing dependencies across projects). Your projects will stay synchronized and run efficiently.
 
 *Note on Triggers: If table updates happen during the cool-down period, the trigger is suppressed, but the tables are marked as ready. Therefore, if all configured tables are updated during the cool-down period, the flow is not scheduled at that time — but once the cool-down expires and any table is updated (causing the trigger to be evaluated), the system recognizes that all tables are already up to date and runs the flow immediately.*
+
+To schedule any configuration, or a single configuration row, through the API, see [Schedule via the API](/flows/schedule-api/).
 
 ## Check Run History
 

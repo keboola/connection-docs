@@ -1,15 +1,19 @@
 ---
 title: Basic Authentication
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/basic'
+description: 'Set up basic HTTP authentication in Generic Extractor: a username and password sent in the Authorization header, in the UI or with the basic type.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/basic/
 ---
+
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
 
 Basic Authentication provides the [HTTP Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication)
 method. It requires entering a username and password in the configuration and sends the encoded values in the 
 `Authorization` header. 
 
-### User Interface
+### User interface
 
 In the user interface, you simply select the `Basic Authorization` method and enter the username and password.
 
@@ -35,15 +39,15 @@ A sample Basic authentication looks like this:
 ```
 
 The `username` and `password` fields are part of the [`config` section](/components/extractors/generic-extractor/configuration/config/). 
-They are also prefixed by the hash `#` character, which means they are stored [encrypted](/overview/encryption/). 
+They are also prefixed by the hash `#` character, which means they are stored [encrypted](/extend/encryption/). 
 If the API expects something else than a username and password in the `Authorization` header, or if it requires 
 a custom authorization header, use the [Default Headers option](/components/extractors/generic-extractor/configuration/api/#headers).
 
-## Configuration Parameters
+## Configuration parameters
 This `basic` type of authentication has no configuration parameters. The login and password must be provided in the 
 [`config` section](/components/extractors/generic-extractor/configuration/config/) of the Generic Extractor configuration.
 
-## Basic Configuration Example
+## Basic configuration example
 Assume you have an API which requires you to use the HTTP Basic authentication to send the login and password in 
 the `Authorization` header. Assume that your login is `JohnDo` and password is `secret`. The following 
 configuration solves the situation:

@@ -1,12 +1,16 @@
 ---
 title: UI Element Examples
+lastUpdated: 2026-10-13
 slug: 'extend/component/ui-options/configuration-schema/examples'
+description: 'Copy JSON schema snippets for common configuration form fields such as passwords, checkboxes, multi selects, code editors, date pickers and conditional fields.'
 
 ---
 
 
 [JSON schema](https://json-schema.org/) allows for design of some advanced UI elements. Some of these are often reused 
 in many components. This page contains a list of the commonly used UI elements and some advanced tips for UI design.
+
+<!-- Reference-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ### API Token & Secret Values
 
@@ -147,7 +151,7 @@ Available modes: `text/x-sfsql`, `text/x-sql`, `text/x-plsql`, `text/x-python`, 
 JSON mode supports encryption. Default mode is `application/json` . You should set type base on mode (string or object).
 
 A JSON-mode editor stores the parsed JSON, so keys prefixed with `#` inside the field are
-[encrypted](/overview/encryption/) on save. The UI states this in a note below the editor. If the field does not hold
+[encrypted](/extend/encryption/) on save. The UI states this in a note below the editor. If the field does not hold
 Keboola configuration (a vendor query filter, a request payload template), that note advertises something the component
 cannot use — the platform would encrypt the key and the component would receive the ciphertext. Hide the note with
 `options.encryption_hint: false`:
