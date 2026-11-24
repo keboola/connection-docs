@@ -1,5 +1,6 @@
 ---
 title: Data Streams
+lastUpdated: 2026-11-19
 description: 'What Data Streams are and how they work: the HTTP and OpenTelemetry (OTLP) source types, how events reach a Storage table, and a map of the section.'
 slug: 'storage/data-streams'
 redirect_from:

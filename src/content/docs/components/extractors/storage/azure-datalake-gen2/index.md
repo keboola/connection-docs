@@ -1,5 +1,6 @@
 ---
 title: Azure Datalake Gen 2
+lastUpdated: 2026-11-19
 slug: 'components/extractors/storage/azure-datalake-gen2'
 description: 'Load CSV files from an Azure Datalake Gen2 file system into Keboola tables with an account name and key, and set wildcards and CSV options.'
 redirect_from:

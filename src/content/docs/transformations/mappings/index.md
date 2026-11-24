@@ -1,5 +1,6 @@
 ---
 title: Input and Output Mapping
+lastUpdated: 2026-11-20
 slug: 'transformations/mappings'
 description: 'Set up input and output mapping for a transformation, including load types, read-only input mapping, partition-aware import and Direct Mode output mapping.'
 search_keywords: [input mapping, output mapping]

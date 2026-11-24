@@ -1,5 +1,6 @@
 ---
 title: Debug mode
+lastUpdated: 2026-11-20
 slug: 'components/debug-mode'
 sidebar:
   label: Debug Mode

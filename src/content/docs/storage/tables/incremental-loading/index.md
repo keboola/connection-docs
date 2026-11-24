@@ -1,5 +1,6 @@
 ---
 title: Primary keys and incremental loading
+lastUpdated: 2026-11-20
 slug: 'storage/tables/incremental-loading'
 sidebar:
   label: Primary Keys & Incremental Loading

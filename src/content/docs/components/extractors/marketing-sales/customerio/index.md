@@ -1,5 +1,6 @@
 ---
 title: Customer IO
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/customerio'
 description: 'Extract campaigns, segments, messages, customers and activities from Customer.io with an App API key, and choose how activity data is parsed into tables.'
 ---

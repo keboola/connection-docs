@@ -1,5 +1,6 @@
 ---
 title: HTTP
+lastUpdated: 2026-11-19
 slug: 'components/extractors/storage/http'
 description: 'Download a CSV file or a ZIP or GZ archive from an HTTP or HTTPS base URL into a Keboola table, one file per configuration row.'
 redirect_from:

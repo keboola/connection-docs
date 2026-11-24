@@ -1,5 +1,6 @@
 ---
 title: /data/out/tables manifests
+lastUpdated: 2026-11-20
 description: 'The optional fields of a /data/out/tables manifest, such as destination and columns, which control how your component''s table loads to Storage.'
 slug: 'extend/common-interface/manifest-files/out-tables-manifests'
 ---

@@ -1,5 +1,6 @@
 ---
 title: Relational Sync Data Source Connectors for SQL Databases
+lastUpdated: 2026-11-19
 slug: 'components/extractors/database/sqldb'
 description: 'Set up a query-based SQL database connector, select tables or write an advanced-mode query, and read the notes for MySQL, SQL Server, Snowflake and others.'
 redirect_from:

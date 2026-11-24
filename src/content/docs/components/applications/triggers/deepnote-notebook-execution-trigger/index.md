@@ -1,5 +1,6 @@
 ---
 title: Deepnote Notebook Execution Trigger
+lastUpdated: 2026-11-19
 description: 'Trigger a Deepnote notebook run from Keboola: create an API key, find the notebook and project IDs, and configure the trigger. It does not monitor the run.'
 slug: 'components/applications/triggers/deepnote-notebook-execution-trigger'
 ---

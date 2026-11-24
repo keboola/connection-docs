@@ -1,5 +1,6 @@
 ---
 title: Other Data Destination Connectors
+lastUpdated: 2026-10-13
 slug: 'components/writers/other'
 description: 'Send Keboola data where no BI, database or storage connector fits, such as events to Azure Event Hubs, passes to YourPass, or any HTTP endpoint.'
 redirect_from:

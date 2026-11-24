@@ -1,5 +1,6 @@
 ---
 title: ChartMogul
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/chartmogul'
 description: 'Fetch activities, customers, subscriptions, invoices and key metrics from ChartMogul with an active Read API key, choosing one endpoint per row.'
 redirect_from:

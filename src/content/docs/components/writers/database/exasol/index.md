@@ -1,5 +1,6 @@
 ---
 title: Exasol
+lastUpdated: 2026-11-19
 slug: 'components/writers/database/exasol'
 description: 'Write Keboola tables to Exasol SaaS with a personal access token or to a self-hosted Exasol with a password, then set column types and load mode.'
 redirect_from:

@@ -1,5 +1,6 @@
 ---
 title: Implementation Notes
+lastUpdated: 2026-11-18
 description: 'Good practices for writing component code: the conventions to follow in every component, especially one you want to publish.'
 slug: 'extend/component/implementation'
 redirect_from:

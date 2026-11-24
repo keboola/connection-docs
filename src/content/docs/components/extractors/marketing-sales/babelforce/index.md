@@ -1,5 +1,6 @@
 ---
 title: Babelforce
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/babelforce'
 description: 'Import all call data from the Babelforce call center platform with an API Access ID and token, using the Basic template, always as incremental loads.'
 redirect_from:

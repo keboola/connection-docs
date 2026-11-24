@@ -1,5 +1,6 @@
 ---
 title: 'Multi-Project Architecture Guide'
+lastUpdated: 2026-11-12
 slug: 'overview/onboarding/architecture-guide'
 description: 'Choose how to split your work across Keboola projects (vertical, horizontal or hybrid split designs) and understand the trade-offs of each.'
 redirect_from:

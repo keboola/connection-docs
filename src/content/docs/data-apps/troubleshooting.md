@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting
+lastUpdated: 2026-10-08
 slug: 'data-apps/troubleshooting'
 description: "What to do when a Keboola app doesn't start, doesn't behave, or won't let people in: where the evidence is, the usual causes, and the fix for each."
 ---

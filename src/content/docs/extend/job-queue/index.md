@@ -1,5 +1,6 @@
 ---
 title: Job Queue
+lastUpdated: 2026-10-13
 slug: 'extend/job-queue'
 description: 'Explains how Job Queue runs a component image and handles its authentication, isolation and data mapping, and lists the configuration nodes it reads.'
 redirect_from:

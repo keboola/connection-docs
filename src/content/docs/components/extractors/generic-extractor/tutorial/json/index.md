@@ -1,5 +1,6 @@
 ---
 title: JSON Introduction
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/tutorial/json'
 description: 'Learn how JSON describes data with objects, arrays, properties and typed values, and how to refer to a property with dot notation.'
 redirect_from:
