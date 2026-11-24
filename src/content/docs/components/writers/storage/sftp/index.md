@@ -1,5 +1,6 @@
 ---
 title: SFTP
+lastUpdated: 2026-11-19
 slug: 'components/writers/storage/sftp'
 description: 'Write Keboola tables and files to an SFTP server with a password or private key, set the remote path, and optionally add a timestamp to file names.'
 redirect_from:

@@ -1,5 +1,6 @@
 ---
 title: Adform DSP Reports
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/adform-dsp-reports'
 description: 'Extract Adform Buy-Side report data from the Reporting Stats API with client credentials, choosing dimensions, up to ten metrics, a date range and load type.'
 redirect_from:

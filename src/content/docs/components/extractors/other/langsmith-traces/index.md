@@ -1,5 +1,6 @@
 ---
 title: LangSmith Traces
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/langsmith-traces'
 description: Extract the run history and feedback of your LangSmith projects into two incremental Storage tables.
 search_keywords: [langsmith, langchain, traces]

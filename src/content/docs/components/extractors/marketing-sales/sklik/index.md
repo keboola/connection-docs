@@ -1,5 +1,6 @@
 ---
 title: Sklik
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/sklik'
 description: 'Fetch Sklik reports for all or selected accessible accounts with an API key, setting the resource, restriction filter, display options and columns.'
 redirect_from:

@@ -1,5 +1,6 @@
 ---
 title: ERP Data Source Connectors
+lastUpdated: 2026-11-18
 description: 'Data source connectors that import business records from ERP and accounting systems into Keboola Storage.'
 slug: 'components/extractors/erp'
 redirect_from:

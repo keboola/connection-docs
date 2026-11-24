@@ -1,5 +1,6 @@
 ---
 title: GoodData Reports
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/gooddata-reports'
 description: 'Import GoodData reports into Keboola Storage as tables by their report URIs, with your GoodData host and credentials or those of a provisioned project.'
 redirect_from:

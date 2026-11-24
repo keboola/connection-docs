@@ -1,5 +1,6 @@
 ---
 title: Bearer Token Authentication
+lastUpdated: 2026-11-18
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/bearer_token'
 description: 'Set up bearer token authentication in Generic Extractor: a token sent in the Authorization header, in the UI or built with the concat function in JSON.'
 redirect_from:

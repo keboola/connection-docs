@@ -1,5 +1,6 @@
 ---
 title: MongoDB
+lastUpdated: 2026-11-19
 slug: 'components/extractors/database/mongodb'
 description: 'Export MongoDB collections into Keboola tables with a query, sort and limit, in raw mode or with a mapping, and fetch only new or changed records.'
 redirect_from:

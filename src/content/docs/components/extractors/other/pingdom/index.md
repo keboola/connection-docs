@@ -1,5 +1,6 @@
 ---
 title: Pingdom
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/pingdom'
 description: 'Import Pingdom checks, contacts, probes, results, credits and alerts, choosing the last 24 hours or 30 days, with your account login and application API key.'
 redirect_from:

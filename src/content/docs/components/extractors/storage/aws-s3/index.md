@@ -1,5 +1,6 @@
 ---
 title: AWS S3
+lastUpdated: 2026-11-19
 slug: 'components/extractors/storage/aws-s3'
 description: 'Load CSV files from AWS S3 buckets into Keboola tables with an access key or an AWS role, and set wildcards, new files only and CSV header options.'
 redirect_from:

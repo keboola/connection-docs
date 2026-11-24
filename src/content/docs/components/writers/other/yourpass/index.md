@@ -1,5 +1,6 @@
 ---
 title: YourPass
+lastUpdated: 2026-11-19
 slug: 'components/writers/other/yourpass'
 description: 'Create, update or delete YourPass mobile wallet passes from a Keboola table through the YourPass API, using your account credentials and the required columns.'
 redirect_from:
