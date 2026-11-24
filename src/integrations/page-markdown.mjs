@@ -514,8 +514,10 @@ export function buildLlmsTxt(site, siteTitle, pages) {
 function entry(page, url) {
   const label = String(page.title).replace(/([[\]])/g, '\\$1');
   const description = page.description ? String(page.description).replace(/\s+/g, ' ').trim() : '';
+  // The preamble promises Markdown behind every link; a page without a twin says it links HTML.
+  const html = page.twin === false ? ' (HTML page, no Markdown copy)' : '';
   const suffix = description ? `: ${description}` : '';
-  return `- [${label}](${url(page)})${suffix}`;
+  return `- [${label}](${url(page)})${html}${suffix}`;
 }
 
 export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' } = {}) {

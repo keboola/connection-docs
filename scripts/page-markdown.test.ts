@@ -194,5 +194,5 @@ test('llms.txt keeps the HTML link for a page whose twin was not written', () =>
   const out = buildLlmsTxt('https://help.keboola.com', 'Docs', [
     { slug: 'a', title: 'A', description: '', twin: false },
   ]);
-  assert.match(out, /- \[A\]\(https:\/\/help\.keboola\.com\/a\/\)$/m);
+  assert.match(out, /- \[A\]\(https:\/\/help\.keboola\.com\/a\/\) \(HTML page, no Markdown copy\)$/m);
 });
