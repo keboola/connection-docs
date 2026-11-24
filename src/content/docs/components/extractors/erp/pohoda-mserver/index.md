@@ -1,5 +1,6 @@
 ---
 title: POHODA mServer
+lastUpdated: 2026-11-19
 slug: 'components/extractors/erp/pohoda-mserver'
 description: Extract address book, invoices, orders, stock and other agendas from STORMWARE POHODA through its mServer XML API, with incremental loading.
 search_keywords: [pohoda, stormware, mserver]

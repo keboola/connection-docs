@@ -1,5 +1,6 @@
 ---
 title: Manage development branches
+lastUpdated: 2026-11-20
 slug: 'components/branches/manage'
 sidebar:
   label: Manage Branches

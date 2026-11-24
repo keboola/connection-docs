@@ -1,5 +1,6 @@
 ---
 title: Google Drive Sheets
+lastUpdated: 2026-11-19
 slug: 'components/extractors/storage/google-drive'
 description: 'Import sheets from Google Drive spreadsheets into tables in your project after you authorize your Google account, and rename the destination tables.'
 redirect_from:

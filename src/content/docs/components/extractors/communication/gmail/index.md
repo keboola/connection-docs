@@ -1,5 +1,6 @@
 ---
 title: Gmail Messages
+lastUpdated: 2026-11-19
 slug: 'components/extractors/communication/gmail'
 description: 'Fetch Gmail messages, headers and message parts into Keboola with read-only access, a search query, and your own OAuth credentials if Google blocks the app.'
 redirect_from:

@@ -1,5 +1,6 @@
 ---
 title: MS Outlook IMAP Email Content and Attachments (Office 365)
+lastUpdated: 2026-11-23
 slug: 'components/extractors/communication/ms-outlook'
 description: 'Download emails and attachments from Office 365 Outlook mailboxes after you authorize, then filter them by search query, folder and date.'
 redirect_from:

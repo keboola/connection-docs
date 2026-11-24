@@ -1,5 +1,6 @@
 ---
 title: Google Calendar
+lastUpdated: 2026-11-19
 slug: 'components/extractors/communication/google-calendar'
 description: 'Download all calendars in your Google account with their events and details, or Google holiday calendars, after you authorize the connector.'
 redirect_from:

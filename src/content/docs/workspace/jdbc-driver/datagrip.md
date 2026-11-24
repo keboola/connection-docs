@@ -1,5 +1,6 @@
 ---
 title: DataGrip Installation Guide
+lastUpdated: 2026-11-20
 sidebar:
   label: Connect DataGrip
 slug: 'workspace/jdbc-driver/datagrip'

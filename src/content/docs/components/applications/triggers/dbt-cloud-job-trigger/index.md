@@ -1,5 +1,6 @@
 ---
 title: dbt Cloud Job Trigger
+lastUpdated: 2026-11-23
 slug: 'components/applications/triggers/dbt-cloud-job-trigger'
 description: 'Trigger a dbt Cloud job from Keboola with your account ID, job ID and API key, optionally wait for the run, and store its results and artifacts.'
 ---

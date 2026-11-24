@@ -1,5 +1,6 @@
 ---
 title: ServiceNow Data Source Connector
+lastUpdated: 2026-11-18
 slug: 'components/extractors/other/servicenow'
 description: 'Fetch ServiceNow tables with a username and password, filter rows with a sysparm query, limit fields, and load in backfill or incremental mode.'
 redirect_from:

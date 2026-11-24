@@ -1,5 +1,6 @@
 ---
 title: Components
+lastUpdated: 2026-11-19
 slug: 'components'
 description: 'What Keboola components are, how configurations, rows, versions and jobs fit together, what the release stages mean, and where each task is documented.'
 redirect_from:

@@ -3,6 +3,9 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
+    "gen:ogimage": "node scripts/make-og-image.mjs",
+    "gen:lastupdated": "node scripts/gen-last-updated.mjs",
+    "check:lastupdated": "node scripts/gen-last-updated.mjs --check",
     "dev": "astro dev",
     "start": "astro dev",
     "prebuild": "rm -rf .astro node_modules/.astro",
@@ -16,6 +19,7 @@
   "dependencies": {
     "@astrojs/markdown-remark": "^7.3.0",
     "@astrojs/mdx": "^8.0.1",
+    "@astrojs/sitemap": "^3.7.4",
     "@astrojs/starlight": "^0.42",
     "@vercel/functions": "^3.11.3",
     "astro": "^7.2.10",

@@ -1,5 +1,6 @@
 ---
 title: Debugging
+lastUpdated: 2026-10-13
 slug: 'extend/component/tutorial/debugging'
 description: 'Debug a component by downloading its data folder from a debug job, running the image locally with docker run, and trying a test image tag through the API.'
 ---

@@ -1,5 +1,6 @@
 ---
 title: Database Data Destination Connectors
+lastUpdated: 2026-10-13
 slug: 'components/writers/database'
 description: 'Pick the connector that sends Keboola tables to BigQuery, Exasol, Firebolt, MySQL, Oracle, PostgreSQL, Redshift, Snowflake, SQL Server or Synapse.'
 redirect_from:

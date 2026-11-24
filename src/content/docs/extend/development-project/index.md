@@ -1,5 +1,6 @@
 ---
 title: Development Project
+lastUpdated: 2026-10-13
 slug: 'extend/development-project'
 description: "How a third-party developer gets a Keboola project to build and test components in: what the development project offers, on what conditions, and how to ask for one."
 ---

@@ -1,5 +1,6 @@
 ---
 title: Dropbox
+lastUpdated: 2026-11-19
 slug: 'components/writers/storage/dropbox'
 description: 'Write Keboola tables and files to an authorized Dropbox account, into the Apps/Keboola Connection Writer V2 folder or a subfolder you set.'
 redirect_from:
