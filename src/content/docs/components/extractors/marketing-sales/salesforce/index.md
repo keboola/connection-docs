@@ -1,5 +1,6 @@
 ---
 title: Salesforce
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/salesforce'
 description: 'Import Salesforce data through the Bulk API with a SOQL query or a whole object, authenticating with a security token or an External Client App.'
 redirect_from:

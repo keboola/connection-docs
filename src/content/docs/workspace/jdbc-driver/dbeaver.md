@@ -1,5 +1,6 @@
 ---
 title: DBeaver Installation Guide
+lastUpdated: 2026-11-20
 sidebar:
   label: Connect DBeaver
 slug: 'workspace/jdbc-driver/dbeaver'

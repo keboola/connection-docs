@@ -1,5 +1,6 @@
 ---
 title: Policy Reference
+lastUpdated: 2026-11-24
 slug: 'storage/row-level-security/policy-reference'
 description: 'The format of row-level and column-level security policies: rule selectors, the condition language, how rules and policies combine, scope, and examples.'
 ---

@@ -1,5 +1,6 @@
 ---
 title: /data/in/tables manifests
+lastUpdated: 2026-11-19
 description: 'The manifest next to each input table in /data/in/tables, with an example of the table metadata it holds.'
 slug: 'extend/common-interface/manifest-files/in-tables-manifests'
 ---

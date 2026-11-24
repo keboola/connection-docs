@@ -1,5 +1,6 @@
 ---
 title: MixPanel
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/mixpanel'
 description: Export raw event data from Mixpanel into Storage as a name-value pair table or as raw JSON, for a date range or a rolling window of full days.
 search_keywords: [mixpanel]

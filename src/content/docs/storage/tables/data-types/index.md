@@ -1,5 +1,6 @@
 ---
 title: Native data types
+lastUpdated: 2026-11-19
 slug: 'storage/tables/data-types'
 sidebar:
   label: Data Types

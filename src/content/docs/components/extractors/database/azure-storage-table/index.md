@@ -1,5 +1,6 @@
 ---
 title: Azure Storage Table
+lastUpdated: 2026-11-19
 slug: 'components/extractors/database/azure-storage-table'
 description: 'Fetch rows from Azure Table storage or the Cosmos DB Table API with a connection string, in raw or mapping mode, with optional incremental fetching.'
 ---

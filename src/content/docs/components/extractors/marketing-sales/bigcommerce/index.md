@@ -1,5 +1,6 @@
 ---
 title: BigCommerce
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/bigcommerce'
 description: 'Download brands, customers, orders and products from your BigCommerce store with an API path and read-only access token, as full or incremental loads.'
 redirect_from:

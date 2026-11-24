@@ -1,5 +1,6 @@
 ---
 title: OpenTelemetry (OTLP) streams reference
+lastUpdated: 2026-11-19
 slug: 'storage/data-streams/opentelemetry/reference'
 sidebar:
   label: OpenTelemetry reference

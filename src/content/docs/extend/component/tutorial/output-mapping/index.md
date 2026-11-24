@@ -1,5 +1,6 @@
 ---
 title: Output Mapping
+lastUpdated: 2026-10-29
 description: Make your component write its results to Storage through output mapping and a default bucket, then check the output.
 slug: 'extend/component/tutorial/output-mapping'
 ---

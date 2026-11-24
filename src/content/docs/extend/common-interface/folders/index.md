@@ -1,5 +1,6 @@
 ---
 title: Data Folders Specification
+lastUpdated: 2026-11-19
 description: 'The /data folder layout a component reads input from and writes output to, and exchanging data via S3, ABS, and database or file system workspaces.'
 slug: 'extend/common-interface/folders'
 ---

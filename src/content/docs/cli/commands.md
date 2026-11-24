@@ -1,5 +1,6 @@
 ---
 title: kbagent command reference
+lastUpdated: 2026-11-23
 slug: 'cli/commands'
 sidebar:
   label: Command Reference

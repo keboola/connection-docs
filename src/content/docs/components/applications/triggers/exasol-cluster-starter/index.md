@@ -1,5 +1,6 @@
 ---
 title: Exasol Cluster Starter
+lastUpdated: 2026-11-19
 description: 'Start or stop an Exasol Cloud cluster from Keboola: get a personal access token and the cluster host, then create the configuration.'
 slug: 'components/applications/triggers/exasol-cluster-starter'
 ---
