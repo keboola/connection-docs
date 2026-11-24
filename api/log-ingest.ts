@@ -12,7 +12,7 @@
  * anything but a redirect, for
  *   - pages (a path ending in `/`, without an extension, or `.html`),
  *   - the Markdown twins (`/<slug>/index.md`, see src/integrations/page-markdown.mjs),
- *   - `/llms.txt` and `/llms-full.txt`.
+ *   - `/llms.txt`, `/llms-full.txt` and the per-section `/<section>/llms-full.txt`.
  * Everything else is dropped here: assets (`/_astro/`, `/pagefind/`, images,
  * fonts), `/api/*`, preview deployments, build logs, and 3xx answers (with
  * `trailingSlash: 'always'` every slashless URL is a 308 followed by the real
@@ -110,7 +110,8 @@ export interface TrafficRecord {
 
 /** Is this a request we count, and as what? Expects a path without the query. */
 export function classifyPath(path: string): RequestKind | null {
-  if (path === '/llms.txt' || path === '/llms-full.txt') return 'llms';
+  // the site-wide files and one llms-full.txt per top-level section (page-markdown.mjs)
+  if (/^\/(?:[^/]+\/)?llms(?:-full)?\.txt$/.test(path)) return 'llms';
   if (/^\/(?:api|_astro|_vercel|pagefind)(?:\/|$)/.test(path)) return null;
   if (path.endsWith('.md')) return 'markdown';
   const last = path.slice(path.lastIndexOf('/') + 1);
