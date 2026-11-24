@@ -1,6 +1,7 @@
 ---
 title: Database Data Source Connectors
 slug: 'components/extractors/database'
+description: 'Choose query-based or log-based connectors for SQL and NoSQL databases, connect over an SSH tunnel, and fetch changes with CDC or incremental fetching.'
 redirect_from:
   - /extractors/database/
   - /integrate/database/
@@ -10,6 +11,8 @@ redirect_from:
 
 
 Data source connectors import and integrate data from external sources into the Keboola environment.
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## SQL Databases
 
@@ -123,11 +126,11 @@ The rows are fetched from the source table, including the last fetched value. Th
 ideal to set the ordering column as a primary key so you don't receive duplicated rows in
 the Storage table. You can clear the stored value if you need to fetch the entire table.
 
-This incremental fetching feature is related to [**incremental loading**](/storage/tables/#incremental-loading).
+This incremental fetching feature is related to [**incremental loading**](/storage/tables/incremental-loading/#incremental-loading).
 While not required, it is recommended to turn on incremental loading when fetching data incrementally; otherwise,
 the table in Storage will contain only newly added rows. This may sound like a good idea when you want to
 process only the newly added rows. In that case, however, you should do so using
-[**incremental processing**](/storage/tables/#incremental-processing). The advantage of using incremental processing
+[**incremental processing**](/storage/tables/incremental-loading/#incremental-processing). The advantage of using incremental processing
 over having only newly added rows in a Storage table is that the table contains all loaded data, and it is not necessary
 to synchronize extraction and processing.
 
@@ -158,3 +161,7 @@ The currently supported log-based connectors:
 
 - [MySql CDC](/components/extractors/database/mysql/)
 - [PostgreSQL CDC](/components/extractors/database/postgresql/)
+
+---
+
+**Next:** [MySQL →](/components/extractors/database/mysql/)

@@ -10,6 +10,7 @@ import imageDimensions from './src/integrations/image-dimensions.mjs';
 import externalLinks from './src/integrations/external-links.mjs';
 import pagefindTitles from './src/integrations/pagefind-titles.mjs';
 import { remarkStripComments } from './src/integrations/strip-comments.mjs';
+import { remarkAgentOnly } from './src/integrations/agent-only.mjs';
 
 /* Shared so the llms.txt heading cannot drift from the site's own title. */
 const SITE_TITLE = 'Keboola User Documentation';
@@ -17,11 +18,16 @@ const SITE_TITLE = 'Keboola User Documentation';
 export default defineConfig({
   site: 'https://help.keboola.com',
   trailingSlash: 'always',
+  /* Astro 7 defaults to 'jsx', which drops the space where text and an inline
+     element meet across a line break ("region at\n<a>" -> "region at<a>").
+     `true` is the Astro 6 behaviour our .astro templates are written for. */
+  compressHTML: true,
   build: {
     format: 'directory',
   },
   markdown: {
-    remarkPlugins: [remarkStripComments, beaconTransforms],
+    // :::agent blocks are for the markdown twin only; see agent-only.mjs.
+    remarkPlugins: [remarkStripComments, remarkAgentOnly, beaconTransforms],
     // Links that leave help.keboola.com open in a new tab; see the plugin's header.
     rehypePlugins: [externalLinks],
   },

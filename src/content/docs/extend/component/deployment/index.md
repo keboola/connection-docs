@@ -1,5 +1,6 @@
 ---
 title: Deployment
+description: 'How a component''s deployment pipeline works: a build on every push, an image pushed to the registry on every tag, and alternative setups.'
 slug: 'extend/component/deployment'
 redirect_from:
   - /extend/docker/tutorial/automated-build/

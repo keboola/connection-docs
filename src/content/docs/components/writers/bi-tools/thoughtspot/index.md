@@ -1,6 +1,7 @@
 ---
 title: ThoughtSpot
 slug: 'components/writers/bi-tools/thoughtspot'
+description: 'Load Keboola tables into ThoughtSpot with database and SSH credentials, then set column types, the table type, and full or incremental load.'
 redirect_from:
     - /writers/bi-tools/thoughtspot/
 ---
@@ -9,8 +10,10 @@ redirect_from:
 
 This data destination connector sends data to the [ThoughtSpot](https://www.thoughtspot.com/product) platform.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **ThoughtSpot** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **ThoughtSpot** data destination connector.
 Then **Set Up Credentials**. You need to provide a [*host name*](https://docs.thoughtspot.com/software/latest/dataflow-jdbc-reference), 
 *user name*, *password*, *database name*, *schema*, *SSH user*, and *SSH password*.
 The connector uses the [TSLOAD CLI tool](https://docs.thoughtspot.com/software/latest/tsload-connector) 
@@ -58,4 +61,4 @@ In the **Full Load** mode, the table is completely overwritten including the tab
 using the [`DROP`](https://docs.thoughtspot.com/software/latest/tql-cli-commands) command and it is recreated.
 
 Additionally, you can specify a **primary key** for the table, a simple column **data filter**, and a filter for
-[incremental processing](/storage/tables/#incremental-processing).
+[incremental processing](/storage/tables/incremental-loading/#incremental-processing).

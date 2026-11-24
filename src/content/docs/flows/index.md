@@ -1,8 +1,10 @@
 ---
 title: Conditional Flows
 slug: 'flows'
+description: 'Build a conditional flow in Keboola with phases, parallel tasks, conditions, retries and notifications, then run it, schedule it and check its run history.'
 redirect_from:
     - /flows/conditional-flows/
+    - /transformations/dbt/flows/
     - /automate/
     - /integrate/orchestrator/
 ---
@@ -54,9 +56,13 @@ Select a task in the Builder to open its settings.
 
 - To modify the parameters sent to the underlying [API call](/extend/jobs/#run-a-job), you can set **Task Parameters**.
 Select the task and click **Set advanced parameters**. When finished, click **Set**. A common use is
-overriding a [variable](/components/variables/#task-parameters-on-a-single-task) for that one task.
+overriding a [variable](/components/variables/use/#override-a-variable-on-one-flow-task) for that one task.
 
 ![The Task Parameters editor, pre-filled with the task's type, mode, componentId, and configId](/flows/task-parameters-modal.png)
+
+### Start an app
+
+A Keboola [app](/data-apps/) can be a task too: pick it on the **Apps** tab when you add a component. Put it after the tasks that update its data: by default, each run restarts the app so it loads the fresh tables. What the task does and how to configure it: [Start the app from a flow](/data-apps/operate/#start-the-app-from-a-flow).
 
 ## Conditions
 
@@ -91,7 +97,7 @@ You can use logical operators (AND) and (OR) to combine multiple statements with
 
 ### 3. What the Condition Compares (Subject)
 
-Every statement starts with a **subject** - the thing the flow looks at. The picker offers two tabs: **Phases / Tasks** and **Variables** (see [Using Variables in Conditions](/components/variables/#using-variables-in-conditions)).
+Every statement starts with a **subject** - the thing the flow looks at. The picker offers three tabs: **Phases / Tasks**, **Variables** and **Functions** (see [Using Variables in Conditions](/components/variables/use/#use-a-variable-in-a-condition)).
 
 In the **Phases / Tasks** tab you can choose:
 
@@ -102,7 +108,7 @@ In the **Phases / Tasks** tab you can choose:
 | ***phase* > All Tasks in Phase** | Passes only when **every** task in that phase matches. |
 | ***phase* > Any Task in Phase** | Passes when **at least one** task in that phase matches. |
 | ***phase* > Continue on Failure** | Passes when **every** task in that phase succeeded, except the tasks you explicitly allow to fail. See [Continue on Failure](#4-continue-on-failure). |
-| ***phase* > *task*** | A single field from that task's job result (browse the result tree, as with [Dynamic Value](/components/variables/#dynamic-value) variables). |
+| ***phase* > *task*** | A single field from that task's job result (browse the result tree, as with [Dynamic Value](/components/variables/use/#dynamic-value) variables). |
 
 For the aggregated subjects (*Any Task in the Flow*, *All Tasks in Phase*, *Any Task in Phase*), the field is picked from a short list that applies to any task: **Job Status**, **Job Duration**, **Error Message**, **Count of output tables**, **Sum of imported rows**, and **Min of imported rows**.
 

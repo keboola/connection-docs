@@ -1,5 +1,6 @@
 ---
 title: Kai Use Cases & Examples
+description: 'Example prompts for Kai, grouped by task: troubleshooting jobs, SQL transformations, integration setup, apps, the semantic layer, and data exploration.'
 slug: 'kai/use-cases'
 ---
 

@@ -25,7 +25,7 @@ The official API documentation is at [api.mpohoda.cz/doc](https://api.mpohoda.cz
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **mPOHODA** data source connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **mPOHODA** data source connector.
 
 ### Connection
 

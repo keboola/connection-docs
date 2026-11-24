@@ -11,7 +11,7 @@ Your data platform now has a command line an AI can drive. **kbagent** connects 
 
 It's just as comfortable in your own hands: one tool for every project from the terminal, every command scriptable, with structured JSON output throughout.
 
-<!-- Source: keboola/cli README + docs. Mirrored into help docs; TODO: repo→docs sync mechanism (Jordan). -->
+<!-- Source: keboola/cli README + docs. Mirrored into help docs; TODO(Jordan): repo→docs sync mechanism. -->
 
 :::note
 kbagent is a different tool from the legacy **Keboola as Code** CLI (`kbc`) documented on [developers.keboola.com/cli](https://developers.keboola.com/cli/). That tool is still supported for now; new command-line work should use kbagent.
@@ -49,10 +49,10 @@ Then explore:
 ```bash
 kbagent doctor
 kbagent job list --limit 5
-kbagent search "customer_id"
+kbagent search "customer_id" --search-type config-based
 ```
 
-A minute in, `doctor` has confirmed the connection, you've seen your last five job runs, and `search` is answering across every project you connected. Everything the UI does — and a lot it doesn't — is a command away, scriptable, and safe to hand to an agent.
+A minute in, `doctor` has confirmed the connection, you've seen your last five job runs, and `search` has found every configuration that mentions `customer_id`. Without `--search-type config-based`, `search` uses Global Search, and a project that doesn't have it enabled answers with an error that points to this flag. Everything the UI does — and a lot it doesn't — is a command away, scriptable, and safe to hand to an agent.
 
 ## Why a CLI (and not just the UI)?
 

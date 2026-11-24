@@ -1,6 +1,7 @@
 ---
 title: Business Intelligence
 slug: 'components/writers/bi-tools'
+description: 'Send Keboola tables to GoodData, Looker, Tableau or ThoughtSpot, or give BI tools read-only access through Data Gateway or a Snowflake or BigQuery workspace.'
 redirect_from:
     - /writers/bi-tools/
 
@@ -8,6 +9,8 @@ redirect_from:
 
 Data destination connectors export data from Keboola to external systems. The following data destination connectors
 allow you to push data to various business intelligence platforms:
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 - [GoodData](/components/writers/bi-tools/gooddata/) — writes tables to [GoodData](https://www.gooddata.com/) and optionally also manages the GoodData project LDM.
 - [Looker](/components/writers/bi-tools/looker/) — writes tables to [Looker](https://looker.com/)

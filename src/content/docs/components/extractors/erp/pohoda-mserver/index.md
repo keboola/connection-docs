@@ -28,7 +28,7 @@ POHODA mServer and the POHODA desktop application cannot open the same company d
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **POHODA mServer** data source connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **POHODA mServer** data source connector.
 
 ### Connection
 

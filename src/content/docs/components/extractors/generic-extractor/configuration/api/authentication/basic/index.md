@@ -1,6 +1,7 @@
 ---
 title: Basic Authentication
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/basic'
+description: 'Set up basic HTTP authentication in Generic Extractor: a username and password sent in the Authorization header, in the UI or with the basic type.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/basic/
 ---
