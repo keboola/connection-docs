@@ -1,0 +1,86 @@
+---
+title: Use these docs with your AI agent
+slug: 'ai/docs-for-agents'
+description: 'Hand ChatGPT, Claude, Cursor or another AI agent the Keboola docs as plain Markdown: one page, a whole section or the full set, or query them through the Keboola MCP Server.'
+---
+
+import Prereqs from '../../../components/Prereqs.astro';
+
+Every page of the Keboola documentation is also published as plain Markdown, without the site's navigation, so an AI assistant or coding agent reads only the text. This page shows how to give your agent one page, a whole section or the whole documentation, and how to ask the docs a question from an MCP client or from Kai on this site.
+
+{/* How-to-type page. Source: src/integrations/page-markdown.mjs (twins, llms.txt, llms-full.txt), src/components/CopyMarkdown.astro, src/components/AskKaiDrawer.astro, keboola/mcp-server src/keboola_mcp_server/tools/doc.py (docs_query). Verified 2026-11-24 against a local build. */}
+
+<Prereqs needs={[]}>
+  <li><strong>An AI assistant or agent that can read a web page</strong>, such as ChatGPT, Claude, Cursor or Claude Code. One that can't fetch a URL can still take a page you copy into it.</li>
+  <li><strong>For the MCP section only:</strong> a Keboola project and an MCP client connected to it. See <a href="/ai/mcp-server/">MCP Server</a>.</li>
+</Prereqs>
+
+## Give your agent one page
+
+**Goal:** your agent answers from the page you're reading.
+
+1. Beside or under the page title, click **Copy as Markdown**, then paste into your agent's chat.
+2. Or click the arrow beside that button and pick one of these:
+   - **View as Markdown** opens the page's Markdown copy, at the page's own address with `index.md` after the final slash, for example `https://help.keboola.com/storage/index.md`. Give that address to an agent that fetches pages.
+   - **Open in ChatGPT** or **Open in Claude** starts a new chat whose message asks the assistant to read the page's Markdown address.
+
+**Result:** the agent has the page's full text, code samples included.
+
+## Give your agent a whole section
+
+**Goal:** one download gives the agent every page of a section, or of the whole documentation.
+
+1. Pick the file:
+
+   | What the agent gets | Address |
+   |---|---|
+   | Every page | `https://help.keboola.com/llms-full.txt` |
+   | One section, for example Storage | `https://help.keboola.com/storage/llms-full.txt` |
+
+   Each top-level section has its own file. The list of them is at the top of `https://help.keboola.com/llms.txt`.
+2. Give your agent the address, or download the file and attach it.
+
+The full set runs to several megabytes, and Components is the largest section by far. In a chat, give the agent one section file. Keep the full set for an agent that works on a local copy or can search a large file.
+
+**Result:** in the file, each page starts with its title and its URL, so the agent can tell you which page an answer came from.
+
+## Let your agent find the pages itself
+
+**Goal:** the agent looks up only the pages it needs while it works.
+
+1. Give your agent `https://help.keboola.com/llms.txt`. It lists every page with a one-line description, grouped by section, and each link opens that page's Markdown copy.
+
+The site's `robots.txt` allows crawling, AI agents included.
+
+**Result:** the agent picks the pages that match your question and fetches just those.
+
+## Ask the docs from an MCP client
+
+**Goal:** an agent that works in your Keboola project asks the documentation a question in the same session.
+
+1. Connect your client to the Keboola MCP Server, as described in [MCP Server](/ai/mcp-server/).
+2. Ask your agent a question about Keboola and say you want the answer from the documentation. The server's `docs_query` tool takes the question in plain language and returns an answer from this documentation with the URLs of the pages it used. The tool is read-only, so it stays available under the [read-only tool restrictions](/ai/mcp-server/#read-only-tools).
+
+**Result:** answers about Keboola come with links to the pages they are based on.
+
+## Ask Kai on this site
+
+**Goal:** a quick answer when you don't have an agent of your own open.
+
+1. Click **KAI – AI ASSISTANT** in the header, or press ⌘ / (Ctrl + / on Windows and Linux). In search, the **Ask Kai** entry at the top of the dialog sends what you typed to Kai. On a phone, open search and pick **Ask Kai**.
+2. Ask your question.
+
+**Result:** Kai answers from the documentation and lists the pages it drew on under **Sources**.
+
+## Check that the answer came from the docs
+
+**Goal:** confirm the agent answered from this documentation and not from memory.
+
+1. Ask your agent which page its answer is based on.
+2. Open the URL it gives.
+
+**Result:** the agent names a `help.keboola.com` page, or the title of a page you pasted, and that page says what the agent told you.
+
+If the agent can't name a page, the URL doesn't open, or the page says something else, treat the answer as unchecked. Give the agent the page or the section file again, or ask Kai, which lists the pages it drew on.
+
+**Next:** [MCP Server →](/ai/mcp-server/)
