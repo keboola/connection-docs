@@ -17,6 +17,8 @@ Source data types are mapped to a destination using a **base type**. The current
 
 For detailed mappings, please refer to the [conversion table](https://developers.keboola.com/extend/common-interface/manifest-files/out-tables-manifests-native-types/#data-type-conversions). You can also view the extracted data types in the [storage table](/storage/tables/) detail.
 
+When a component describes its output with base types, a source type that has none of them as an equivalent (for example `TIME`, `INTERVAL`, `UUID`, `BLOB`, `JSON`, arrays, or structs) has to be mapped to one; the DuckDB transformation maps all of these to `STRING`. Length, precision, and scale are carried over only when the source type holds them. If the source engine discards them, they cannot be reconstructed later. See [output data types in DuckDB transformations](/transformations/duckdb/#output-data-types) for a concrete example of both cases.
+
 ### Ways to define a type
 
 #### Using actual data types of the storage backend
