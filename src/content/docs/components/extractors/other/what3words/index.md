@@ -1,6 +1,8 @@
 ---
 title: What3words Augmentation
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/what3words'
+description: 'Translate what3words addresses to latitude and longitude, or coordinates to what3words addresses, with a what3words API key; each address costs one API call.'
 redirect_from:
     - /extractors/other/what3words/
 ---
@@ -11,8 +13,10 @@ This data source connector allows you to translate [what3words](https://what3wor
 Before using the connector, you need to [obtain a what3words API key](https://developer.what3words.com/public-api/docsv2#overview).
 Notice that each translated address requires one API call.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **What3words Augmentation** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **What3words Augmentation** connector.
 
 ## Augment What3words Address
 In this mode of operation, you identify [what3words](https://what3words.com/about) addresses, and the connector

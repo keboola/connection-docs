@@ -1,7 +1,8 @@
 ---
 title: Merge Requests
+lastUpdated: 2026-11-20
 slug: 'components/branches/merge-requests'
-description: Review, approve, and merge development branch changes into production using merge requests.
+description: 'Review the changes in a development branch, send them as a merge request, approve and merge it, resolve conflicts, and require review with branch protection.'
 ---
 
 A **merge request** is the controlled way to bring the configuration changes you made in a
@@ -12,6 +13,13 @@ approve or reject the changes, and only then are they merged into production.
 Merge requests give you the review, approval, and audit workflow that teams expect from modern
 Git-based development — while keeping everything inside your Keboola project.
 
+<!-- How-to-type page. Source: this page as it was before the 2026-11-19 rework (screenshots from July 2026). Text reshaped into tasks; facts not re-checked against the product. -->
+
+This page has the steps. The states a request moves through and what a merge leaves behind are explained in
+[The merge request lifecycle](/components/branches/#the-merge-request-lifecycle) and
+[After a merge](/components/branches/#after-a-merge). To create or close the branch itself, see
+[Manage development branches](/components/branches/manage/).
+
 :::caution[Branches 2.0]
 Merge requests are part of the **Branches 2.0** feature. If you don't see them in your project,
 enable Branches 2.0 in your **project settings** or contact **Keboola support** to have it turned on.
@@ -20,97 +28,96 @@ enable Branches 2.0 in your **project settings** or contact **Keboola support** 
 :::tip
 If your project does **not** require any approvals, a merge request is still created, but it is
 auto-approved the moment you submit it, so you can merge immediately. You get the diff and the
-audit trail without the review overhead. See [Requiring Review](#requiring-review-branch-protection).
+audit trail without the review overhead. See [Require review](#require-review-branch-protection).
 :::
 
-## The Merge Request Lifecycle
+## Review your branch changes
 
-Every merge request moves through a set of states, shown as filters at the top of the
-**Merge Requests** list:
+**Goal:** see what your branch would change in production before you submit anything.
 
-- **In Review** — submitted and waiting for the required number of approvals.
-- **Ready to Merge** — approved and ready to be merged into production (either manually or automatically).
-- **Merged** — the changes have been applied to production.
-- **Rejected** — a reviewer requested changes; go back to the branch, adjust, and resubmit.
-- **Closed** — the request was cancelled without merging.
+1. Switch into your development branch and open **Changes** from the
+   branch switcher. **Pull from Prod** in the same menu lets you first bring the latest production
+   state into your branch.
 
-You can reach the list at any time from the branch switcher (**Merge Requests**) or from the project menu.
+   ![Screenshot - Branch switcher with Changes and Pull from Prod](/components/branches/merge-requests/figures/branch-changes-menu.png)
 
-![Screenshot - Merge Requests list](/components/branches/merge-requests/figures/merge-requests-list.png)
+2. The **Changes** view compares your branch against production and lists every configuration that
+   differs, together with its status (for example, *Updated in branch*).
 
-Each row shows the request name and description, its status, who created it and when, a link to the
-changed configurations, and the reviews collected so far.
+   ![Screenshot - Changes between branch and production](/components/branches/merge-requests/figures/branch-changes.png)
 
-## Reviewing Your Branch Changes
+3. Expand any configuration to see a side-by-side diff of the underlying configuration between the
+   production version and your branch version. Additions are highlighted in green and removals in red.
 
-Before you submit anything, switch into your development branch and open **Changes** from the
-branch switcher. **Pull from Prod** in the same menu lets you first bring the latest production
-state into your branch.
+   ![Screenshot - Configuration diff](/components/branches/merge-requests/figures/configuration-diff.png)
 
-![Screenshot - Branch switcher with Changes and Pull from Prod](/components/branches/merge-requests/figures/branch-changes-menu.png)
+**Result:** you can confirm exactly what will be merged.
 
-The **Changes** view compares your branch against production and lists every configuration that
-differs, together with its status (for example, *Updated in branch*).
+## Create a merge request
 
-![Screenshot - Changes between branch and production](/components/branches/merge-requests/figures/branch-changes.png)
+**Goal:** submit the changes in your branch for review.
 
-Expand any configuration to see a side-by-side diff of the underlying configuration between the
-production version and your branch version. Additions are highlighted in green and removals in red,
-so you can confirm exactly what will be merged.
+1. When you are happy with the changes, click **Send for review** in the **Changes** view.
+2. Fill in:
 
-![Screenshot - Configuration diff](/components/branches/merge-requests/figures/configuration-diff.png)
+   - **Name** — a short, descriptive title for the request (required).
+   - **Internal ID** *(optional)* — a reference to an external tracker (Jira, Asana, Trello, Notion, …).
+   - **Branch Description** *(optional)* — supports Markdown; pre-filled from the branch notes.
+   - **Optional Reviewers** — invite specific colleagues to review. If your project requires approvals,
+     the required reviewers are enforced here; if none are required, you can still invite reviewers or
+     leave it empty for auto-approval.
+   - **Merge behavior** — tick **Merge automatically after review** to have the branch merged as soon as
+     it is approved (see [Auto-merge](#merge-to-production)).
 
-## Creating a Merge Request
+   ![Screenshot - Send for review dialog](/components/branches/merge-requests/figures/send-for-review.png)
 
-When you are happy with the changes, click **Send for review** in the **Changes** view. Fill in:
+3. Submit the dialog.
 
-- **Name** — a short, descriptive title for the request (required).
-- **Internal ID** *(optional)* — a reference to an external tracker (Jira, Asana, Trello, Notion, …).
-- **Branch Description** *(optional)* — supports Markdown; pre-filled from the branch notes.
-- **Optional Reviewers** — invite specific colleagues to review. If your project requires approvals,
-  the required reviewers are enforced here; if none are required, you can still invite reviewers or
-  leave it empty for auto-approval.
-- **Merge behavior** — tick **Merge automatically after review** to have the branch merged as soon as
-  it is approved (see [Auto-merge](#merging-to-production)).
-
-![Screenshot - Send for review dialog](/components/branches/merge-requests/figures/send-for-review.png)
-
-Submitting creates the merge request. If no reviewers are required on the project, the request is
+**Result:** submitting creates the merge request. If no reviewers are required on the project, the request is
 auto-approved immediately and is ready to merge.
 
-## Reviewing and Approving
+## Review and approve a merge request
 
-When a project [requires approvals](#requiring-review-branch-protection), a submitted request enters
-the **In Review** state and the invited reviewers are notified. Reviewers open the request, inspect
-the configuration diff, and then either:
+**Goal:** decide, as a reviewer, whether the changes may reach production.
 
-- **Approve** — once the required number of approvals is reached, the request becomes **Ready to Merge**.
-- **Reject** — the request is sent back so the author can make further changes in the branch and resubmit.
+When a project [requires approvals](#require-review-branch-protection), a submitted request enters
+the **In Review** state and the invited reviewers are notified.
 
-Approvals and rejections are recorded on the merge request, giving you a complete audit trail of who
+1. Reviewers open the request and inspect
+   the configuration diff.
+2. Then they either:
+
+   - **Approve** — once the required number of approvals is reached, the request becomes **Ready to Merge**.
+   - **Reject** — the request is sent back so the author can make further changes in the branch and resubmit.
+
+**Result:** approvals and rejections are recorded on the merge request, giving you a complete audit trail of who
 signed off on which changes.
 
-## Merging to Production
+## Merge to production
 
-Open an approved merge request to merge it. From the request detail you can:
+**Goal:** apply an approved merge request to production.
 
-- **Merge Now** — apply the changes to production immediately. You are asked to confirm; after that,
-  new [configuration versions](/components/#configuration-versions) are created in production with the
-  merge as their change description.
-- **Schedule Merge** — enable **Merge automatically after review** so the request merges on its own the
-  moment it is approved, without anyone having to click *Merge Now*.
-- **Cancel Request** — close the request without merging (the branch stays and can be resubmitted).
-- **Changelog** — download a record of what was merged.
+1. Open an approved merge request to merge it. From the request detail you can:
 
-![Screenshot - Merge request detail](/components/branches/merge-requests/figures/merge-request-detail.png)
+   - **Merge Now** — apply the changes to production immediately. You are asked to confirm; after that,
+     new [configuration versions](/components/configurations/#see-the-version-history) are created in production with the
+     merge as their change description.
+   - **Schedule Merge** — enable **Merge automatically after review** so the request merges on its own the
+     moment it is approved, without anyone having to click *Merge Now*.
+   - **Cancel Request** — close the request without merging (the branch stays and can be resubmitted).
+   - **Changelog** — download a record of what was merged.
 
-Clicking **Merge Now** asks you to confirm before anything reaches production:
+   ![Screenshot - Merge request detail](/components/branches/merge-requests/figures/merge-request-detail.png)
 
-![Screenshot - Merge to production confirmation](/components/branches/merge-requests/figures/merge-confirm.png)
+2. Clicking **Merge Now** asks you to confirm before anything reaches production:
+
+   ![Screenshot - Merge to production confirmation](/components/branches/merge-requests/figures/merge-confirm.png)
 
 To merge automatically once the request is approved, enable **Merge automatically after review**:
 
 ![Screenshot - Schedule (automatic) merge](/components/branches/merge-requests/figures/schedule-merge.png)
+
+**Result:** the changes are applied to production and the request moves to **Merged**. What happens to the branch and its data is described in [After a merge](/components/branches/#after-a-merge).
 
 :::caution
 As with a direct branch merge, **only configurations are merged, not data.** Branch storage is
@@ -118,23 +125,27 @@ isolated; after merging, run your configurations in production to populate produ
 [Development Branches](/components/branches/) for how branched storage works.
 :::
 
-## Merge Conflicts
+## Resolve merge conflicts
+
+**Goal:** make a branch mergeable again after the same configuration changed in production.
 
 A conflict occurs when a configuration was changed **both** in production and in your branch after
 the branch was created, so the branch can no longer be merged cleanly. Keboola detects this and can
-notify you (see [notifications](#requiring-review-branch-protection)). The affected configuration is
-marked **Conflicting configuration** in the **Changes** view, and the request cannot be sent for review
-or merged until every conflict is resolved.
+notify you (see [notifications](#require-review-branch-protection)).
 
-![Screenshot - Conflicting configuration](/components/branches/merge-requests/figures/conflict-detected.png)
+1. Open the **Changes** view. The affected configuration is
+   marked **Conflicting configuration** there, and the request cannot be sent for review
+   or merged until every conflict is resolved.
 
-You resolve each conflicting configuration directly from the row:
+   ![Screenshot - Conflicting configuration](/components/branches/merge-requests/figures/conflict-detected.png)
 
-- **Resolve** opens a three-way **Merge Conflict Resolution** view (see below).
-- The dropdown next to it offers a one-click shortcut, **Keep production version**, which discards your
-  branch change for that configuration and takes what is currently in production.
+2. You resolve each conflicting configuration directly from the row:
 
-![Screenshot - Resolve conflict options](/components/branches/merge-requests/figures/conflict-resolve.png)
+   - **Resolve** opens a three-way **Merge Conflict Resolution** view (see below).
+   - The dropdown next to it offers a one-click shortcut, **Keep production version**, which discards your
+     branch change for that configuration and takes what is currently in production.
+
+   ![Screenshot - Resolve conflict options](/components/branches/merge-requests/figures/conflict-resolve.png)
 
 ### Three-way merge resolution
 
@@ -159,20 +170,11 @@ sent for review or approved. What you can use depends on the state of the reques
   **Pull from Prod** in the branch switcher, reconcile the affected configurations, and submit the merge
   request again.
 
-## After a Merge
+**Result:** when no conflict remains, the request can be sent for review or merged again.
 
-A merged request is kept in the [list](#the-merge-request-lifecycle) with the **Merged** status, and you
-can **Download Changelog** from its row for a record of exactly what was applied.
+## Merge requests in Kai, the MCP Server, and the CLI
 
-Because a merge produces new [configuration versions](/components/#configuration-versions) in production,
-no configuration change is lost: if a merged change causes problems, you can open the affected configuration
-and roll it back to its previous version, restoring the pre-merge state.
-
-A successful merge also **deletes the development branch**, including its buckets, tables, and workspaces.
-Only the configuration changes reach production; if you still need data from the branch, export it before
-you merge.
-
-## Merge Requests in Kai, the MCP Server, and the CLI
+**Goal:** create, review and merge a request without the UI.
 
 The same flow is available outside the UI:
 
@@ -198,20 +200,32 @@ The same flow is available outside the UI:
   `kbagent merge-request merge` merges it. Run `kbagent merge-request --help` for the full list, or see
   the [kbagent repository](https://github.com/keboola/cli).
 
-## Requiring Review (Branch Protection)
+**Result:** the merge request goes through the same flow as one you handle in the UI.
 
-Whether review is required — and who may review — is configured per project in
-**Project Settings → Branch Protection**.
+## Require review (branch protection)
 
-![Screenshot - Branch Protection settings](/components/branches/merge-requests/figures/branch-protection.png)
+**Goal:** set whether merge requests need approval, and who may give it.
 
-- **Required approvals** — the number of approvals a merge request needs before it can be merged.
-  Set it to `0` to let anyone merge without review (requests are auto-approved on submit).
-- **Reviewers** — by default **all** project users can review branches. You can restrict reviewing to
-  a chosen set of colleagues.
-- **Your Notifications** — choose when you receive an email: when a review is requested, when a review
-  is submitted, when a conflict is detected, and when a branch is merged. **Only notify me when I'm
-  directly involved** limits notifications to requests you created or were asked to review.
+1. Whether review is required — and who may review — is configured per project in
+   **Project Settings → Branch Protection**. Open it.
 
-Once review requirements are in place, every merge request must collect the required approvals before
+   ![Screenshot - Branch Protection settings](/components/branches/merge-requests/figures/branch-protection.png)
+
+   <!-- VERIFY(Nikita): on 2026-11-20 Branch Protection was not found in the UI of project 264: not in Project settings (Project, Users, Features, …), not under Features, and not in the branch switcher, in production or inside a branch. A second search the same day also found nothing in Project settings → Features (AI Component Suggestions, Branched storage, Branches 2.0, External Datasets, Kai, Native Data Types), Users, My Account & Organizations or the user menu; the checking user was a project Admin without Organization admin. It may be visible only to organization admins or behind a feature. Confirm who sees Branch Protection and where. -->
+
+2. Set the options:
+
+   - **Required approvals** — the number of approvals a merge request needs before it can be merged.
+     Set it to `0` to let anyone merge without review (requests are auto-approved on submit).
+   - **Reviewers** — by default **all** project users can review branches. You can restrict reviewing to
+     a chosen set of colleagues.
+   - **Your Notifications** — choose when you receive an email: when a review is requested, when a review
+     is submitted, when a conflict is detected, and when a branch is merged. **Only notify me when I'm
+     directly involved** limits notifications to requests you created or were asked to review.
+
+**Result:** once review requirements are in place, every merge request must collect the required approvals before
 it can reach production.
+
+---
+
+**Next:** [IP addresses →](/components/ip-addresses/)

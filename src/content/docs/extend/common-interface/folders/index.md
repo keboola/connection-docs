@@ -1,5 +1,7 @@
 ---
 title: Data Folders Specification
+lastUpdated: 2026-11-19
+description: 'The /data folder layout a component reads input from and writes output to, and exchanging data via S3, ABS, and database or file system workspaces.'
 slug: 'extend/common-interface/folders'
 ---
 
@@ -194,7 +196,7 @@ Notice that some of the values might be empty for different workspace backends (
 They will be always present, though.
 
 When exchanging data via workspace, there are couple of differences to loading data into files:
-- Loading to workspaces supports only [storage tables](/storage/tables/), [storage files](/storage/file-uploads/)
+- Loading to workspaces supports only [storage tables](/storage/tables/), [storage files](/storage/files/)
 are always saved to the directory structure.
 - The `days` attribute is not supported for filtering table, use `changed_since` instead.
 - [Automatic Incremental Processing](/storage/tables/incremental-loading/#automatic-incremental-processing) (also known as Adaptive Input Mapping) is not supported.

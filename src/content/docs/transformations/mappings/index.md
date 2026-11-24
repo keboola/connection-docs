@@ -114,7 +114,7 @@ load itself works:
 - [Input mapping options](/transformations/mappings/input/): table and file inputs, data types, load types, read-only
   input mapping and the `_timestamp` column.
 - [Output mapping options](/transformations/mappings/output/): table and file outputs, incremental loads, primary
-  keys and deleting rows.
+  keys, deleting rows and the Snowflake import method.
 - [Partition-aware import](/transformations/mappings/partition-aware-import/): cut the cost of incremental loads on
   BigQuery.
 - [Direct Mode output mapping](/transformations/mappings/direct-mode/) and

@@ -1,5 +1,7 @@
 ---
 title: Custom Python
+lastUpdated: 2026-11-19
+description: 'Run your own Python code in Keboola: pick the Python version, write code in the UI or load it from Git, and add dependencies and encrypted parameters.'
 slug: 'components/applications/custom-python'
 ---
 
@@ -8,6 +10,8 @@ slug: 'components/applications/custom-python'
 This component lets you run custom Python code directly in Keboola. Use it to call external APIs,
 process files, push data to third-party systems, or build any integration that isn't covered by an existing connector —
 all without leaving Keboola.
+
+<!-- Reference-type page. Type declared in the 2026-11-19 section rework; the content is unchanged and was not re-checked against the component. -->
 
 ![Screenshot - Custom Python Component Overview](/components/applications/custom-python/custom-python-0.png)
 
@@ -29,7 +33,7 @@ all without leaving Keboola.
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **Custom Python** application.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Custom Python** application.
 
 ### Python Version
 

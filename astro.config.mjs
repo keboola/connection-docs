@@ -1,20 +1,26 @@
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import starlight from '@astrojs/starlight';
 import starlightImageZoom from 'starlight-image-zoom';
+import sitemap from '@astrojs/sitemap';
 import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
 import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
 import externalLinks from './src/integrations/external-links.mjs';
 import pagefindTitles from './src/integrations/pagefind-titles.mjs';
+import { sitemapOptions } from './src/integrations/sitemap-lastmod.mjs';
 import { remarkStripComments } from './src/integrations/strip-comments.mjs';
+import { remarkAgentOnly } from './src/integrations/agent-only.mjs';
+
+const SITE = 'https://help.keboola.com';
 
 /* Shared so the llms.txt heading cannot drift from the site's own title. */
 const SITE_TITLE = 'Keboola User Documentation';
 
 export default defineConfig({
-  site: 'https://help.keboola.com',
+  site: SITE,
   trailingSlash: 'always',
   /* Astro 7 defaults to 'jsx', which drops the space where text and an inline
      element meet across a line break ("region at\n<a>" -> "region at<a>").
@@ -24,7 +30,8 @@ export default defineConfig({
     format: 'directory',
   },
   markdown: {
-    remarkPlugins: [remarkStripComments, beaconTransforms],
+    // :::agent blocks are for the markdown twin only; see agent-only.mjs.
+    remarkPlugins: [remarkStripComments, remarkAgentOnly, beaconTransforms],
     // Links that leave help.keboola.com open in a new tab; see the plugin's header.
     rehypePlugins: [externalLinks],
   },
@@ -66,21 +73,23 @@ export default defineConfig({
         Footer: './src/components/Footer.astro',
         // Adds a header link to the Keboola API reference (api.keboola.com).
         SocialIcons: './src/components/SocialIcons.astro',
+        // Empty: PageTitle.astro already shows the date in the page's meta row,
+        // and Starlight would print it a second time in the footer.
+        LastUpdated: './src/components/LastUpdated.astro',
       },
       pagination: true,
-      // lastUpdated is deliberately OFF. PageTitle.astro renders an
-      // "Updated <date>" line when Starlight supplies one, and Starlight takes
-      // that date from each file's last commit — so it needs real git history.
-      // Turning it on was tried and reverted: the production build on Vercel
-      // clones shallow, Starlight's getLastUpdated catches the lookup error and
-      // returns undefined, and the line renders on no page at all. Verified on
-      // the preview for PR #1132.
+      // The date PageTitle.astro renders as "Updated <date>". Every page carries
+      // it in frontmatter, written by scripts/gen-last-updated.mjs — Starlight
+      // prefers that over git and never shells out for it.
       //
-      // To switch it on, the build must first have full history. Vercel has no
-      // documented clone-depth setting, so that means a `git fetch --unshallow`
-      // ahead of `astro build` (vercel.json `buildCommand`, or the project's
-      // build command) — confirm it on a preview before re-adding this, and
-      // restore `fetch-depth: 0` in .github/workflows/*.yml at the same time.
+      // It has to be precomputed. Starlight's own lookup runs `git log` during
+      // the build, and on Vercel that fails on every page: a probe deployed to
+      // a preview found `.git` present and `git --version` working, but every
+      // other git command failing, `rev-parse --git-dir` included. It is not a
+      // shallow clone — `git fetch --unshallow` and publishing `safe.directory`
+      // both changed nothing (PR #1134, four preview deploys). The workflow
+      // .github/workflows/sync-last-updated.yml refreshes the dates weekly.
+      lastUpdated: true,
       editLink: {
         baseUrl: 'https://github.com/keboola/connection-docs/edit/main/',
       },
@@ -93,5 +102,8 @@ export default defineConfig({
     // Must come AFTER starlight(): it reads the Pagefind index Starlight
     // builds in the same astro:build:done hook.
     pagefindTitles(),
+    // Starlight adds this itself when the config has none; ours adds each
+    // page's lastUpdated date as <lastmod> (see sitemap-lastmod.mjs).
+    sitemap(sitemapOptions({ contentDir: fileURLToPath(new URL('./src/content/docs/', import.meta.url)), site: SITE })),
   ],
 });

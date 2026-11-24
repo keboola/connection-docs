@@ -1,5 +1,6 @@
 ---
 title: Encryption
+lastUpdated: 2026-10-13
 slug: 'extend/encryption'
 description: How Keboola encrypts sensitive configuration values, what the `#` key prefix does, and which cipher each combination of Encryption API parameters produces.
 redirect_from:
@@ -15,6 +16,8 @@ these values.
 Decryption occurs solely during the serialization of configuration to the Docker container's
 configuration file. The decrypted data are stored on the Docker host drive and are promptly
 deleted after the container's completion. The component code exclusively accesses the decrypted data.
+
+<!-- Reference-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ## UI Interaction
 

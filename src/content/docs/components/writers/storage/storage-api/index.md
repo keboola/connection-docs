@@ -1,6 +1,8 @@
 ---
 title: Keboola Storage
+lastUpdated: 2026-11-19
 slug: 'components/writers/storage/storage-api'
+description: 'Copy tables into one bucket of another Keboola project, even in another organization or region, with a write token and update, replace or recreate mode.'
 redirect_from:
     - /writers/storage/storage-api/
 ---
@@ -10,6 +12,8 @@ redirect_from:
 This data destination connector loads single or multiple tables from your current project into a different Keboola project.
 The component can be used in situations where [Data Catalog](/catalog/)
 cannot, e.g., moving data between two different [organizations](/management/organization) or regions.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prepare API Token
 The data destination connector requires an [API Token](/management/project/tokens/) with **write** access to a **single bucket** only. 
@@ -27,7 +31,7 @@ If you want to write to multiple buckets, you'll have to create multiple tokens 
 and multiple configurations.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Storage** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Keboola Storage** data destination connector.
 
 ## Specify Target Project
 Select the region of the *target project* and paste the token [you generated](#prepare-api-token) in the *target project*.

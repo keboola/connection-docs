@@ -1,6 +1,8 @@
 ---
 title: Login Using OAuth 2.0 Authentication
+lastUpdated: 2026-11-18
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth20-login'
+description: 'The oauth20.login type in Generic Extractor, not yet supported, pairs OAuth 2.0 with a login request for temporary credentials, with a Google example.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth20-login/
 ---
@@ -9,6 +11,7 @@ redirect_from:
 
 
 **Note** that this configuration option is not yet supported and the test endpoint button will not work.
+<!-- VERIFY(Ondřej Popelka): this banner says the method is not yet supported, but keboola/generic-extractor may already implement it. Confirm, then keep or drop the banner, and update the page description to match. -->
 
 The OAuth Login method is useful when you need to send a one-time **login request** to obtain temporary credentials
 for authentication of all the other API requests. A sample OAuth Login authentication looks like this:

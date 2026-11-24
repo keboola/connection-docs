@@ -1,6 +1,8 @@
 ---
 title: Incremental Loading
+lastUpdated: 2026-11-12
 slug: 'components/extractors/generic-extractor/incremental'
+description: 'Load API data incrementally with Generic Extractor using incrementalOutput, a primary key, and previousStart in modified_since, from and to request parameters.'
 redirect_from:
     - /extend/generic-extractor/incremental/
 ---
@@ -216,3 +218,7 @@ into an orchestration, and the configuration does not run for some reason, you m
 However, this may still be a useful approach for obtaining samples of data for POCs.
 
 See [example [EX110]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/110-incremental-relative).
+
+---
+
+**Next:** [Running Generic Extractor →](/components/extractors/generic-extractor/running/)

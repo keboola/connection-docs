@@ -1,5 +1,6 @@
 ---
 title: 'Transform data'
+lastUpdated: 2026-11-24
 slug: 'getting-started/transform'
 description: 'Create an SQL transformation that joins a summer of sales, rosters and weather with a live forecast into one table per café and day, and learn how mappings keep Storage safe.'
 redirect_from:
@@ -34,7 +35,7 @@ Jordan's review on #1116, item 3, which asked for one run or a label on the page
 screenshots were reshot on 2026-10-01 in Free Plan project 6375, with the Boolabean names.
 
 CLI / API tab added 2026-09-15 and run live against project 264 with kbagent v0.93.1: `transformation
-create --sql-file --created-table` built a throwaway transformation from the page's own SQL file, `transformation edit --storage @file` added the five inputs (create leaves the input mapping empty —
+create --sql-file --created-table` built a throwaway transformation from the page's own SQL file, `transformation edit --storage @file` (now `--storage-file` in kbagent 1.x) added the five inputs (create leaves the input mapping empty —
 that is why the second command exists), `job run --wait` finished green (job 104346054) and
 `storage table-detail` reported 42 rows. The throwaway transformation and its output bucket were
 deleted the same minute. */}
@@ -67,13 +68,20 @@ tab", nothing else; notes/getting-started/CONSERVATION-REPORT.md, 2026-09-29. */
   copies in what you list (Kai's builds read it in place);
   [output mapping](/transformations/mappings/output/) writes back only what you name, so
   nothing else in Storage changes and Keboola can track lineage.
-- **Table names matter, bucket names do not.** The SQL reads `sales`, `weather_daily`, `staffing`,
+- **Table names matter, [bucket](/storage/buckets/) names do not.** The SQL reads `sales`, `weather_daily`, `staffing`,
   `stores` and `forecast` (not `products`); keep those names in the input mapping, or edit the
   queries to match. Buckets carry configuration IDs, so yours will differ.
 - **Find out which SQL your project speaks:** **Transformations → Create Transformation** lists
   *Snowflake SQL Transformation* or *Google BigQuery Transformation*. New
   [Free Plan](/management/payg-project/) projects default to the [BigQuery backend](/storage/);
   contract customers choose theirs.
+
+:::tip[New to input and output mapping?]
+Input mapping copies the tables you list into a temporary staging area, and your SQL runs on that
+copy. Output mapping writes back to Storage only the tables you name, and the rest is deleted when
+the run ends. Kai's build skips the copy and reads the source tables in place, read-only;
+[Input and Output Mapping](/transformations/mappings/) covers both.
+:::
 
 ## What the SQL has to do
 
@@ -161,7 +169,7 @@ figures, though Kai picks its own column types and writes the weekday out in ful
 since 5 Aug; see notes/getting-started/DECISIONS.md 2026-09-08. */}
 
 The chat links what Kai made, so that is where to find it afterwards: the transformation, and the
-job that ran it.
+[job](/management/jobs/) that ran it.
 
 ![Screenshot - The Kai chat after the transformation prompt: Transformation created, Boolabean staffing outlook, Google BigQuery; Job succeeded; then Kai's answer, 42 rows with Boolabean Zelný trh in Brno the most stretched on two days, three short-handed rows in all, and a closing line that it will confirm once the job has written the table](/getting-started/transform/kai-transform.png)
 
@@ -497,7 +505,7 @@ Back on the transformation's page after you save, **Queries** shows your SQL as 
 </TabItem>
 <TabItem label="CLI / API">
 
-`kbagent` builds the same transformation from a SQL file. Connect it to your project once with
+[`kbagent`](/cli/) builds the same transformation from a SQL file. Connect it to your project once with
 `kbagent project add` (see [the CLI quickstart](/cli/getting-started/)); the examples use
 `docs-demo` as the project alias.
 
@@ -525,11 +533,11 @@ docs-demo --component-id keboola.google-bigquery-transformation` finds it again 
 **Add the input mapping**
 
 `transformation create` leaves the input mapping empty, and the SQL above reads its tables by the
-short names the mapping gives them, so the next command fills it in. `--storage` replaces
-`configuration.storage` wholesale, which means the file has to carry the output mapping too:
+short names the mapping gives them, so the next command fills it in. `--storage-file` replaces
+`configuration.storage` wholesale, which means the file has to carry the output mapping too. Save the JSON below as `storage.json`, then run:
 
 ```bash
-kbagent transformation edit --project docs-demo --config-id <config-id> --change-description "Add the five input tables" --storage @storage.json
+kbagent transformation edit --project docs-demo --config-id <config-id> --change-description "Add the five input tables" --storage-file storage.json
 ```
 
 ```json title="storage.json"

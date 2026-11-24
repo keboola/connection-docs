@@ -1,6 +1,8 @@
 ---
 title: Google Sheets
+lastUpdated: 2026-11-19
 slug: 'components/writers/storage/google-sheets'
+description: 'Write Keboola tables into worksheets of a Google Sheets spreadsheet, overwriting the sheet or appending rows; Google Sheets limits the document size.'
 redirect_from:
     - /writers/storage/google-sheets/
 ---
@@ -12,9 +14,11 @@ It allows you to write tables into individual sheets of a spreadsheet document a
 Be aware that Google Sheets have [strict limits](https://spreadsheetpoint.com/google-sheets-limitations/)
 on the size of the document. If you are getting close to them, use the [Google Drive data destination connector](/components/writers/storage/google-drive/) to avoid failed writes.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Sheets** data destination connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Sheets** data destination connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 Then click the **New Table** button to add a new table:
 
 ![Screenshot - Add Table Step 1](/components/writers/storage/google-sheets/google-sheets-1.png)

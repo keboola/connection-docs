@@ -1,6 +1,8 @@
 ---
 title: Component Configurations API
+lastUpdated: 2026-10-13
 slug: 'storage/api/configurations'
+description: 'Learn how a component configuration is structured, then list, modify, roll back and copy configurations and their rows with the Storage API.'
 redirect_from:
     - /integrate/storage/api/configurations/
 ---
@@ -87,6 +89,8 @@ It will give you something like this:
 
 From here, you can see all available information about a particular component. In the following examples, we
 will use `keboola.ex-aws-s3` --- the AWS S3 extractor.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration Structure
 Component configurations are largely dependent on the actual component being configured. This makes creating configurations manually
@@ -523,3 +527,6 @@ It will return the ID of the newly created configuration:
 }
 ```
 
+---
+
+**Next:** [Import & Export →](/storage/api/import-export/)

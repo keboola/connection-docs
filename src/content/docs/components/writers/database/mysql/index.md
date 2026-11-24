@@ -1,6 +1,8 @@
 ---
 title: MySQL
+lastUpdated: 2026-11-19
 slug: 'components/writers/database/mysql'
+description: 'Write Keboola tables to a MySQL or MariaDB database with dedicated credentials or an SSH tunnel, then set column types and full or incremental load.'
 redirect_from:
     - /writers/database/mysql/
 
@@ -10,8 +12,10 @@ redirect_from:
 
 This data destination connector sends data to a [MySQL](https://www.mysql.com/products/) or [MariaDB](https://mariadb.org/) database.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **MySQL** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **MySQL** data destination connector.
 
 The first step is to **Set Up Database Credentials**.
 You need to provide a *host name*, *user name*, *password*, and a *database name* (MySQL [*schema*](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_schema)).

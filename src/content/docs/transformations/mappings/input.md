@@ -205,7 +205,7 @@ malformed files, etc.) or, for example, to work with pre-trained models that you
 
 ### Options
 
-- **Tags** — [tags](/storage/files/#uploading-file) used to select files.
+- **Tags** — [tags](/storage/files/#upload-a-file) used to select files.
 - **Changed Since** — the time range for selecting files. Either a static range (e.g. `30 minutes`) or *Since last successful run* for incremental processing (see below). With a static range, a file must satisfy **both** the tags **and** the range to be selected.
 - **Query** *(deprecated, do not use)* — legacy option for a customized [Elastic query](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/query-dsl-query-string-query.html#query-string-syntax).
 - **Processed Tags** *(deprecated, do not use)* — legacy option that assigned tags to input files after the transformation finished, used to process files incrementally.

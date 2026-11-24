@@ -1,5 +1,7 @@
 ---
 title: Notifications
+lastUpdated: 2026-11-18
+description: 'The notification types for flows, jobs, apps, and credit usage, how to set up flow, job, and app notifications, and how webhook delivery works.'
 slug: 'management/notifications'
 ---
 
@@ -47,7 +49,7 @@ dropdown or type any address.
 
 ***Important:** Notifications are not supported in development branches. Always set error status notifications for scheduled production flows.*
 
-<!-- VERIFY(owner): four claims on this page predate this PR and no public source confirms them.
+<!-- VERIFY(Ondřej Jodas): four claims on this page predate this PR and no public source confirms them.
      1. The averaging window for the processing-overtime event (docs have said "last 20 executions")
         and whether it counts only successful runs.
      2. Manual-run routing: does the user who started the flow REPLACE the configured recipients or

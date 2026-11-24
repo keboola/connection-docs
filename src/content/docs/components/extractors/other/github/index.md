@@ -1,18 +1,21 @@
 ---
 title: GitHub
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/github'
+description: 'Import organizations, members, teams, repositories, issues and commits from GitHub with an authorized account, in Smart Mode (incremental) or Full Mode.'
 redirect_from:
     - /extractors/other/github/
 ---
 
 
 
-The GitHub data source connector uses the [GitHub API](https://developer.github.com/v3/) to import data from [GitHub](https://github.com/)
-to Keboola.
+The connector calls the [GitHub API](https://developer.github.com/v3/).
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **GitHub** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization), and
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **GitHub** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/), and
 select the template you wish to use. There are two configuration templates available:
 
 - `Smart Mode` -- always gets missing data only, loads data [incrementally](/storage/tables/incremental-loading/#incremental-loading).

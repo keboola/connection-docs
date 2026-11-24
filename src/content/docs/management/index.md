@@ -1,5 +1,7 @@
 ---
 title: Management
+lastUpdated: 2026-11-20
+description: 'Overview of managing a Keboola project: data governance and jobs, user types, project status and deletion, support, and the maintenance window.'
 slug: 'management'
 redirect_from:
   - /getting-started/management/
@@ -20,11 +22,11 @@ running and finished (what tables were modified, how much data was transferred a
 what events occurred during the job execution).
 - [**Storage Jobs**](/management/jobs/#storage-jobs) — track all data
 which were uploaded/downloaded into your project.
-- [**Table Snapshots**](/storage/tables/backups/#table-snapshots) — allow you to revert data
-to an earlier version (either revert the contents of a table or copy the table into another one).
+- [**Table Snapshots**](/storage/tables/backups/#copy-a-table-with-a-snapshot) — keep a copy of a table's contents
+at the time you take it, from which you can create a new table right away or later; a snapshot does not restore the original table in place.
 - [**Data Takeout**](/management/project/export/) — allows you to get your data back from us; in Keboola, you are
 always the sole owner of your data. Data Takeout is especially useful for proof-of-concept projects.
-- [**Trash tab**](/components/#delete-configuration) — allows you to list and restore deleted configurations.
+- [**Trash tab**](/components/configurations/#delete-and-restore-a-configuration) — allows you to list and restore deleted configurations.
 
 ### User Management
 There are three types of Keboola [project users](/management/project/users/):

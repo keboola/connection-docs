@@ -92,6 +92,28 @@ const CLASS_ATTR = attr('class');
 const hrefOf = (attrs) => (attrs.match(HREF) || [])[2];
 const opensNewTab = (attrs) => isExternalHref(hrefOf(attrs)) && !TARGET.test(attrs);
 
+// HTML that is only a picture: <img>, or <picture> with its <source>s and <img>
+const MEDIA_HTML = /^(?:\s*<\/?(?:img|picture|source)\b[^>]*>)+\s*$/i;
+const isMediaHtml = (html) => MEDIA_HTML.test(html) && /<(?:img|picture)\b/i.test(html);
+
+/**
+ * Whether the inline link opened by the raw node at `index` holds only a
+ * picture: every node up to the raw node with its </a> is an image, a piece of
+ * <picture> markup or blank text.
+ */
+function loneOpenerWrapsMedia(parent, index) {
+  const between = [];
+  for (let i = index + 1; parent && i < parent.children.length; i++) {
+    const n = parent.children[i];
+    if (n.type === 'raw' && /^\s*<\/a>/i.test(n.value)) {
+      const kids = between.filter((k) => !isBlankText(k));
+      return kids.length > 0 && kids.every((k) => isImage(k) || (k.type === 'raw' && MEDIA_HTML.test(k.value)));
+    }
+    between.push(n);
+  }
+  return false;
+}
+
 /** How many external <a …> in an HTML string close somewhere else. */
 function unclosedExternal(html) {
   const rest = html.replace(/<a\b[^>]*>[\s\S]*?<\/a>/gi, '');
@@ -140,8 +162,11 @@ export default function externalLinks() {
         const hint = !inHeading.has(node);
         // Inline HTML in a paragraph arrives as separate raw nodes for <a …>
         // and </a>; put the hidden text before the closing tag that follows.
-        let open = hint ? unclosedExternal(node.value) : 0;
-        node.value = externalizeHtml(node.value, { hint });
+        const lone = unclosedExternal(node.value);
+        let open = hint ? lone : 0;
+        // a badge written as inline HTML: <a …>, <img …>, </a> as three raw nodes
+        const media = lone > 0 && loneOpenerWrapsMedia(parent, index);
+        node.value = externalizeHtml(node.value, { hint, loneClass: !media });
         for (let i = index + 1; open > 0 && parent && i < parent.children.length; i++) {
           const next = parent.children[i];
           if (next.type !== 'raw' || !next.value.includes('</a>')) continue;
@@ -171,15 +196,17 @@ function tagAttrs(attrs, withClass) {
  * unless `hint` is false (a link inside a heading); an opening <a …> whose
  * closing tag sits in another raw node (inline HTML in a paragraph) gets
  * target, rel and the class here, and the plugin adds the hidden text at the
- * closing tag. Tags that already have a target are left alone.
+ * closing tag; `loneClass: false` leaves the class off such an opener, for a
+ * link the plugin has seen holds only a picture. A whole link that holds only
+ * an <img> or a <picture> gets no class either. Tags that already have a
+ * target are left alone.
  */
-export function externalizeHtml(html, { hint = true } = {}) {
+export function externalizeHtml(html, { hint = true, loneClass = true } = {}) {
   const whole = html.replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi, (m, attrs, text) => {
     if (!opensNewTab(attrs)) return m;
-    const media = /^\s*<(img|picture)\b[^>]*>\s*(<\/picture>\s*)?$/i.test(text);
-    return `<a${tagAttrs(attrs, !media)}>${text}${hint ? HINT_HTML : ''}</a>`;
+    return `<a${tagAttrs(attrs, !isMediaHtml(text))}>${text}${hint ? HINT_HTML : ''}</a>`;
   });
   return whole.replace(/<a\b([^>]*)>/gi, (m, attrs) =>
-    opensNewTab(attrs) ? `<a${tagAttrs(attrs, true)}>` : m,
+    opensNewTab(attrs) ? `<a${tagAttrs(attrs, loneClass)}>` : m,
   );
 }

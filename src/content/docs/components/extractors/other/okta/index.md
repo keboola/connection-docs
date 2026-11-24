@@ -1,6 +1,8 @@
 ---
 title: Okta
+lastUpdated: 2026-10-14
 slug: 'components/extractors/other/okta'
+description: 'Fetch Okta users, user types and devices with an organization URL and API token, using search queries and full or incremental sync.'
 redirect_from:
     - /extractors/other/okta/
 ---
@@ -8,6 +10,8 @@ redirect_from:
 
 
 This extractor fetches data from [Okta](https://www.okta.com/). It supports backfill mode and also incremental fetching.
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prerequisites
 Before you start, get an Okta API token. To find out how to obtain the token, go to the [Okta docs](https://developer.okta.com/docs/guides/create-an-api-token/main).

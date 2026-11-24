@@ -1,13 +1,16 @@
 ---
 title: Workspace Retention
+lastUpdated: 2026-11-19
 slug: 'workspace/retention'
-description: Unused Snowflake and BigQuery workspaces are warned, deactivated and deleted automatically. How it works, which e-mails you get and how to keep or recover a workspace.
+description: 'Unused Snowflake and BigQuery workspaces are warned, deactivated and deleted automatically: the timeline, the e-mails, and how to keep or recover one.'
 ---
 
 From 9 November 2026, Keboola cleans up unused Snowflake and BigQuery workspaces automatically. A workspace
 nobody has used for six months is first warned, then deactivated, and finally deleted. You get an e-mail
 at each step, and using a workspace keeps it. See also the
 [changelog announcement](https://www.keboola.com/changelog/unused-workspaces-will-be-cleaned-up-automatically).
+
+<!-- Explanation-type page. Source: the page as it stood on main; shape only, content unchanged, checked 2026-11-19. -->
 
 ## Which Workspaces Are Affected
 
@@ -139,3 +142,5 @@ project events.
 **I am an organization administrator. Why did I get the e-mail?**
 The user who created the workspace is no longer a member of the project, or the workspace was created with a
 Storage API token. The e-mail says this next to each such workspace.
+
+**Next:** [Snowflake workspaces access changes →](/workspace/snowflake-workspaces-access-changes/)

@@ -1,6 +1,8 @@
 ---
 title: GoodData
+lastUpdated: 2026-11-19
 slug: 'components/writers/bi-tools/gooddata'
+description: 'Write Keboola tables to a GoodData project and let the connector build its logical data model from the column types and date dimensions you set.'
 redirect_from:
     - /writers/bi-tools/gooddata/
 ---
@@ -16,9 +18,11 @@ provided by GoodData. However, you need to provide all the required information 
 the configuration non-trivial, and you should have the data model designed before you start configuring
 the connector.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **GoodData** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **GoodData** connector.
 
 The first step is to configure the GoodData project that will be used for writing:
 

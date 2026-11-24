@@ -1,5 +1,6 @@
 ---
 title: Keboola Overview
+lastUpdated: 2026-10-13
 slug: 'overview'
 description: "What Keboola is and how its parts fit together: deployment options, architecture, governance, extending the platform, and the terms you meet everywhere, including stacks, jobs, tokens and the APIs."
 redirect_from:
@@ -23,6 +24,8 @@ Key features of Keboola:
 
 ***Note:** In the early days, we called the Keboola platform **Keboola Connection (KBC)**.  Although the platform's name is **Keboola** now, you will probably see 
 the word Connection or the abbreviation 'KBC' occasionally in table names, column names, etc.*  
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Deployment Options
 Keboola supports various deployment models to suit your specific needs:
@@ -185,3 +188,7 @@ To make sure your transformation does not harm data in Storage, [mapping](/trans
 A secure [workspace](/workspace/) is created with data copied from the tables specified 
 in the [input mapping](/transformations/mappings/input/). After the transformation is executed successfully, only tables and files defined
 in the [output mapping](/transformations/mappings/output/) are returned to Storage.
+
+---
+
+**Next:** [Our APIs →](/overview/api/)

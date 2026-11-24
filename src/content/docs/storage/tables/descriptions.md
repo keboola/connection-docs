@@ -1,15 +1,16 @@
 ---
 title: Table and column descriptions
+lastUpdated: 2026-11-19
 slug: 'storage/tables/descriptions'
 sidebar:
   label: Descriptions
 search_keywords: [description, column description, table description, comment, COMMENT, KBC.description]
-description: 'Table and column descriptions in Storage: editing them in the UI and API, size limits per backend, external tables, workspaces, Data Gateway and KBC.description metadata.'
+description: 'Table and column descriptions in Storage: UI and API editing, size limits per backend, external tables, workspaces, Data Gateway and KBC.description metadata.'
 ---
 
 Every Storage table and column can carry a description. This page lists where descriptions come from, where they are written, and their limits.
 
-<!-- Reference-type page. Split from the former single tables page (PRDCT-486); text carried over from main 2026-11-12. -->
+<!-- Reference-type page. Split from the former single tables page; text carried over from main 2026-11-12. -->
 
 Tables and columns carry a description that is part of the
 [table definition](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/buckets/-bucketId-/tables-definition).
@@ -24,7 +25,14 @@ On Snowflake and BigQuery projects, open a bucket and then a table.
 
 Descriptions are Markdown, within the [size limit](#descriptions-in-your-backend), and are saved with **Save**.
 Saving a description in the UI turns off the **Managed by Keboola** switch of the table, so Keboola components stop
-updating the descriptions of the table and all its columns. You can turn it on again from the same box.
+updating the descriptions of the table and all its columns.
+
+To return to the descriptions from the source, turn the switch on again in the **Table Description** box.
+Turning it on changes no description by itself:
+- The next run of a component that writes the table replaces the descriptions with the values it provides.
+- This applies to the table and all its columns at once, so your other edits are replaced too.
+- A description that the component does not provide stays as it is.
+
 The description of an alias shows the description of its source table and is read-only, as are the descriptions of
 tables in buckets backed by an external schema (see [Descriptions of External Tables](#descriptions-of-external-tables)).
 
@@ -46,10 +54,10 @@ BigQuery console.
 Storage accepts descriptions up to 65,535 bytes (fewer characters for non-ASCII text) and stores the full text,
 which stays available through the Storage API. The backend receives only the part within its own limit:
 
-| Backend | Longest description written to the backend |
-|---|---|
-| Snowflake | 16,384 characters |
-| BigQuery | 1,024 characters |
+| Backend | Table description | Column description |
+|---|---|---|
+| Snowflake | 16,384 characters | 16,384 characters |
+| BigQuery | 16,384 characters | 1,024 characters |
 
 <!-- TODO(DMD-2640): remove the exception below once Storage truncates column descriptions before writing them to BigQuery. -->
 Exception: on BigQuery, column descriptions are not truncated when you save them through the table definition
