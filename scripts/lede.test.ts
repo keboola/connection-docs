@@ -38,6 +38,14 @@ test('a paragraph cut short by a list is the start of the description', () => {
   );
 });
 
+test('a summary that starts with a complete first paragraph stays as the lede', () => {
+  const body = 'The connector reads tables from a PostgreSQL database into Storage.\n\n## Configure\n';
+  assert.equal(
+    ledeRepeatsBody('The connector reads tables from a PostgreSQL database into Storage. It covers incremental loads, SSH tunnels and CDC.', body),
+    false,
+  );
+});
+
 test('a short first paragraph does not swallow an unrelated description', () => {
   assert.equal(ledeRepeatsBody('Kai is generally available in every project.', 'Kai is\n'), false);
 });

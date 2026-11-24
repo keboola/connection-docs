@@ -73,12 +73,16 @@ export function plainText(text) {
 
 // True when the description is the opening of the first paragraph, ignoring
 // markup and its own closing punctuation (the backfill turned some trailing
-// colons into periods). Also true the other way round: a paragraph cut short by
-// a list ("…fetch data from the" followed by "- Azure Table storage") is the
-// start of a description that ran on into that list.
+// colons into periods). Also true the other way round, but only for a paragraph
+// cut short by a list ("…fetch data from the" followed by "- Azure Table
+// storage"): that is the start of a description that ran on into the list. A
+// first paragraph that ends its sentence is complete, and a description that
+// starts with it and goes on is a summary worth showing.
 export function ledeRepeatsBody(description, body) {
   const lede = plainText(description).replace(/[.:!?]+$/, '');
   if (!lede) return false;
   const para = plainText(firstParagraph(body));
-  return para.startsWith(lede) || (para.length >= 40 && lede.startsWith(para));
+  if (para.startsWith(lede)) return true;
+  const cutShort = !/[.!?]["')\]]*$/.test(para);
+  return cutShort && para.length >= 40 && lede.startsWith(para);
 }
