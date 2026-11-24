@@ -1,5 +1,6 @@
 ---
 title: Multi-Project Architecture
+description: Split extraction, transformation and delivery across several Keboola projects, and share data between them through the Data Catalog.
 slug: 'catalog/multi-project'
 ---
 
@@ -7,7 +8,9 @@ slug: 'catalog/multi-project'
 
 Keboola is a very versatile platform and can be used in many different ways. When you deal with a larger number of source 
 and destination systems, or when some of them are very complex or difficult to set up, you might consider splitting the
-traditional extract-load process into isolated projects.
+traditional extract-load process into isolated projects that share data through the [Data Catalog](/catalog/).
+
+<!-- Explanation-type page. Source: keboola/connection-docs history, checked 2026-11-19. Content is unchanged; only the page shape was edited. -->
 
 Let's say that you have a large source database and you want to provide that to data scientists. While it is 
 very easy for a data scientist to set up a database data source connector and get all the data, it might not be a good 
@@ -29,11 +32,11 @@ anything else really.
 This page explains the concept with a worked example. For a guided walkthrough of *when and how* to adopt it for your organization, see the [Multi-Project Architecture Guide](/overview/onboarding/architecture-guide/).
 :::
 
-## Example Scenario
+## Example scenario
 Let's say that you have an existing Keboola project that contains:
 
 - Oracle database data source connector with the following configurations:
-    - `ora-history` -- The source database is over 2TB; the largest table is `op_history`, which can be easily loaded [incrementally](/storage/tables/#incremental-loading) as records are only added; it is updated every 10 minutes.
+    - `ora-history` -- The source database is over 2TB; the largest table is `op_history`, which can be easily loaded [incrementally](/storage/tables/incremental-loading/#incremental-loading) as records are only added; it is updated every 10 minutes.
     - `ora-crm` -- Tables from a CRM system. Major updates are being made to the CRM, so the structure of the tables changes often. Every two weeks, a column is renamed or a table is split into two.
     - `ora-common` -- Auxiliary tables with addresses and product names that are updated 4 times a year with data from the parent company.
     - `ora-is` -- Extracts `ORA_IS_XXX` bunch of tables which represent a port of a legacy information system, where column names had to fit into a 6 character limit.
@@ -45,7 +48,7 @@ Let's say that you have an existing Keboola project that contains:
     - There are three Google Analytics accounts. One -- for the main site -- is managed by the IT department, the other two are managed by the marketing department (The IT department does not want to allow the marketing department to access the main site.).
 - A bunch of transformations generating reports and writers.
 
-### Single Project
+### Single project
 The following schema shows the configurations and data exchanged between them:
 
 ![Schema -- Single project](/catalog/multi-project/multi-project-1.png)
@@ -55,7 +58,7 @@ The important part is that nothing prevents you from setting up all those compon
 you don't want everyone to be responsible for everything. Multi-project architecture is just that -- a way to divide 
 responsibilities, separate concerns and build interfaces.
 
-### Multi Project
+### Multi project
 The following image illustrates the usage pattern change:
 
 ![Schema -- Multi project](/catalog/multi-project/multi-project-2.png)
@@ -70,7 +73,7 @@ The following image illustrates the usage pattern change:
 - The SQL Server data source connectors are in the `MS` project. All the tables are shared as they are extracted using a `MSSSQL` bucket. There are no 
 transformations or other components. The project is only accessible to SQL Server DBAs. Formally the tables must be up to date at least 
 every 4th hour. In reality, they are updated every hour.
-- Google Analytics data source connectors are all in a single project `GA` maintained by the marketing department. The data source connector for the main site (managed by the IT) is there too; it was only [externally authorized](/components/#external-authorization) by the IT department. The marketing department is responsible for basic cleaning of the data -- the project contains some cleaning transformations and the `ga_clean` bucket is shared to the organization. The tables in the bucket are updated every 10 minutes, though the formal requirement is that they are updated at least every 4th hour.
+- Google Analytics data source connectors are all in a single project `GA` maintained by the marketing department. The data source connector for the main site (managed by the IT) is there too; it was only [externally authorized](/components/authorization/#ask-the-account-owner-to-authorize) by the IT department. The marketing department is responsible for basic cleaning of the data -- the project contains some cleaning transformations and the `ga_clean` bucket is shared to the organization. The tables in the bucket are updated every 10 minutes, though the formal requirement is that they are updated at least every 4th hour.
 - Everything else is in the project `Reporting`. It is possible to further split it to, e.g., a project taking care of newsletters and reporting.
 
 While the above schema may look more complex and difficult to set up, it actually simplifies things a lot. It leads to a very simple
@@ -96,3 +99,7 @@ it is completely unconstrained. For a smaller company, having only the major sou
 might be sufficient. A large corporation might need a deeper separation, so the following schema might be more appropriate: 
 
 ![Schema -- Large Multi-project](/catalog/multi-project/schema-3.png)
+
+---
+
+**Next:** [Multi-Project Architecture Guide →](/overview/onboarding/architecture-guide/)
