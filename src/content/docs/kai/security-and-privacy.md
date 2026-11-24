@@ -1,6 +1,6 @@
 ---
 title: Security & Privacy
-lastUpdated: 2026-09-10
+description: 'How Kai handles your data: data use and model training, the AI provider, access and control, compliance, terms, and security best practices.'
 slug: 'kai/security-and-privacy'
 ---
 
@@ -58,7 +58,6 @@ Contact [support@keboola.com](mailto:support@keboola.com) to discuss BYOLLM opti
 
 Kai leverages Keboola's existing security certifications:
 - SOC 2 Type II
-- ISO 27001
 - GDPR compliant
 - Regional data residency
 

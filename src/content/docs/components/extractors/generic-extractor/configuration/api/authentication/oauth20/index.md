@@ -1,10 +1,12 @@
 ---
 title: OAuth 2.0 Authentication
-lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth20'
+description: 'Configure OAuth 2.0 authentication in Generic Extractor with the oauth20 type: format, headers and query parameters, with bearer and HMAC examples.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth20/
 ---
+
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
 
 
 OAuth 2.0 Authentication is one of [two OAuth methods](/components/extractors/generic-extractor/configuration/api/authentication/#oauth) and
@@ -77,7 +79,7 @@ Note that the properties `appKey` and `#appSecret` must exist even if not used b
 to empty strings. For more information about OAuth 2, see the [official documentation](https://oauth.net/2/)
 or learn [more about Keboola-OAuth integration](/extend/common-interface/oauth).
 
-## Configuration Parameters
+## Configuration parameters
 The following configuration parameters are supported for the `oauth20` authentication type:
 
 - `format` (optional, string) — If the OAuth service provider response is JSON, use the only possible
@@ -93,7 +95,7 @@ are available in the [OAuth function context](/components/extractors/generic-ext
 ## Examples
 The following two examples demonstrate the support for OAuth 2 in Generic Extractor.
 
-### Bearer Authentication
+### Bearer authentication
 The most basic OAuth authentication method is with "Bearer Token". If you have an API which supports
 this authentication method, the following configuration can be used:
 
@@ -145,7 +147,7 @@ the header `Authorization: Bearer SomeToken1234abcd567ef` using the
 
 See [example [EX103]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/103-oauth2-bearer).
 
-### HMAC Authentication
+### HMAC authentication
 If you have an API which requires an [HMAC](https://en.wikipedia.org/wiki/Hash-based_message_authentication_code)
 signed token, generate the correct signature using [functions](/components/extractors/generic-extractor/functions).
 The following example assumes you obtain the following response from the API upon authentication:

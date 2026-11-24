@@ -1,6 +1,6 @@
 ---
 title: Python Client Library
-lastUpdated: 2026-08-05
+description: 'Install the Python client for the Storage API and use it to create tables, import data, load incrementally, and export data, with examples.'
 slug: 'storage/api/clients/python-client'
 redirect_from:
     - /integrate/storage/python-client/

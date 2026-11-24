@@ -1,7 +1,7 @@
 ---
 title: Google Drive Sheets
-lastUpdated: 2026-02-25
 slug: 'components/extractors/storage/google-drive'
+description: 'Import sheets from Google Drive spreadsheets into tables in your project after you authorize your Google account, and rename the destination tables.'
 redirect_from:
     - /extractors/storage/google-drive/
 
@@ -9,12 +9,13 @@ redirect_from:
 
 
 
-This data source connector loads sheets from Google Drive Sheets and stores them as tables in a bucket in your
-current project.
+Each sheet you select lands as its own table in one bucket of the current project.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Drive** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Drive** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 Click **New Sheet** to configure extraction and **Select spreadsheet** to list accessible spreadsheets 
 in your account:

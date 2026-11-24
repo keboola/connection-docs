@@ -1,17 +1,19 @@
 ---
 title: FTP 
-lastUpdated: 2026-06-19
 slug: 'components/extractors/storage/ftp'
+description: 'Load CSV files from FTP, FTPS or SFTP servers into Keboola tables with a password or private key, and pick files with a path or glob pattern.'
 redirect_from:
     - /extractors/storage/ftp/
 ---
 
 
 
-The FTP data source connector loads a single, or multiple CSV files from FTP, FTPS and SFTP servers, and stores them in Keboola Storage.
+Set up the connection once, then add a table for each file or group of files you want to load.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **FTP** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **FTP** connector.
 To access the files on FTP, you need to set up access credentials.
 
 ![Screenshot - FTP extractor server configuration](/components/extractors/storage/ftp/ftp-1.png)
@@ -50,7 +52,7 @@ Now determine how to save the data in Storage.
 
 - The initial value in **Table Name** is derived from the configuration table name. You can change it at any time; however,
 the [Storage bucket](/storage/buckets/) where the table will be saved cannot be changed.
-- **Incremental Load** will turn on [incremental loading to Storage](/storage/tables/#incremental-loading). The result of the
+- **Incremental Load** will turn on [incremental loading to Storage](/storage/tables/incremental-loading/#incremental-loading). The result of the
 incremental load depends on other settings (mainly **Primary Key**).
 - **Delimiter** and **Enclosure** specify the CSV settings.
 
@@ -72,5 +74,5 @@ adds the row number in the source file.
 
 ![Screenshot - FTP extractor audit](/components/extractors/storage/ftp/ftp-6.png)
 
-The connector also supports [Debug mode](/components/#debug-mode), all supported
+The connector also supports [Debug mode](/components/debug-mode/), all supported
 parameters are described in the [GitHub repository](https://github.com/keboola/ex-ftp).

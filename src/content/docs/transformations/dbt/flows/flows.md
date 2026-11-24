@@ -1,6 +1,6 @@
 ---
 title: Usage in Flows
-lastUpdated: 2026-06-22
+description: 'Add dbt components to a flow like any other component, with a schedule and notifications.'
 slug: 'transformations/dbt/flows'
 ---
 

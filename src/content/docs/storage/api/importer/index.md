@@ -1,6 +1,6 @@
 ---
 title: Storage API Importer
-lastUpdated: 2026-08-25
+description: 'Import a CSV file into an existing Storage table with one HTTP POST request to the Storage API Importer: parameters and examples.'
 slug: 'storage/api/importer'
 redirect_from:
     - /integrate/storage/api/importer/

@@ -1,6 +1,6 @@
 ---
 title: /data/in/tables manifests
-lastUpdated: 2026-08-04
+description: 'The manifest next to each input table in /data/in/tables, with an example of the table metadata it holds.'
 slug: 'extend/common-interface/manifest-files/in-tables-manifests'
 ---
 
@@ -90,11 +90,11 @@ native description field; when that field is empty, it falls back to the `KBC.de
 in the table `metadata`. The field is omitted when no description is available.
 
 The `schema` field describes the columns of the downloaded table, including their data types. It is
-built from the [table definition](/storage/tables/data-types/). The columns it
+built from the [table definition](/storage/tables/data-types/reference/#data-types-in-the-table-definition). The columns it
 lists, and their order, match the `columns` node. Each object in the `schema` array represents one column:
 - The `name` field specifies the column name.
 - The `data_type` field describes the column's data type. The `base` type is the backend-agnostic
-  [base type](/storage/tables/data-types/#base-types); an additional key named
+  [base type](/storage/tables/data-types/reference/#base-types); an additional key named
   after the table's [storage backend](/storage/#storage-data) (e.g., `snowflake`,
   `bigquery`) carries the type as it exists on that backend, together with its `length` and `default`
   when set. This field is omitted for columns that are not typed.

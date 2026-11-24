@@ -1,10 +1,12 @@
 ---
 title: Multiple Scrollers
-lastUpdated: 2026-08-07
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/multiple'
+description: 'Use the multiple pagination method in Generic Extractor to define several scrollers for one API and assign a scroller to each job.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/pagination/multiple/
 ---
+
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
 
 
 Setting the pagination method to `multiple` allows you to use **multiple scrollers on a single API**.
@@ -53,7 +55,7 @@ The name of the scroller must be used in a specific [job `scroller` parameter](/
 A `default` scroller can be set (must be one of the names defined in `scrollers`). In that case, all jobs
 without an assigned scroller will use the default one.
 
-### Stopping Condition
+### Stopping condition
 There are no specific stopping conditions for the `multiple` pagination. Each scroller acts upon its 
 normal stopping conditions.
 

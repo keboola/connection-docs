@@ -1,7 +1,7 @@
 ---
 title: Data Source Connectors
-lastUpdated: 2026-06-03
 slug: 'components/extractors'
+description: 'Data source connectors import data from APIs, databases and storage services into Keboola; get the data in first and shape it in Keboola afterwards.'
 redirect_from:
     - /extractors/
 
@@ -10,6 +10,8 @@ redirect_from:
 
 
 Data source connectors (formerly known as extractors) are [Keboola components](/components/) used for **importing data from external sources into Keboola**.
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Types of Data Source Connectors
 Typically, data source connectors connect to [APIs](https://en.wikipedia.org/wiki/Application_programming_interface#Web_APIs)
@@ -30,9 +32,9 @@ For a definitive list of usable data source connectors, see your project **Data 
 Even though data source connectors are generally designed for [**automated and repeated**](/flows/) data collection,
 they can be triggered manually at any time.
 
-- For manual import of ad-hoc data, see [Data Import in Storage](/storage/files/), or our [tutorial on manual data loading](/tutorial/load/).
-- Configure a [sample data source connector](/tutorial/load/googlesheets/) (Google Sheets).
-- Configure a [database data source connector](/tutorial/load/database/);
+- For manual import of ad-hoc data, see [Data Import in Storage](/storage/files/). To load your first tables with a connector, see [Load data into Storage](/getting-started/load/).
+- Configure a [sample data source connector](/getting-started/load/googlesheets/) (Google Sheets).
+- Configure a [database data source connector](/getting-started/load/database/);
 other SQL database data source connectors are configured in the exact same way.
 
 As bringing data into Keboola is the main purpose of a data source connectors, go the path of least resistance:

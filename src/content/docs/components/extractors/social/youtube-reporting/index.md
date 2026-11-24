@@ -1,7 +1,7 @@
 ---
 title: YouTube Reporting
-lastUpdated: 2026-06-22
 slug: 'components/extractors/social/youtube-reporting'
+description: 'See which channel and content owner reports the YouTube Reporting connector downloads, and why the first report can take up to 24 hours.'
 redirect_from:
     - /extractors/social/youtube-reporting/
 

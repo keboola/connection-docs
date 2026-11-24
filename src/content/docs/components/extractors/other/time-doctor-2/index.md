@@ -1,17 +1,19 @@
 ---
 title: Time Doctor 2
-lastUpdated: 2024-02-28
 slug: 'components/extractors/other/time-doctor-2'
+description: 'Import users, worklogs, edit time, time use, projects and tasks from Time Doctor 2 with a user email and password and a from and to time range.'
 redirect_from:
     - /extractors/other/time-doctor-2/
 ---
 
 
 
-This data source connector uses the [Time Doctor 2 API](https://api2.timedoctor.com/) to import data from Time Doctor 2.
+The connector calls the [Time Doctor 2 API](https://api2.timedoctor.com/).
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Time Doctor 2** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Time Doctor 2** connector.
 You need to provide an email address and the password of a user with appropriate access rights.
 
 To configure what data you want to extract, you can use the following parameters:

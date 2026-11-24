@@ -1,7 +1,7 @@
 ---
 title: GoodData Reports
-lastUpdated: 2024-02-29
 slug: 'components/extractors/marketing-sales/gooddata-reports'
+description: 'Import GoodData reports into Keboola Storage as tables by their report URIs, with your GoodData host and credentials or those of a provisioned project.'
 redirect_from:
     - /extractors/marketing-sales/gooddata-reports/
 ---
@@ -11,8 +11,10 @@ redirect_from:
 The GoodData Reports data source connector uses the [GoodData API](https://help.gooddata.com/display/API/API+Reference#/reference/dashboards-and-reporting/export-a-large-report/export-a-raw-report) to import
 reports from the [GoodData](https://www.gooddata.com/) business intelligence platform and stores the data in Keboola Storage.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **GoodData Reports** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **GoodData Reports** connector.
 Type in your GoodData host: secure.gooddata.com, keboola.eu.gooddata.com, or a custom host. Find the host
 by opening the report you wish to extract.
 

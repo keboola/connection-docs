@@ -1,20 +1,22 @@
 ---
 title: BigCommerce
-lastUpdated: 2024-02-28
 slug: 'components/extractors/marketing-sales/bigcommerce'
+description: 'Download brands, customers, orders and products from your BigCommerce store with an API path and read-only access token, as full or incremental loads.'
 redirect_from:
     - /extractors/marketing-sales/bigcommerce/
 ---
 
 
 
-This data source connector downloads data about brands, customers, orders, and products in your BigCommerce store.
+Setting it up takes two steps: create an API account in BigCommerce, then enter its API path and token in Keboola.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prerequisites
 You need a V2/V3 API access token with read-only OAuth scope and know your API path. You can find more information on how to obtain these in [this guide](https://support.bigcommerce.com/s/article/Store-API-Accounts?language=en_US#creating).
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **BigCommerce** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **BigCommerce** connector.
 
 ### Global Configuration
 
@@ -45,7 +47,7 @@ If you are extracting *time-bound* data (i.e., anything **except** `Brands`), yo
 - **Date From**: only data modified after this date are downloaded. Use the `YYYY-MM-DD` format or a human readable description, e.g., `5 days ago`, `1 month ago`, `yesterday`, etc. You can also set this as `last run`, which will fetch data from the last run of the component; if no previous successful run exists, all data up to specified **Date To** will be downloaded.
 - **Date To**: only data modified before this date are downloaded. Use the `YYYY-MM-DD` format or a a human readable description, e.g., `5 days ago`, `1 week ago`, `today`, etc.
 
-Finally, in the **Destination** part of the row configuration, you must choose the **Load Type**; i. e., whether you want to use [incremental loading](/storage/tables/#incremental-loading) (by selecting `Incremental Load`) or full loading (by selecting `Full Load`).
+Finally, in the **Destination** part of the row configuration, you must choose the **Load Type**; i. e., whether you want to use [incremental loading](/storage/tables/incremental-loading/#incremental-loading) (by selecting `Incremental Load`) or full loading (by selecting `Full Load`).
 
 ![Row configuration entry](/components/extractors/marketing-sales/bigcommerce/row_config.png)
 

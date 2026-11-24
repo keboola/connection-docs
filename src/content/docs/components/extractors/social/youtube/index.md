@@ -1,7 +1,7 @@
 ---
 title: YouTube Data API
-lastUpdated: 2026-08-05
 slug: 'components/extractors/social/youtube'
+description: 'Get basic data about your YouTube channels, playlists and videos with the Channels or Videos template, or write your own YouTube Data API jobs.'
 redirect_from:
     - /extractors/social/youtube/
 
@@ -9,15 +9,16 @@ redirect_from:
 
 
 
-The YouTube Data API source connector uses the [YouTube Data API](https://developers.google.com/youtube/v3/docs/) to extract data
-about your YouTube channels or your YouTube activity. It is ideal for obtaining basic information about your channels, playlists, and videos.
+The connector calls the [YouTube Data API](https://developers.google.com/youtube/v3/docs/).
 
 ***Note:** This connector is not designed for analytics and reporting. Use the
 [YouTube Reporting](/components/extractors/social/youtube-reporting/) or the [Google Analytics](/components/extractors/marketing-sales/google-analytics/) data source connectors for such purposes.*
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-To begin, [create a new configuration](/components/#creating-component-configuration) for the **YouTube** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+To begin, [create a new configuration](/components/configurations/#create-a-configuration) for the **YouTube** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 Select one of the two available **templates**: 
 

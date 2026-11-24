@@ -1,7 +1,7 @@
 ---
 title: AWS S3
-lastUpdated: 2024-03-06
 slug: 'components/writers/storage/aws-s3'
+description: 'Write Keboola tables as CSV files to an AWS S3 bucket, authenticating with an IAM user access key or an AWS role with s3:PutObject permission.'
 redirect_from:
     - /writers/storage/aws-s3/
 ---
@@ -11,6 +11,8 @@ redirect_from:
 This data destination connector allows you to write CSV files into a single AWS S3 bucket. After creating a new configuration, select the files
 you want to write to AWS S3. You also need to set up the proper permissions on AWS. You can set up AWS credentials or create an AWS role.
 The connector supports additional [processor configuration](https://developers.keboola.com/extend/component/processors/) via the JSON editor.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Obtain AWS Credentials
 We strongly recommend that you create a dedicated user for the connector. To do so, create a new user in [AWS IAM](https://aws.amazon.com/iam/)
@@ -85,7 +87,7 @@ Select `Role` as the **Login Type**. Create a role in your AWS account using the
 In your project, fill in your **Account ID** and **Role Name**.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **AWS S3** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **AWS S3** connector.
 In the next step, provide the target S3 bucket and [AWS credentials](#obtain-aws-credentials) with write permissions to it.
 
 ![Screenshot - Configure credentials](/components/writers/storage/aws-s3/aws-s3-1.png)

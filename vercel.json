@@ -10,5 +10,62 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/tutorial/:file(opportunity|account|user|level).csv",
+      "destination": "/getting-started/:file.csv",
+      "permanent": true
+    },
+    {
+      "source": "/tutorial/branches/:file(bitcoin_price|bitcoin_transactions).csv",
+      "destination": "/getting-started/branches/:file.csv",
+      "permanent": true
+    },
+    {
+      "source": "/tutorial/onboarding/usage-blueprint/keboola-platform-usage-blueprint-document.docx",
+      "destination": "/overview/onboarding/usage-blueprint/keboola-platform-usage-blueprint-document.docx",
+      "permanent": true
+    },
+    {
+      "source": "/tutorial/ad-hoc/:file(cloud-platform-service-account-1|cloud-platform-service-account-3|cloud-platform-service-account-4|cloud-platform-service-account-5|cloud-platform-storage-1|cloud-platform-storage-3|ex-bigquery-1|ex-bigquery-10|ex-bigquery-11|ex-bigquery-2|ex-bigquery-3|ex-bigquery-4|ex-bigquery-5|ex-bigquery-7|ex-bigquery-8|ex-bigquery-9|sandbox-1|sandbox-2|sandbox-3|transformation-1|transformation-2|transformation-3|transformation-4).png",
+      "destination": "/getting-started/ad-hoc/:file.png",
+      "permanent": true
+    },
+    {
+      "source": "/tutorial/automate/:file(automate1).png",
+      "destination": "/getting-started/automate/:file.png",
+      "permanent": true
+    },
+    {
+      "source": "/tutorial/branches/figures/:file.png",
+      "destination": "/getting-started/branches/figures/:file.png",
+      "permanent": true
+    },
+    {
+      "source": "/tutorial/load/:file(db-picture1|db-picture2|db-picture3|db-picture4|db-picture5|db-picture6|db-picture7|google-sheets-create|save-and-run|select-files|sign-in-with-google|source-intro|source-intro-0|storage).png",
+      "destination": "/getting-started/load/:file.png",
+      "permanent": true
+    },
+    {
+      "source": "/tutorial/manipulate/:file(mapping|workspaces1|workspaces2|workspaces3).png",
+      "destination": "/getting-started/transform/:file.png",
+      "permanent": true
+    },
+    {
+      "source": "/tutorial/onboarding/architecture-guide/:file.png",
+      "destination": "/overview/onboarding/architecture-guide/:file.png",
+      "permanent": true
+    },
+    {
+      "source": "/tutorial/onboarding/architecture-guide/bdm-guide/:file.png",
+      "destination": "/overview/onboarding/architecture-guide/bdm-guide/:file.png",
+      "permanent": true
+    },
+    {
+      "source": "/tutorial/write/:file(writing2|writing3|writing4|writing5|writing7).png",
+      "destination": "/getting-started/write/:file.png",
+      "permanent": true
+    }
   ]
 }

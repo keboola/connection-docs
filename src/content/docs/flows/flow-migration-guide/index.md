@@ -1,6 +1,6 @@
 ---
 title: Migration Guide
-lastUpdated: 2026-07-30
+description: 'Migrate a Legacy Flow to a Conditional Flow: preview and review the converted flow, then run the migration. The original flow is kept and disabled.'
 slug: 'flows/flow-migration-guide'
 ---
 

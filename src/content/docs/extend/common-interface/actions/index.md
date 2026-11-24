@@ -1,6 +1,6 @@
 ---
 title: Actions
-lastUpdated: 2026-07-27
+description: 'Synchronous component actions for quick tasks beside the default run job: the use case, running them, return values, error handling, and limits.'
 slug: 'extend/common-interface/actions'
 ---
 

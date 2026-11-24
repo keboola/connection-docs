@@ -1,7 +1,7 @@
 ---
 title: Microsoft SQL
-lastUpdated: 2026-08-04
 slug: 'components/extractors/database/microsoft-sql'
+description: 'Sync SQL Server and Azure SQL data into Keboola with queries, or with native CDC on CDC-enabled tables to capture deletions too.'
 ---
 
 
@@ -10,6 +10,8 @@ slug: 'components/extractors/database/microsoft-sql'
 
 This connector supports the most recent versions of both SQL Server and Azure SQL deployments.
 
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Default Functionality
 
 This [standard SQL database connector](/components/extractors/database/sqldb) performs queries against the source database to synchronize data. 
@@ -17,7 +19,7 @@ It offers a straightforward approach suitable for most use cases, enabling [time
 
 All SQL database connectors are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and offer an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). 
 
-For guidance on basic configuration, please refer to our tutorial: [Loading Data with Database data source connector](/tutorial/load/database/). 
+For the basic configuration, see [Load from a database](/getting-started/load/database/) in Getting Started.
 
 ## CDC (Change Data Capture) Mode
 

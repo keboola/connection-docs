@@ -1,7 +1,7 @@
 ---
 title: Azure Cosmos DB
-lastUpdated: 2024-02-28
 slug: 'components/extractors/database/cosmosdb'
+description: 'Fetch items from Azure Cosmos DB over the SQL API with an endpoint, database ID and key, in raw or mapping mode, with a generated or custom query.'
 ---
 
 
@@ -11,7 +11,7 @@ using the [SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-qu
 If your CosmosDB instance uses the [MongoDB API](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction), you should use the [MongoDB data source connector](/components/extractors/database/mongodb/) instead.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **CosmosDB** data source connector.  
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **CosmosDB** data source connector.  
 
 Fill in the **Endpoint**, **Database ID** and **Key**. Then click **Save**.
 
@@ -34,7 +34,7 @@ the [**Configuration Parameters**](#configuration-parameters). Then click **Save
 
 - **`containerId`**: string (required); the ID of the Cosmos DB container
 - **`output`**: string (required); the name of the output table in your bucket
-- **`incremental`**: boolean (optional); enables [incremental loading](/storage/tables/#incremental-loading); the default is `false`
+- **`incremental`**: boolean (optional); enables [incremental loading](/storage/tables/incremental-loading/#incremental-loading); the default is `false`
 - **`incrementalFetchingKey`**: string (optional); the name of the key for [incremental fetching](/components/extractors/database/#incremental-fetching), e.g., `c.id`
 - **`mode`**: enum (optional)
     - `mapping` (default) -- items are exported using specified `mapping`

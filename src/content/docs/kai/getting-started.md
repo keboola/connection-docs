@@ -1,10 +1,12 @@
 ---
 title: Getting Started with Kai
-lastUpdated: 2026-09-22
 slug: 'kai/getting-started'
+description: 'Enable Kai in a project, open the chat, and learn to use it, with example prompts, action approval, plan mode, attachments, slash commands and usage limits.'
 ---
 
 
+
+Read this page before your first chat with Kai. If you want to know what Kai is first, start with the [Kai overview](/kai/). Once you're set up, [Kai settings](/kai/settings/) covers tool permissions, instructions and context files.
 
 ## Access
 
@@ -236,13 +238,16 @@ it works.
 ## Usage and Limits
 
 On contracted plans, Kai consumes **[PPU credits](/kai/pricing/)** — the same project
-power that runs your transformations, extractors, and data apps — rather than a monthly
+power that runs your transformations, extractors, and apps — rather than a monthly
 message quota. A median conversation costs about **1.1 PPU**. New organizations start with
 a [free allowance of 300 PPU](/kai/pricing/#free-allowance-for-new-organizations).
 
 Organization Admins cap Kai spend with a monthly project budget and per-user limits in
 **Settings → Kai Agent → Kai spend limits**. An indicator appears in your chat panel at 80%
-of your limit, and when a limit is reached, Kai stops and tells you which one applied.
+of your limit, and when a limit is reached, Kai stops and tells you which one applied. A
+reply that has already started always finishes, so a limit never cuts off work in progress —
+see [Hierarchy of limits](/kai/pricing/#hierarchy-of-limits) for what that means for your
+budget.
 
 [Pay-as-you-go projects](/management/payg-project/) are not on this model yet. They keep a
 monthly Kai message limit per user until usage-based billing reaches PAYG.

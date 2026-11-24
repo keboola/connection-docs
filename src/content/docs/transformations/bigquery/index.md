@@ -1,6 +1,6 @@
 ---
 title: Google BigQuery Transformation
-lastUpdated: 2026-08-04
+description: 'Run SQL transformations in BigQuery: limits, aborting a run, best practices for data types and UDFs, and read-only input mapping.'
 slug: 'transformations/bigquery'
 ---
 

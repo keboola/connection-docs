@@ -1,6 +1,5 @@
 ---
 title: Keboola JDBC Driver
-lastUpdated: 2026-06-30
 slug: 'workspace/jdbc-driver'
 description: Connect DBeaver, DataGrip, Tableau, or any JDBC client to your Keboola project and query your data with standard SQL.
 ---
@@ -10,6 +9,8 @@ description: Connect DBeaver, DataGrip, Tableau, or any JDBC client to your Kebo
 The Keboola JDBC driver lets standard SQL clients query data in your Keboola project. It connects through the Query Service API, so any JDBC-compatible tool — [DBeaver](/workspace/jdbc-driver/dbeaver/), [DataGrip](/workspace/jdbc-driver/datagrip/), or [Tableau](/workspace/jdbc-driver/tableau/) — can read your tables and platform metadata with plain SQL.
 
 The driver auto-discovers your branches and workspaces, exposes virtual `_keboola.*` tables for platform metadata, adds a `KEBOOLA HELP` command, and supports full Snowflake metadata via `SHOW` commands.
+
+<!-- Reference-type page. Source: the page as it stood on main; shape only, content unchanged, checked 2026-11-19. -->
 
 :::note
 This page is about reading data **out of** Keboola from external SQL/BI clients. If you instead want to **push** data into the Tableau ecosystem from Keboola, see the [Tableau data destination connector](/components/writers/bi-tools/tableau/).
@@ -38,7 +39,7 @@ The token has specific requirements for use with the driver:
 - Access to components is **not** required for SQL access.
 - The token must come from the **same project** as the workspace you want to query.
 
-A workspace must also already exist in the project — the driver auto-selects the newest one. Create one in the Keboola UI under [Workspaces](/workspace/).
+A workspace must also already exist in the project — the driver auto-selects the newest one. To create one in the Keboola UI, see [Create a workspace](/workspace/create/).
 
 :::tip
 If you get connection errors, first verify your token works by visiting `https://connection.keboola.com/v2/storage/tokens/verify` with the header `X-StorageApi-Token: <your-token>`.
@@ -74,3 +75,5 @@ The JDBC URL takes the form `jdbc:keboola://<host>`, where `<host>` is your Kebo
 ## Need Help?
 
 For further help, reach out via [Keboola Support](/management/support/).
+
+**Next:** [DBeaver installation guide →](/workspace/jdbc-driver/dbeaver/)

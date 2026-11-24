@@ -1,6 +1,6 @@
 ---
 title: Snowflake to DuckDB Migration
-lastUpdated: 2026-08-04
+description: 'Migrate Snowflake transformations to DuckDB: the SQL dialect differences that cause trouble, and how to work around them.'
 slug: 'transformations/duckdb/snowflake-migration'
 ---
 

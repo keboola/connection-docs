@@ -1,6 +1,5 @@
 ---
 title: kbagent how-to guides
-lastUpdated: 2026-07-20
 slug: 'cli/workflows'
 sidebar:
   label: How-to Guides

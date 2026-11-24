@@ -1,7 +1,7 @@
 ---
 title: Google Cloud Storage
-lastUpdated: 2024-02-29
 slug: 'components/writers/storage/google-cloud-storage'
+description: 'Write Keboola tables and files to a Google Cloud Storage bucket, authorized with a service account key or instant authorization.'
 redirect_from:
     - /writers/storage/google-cloud-storage/
 ---
@@ -10,9 +10,11 @@ redirect_from:
 
 This data destination connector sends tables as CSV or other files to a [Google Cloud Storage](https://cloud.google.com/storage) bucket.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Cloud Storage** data destination connector.
-To authorize the connector, you can either choose to use a Google service account or [instant authorization](/components/#instant-authorization).
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Cloud Storage** data destination connector.
+To authorize the connector, you can either choose to use a Google service account or [instant authorization](/components/authorization/#authorize-with-your-own-account).
 
 The service account login is the recommended way of authorizing this component. 
 

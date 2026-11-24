@@ -1,7 +1,7 @@
 ---
 title: Google Drive
-lastUpdated: 2026-02-19
 slug: 'components/writers/storage/google-drive'
+description: 'Write Keboola tables to Google Drive as CSV or Google Sheets files, updating one file or creating a new file with each run.'
 redirect_from:
     - /writers/storage/google-drive/
 ---
@@ -13,14 +13,16 @@ It allows you to write entire tables as CSV files, or Google Sheets files. To wr
 to an existing sheet, use the [Google Sheets data destination connector](/components/writers/storage/google-sheets/). Writing tables as CSV files
 is not bound by [Google Sheets limits](https://spreadsheetpoint.com/google-sheets-limitations/).
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Drive** data destination connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Drive** data destination connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 Then click the **New Table** button to add a new table:
 
 ![Screenshot - Add Table Step 1](/components/writers/storage/google-drive/google-drive-1.png)
 
-Select a table from Storage. You may also specify additional filters as well as [incremental processing](/storage/tables/#incremental-processing).
+Select a table from Storage. You may also specify additional filters as well as [incremental processing](/storage/tables/incremental-loading/#incremental-processing).
 All options may be modified later. Click **Next** to select how to load the table to Google Drive:
 
 ![Screenshot - Add Table Step 2](/components/writers/storage/google-drive/google-drive-2.png)

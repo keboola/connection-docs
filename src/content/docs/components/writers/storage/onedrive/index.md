@@ -1,7 +1,7 @@
 ---
 title: OneDrive Excel Sheets
-lastUpdated: 2026-06-19
 slug: 'components/writers/storage/onedrive'
+description: 'Write Keboola tables to an Excel worksheet in OneDrive, Office 365 or SharePoint, pick or create the workbook and worksheet, and overwrite or append rows.'
 redirect_from:
     - /writers/storage/onedrive/
 ---
@@ -20,9 +20,11 @@ so with this connector you can write to any Excel sheet on your personal or busi
 The contents of the sheet can be overwritten or new lines can be added at the end.
 
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **OneDrive Excel Sheets** data destination connector.  
-Then, click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **OneDrive Excel Sheets** data destination connector.  
+Then, click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 Click **Add Table** to configure the export.
 

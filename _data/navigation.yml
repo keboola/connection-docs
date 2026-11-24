@@ -5,74 +5,92 @@ items:
   - url: /overview/
     title: Keboola Overview
     items:
+      - url: /overview/onboarding/
+        title: Platform Onboarding
+        items:
+          - url: /overview/onboarding/usage-blueprint/
+            title: Usage Blueprint
+
+          - url: /overview/onboarding/architecture-guide/
+            title: Multi-Project Architecture
+            items:
+              - url: /overview/onboarding/architecture-guide/bdm-guide/
+                title: Business Data Model
+
+          - url: /overview/onboarding/cheat-sheet/
+            title: Best Practices
+
+          - url: /overview/onboarding/governance-guide/
+            title: Governance Guide
+
+      - url: /overview/google-data-policy/
+        title: Google Data Policy
+
       - url: /overview/api/
         title: Our APIs
 
-  - url: /tutorial/
-    title: Getting Started Tutorial
+  - url: /getting-started/
+    title: Getting Started
     items:
-      - url: /tutorial/load/
-        title: "Part 1: Loading Data"
+      - url: /getting-started/project/
+        title: Create or join a project
+
+      - url: /getting-started/load/
+        title: Load data into Storage
+
+      - url: /getting-started/transform/
+        title: Transform data
+
+      - url: /getting-started/ask/
+        title: Explore your data
+
+      - url: /getting-started/app/
+        title: Build an app
+
+      - url: /getting-started/automate/
+        title: Build and schedule a weekly flow
+
+      - url: /getting-started/check/
+        title: Check Storage and Jobs
+
+      - url: /getting-started/going-further/
+        title: Going further
         items:
-          - url: /tutorial/load/googlesheets/
-            title: Loading Data from Google Sheets
+          - url: /getting-started/write/
+            title: Send a table to Google Sheets
 
-          - url: /tutorial/load/database/
-            title: Loading Data from Database
+          - url: /getting-started/load/googlesheets/
+            title: Load from Google Sheets
 
-      - url: /tutorial/manipulate/
-        title: "Part 2: Data Manipulation"
-        items:
-          - url: /tutorial/manipulate/workspace/
-            title: Using Workspace
+          - url: /getting-started/load/database/
+            title: Load from a database
 
-      - url: /tutorial/write/
-        title: "Part 3: Writing Data"
+          - url: /getting-started/transform/workspace/
+            title: Use a workspace
 
-      - url: /tutorial/automate/
-        title: "Part 4: Flow Automation"
+          - url: /getting-started/ad-hoc/
+            title: Ad-hoc data analysis
 
-      - url: /tutorial/ad-hoc/
-        title: "Part 5: Ad-Hoc Data Analysis"
-
-      - url: /tutorial/branches/
-        title: "Part 6: Development Branches"
-        items:
-          - url: /tutorial/branches/prepare-tables/
-            title: Prepare Tables
-
-          - url: /tutorial/branches/prepare-files/
-            title: Prepare Files
-
-          - title: Tables in Branch
-            url: /tutorial/branches/tables-in-branch/
-
-          - title: Files in Branch
-            url: /tutorial/branches/files-in-branch/
-
-          - url: /tutorial/branches/project-diff/
-            title: Project Diff
-
-          - title: Merge to Production
-            url: /tutorial/branches/merge-to-production/
-
-      - url: /tutorial/onboarding/
-        title: Keboola Platform Onboarding
-        items:
-          - url: /tutorial/onboarding/usage-blueprint/
-            title: Usage Blueprint
-
-          - url: /tutorial/onboarding/architecture-guide/
-            title: Multi-Project Architecture
+          - url: /getting-started/branches/
+            title: Development branches
             items:
-              - url: /tutorial/onboarding/architecture-guide/bdm-guide/
-                title: Business Data Model
+              - url: /getting-started/branches/prepare-tables/
+                title: Prepare tables
 
-          - url: /tutorial/onboarding/cheat-sheet/
-            title: Best Practices
+              - url: /getting-started/branches/prepare-files/
+                title: Prepare files
 
-          - url: /tutorial/onboarding/governance-guide/
-            title: Governance Guide
+              - url: /getting-started/branches/tables-in-branch/
+                title: Tables in a branch
+
+              - url: /getting-started/branches/files-in-branch/
+                title: Files in a branch
+
+              - url: /getting-started/branches/project-diff/
+                title: Project diff
+
+              - url: /getting-started/branches/merge-to-production/
+                title: Merge to production
 
   - url: /kai/
     title: Kai - AI Assistant
@@ -107,6 +125,9 @@ items:
       - url: /flows/flow-migration-guide/
         title: Migration Guide
 
+      - url: /flows/schedule-api/
+        title: Schedule via the API
+
   - url: /data-apps/
     title: Apps
     items:
@@ -124,6 +145,10 @@ items:
             title: Authentication
           - url: /data-apps/publish-and-share/
             title: Publish and share
+          - url: /data-apps/operate/
+            title: Operate and update
+          - url: /data-apps/troubleshooting/
+            title: Troubleshooting
       - url: /data-apps/reference/
         title: Reference
       - url: /data-apps/streamlit/
@@ -139,17 +164,39 @@ items:
   - url: /components/
     title: Components
     items:
+      - url: /components/configurations/
+        title: Configurations
+
+      - url: /components/authorization/
+        title: Authorization
+
+      - url: /components/debug-mode/
+        title: Debug Mode
+
       - url: /components/running-jobs-in-parallel/
         title: Running Jobs in Parallel
 
       - url: /components/variables/
         title: Variables
         items:
+          - url: /components/variables/use/
+            title: Use Variables
           - url: /components/variables/api/
             title: Variables Through the API
             items:
               - url: /components/variables/api/tutorial/
                 title: Tutorial
+
+      - url: /components/branches/
+        title: Development Branches
+        items:
+          - url: /components/branches/manage/
+            title: Manage Branches
+          - url: /components/branches/merge-requests/
+            title: Merge Requests
+
+      - url: /components/ip-addresses/
+        title: IP Addresses
 
       - url: /components/extractors/
         title: Data Source Connectors
@@ -220,8 +267,17 @@ items:
               - url: /components/extractors/erp/k2/
                 title: K2
 
+              - url: /components/extractors/erp/mpohoda/
+                title: mPOHODA
+
               - url: /components/extractors/erp/netsuite/
                 title: NetSuite
+
+              - url: /components/extractors/erp/pohoda-mserver/
+                title: POHODA mServer
+
+              - url: /components/extractors/erp/suiteprojects-pro/
+                title: SuiteProjects Pro
 
           - url: /components/extractors/marketing-sales/
             title: Marketing/Sales
@@ -282,6 +338,9 @@ items:
                 items:
                   - url: /components/extractors/marketing-sales/bing-ads/report-presets-columns-and-pk/
                     title: Columns and primary keys of report presets
+
+              - url: /components/extractors/marketing-sales/mixpanel/
+                title: MixPanel
 
               - url: /components/extractors/marketing-sales/pinterest-ads/
                 title: Pinterest Ads
@@ -385,6 +444,9 @@ items:
               - url: /components/extractors/other/hibob/
                 title: HiBob
 
+              - url: /components/extractors/other/langsmith-traces/
+                title: LangSmith Traces
+
               - url: /components/extractors/other/mapbox/
                 title: Mapbox
 
@@ -405,6 +467,9 @@ items:
 
               - url: /components/extractors/other/time-doctor-2
                 title: Time Doctor 2
+
+              - url: /components/extractors/other/ukg-hr/
+                title: UKG HR
 
               - url: /components/extractors/other/weather-api
                 title: Weather API
@@ -551,6 +616,15 @@ items:
               - url: /components/writers/database/synapse/
                 title: Synapse
 
+          - url: /components/writers/erp/
+            title: ERP
+            items:
+              - url: /components/writers/erp/mpohoda/
+                title: mPOHODA
+
+              - url: /components/writers/erp/pohoda-mserver/
+                title: POHODA mServer
+
           - url: /components/writers/storage/
             title: Storage
             items:
@@ -609,6 +683,10 @@ items:
                 title: dbt Cloud Job Trigger
               - url: /components/applications/triggers/deepnote-notebook-execution-trigger/
                 title: Deepnote Notebook Execution Trigger
+              - url: /components/applications/triggers/powerbi-refresh/
+                title: Power BI Refresh
+              - url: /components/applications/triggers/tableau-extract-refresh/
+                title: Tableau Extract Refresh Trigger
           - url: /components/applications/custom-python/
             title: Custom Python
           - url: /components/applications/data-gateway/
@@ -619,39 +697,47 @@ items:
               - url: /components/applications/ai/generative-ai/
                 title: Generative AI
 
-      - url: /components/branches/
-        title: Development Branches
-        items:
-          - url: /components/branches/merge-requests/
-            title: Merge Requests
-
-      - url: /components/ip-addresses/
-        title: IP Addresses
-
   - url: /catalog/
     title: Data Catalog
     items:
+      - url: /catalog/share-and-link/
+        title: Share and link buckets
+
       - url: /catalog/multi-project/
         title: Multi-Project Architecture
 
   - url: /storage/
     title: Storage
     items:
+      - url: /storage/tables/
+        title: Tables & Aliases
+        items:
+          - url: /storage/tables/manage/
+            title: Manage Tables
+
+          - url: /storage/tables/incremental-loading/
+            title: Primary Keys & Incremental Loading
+
+          - url: /storage/tables/descriptions/
+            title: Descriptions
+
+          - url: /storage/tables/data-types/
+            title: Data Types
+
+          - url: /storage/tables/data-types/reference/
+            title: Data Types Reference
+
+          - url: /storage/tables/csv-files/
+            title: CSV Files
+
+          - url: /storage/tables/csv-files/excel/
+            title: CSV in Excel
+
+          - url: /storage/tables/backups/
+            title: Back Up and Restore
+
       - url: /storage/buckets/
         title: Buckets
-
-      - url: /storage/bucket-exposure/
-        title: Bucket Exposure
-
-      - url: /storage/data-streams/
-        title: Data Streams
-        items:
-          - url: /storage/data-streams/opentelemetry/
-            title: OpenTelemetry (OTLP)
-          - url: /storage/data-streams/reference/
-            title: Reference
-          - url: /storage/data-streams/tutorial/
-            title: Tutorial
 
       - url: /storage/files/
         title: Files
@@ -659,32 +745,61 @@ items:
       - url: /storage/jobs/
         title: Jobs
 
-      - url: /storage/tables/
-        title: Tables & Aliases
+      - url: /storage/bucket-exposure/
+        title: Bucket Exposure
         items:
-          - url: /storage/tables/data-types/
-            title: Data Types
+          - url: /storage/bucket-exposure/create/
+            title: BigQuery Exposures
 
-          - url: /storage/tables/csv-files/
-            title: CSV Files
+          - url: /storage/bucket-exposure/snowflake-grant/
+            title: Snowflake Grant Mode
 
-          - url: /storage/tables/uploads/
-            title: Table Import/Export
+          - url: /storage/bucket-exposure/snowflake-share/
+            title: Snowflake Share Mode
 
-          - url: /storage/tables/backups/
-            title: Backups and Restorations
+      - url: /storage/data-streams/
+        title: Data Streams
+        items:
+          - url: /storage/data-streams/tutorial/
+            title: Tutorial
+          - url: /storage/data-streams/create/
+            title: Create a stream
+          - url: /storage/data-streams/opentelemetry/
+            title: OpenTelemetry (OTLP)
+          - url: /storage/data-streams/opentelemetry/reference/
+            title: OpenTelemetry reference
+          - url: /storage/data-streams/reference/
+            title: Reference
 
       - url: /storage/byodb/
         title: Bring Your Own Database
         items:
+          - url: /storage/byobq/
+            title: Connect Your Own BigQuery
+
           - url: /storage/byodb/external-buckets/
             title: External Datasets
+            items:
+              - url: /storage/byodb/external-buckets/register/
+                title: Register and Use
 
           - url: /storage/byodb/snowflake-secure-data-sharing/
-            title: Snowflake Secure Data Sharing
+            title: Import a Snowflake Share
 
-      - url: /storage/byobq/
-        title: Bring Your Own BigQuery
+          - url: /storage/byodb/bigquery-policy-tags/
+            title: BigQuery policy tags
+            items:
+              - url: /storage/byodb/bigquery-policy-tags/enable/
+                title: Enable BigQuery policy tags
+
+      - url: /storage/row-level-security/
+        title: Row- and Column-Level Security
+        items:
+          - url: /storage/row-level-security/set-up/
+            title: Set Up
+
+          - url: /storage/row-level-security/policy-reference/
+            title: Policy Reference
 
       - url: /storage/api/
         title: Storage API
@@ -787,21 +902,36 @@ items:
   - url: /workspace/
     title: Workspaces
     items:
-      - url: /workspace/snowflake-workspaces-access-changes/
-        title: Snowflake Workspaces Access Changes
+      - url: /workspace/create/
+        title: Create a Workspace
+
+      - url: /workspace/connect/
+        title: Connect
 
       - url: /workspace/sql-editor/
         title: SQL Editor
+
+      - url: /workspace/sql-editor/use/
+        title: Use the SQL Editor
 
       - url: /workspace/jdbc-driver/
         title: Keboola JDBC Driver
         items:
           - url: /workspace/jdbc-driver/dbeaver/
-            title: DBeaver
+            title: Connect DBeaver
           - url: /workspace/jdbc-driver/datagrip/
-            title: DataGrip
+            title: Connect DataGrip
           - url: /workspace/jdbc-driver/tableau/
-            title: Tableau
+            title: Connect Tableau
+
+      - url: /workspace/table-export/
+        title: Table Export
+
+      - url: /workspace/retention/
+        title: Workspace Retention
+
+      - url: /workspace/snowflake-workspaces-access-changes/
+        title: Snowflake Workspaces Access Changes
 
   - url: /management/
     title: Management
@@ -934,6 +1064,11 @@ items:
             title: Configuration File
           - url: /extend/common-interface/environment/
             title: Environment
+          - url: /extend/common-interface/artifacts/
+            title: Artifacts
+            items:
+              - url: /extend/common-interface/artifacts/tutorial/
+                title: Tutorial
           - url: /extend/common-interface/manifest-files/
             title: Manifest Files
             items:
@@ -970,9 +1105,15 @@ items:
         items:
           - url: /extend/publish/checklist/
             title: Checklist
+      - url: /extend/development-project/
+        title: Development Project
 
   - url: /external-integrations/
     title: External Integrations
     items:
       - url: /external-integrations/n8n/
         title: n8n
+
+  # Not a docs-collection page (src/pages/changelog.astro): `link`, not `url`.
+  - link: /changelog/
+    title: Changelog

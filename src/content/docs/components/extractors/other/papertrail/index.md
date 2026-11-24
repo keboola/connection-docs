@@ -1,7 +1,7 @@
 ---
 title: Papertrail
-lastUpdated: 2026-08-05
 slug: 'components/extractors/other/papertrail'
+description: 'Import Papertrail log events that match a search query, over a retention period of 1 day to 1 month, with a Papertrail API token; loads are incremental.'
 redirect_from:
     - /extractors/other/papertrail/
 
@@ -13,8 +13,10 @@ This data source connector uses the Papertrail [Search API](https://help.papertr
 to import events matching the specified query from [Papertrail](https://www.papertrail.com/) 
 (logs from apps, servers, and cloud services).
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Papertrail** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Papertrail** connector.
 
 To configure the connector, you need to provide a Papertrail API token, enter a search query and select a retention period.
 Then select the data you wish to extract.

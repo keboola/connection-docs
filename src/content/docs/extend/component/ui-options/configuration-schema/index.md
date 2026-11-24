@@ -1,6 +1,6 @@
 ---
 title: Configuration Schema
-lastUpdated: 2026-08-07
+description: 'Define a JSON schema so the Keboola UI shows a form instead of a JSON text area: formats, options, the live schema editor, AI Kit, and examples.'
 slug: 'extend/component/ui-options/configuration-schema'
 redirect_from:
     - /extend/registration/configuration-schema/

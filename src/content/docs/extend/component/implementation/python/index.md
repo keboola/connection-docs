@@ -1,6 +1,6 @@
 ---
 title: Python Implementation Notes
-lastUpdated: 2026-08-04
+description: 'Write a Keboola component in Python: choosing a base image, the keboola.component package, parsing the configuration, and input and output mapping.'
 slug: 'extend/component/implementation/python'
 redirect_from:
     - /extend/custom-science/python/

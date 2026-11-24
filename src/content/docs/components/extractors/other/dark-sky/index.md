@@ -1,7 +1,7 @@
 ---
 title: Dark Sky
-lastUpdated: 2026-08-05
 slug: 'components/extractors/other/dark-sky'
+description: 'The Dark Sky connector no longer works since its API ended in March 2023; see the input and output of existing configurations, or move to Weather API.'
 redirect_from:
     - /extractors/other/dark-sky/
 
@@ -19,13 +19,15 @@ This data source connector looked up the weather anywhere on the globe, returnin
 
 To configure the connector, you provided tables with locations, your Dark Sky API key, the units to use, and a desired forecast granularity.
 
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## API Secret Key
 The connector authenticated with a Dark Sky API Secret key. **New keys are no longer issued** — the sign-up and documentation pages now redirect to Apple's WeatherKit announcement.
 
 ![Screenshot - Dark Sky API key](/components/extractors/other/dark-sky/dark-sky-token.png)
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Dark Sky** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Dark Sky** connector.
 
 The connector fetches weather conditions for locations provided by you in one or more tables.
 Each table must contain the following columns in this particular order:

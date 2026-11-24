@@ -1,6 +1,6 @@
 ---
 title: R Client Library
-lastUpdated: 2026-08-05
+description: 'Install the R client for the Storage API and use it to create a table, import data, and export data, with examples.'
 slug: 'storage/api/clients/r-client'
 redirect_from:
     - /integrate/storage/r-client/

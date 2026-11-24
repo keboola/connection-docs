@@ -1,6 +1,6 @@
 ---
 title: Logging Specification
-lastUpdated: 2026-08-04
+description: 'Display events to Keboola end-users from your component, through standard output and standard error or a Graylog GELF logger.'
 slug: 'extend/common-interface/logging'
 ---
 

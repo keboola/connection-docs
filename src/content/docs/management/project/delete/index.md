@@ -1,6 +1,6 @@
 ---
 title: Project Deletion
-lastUpdated: 2026-06-03
+description: 'Delete a Keboola project from the project settings, and what happens after you mark it for deletion. Export the project first if you need its data.'
 slug: 'management/project/delete'
 redirect_from:
   - /management/project-delete/

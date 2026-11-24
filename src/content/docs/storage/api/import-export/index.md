@@ -1,11 +1,15 @@
 ---
 title: Manually Importing and Exporting Data
-lastUpdated: 2026-09-16
 slug: 'storage/api/import-export'
+description: 'Import a table into Keboola Storage and export one by hand with the Storage API, using curl, the AWS CLI and a Python script, including sliced files.'
 redirect_from:
     - /integrate/storage/api/import-export/
 ---
 
+
+Read this page when you call the Storage API yourself. [Storage API](/storage/api/) covers the rest of the API, and the [API Importer](/storage/api/importer/) uploads a file in one call.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Working with Data
 Keboola Table Storage (Tables) and Keboola File Storage (File Uploads) are heavily connected together.
@@ -114,7 +118,7 @@ curl --request POST --header "Content-Type: application/json" --header "X-Storag
 ```
 
 This will create an asynchronous job, importing data from the `192726698` file into the `new-table` destination table in the `in.c-main` bucket.
-Then [poll for the job results](/extend/jobs/#job-polling), or review its status in the UI.
+Then [poll for the job results](/storage/jobs/), or review its status in the UI.
 
 #### Python Example
 The above process is implemented in the following example script in Python. This script uses the
@@ -341,3 +345,7 @@ or on Windows:
 ```bash
 copy 192611594.csv0000_part_00 /B +192611594.csv0001_part_00 /B merged2.csv
 ```
+
+---
+
+**Next:** [API Importer →](/storage/api/importer/)

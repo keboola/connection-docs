@@ -1,7 +1,7 @@
 ---
 title: Job Queue
-lastUpdated: 2026-09-16
 slug: 'extend/job-queue'
+description: 'Explains how Job Queue runs a component image and handles its authentication, isolation and data mapping, and lists the configuration nodes it reads.'
 redirect_from:
     - /extend/docker-runner/
 ---
@@ -19,6 +19,8 @@ following a set of rules that will allow you to integrate the application into K
 There is a [predefined interface](/extend/common-interface/) with Job Queue, consisting
 mainly of a [folder structure](/extend/common-interface/folders/) and a [serialized configuration file](/extend/common-interface/config-file/).
 All [components](/extend/component/), including our internal R and Python Transformations, are run using Job Queue.
+
+<!-- Explanation-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ## Workflow
 The Job Queue functionality can be described in the following steps:
@@ -62,13 +64,11 @@ containers; the component cannot be affected by other running components. It may
 to have no network access.
 
 ## API
-The [Job Queue API](https://api.keboola.com/?service=job-queue) has API calls to
-
-- run a [component](/extend/component/).
-- [encrypt values](/extend/encryption/).
-- [prepare the data folder](/extend/component/running/#preparing-data-folder).
-- run [component actions](/extend/common-interface/actions/).
-- run a [component](/extend/component/) with a [specified Docker image tag](https://api.keboola.com/?service=job-queue#post-/jobs), usable for [testing images](/extend/component/deployment/#test-live-configurations).
+The [Job Queue API](https://api.keboola.com/?service=job-queue) runs components, optionally with a
+[specific Docker image tag](https://api.keboola.com/?service=job-queue) for [testing images](/extend/component/deployment/#test-live-configurations),
+prepares the [data folder](/extend/component/running/#preparing-data-folder) for debugging and runs
+[component actions](/extend/common-interface/actions/). How to create, poll and debug jobs through it is on the
+[Jobs API](/extend/jobs/) page.
 
 ## Configuration
 Components executed by Job Queue store their configurations in
@@ -89,3 +89,7 @@ pins the Docker image tag that jobs of this configuration run, which is the usua
 - `authorization` — OAuth authorization [injected to the configuration](/extend/common-interface/oauth/); not stored in the component configuration
 - `image_parameters` — an arbitrary object passed from the [component](/extend/component/); not stored in the component configuration
 - `action` — an [action](/extend/common-interface/actions/) being executed; not stored in the component configuration
+
+---
+
+**Next:** [Component Jobs →](/extend/jobs/)

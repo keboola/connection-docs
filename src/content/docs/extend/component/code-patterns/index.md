@@ -1,6 +1,6 @@
 ---
 title: Code Patterns
-lastUpdated: 2026-08-04
+description: 'Build a Code Pattern, a component that generates transformation code. Start here for its generate action and configuration format.'
 slug: 'extend/component/code-patterns'
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Storage Docker CLI Client
-lastUpdated: 2026-08-25
 slug: 'storage/api/clients/docker-cli'
+description: 'Use the Storage API Docker CLI client to create tables, import data into them and export them from the command line on any machine with Docker.'
 redirect_from:
     - /integrate/storage/docker-cli-client/
     - /integrate/storage/php-cli-client/
@@ -20,6 +20,8 @@ Currently, the client implements
 
 The client source is available in our [Github repository](https://github.com/keboola/storage-api-cli).
 The client docker image is available in the [Quay repository](https://quay.io/repository/keboola/storage-api-cli?tab=tags).
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Running in Docker
 To print available commands:
@@ -48,7 +50,7 @@ or on Windows:
 
     docker run --volume=C:\Users\name\some-dir:/data quay.io/keboola/storage-api-cli:latest create-table in.c-main new-table /data/new-table.csv --token=storage_token
 
-or when using other than the [default US region](/overview/api/#stacks-and-endpoints), you need to provide the Storage API address:
+or when using other than the [default US region](/overview/#stacks), you need to provide the Storage API address:
 
 ```bash
 docker run --volume=$("pwd"):/data quay.io/keboola/storage-api-cli:latest create-table in.c-main new-table /data/new-table.csv --token=storage_token --url="https://connection.eu-central-1.keboola.com/"

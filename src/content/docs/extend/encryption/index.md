@@ -1,6 +1,5 @@
 ---
 title: Encryption
-lastUpdated: 2026-09-16
 slug: 'extend/encryption'
 description: How Keboola encrypts sensitive configuration values, what the `#` key prefix does, and which cipher each combination of Encryption API parameters produces.
 redirect_from:
@@ -17,6 +16,8 @@ Decryption occurs solely during the serialization of configuration to the Docker
 configuration file. The decrypted data are stored on the Docker host drive and are promptly
 deleted after the container's completion. The component code exclusively accesses the decrypted data.
 
+<!-- Reference-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
+
 ## UI Interaction
 
 When saving arbitrary configuration data, if a key is prefixed with the `#` character, the associated value is automatically encrypted.
@@ -30,6 +31,9 @@ After saving, the configuration appears as follows:
 
 Once saved, the value becomes encrypted and irreversible. The component defines which values are
 encrypted, indicating that not all values can be encrypted unless explicitly supported by the component.
+
+Inside the component the values arrive decrypted in the [configuration file](/extend/common-interface/config-file/);
+Image and Stack Parameters follow [their own encryption rules](/extend/common-interface/config-file/#encryption).
 
 For example, a component requiring the following configuration:
 

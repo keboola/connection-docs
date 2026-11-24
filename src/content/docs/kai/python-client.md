@@ -1,6 +1,6 @@
 ---
 title: Kai Python Client
-lastUpdated: 2026-07-10
+description: 'Install and use the Kai Python Client, an async library and command-line tool for the Kai API, and integrate Kai into apps or use it with Claude Code.'
 slug: 'kai/python-client'
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: DuckDB Transformation
-lastUpdated: 2026-09-15
 slug: 'transformations/duckdb'
+description: 'Create a DuckDB transformation in Keboola, choose its backend size and input options, and write SQL that suits its block-based parallel execution.'
 ---
 
 

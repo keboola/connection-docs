@@ -1,24 +1,23 @@
 ---
 title: Snowflake Workspaces Access Changes
-lastUpdated: 2026-08-04
+description: 'Direct Snowflake login from IDEs and BI tools is being removed for shared-backend projects: what is deprecated, when, and which tools replace it.'
 slug: 'workspace/snowflake-workspaces-access-changes'
 redirect_from:
   - /transformations/workspace/snowflake-workspaces-access-changes/
 ---
 
+This page lists the changes to direct access and password authentication for Snowflake workspaces, by date, from October 2025 to October 2026.
 
-
-
-# ⚠️ Crucial Snowflake Workspace Access Change
+## ⚠️ Crucial Snowflake Workspace Access Change
 By **end of the year 2025**, all projects using Keboola’s shared Snowflake backend ([Multi-tenant](/storage/#multi-tenant-mt) or [Pay-As-You-Go](/management/payg-project/)) will lose direct access to SQL workspaces, as Snowflake prohibits shared accounts across customers.
 
 Users will no longer be able to log in to the Snowflake UI environment, nor connect through external tools such as IDEs or BI platforms. New tools are provided to support SQL development and connect the BI tools.
 
 
-# Snowflake Single-factor Password Authentication Deprecation
+## Snowflake Single-factor Password Authentication Deprecation
 While [Keboola-Brings-Database](/storage/#keboola-brings-database-kbdb) and [Bring-Your-Own-Database](/storage/#bring-your-own-database-byodb) projects are not losing access to Snowflake workspaces, [Snowflake is globally deprecating single-factor password authentication](https://docs.snowflake.com/en/user-guide/security-mfa-rollout) and we are implementing changes to Keboola platform to support this change.
 
-# Timeline of Changes
+## Timeline of Changes
 
 Some changes apply only to specific customer types using the Snowflake backend for their Keboola projects:
 

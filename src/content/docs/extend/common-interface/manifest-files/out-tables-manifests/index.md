@@ -1,6 +1,6 @@
 ---
 title: /data/out/tables manifests
-lastUpdated: 2026-08-03
+description: 'The optional fields of a /data/out/tables manifest, such as destination and columns, which control how your component''s table loads to Storage.'
 slug: 'extend/common-interface/manifest-files/out-tables-manifests'
 ---
 
@@ -77,3 +77,25 @@ filled by the Id of the running component (e.g., `keboola.ex-db-snowflake`).
   }
 }
 ```
+
+## Import method
+
+On the Snowflake backend, the `import_method` field chooses how Snowflake writes the destination table:
+
+```json
+{
+  ...
+  "import_method": "single_statement"
+}
+```
+
+- `auto` (the same as omitting the field) uses the platform default for the project.
+- `single_statement` writes the table with one `MERGE` (incremental load) or `INSERT OVERWRITE` (full load).
+- `multi_statement` writes the table with several statements.
+
+An explicit `single_statement` or `multi_statement` for a table in a bucket on a backend other than Snowflake makes
+the import fail with an error (`storage.tables.importMethodNotSupported`); `auto` is safe on every backend.
+
+The value in the manifest is used when the end-user output mapping has no `import_method` or has `auto`. A
+`single_statement` or `multi_statement` in the output mapping takes precedence over the manifest. See
+[Import method](/transformations/mappings/#import-method-snowflake) for how the methods differ.

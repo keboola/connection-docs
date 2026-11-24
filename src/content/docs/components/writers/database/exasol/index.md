@@ -1,7 +1,7 @@
 ---
 title: Exasol
-lastUpdated: 2026-08-04
 slug: 'components/writers/database/exasol'
+description: 'Write Keboola tables to Exasol SaaS with a personal access token or to a self-hosted Exasol with a password, then set column types and load mode.'
 redirect_from:
     - /writers/database/exasol/
 ---
@@ -10,8 +10,10 @@ redirect_from:
 
 This data destination connector sends data to a [Exasol](https://www.exasol.com/) database.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Exasol** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Exasol** data destination connector.
 
 The first step is to **set up credentials**:
 

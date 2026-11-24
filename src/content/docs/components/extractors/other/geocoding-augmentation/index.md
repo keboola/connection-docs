@@ -1,7 +1,7 @@
 ---
 title: Geocoding Augmentation
-lastUpdated: 2024-04-04
 slug: 'components/extractors/other/geocoding-augmentation'
+description: 'Add latitude and longitude to place names or addresses, or find the closest place for coordinates, using Google Maps, OpenStreetMap or another provider.'
 redirect_from:
     - /extractors/other/geocoding-augmentation/
 ---
@@ -10,8 +10,10 @@ redirect_from:
 
 This data source connector provides detailed data for locations specified by their names, addresses, or coordinates.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Geocoding Augmentation** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Geocoding Augmentation** connector.
 
 ### Augment Locations
 In this case, specify the location. The data source connector will fetch its geographical latitude and longitude 

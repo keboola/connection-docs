@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-lastUpdated: 2025-12-08
+description: 'Fix dbt connection failures in remote workspaces, including an authentication method that does not match the one in profiles.yml.'
 slug: 'transformations/dbt/troubleshooting'
 ---
 

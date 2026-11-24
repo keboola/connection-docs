@@ -1,6 +1,6 @@
 ---
 title: Migration between stacks
-lastUpdated: 2026-06-03
+description: 'Move a project to another stack with Keboola Support: the migration steps, what is migrated and what is not, and what to set up again in the new project.'
 slug: 'management/project/migration'
 ---
 
