@@ -34,7 +34,7 @@ Jordan's review on #1116, item 3, which asked for one run or a label on the page
 screenshots were reshot on 2026-10-01 in Free Plan project 6375, with the Boolabean names.
 
 CLI / API tab added 2026-09-15 and run live against project 264 with kbagent v0.93.1: `transformation
-create --sql-file --created-table` built a throwaway transformation from the page's own SQL file, `transformation edit --storage @file` added the five inputs (create leaves the input mapping empty —
+create --sql-file --created-table` built a throwaway transformation from the page's own SQL file, `transformation edit --storage @file` (now `--storage-file` in kbagent 1.x) added the five inputs (create leaves the input mapping empty —
 that is why the second command exists), `job run --wait` finished green (job 104346054) and
 `storage table-detail` reported 42 rows. The throwaway transformation and its output bucket were
 deleted the same minute. */}
@@ -525,11 +525,11 @@ docs-demo --component-id keboola.google-bigquery-transformation` finds it again 
 **Add the input mapping**
 
 `transformation create` leaves the input mapping empty, and the SQL above reads its tables by the
-short names the mapping gives them, so the next command fills it in. `--storage` replaces
-`configuration.storage` wholesale, which means the file has to carry the output mapping too:
+short names the mapping gives them, so the next command fills it in. `--storage-file` replaces
+`configuration.storage` wholesale, which means the file has to carry the output mapping too. Save the JSON below as `storage.json`, then run:
 
 ```bash
-kbagent transformation edit --project docs-demo --config-id <config-id> --change-description "Add the five input tables" --storage @storage.json
+kbagent transformation edit --project docs-demo --config-id <config-id> --change-description "Add the five input tables" --storage-file storage.json
 ```
 
 ```json title="storage.json"

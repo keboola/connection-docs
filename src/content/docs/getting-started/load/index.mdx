@@ -366,8 +366,11 @@ Repeat for `products`, `sales`, `staffing` and `weather_daily`, changing the nam
 the folder together. Then run the configuration and wait for the job:
 
 ```bash
-kbagent job run --project docs-demo --component-id keboola.ex-http --config-id <config-id> --wait
+kbagent job run --project docs-demo --component-id keboola.ex-http --config-id <config-id> --wait --timeout 900
 ```
+
+`--wait` gives up after five minutes by default and then stops the job, and this one can take
+longer, so `--timeout 900` gives it fifteen.
 
 **Add the forecast**
 
@@ -378,7 +381,7 @@ and the four column names given explicitly instead of read from a header.
 kbagent config new --project docs-demo --component-id keboola.ex-http --name "Boolabean forecast" --push --no-files --configuration '{"parameters":{"baseUrl":"https://api.open-meteo.com/v1/"}}'
 ```
 
-The row's JSON is long, and `--configuration` takes `@file`, so put it in one:
+The row's JSON is long, and `--configuration-file` reads it from a file, so put it in one:
 
 ```json title="forecast-row.json"
 {
@@ -404,7 +407,7 @@ Nine lines skipped, not eight: the header goes too, and `columns` names the four
 place, without the header's unit suffixes.
 
 ```bash
-kbagent config row-create --project docs-demo --component-id keboola.ex-http --config-id <forecast-config-id> --name forecast --configuration @forecast-row.json
+kbagent config row-create --project docs-demo --component-id keboola.ex-http --config-id <forecast-config-id> --name forecast --configuration-file forecast-row.json
 ```
 
 ```bash

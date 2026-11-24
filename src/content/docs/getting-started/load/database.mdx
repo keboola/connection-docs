@@ -158,7 +158,7 @@ back out again. Add `--dry-run` to the command below to see the request and chec
 component's schema without creating anything:
 
 ```bash
-kbagent config new --project docs-demo --component-id keboola.ex-db-snowflake --name "Sample Snowflake" --push --no-files --configuration @snowflake-db.json
+kbagent config new --project docs-demo --component-id keboola.ex-db-snowflake --name "Sample Snowflake" --push --no-files --configuration-file snowflake-db.json
 ```
 
 It prints the new configuration ID. If you would rather the password never sat in a file or a
@@ -184,7 +184,7 @@ builds:
 ```
 
 ```bash
-kbagent config row-create --project docs-demo --component-id keboola.ex-db-snowflake --config-id <config-id> --name ACCOUNT --configuration @account-row.json
+kbagent config row-create --project docs-demo --component-id keboola.ex-db-snowflake --config-id <config-id> --name ACCOUNT --configuration-file account-row.json
 ```
 
 Repeat for `OPPORTUNITY` and `USER`, changing the name, the source table and the output table

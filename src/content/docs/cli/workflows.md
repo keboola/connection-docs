@@ -29,8 +29,8 @@ kbagent registers each project and mints a per-project Storage token. **Result:*
 
 ```bash
 kbagent branch create --project analytics --name "experiment"   # creates and activates
-kbagent config update --project analytics --config-id 456 ...    # targets the branch
-kbagent branch merge --project analytics                         # get the KBC merge URL
+kbagent config update --project analytics --component-id <component-id> --config-id 456 ...    # targets the branch
+kbagent merge-request create --project analytics --title "Experiment"   # open a merge request
 ```
 
 Link a git branch to the Keboola dev branch so they move together. This needs a sync workspace in git-branching mode (run once, inside a git repository):
@@ -42,7 +42,7 @@ kbagent sync branch-link --project analytics
 
 With no `--branch-id`/`--branch-name`, `branch-link` maps your **current git branch** to a Keboola branch of the same name, creating it if it doesn't exist — check out a git branch and you're on the matching dev branch.
 
-**Result:** your edits live on the branch; production is untouched until you merge. After `branch merge`, kbagent resets the active branch back to main.
+**Result:** your edits live on the branch; production is untouched until you merge. Merge requests need a project with Branches 2.0 (the `branches-merge-requests` feature); without it, `merge-request` commands fail with `FEATURE_NOT_ENABLED` and you merge in the Keboola UI. Once the merge request has the approvals the project requires, `kbagent merge-request merge --project analytics --branch <branch-id> --yes` merges the whole branch into production, deletes it, and resets the active branch to production.
 
 ## Version your configs with GitOps
 
@@ -70,7 +70,7 @@ kbagent sync pull --project analytics    # configs as local files
 # edit the files (or let your coding agent do it)
 kbagent sync diff --project analytics    # review exactly what changes
 kbagent sync push --project analytics    # apply to the dev branch
-kbagent branch merge --project analytics # merge URL for the final click
+kbagent merge-request create --project analytics --title "Warehouse migration"   # for review (Branches 2.0)
 ```
 
 **Result:** the change happened across the org, was reviewable as a diff, and production stayed safe behind the branch — the workflow the UI can't do.
@@ -104,12 +104,12 @@ kbagent job detail --project prod --job-id 90878516
 kbagent agent create --name "Weekend triage" --type ai_agent \
   --cli claude --cron "0 6 * * 1" \
   --prompt "Review the weekend's failed jobs and post a triage summary"
-kbagent agent run <task-id>      # run it once right now (create prints the ID)
+kbagent agent run --task-id <task-id>    # run it once right now (create prints the ID)
 kbagent agent list               # what's scheduled
-kbagent agent runs <task-id>     # past runs (drill in with run-detail / run-events)
+kbagent agent runs --task-id <task-id>   # past runs (drill in with run-detail / run-events)
 ```
 
-**Result:** every Monday at 6:00 an agent reviews the weekend's failures and writes up the triage — a standing task nobody has to remember. `agent cron-preview` shows the upcoming firing times. Scheduled firing lives in the server: keep `kbagent serve` running (task management and ad-hoc `agent run` work without it).
+**Result:** every Monday at 6:00 UTC an agent reviews the weekend's failures and writes up the triage — a standing task nobody has to remember. `agent cron-preview` shows the upcoming firing times. Scheduled firing lives in the server: keep `kbagent serve` running (task management and ad-hoc `agent run` work without it).
 
 ## Debug transformation SQL from the terminal
 
@@ -120,7 +120,7 @@ kbagent workspace from-transformation --project prod \
   --component-id keboola.snowflake-transformation --config-id 123
 # → prints the new workspace's ID; loaded with the transformation's inputs
 kbagent workspace query --project prod --workspace-id <id> \
-  --sql "SELECT count(*) FROM orders"
+  --sql 'SELECT count(*) FROM "orders"'
 ```
 
 **Result:** the query runs in an isolated SQL workspace with the same data your transformation sees; iterate freely, production never notices. `workspace gc` cleans up idle workspaces.
@@ -141,10 +141,10 @@ kbagent token create --project prod --description "nightly-ci" --expires-in 8640
 
 ```bash
 kbagent encrypt values --project prod \
-  --component-id keboola.ex-db-snowflake --input '{"#password": "secret"}'
+  --component-id keboola.ex-db-snowflake --values '{"#password": "secret"}'
 ```
 
-**Result:** `#`-prefixed values encrypted for the target component, ready to paste into a configuration. `--input` also accepts `@file` or `-` for stdin.
+**Result:** `#`-prefixed values encrypted for the target component, ready to paste into a configuration. To read the values from a file or stdin, use `--values-file <path>` or `--values-file -`.
 
 ## Run kbagent safely (unattended or via an agent)
 
@@ -154,6 +154,8 @@ kbagent encrypt values --project prod \
 kbagent --deny-writes config list         # reads only, this session
 kbagent init --from-global --read-only    # a read-only local workspace
 ```
+
+`init --from-global` copies project tokens, not a browser sign-in. If you signed in with `kbagent auth login`, the local workspace has no session and its reads fail; use the session flags such as `--deny-writes` instead.
 
 See [Use with AI agents](/cli/for-agents/) for the full sandboxing story.
 
