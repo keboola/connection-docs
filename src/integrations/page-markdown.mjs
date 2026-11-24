@@ -515,9 +515,11 @@ function entry(page, url) {
   const label = String(page.title).replace(/([[\]])/g, '\\$1');
   const description = page.description ? String(page.description).replace(/\s+/g, ' ').trim() : '';
   // The preamble promises Markdown behind every link; a page without a twin says it links HTML.
-  const html = page.twin === false ? ' (HTML page, no Markdown copy)' : '';
-  const suffix = description ? `: ${description}` : '';
-  return `- [${label}](${url(page)})${html}${suffix}`;
+  // The marker goes into the notes, so the entry keeps the llmstxt.org shape `- [name](url): notes`.
+  const html = page.twin === false ? 'HTML page, no Markdown copy.' : '';
+  const notes = [html, description].filter(Boolean).join(' ');
+  const suffix = notes ? `: ${notes}` : '';
+  return `- [${label}](${url(page)})${suffix}`;
 }
 
 export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' } = {}) {
