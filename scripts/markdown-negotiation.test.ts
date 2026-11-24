@@ -26,6 +26,14 @@ test('markdown ranked below HTML, or at q=0, gets the HTML', () => {
   assert.equal(prefersMarkdown('text/markdown;q=abc'), false);
 });
 
+test('a wildcard ranked above markdown gets the HTML', () => {
+  assert.equal(prefersMarkdown('text/markdown;q=0.1, */*'), false);
+  assert.equal(prefersMarkdown('text/markdown;q=0.5, text/*'), false);
+  // markdown first, wildcard as the fallback: the twin
+  assert.equal(prefersMarkdown('text/markdown, text/html;q=0.9, */*;q=0.8'), true);
+  assert.equal(prefersMarkdown('text/markdown, */*'), true);
+});
+
 test('a page path maps to its twin', () => {
   assert.equal(twinPath('/'), '/index.md');
   assert.equal(twinPath('/storage/'), '/storage/index.md');

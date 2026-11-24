@@ -33,13 +33,16 @@ function qualities(accept) {
 /**
  * True when the Accept header asks for markdown at least as much as HTML.
  * Wildcards are not read as a wish for markdown: `*\/*` is what every client
- * sends, and it must keep getting the page it always got.
+ * sends, and it must keep getting the page it always got. They do count for
+ * HTML: `text/markdown;q=0.1, *\/*` ranks anything, HTML included, above
+ * markdown.
  */
 export function prefersMarkdown(accept) {
   const q = qualities(accept);
   const md = q.get('text/markdown') ?? 0;
   if (md <= 0) return false;
-  return md >= (q.get('text/html') ?? 0);
+  const html = Math.max(q.get('text/html') ?? 0, q.get('text/*') ?? 0, q.get('*/*') ?? 0);
+  return md >= html;
 }
 
 /**
