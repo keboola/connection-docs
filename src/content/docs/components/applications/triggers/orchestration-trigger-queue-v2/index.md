@@ -1,11 +1,15 @@
 ---
 title: Orchestration Trigger
+lastUpdated: 2026-11-19
+description: 'Trigger Conditional or Legacy Flows from another Keboola project: how to authorize and configure the Orchestration Trigger application.'
 slug: 'components/applications/triggers/orchestration-trigger-queue-v2'
 ---
 
 
 
 The **Orchestration Trigger** application triggers Keboola [Conditional Flows](/flows/) and Legacy Flows — typically across different Keboola projects in a [Multi-Project Architecture](/catalog/multi-project/) setup.
+
+<!-- Reference-type page. Type declared in the 2026-11-19 section rework; the content is unchanged and was not re-checked against the component. -->
 
 ## Authorization
 
@@ -18,7 +22,7 @@ If you choose the limited token, remember to extend its permissions every time a
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **Orchestration Trigger** application.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Orchestration Trigger** application.
 
 ![Screenshot - Orchestration Trigger configuration](/components/applications/triggers/orchestration-trigger-queue-v2/config.png)
 

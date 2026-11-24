@@ -1,5 +1,7 @@
 ---
 title: Code Patterns
+lastUpdated: 2026-11-18
+description: 'Generate transformation code from a form with a Code Pattern: where to find patterns, creating a transformation, mapping, parameters, and generated code.'
 slug: 'transformations/code-patterns'
 ---
 

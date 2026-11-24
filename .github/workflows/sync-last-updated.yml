@@ -1,0 +1,59 @@
+name: "Sync last-updated dates"
+
+# Recomputes each page's frontmatter `lastUpdated` from git history and opens a
+# PR when anything moved.
+#
+# The dates are precomputed and committed rather than read during the build
+# because Vercel — which serves help.keboola.com — gives the build no usable
+# git repository: a probe deployed to a preview found `.git` present and
+# `git --version` fine, with every other git command failing. Starlight prefers
+# a frontmatter `lastUpdated` and never shells out for it, so resolving the
+# dates here is what makes them appear in production at all. See the header of
+# scripts/gen-last-updated.mjs.
+#
+# fetch-depth: 0 is required — the generator walks the full history, and
+# actions/checkout clones only the tip by default.
+#
+# NOTE: PRs opened with the default GITHUB_TOKEN do not trigger pull_request
+# workflows, so branch.yml won't run on the bot PR. Same limitation, and same
+# trade-off, as sync-cli-reference.yml.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # weekly, Monday 06:00 UTC — dates move slowly
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    name: "Sync"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: "Setup Node.js"
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: "Recompute dates"
+        run: node scripts/gen-last-updated.mjs
+      - name: "Create pull request"
+        uses: peter-evans/create-pull-request@v7
+        with:
+          add-paths: src/content/docs
+          branch: sync/last-updated-dates
+          delete-branch: true
+          commit-message: "chore: sync last-updated dates"
+          title: "chore: sync last-updated dates"
+          body: |
+            Automated refresh of the frontmatter `lastUpdated` dates from git
+            history, by `scripts/gen-last-updated.mjs`.
+
+            The diff is a list of which pages have been edited since the last
+            sync. Commits that only touched a `lastUpdated:` line are skipped,
+            so this PR never counts its own previous runs as content edits.

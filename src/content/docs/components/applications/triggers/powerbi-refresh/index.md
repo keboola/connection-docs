@@ -1,11 +1,15 @@
 ---
 title: Power BI Refresh
+lastUpdated: 2026-11-19
+description: 'Refresh Power BI datasets at the end of a flow: authorize, find the dataset ID, and create one configuration per Power BI workspace.'
 slug: 'components/applications/triggers/powerbi-refresh'
 ---
 
 
 
 The Power BI Refresh application automatically triggers dataset refreshes in your [Power BI](https://powerbi.microsoft.com/) workspace. Add it to the end of your Keboola flow so that your dashboards are updated immediately after your data pipelines complete — no manual steps, no scheduled mismatches.
+
+<!-- Reference-type page. Type declared in the 2026-11-19 section rework; the content is unchanged and was not re-checked against the component. -->
 
 **Important:** Each Power BI Refresh configuration can only work with a single Power BI workspace. To refresh datasets in multiple workspaces, create a separate configuration for each workspace.
 
@@ -16,7 +20,7 @@ The Power BI Refresh application automatically triggers dataset refreshes in you
 
 ## Authorization
 
-[Create a new configuration](/components/#creating-component-configuration) of the **Power BI Refresh** application and authorize it using OAuth2. Click **Authorize** and sign in with the Microsoft account that has access to the Power BI workspace you want to refresh.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Power BI Refresh** application and authorize it using OAuth2. Click **Authorize** and sign in with the Microsoft account that has access to the Power BI workspace you want to refresh.
 
 ## Create New Configuration
 

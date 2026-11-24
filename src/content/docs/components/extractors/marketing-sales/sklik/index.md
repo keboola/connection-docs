@@ -1,6 +1,8 @@
 ---
 title: Sklik
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/sklik'
+description: 'Fetch Sklik reports for all or selected accessible accounts with an API key, setting the resource, restriction filter, display options and columns.'
 redirect_from:
     - /extractors/marketing-sales/sklik/
 ---
@@ -9,12 +11,14 @@ redirect_from:
 
 The Sklik data source connector fetches data from [Sklik](https://www.sklik.cz/). It downloads configured reports for all specified accounts.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 Before you start, have a working [Sklik](https://www.sklik.cz/) account, and get an Sklik 
 API [key](https://napoveda.sklik.cz/pokrocila-prace-s-daty/sklik-api/). Select Settings from the drop-down menu next to your account name
 in the top right corner of the screen. The API key is on the bottom of the Account Settings page. Copy it to your clipboard.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Sklik** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Sklik** connector.
 
 Then provide your API key:
 

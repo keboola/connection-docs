@@ -1,5 +1,6 @@
 ---
 title: Google BigQuery
+lastUpdated: 2026-11-19
 description: Run queries in Google BigQuery and load the results into Storage tables, or as Avro files with the files variant.
 slug: 'components/extractors/database/bigquery'
 redirect_from:
@@ -18,7 +19,7 @@ Running the connector creates a background job that
 
 <!-- How-to-type page. Avro files section added 2026-10-12 and corrected 2026-10-13 from Jiří Soukup's code-checked review of PR #1183; the rest is the legacy page. -->
 
-***Note:** Using the Google BigQuery connector is also described in our [Getting Started Tutorial](/tutorial/ad-hoc/#using-bigquery-connector).*
+***Note:** Using the Google BigQuery connector is also described in our [Getting Started Tutorial](/getting-started/ad-hoc/#using-bigquery-connector).*
 
 ## Initial Setup
 
@@ -39,7 +40,7 @@ Finally, click **+ Create Key** to create a new JSON key, and then click **Creat
 ![Screenshot - Create JSON key](/components/extractors/database/bigquery/googlecloud-3.png)
 
 ### Bucket
-The data source connector uses a Google Storage bucket as a temporary storage for off-loading the data from BigQuery.
+The data source connector uses a Google Cloud Storage bucket as a temporary storage for off-loading the data from BigQuery.
 Go to the [**Google Cloud Platform Console > Storage >  Cloud Storage > Browser**](https://console.cloud.google.com/storage/browser)
 and click **Create Bucket**. **Name** the bucket and select its **location** (must be the same as of your dataset).
 
@@ -48,7 +49,7 @@ and click **Create Bucket**. **Name** the bucket and select its **location** (mu
 Do not set a retention policy on the bucket. The bucket contains only temporary data and no retention is needed.
 
 ## Configure Extraction
-[Create a new configuration](/components/#creating-component-configuration) of the BigQuery connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the BigQuery connector.
 Click **Set Service Account Key**.
 
 ![Screenshot - Set Service Account Key](/components/extractors/database/bigquery/bigquery-1.png)

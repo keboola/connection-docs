@@ -1,0 +1,220 @@
+---
+title: Send OpenTelemetry (OTLP) data to Keboola
+lastUpdated: 2026-11-20
+description: 'Send logs, metrics, and traces from your apps to Keboola Storage over OTLP: create the data stream, set up your SDK or collector, and check that data arrives.'
+slug: 'storage/data-streams/opentelemetry'
+sidebar:
+  label: OpenTelemetry (OTLP)
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Any official OpenTelemetry SDK or collector can export to an OTLP data stream; the tabs below cover Python, Node.js, Go, and the Collector. For why you would keep telemetry next to your business data, see [Data Streams](/storage/data-streams/#opentelemetry-otlp-streams); for the tables and fields a stream produces, see the [OpenTelemetry reference](/storage/data-streams/opentelemetry/reference/).
+
+{/* How-to-type page. Source: this page as it stood before the 2026-11-19 section split. Text moved, steps not re-run in the app. */}
+
+## Create an OTLP data stream
+
+**Goal:** an OTLP data stream with a destination table for each signal.
+
+1. Navigate to **Storage > Data Streams** and click **Create Data Stream**.
+2. Select **OpenTelemetry (OTLP)** as the source type.
+3. Name the data stream (e.g., "production-telemetry"). The destination table names are filled automatically.
+4. Click **Create**.
+
+**Result:** The app sets up a destination table per signal (logs, metrics, traces) with a default column mapping, so there is nothing to map by hand before you start sending data.
+
+## Configure your application
+
+**Goal:** your SDK or collector exports telemetry to the stream.
+
+1. Open the OTLP source detail page. It provides:
+   {/* VERIFY(Nikita): the step does not say how to reach the source detail page. Check the click path from Storage > Data Streams and add it. */}
+   - **Endpoint URL** with a one-click copy button.
+   - **Environment variable snippet** ready to paste into your application or deployment configuration.
+   - **Table statistics** for each destination table (logs, metrics, traces), showing waiting vs. imported data.
+   - **Import conditions** — the same configurable thresholds (interval, data size, record count) as HTTP data streams. [Learn more](/storage/data-streams/reference/#conditions)
+2. To connect any OpenTelemetry SDK or collector, set two environment variables:
+
+   ```bash
+   export OTEL_EXPORTER_OTLP_ENDPOINT="<your-stream-endpoint>"
+   export OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
+   ```
+
+   Replace `<your-stream-endpoint>` with the endpoint URL shown on the source detail page.
+3. Install the exporter and run your application, or add the exporter to your collector. The OTLP/HTTP endpoint is compatible with any OpenTelemetry SDK or collector. Below are quick-start snippets for popular languages and the OpenTelemetry Collector.
+
+<Tabs syncKey="otel-sdk">
+  <TabItem label="Python">
+    Install the OpenTelemetry distro and the OTLP/HTTP exporter, then the instrumentation for the libraries your app uses:
+
+    ```bash
+    pip install opentelemetry-distro opentelemetry-exporter-otlp-proto-http
+    opentelemetry-bootstrap -a install
+    ```
+
+    Set the environment variables and start your application through `opentelemetry-instrument`:
+
+    ```bash
+    export OTEL_EXPORTER_OTLP_ENDPOINT="<your-stream-endpoint>"
+    export OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
+    export OTEL_SERVICE_NAME="my-python-service"
+    opentelemetry-instrument python my_app.py
+    ```
+
+    If you would rather set up the tracer, meter and logger providers in your own code, see the [OpenTelemetry Python instrumentation guide](https://opentelemetry.io/docs/languages/python/instrumentation/).
+  </TabItem>
+  <TabItem label="Node.js">
+    Install the OpenTelemetry API and the zero-code auto-instrumentation package:
+
+    ```bash
+    npm install @opentelemetry/api @opentelemetry/auto-instrumentations-node
+    ```
+
+    Set the environment variables and load the instrumentation before your app:
+
+    ```bash
+    export OTEL_EXPORTER_OTLP_ENDPOINT="<your-stream-endpoint>"
+    export OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
+    export OTEL_SERVICE_NAME="my-node-service"
+    node --require @opentelemetry/auto-instrumentations-node/register my_app.js
+    ```
+  </TabItem>
+  <TabItem label="Go">
+    ```bash
+    go get go.opentelemetry.io/otel \
+           go.opentelemetry.io/otel/sdk \
+           go.opentelemetry.io/otel/sdk/metric \
+           go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp \
+           go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetrichttp
+    ```
+
+    ```bash
+    export OTEL_EXPORTER_OTLP_ENDPOINT="<your-stream-endpoint>"
+    export OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
+    export OTEL_SERVICE_NAME="my-go-service"
+    ```
+
+    The exporters read these variables, but only once your code creates them and registers an SDK provider. A minimal setup for traces and metrics:
+
+    ```go
+    package main
+
+    import (
+        "context"
+        "log"
+
+        "go.opentelemetry.io/otel"
+        "go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetrichttp"
+        "go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
+        sdkmetric "go.opentelemetry.io/otel/sdk/metric"
+        sdktrace "go.opentelemetry.io/otel/sdk/trace"
+    )
+
+    func main() {
+        ctx := context.Background()
+
+        // Both exporters read OTEL_EXPORTER_OTLP_* from the environment.
+        traceExp, err := otlptracehttp.New(ctx)
+        if err != nil {
+            log.Fatal(err)
+        }
+        tp := sdktrace.NewTracerProvider(sdktrace.WithBatcher(traceExp))
+        defer tp.Shutdown(ctx)
+        otel.SetTracerProvider(tp)
+
+        metricExp, err := otlpmetrichttp.New(ctx)
+        if err != nil {
+            log.Fatal(err)
+        }
+        mp := sdkmetric.NewMeterProvider(sdkmetric.WithReader(sdkmetric.NewPeriodicReader(metricExp)))
+        defer mp.Shutdown(ctx)
+        otel.SetMeterProvider(mp)
+
+        // Your application code goes here.
+    }
+    ```
+
+    The providers pick up `OTEL_SERVICE_NAME` through the SDK's default resource. Shutting them down on exit flushes the last batch.
+  </TabItem>
+  <TabItem label="Collector">
+    If you already run an [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/), define Keboola as an OTLP/HTTP exporter and add it to the `exporters` list of each pipeline you already have, next to your existing exporters. Keep each pipeline's `receivers` and `processors` as they are:
+
+    ```yaml
+    exporters:
+      otlphttp/keboola:
+        endpoint: "<your-stream-endpoint>"
+        compression: gzip
+
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]                                # keep your existing receivers
+          exporters: [<your-existing-exporter>, otlphttp/keboola]
+        metrics:
+          receivers: [otlp]
+          exporters: [<your-existing-exporter>, otlphttp/keboola]
+        logs:
+          receivers: [otlp]
+          exporters: [<your-existing-exporter>, otlphttp/keboola]
+    ```
+
+    This approach lets you fan out telemetry to both your existing monitoring backend and Keboola simultaneously.
+  </TabItem>
+</Tabs>
+
+:::caution[Don't append the signal path yourself]
+The endpoint URL is a **base** URL. The SDK appends `/v1/logs`, `/v1/metrics`, or `/v1/traces` to it automatically, based on the signal it is exporting. Setting `OTEL_EXPORTER_OTLP_ENDPOINT` to a URL that already ends in `/v1/traces` breaks the export — most exporters either reject the value or silently strip the suffix. Use the per-signal `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT` variables only if you need to override a single signal, and give those the full signal path.
+:::
+
+**Result:** Once these variables are set and the exporter is loaded (by the zero-code agent in Python and Node.js, by your setup code in Go, by the exporters section in the Collector), telemetry is exported to your Keboola project.
+
+## Keep the secret out of your logs
+
+**Goal:** the source's secret travels in a request header and stays out of URLs.
+
+The endpoint URL shown in the app embeds the source's 48-character secret as its last path segment. That is convenient — a single string configures any SDK — but URLs end up in access logs, CDN logs, and APM traces.
+
+The API therefore returns the same endpoint in two forms in the source detail (`GET /v1/branches/{branchId}/sources/{sourceId}`):
+
+```bash
+curl --header "X-StorageApi-Token: <your-storage-api-token>" \
+     "https://stream.keboola.com/v1/branches/default/sources/<sourceId>"
+```
+
+Replace `stream.keboola.com` with your [stack's](/overview/#stacks) Stream API host. Reading the source does not need an admin token.
+
+| Field | Value | How to authenticate |
+|---|---|---|
+| `otlp.url` | `https://stream-in.keboola.com/otlp/<projectId>/<sourceId>/<secret>` | Secret in the URL — nothing else needed |
+| `otlp.baseUrl` + `otlp.secret` | `https://stream-in.keboola.com/otlp/<projectId>/<sourceId>` | `Authorization: Bearer <secret>` header |
+
+For anything beyond a quick test, prefer the header form:
+
+1. Read `otlp.baseUrl` and `otlp.secret` from the source detail.
+2. Set the endpoint to the base URL and pass the secret in a header:
+
+   ```bash
+   export OTEL_EXPORTER_OTLP_ENDPOINT="<otlp.baseUrl>"
+   export OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
+   export OTEL_EXPORTER_OTLP_HEADERS="Authorization=Bearer <otlp.secret>"
+   ```
+
+3. If your exporter sends a malformed `Authorization` header, percent-encode the space: `Authorization=Bearer%20<otlp.secret>`. `OTEL_EXPORTER_OTLP_HEADERS` values are specified as W3C Baggage, and SDKs differ in how strictly they decode them.
+
+{/* Checked 2026-11-20 in project 264 with the Python SDK (opentelemetry-sdk 1.45): spans sent with the secret in the URL, with `Authorization=Bearer <secret>` and with `Bearer%20<secret>` all reached the traces table; the secret was 48 characters. */}
+
+**Result:** Both forms accept exactly the same traffic. Note that an HTTP source's secret cannot be used against the OTLP endpoints, or vice versa — secrets are scoped to the transport.
+
+## Verify data ingestion
+
+**Goal:** confirm that telemetry reaches Storage.
+
+1. Wait until the stream's [import conditions](/storage/data-streams/reference/#conditions) are met (by default within about a minute). Records become available in Storage once they are.
+2. Check the **Table statistics** on the source detail page to confirm data is flowing.
+
+{/* Checked 2026-11-20: default import trigger is 1 minute since the file opened (target import config and filerotation conditions in keboola-as-code); slices are uploaded on file rotation, so the 30 s staging step does not add to it. Expect about a minute plus the Storage import job. Live in project 264: three spans sent at 14:31:56 UTC were in the traces table by 14:32:41, under a minute. */}
+
+**Result:** **Table statistics** shows imported data for the destination tables. For the fields each table can hold and for query examples, see the [OpenTelemetry reference](/storage/data-streams/opentelemetry/reference/).
+
+**Next:** [OpenTelemetry reference →](/storage/data-streams/opentelemetry/reference/)

@@ -1,5 +1,6 @@
 ---
 title: mPOHODA
+lastUpdated: 2026-11-19
 slug: 'components/extractors/erp/mpohoda'
 description: Extract invoices, orders, offers, business partners, price lists and reference lists from the mPOHODA cloud accounting API, with incremental loading.
 search_keywords: [pohoda, stormware, mpohoda]
@@ -25,7 +26,7 @@ The official API documentation is at [api.mpohoda.cz/doc](https://api.mpohoda.cz
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **mPOHODA** data source connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **mPOHODA** data source connector.
 
 ### Connection
 

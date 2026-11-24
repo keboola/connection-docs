@@ -66,8 +66,9 @@ AGENTS.md. Read it first:
 - You may decide structure and form yourself. Facts and deletions need the owner
   or the code; otherwise keep the text and flag it `VERIFY(<owner>)` or
   `TODO(human-review, <owner>)`.
-- Conserve content: every removed paragraph gets a new home or a logged deletion
-  in the PR description. Nothing disappears silently.
+- Conserve content: every removed paragraph gets a new home or a logged deletion,
+  in the PR description or in a CONSERVATION-REPORT and a MISSING list under
+  `notes/<section>/`, as in `notes/getting-started/`. Nothing disappears silently.
 - Current guardrails: don't present E2B as the hosting platform, and don't say
   Streamlit is retired.
 - Stakeholder preferences and the paste-ready prompt block live in the local

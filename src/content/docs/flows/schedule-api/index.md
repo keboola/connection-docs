@@ -1,5 +1,6 @@
 ---
 title: Schedule via the API
+lastUpdated: 2026-09-22
 slug: 'flows/schedule-api'
 description: "Attach one or more cron schedules to any configuration, or to a single configuration row, through the Scheduler API: create a keboola.scheduler configuration, then activate it."
 redirect_from:

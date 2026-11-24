@@ -1,6 +1,8 @@
 ---
 title: Data Destination Connectors
+lastUpdated: 2026-10-13
 slug: 'components/writers'
+description: 'Data destination connectors send data from Keboola to BI tools, databases, storage services and other systems; a configuration usually serves one destination.'
 redirect_from:
     - /writers/
 
@@ -8,6 +10,8 @@ redirect_from:
 
 Data destination connectors are [Keboola components](/overview/) that take transformed and processed **output data from Keboola**
 and deliver it **into its final destination:** the systems and applications where the data gets used/**consumed**.
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Types of Data Destination Connectors
 We integrate your data into most of the top market systems.
@@ -31,7 +35,7 @@ Each data destination connector can have multiple configurations. Each configura
 Even though destination connectors are generally designed for [**automated and repeated**](/flows/) data collection,
 they can be triggered manually at any time.
 
-We provide tutorials on [writing into Tableau](/tutorial/write/).
+For a worked example, see [Send a table to Google Sheets](/getting-started/write/), which walks one destination end to end.
 
 You can also watch the following videos:
 

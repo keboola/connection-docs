@@ -1,6 +1,8 @@
 ---
 title: Azure Event Hub
+lastUpdated: 2026-11-19
 slug: 'components/writers/other/azure-event-hub'
+description: 'Publish Keboola table rows to Azure Event Hubs with a connection string and hub name, sending each row as JSON or the value of one column.'
 redirect_from:
     - /writers/other/azure-event-hub/
 ---
@@ -9,6 +11,8 @@ redirect_from:
 
 This data destination connector allows you to publish events to the [Azure Event Hubs](https://azure.microsoft.com/en-us/services/event-hubs/).
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Mapping Mode
 
 There are two **mapping modes**:
@@ -16,7 +20,7 @@ There are two **mapping modes**:
  - **`column_value` mode**: message is the value of the specified column, from the table's row
  
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Azure Event Hub** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Azure Event Hub** connector.
 
 Fill in the **Connection String** and **Event Hub Name**. Then click **Save**.
 

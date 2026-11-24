@@ -1,6 +1,8 @@
 ---
 title: Intercom
+lastUpdated: 2026-11-19
 slug: 'components/extractors/communication/intercom'
+description: 'See which tables and columns the Intercom connector creates from users, leads, companies, notes and conversations with the Basic or Conversations template.'
 redirect_from:
     - /extractors/communication/intercom/
 ---
@@ -11,8 +13,8 @@ This data source connector fetches data from [Intercom](https://www.intercom.com
 
 ## Configuration
 Before you start, have a working Intercom account with a plan (a trial will work as well). 
-[Create a new configuration](/components/#creating-component-configuration) of the **Intercom** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Intercom** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 
 Choose one of the configuration templates available: **Basic** or **Conversations** and **Save** the configuration.
 You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
