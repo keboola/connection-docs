@@ -355,9 +355,11 @@ async function handleStub(
 // ─── Entry point ────────────────────────────────────────────────────────
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // Every answer carries the CORS header, errors included: the dev drawer on localhost calls a
+  // deployed function cross-origin and could not read a 400's text without it.
+  setCors(req, res);
   if (req.method === 'OPTIONS') {
     res.statusCode = 204;
-    setCors(req, res);
     res.setHeader('access-control-max-age', '86400');
     res.end();
     return;
@@ -367,7 +369,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'GET') {
     res.statusCode = 200;
     res.setHeader('content-type', 'application/json');
-    setCors(req, res);
     res.setHeader('cache-control', 'no-store');
     res.end(JSON.stringify({ enabled: Boolean(AI_SERVICE_URL && KBC_TOKEN) }));
     return;
@@ -415,7 +416,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.statusCode = 429;
     res.setHeader('content-type', 'application/json');
     res.setHeader('retry-after', String(IP_WINDOW_MS / 1000));
-    setCors(req, res);
     res.end(
       JSON.stringify({
         error: 'Too many questions in a short time. Wait a few minutes and try again.',

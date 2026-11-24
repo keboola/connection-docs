@@ -94,6 +94,19 @@ test('CORS: vercel.app and look-alike origins get no allow header', async () => 
   }
 });
 
+test('CORS: a 400 or 405 for an allowed origin carries the header, so the drawer can read it', async () => {
+  const mod = await load({}, 'cors-errors');
+  const origin = 'http://localhost:4321';
+  const long = res();
+  await mod.default(req('POST', { message: 'x'.repeat(2001) }, { origin }), long);
+  assert.equal(long.statusCode, 400);
+  assert.equal(long.headers['access-control-allow-origin'], origin);
+  const put = res();
+  await mod.default(req('PUT', undefined, { origin }), put);
+  assert.equal(put.statusCode, 405);
+  assert.equal(put.headers['access-control-allow-origin'], origin);
+});
+
 // ─── Request validation ──────────────────────────────────────────────────
 
 test('a missing, empty or non-string message is a 400, not a 500', async () => {
