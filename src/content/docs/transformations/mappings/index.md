@@ -358,11 +358,17 @@ reads (and bills) only those partitions.
 
 ##### How it works
 
-1. Before deduplication, Keboola reads the distinct values of the destination's partitioning column from the loaded data.
+1. Before deduplication, Keboola reads from the loaded data which destination partitions the values of the
+   partitioning column fall into. For integer-range partitioning, these are the ranges the loaded IDs fall into, not
+   the individual IDs.
 2. It adds a filter on that column to the deduplication statement, for example
    ``AND dest.`date` IN ('2026-10-12', '2026-10-13')``. For `DATETIME` and `TIMESTAMP` columns, the filter is a time
-   range for each partition (in UTC for `TIMESTAMP`).
+   range for each partition (in UTC for `TIMESTAMP`); for integer-range partitioning, it is an integer range for each
+   partition.
 3. BigQuery prunes all other partitions of the destination table.
+
+Loaded values that fall outside the table's partition ranges (BigQuery keeps such rows in its `__UNPARTITIONED__`
+partition) are handled as well; the load result is the same.
 
 The data loaded into the table is the same as without the option; only the amount of data BigQuery reads changes.
 
@@ -379,11 +385,11 @@ runs as before, without an error.
 
   Ingestion-time partitioning is not supported.
 - The partitioning column is **part of the primary key**.
-- The loaded data contains at most 4,000 distinct values of the partitioning column. For time-unit partitioning, the
-  values are counted per partition unit (e.g., per day for `DAY` partitioning); for integer-range partitioning, every
-  distinct integer counts, even when several of them fall into the same range partition. Above the limit, the
-  deduplication runs without the filter. This does not lift BigQuery's own limit on the number of partitions a single
-  job can modify.
+- The loaded data falls into at most 4,000 destination partitions. The limit counts partitions, not distinct values:
+  for time-unit partitioning, one per partition unit (e.g., per day for `DAY` partitioning); for integer-range
+  partitioning, one per range, however many IDs fall into it. Above the limit, the deduplication runs without the
+  filter and reads the whole destination table; the loaded data is the same. This does not lift BigQuery's own limit
+  on the number of partitions a single job can modify.
 
 ##### Setting it up
 
