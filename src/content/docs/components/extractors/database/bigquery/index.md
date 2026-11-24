@@ -48,7 +48,7 @@ and click **Create Bucket**. **Name** the bucket and select its **location** (mu
 Do not set a retention policy on the bucket. The bucket contains only temporary data and no retention is needed.
 
 ## Configure Extraction
-[Create a new configuration](/components/#creating-component-configuration) of the BigQuery connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the BigQuery connector.
 Click **Set Service Account Key**.
 
 ![Screenshot - Set Service Account Key](/components/extractors/database/bigquery/bigquery-1.png)

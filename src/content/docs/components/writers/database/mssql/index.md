@@ -13,7 +13,7 @@ This data destination connector sends data to a [Microsoft SQL Server](https://w
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **SQL Server** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **SQL Server** data destination connector.
 
 The first step is to **Set Up Database Credentials**.
 You need to provide a *host name*, *user name*, *password*, *database name*, and SQL Server version; optionally, an *instance name* if needed for the connection.
@@ -72,7 +72,7 @@ This means that if the database is used by other applications which acquire tabl
 freeze waiting for the locks to be released.
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
-[incremental processing](/storage/tables/#incremental-processing).
+[incremental processing](/storage/tables/incremental-loading/#incremental-processing).
 
 ## Binary types
 

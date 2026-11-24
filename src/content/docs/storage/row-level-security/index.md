@@ -84,8 +84,7 @@ For the end users of a [Data App](/data-apps/) who sign in through single sign-o
 - A governed app must forward the signed-in user's token to Query Service. The clients in [Apply policies to a Data App](/storage/row-level-security/set-up/#apply-policies-to-a-data-app) do this for Python, JavaScript and Streamlit apps.
 - In a project with the `row-level-security` feature, the **Kai in the app** setting of a Data App stays off.
 - A governed app can only read: it runs `SELECT` statements and nothing else, so an app that writes to its Storage Access tables fails on its inserts, updates and deletes.
-<!-- kbagent-check: skip-next -->
-- On BigQuery, create the governed workspace with the MCP Server, the API, or `kbagent workspace create --governed` (Keboola CLI 1.2.0 or later).
+- On BigQuery, create the governed workspace with the MCP Server, the API, or the `--governed` flag of `kbagent workspace create` (Keboola CLI 1.2.0 or later).
 <!-- Checked 2026-11-20: keboola/cli supports --governed on Snowflake and BigQuery since 1.2.0 (changelog #892, #922; GOVERNED_WORKSPACE_BACKENDS in constants.py). -->
 - Column policies are an allowlist of visible columns. Masking a column's values is not supported.
 - Range conditions (`gt`, `gte`, `lt`, `lte`) compare the values as text on columns stored as text, which is the default for Keboola tables (untyped tables). For example `"10" >= "2"` is false, so a numeric or date range on such a column can hide or show the wrong rows without an error. Use a typed table for columns you filter by range, or use `eq` or `in` conditions.

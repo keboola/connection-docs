@@ -1,6 +1,7 @@
 ---
 title: NetSuite
 slug: 'components/extractors/erp/netsuite'
+description: 'Download NetSuite data through SuiteAnalytics Connect with your account ID and role ID, then select tables or write a custom Oracle SQL query.'
 ---
 
 
@@ -8,6 +9,8 @@ slug: 'components/extractors/erp/netsuite'
 The data source for NetSuite enables users to download data from NetSuite using
 the [SuiteAnalytics Connect Service](https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/chapter_3963845427.html). 
 Leveraging the ODBC driver, this data source connector provides the same capabilities as other Keboola database data source connectors, including incremental fetching.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prerequisites
 

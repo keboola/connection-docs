@@ -33,7 +33,7 @@ There are the following user roles available:
     - delete the project;
     - manage users;
     - manage [API tokens](/management/project/tokens/);
-    - permanently remove configurations in [trash](/components/#delete-configuration);
+    - permanently remove configurations in [trash](/components/configurations/#delete-and-restore-a-configuration);
     - create an external authorization link; and
     - change the name, the schedule, and the disabled status of an existing flow.
 - **ReadOnly** – the user can view all project data, but **cannot**

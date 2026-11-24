@@ -89,7 +89,7 @@ tables:
 
   - id: kbc_component_configuration
     mode: project
-    description: "This table lists the [configurations of components](/components/#creating-component-configuration) (e.g., a configuration of the AWS S3 data source connector)."
+    description: "This table lists the [configurations of components](/components/configurations/#create-a-configuration) (e.g., a configuration of the AWS S3 data source connector)."
     is_full_load: true
     columns:
       - name: kbc_component_configuration_id
@@ -161,7 +161,7 @@ tables:
 
   - id: kbc_component_configuration_version
     mode: project
-    description: "This table shows the [version history](/components/#configuration-versions) of the component configuration."
+    description: "This table shows the [version history](/components/configurations/#see-the-version-history) of the component configuration."
     is_full_load: false
     columns:
       - name: kbc_component_configuration_id
@@ -199,7 +199,7 @@ tables:
 
   - id: kbc_component_configuration_row
     mode: project
-    description: "This table lists rows of the [configurations for the components](/components/#creating-component-configuration) (e.g., a configuration for a single table in the Snowflake data destination connector)."
+    description: "This table lists rows of the [configurations for the components](/components/configurations/#create-a-configuration) (e.g., a configuration for a single table in the Snowflake data destination connector)."
     is_full_load: false
     columns:
       - name: kbc_component_configuration_row_id
