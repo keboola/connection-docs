@@ -1,6 +1,6 @@
 ---
 title: Keboola Model Context Protocol (MCP) Server
-lastUpdated: 2026-11-18
+lastUpdated: 2026-11-23
 slug: 'ai/mcp-server'
 description: 'Connect Cursor, Claude, ChatGPT, Windsurf, VS Code, Make or another MCP client to your Keboola project, limit its tools, or run the MCP server locally.'
 search_keywords: [mcp, mcp server]

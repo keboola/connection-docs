@@ -1,6 +1,6 @@
 ---
 title: dbt Transformation
-lastUpdated: 2026-11-18
+lastUpdated: 2026-11-23
 description: 'How Keboola runs dbt: the prerequisites, and which dbt component fits each use case.'
 slug: 'transformations/dbt'
 ---
