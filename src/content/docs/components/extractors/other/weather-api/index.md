@@ -1,6 +1,6 @@
 ---
 title: Weather API
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-14
 slug: 'components/extractors/other/weather-api'
 description: 'Load forecast and historical weather from Weather API for a location set in the configuration or in an input table, with your Weather API token.'
 ---

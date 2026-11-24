@@ -1,6 +1,6 @@
 ---
 title: Microsoft SQL
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-14
 slug: 'components/extractors/database/microsoft-sql'
 description: 'Sync SQL Server and Azure SQL data into Keboola with queries, or with native CDC on CDC-enabled tables to capture deletions too.'
 ---

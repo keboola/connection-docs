@@ -1,6 +1,6 @@
 ---
 title: Multiple Scrollers
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/multiple'
 description: 'Use the multiple pagination method in Generic Extractor to define several scrollers for one API and assign a scroller to each job.'
 redirect_from:

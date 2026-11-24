@@ -1,6 +1,6 @@
 ---
 title: Business Intelligence
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'components/writers/bi-tools'
 description: 'Send Keboola tables to GoodData, Looker, Tableau or ThoughtSpot, or give BI tools read-only access through Data Gateway or a Snowflake or BigQuery workspace.'
 redirect_from:

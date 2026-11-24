@@ -1,6 +1,6 @@
 ---
 title: Mapping
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/configuration/config/mappings'
 description: 'The mappings key in Generic Extractor: control how JSON responses convert to CSV tables with column, table and user mapping, primary keys and nesting.'
 redirect_from:

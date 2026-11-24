@@ -1,6 +1,6 @@
 ---
 title: AI Features
-lastUpdated: 2026-11-18
+lastUpdated: 2026-11-03
 slug: 'ai'
 description: 'See which AI features Keboola offers, from the Kai assistant, AI Kit, the MCP server and the semantic layer to component suggestions and error explanations.'
 ---

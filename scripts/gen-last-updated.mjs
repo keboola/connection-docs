@@ -19,10 +19,22 @@
  * and committed. `.github/workflows/sync-last-updated.yml` re-runs this weekly
  * and opens a PR when anything moved, the same shape as the CLI reference sync.
  *
+ * ## Which commits count
+ *
+ * Each page is dated by its own `git log --no-merges -- <page>`, one log per
+ * page (a few seconds for all of them).
+ *
+ * Per page, not one log over the docs directory: the repo allows merge commits
+ * only, so every PR's own commits stay in history, including ones a later
+ * commit on the same branch undid. A per-file log drops a branch at any merge
+ * that left the page as it was on the other side, so only changes that reached
+ * the page as it is now are seen. A directory log cannot drop anything, since
+ * the directory changes in every merge, and it dated 92 pages by branch
+ * commits whose change never reached main.
+ *
  * Merge commits are ignored (`--no-merges`): a merge touches every file it
  * brings in, so counting it would date a page by when its PR landed rather
- * than when its text last changed — and would stamp a branch merge's whole
- * incoming set with the merge day.
+ * than when its text last changed. The date is the commit date of that change.
  *
  * ## Why the migration commit is skipped
  *
@@ -46,95 +58,89 @@ const CHECK = process.argv.includes('--check');
  *  whose date must never be shown as a content date. */
 const MIGRATION_SHA = 'b3a2e34056019970bb29bedf748269b4d34614c7';
 
-const git = (args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf-8', maxBuffer: 64 << 20 });
+const git = (args) =>
+  execFileSync('git', ['-c', 'core.quotePath=false', ...args], {
+    cwd: ROOT,
+    encoding: 'utf-8',
+    maxBuffer: 256 << 20,
+  });
 
-/**
- * Every commit touching each page, newest first, from one pass over the log.
- *
- * `--follow` cannot be batched — it takes a single path — so this cheap bulk
- * pass runs first and only the pages it cannot answer fall back to it. That is
- * exactly the set the migration created, since those paths have no earlier
- * commit under their current name.
- */
-function historyFromOnePass() {
-  const log = git(['log', '--no-merges', '--format=c:%H %cs', '--name-status', '--', DOCS]);
-  const history = new Map();
-  let commit = null;
-
-  for (const line of log.split('\n')) {
-    if (line.startsWith('c:')) {
-      const [sha, date] = line.slice(2).split(' ');
-      commit = { sha, date };
-      continue;
-    }
-    if (!commit) continue;
-    // Added/Modified entries are "A\t<path>" / "M\t<path>"; renames are
-    // "R100\t<old>\t<new>" and the new path is what we key on.
-    const parts = line.split('\t');
-    if (parts.length < 2) continue;
-    const path = parts[parts.length - 1];
-    if (!history.has(path)) history.set(path, []);
-    history.get(path).push(commit);
-  }
-  return history;
+/** A page's non-merge commits, newest first, as `git log` simplifies them. */
+function pageLog(file, ...extra) {
+  return git(['log', '--no-merges', ...extra, '--format=%H %cs %P', '--', file])
+    .split('\n')
+    .filter(Boolean)
+    .map((line) => {
+      const [sha, date, parent] = line.split(' ');
+      return { sha, date, parent };
+    });
 }
 
 /**
- * True when a commit changed nothing in this page but its own `lastUpdated`.
+ * Per commit, the pages whose only change is their own `lastUpdated:` line.
+ * One diff per commit, cached: the PR that introduced the dates and every
+ * weekly sync touch hundreds of pages each.
  *
  * Without this the generator reads its own output: writing the date is itself
  * an edit, so the next run would see that commit as the page's newest change
  * and move the date to whenever the generator last ran. Every page would end
  * up looking freshly updated, which is worse than the problem being solved.
  */
-function isDateOnlyEdit(sha, file) {
-  let diff;
-  try {
-    diff = git(['show', '--format=', '--unified=0', sha, '--', file]);
-  } catch {
-    return false;
+const dateOnlyCache = new Map();
+function dateOnlyPages({ sha, parent }) {
+  if (dateOnlyCache.has(sha)) return dateOnlyCache.get(sha);
+  const diff = parent
+    ? git(['diff', '--unified=0', '--no-color', '--no-ext-diff', parent, sha, '--', DOCS])
+    : git(['show', '--format=', '--unified=0', '--no-color', '--no-ext-diff', sha, '--', DOCS]);
+
+  const changed = new Map();
+  let file = null;
+  let inHunk = false;
+  for (const line of diff.split('\n')) {
+    if (line.startsWith('diff --git ')) {
+      file = null;
+      inHunk = false;
+    } else if (!inHunk && line.startsWith('+++ ')) {
+      file = line.startsWith('+++ b/') ? line.slice(6) : null;
+      if (file) changed.set(file, []);
+    } else if (line.startsWith('@@')) {
+      inHunk = true;
+    } else if (inHunk && file && /^[+-]/.test(line)) {
+      const text = line.slice(1).trim();
+      if (text) changed.get(file).push(text);
+    }
   }
-  const changed = diff
-    .split('\n')
-    .filter((l) => /^[+-]/.test(l) && !/^(\+\+\+|---)/.test(l))
-    .map((l) => l.slice(1).trim())
-    .filter(Boolean);
-  return changed.length > 0 && changed.every((l) => l.startsWith('lastUpdated:'));
+  const dateOnly = new Set();
+  for (const [path, lines] of changed) {
+    if (lines.length && lines.every((l) => l.startsWith('lastUpdated:'))) dateOnly.add(path);
+  }
+  dateOnlyCache.set(sha, dateOnly);
+  return dateOnly;
 }
 
-/** First commit that actually changed the page's content. */
+/** Newest commit that actually changed the page's content. */
 function realEditDate(commits, file) {
-  for (const { sha, date } of commits) {
-    if (sha === MIGRATION_SHA) continue;
-    if (isDateOnlyEdit(sha, file)) continue;
-    return date;
+  for (const commit of commits) {
+    if (commit.sha === MIGRATION_SHA) continue;
+    if (dateOnlyPages(commit).has(file)) continue;
+    return commit.date;
   }
   return undefined;
-}
-
-/** Follows the migration's rename to find a page's real previous edit. */
-function dateViaFollow(file) {
-  const commits = git(['log', '--follow', '--no-merges', '--format=%H %cs', '--', file])
-    .split('\n')
-    .filter(Boolean)
-    .map((line) => {
-      const [sha, date] = line.split(' ');
-      return { sha, date };
-    });
-  return realEditDate(commits, file);
 }
 
 const pages = git(['ls-files', DOCS])
   .split('\n')
   .filter((f) => f.endsWith('.md') || f.endsWith('.mdx'));
 
-const history = historyFromOnePass();
 let written = 0;
 const drift = [];
 const unresolved = [];
 
 for (const file of pages) {
-  const date = realEditDate(history.get(file) ?? [], file) ?? dateViaFollow(file);
+  // Pages the migration created have no real edit under their current
+  // name; --follow crosses the rename. It takes a single path, so it runs
+  // only for those.
+  const date = realEditDate(pageLog(file), file) ?? realEditDate(pageLog(file, '--follow'), file);
   if (!date) {
     unresolved.push(file);
     continue;

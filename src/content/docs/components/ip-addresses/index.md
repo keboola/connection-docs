@@ -1,6 +1,6 @@
 ---
 title: IP Addresses
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'components/ip-addresses'
 description: 'The IP addresses Keboola uses on each stack to reach your systems, so you can allow them in your firewall, and the JSON file that lists them.'
 redirect_from:

@@ -1,6 +1,6 @@
 ---
 title: Incremental Loading
-lastUpdated: 2026-11-18
+lastUpdated: 2026-11-12
 slug: 'components/extractors/generic-extractor/incremental'
 description: 'Load API data incrementally with Generic Extractor using incrementalOutput, a primary key, and previousStart in modified_since, from and to request parameters.'
 redirect_from:

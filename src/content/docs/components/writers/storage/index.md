@@ -1,6 +1,6 @@
 ---
 title: Storage Data Destination Connectors
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'components/writers/storage'
 description: 'Pick the connector that writes tables or files to AWS S3, Dropbox, Google Cloud Storage, Google Drive and Sheets, OneDrive, SFTP or another Keboola project.'
 redirect_from:

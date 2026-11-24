@@ -1,6 +1,6 @@
 ---
 title: AI Kit
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'ai/ai-kit'
 description: 'Install AI Kit in an AI coding assistant such as Claude Code and see which Keboola agents, commands and workflows each of its seven parts adds.'
 ---

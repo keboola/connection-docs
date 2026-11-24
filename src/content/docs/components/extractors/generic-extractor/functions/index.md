@@ -1,6 +1,6 @@
 ---
 title: Functions
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/functions'
 description: 'Use Generic Extractor functions such as concat, md5, sprintf and hash_hmac to build values in URLs, headers, parameters and authentication.'
 redirect_from:

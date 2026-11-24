@@ -1,6 +1,6 @@
 ---
 title: Storage Data Source Connectors
-lastUpdated: 2026-11-18
+lastUpdated: 2026-11-11
 slug: 'components/extractors/storage'
 description: 'Pick the connector that imports data into Keboola from AWS S3, Azure Datalake Gen2, FTP, Google Drive, HTTP, OneDrive or another Keboola project.'
 redirect_from:

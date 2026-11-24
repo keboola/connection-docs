@@ -1,6 +1,6 @@
 ---
 title: Okta
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-14
 slug: 'components/extractors/other/okta'
 description: 'Fetch Okta users, user types and devices with an organization URL and API token, using search queries and full or incremental sync.'
 redirect_from:

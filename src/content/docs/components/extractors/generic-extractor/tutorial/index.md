@@ -1,6 +1,6 @@
 ---
 title: Generic Extractor Tutorial
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/tutorial'
 description: 'Generic Extractor tutorial: prepare a MailChimp account and API key, then configure the extractor for a new REST API step by step.'
 redirect_from:

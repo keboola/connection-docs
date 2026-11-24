@@ -1,6 +1,6 @@
 ---
 title: External Integrations
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'external-integrations'
 description: 'Connect Keboola to other tools through the REST API, the MCP server, or workflow automation platforms such as n8n.'
 ---

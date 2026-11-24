@@ -1,6 +1,6 @@
 ---
 title: Code Pattern Quick Start
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'extend/component/code-patterns/tutorial'
 description: 'Build a code pattern component on top of the component quick start, test its generate action through the API and attach it to a transformation.'
 ---

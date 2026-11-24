@@ -1,6 +1,6 @@
 ---
 title: Storage Docker CLI Client
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'storage/api/clients/docker-cli'
 description: 'Use the Storage API Docker CLI client to create tables, import data into them and export them from the command line on any machine with Docker.'
 redirect_from:

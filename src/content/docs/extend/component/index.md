@@ -1,6 +1,6 @@
 ---
 title: Components
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'extend/component'
 description: 'Explains what a Keboola component is, what you need before you build one, and how the extractor, writer, application, processor and code pattern types differ.'
 redirect_from:

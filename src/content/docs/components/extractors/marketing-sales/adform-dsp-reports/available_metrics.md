@@ -1,6 +1,6 @@
 ---
 title: Available Metrics
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-14
 slug: 'components/extractors/marketing-sales/adform-dsp-reports/available-metrics'
 description: 'Look up every metric available to Adform DSP Reports, with its key, category, display format, description and specs metadata, as the Adform API returns it.'
 ---

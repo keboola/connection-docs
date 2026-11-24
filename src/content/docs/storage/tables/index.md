@@ -1,6 +1,6 @@
 ---
 title: Tables in Storage
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-19
 slug: 'storage/tables'
 sidebar:
   label: Tables

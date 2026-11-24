@@ -1,6 +1,6 @@
 ---
 title: Mapbox
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-14
 slug: 'components/extractors/other/mapbox'
 description: 'Enrich coordinates in an input table with Mapbox Isochrone areas or Matrix travel times and distances, using a Mapbox API token and per-endpoint parameters.'
 ---

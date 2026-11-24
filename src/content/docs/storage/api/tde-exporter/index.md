@@ -1,6 +1,6 @@
 ---
 title: TDE Exporter
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'storage/api/tde-exporter'
 description: 'Run the TDE Exporter to export Keboola Storage tables to Tableau Data Extract files, with a stored or custom configuration and column type definitions.'
 redirect_from:

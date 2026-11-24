@@ -1,6 +1,6 @@
 ---
 title: Generic Extractor Parameter Map
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/map'
 description: 'A sample Generic Extractor configuration that shows where each option goes, including api pagination and authentication, config jobs, mappings and iterations.'
 redirect_from:

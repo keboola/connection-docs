@@ -1,6 +1,6 @@
 ---
 title: Component Configurations API
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-13
 slug: 'storage/api/configurations'
 description: 'Learn how a component configuration is structured, then list, modify, roll back and copy configurations and their rows with the Storage API.'
 redirect_from:

@@ -1,6 +1,6 @@
 ---
 title: DynamoDB Streams
-lastUpdated: 2026-11-18
+lastUpdated: 2026-10-14
 slug: 'components/extractors/other/dynamodb-streams'
 description: 'Download data from DynamoDB Streams with an AWS access key ID and secret, region and table name, in back-fill mode or incrementally using a state file.'
 redirect_from:
