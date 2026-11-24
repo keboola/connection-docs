@@ -22,7 +22,7 @@ pipeline then reruns by itself every week. This guide does each of those once, o
 so you can do them on your own data.
 
 :::tip[New to Kai?]
-Kai works inside your project. It reads your tables, configurations and job logs, and it asks before
+Kai works inside your project. It reads your tables, configurations and [job logs](/management/jobs/), and it asks before
 each change it makes. [What Kai can do](/kai/) lists its skills, and [AI Features](/ai/) lists the other AI features,
 such as the MCP server and the semantic layer.
 :::
@@ -97,6 +97,12 @@ Pick a tab once and every page after it opens on the same one:
 Where one of the three cannot do the job (a signup form, a Google consent screen, a branch merge),
 the page says so rather than showing an empty tab.
 
+:::tip[New to kbagent?]
+kbagent is Keboola's command-line interface. It works with the same things as the UI, such as
+configurations, jobs, tables and flows, and its commands can go in a script or be run by an AI
+coding agent. The **CLI / API** tabs in this guide use it, and [CLI](/cli/) shows how to install it.
+:::
+
 ### Approvals and plan mode
 
 {/* Moved here from PathIntro.astro on 2026-09-29: the component printed this on every task page
@@ -123,7 +129,7 @@ for the app's access to Storage and once to deploy it.
   changes keeps a **Versions** tab, and **Restore this version** on an earlier row takes it back;
   **Delete configuration** removes one you do not want, into **Trash**. Restoring a version changes
   the configuration only: tables a job already wrote stay as they are. The weekly schedule is a
-  configuration of its own, outside the flow's versions, and an app's versions record its
+  configuration of its own, outside the [flow](/flows/)'s versions, and an app's versions record its
   settings, not the code Kai wrote.
 
   ![Screenshot - The Versions tab of the Boolabean sales configuration: one version per change Kai made, from Configuration created to the fifth row added, with the Restore this version tooltip on an earlier row](/getting-started/kai-undo-versions.png)
