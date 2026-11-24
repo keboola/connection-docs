@@ -1,6 +1,7 @@
 ---
 title: AI Kit
 slug: 'ai/ai-kit'
+description: 'Install AI Kit in an AI coding assistant such as Claude Code and see which Keboola agents, commands and workflows each of its seven parts adds.'
 ---
 
 
@@ -10,6 +11,8 @@ AI Kit is a plugin marketplace for AI coding assistants that provides specialize
 AI Kit is designed for developers who use AI coding assistants like Claude Code to work with Keboola projects. It provides seven plugins that cover different aspects of Keboola development, from building production-ready components and apps to driving your projects from the terminal and modelling your semantic layer.
 
 The toolkit includes specialized AI agents that understand Keboola's architecture, best practices, and development patterns. These agents can help you create new components from scratch, implement configuration schemas, build apps, review a project for SQL and security problems, and automate common development workflows.
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Installation
 
@@ -141,3 +144,7 @@ Additional resources:
 - [Python Component Library](https://github.com/keboola/python-component)
 - [Cookiecutter Python Component Template](https://github.com/keboola/cookiecutter-python-component)
 - [Streamlit Documentation](https://docs.streamlit.io)
+
+---
+
+**Next:** [MCP Server →](/ai/mcp-server/)

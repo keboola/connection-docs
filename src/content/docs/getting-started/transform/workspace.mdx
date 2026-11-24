@@ -142,12 +142,12 @@ a live run shows it does, this tab should say so instead. */}
    the workspace sees everything in Storage without copying anything. Leave it off to follow the
    steps below.
 
-4. A job creates the workspace. In the **Workspaces** list it shows as *Creating* until that job
+4. A [job](/management/jobs/) creates the workspace. In the **Workspaces** list it shows as *Creating* until that job
    finishes, then as ready.
 
 5. Click the workspace name to open it.
 
-6. Set the **table input mapping**, exactly as a transformation does, then click **Load Data**.
+6. Set the **[table input mapping](/transformations/mappings/)**, exactly as a transformation does, then click **Load Data**.
    The tables are copied as they are at that moment; click **Load Data** again to refresh them.
 
 7. Open the **Connect** menu. On a Snowflake backend it holds two ways in: a **Connect** button
@@ -156,7 +156,7 @@ a live run shows it does, this tab should say so instead. */}
 
    Both of those need a project with a dedicated Snowflake backend. A project on the shared
    Snowflake backend that Pay As You Go and multi-tenant projects use has no direct connection,
-   and a Free Plan project, the kind this guide starts from, runs on BigQuery rather than
+   and a [Free Plan](/management/payg-project/) project, the kind this guide starts from, runs on BigQuery rather than
    Snowflake. In either case the [SQL Editor](/workspace/sql-editor/) is the way in: it runs the
    same queries against the same workspace, in the browser, on Snowflake and BigQuery alike.
 
@@ -197,10 +197,10 @@ tell you the host, database, schema and user afterwards, but never the key.
 **Load the tables**
 
 ```bash
-kbagent workspace load --project docs-demo --workspace-id <workspace-id> --tables out.c-Boolabean-staffing-outlook.staffing_outlook
+kbagent workspace load --project docs-demo --workspace-id <workspace-id> --table-id out.c-Boolabean-staffing-outlook.staffing_outlook
 ```
 
-Repeat `--tables` for each one. The load clears the workspace first unless you add `--preserve`,
+Repeat `--table-id` for each one. The load clears the workspace first unless you add `--preserve`,
 which is the difference between refreshing a copy and adding to it.
 
 **Run your SQL**
@@ -261,7 +261,7 @@ kbagent workspace query --project docs-demo --workspace-id <workspace-id> --sql 
 project 6375 (lower-case column names, `date` in backticks); it has not been run inside a BigQuery
 workspace with `kbagent workspace query`. */}
 
-`--file` takes a `.sql` file instead, which is the shape you want once the query is longer than a
+`--sql-file` takes a `.sql` file instead (`-` reads it from stdin), which is the shape you want once the query is longer than a
 line, and `--full` fetches the whole result rather than the first page.
 
 **Look at it, then throw it away**
@@ -300,9 +300,11 @@ read-only.
 - **The workspace is empty after loading.** Loading again replaces what was there rather than
   adding to it, in the UI's **Load Data** and in `workspace load` alike. Pass `--preserve` when
   you meant to add a table.
-- **You cannot find the password.** Workspace credentials are shown once, when they are created,
-  and are not readable back. Reissue them from the **Connect** dialog, or with
-  `kbagent workspace password`.
+- **You cannot find the password or key.** Workspace credentials are shown once, when they are
+  created, and are not readable back. Reissue them from the **Connect** dialog.
+  `kbagent workspace password` resets the password of a password-based workspace only: a Snowflake
+  workspace signs in with a key pair, and the command refuses it, so create a new workspace instead.
+  {/* Checked 2026-11-23 with kbagent 1.4.1: `workspace password` on a Snowflake workspace fails with "Reset password is not supported for login type snowflake-person-keypair", and kbagent has no key-reissue command. VERIFY(Nikita): whether the Connect dialog can reissue a key for a key-pair workspace, and what BigQuery workspaces do. */}
 - **Old workspaces you forgot about.** They are all in **Workspaces**; from a terminal,
   `kbagent workspace list --project docs-demo --orphaned` finds the ones whose configuration is
   already gone, and `kbagent workspace gc --dry-run` says what it would clean up before it does

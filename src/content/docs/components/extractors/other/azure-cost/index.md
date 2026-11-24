@@ -12,8 +12,8 @@ to import cost and usage data of an [Azure subscription](https://techcommunity.m
 <!-- How-to-type page. Service principal section added 2026-10-12 from the registry schema of `keboola.ex-azure-cost-management-sp` and the README of keboola/ex-azure-cost-management; the rest is the legacy page. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Azure Cost Management OAuth** connector.  
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with your Azure account.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Azure Cost Management OAuth** connector.  
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/) with your Azure account.
 
 Fill in the **Subscription ID** and click **Save**.
 
@@ -33,14 +33,14 @@ In the [Configuration Row](/components/#configuration-rows) fill in
 
 ![Screenshot - Configuration Row](/components/extractors/other/azure-cost/row.png)
 
-If the [**Incremental Load**](/storage/tables/#incremental-loading) is set to true, the new data will be appended to the old ones. 
+If the [**Incremental Load**](/storage/tables/incremental-loading/#incremental-loading) is set to true, the new data will be appended to the old ones. 
 This way you can import new data, e.g., from today, without deleting the data imported before.
 
 ## Service principal variant
 
 The **Azure Cost Management Service Principal** connector reads the same cost and usage data, but signs in as an application (a service principal) instead of a personal Microsoft account, so there is no **Authorize Account** step.
 
-[Create a new configuration](/components/#creating-component-configuration) of the **Azure Cost Management Service Principal** connector and fill in the **Subscription ID** and the service principal's **Tenant ID**, **Username** and **Password**. Username is the application (client) ID and Password is the client secret of the [service principal](https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals) registered in your tenant; the password is stored encrypted. The service principal needs read access to Cost Management for that subscription. The rows, their fields and the output table are the same as above.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Azure Cost Management Service Principal** connector and fill in the **Subscription ID** and the service principal's **Tenant ID**, **Username** and **Password**. Username is the application (client) ID and Password is the client secret of the [service principal](https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals) registered in your tenant; the password is stored encrypted. The service principal needs read access to Cost Management for that subscription. The rows, their fields and the output table are the same as above.
 
 <!-- VERIFY(Jiří Soukup): the exact Azure role. Microsoft documents Cost Management Reader (or Contributor) for a subscription's cost data, but the connector POSTs to the Cost Management Query API and the Reader role lists only Microsoft.CostManagement/*/read. Untested with a Reader-only service principal (Jiří's review of PR #1183, 13 Oct 2026); keep the general wording until someone runs it. -->
 

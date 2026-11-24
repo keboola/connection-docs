@@ -31,7 +31,7 @@ Pick your operating system:
     Alternative — [uv](https://docs.astral.sh/uv/), if you want to pin to a version or uninstall cleanly:
 
     ```bash
-    uv tool install "git+https://github.com/keboola/cli"
+    uv tool install "keboola-cli[server]"
     ```
   </TabItem>
   <TabItem label="Linux">
@@ -46,7 +46,7 @@ Pick your operating system:
     Alternative — [uv](https://docs.astral.sh/uv/), if you want to pin to a version or uninstall cleanly:
 
     ```bash
-    uv tool install "git+https://github.com/keboola/cli"
+    uv tool install "keboola-cli[server]"
     ```
   </TabItem>
   <TabItem label="Windows">
@@ -89,7 +89,7 @@ Confirm it's on your `PATH` (all platforms). Any version line like the one below
 
 ```console
 $ kbagent --version
-kbagent v0.91.0
+kbagent v1.4.1
 ```
 {/* Verified locally 2026-07-13 (macOS) via uv; version sample tracks the vendored command reference. Windows block (winget uv + release wheel + `uv tool update-shell`, Git-bash and self-contained-zip alternatives, no WinGet package, stale Chocolatey) copied from the "Windows" section of keboola/cli's README, which is the source of truth for it. */}
 
@@ -129,12 +129,12 @@ kbagent auth register-projects
 
 It shows a picker of every project the account can reach and registers the ones you choose. Add `--all` to register all of them without the picker.
 
-Both commands need a real terminal. There is no headless path through `auth login`.
+`auth login` needs a person to approve the sign-in in a browser, so it can't run unattended. On a machine without a browser, add `--device-code`: it prints a link and a code to open on another device. The picker of `auth register-projects` needs a real terminal; in a script, pass `--all` or `--project-id <id>` instead.
 
 ### Or register one project with a token
 
 ```bash
-kbagent project add --project prod --url https://connection.keboola.com --token YOUR_TOKEN
+kbagent project add --alias prod --url https://connection.keboola.com --token YOUR_TOKEN
 ```
 
 `project add` is the static-token route. It reads the token from `--token`, or from `KBC_TOKEN` if you'd rather keep it off the command line. With neither, it prompts with hidden input, so the value never lands in your shell history. That prompt needs a TTY an agent's tool-run shell does not have.
@@ -151,7 +151,7 @@ CI, containers, cron, and anything else running unattended need a Storage API to
 
 If you don't see **Agentic CLI** in your project's settings, create the token yourself under **Settings → API Tokens** and pass it as `--token`. [API tokens](/management/project/tokens/) covers that screen.
 
-{/* Step 2's static-token half mirrors the Agentic CLI surface in the product UI (Settings → Developer settings → Agentic CLI): the same `kbagent project add --project <name> --url <stack>` and the read-only token that page can put into the command. That page is feature-flagged, hence the API Tokens fallback. Browser-login half (`auth login` + `auth register-projects`, `--all`, the device-code path, the `Auth` column, no headless path) and the static-token-only features from keboola/cli docs/auth.md on main; narrowed to Kai and the Python SDK (plus one semantic-layer command) by the v0.94.0 release notes, keboola/cli#759. */}
+{/* Step 2's static-token half mirrors the Agentic CLI surface in the product UI (Settings → Developer settings → Agentic CLI): the same `kbagent project add --project <name> --url <stack>` and the read-only token that page can put into the command. Checked 2026-11-23 with kbagent 1.4.1: `project add --project` is gone ("removed in 1.0.0. Use --alias", exit 2). VERIFY(Nikita): check whether the Agentic CLI page now builds the command with `--alias`. That page is feature-flagged, hence the API Tokens fallback. Browser-login half (`auth login` + `auth register-projects`, `--all`, the device-code path, the `Auth` column) and the static-token-only features from keboola/cli docs/auth.md on main; narrowed to Kai and the Python SDK (plus one semantic-layer command) by the v0.94.0 release notes, keboola/cli#759. */}
 
 A Storage API token is enough for browsing. Some commands need an admin (master) token, e.g. creating branches or workspaces needs admin privileges. Token types and scoping options are covered in [API tokens](/management/project/tokens/).
 
@@ -176,7 +176,7 @@ Explore what's there. Recent jobs:
 ```bash
 kbagent job list --limit 5    # recent jobs (shown above)
 kbagent project list          # connected projects
-kbagent config list           # configurations across all connected projects
+kbagent config list           # configurations in the active project (--all-projects for all)
 ```
 
 ## Step 5 — Search
@@ -207,7 +207,7 @@ kbagent search "shopify"
 
 ```bash
 KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
-  org setup --project-ids 901,9621 --url https://connection.keboola.com --yes
+  org setup --project-id 901 --project-id 9621 --url https://connection.keboola.com --yes
 ```
 
 **A whole organization** (org admin) — kbagent registers every project and mints per-project tokens:
@@ -217,9 +217,9 @@ KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
   org setup --org-id 123 --url https://connection.keboola.com --yes
 ```
 
-{/* Verified vs v0.66.1 (Padak review): --allow-env-manage-token required to read KBC_MANAGE_API_TOKEN (default-deny since 0.29.0); --org-id / --project-ids / --yes correct; --token-expires-in lives on `project refresh`, not org setup. */}
+{/* Verified vs v0.66.1 (Padak review): --allow-env-manage-token required to read KBC_MANAGE_API_TOKEN (default-deny since 0.29.0); --org-id / --project-id (repeatable) / --yes correct; re-checked against kbagent 1.4.1 on 2026-11-21; --token-expires-in lives on `project refresh`, not org setup. */}
 
-Read commands then fan out across every connected project — see [multi-project](/cli/concepts/#multi-project-and-stacks).
+Read commands such as `config list`, `job list` and `search` then take `--all-projects` to fan out across every connected project — see [multi-project](/cli/concepts/#multi-project-and-stacks).
 
 ---
 

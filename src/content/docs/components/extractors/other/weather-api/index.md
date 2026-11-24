@@ -1,6 +1,7 @@
 ---
 title: Weather API
 slug: 'components/extractors/other/weather-api'
+description: 'Load forecast and historical weather from Weather API for a location set in the configuration or in an input table, with your Weather API token.'
 ---
 
 
@@ -8,6 +9,8 @@ slug: 'components/extractors/other/weather-api'
 [Weather API](https://weatherapi.com) is a free service that offers information on forecasted, real-time, and historical weather, including marine weather.
 
 This component enables users to load data from [Weather API](https://weatherapi.com) and bring it into Keboola.
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Prerequisites
 

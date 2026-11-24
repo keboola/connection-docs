@@ -30,7 +30,7 @@ If you want to write to multiple buckets, you'll have to create multiple tokens 
 and multiple configurations.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Keboola Storage** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Keboola Storage** data destination connector.
 
 ## Specify Target Project
 Select the region of the *target project* and paste the token [you generated](#prepare-api-token) in the *target project*.
@@ -52,11 +52,11 @@ Each table has different settings but they are all written to the **same project
 ### Source
 - **Table** specifies the table in the *source project*. This value cannot be changed. If you want to write another table,
 create a new item in the configuration.
-- **Changed In Last** allows you to use [incremental processing](/storage/tables/#incremental-processing) to write only the recent part of the data.
+- **Changed In Last** allows you to use [incremental processing](/storage/tables/incremental-loading/#incremental-processing) to write only the recent part of the data.
 
 ### Destination
 - **Table Name** -- table name in the *target project* and bucket.
-- **Mode** -- One of `Update`, `Replace` or `Recreate`. The update mode enables [incremental loading](/storage/tables/#incremental-loading) 
+- **Mode** -- One of `Update`, `Replace` or `Recreate`. The update mode enables [incremental loading](/storage/tables/incremental-loading/#incremental-loading) 
 in the *target project*. The **primary key** setting will be used from the table in the current project. The replace mode replaces all data
 in the target table, but keeps the table structure. The Recreate mode drops and creates the target table. Note that the
 Recreate mode creates a brief moments where the target table does not exist. This can create problems for example when an orchestration

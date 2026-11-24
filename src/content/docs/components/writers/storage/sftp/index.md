@@ -14,7 +14,7 @@ This data destination connector allows you to write tables and files to a remote
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) 
+[Create a new configuration](/components/configurations/#create-a-configuration) 
 of the SFTP data destination connector. 
 Then provide the target SFTP server URL, port (default is 22), and authentication, either via 
 a username and a password, or with a private key.
