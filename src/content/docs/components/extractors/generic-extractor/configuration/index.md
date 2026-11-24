@@ -1,6 +1,8 @@
 ---
 title: Generic Extractor Configuration
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/configuration'
+description: 'Configure Generic Extractor in the user interface or as JSON with the api, config, aws and iterations sections, and find options in the configuration map.'
 redirect_from:
     - /extend/generic-extractor/configuration/
 ---

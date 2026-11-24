@@ -1,5 +1,6 @@
 ---
 title: UKG HR
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/ukg-hr'
 description: Extract requests, employees, employee documents, organizations and users from UKG HR Service Delivery into Storage, with incremental loading.
 search_keywords: [hrsd, hr service delivery, ultipro, people assist]
@@ -34,7 +35,7 @@ The credentials are stored encrypted. No Keboola OAuth broker or partner registr
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **UKG HR** data source connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **UKG HR** data source connector.
 
 ### Connection
 

@@ -1,17 +1,22 @@
 ---
-title: CSV Files
+title: CSV files
+lastUpdated: 2026-11-19
 slug: 'storage/tables/csv-files'
+sidebar:
+  label: CSV Files
+description: 'The CSV format Storage accepts on import and produces on export: delimiter, enclosure, line breaks, encoding and compression, with an example.'
+search_keywords: [csv, csv format, delimiter, enclosure, RFC 4180, utf-8, gzip, export format]
 ---
 
+All data imported to and exported from Storage has to be in the CSV format. This page lists the format Storage accepts and the format it produces. To get data out of or into Microsoft Excel, see [CSV files in Excel](/storage/tables/csv-files/excel/).
 
-
-All data imported to and exported from Storage has to be in the CSV format.
+<!-- Reference-type page. Source: the former CSV files page on main; text carried over and checked against it 2026-11-19. -->
 
 In many cases, our data source and destination connectors take care of the necessary conversion,
 but sometimes you have to be aware of the supported formats — for
 example, when you are [loading data with the HTTP connector](/getting-started/load/).
 
-## Input CSV Format
+## Input CSV format
 Storage accepts CSV files in the format defined by [RFC 4180 Specification](https://tools.ietf.org/html/rfc4180).
 This is basically compatible with CSV exports from OpenOffice Calc, MS Excel, and Google Drive.
 
@@ -52,29 +57,9 @@ A CSV file in this format can be exported from
 - OpenOffice / LibreOffice Calc, where you simply save the file in a Text CSV file and select *Unicode (UTF-8)* encoding.
 - Google Drive, where it is the default output format (note, however, that you might
     prefer to use the [Google Sheets data source connector](/getting-started/load/googlesheets/) instead).
-- Microsoft Excel by following the below instructions.
+- Microsoft Excel by following [Export an Excel sheet as a file for Storage](/storage/tables/csv-files/excel/#export-an-excel-sheet-as-a-file-for-storage).
 
-### Exporting from Microsoft Excel
-Because Microsoft Excel does not support UTF-8 encoding very well, it is a bit tricky to
-export data correctly. There are a
-[number of options](https://stackoverflow.com/questions/4221176/excel-to-csv-with-utf8-encoding),
-but without using any non-standard Windows tools, the quickest is to save the Excel sheet as `Unicode Text (*.txt)`
-format:
-
-![Screenshot -- Excel Export - Save File](/storage/tables/excel-export-1.png)
-
-This will produce a tab-delimited file in UTF-16 encoding, which you can convert in Windows
-Notepad. Simply open the file, and without making any modifications, save it with `UTF-8` encoding (and .csv extension):
-
-![Screenshot -- Excel Export - Notepad Convert](/storage/tables/excel-export-2.png)
-
-The resulting file `import-data.txt.csv` can now be imported into Keboola Storage as a tab delimited file.
-
-![Screenshot -- Excel Export - KBC Import](/storage/tables/excel-export-3.png)
-
-*Note: as long as your data does not contain any non-[ASCII](https://en.wikipedia.org/wiki/ASCII#Character_set) characters, you can simply save them as CSV.*
-
-## Output CSV Format
+## Output CSV format
 When you export a table from Storage, the same format is used for import:
 
 - **Delimiter** is set to comma `,`.
@@ -91,23 +76,8 @@ The above format is again compatible with many applications; you can
 when asked about the file format).
 - import it into Google Drive without any conversion (notice, however, that you might want to
     use the [Google Drive data destination connector](/components/writers/storage/google-drive/) instead)
-- import it into Microsoft Excel by following the below instructions.
+- import it into Microsoft Excel by following [Open a CSV file from Storage in Excel](/storage/tables/csv-files/excel/#open-a-csv-file-from-storage-in-excel).
 
 *Note: The rows are exported in random order and there is no way to specify ordering of rows in the exported file.*
 
-### Opening in Microsoft Excel
-The easiest way to import the CSV file exported from Keboola into Microsoft Excel is by starting Excel and opening 
-a **blank workbook**. Then use the **Data** -- **From Text** function and select the exported file:
-
-![Screenshot -- Excel Import -- Select file](/storage/tables/excel-import-1.png)
-
-An import wizard will start. On its first screen, select the **delimited** file and **Unicode UTF-8** encoding:
-
-![Screenshot -- Excel Import -- Import Wizard](/storage/tables/excel-import-2.png)
-
-On the next screen, make sure that *only* the **comma** delimiter is selected:
-
-![Screenshot -- Excel Import -- Import Wizard](/storage/tables/excel-import-3.png)
-
-However, using this method, Excel is not able to import new lines contained in table cells. 
-If you need to do that, you have to use a more [complicated approach](https://stackoverflow.com/questions/2668678/importing-csv-with-line-breaks-in-excel-2007).
+**Next:** [CSV files in Excel →](/storage/tables/csv-files/excel/)

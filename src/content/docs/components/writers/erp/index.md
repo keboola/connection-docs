@@ -1,5 +1,6 @@
 ---
 title: ERP Data Destination Connectors
+lastUpdated: 2026-10-12
 slug: 'components/writers/erp'
 description: Data destination connectors that write Keboola tables into accounting and ERP systems.
 ---

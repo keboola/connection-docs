@@ -1,6 +1,8 @@
 ---
 title: Component Quick Start
+lastUpdated: 2026-10-13
 slug: 'extend/component/tutorial'
+description: 'Create a Hello, World! component in the Developer Portal, generate its repository from a template, deploy it through CI and run it in a Keboola project.'
 redirect_from:
     - /extend/docker/quick-start/
     - /extend/custom-science/quick-start/

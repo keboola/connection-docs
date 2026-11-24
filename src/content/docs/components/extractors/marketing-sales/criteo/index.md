@@ -1,6 +1,8 @@
 ---
 title: Criteo
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/criteo'
+description: 'Extract Criteo ad performance reports with the client ID and secret of your own Criteo developer app, choosing dimensions, metrics, currency and date range.'
 redirect_from:
     - /extractors/marketing-sales/criteo/
 ---
@@ -8,6 +10,8 @@ redirect_from:
 
 
 This data source connector uses the Criteo Marketing Solutions API to extract data on ad performance.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Getting Credentials
 
@@ -30,7 +34,7 @@ To create a Criteo developer app and get a client ID and a client secret, take t
 Now you can use the client ID and client secret obtained from the text file.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Criteo** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Criteo** connector.
 
 To configure this connector, you need to provide an API **Client ID** and a **Client secret**. Then click **Add Row**
 to create a new report to download.

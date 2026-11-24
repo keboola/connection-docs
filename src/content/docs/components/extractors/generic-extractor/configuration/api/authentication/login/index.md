@@ -1,6 +1,8 @@
 ---
 title: Login
+lastUpdated: 2026-11-18
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/login'
+description: 'Configure login authentication in Generic Extractor: a one-time login request returns temporary credentials that authenticate all other API requests.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/login/
 ---
@@ -8,8 +10,7 @@ redirect_from:
 <!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
 
 
-Use the Login authentication to send a one-time **login request** to obtain temporary credentials
-for authentication of all the other API requests.
+The UI does not offer this method yet, so you set it in JSON. The [OAuth 2.0 Client Credentials](/components/extractors/generic-extractor/configuration/api/authentication/oauth_cc/) method in the UI is built on it.
 
 ## User interface
 

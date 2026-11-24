@@ -1,6 +1,8 @@
 ---
 title: OAuth 1.0 Authentication
+lastUpdated: 2026-11-18
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth10'
+description: 'The oauth10 type in Generic Extractor is not yet supported (the test endpoint button fails); published components only, tested by injecting oauth_token.'
 redirect_from:
     - /extend/generic-extractor/configuration/api/authentication/oauth10/
 ---
@@ -9,6 +11,7 @@ redirect_from:
 
 
 **Note** that this configuration option is not yet supported and the test endpoint button will not work.
+<!-- VERIFY(Ondřej Popelka): this banner says the method is not yet supported, but keboola/generic-extractor may already implement it. Confirm, then keep or drop the banner, and update the page description to match. -->
 
 OAuth 1.0 authentication is one of the [two OAuth methods](/components/extractors/generic-extractor/configuration/api/authentication/#oauth) and
 is supported only for [published components](/components/extractors/generic-extractor/publish/).

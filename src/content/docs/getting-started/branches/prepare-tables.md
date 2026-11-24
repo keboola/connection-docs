@@ -1,5 +1,6 @@
 ---
 title: 'Prepare the table configurations'
+lastUpdated: 2026-11-24
 slug: 'getting-started/branches/prepare-tables'
 description: "Set up the table-manipulating configurations used by the development branches walkthrough: a data source connector and an SQL transformation in production."
 redirect_from:
@@ -10,7 +11,7 @@ prev: 'Development branches'
 
 
 In this part of our tutorial about development branches, you will prepare [component configurations](/components/) 
-that manipulate tables and buckets in [Storage](/storage/). We will use those configurations in the following sections 
+that manipulate tables and [buckets](/storage/buckets/) in [Storage](/storage/). We will use those configurations in the following sections 
 to see how branches work. 
 
 You can create a configuration of any component in a branch, and the following steps are not strictly necessary; you
