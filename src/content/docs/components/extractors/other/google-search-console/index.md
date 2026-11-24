@@ -1,6 +1,7 @@
 ---
 title: Google Search Console
 slug: 'components/extractors/other/google-search-console'
+description: 'Extract Search Analytics and Sitemaps data for domains linked to your Google account, with dimensions, date ranges, filter groups and incremental load.'
 redirect_from:
     - /extractors/other/google-search-console/
 ---
@@ -14,9 +15,11 @@ The component supports the
 endpoint and the [Sitemaps](https://developers.google.com/webmaster-tools/v1/sitemaps)
 endpoint.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Search Console** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization).
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Search Console** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/).
 
 ![Screenshot - Component Config](/components/extractors/other/google-search-console/auth.png)
 

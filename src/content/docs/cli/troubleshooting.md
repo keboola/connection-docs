@@ -10,7 +10,7 @@ description: 'The most common kbagent CLI failures and their fixes — install a
 
 The failures you're most likely to hit with [kbagent](/cli/), each with its cause and fix. With `--json`, failures carry a stable machine-readable `code` — it's shown here where one applies, and the [full catalogue](https://github.com/keboola/cli/blob/main/docs/error-codes.md) lives in the CLI repo.
 
-`kbagent doctor` is the universal first step: it checks your config, connections, and version, and often names the problem outright. `kbagent doctor --fix` repairs what it safely can.
+`kbagent doctor` is the universal first step: it checks your config, connections, and version, and often names the problem outright. It reports what it finds; the fixes below are the manual follow-up.
 
 <!-- Reference-type page. Error codes + semantics verified against keboola/cli docs/error-codes.md (CI-gated catalogue) and the section's earlier source-level review (v0.66.1–v0.76.1). -->
 
@@ -21,18 +21,17 @@ The failures you're most likely to hit with [kbagent](/cli/), each with its caus
 **Fix:** restart the terminal (or re-source your shell profile). If it persists after a `uv` install, run `uv tool update-shell` and open a new terminal. As a no-install fallback, `uvx` works immediately:
 
 ```bash
-uvx --from 'git+https://github.com/keboola/cli' kbagent --version
+uvx --from keboola-cli kbagent --version
 ```
 
 ## Invalid or expired token — `INVALID_TOKEN`
 
 **Cause:** the Storage API token registered for the project was revoked, expired, or mistyped.
 
-**Fix:** create a fresh token in the Keboola UI and re-register the project:
+**Fix:** create a fresh token in the Keboola UI and give it to the project you already registered:
 
 ```bash
-kbagent project add --project prod \
-  --url https://connection.keboola.com --token NEW_TOKEN
+kbagent project edit --project prod --token NEW_TOKEN
 ```
 
 For projects onboarded via `org setup`, `kbagent project refresh` re-mints the project token instead.
@@ -51,8 +50,10 @@ For projects onboarded via `org setup`, `kbagent project refresh` re-mints the p
 
 ```bash
 kbagent permissions show
-kbagent permissions reset   # remove all restrictions
+kbagent permissions reset   # remove persisted restrictions
 ```
+
+`permissions reset` asks a person to type a confirmation code in a real terminal; there is no `--yes`, so an agent can't run it. Session flags such as `--deny-writes` last for one command, so to lift them, run the command without them.
 
 If you're inside a read-only local workspace (`init --from-global --read-only`), switch to a directory using your global config instead.
 
@@ -79,7 +80,7 @@ kbagent search "shopify" --search-type config-based
 
 ## `NOT_INITIALIZED` — `.keboola/manifest.json` not found
 
-**Cause:** you ran a [GitOps sync](/cli/concepts/#gitops-sync) command in a directory that was never initialized.
+**Cause:** you ran `sync status`, `sync diff` or `sync push` ([GitOps sync](/cli/concepts/#gitops-sync)) in a directory that was never initialized. `sync pull` initializes the directory itself.
 
 **Fix:** initialize first, then pull:
 
@@ -90,19 +91,23 @@ kbagent sync pull
 
 ## `SYNC_CONFLICT` — local and remote both changed
 
-**Cause:** since your last `sync pull`, the configuration changed both locally and in Keboola; kbagent refuses to overwrite silently.
+**Cause:** since your last `sync pull`, the configuration changed both locally and in Keboola; kbagent refuses to overwrite silently. `sync pull` skips that configuration as locally modified, `sync push` refuses it ("Remote changes detected. Run 'sync pull' first."), and `sync pull --force` stops with `SYNC_CONFLICT`.
 
-**Fix:** the `--json` error lists the conflicting configs under `details.conflicts`. Review them (`kbagent sync diff`), keep the side you want — commit or discard local edits — then pull or push again.
+**Fix:** the `--json` error lists the conflicting configs under `details.conflicts`, and `kbagent sync diff` marks them `! CONFLICT`. To keep the Keboola version, run `kbagent sync pull --theirs`, which discards **all** local changes in the tree.
+
+<!-- Checked 2026-11-23 with kbagent 1.4.1 on a throwaway config in project 264: plain pull skips, push refuses, pull --force gives SYNC_CONFLICT with details.conflicts[], pull --theirs resolves it. VERIFY(Nikita): how to keep local edits through a conflict was not run end to end (copy aside, pull --theirs, re-apply, push). -->
 
 ## Web UI or scheduled agents don't respond
 
 **Cause:** both the browser dashboard and cron-scheduled agent tasks run through the local server, and it isn't running.
 
-**Fix:**
+**Fix:** start the server with the web UI:
 
 ```bash
-kbagent serve
+kbagent serve --ui
 ```
+
+Plain `kbagent serve` runs the API and the agent scheduler without the browser UI. If it says the optional `server` extras are missing, reinstall with them: `uv tool install --force "keboola-cli[server]"`.
 
 Keep it running (or supervise it) wherever scheduled agents are meant to fire — see [Web UI](/cli/web-ui/) and the [scheduled-agent recipe](/cli/workflows/#schedule-an-ai-agent).
 
@@ -120,7 +125,7 @@ kbagent changelog
 
 ## Still stuck?
 
-- `kbagent doctor --fix` — automated checks and safe repairs.
+- `kbagent doctor` — health checks on your config and project connectivity.
 - `kbagent context` — the full command reference for your installed version.
 - The [error-code catalogue](https://github.com/keboola/cli/blob/main/docs/error-codes.md) — every `--json` `code` with its meaning.
 - [Command reference](/cli/commands/) — flags and groups overview.

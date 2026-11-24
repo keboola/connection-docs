@@ -1,6 +1,7 @@
 ---
 title: Legacy Flows
 slug: 'flows/flows-legacy'
+description: 'Build, schedule and monitor a flow in the Legacy Flow Builder, which Conditional Flows are replacing.'
 redirect_from:
     - /orchestrator/
     - /orchestrator/design/
@@ -18,6 +19,8 @@ redirect_from:
 **Important:** This is the Legacy Flow Builder. It is being replaced by [Conditional Flows](/flows/), which offer conditional logic, branching, retries, and more robust error handling. We recommend using [Conditional Flows](/flows/) for all new workflows. An automatic migration from Legacy Flows to Conditional Flows is planned.
 :::
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Migration to Conditional Flows
 
 We're planning an automatic migration from Legacy Flows to [Conditional Flows](/flows/) to ensure a smooth transition without requiring manual intervention from users. This migration will preserve the logic, scheduling, and component configurations of existing flows while upgrading them to support conditional branching, retries, and other advanced features. In most cases, the migrated flows will look and behave the same — but with added flexibility under the hood.
@@ -26,8 +29,8 @@ News and more information about the migration will be posted to our [changelog](
 
 
 
-*If you already know how flows work in general and want to create your first flow, go to our [Getting Started tutorial](/tutorial/automate/).  
-For useful tips, check out our cheat sheet with [best practices](/tutorial/onboarding/cheat-sheet/#automating-your-flow).*
+*If you already know how flows work in general and want to create your first flow, go to our [Getting Started tutorial](/getting-started/automate/).  
+For useful tips, check out our cheat sheet with [best practices](/overview/onboarding/cheat-sheet/#automating-your-flow).*
 
 Legacy Flows integrate all of your project's segments (data connectors, transformations, other flows, etc.) by creating custom automated processes, chaining components to be run in a specific order, 
 and defining the execution schedule to **bring in the newest data available**. 
@@ -58,7 +61,7 @@ Let us show you how to organize individual tasks into steps, set up notification
 ## Access the Legacy Flow Builder
 Select from the top menu **Conditional Flows > Legacy Flows** and click the **Create Flow** button.
    
-![Go to Flows](/tutorial/automate/automate1.png)
+![Go to Flows](/getting-started/automate/automate1.png)
 
 Name your new flow and add an easy to understand description. Then click **Create Flow** again. 
 
@@ -104,7 +107,7 @@ execute more jobs in parallel. Keboola will then concurrently execute the jobs t
 
 - If you are working with APIs that are inconsistent or prone to frequent errors, consider enabling the **Continue on Failure** flag. Each phase (or step) of the flow will only run successfully if all jobs within that phase complete successfully. If a phase fails, no subsequent phases will continue. However, enabling this flag for each task (off by default) allows the flow to continue to subsequent phases, ending with a warning status if errors are encountered.
 
-- Finally, to modify the parameters sent to the underlying [API call](https://developers.keboola.com/integrate/jobs/#run-a-job), you can set **Task Parameters**. 
+- Finally, to modify the parameters sent to the underlying [API call](/extend/jobs/#run-a-job), you can set **Task Parameters**. 
 Select the task and click **Set advanced parameters**. When finished, click **Set**.
 
 ***Example of the advanced parameter:** changing a variable in transformation:*
@@ -153,3 +156,7 @@ In the tab **All Runs**, you can check how your flow is running with a detailed 
 In **Jobs** you’ll see how the flow runs and triggers each individual component sequentially. The status updates in real-time. 
 Once the last of your data source connectors finishes, the transformations will be triggered. After they complete, the data destination connector(s) will run, and the flow will be finalized. 
 In the end, you’ll see either a **Success** message or an error notification if something went wrong.
+
+---
+
+**Next:** [Migration Guide →](/flows/flow-migration-guide/)

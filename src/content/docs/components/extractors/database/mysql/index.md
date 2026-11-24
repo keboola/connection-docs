@@ -1,6 +1,7 @@
 ---
 title: MySQL
 slug: 'components/extractors/database/mysql'
+description: 'Sync MySQL, MariaDB or Aurora data into Keboola with the query-based connector or log-based CDC, and set up the user, binlog and GTIDs that CDC needs.'
 ---
 
 
@@ -20,7 +21,7 @@ It is a straightforward approach suitable for most use cases, allowing for [time
 All connectors are [configured](/components/extractors/database/sqldb/#initial-setup) similarly and 
 offer an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). 
 
-Basic configuration is covered in the [Tutorial - Loading Data from Database](/tutorial/load/database/). 
+Getting Started covers the basic configuration in [Load from a database](/getting-started/load/database/).
 
 ## MySQL Log-Based CDC
 
@@ -124,7 +125,7 @@ underlying [Debezium Schema Change Topic](https://debezium.io/documentation/refe
 
 ### Data Type Mapping
 
-MySQL data types are mapped to [Keboola Base Types](/storage/tables/data-types/#base-types) as follows:
+MySQL data types are mapped to [Keboola Base Types](/storage/tables/data-types/reference/#base-types) as follows:
 
 | Source Type | Base Type | Note                                                                 |
 |-------------|-----------|----------------------------------------------------------------------|

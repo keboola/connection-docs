@@ -1,6 +1,7 @@
 ---
 title: Component Quick Start
 slug: 'extend/component/tutorial'
+description: 'Create a Hello, World! component in the Developer Portal, generate its repository from a template, deploy it through CI and run it in a Keboola project.'
 redirect_from:
     - /extend/docker/quick-start/
     - /extend/custom-science/quick-start/
@@ -32,7 +33,7 @@ you should also receive access to a development Keboola project.
 ![Screenshot -- Join a vendor](/extend/component/tutorial/join-vendor.png)
 
 In order to create a **new vendor**, a Keboola administrator has to approve your request, and you will
-receive a [development project](https://developers.keboola.com/#development-project) in Keboola. In addition to that, you need to provide us
+receive a [development project](/extend/development-project/) in Keboola. In addition to that, you need to provide us
 with a channel for receiving internal errors from your components. Anything supported
 by [Papertrail notifications](https://help.papertrailapp.com/kb/how-it-works/alerts#supported-services)
 is available, though e-mail or a Slack channel is most commonly used.

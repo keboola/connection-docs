@@ -1,6 +1,7 @@
 ---
 title: Snowflake Transformation
 slug: 'transformations/snowflake-plain'
+description: 'Write Snowflake SQL transformations in Keboola, with their query limits, abort variable, backend sizes, case sensitivity, data types and timestamp handling.'
 redirect_from:
   - /transformations/snowflake/
 ---
@@ -219,7 +220,7 @@ CREATE TABLE "out" AS
 Do not use `ALTER SESSION` queries to modify the default timestamp format, as the loading and unloading sessions are separate 
 from your transformation/sandbox session and the format may change unexpectedly.
 
-**Important:** In the AWS US Keboola [region](https://developers.keboola.com/overview/api/#stacks-and-endpoints) 
+**Important:** In the AWS US Keboola [region](/overview/api/#stacks-and-endpoints) 
 (connection.keboola.com), the following [Snowflake default](https://docs.snowflake.com/en/sql-reference/parameters) 
 parameters are overridden:
 

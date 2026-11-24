@@ -1,6 +1,7 @@
 ---
 title: AI Features
 slug: 'ai'
+description: 'See which AI features Keboola offers, from the Kai assistant, AI Kit, the MCP server and the semantic layer to component suggestions and error explanations.'
 ---
 
 
@@ -8,6 +9,8 @@ slug: 'ai'
 Keboola's AI-powered capabilities help you build, optimize, and automate your data pipelines with intelligent assistance. From automated flow creation to smart component recommendations, our AI features are designed to accelerate your data operations and reduce manual effort.
 
 Keboola integrates artificial intelligence throughout the platform to enhance productivity, simplify complex tasks, and provide intelligent insights. Whether you're a beginner looking to create your first data pipeline or an experienced data engineer optimizing existing workflows, our AI features adapt to your needs and skill level. Following AI features are currently available on Keboola platform:
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ### Kai - AI Assistant
 
@@ -19,7 +22,7 @@ A [Python client library](https://github.com/keboola/kai-client) is also availab
 
 ### AI Kit
 
-A plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development. It includes plugins for code quality and security analysis, building Keboola Python components, and creating Streamlit data apps.
+A plugin marketplace for AI coding assistants that provides specialized agents, commands, and workflows for Keboola development. It includes plugins for code quality and security analysis, building Keboola Python components, and creating Streamlit apps.
 [Learn more about AI Kit →](/ai/ai-kit/)
 
 ### MCP Server
@@ -27,10 +30,19 @@ A plugin marketplace for AI coding assistants that provides specialized agents, 
 Model Context Protocol server integration for seamless communication between AI agents and your data infrastructure on Keboola.
 [Learn more about MCP Server →](/ai/mcp-server/)
 
-### Machine-Readable API Index
+### Semantic Layer
 
-Every Keboola stack publishes a machine-readable index of its APIs at `https://api.<stack>/apis.json` (for example, [`https://api.keboola.com/apis.json`](https://api.keboola.com/apis.json)). The index lists each service with its base `apiUrl` and a link to its OpenAPI specification (`openApiSpecUrl`) — a convenient overview for agentic usage: AI agents, MCP servers, and other tooling that discovers Keboola's APIs programmatically.
-[View the API index →](https://api.keboola.com/apis.json)
+Describe your data in business terms — datasets, metrics, relationships, glossary terms, and business rules — so AI assistants understand what your data means, not just how it is stored.
+[Learn more about the Semantic Layer →](/ai/semantic-layer/)
+
+### Row- and Column-Level Security
+
+Restrict which rows and columns of a Storage table each reader sees, including an AI assistant working through the MCP Server. Policies are written once and enforced on every query.
+[Learn more about row- and column-level security →](/storage/row-level-security/)
+
+### Machine-readable API index
+
+Each stack publishes its API index at `https://api.<stack>/apis.json`; what it contains and how to use it is described under [APIs](/overview/api/).
 
 ### AI Component Suggestions
 
@@ -49,3 +61,7 @@ Automatically generates a description using AI.
 
 AI-powered explanations for job failures that help you understand and resolve errors more quickly.
 [Learn more about Explaining Errors →](/overview/#ai-assistance)
+
+---
+
+**Next:** [AI Kit →](/ai/ai-kit/)

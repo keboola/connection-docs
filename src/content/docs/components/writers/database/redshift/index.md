@@ -1,6 +1,7 @@
 ---
 title: Redshift
 slug: 'components/writers/database/redshift'
+description: 'Write Keboola tables to your own Amazon Redshift database or one Keboola provisions, then share that database with Looker, Power BI, Qlik or Tableau.'
 redirect_from:
     - /writers/database/redshift/
 
@@ -13,8 +14,10 @@ to an existing Redshift database, or to a new database it provisions to you. The
 for sharing your data in form of an SQL database with some service. For example, you can use it to send
 data to [Tableau](https://www.tableau.com/) or [PowerBI](https://powerbi.microsoft.com/en-us/).
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Redshift** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Redshift** data destination connector.
 
 The first step is to **Set Up Credentials**:
 
@@ -94,7 +97,7 @@ freeze waiting for the locks to be released. See the [Redshift docs](https://doc
 for more details.
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
-[incremental processing](/storage/tables/#incremental-processing).
+[incremental processing](/storage/tables/incremental-loading/#incremental-processing).
 
 ## Using Keboola Provisioned Database
 The connector offers the option to create a [Keboola Provisioned database](#keboola-redshift-database) for you. You can

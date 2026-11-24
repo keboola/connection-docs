@@ -1,6 +1,7 @@
 ---
 title: TikTok Ads
 slug: 'components/extractors/marketing-sales/tiktok-ads'
+description: 'Extract TikTok ad performance reports through the Marketing Reports API, choosing advertiser IDs, report type, data level, dimensions, metrics and date range.'
 ---
 
 
@@ -9,9 +10,11 @@ This data source connector uses the [TikTok Marketing Reports API](https://ads.t
 reports on performance of ads. Depending on the data you need to extract, 
 there are [four report types](https://ads.tiktok.com/marketing_api/docs?id=1738864835805186): basic reports, audience reports, playable material reports, and catalog reports.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **TikTok Ads** connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization) with access to the Ad Account you want to extract.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **TikTok Ads** connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/) with access to the Ad Account you want to extract.
 
 Once the component is authorized, click **Add Row** in order to create a new report to download. Each report you will download will be a [configuration row](/components/#configuration-rows).
 

@@ -1,6 +1,7 @@
 ---
 title: Firebolt
 slug: 'components/writers/database/firebolt'
+description: 'Write Keboola tables to a Firebolt database through an S3 staging bucket, and set column types, fact or dimension tables, load mode and Firebolt indexes.'
 redirect_from:
     - /writers/database/firebolt/
 ---
@@ -10,7 +11,7 @@ redirect_from:
 This data destination connector sends data to a [Firebolt](https://www.firebolt.io/) database.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Firebolt** data destination connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Firebolt** data destination connector.
 
 The first step is to **set up credentials**:
 

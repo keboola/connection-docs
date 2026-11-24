@@ -1,6 +1,7 @@
 ---
 title: Common Interface
 slug: 'extend/common-interface'
+description: 'Shows how a component exchanges data with Keboola through data folders, the configuration file and environment variables, and lists the memory and disk limits.'
 ---
 
 To exchange data between your component and Keboola, use
@@ -14,14 +15,17 @@ Optionally, you can use
 * [logging](/extend/common-interface/logging),
 * [manifest files](/extend/common-interface/manifest-files/) for working with table and file meta-data,
 * the [OAuth](/extend/common-interface/oauth/) part of the configuration file, and
-* [actions](/extend/common-interface/actions/) for quick synchronous tasks.
+* [actions](/extend/common-interface/actions/) for quick synchronous tasks,
+* [artifacts](/extend/common-interface/artifacts/) to pass extra files between jobs (preview feature).
 
-In addition to that, [Job Queue](/extend/job-queue/) provides tools for
-[encryption](/overview/encryption) and [OAuth2 authorization](/extend/common-interface/oauth/).
+Sensitive configuration values are protected by [encryption](/extend/encryption/), and third-party
+access by [OAuth2 authorization](/extend/common-interface/oauth/).
 
 To quickly get the picture, have a look a [random sample data folder](/extend/data.zip).
 
 Our Python library [PyPi](https://pypi.org/project/keboola.component/) provides a convenient way how to interact with the Common Interface. Learn more in the [documentation](https://keboola.github.io/python-component/index.html#header-submodules).
+
+<!-- Explanation-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ### Component Limits
 Even though you can define your own limits for your component, all components are also subject to the following service limits:
@@ -34,3 +38,7 @@ The size allocated for overlay2 is consumed by memory swapping, and all other op
 As the swap size cannot be larger than the allocated disk space, we cannot safely increase the memory limit over 8 GB.
 
 If you need more than 8 GB of memory/swap or larger disk space, get in touch with us to discuss possible solutions.
+
+---
+
+**Next:** [Data Folders →](/extend/common-interface/folders/)

@@ -1,6 +1,7 @@
 ---
 title: Components
 slug: 'extend/component'
+description: 'Explains what a Keboola component is, what you need before you build one, and how the extractor, writer, application, processor and code pattern types differ.'
 redirect_from:
     - /extend/docker/
     - /extend/custom-science/
@@ -12,6 +13,8 @@ redirect_from:
 Components allow you to [extend](/extend/) Keboola.
 The data interface to components is very similar to [Transformations](/transformations/) — data is exchanged as
 CSV files in [designated directories](/extend/common-interface/).
+
+<!-- Explanation-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ### Intro to Component Creation
 As a developer, you implement the application logic in a language of your choice and store it in a
@@ -45,7 +48,7 @@ from our side. It also takes care of executing your component in its own [isolat
 ## Requirements
 Before you start developing a new component, you should
 
-- have a [Keboola project](https://developers.keboola.com/#development-project) where you can test your code.
+- have a [Keboola project](/extend/development-project/) where you can test your code.
 - get yourself acquainted with Docker. You should be
 able to run `docker` commands. Strictly speaking, you can get away
 with not using them, but it will certainly speed things up for you.
@@ -88,7 +91,7 @@ The expected behavior of the above component types can be described in more deta
 - Transformation -- represents a transformation engine. The UI treats these components specially and expects that they have similar capabilities
 and configuration options. These are created by Keboola. If you wish to bring your own, please contact us first.
 - Other -- this component type has a special role in the UI, it has no standard component UI. Notable "other" components are:
-    - `keboola.variables` -- Component for storing [variables](/transformations/variables/api/) configurations. Use the standard [configurations API](https://api.keboola.com/?service=storage#tag--Component-Configurations). No jobs can be made.
+    - `keboola.variables` -- Component for storing [variables](/components/variables/api/) configurations. Use the standard [configurations API](https://api.keboola.com/?service=storage#tag--Component-Configurations). No jobs can be made.
     - `keboola.storage` -- Placeholder component for actions from Storage service. Neither configurations nor jobs can be made. Use the
     [dedicated API](https://api.keboola.com/?service=storage) to work with Storage.
 
@@ -98,3 +101,7 @@ and configuration options. These are created by Keboola. If you wish to bring yo
 - Follow the [next steps](/extend/component/tutorial/input-mapping/) of the tutorial to understand how your component interacts with Keboola.
 - See more about [testing and debugging of components](/extend/component/tutorial/debugging/) in the Keboola environment.
 - Request [publication](/extend/publish/) of your component. 
+
+---
+
+**Next:** [Tutorial →](/extend/component/tutorial/)

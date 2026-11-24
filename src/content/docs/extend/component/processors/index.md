@@ -1,6 +1,7 @@
 ---
 title: Processors
 slug: 'extend/component/processors'
+description: 'Add processors to the before or after array of a component configuration through the Storage API, set their parameters and version tag, and chain them.'
 redirect_from:
     - /integrate/docker-runner/processors/
     - /extend/docker-runner/processors/
@@ -144,7 +145,7 @@ When updating the configuration, you must provide `componentId`, `configurationI
 the configuration in the `configuration` form field. Make sure to supply only the **contents** of the `configuration`
 node and to properly escape the form data.
 
-See our [configuration documentation](/storage/api/configurations/#modifying-a-configuration) for
+See our [configuration documentation](/storage/api/configurations/#modifying-configuration) for
 a more thorough description and the *Add processor to Email Attachments Extractor Configuration* example
 in our [collection](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
 Remember, the processors can be [chained](/extend/component/tutorial/processors/#chaining-processors) to
