@@ -1,5 +1,6 @@
 ---
 title: Create and configure a data stream
+lastUpdated: 2026-11-20
 slug: 'storage/data-streams/create'
 sidebar:
   label: Create a stream

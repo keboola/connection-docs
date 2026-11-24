@@ -1,5 +1,6 @@
 ---
 title: Generic Writer
+lastUpdated: 2026-11-18
 slug: 'components/writers/generic-writer'
 description: 'Generic Writer sends data from one table to one HTTP endpoint per configuration, all at once or row by row, for webhooks, notifications and API updates.'
 redirect_from:

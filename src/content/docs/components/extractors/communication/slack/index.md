@@ -1,5 +1,6 @@
 ---
 title: Slack
+lastUpdated: 2026-11-19
 slug: 'components/extractors/communication/slack'
 description: 'Fetch Slack users, channels and messages into Keboola after you authorize, in Smart Mode for incremental loads or Full Mode for everything.'
 redirect_from:

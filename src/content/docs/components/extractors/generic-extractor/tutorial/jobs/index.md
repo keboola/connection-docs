@@ -1,5 +1,6 @@
 ---
 title: Jobs Tutorial
+lastUpdated: 2026-11-18
 slug: 'components/extractors/generic-extractor/tutorial/jobs'
 description: 'Generic Extractor tutorial on jobs: extract the sub-resources of MailChimp campaigns with child jobs and placeholders, and add multiple jobs.'
 redirect_from:

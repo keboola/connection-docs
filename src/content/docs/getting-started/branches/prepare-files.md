@@ -1,5 +1,6 @@
 ---
 title: 'Prepare the file configurations'
+lastUpdated: 2026-09-23
 slug: 'getting-started/branches/prepare-files'
 description: "Set up the file-manipulating configurations used by the development branches walkthrough: a Python transformation that writes files to Storage."
 redirect_from:

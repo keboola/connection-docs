@@ -1,5 +1,6 @@
 ---
 title: 'Development branches'
+lastUpdated: 2026-10-02
 slug: 'getting-started/branches'
 description: "Change a running project safely: work in a development branch, see the project diff, and merge your changes back into production."
 redirect_from:

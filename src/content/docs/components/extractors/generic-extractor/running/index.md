@@ -1,5 +1,6 @@
 ---
 title: Running Generic Extractor
+lastUpdated: 2026-11-18
 slug: 'components/extractors/generic-extractor/running'
 description: 'Turn on debug mode to see every request Generic Extractor sends, run it locally in Docker with a config.json, and run the documented examples.'
 redirect_from:

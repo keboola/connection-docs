@@ -1,5 +1,6 @@
 ---
 title: NetSuite
+lastUpdated: 2026-11-18
 slug: 'components/extractors/erp/netsuite'
 description: 'Download NetSuite data through SuiteAnalytics Connect with your account ID and role ID, then select tables or write a custom Oracle SQL query.'
 ---

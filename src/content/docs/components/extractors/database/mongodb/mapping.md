@@ -1,5 +1,6 @@
 ---
 title: Mapping Examples
+lastUpdated: 2026-11-18
 slug: 'components/extractors/database/mongodb/mapping'
 description: 'Copy MongoDB mapping examples that turn documents into tables, with a primary key, nested documents, lists and boolean values.'
 redirect_from:

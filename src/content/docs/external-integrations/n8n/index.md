@@ -1,5 +1,6 @@
 ---
 title: n8n Integration
+lastUpdated: 2026-11-18
 slug: 'external-integrations/n8n'
 description: 'Install the Keboola node in self-hosted n8n, connect it with a Storage API token, and build workflows that read from or write to Keboola tables.'
 ---

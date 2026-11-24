@@ -1,5 +1,6 @@
 ---
 title: Row-Level and Column-Level Security
+lastUpdated: 2026-11-24
 slug: 'storage/row-level-security'
 description: 'How row-level and column-level security works in Keboola: what policies protect, who they apply to, deny by default, what readers see, and the limitations.'
 ---

@@ -1,5 +1,6 @@
 ---
 title: Set up row-level and column-level security
+lastUpdated: 2026-11-24
 slug: 'storage/row-level-security/set-up'
 sidebar:
   label: Set Up

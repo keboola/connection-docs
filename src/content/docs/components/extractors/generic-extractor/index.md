@@ -1,5 +1,6 @@
 ---
 title: Generic Extractor
+lastUpdated: 2026-11-18
 slug: 'components/extractors/generic-extractor'
 description: 'Generic Extractor is a configurable REST client that extracts data from almost any web API without code, set up in a visual builder or in JSON.'
 redirect_from:

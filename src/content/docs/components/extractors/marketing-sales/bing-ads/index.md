@@ -1,5 +1,6 @@
 ---
 title: Microsoft Advertising (Bing Ads)
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/bing-ads'
 description: 'Extract Microsoft Advertising (Bing Ads) campaign entities or reports with your account and customer IDs, using report presets or your own columns.'
 redirect_from:

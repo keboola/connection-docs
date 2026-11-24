@@ -1,5 +1,6 @@
 ---
 title: Custom Python
+lastUpdated: 2026-11-19
 description: 'Run your own Python code in Keboola: pick the Python version, write code in the UI or load it from Git, and add dependencies and encrypted parameters.'
 slug: 'components/applications/custom-python'
 ---

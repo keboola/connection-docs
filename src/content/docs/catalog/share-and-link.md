@@ -1,5 +1,6 @@
 ---
 title: Share and link buckets
+lastUpdated: 2026-11-20
 description: 'Share a Storage bucket or selected tables through the Data Catalog, link a bucket another project shares, edit its metadata, and stop sharing it.'
 slug: 'catalog/share-and-link'
 ---

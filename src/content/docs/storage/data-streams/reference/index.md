@@ -1,5 +1,6 @@
 ---
 title: Data Streams reference
+lastUpdated: 2026-11-19
 description: 'Technical reference for Data Streams: sources and sinks in the Stream API, column types, mapping templates, import conditions, payload test, tokens, and limits.'
 slug: 'storage/data-streams/reference'
 sidebar:

@@ -1,5 +1,6 @@
 ---
 title: Data types reference
+lastUpdated: 2026-11-19
 slug: 'storage/tables/data-types/reference'
 sidebar:
   label: Data Types Reference

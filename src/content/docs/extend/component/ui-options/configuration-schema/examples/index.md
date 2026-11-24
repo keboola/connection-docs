@@ -1,5 +1,6 @@
 ---
 title: UI Element Examples
+lastUpdated: 2026-11-18
 slug: 'extend/component/ui-options/configuration-schema/examples'
 description: 'Copy JSON schema snippets for common configuration form fields such as passwords, checkboxes, multi selects, code editors, date pickers and conditional fields.'
 

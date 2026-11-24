@@ -1,5 +1,6 @@
 ---
 title: Google Display & Video 360
+lastUpdated: 2026-11-18
 slug: 'components/extractors/marketing-sales/google-dv360'
 description: 'Run existing Display & Video 360 reports or define new ones in the configuration, through the Google Bid Manager API, and load the results into Storage.'
 ---

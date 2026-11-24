@@ -1,5 +1,6 @@
 ---
 title: Getting Started with Kai
+lastUpdated: 2026-11-18
 slug: 'kai/getting-started'
 description: 'Enable Kai in a project, open the chat, and learn to use it, with example prompts, action approval, plan mode, attachments, slash commands and usage limits.'
 ---

@@ -1,5 +1,6 @@
 ---
 title: Checklist
+lastUpdated: 2026-11-18
 slug: 'extend/publish/checklist'
 description: 'Check a component against this list before you send the publish request, from its name, icon and descriptions to its configuration schema and user errors.'
 ---

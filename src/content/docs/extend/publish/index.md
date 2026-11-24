@@ -1,5 +1,6 @@
 ---
 title: Publish Component
+lastUpdated: 2026-11-18
 slug: 'extend/publish'
 description: 'Request publication of a component in the Developer Portal and meet the review rules for its name, descriptions, icon, configuration schema and error handling.'
 redirect_from:

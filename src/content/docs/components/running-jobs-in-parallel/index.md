@@ -1,5 +1,6 @@
 ---
 title: Running Jobs in Parallel
+lastUpdated: 2026-11-19
 slug: 'components/running-jobs-in-parallel'
 description: 'How the parallelism setting runs configuration rows as concurrent jobs, why fewer may run at once, how waiting jobs are billed, and when it helps.'
 ---

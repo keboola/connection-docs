@@ -1,5 +1,6 @@
 ---
 title: Manually Importing and Exporting Data
+lastUpdated: 2026-11-18
 slug: 'storage/api/import-export'
 description: 'Import a table into Keboola Storage and export one by hand with the Storage API, using curl, the AWS CLI and a Python script, including sliced files.'
 redirect_from:

@@ -1,5 +1,6 @@
 ---
 title: Shoptet Permalink
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/shoptet'
 description: 'Download Shoptet orders, products, customers and stock from permanent CSV export links, add other exports, and set the date period, load type and chunks.'
 redirect_from:

@@ -1,5 +1,6 @@
 ---
 title: Pagination Tutorial
+lastUpdated: 2026-11-18
 slug: 'components/extractors/generic-extractor/tutorial/pagination'
 description: 'Generic Extractor tutorial on pagination: configure the offset method for the MailChimp API and run the extraction over several pages.'
 redirect_from:

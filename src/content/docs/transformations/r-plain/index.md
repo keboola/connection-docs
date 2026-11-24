@@ -1,5 +1,6 @@
 ---
 title: R Transformation
+lastUpdated: 2026-11-18
 slug: 'transformations/r-plain'
 description: 'Write an R transformation that fits the Keboola environment and its limits, load packages, avoid row names in output, and develop it in a workspace or locally.'
 redirect_from:

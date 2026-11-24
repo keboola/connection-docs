@@ -1,5 +1,6 @@
 ---
 title: Google Campaign Manager 360
+lastUpdated: 2026-11-18
 slug: 'components/extractors/marketing-sales/google-cm360'
 description: 'Retrieve Campaign Manager 360 reports from several ad accounts by running existing reports, using one as a template, or defining a report in the UI.'
 ---

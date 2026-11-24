@@ -1,5 +1,6 @@
 ---
 title: Manage tables
+lastUpdated: 2026-11-20
 slug: 'storage/tables/manage'
 sidebar:
   label: Manage Tables

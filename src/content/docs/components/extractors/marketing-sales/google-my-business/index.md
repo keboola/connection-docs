@@ -1,5 +1,6 @@
 ---
 title: Google My Business
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/google-my-business'
 description: 'Collect daily metrics, reviews, media and questions for your businesses on a Google Business profile, choosing endpoints, a date range and the load type.'
 redirect_from:

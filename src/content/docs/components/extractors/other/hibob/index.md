@@ -1,5 +1,6 @@
 ---
 title: HiBob
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/hibob'
 description: 'Retrieve employees, work history, employment history and lifecycle tables from the HiBob HR platform with a service user ID and token.'
 ---

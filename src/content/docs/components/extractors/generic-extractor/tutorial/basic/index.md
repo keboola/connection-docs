@@ -1,5 +1,6 @@
 ---
 title: Basic Configuration
+lastUpdated: 2026-11-18
 slug: 'components/extractors/generic-extractor/tutorial/basic'
 description: 'Generic Extractor tutorial: configure the base URL, basic authentication and the campaigns endpoint of the MailChimp API.'
 redirect_from:

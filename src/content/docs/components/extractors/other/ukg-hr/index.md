@@ -1,5 +1,6 @@
 ---
 title: UKG HR
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/ukg-hr'
 description: Extract requests, employees, employee documents, organizations and users from UKG HR Service Delivery into Storage, with incremental loading.
 search_keywords: [hrsd, hr service delivery, ultipro, people assist]

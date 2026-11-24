@@ -1,5 +1,6 @@
 ---
 title: Enable BigQuery policy tags
+lastUpdated: 2026-11-19
 slug: 'storage/byodb/bigquery-policy-tags/enable'
 description: What you need in Google Cloud to enable BigQuery policy tags on your backend, and how to ask Keboola for it.
 ---

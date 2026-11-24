@@ -1,5 +1,6 @@
 ---
 title: Use CSV files from Storage in Microsoft Excel
+lastUpdated: 2026-11-20
 slug: 'storage/tables/csv-files/excel'
 sidebar:
   label: CSV in Excel

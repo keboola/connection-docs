@@ -1,5 +1,6 @@
 ---
 title: Page Number Scroller
+lastUpdated: 2026-11-18
 slug: 'components/extractors/generic-extractor/configuration/api/pagination/pagenum'
 description: 'Configure the pagenum pagination method in Generic Extractor for APIs that page by page number and page size: limit, limitParam and pageParam.'
 redirect_from:

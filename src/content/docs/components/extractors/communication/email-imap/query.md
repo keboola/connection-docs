@@ -1,5 +1,6 @@
 ---
 title: IMAP Query Syntax
+lastUpdated: 2026-11-18
 slug: 'components/extractors/communication/email-imap/query-syntax'
 description: 'Look up the IMAP search keywords, such as FROM, SUBJECT, SINCE and UNSEEN, and combine them in brackets to filter the emails a configuration downloads.'
 ---

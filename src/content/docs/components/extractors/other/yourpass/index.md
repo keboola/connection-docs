@@ -1,5 +1,6 @@
 ---
 title: YourPass
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/yourpass'
 description: 'Import mobile wallet pass data from YourPass with your username, password and client ID, filtered by project or template ID, in sandbox or production mode.'
 redirect_from:

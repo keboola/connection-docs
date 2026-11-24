@@ -1,5 +1,6 @@
 ---
 title: Pipedrive
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/pipedrive'
 description: 'Import organizations, persons, activities, pipelines and, with the Extended template, deals from Pipedrive with an API token and your company domain.'
 redirect_from:

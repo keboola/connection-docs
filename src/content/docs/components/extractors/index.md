@@ -1,5 +1,6 @@
 ---
 title: Data Source Connectors
+lastUpdated: 2026-11-18
 slug: 'components/extractors'
 description: 'Data source connectors import data from APIs, databases and storage services into Keboola; get the data in first and shape it in Keboola afterwards.'
 redirect_from:

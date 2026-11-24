@@ -1,5 +1,6 @@
 ---
 title: Oracle
+lastUpdated: 2026-11-18
 slug: 'components/extractors/database/oracle'
 description: 'The Oracle connector syncs data from an Oracle database into Keboola with queries, supports timestamp-based CDC and is set up like other database connectors.'
 ---
