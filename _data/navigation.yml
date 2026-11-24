@@ -1068,8 +1068,6 @@ items:
           - url: /external-integrations/n8n/
             title: n8n
 
-      # Not a docs-collection page (src/pages/changelog.astro): `link`, not `url`.
-
   - title: Administer
     collapsed: false
     items:
@@ -1127,5 +1125,6 @@ items:
               - url: /management/telemetry/telemetry-dashboards/
                 title: Telemetry Dashboards
 
+  # Not a docs-collection page (src/pages/changelog.astro): `link`, not `url`.
   - link: /changelog/
     title: Changelog
