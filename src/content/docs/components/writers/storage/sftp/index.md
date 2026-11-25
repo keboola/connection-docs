@@ -1,6 +1,8 @@
 ---
 title: SFTP
+lastUpdated: 2026-11-19
 slug: 'components/writers/storage/sftp'
+description: 'Write Keboola tables and files to an SFTP server with a password or private key, set the remote path, and optionally add a timestamp to file names.'
 redirect_from:
     - /writers/storage/sftp/
 ---
@@ -9,9 +11,11 @@ redirect_from:
 
 This data destination connector allows you to write tables and files to a remote SFTP server.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) 
+[Create a new configuration](/components/configurations/#create-a-configuration) 
 of the SFTP data destination connector. 
 Then provide the target SFTP server URL, port (default is 22), and authentication, either via 
 a username and a password, or with a private key.
@@ -24,11 +28,11 @@ __Save__ the SFTP parameters and continue to the
 
 ![Screenshot - Generating new row configuration](/components/writers/storage/sftp/newrow.png) 
 
-__Add__ the new row and fill in the [tables](/transformations/mappings/#table-input-mapping) 
-and [files](/transformations/mappings/#file-input-mapping) you want to write to the SFTP server.
-Add new tables with the **New Table Input** button. Once added, the tables will show up in the Table Input Mapping.
+__Add__ the new row and fill in the [tables](/transformations/mappings/input/#table-input-mapping) 
+and [files](/transformations/mappings/input/#file-input-mapping) you want to write to the SFTP server.
+Add new tables with the **Add Table Input** button. Once added, the tables will show up in the Table Input Mapping.
 Add new files with the **New File Input** button. You can add files using 
-[file tags](/transformations/mappings/#file-input-mapping).
+[file tags](/transformations/mappings/input/#file-input-mapping).
 
 Next, configure the parameters by adding the remote destination path in the SFTP server. 
 Make sure the remote destination path exists on the server.
@@ -42,5 +46,6 @@ If you want to add [processors](https://developers.keboola.com/extend/component/
 to the files or tables before the input, you can specify these in the processor configuration window.
 
 ![Screenshot - New row configuration](/components/writers/storage/sftp/rowconfig.png) 
+<!-- VERIFY(Nikita): reshoot this screenshot; it still shows the old New Table Input button, now Add Table Input. -->
 
 

@@ -1,5 +1,6 @@
 ---
 title: Jobs
+lastUpdated: 2026-10-13
 slug: 'management/jobs'
 description: Track component jobs in Keboola — the jobs log and search syntax, the job lifecycle and states, waiting and parallelism limits, and how to terminate a running job.
 ---
@@ -20,6 +21,8 @@ All jobs are logged and their tracked history is virtually unlimited. Click on a
 - what exact parameters were used for the job (this might be useful when working with the [API](/extend/jobs/#working-with-the-jobs-api)).
 
 ![Screenshot - Jobs Detail](/management/jobs/jobs-detail.png)
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Searching the jobs log
 

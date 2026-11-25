@@ -1,5 +1,6 @@
 ---
 title: 'Prepare the file configurations'
+lastUpdated: 2026-11-24
 slug: 'getting-started/branches/prepare-files'
 description: "Set up the file-manipulating configurations used by the development branches walkthrough: a Python transformation that writes files to Storage."
 redirect_from:
@@ -42,7 +43,7 @@ Here is the finished transformation.
 ![Screenshot - Python transformation overview](/getting-started/branches/figures/python-prod-overview.png)
 
 ## Run Transformation
-Now run the component. After the job is finished, go to the **Files** tab in **Storage**, where you can see 
+Now run the component. After the [job](/management/jobs/) is finished, go to the **Files** tab in **Storage**, where you can see 
 the file `demoFile.txt` generated.
 
 ![Screenshot - Generated File](/getting-started/branches/figures/07-generated-file.png)

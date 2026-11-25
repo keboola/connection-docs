@@ -1,5 +1,6 @@
 ---
 title: Google BigQuery
+lastUpdated: 2026-11-19
 description: Run queries in Google BigQuery and load the results into Storage tables, or as Avro files with the files variant.
 slug: 'components/extractors/database/bigquery'
 redirect_from:
@@ -48,7 +49,7 @@ and click **Create Bucket**. **Name** the bucket and select its **location** (mu
 Do not set a retention policy on the bucket. The bucket contains only temporary data and no retention is needed.
 
 ## Configure Extraction
-[Create a new configuration](/components/#creating-component-configuration) of the BigQuery connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the BigQuery connector.
 Click **Set Service Account Key**.
 
 ![Screenshot - Set Service Account Key](/components/extractors/database/bigquery/bigquery-1.png)

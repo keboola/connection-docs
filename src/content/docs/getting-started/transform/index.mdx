@@ -1,5 +1,6 @@
 ---
 title: 'Transform data'
+lastUpdated: 2026-11-24
 slug: 'getting-started/transform'
 description: 'Create an SQL transformation that joins a summer of sales, rosters and weather with a live forecast into one table per café and day, and learn how mappings keep Storage safe.'
 redirect_from:
@@ -34,7 +35,7 @@ Jordan's review on #1116, item 3, which asked for one run or a label on the page
 screenshots were reshot on 2026-10-01 in Free Plan project 6375, with the Boolabean names.
 
 CLI / API tab added 2026-09-15 and run live against project 264 with kbagent v0.93.1: `transformation
-create --sql-file --created-table` built a throwaway transformation from the page's own SQL file, `transformation edit --storage @file` added the five inputs (create leaves the input mapping empty —
+create --sql-file --created-table` built a throwaway transformation from the page's own SQL file, `transformation edit --storage @file` (now `--storage-file` in kbagent 1.x) added the five inputs (create leaves the input mapping empty —
 that is why the second command exists), `job run --wait` finished green (job 104346054) and
 `storage table-detail` reported 42 rows. The throwaway transformation and its output bucket were
 deleted the same minute. */}
@@ -63,17 +64,24 @@ tab", nothing else; notes/getting-started/CONSERVATION-REPORT.md, 2026-09-29. */
 
 ![Screenshot - A new BigQuery transformation, Boolabean staffing outlook: empty Table Input Mapping and Table Output Mapping sections with their add buttons, above an empty Queries section offering Create Multiple Queries](/getting-started/transform/mapping.png)
 
-- **Mappings decide what goes in and out.** [Input mapping](/transformations/mappings/#input-mapping)
+- **Mappings decide what goes in and out.** [Input mapping](/transformations/mappings/input/)
   copies in what you list (Kai's builds read it in place);
-  [output mapping](/transformations/mappings/#output-mapping) writes back only what you name, so
+  [output mapping](/transformations/mappings/output/) writes back only what you name, so
   nothing else in Storage changes and Keboola can track lineage.
-- **Table names matter, bucket names do not.** The SQL reads `sales`, `weather_daily`, `staffing`,
+- **Table names matter, [bucket](/storage/buckets/) names do not.** The SQL reads `sales`, `weather_daily`, `staffing`,
   `stores` and `forecast` (not `products`); keep those names in the input mapping, or edit the
   queries to match. Buckets carry configuration IDs, so yours will differ.
 - **Find out which SQL your project speaks:** **Transformations → Create Transformation** lists
   *Snowflake SQL Transformation* or *Google BigQuery Transformation*. New
   [Free Plan](/management/payg-project/) projects default to the [BigQuery backend](/storage/);
   contract customers choose theirs.
+
+:::tip[New to input and output mapping?]
+Input mapping copies the tables you list into a temporary staging area, and your SQL runs on that
+copy. Output mapping writes back to Storage only the tables you name, and the rest is deleted when
+the run ends. Kai's build skips the copy and reads the source tables in place, read-only;
+[Input and Output Mapping](/transformations/mappings/) covers both.
+:::
 
 ## What the SQL has to do
 
@@ -161,7 +169,7 @@ figures, though Kai picks its own column types and writes the weekday out in ful
 since 5 Aug; see notes/getting-started/DECISIONS.md 2026-09-08. */}
 
 The chat links what Kai made, so that is where to find it afterwards: the transformation, and the
-job that ran it.
+[job](/management/jobs/) that ran it.
 
 ![Screenshot - The Kai chat after the transformation prompt: Transformation created, Boolabean staffing outlook, Google BigQuery; Job succeeded; then Kai's answer, 42 rows with Boolabean Zelný trh in Brno the most stretched on two days, three short-handed rows in all, and a closing line that it will confirm once the job has written the table](/getting-started/transform/kai-transform.png)
 
@@ -239,7 +247,7 @@ You should end up with five inputs, listed as **Source Table → Input Table**:
 
 Input mapping has more to it: incremental processing with **Changed in Last**, column filters,
 data filters. None of it is needed here; see
-[input mapping](/transformations/mappings/#input-mapping) when you have a large table to process.
+[input mapping](/transformations/mappings/input/) when you have a large table to process.
 
 **Set the output mapping**
 
@@ -247,8 +255,8 @@ data filters. None of it is needed here; see
 
    Output mapping opens in **Guided Mode**, the standard, copy-based mapping the steps below
    describe. If your project also shows **Direct Mode**, ignore it here: that writes straight to
-   Storage and is a [private beta](/transformations/mappings/#direct-mode-output-mapping).
-   {/* VERIFY(Nikita): transformations/mappings/index.md says Direct Mode is a private beta that
+   Storage and is a [private beta](/transformations/mappings/direct-mode/).
+   {/* VERIFY(Nikita): transformations/mappings/direct-mode/index.md says Direct Mode is a private beta that
    Support has to enable, yet the toggle was visible in a brand-new Free Plan project (6211,
    2026-08-19) with no such request. Either that gate has changed or the mappings page is stale.
    Seen again in Free Plan project 6375 on 2026-10-01, with the UPPERCASE suggestion of step 2,
@@ -486,7 +494,7 @@ FORMAT_DATE('%a') returning Mon/Tue like Snowflake's DAYNAME, and that every col
 (the 2026-08-19 lesson from project 6211: a bare column name that matches a table name resolves to
 the range variable and comparisons then fail with "STRUCT<...> vs STRING"). The 2026-08-25 note
 about `SELECT * EXCEPT (_timestamp)` still applies: _timestamp appears only on CLONE-staged inputs
-(transformations/mappings/index.md), and EXCEPT on an absent column is itself an error, so the
+(transformations/mappings/input.md), and EXCEPT on an absent column is itself an error, so the
 block does not use it. */}
 
 Back on the transformation's page after you save, **Queries** shows your SQL as the one code in
@@ -497,7 +505,7 @@ Back on the transformation's page after you save, **Queries** shows your SQL as 
 </TabItem>
 <TabItem label="CLI / API">
 
-`kbagent` builds the same transformation from a SQL file. Connect it to your project once with
+[`kbagent`](/cli/) builds the same transformation from a SQL file. Connect it to your project once with
 `kbagent project add` (see [the CLI quickstart](/cli/getting-started/)); the examples use
 `docs-demo` as the project alias.
 
@@ -525,11 +533,11 @@ docs-demo --component-id keboola.google-bigquery-transformation` finds it again 
 **Add the input mapping**
 
 `transformation create` leaves the input mapping empty, and the SQL above reads its tables by the
-short names the mapping gives them, so the next command fills it in. `--storage` replaces
-`configuration.storage` wholesale, which means the file has to carry the output mapping too:
+short names the mapping gives them, so the next command fills it in. `--storage-file` replaces
+`configuration.storage` wholesale, which means the file has to carry the output mapping too. Save the JSON below as `storage.json`, then run:
 
 ```bash
-kbagent transformation edit --project docs-demo --config-id <config-id> --change-description "Add the five input tables" --storage @storage.json
+kbagent transformation edit --project docs-demo --config-id <config-id> --change-description "Add the five input tables" --storage-file storage.json
 ```
 
 ```json title="storage.json"
@@ -720,7 +728,7 @@ side, so nothing joins. Compare the two expressions character by character.
 Your input tables were staged by *cloning*, which copies Keboola's internal `_timestamp` column
 along with the data, and that column cannot be written back to Storage. It is not backend-specific
 and it is not a problem with the query. The clean fix is the **`dropTimestampColumn`** option on the
-input mapping; see [the `_timestamp` system column](/transformations/mappings/#_timestamp-system-column).
+input mapping; see [the `_timestamp` system column](/transformations/mappings/input/#_timestamp-system-column).
 
 </details>
 

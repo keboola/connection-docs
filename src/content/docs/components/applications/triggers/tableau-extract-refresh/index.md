@@ -1,11 +1,15 @@
 ---
 title: Tableau Extract Refresh Trigger
+lastUpdated: 2026-11-19
+description: 'Refresh Tableau extracts from a flow with a personal access token: full or incremental refresh, poll mode, continue on error, and a sample configuration.'
 slug: 'components/applications/triggers/tableau-extract-refresh'
 ---
 
 
 
 The Tableau Extract Refresh Trigger application triggers extract refresh tasks on [Tableau](https://www.tableau.com/) data sources and workbooks directly from a Keboola flow. It supports both full and incremental refresh types, and can either wait for all triggered tasks to complete (poll mode) or fire and finish immediately.
+
+<!-- Reference-type page. Type declared in the 2026-11-19 section rework; the content is unchanged and was not re-checked against the component. -->
 
 ## Prerequisites
 
@@ -21,7 +25,7 @@ Tableau allows only one active session per token, so configurations that share t
 
 ## Create New Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **Tableau Extract Refresh Trigger** application and fill in the parameters below.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Tableau Extract Refresh Trigger** application and fill in the parameters below.
 
 ![Tableau Extract Refresh Trigger - Configuration](/components/applications/triggers/tableau-extract-refresh/tableau-config.png)
 

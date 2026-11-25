@@ -1,5 +1,6 @@
 ---
 title: 'Merge to production'
+lastUpdated: 2026-11-24
 slug: 'getting-started/branches/merge-to-production'
 description: 'Merge a development branch back into production, all at once or configuration by configuration, and verify the result.'
 redirect_from:
@@ -52,7 +53,7 @@ If you examine the code block, you will see that the change from the branch is t
 
 ![Screenshot - Merged change](/getting-started/branches/figures/merge-python-in-prod-2.png)
 
-If you go to the **Storage** section, you will see that the branch buckets are still available if you toggle the switch 
+If you go to the **Storage** section, you will see that the branch [buckets](/storage/buckets/) are still available if you toggle the switch 
 to show development branch buckets. However, they cannot be used by the production configurations.
 
 ![Screenshot - Production storage](/getting-started/branches/figures/merge-python-prod-storage.png)

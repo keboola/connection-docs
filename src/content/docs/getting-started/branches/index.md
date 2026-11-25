@@ -1,5 +1,6 @@
 ---
 title: 'Development branches'
+lastUpdated: 2026-11-23
 slug: 'getting-started/branches'
 description: "Change a running project safely: work in a development branch, see the project diff, and merge your changes back into production."
 redirect_from:
@@ -29,7 +30,7 @@ various components that demonstrate the different aspects of branches.
 
 ## From a terminal
 
-[kbagent](/cli/) drives a branch from the shell, with one gap in the middle. The examples name
+[kbagent](/cli/) drives a branch from the shell; the merge on the pages below stays in the UI. The examples name
 the project by the alias `kbagent project add` stored for it, `docs-demo` here. Substitute yours:
 
 ```bash
@@ -38,13 +39,19 @@ kbagent branch create --project docs-demo --name "Try the new transformation"
 
 Creating a branch also activates it, so the commands that follow act inside it rather than in
 production. `kbagent branch list` shows what exists, `kbagent branch use --branch <branch-id>`
-switches to another one, and `kbagent branch reset` puts you back in production. Read-only
-commands are the exception: they report production unless you pass `--branch` explicitly, which
-keeps `storage tables` from quietly answering about a branch you forgot you were in.
+switches to another one, and `kbagent branch reset` puts you back in production. Storage reads
+are the exception: `storage tables` and `storage buckets` report production unless you pass
+`--branch` explicitly, so they don't quietly answer about a branch you forgot you were in.
+`config list` follows the active branch.
 
-The merge is the gap. `kbagent branch merge` hands you the URL of the merge screen rather than
-merging anything, because the diff and the partial-merge choices on the pages below are where the
-decision is made. `kbagent branch delete --branch <branch-id>` removes a branch afterwards.
+The merge on the pages below, with its diff and partial-merge choices, happens in the Keboola UI;
+`kbagent branch delete --branch <branch-id>` removes a branch you kept afterwards. On a project
+with [merge requests](/components/branches/merge-requests/) (Branches 2.0), kbagent can also run the
+review: `kbagent merge-request create --project docs-demo --title "<title>"` from the active
+branch, then, once it has the approvals the project requires,
+`kbagent merge-request merge --project docs-demo --branch <branch-id> --yes`. That merges the whole
+branch into production, deletes it and puts you back in production; partial merges stay in the UI.
+Without Branches 2.0, the `merge-request` commands fail with `FEATURE_NOT_ENABLED`.
 
 :::caution[Public Beta]
 This feature is currently in public beta. Please provide feedback using the feedback button in your project.

@@ -1,5 +1,7 @@
 ---
 title: Migration between stacks
+lastUpdated: 2026-11-18
+description: 'Move a project to another stack with Keboola Support: the migration steps, what is migrated and what is not, and what to set up again in the new project.'
 slug: 'management/project/migration'
 ---
 
@@ -42,7 +44,7 @@ destination project.
 
 ### Important
 - The internal timestamp for all data rows will be set to the date of the migration. So, if you are using incremental loads 
-based on [Changed in last](/transformations/mappings/#input-mapping) in 
+based on [Changed in last](/transformations/mappings/input/) in 
 transformations or data destination connectors, it will fetch all data on the first run.
 - Creation dates and authors of all configurations will be modified.
 - Orchestration IDs will be changed.
