@@ -2,7 +2,7 @@
 // check-redirects.mjs — the dev→help URL contract, as a checkable artifact.
 //
 // WHY
-//   developers.keboola.com retirement (PRDCT-565) needs one consolidated
+//   developers.keboola.com retirement needs one consolidated
 //   "every dev URL → final help URL" table; today that truth is split across
 //   PLACEMENT-MAP.md, MIGRATION-REPORT(.md/-phase2.md) and batch PRs, and the
 //   in-build redirects are meta-refresh pages, not 301 rules. This script makes
@@ -21,7 +21,7 @@
 //   redirect — dev landing/duplicate; 301 straight to the canonical
 //   dies     — site chrome (404.html) — nothing to map, listed for completeness
 //   external — deliberately not on help; 301 goes off-site (e.g. the tool's own repository)
-//   unsure   — PLACEMENT-MAP row awaiting a PRDCT-550 call; final path is the proposal
+//   unsure   — PLACEMENT-MAP row awaiting a placement call; final path is the proposal
 //   alias    — not a page: a Jekyll redirect_from the dev site honours; help resolves it via redirect_from on the canonical page
 
 import fs from 'node:fs';
@@ -57,7 +57,7 @@ function parsePlacementMap() {
     if (tgt && /^https?:\/\//.test(tgt)) status = 'external';
     else if (/\bALIAS\b/.test(dedup)) status = 'alias';
     else if (/NOT MIGRATED/i.test(dedup) && !tgt) status = 'dies';
-    else if (/REDIRECT/i.test(dedup) || section.trim().startsWith('—')) status = 'redirect';
+    else if (/^\s*REDIRECT\b/.test(dedup) || section.trim().startsWith('—')) status = 'redirect';
     else status = 'moved';
     if (/UNSURE/i.test(dedup) || /UNSURE/i.test(section)) status = 'unsure';
     rows.push({ dev, tgt: tgt ?? '', status, conf: conf.trim() });
@@ -112,6 +112,8 @@ function checkBuild() {
     const identity = !r.tgt || r.tgt === r.dev;
     if (identity) {
       if (!inDist(r.dev)) lost.push(`${r.dev} (page missing)`);
+      // a redirect page is an index.html too: an identity row must be the real page, not a stub to elsewhere
+      else if (redirectTargetInDist(r.dev) !== null) lost.push(`${r.dev} (identity row, but dist serves a redirect to ${redirectTargetInDist(r.dev)})`);
       continue;
     }
     // moved / redirect / alias: the edge host-swap forwards the dev path verbatim, so help must serve a

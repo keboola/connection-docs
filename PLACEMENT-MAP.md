@@ -34,8 +34,8 @@ These no longer gate the dev-domain retirement: connection-docs#1120 merged the 
 |---|---|---|---|---|---|---|
 | `404.md` | `/404.html` | — (site chrome, dies with dev site) | `—` | — | high | NOT MIGRATED — help has its own 404 |
 | `automate/index.md` | `/automate/` | — (landing dies) | `/flows/` | — | med | REDIRECT → /flows/ (automation home) — thin landing |
-| `automate/run-job.md` | `/automate/run-job/` | Management › Jobs | `/management/jobs/api/` | how-to | med | REDIRECT — MERGED (2026-09-09, #1120) into Jobs API › Run a job; duplicate of the same call |
-| `automate/run-orchestration.md` | `/automate/run-orchestration/` | Management › Jobs | `/management/jobs/api/` | how-to | med | REDIRECT — MERGED (2026-09-09, #1120) into Jobs API › Run a flow; false one-component claim corrected |
+| `automate/run-job.md` | `/automate/run-job/` | Management › Jobs | `/extend/jobs/` | how-to | med | REDIRECT — MERGED (2026-09-09, #1120) into Jobs API › Run a job; duplicate of the same call |
+| `automate/run-orchestration.md` | `/automate/run-orchestration/` | Management › Jobs | `/extend/jobs/` | how-to | med | REDIRECT — MERGED (2026-09-09, #1120) into Jobs API › Run a flow; false one-component claim corrected |
 | `automate/set-schedule.md` | `/automate/set-schedule/` | Flows | `/flows/schedule-api/` | how-to | med | MOVED + compressed (2026-09-09, #1120): 308 → 105 lines, one worked example, master-token claim → VERIFY |
 | `cli/commands/ci/index.md` | `/cli/commands/ci/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
 | `cli/commands/ci/workflows/index.md` | `/cli/commands/ci/workflows/` | — (not migrated) | `https://github.com/keboola/keboola-as-code` | reference | high | EXTERNAL — David 2026-09-02: not ported into help; the kbagent banner names the repository instead |
@@ -188,7 +188,7 @@ These no longer gate the dev-domain retirement: connection-docs#1120 merged the 
 | `integrate/data-streams/tutorial/index.md` | `/integrate/data-streams/tutorial/` | Storage (weave done: PR #1023) | `/storage/data-streams/tutorial/` | — | high | REDIRECT → /storage/data-streams/* — woven in #1023 |
 | `integrate/database/index.md` | `/integrate/database/` | Components (fold done: PR #1019) | `/components/extractors/database/` | how-to | high | REDIRECT → canonical — SSH-tunnel folded in #1019 |
 | `integrate/index.md` | `/integrate/` | — (landing dies) | `/overview/` | — | med | REDIRECT → /overview/ (or /storage/api/) — thin landing; content already on combined home |
-| `integrate/jobs/index.md` | `/integrate/jobs/` | Management › Jobs | `/management/jobs/api/` | explanation+reference | med | MOVED + curated (2026-09-09, #1120): API how-to and state semantics kept, field dump replaced by the swagger link; absorbs run-job and run-orchestration |
+| `integrate/jobs/index.md` | `/integrate/jobs/` | Management › Jobs | `/extend/jobs/` | explanation+reference | med | MOVED + curated (2026-09-09, #1120): API how-to and state semantics kept, field dump replaced by the swagger link; absorbs run-job and run-orchestration |
 | `integrate/mcp.md` | `/integrate/mcp/` | AI (merged: PR #1001) | `/ai/mcp-server/` | — | high | REDIRECT → /ai/mcp-server/ — MCP canonical on help |
 | `integrate/orchestrator/index.md` | `/integrate/orchestrator/` | — (empty stub) | `/flows/` | — | high | REDIRECT → /flows/ — dev page is an empty comment stub |
 | `integrate/storage/api/configurations.md` | `/integrate/storage/api/configurations/` | Storage › Storage API | `/storage/api/configurations/` | reference | high | — |
@@ -203,8 +203,8 @@ These no longer gate the dev-domain retirement: connection-docs#1120 merged the 
 | `integrate/storage/r-client.md` | `/integrate/storage/r-client/` | Storage › Storage API clients | `/storage/api/clients/r-client/` | reference | high | — |
 | `integrate/variables/index.md` | `/integrate/variables/` | Components › Variables | `/components/variables/api/` | reference | high | help variables page CANONICAL (UI concept) — dev page = keboola.variables API reference sub-page; section settled by owner (Matyáš 2026-08-04, Jordan 2026-08-05): variables are a base component, so Components, not Transformations — executed in #1051 |
 | `integrate/variables/tutorial.md` | `/integrate/variables/tutorial/` | Components › Variables | `/components/variables/api/tutorial/` | reference | high | help variables page CANONICAL (UI concept) — dev page = keboola.variables API reference sub-page; section settled by owner (Matyáš 2026-08-04, Jordan 2026-08-05) — executed in #1051 |
-| `overview/api/index.md` | `/overview/api/` | Keboola Overview | `/overview/apis/` | explanation+index | flag | MOVED (2026-09-14, connection-docs#1120): the page became /overview/apis/ so the redirect lands exactly (Jordan's review); catalogue and endpoint tables dropped (portal + GET /v2/storage are the source of truth) |
-| `overview/encryption.md` | `/overview/encryption/` | Common Interface | `/extend/common-interface/encryption/` | reference | med | MOVED (2026-09-09, #1120) unchanged; config-file/#encryption links here |
+| `overview/api/index.md` | `/overview/api/` | Keboola Overview | `/overview/api/` | explanation+index | flag | MOVED (2026-09-14, connection-docs#1120): the page keeps its /overview/api/ path on help; catalogue and endpoint tables dropped (portal + GET /v2/storage are the source of truth) |
+| `overview/encryption.md` | `/overview/encryption/` | Common Interface | `/extend/encryption/` | reference | med | MOVED (2026-09-09, #1120) unchanged; config-file/#encryption links here |
 | `overview/index.md` | `/overview/` | — (weave done: PR #1022) | `/overview/` | explanation | high | MERGED → /overview/ — overview combined in #1022 |
 | `overview/repositories.md` | `/overview/repositories/` | — (killed: PR #1022) | `/overview/` | — | high | REDIRECT → /overview/ — content folded into overview |
 
@@ -240,7 +240,7 @@ Not pages: URL aliases the dev site serves through `jekyll-redirect-from`. Help 
 | `integrate/data-streams/overview/index.md` | `/integrate/push-data/overview/` | alias | `/storage/data-streams/reference/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
 | `integrate/data-streams/tutorial/index.md` | `/integrate/push-data/tutorial/` | alias | `/storage/data-streams/tutorial/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
 | `integrate/storage/docker-cli-client.md` | `/integrate/storage/php-cli-client/` | alias | `/storage/api/clients/docker-cli/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
-| `integrate/jobs/index.md` | `/overview/jobs/` | alias | `/management/jobs/api/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
+| `integrate/jobs/index.md` | `/overview/jobs/` | alias | `/extend/jobs/` | — | high | ALIAS of the owning page; dev Jekyll redirect_from, help carries the same redirect_from |
 ## Cutover runbook — retiring developers.keboola.com (PRDCT-565)
 
 **End state:** the domain is a permanent 301 redirector, content lives on help, the repository is archived. DNS stays (383 files across the `keboola` org, six components in the registry and the outside web link the domain; a dead DNS would break all of it and pass no search signal).

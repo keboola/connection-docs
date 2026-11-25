@@ -2,8 +2,8 @@
 # dev_path	final_help_path	status
 /404.html		dies
 /automate/	/flows/	redirect
-/automate/run-job/	/management/jobs/api/	redirect
-/automate/run-orchestration/	/management/jobs/api/	redirect
+/automate/run-job/	/extend/jobs/	redirect
+/automate/run-orchestration/	/extend/jobs/	redirect
 /automate/set-schedule/	/flows/schedule-api/	moved
 /cli/commands/ci/	https://github.com/keboola/keboola-as-code	external
 /cli/commands/ci/workflows/	https://github.com/keboola/keboola-as-code	external
@@ -156,7 +156,7 @@
 /integrate/data-streams/tutorial/	/storage/data-streams/tutorial/	redirect
 /integrate/database/	/components/extractors/database/	redirect
 /integrate/	/overview/	redirect
-/integrate/jobs/	/management/jobs/api/	moved
+/integrate/jobs/	/extend/jobs/	moved
 /integrate/mcp/	/ai/mcp-server/	redirect
 /integrate/orchestrator/	/flows/	redirect
 /integrate/storage/api/configurations/	/storage/api/configurations/	moved
@@ -165,14 +165,14 @@
 /integrate/storage/api/	/storage/api/	moved
 /integrate/storage/api/tde-exporter/	/storage/api/tde-exporter/	moved
 /integrate/storage/docker-cli-client/	/storage/api/clients/docker-cli/	moved
-/integrate/storage/	/storage/api/	redirect
+/integrate/storage/	/storage/api/	moved
 /integrate/storage/php-client/	/storage/api/clients/php-client/	moved
 /integrate/storage/python-client/	/storage/api/clients/python-client/	moved
 /integrate/storage/r-client/	/storage/api/clients/r-client/	moved
 /integrate/variables/	/components/variables/api/	moved
 /integrate/variables/tutorial/	/components/variables/api/tutorial/	moved
-/overview/api/	/overview/apis/	redirect
-/overview/encryption/	/extend/common-interface/encryption/	moved
+/overview/api/	/overview/api/	moved
+/overview/encryption/	/extend/encryption/	moved
 /overview/	/overview/	redirect
 /overview/repositories/	/overview/	redirect
 /extend/common-interface/sandbox/	/extend/component/running/	alias
@@ -200,4 +200,4 @@
 /integrate/push-data/overview/	/storage/data-streams/reference/	alias
 /integrate/push-data/tutorial/	/storage/data-streams/tutorial/	alias
 /integrate/storage/php-cli-client/	/storage/api/clients/docker-cli/	alias
-/overview/jobs/	/management/jobs/api/	alias
+/overview/jobs/	/extend/jobs/	alias
