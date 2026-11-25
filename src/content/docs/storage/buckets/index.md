@@ -1,6 +1,6 @@
 ---
 title: Buckets
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-26
 slug: 'storage/buckets'
 description: Create a Storage bucket, pick its in or out stage, and open a bucket's details.
 ---
@@ -19,7 +19,7 @@ For information on how to load data into Storage, see the corresponding part of 
 
 To create a bucket, click **Create bucket** on the **Storage** page, enter a name, choose the stage, and click **Create bucket** in the dialog:
 
-<video autoplay loop muted playsinline poster="/storage/buckets/create-bucket-poster.png" aria-label="The Storage page with the Create bucket button marked, then the Create Bucket dialog with the name my-tutorial-bucket, stage IN, and its Create bucket button marked (an example project: the bucket names, counts and dates vary)">
+<video autoplay loop muted playsinline controls poster="/storage/buckets/create-bucket-poster.png" aria-label="The Storage page with the Create bucket button marked, then the Create Bucket dialog with the name my-tutorial-bucket, stage IN, and its Create bucket button marked (an example project: the bucket names, counts and dates vary)">
   <source src="/storage/buckets/create-bucket.mp4" type="video/mp4" />
 </video>
 
