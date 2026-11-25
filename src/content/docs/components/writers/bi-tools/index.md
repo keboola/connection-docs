@@ -1,6 +1,6 @@
 ---
 title: Business Intelligence
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-12
 slug: 'components/writers/bi-tools'
 description: 'Send Keboola tables to GoodData, Looker, Tableau or ThoughtSpot, or give BI tools read-only access through Data Gateway or a Snowflake or BigQuery workspace.'
 redirect_from:
@@ -21,4 +21,4 @@ allow you to push data to various business intelligence platforms:
 
 A number of BI and Analytics tools are also accessible via the [Data Gateway](/components/applications/data-gateway/) component, which is providing read only access to the data to third-party applications supporting Snowflake as a data source.
 
-Users with access to Snowflake or BigQuery [workspaces](/workspace/) can utilize [read-only access to storage](/transformations/mappings/#read-only-input-mapping) to query the data in Storage directly. Or load data to created workspace by using [Snowflake](/components/writers/database/snowflake/) or [BigQuery](/components/writers/database/bigquery/) data destination connectors.
+Users with access to Snowflake or BigQuery [workspaces](/workspace/) can utilize [read-only access to storage](/transformations/mappings/input/#read-only-input-mapping) to query the data in Storage directly. Or load data to created workspace by using [Snowflake](/components/writers/database/snowflake/) or [BigQuery](/components/writers/database/bigquery/) data destination connectors.
