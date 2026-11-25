@@ -20,11 +20,18 @@ On an incremental load with a primary key, Keboola deduplicates the new rows aga
 table, this step reads the whole destination table even when the new rows touch only a few days. With partition-aware
 import:
 
-1. Before deduplication, Keboola reads the distinct values of the destination's partitioning column from the loaded data.
+1. Before deduplication, Keboola reads from the loaded data which destination partitions the values of the
+   partitioning column fall into. For integer-range partitioning, these are the ranges the loaded IDs fall into, not
+   the individual IDs.
 2. It adds a filter on that column to the deduplication statement, for example
    ``AND dest.`date` IN ('2026-10-12', '2026-10-13')``. For `DATETIME` and `TIMESTAMP` columns, the filter is a time
-   range for each partition (in UTC for `TIMESTAMP`).
+   range for each partition (in UTC for `TIMESTAMP`); for integer-range partitioning, it is an integer range for each
+   partition.
 3. BigQuery prunes all other partitions of the destination table.
+
+Loaded IDs outside the table's partition ranges (below the range start, or at or above the range end) do not switch
+the option off. BigQuery keeps such rows in its `__UNPARTITIONED__` partition, so the import then reads that partition
+too, in addition to the partitions of the in-range IDs.
 
 The data loaded into the table is the same as without the option; only the amount of data BigQuery reads changes.
 
@@ -40,15 +47,17 @@ runs as before, without an error.
 - **Incremental** is enabled and a **Primary key** is set.
 - The destination table is partitioned by a column:
   - time-unit column partitioning on a `DATE`, `DATETIME`, or `TIMESTAMP` column (`HOUR`, `DAY`, `MONTH`, or `YEAR`), or
-  - integer-range partitioning on an `INT64` column.
+  - integer-range partitioning on an `INT64` column, with a range whose width (end minus start) fits in `INT64`, that
+    is, at most 9,223,372,036,854,775,807. Only a range with a negative start can be wider. On a wider range, the
+    deduplication (`MERGE`) runs without the filter and reads the whole destination table.
 
   Ingestion-time partitioning is not supported.
 - The partitioning column is **part of the primary key**.
-- The loaded data contains at most 4,000 distinct values of the partitioning column. For time-unit partitioning, the
-  values are counted per partition unit (e.g., per day for `DAY` partitioning); for integer-range partitioning, every
-  distinct integer counts, even when several of them fall into the same range partition. Above the limit, the
-  deduplication runs without the filter. This does not lift BigQuery's own limit on the number of partitions a single
-  job can modify.
+- The loaded data falls into at most 4,000 destination partitions. The limit counts partitions, not distinct values:
+  for time-unit partitioning, one per partition unit (e.g., per day for `DAY` partitioning); for integer-range
+  partitioning, one per range, however many IDs fall into it. Above the limit, the deduplication runs without the
+  filter and reads the whole destination table; the loaded data is the same. This does not lift BigQuery's own limit
+  on the number of partitions a single job can modify.
 
 ## Set it up
 
