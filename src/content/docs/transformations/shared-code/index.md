@@ -1,6 +1,6 @@
 ---
 title: Shared Code
-lastUpdated: 2026-08-08
+lastUpdated: 2026-11-12
 slug: 'transformations/shared-code'
 description: Share pieces of transformation code between otherwise unrelated transformations, in the UI and through the API.
 ---
@@ -89,7 +89,7 @@ CREATE OR REPLACE TABLE "result" AS
 	SELECT *, "second" * 42 AS "larger_second" FROM "source";
 ```
 
-Because of [Clone mapping](/transformations/mappings/#loading-type-snowflake-and-bigquery), you have 
+Because of [Clone mapping](/transformations/mappings/input/#loading-type-snowflake-and-bigquery), you have 
 to drop the `_timestamp` column from the source by executing this query:
 
 ```sql
@@ -140,7 +140,7 @@ The transformation will detect that the value for the `source` variable is not d
 
 ![Screenshot - Shared Code in Transformation](/transformations/shared-code/shared-code-variables-2.png)
 
-Set the `source` value to the [destination name](/transformations/mappings/#table-input-mapping) of the 
+Set the `source` value to the [destination name](/transformations/mappings/input/#table-input-mapping) of the 
 table in the *Table Input Mapping* (`source-table` in this case):
 
 ![Screenshot - Shared Code with set Variables](/transformations/shared-code/shared-code-variables-3.png)

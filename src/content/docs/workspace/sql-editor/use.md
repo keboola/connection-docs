@@ -214,10 +214,10 @@ Once temporary working tables are created, you must map them to a destination in
 **Goal:** a Storage table the workspace writes to directly, with no copy step.
 
 Direct Mode output mapping is a private beta: [Keboola Support](/management/support/) must enable it for your project,
-as the [mappings page](/transformations/mappings/#direct-mode-output-mapping) says.
+as the [Direct Mode page](/transformations/mappings/direct-mode/) says.
 
 On Snowflake and BigQuery workspaces, you can skip the copy step altogether and let the workspace write straight
-into a Storage table using [Direct Mode output mapping](/transformations/mappings/#direct-mode-output-mapping).
+into a Storage table using [Direct Mode output mapping](/transformations/mappings/direct-mode/).
 
 1.  In the **Working Tables** section, click the three dots next to a working table and select
     **Create writable table**.
@@ -235,7 +235,7 @@ the mapping, which also revokes the workspace's write access.
 :::caution
 In Direct Mode, you are responsible for deduplication, data types, and error handling — Keboola performs no
 validation on direct writes. Read the
-[good and bad practices](/transformations/mappings/#good-practices) before using it in production.
+[good and bad practices](/transformations/mappings/direct-mode/set-up/#good-practices) before using it in production.
 :::
 
 ## Save queries as a transformation
