@@ -1,5 +1,6 @@
 ---
 title: Dropbox
+lastUpdated: 2026-11-19
 slug: 'components/writers/storage/dropbox'
 description: 'Write Keboola tables and files to an authorized Dropbox account, into the Apps/Keboola Connection Writer V2 folder or a subfolder you set.'
 redirect_from:
@@ -18,11 +19,12 @@ Then click **Authorize Account** to [authorize the configuration](/components/au
 
 You may specify Storage [tables](/storage/tables/) or [files](/storage/files/) to be written to the target Dropbox account. 
 
-- To specify tables, click the **New Table Input** button, and select the table you want to send to Dropbox. 
+- To specify tables, click the **Add Table Input** button, and select the table you want to send to Dropbox. 
 *Filename* is the name of the destination file, the directory `/data/in/tables/` is ignored.
 - To specify files, click **New File Input** and specify a file tag or [Elastic Query string](https://www.elastic.co/guide/en/elasticsearch/reference/6.6/query-dsl-query-string-query.html#query-string-syntax).
 
 ![Screenshot - Specify input](/components/writers/storage/dropbox/dropbox-1.png)
+<!-- VERIFY(Nikita): reshoot this screenshot; it still shows the old New Table Input button, now Add Table Input. Mask the colleague's e-mail and name in the Versions panel in the new shot. -->
 
 The written files will be available in the **Apps/Keboola Connection Writer V2** folder in Dropbox. You can optionally specify 
 an additional subfolder in this folder in the `Destination folder` setting. In the above screenshot, the files would be saved 

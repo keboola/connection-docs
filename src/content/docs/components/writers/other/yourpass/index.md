@@ -1,5 +1,6 @@
 ---
 title: YourPass
+lastUpdated: 2026-11-19
 slug: 'components/writers/other/yourpass'
 description: 'Create, update or delete YourPass mobile wallet passes from a Keboola table through the YourPass API, using your account credentials and the required columns.'
 redirect_from:
@@ -51,11 +52,12 @@ For each action there are specific requirements for the input tables, these are 
 Once all configurations are set, click **save** to save the configuration.
 
 ![Screenshot - Input mapping](/components/writers/other/yourpass/row.png)
+<!-- VERIFY(Nikita): reshoot this screenshot; it still shows the old New Table Input button, now Add Table Input. -->
 
 
 ### Input table mapping
 
-Click **New Table Input** to add one table to the [Input Mapping](/transformations/mappings/).
+Click **Add Table Input** to add one table to the [Input Mapping](/transformations/mappings/).
 
 ![Screenshot - Input mapping](/components/writers/other/yourpass/inputmapping.png)
 

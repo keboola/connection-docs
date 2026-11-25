@@ -1,5 +1,6 @@
 ---
 title: FTP 
+lastUpdated: 2026-11-19
 slug: 'components/extractors/storage/ftp'
 description: 'Load CSV files from FTP, FTPS or SFTP servers into Keboola tables with a password or private key, and pick files with a path or glob pattern.'
 redirect_from:

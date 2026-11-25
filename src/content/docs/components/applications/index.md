@@ -1,5 +1,6 @@
 ---
 title: Applications
+lastUpdated: 2026-11-20
 description: 'What Keboola applications are, how they differ from transformations, and the ones documented here: Custom Python, Data Gateway, Generative AI and the triggers.'
 slug: 'components/applications'
 redirect_from:

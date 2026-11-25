@@ -1,5 +1,6 @@
 ---
 title: How kbagent works
+lastUpdated: 2026-11-23
 slug: 'cli/concepts'
 sidebar:
   label: How It Works

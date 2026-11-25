@@ -1,5 +1,6 @@
 ---
 title: Kai Best Practices
+lastUpdated: 2026-11-18
 description: 'Tips for working with Kai: give business context, plan before building, iterate, be specific, use dev branches, manage context, and keep security in mind.'
 slug: 'kai/best-practices'
 ---

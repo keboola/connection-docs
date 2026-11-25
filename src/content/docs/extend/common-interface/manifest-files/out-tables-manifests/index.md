@@ -1,5 +1,6 @@
 ---
 title: /data/out/tables manifests
+lastUpdated: 2026-11-20
 description: 'The optional fields of a /data/out/tables manifest, such as destination and columns, which control how your component''s table loads to Storage.'
 slug: 'extend/common-interface/manifest-files/out-tables-manifests'
 ---
@@ -98,4 +99,4 @@ the import fail with an error (`storage.tables.importMethodNotSupported`); `auto
 
 The value in the manifest is used when the end-user output mapping has no `import_method` or has `auto`. A
 `single_statement` or `multi_statement` in the output mapping takes precedence over the manifest. See
-[Import method](/transformations/mappings/#import-method-snowflake) for how the methods differ.
+[Import method](/transformations/mappings/output/#import-method-snowflake) for how the methods differ.

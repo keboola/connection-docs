@@ -10,7 +10,7 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { stripMdx, stripSearchMarkup, twinBody } from '../src/integrations/page-markdown.mjs';
+import { buildLlmsFull, buildLlmsTxt, stripMdx, stripSearchMarkup, twinBody } from '../src/integrations/page-markdown.mjs';
 import { fenceTracker, stripHtmlComments } from '../src/integrations/strip-comments.mjs';
 
 const prereqs = (inner: string) =>
@@ -177,4 +177,63 @@ test('a CRLF page keeps its code samples as written', () => {
   assert.equal(stripHtmlComments(comment), comment);
   const span = ['~~~html\r', '<span data-pagefind-weight="5">Title</span>\r', '~~~\r'].join('\n');
   assert.equal(stripSearchMarkup(span), span);
+});
+
+test('llms.txt links each page to its markdown twin', () => {
+  const out = buildLlmsTxt('https://help.keboola.com', 'Docs', [
+    { slug: '', title: 'Home', description: 'Start here.' },
+    { slug: 'storage', title: 'Storage', description: 'Tables and files.' },
+    { slug: 'storage/tables', title: 'Tables', description: '' },
+  ]);
+  assert.match(out, /- \[Home\]\(https:\/\/help\.keboola\.com\/index\.md\): Start here\./);
+  assert.match(out, /- \[Storage\]\(https:\/\/help\.keboola\.com\/storage\/index\.md\): Tables and files\./);
+  assert.match(out, /- \[Tables\]\(https:\/\/help\.keboola\.com\/storage\/tables\/index\.md\)$/m);
+});
+
+test('llms.txt keeps the HTML link for a page whose twin was not written', () => {
+  const out = buildLlmsTxt('https://help.keboola.com', 'Docs', [
+    { slug: 'a', title: 'A', description: '', twin: false },
+    { slug: 'b', title: 'B', description: 'About B.', twin: false },
+  ]);
+  // llmstxt.org shape: `- [name](url): notes`, with the marker inside the notes
+  assert.match(out, /^- \[A\]\(https:\/\/help\.keboola\.com\/a\/\): HTML page, no Markdown copy\.$/m);
+  assert.match(out, /^- \[B\]\(https:\/\/help\.keboola\.com\/b\/\): HTML page, no Markdown copy\. About B\.$/m);
+});
+
+test('llms-full.txt holds every page, and each section gets its own file', () => {
+  const files = buildLlmsFull('https://help.keboola.com', 'Docs', [
+    { slug: 'storage/tables', title: 'Tables', body: '## Create\n\nText.' },
+    { slug: '', title: 'Home', body: 'Hi.' },
+    { slug: 'storage', title: 'Storage', body: 'About storage.' },
+    { slug: 'flows', title: 'Flows', body: 'About flows.' },
+  ]);
+  assert.deepEqual([...files.keys()].sort(), ['flows/llms-full.txt', 'llms-full.txt', 'storage/llms-full.txt']);
+  const all = files.get('llms-full.txt')!;
+  // slug order, each page with its title and URL
+  assert.ok(all.indexOf('# Home') < all.indexOf('# Flows') && all.indexOf('# Flows') < all.indexOf('# Storage\n'));
+  assert.match(all, /# Tables\n\nURL: https:\/\/help\.keboola\.com\/storage\/tables\/\n\n## Create/);
+  const storage = files.get('storage/llms-full.txt')!;
+  assert.match(storage, /^# Docs: Storage\n/);
+  assert.match(storage, /> 2 pages in one file/);
+  assert.doesNotMatch(storage, /About flows|# Home/);
+});
+
+test('llms.txt lists the section files when they are written', () => {
+  const pages = [{ slug: 'storage', title: 'Storage', description: '' }];
+  const out = buildLlmsTxt('https://help.keboola.com', 'Docs', pages, { fullText: true });
+  assert.match(out, /- \[All pages\]\(https:\/\/help\.keboola\.com\/llms-full\.txt\)/);
+  assert.match(out, /- \[Storage\]\(https:\/\/help\.keboola\.com\/storage\/llms-full\.txt\)/);
+  assert.doesNotMatch(buildLlmsTxt('https://help.keboola.com', 'Docs', pages), /llms-full/);
+});
+
+test('llms.txt lists no section file for a section with no twin written', () => {
+  const pages = [
+    { slug: 'storage', title: 'Storage', description: '' },
+    { slug: 'faq', title: 'FAQ', description: '', twin: false },
+  ];
+  const out = buildLlmsTxt('https://help.keboola.com', 'Docs', pages, { fullText: true });
+  assert.match(out, /- \[Storage\]\(https:\/\/help\.keboola\.com\/storage\/llms-full\.txt\)/);
+  assert.doesNotMatch(out, /faq\/llms-full\.txt/);
+  // the page itself is still listed, as HTML
+  assert.match(out, /- \[FAQ\]\(https:\/\/help\.keboola\.com\/faq\/\)/);
 });

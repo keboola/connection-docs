@@ -1,5 +1,6 @@
 ---
 title: Tables in Storage
+lastUpdated: 2026-11-19
 slug: 'storage/tables'
 sidebar:
   label: Tables
@@ -32,6 +33,8 @@ table. In that case, the columns from the imported table will be added to the ex
 Table and column names can contain only alphanumeric characters. Dash and
 underscores are allowed. Column names must not start or end with dash `-` or underscore
 character `_`.
+<!-- VERIFY(Storage team): are dashes allowed in column names, and how long may a column name be? An earlier review reported that dashes are rejected in column names and that column names are capped at 64 characters (table names at 96); neither could be confirmed from public sources, so the text above is unchanged. -->
+
 
 When you select a table from any bucket in Storage, detailed information about the table will be displayed
 at the top of the screen. This is what we refer to as the **table detail** throughout our documentation.
@@ -45,7 +48,7 @@ An alias does not contain any actual data; it is simply a link to some already e
 Therefore, an alias cannot be written to, and its size does not count toward your project quota.
 
 Alias tables are automatically materialized as physical database VIEWs. This makes them fully accessible in workspaces and
-transformations via [read-only storage access](/transformations/mappings/#read-only-input-mapping) — no input mapping configuration is required.
+transformations via [read-only storage access](/transformations/mappings/input/#read-only-input-mapping) — no input mapping configuration is required.
 Filtered aliases are also supported; the filter condition is enforced as a `WHERE` clause in the VIEW.
 In [linked buckets](/catalog/), alias VIEWs from the source project are automatically mirrored to the destination project,
 making them immediately queryable there as well.

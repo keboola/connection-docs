@@ -1,10 +1,11 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSync } from 'node:fs';
-import { join, extname } from 'node:path';
+import { join, extname, dirname, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { sharedText, tabsText, linksToText, LABELS as PREREQ_LABELS } from '../components/prereqs.mjs';
 import { stripHtmlComments, collapseBlankLines, fenceTracker, fenceOpener, closesFence } from './strip-comments.mjs';
 import { processAgentBlocks, findAgentLeaks } from './agent-only.mjs';
+import { cleanTwin } from './twin-cleanup.mjs';
 import { pathIntroText } from '../components/getting-started/pathintro.mjs';
 import { courseListText, courseBarText } from '../components/getting-started/course.mjs';
 import { sampleText } from '../components/getting-started/sample.mjs';
@@ -439,9 +440,10 @@ export function twinBody(content, isMdx, file = 'page') {
  * twinBody plus the text of the page's agent blocks, from a single parse, so the
  * build can check that none of them reached the HTML without parsing twice.
  */
-export function twinParts(content, isMdx, file = 'page') {
+export function twinParts(content, isMdx, file = 'page', { pageUrl, assetBase } = {}) {
   const { markdown, texts } = processAgentBlocks(twinSource(content, isMdx), file);
-  return { body: stripSearchMarkup(markdown).trim(), agentTexts: texts };
+  // asides as quotes, browser-only markup out, and (with the page's URL) absolute links
+  return { body: cleanTwin(stripSearchMarkup(markdown), pageUrl, assetBase ?? pageUrl).trim(), agentTexts: texts };
 }
 
 /**
@@ -450,10 +452,21 @@ export function twinParts(content, isMdx, file = 'page') {
  * Grouped by top-level slug segment, and each group is titled with that
  * section's own root page ("storage" -> "Storage") rather than a slug
  * prettified by hand, so the index and the nav cannot drift apart.
+ *
+ * Each entry links to the page's markdown twin, not its HTML: an agent that
+ * follows a link gets the text without the site's navigation, scripts and
+ * styling (the llmstxt.org convention, and what Stripe and dbt do). A page
+ * whose twin was not written (`twin: false`, a slug collision) keeps its HTML
+ * link, because its index.md holds another page's text.
+ *
+ * Exported for scripts/page-markdown.test.ts.
  */
-function buildLlmsTxt(site, siteTitle, pages) {
+export function buildLlmsTxt(site, siteTitle, pages, { fullText = false } = {}) {
   const byTitle = new Map(pages.map((p) => [p.slug, p.title]));
-  const url = (slug) => new URL(slug ? `/${slug}/` : '/', site).href;
+  const url = (page) => {
+    const path = page.slug ? `/${page.slug}/` : '/';
+    return new URL(page.twin === false ? path : `${path}index.md`, site).href;
+  };
 
   const sections = new Map();
   for (const page of pages) {
@@ -469,10 +482,26 @@ function buildLlmsTxt(site, siteTitle, pages) {
     '> transformations, flows, apps, AI features, and extending the platform with',
     '> your own components.',
     '',
-    'Every page below is also available as plain markdown by appending `index.md` to its',
-    'URL — for example `https://help.keboola.com/storage/index.md`.',
+    'Each link below opens the plain-markdown copy of a page. The same page as HTML is at',
+    'that URL without `index.md`: `https://help.keboola.com/storage/index.md` is the',
+    'markdown of `https://help.keboola.com/storage/`.',
     '',
   ];
+
+  // One file per section (buildLlmsFull), listed up front so an agent that
+  // wants a whole area does not fetch it page by page.
+  // buildLlmsFull gets the written twins only, so a section whose pages all lack
+  // a twin has no file: list just the sections that have one.
+  if (fullText) {
+    lines.push('## Whole sections in one file', '');
+    lines.push(`- [All pages](${new URL('/llms-full.txt', site).href}): every Markdown page below, in one file`);
+    const withTwin = new Set(pages.filter((p) => p.twin !== false).map((p) => p.slug.split('/')[0]));
+    for (const key of [...sections.keys()].filter((k) => k && withTwin.has(k)).sort()) {
+      const label = String(byTitle.get(key) ?? key).replace(/([[\]])/g, '\\$1');
+      lines.push(`- [${label}](${new URL(`/${key}/llms-full.txt`, site).href})`);
+    }
+    lines.push('');
+  }
 
   const root = sections.get('') ?? [];
   sections.delete('');
@@ -502,8 +531,60 @@ function buildLlmsTxt(site, siteTitle, pages) {
 function entry(page, url) {
   const label = String(page.title).replace(/([[\]])/g, '\\$1');
   const description = page.description ? String(page.description).replace(/\s+/g, ' ').trim() : '';
-  const suffix = description ? `: ${description}` : '';
-  return `- [${label}](${url(page.slug)})${suffix}`;
+  // The preamble promises Markdown behind every link; a page without a twin says it links HTML.
+  // The marker goes into the notes, so the entry keeps the llmstxt.org shape `- [name](url): notes`.
+  const html = page.twin === false ? 'HTML page, no Markdown copy.' : '';
+  const notes = [html, description].filter(Boolean).join(' ');
+  const suffix = notes ? `: ${notes}` : '';
+  return `- [${label}](${url(page)})${suffix}`;
+}
+
+/**
+ * The llms-full.txt files: every twin in one file, so an agent can take a whole
+ * section, or the whole site, in a single fetch instead of one per page (the
+ * pattern Cloudflare, Supabase and dbt publish).
+ *
+ * `/llms-full.txt` holds every page; `/<section>/llms-full.txt` holds the pages
+ * under one top-level slug, the same groups llms.txt uses. Each page starts with
+ * its `# Title` and a `URL:` line naming its HTML page, the pair a reader can
+ * split the file on (a `#` line alone could be a comment in a code sample).
+ * Pages come in slug order, as in llms.txt.
+ *
+ * Returns a map of output path (relative to the build root) to file content.
+ * Exported for scripts/page-markdown.test.ts.
+ */
+export function buildLlmsFull(site, siteTitle, pages) {
+  const sorted = [...pages].sort((a, b) => a.slug.localeCompare(b.slug));
+  const byTitle = new Map(sorted.map((p) => [p.slug, p.title]));
+  const block = (p) => [
+    `# ${p.title}`,
+    '',
+    `URL: ${new URL(p.slug ? `/${p.slug}/` : '/', site).href}`,
+    '',
+    p.body,
+    '',
+  ].join('\n');
+  const file = (heading, group) => [
+    `# ${heading}`,
+    '',
+    `> ${group.length} pages in one file. Each page starts with its title as a \`#\` heading, followed by its URL.`,
+    '',
+    ...group.map(block),
+  ].join('\n');
+
+  const files = new Map();
+  files.set('llms-full.txt', file(`${siteTitle}: all pages`, sorted));
+  const sections = new Map();
+  for (const p of sorted) {
+    const key = p.slug.split('/')[0];
+    if (!key) continue;
+    if (!sections.has(key)) sections.set(key, []);
+    sections.get(key).push(p);
+  }
+  for (const [key, group] of sections) {
+    files.set(`${key}/llms-full.txt`, file(`${siteTitle}: ${byTitle.get(key) ?? key}`, group));
+  }
+  return files;
 }
 
 export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' } = {}) {
@@ -531,6 +612,7 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
         let skipped = 0;
         const index = [];
         const agentPages = []; // pages with :::agent blocks, for the leak check below
+        const full = []; // each written twin, for the llms-full.txt files
 
         for (const file of findMarkdownFiles(contentDir)) {
           const content = readFileSync(file, 'utf-8');
@@ -555,6 +637,7 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
 
           // Never clobber an existing file (e.g. two sources mapping to one slug).
           if (existsSync(mdFile)) {
+            index[index.length - 1].twin = false;
             logger.warn(`Skipping ${fm.slug || '/'} (index.md already exists)`);
             skipped++;
             continue;
@@ -563,9 +646,14 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
           const isMdx = extname(file) === '.mdx';
           // :::agent blocks, dropped from the HTML, become a labelled quote here (agent-only.mjs);
           // their text is kept for the leak check after the loop. One parse serves both.
-          const { body, agentTexts } = twinParts(content, isMdx, file);
+          const pageUrl = site ? new URL(fm.slug ? `/${fm.slug}/` : '/', site).href : undefined;
+          // relative files (`./shot.png`) sit next to the source file, not under the page's slug
+          const fileDir = relative(contentDir, dirname(file)).split(sep).join('/');
+          const assetBase = site ? new URL(fileDir ? `/${fileDir}/` : '/', site).href : undefined;
+          const { body, agentTexts } = twinParts(content, isMdx, file, { pageUrl, assetBase });
           if (agentTexts.length) agentPages.push({ slug: fm.slug, texts: agentTexts });
           const md = (fm.title ? `# ${fm.title}\n\n` : '') + body + '\n';
+          full.push({ slug: fm.slug, title: fm.title ?? fm.slug, body });
 
           mkdirSync(mdDir, { recursive: true });
           writeFileSync(mdFile, md);
@@ -583,8 +671,14 @@ export default function pageMarkdown({ siteTitle = 'Keboola User Documentation' 
 
         if (site) {
           index.sort((a, b) => a.slug.localeCompare(b.slug));
-          writeFileSync(join(outDir, 'llms.txt'), buildLlmsTxt(site, siteTitle, index));
+          writeFileSync(join(outDir, 'llms.txt'), buildLlmsTxt(site, siteTitle, index, { fullText: true }));
           logger.info(`Wrote llms.txt indexing ${index.length} pages`);
+          const fullFiles = buildLlmsFull(site, siteTitle, full);
+          for (const [rel, text] of fullFiles) {
+            mkdirSync(join(outDir, rel, '..'), { recursive: true });
+            writeFileSync(join(outDir, rel), text);
+          }
+          logger.info(`Wrote ${fullFiles.size} llms-full.txt files (${full.length} pages)`);
         } else {
           logger.warn('No `site` configured — skipping llms.txt');
         }

@@ -1,5 +1,6 @@
 ---
 title: 'Work with files in a branch'
+lastUpdated: 2026-11-24
 slug: 'getting-started/branches/files-in-branch'
 description: 'See how File Storage behaves inside a development branch and how branch-created files are tagged and kept apart from production files.'
 redirect_from:

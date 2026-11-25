@@ -1,5 +1,6 @@
 ---
 title: Troubleshooting kbagent
+lastUpdated: 2026-11-23
 slug: 'cli/troubleshooting'
 sidebar:
   label: Troubleshooting

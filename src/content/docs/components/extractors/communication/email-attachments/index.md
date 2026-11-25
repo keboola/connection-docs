@@ -1,5 +1,6 @@
 ---
 title: Email Attachments
+lastUpdated: 2026-11-19
 slug: 'components/extractors/communication/email-attachments'
 description: 'Import CSV files sent as email attachments to a generated address into Keboola tables, one attachment per email, on AWS multitenant stacks only.'
 redirect_from:

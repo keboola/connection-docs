@@ -1,5 +1,6 @@
 ---
 title: Oracle Transformation
+lastUpdated: 2026-11-18
 description: 'Set up an Oracle transformation: an example SQL script that creates a user and schema with read and write privileges for Keboola.'
 slug: 'transformations/oracle'
 ---

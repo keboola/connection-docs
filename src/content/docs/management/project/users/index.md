@@ -1,5 +1,6 @@
 ---
 title: Project Users
+lastUpdated: 2026-11-19
 description: Invite users to a project, give them a role, change or remove their access, and set up sign-in with Google or multi-factor authentication.
 slug: 'management/project/users'
 redirect_from:

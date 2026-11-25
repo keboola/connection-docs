@@ -1,5 +1,6 @@
 ---
 title: Facebook Pages
+lastUpdated: 2026-11-19
 slug: 'components/extractors/social/facebook'
 description: 'Extract your Facebook Pages feed, comments, likes and Insights through the Graph API with queries that set the endpoint, fields and date range.'
 redirect_from:

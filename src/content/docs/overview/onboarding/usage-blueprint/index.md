@@ -1,5 +1,6 @@
 ---
 title: 'Keboola Platform Usage Blueprint'
+lastUpdated: 2026-11-12
 slug: 'overview/onboarding/usage-blueprint'
 description: 'Capture who uses Keboola for what, which data flows where, and how success is measured, in the document that anchors your platform rollout.'
 redirect_from:

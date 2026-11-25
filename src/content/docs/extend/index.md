@@ -1,5 +1,6 @@
 ---
 title: Extending Keboola
+lastUpdated: 2026-11-18
 description: 'Extend Keboola with your own code: a component or a Generic Extractor connector, and what that offers customers, external companies, and data scientists.'
 slug: 'extend'
 ---

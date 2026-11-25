@@ -1,5 +1,6 @@
 ---
 title: OneDrive Excel Sheets
+lastUpdated: 2026-11-19
 slug: 'components/extractors/storage/onedrive-excel-sheets'
 description: 'Import Excel worksheets from OneDrive, Office 365 or SharePoint into Keboola tables by picking the workbook and worksheet with the file picker.'
 redirect_from:

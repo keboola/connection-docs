@@ -1,5 +1,6 @@
 ---
 title: K2
+lastUpdated: 2026-11-19
 slug: 'components/extractors/erp/k2'
 description: 'Fetch K2 ERP data objects through the K2 API with a username, password and optional SSH tunnel, in full load or in incremental load between two dates.'
 ---

@@ -1,5 +1,6 @@
 ---
 title: Google Ads
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/google-ads'
 description: 'Import Google Ads reports by writing GAQL queries for your customer ID, with optional since and until dates and a primary key for each output table.'
 redirect_from:

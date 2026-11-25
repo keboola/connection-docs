@@ -1,5 +1,6 @@
 ---
 title: Firebolt
+lastUpdated: 2026-11-19
 slug: 'components/writers/database/firebolt'
 description: 'Write Keboola tables to a Firebolt database through an S3 staging bucket, and set column types, fact or dimension tables, load mode and Firebolt indexes.'
 redirect_from:

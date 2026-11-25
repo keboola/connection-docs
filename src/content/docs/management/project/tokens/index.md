@@ -1,5 +1,6 @@
 ---
 title: API Tokens
+lastUpdated: 2026-11-19
 slug: 'management/project/tokens'
 description: 'Learn what Keboola API tokens are, how master tokens differ from limited ones, and how to create, refresh and share a token with restricted access.'
 redirect_from:

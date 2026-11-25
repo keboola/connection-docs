@@ -1,5 +1,6 @@
 ---
 title: Manage tables
+lastUpdated: 2026-11-20
 slug: 'storage/tables/manage'
 sidebar:
   label: Manage Tables
@@ -45,7 +46,7 @@ links). You must confirm that you understand the aliases will be deleted as well
 
 **Goal:** a primary key on one or more columns, so loads deduplicate rows and incremental loads update existing rows.
 
-A primary key can also come from the [output mapping](/transformations/mappings/#output-mapping) of a transformation
+A primary key can also come from the [output mapping](/transformations/mappings/output/) of a transformation
 or application; the two must match. A column that already contains duplicates can't become a primary key. Both
 errors are described in [Primary keys](/storage/tables/incremental-loading/#primary-keys).
 
@@ -98,7 +99,7 @@ synchronizing data with external systems (e.g., deleting stale records).
 **Result:** the matching rows are gone from the table.
 
 To delete rows before each incremental load of a transformation instead, use the
-**Delete rows** option of the [transformation output mapping](/transformations/mappings/#output-mapping), with Incremental
+**Delete rows** option of the [transformation output mapping](/transformations/mappings/output/), with Incremental
 loading enabled.
 
 ## Keep the lengths and precisions of a typed table

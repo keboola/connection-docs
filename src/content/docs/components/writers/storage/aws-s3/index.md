@@ -1,5 +1,6 @@
 ---
 title: AWS S3
+lastUpdated: 2026-11-19
 slug: 'components/writers/storage/aws-s3'
 description: 'Write Keboola tables as CSV files to an AWS S3 bucket, authenticating with an IAM user access key or an AWS role with s3:PutObject permission.'
 redirect_from:
