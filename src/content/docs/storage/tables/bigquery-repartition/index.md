@@ -18,6 +18,15 @@ This guide applies to the BigQuery backend. To set the layout of a table that do
 | Change, add or remove the clustering only | [Change the clustering in place](#change-the-clustering-in-place) |
 | Add or change the partitioning, with or without clustering; the partitioning column is `DATE`, `DATETIME` or `TIMESTAMP` | [Copy and swap](#copy-and-swap) |
 | Partition by a date that is stored in a `STRING` column, or partition a table without native data types | The type-change path of the [kbagent skill](#kbagent-skill) |
+| Add or change the partitioning of a table over 5 TiB | The [kbagent skill](#kbagent-skill), which copies the table in one job or in ranges |
+
+When only the clustering changes, change it in place. Use copy and swap for such a table only when the rows that
+are already in the table must be reclustered at once. <!-- pending DMD-3052 decision -->
+
+A table with a row access policy is not converted by copy and swap. The Storage copy reads the table through the
+policy: it copies only the rows that the service account of the project can see, it reports no error, and the row
+count check passes on a copy that lacks rows. The clustering change in place copies no data and keeps the policies
+on the table.
 
 ## Copy and swap
 
@@ -25,6 +34,12 @@ This guide applies to the BigQuery backend. To set the layout of a table that do
 
 - **Requirements.** The copy is created in the same bucket as the original table. The swap refuses two tables from
   different buckets, and it refuses an alias.
+- **Row access policies.** Do not use this procedure for a table with a row access policy. The copy would contain
+  only the rows that the service account of the project can see, and the validation would still pass (see
+  [Choose the method](#choose-the-method)).
+- **Size.** The copy is one BigQuery job, and a job that runs past the 6-hour limit of a BigQuery query fails. For a
+  table over 5 TiB, use the [kbagent skill](#kbagent-skill): it measures the copy of a sample and then copies the
+  table in one job, or in ranges of the partitioning column with a transformation.
 - **Cost.** The copy is one full scan of the source table. The storage of the table is doubled until you delete the
   old table. The copy is new data, so BigQuery bills it as active storage even where the original has aged into
   long-term storage.
@@ -36,10 +51,9 @@ This guide applies to the BigQuery backend. To set the layout of a table that do
   invisible to the copy for up to 90 minutes, and BigQuery refuses to rename a table for about 5 hours after the last
   streaming write, sometimes longer. Start the copy after the streaming buffer is empty, and the swap after BigQuery
   allows the rename.
-- **Objects outside Storage.** Table-level IAM bindings and row access policies that were set directly in BigQuery
-  stay with the physical table, so after the swap they are on the old table. Search indexes are dropped by the swap.
-  Record them before you start, apply the IAM bindings and the row access policies to the copy before the swap, and
-  create the search indexes again after the swap.
+- **Objects outside Storage.** Table-level IAM bindings that were set directly in BigQuery stay with the physical
+  table, so after the swap they are on the old table. Search indexes are dropped by the swap. Record them before you
+  start, apply the IAM bindings to the copy before the swap, and create the search indexes again after the swap.
 - **Policy tags.** The copy carries the policy tags of the source only when
   [BigQuery policy tags](/storage/byodb/bigquery-policy-tags/) are enabled for the backend and the project. Otherwise
   the copy is created without them.
@@ -85,7 +99,7 @@ kbagent --json storage table-detail --project my-project --table-id out.c-traffi
 - The columns, their types and the primary key are the same.
 - `definition.timePartitioning`, `definition.rangePartitioning` and `definition.clustering` show the requested layout.
 - Each column that is protected by a policy tag on the original is protected on the copy.
-- The IAM bindings and the row access policies that you applied to the copy equal the recorded ones.
+- The IAM bindings that you applied to the copy equal the recorded ones.
 
 Do not swap when one of the checks fails.
 
@@ -139,7 +153,8 @@ way back is the 7-day fail-safe of BigQuery, which needs a request to Google sup
 
 ## Change the clustering in place
 
-Change the clustering of a BigQuery table in the UI or through the Storage API.
+Change the clustering of a BigQuery table in the UI, with kbagent or through the Storage API. The table keeps its ID
+and its data, so nothing is copied or swapped and the writers do not have to stop.
 
 ### In the UI
 
@@ -151,6 +166,17 @@ Change the clustering of a BigQuery table in the UI or through the Storage API.
    Otherwise each job of that configuration logs a message that the table has a different layout.
 
 The pencil is not available for an alias and for a table in a linked bucket.
+
+### With kbagent
+
+<!-- kbagent-check: skip-next -->
+```bash
+kbagent storage clustering-set --project my-project --table-id out.c-traffic.traffic_deal --clustering-field country_code
+```
+
+Repeat `--clustering-field` for each column, in clustering order. `--clear` removes the clustering. Add `--dry-run`
+to preview the change without writing. The command needs a kbagent release that contains the `storage clustering-set`
+command.
 
 ### Through the API
 
@@ -190,7 +216,14 @@ new clustering is applied.
 The kbagent plugin for Claude Code (see [kbagent for AI agents](/cli/for-agents/#the-kbagent-plugin)) contains the
 skill
 [kbagent-bigquery-repartition](https://github.com/keboola/cli/tree/main/plugins/kbagent/skills/kbagent-bigquery-repartition).
-It runs the copy and swap procedure for one table and adds the steps that this guide only names: the preflight record
-(writers, aliases, sharing, policy tags, IAM bindings, row access policies, search indexes), the choice of
-granularity, the type-change path for a date stored in a `STRING` column, the validation queries, the rollback, and the
-recovery of a failed swap. Every write waits for a confirmation.
+It converts one table and adds the steps that this guide only names: the preflight record (writers, aliases, sharing,
+policy tags, IAM bindings, row access policies, search indexes), the choice of granularity, the type-change path for
+a date stored in a `STRING` column, the validation queries, the rollback, and the recovery of a failed swap. Every
+write waits for a confirmation.
+
+- A table with a row access policy is not converted. The skill stops before it creates a copy.
+- A table over 5 TiB is converted. The skill copies a sample, measures it, and then copies the table in one job or in
+  ranges of the partitioning column, one transformation job per range. The validation includes the row count of each
+  partition.
+- A table that needs only a clustering change is changed in place by default. The skill uses copy and swap for it
+  only when the existing rows must be reclustered at once. <!-- pending DMD-3052 decision -->
