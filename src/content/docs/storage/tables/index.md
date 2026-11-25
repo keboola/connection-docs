@@ -33,6 +33,8 @@ table. In that case, the columns from the imported table will be added to the ex
 Table and column names can contain only alphanumeric characters. Dash and
 underscores are allowed. Column names must not start or end with dash `-` or underscore
 character `_`.
+<!-- VERIFY(Storage team): are dashes allowed in column names, and how long may a column name be? An earlier review reported that dashes are rejected in column names and that column names are capped at 64 characters (table names at 96); neither could be confirmed from public sources, so the text above is unchanged. -->
+
 
 When you select a table from any bucket in Storage, detailed information about the table will be displayed
 at the top of the screen. This is what we refer to as the **table detail** throughout our documentation.
