@@ -1,5 +1,6 @@
 ---
 title: OneDrive Files
+lastUpdated: 2026-11-19
 slug: 'components/extractors/storage/onedrive-files'
 description: 'Download files from personal OneDrive, OneDrive for Business or SharePoint into Keboola File Storage with a file path pattern and optional tags.'
 ---

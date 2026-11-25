@@ -1,5 +1,6 @@
 ---
 title: GitHub
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/github'
 description: 'Import organizations, members, teams, repositories, issues and commits from GitHub with an authorized account, in Smart Mode (incremental) or Full Mode.'
 redirect_from:

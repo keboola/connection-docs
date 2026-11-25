@@ -1,5 +1,6 @@
 ---
 title: Workspace Retention
+lastUpdated: 2026-11-19
 slug: 'workspace/retention'
 description: 'Unused Snowflake and BigQuery workspaces are warned, deactivated and deleted automatically: the timeline, the e-mails, and how to keep or recover one.'
 ---

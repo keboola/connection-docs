@@ -1,5 +1,6 @@
 ---
 title: Manifest Files Specification
+lastUpdated: 2026-11-18
 description: 'What manifest files are: metadata Keboola writes for input tables and files, and options your component sets for its output tables and files.'
 slug: 'extend/common-interface/manifest-files'
 ---

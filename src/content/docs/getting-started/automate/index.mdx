@@ -1,5 +1,6 @@
 ---
 title: 'Build and schedule a weekly flow'
+lastUpdated: 2026-11-24
 slug: 'getting-started/automate'
 description: 'Wire your two connectors and the transformation into a single flow, run the two loads in parallel, give it a Monday 06:00 schedule, and get notified when it fails.'
 redirect_from:
@@ -18,8 +19,14 @@ import FlowStrip from '../../../../components/getting-started/FlowStrip.astro';
 <CourseLine current="automate" />
 
 Your table is true today because you ran every step by hand; next week the forecast has moved on
-and the table has not. A **flow** runs your configurations in order, on a schedule, so every Monday
+and the table has not. A **[flow](/flows/)** runs your configurations in order, on a schedule, so every Monday
 the outlook for the week ahead is rebuilt before the first café opens.
+
+:::tip[New to flows?]
+A flow is Keboola's automated pipeline, and this page builds your first. Each run of a flow is a
+job of its own, with a job for each task under it. Flows live under **Conditional Flows** in the navigation (**Flows** in older projects),
+and [Conditional Flows](/flows/) covers them in full.
+:::
 
 {/* Weekly since 2026-10-01 (Michal Jeřábek, 30.09; Nikita): the daily flow took 8.5 to 10.6 min a
 run in project 264, and a Free Plan project gets 60 job-runtime minutes a month, so a daily schedule
@@ -131,7 +138,7 @@ carries **Run task** and its settings.
 
 Inside the sales configuration the five files are already fetched by one task. Row-based components
 like this one can be [parallelized internally](/flows/#execute-tasks-in-parallel), and in **Jobs**
-you will see that one task fan out into a job per row.
+you will see that one task fan out into a [job](/management/jobs/) per row.
 
 Flows can also branch on what happened: retry a task, take a different path on failure, end early.
 That is [conditions](/flows/#conditions), and you need none of it yet.
@@ -266,7 +273,7 @@ if you took the side trip.
 </TabItem>
 <TabItem label="CLI / API">
 
-A flow is a configuration like any other, and `kbagent` writes it from a YAML file. Run `kbagent flow schema`
+A flow is a configuration like any other, and [`kbagent`](/cli/) writes it from a YAML file. Run `kbagent flow schema`
 once to see the full format with comments (add `--project <alias> --full` for the live JSON
 schema); the file below is the two phases of this guide.
 
@@ -314,15 +321,16 @@ keboola.ex-http` finds the two connectors again, and the same command with the t
 Check the file before it reaches the project, then create it:
 
 ```bash
-kbagent flow validate --project docs-demo --file @flow.yaml
+kbagent flow validate --project docs-demo --definition-file flow.yaml
 ```
 
 ```bash
-kbagent flow new --project docs-demo --name "Boolabean morning outlook" --file @flow.yaml
+kbagent flow new --project docs-demo --name "Boolabean morning outlook" --definition-file flow.yaml
 ```
 
-It prints the flow's configuration ID, which the next two commands take as `<flow-id>`;
-`kbagent config list --project docs-demo --component-id keboola.flow` finds it again.
+The next two commands take the flow's configuration ID as `<flow-id>`. `flow new` doesn't print
+it; add `--json` to read it from `data.id`, or list it with
+`kbagent config list --project docs-demo --component-id keboola.flow`.
 
 **The schedule** is a separate configuration, and one command upserts it:
 
@@ -336,11 +344,14 @@ kbagent flow schedule --project docs-demo --flow-id <flow-id> --cron '0 6 * * 1'
 kbagent job run --project docs-demo --component-id keboola.flow --config-id <flow-id> --wait
 ```
 
-**Check:** the run's own job and one job per task:
+**Check:** the run's own job and one job per phase:
 
 ```bash
 kbagent job list --project docs-demo --component-id keboola.flow --limit 5
 ```
+
+The task jobs are listed under their own components; `kbagent job list --project docs-demo --limit 10`
+shows them all.
 
 Notifications have no command; they live in the flow's **Notifications** tab, below.
 
@@ -364,7 +375,7 @@ If you also loaded data from [Google Sheets](/getting-started/load/googlesheets/
 [a database](/getting-started/load/database/), put those data source configurations in the first
 phase alongside the two HTTP ones; that is the same parallelism, with a third source. Then make the
 transformation read from the tables those connectors produce, since they land in their own
-buckets: on a hand-built transformation, repoint its **input mapping**; on a Kai-built one there
+[buckets](/storage/buckets/): on a hand-built transformation, repoint its **[input mapping](/transformations/mappings/)**; on a Kai-built one there
 is no input mapping, so re-prompt Kai to include the new tables. A flow that runs the right
 components against the wrong inputs succeeds and produces nothing useful.
 
@@ -406,7 +417,7 @@ Timezone** heads the list), check the **Schedule Preview**, then click **Set Up 
 The predefined intervals are **Every 15 minutes**, **Every hour**, **Once a day**, **Once a week**
 and **End of month**; **Set Your Own** covers every hour, day, week, month or year, at the hours and
 minutes you pick. A flow can hold **several** schedules: they work independently, the flow runs whenever any
-of them fires, and the tab shows a count. If you share a stack with other projects, scheduling
+of them fires, and the tab shows a count. If you share a [stack](/overview/#stacks) with other projects, scheduling
 slightly off the hour avoids the busiest moments. A schedule can also be driven by a table changing
 rather than a clock; see [Schedule and Automate](/flows/#schedule-and-automate).
 

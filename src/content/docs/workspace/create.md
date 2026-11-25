@@ -1,5 +1,6 @@
 ---
 title: Create a workspace and load data
+lastUpdated: 2026-11-20
 slug: 'workspace/create'
 sidebar:
   label: Create a Workspace
@@ -64,8 +65,8 @@ You can also create workspaces from transformations.
 To open the workspace detail, click the workspace name in the **Workspaces** list.
 
 1. In the workspace detail, configure a
-   [table input mapping](/transformations/mappings/#table-input-mapping) or
-   [file input mapping](/transformations/mappings/#file-input-mapping) (or both).
+   [table input mapping](/transformations/mappings/input/#table-input-mapping) or
+   [file input mapping](/transformations/mappings/input/#file-input-mapping) (or both).
 2. In the right panel, click **Load data**. It is enabled only when the workspace has an input mapping.
 
    ![Workspace - Load Data](/workspace/load-data.png)
@@ -97,8 +98,8 @@ Unloading data is useful, for example, when your ad-hoc analysis leads to
 valuable results, or when you trained a new model which you'd like to use in transformations.
 
 1. In the workspace detail, configure a
-   [Table Output Mapping](/transformations/mappings/#table-output-mapping)
-   or [File Output Mapping](/transformations/mappings/#file-output-mapping) (or both).
+   [Table Output Mapping](/transformations/mappings/output/#table-output-mapping)
+   or [File Output Mapping](/transformations/mappings/output/#file-output-mapping) (or both).
 2. Click **Unload data**.
 
    ![Workspace - Unload Data](/workspace/unload-data.png)
@@ -110,7 +111,7 @@ For Snowflake and BigQuery workspaces, you can also export a single table direct
 [Exporting Workspace Tables to Files](/workspace/table-export/) for details.
 
 Snowflake and BigQuery workspaces can also skip unloading entirely and write to a Storage table directly with
-[Direct Mode output mapping](/transformations/mappings/#direct-mode-output-mapping). The workspace gets write
+[Direct Mode output mapping](/transformations/mappings/direct-mode/). The workspace gets write
 access to the selected table as soon as the mapping is saved, so no **Unload data** run is needed.
 
 ## Create a transformation from a workspace

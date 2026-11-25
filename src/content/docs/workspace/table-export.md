@@ -1,5 +1,6 @@
 ---
 title: Exporting Workspace Tables to Files
+lastUpdated: 2026-11-19
 slug: 'workspace/table-export'
 sidebar:
   label: Table Export

@@ -1,5 +1,6 @@
 ---
 title: Stripe
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/stripe'
 description: 'Import almost all Stripe data, or only charges, through the Stripe API with an API token, using a configuration template with full load.'
 redirect_from:

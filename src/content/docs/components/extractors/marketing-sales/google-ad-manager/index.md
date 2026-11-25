@@ -1,5 +1,6 @@
 ---
 title: Google Ad Manager 
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/google-ad-manager'
 description: 'Export Google Ad Manager report data with a Google service account key, setting the report type, dimensions, metrics, ad unit view and date range.'
 redirect_from:

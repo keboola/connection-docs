@@ -1,5 +1,6 @@
 ---
 title: Files in Storage
+lastUpdated: 2026-11-20
 slug: 'storage/files'
 sidebar:
   label: Files

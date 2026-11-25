@@ -1,5 +1,6 @@
 ---
 title: 'Work with files in a branch'
+lastUpdated: 2026-11-24
 slug: 'getting-started/branches/files-in-branch'
 description: 'See how File Storage behaves inside a development branch and how branch-created files are tagged and kept apart from production files.'
 redirect_from:
@@ -19,7 +20,7 @@ In your development branch, go to **Transformations**, select the transformation
 ![Screenshot - Run Transformation in Development Branch](/getting-started/branches/figures/python-branch-overview.png)
 
 ## File Tags
-When the job finishes, go to the **Files** tab in **Storage**. You can see that the `demoFile.txt` was created but was not
+When the [job](/management/jobs/) finishes, go to the **Files** tab in **Storage**. You can see that the `demoFile.txt` was created but was not
 assigned the tag `demoOutput`. It was assigned the tag `1835-demoOutput` instead. The prefix `1835` is the ID of
 this branch. You can also see the ID in the URL. This is how the development branch files are distinguished from
 the files that were created in the production environment.

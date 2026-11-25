@@ -1,5 +1,6 @@
 ---
 title: Snowflake Workspaces Access Changes
+lastUpdated: 2026-11-19
 description: 'Direct Snowflake login from IDEs and BI tools is being removed for shared-backend projects: what is deprecated, when, and which tools replace it.'
 slug: 'workspace/snowflake-workspaces-access-changes'
 redirect_from:

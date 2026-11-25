@@ -1,5 +1,6 @@
 ---
 title: Telemetry Data
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/telemetry-data'
 description: 'Every table and column the Telemetry Data connector extracts about your project or organization in project, organization and Activity Center modes.'
 redirect_from:

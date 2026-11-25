@@ -1,5 +1,6 @@
 ---
 title: Development Branches
+lastUpdated: 2026-11-19
 description: 'How development branches work: isolated branch storage, the merge request lifecycle, what a merge leaves behind, and which components are limited in a branch.'
 slug: 'components/branches'
 ---
