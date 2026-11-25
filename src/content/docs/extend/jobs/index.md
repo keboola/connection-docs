@@ -1,5 +1,6 @@
 ---
 title: Component Jobs
+lastUpdated: 2026-10-13
 slug: 'extend/jobs'
 description: "Run a component or a flow through the Queue API, poll the job until it finishes, run a debug job, and read what the job object tells you about states, hierarchy and runtime settings."
 redirect_from:
@@ -301,3 +302,7 @@ that usually come up alongside it:
 Component jobs are not the only asynchronous operations. [Storage jobs](https://api.keboola.com/?service=storage),
 created for instance by [asynchronous imports](https://api.keboola.com/?service=storage)
 and exports, follow the same idea with their own details.
+
+---
+
+**Next:** [Encryption →](/extend/encryption/)

@@ -1,5 +1,6 @@
 ---
 title: 'Business Data Model Guide'
+lastUpdated: 2026-11-12
 slug: 'overview/onboarding/architecture-guide/bdm-guide'
 description: "Build a business data model with your stakeholders: identify entities and relationships, then turn them into the tables your project produces."
 redirect_from:

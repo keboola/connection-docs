@@ -1,5 +1,6 @@
 ---
 title: oAuth 2.0 Client Credentials Authentication
+lastUpdated: 2026-10-13
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/oauth_cc'
 description: 'Set up OAuth 2.0 client credentials authentication in Generic Extractor: client ID, client secret and access token URL, sent as Basic auth or a form post.'
 redirect_from:

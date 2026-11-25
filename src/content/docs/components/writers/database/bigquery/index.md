@@ -1,5 +1,6 @@
 ---
 title: Google BigQuery
+lastUpdated: 2026-11-19
 slug: 'components/writers/database/bigquery'
 description: 'Write Keboola tables to a Google BigQuery dataset with a service account JSON key, then set table names, column data types and full or incremental load.'
 redirect_from:
@@ -34,7 +35,7 @@ Finally, create a new JSON key (click **+ Create key**) and download it to your 
 You can now close the Google Cloud Platform Console and go back to configuring the connector.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **BigQuery** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **BigQuery** connector.
 Click on the **Set Service Account Key** button. 
 Open the [downloaded key](#create-service-account) in a text editor, copy & paste it in the input field, click **Submit** and then **Save**. 
 

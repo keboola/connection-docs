@@ -1,5 +1,6 @@
 ---
 title: Enable BigQuery policy tags
+lastUpdated: 2026-11-19
 slug: 'storage/byodb/bigquery-policy-tags/enable'
 description: What you need in Google Cloud to enable BigQuery policy tags on your backend, and how to ask Keboola for it.
 ---
@@ -50,3 +51,7 @@ read role first; Keboola warns when it is missing.
 - **Turning it off.** Keboola can disable the backend immediately. Nothing changes on your taxonomy; the grants stay
   until you remove them.
 - **Removing grants.** Keboola does not detect a grant removed after enablement. Copies of protected columns then fail.
+
+---
+
+**Next:** [Row-level and column-level security →](/storage/row-level-security/)

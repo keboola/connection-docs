@@ -1,6 +1,8 @@
 ---
 title: Transformations
+lastUpdated: 2026-11-19
 slug: 'transformations'
+description: 'Learn how Keboola transformations work, how input and output mapping keep them isolated from Storage, which backends run them, and how to develop them.'
 redirect_from:
     - /manipulation/transformations/
 ---
@@ -18,7 +20,7 @@ In Keboola, all transformations operate on a copy of the data from Storage
 in a safe and isolated environment. This improves the safety, repeatability, and traceability of all data operations.
 The process of isolating data is called [**mapping**](/transformations/mappings/).
 The mapping process copies input data from permanent project Storage into a 
-[**staging**](/transformations/mappings/#table-input-mapping) area, representing ephemeral Storage to run the transformation **script**.
+[**staging**](/transformations/mappings/input/#table-input-mapping) area, representing ephemeral Storage to run the transformation **script**.
 A transformation [**backend**](/transformations/#backends) executes the transformation script. To ease the [development](/transformations/#developing-transformations) 
 of the transformation script, all transformations are **automatically versioned**, and you can use a **workspace**
 that provides a copy of the environment and can be run interactively.
@@ -38,6 +40,8 @@ The transformation job then runs the transformation script operating on the stag
 When the transformation is finished, the **output mapping** process moves the transformation results back to
 the designated tables in Storage. The **input** and **output** mappings ensure complete safety of
 the transformation processes -- the transformation always operates in an isolated workspace.
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Mapping
 [**Input and output mapping**](/transformations/mappings/) — separates the source data from your transformation. 
@@ -84,10 +88,10 @@ Choose according to your taste and available libraries.
 ***Note:** Switching between SQL backends requires updating the code into the corresponding SQL dialect.*
 
 ## Developing Transformations
-Transformation scripts are stored in [configurations](/components/#creating-component-configuration), and as such, 
+Transformation scripts are stored in [configurations](/components/configurations/#create-a-configuration), and as such, 
 they share common properties and functions. Particularly important is that all changes are automatically
-[versioned](/components/#configuration-versions), and you can always [roll back](/components/#rollback-version) 
-a configuration or [copy](/components/#copy-configuration) a version to a new transformation.
+[versioned](/components/configurations/#see-the-version-history), and you can always [roll back](/components/configurations/#roll-back-to-an-earlier-version) 
+a configuration or [copy](/components/configurations/#copy-a-configuration) a version to a new transformation.
 
 You can easily develop transformations using the [workspace](/workspace/). It allows you to run 
 and play with your arbitrary transformation scripts on copies of your tables
@@ -264,6 +268,10 @@ When triggered
 
 ## Read-Only Input Mapping
 
-With the [read-only input mapping](/transformations/mappings/#read-only-input-mapping) feature, you can access all buckets (your own or linked) in transformations. Your transformation user
+With the [read-only input mapping](/transformations/mappings/input/#read-only-input-mapping) feature, you can access all buckets (your own or linked) in transformations. Your transformation user
 has read-only access to buckets (and their tables), so you can access such data. So, there is no need to specify standard input mapping 
 for your transformations. The name of the backend object (database, schema, etc.) depends on the backend you use, and it contains the bucket ID (not the bucket name).
+
+---
+
+**Next:** [Mappings →](/transformations/mappings/)

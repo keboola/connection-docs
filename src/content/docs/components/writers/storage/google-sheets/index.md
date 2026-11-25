@@ -1,5 +1,6 @@
 ---
 title: Google Sheets
+lastUpdated: 2026-11-19
 slug: 'components/writers/storage/google-sheets'
 description: 'Write Keboola tables into worksheets of a Google Sheets spreadsheet, overwriting the sheet or appending rows; Google Sheets limits the document size.'
 redirect_from:
@@ -16,13 +17,13 @@ on the size of the document. If you are getting close to them, use the [Google D
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Google Sheets** data destination connector.
-Then click **Authorize Account** to [authorize the configuration](/components/#authorization). 
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Sheets** data destination connector.
+Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
 Then click the **New Table** button to add a new table:
 
 ![Screenshot - Add Table Step 1](/components/writers/storage/google-sheets/google-sheets-1.png)
 
-Select a table from Storage. You may also specify additional filters as well as [incremental processing](/storage/tables/#incremental-processing).
+Select a table from Storage. You may also specify additional filters as well as [incremental processing](/storage/tables/incremental-loading/#incremental-processing).
 All options may be modified later. Click **Next** to select whether to create a new file or write to an existing one:
 
 ![Screenshot - Add Table Step 2](/components/writers/storage/google-sheets/google-sheets-2.png)

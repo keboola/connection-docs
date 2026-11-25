@@ -1,6 +1,8 @@
 ---
 title: LinkedIn Pages 
+lastUpdated: 2026-11-20
 slug: 'components/extractors/marketing-sales/linkedin-pages'
+description: 'Look up the LinkedIn Pages connector settings for organization IDs, endpoints for page, follower and share statistics or posts, sync dates and load type.'
 redirect_from:
     - /extractors/marketing-sales/linkedin-pages/
 ---
@@ -9,8 +11,10 @@ redirect_from:
 
 This data source connector downloads data from the [LinkedIn Pages API](https://learn.microsoft.com/en-us/linkedin/marketing) related to organizations, their posts, and statistics about performance of their pages, as well as tables of enumerated types used therein.
 
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **LinkedIn Pages** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **LinkedIn Pages** connector.
 
 ### Global Configuration
 To configure this connector, you need to authenticate with a **LinkedIn Profile** using OAuth. More info on this topic can be found in [LinkedIn API Documentation](https://learn.microsoft.com/en-us/linkedin/shared/authentication/getting-access).

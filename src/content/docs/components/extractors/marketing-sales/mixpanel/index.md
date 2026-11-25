@@ -1,5 +1,6 @@
 ---
 title: MixPanel
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/mixpanel'
 description: Export raw event data from Mixpanel into Storage as a name-value pair table or as raw JSON, for a date range or a rolling window of full days.
 search_keywords: [mixpanel]
@@ -19,7 +20,7 @@ search_keywords: [mixpanel]
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **MixPanel** data source connector. The connector has no rows; one configuration is one export.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **MixPanel** data source connector. The connector has no rows; one configuration is one export.
 
 | Field | Description |
 |---|---|

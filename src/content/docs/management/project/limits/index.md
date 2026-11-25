@@ -1,5 +1,6 @@
 ---
 title: Project Limits
+lastUpdated: 2026-10-13
 slug: 'management/project/limits'
 search_keywords: [limits]
 description: Business and platform limits of a Keboola project - time credits (PPU) per job type, Apps pricing, storage size, and platform quotas.
@@ -19,6 +20,8 @@ and a possible contract update conversation.
 these limits is either technically impossible, or it carries a risk of degraded performance.
 
 **Note:** These limits apply to standard Keboola projects. The limits for [pay-as-you-go projects](/management/payg-project/) might differ.
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Business Limits
 

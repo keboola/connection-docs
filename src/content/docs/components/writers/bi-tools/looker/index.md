@@ -1,5 +1,6 @@
 ---
 title: Looker
+lastUpdated: 2026-11-19
 slug: 'components/writers/bi-tools/looker'
 description: 'Push Keboola tables to Looker as a new LookML project through a Snowflake workspace, with a Looker API client ID and secret and optional foreign keys.'
 redirect_from:
@@ -20,7 +21,7 @@ To connect Keboola to your Looker account, you need API credentials from Looker 
 The exact required steps are described in the [Looker documentation](https://docs.looker.com/reference/api-and-integration/api-auth#authentication_with_a_sdk). 
 You need `Client ID` and `Client secret` to authenticate Keboola with Looker. 
 
-Create a [new **Looker data destination connector** configuration](/components/#creating-component-configuration) in your project. 
+Create a [new **Looker data destination connector** configuration](/components/configurations/#create-a-configuration) in your project. 
 
 Continue by setting up a Snowflake workspace to use with Looker. You can either supply your own or use 
 a Keboola generated workspace. 

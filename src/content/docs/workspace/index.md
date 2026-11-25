@@ -1,217 +1,99 @@
 ---
-title: Workspace
-description: 'What workspaces are for, connecting to one, loading and unloading data, their lifecycle, and using them to develop transformations or for analysis.'
+title: Workspaces
+lastUpdated: 2026-11-20
+description: 'What a Keboola workspace is for, the Python, R, Snowflake and BigQuery types, the workspace lifecycle, read-only access to Storage, and a map of the section.'
 slug: 'workspace'
 redirect_from:
   - /transformations/sandbox/
   - /transformations/workspace/
 ---
 
+A workspace is a safe, isolated environment for working with your project's data: JupyterLab for Python and R, or SQL on
+Snowflake and BigQuery. This page explains what workspaces are for, the workspace types and the workspace lifecycle. For
+the steps, start with [Create a workspace and load data](/workspace/create/).
 
+<!-- Explanation-type page. Source: the former single Workspace page on main; split by type, text carried over, checked 2026-11-19. -->
+
+## What a workspace is for
 
 A workspace serves several purposes and can be used as
 
 - an *interactive development environment* (IDE) to create transformations. 
 - an *analytical workspace* where you can interactively perform experiments and modelling with live production data. 
 - an ephemeral workspace created on each run of a transformation to provide the *staging* area in which the transformation operates.
+
 Ephemeral transformation workspaces are not visible in the transformation UI, hence we won't mention them further.
 
-## Working with Workspaces
-Select from the top menu Workspaces:
+When the code you developed in a workspace works, you can
+[create a transformation from the workspace](/workspace/create/#create-a-transformation-from-a-workspace).
 
-![Workspace Introduction](/workspace/workspace-intro.png)
+## Analytical workspaces
+Apart from developing transformations, you can use workspaces to perform ad-hoc analysis 
+of production data of your choice. A workspace provides you with a safe and isolated environment
+where you can experiment. The input mapping isolation also means that you can work on live
+production projects without data in the workspace constantly changing — you update them
+on demand by loading data into the workspace.
 
-Select a workspace type; not all workspace types are supported in all project workspaces. 
-Workspace types match available transformation types. For scripting languages ([Python](https://www.python.org/) and 
+A comprehensive [video guide](https://www.youtube.com/watch?v=iQMnh9nqRiE) on this subject is available on our YouTube channel.
+
+## Workspace types
+
+Not all workspace types are supported in all projects. Workspace types match available transformation types.
+How to open each type is in [Connect to a workspace](/workspace/connect/).
+
+### Python and R
+
+For scripting languages ([Python](https://www.python.org/) and 
 [R](https://www.r-project.org/)), we provide [JupyterLab](https://jupyter.org/) with 
 the matching [kernel](https://jupyter.readthedocs.io/en/latest/projects/kernels.html).
+
+### Snowflake
+
 For SQL workspaces, you can either use Snowflake's [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight-homepage) 
-or a database client of your liking (for example, [Dbeaver](https://dbeaver.io/)).
+or a database client of your liking (for example, [DBeaver](https://dbeaver.io/)). The built-in
+[SQL Editor](/workspace/sql-editor/) runs in your browser and needs no external tool.
 
-![Workspace - Select Type](/workspace/workspace-create-1.png)
+:::caution[Direct access availability]
+Direct access to Snowflake Workspaces is **only available for projects with dedicated Snowflake backends** (KBDB - Keboola-Brings-Database or BYODB - Bring-Your-Own-Database).
 
-Name and optionally describe the workspace:
-
-![Workspace - Name workspace](/workspace/workspace-create-2.png)
-
-Creating the workspace takes a few seconds, so it will take a while before it appears:
-
-![Workspace - Running](/workspace/workspace-create-3.png)
-
-Once the workspace is ready, you'll see it in the workspace list:
-
-![Workspace - Running](/workspace/workspace-create-4.png)
-
-In the workspace detail, you can
-
-- get credentials & connect to the workspace,
-- configure workspace [mappings](/transformations/mappings/),
-- load & unload data specified in the mappings, and
-- manage the workspace (resume & terminate & delete).
-
-![Workspace - Running](/workspace/workspace-detail-1.png)
-
-### Connecting to Workspace
-#### Python/R
-To connect to a [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/) workspace with the associated kernel 
-(Python, R), use the URL and the password provided in the **Credentials** link. Use the **Connect** button 
-to directly open the JupyterLab interface.
-
-![Workspace - Python/R](/workspace/workspace-connect-pythonr.png)
-
-#### SQL Editor
-
-The built-in [SQL Editor](/workspace/sql-editor) lets you work with **Snowflake** and **Google BigQuery** workspaces directly in your browser, without connecting any external tools.
-
->***Note for Multi-tenant and Pay-As-You-Go Projects (Snowflake backend)***
->
->If your project uses Keboola's shared Snowflake backend (Multi-tenant or Pay-As-You-Go), the **SQL Editor is your primary tool** for SQL development, as direct Snowflake workspace access is not available.
-
-:::tip[Use SQL Editor for Safe Testing]
-For interactive SQL exploration inside your workspace, use the SQL Editor. It lets you safely test queries, preview data, and prepare the SQL code you later use in your transformations - without affecting your production pipelines. Learn more: [SQL Editor](/workspace/sql-editor).
+**Multi-tenant and Pay-As-You-Go projects** using Keboola's shared Snowflake backend **do not have direct access** to Snowflake Workspaces.
+For these projects, use these alternatives:
+- **[SQL Editor](/workspace/sql-editor/)** - for interactive SQL queries, transformations, and development
+- **[Data Gateway](/components/applications/data-gateway/)** - for connecting BI tools and external applications
 :::
 
-#### Keboola JDBC Driver
+Projects with a dedicated Snowflake backend get two versions of the Snowflake workspace, **Person** and
+**Legacy Service**. They differ in how you sign in; both are described in
+[Connect to a workspace](/workspace/connect/).
+<!-- VERIFY(Nikita): the Connect page carries a marker on the Legacy Service deprecation date. If Legacy Service workspaces are gone, drop them here as well. Evidence 2026-11-20: of the 25 workspaces in project 264, 21 use snowflake-service-keypair, 2 snowflake-person-sso and 2 none; none uses a password (Legacy Service) login. -->
 
-To query your project's data from external SQL clients and BI tools, use the [Keboola JDBC driver](/workspace/jdbc-driver/). It connects DBeaver, DataGrip, Tableau, or any JDBC-compatible client to your project through the Query Service API, with step-by-step installation guides for each.
+### BigQuery
 
-#### Snowflake
+A BigQuery workspace opens in the built-in [SQL Editor](/workspace/sql-editor/), or in an external database client
+with the credentials file from the workspace. See [Connect to a workspace](/workspace/connect/).
 
->***Important: Direct Access Availability***
->
->Direct access to Snowflake Workspaces is **only available for projects with dedicated Snowflake backends** (KBDB - Keboola-Brings-Database or BYODB - Bring-Your-Own-Database).
->
->**Multi-tenant and Pay-As-You-Go projects** using Keboola's shared Snowflake backend **do not have direct access** to Snowflake Workspaces.
->For these projects, use these alternatives:
->- **[SQL Editor](/workspace/sql-editor)** - for interactive SQL queries, transformations, and development
->- **[Data Gateway](/components/applications/data-gateway)** - for connecting BI tools and external applications
+## Read-only input mapping
 
-We provide two versions of [Snowflake](https://www.snowflake.com/) workspaces with different authentication options for projects with dedicated Snowflake backends.
+The workspace also supports **read-only input mappings**, as described in the [mapping section](/transformations/mappings/input/#read-only-input-mapping).
+For each **workspace** or **Snowflake writer** (data destination) configuration, users can choose whether to use a **read-only input mapping**.
 
-**Person** type workspace uses `SSO` and `Key Pair` authentication methods. To connect using:
+Note that **there are security implications**. If you enable a **read-only input mapping** for a workspace, then it has access to all the data in the project. 
+You may not want to share workspace credentials with other people unless it's acceptable for them to see all the data in the project. If limited access is required, do not enable **read-only input mappings** for the workspace.
 
-- `SSO` - use the **Connect** button in the **Connect** menu to login to Snowflake's [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight-homepage) web interface.
-- `Key Pair` - use your favorite database client or other third-party tool and the Key Pair credentials provided in the **Connect** menu. Keboola can generate the key pair for you, or you can [bring your own](#bringing-your-own-key-pair) and register only the public key.
+With **read-only input mappings** disabled, only tables listed in the input mapping are accessible.
 
-![Workspace - Snowflake](/workspace/workspace-connect-snowflake-person.png)
+![Workspace - Create new workspace with Read Only](/workspace/create-new-ws-with-ro.png)
 
-**Legacy Service** type workspace uses `SSO` and `Password` authentication methods. To connect using:
+So, if we enable this feature when we create a workspace, we can access individual tables in the workspace,
+without needing to define any tables in the input mapping. Alias tables are materialized as database VIEWs and are fully accessible via read-only input mappings — including filtered aliases.
+This also applies to linked buckets. Note that buckets and tables belong to another project, so you must access, for example, the database of another project depending on the backend.
+For example, say your bucket `in.c-customers` is linked from bucket `in.c-crm-extractor` in project 123. You then need to reference the tables in the transformation like this: `"KEBOOLA_123"."in.c-crm-extractor"."my-table"`. When developing transformation code, it's easiest to create a workspace with **read-only input mappings** enabled and look directly in the database to find the correct database and schema names. 
 
-- `SSO` - use the **Connect** button in the **Connect** menu to login to Snowflake's [Snowsight](https://docs.snowflake.com/en/user-guide/ui-snowsight-homepage) web interface.
-- `Password` - use your favorite database client or other third-party tool and the Password credentials provided in the **Connect** menu.
+![Example - Empty Input Mapping](/workspace/example-of-empty-im.png)
 
-![Workspace - Snowflake](/workspace/workspace-connect-snowflake-legacy.png)
+![Example - Table in workspace](/workspace/table-in-ws.png)
 
->***Important***
->
->**Legacy Service** type workspace is using single-factor password authentication which is being [deprecated by Snowflake](https://docs.snowflake.com/en/user-guide/security-mfa-rollout).
->As a result, we are deprecating this login type by the end of 2025.
->We recommend using `Person` type workspace instead, if you don't need to use password authentication.
-
-##### Using Key Pair Authentication with Third-Party Tools
-Below are links to documentation for popular database IDEs used by Keboola users that support Key Pair authentication.
-
-- [DBeaver Community Edition](https://community.snowflake.com/s/article/Using-Private-Key-authentication-in-DBeaver)
-- [DBeaver Commercial Editions](https://dbeaver.com/docs/dbeaver/Authentication-Snowflake/#private-key-authentication)
-- [DataGrip](https://www.jetbrains.com/help/datagrip/create-snowflake-data-source-with-key-pair-authentication.html)
-- [VSCode/Cursor Snowflake Extension](https://docs.snowflake.com/en/user-guide/vscode-ext#sign-in-to-snowflake-with-the-vs-code-extension)
-- [VSCode/Cursore DBCode Extension](https://dbcode.io/docs/supported-databases/snowflake)
-
-##### Private Key Security and Encryption
-When Keboola generates the key pair, the private key is unencrypted, so we recommend using password management tools like [Keepass](https://keepass.info/) or [1Password](https://1password.com/) to store your private key for better security.
-In case you need to store the private key locally and want to protect it from unauthorized access, you can follow the instructions below based on your OS to encrypt it using [OpenSSL](https://www.openssl.org/):
-
-If your tool requires a passphrase-protected private key, you can also [bring your own key pair](#bringing-your-own-key-pair) instead.
-
-**macOS & Linux**
-
-Open a terminal and run:
-
-```
-openssl pkcs8 -in private_key.pem -topk8 -v2 aes-256-cbc -out private_key_encrypted.pem
-```
-
-* `-in private_key.pem` → input file
-* `-topk8` → outputs in PKCS #8 format
-* `-v2 aes-256-cbc` → encryption algorithm
-* `-out private_key_etncrypted.pem` → encrypted key file
-
-👉 You’ll be prompted to set a password.
-
-**Windows**
-
-Make sure OpenSSL is installed (e.g., via [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or [Windows binaries](https://slproweb.com/products/Win32OpenSSL.html)).
-
-Open PowerShell or Command Prompt and run:
-
-```
-openssl pkcs8 -in private_key.pem -topk8 -v2 aes-256-cbc -out private_key_encrypted.pem
-```
-
-* `-in private_key.pem` → input file
-* `-topk8` → outputs in PKCS #8 format
-* `-v2 aes-256-cbc` → encryption algorithm
-* `-out private_key_encrypted.pem` → encrypted key file
-
-👉 You’ll be prompted to set a password.
-
-##### Bringing Your Own Key Pair
-Some third-party tools (such as SAS CI360) require a passphrase-protected private key. Keboola only needs the public half of the pair, so you can create it yourself and register just the public key.
-
-Generate the pair as follows (on Windows, with OpenSSL installed as described above). You'll be prompted to set a passphrase:
-
-```
-openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -aes-256-cbc -out private_key_encrypted.pem
-openssl rsa -in private_key_encrypted.pem -pubout -out public_key.pem
-```
-
-To register the key, open the **Connect** menu on your workspace and use **Use Own Key** next to **Reset Key Pair**, then paste the contents of `public_key.pem` or drop the file onto the field. It must be an RSA key of at least 2048 bits, in PEM (`-----BEGIN PUBLIC KEY-----`) or base64-encoded DER format. Convert a PKCS #1 key with `openssl rsa -RSAPublicKey_in -in public_key.pem -pubout`, or an OpenSSH one with `ssh-keygen -e -m PKCS8 -f public_key.pub`.
-
-:::caution
-Registering a public key replaces the one currently on the workspace, so the previous key pair stops working immediately.
-:::
-
-##### Private Key Conversion to .p8 Format
-Some third-party BI tools (such as Metabase) require private keys in `.p8` format instead of the default `.pem` format provided by Keboola. You can convert your private key using OpenSSL with the following command:
-
-**macOS & Linux**
-
-Open a terminal and run:
-
-```
-openssl pkcs8 -topk8 -inform PEM -outform DER -in private_key.pem -out private_key.p8 -nocrypt
-```
-
-* `-topk8` → outputs in PKCS #8 format
-* `-inform PEM` → input format is PEM
-* `-outform DER` → output format is DER
-* `-in private_key.pem` → input file
-* `-out private_key.p8` → output file
-* `-nocrypt` → no encryption
-
-**Windows**
-
-Make sure OpenSSL is installed (e.g., via [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or [Windows binaries](https://slproweb.com/products/Win32OpenSSL.html)).
-
-Open PowerShell or Command Prompt and run:
-
-```
-openssl pkcs8 -topk8 -inform PEM -outform DER -in private_key.pem -out private_key.p8 -nocrypt
-```
-
-* `-topk8` → outputs in PKCS #8 format
-* `-inform PEM` → input format is PEM
-* `-outform DER` → output format is DER
-* `-in private_key.pem` → input file
-* `-out private_key.p8` → output file
-* `-nocrypt` → no encryption
-
-#### BigQuery
-To connect to a [BigQuery](https://cloud.google.com/bigquery) workspace with an external database client, use the **Credentials File** provided in the **Connect** menu. Alternatively, use the built-in [SQL Editor](/workspace/sql-editor) without any external tools.
-
-![Workspace - BigQuery](/workspace/workspace-connect-bigquery.png)
-
-### Workspace Lifecycle
+## Workspace lifecycle
 When a workspace is created, it enters the **Active** state and can be used. 
 
 - Database (Snowflake and BigQuery) workspaces are billed by the runtime of queries executed in them. They stay active until you delete them, unless nobody uses them for six months; such workspaces are first warned, then deactivated and later deleted automatically, see [Workspace Retention](/workspace/retention/).
@@ -248,69 +130,10 @@ you'll see the following error:
     Server Connection Error
     A connection to the Jupyter server could not be established. JupyterLab will continue trying to reconnect. Check your network connection or Jupyter server configuration.
 
-If you see this error, please go to the list of workspaces in Keboola, resume the workspace
-and reconnect from there.
+The workspace is still there. How to resume it and get back in is in
+[Connect to a workspace](/workspace/connect/).
 
-### Loading Data
-To load arbitrary data into the workspace, configure a
-[table input mapping](/transformations/mappings/#table-input-mapping) or
-[file input mapping](/transformations/mappings/#file-input-mapping) (or both) and click the **Load Data** button.
-
-![Workspace - Load Data](/workspace/load-data.png)
-
-When loading data, you have the option to **Clean workspace before loading**. When this option is enabled, Keboola removes all **tables** and **views** from the workspace schema before loading the new data. However, the following objects are **not** removed and will persist across loads:
-
-- **Stored procedures**
-- **User-defined functions (UDFs)**
-
-This is by design — Keboola does not create stored procedures or UDFs, so it does not manage or remove them during cleanup. If you have created stored procedures or UDFs in the workspace, you are responsible for managing their lifecycle. Keep this in mind to avoid potential naming conflicts or unexpected behavior from outdated routines.
-
-When loading data into a workspace, you can specify entire buckets, which can be especially
-useful when you are not sure what tables you'll need in your work. You can also take
-advantage of [alias tables](/storage/tables/#aliases) and prepare buckets with the tables you'll need.
-
-### Read-Only Input Mapping
-
-*Note: You must be using [new transformations](/transformations/) to see this feature.*
-
-The workspace also supports **read-only input mappings**, as described in the [mapping section](/transformations/mappings/#read-only-input-mapping).
-For each **workspace** or **Snowflake writer** (data destination) configuration, users can choose whether to use a **read-only input mapping**.
-
-Note that **there are security implications**. If you enable a **read-only input mapping** for a workspace, then it has access to all the data in the project. 
-You may not want to share workspace credentials with other people unless it's acceptable for them to see all the data in the project. If limited access is required, do not enable **read-only input mappings** for the workspace.
-
-With **read-only input mappings** disabled, only tables listed in the input mapping are accessible.
-
-![Workspace - Create new workspace with Read Only](/workspace/create-new-ws-with-ro.png)
-
-So, if we enable this feature when we create a workspace, we can access individual tables in the workspace,
-without needing to define any tables in the input mapping. Alias tables are materialized as database VIEWs and are fully accessible via read-only input mappings — including filtered aliases.
-This also applies to linked buckets. *Note that buckets and tables belong to another project, so you must access, for example, the database of another project depending on the backend.
-For example, say your bucket `in.c-customers` is linked from bucket `in.c-crm-extractor` in project 123. You then need to reference the tables in the transformation like this: `"KEBOOLA_123"."in.c-crm-extractor"."my-table"`. When developing transformation code, it's easiest to create a workspace with **read-only input mappings** enabled and look directly in the database to find the correct database and schema names. 
-
-![Example - Empty Input Mapping](/workspace/example-of-empty-im.png)
-
-![Example - Table in workspace](/workspace/table-in-ws.png)
-
-### Unloading Data
-You can also unload data from the Python and R workspaces. To unload data, configure 
-[Table Output Mapping](/transformations/mappings/#table-output-mapping)
-or [File Output Mapping](/transformations/mappings/#file-output-mapping) (or both) and click **Unload Data** button.
-
-![Workspace - Unload Data](/workspace/unload-data.png)
-
-Unloading data is useful, for example, when your ad-hoc analysis leads to
-valuable results, or when you trained a new model which you'd like to use in transformations.
-
-For Snowflake and BigQuery workspaces, you can also export a single table directly from the workspace schema to
-[File Storage](/storage/files/) via the Storage API. See
-[Exporting Workspace Tables to Files](/workspace/table-export/) for details.
-
-Snowflake and BigQuery workspaces can also skip unloading entirely and write to a Storage table directly with
-[Direct Mode output mapping](/transformations/mappings/#direct-mode-output-mapping). The workspace gets write
-access to the selected table as soon as the mapping is saved, so no **Unload Data** run is needed.
-
-### Data Persistency (beta)
+## Data persistency (beta)
 When this feature is enabled in a project, your data in workspaces can be kept. This way you can, when you return, start where you left off without losing data or time by importing the data again or executing scripts to get to the right stage.
 
 Once this feature is activated, we will automatically back up all the data in newly created workspaces up to the limits defined by your selected workspace size. More specifically:
@@ -327,25 +150,19 @@ Provisioning of persistent storage takes some time, usually 2–3 minutes after 
 
 Pricing:
 Curently for FREE in public beta. When it is generally available, additional charges will apply. 
+<!-- VERIFY(Nikita): is Data Persistency still a free public beta, and are the size limits (50, 100 and 150 GB) current? -->
 
-## Developing Transformations
-Workspaces are highly useful for developing transformations. When you configure [mappings](/transformations/mappings/) 
-and develop a script in JupyterLab, you can use the **Create Transformation** button to 
-deploy the notebook into a transformation. Please note that only input/output mapping without the actual script is copied when creating transformation from a workspace
+## This section
 
-![Workspace - Create Transformation](/workspace/create-transformation-1.png)
+The pages read in order:
 
-Enter the name of the new transformation:
+1. [Create a workspace and load data](/workspace/create/) has the steps for a new workspace: creating it, loading tables and files, unloading the results, and turning it into a transformation.
+2. [Connect to a workspace](/workspace/connect/) shows how to open JupyterLab, the SQL Editor, Snowsight or your own SQL client, and how to set up Snowflake key-pair authentication.
+3. [SQL Editor](/workspace/sql-editor/) explains the in-browser editor: its interface, sessions, variables and sharing.
+4. [Use the SQL Editor](/workspace/sql-editor/use/) has the editor's tasks, from running a query to saving your queries as a transformation.
+5. [Keboola JDBC driver](/workspace/jdbc-driver/) connects DBeaver, DataGrip, Tableau or any other JDBC client to the project.
+6. [Exporting workspace tables to files](/workspace/table-export/) is the reference for the Storage API call that writes a workspace table to File Storage.
+7. [Workspace retention](/workspace/retention/) says when unused Snowflake and BigQuery workspaces are warned, deactivated and deleted.
+8. [Snowflake workspaces access changes](/workspace/snowflake-workspaces-access-changes/) lists the dated changes to direct Snowflake access and password authentication.
 
-![Workspace - Create Transformation](/workspace/create-transformation-2.png)
-
-You can also create workspaces from transformations.
-
-## Analytical Workspaces
-Apart from developing transformations, you can use workspaces to perform ad-hoc analysis 
-of production data of your choice. A workspace provides you with a safe and isolated environment
-where you can experiment. The input mapping isolation also means that you can work on live
-production projects without data in the workspace constantly changing — you update them
-on demand by loading data into the workspace.
-
-A comprehensive [video guide](https://www.youtube.com/watch?v=iQMnh9nqRiE) on this subject is available on our YouTube channel.
+**Next:** [Create a workspace and load data →](/workspace/create/)

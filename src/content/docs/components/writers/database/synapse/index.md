@@ -1,5 +1,6 @@
 ---
 title: Synapse
+lastUpdated: 2026-11-19
 slug: 'components/writers/database/synapse'
 description: 'Write Keboola tables to an Azure Synapse database on Azure stacks with a dedicated login, then set column types and full or incremental load.'
 redirect_from:
@@ -14,7 +15,7 @@ database and is **only available on the Azure [Keboola stacks](/overview/#stacks
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Synapse** data destination connector. Start
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Synapse** data destination connector. Start
 with **setting up database credentials** and provide a *host name*, *port*, *user name*, *password*, *database
 name*, and a *schema*.
 
@@ -93,4 +94,4 @@ This means that if the database is used by other applications which acquire tabl
 freeze waiting for the locks to be released.
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
-[incremental processing](/storage/tables/#incremental-processing).
+[incremental processing](/storage/tables/incremental-loading/#incremental-processing).

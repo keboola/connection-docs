@@ -1,5 +1,6 @@
 ---
 title: 'Keboola Platform Onboarding'
+lastUpdated: 2026-11-12
 slug: 'overview/onboarding'
 description: "Plan a Keboola rollout: write a usage blueprint, design your project architecture and data model, follow best practices, and govern usage and costs."
 redirect_from:

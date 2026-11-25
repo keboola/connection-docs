@@ -1,5 +1,6 @@
 ---
 title: GoodData
+lastUpdated: 2026-11-19
 slug: 'components/writers/bi-tools/gooddata'
 description: 'Write Keboola tables to a GoodData project and let the connector build its logical data model from the column types and date dimensions you set.'
 redirect_from:
@@ -21,7 +22,7 @@ the connector.
 
 ## Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **GoodData** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **GoodData** connector.
 
 The first step is to configure the GoodData project that will be used for writing:
 
@@ -104,7 +105,7 @@ Incremental load will keep the existing data in the GoodData project.
 It can be much faster, but the source data needs to be correctly prepared. 
 The incremental load relies on the following two features:
 
-- [Incremental processing](/storage/tables/#incremental-processing) in Storage, and
+- [Incremental processing](/storage/tables/incremental-loading/#incremental-processing) in Storage, and
 - Identity in GoodData; this can be either a `CONNECTION_POINT` column (which acts as a database primary key), or a [Fact Grain](https://help.gooddata.com/doc/enterprise/en/data-integration/data-modeling-in-gooddata/logical-data-model-components-in-gooddata/facts-in-logical-data-models#FactsinLogicalDataModels-FactDatasets) (which acts as a compound unique key). Fact Grain can be used when there is no single identifying column (i.e. there is no `CONNECTION_POINT`) and there is a combination of columns which can be used to identify rows. If there is no such combination, then incremental loading cannot be used.
 
 From the table configuration page, you can also **Run** a load of a single table. However, if the table has relations to other

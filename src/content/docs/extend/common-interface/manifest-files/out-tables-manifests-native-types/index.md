@@ -1,5 +1,6 @@
 ---
 title: /data/out/tables manifests with Native Types
+lastUpdated: 2026-11-19
 description: 'Output table manifest fields for Native Types, such as the schema field for typed columns, plus the dataTypeSupport levels, base types, and type conversions.'
 slug: 'extend/common-interface/manifest-files/out-tables-manifests-native-types'
 ---
@@ -71,7 +72,7 @@ The `schema` [optional] field allow you to create a table with Native Data Types
 Each object in the `schema` array represents one column:
 - The `name` [required] field specifies the column name.
 - The `data_type` [optional] field defines the data type for different [storage backends](/storage/#storage-data), referred to as "Native Types".
-  - The `base` [required] type is always required and can have values specified in the [Base Types documentation](/storage/tables/data-types/#base-types). 
+  - The `base` [required] type is always required and can have values specified in the [Base Types documentation](/storage/tables/data-types/reference/#base-types). 
   - Other types like Snowflake and BigQuery are optional and allows you to specify settings for a particular database backend.
 - The `nullable` [optional] field indicates if the column can be null.
 - The `primary_key` [optional] field specifies if the column is a primary key.

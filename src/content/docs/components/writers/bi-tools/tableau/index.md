@@ -1,5 +1,6 @@
 ---
 title: Tableau TDE
+lastUpdated: 2026-11-19
 slug: 'components/writers/bi-tools/tableau'
 description: 'Write Keboola tables to Tableau TDE files with column types and filters, then download them or upload them to Tableau Server, Dropbox or Google Drive.'
 redirect_from:
@@ -26,7 +27,7 @@ Getting Started walks through the pattern on a simpler destination first. You ca
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Tableau** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Tableau** connector.
 
 Then create a new table configuration by clicking the **New Table** button. Select a table
 from [Storage](/storage/tables/).
@@ -47,7 +48,7 @@ be part of the TDE file. When configuring the data types, use the *Preview* icon
 
 As optional last steps in table configuration, you can configure the name of the TDE file (useful for uploading to Dropbox or Google Drive)
 and *Table data filter*. The table data filter allows you to set a simple filter for one column or
-take advantage of [Incremental processing](/storage/tables/#incremental-processing) by writing only
+take advantage of [Incremental processing](/storage/tables/incremental-loading/#incremental-processing) by writing only
 recently modified data.
 
 ![Screenshot - Table Configuration Additional Settings](/components/writers/bi-tools/tableau/tableau-4.png)
@@ -73,7 +74,7 @@ but only one destination can be used for one connector configuration.
 ![Screenshot - Upload Destination](/components/writers/bi-tools/tableau/tableau-7.png)
 
 For [Dropbox](https://www.dropbox.com/) and [Google Drive](https://www.google.com/drive/) configurations click the
-**Authorize** button to [authorize](/components/#authorization) the respective service.
+**Authorize** button to [authorize](/components/authorization/) the respective service.
 
 For Google Drive, you may also select the destination
 folder. For Dropbox, the destination folder is always `Apps\Keboola Connection Writer V2\`.

@@ -1,5 +1,6 @@
 ---
 title: Azure Event Hub
+lastUpdated: 2026-11-19
 slug: 'components/writers/other/azure-event-hub'
 description: 'Publish Keboola table rows to Azure Event Hubs with a connection string and hub name, sending each row as JSON or the value of one column.'
 redirect_from:
@@ -19,7 +20,7 @@ There are two **mapping modes**:
  - **`column_value` mode**: message is the value of the specified column, from the table's row
  
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Azure Event Hub** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Azure Event Hub** connector.
 
 Fill in the **Connection String** and **Event Hub Name**. Then click **Save**.
 
@@ -33,9 +34,10 @@ Fill in the **Name**, and, optionally, the **Description**. Then click **Add Row
 
 ![Screenshot - Add Row Modal](/components/writers/other/azure-event-hub/add-row-modal.png)
 
-Click **New Table Input** to add one table to the [Input Mapping](/transformations/mappings/).
+Click **Add Table Input** to add one table to the [Input Mapping](/transformations/mappings/).
 
 ![Screenshot - Configuration Row](/components/writers/other/azure-event-hub/add-table.png)
+<!-- VERIFY(Nikita): reshoot this screenshot; it still shows the old New Table Input button, now Add Table Input. -->
 
 Fill in the **Source** table. You can also fill in other fields. Then click **Add Input**.
 

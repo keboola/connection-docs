@@ -1,6 +1,8 @@
 ---
 title: ČEPS
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/ceps'
+description: 'Extract public Czech electricity transmission data from the ČEPS API for a date range, picking endpoints and granularity; each endpoint loads its own table.'
 ---
 
 
@@ -10,8 +12,10 @@ This component enables you to extract publicly available data from the Ceps API.
 itself can be found on the [Ceps Data Website](https://www.ceps.cz/cs/data).
 
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **ČEPS** data source connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **ČEPS** data source connector.
 Specify the date from and date to which you want to extract data. You can use either an exact date in YYYY-MM-DD format,
 or you can set a relative date e.g. 1 month ago, 5 days ago, yesterday, now. Then set the endpoints and granularity 
 of those endpoints that you want to fetch. 
