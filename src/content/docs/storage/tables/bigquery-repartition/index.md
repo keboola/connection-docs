@@ -21,7 +21,7 @@ This guide applies to the BigQuery backend. To set the layout of a table that do
 | Add or change the partitioning of a table over 5 TiB | The [kbagent skill](#kbagent-skill), which copies the table in one job or in ranges |
 
 When only the clustering changes, change it in place. Use copy and swap for such a table only when the rows that
-are already in the table must be reclustered at once. <!-- pending DMD-3052 decision -->
+are already in the table must be reclustered at once.
 
 A table with a row access policy is not converted by copy and swap. The Storage copy reads the table through the
 policy: it copies only the rows that the service account of the project can see, it reports no error, and the row
@@ -226,4 +226,4 @@ write waits for a confirmation.
   ranges of the partitioning column, one transformation job per range. The validation includes the row count of each
   partition.
 - A table that needs only a clustering change is changed in place by default. The skill uses copy and swap for it
-  only when the existing rows must be reclustered at once. <!-- pending DMD-3052 decision -->
+  only when the existing rows must be reclustered at once.
