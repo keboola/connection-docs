@@ -54,6 +54,8 @@ on the table.
 - **Objects outside Storage.** Table-level IAM bindings that were set directly in BigQuery stay with the physical
   table, so after the swap they are on the old table. Search indexes are dropped by the swap. Record them before you
   start, apply the IAM bindings to the copy before the swap, and create the search indexes again after the swap.
+  BigQuery does not allow `CREATE SEARCH INDEX` in the Standard edition. When the project runs on that edition, a
+  dropped search index cannot be created again, so decide before you start whether the table can lose it.
 - **Policy tags.** The copy carries the policy tags of the source only when
   [BigQuery policy tags](/storage/byodb/bigquery-policy-tags/) are enabled for the backend and the project. Otherwise
   the copy is created without them.
@@ -125,7 +127,7 @@ table ID, so it reads the new table.
 ### 4. After the swap
 
 - Check the layout in the detail of the original table ID.
-- Create the search indexes again.
+- Create the search indexes again, where the BigQuery edition of the project allows it.
 - Read every alias of the table and compare its columns and its row count with the table.
 - Align the output mappings that load the table: set `time_partitioning`, `range_partitioning` and `clustering` to
   the new layout, or remove them. An output mapping that still requests the old layout loads the data and the table
