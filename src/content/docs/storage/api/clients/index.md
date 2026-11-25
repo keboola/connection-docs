@@ -1,5 +1,6 @@
 ---
 title: Storage API Clients
+lastUpdated: 2026-10-13
 slug: 'storage/api/clients'
 description: The client libraries for working with Keboola Storage from Python, PHP, R or the command line, and which one to pick.
 ---

@@ -1,5 +1,6 @@
 ---
 title: Share a bucket with other Snowflake accounts (share mode)
+lastUpdated: 2026-11-20
 slug: 'storage/bucket-exposure/snowflake-share'
 sidebar:
   label: Snowflake Share Mode

@@ -1,5 +1,6 @@
 ---
 title: Airtable
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/airtable'
 description: 'Fetch tables from an Airtable base with a read-only personal access token, filter records with a formula, and choose full or incremental load.'
 ---

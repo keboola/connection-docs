@@ -1,5 +1,6 @@
 ---
 title: Artifacts
+lastUpdated: 2026-10-13
 slug: 'extend/common-interface/artifacts'
 description: "What artifacts are, the extra files a component produces or consumes, and how they pass between jobs in a project. Preview feature."
 redirect_from:

@@ -1,5 +1,6 @@
 ---
 title: Login
+lastUpdated: 2026-11-18
 slug: 'components/extractors/generic-extractor/configuration/api/authentication/login'
 description: 'Configure login authentication in Generic Extractor: a one-time login request returns temporary credentials that authenticate all other API requests.'
 redirect_from:

@@ -1,5 +1,6 @@
 ---
 title: Intercom
+lastUpdated: 2026-11-19
 slug: 'components/extractors/communication/intercom'
 description: 'See which tables and columns the Intercom connector creates from users, leads, companies, notes and conversations with the Basic or Conversations template.'
 redirect_from:

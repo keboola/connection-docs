@@ -1,5 +1,6 @@
 ---
 title: YouTube Data API
+lastUpdated: 2026-11-19
 slug: 'components/extractors/social/youtube'
 description: 'Get basic data about your YouTube channels, playlists and videos with the Channels or Videos template, or write your own YouTube Data API jobs.'
 redirect_from:

@@ -1,5 +1,6 @@
 ---
 title: Create and manage a bucket exposure for BigQuery
+lastUpdated: 2026-11-20
 slug: 'storage/bucket-exposure/create'
 sidebar:
   label: BigQuery Exposures

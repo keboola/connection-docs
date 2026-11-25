@@ -1,5 +1,6 @@
 ---
 title: Dark Sky
+lastUpdated: 2026-11-19
 slug: 'components/extractors/other/dark-sky'
 description: 'The Dark Sky connector no longer works since its API ended in March 2023; see the input and output of existing configurations, or move to Weather API.'
 redirect_from:

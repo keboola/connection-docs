@@ -1,5 +1,6 @@
 ---
 title: Keboola User Documentation
+lastUpdated: 2026-11-18
 slug: ''
 description: 'Start here to find the Keboola overview, the getting started tutorial, support, and the main sections of the Keboola user documentation.'
 ---

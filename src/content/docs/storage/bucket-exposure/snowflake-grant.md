@@ -1,5 +1,6 @@
 ---
 title: Give Snowflake roles read access to a bucket (grant mode)
+lastUpdated: 2026-11-19
 slug: 'storage/bucket-exposure/snowflake-grant'
 sidebar:
   label: Snowflake Grant Mode

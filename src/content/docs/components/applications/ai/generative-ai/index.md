@@ -1,5 +1,6 @@
 ---
 title: Generative AI
+lastUpdated: 2026-11-19
 description: Query large language models from OpenAI, Azure OpenAI, Anthropic, Hugging Face, or Google with data from your Keboola project.
 slug: 'components/applications/ai/generative-ai'
 redirect_from:

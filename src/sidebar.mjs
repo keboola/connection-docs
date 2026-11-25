@@ -572,10 +572,15 @@ export const sidebar = [
         items: [
           { label: "Overview", slug: "transformations" },
           {
-            label: "Mappings",
+            label: "Input and Output Mapping",
             collapsed: true,
             items: [
               { label: "Overview", slug: "transformations/mappings" },
+              { slug: "transformations/mappings/input" },
+              { slug: "transformations/mappings/output" },
+              { slug: "transformations/mappings/partition-aware-import" },
+              { slug: "transformations/mappings/direct-mode" },
+              { slug: "transformations/mappings/direct-mode/set-up" },
               { slug: "transformations/mappings/bigquery-partitioning-clustering" },
             ],
           },

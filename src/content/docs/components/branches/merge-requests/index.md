@@ -1,5 +1,6 @@
 ---
 title: Merge Requests
+lastUpdated: 2026-11-20
 slug: 'components/branches/merge-requests'
 description: 'Review the changes in a development branch, send them as a merge request, approve and merge it, resolve conflicts, and require review with branch protection.'
 ---
@@ -163,6 +164,9 @@ sent for review or approved. What you can use depends on the state of the reques
 
 - **Resolve** and **Keep production version** work in every state, including **In Review** and
   **Ready to Merge**. They update only the conflicting configuration in your branch.
+  Resolving a conflict this way does not withdraw approvals that were already given. The merge applies the
+  branch as it is at the moment of merging, not as it was when it was approved. If the reviewers should look
+  at the result again, have one of them **Reject** the request and submit it again.
 - **Pull from Prod** and editing configurations yourself need a writable branch. While the request is
   **In Review** or **Ready to Merge**, the branch is read-only. To make it writable again, have a reviewer
   **Reject** the request, or **Cancel Request** and submit a new one when you are done. Then use

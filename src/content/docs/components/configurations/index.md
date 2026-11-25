@@ -1,5 +1,6 @@
 ---
 title: Create and manage configurations
+lastUpdated: 2026-11-20
 slug: 'components/configurations'
 sidebar:
   label: Configurations

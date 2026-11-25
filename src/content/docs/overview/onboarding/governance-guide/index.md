@@ -1,5 +1,6 @@
 ---
 title: 'Keboola Governance Guide'
+lastUpdated: 2026-11-12
 slug: 'overview/onboarding/governance-guide'
 description: 'Monitor project usage, attribute costs to teams and use cases, and keep access and security under control using Keboola telemetry.'
 redirect_from:

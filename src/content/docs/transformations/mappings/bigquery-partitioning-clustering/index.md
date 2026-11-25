@@ -4,7 +4,7 @@ slug: 'transformations/mappings/bigquery-partitioning-clustering'
 description: 'Set the partitioning and clustering of a BigQuery table created by a table output mapping, in the configuration or in the table manifest.'
 ---
 
-On the BigQuery backend, a [table output mapping](/transformations/mappings/#table-output-mapping) can set the
+On the BigQuery backend, a [table output mapping](/transformations/mappings/output/#table-output-mapping) can set the
 partitioning and the clustering of the destination table. The layout is applied when output mapping creates the
 table. Output mapping never changes the layout of a table that already exists; to convert an existing table, see
 [Repartition a BigQuery table](/storage/tables/bigquery-repartition/).
@@ -113,7 +113,7 @@ The table output mapping editor checks the options before the job runs:
 
 ## Direct Mode output mapping
 
-A [Direct Mode output mapping](/transformations/mappings/#direct-mode-output-mapping)
+A [Direct Mode output mapping](/transformations/mappings/direct-mode/)
 (`unload_strategy: direct-grant`) does not create its destination table. The transformation writes into a table that
 already exists, so output mapping has no table to apply the layout to. Create the table with the layout beforehand:
 
@@ -166,7 +166,7 @@ A value in the configuration overrides the value from the manifest:
 On an incremental load with a primary key, Keboola deduplicates the new rows against the destination table.
 Partitioning the table does not limit this step: the `MERGE` still reads the whole table. When the primary key
 contains the partitioning column, enable
-[Partition-aware import](/transformations/mappings/#partition-aware-import-bigquery) (`partition_aware_import`) in the
+[Partition-aware import](/transformations/mappings/partition-aware-import/) (`partition_aware_import`) in the
 same output mapping. The deduplication then reads only the partitions that the new rows belong to.
 
 ```json

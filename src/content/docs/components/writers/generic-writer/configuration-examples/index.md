@@ -1,5 +1,6 @@
 ---
 title: Generic Writer Configuration Examples
+lastUpdated: 2026-10-13
 slug: 'components/writers/generic-writer/configuration-examples'
 description: 'Copy sample Generic Writer configurations that iterate over rows, send batch events to Exponea, user events to Customer.io and notifications to Slack.'
 redirect_from:

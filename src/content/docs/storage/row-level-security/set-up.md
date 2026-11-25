@@ -1,5 +1,6 @@
 ---
 title: Set up row-level and column-level security
+lastUpdated: 2026-11-24
 slug: 'storage/row-level-security/set-up'
 sidebar:
   label: Set Up
@@ -160,6 +161,8 @@ kbagent workspace query --project my-project --workspace-id <governed-workspace-
 `<governed-workspace-id>` is the ID `workspace create --governed` printed. The query runs through Query Service with your Storage token, so it shows what you read as `keboola|<your administrator ID>`.
 
 **Result:** The query returns only the rows and columns the policy allows for that reader. If it is refused, or comes back empty when it should not, see [What users see](/storage/row-level-security/#what-users-see).
+
+<!-- Checked 2026-11-23 with kbagent 1.4.1 in project 264 (Snowflake), governed workspace, own test table: the query returned only the allowed rows and columns. VERIFY(Nikita, Storage team): for about 1-2 minutes after `cls create` and after deleting a policy, results flipped between consecutive queries, and a hidden column (`salary`) was readable in that window; after it, results were consistent. Is this propagation delay expected, and should the page tell readers to wait before relying on a new or changed policy? -->
 
 ## Apply policies to a Data App
 

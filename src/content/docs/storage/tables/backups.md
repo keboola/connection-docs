@@ -1,5 +1,6 @@
 ---
 title: Back up and restore tables
+lastUpdated: 2026-11-20
 slug: 'storage/tables/backups'
 sidebar:
   label: Back Up and Restore

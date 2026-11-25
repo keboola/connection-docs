@@ -120,7 +120,7 @@ table ID, so it reads the new table.
   configuration afterwards.
 - Resume the writers and check that the next load succeeds and keeps the layout.
 - When the table is loaded incrementally and its primary key contains the partitioning column, enable
-  [Partition-aware import](/transformations/mappings/#partition-aware-import-bigquery) in the output mapping that
+  [Partition-aware import](/transformations/mappings/partition-aware-import/) in the output mapping that
   loads it. Without it, the deduplication of each load still reads the whole table.
 
 ### 5. Roll back or clean up

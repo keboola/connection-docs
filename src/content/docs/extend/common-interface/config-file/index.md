@@ -1,5 +1,6 @@
 ---
 title: Configuration File Specification
+lastUpdated: 2026-11-20
 slug: 'extend/common-interface/config-file'
 description: 'Lists the config.json root nodes (storage, parameters, image_parameters, authorization, action), how the state file works, and mapping examples.'
 ---
@@ -278,11 +279,11 @@ The tables element in a configuration of the **output mapping** is an array and 
   - `enclosure`
   - `write_always`
   - `partition_aware_import` - BigQuery only; limits the deduplication of an incremental load to the destination partitions
-    present in the loaded data (see [Partition-aware import](/transformations/mappings/#partition-aware-import-bigquery))
+    present in the loaded data (see [Partition-aware import](/transformations/mappings/partition-aware-import/))
   - `import_method` - `auto` (default), `single_statement` or `multi_statement`; chooses how Snowflake writes the
     destination table. `auto` is safe on every backend; `single_statement` or `multi_statement` for a table in a
     non-Snowflake bucket fails with `storage.tables.importMethodNotSupported`
-    (see [Import method](/transformations/mappings/#import-method-snowflake))
+    (see [Import method](/transformations/mappings/output/#import-method-snowflake))
   - `time_partitioning`, `range_partitioning`, `clustering` - BigQuery only; the partitioning and the clustering of the
     destination table when the output mapping creates it
     (see [BigQuery partitioning and clustering](/transformations/mappings/bigquery-partitioning-clustering/))
@@ -778,7 +779,7 @@ If that file is not present in the `/data/out/files` folder, an error will be th
 [development branches](/extend/common-interface/development-branches/), because a job running in a
 development branch cannot write tags back to files in production storage. New configurations should not
 use it, and the UI no longer offers it. Existing configurations continue to work. To process files
-incrementally, use [incremental file processing](/transformations/mappings/#incremental-file-processing)
+incrementally, use [incremental file processing](/transformations/mappings/input/#incremental-file-processing)
 instead.
 
 The following describes the legacy `processed_tags` behavior, retained for reference only.

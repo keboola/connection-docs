@@ -1,5 +1,6 @@
 ---
 title: Facebook Ads
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/facebook-ads'
 description: 'Extract ads, ad sets, campaigns and ads insights from Facebook Ad Accounts through the Marketing API, with queries that set the endpoint, fields and dates.'
 redirect_from:
