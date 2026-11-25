@@ -946,6 +946,9 @@ items:
       - url: /ai/semantic-layer/
         title: Semantic Layer
 
+      - url: /ai/docs-for-agents/
+        title: Use these docs with your AI agent
+
   - title: Develop and integrate
     collapsed: false
     items:

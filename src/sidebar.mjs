@@ -722,6 +722,7 @@ export const sidebar = [
       { slug: "ai/ai-kit" },
       { slug: "ai/mcp-server" },
       { slug: "ai/semantic-layer" },
+      { slug: "ai/docs-for-agents" },
     ],
   },
   {
