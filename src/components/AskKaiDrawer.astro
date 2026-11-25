@@ -34,7 +34,7 @@
         <div class="ak-suggestions">
           <button type="button" class="ak-suggestion" data-ask-kai-prompt>How do I set up a flow with conditional steps?</button>
           <button type="button" class="ak-suggestion" data-ask-kai-prompt>What backends does Keboola Storage support?</button>
-          <button type="button" class="ak-suggestion" data-ask-kai-prompt>How do I deploy a Streamlit data app?</button>
+          <button type="button" class="ak-suggestion" data-ask-kai-prompt>How do I deploy a Streamlit app?</button>
         </div>
       </div>
     </section>
@@ -45,6 +45,7 @@
         name="message"
         placeholder="Ask a question about the docs…"
         rows="1"
+        maxlength="2000"
         required
         aria-label="Your question"
       ></textarea>
@@ -248,7 +249,14 @@
           body: JSON.stringify({ message: trimmed, sessionId }),
           signal,
         });
-        if (!res.ok || !res.body) throw new Error(`Network error (${res.status})`);
+        if (!res.ok) {
+          // The proxy answers 400 (too long, empty) and 429 (rate limit) with a
+          // JSON { error } written for readers; show it instead of a status code.
+          let detail = '';
+          try { detail = (await res.json())?.error || ''; } catch { /* not JSON */ }
+          throw new Error(detail || `Network error (${res.status})`);
+        }
+        if (!res.body) throw new Error(`Network error (${res.status})`);
 
         const reader = res.body.getReader();
         const decoder = new TextDecoder();
@@ -472,6 +480,13 @@
     document.addEventListener('astro:page-load', ensureSearchKaiCta);
 
     // ─── Wire triggers ───────────────────────────────────────────────
+    // Other components open the drawer with a suggested question by
+    // dispatching `kbc:ask-kai` with { detail: { prefill } }. A draft the
+    // reader already typed wins over the suggestion.
+    document.addEventListener('kbc:ask-kai', (e) => {
+      const prefill = (e as CustomEvent<{ prefill?: string }>).detail?.prefill;
+      openDrawer(input.value.trim() ? undefined : prefill);
+    });
     document.addEventListener('click', (e) => {
       const t = e.target as HTMLElement | null;
       if (!t) return;

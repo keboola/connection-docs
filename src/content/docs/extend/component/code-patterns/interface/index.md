@@ -1,6 +1,8 @@
 ---
 title: Code Pattern Interface
+lastUpdated: 2026-10-13
 slug: 'extend/component/code-patterns/interface'
+description: 'Specifies the generate action of a code pattern component, the config.json keys it gets, the JSON it writes to stdout and its Developer Portal settings.'
 ---
 
 
@@ -46,7 +48,7 @@ This section shows how the code generation process works from start to end:
 ## Generate Action
 There are two types of component actions: 
 
-- [Asynchronous, background](/integrate/jobs/) **run** actions
+- [Asynchronous, background](/extend/jobs/) **run** actions
 - [Synchronous actions](/extend/common-interface/actions/) with limited execution time
 
 Code patterns do not implement the **run** action. They only implement the **generate** [synchronous action](/extend/common-interface/actions/).

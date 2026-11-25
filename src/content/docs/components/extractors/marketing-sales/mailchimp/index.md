@@ -1,6 +1,8 @@
 ---
 title: Mailchimp
+lastUpdated: 2026-11-19
 slug: 'components/extractors/marketing-sales/mailchimp'
+description: 'Extract lists and members, campaigns, automations and reports from Mailchimp with your data center, username and API key, choosing a configuration template.'
 redirect_from:
     - /extractors/marketing-sales/mailchimp/
 ---
@@ -11,6 +13,8 @@ The Mailchimp data source connector uses the [Mailchimp API](https://mailchimp.c
 mailing lists sent by the [Mailchimp](https://mailchimp.com/) service. It downloads configured reports for all specified accounts,
 importing data such as list and members, campaigns, automations, reports, reports with click details, member activity, etc.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 Before you start, have a working [Mailchimp](https://login.mailchimp.com/signup/) account filled with [data](https://us13.admin.mailchimp.com/campaigns/)
 and an API key.
 
@@ -19,7 +23,7 @@ To gain access to the Mailchimp API, log in to [Mailchimp](https://mailchimp.com
 It will look like this: c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13.
 
 ## Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **Mailchimp** connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Mailchimp** connector.
 
 Fill in the **data center** for your account, your account **username** and the **API key**:
 Optionally name the **storage bucket** where your results will be stored.
@@ -40,7 +44,7 @@ Available templates:
 
 **Save** the configuration before you run the extraction.
 
-You can also [switch to the JSON editor](/components/extractors/other/generic/#template-mode).
+You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
 
 ## API Limits
 Each user account is permitted up to 10 simultaneous connections, and you’ll receive an error message if you reach the limit.

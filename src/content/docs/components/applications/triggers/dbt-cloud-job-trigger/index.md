@@ -1,14 +1,18 @@
 ---
 title: dbt Cloud Job Trigger
+lastUpdated: 2026-11-23
 slug: 'components/applications/triggers/dbt-cloud-job-trigger'
+description: 'Trigger a dbt Cloud job from Keboola with your account ID, job ID and API key, optionally wait for the run, and store its results and artifacts.'
 ---
 
 
 
-The dbt Cloud Job Trigger is used for triggering [dbt Cloud](https://www.getdbt.com/product/what-is-dbt) jobs.
+The job itself runs in [dbt Cloud](https://www.getdbt.com/product/what-is-dbt). The trigger starts it through the dbt Cloud API and records the response in the `dbt_cloud_trigger` table.
+
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Create New Configuration
-[Create a new configuration](/components/#creating-component-configuration) of the **dbt Cloud Job Trigger** application.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **dbt Cloud Job Trigger** application.
 Then fill in your Account ID, Job ID and API key. You also have the option to choose a custom Cause message to identify the trigger.
 It saves the response from [triggerRun](https://docs.getdbt.com/dbt-cloud/api-v2#tag/Jobs/operation/triggerRun) into the table dbt_cloud_trigger.
 If you check the **Wait for result** option, the component will wait for the job to finish for the maximum time set via the **Max wait time** field after it has been triggered. Then it will store the result of [getRunById](https://docs.getdbt.com/dbt-cloud/api-v2#tag/Runs/operation/getRunById) into the table dbt_cloud_run. It will also store all available artifacts, unless you turn that off with **Don't store artifacts**.
@@ -28,6 +32,8 @@ If you check the **Wait for result** option, the component will wait for the job
 You can find out how to get a service account token in the [dbt Cloud documentation](https://docs.getdbt.com/docs/dbt-cloud-apis/service-tokens).
 
 ## Notes on Artifacts Usage 
-In order to be able to use Keboola artifacts, the project must have the ```artifact``` feature enabled. You can find more information about this in [Keboola's docs](https://developers.keboola.com/integrate/artifacts/).
+In order to be able to use Keboola artifacts, the project must have the ```artifact``` feature enabled. You can find more information about this in [Keboola's docs](/extend/common-interface/artifacts/).
 
+---
 
+**Next:** [Deepnote Notebook Execution Trigger →](/components/applications/triggers/deepnote-notebook-execution-trigger/)

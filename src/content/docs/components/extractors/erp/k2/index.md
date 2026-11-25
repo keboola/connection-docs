@@ -1,6 +1,8 @@
 ---
 title: K2
+lastUpdated: 2026-11-19
 slug: 'components/extractors/erp/k2'
+description: 'Fetch K2 ERP data objects through the K2 API with a username, password and optional SSH tunnel, in full load or in incremental load between two dates.'
 ---
 
 
@@ -8,9 +10,11 @@ slug: 'components/extractors/erp/k2'
 K2 is an ERP information system for managing production, inventory, financials, and more.
 This component fetches defined data objects from the K2 API.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Authorization Configuration
 
-[Create a new configuration](/components/#creating-component-configuration) of the **K2** data source connector.
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **K2** data source connector.
 Once you have a new configuration of the K2 component, start by authorizing the component. To authorize the component
 open the K2 authorization configuration settings.
 

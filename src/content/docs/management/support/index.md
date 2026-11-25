@@ -1,5 +1,7 @@
 ---
 title: Keboola Support
+lastUpdated: 2026-11-18
+description: 'Get help from Keboola support from inside your project, control support users'' access to it, and what to do if you are locked out of Keboola.'
 slug: 'management/support'
 ---
 

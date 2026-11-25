@@ -1,6 +1,8 @@
 ---
 title: API Tokens
+lastUpdated: 2026-11-19
 slug: 'management/project/tokens'
+description: 'Learn what Keboola API tokens are, how master tokens differ from limited ones, and how to create, refresh and share a token with restricted access.'
 redirect_from:
   - /storage/tokens/
 ---
@@ -21,11 +23,13 @@ Normally, when you are using the user interface, your API token is exchanged aut
 the server backend. Therefore you need to work with tokens only when working with Keboola programmatically 
 (or if you need to limit a user's authorization to certain operations or data). 
 To learn more about all the available programmatic approaches, please follow our 
-[developers documentation](https://developers.keboola.com/overview/api/).
+[developers documentation](/overview/api/).
 
 Tokens can be managed from the **Project Settings > API Tokens** page.
 
 ![Screenshot - Storage Tokens](/management/project/tokens/API_tokens.png)
+
+<!-- Explanation-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 ## Master Tokens
 Tokens that belong to project administrators are called **master tokens**. Their description is 
@@ -43,13 +47,13 @@ API tokens are created
 1. automatically when joining a project (master token).
 2. automatically when creating a new configuration of certain components (for example, flows).
 3. automatically when running a JupyterLab workspace.
-4. automatically when using [external OAuth](/components/#external-authorization) authorization.
+4. automatically when using [external OAuth](/components/authorization/#ask-the-account-owner-to-authorize) authorization.
 5. manually when needed.
 
 Automatically created tokens have the lowest possible permissions for their task and also set expiration if possible.
 These are the typical reasons to manually create a new API token:
 
-- You want to use the [APIs](https://developers.keboola.com/overview/api/); this includes all of the [Storage clients](https://developers.keboola.com/integrate/storage/#storage-api-clients).
+- You want to use the [APIs](/overview/api/); this includes all of the [Storage clients](https://developers.keboola.com/integrate/storage/#storage-api-clients).
 - You need to limit access to certain data (for example, share a single table) or components.
 
 Although tokens cannot be used to directly log in to the Keboola user interface, they do allow executing almost all 
@@ -96,7 +100,8 @@ You can also limit the token validity.
 ![Screenshot - Access Tokens](/management/project/tokens/access-token-detail.png)
 
 You can see and copy the token only once — right after it was created. If you
-need to access the token later, you can [share it](#sharing-token).
+need the token value later, [refresh the token](#refreshing-token) to get a new value. The old value stops
+working immediately, so update every script and integration that uses it.
 
 ![Screenshot - Access Tokens](/management/project/tokens/access-token-detail-2.png)
 
@@ -117,12 +122,12 @@ You would then create a token that is authorized for running the **MySQL databas
 *Note: For historical reasons, specifying the Orchestrator component in component permissions is optional. 
 This means that the token will also work if it has access to no components.*
 
-You can then [share the token](#sharing-token) to the person responsible for the database process and be 
+You can then give the token to the person responsible for the database process and be 
 sure that they can use only that particular component in that particular bucket. They will be even able to 
 reconfigure it — e.g., update the extraction queries (but only via the API).
 Also, writing to a limited set of buckets is a good way of preventing accidentally overwriting data.
 
-You can also specify if a token is allowed to delete configurations in [Trash](/components/#delete-configuration) by 
+You can also specify if a token is allowed to delete configurations in [Trash](/components/configurations/#delete-and-restore-a-configuration) by 
 selecting **Full Access** for Trash. This is rarely needed.
 
 ## Refreshing Token
@@ -135,16 +140,19 @@ A confirmation dialog is displayed. When you click **Refresh**, the old token wi
 
 ![Screenshot - Refresh Token Detail](/management/project/tokens/refresh-token-detail.png)
 
-A new token is generated. Now you can copy it or send it to someone.
+A new token is generated. Copy the new value now; it is shown only once.
 
 ![Screenshot - Refresh Token Done](/management/project/tokens/refresh-token-done.png)
 
 ## Sharing Token
-An existing token can be shared to an arbitrary email address (including yours). You can
-share a token by clicking the **Send Token** button. Note that master tokens cannot be shared. 
+:::caution[Deprecated]
+Sending a token via email (the **Send via email** button) is deprecated and will be removed on February 4, 2027.
+To get a token value again, [refresh the token](#refreshing-token); the old value stops working immediately. See the
+[announcement](https://changelog.keboola.com/sending-api-tokens-via-email-will-be-removed-on-february-4-2027/) for details.
+:::
 
-**Important:** Always use the **Send Token** feature instead of copying and sending the token yourself. 
-This is more secure because it does not actually send the token, only a link to retrieve it.
+An existing token can be shared to an arbitrary email address (including yours). You can
+share a token by clicking the **Send via email** button. Note that master tokens cannot be shared. 
 
 ![Screenshot - Access Tokens](/management/project/tokens/send-token-button.png)
 
@@ -163,7 +171,7 @@ people can send data directly to your Keboola project instead of struggling with
 To revoke the access, simply delete or refresh the token.
 
 The token can then be used with the [Storage API](https://developers.keboola.com/integrate/) 
-or [other APIs](https://developers.keboola.com/overview/api/). 
+or [other APIs](/overview/api/). 
 
 ### Storage Console
 Typical usecase of sharing a token with someone is giving them a partial access to your project storage. The 
@@ -177,8 +185,12 @@ The Storage Console allows some basic operations with the project [Storage](/sto
 ![Screenshot - Storage Console](/management/project/tokens/storage-console.png)
 
 The link to the Storage API Console is available at the token retrieval page as it is different for each 
-[region](https://developers.keboola.com/overview/api/):
+[region](/overview/api/):
 
 - [AWS US Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.keboola.com)
 - [AWS EU Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.eu-central-1.keboola.com)
 - [Azure EU Region](https://storage-api-console.keboola.com/?endpoint=https%3A%2F%2Fconnection.north-europe.azure.keboola.com)
+
+---
+
+**Next:** [Limits & Project Power →](/management/project/limits/)

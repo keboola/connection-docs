@@ -1,5 +1,7 @@
 ---
 title: PHP Implementation Notes
+lastUpdated: 2026-11-18
+description: 'Write a Keboola component in PHP: choosing a base image, handling dependencies, reading the configuration, and working with input and output mapping.'
 slug: 'extend/component/implementation/php'
 redirect_from:
     - /extend/custom-science/php/

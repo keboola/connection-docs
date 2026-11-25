@@ -1,0 +1,46 @@
+---
+title: Bearer Token Authentication
+lastUpdated: 2026-11-18
+slug: 'components/extractors/generic-extractor/configuration/api/authentication/bearer_token'
+description: 'Set up bearer token authentication in Generic Extractor: a token sent in the Authorization header, in the UI or built with the concat function in JSON.'
+redirect_from:
+    - /extend/generic-extractor/configuration/api/authentication/bearer_token/
+---
+
+<!-- Reference-type page. Content not yet re-verified against keboola/generic-extractor; see PRDCT-676. -->
+
+This method is available through UI. You can select the `Bearer Token` method and fill in the token.
+
+![img.png](/components/extractors/generic-extractor/configuration/api/authentication/bearer.png)
+
+### JSON
+
+In the underlying JSON, the Bearer Token is implemented as follows:
+
+Place your token into the `config.#__BEARER_TOKEN` parameter. The `Authorization` header is then constructed using the `concat` function.
+
+```json
+{
+    "api": {
+        ...,
+        "http": {
+      "headers": {
+        "Authorization": {
+          "function": "concat",
+          "args": [
+            "Bearer ",
+            {
+              "attr": "#__BEARER_TOKEN"
+            }
+          ]
+        }
+      }
+    }
+    },
+    "config": {
+       "#__BEARER_TOKEN": "secret",
+       "jobs": [...]
+    }
+}
+```
+

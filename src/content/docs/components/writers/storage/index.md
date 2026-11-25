@@ -1,6 +1,8 @@
 ---
 title: Storage Data Destination Connectors
+lastUpdated: 2026-10-13
 slug: 'components/writers/storage'
+description: 'Pick the connector that writes tables or files to AWS S3, Dropbox, Google Cloud Storage, Google Drive and Sheets, OneDrive, SFTP or another Keboola project.'
 redirect_from:
     - /writers/storage/
 
@@ -8,6 +10,8 @@ redirect_from:
 
 Data destination connectors export data from Keboola to external systems. The following data destination connectors
 allow you to push data to generic storage services:
+
+<!-- Reference-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
 - [AWS S3](/components/writers/storage/aws-s3/) — writes CSV files to a single AWS S3 bucket with additional postprocessing.
 - [Dropbox](/components/writers/storage/dropbox/) — writes CSV files to a Dropbox account.

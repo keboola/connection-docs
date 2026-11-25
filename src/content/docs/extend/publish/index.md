@@ -1,6 +1,8 @@
 ---
 title: Publish Component
+lastUpdated: 2026-10-13
 slug: 'extend/publish'
+description: 'Request publication of a component in the Developer Portal and meet the review rules for its name, descriptions, icon, configuration schema and error handling.'
 redirect_from:
     - /extend/registration/checklist/
     - /extend/registration/
@@ -20,6 +22,8 @@ That being said, any Keboola user can use any component, unless
 If you have not yet created your component, please go through the [tutorial](/extend/component/tutorial/), which will
 navigate you through creating an account in the [Developer Portal](https://components.keboola.com/) and
 [initializing the component](/extend/component/tutorial/).
+
+<!-- How-to-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ## Publishing Component
 A non-published component can be used without limitations, but it is not offered in the Keboola UI. It can only be used via
@@ -85,7 +89,7 @@ ZAR). The rates are available for all working days from 4 January 1999 up to pre
 
 - Use only the necessary [UI options](/extend/component/ui-options/) (i.e., if there are no output files, do not use `genericDockerUI-fileOutput`).
 - For extractors, always use the [default bucket](/extend/common-interface/folders/#default-bucket) — do not use the `genericDockerUI-tableOutput` flag.
-- Use [encryption](/overview/encryption/) to store sensitive values. No plain-text passwords!
+- Use [encryption](/extend/encryption/) to store sensitive values. No plain-text passwords!
 - Use a [configuration schema](/extend/component/ui-options/configuration-schema/).
     - List all properties in the `required` field.
     - Always use `propertyOrder` to explicitly define the order of the fields in the form.
@@ -122,3 +126,7 @@ the **Component Limits**.
 ### Checklist
 
 Before requesting to publish a component, please check all rules using [this checklist](/extend/publish/checklist).
+
+---
+
+**Next:** [Checklist →](/extend/publish/checklist/)

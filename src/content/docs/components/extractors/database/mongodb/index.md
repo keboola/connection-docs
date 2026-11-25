@@ -1,6 +1,8 @@
 ---
 title: MongoDB
+lastUpdated: 2026-11-19
 slug: 'components/extractors/database/mongodb'
+description: 'Export MongoDB collections into Keboola tables with a query, sort and limit, in raw mode or with a mapping, and fetch only new or changed records.'
 redirect_from:
     - /extractors/database/mongodb/
 ---
@@ -11,8 +13,10 @@ The MongoDB data source connector allows you to fetch data from the NoSQL [Mongo
 Version 4.2 may work, though it is not guaranteed, and lower version are not supported due to `mongoexport` compatibility.
 Follow these steps to configure it.
 
+<!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
 ## Set Up Database Credentials
-[Create a new configuration](/components/#creating-component-configuration), click **Set Up Database Credentials**, and complete the form. 
+[Create a new configuration](/components/configurations/#create-a-configuration), click **Set Up Database Credentials**, and complete the form. 
 Then test the credentials and save them. Optionally, set up an [SSH tunnel](/components/extractors/database/#connecting-to-database).
 
 ![MongoDB new credentials](/components/extractors/database/mongodb/mongodb-1.png)

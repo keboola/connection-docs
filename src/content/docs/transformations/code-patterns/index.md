@@ -1,5 +1,7 @@
 ---
 title: Code Patterns
+lastUpdated: 2026-11-18
+description: 'Generate transformation code from a form with a Code Pattern: where to find patterns, creating a transformation, mapping, parameters, and generated code.'
 slug: 'transformations/code-patterns'
 ---
 
@@ -54,16 +56,16 @@ Follow the instructions at the top of the configuration page.
 
 The user interface of the configuration consists of the following:
 1. Instructions on how to set up the code pattern correctly
-2. [Table Input Mapping](/transformations/mappings/#table-input-mapping)
-3. [Table Output Mapping](/transformations/mappings/#table-output-mapping)
+2. [Table Input Mapping](/transformations/mappings/input/#table-input-mapping)
+3. [Table Output Mapping](/transformations/mappings/output/#table-output-mapping)
 4. [Parameters Form](#parameters-form) of the code pattern
 5. **Generate Code** button
 6. Read-only [generated code](#generated-code)
 
 ### Input and Output Mapping
 
-Table [Input](/transformations/mappings/#table-input-mapping) 
-and [Output](/transformations/mappings/#table-output-mapping) Mapping can be created either
+Table [Input](/transformations/mappings/input/#table-input-mapping) 
+and [Output](/transformations/mappings/output/#table-output-mapping) Mapping can be created either
 - **manually** as in ordinary transformations, or
 - **automatically**, generated together with the code if the component supports it.
 

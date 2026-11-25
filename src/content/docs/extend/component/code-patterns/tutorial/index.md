@@ -1,6 +1,8 @@
 ---
 title: Code Pattern Quick Start
+lastUpdated: 2026-10-13
 slug: 'extend/component/code-patterns/tutorial'
+description: 'Build a code pattern component on top of the component quick start, test its generate action through the API and attach it to a transformation.'
 ---
 
 
@@ -9,6 +11,8 @@ Their behavior is specified in their  [interface](/extend/component/code-pattern
 
 The instructions below refer to the general [component quick start](/extend/component/tutorial/), 
 highlighting the steps specific to code patterns.
+
+<!-- How-to-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
 ## Creating Component
 First, follow the common steps for [creating a component](/extend/component/tutorial/):
@@ -80,7 +84,7 @@ You have created an empty transformation.
 /admin/projects/{PROJECT_ID}/transformations-v2/{COMPONENT_ID}/{CONFIGURATION_ID}
 ```
 
-**Set the code pattern to the transformation via [Storage API](https://developers.keboola.com/overview/api/).**
+**Set the code pattern to the transformation via [Storage API](/storage/api/configurations/).**
 
 Load the configuration in the JSON format via the [Configuration Detail](https://api.keboola.com/?service=storage#get-/v2/storage/branch/-branchId-/components/-componentId-/configs/-configurationId-) API call.
 
