@@ -4,11 +4,11 @@ lastUpdated: 2026-11-20
 slug: 'storage/tables/backups'
 sidebar:
   label: Back Up and Restore
-description: 'Restore a Storage table to an earlier point in time with time travel on Snowflake, or copy it with table snapshots on any backend.'
+description: 'Restore a Storage table to an earlier point in time with time travel on Snowflake or BigQuery, or copy it with table snapshots on any backend.'
 search_keywords: [backup, restore, time travel, snapshot, table snapshot, revert table, copy table]
 ---
 
-There are two methods available for backing up and restoring data: time travel restore, available only for the Snowflake backend, and snapshots, available for all backends. This page shows both. Each starts from the table detail of the table you want to restore or copy.
+There are two methods available for backing up and restoring data: time travel restore, available for the Snowflake and BigQuery backends, and snapshots, available for all backends. This page shows both. Each starts from the table detail of the table you want to restore or copy.
 
 <!-- How-to-type page. Source: the former backups page on main; text carried over and checked against it 2026-11-19. Tab, menu and button names in the steps were checked in the UI of project 264 on 2026-11-20; the screenshots date from 2019. -->
 
@@ -19,7 +19,10 @@ There are two methods available for backing up and restoring data: time travel r
 
 **Goal:** a new table that is an exact replica of an existing table as it was at a point in time you choose.
 
-Every project with a Snowflake backend can create an exact replica of a table at any point in time up to the [limit set](/management/project/) for the project.
+Projects with a Snowflake or BigQuery backend can create an exact replica of a table at any point in time up to the [limit set](/management/project/) for the project.
+<!-- VERIFY(Nikita, Storage team): how far back time travel reaches differs by backend. On Snowflake it follows the project's data-retention setting; on BigQuery the ceiling is the dataset's own time-travel window, which BigQuery caps at 7 days (2-7 configurable). Confirm what a BigQuery project is actually allowed before documenting a number here. -->
+
+Time travel restore is not available on [Pay As You Go](/management/payg-project/) projects.
 
 1. Open the table detail, click **⋮** (**More actions**, top right) and select **Restore**. The dialog
    **Restore Table Using Time Travel** opens.
