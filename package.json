@@ -22,7 +22,7 @@
     "@astrojs/sitemap": "^3.7.4",
     "@astrojs/starlight": "^0.42",
     "@vercel/functions": "^3.11.3",
-    "astro": "^7.2.10",
+    "astro": "^7.4.13",
     "marked": "^18.0.4",
     "remark-directive": "^4.0.0",
     "remark-parse": "^11.0.0",
