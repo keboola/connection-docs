@@ -10,9 +10,14 @@ Video:
 
 ## Local Development
 
-Let's set up the local development with [Keboola CLI](https://developers.keboola.com/cli/).
+Local development runs on the **Keboola as Code CLI** (`kbc`), a separate tool from
+[kbagent](/cli/). Its reference documentation has been retired; the tool itself lives at
+[keboola/keboola-as-code](https://github.com/keboola/keboola-as-code), and the install commands
+you need are below.
 
-It is easy on Mac with [homebrew](https://docs.brew.sh/Installation.html) support (other platforms covered in the [documentation](https://developers.keboola.com/cli/installation/)):
+### Install
+
+**macOS**, with [Homebrew](https://docs.brew.sh/Installation.html):
 
 ```bash
 brew tap keboola/keboola-cli
@@ -20,10 +25,73 @@ brew install keboola-cli
 kbc --version
 ```
 
-If you already have CLI, make sure you have the most updated version:
+**Debian / Ubuntu:**
 
 ```bash
-brew upgrade keboola-cli
+sudo wget -P /etc/apt/trusted.gpg.d https://cli-dist.keboola.com/deb/keboola.gpg
+echo "deb https://cli-dist.keboola.com/deb /" | sudo tee /etc/apt/sources.list.d/keboola.list
+sudo apt-get update
+sudo apt-get install keboola-cli
+kbc --version
+```
+
+**Fedora:**
+
+```bash
+sudo rpm --import https://cli-dist.keboola.com/rpm/keboola.gpg
+echo "[keboola]
+name=keboola
+baseurl=https://cli-dist.keboola.com/rpm
+enabled=1
+gpgcheck=1
+gpgkey=https://cli-dist.keboola.com/rpm/keboola.gpg
+" | sudo tee /etc/yum.repos.d/keboola.repo
+sudo dnf install keboola-cli
+kbc --version
+```
+
+**Alpine:**
+
+```bash
+echo "https://cli-dist.keboola.com/apk" | sudo tee -a /etc/apk/repositories
+sudo wget -P /etc/apk/keys/ https://cli-dist.keboola.com/apk/keboola.rsa.pub
+sudo apk update
+sudo apk add keboola-cli
+kbc --version
+```
+
+**Windows**, with one of [WinGet](https://apps.microsoft.com/detail/9NBLGGH4NNS1), [Chocolatey](https://chocolatey.org/install) or [Scoop](https://scoop.sh/):
+
+```shell
+winget install --id=Keboola.KeboolaCLI -e
+```
+
+```shell
+choco install keboola-cli
+```
+
+```shell
+scoop bucket add keboola https://github.com/keboola/scoop-keboola-cli.git
+scoop install keboola/keboola-cli
+```
+
+An [MSI installer](https://cli-dist.keboola.com/?prefix=msi/) and [precompiled binaries](https://cli-dist.keboola.com/?prefix=zip/) are also available.
+
+### Upgrade
+
+Upgrade with the package manager you installed it with, then check the version:
+
+| Platform | Command |
+|---|---|
+| macOS | `brew upgrade keboola-cli` |
+| Debian / Ubuntu | `sudo apt-get update && sudo apt-get install --only-upgrade keboola-cli` |
+| Fedora | `sudo dnf upgrade keboola-cli` |
+| Alpine | `sudo apk update && sudo apk upgrade keboola-cli` |
+| Windows (WinGet) | `winget upgrade --id=Keboola.KeboolaCLI -e` |
+| Windows (Chocolatey) | `choco upgrade keboola-cli` |
+| Windows (Scoop) | `scoop update keboola/keboola-cli` |
+
+```bash
 kbc --version
 ```
 

@@ -37,7 +37,7 @@ While this makes some operations seemingly unnecessarily complicated, it ensures
 are repeatable and you can't inadvertently overwrite data in the project Storage. For ad-hoc
 operations, we recommend you use **[workspaces](/workspace/)**. For
 bulk operations, consider taking advantage of **[variables](/components/variables/)**
-and [programmatic automation](https://developers.keboola.com/automate/).
+and [programmatic automation](/flows/).
 
 ## Input mapping
 

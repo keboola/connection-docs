@@ -116,7 +116,7 @@ in the history of **versions**.
 programmatically using [the API](/overview/api/). In other words, all configuration modifications are recorded.
 
 All of the operations can be [accessed via an API](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/components/-componentId-/configs).
-The [developer guide](https://developers.keboola.com/integrate/storage/api/configurations/) explains how to work with configurations.
+The [Component Configurations API](/storage/api/configurations/) page explains how to work with configurations.
 
 **Important**: Component configurations do not count towards your project quota.
 

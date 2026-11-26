@@ -21,7 +21,7 @@ Debug mode shows the JSON behind a [component configuration](/components/configu
 
 2. By editing the full JSON configuration, you can set up the component (all options are
    described in the component's documentation, linked as **Documentation** under **Additional Links** at the top of the configuration) and the processors (to learn more about processors,
-   see the [Developers Docs](https://developers.keboola.com/extend/docker-runner/processors/)).
+   see [Processors](/extend/component/processors/)).
 3. Save the configuration.
 
 **Result:** the component runs with the JSON you saved. Changing the JSON configuration may render the visual form unable to represent the configuration, and switching back may be disabled. Reverting such changes will re-enable the visual form. But the JSON will translate back

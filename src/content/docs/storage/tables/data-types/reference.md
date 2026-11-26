@@ -15,7 +15,7 @@ Look up how Storage represents column data types: the base types, the two ways t
 ## Base types
 Source data types are mapped to a destination using a **base type**. The current base types are `STRING`, `INTEGER`, `NUMERIC`, `FLOAT`, `BOOLEAN`, `DATE`, and `TIMESTAMP`. For example, a MySQL extractor may store a column with the data type `BIGINT`. This type is mapped to the `INTEGER` base type, ensuring high interoperability between components. 
 
-For detailed mappings, please refer to the [conversion table](https://developers.keboola.com/extend/common-interface/manifest-files/out-tables-manifests-native-types/#data-type-conversions). You can also view the extracted data types in the [storage table](/storage/tables/) detail.
+For detailed mappings, please refer to the [conversion table](/extend/common-interface/manifest-files/out-tables-manifests-native-types/#data-type-conversions). You can also view the extracted data types in the [storage table](/storage/tables/) detail.
 
 When a component describes its output with base types, a source type that has none of them as an equivalent (for example `TIME`, `INTERVAL`, `UUID`, `BLOB`, `JSON`, arrays, or structs) has to be mapped to one; the DuckDB transformation maps all of these to `STRING`. Length, precision, and scale are carried over only when the source type holds them. If the source engine discards them, they cannot be reconstructed later. See [output data types in DuckDB transformations](/transformations/duckdb/#output-data-types) for a concrete example of both cases.
 
