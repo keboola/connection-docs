@@ -875,6 +875,8 @@ items:
                 title: With Kai
               - url: /data-apps/build-locally/
                 title: Locally
+              - url: /data-apps/kai-chat/
+                title: Add a Kai chat
           - title: Run & share
             items:
               - url: /data-apps/authentication/

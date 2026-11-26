@@ -1,6 +1,6 @@
 ---
 title: Security & Privacy
-lastUpdated: 2026-11-18
+lastUpdated: 2026-11-26
 description: 'How Kai handles your data: data use and model training, the AI provider, access and control, compliance, terms, and security best practices.'
 slug: 'kai/security-and-privacy'
 ---
@@ -48,6 +48,8 @@ Contact [support@keboola.com](mailto:support@keboola.com) to discuss BYOLLM opti
 **Full audit trail** — All Kai actions are logged in your project's audit trail with organizational visibility.
 
 **Project isolation** — Kai only sees your current project and cannot access other projects.
+
+**Kai in apps** — In an app with a Kai chat, Kai reads only the data the app reads and cannot change anything. All visitors of one app share the same Kai access. See [Add a Kai chat to your app](/data-apps/kai-chat/#what-visitors-can-ask-and-what-kai-can-read).
 
 ## Security Best Practices
 
