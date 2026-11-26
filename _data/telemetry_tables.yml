@@ -983,6 +983,7 @@ tables:
       - "auditLog.admin.maintainerInvitation.rejected"
       - "auditLog.admin.metadataListed"
       - "auditLog.admin.mfaFailed"
+      - "auditLog.admin.mfaRemovalRefused"
       - "auditLog.admin.organizationInvitation.accepted"
       - "auditLog.admin.organizationInvitation.rejected"
       - "auditLog.admin.patCreated"
