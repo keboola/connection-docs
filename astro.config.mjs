@@ -8,6 +8,7 @@ import { sidebar } from './src/sidebar.mjs';
 import redirectFrom from './src/integrations/redirect-from.mjs';
 import pageMarkdown from './src/integrations/page-markdown.mjs';
 import beaconTransforms from './src/integrations/beacon-transforms.mjs';
+import imageDimensions from './src/integrations/image-dimensions.mjs';
 import externalLinks from './src/integrations/external-links.mjs';
 import pagefindTitles from './src/integrations/pagefind-titles.mjs';
 import { sitemapOptions } from './src/integrations/sitemap-lastmod.mjs';
@@ -37,6 +38,8 @@ export default defineConfig({
   },
   integrations: [
     redirectFrom(),
+    // Sizes <img> tags in the built HTML; see the file for why it runs on dist/.
+    imageDimensions(),
     pageMarkdown({ siteTitle: SITE_TITLE }),
     starlight({
       title: SITE_TITLE,
