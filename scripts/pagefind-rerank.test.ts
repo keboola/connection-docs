@@ -38,6 +38,9 @@ const TITLES = [
   ['sheets', 'Google Sheets', '/components/writers/other/google-sheets/'],
   ['kbagent', 'Command-line agent', '/management/kbagent/'],
   ['overview', 'Overview', '/overview/'],
+  ['tde', 'TDE Exporter', '/components/writers/other/tableau-tde/'],
+  ['storage-api', 'Storage API', '/storage/api/'],
+  ['flows', 'Flows', '/flows/'],
 ];
 globalThis.fetch = (async (url: URL) => {
   assert.match(String(url), /pagefind-titles\.json$/);
@@ -127,4 +130,26 @@ test('slow fragments: after the timeout the ranking comes back unchanged', async
   // the finished load is still handed to the UI
   await darkSky.data();
   assert.equal(darkSky.loads, 1);
+});
+
+test('"export": longer forms like "exporter" and "exported" are real matches, not prefix noise', async () => {
+  // 10 "exporter", 4 "export": the plural fold alone counted this page as
+  // prefix-only and moved it below the Storage API page
+  const tde = result('tde', `${repeat('exporter', 10)} ${repeat('export', 4)} Tableau`, /^export/i);
+  const storageApi = result('storage-api', `${repeat('exported', 3)} exporting export`, /^export/i);
+  const flows = result('flows', `${repeat('export', 2)} schedule`, /^export/i);
+  const kbagent = result('kbagent', `export ${repeat('command', 5)}`, /^export/i);
+  fake.results = [tde, storageApi, flows, kbagent];
+  assert.deepEqual(ids(await search('export')), ['tde', 'storage-api', 'flows', 'kbagent']);
+});
+
+test('"config": when most checked pages are prefix-only, the last word is a prefix and nothing moves', async () => {
+  // "configuration" outnumbers "config" on almost every page; demoting them
+  // all would only put the unchecked results first
+  const flows = result('flows', `${repeat('configuration', 6)} config`, /^config/i);
+  const storageApi = result('storage-api', `${repeat('configured', 4)} configs`, /^config/i);
+  const tde = result('tde', `${repeat('configuration', 3)} Tableau`, /^config/i);
+  const kbagent = result('kbagent', `${repeat('config', 5)} configuration`, /^config/i);
+  fake.results = [flows, storageApi, tde, kbagent];
+  assert.deepEqual(ids(await search('config')), ['flows', 'storage-api', 'tde', 'kbagent']);
 });

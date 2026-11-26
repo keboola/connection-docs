@@ -173,9 +173,18 @@ const PREFIX_CHECK_TIMEOUT_MS = 300;
 // title tiers didn't place, move down every page where most matches of the
 // last query word aren't that word itself. Only those matches count: the
 // other query words, stop words like "to" and "keboola", and stemmed forms
-// ("configured" for "configuration") say nothing about prefix noise. A page
-// with no match starting with the last word stays where it is, and so does
-// everything when the last word is a stop word or the fragments are slow.
+// ("configured" for "configuration") say nothing about prefix noise. The
+// word with a common ending counts as the word itself: "exporter" and
+// "exported" are real matches for "export", while "apple", "appkey" and
+// "application" stay prefix-only for "app". A page with no match starting
+// with the last word stays where it is, and so does everything when the last
+// word is a stop word or the fragments are slow. When most checked pages come
+// out prefix-only, the last word is itself a prefix (shorthand like "config",
+// or a word still being typed), not noise on a few pages, so nothing moves:
+// demoting them would put Pagefind's unchecked results 21+ first.
+const WORD_ENDINGS = ['s', 'es', 'ed', 'ing', 'er', 'ers'];
+const isWordForm = (w, word) => w === word || WORD_ENDINGS.some((e) => w === word + e);
+
 async function demotePrefixOnly(ranked, queryWords, lastWord) {
   const unchanged = () => ranked.map((r) => r.result);
   if (!lastWord || !queryWords.includes(lastWord)) return unchanged();
@@ -200,9 +209,10 @@ async function demotePrefixOnly(ranked, queryWords, lastWord) {
         const parts = words(contentWords[location] ?? '', { keepStopWords: true });
         if (!parts.some((w) => w.startsWith(lastWord))) continue;
         prefixed += 1;
-        if (parts.includes(lastWord)) exact += 1;
+        if (parts.some((w) => isWordForm(w, lastWord))) exact += 1;
       }
-      return exact * 2 < prefixed ? r : null;
+      if (!prefixed) return null;
+      return { r, weak: exact * 2 < prefixed };
     }),
   );
   let timer;
@@ -212,7 +222,9 @@ async function demotePrefixOnly(ranked, queryWords, lastWord) {
   const outcome = await Promise.race([checks, timeout]);
   clearTimeout(timer);
   if (!outcome) return unchanged();
-  const weak = new Set(outcome.filter(Boolean));
+  const judged = outcome.filter(Boolean);
+  const weak = new Set(judged.filter((j) => j.weak).map((j) => j.r));
+  if (weak.size * 2 > judged.length) return unchanged();
   return [...ranked.filter((r) => !weak.has(r)), ...ranked.filter((r) => weak.has(r))].map(
     (r) => r.result,
   );
