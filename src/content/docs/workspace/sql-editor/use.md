@@ -1,6 +1,6 @@
 ---
 title: Use the SQL Editor
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 slug: 'workspace/sql-editor/use'
 description: 'Tasks in the SQL Editor: create an SQL workspace, run queries, export results, add table mappings, reuse shared code, and save queries as a transformation.'
 ---
@@ -10,6 +10,15 @@ transformation. Each task after the first starts with the SQL Editor open on you
 detail, click **Open SQL Editor**. The SQL Editor page explains the panes, sessions and workspace sharing.
 
 <!-- How-to-type page. Source: the former single SQL Editor page on main; split by type, text carried over, checked 2026-11-19. -->
+
+## Before you start
+
+- **A project on Snowflake or Google BigQuery.** The SQL Editor works with workspaces on those two backends.
+- **A project role other than ReadOnly**, which can't create or change configurations. See [User roles](/management/project/users/#user-roles).
+  <!-- VERIFY(nikita): that a ReadOnly user can't create an SQL workspace; the roles list names configurations, not workspaces. -->
+- **For [Reuse shared code](#reuse-shared-code):** the shared code must exist already. To create it, see [Shared Code](/transformations/shared-code/).
+- **For [Direct Mode](#write-directly-to-storage-direct-mode):** Direct Mode output mapping is a private beta: [Keboola Support](/management/support/) must enable it for your project,
+  as the [Direct Mode page](/transformations/mappings/direct-mode/) says.
 
 ## Create an SQL workspace and open the editor
 
@@ -32,7 +41,7 @@ The SQL Editor is accessed via a dedicated SQL workspace. To get started, you mu
 
     ![SQL Editor - Workspace details open editor button](/workspace/sql-editor/03-workspace-details-open-editor.jpg)
 
-**Result:** the SQL Editor opens on the new workspace.
+**Check:** the SQL Editor opens on the new workspace, with your project's buckets and tables in the **Storage Explorer**.
 
 ## Preview a table
 
@@ -45,7 +54,7 @@ To quickly inspect the contents of a table in the Storage Explorer:
 
     ![SQL Editor - Context menu showing Data preview option](/workspace/sql-editor/05-data-preview-menu.jpg)
 
-**Result:** this executes a `SELECT * FROM table_name LIMIT 100` query, showing the first rows and metadata in the results pane below.
+**Check:** the results pane below shows the first rows and metadata of the table. The editor runs a `SELECT * FROM table_name LIMIT 100` query for you.
 
 ![SQL Editor - Query result preview of a table](/workspace/sql-editor/06-query-result-preview.jpg)
 
@@ -71,7 +80,7 @@ To quickly inspect the contents of a table in the Storage Explorer:
 
     ![SQL Editor - New query block added to the editor](/workspace/sql-editor/09-new-query-block.jpg)
 
-**Result:** the query result appears in the results pane. After executing a query, you can access detailed information about the execution in the results pane by clicking **QUERY DETAILS**.
+**Check:** the query result appears in the results pane. After executing a query, you can access detailed information about the execution in the results pane by clicking **QUERY DETAILS**.
 
 ![SQL Editor - Query details panel open in the results pane](/workspace/sql-editor/10-query-details-panel.jpg)
 
@@ -82,8 +91,6 @@ After executing a query, you can view detailed information about previously run 
 **Goal:** a predefined query from Shared Code in your code block, either copied or linked.
 
 Shared Code allows you to reuse predefined SQL queries across multiple transformations or query blocks. This promotes consistency and simplifies maintenance.
-
-The shared code must exist already. To create it, see [Shared Code](/transformations/shared-code/).
 
 1. In the SQL code editor block, click the **Select Shared Code** link.
 
@@ -97,7 +104,7 @@ The shared code must exist already. To create it, see [Shared Code](/transformat
    *   **Use Inline:** The SQL text of the shared code is copied directly into your transformation block. You can then freely edit and modify the code locally. This is equivalent to copy-pasting the code.
    *   **Use as Shared Code (Linking):** The code block is linked to the original shared code template.
 
-**Result:** the shared code is in your block. When linking shared code:
+**Check:** the shared code is in your block. When linking shared code:
 
 *   The code block appears labeled **SHARED CODE**.
 *   Any updates made to the original shared code template will automatically propagate to this transformation block.
@@ -115,7 +122,7 @@ If you need to make modifications to the code for a specific transformation, you
     *   **Export as CSV**: standard comma-separated values
     *   **Export as CSV (Gzip)**: compressed CSV for large exports
 
-**Result:** your query results are downloaded as a CSV-formatted file.
+**Check:** your browser downloads the query results as a CSV file, gzipped if you picked **Export as CSV (Gzip)**.
 
 **Download limit:** Exported files are limited to **100 MB**. If your query result exceeds this size, consider adding a `LIMIT` clause to reduce the row count, filtering the data before export, or using Keboola Storage to access the full dataset.
 
@@ -164,7 +171,7 @@ To query and work with the filtered/mapped data interactively in the editor, you
 
 The **Clean workspace before loading** option removes tables and views from the workspace schema but keeps stored procedures and user-defined functions. See [Clean workspace before loading](/workspace/create/#clean-workspace-before-loading).
 
-**Result:** the mapped table is loaded and you can query it. If a table is configured for Input Mapping but not yet loaded, hovering over the table icon will show a warning indicating limited functionality.
+**Check:** the mapped table is loaded and you can query it. If a table is configured for Input Mapping but not yet loaded, hovering over the table icon will show a warning indicating limited functionality.
 
 ![Unloaded Input Mapped table warning](/workspace/sql-editor/25-unloaded-table-tooltip.jpg)
 
@@ -205,7 +212,7 @@ Once temporary working tables are created, you must map them to a destination in
 5.  In the Output Mapping dialog, configure the destination bucket and table name in Storage. You can also define the primary key and set incremental loading options.
 6.  Click **ADD OUTPUT**.
 
-**Result:** once mapped, the table icon in the Working Tables section changes to **OM** (Output Mapping), confirming it is ready to be saved as a transformation.
+**Check:** once mapped, the table icon in the Working Tables section changes to **OM** (Output Mapping), confirming it is ready to be saved as a transformation.
 
 ![SQL Editor - Working Tables section showing OM (Output Mapping) table](/workspace/sql-editor/14-working-tables-om.jpg)
 
@@ -213,11 +220,9 @@ Once temporary working tables are created, you must map them to a destination in
 
 **Goal:** a Storage table the workspace writes to directly, with no copy step.
 
-Direct Mode output mapping is a private beta: [Keboola Support](/management/support/) must enable it for your project,
-as the [Direct Mode page](/transformations/mappings/direct-mode/) says.
-
 On Snowflake and BigQuery workspaces, you can skip the copy step altogether and let the workspace write straight
-into a Storage table using [Direct Mode output mapping](/transformations/mappings/direct-mode/).
+into a Storage table using [Direct Mode output mapping](/transformations/mappings/direct-mode/). It is a private
+beta; see [Before you start](#before-you-start).
 
 1.  In the **Working Tables** section, click the three dots next to a working table and select
     **Create writable table**.
@@ -228,7 +233,7 @@ into a Storage table using [Direct Mode output mapping](/transformations/mapping
 Direct Mode output mapping, which grants the workspace write access to that table. The working table you started
 from is used only as the template for the column structure — it is not copied or modified.
 
-The new table shows up in the **Writable tables** section of the Storage Explorer with the **DG** badge, and you
+**Check:** the new table shows up in the **Writable tables** section of the Storage Explorer with the **DG** badge, and you
 can `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE` it from your next query. Use the three-dots menu there to remove
 the mapping, which also revokes the workspace's write access.
 
@@ -249,6 +254,6 @@ validation on direct writes. Read the
 2.  To add a note to the version, open the arrow next to the button and select **Save with description** instead.
 3.  Close the editor and, in the workspace detail, click **Create new transformation**, or **Copy to existing transformation** to update one you have. See [Create a transformation from a workspace](/workspace/create/#create-a-transformation-from-a-workspace).
 
-**Result:** a transformation with your saved queries, the input and output mapping and the variables of the workspace.
+**Check:** the new transformation is listed under **Transformations**, with your saved queries, the input and output mapping and the variables of the workspace.
 
 **Next:** [Keboola JDBC driver →](/workspace/jdbc-driver/)

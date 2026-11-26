@@ -1,12 +1,24 @@
 ---
 title: dbt CLI
-lastUpdated: 2026-10-29
+lastUpdated: 2026-11-27
 description: 'Develop dbt transformations locally with the Keboola CLI: set up the project, run, test and debug models, and use workspaces.'
 slug: 'transformations/dbt/cli'
 ---
 
 Video:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/q3wZ8gukpnw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!-- How-to-type page. Typed 2026-11-27 with its prerequisites and check step (T4/T5). -->
+
+## Before you start
+
+- **A Keboola project on Snowflake.** `kbc dbt init` creates a Snowflake workspace in it.
+- **A Storage API token** from that project. `kbc dbt init` asks for the Storage API host and the
+  [token](/management/project/tokens/).
+- **A cloned Git repository with a dbt project**, with `dbt_project.yml` in the folder you run the commands from.
+- **The dbt binary**, installed locally.
+- **The Keboola CLI (`kbc`).** [Local development](#local-development) installs it with Homebrew on a Mac
+  and links the steps for other platforms.
 
 ## Local Development
 
@@ -34,8 +46,6 @@ kbc --version
 ### Steps
 
 **initial setup**
-
-You must have a Keboola project, a cloned git repository with a dbt project, and the dbt binary installed.
 
 The user is in the folder with the cloned dbt project and can run the following commands.
 
@@ -109,6 +119,9 @@ dbt run -t beer_demo  --profiles-dir .
 ```
 
 ![](imgs/2769879081.png)
+
+**Check:** the run ends with `Completed successfully` and a `Done.` line with `ERROR=0`, and every model line says
+`OK created`.
 
 ### Other Commands for Future Use
 

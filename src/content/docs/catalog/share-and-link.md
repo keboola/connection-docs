@@ -1,6 +1,6 @@
 ---
 title: Share and link buckets
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 description: 'Share a Storage bucket or selected tables through the Data Catalog, link a bucket another project shares, edit its metadata, and stop sharing it.'
 slug: 'catalog/share-and-link'
 ---
@@ -9,7 +9,12 @@ Each recipe on this page is self-contained: a goal, the steps and the result. Fo
 
 <!-- How-to-type page. Source: the former single Data Catalog page (keboola/connection-docs history), checked 2026-11-19. Steps are carried over from that page and not re-run in the product. -->
 
-**Before you start:** to manage shared buckets, your user account must be an [organization member](/management/organization/) or a project administrator with the [share role](/management/project/users/#user-roles) assigned. Source and destination projects must belong to the same organization (and region).
+## Before you start
+
+- **To share a bucket, edit it or stop sharing it:** your user account must be an [organization member](/management/organization/) or a project administrator with the [share role](/management/project/users/#user-roles) assigned.
+- **To link a bucket:** a project role other than **ReadOnly**, which can't use the Data Catalog, and a [sharing type](/catalog/#sharing-types) on the bucket that includes you or your project.
+- **Both projects in one organization:** source and destination projects must belong to the same organization (and region).
+- **The data to share** in [Storage](/storage/): the bucket you want to share, or the tables to put in a new one.
 
 <!-- VERIFY(Nikita): the labels on this page come from the 2019 to 2020 UI. Checked 2026-11-20 in the UI of project 264: the section is called Data Catalog, and the list has the filter buttons All, Linked and Mine (there is no Shared with you tab). The start button is Share bucket (Data Catalog top right, and in the bucket's ⋮ menu), disabled with "You don't have permission to share data" for a project Admin without Organization admin; the bucket detail shows Sharing: Disabled (click to enable). + Create alias table and Synchronize columns with the source table were seen on a non-shared bucket. Still unknown, because sharing is disabled for that role and nothing is shared with or from project 264: Share existing bucket, Select tables, the button that confirms the share in both variants, Link and the control that opens it, Edit Sharing and a save step after it, Disable and where it sits, and where each result can be checked. Needs a user with the right to share, or another project. -->
 
@@ -42,6 +47,9 @@ you have chosen.
 
 ![Screenshot -- View sharing](/catalog/catalog-4.png)
 
+**Check:** the bucket is listed in **Data Catalog**, and its **Who can use it** column matches the sharing type you chose.
+<!-- VERIFY(nikita): that Who can use it shows the sharing type of a bucket shared from this project. Seen on 2026-11-20 only as a column name in project 264, where nothing is shared; check with a user who has the share role. -->
+
 ### Share selected tables
 
 1. Choose the **Select tables** option.
@@ -60,6 +68,8 @@ you have chosen.
 
 ![Screenshot -- Bucket Result](/catalog/catalog-9.png)
 
+**Check:** the new bucket is listed in **Data Catalog**, and in **Storage** it holds an alias of each table you selected.
+
 To change sharing settings, share the newly [created bucket again](#share-an-existing-bucket). The newly selected settings will overwrite the old ones. For the **Edit Sharing** button, see [Edit a shared bucket's metadata](#edit-a-shared-buckets-metadata). <!-- VERIFY(Nikita): the old page contradicts itself here. This sentence says to share the bucket again to change its sharing settings, while the Edit Sharing sentence, now in "Edit a shared bucket's metadata", says that button changes them. Confirm which holds for a bucket created with Select tables. Not checkable in project 264 on 2026-11-20: nothing is shared from that project and Share bucket is disabled for that role, so Edit Sharing does not appear. -->
 
 ## Add tables to a shared bucket
@@ -76,6 +86,8 @@ create an [alias](/storage/tables/#aliases) of the table and set the shared buck
    <!-- Checked 2026-11-20 in the UI of project 264: the bucket page has + Add Table and + Create alias table; the dialog has Source table*, Name*, Filtering (optional), Columns with Synchronize columns with the source table (checked by default) and Create alias table. -->
 
 **Result:** once created in the shared bucket, the alias will immediately appear in all linked projects.
+
+**Check:** the alias table is listed in the shared bucket in **Storage**, and in the linked bucket of a project that links it.
 
 ## Link a shared bucket
 
@@ -99,6 +111,9 @@ You can see the detail of the shared bucket with a link to the source project (i
 
 ![Screenshot -- Link Bucket Tables](/catalog/catalog-13.png)
 
+**Check:** the bucket is listed in your project's **Storage** under the name you entered, and in **Data Catalog** when you click the **Linked** filter.
+<!-- VERIFY(nikita): that the Linked filter in Data Catalog lists buckets linked into the current project. Only the filter's name was seen (project 264, 2026-11-20), with nothing linked there. -->
+
 ## Edit a shared bucket's metadata
 
 **Goal:** edit the metadata of a shared bucket directly from the Data Catalog, or change its sharing settings.
@@ -116,6 +131,8 @@ You can see the detail of the shared bucket with a link to the source project (i
 
 **Result:** these metadata changes will be propagated to all linked buckets, ensuring consistency across projects.
 
+**Check:** in a project that links the bucket, the linked bucket shows the new description and color.
+
 ## Stop sharing a bucket
 
 **Goal:** stop sharing a bucket from your project with other projects.
@@ -126,6 +143,8 @@ You can see the detail of the shared bucket with a link to the source project (i
    ![Screenshot -- Disable Sharing](/catalog/catalog-14.png)
 
 **Result:** the bucket is no longer shared. While other projects still link the bucket, sharing cannot be disabled: the links have to be removed first. See also the [constraints](/catalog/#constraints). <!-- Checked 2026-11-20: unsharing fails while linked buckets exist, per the Keboola CLI (kbagent sharing unshare) docs; whether the UI offers to remove the links itself was not checked. -->
+
+**Check:** the bucket's detail page in **Storage** shows **Sharing: Disabled**.
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Keboola Model Context Protocol (MCP) Server
-lastUpdated: 2026-11-23
+lastUpdated: 2026-11-27
 slug: 'ai/mcp-server'
 description: 'Connect Cursor, Claude, ChatGPT, Windsurf, VS Code, Make or another MCP client to your Keboola project, limit its tools, or run the MCP server locally.'
 search_keywords: [mcp, mcp server]
@@ -26,6 +26,8 @@ Connect your MCP clients and AI assistants to your **Keboola Project** and give 
 - **[Make](#using-with-make)** - Agent mode with MCP servers
 - **[Other clients](#remote-server-setup)** - Remote server connection
 
+<!-- How-to-type page. Typed 2026-11-27 with its prerequisites and check step (T4/T5). -->
+
 Query data, create transformations, write SQL queries, and build your pipelines — **all with no clicks required.**
 
 
@@ -46,6 +48,15 @@ Keboola's MCP Server brings powerful AI agents like Claude and Cursor directly i
 
 
 ![Claude debug error flow in MCP Server](/ai/mcp-server/mcp-claude-debug-error.gif)
+
+## Before you start
+
+- **A Keboola account** with access to a project. The remote server runs on the multi-tenant stacks; a [local server](#running-the-mcp-server-locally) works with any stack. Your assistant gets the permissions of your role in that project.
+- **An MCP client** that supports remote Streamable HTTP connections with OAuth, such as Claude, ChatGPT, Cursor, Windsurf, VS Code or Make. A client without it can connect through the [`mcp-remote`](#via-mcp-remote-adapter-fallback) adapter, which needs Node.js.
+- **A client plan that allows custom connectors**, where the client requires one: see the sections for [Claude](#using-with-claude-desktop), [ChatGPT](#using-with-chatgpt) and [VS Code](#using-with-vs-code).
+- **To run the server locally:** Docker, or Python 3.11+ and `uv`, plus your stack URL and a way to sign in (a browser login or a token). See [Running the MCP Server Locally](#running-the-mcp-server-locally).
+  <!-- Checked 2026-11-27: keboola/mcp-server pyproject.toml (1.120.5) requires-python >=3.11; the README lists the stack URL and an authentication method as required and the workspace schema as optional. -->
+
 ## Connecting to Keboola's MCP Server
 
 Keboola MCP Server is hosted on every multi-tenant stack and supports OAuth authentication. You can use the remote server in any AI Assistant that supports remote Streamable HTTP connection and OAuth authentication. Streamable HTTP is the recommended transport method, providing bidirectional streaming for improved performance and reliability.
@@ -249,6 +260,9 @@ For detailed setup and troubleshooting, see the [VS Code MCP documentation](http
 3. Navigate to Keboola [project settings](/management/project/), click `Users & Settings` > `MCP Server`, and open the MAKE tab.
 4. Copy the integration URL displayed there and enter it as the server URL in the MCP Client module. MAKE loads the available Keboola tools automatically.
 
+**Check:** ask your assistant *"What buckets and tables are in my Keboola project?"* It answers with the buckets and
+tables of the project you chose. In Make, the MCP Client module lists the Keboola tools.
+
 ## Available Tools
 
 Keboola's MCP Server comes with a rich set of tools your AI client (like Claude or Cursor) can use to interact with your data environment — just by asking in plain language.
@@ -425,7 +439,7 @@ Before proceeding, ensure you have Docker installed on your system. You can find
 
 ### Using the uv command
 
-The primary way to run the server locally without Docker is by using `uv` or `uvx` to execute the `keboola_mcp_server` package. More information about the server is available in its [Keboola MCP Server GitHub repository](https://github.com/keboola/mcp-server). Make sure you have Python 3.10+ and `uv` installed.
+The primary way to run the server locally without Docker is by using `uv` or `uvx` to execute the `keboola_mcp_server` package. More information about the server is available in its [Keboola MCP Server GitHub repository](https://github.com/keboola/mcp-server). Make sure you have Python 3.11+ and `uv` installed.
 
 1. **Sign in and set up environment variables:**  
    Sign in once with `login` (see [Signing in to the Local Server](#signing-in-to-the-local-server)); the server needs no token in its environment. Then configure the following environment variables:
@@ -514,6 +528,9 @@ Example `mcp_servers.json` snippet:
 ```
 
 > You can use this link to get the above configuration template into your Cursor: [![Install MCP Server using uvx](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=keboola&config=eyJjb21tYW5kIjoidXZ4IGtlYm9vbGFfbWNwX3NlcnZlciAtLWFwaS11cmwgaHR0cHM6Ly9jb25uZWN0aW9uLllPVVJfUkVHSU9OLmtlYm9vbGEuY29tIiwiZW52Ijp7IktCQ19XT1JLU1BBQ0VfU0NIRU1BIjoieW91cl93b3Jrc3BhY2Vfc2NoZW1hIn19)
+
+**Check:** in the connected client, ask *"What buckets and tables are in my Keboola project?"* The answer lists the
+buckets and tables of your project.
 
 ## Programmatic Integration
 

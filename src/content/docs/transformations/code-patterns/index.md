@@ -1,6 +1,6 @@
 ---
 title: Code Patterns
-lastUpdated: 2026-11-18
+lastUpdated: 2026-11-27
 description: 'Generate transformation code from a form with a Code Pattern: where to find patterns, creating a transformation, mapping, parameters, and generated code.'
 slug: 'transformations/code-patterns'
 ---
@@ -11,6 +11,15 @@ Code Pattern is a special type of [component](/components/) that
 
 - generates code based on [parameters](#parameters-form), and
 - can be used in the user interface of [New Transformations](/transformations/).
+
+<!-- How-to-type page. Typed 2026-11-27 with its prerequisites and check step (T4/T5). -->
+
+## Before you start
+
+- **A published code pattern** that supports the transformation type you want. Find one in the
+  [list of code patterns](#list-of-code-patterns); its description says which transformation types it works with.
+- **A project role that can create configurations.** The **ReadOnly** role cannot; see
+  [user roles](/management/project/users/#user-roles).
 
 ## List of Code Patterns
 
@@ -93,4 +102,7 @@ on the code pattern component with the actual parameters. The result is then sav
 ![Screenshot -- Generated Code](/transformations/code-patterns/overview-6-code.png)
 
 After the code has been generated, you can [run the job](/management/jobs/#running-jobs) the standard way.
+
+**Check:** the generated code shows up read-only in the transformation, next to a **Regenerate Code** button,
+and the job detail of the run shows the status **Success**.
 

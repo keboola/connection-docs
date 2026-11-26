@@ -1,6 +1,6 @@
 ---
 title: Snowflake to DuckDB Migration
-lastUpdated: 2026-11-18
+lastUpdated: 2026-11-27
 description: 'Migrate Snowflake transformations to DuckDB: the SQL dialect differences that cause trouble, and how to work around them.'
 slug: 'transformations/duckdb/snowflake-migration'
 ---
@@ -9,6 +9,17 @@ slug: 'transformations/duckdb/snowflake-migration'
 
 This guide covers the key differences between Snowflake and DuckDB SQL dialects and provides practical advice
 for migrating your Snowflake transformations to DuckDB in Keboola.
+
+<!-- How-to-type page. Typed 2026-11-27 with its prerequisites and check step (T4/T5). Most of the page is dialect reference that supports step 5. -->
+
+## Before you start
+
+- **Snowflake SQL transformations** to migrate, in the source branch (production by default).
+- **DuckDB transformations** in your project. They are in beta; see [DuckDB transformation](/transformations/duckdb/).
+  <!-- VERIFY(nikita): the Developer Portal lists keboola.duckdb-transformation as public with no component feature and the beta flag; confirm no project-level feature or Support request is needed. -->
+- **A project role that can create configurations and development branches.** The component writes the migrated
+  configurations to a [development branch](/components/branches/), an existing one or one it creates.
+  <!-- VERIFY(nikita): which project roles can run the Transformation Migration component and let it create a branch (the ReadOnly role cannot create configurations). -->
 
 ## Automatic SQL Transpilation
 
@@ -71,6 +82,9 @@ Open the newly created DuckDB transformation. The component preserves all input/
 Snowflake and DuckDB (see the sections below for common differences).
 
 ![Migrated DuckDB Transformation](/transformations/duckdb/migration-result.png)
+
+**Check:** in the destination branch, the migrated DuckDB transformations are listed under **Transformations** with the
+input and output mappings of the originals. Run one there: the job detail shows the status **Success** once its SQL works.
 
 ### What the Component Does
 

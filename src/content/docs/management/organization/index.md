@@ -1,6 +1,6 @@
 ---
 title: Organizations
-lastUpdated: 2026-11-11
+lastUpdated: 2026-11-27
 description: 'Manage a Keboola organization: its admins, members, projects and settings, and the GitHub connection its projects clone private repositories through.'
 slug: 'management/organization'
 ---
@@ -14,12 +14,12 @@ and maintainers are therefore organized into a hierarchy:
 
 ![Screenshot - Project Hierarchy](/management/organization/organizations-maintainers.png)
 
+<!-- How-to-type page. Typed 2026-11-27 with its prerequisites and check step (T4/T5). -->
+
 Although projects, organizations, and maintainers form a hierarchy, their users do not. Each unit has a completely
 independent set of users. That means organization users are not automatically users of the projects
 within organizations and -- vice-versa -- project users are not automatically users of the organization.
 This distinction is important, for example, when [sharing buckets](/catalog/#sharing-types).
-
-Depending on your contract details and permissions, the `Organizations` feature may or may not be available to you.
 
 ![Screenshot - Organizations](/management/organization/organization-1.png)
 
@@ -60,6 +60,15 @@ We recommend keeping the number of organization admins small (typically 2-4 peop
 - Users who need to manage data sharing across projects
 
 For regular project work, users should be added directly to the relevant projects with appropriate [project roles](/management/project/users/#user-roles) rather than being made organization admins.
+
+## Before you start
+
+- **The `Organizations` feature.** Depending on your contract details and permissions, it may or may not be available
+  to you.
+- **Organization admin (member) status** in the organization, to manage its members, projects and settings. See
+  [Organization admins](#organization-admins).
+- **To connect GitHub**, you also need to be an owner of the GitHub organization (on github.com or a GitHub Enterprise
+  host).
 
 ## Manage Members
 All organization members are full members and as such can **add and remove** other members.
@@ -127,7 +136,7 @@ Keboola gets a short-lived token from the App each time it clones the repository
 Keboola has already registered the GitHub App for your stack. You only install it on your GitHub organization
 and connect that GitHub organization to your Keboola organization.
 
-You need to be both an organization admin in Keboola and an owner of the GitHub organization.
+You need to be both an organization admin in Keboola and an owner of the GitHub organization (see [Before you start](#before-you-start)).
 
 1. Open the **GitHub** tab of your organization: `https://connection.<stack>/control/organizations/<organization-id>?tab=github`.
 2. Click **Install GitHub App** and install the App on your GitHub organization. Select the repositories
@@ -136,7 +145,9 @@ You need to be both an organization admin in Keboola and an owner of the GitHub 
 3. Click **Connect GitHub organization**, enter a name, and leave **GitHub Enterprise host** empty for github.com.
 4. Click **Continue to GitHub**, sign in, and authorize the App.
 
-The connected GitHub organization appears in the list, with the GitHub account and the user who connected it.
+**Check:** the connected GitHub organization appears in the list on the **GitHub** tab, with the GitHub account and the
+user who connected it.
+
 Click **Disconnect** to remove the connection. Configurations that use it then fail to clone the repository.
 
 If the connection fails, the tab shows why, for example when the App is not installed on the GitHub organization

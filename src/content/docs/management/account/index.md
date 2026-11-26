@@ -1,6 +1,6 @@
 ---
 title: Account Management
-lastUpdated: 2026-11-18
+lastUpdated: 2026-11-27
 description: 'Manage your own Keboola account: password, multi-factor authentication, project invitations, Management API tokens, promo codes, and user sessions.'
 slug: 'management/account'
 ---
@@ -29,6 +29,17 @@ On the **Account Settings** page, you can do the following:
 - Create management [tokens](#tokens)
 - Work with [organizations and maintainers](/management/organization/)
 
+<!-- How-to-type page. Typed 2026-11-27 with its prerequisites and check steps (T4/T5). -->
+
+## Before you start
+
+- **Your current password**, to set a new one.
+- **For TOTP**, a device with the [Google Authenticator app](https://support.google.com/accounts/answer/1066447?hl=en) or
+  a compatible MFA application. MFA using SMS is not supported.
+- **For U2F**, a security key that uses the [FIDO U2F](https://fidoalliance.org/) standard, and a browser from the
+  [supported list](#u2f).
+- **For a new project from a promo code**, the code you received.
+
 ## Changing Password
 To change your password, go to your account settings — the **Account & Security** section.
 
@@ -55,8 +66,7 @@ Follow the [instructions](#u2f).
 ### TOTP 
 [TOTP](https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm)
 is **software-based authentication**. 
-You need to have a device with the [Google Authenticator app](https://support.google.com/accounts/answer/1066447?hl=en) or
-a compatible MFA application (MFA using SMS is not supported). To enable MFA, go to **Account & Security** and 
+You need an authenticator app (see [Before you start](#before-you-start)). To enable MFA, go to **Account & Security** and 
 click the **Enable MFA** button:
 
 ![Screenshot -- Enable MFA -- Step 1](/management/account/enable-mfa-1.png)
@@ -74,6 +84,8 @@ Once you click the **Activate** button, the MFA will be enabled. You can then do
 **Recovery Codes** or reconfigure the MFA to another device:
 
 ![Screenshot -- MFA Enabled](/management/account/enable-mfa-3.png)
+
+**Check:** the **Multi-Factor Authentication** section of **Account & Security** says the multi-factor authentication is **enabled**.
 
 Every time you log in with your email and password,
 you will be prompted to enter the MFA code obtained from your device:
@@ -123,7 +135,7 @@ Then activate your security key as recommended in its documentation (e.g., press
 
 ![Screenshot -- Enable U2F -- Step 4](/management/account/enable-u2f-3.png)
 
-Once you are redirected, you will get the following notification: `The new u2f device "my-u2f-device" was added.` 
+**Check:** once you are redirected, you will get the following notification: `The new u2f device "my-u2f-device" was added.` 
 You will also see that `Multi-factor authentication is enabled` and that `You have configured 1 device`:
 
 ![Screenshot -- Enable U2F -- Step 5](/management/account/enable-u2f-4.png)
@@ -166,6 +178,8 @@ The token will be shown to you.
 
 ![Screenshot -- Manage Token Created](/management/account/manage-token-created.png)
 
+**Check:** the token is listed under **Personal Access Tokens**, with its creation and expiry dates.
+
 Despite the fact that management tokens always expire, we advise you to delete the ones you are not using.
 
 ## Promo Codes
@@ -186,3 +200,6 @@ All devices that you have used to log into your account are listed on the **User
 You can revoke any of these sessions. Revoking a session is the equivalent of logging out from the UI.
 Revoke your sessions if you forgot to log out on a computer you don't have access to, 
 if you loose your computer or detect any suspicious activity.
+
+**Check:** the revoked session is no longer listed on the **User Sessions** page.
+<!-- VERIFY(nikita): that a revoked session disappears from the User Sessions list right away (not after a reload or with a "revoked" label); try it on a test account. -->

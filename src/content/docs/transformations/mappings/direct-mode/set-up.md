@@ -1,6 +1,6 @@
 ---
 title: Set up Direct Mode output mapping
-lastUpdated: 2026-11-12
+lastUpdated: 2026-11-27
 slug: 'transformations/mappings/direct-mode/set-up'
 sidebar:
   label: Set Up Direct Mode
@@ -86,7 +86,7 @@ Keboola creates the Storage table (creating the bucket first if it does not exis
 Direct Mode output mapping. The source working table itself is not modified or copied — only its column
 structure is used as the template for the new Storage table.
 
-**Result:** the new table appears in the **Writable tables** section of the Storage Explorer with the **DG** badge, and
+**Check:** the new table appears in the **Writable tables** section of the Storage Explorer with the **DG** badge, and
 the workspace can write to it right away. Use the three-dots menu there to remove the mapping (and with it the
 workspace's write access).
 

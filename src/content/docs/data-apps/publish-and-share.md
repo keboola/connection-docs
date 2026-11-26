@@ -1,11 +1,19 @@
 ---
 title: Publish and share
-lastUpdated: 2026-10-06
+lastUpdated: 2026-11-27
 slug: 'data-apps/publish-and-share'
 description: Publish a Keboola app and share it with your team or external users.
 ---
 
 Once your app is ready, publish it and share the link with the people who need it.
+
+<!-- How-to-type page. Typed 2026-11-27 with its prerequisites and check step (T4/T5). -->
+
+## Before you start
+
+- **An app in your project**, built with Kai ([Build your first app with Kai](/data-apps/getting-started/)) or from your own code ([Build locally](/data-apps/build-locally/)).
+- **A project role that can edit the app**, to deploy it and change its authentication.
+- **For OIDC, GitHub, GitLab or JumpCloud sign-in:** an OAuth app in that provider's console (for OIDC, admin rights there). **Basic (Password)**, the default, needs nothing outside Keboola. See [Authentication](/data-apps/authentication/).
 
 ## Publish the app
 
@@ -17,6 +25,9 @@ An app is "published" once it's deployed and reachable at its URL, with the righ
 
 2. **Set authentication.** Choose who can open it — a shared password, SSO, GitHub, and more. See [Authentication](/data-apps/authentication/).
 3. **Share the URL.** Anyone who passes the app's authentication can open it.
+
+**Check:** the app's status reads **Active**, and the **App access** card on its **Overview** tab shows the **App URL**
+with an **Open** button. Open the URL: with **Basic (Password)**, the app asks for the password before it opens.
 
 ## Share with your team
 

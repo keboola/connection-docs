@@ -1,6 +1,6 @@
 ---
 title: Legacy Flows
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'flows/flows-legacy'
 description: 'Build, schedule and monitor a flow in the Legacy Flow Builder, which Conditional Flows are replacing.'
 redirect_from:
@@ -21,6 +21,11 @@ redirect_from:
 :::
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- **A project role other than ReadOnly**, which can't create or run flows. The Guest role can build and run a flow but can't change an existing flow's name, schedule or disabled status. See [User roles](/management/project/users/#user-roles).
+- **The configurations the flow runs**, such as data source connectors, transformations and data destination connectors. You pick each one from a drop-down when you add a step.
 
 ## Migration to Conditional Flows
 
@@ -157,6 +162,8 @@ In the tab **All Runs**, you can check how your flow is running with a detailed 
 In **Jobs** you’ll see how the flow runs and triggers each individual component sequentially. The status updates in real-time. 
 Once the last of your data source connectors finishes, the transformations will be triggered. After they complete, the data destination connector(s) will run, and the flow will be finalized. 
 In the end, you’ll see either a **Success** message or an error notification if something went wrong.
+
+**Check:** the run you started is listed in **All Runs**, and its tasks run in the order of your steps and end with **Success**.
 
 ---
 

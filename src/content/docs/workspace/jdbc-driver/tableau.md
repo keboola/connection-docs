@@ -1,6 +1,6 @@
 ---
 title: Tableau Desktop Installation Guide
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 sidebar:
   label: Connect Tableau
 slug: 'workspace/jdbc-driver/tableau'
@@ -70,7 +70,7 @@ In the data source pane, switch to **New Custom SQL** and run:
 SELECT * FROM _keboola.buckets LIMIT 10
 ```
 
-**Result:** this returns one row per bucket in your project and confirms the driver is wired up. `_keboola.buckets` is one of five virtual tables exposing Keboola platform metadata (`components`, `events`, `jobs`, `tables`, `buckets`).
+**Check:** this returns one row per bucket in your project and confirms the driver is wired up. `_keboola.buckets` is one of five virtual tables exposing Keboola platform metadata (`components`, `events`, `jobs`, `tables`, `buckets`).
 
 To browse real Snowflake tables, pick a database and schema from the left-hand pane — Tableau will populate them via standard JDBC metadata calls.
 

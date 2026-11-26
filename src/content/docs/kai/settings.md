@@ -1,6 +1,6 @@
 ---
 title: Kai Settings
-lastUpdated: 2026-09-30
+lastUpdated: 2026-11-27
 slug: 'kai/settings'
 description: Configure Kai's tool permissions, system instructions, context files (knowledge files), and skill files — in the UI or programmatically via the Storage Files API.
 ---
@@ -10,6 +10,18 @@ description: Configure Kai's tool permissions, system instructions, context file
 Kai's settings let you personalize how Kai behaves in your project. Open the Kai chat panel and click the **Settings** icon (gear) to access them. Settings are **per-user and per-project**, so each team member can configure their own preferences independently.
 
 The settings panel has two tabs: **Tool Permissions** and **System Instructions**. Project-wide customization — project-level instructions, [context files](#context-files), and [skill files](#skill-files) — is managed in **Settings → Kai Agent** in the main Keboola navigation (the tab is labeled **Kai Assistant** in projects not yet upgraded to the new Kai engine).
+
+<!-- How-to-type page. Typed 2026-11-27 with its prerequisites and check steps (T4/T5). -->
+
+## Before you start
+
+- **Kai switched on in the project.** An organization admin can turn it on from the chat screen or in
+  **Settings → Features**; anyone else asks their organization admin or Support. See [Kai](/kai/#getting-started).
+- **Project admin or manager role**, to edit project-level instructions.
+- **The same role for context files and skill files**, which live on the same **Settings → Kai Agent** page.
+  <!-- VERIFY(nikita): which project roles can upload and delete context and skill files in Settings → Kai Agent; check keboola/ui. -->
+- **A Storage API token with file write permissions**, to manage the files through the API or a sync job.
+  For the CLI commands, install [kbagent](/cli/) and connect it to the project (a browser sign-in works too).
 
 ## Tool Permissions
 
@@ -63,13 +75,13 @@ Project-level instructions apply to **all users** in the project. They are manag
 2. Enter your instructions in the **System instructions** text field.
 3. The instructions auto-save.
 
+**Check:** reopen **Settings → Kai Agent**. Your text is still in the **System instructions** field.
+
 Use project-level instructions for team-wide standards such as:
 
 - **Naming conventions** — e.g., "Always prefix staging tables with `stg_` and use snake_case for all column names."
 - **Coding standards** — e.g., "Write SQL transformations using CTEs instead of subqueries. Always include comments explaining business logic."
 - **Pipeline conventions** — e.g., "Load `in.c-*` buckets incrementally and never modify them in place. Build output tables from staging tables instead of one deep query."
-
-Project-level instructions can be edited by project admins and managers.
 
 ### User-Level Instructions
 
@@ -82,6 +94,8 @@ User-level instructions are **personal to you** and are added on top of the proj
 3. Select the **System Instructions** tab.
 4. Enter your instructions in the text field.
 5. The instructions auto-save.
+
+**Check:** close the settings and open the **System Instructions** tab again. Your text is still there.
 
 Use user-level instructions for personal preferences such as:
 
@@ -118,6 +132,8 @@ To manage them, go to **Settings → Kai Agent** in the main Keboola navigation 
 1. Drag a Markdown (`.md`) file onto the card, or click **Select Files**.
 2. The file is uploaded and takes effect in every **new** conversation (running conversations are not affected).
 3. To replace a file, upload the new version and delete the old one.
+
+**Check:** the file is listed on the **Context files** card.
 
 Rules and limits:
 
@@ -202,6 +218,8 @@ Two formats are accepted:
    ```
 
 2. **A `.skill` archive** — a ZIP file with a `SKILL.md` at its root (or at the root of a single top-level directory), plus any supporting files the skill references.
+
+**Check:** start a new conversation and type `/` in the Kai chat. The skill is in the menu.
 
 Rules and limits:
 
@@ -300,7 +318,10 @@ On each run, the sync job should:
 
 Upload-then-delete (rather than delete-then-upload) ensures a conversation starting mid-sync still finds a copy. Deleting the old copy is required: Kai loads at most 10 tagged files, and both revisions would otherwise be loaded together.
 
-The job can run anywhere — a CI pipeline triggered on changes to the source document, or a scheduled Keboola flow with a Python step calling the Storage API. It only needs a Storage API token with file write permissions. The same pattern works for skill files using the `kai-skill` tag.
+The job can run anywhere — a CI pipeline triggered on changes to the source document, or a scheduled Keboola flow with a Python step calling the Storage API (it needs the token from [Before you start](#before-you-start)). The same pattern works for skill files using the `kai-skill` tag.
+
+**Check:** after a run, `kbagent storage files --project myproj --tag kai-context` lists one file per file name, and its ID
+is the one the job just uploaded.
 
 ### Troubleshooting
 

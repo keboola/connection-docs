@@ -1,6 +1,6 @@
 ---
 title: Create a workspace and load data
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 slug: 'workspace/create'
 sidebar:
   label: Create a Workspace
@@ -11,6 +11,14 @@ This page has the step-by-step tasks for a [workspace](/workspace/), from creati
 Storage. To open the workspace in JupyterLab or a SQL tool, see [Connect to a workspace](/workspace/connect/).
 
 <!-- How-to-type page. Source: the former single Workspace page on main; split by type, text carried over, checked 2026-11-19. -->
+
+## Before you start
+
+- **A project role other than ReadOnly**, which can't create or change configurations. See [User roles](/management/project/users/#user-roles).
+  <!-- VERIFY(nikita): that a ReadOnly user can't create a workspace or load data into it; the roles list names configurations, not workspaces. -->
+- **A workspace type your project offers.** Which types you can pick depends on the project: see [Workspace types](/workspace/#workspace-types).
+- **To load data:** the tables or files in [Storage](/storage/).
+- **To unload data:** a Python or R workspace. Snowflake and BigQuery workspaces write to Storage in other ways, described under [Unload data from a workspace](#unload-data-from-a-workspace).
 
 ## Create a workspace
 
@@ -47,6 +55,9 @@ Creating the workspace takes a few seconds, so it will take a while before it ap
 
 ![Workspace - Running](/workspace/workspace-create-4.png)
 
+**Check:** the workspace is listed under **Workspaces** with the status **Active**.
+<!-- VERIFY(nikita): the status label in the current UI. Source: workspace-create-4.png, which shows the old UI (New Workspace button, Orchestrations menu). -->
+
 In the workspace detail, you can
 
 - get credentials & [connect to the workspace](/workspace/connect/),
@@ -81,6 +92,10 @@ advantage of [alias tables](/storage/tables/#aliases) and prepare buckets with t
 
 **Result:** the tables and files from the input mapping are loaded into the workspace.
 
+**Check:** in a Python or R workspace, JupyterLab shows the tables as CSV files in `in/tables/` and the files in
+`in/files/`; in an SQL workspace, the tables are in the workspace schema under the names set in the input mapping.
+<!-- VERIFY(nikita): the folder names in a JupyterLab workspace. Source: the in/tables and in/files paths of Python transformations (transformations/python-plain/index.md); not checked in a workspace. -->
+
 ### Clean workspace before loading
 
 In the **Load Data to Workspace** dialog, you have the option to **Clean workspace before loading**. When this option is enabled, Keboola removes all **tables** and **views** from the workspace schema before loading the new data. However, the following objects are **not** removed and will persist across loads:
@@ -105,6 +120,8 @@ valuable results, or when you trained a new model which you'd like to use in tra
    ![Workspace - Unload Data](/workspace/unload-data.png)
 
 **Result:** the tables and files from the output mapping are saved to Storage.
+
+**Check:** each table is in Storage under the destination set in the output mapping.
 
 For Snowflake and BigQuery workspaces, you can also export a single table directly from the workspace schema to
 [File Storage](/storage/files/) via the Storage API. See
@@ -133,7 +150,7 @@ Python and Snowflake SQL workspaces both have this action in the workspace detai
 
    ![Workspace - Create Transformation](/workspace/create-transformation-2.png)
 
-**Result:** a new transformation with the input and output mapping of the workspace. From a Python or R workspace,
+**Check:** the new transformation is listed under **Transformations** and has the input and output mapping of the workspace. From a Python or R workspace,
 the notebook script is not copied. From an SQL workspace, the saved queries and variables are copied as well; see
 [Variables](/workspace/sql-editor/#variables).
 <!-- Checked 2026-11-20 in the UI of project 264, Snowflake and Python (temporary workspaces): the Python dialog adds Backend Version (optional, default Python 3.10.10); otherwise dialog Create Transformation ("You are about to create a new transformation from the workspace …"), fields Name* and Description (optional), button Create Transformation. VERIFY(Nikita): the dialog does not say what is copied; confirm the "notebook script is not copied" rule for Python/R (the Python dialog does not say either). -->
