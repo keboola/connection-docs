@@ -1,6 +1,6 @@
 ---
 title: Storage Docker CLI Client
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'storage/api/clients/docker-cli'
 description: 'Use the Storage API Docker CLI client to create tables, import data into them and export them from the command line on any machine with Docker.'
 redirect_from:
@@ -23,6 +23,14 @@ The client source is available in our [Github repository](https://github.com/keb
 The client docker image is available in the [Quay repository](https://quay.io/repository/keboola/storage-api-cli?tab=tags).
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- **Docker** on the machine where you run the client: [install Docker](https://docs.docker.com/get-docker/).
+- **A Storage API token** with write access to the bucket you load into; exporting needs read access. Create one in [API tokens](/management/project/tokens/#limited-tokens).
+- **An existing bucket**, such as `in.c-main`. `create-table` stops if the bucket does not exist or the token cannot access it. To create one, see [Buckets](/storage/buckets/).
+- **The CSV file** in the local folder you mount into the container (the examples mount the current directory as `/data`).
+- **Your stack's URL** if your project is not on `connection.keboola.com`. The list is in [Stacks](/overview/#stacks).
 
 ## Running in Docker
 To print available commands:
@@ -114,3 +122,5 @@ the current directory. You should see an output similar to this one:
     Authorized as: ondrej.popelka@keboola.com (Tutorial)
     Table found ok
     Export done in 17 secs.
+
+**Check:** `old-data.csv` is in the current directory, and its first line holds the table's column names.

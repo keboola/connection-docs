@@ -1,6 +1,6 @@
 ---
 title: Files in Storage
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 slug: 'storage/files'
 sidebar:
   label: Files
@@ -17,6 +17,12 @@ The *File Storage* is available in the **Files** section of Storage and contains
 
 Files also keeps the CSV files behind table imports and exports, so it holds a history of the data loaded into your
 tables. How tables pass through Files is explained in the [Storage overview](/storage/#how-tables-pass-through-file-storage).
+
+## Before you start
+
+- **A project role that can change data in Storage**, to upload or delete files. The ReadOnly role can't; see [User roles](/management/project/users/#user-roles).
+- **A file of up to 2 GB** to upload. Larger files need a sliced upload; see [Limits](#limits).
+- **A table in Storage**, to export it as one file.
 
 ## Upload a file
 
@@ -40,6 +46,8 @@ tables. How tables pass through Files is explained in the [Storage overview](/st
 3. Click **Start upload**. It is active once a file is selected.
 
 **Result:** the file is listed in Files under the ID it got on upload.
+
+**Check:** the file is in the Files list. If you tagged it, searching for `tags:<your tag>` in the box above the list finds it.
 
 **Important:** The name of an uploaded file does not have to be unique because
 files are identified by their ID assigned on upload.
@@ -69,6 +77,8 @@ they uploaded themselves.
    ![Screenshot - File upload detail](/storage/files/files-download-file.png)
 
 **Result:** the file is downloaded or deleted, or its link is copied. What the link looks like and how long it works depends on whether the file is public.
+
+**Check:** paste a copied link into a browser: it downloads the file (for a sliced file, its JSON manifest). A link to a non-public file works for one hour from the moment the list was shown.
 
 ### File links
 
@@ -114,8 +124,9 @@ The [Storage overview](/storage/#how-tables-pass-through-file-storage) explains 
 4. Wait while the table header shows **Preparing export**. When the toast "Table … is ready to download." appears,
    click **Download Now**.
 
-**Result:** one merged file with the table data, downloaded in the format you chose. The export is also kept in
-**Storage → Files** as a `.csv.gz` file.
+**Result:** one merged file with the table data, downloaded in the format you chose.
+
+**Check:** **Storage → Files** also lists the export as a `.csv.gz` file tagged `table-export`.
 <!-- Checked 2026-11-20 in the UI of project 264: after Export the header shows Preparing export, then the toast "Table … is ready to download." with Download Now / Dismiss. Storage → Files then lists two .csv.gz files: one tagged table-export (expires in 1 day) and one storage-merged-export (expires in 14 days). Earlier API check: a table export through the Storage API creates a file in Files, sliced on Snowflake even for a 3-row table. -->
 
 ## Limits

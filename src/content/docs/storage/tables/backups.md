@@ -1,6 +1,6 @@
 ---
 title: Back up and restore tables
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 slug: 'storage/tables/backups'
 sidebar:
   label: Back Up and Restore
@@ -15,14 +15,18 @@ There are two methods available for backing up and restoring data: time travel r
 ![Screenshot - Storage Backups](/storage/tables/snap-restore.png)
 <!-- TODO(human-review, Nikita): this screenshot shows the "Snapshot and Restore" tab, which no longer exists (checked 2026-11-20 in project 264: the table detail has a Snapshots tab, and time travel is under ⋮ → Restore). Replace or drop it. -->
 
+## Before you start
+
+- **The table you want to restore or copy**, and a bucket for the new table.
+- **A project role that can change data in Storage.** The ReadOnly role can't; see [User roles](/management/project/users/#user-roles).
+- **For time travel only:** a project on Snowflake or BigQuery that is not a [Pay As You Go](/management/payg-project/) project. Snapshots work on every backend, but not on external buckets.
+
 ## Restore a table with time travel
 
 **Goal:** a new table that is an exact replica of an existing table as it was at a point in time you choose.
 
 Projects with a Snowflake or BigQuery backend can create an exact replica of a table at any point in time up to the [limit set](/management/project/) for the project.
 <!-- VERIFY(Nikita, Storage team): how far back time travel reaches differs by backend. On Snowflake it follows the project's data-retention setting; on BigQuery the ceiling is the dataset's own time-travel window, which BigQuery caps at 7 days (2-7 configurable). Confirm what a BigQuery project is actually allowed before documenting a number here. -->
-
-Time travel restore is not available on [Pay As You Go](/management/payg-project/) projects.
 
 1. Open the table detail, click **⋮** (**More actions**, top right) and select **Restore**. The dialog
    **Restore Table Using Time Travel** opens.
@@ -36,6 +40,8 @@ Time travel restore is not available on [Pay As You Go](/management/payg-project
 
 **Result:** a new table in the bucket you selected, with the data as it was at the selected time point. Data types are
 not carried over: re-create them on the new table.
+
+**Check:** the destination bucket lists the new table under the name you set in **Table Name**.
 
 :::caution[The restore time uses your current time zone]
 The time input is interpreted as the wall clock in your current local timezone.
@@ -76,5 +82,7 @@ To rename a table, change its display name ([Update a table](https://api.keboola
    ![Screenshot - Storage Snapshots List](/storage/tables/snapshot-restore.png)
 
 **Result:** the snapshot is in the list on the **Snapshots** tab, and a table created from it holds the contents the table had when the snapshot was taken.
+
+**Check:** the **Snapshots** tab lists the snapshot with its creation time, and the destination bucket lists the table `<table>_<snapshot ID>` (or the name you set).
 
 **Next:** [Buckets →](/storage/buckets/)

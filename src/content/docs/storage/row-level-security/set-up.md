@@ -1,6 +1,6 @@
 ---
 title: Set up row-level and column-level security
-lastUpdated: 2026-11-24
+lastUpdated: 2026-11-27
 slug: 'storage/row-level-security/set-up'
 sidebar:
   label: Set Up
@@ -14,6 +14,14 @@ Setting up [row-level and column-level security](/storage/row-level-security/) t
 :::caution[Public Beta]
 Row-level and column-level security is in free public beta until 28 February 2027. A project admin can turn it on in **Project settings → Features**. After the beta it becomes a paid add-on; your Customer Success Manager will share the details. See the [overview](/storage/row-level-security/) for what the beta covers.
 :::
+
+## Before you start
+
+- **A project on Snowflake or BigQuery**, the two backends row-level security supports.
+- **The project admin role**, to turn on the `row-level-security` feature in **Project settings → Features** (step 1).
+- **A project administrator's master Storage token** to write policies. Sharing a policy with other projects or applying it to the whole organization also needs the [organization administrator](/management/organization/) role.
+- **For the CLI path:** [kbagent](/cli/getting-started/), connected to the project. The commands below were checked with kbagent 1.4.1.
+- **For a Data App:** an app that users sign in to through single sign-on (OIDC). See [Data Apps authentication](/data-apps/authentication/).
 
 ## 1. Turn on the feature
 
@@ -47,7 +55,7 @@ kbagent --json workspace create --project my-project --name governed-ws --govern
 
 **Goal:** give every table that readers should see a policy.
 
-Write policies before you switch a project over: a governed workspace shows no data until a policy allows it. Policies are written by a project administrator (master Storage token). Sharing a policy with other projects or applying it to the whole organization needs the organization administrator role.
+Write policies before you switch a project over: a governed workspace shows no data until a policy allows it. Who can write them is in [Before you start](#before-you-start).
 
 You can write policies in four ways. They all create the same `rls-policy` and `cls-policy` objects.
 
@@ -240,6 +248,8 @@ orders = load_orders(get_app_user_key())
 **Result:** After a redeploy, the queries of the app run under the listed policies with the identity of the signed-in user.
 
 A query that carries only the app's Storage token, without the user token, is refused (HTTP 403, `Row-level security does not allow this query`). So is a background job without a signed-in user.
+
+**Check:** sign in to the app as a user whom a rule selects. It shows only the rows and columns the listed policies allow for that user.
 
 ---
 

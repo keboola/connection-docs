@@ -1,6 +1,6 @@
 ---
 title: Register and use an external dataset
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 slug: 'storage/byodb/external-buckets/register'
 sidebar:
   label: Register and Use
@@ -8,10 +8,22 @@ description: 'Register a Snowflake schema or BigQuery dataset as an external dat
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import Prereqs from '../../../../../components/Prereqs.astro';
 
 These are the tasks around an [external dataset](/storage/byodb/external-buckets/): register a schema or dataset from your own warehouse, refresh it, query it, share it and remove it. Where Snowflake and BigQuery differ, pick your backend in a tab. The other tab groups on the page switch with it.
 
 {/* How-to-type page. Source: the "Creating", "Using", "Sharing" and "Removing" sections of the External Datasets page as it stood on main before the split. Structure checked 2026-11-19, facts not re-verified. */}
+
+<Prereqs needs={[]}>
+  <li><strong>A project on your own Snowflake or BigQuery,</strong> because external datasets need <a href="/storage/byodb/">BYODB</a>.</li>
+  <li><strong>The project features <code>external-buckets</code> and <code>input-mapping-read-only-storage</code>,</strong> which the Storage API requires for registration. Ask <a href="/management/support/">Keboola Support</a> about them.</li>
+  <li><strong>The production branch.</strong> Registration works in the default branch only, not in a development branch.</li>
+  <li><strong>A project role that can change Storage;</strong> ReadOnly cannot. See <a href="/management/project/users/#user-roles">User roles</a>.</li>
+  <li><strong>The schema or dataset</strong> in your warehouse, with the tables and views you want to read.</li>
+  <li><strong>Rights in your warehouse to grant Keboola read access:</strong> on Snowflake, a role that can grant <code>USAGE</code> on the database and schema and <code>SELECT</code> on all and future tables and views (future grants need <code>MANAGE GRANTS</code> or ownership of the schema); on BigQuery, access to Analytics Hub in your GCP project.</li>
+</Prereqs>
+
+{/* VERIFY(nikita): the two feature names come from the Storage API spec (POST /v2/storage/buckets/register). Check whether BYODB projects get them by default or whether Support turns them on. */}
 
 ## Register an external dataset
 
@@ -54,6 +66,8 @@ An external dataset can be registered in the Storage of a project. The dialog wi
 
 **Result:** When you register an external dataset, we analyze the metadata of the objects in it and register all tables and views as tables in the Keboola Storage bucket.
 
+**Check:** the new bucket is listed in **Storage**, and its tables match the tables and views of the schema or dataset. Tables whose names break the [naming limits](/storage/byodb/external-buckets/#limitations) are left out.
+
 ## Refresh an external dataset
 
 **Goal:** make tables or views that were added after the registration visible in Keboola.
@@ -66,6 +80,8 @@ If you later add additional tables or views, you must manually **refresh** the S
    ![Bucket refresh](/storage/byodb/external-buckets/figures/4.png)
 
 **Result:** The added tables and views are visible in Keboola. For table and column descriptions, see [Using an external dataset](/storage/byodb/external-buckets/#using-an-external-dataset).
+
+**Check:** the bucket detail lists the tables and views you added in the warehouse.
 
 ## Refresh on a schedule
 
@@ -82,6 +98,8 @@ You can enable **Auto-refresh** for external buckets using a cron scheduler. Aut
    ![Auto-refresh schedule](/storage/byodb/external-buckets/figures/autorefresh-2.png)
 
 **Result:** The bucket metadata is refreshed automatically on the schedule you set.
+
+**Check:** **Scheduled Tasks** in **Auto-refresh Settings** shows the schedule in words, such as *At 00:00, every day (UTC)*.
 
 ## Keep read-only input mapping access to recreated tables
 
@@ -102,6 +120,8 @@ A refresh of the bucket restores the access each time (see [Limitations](/storag
    {/* VERIFY(Nikita): the sentence above used to point at "the pattern in the picture", and no picture was on the page. It now gives the pattern from the BYODB page. An unused registration screenshot in this page's figures folder (3-snflk.png) shows a role named KEBOOLA_8. The BYODB page also says Keboola resources are prefixed SAPI_ on the connection.keboola.com stack: check the read-only role name there. */}
 
 **Result:** The read-only role can read tables and views created in the schema later, so a recreated table stays readable.
+
+**Check:** `SHOW FUTURE GRANTS IN SCHEMA "REPORTING"."sales_schema";` lists `SELECT` on tables, views and external tables for the read-only role. Use your own database and schema names.
 
 ## Query an external dataset in a SQL transformation
 
@@ -197,6 +217,8 @@ Removing an external dataset is as simple as removing any other Storage bucket.
 **Result:** The Storage bucket will be removed from the project, but the schema in the database will remain untouched. Any rights that you have granted to Keboola during the registration will be revoked.
 
 If you wish to remove the schema, you must do so manually in your warehouse.
+
+**Check:** the bucket is no longer listed in **Storage**, and the schema or dataset is still in your warehouse.
 
 ---
 

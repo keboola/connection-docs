@@ -1,13 +1,13 @@
 ---
 title: Connect your own BigQuery
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 sidebar:
   label: Connect Your Own BigQuery
 description: 'Set up the Google Cloud resources for connecting your own BigQuery to Keboola: folder, project, service account and permissions.'
 slug: 'storage/byobq'
 ---
 
-This guide is for the Google Cloud administrator of an organization that runs its Keboola projects on its own BigQuery ([Bring Your Own Database](/storage/byodb/)). The registration at the end also needs a Keboola Management API token with super admin privileges.
+This guide is for the Google Cloud administrator of an organization that runs its Keboola projects on its own BigQuery ([Bring Your Own Database](/storage/byodb/)).
 
 <!-- How-to-type page. Source: this page as it stood on main; headings moved one level down, and the lede, Goal and Result lines added; steps unchanged. Structure checked 2026-11-19, facts not re-verified. -->
 
@@ -15,11 +15,19 @@ This guide is designed to walk you through the essential processes of setting up
 and related services to your Keboola project. From creating a dedicated folder in your Google organization to creating a project and a service account, 
 each section is tailored to ensure a smooth and efficient setup.
 
-Before you start, check the [BigQuery limits](/storage/byodb/#bigquery-limitations) on the BYODB page.
-
 ![How to connect BigQuery](/storage/byobq/pic.png)
 
 ***Note:** Naming conventions are up to you, but we strongly recommend naming all resources in a way that makes their connection to Keboola clearly identifiable (e.g., include "keboola" in the name). This makes debugging significantly easier when issues arise.*
+
+## Before you start
+
+- **The [BigQuery limits](/storage/byodb/#bigquery-limitations)** on the BYODB page, checked against how you plan to use Keboola.
+- **Admin rights in your Google Cloud organization.** You create a folder and a project in it, grant roles on the folder, and add a principal to the billing account.
+- **A Google Cloud billing account** for the new project.
+- **The region of the Keboola product** you bought through the marketplace. The Cloud Storage bucket must be in the same region, or Keboola rejects the registration.
+- **A Keboola Management API token** with super admin privileges, for the registration at the end. Generate one in **Admin > Account > [Access Tokens](https://connection.keboola.com/admin/account/access-tokens)**.
+  <!-- VERIFY(nikita): the Management API spec (connection.keboola.com/api/manage/doc.json) says of POST /manage/file-storage-gcs "Superuser credentials are not required for storage registration", but files both registration calls under its SUPER tags. Check which token each call needs, and whether a customer can hold a super admin token at all. -->
+- **An HTTP client** such as `curl`, for the two Management API calls.
 
 ## Create BigQuery and GCP resources
 
@@ -100,6 +108,8 @@ Before you start, check the [BigQuery limits](/storage/byodb/#bigquery-limitatio
 
 **Result:** You have the folder ID, the JSON key file of the service account, and the name and region of the bucket. The registration below uses all of them.
 
+**Check:** in **IAM & Admin > IAM** of the project, the service account has **Owner** and **Storage Object Admin**. On the folder's IAM page it has **Browser** and **Project Creator**, and the bucket's **Lifecycle** tab shows two **Delete object** rules, for `exp-2/` and `exp-15/`.
+
 ***Note:** If you want to see your BigQuery tables directly in the BigQuery console, go to your folder and add a BigQuery Data Viewer or higher role.*
 
 ## Register resources in Keboola
@@ -108,7 +118,7 @@ Before you start, check the [BigQuery limits](/storage/byodb/#bigquery-limitatio
 
 ### 1. Register GCS File Storage in Keboola
 
-Once the GCS bucket is ready, register it in Keboola via the [Management API](https://api.keboola.com/?service=manage#post-/manage/file-storage-gcs). This requires a **Keboola Management API token** with super admin privileges. You can generate one in **Admin > Account > [Access Tokens](https://connection.keboola.com/admin/account/access-tokens)**.
+Once the GCS bucket is ready, register it in Keboola via the [Management API](https://api.keboola.com/?service=manage#post-/manage/file-storage-gcs), with the Management API token from [Before you start](#before-you-start).
 
 Send a `POST` request to `/manage/file-storage-gcs`:
 
@@ -179,6 +189,8 @@ A successful response returns HTTP `201` with an object containing the new backe
 ***Note:** Once both resources are registered, contact Keboola Support and provide the file storage ID and BigQuery backend ID. Support will set up your project with these backends.*
 
 For full API reference, see the [Keboola Management API documentation](https://api.keboola.com/?service=manage).
+
+**Check:** both calls returned an object with an `id`. The BigQuery backend registration checks the service account's roles and lists each one as held or missing; grant any missing role in Google Cloud and send the call again.
 
 ---
 

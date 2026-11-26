@@ -1,6 +1,6 @@
 ---
 title: Give Snowflake roles read access to a bucket (grant mode)
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'storage/bucket-exposure/snowflake-grant'
 sidebar:
   label: Snowflake Grant Mode
@@ -15,11 +15,15 @@ which sees the whole project.
 
 <!-- How-to-type page. Source: the "Snowflake Grant Mode" section of the Bucket Exposure page as it stood on main before the split. Structure checked 2026-11-19, facts not re-verified. -->
 
-Grant mode is available only when the project's Snowflake backend is **your own account**
-([BYODB](/storage/byodb/)), or an account Keboola runs for your organization alone. It is not
-available on Keboola's shared Snowflake accounts or in Snowflake Partner Connect projects.
+To share the bucket with other Snowflake accounts instead, use [share mode](/storage/bucket-exposure/snowflake-share/).
 
-To share the bucket with other Snowflake accounts instead, use [share mode](/storage/bucket-exposure/snowflake-share/). Bucket Exposure is in beta and has to be enabled for your project: see the note at the top of the [Bucket Exposure overview](/storage/bucket-exposure/).
+## Before you start
+
+- **A Snowflake backend that is your own account** ([BYODB](/storage/byodb/)), or an account Keboola runs for your organization alone. Grant mode is not available on Keboola's shared Snowflake accounts or in Snowflake Partner Connect projects.
+- **Bucket Exposure enabled for the project.** It is in beta; Keboola Support turns it on, as the note at the top of the [Bucket Exposure overview](/storage/bucket-exposure/) says.
+- **Manage access to the bucket**, the same permission you need to [share a bucket](/catalog/share-and-link/) inside Keboola.
+  <!-- VERIFY(nikita): moved over from the generic create page; confirm the Snowflake modes need the same permission (organization member or the Share role). -->
+- **The grantee roles**, already created in your Snowflake account. Keboola does not create roles; the other rules for them are in step 2 below.
 
 ## Create a grant-mode exposure
 
@@ -56,6 +60,8 @@ To share the bucket with other Snowflake accounts instead, use [share mode](/sto
 schema as `"<DATABASE>"."<SCHEMA>"`. Give that name and the role to the people who will
 query the data.
 
+**Check:** in Snowflake, `SHOW GRANTS TO ROLE` for a grantee role lists `USAGE` on that schema, as shown in [Check access in Snowflake](#check-access-in-snowflake).
+
 ### What a grantee role gets
 
 For every role in the list, Keboola runs these grants as the project's role:
@@ -84,6 +90,8 @@ next save also finishes any revoke that the failed job did not run.
 
 After you create a missing role in Snowflake, save the exposure again with the list
 unchanged: every save re-applies the grants to all listed roles.
+
+**Check:** `SHOW GRANTS TO ROLE` for an added role lists `SELECT` on the bucket's tables and views; for a removed role, the only grant left from this exposure is `USAGE` on the project database.
 
 ## End a role's access
 
@@ -125,7 +133,7 @@ SHOW FUTURE GRANTS TO ROLE DATABRICKS_READER;
 
 `DATABRICKS_READER` is an example: replace it with the grantee role you want to check.
 
-**Result:** While the role is a grantee, the first statement lists `USAGE` on the project database and
+**Check:** while the role is a grantee, the first statement lists `USAGE` on the project database and
 on the bucket schema and `SELECT` on each table and view in the bucket; the second lists the
 future `SELECT` grants on tables and views in the schema. After you remove the role, the
 only grant this exposure leaves behind is `USAGE` on the project database.

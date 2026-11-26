@@ -1,6 +1,6 @@
 ---
 title: Create and configure a data stream
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 slug: 'storage/data-streams/create'
 sidebar:
   label: Create a stream
@@ -10,6 +10,14 @@ description: 'Create a data stream in the app, set its table, import conditions 
 Work through these tasks in order for a new HTTP stream, or jump to the one you need. For what Data Streams are, see the [overview](/storage/data-streams/); for column types, templates and the Stream API, see the [reference](/storage/data-streams/reference/).
 
 <!-- How-to-type page. Source: the Data Streams overview and the Data Streams reference as they stood before the 2026-11-19 section split. Text moved, steps not re-run in the app. -->
+
+## Before you start
+
+- **The admin role in the project.** Creating a stream and changing its settings are write operations, which only an admin's master token may do; see the [reference](/storage/data-streams/reference/) and [User roles](/management/project/users/#user-roles).
+  <!-- VERIFY(nikita): keboola/keboola-as-code internal/pkg/service/stream/api/service/service.go canWrite() also accepts the share role; confirm and update the reference note too. -->
+- **An application or service that can send HTTP POST requests**, such as a webhook, to deliver the events.
+- **For a delivery guarantee:** `curl` or another HTTP client, your master token, the source ID and your [stack's](/overview/#stacks) Stream API host.
+- **For Kafka:** a Kafka Connect cluster with an HTTP Sink connector installed.
 
 ## Create a data stream
 
@@ -23,6 +31,8 @@ Work through these tasks in order for a new HTTP stream, or jump to the one you 
 <!-- VERIFY(Nikita): the steps name no button that confirms the dialog. The OTLP flow says "Click Create"; check that the HTTP flow uses the same button, and add the step. Not checked in project 264 on 2026-11-20: Storage → Data Streams shows the placeholder "Unlock the Power of Real-Time Data" with Unlock Data Streams and How it works, and Unlock Data Streams was not clicked. The same day, kbagent stream create-source created a source in that project through the Stream API. Decide whether this page should mention Unlock Data Streams. -->
 
 **Result:** The stream is created. Configure an HTTP stream as described below. For an OTLP stream, continue with [Send OpenTelemetry (OTLP) data to Keboola](/storage/data-streams/opentelemetry/).
+
+**Check:** the stream has a **Data Stream URL**, which the next task copies.
 
 ## Configure an HTTP data stream
 
@@ -51,7 +61,7 @@ Work through these tasks in order for a new HTTP stream, or jump to the one you 
 
    ![Screenshot - Data Streams Table Statistics](/storage/data-streams/data-streams-pic1.png)
 
-**Result:** **Table statistics** shows the events you sent as waiting for import, and as imported once the first import condition is met.
+**Check:** **Table statistics** shows the events you sent as waiting for import, and as imported once the first import condition is met.
 
 ## Choose a delivery guarantee
 
@@ -82,6 +92,8 @@ The call returns `202 Accepted` with a task; poll the task's `url` until it fini
 
 **Result:** The client and the stream's settings match the guarantee you chose.
 
+**Check:** a `GET` request to the same `settings` URL returns `storage.level.local.encoding.sync.wait` with the value you chose.
+
 ## Send events from Apache Kafka
 
 **Goal:** a data stream ingests the records from your Kafka topics.
@@ -96,5 +108,7 @@ To connect Keboola with [Apache Kafka®](https://kafka.apache.org/) and ingest d
 <!-- VERIFY(Nikita): which HTTP Sink connector is meant (Aiven http-connector-for-apache-kafka uses http.url and batching.enabled; Confluent HTTP Sink uses its own property names)? Name it and its target-URL property. -->
 
 **Result:** The connector continuously reads data records from one or more Kafka topics and sends the data as a POST request in JSON format to Keboola's Data Stream API URL. Data records from Kafka topics are transformed into strings before being sent to Keboola.
+
+**Check:** the stream's **Table statistics** shows the records as waiting for import. Once an import condition is met, the destination table has one row per Kafka record.
 
 **Next:** [Send OpenTelemetry (OTLP) data to Keboola →](/storage/data-streams/opentelemetry/)

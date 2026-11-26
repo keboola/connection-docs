@@ -1,6 +1,6 @@
 ---
 title: Data Streams Tutorial
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 description: Set up a data stream that loads GitHub issue events from a webhook into a Storage table.
 slug: 'storage/data-streams/tutorial'
 sidebar:
@@ -186,7 +186,7 @@ Since the table `in.c-github.issues` did not exist, it was created:
 
 ![Keboola storage table](/storage/data-streams/tutorial/github_webhook_export_table.png)
 
-**Verify the data landed** — open the table's **Data Sample** in the UI, or fetch the table detail via the Storage API:
+**Check:** the table `in.c-github.issues` has a row for the issue you opened: its `issue_id` is a number. The row from GitHub's `ping` has `issue_id` `undefined`, so it does not count. Open the table's **Data Sample** in the UI, or fetch the table detail via the Storage API:
 
 ```shell
 curl --header "X-StorageApi-Token: YOUR_TOKEN" \
