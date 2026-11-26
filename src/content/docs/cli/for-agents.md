@@ -1,6 +1,6 @@
 ---
 title: kbagent with AI agents
-lastUpdated: 2026-09-29
+lastUpdated: 2026-11-27
 slug: 'cli/for-agents'
 sidebar:
   label: Use with AI Agents
@@ -10,6 +10,14 @@ description: 'Give an AI coding agent safe control of Keboola with kbagent: the 
 
 
 [kbagent](/cli/) is built to be driven by AI coding agents (Claude Code, Claude Desktop, Cursor, VS Code, the ChatGPT app) as well as humans. It gives an agent a stable command surface, a machine-readable reference, and safety rails so it can operate Keboola without you handing over unrestricted access.
+
+<!-- How-to-type page. Typed 2026-11-27 with its prerequisites and check steps (T4/T5). -->
+
+## Before you start
+
+- For the client routes, one of the five AI clients: Claude Code, Claude Desktop, Cursor, VS Code with Copilot, or the ChatGPT app.
+- A Keboola project you can sign in to, or a Storage API token for it: [connect your project](/cli/getting-started/#step-2--connect-your-project).
+- A real terminal, for installing kbagent and signing in. Claude Code is one; the other four clients need a separate one.
 
 <!-- Source: keboola/cli README ("For AI agents") + `kbagent context` + `kbagent doctor`. The `/keboola` subagent and `context` sections verified 2026-07-13; the plugin, marketplace and per-client sections below carry their own 2026-08-26 dates. -->
 
@@ -53,6 +61,8 @@ Use a real terminal for all three. `auth login` opens a browser you have to fini
 
 `kbagent doctor` sits here, with the steps it checks. It looks for a plugin under `~/.claude/plugins/cache`, so it cannot see a Cursor, VS Code or ChatGPT app install, and it cannot confirm the plugin half of your setup.
 
+**Check:** `kbagent doctor` reports your project as connected.
+
 Then follow your client below.
 
 ### Claude Code
@@ -66,6 +76,8 @@ Claude Code is already a terminal, so it can do the whole setup itself.
    <!-- kbagent-check: skip-next. This is a chat prompt for the agent to read. -->
 5. Ask it: `kbagent list my projects`
 
+**Check:** the reply lists the same projects as `kbagent project list`.
+
 ### Claude Desktop
 
 Claude Desktop has no slash commands in its chat. `/plugin` answers "/plugin isn't available in this environment", and both `/kbagent:setup` and `/kbagent` answer "Unknown command". The plugin goes in through the UI instead.
@@ -78,6 +90,8 @@ Claude Desktop has no slash commands in its chat. `/plugin` answers "/plugin isn
 
 Type that last one without a leading slash. `/kbagent …` fails here.
 
+**Check:** the reply lists the same projects as `kbagent project list`.
+
 ### Cursor
 
 1. Do the terminal steps above.
@@ -86,6 +100,8 @@ Type that last one without a leading slash. `/kbagent …` fails here.
 4. Find the `kbagent` row under **Keboola Ai Kit** and press **Add**.
    <!-- kbagent-check: skip-next. This is a chat prompt for the agent to read. -->
 5. Ask in the chat: `kbagent list my projects`
+
+**Check:** the reply lists the same projects as `kbagent project list`.
 
 :::caution[Cursor needs the full URL]
 The short `keboola/ai-kit` form that works in Claude Code and Claude Desktop is rejected here with `[invalid_argument] Error`. Paste `https://github.com/keboola/ai-kit`.
@@ -101,6 +117,8 @@ VS Code's Copilot reads the Claude plugin format (`.claude-plugin/plugin.json` a
 4. Pick `kbagent` from the picker.
    <!-- kbagent-check: skip-next. This is a chat prompt for the agent to read. -->
 5. Open the Chat panel (`⌃⌘I`, or `Ctrl+Alt+I` on Windows) and ask: `kbagent list my projects`
+
+**Check:** the reply lists the same projects as `kbagent project list`.
 
 ### ChatGPT app
 
@@ -119,6 +137,8 @@ The same two steps work from a shell:
 codex plugin marketplace add https://github.com/keboola/ai-kit
 codex plugin add kbagent@keboola-claude-kit
 ```
+
+**Check:** the app's reply to step 5 lists the same projects as `kbagent project list`.
 
 ### Plain terminal
 

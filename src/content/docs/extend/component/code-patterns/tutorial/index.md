@@ -1,6 +1,6 @@
 ---
 title: Code Pattern Quick Start
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'extend/component/code-patterns/tutorial'
 description: 'Build a code pattern component on top of the component quick start, test its generate action through the API and attach it to a transformation.'
 ---
@@ -13,6 +13,17 @@ The instructions below refer to the general [component quick start](/extend/comp
 highlighting the steps specific to code patterns.
 
 <!-- How-to-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
+
+## Before you start
+
+- Everything in the [component quick start's list](/extend/component/tutorial/#before-you-start), among
+  them a Developer Portal account in a vendor, a Keboola project and a GitHub account.
+- A transformation type the pattern will support in that project, for example
+  `keboola.snowflake-transformation`; see [Supported Components](/extend/component/code-patterns/interface#supported-components).
+- A [Storage API token](/management/project/tokens/) for the API calls. It needs access to the transformation
+  component and to the code pattern component; a master token has access to all components.
+  <!-- VERIFY(nikita): whether the sync action that runs the code pattern checks the token's component access; the sync-actions service is not public. -->
+- `curl` or another HTTP client.
 
 ## Creating Component
 First, follow the common steps for [creating a component](/extend/component/tutorial/):
@@ -56,7 +67,9 @@ The first option is to call the [generate action](/extend/component/code-pattern
 
 - You can test that the component returns the desired results based on the specified inputs.
 - Use the [Run Component Action](https://api.keboola.com/?service=sync-actions#post-/actions) API call.
-- An [API token](/management/project/tokens/) is needed.
+
+**Check:** the response is the generated code in the [output format](/extend/component/code-patterns/interface#output-format):
+a `parameters` key with the code `blocks`, plus a `storage` key when the pattern generates the mapping.
 
 ### Modify Transformation via API
 The second option is to modify the transformation to use an unpublished code pattern.
@@ -150,9 +163,15 @@ This is an example response, some keys are omitted.
 
 The transformation now uses the code pattern, and you can **test it in the [user interface](/transformations/code-patterns/#configuration)**.
 
+**Check:** the transformation detail shows the pattern's parameters form and a **Generate Code** button. After you
+click it, the generated code appears, read-only.
+
 ## Publishing Component
 Make sure the component is set up according to [Interface - Developer Portal](/extend/component/code-patterns/interface#developer-portal).
 Then follow the tutorial [Publish Component](/extend/publish/).
+
+**Check:** once the pattern is published, it appears in the **Use predefined code pattern** select box when you
+create a transformation of a supported type.
 
 ## Next Steps
 - [Interface](/extend/component/code-patterns/interface) describes how the code patterns work internally.

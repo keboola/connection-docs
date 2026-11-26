@@ -1,6 +1,6 @@
 ---
 title: Artifacts Tutorial
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'extend/common-interface/artifacts/tutorial'
 description: "Produce and consume artifacts from a Python transformation step by step, using curl against the Storage API."
 redirect_from:
@@ -16,13 +16,20 @@ But these principles would work inside any component.
 In the examples, we use the `curl` console tool to interact with our APIs.
 
 :::note
-The `artifacts` feature must be enabled in your project; contact [support@keboola.com](mailto:support@keboola.com) to enable it.
 Artifacts configuration can be created or edited only through the [Storage API](https://api.keboola.com/?service=storage), not in the UI.
 :::
 
-## Examples
+## Before you start
 
-For each example we will need [Storage API Token](/management/project/tokens/) to make the API call.
+- The `artifacts` feature, enabled in your project: contact [support@keboola.com](mailto:support@keboola.com) to enable it.
+- A [Storage API token](/management/project/tokens/) for the API calls in each example. New tokens have no access to
+  component configurations, so give it access to the Python transformation (`keboola.python-transformation-v2`),
+  or use a master token.
+- `curl` in a terminal.
+- For example 4, a project where you can create a [Legacy Flow](/flows/flows-legacy/).
+  <!-- VERIFY(nikita): can a new project still create a Legacy Flow (keboola.orchestrator)? If not, example 4 needs a project that already has one, or the Conditional Flows question in step 3 decides it. -->
+
+## Examples
 
 1. Obtain a Storage API token from the user interface of your project, see this [Guide](/management/project/tokens).
 2. Store the token and url to the environment variable.
@@ -52,9 +59,10 @@ This file will be then uploaded as "artifact" to File Storage.
 
     ![Artifacts - Job](/extend/common-interface/artifacts/artifacts-tutorial-2.png)
 
-3. The file is now visible in File Storage with appropriate tags
+**Check:** File Storage (the **Files** tab in Storage) now has an archive of the `current` folder, tagged `artifact`, `branchId-…`,
+`componentId-…`, `configId-…` and `jobId-…`.
 
-   ![Artifacts - File Storage](/extend/common-interface/artifacts/artifacts-tutorial-3.png)
+![Artifacts - File Storage](/extend/common-interface/artifacts/artifacts-tutorial-3.png)
 
 ### 2. Produce & consume artifacts
 
@@ -103,7 +111,9 @@ with open("/data/artifacts/out/current/myartifact1", "w") as file:
     --data-urlencode 'name=Artifacts upload & download' \
     --data-urlencode 'description=Test Artifacts upload & download'
     ```
-1. Run the configuration (in the UI, or through the [Jobs API](/extend/jobs/#run-a-job)) and open its job log. The first run prints `[]`: there are no previous runs to download from yet. Run it again and the log lists `/data/artifacts/in/runs/jobId-<first job id>/myartifact1`.
+1. Run the configuration (in the UI, or through the [Jobs API](/extend/jobs/#run-a-job)) and open its job log. The first run prints `[]`: there are no previous runs to download from yet. Run it again.
+
+**Check:** the second job's log lists `/data/artifacts/in/runs/jobId-<first job id>/myartifact1`.
 
 ### 3. Consume artifacts from different component
 Similar to previous example we will create a configuration of Python Transformation component. 
@@ -123,7 +133,7 @@ But this time we will download artifacts produced by the configuration from `Exa
     --data-urlencode 'name=Artifacts upload & download' \
     --data-urlencode 'description=Test Artifacts upload & download'    
     ```
-3. Run the consumer configuration and open its job log: it lists the producer's artifact under `/data/artifacts/in/custom/jobId-<producer job id>/`.
+3. Run the consumer configuration and open its job log.
    
 The whole configuration now looks like this (with the numeric ID you exported in place of `1234567`):
 
@@ -157,6 +167,8 @@ The whole configuration now looks like this (with the numeric ID you exported in
         }
     }
    ```
+
+**Check:** the consumer's job log lists the producer's artifact under `/data/artifacts/in/custom/jobId-<producer job id>/`.
 
 ### 4. Shared artifacts
 This example will show how to share artifacts within an orchestration
@@ -223,4 +235,6 @@ The configuration producing artifact needs to be in a phase that precedes the co
 
    ![Artifacts orchestration](/extend/common-interface/artifacts/artifacts-tutorial-4.png)
 
-4. Run it. The consumer's job log lists `/data/artifacts/in/shared/jobId-<producer job id>/myartifact3`.
+4. Run it.
+
+**Check:** the consumer's job log lists `/data/artifacts/in/shared/jobId-<producer job id>/myartifact3`.

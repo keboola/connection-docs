@@ -1,6 +1,6 @@
 ---
 title: Component Quick Start
-lastUpdated: 2026-11-26
+lastUpdated: 2026-11-27
 slug: 'extend/component/tutorial'
 description: 'Create a Hello, World! component in the Developer Portal, generate its repository from a template, deploy it through CI and run it in a Keboola project.'
 redirect_from:
@@ -17,10 +17,22 @@ A Keboola component is a Docker image. When a job runs, the [Job Queue](/extend/
 provisioned by the [Developer Portal](https://components.keboola.com/) — the only supported registry — and are
 pushed there by the [deploy script](/extend/component/deployment/) in your CI pipeline.
 
-## Before You Start
-You need to have a computer with working [Docker](https://www.docker.com/why-docker) to develop the Keboola component code.
-To be able to create new components, you also need to have an account in the [Keboola Developer Portal](https://components.keboola.com/),
-which manages the list of components available in Keboola.
+<!-- Tutorial-type page. Typed 2026-11-27 with its prerequisites and check step (T4/T5). -->
+
+## Before you start
+
+- A computer with working [Docker](https://www.docker.com/why-docker), to develop the Keboola component code
+  (the Python path below runs without it).
+- An account in the [Keboola Developer Portal](https://components.keboola.com/), which manages the list of
+  components available in Keboola. You must be able to log in to it; how to get an account is below.
+- Membership in a vendor in the Developer Portal, approved by the vendor administrator (or, for a new
+  vendor, by Keboola).
+- A Keboola project on one of the [stacks](/overview/#stacks) that you can log in to. Joining or creating a
+  vendor should give you a development project.
+- A [GitHub](https://github.com/) account, and Git to push the component repository.
+- For the [Python](#python) template's CI, a [Docker Hub](https://hub.docker.com/) account and access token
+  for the `DOCKERHUB_USER` and `DOCKERHUB_TOKEN` secrets, unless your GitHub organization already sets them.
+- Python with `pip`, to install the cookiecutter tool for the [Python](#python) template.
 
 The Developer Portal uses different credentials than Keboola. [Creating an account](https://components.keboola.com/auth/create-account) is free; it requires a working email address
 (to which a confirmation email will be sent) and a mobile phone for a mandatory two-factor authorization.
@@ -41,11 +53,6 @@ is available, though e-mail or a Slack channel is most commonly used.
 
 When you are confirmed as a member of a vendor, you may proceed to creating your own component.
 The example component is written in the Python language, but no knowledge of Python is required.
-Before you continue with this tutorial, make sure you
-
-- can log in to the [Developer Portal](https://components.keboola.com/).
-- can log in to one of the Keboola [stacks](/overview/#stacks)
-- have a [Github](https://github.com/) account.
 
 *Note: Even though the tutorial assumes using [GitHub](https://github.com/) + [Travis](https://www.travis-ci.com/) services, they are not required for extending Keboola.
 We use them because we like them the most. The [deployment documentation](/extend/component/deployment/) shows how to configure,
@@ -217,6 +224,12 @@ On this URL, you can create a configuration and run it without any settings.
 And you should see the "Hello, World" message in the events:
 
 ![Screenshot -- Component Events](/extend/component/tutorial/hello-world.png)
+
+**Check:** with the generator's `simple-python` template, the job ends with the status **Success** and its
+events include "Hello world from python", as in the screenshot. A component made from the cookiecutter
+[Python](#python) template fails on an empty configuration: it needs the `print_hello` and `#api_token`
+parameters and an input table, and it logs "Hello World" only when `print_hello` is true.
+<!-- VERIFY(nikita): checked 2026-11-27 against keboola/cookiecutter-python-component main (src/configuration.py, src/component.py) and the 2020 hello-world.png, which matches the generator's simple-python template. Owner decision: rewrite this run step for the Python path (parameters and an input table) or scope it to the generator path. -->
 
 When you create a component, it will have assigned a memory limit of **256MB** and
 run timeout of **1 hour**. If you need to change those limits, please

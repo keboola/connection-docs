@@ -1,6 +1,6 @@
 ---
 title: Debugging
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'extend/component/tutorial/debugging'
 description: 'Debug a component by downloading its data folder from a debug job, running the image locally with docker run, and trying a test image tag through the API.'
 ---
@@ -11,6 +11,17 @@ examine the component while it is running. However, there are some options how t
 replicated locally, so that you can analyze what is happening if something is not right.
 
 <!-- Tutorial-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
+
+## Before you start
+
+- A component deployed through the [component quick start](/extend/component/tutorial/), and a configuration
+  of it in a Keboola project.
+- [Docker](https://www.docker.com/) on your computer, to build and run the image locally.
+- A [Storage API token](/management/project/tokens/) that can run the component, for the Queue API calls. New
+  tokens have no access to components; a master token has access to all of them.
+- `curl` or an API client such as Postman.
+- For [Running Specific Tags](#running-specific-tags): push access to the component's repository, to commit and
+  tag a test version.
 
 ## Checking Errors and Version
 There are two [types of errors](/extend/common-interface/environment/#return-values). In the case of
@@ -164,6 +175,9 @@ For instance:
 This means that the directory with the component code will shadow the one inside the image (defined by the `COPY . /code/`
 instruction in `Dockerfile`) and you will run the current code in the image environment.
 
+**Check:** after you edit the code, the same `docker run` command runs the edited version, without a new
+`docker build`.
+
 ## Running Specific Tags
 The Run Job API call in debug mode is very powerful but it always runs the production version of the component. There are cases where you might want to
 run a test or development version of a component. In such situations, an alternative may be to run a specific image tag.
@@ -201,7 +215,7 @@ following API call:
     "mode": "run"
     }'
 
-In the job detail -- under **Parameters & Results**, , you'll see that a specific tag was requested. In the job events, you can then
+**Check:** in the job detail, under **Parameters & Results**, you'll see that a specific tag was requested. In the job events, you can then
 see that it was indeed used and that the script printed out all files in the `/data/in/tables/` folder.
 
 ![Screenshot -- Image Results](/extend/component/tutorial/debug-4.png)

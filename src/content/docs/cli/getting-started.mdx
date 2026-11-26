@@ -1,6 +1,6 @@
 ---
 title: Get started with kbagent
-lastUpdated: 2026-11-24
+lastUpdated: 2026-11-27
 slug: 'cli/getting-started'
 sidebar:
   label: Get Started
@@ -10,10 +10,19 @@ description: 'A guided first run of the kbagent CLI — install it, connect a Ke
 
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import Prereqs from '../../../components/Prereqs.astro';
 
 This walkthrough takes you from nothing to browsing a real project with [kbagent](/cli/) in a few minutes. Follow it top to bottom for a single project; the [Connect more](#connect-more-projects) section covers multi-project and organization setup.
 
 {/* Tutorial-type page. Source: keboola/cli README + docs/TUTORIAL.md. Terminal output verified locally against demo project 264, 2026-07-13. */}
+
+<Prereqs needs={['project']}>
+  <li><strong>A terminal,</strong> with <code>curl</code> on macOS or Linux, or PowerShell on Windows. You don't need Python: the installer sets up uv, which brings its own.</li>
+  <li><strong>A browser to sign in to Keboola,</strong> or a Storage API token for the project. Step 2 shows where to get one.</li>
+  <li><strong>For <a href="#connect-more-projects">Connect more projects</a> only:</strong> a Manage API token. A personal access token covers <code>--project-id</code>; <code>--org-id</code> needs an organization admin's token.</li>
+</Prereqs>
+
+{/* Prerequisites added 2026-11-27 (T4): curl as the only install-script requirement and the uv bootstrap from keboola/cli install.sh on main; Manage API token scope from the `org setup` options in _data/cli/command-reference.md (kbagent 1.4.1). */}
 
 ## Step 1 — Install
 
@@ -202,6 +211,8 @@ kbagent search "shopify"
   export KBAGENT_CONVERSATION_ID="<unique-id>"
   ```
 
+**Check:** `kbagent project list` shows your project, with `session` or `static` in its `Auth` column, and `kbagent --json project list` prints the same list as JSON.
+
 ## Connect more projects
 
 **Several projects** — register each one with `project add`, or bulk-onboard with a Manage API token:
@@ -221,6 +232,8 @@ KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
 {/* Verified vs v0.66.1 (Padak review): --allow-env-manage-token required to read KBC_MANAGE_API_TOKEN (default-deny since 0.29.0); --org-id / --project-id (repeatable) / --yes correct; re-checked against kbagent 1.4.1 on 2026-11-21; --token-expires-in lives on `project refresh`, not org setup. */}
 
 Read commands such as `config list`, `job list` and `search` then take `--all-projects` to fan out across every connected project — see [multi-project](/cli/concepts/#multi-project-and-stacks).
+
+**Check:** `kbagent project list` lists every project that `org setup` registered.
 
 ---
 
