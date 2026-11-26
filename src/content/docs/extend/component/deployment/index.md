@@ -10,7 +10,7 @@ redirect_from:
 
 If you created your component according to the [tutorial](/extend/component/tutorial/), you already have
 a deployment pipeline set up. This article explains in more detail how the pipeline works. It also describes
-alternative set ups. Assuming your component is similar to the one created in the [tutorial](/extend/component/tutorial/),
+alternative setups. Assuming your component is similar to the one created in the [tutorial](/extend/component/tutorial/),
 you see the following behavior:
 
 - Every push the workflow listens to triggers a build, and the built image lands in our

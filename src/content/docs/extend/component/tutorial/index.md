@@ -108,7 +108,7 @@ pip install cookiecutter
 1. Run ```bash
 cookiecutter gh:keboola/cookiecutter-python-component```
 2. Fill in requested parameters:
-    - `repository_url` - (OPT) URL of your repository. If filled in, the template git repository is initialised and its remote set to your repository.
+    - `repository_url` - (OPT) URL of your repository. If filled in, the template git repository is initialized and its remote set to your repository.
     - `component_name` - Name of your component
     - `dev_portal_vendor_name` - Your vendor ID in the Developer Portal
     - `dev_portal_component_id` - The component ID to register. Defaults to the normalized component name.
