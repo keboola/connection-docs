@@ -101,7 +101,8 @@ test('classifyPath keeps pages, twins and llms.txt, drops assets and api', async
   assert.equal(classifyPath('/storage/tables/index.md'), 'markdown');
   assert.equal(classifyPath('/llms.txt'), 'llms');
   assert.equal(classifyPath('/llms-full.txt'), 'llms');
-  for (const p of ['/_astro/page.js', '/pagefind/x.pf_meta', '/api/chat', '/api/log-ingest', '/favicon.ico', '/storage/shot.png', '/components/ip-addresses/kbc-public-ip.json']) {
+  assert.equal(classifyPath('/storage/llms-full.txt'), 'llms');
+  for (const p of ['/storage/tables/llms-full.txt', '/_astro/page.js', '/pagefind/x.pf_meta', '/api/chat', '/api/log-ingest', '/favicon.ico', '/storage/shot.png', '/components/ip-addresses/kbc-public-ip.json']) {
     assert.equal(classifyPath(p), null, p);
   }
 });
