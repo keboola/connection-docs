@@ -19,6 +19,8 @@
  *   4. everything else, in Pagefind's order, except that among Pagefind's
  *      first 30, pages whose title or URL has some of the words move up,
  *      rarer words counting more ("create app" → the Apps pages).
+ * Then, among the first 20 results of group 4, pages where most matches of the
+ * last query word are only prefix matches ("Apple" for "apps") move to the end.
  * Inside each group, shallower pages come first, so a section hub beats its
  * sub-pages, then shorter titles, then Pagefind's order. The home page is left
  * out: its title "Keboola User Documentation" would win "users".
@@ -150,7 +152,89 @@ async function rerank(response, term) {
       (a.tier ? a.depth - b.depth || a.titleLength - b.titleLength : b.partial - a.partial) ||
       a.index - b.index,
   );
-  return { ...response, results: ranked.map((r) => r.result) };
+  const lastWord = words(term || '', { keepStopWords: true }).at(-1);
+  return { ...response, results: await demotePrefixOnly(ranked, queryWords, lastWord) };
+}
+
+// How many of the first results without a title or URL match get their text
+// checked. Each check downloads one ~3 KB fragment, which the UI reuses when
+// it renders the result.
+const PREFIX_CHECK_DEPTH = 20;
+
+// How long the results wait for those fragments. The search box already waits
+// 300 ms after the last keystroke (Pagefind UI's default debounce), so this
+// caps the extra wait at one more debounce. On a normal connection 20 fragments
+// of ~3 KB from the same origin arrive well inside it; on a slow one, showing
+// Pagefind's ranking now beats a better ranking later.
+const PREFIX_CHECK_TIMEOUT_MS = 300;
+
+// Pagefind matches the last query word as a prefix, so "apps" finds Dark Sky
+// through "Apple", "apples" and "appKey". Among the first results that the
+// title tiers didn't place, move down every page where most matches of the
+// last query word aren't that word itself. Only those matches count: the
+// other query words, stop words like "to" and "keboola", and stemmed forms
+// ("configured" for "configuration") say nothing about prefix noise. The
+// word with a common ending counts as the word itself: "exporter" and
+// "exported" are real matches for "export", while "apple", "appkey" and
+// "application" stay prefix-only for "app". A word that ends in "e" also
+// takes "d", "r" and "rs": "shared" and "scheduler" count for "share" and
+// "schedule" ("sharing" doesn't start with "share", so it never counts). A
+// page with no match starting with the last word stays where it is, and so
+// does everything when the last word is a stop word or the fragments are slow.
+// When most checked pages come out prefix-only, the last word is itself a
+// prefix (shorthand like "config", or a word still being typed), not noise on
+// a few pages, so nothing moves: demoting them would put Pagefind's unchecked
+// results 21+ first.
+const WORD_ENDINGS = ['s', 'es', 'ed', 'ing', 'er', 'ers'];
+const E_ENDINGS = ['d', 'r', 'rs'];
+const isWordForm = (w, word) =>
+  w === word ||
+  WORD_ENDINGS.some((e) => w === word + e) ||
+  (word.endsWith('e') && E_ENDINGS.some((e) => w === word + e));
+
+async function demotePrefixOnly(ranked, queryWords, lastWord) {
+  const unchanged = () => ranked.map((r) => r.result);
+  if (!lastWord || !queryWords.includes(lastWord)) return unchanged();
+  const checked = ranked.filter((r) => r.tier === 0).slice(0, PREFIX_CHECK_DEPTH);
+  const checks = Promise.all(
+    checked.map(async (r) => {
+      // The UI calls data() again to render the result: hand it this load
+      // rather than a second download. A load that failed is not kept, so
+      // the UI's own call fetches the fragment again.
+      const original = r.result.data;
+      const loaded = original.call(r.result);
+      r.result.data = () => loaded;
+      const data = await loaded.catch(() => {
+        r.result.data = original;
+        return null;
+      });
+      if (!data?.locations?.length) return null;
+      const contentWords = data.content.split(/\s+/);
+      let prefixed = 0;
+      let exact = 0;
+      for (const location of data.locations) {
+        const parts = words(contentWords[location] ?? '', { keepStopWords: true });
+        if (!parts.some((w) => w.startsWith(lastWord))) continue;
+        prefixed += 1;
+        if (parts.some((w) => isWordForm(w, lastWord))) exact += 1;
+      }
+      if (!prefixed) return null;
+      return { r, weak: exact * 2 < prefixed };
+    }),
+  );
+  let timer;
+  const timeout = new Promise((resolve) => {
+    timer = setTimeout(resolve, PREFIX_CHECK_TIMEOUT_MS, null);
+  });
+  const outcome = await Promise.race([checks, timeout]);
+  clearTimeout(timer);
+  if (!outcome) return unchanged();
+  const judged = outcome.filter(Boolean);
+  const weak = new Set(judged.filter((j) => j.weak).map((j) => j.r));
+  if (weak.size * 2 > judged.length) return unchanged();
+  return [...ranked.filter((r) => !weak.has(r)), ...ranked.filter((r) => weak.has(r))].map(
+    (r) => r.result,
+  );
 }
 
 export async function search(term, options) {
