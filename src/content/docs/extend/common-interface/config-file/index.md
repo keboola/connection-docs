@@ -284,6 +284,9 @@ The tables element in a configuration of the **output mapping** is an array and 
     destination table. `auto` is safe on every backend; `single_statement` or `multi_statement` for a table in a
     non-Snowflake bucket fails with `storage.tables.importMethodNotSupported`
     (see [Import method](/transformations/mappings/output/#import-method-snowflake))
+  - `time_partitioning`, `range_partitioning`, `clustering` - BigQuery only; the partitioning and the clustering of the
+    destination table when the output mapping creates it
+    (see [BigQuery partitioning and clustering](/transformations/mappings/bigquery-partitioning-clustering/))
 
 #### Input mapping — basic
 Download tables `in.c-ex-salesforce.Leads` and `in.c-ex-salesforce.Accounts` to `/data/tables/in/leads.csv`

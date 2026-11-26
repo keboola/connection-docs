@@ -125,6 +125,9 @@ items:
               - url: /storage/tables/backups/
                 title: Back Up and Restore
 
+              - url: /storage/tables/bigquery-repartition/
+                title: Repartition a BigQuery Table
+
           - url: /storage/buckets/
             title: Buckets
 
@@ -769,6 +772,9 @@ items:
 
               - url: /transformations/mappings/direct-mode/set-up/
                 title: Set Up Direct Mode
+
+              - url: /transformations/mappings/bigquery-partitioning-clustering/
+                title: BigQuery Partitioning and Clustering
         
           - url: /transformations/shared-code/
             title: Shared Code

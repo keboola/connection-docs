@@ -48,6 +48,28 @@ The options will cause the specified rows to be deleted from the source table be
 table is imported. See an [example](/extend/common-interface/config-file/#output-mapping--delete-rows).
 Using this option makes sense only with [incremental loads](/components/extractors/generic-extractor/incremental/).
 
+## Partitioning and clustering (BigQuery)
+
+On the BigQuery backend, the `time_partitioning`, `range_partitioning` and `clustering` fields set the layout of the
+table when output mapping creates it:
+
+```json
+{
+  ...
+  "columns": ["id", "country", "report_date"],
+  "clustering": { "fields": ["country"] }
+}
+```
+
+The manifest must define the columns of the table (`columns`, or `schema` in a
+[manifest with Native Types](/extend/common-interface/manifest-files/out-tables-manifests-native-types/)); a table
+whose columns are not known fails with a user error. A table created without column types has only `STRING` columns,
+so it can be clustered, but time partitioning by a column fails. Only one of `time_partitioning` and
+`range_partitioning` can be set. A value in the end-user output mapping overrides the value from the manifest. On another backend the fields have
+no effect and the job logs a warning. See
+[BigQuery partitioning and clustering](/transformations/mappings/bigquery-partitioning-clustering/) for the content
+of the fields and the behavior with an existing table.
+
 The `metadata` and `column_metadata` fields allow you to set
 Metadata for the table and its columns.
 The `metadata` field corresponds to the [Table Metadata API call](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/metadata).

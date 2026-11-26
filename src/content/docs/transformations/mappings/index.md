@@ -120,5 +120,7 @@ load itself works:
   BigQuery.
 - [Direct Mode output mapping](/transformations/mappings/direct-mode/) and
   [how to set it up](/transformations/mappings/direct-mode/set-up/).
+- [BigQuery partitioning and clustering](/transformations/mappings/bigquery-partitioning-clustering/): set the
+  partitioning and the clustering of a BigQuery table that the output mapping creates.
 
 **Next:** [Input mapping options →](/transformations/mappings/input/)
