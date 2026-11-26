@@ -41,6 +41,7 @@ const TITLES = [
   ['tde', 'TDE Exporter', '/components/writers/other/tableau-tde/'],
   ['storage-api', 'Storage API', '/storage/api/'],
   ['flows', 'Flows', '/flows/'],
+  ['shared-code', 'Shared Code', '/transformations/shared-code/'],
 ];
 globalThis.fetch = (async (url: URL) => {
   assert.match(String(url), /pagefind-titles\.json$/);
@@ -152,4 +153,21 @@ test('"config": when most checked pages are prefix-only, the last word is a pref
   const kbagent = result('kbagent', `${repeat('config', 5)} configuration`, /^config/i);
   fake.results = [flows, storageApi, tde, kbagent];
   assert.deepEqual(ids(await search('config')), ['flows', 'storage-api', 'tde', 'kbagent']);
+});
+
+test('"share" and "update": forms of a word that ends in "e" are real matches', async () => {
+  // "share" + "ed" is "shareed", so "shared" counted as prefix noise and
+  // Shared Code (5 "share", 132 "shared" on the real page) moved down
+  const sharedCode = result('shared-code', `${repeat('shared', 12)} share sharer`, /^shar/i);
+  const flows = result('flows', `${repeat('share', 2)} schedule`, /^shar/i);
+  const kbagent = result('kbagent', `share ${repeat('command', 5)}`, /^shar/i);
+  const overview = result('overview', `${repeat('share', 3)} project`, /^shar/i);
+  fake.results = [sharedCode, flows, kbagent, overview];
+  assert.deepEqual(ids(await search('share')), ['shared-code', 'flows', 'kbagent', 'overview']);
+
+  const storageApi = result('storage-api', `${repeat('updated', 6)} updaters update`, /^updat/i);
+  const tde = result('tde', `${repeat('update', 2)} Tableau`, /^updat/i);
+  const sheets = result('sheets', `update ${repeat('rows', 4)}`, /^updat/i);
+  fake.results = [storageApi, tde, sheets];
+  assert.deepEqual(ids(await search('update')), ['storage-api', 'tde', 'sheets']);
 });

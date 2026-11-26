@@ -176,14 +176,21 @@ const PREFIX_CHECK_TIMEOUT_MS = 300;
 // ("configured" for "configuration") say nothing about prefix noise. The
 // word with a common ending counts as the word itself: "exporter" and
 // "exported" are real matches for "export", while "apple", "appkey" and
-// "application" stay prefix-only for "app". A page with no match starting
-// with the last word stays where it is, and so does everything when the last
-// word is a stop word or the fragments are slow. When most checked pages come
-// out prefix-only, the last word is itself a prefix (shorthand like "config",
-// or a word still being typed), not noise on a few pages, so nothing moves:
-// demoting them would put Pagefind's unchecked results 21+ first.
+// "application" stay prefix-only for "app". A word that ends in "e" also
+// takes "d", "r" and "rs": "shared" and "scheduler" count for "share" and
+// "schedule" ("sharing" doesn't start with "share", so it never counts). A
+// page with no match starting with the last word stays where it is, and so
+// does everything when the last word is a stop word or the fragments are slow.
+// When most checked pages come out prefix-only, the last word is itself a
+// prefix (shorthand like "config", or a word still being typed), not noise on
+// a few pages, so nothing moves: demoting them would put Pagefind's unchecked
+// results 21+ first.
 const WORD_ENDINGS = ['s', 'es', 'ed', 'ing', 'er', 'ers'];
-const isWordForm = (w, word) => w === word || WORD_ENDINGS.some((e) => w === word + e);
+const E_ENDINGS = ['d', 'r', 'rs'];
+const isWordForm = (w, word) =>
+  w === word ||
+  WORD_ENDINGS.some((e) => w === word + e) ||
+  (word.endsWith('e') && E_ENDINGS.some((e) => w === word + e));
 
 async function demotePrefixOnly(ranked, queryWords, lastWord) {
   const unchanged = () => ranked.map((r) => r.result);
