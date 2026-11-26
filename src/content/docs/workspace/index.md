@@ -74,7 +74,7 @@ with the credentials file from the workspace. See [Connect to a workspace](/work
 
 ## Read-only input mapping
 
-The workspace also supports **read-only input mappings**, as described in the [mapping section](/transformations/mappings/#read-only-input-mapping).
+The workspace also supports **read-only input mappings**, as described in the [mapping section](/transformations/mappings/input/#read-only-input-mapping).
 For each **workspace** or **Snowflake writer** (data destination) configuration, users can choose whether to use a **read-only input mapping**.
 
 Note that **there are security implications**. If you enable a **read-only input mapping** for a workspace, then it has access to all the data in the project. 

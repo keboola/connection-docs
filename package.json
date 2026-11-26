@@ -21,6 +21,7 @@
     "@astrojs/mdx": "^8.0.1",
     "@astrojs/sitemap": "^3.7.4",
     "@astrojs/starlight": "^0.42",
+    "@vercel/functions": "^3.11.3",
     "astro": "^7.2.10",
     "marked": "^18.0.4",
     "remark-directive": "^4.0.0",
@@ -33,5 +34,19 @@
   "devDependencies": {
     "@vercel/node": "^5.10.2",
     "js-yaml": "^4.3.2"
+  },
+  "overrides": {
+    "tsx": {
+      "esbuild": "^0.28.1"
+    },
+    "vite": {
+      "esbuild": "^0.28.1"
+    },
+    "glob": {
+      "minimatch": "^11.0.1"
+    },
+    "@vercel/node": {
+      "undici": "^6.29.1"
+    }
   }
 }

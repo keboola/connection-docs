@@ -66,6 +66,11 @@
       "source": "/tutorial/write/:file(writing2|writing3|writing4|writing5|writing7).png",
       "destination": "/getting-started/write/:file.png",
       "permanent": true
+    },
+    {
+      "source": "/storage/buckets/create-bucket.png",
+      "destination": "/storage/buckets/create-bucket-poster.png",
+      "permanent": true
     }
   ]
 }

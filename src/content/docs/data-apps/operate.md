@@ -96,7 +96,7 @@ In the flow's configuration, the task runs the **Data App Control** component, `
 
 To only start a stopped or sleeping app and leave a running one alone, add `"forceRestart": false` to `configData.parameters`. In the flow builder, select the task and click **Set advanced parameters** at the bottom of its panel; through the API, edit the flow's configuration. A running app then keeps its build and its `KBC_TOKEN`. A stopped or sleeping app still starts and loads its Input Mapping again, but from its last build, not from the latest code.
 
-If the task shows `keboola.data-apps` with a `configId` instead, it was added before the app was first deployed or on a stack without Data App Control. It restarts the app the same way, but `forceRestart` has no effect there. Deploy the app, then remove the task and add the app again.
+If the task shows `keboola.data-apps` with a `configId` instead, it is an older form that is being retired and will stop working. `forceRestart` has no effect there. To fix such a flow, deploy the app, remove the old task and add the app again from the **Apps** tab. The new task uses Data App Control.
 
 ## When something is off
 
