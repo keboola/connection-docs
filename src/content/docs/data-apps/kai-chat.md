@@ -25,7 +25,7 @@ You need:
 - No row-level or column-level security. Kai isn't available in an app with row or column policies, or in a project with the `row-level-security` feature, yet.
 - The latest version of `@keboola/api-client`. Older versions have no `kbc.kai`.
 
-<!-- VERIFY(Miro): put the first @keboola/api-client version with kbc.kai here once keboola/ui#10700 is released (expected 61.1.0). -->
+<!-- VERIFY(Miro): put the first @keboola/api-client version with kbc.kai here now that keboola/ui#10700 is merged; number to be confirmed (expected 61.1.0). -->
 
 The chat spends the project's [Kai credits](/kai/pricing/), like any other Kai conversation.
 
@@ -77,6 +77,8 @@ What the relay does for you:
 
 The chat works inside the Builder preview as well as in the deployed app.
 
+<!-- VERIFY(Miro): the session cookie was checked in a local stand-in of the preview iframe only; confirm in the real Builder preview of a deployed app. -->
+
 ### Run it locally
 
 On your computer there's no Kai token. To try the chat locally, let the relay use your own token from `STORAGE_API_TOKEN`:
@@ -105,7 +107,9 @@ export function App() {
 }
 ```
 
-The component opens as a floating button in the corner of the page and streams Kai's answers into a panel. When Kai is off for the app, or the run has no Kai token, it renders nothing.
+By default the component is a button in the bottom-right corner of the page that opens a panel, full screen on a phone. Kai's answers stream into the panel. When Kai is off for the app, the run has no Kai token, or the backend serves no relay at the chat's path, it renders nothing.
+
+The tab keeps its chat in `sessionStorage`: a refresh brings the transcript back and joins an answer still running. A new tab starts a new chat.
 
 ![An app's dashboard with the Ask Kai panel open on the right: Kai's answer with a table and a chart, two suggested follow-up questions, and the message box at the bottom](/data-apps/kai-chat-panel.png)
 
@@ -115,17 +119,31 @@ You can change the chat at three levels.
 
 | Level | What you change | How |
 |---|---|---|
-| Theme | Colors, corner radius, font, light or dark mode | The `theme` prop, or CSS variables on `.kai-chat` |
+| Theme | Light or dark mode, colors, corner radius | The `colorScheme` prop, and CSS variables on `.kai-chat` |
 | Props | Title, greeting, suggested questions, placement, page context, relay path | Props on `<KaiChat>` |
-| Your own UI | The whole chat window | The `useKaiChat()` hook from `@keboola/kai-app-chat/headless` |
+| Your own UI | The whole chat window | The `useKaiChat()` hook from `@keboola/kai-app-chat` |
 
 ### Theme
 
-The chat's styles are scoped under the `.kai-chat` class, so they don't change the rest of your app and your app's styles don't leak in. By default the chat uses your app's font.
+`colorScheme` is `light` (the default), `dark` or `system`, which follows the visitor's operating system.
 
 ```tsx
-<KaiChat theme={{ mode: 'light', primary: '#1f8fff', radius: 8 }} />
+<KaiChat colorScheme="system" />
 ```
+
+To change colors or the corner radius, set the design CSS variables on `.kai-chat`. Their values are RGB channels separated by spaces, not hex:
+
+```css
+.kai-chat {
+  --primary: 31 143 255;
+}
+```
+
+The chat uses your app's `--font-sans` CSS variable when the app defines one, otherwise Inter.
+
+<!-- VERIFY(Miro): the diff doesn't define the design variables; confirm `--primary`, the RGB-triple format and `--font-sans` against @keboola/design's stylesheet. -->
+
+The chat's styles are scoped to `.kai-chat`, so they don't change the rest of your app. Your app's unlayered rules on bare elements, such as `strong { color: … }` or `button { padding: … }`, still reach into the chat.
 
 ### Props
 
@@ -140,21 +158,37 @@ The chat's styles are scoped under the `.kai-chat` class, so they don't change t
 />
 ```
 
+- `title` heads the chat. The default is "Ask Kai".
+- `greeting` shows while the chat is empty. `suggestedPrompts` offers up to four questions while the chat is empty.
 - `context` tells Kai what the visitor is looking at: a `title` (up to 200 characters) and a `text` (up to 2,000 characters). It's sent with each message, so keep it in step with what's on screen.
-- `placement` is `floating` (the default), `panel` or `inline`.
+- `placement` is `floating` (the default), `panel` or `inline`. `floating` is a button in the bottom-right corner that opens a panel, full screen on a phone. `panel` and `inline` fill their parent element.
 - `endpoint` is the path where you mounted the relay. The default is `/api/kai`.
+- `colorScheme` is `light` (the default), `dark` or `system`.
+- `defaultOpen` opens a floating chat on page load. A floating chat starts its chat on first open, not on page load.
+- `className` adds your own class to the chat's root element.
 
 <!-- VERIFY(Miro): kai-agent reads `appContext` (page context) by the beta day. -->
 
 ### Your own UI
 
-To build the chat window yourself, use the headless hook. It gives you the messages and the actions, and no markup:
+To build the chat window yourself, use the `useKaiChat()` hook. It gives you the chat's state and actions, and no markup:
 
 ```tsx
-import { useKaiChat } from '@keboola/kai-app-chat/headless';
+import { useKaiChat } from '@keboola/kai-app-chat';
 
-const { messages, status, send, stop, error } = useKaiChat({ endpoint: '/api/kai' });
+const kai = useKaiChat(); // { endpoint: '/api/kai' } by default
+if (kai.enabled === false) return null;
+kai.send('Why did revenue drop?', {
+  context: { title: 'Sales', text: 'Chart: revenue by region' },
+});
 ```
+
+- `enabled` is `undefined` until the backend answers, and `false` when the app has no Kai.
+- `messages` are the chat's messages, as AI SDK `UIMessage` objects.
+- `status` is the AI SDK's chat status, `starting` until the tab has its chat, or `reconnecting` while a dropped answer is retried.
+- `error` is `{ type, message }`, with a message fit for the visitor. A rate limit adds `retryAfterSeconds`.
+- `send(text, { context })` returns `false` when the question didn't go out: the text is empty, it's over 8,000 characters, or the chat can't take one, for example while it's still answering.
+- `stop()` stops the answer. `reset()` starts a new chat.
 
 ## What visitors can ask and what Kai can read
 
@@ -175,7 +209,7 @@ All visitors of one app are one Kai user. Kai doesn't know who is asking, and ev
 - **One Kai user per app.** There are no per-visitor permissions and no row-level security per visitor.
 - **Read-only.** Kai can't change the project. The relay refuses every approval; declining passes.
 - **No answers to Kai's questions.** When Kai asks the visitor a follow-up question, the visitor can't answer it yet.
-- **Chats stay in one browser.** A chat opens only in the browser that started it. A redeploy gives the app a new token, which ends the open chats.
+- **Chats stay in one browser.** A chat opens only in the browser that started it. A redeploy gives the app a new token, which ends the open chats. On the next page load the chat starts a new one by itself.
 - **Message size.** One message holds up to 8,000 characters of text. Files can't be attached.
 - **One message rate limit per app.** All visitors of an app share one message rate limit.
 
@@ -206,7 +240,9 @@ The **Kai in the app** setting says why. If it says "This project doesn't allow 
 
 ### 404 "Chat not found"
 
-The chat ID isn't in this browser's session. It was started in another browser, the cookie was cleared, or the app was deployed again. Start a new chat.
+The backend no longer knows the chat. It was started in another browser, the cookie was cleared, or the app was deployed again.
+
+When this happens on page load, the chat starts a new chat by itself. Only a chat lost while the tab is open shows an error. The visitor then starts a new chat with **New chat**.
 
 If you build your own UI, create chats one at a time. When two new chats are created at the same moment, the browser keeps only the second, and the first answers 404.
 
