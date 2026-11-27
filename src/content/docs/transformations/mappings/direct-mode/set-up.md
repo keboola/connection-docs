@@ -36,6 +36,8 @@ The mode cannot be switched on an existing mapping — delete the mapping and cr
 
 **Result:** on the next run, your SQL writes to the Storage table, and Keboola refreshes the table metadata afterwards.
 
+**Check:** after the next run, the destination table in Storage shows the rows your SQL wrote and a new last-change time.
+
 Under the hood, Direct Mode is the `unload_strategy` field on the output table in the configuration JSON:
 
 ```json
@@ -72,6 +74,8 @@ delete it and create a new one.
 
 **Result:** the write privileges are granted as soon as you save the mapping, so your very next query can write to
 the table.
+
+**Check:** an `INSERT` into the destination table from the workspace succeeds instead of failing on privileges.
 
 ## In the SQL Editor, with a new table
 

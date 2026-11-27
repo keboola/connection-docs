@@ -10,16 +10,16 @@ slug: 'transformations/duckdb/snowflake-migration'
 This guide covers the key differences between Snowflake and DuckDB SQL dialects and provides practical advice
 for migrating your Snowflake transformations to DuckDB in Keboola.
 
-<!-- How-to-type page. Typed 2026-11-27 with its prerequisites and check step (T4/T5). Most of the page is dialect reference that supports step 5. -->
+<!-- Mixed page: dialect reference plus one migration procedure, so no type marker until the structure pass (T6) splits it. Prerequisites and check step added 2026-11-27 (T4/T5). -->
 
 ## Before you start
 
 - **Snowflake SQL transformations** to migrate, in the source branch (production by default).
 - **DuckDB transformations** in your project. They are in beta; see [DuckDB transformation](/transformations/duckdb/).
-  <!-- VERIFY(nikita): the Developer Portal lists keboola.duckdb-transformation as public with no component feature and the beta flag; confirm no project-level feature or Support request is needed. -->
-- **A project role that can create configurations and development branches.** The component writes the migrated
+  <!-- VERIFY(Nikita): the Developer Portal lists keboola.duckdb-transformation as public with no component feature and the beta flag; confirm no project-level feature or Support request is needed. -->
+- **A project role that can create configurations and development branches** (not confirmed which roles). The component writes the migrated
   configurations to a [development branch](/components/branches/), an existing one or one it creates.
-  <!-- VERIFY(nikita): which project roles can run the Transformation Migration component and let it create a branch (the ReadOnly role cannot create configurations). -->
+  <!-- VERIFY(Nikita): which project roles can run the Transformation Migration component and let it create a branch (the ReadOnly role cannot create configurations). -->
 
 ## Automatic SQL Transpilation
 
@@ -39,7 +39,7 @@ data types, and Snowflake-specific features used. Expect that roughly **25% of m
 adjustments** — for example, fixing case sensitivity issues, replacing unsupported functions, or adjusting data type casts. 
 Always review and test the migrated configurations before using them in production.
 
-### Tutorial: Migrating Snowflake Transformations
+### Migrate Snowflake transformations
 
 #### Step 1: Create a New Configuration
 

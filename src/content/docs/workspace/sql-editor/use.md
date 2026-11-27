@@ -14,11 +14,12 @@ detail, click **Open SQL Editor**. The SQL Editor page explains the panes, sessi
 ## Before you start
 
 - **A project on Snowflake or Google BigQuery.** The SQL Editor works with workspaces on those two backends.
-- **A project role other than ReadOnly**, which can't create or change configurations. See [User roles](/management/project/users/#user-roles).
-  <!-- VERIFY(nikita): that a ReadOnly user can't create an SQL workspace; the roles list names configurations, not workspaces. -->
+- **A project role other than ReadOnly**, which can't create or change configurations. In projects with Governed Change Management, Developers and Reviewers work in a development branch and can't edit the production branch. See [User roles](/management/project/users/#user-roles).
+  <!-- VERIFY(Nikita): that a ReadOnly user can't create an SQL workspace; the roles list names configurations, not workspaces. -->
 - **For [Reuse shared code](#reuse-shared-code):** the shared code must exist already. To create it, see [Shared Code](/transformations/shared-code/).
-- **For [Direct Mode](#write-directly-to-storage-direct-mode):** Direct Mode output mapping is a private beta: [Keboola Support](/management/support/) must enable it for your project,
-  as the [Direct Mode page](/transformations/mappings/direct-mode/) says.
+- **For [Direct Mode](#write-directly-to-storage-direct-mode):** Direct Mode output mapping is a private beta. The [Direct Mode page](/transformations/mappings/direct-mode/)
+  says to ask [Keboola Support](/management/support/) to enable it for your project.
+  <!-- VERIFY(Nikita): same open question as on direct-mode/set-up.md: the toggle was seen in a new Free Plan project with no Support request. -->
 
 ## Create an SQL workspace and open the editor
 
@@ -254,6 +255,6 @@ validation on direct writes. Read the
 2.  To add a note to the version, open the arrow next to the button and select **Save with description** instead.
 3.  Close the editor and, in the workspace detail, click **Create new transformation**, or **Copy to existing transformation** to update one you have. See [Create a transformation from a workspace](/workspace/create/#create-a-transformation-from-a-workspace).
 
-**Check:** the new transformation is listed under **Transformations**, with your saved queries, the input and output mapping and the variables of the workspace.
+**Check:** the new transformation is listed under **Transformations**, with your saved queries, the input and output mapping and the variables of the workspace. If you chose **Copy to existing transformation**, that transformation now has them instead.
 
 **Next:** [Keboola JDBC driver →](/workspace/jdbc-driver/)

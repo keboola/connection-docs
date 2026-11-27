@@ -113,7 +113,7 @@ When this option is enabled:
 - The new package versions will be frozen in the app state
 
 **Check:** after the redeploy, the "Click Here" link in the "Packages" card lists the new versions.
-<!-- VERIFY(nikita): that the Click Here link shows the versions frozen by the latest redeploy with Update packages dependencies on. Source so far: the lock-freeze-version-toggle.png alt text and the "frozen in the app state" bullet; not run in the product. -->
+<!-- VERIFY(Nikita): that the Click Here link shows the versions frozen by the latest redeploy with Update packages dependencies on. Source so far: the lock-freeze-version-toggle.png alt text and the "frozen in the app state" bullet; not run in the product. -->
 
 ## Git repository deployment
 

@@ -24,8 +24,9 @@ Takeout data **cannot** be automatically imported into Keboola (recovering a pro
 
 ## Before you start
 
-- **Admin or Share role** in the project, to open the **Settings** tab in **Users & Settings**.
-  <!-- VERIFY(nikita): which project roles see the Data Takeout button (Guest and ReadOnly cannot change project settings); check keboola/ui or try with a Guest user. -->
+- **A project role that can run Data Takeout.** Which roles can is not confirmed yet; Guest and ReadOnly can't
+  change project settings.
+  <!-- VERIFY(Nikita): which project roles see the Data Takeout button in Users & Settings → Settings; check keboola/ui or try with a Guest user. -->
 - **Amazon S3 bucket** in any region.
 - **Amazon IAM user's API keys** with proper access to the S3 bucket. [Prepare project](#prepare-project) shows how
   to create the bucket, the user and its policy.
@@ -35,7 +36,7 @@ We strongly recommend that you create a dedicated user with a dedicated bucket t
 prevent an accidental leak of credentials or your project management.
 
 If you are familiar with AWS Cloud Formation, the application repository offers
-a [CF template](https://github.com/keboola/kbc-project-backup/blob/master/aws-cf-template.json)
+a [CF template](https://github.com/keboola/app-project-backup/blob/master/aws-cf-template.json)
 to create all required resources.
 
 - **Create an S3 Bucket** following the [Amazon documentation](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html).

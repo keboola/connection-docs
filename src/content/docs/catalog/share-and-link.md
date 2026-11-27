@@ -12,7 +12,7 @@ Each recipe on this page is self-contained: a goal, the steps and the result. Fo
 ## Before you start
 
 - **To share a bucket, edit it or stop sharing it:** your user account must be an [organization member](/management/organization/) or a project administrator with the [share role](/management/project/users/#user-roles) assigned.
-- **To link a bucket:** a project role other than **ReadOnly**, which can't use the Data Catalog, and a [sharing type](/catalog/#sharing-types) on the bucket that includes you or your project.
+- **To link a bucket:** a project role other than **ReadOnly**, which can't use the Data Catalog, and a [sharing type](/catalog/#sharing-types) on the bucket that includes you or your project. In projects with Governed Change Management, linking and unlinking a bucket is the Production Manager's right.
 - **Both projects in one organization:** source and destination projects must belong to the same organization (and region).
 - **The data to share** in [Storage](/storage/): the bucket you want to share, or the tables to put in a new one.
 
@@ -48,7 +48,7 @@ you have chosen.
 ![Screenshot -- View sharing](/catalog/catalog-4.png)
 
 **Check:** the bucket is listed in **Data Catalog**, and its **Who can use it** column matches the sharing type you chose.
-<!-- VERIFY(nikita): that Who can use it shows the sharing type of a bucket shared from this project. Seen on 2026-11-20 only as a column name in project 264, where nothing is shared; check with a user who has the share role. -->
+<!-- VERIFY(Nikita): that Who can use it shows the sharing type of a bucket shared from this project. Seen on 2026-11-20 only as a column name in project 264, where nothing is shared; check with a user who has the share role. -->
 
 ### Share selected tables
 
@@ -112,7 +112,7 @@ You can see the detail of the shared bucket with a link to the source project (i
 ![Screenshot -- Link Bucket Tables](/catalog/catalog-13.png)
 
 **Check:** the bucket is listed in your project's **Storage** under the name you entered, and in **Data Catalog** when you click the **Linked** filter.
-<!-- VERIFY(nikita): that the Linked filter in Data Catalog lists buckets linked into the current project. Only the filter's name was seen (project 264, 2026-11-20), with nothing linked there. -->
+<!-- VERIFY(Nikita): that the Linked filter in Data Catalog lists buckets linked into the current project. Only the filter's name was seen (project 264, 2026-11-20), with nothing linked there. -->
 
 ## Edit a shared bucket's metadata
 

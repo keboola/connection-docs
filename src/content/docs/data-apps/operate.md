@@ -80,7 +80,7 @@ Add the app to a [flow](/flows/) when it should start after other work, for exam
 3. Save the flow.
 
 **Check:** the app is a task in the flow's Builder. When the flow runs, the app's **All Runs** tab lists a new start.
-<!-- VERIFY(nikita): that a start by the flow's Data App Control task shows in the app's All Runs tab. Source: this page describes All Runs as "every start attempt"; not run from a flow. -->
+<!-- VERIFY(Nikita): that a start by the flow's Data App Control task shows in the app's All Runs tab. Source: this page describes All Runs as "every start attempt"; not run from a flow. -->
 
 When the flow runs, the task starts a stopped or sleeping app and restarts a running one. Unlike **Redeploy**, it keeps the configuration the app was last deployed with:
 

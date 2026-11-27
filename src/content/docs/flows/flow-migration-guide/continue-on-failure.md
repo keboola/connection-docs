@@ -15,7 +15,7 @@ In [Legacy Flows](/flows/flows-legacy/), enabling **Continue on Failure** on a t
 ## Before you start
 
 - **A Conditional Flow** with the phase you want to change, migrated from a Legacy Flow or built in the [Builder](/flows/).
-- **A project role other than ReadOnly**, which can't modify flows. See [User roles](/management/project/users/#user-roles).
+- **A project role other than ReadOnly**, which can't modify flows. In projects with Governed Change Management, Developers and Reviewers change flows only in a development branch, and the Production Manager manages them in production. See [User roles](/management/project/users/#user-roles).
 - **For the notification example:** the email address or webhook that the **Notification** task sends to.
 
 ## What the migration produces

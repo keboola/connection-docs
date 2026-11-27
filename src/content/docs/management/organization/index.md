@@ -136,8 +136,6 @@ Keboola gets a short-lived token from the App each time it clones the repository
 Keboola has already registered the GitHub App for your stack. You only install it on your GitHub organization
 and connect that GitHub organization to your Keboola organization.
 
-You need to be both an organization admin in Keboola and an owner of the GitHub organization (see [Before you start](#before-you-start)).
-
 1. Open the **GitHub** tab of your organization: `https://connection.<stack>/control/organizations/<organization-id>?tab=github`.
 2. Click **Install GitHub App** and install the App on your GitHub organization. Select the repositories
    Keboola can clone, or all repositories. GitHub shows the permissions the App asks for

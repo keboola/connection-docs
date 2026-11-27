@@ -18,7 +18,7 @@ Flows allow you to build automated data pipelines with conditional logic, branch
 
 ## Before you start
 
-- **A project role other than ReadOnly**, which can't create or run flows. The Guest role can build and run a flow but can't change an existing flow's name, schedule or disabled status. See [User roles](/management/project/users/#user-roles).
+- **A project role other than ReadOnly**, which can't create or run flows. The Guest role can build and run a flow but can't change an existing flow's name, schedule or disabled status. In projects with Governed Change Management, Developers and Reviewers change flows only in a development branch, and the Production Manager manages them in production. See [User roles](/management/project/users/#user-roles).
 - **The configurations the flow runs**, such as connectors, transformations and [apps](#start-an-app).
 - **For notifications:** the email addresses or webhook URLs to send them to.
 

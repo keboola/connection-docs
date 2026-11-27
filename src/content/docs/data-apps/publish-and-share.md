@@ -26,8 +26,9 @@ An app is "published" once it's deployed and reachable at its URL, with the righ
 2. **Set authentication.** Choose who can open it — a shared password, SSO, GitHub, and more. See [Authentication](/data-apps/authentication/).
 3. **Share the URL.** Anyone who passes the app's authentication can open it.
 
-**Check:** the app's status reads **Active**, and the **App access** card on its **Overview** tab shows the **App URL**
+**Check:** the app's status badge reads **Running**, and the **App access** card on its **Overview** tab shows the **App URL**
 with an **Open** button. Open the URL: with **Basic (Password)**, the app asks for the password before it opens.
+<!-- Source for Running: operate.md, checked 2026-10-14 (Start shows Starting, then Deploying, then Running). VERIFY(Nikita): the badge after a first deploy, and whether the Apps list uses the same label. -->
 
 ## Share with your team
 

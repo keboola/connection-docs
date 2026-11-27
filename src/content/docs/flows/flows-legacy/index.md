@@ -24,7 +24,7 @@ redirect_from:
 
 ## Before you start
 
-- **A project role other than ReadOnly**, which can't create or run flows. The Guest role can build and run a flow but can't change an existing flow's name, schedule or disabled status. See [User roles](/management/project/users/#user-roles).
+- **A project role other than ReadOnly**, which can't create or run flows. The Guest role can build and run a flow but can't change an existing flow's name, schedule or disabled status. In projects with Governed Change Management, Developers and Reviewers change flows only in a development branch, and the Production Manager manages them in production. See [User roles](/management/project/users/#user-roles).
 - **The configurations the flow runs**, such as data source connectors, transformations and data destination connectors. You pick each one from a drop-down when you add a step.
 
 ## Migration to Conditional Flows

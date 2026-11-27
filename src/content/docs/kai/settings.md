@@ -15,11 +15,13 @@ The settings panel has two tabs: **Tool Permissions** and **System Instructions*
 
 ## Before you start
 
-- **Kai switched on in the project.** An organization admin can turn it on from the chat screen or in
-  **Settings → Features**; anyone else asks their organization admin or Support. See [Kai](/kai/#getting-started).
-- **Project admin or manager role**, to edit project-level instructions.
-- **The same role for context files and skill files**, which live on the same **Settings → Kai Agent** page.
-  <!-- VERIFY(nikita): which project roles can upload and delete context and skill files in Settings → Kai Agent; check keboola/ui. -->
+- **Kai switched on in the project.** An organization admin can turn it on from the chat screen, and it can also
+  be enabled in **Settings → Features** in the project. See [Kai](/kai/#getting-started).
+- **A project role that can edit project-level instructions.** The section below says project admins and managers
+  can; Keboola has no role named "manager", so which other roles qualify is not confirmed yet.
+- **A role that can manage context files and skill files**, which live on the same **Settings → Kai Agent** page.
+  Which roles can is not confirmed yet.
+  <!-- VERIFY(Nikita): which project roles can edit project-level instructions and upload or delete context and skill files in Settings → Kai Agent ("admins and managers" in the text below; no project role is called manager); check keboola/ui. -->
 - **A Storage API token with file write permissions**, to manage the files through the API or a sync job.
   For the CLI commands, install [kbagent](/cli/) and connect it to the project (a browser sign-in works too).
 

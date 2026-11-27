@@ -157,14 +157,14 @@ When you decline the invitation, you'll lose the opportunity to enter the projec
 ![Screenshot -- Promo codes](/management/account/invitations.png)
 
 ## Tokens
-On the **Access Tokens** page, you can create tokens for the [Management API](https://api.keboola.com/?service=manage).
+On the **Personal Access Tokens** page, you can create tokens for the [Management API](https://api.keboola.com/?service=manage).
 Do not confuse them with [Storage API tokens](/management/project/tokens/), which are used for operations
 within a project. Management tokens are used for project-independent operations such as creating and moving projects,
 creating organizations and projects monitoring. This means that the Management API offers some features which are
 not available from the UI yet. Unless you need the features or have other reasons to work with
 the Management API, there is no need to create a management token.
 
-To create a management token, click the **New Token** button in the **Access Tokens** section:
+To create a management token, click the **New Token** button in the **Personal Access Tokens** section:
 
 ![Screenshot -- Manage Tokens](/management/account/manage-tokens.png)
 
@@ -202,4 +202,4 @@ Revoke your sessions if you forgot to log out on a computer you don't have acces
 if you loose your computer or detect any suspicious activity.
 
 **Check:** the revoked session is no longer listed on the **User Sessions** page.
-<!-- VERIFY(nikita): that a revoked session disappears from the User Sessions list right away (not after a reload or with a "revoked" label); try it on a test account. -->
+<!-- VERIFY(Nikita): that a revoked session disappears from the User Sessions list right away (not after a reload or with a "revoked" label); try it on a test account. -->

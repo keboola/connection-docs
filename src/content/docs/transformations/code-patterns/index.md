@@ -18,8 +18,9 @@ Code Pattern is a special type of [component](/components/) that
 
 - **A published code pattern** that supports the transformation type you want. Find one in the
   [list of code patterns](#list-of-code-patterns); its description says which transformation types it works with.
-- **A project role that can create configurations.** The **ReadOnly** role cannot; see
-  [user roles](/management/project/users/#user-roles).
+- **A project role that can create configurations.** The **ReadOnly** role cannot.
+  In projects with Governed Change Management, Developers and Reviewers work in a development branch and
+  can't edit the production branch. See [user roles](/management/project/users/#user-roles).
 
 ## List of Code Patterns
 

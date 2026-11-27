@@ -260,8 +260,13 @@ For detailed setup and troubleshooting, see the [VS Code MCP documentation](http
 3. Navigate to Keboola [project settings](/management/project/), click `Users & Settings` > `MCP Server`, and open the MAKE tab.
 4. Copy the integration URL displayed there and enter it as the server URL in the MCP Client module. MAKE loads the available Keboola tools automatically.
 
-**Check:** ask your assistant *"What buckets and tables are in my Keboola project?"* It answers with the buckets and
-tables of the project you chose. In Make, the MCP Client module lists the Keboola tools.
+**Check:** the MCP Client module lists the Keboola tools.
+
+### Check the connection
+
+Whichever client you set up above, ask your assistant *"What buckets and tables are in my Keboola project?"*
+
+**Check:** it answers with the buckets and tables of the project you chose.
 
 ## Available Tools
 
