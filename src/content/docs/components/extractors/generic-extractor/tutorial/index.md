@@ -20,7 +20,8 @@ easy to understand and has excellent documentation.
 
 ## Before you start
 
-You need a MailChimp account with some data in it and an API key. Do this first:
+You need a Keboola project where you can create component configurations, and a MailChimp account with some
+data in it and an API key. Do this first:
 
 1. Read our [quick introduction to REST](/components/extractors/generic-extractor/tutorial/rest/) for a basic understanding of
 **HTTP requests** and **REST API**.
@@ -55,7 +56,7 @@ account. The data center is the last part of the API key; if the API key is
 username and the API key for password.
 
 Now, go straight to the documentation of the
-[**Campaign** resource](https://mailchimp.com/developer/reference/campaigns/).
+[**Campaign** resource](https://mailchimp.com/developer/marketing/api/campaigns/).
 Because you intend to extract data from MailChimp, the only part you are interested in is the **Read Method**.
 
 ![Screenshot - Read Campaign Documentation](/components/extractors/generic-extractor/tutorial/mailchimp-api-docs-1.png)

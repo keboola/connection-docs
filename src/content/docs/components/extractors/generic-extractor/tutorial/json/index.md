@@ -15,7 +15,7 @@ data.
 
 ## Before you start
 
-- Basic programming jargon (object, array, string, number).
+- Basic programming jargon.
 - A text editor with JSON support, or an [online editor](http://www.jsoneditoronline.org/).
 
 ## Object representation

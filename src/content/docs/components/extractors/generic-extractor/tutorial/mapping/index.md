@@ -323,8 +323,8 @@ then look like this:
 }
 ```
 
-**Check:** the job ends with status **Success** and Storage has the table `in.c-ge-tutorial.content`, with only
-the columns your mapping lists and a `campaign_id` column linking each row to its campaign.
+**Check:** the job ends with status **Success** and Storage has the table `in.c-ge-tutorial.content`, with the
+columns your mapping lists, including `campaign_id`, which links each row to its campaign.
 
 ## Review
 Now, let's review what parts are connected and how. Note that the values in blue 

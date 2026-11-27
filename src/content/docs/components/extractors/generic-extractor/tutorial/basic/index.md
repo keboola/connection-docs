@@ -17,7 +17,9 @@ extract your campaigns.
 
 - A basic understanding of [REST API](/components/extractors/generic-extractor/tutorial/rest/) and the
   [JSON format](/components/extractors/generic-extractor/tutorial/json/).
-- The [MailChimp API documentation](https://mailchimp.com/developer/reference/) at hand.
+- The [MailChimp API documentation](https://mailchimp.com/developer/marketing/api/) at hand.
+- A new configuration of [Generic Extractor](/components/extractors/generic-extractor/) in your Keboola project.
+  See [Create a configuration](/components/configurations/#create-a-configuration).
 - Your [MailChimp API key](/components/extractors/generic-extractor/tutorial/#before-you-start).
 
 ## Configuration
@@ -176,8 +178,9 @@ represented in a single column of the `campaigns` table. Generic Extractor, ther
 value with a generated key, for example, `campaigns_75d5b14d79d034cd07a9d95d5f0ca5bd`, and automatically
 creates a new table that has the column `JSON_parentId` with that value so that you can join the tables together.
 
-**Check:** the job ends with status **Success** and Storage has the table `in.c-ge-tutorial.campaigns`, one row
-per campaign, and `in.c-ge-tutorial.campaigns__links`.
+**Check:** the job ends with status **Success** and the output bucket has the table `campaigns`, one row per
+campaign, and `campaigns__links`. With the output bucket `ge-tutorial` used here, they are
+`in.c-ge-tutorial.campaigns` and `in.c-ge-tutorial.campaigns__links`.
 
 ### Final JSON configuration
 The main parts of the configuration and their nesting are shown in the following schema:

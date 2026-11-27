@@ -167,7 +167,7 @@ This is expected because Generic Extractor tries bigger offsets until the number
 less than the page size. With the page size set to 1, this means that the last page will contain no data.
 
 **Check:** the events show one request per campaign plus a last, empty page, with `offset` growing by 1, and the `campaigns` table has
-as many rows as you have campaigns. Set `limit` back and turn `debug` off when you are done.
+as many rows as you have campaigns.
 
 ## Summary
 In this part of the tutorial, you learned how to set up simple pagination. This is very important
