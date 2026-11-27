@@ -21,7 +21,7 @@ The connector calls the [YouTube Data API](https://developers.google.com/youtube
 
 - A Google account that owns or manages the YouTube channel. You sign in with it when you authorize the
   configuration.
-  <!-- VERIFY(nikita): the OAuth scope the connector requests (youtube.readonly?); the template in keboola/kbc-ui-templates does not state it. -->
+  <!-- VERIFY(Nikita): the OAuth scope the connector requests (youtube.readonly?); the template in keboola/kbc-ui-templates does not state it. -->
 
 ## Configuration
 To begin, [create a new configuration](/components/configurations/#create-a-configuration) for the **YouTube** connector.

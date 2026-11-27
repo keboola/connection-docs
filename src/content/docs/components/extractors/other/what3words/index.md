@@ -10,7 +10,6 @@ redirect_from:
 
 
 This data source connector allows you to translate [what3words](https://what3words.com/) addresses to coordinates and vice versa.
-Each translated address requires one API call.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
@@ -41,7 +40,7 @@ and select the **forward** method in the configuration.
 
 ## Augment Coordinates
 In this case, you specify geographical latitude and longitude coordinates, and the data source connector fetches their what3words addresses.
-Select one or more tables which have exactly two columns: the first column with a latitude, the second one with a longitude. 
+Select a single table which has exactly two columns: the first column with a latitude, the second one with a longitude. 
 If the source table does not meet these requirements, edit the [input mapping](/transformations/mappings/input/) 
 details accordingly. 
 

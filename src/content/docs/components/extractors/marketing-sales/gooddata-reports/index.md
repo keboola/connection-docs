@@ -43,7 +43,7 @@ Continue by providing your own GoodData **credentials**.
 
 ![Screenshot - GoodData Credentials](/components/extractors/marketing-sales/gooddata-reports/gooddata-reports-3.png)
 
-<!-- VERIFY(nikita): this option no longer works; keboola/gooddata-extractor reads only host, username, #password and reports, and the configSchema marks pid and writer_id "deprecated, ignored". Delete the paragraph and its screenshots, and the "provisioned project" part of the description, once the owner agrees. -->
+<!-- VERIFY(Nikita): this option no longer works; keboola/gooddata-extractor reads only host, username, #password and reports, and the configSchema marks pid and writer_id "deprecated, ignored". Delete the paragraph and its screenshots, and the "provisioned project" part of the description, once the owner agrees. -->
 You can also choose an ID of the **GoodData Project** provisioned in one of the existing GoodData data destination connector configurations 
 and use its credentials. The project ID (PID) of the provisioned project can be found in a GoodData data destination connector configuration.
 

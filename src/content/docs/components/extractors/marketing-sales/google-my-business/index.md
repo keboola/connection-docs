@@ -17,7 +17,8 @@ The Google account you authorize must have access to every [Google Business prof
 
 - A Google account with access to the locations you want to read. To see which locations your account can
   access, visit [business.google.com/locations](https://business.google.com/locations).
-  <!-- VERIFY(nikita): the OAuth scope the connector requests (business.manage?) and whether a location Manager role is enough. -->
+  The connector asks for access to the Business Profile APIs (scope `https://www.googleapis.com/auth/business.manage`).
+  <!-- VERIFY(Nikita): whether a location Manager role is enough. -->
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Google My Business** connector.

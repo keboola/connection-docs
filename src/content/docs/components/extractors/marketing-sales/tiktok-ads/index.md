@@ -17,7 +17,7 @@ there are [four report types](https://ads.tiktok.com/marketing_api/docs?id=17388
 
 - A TikTok For Business login with access to the Ad Account you want to extract. You sign in with it when you
   authorize the configuration.
-  <!-- VERIFY(nikita): the minimum ad account role (Analyst?) and the Marketing API permission scopes the Keboola TikTok app requests. -->
+  <!-- VERIFY(Nikita): the minimum ad account role (Analyst?) and the Marketing API permission scopes the Keboola TikTok app requests. -->
 - The dimensions and metrics you want, from the documentation of the
   [report type](https://ads.tiktok.com/marketing_api/docs?id=1738864835805186) you plan to use.
 

@@ -20,8 +20,8 @@ This data source connector allows you to import data from Google Ads.
 - A Google Ads account. If you do not have a Google Ads manager account, follow this
   [guide](https://support.google.com/google-ads/answer/7459399?hl=en) to set it up.
 - A Google account with access to the Ads accounts you want to read. You sign in with it when you authorize
-  the configuration.
-  <!-- VERIFY(nikita): the OAuth scope the connector requests (adwords?) and the minimum Google Ads access level (read-only?) the signed-in user needs. -->
+  the configuration and grant access to the Google Ads API (scope `https://www.googleapis.com/auth/adwords`).
+  <!-- VERIFY(Nikita): the minimum Google Ads access level (read-only?) the signed-in user needs. -->
 - The [customer ID](https://support.google.com/google-ads/answer/1704344?hl=en) of each account to download.
 
 ## Configuration
@@ -44,9 +44,8 @@ can be specified
 - **relatively** — e.g. `14 days ago` or `last month`.
 
 In each GAQL query, pick columns to download from allowed report values, and the FROM clause from allowed report types.
-You also need to specify the name of the query and destination table in Storage. 
-
-**Important**: *customer* and *campaign* are reserved names, thus cannot be used as table names.
+You also need to name the query. Its result always goes to the table `report-<query name>`, next to the
+`customer` and `campaign` tables the connector creates on every run.
 
 Additionally, for each query, specify a list of columns to be used as a primary key. 
 Use *Display Name* of the columns replace dot with upper case first letter

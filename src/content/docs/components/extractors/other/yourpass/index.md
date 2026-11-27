@@ -20,7 +20,7 @@ to Keboola.
 
 - YourPass API credentials: your YourPass user name (email) and password, your client ID and, if your client
   has one, the client secret.
-  <!-- VERIFY(nikita): where a YourPass customer gets the client ID and secret (YourPass support, or a self-service setting?). -->
+  <!-- VERIFY(Nikita): where a YourPass customer gets the client ID and secret (YourPass support, or a self-service setting?). -->
 - The project or template IDs, if you want only some passes.
 
 ## Configuration

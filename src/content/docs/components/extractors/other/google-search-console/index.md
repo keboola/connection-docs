@@ -22,7 +22,7 @@ endpoint.
 
 - A Google account with access to the Search Console property (the domain or URL prefix) you want to read. You
   sign in with it when you authorize the configuration.
-  <!-- VERIFY(nikita): the OAuth scope the connector requests (webmasters.readonly?) and whether a Restricted user on the property is enough. -->
+  <!-- VERIFY(Nikita): the OAuth scope the connector requests (webmasters.readonly?) and whether a Restricted user on the property is enough. -->
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Search Console** connector.

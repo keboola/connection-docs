@@ -43,10 +43,10 @@ It will look like this: `c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13`.
 ## Get started
 Let's take a closer look at the [MailChimp API](https://mailchimp.com/developer/) now.
 There are plenty of documentation guides available. To explore the API and review what information is in
-each resource, use, for example, the [Playground](https://us1.api.mailchimp.com/playground/).
+each resource, use the [API reference](https://mailchimp.com/developer/marketing/api/).
 
 The basic properties of the API are outlined in the
-[Getting Started Guide](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#resources).
+[API fundamentals](https://mailchimp.com/developer/marketing/docs/fundamentals/).
 The following are the crucial parts for our use-case:
 
 - The root API URL is `https://<dc>.api.mailchimp.com/3.0`, where `<dc>` refers to a data center for your

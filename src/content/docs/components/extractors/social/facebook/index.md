@@ -19,9 +19,9 @@ The feed, comments and likes come from the Page [feed](https://developers.facebo
 ## Before you start
 
 - A Facebook account with access to the Pages you want to extract. You sign in with it when you authorize the
-  configuration, and grant the permissions listed below. Alternatively, have a manually generated access token
+  configuration, and grant the permissions the consent dialog asks for. Alternatively, have a manually generated access token
   ready for **Direct token insert**.
-  <!-- VERIFY(nikita): the permissions the Keboola app requests today; manage_pages was replaced by pages_read_engagement and related permissions in Graph API v7+. Not found in keboola/component-meta. -->
+  <!-- VERIFY(Nikita): the permissions the Keboola app requests today; manage_pages was replaced by pages_read_engagement and related permissions in Graph API v7+. Not found in keboola/component-meta. -->
 - Some knowledge of the [Graph API](https://developers.facebook.com/docs/graph-api/using-graph-api): each
   query is a Graph API request.
 

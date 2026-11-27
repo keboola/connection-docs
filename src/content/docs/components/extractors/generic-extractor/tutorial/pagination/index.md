@@ -18,7 +18,7 @@ the MailChimp API](/components/extractors/generic-extractor/tutorial/). If you c
 only one campaign. You should now create some more campaigns (you do not have to configure them anyhow).
 
 If the API has consistent pagination for all resources (which the
-[MailChimp API has](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters)),
+[MailChimp API has](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination)),
 then the pagination is defined in the `Pagination` section of the endpoint configuration (or in the `api` section in the underlying JSON).
 
 ## Before you start
@@ -28,7 +28,7 @@ then the pagination is defined in the `Pagination` section of the endpoint confi
 - More than one campaign in your MailChimp account, as described above.
 
 ## Preparation
-The MailChimp API uses the [`offset` pagination method](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters),
+The MailChimp API uses the [`offset` pagination method](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination),
 which means that each page has a fixed `limit` (by default 10 items), and you need to use the offset to move 
 that fixed-size page over the next set of results. For the first page, the `offset` is 0, for the second 
 page, the `offset` is 10. This is the same kind of pagination as in SQL.
@@ -36,8 +36,8 @@ page, the `offset` is 10. This is the same kind of pagination as in SQL.
 The offset pagination method is configured with the following basic properties:
 
 - `method` — for MailChimp, set this property to `offset`.
-- `offsetParam` — name of the API parameter which defines the [page offset](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters)
-- `limitParam` -- name of the API parameters which define the [page size (limit)](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters)
+- `offsetParam` — name of the API parameter which defines the [page offset](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination)
+- `limitParam` -- name of the API parameters which define the [page size (limit)](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination)
 
 So, for MailChimp, configure the pagination this way:
 

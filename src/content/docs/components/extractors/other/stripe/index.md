@@ -17,7 +17,7 @@ The connector calls the [Stripe API](https://stripe.com/docs/api).
 
 - A Stripe [API key](https://stripe.com/docs/api#authentication) from the
   [Stripe dashboard](https://dashboard.stripe.com/login?redirect=%2Faccount%2Fapikeys).
-  <!-- VERIFY(nikita): whether a restricted key with read-only access to the objects in the templates works, so readers don't have to hand over the full secret key. -->
+  <!-- VERIFY(Nikita): whether a restricted key with read-only access to the objects in the templates works, so readers don't have to hand over the full secret key. -->
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Stripe** connector.

@@ -59,10 +59,11 @@ In the configuration parameters, do the following:
 - If loading is set to `incremental`, set a primary key.
 - Click **Save** to save the configuration.
 
+![Screenshot - Row configuration](/components/extractors/marketing-sales/criteo/row.png)
+
 Click **Run Component**.
 
 **Check:** the job ends with status **Success** and Storage has a table with the output name you set in the row.
 
-![Screenshot - Row configuration](/components/extractors/marketing-sales/criteo/row.png)
 
 For further details on the Criteo API and troubleshooting steps, please refer to Criteo's official [documentation](https://developers.criteo.com/marketing-solutions/docs/api-troubleshooting-tips).

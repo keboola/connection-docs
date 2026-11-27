@@ -20,7 +20,7 @@ Setting it up takes two steps: link a Google service account to your Google Ad M
   configuration.
 - API access for that service account in Google Ad Manager. Add it to your network as described in Google's
   [Ad Manager API authentication guide](https://developers.google.com/ad-manager/api/authentication).
-  <!-- VERIFY(nikita): which Ad Manager role the service account user needs to run reports. -->
+  <!-- VERIFY(Nikita): which Ad Manager role the service account user needs to run reports. -->
 - Your network code, the number in the Ad Manager URL, for example `1234` in `https://admanager.google.com/1234#home`.
 
 ## Authorization Configuration

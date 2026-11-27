@@ -15,9 +15,9 @@ The connector calls the [Zoho Bulk Read APIs](https://www.zoho.com/crm/developer
 
 - A Zoho CRM user with access to the modules you want to extract. You sign in with it when you authorize the
   configuration, and you enter its email address afterwards.
-  <!-- VERIFY(nikita): the OAuth scopes the Keboola Zoho app requests (ZohoCRM.bulk.read plus module read scopes?), and what "the email you used to generate the Self Client" means when the connector authorizes through Keboola's own app. -->
-- Your Zoho [data center](https://help.zoho.com/portal/en/kb/commerce/user-guide/getting-started-with-zoho-commerce/articles/data-centers),
-  which you select during authorization.
+  <!-- VERIFY(Nikita): the OAuth scopes the Keboola Zoho app requests (ZohoCRM.bulk.read plus module read scopes?), and what "the email you used to generate the Self Client" means when the connector authorizes through Keboola's own app. -->
+- Your Zoho [data center](https://help.zoho.com/portal/en/kb/commerce/user-guide/getting-started-with-zoho-commerce/articles/data-centers).
+  You set it in the configuration's account settings, next to the user email.
 - The modules and fields you want. The row form lists their API names for you.
 
 ## Supported Endpoints
@@ -33,7 +33,8 @@ If you need additional endpoints, please submit your request to [ideas.keboola.c
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Zoho** data source connector.
 
 Click **Authorize Account** to [authorize the configuration](/components/authorization/) with access to the Zoho CRM data you want to extract. Then, select 
-a [data center](https://help.zoho.com/portal/en/kb/commerce/user-guide/getting-started-with-zoho-commerce/articles/data-centers) of your Zoho instance during the authorization process.
+the [data center](https://help.zoho.com/portal/en/kb/commerce/user-guide/getting-started-with-zoho-commerce/articles/data-centers) of your Zoho instance in the account settings.
+<!-- VERIFY(Nikita): configSchema of ex-zoho requires zoho_datacenter in the account settings; check whether the authorization dialog also asks for it. -->
 
 Once done, you must enter the **account's user email address (`user_email`)** you used to generate the Self Client.
 

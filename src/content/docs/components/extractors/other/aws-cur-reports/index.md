@@ -17,7 +17,7 @@ AWS describes how it produces these exports in [What are AWS Cost and Usage Repo
   below.
 - AWS access keys (key ID and secret) for an IAM user that can list the bucket and read the report files
   (`s3:ListBucket` and `s3:GetObject`).
-<!-- Checked 2026-11-27: the only S3 calls in keboola/component-aws-cost-and-usage-reports are list_objects_v2, get_object and download_file, plus DuckDB reading named keys; the region comes from the configuration. -->
+  <!-- Checked 2026-11-27: the only S3 calls in keboola/component-aws-cost-and-usage-reports are list_objects_v2, get_object and download_file, plus DuckDB reading named keys; the region comes from the configuration. -->
 - The bucket's region and the report prefix you set in the export.
 
 ### AWS setup

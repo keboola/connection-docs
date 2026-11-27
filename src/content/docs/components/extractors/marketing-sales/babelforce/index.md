@@ -16,7 +16,7 @@ The connector calls the [Babelforce](https://www.babelforce.com/) [REST API](htt
 ## Before you start
 
 - A Babelforce account with API access, and its API **Access ID** and **API token**.
-  <!-- VERIFY(nikita): where in Babelforce a user finds or creates the Access ID and token, and which user role may do it. -->
+  <!-- VERIFY(Nikita): where in Babelforce a user finds or creates the Access ID and token, and which user role may do it. -->
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Babelforce** connector.
@@ -32,4 +32,5 @@ You can also [switch to the JSON editor](/components/extractors/generic-extracto
 
 Click **Run Component**.
 
-**Check:** the job ends with status **Success** and Storage has the table `calls_export` with your call data.
+**Check:** the job ends with status **Success** and Storage has the table `calls_export` with your call data, plus
+`bridged_calls_export` and `recordings_export`.

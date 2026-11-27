@@ -13,6 +13,11 @@ redirect_from:
 In the previous part of the tutorial, you [extracted the content of a MailChimp campaign](/components/extractors/generic-extractor/tutorial/jobs/). 
 Now, it's time to clean up the response.
 
+## Before you start
+
+- The configuration from [Jobs](/components/extractors/generic-extractor/tutorial/jobs/), which extracts
+  campaigns and their content.
+
 This is the initial configuration:
 
 ![Whole cfg](/components/extractors/generic-extractor/tutorial/mapping_all.png)
@@ -80,11 +85,6 @@ the request `GET /3.0/campaigns/f7ed43aaea/content?count=1&offset=0` sent. That 
 pagination applies to **all API requests**. Generic Extractor tries to page the 
 unpaged `/content` resource. This may ultimately lead to duplicates because the extraction of that
 resource is only terminated after the resource returns the same response twice.*
-
-## Before you start
-
-- The configuration from [Jobs](/components/extractors/generic-extractor/tutorial/jobs/), which extracts
-  campaigns and their content.
 
 ## Mapping
 

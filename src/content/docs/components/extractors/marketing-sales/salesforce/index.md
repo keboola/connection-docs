@@ -33,6 +33,9 @@ a specified SOQL query, or by selecting a Salesforce object and getting all data
 The connector supports three authentication methods. Select the appropriate **Login Method** based on your Salesforce setup and security requirements.
 
 #### Security Token with Username and Password
+**Note:** Salesforce is retiring this method in the Summer '27 release, and it is already unavailable in new
+Salesforce orgs. For a new setup, use [OAuth 2.0 client credentials](#external-client-app-oauth-20-client-credentials).
+
 This is the default and simplest authentication method. You need to provide your Salesforce **Login Name**, **Password**, and **Security Token**. 
 If you do not have your Security Token, you will need to reset it by following the steps in the 
 [Salesforce Documentation](https://help.salesforce.com/s/articleView?id=sf.user_security_token.htm&type=5).
@@ -41,6 +44,9 @@ Note that the security token is different for sandbox and production environment
 don't forget to add `.sandboxname` at the end of your username.
 
 #### External Client App with Username and Password
+**Note:** Salesforce is retiring this method on 2027-02-20, and it is already unavailable in new Salesforce orgs.
+For a new setup, use [OAuth 2.0 client credentials](#external-client-app-oauth-20-client-credentials).
+
 This method uses a Salesforce External Client App for authentication (the current-generation replacement for
 Connected Apps, introduced in Salesforce Spring '26). In addition to your **Login Name** and **Password**, 
 you need to provide the **Consumer Key** and **Consumer Secret** from your External Client App.

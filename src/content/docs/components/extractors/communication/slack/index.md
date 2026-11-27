@@ -17,7 +17,7 @@ The connector calls the [Slack API](https://api.slack.com/methods).
 
 - A Slack account in the workspace you want to read. You sign in with it when you authorize the
   configuration. The connector reads the workspace's users, its public channels and their messages.
-  <!-- VERIFY(nikita): the OAuth scopes Keboola's Slack app requests, and whether a workspace admin must approve the app first. -->
+  <!-- VERIFY(Nikita): the OAuth scopes Keboola's Slack app requests, and whether a workspace admin must approve the app first. -->
 - The [Slack API documentation](https://api.slack.com/methods) at hand if you plan to change the template
   in the JSON editor.
 

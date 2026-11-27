@@ -17,7 +17,7 @@ Setting it up takes two steps: authorize the Gmail account, then write the queri
 
 - A Google account with Gmail. You sign in with it when you authorize the configuration. The connector
   reads the mailbox and never changes it.
-  <!-- VERIFY(nikita): the exact OAuth scope the connector requests (gmail.readonly?); it is set in the OAuth broker, not in keboola/gmail-extractor. -->
+  <!-- VERIFY(Nikita): the exact OAuth scope the connector requests (gmail.readonly?); it is set in the OAuth broker, not in keboola/gmail-extractor. -->
 - A Google Cloud project for custom OAuth credentials, the preferred option. Google treats mail access as
   sensitive and may refuse the default app. In the project, you enable the Gmail API and create an OAuth
   client ID, as described in [Custom OAuth credentials](#custom-oauth-credentials).

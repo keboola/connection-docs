@@ -14,23 +14,19 @@ The connector calls the [Market Vision API](https://reporting.marketvision-sprin
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
+The data is extracted incrementally, so only data that has been changed since the last run is fetched. 
+The component has backfill implemented, meaning that if not all data could be fetched in the first run due to large 
+amounts of data, it will be fetched in the following runs.
+
 ## Before you start
 
 - The user name and password of a Market Vision user. The connector signs in with them and reads all projects
   the user can see.
   <!-- Checked 2026-11-27: kds-team.ex-market-vision configSchema requires username and #password; the code calls client.login(username, password). -->
 
-The data is extracted incrementally, so only data that has been changed since the last run is fetched. 
-The component has backfill implemented, meaning that if not all data could be fetched in the first run due to large 
-amounts of data, it will be fetched in the following runs.
-
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Market Vision** connector.
 Then fill in your Market Vision **Username** and **Password**.
-<!-- VERIFY(nikita): the screenshot below still shows the old Api Token field and a staff member's name in the version list; recapture it. -->
-
-![Screenshot - Api Version](/components/extractors/marketing-sales/market-vision/auth.png)
-
 
 Once the credentials are filled in, save the configuration and you can run the component. If you have a lot of data in
 Market Vision, it might take a couple of runs to extract all the data. You can see that the backfill has finished by not seeing

@@ -17,7 +17,7 @@ The connector calls the [GitHub API](https://developer.github.com/v3/).
 
 - A GitHub account that is a member of the organizations you want to read. You sign in with it when you
   authorize the configuration.
-  <!-- VERIFY(nikita): the OAuth scopes Keboola's GitHub app requests (read:org, repo?), and whether an organization owner must approve the app for private repositories. -->
+  <!-- VERIFY(Nikita): the OAuth scopes Keboola's GitHub app requests (read:org, repo?), and whether an organization owner must approve the app for private repositories. -->
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **GitHub** connector.
@@ -44,4 +44,4 @@ You can also [switch to the JSON editor](/components/extractors/generic-extracto
 Click **Run Component**.
 
 **Check:** the job ends with status **Success** and Storage has the tables `organizations`, `members`, `teams`,
-`repos`, `issues` and `commits`.
+`repos`, `issues`, `issue_labels` and `commits`.

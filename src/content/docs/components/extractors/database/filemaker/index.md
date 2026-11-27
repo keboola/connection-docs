@@ -20,7 +20,7 @@ This component extracts layout data from [FileMaker](https://www.claris.com/file
   The connector reads data through these layouts.
 - The host URL of the FileMaker server, and a user name and password for an
   account that may use the Data API.
-  <!-- VERIFY(nikita): that the account needs the fmrest ("Access via FileMaker Data API") extended privilege; Claris docs say so, the component code does not check it. -->
+  <!-- VERIFY(Nikita): that the account needs the fmrest ("Access via FileMaker Data API") extended privilege; Claris docs say so, the component code does not check it. -->
 - The FileMaker server must be reachable over HTTPS from
   [Keboola's IP addresses](/components/ip-addresses/).
 
@@ -56,7 +56,7 @@ Define the object type to extract and configure storage syncing options.
 
 Download schemas of selected layouts. Provide a list of Database and Layout names to retrieve metadata. 
 
-***Note:** Leave the list empty to retrieve metadata for all available objects.*
+***Note:** The connector downloads field schemas only for the layouts you list. With an empty list, you get only the list of layouts in the `layouts` table.*
 
 ##### Layout
 

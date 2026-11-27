@@ -162,11 +162,6 @@ incremental load depends on other settings (mainly **Primary Key**).
 - **Primary Key** can be used to specify the primary key in Storage; it can be used with **Incremental Load**
 and **New Files Only** to create a configuration that incrementally loads all new files into a table in Storage.
 
-Save the table and click **Run Component**.
-
-**Check:** the job ends with status **Success** and Storage has a table with the **Storage Table Name** you set, with
-the rows of the matched files.
-
 ## Processing Settings
 
 ![Screenshot - Processing Settings](/components/extractors/storage/aws-s3/aws-s3-7.png)
@@ -177,6 +172,11 @@ the rows of the matched files.
  including the relative path to the **Search Key**.
  - **Add Row Number Column**: A new column `s3_row_filename` is added to the table and will contain the row number in each 
  of the downloaded files.
+
+Save the table and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table with the **Storage Table Name** you set, with
+the rows of the matched files.
 
 The data source connector also supports [Debug mode](/components/debug-mode/), all supported
 parameters are described in the [GitHub repository](https://github.com/keboola/aws-s3-extractor).

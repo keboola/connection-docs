@@ -18,7 +18,6 @@ The IMAP protocol offers several advantages:
 - Emails remain intact in your original inbox.
 - Emails can be queried using a standardized [query syntax](query-syntax).
 - It is compatible with *almost* any provider that supports **basic authentication**, including Gmail and others.
-  <br>***Note:** If you wish to use IMAP with MS Outlook, use this component: [MS Outlook IMAP Email Content and Attachments (Office 365)](/components/extractors/communication/ms-outlook/).*
 
 ## Before you start
 

@@ -19,7 +19,7 @@ notifications, attachments, description, etc.). It can also be used for download
 
 - A Google account. You sign in with it when you authorize the configuration. The connector downloads
   the calendars in that account's calendar list, so use an account that has the calendars you need.
-  <!-- VERIFY(nikita): the OAuth scope the connector requests (calendar read-only?); the template in keboola/kbc-ui-templates does not state it. -->
+  <!-- VERIFY(Nikita): the OAuth scope the connector requests (calendar read-only?); the template in keboola/kbc-ui-templates does not state it. -->
 - Nothing to set up on the Google side. The connector uses Keboola's own Google app, so you don't need a
   Google Cloud project.
 
