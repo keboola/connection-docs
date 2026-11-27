@@ -375,8 +375,8 @@ People sign in on the host they open. Sessions are tied to one host, so someone 
 Register every listed URL with your provider if it accepts several:
 
 - **OIDC providers** (Google, Microsoft Entra ID, Okta, Auth0 and others) accept several redirect URIs. Add all of them.
-- **GitHub** accepts up to 10 callback URLs per OAuth App or GitHub App. Add both.
-- **GitLab and other providers with a single redirect URI** hold only one. Register the callback of the custom domain. Sign-in on the app's other hosts, including the Keboola address, can then fail. Open the app at its custom domain.
+- **GitHub** accepts up to 10 callback URLs per OAuth App or GitHub App. Add both URLs.
+- **GitLab and other providers with a single redirect URI** hold only one. Register the callback of the custom domain, and [make the domain the primary URL](/data-apps/custom-domains/#make-a-domain-the-primary-url) so that **Open** and shared links use it. Sign-in on the app's other hosts, including the Keboola address, can then fail. People who open the Keboola address directly can't sign in.
 
 {/* VERIFY(product): the Callback URL field lists custom-domain callbacks only once the UI PR (UI2) ships. */}
 

@@ -51,9 +51,10 @@ Add secrets as key-value pairs in the app configuration. The `#` prefix marks a 
 An app can answer on several hosts at once: its Keboola address and any [custom domain](/data-apps/custom-domains/). Keboola routes every host to the app. `KBC_APP_PUBLIC_URL` holds only the primary URL, so write the app to work on any host:
 
 - Use relative URLs for links, redirects and assets.
-- When you need an absolute URL, build it from the `X-Forwarded-Host` and `X-Forwarded-Proto` request headers.
+- When you need an absolute URL, build it from the `X-Forwarded-Host` and `X-Forwarded-Proto` request headers. <!-- VERIFY(platform): the design states that `X-Forwarded-Host` carries the real host on the custom-domain path only; confirm it also does on the `.hub` path. -->
 - Don't hard-code a base URL. Use `KBC_APP_PUBLIC_URL` only for values that must name the primary URL, such as an OAuth issuer.
 - Cookies are tied to the host that set them. Don't set a `Domain` attribute.
+- If your framework checks the host or origin of a request, add the custom domain to its allowed list. This covers Django `ALLOWED_HOSTS` and `CSRF_TRUSTED_ORIGINS`, CORS settings and WebSocket origin checks.
 
 When the primary URL changes, so does everything your app builds from `KBC_APP_PUBLIC_URL`: an OAuth issuer or resource URL, or a webhook address. Connectors and integrations set up on the old address must be created again on the new one.
 
