@@ -1,6 +1,6 @@
 ---
 title: MS Outlook IMAP Email Content and Attachments (Office 365)
-lastUpdated: 2026-11-23
+lastUpdated: 2026-11-27
 slug: 'components/extractors/communication/ms-outlook'
 description: 'Download emails and attachments from Office 365 Outlook mailboxes after you authorize, then filter them by search query, folder and date.'
 redirect_from:
@@ -13,6 +13,16 @@ The connection settings connect to one mailbox, and each configuration row picks
 <!-- VERIFY(Nikita): the catalog entry kds-team.ex-ms-outlook-email-content (checked 2026-11-23) says the connector uses IMAP or the Microsoft Graph API and documents Graph API filter and KQL search modes; this page covers IMAP only. Add the Graph API method. -->
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Microsoft 365 (Office 365) mailbox. You sign in with that Microsoft account when you authorize the
+  configuration. No password is stored; the connector uses OAuth.
+- With the IMAP connection method, IMAP must be enabled for the mailbox. The connector asks
+  for the delegated permission `IMAP.AccessAsUser.All`. If your tenant disables IMAP, the connector can use
+  the Microsoft Graph API instead, which asks for `Mail.ReadWrite.Shared`. Neither permission needs an admin's
+  consent, unless your organization doesn't let users consent to apps.
+  <!-- Checked 2026-11-27: scopes from src/component.py and src/graph_client.py in keboola/component-email-content; Microsoft's Graph permissions reference lists both as AdminConsentRequired: No. -->
 
 ## Authorization
 [Create a new configuration](/components/configurations/#create-a-configuration) for the **MS Outlook** extractor.
@@ -167,6 +177,12 @@ It adds custom tags to the resulting files and offers additional options to crea
 }
 ```
 
+### Run the extraction
+
+Save the row and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has an `emails` table with one row per fetched
+email. If you download attachments, they appear in File Storage, prefixed by the message key.
 
 ## Output
 

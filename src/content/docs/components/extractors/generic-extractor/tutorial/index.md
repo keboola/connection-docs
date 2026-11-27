@@ -1,6 +1,6 @@
 ---
 title: Generic Extractor Tutorial
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'components/extractors/generic-extractor/tutorial'
 description: 'Generic Extractor tutorial: prepare a MailChimp account and API key, then configure the extractor for a new REST API step by step.'
 redirect_from:
@@ -18,8 +18,9 @@ Even though there already is a MailChimp extractor available in Keboola as a
 the [MailChimp](https://mailchimp.com/) API is ideal for this tutorial because it is fairly
 easy to understand and has excellent documentation.
 
-## Prepare
-There are a few things you need to do before you start:
+## Before you start
+
+You need a MailChimp account with some data in it and an API key. Do this first:
 
 1. Read our [quick introduction to REST](/components/extractors/generic-extractor/tutorial/rest/) for a basic understanding of
 **HTTP requests** and **REST API**.
@@ -72,6 +73,9 @@ requests and responses. The response body is in [JSON](/components/extractors/ge
       "create_time": "2015-09-15T14:40:36+00:00",
       ...
 ```
+
+**Check:** you have an API key that ends with your data center (for example `-us13`), you know the root API
+URL built from it (`https://us13.api.mailchimp.com/3.0`), and the Campaign resource documentation is open.
 
 ## Next steps
 Now you have everything you need to actually start extracting the data. Continue with your Generic Extractor

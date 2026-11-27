@@ -1,6 +1,6 @@
 ---
 title: Google BigQuery
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 description: Run queries in Google BigQuery and load the results into Storage tables, or as Avro files with the files variant.
 slug: 'components/extractors/database/bigquery'
 redirect_from:
@@ -21,7 +21,14 @@ Running the connector creates a background job that
 
 ***Note:** Using the Google BigQuery connector is also described in our [Getting Started Tutorial](/getting-started/ad-hoc/#using-bigquery-connector).*
 
-## Initial Setup
+## Before you start
+
+- A Google Cloud project with billing enabled and the BigQuery dataset you want to read, and the rights to create a service
+  account and a Cloud Storage bucket in it.
+- A service account with a JSON key and the roles `BigQuery Data Editor`, `BigQuery Job User` and
+  `Storage Object Admin`. See [Service account](#service-account) below.
+- A Cloud Storage bucket in the same location as the dataset, for the temporary export files. See
+  [Bucket](#bucket) below.
 
 ### Service Account
 To access and extract data from your BigQuery dataset, you need to set up a Google service account. Go 
@@ -80,6 +87,10 @@ Name the query and click **Create**.
 ![Screenshot - Name Query](/components/extractors/database/bigquery/bigquery-6.png)
 
 To learn how to modify your configuration, go to the [SQL databases section](/components/extractors/database/sqldb/#modify-configuration).
+
+Click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has one table per query, with the query's result.
 
 ## Avro files variant
 

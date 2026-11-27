@@ -1,6 +1,6 @@
 ---
 title: JSON Introduction
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'components/extractors/generic-extractor/tutorial/json'
 description: 'Learn how JSON describes data with objects, arrays, properties and typed values, and how to refer to a property with dot notation.'
 redirect_from:
@@ -11,8 +11,12 @@ redirect_from:
 
 
 [JSON (JavaScript Object Notation)](http://www.json.org/) is an easy-to-work-with format for describing structured 
-data. Before you start working with JSON, familiarize yourself with basic programming jargon. It is also recommended 
-to have a text editor with JSON support (you can also use an [online editor](http://www.jsoneditoronline.org/)).
+data.
+
+## Before you start
+
+- Basic programming jargon (object, array, string, number).
+- A text editor with JSON support, or an [online editor](http://www.jsoneditoronline.org/).
 
 ## Object representation
 To describe structured data, JSON uses **objects** and **arrays**. 
@@ -145,6 +149,9 @@ index `2`.
 
 The order of items in an object is not important. It is also worth noting that `[]` represents an empty array and 
 `{}` represents an empty object.
+
+**Check:** you can tell an object (`{}`) from an array (`[]`) and write a dot-notation reference to a nested value, such as
+`address.city` in the example above.
 
 ## Summary
 This page contains a little introduction to JSON documents. We intentionally avoided many details, 

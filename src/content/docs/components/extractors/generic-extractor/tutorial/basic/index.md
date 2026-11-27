@@ -1,6 +1,6 @@
 ---
 title: Basic Configuration
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'components/extractors/generic-extractor/tutorial/basic'
 description: 'Generic Extractor tutorial: configure the base URL, basic authentication and the campaigns endpoint of the MailChimp API.'
 redirect_from:
@@ -10,12 +10,15 @@ redirect_from:
 <!-- Tutorial-type page. Part of the Generic Extractor tutorial chain; nav order is the reading order. -->
 
 
-Before configuring Generic Extractor, you should have a basic understanding
-of [REST API](/components/extractors/generic-extractor/tutorial/rest/) and
-[JSON format](/components/extractors/generic-extractor/tutorial/json/). This tutorial uses the
-[MailChimp API](https://mailchimp.com/developer/reference/), so
-have its documentation at hand. You also need the
-[MailChimp API key](/components/extractors/generic-extractor/tutorial/#prepare).
+In this part of the tutorial, you set the base URL and basic authentication of the MailChimp API and
+extract your campaigns.
+
+## Before you start
+
+- A basic understanding of [REST API](/components/extractors/generic-extractor/tutorial/rest/) and the
+  [JSON format](/components/extractors/generic-extractor/tutorial/json/).
+- The [MailChimp API documentation](https://mailchimp.com/developer/reference/) at hand.
+- Your [MailChimp API key](/components/extractors/generic-extractor/tutorial/#before-you-start).
 
 ## Configuration
 Generic Extractor configuration is written in [JSON format](/components/extractors/generic-extractor/tutorial/json/)
@@ -172,6 +175,9 @@ Because the `_links` property is a nested array within a single campaign object,
 represented in a single column of the `campaigns` table. Generic Extractor, therefore, replaces the column
 value with a generated key, for example, `campaigns_75d5b14d79d034cd07a9d95d5f0ca5bd`, and automatically
 creates a new table that has the column `JSON_parentId` with that value so that you can join the tables together.
+
+**Check:** the job ends with status **Success** and Storage has the table `in.c-ge-tutorial.campaigns`, one row
+per campaign, and `in.c-ge-tutorial.campaigns__links`.
 
 ### Final JSON configuration
 The main parts of the configuration and their nesting are shown in the following schema:

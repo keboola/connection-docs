@@ -1,6 +1,6 @@
 ---
 title: Customer IO
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/marketing-sales/customerio'
 description: 'Extract campaigns, segments, messages, customers and activities from Customer.io with an App API key, and choose how activity data is parsed into tables.'
 ---
@@ -11,7 +11,12 @@ The connector calls the [Customer IO Beta API](https://customer.io/docs/api/#tag
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Get API Key
+## Before you start
+
+- A Customer.io App API key. The connector authenticates with this bearer token.
+- Your account's region (US or EU), which you select next to the key.
+
+### Get API key
 To use this connector, you need a bearer token, known as an App API Key from Customer.io. You can generate a key with 
 a defined scope in [your account settings](https://fly.customer.io/settings/api_credentials?keyType=app).
 Learn more about [bearer authorization in Customer.io](https://customer.io/docs/managing-credentials).
@@ -138,4 +143,8 @@ Example:
 | David| {'daysofinactivity': 76, 'lastactivitydate': '2020-10-21', 'project': 'test', 'projecturl': 'example.com'} |             |               | 1234d | 1609808524 | event |
 | Tom  | {'project': 'test2', 'start': '2020-10-19T11:18:55Z'}                                                |             |               | 01EN0Q4 | 1603120800 | event |
 
+Save the configuration and click **Run Component**.
 
+**Check:** the job ends with status **Success** and Storage has a table for each object you selected, for
+example `customers`. Activities go to `activities_all`, or to one `activity_<type>` table per type with
+`PARSED_DATA`.

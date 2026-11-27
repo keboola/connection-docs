@@ -1,6 +1,6 @@
 ---
 title: Incremental Loading
-lastUpdated: 2026-11-12
+lastUpdated: 2026-11-27
 slug: 'components/extractors/generic-extractor/incremental'
 description: 'Load API data incrementally with Generic Extractor using incrementalOutput, a primary key, and previousStart in modified_since, from and to request parameters.'
 redirect_from:
@@ -13,6 +13,14 @@ redirect_from:
 Extracting data incrementally is universally beneficial — it **speeds up the extraction** and **lowers the load** on both the API and
 [Keboola Storage](/storage/) (thus saving 
 [credits](/management/project/limits/#project-power--time-credits)).
+
+## Before you start
+
+- A Generic Extractor configuration that already extracts the data in full.
+- An API that can filter by time, for example with a `modified_since` parameter. Check its
+  documentation for such a parameter and the format it expects.
+- The columns that identify a row, if the API returns modified entries: you set them as the primary key in
+  the [mappings](/components/extractors/generic-extractor/configuration/config/mappings/).
 
 ## Options
 After you have incrementally extracted data from an API, the data must be 
@@ -218,6 +226,9 @@ into an orchestration, and the configuration does not run for some reason, you m
 However, this may still be a useful approach for obtaining samples of data for POCs.
 
 See [example [EX110]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/110-incremental-relative).
+
+**Check:** run the configuration twice with `"debug": true`. In the second job's events, the request carries a
+later date than in the first, and the table in Storage gains only new or changed rows.
 
 ---
 

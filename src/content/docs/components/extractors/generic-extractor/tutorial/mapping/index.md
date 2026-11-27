@@ -1,6 +1,6 @@
 ---
 title: Mapping Tutorial
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'components/extractors/generic-extractor/tutorial/mapping'
 description: 'Generic Extractor tutorial on mapping: clean up the MailChimp response, set a primary key and nesting level, and add the parent campaign ID as a column.'
 redirect_from:
@@ -80,6 +80,11 @@ the request `GET /3.0/campaigns/f7ed43aaea/content?count=1&offset=0` sent. That 
 pagination applies to **all API requests**. Generic Extractor tries to page the 
 unpaged `/content` resource. This may ultimately lead to duplicates because the extraction of that
 resource is only terminated after the resource returns the same response twice.*
+
+## Before you start
+
+- The configuration from [Jobs](/components/extractors/generic-extractor/tutorial/jobs/), which extracts
+  campaigns and their content.
 
 ## Mapping
 
@@ -317,6 +322,9 @@ then look like this:
     }
 }
 ```
+
+**Check:** the job ends with status **Success** and Storage has the table `in.c-ge-tutorial.content`, with only
+the columns your mapping lists and a `campaign_id` column linking each row to its campaign.
 
 ## Review
 Now, let's review what parts are connected and how. Note that the values in blue 

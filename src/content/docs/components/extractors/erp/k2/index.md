@@ -1,6 +1,6 @@
 ---
 title: K2
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/erp/k2'
 description: 'Fetch K2 ERP data objects through the K2 API with a username, password and optional SSH tunnel, in full load or in incremental load between two dates.'
 ---
@@ -11,6 +11,16 @@ K2 is an ERP information system for managing production, inventory, financials, 
 This component fetches defined data objects from the K2 API.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A K2 user (user name and password) allowed to call the K2 API and read the data objects you need.
+- The source URL of your K2 API, for example `https://myk2server.com`, and the name of
+  the API service.
+- The K2 API must be reachable from [Keboola's IP addresses](/components/ip-addresses/).
+  If it is not public, prepare an SSH server that can reach it; see [SSH tunnel configuration](#ssh-tunnel-configuration).
+- The data object names (class names) you want to fetch, and the
+  [K2 condition syntax](https://help.k2.cz/k2gaia/12/en/10023272.htm) if you want to filter them.
 
 ## Authorization Configuration
 
@@ -72,4 +82,9 @@ with the date to which you wish to fetch data from using the incremental field, 
 relative dates just like **Date from**, but in most cases will be filled in with "now" which means that the component 
 will fetch the data up to the current time of the component run
 
-![Screenshot - Authorization](/components/extractors/erp/k2/incremental_fetching.png)
+![Screenshot - Incremental fetching](/components/extractors/erp/k2/incremental_fetching.png)
+
+Save the row and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table named after the data object (its
+class name). Child objects it contains get their own tables, named `<class name>_<field name>`.

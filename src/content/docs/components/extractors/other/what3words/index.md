@@ -1,6 +1,6 @@
 ---
 title: What3words Augmentation
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/other/what3words'
 description: 'Translate what3words addresses to latitude and longitude, or coordinates to what3words addresses, with a what3words API key; each address costs one API call.'
 redirect_from:
@@ -10,10 +10,16 @@ redirect_from:
 
 
 This data source connector allows you to translate [what3words](https://what3words.com/) addresses to coordinates and vice versa.
-Before using the connector, you need to [obtain a what3words API key](https://developer.what3words.com/public-api/docsv2#overview).
-Notice that each translated address requires one API call.
+Each translated address requires one API call.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A what3words API key. [Obtain one](https://developer.what3words.com/public-api/docsv2#overview) from
+  what3words. Each translated address uses one API call, so check your plan's limit.
+- A table in Storage with the input: one column with what3words addresses, or two columns with latitude and
+  longitude. The sample files below work for a first test.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **What3words Augmentation** connector.
@@ -46,3 +52,8 @@ and select the **reverse** method in the configuration.
 (The names of the columns and the CSV file in the input mapping are not important, use any name you like.)
 
 ![Screenshot - Add w3w address to coordinates](/components/extractors/other/what3words/what3words-2.png)
+
+Save the configuration and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a `result` table in the connector's output bucket:
+coordinates for the **forward** method, what3words addresses for the **reverse** method.

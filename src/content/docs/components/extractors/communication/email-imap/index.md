@@ -1,6 +1,6 @@
 ---
 title: IMAP Email Contents and Attachments
-lastUpdated: 2026-10-14
+lastUpdated: 2026-11-27
 slug: 'components/extractors/communication/email-imap'
 description: 'Download email contents and attachments over IMAP with basic authentication, filter them with IMAP queries, and store attachments as files or tables.'
 redirect_from:
@@ -8,12 +8,10 @@ redirect_from:
 ---
 
 
-
 This extractor allows you to automatically retrieve email contents and/or attachments via the [IMAP protocol](https://en.wikipedia.org/wiki/Internet_Message_Access_Protocol) using [basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication). 
 It supports incremental loads and IMAP queries to define specific criteria. 
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
-
 
 The IMAP protocol offers several advantages:
 
@@ -22,10 +20,26 @@ The IMAP protocol offers several advantages:
 - It is compatible with *almost* any provider that supports **basic authentication**, including Gmail and others.
   <br>***Note:** If you wish to use IMAP with MS Outlook, use this component: [MS Outlook IMAP Email Content and Attachments (Office 365)](/components/extractors/communication/ms-outlook/).*
 
+## Before you start
 
-:::caution
-**Warning:** This component supports IMAP only with **basic authentication**. If you wish to use IMAP with MS Outlook, use this component instead: [MS Outlook IMAP Email Content and Attachments (Office 365)](/components/extractors/communication/ms-outlook/).
-:::
+- The IMAP service enabled on the mailbox. The connector signs in with a
+  user name and password only. For MS Outlook (Office 365), use
+  [MS Outlook IMAP Email Content and Attachments](/components/extractors/communication/ms-outlook/) instead.
+- Your IMAP user name and password, and the hostname and port of your IMAP server.
+  Check with your email provider if you need more details. For Gmail, create an app password as in the
+  [Gmail example](#example-using-gmail-account) below.
+- The connector reads the root `INBOX` folder. If labels or filters in your mail provider
+  (Gmail, for example) move messages to another folder, note its name for the **IMAP Folder** setting.
+- If your mail server accepts connections only from known addresses, allow
+  [Keboola's IP addresses](/components/ip-addresses/).
+
+### Example using Gmail account
+
+- Enable and create an [app password](https://support.google.com/accounts/answer/185833?hl=en) specifically for this integration. Name it, for instance, `Keboola extractor`.
+- Enter your email address in the `Username` field.
+- Enter the generated app password in the `Password` field.
+- In the `IMAP host field`, enter the Gmail IMAP address: `imap.gmail.com`.
+- Use port `993`.
 
 
 ## Features
@@ -41,21 +55,6 @@ The IMAP protocol offers several advantages:
 | Filter email attachments   | Download only attachments that match a specified regex expression.                                                              |
 | Processors support         | Use processors to modify outputs before saving to Storage; e.g., process attachments to be stored in Tabular Storage. |
 
-
-## Getting Started
-Enable IMAP service on your email account. You will need your IMAP credentials (name, password), as well as the hostname and port of your IMAP server.
-Check with your email provider if you need more details.
-
-***Note:** The app fetches emails from the root `INBOX` folder. If you use labels or filters in email providers (e.g., Gmail) that move messages to a different folder, 
- set the `imap_folder` configuration parameter.*
-
-### Example Using GMAIL Account
-
-- Enable and create an [app password](https://support.google.com/accounts/answer/185833?hl=en) specifically for this integration. Name it, for instance, `Keboola extractor`.
-- Enter your email address in the `Username` field.
-- Enter the generated app password in the `Password` field.
-- In the `IMAP host field`, enter the Gmail IMAP address: `imap.gmail.com`.
-- Use port `993`.
 
 ## Configuration
 
@@ -208,6 +207,13 @@ It adds custom tags to the resulting files and offers additional options to crea
 }
 ```
 
+
+### Run the extraction
+
+Save the row and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has an `emails` table with one row per fetched
+email. If you download attachments, they appear in File Storage, prefixed by the message key.
 
 ## Output
 

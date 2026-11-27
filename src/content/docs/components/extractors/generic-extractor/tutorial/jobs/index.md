@@ -1,6 +1,6 @@
 ---
 title: Jobs Tutorial
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'components/extractors/generic-extractor/tutorial/jobs'
 description: 'Generic Extractor tutorial on jobs: extract the sub-resources of MailChimp campaigns with child jobs and placeholders, and add multiple jobs.'
 redirect_from:
@@ -27,6 +27,11 @@ Moreover, each campaign has three **sub-resources**:
 `/campaigns/{campaign_id}/content`, `/campaigns/{campaign_id}/feedback` 
 and `/campaigns/{campaign_id}/send-checklist`. The `{campaign_id}` expression represents a placeholder 
 that a specific campaign ID should replace. To retrieve the sub-resource, use child jobs. 
+
+## Before you start
+
+- The configuration from [Pagination](/components/extractors/generic-extractor/tutorial/pagination/), with
+  at least one campaign in the account.
 
 ## Child jobs
 
@@ -233,6 +238,9 @@ represents the `links` property of the `content` resource. The links table conta
 the `links` column of the campaign content table. This is done automatically because once
 you say that the entire response is supposed to be a single table row, the array `_links` 
 property will not fit into a single value of a table.
+
+**Check:** the job ends with status **Success** and Storage has `in.c-ge-tutorial.campaigns__campaign_id__content`
+with the content of your campaigns, next to the `campaigns` table.
 
 ## Summary
 Now that you know how to extract sub-resources using child jobs, as well as resources composed directly of 

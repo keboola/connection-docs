@@ -1,6 +1,6 @@
 ---
 title: Papertrail
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/other/papertrail'
 description: 'Import Papertrail log events that match a search query, over a retention period of 1 day to 1 month, with a Papertrail API token; loads are incremental.'
 redirect_from:
@@ -16,14 +16,20 @@ to import events matching the specified query from [Papertrail](https://www.pape
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
+## Before you start
+
+- A Papertrail [API token](https://help.papertrailapp.com/kb/how-it-works/http-api#authentication). You find
+  it in your [profile](https://papertrailapp.com/account/profile).
+- A search query in Papertrail's [search syntax](https://help.papertrailapp.com/kb/how-it-works/search-syntax/#quick-reference)
+  that matches the events you want.
+
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Papertrail** connector.
 
 To configure the connector, you need to provide a Papertrail API token, enter a search query and select a retention period.
 Then select the data you wish to extract.
 
-First, provide a Papertrail [API token](https://help.papertrailapp.com/kb/how-it-works/http-api#authentication).
-You can get it in your [profile](https://papertrailapp.com/account/profile).
+First, provide your Papertrail API token.
 
 Then enter your [search query](https://help.papertrailapp.com/kb/how-it-works/search-syntax/#quick-reference). 
 And finally, select a desired **retention period** from the dropdown menu (from 1 day to 1 month).
@@ -37,3 +43,8 @@ When done, **Save** the configuration.
 You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
 
 **Important:** Data is always imported incrementally.
+
+Click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has the `events` table with the events your query
+matches.

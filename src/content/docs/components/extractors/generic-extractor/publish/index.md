@@ -1,6 +1,6 @@
 ---
 title: Publish Generic Extractor
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'components/extractors/generic-extractor/publish'
 description: 'Publish a Generic Extractor configuration as a separate component: design a configuration schema, register it in the Developer Portal, reuse it in projects.'
 redirect_from:
@@ -13,6 +13,13 @@ redirect_from:
 
 It is possible to publish a Generic Extractor configuration as a completely separate component.
 This enables sharing the API extractor between various projects and simplifies its further configuration.
+
+## Before you start
+
+- A working Generic Extractor configuration for the API. Building one is covered in the
+  [tutorial](/components/extractors/generic-extractor/tutorial/).
+- A [Developer Portal](https://components.keboola.com/) account with a vendor that may create components.
+  See [creating a component](/extend/component/tutorial/).
 
 ## Configuration considerations
 Before converting your configuration to a universally available component, consider
@@ -350,3 +357,7 @@ Save the file into a separate `template.json` file. The template file therefore 
 
 Create as many `template.json` files as you wish. However, all of them need to share the same `api.json`
 configuration. When you want to publish your component, attach the `api.json` and all `template.json` files.
+
+**Check:** the component in the Developer Portal shows the Generic Extractor image, a specific tag and the
+`genericTemplatesUI` option, and your configuration schema is saved with it. The templates appear once they are
+added to the templates repository, as described above.

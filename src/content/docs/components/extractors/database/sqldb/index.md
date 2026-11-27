@@ -1,6 +1,6 @@
 ---
 title: Relational Sync Data Source Connectors for SQL Databases
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/database/sqldb'
 description: 'Set up a query-based SQL database connector, select tables or write an advanced-mode query, and read the notes for MySQL, SQL Server, Snowflake and others.'
 redirect_from:
@@ -20,12 +20,19 @@ The connectors for supported SQL databases ([Cloudera Impala](https://www.cloude
 similarly and offer an [advanced mode](/components/extractors/database/sqldb/#advanced-mode). All notable differences are listed 
 in the section [Server Specific Notes](#server-specific-notes).
 
-Before you start configuring your SQL data source connector, consider [setting up an SSH tunnel](/components/extractors/database/#connecting-to-database) to secure your connection to your internal database and 
-avoid exposing your database server to the Internet.
-
 ***Note:** Our [tutorial](/getting-started/load/database/) also includes a quick introduction to extracting data from the Snowflake Database Server.*
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A database user that can read the tables and views you want to extract (`SELECT`). Snowflake also needs
+  usage rights on the warehouse, database and schema; see [Snowflake](#snowflake).
+- The hostname, port, database name, user name and password (Snowflake also accepts a private key). Some servers have extra
+  fields, listed in [Server Specific Notes](#server-specific-notes).
+- The database must accept connections from [Keboola's IP addresses](/components/ip-addresses/).
+  To avoid exposing the server to the Internet, consider
+  [setting up an SSH tunnel](/components/extractors/database/#connecting-to-database) instead.
 
 ## Initial Setup
 After you [create a configuration](/components/configurations/#create-a-configuration), the first step is to configure database credentials using the **Set Up Credentials First** button:
@@ -47,6 +54,11 @@ Each table may also be extracted individually or disabled so that it is not extr
 Existing credentials can be changed using the **Database Credentials** link.
 
 ![Screenshot - Table list](/components/extractors/database/sqldb/sqldb-4.png)
+
+Click **Run Component** to extract all enabled tables.
+
+**Check:** the job ends with status **Success** and Storage has one table for each enabled row, under the
+destination name shown in its table detail.
 
 ## Modify Configuration
 If you want to modify the table extraction setup, click on the corresponding row. You'll get to the table detail view:

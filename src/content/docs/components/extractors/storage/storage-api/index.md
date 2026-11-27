@@ -1,6 +1,6 @@
 ---
 title: Keboola Storage
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/storage/storage-api'
 description: 'Copy tables from one bucket of another Keboola project, even in another organization or region, with a read-only token for that bucket.'
 redirect_from:
@@ -15,7 +15,14 @@ cannot, e.g., when moving data between two different [organizations](/management
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Prepare API Token
+## Before you start
+
+- Access to the source project with rights to create [API tokens](/management/project/tokens/) there.
+- A token with read-only access to a single bucket in the source project, created as described below. Each
+  bucket needs its own token and configuration.
+- The region (stack) of the source project.
+
+### Prepare API token
 The connector requires an [API Token](/management/project/tokens/) with **read-only** access to a **single bucket**. 
 This limits the potential risks of token misuse.
 
@@ -64,3 +71,8 @@ As the token has access to a single bucket only, you do not need to specify the 
 Otherwise the rows with an existing primary key are updated.
 - **Primary Key** -- sets the primary key of the table in the current project. The primary key does not have to be the same
 as in the *source project*.
+
+Save the table and click **Run Component**.
+
+**Check:** the job ends with status **Success** and the current project has a table with the name you assigned,
+holding the rows of the source table.

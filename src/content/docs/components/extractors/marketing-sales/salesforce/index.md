@@ -1,6 +1,6 @@
 ---
 title: Salesforce
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/marketing-sales/salesforce'
 description: 'Import Salesforce data through the Bulk API with a SOQL query or a whole object, authenticating with a security token or an External Client App.'
 redirect_from:
@@ -13,6 +13,18 @@ This data source connector allows you to import data from Salesforce via the Bul
 a specified SOQL query, or by selecting a Salesforce object and getting all data from that object.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Salesforce user with API access (the *API Enabled* permission) and read access to the objects you want
+  to export.
+- Credentials for one of the three login methods described under [Authorization](#authorization): a security
+  token, or an External Client App with its consumer key and secret. The client credentials method also needs
+  your Salesforce domain and a Salesforce admin to set the app's *Run As* user. Salesforce is retiring both
+  username-and-password methods, and they are already unavailable in new Salesforce orgs, so use the client
+  credentials method for a new setup.
+- If your org restricts login IP ranges, allow [Keboola's IP addresses](/components/ip-addresses/),
+  or use the app's IP relaxation setting described below. To go through an HTTPS proxy, have its address ready.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Salesforce V2** connector.
@@ -116,6 +128,11 @@ and only the `CreatedDate` field may be used. This also varies per custom Salesf
 A primary key can be defined to enable deduplication and "upserts" while importing to Storage. It defaults to `Id`, which 
 will be valid in the vast majority of cases. However, if your custom implementation does not define this column or you would 
 like to have your destination table without any, you can modify it.
+
+Save the row and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table named after the Salesforce object, for
+example `Contact`, or the **Storage Table Name** you set in the row.
 
 ## Limitations
 

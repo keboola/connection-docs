@@ -1,6 +1,6 @@
 ---
 title: MongoDB
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/database/mongodb'
 description: 'Export MongoDB collections into Keboola tables with a query, sort and limit, in raw mode or with a mapping, and fetch only new or changed records.'
 redirect_from:
@@ -14,6 +14,17 @@ Version 4.2 may work, though it is not guaranteed, and lower version are not sup
 Follow these steps to configure it.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A database user that can read the collections you want to export, and the connection details: host and
+  port (or a `mongodb+srv` or custom connection URI), database, and the authentication database and mechanism
+  if they are not the defaults.
+- TLS certificates, if your server requires an encrypted connection: the CA certificate, and the client
+  certificate and key when the server checks them.
+- The server must accept connections from [Keboola's IP addresses](/components/ip-addresses/),
+  or you connect through an [SSH tunnel](/components/extractors/database/#connecting-to-database).
+- Basic JSON. Queries, sorting and mappings are written in JSON.
 
 ## Set Up Database Credentials
 [Create a new configuration](/components/configurations/#create-a-configuration), click **Set Up Database Credentials**, and complete the form. 
@@ -49,6 +60,12 @@ The mapping must also be valid JSON.
 
 ***Tip:** While experimenting with the mapping section, use a combination of a limit (e.g., only 10 documents) and a query (e.g., 
 only documents with a specific ID) to avoid exporting the entire collection.*
+
+Save the export and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table named after the export's **Name**.
+In Raw mode it has the columns `id` and `data`; in Mapping mode the columns and any extra tables are the ones
+your mapping defines.
 
 ## Incremental Fetching
 

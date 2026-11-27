@@ -1,6 +1,6 @@
 ---
 title: Google Ad Manager 
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/marketing-sales/google-ad-manager'
 description: 'Export Google Ad Manager report data with a Google service account key, setting the report type, dimensions, metrics, ad unit view and date range.'
 redirect_from:
@@ -13,6 +13,15 @@ redirect_from:
 Setting it up takes two steps: link a Google service account to your Google Ad Manager account, then add one configuration row per report.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Google service account with a JSON key. You copy its client email, private key and token URI into the
+  configuration.
+- API access for that service account in Google Ad Manager. Add it to your network as described in Google's
+  [Ad Manager API authentication guide](https://developers.google.com/ad-manager/api/authentication).
+  <!-- VERIFY(nikita): which Ad Manager role the service account user needs to run reports. -->
+- Your network code, the number in the Ad Manager URL, for example `1234` in `https://admanager.google.com/1234#home`.
 
 ## Authorization Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Ad Manager** connector. 
@@ -46,4 +55,9 @@ you can set a start date: **Date from** and an end date: **Date to**. In both yo
 
 When all settings are filled in, click **Save** to save the configuration row parameters.
 
-![Screenshot - Customer configuration](/components/extractors/marketing-sales/google-ad-manager/row_config.png)
+![Screenshot - Report configuration](/components/extractors/marketing-sales/google-ad-manager/row_config.png)
+
+Click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table with the **Output name** you set, for
+example `historical_report`.

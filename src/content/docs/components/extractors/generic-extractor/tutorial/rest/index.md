@@ -1,6 +1,6 @@
 ---
 title: REST HTTP API Introduction
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'components/extractors/generic-extractor/tutorial/rest'
 description: 'Learn how a REST HTTP API request and response work before you configure Generic Extractor: URL, method, headers, body and status codes.'
 redirect_from:
@@ -21,6 +21,11 @@ Used by web browsers and other API clients, it defines how two parties (client a
 
 - Client creates an HTTP **request** and sends it to the server over the network.
 - Server processes the request, creates a **response**, and sends it to the client over the network.
+
+## Before you start
+
+Nothing to install: this part is reading only. The hands-on parts of the tutorial start with
+[Basic configuration](/components/extractors/generic-extractor/tutorial/basic/).
 
 ## HTTP request
 An HTTP request is composed of:
@@ -130,6 +135,9 @@ should not cause any modifications of data.
 arbitrary order and must yield the same results. It is not correct for an API to have endpoints such as 
 `setFilter` and`getFilteredResult` because they imply that any state (a filter) is retained between those API 
 endpoints.
+
+**Check:** you can name the four parts of an HTTP request (URL, method, headers, body) and tell from a
+response's status code whether the request worked.
 
 ## Summary
 The above describes the basic concepts of an API, HTTP protocol and HTTP REST API. When you 

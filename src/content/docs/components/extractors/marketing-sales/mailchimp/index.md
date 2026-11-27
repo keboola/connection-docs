@@ -1,6 +1,6 @@
 ---
 title: Mailchimp
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/marketing-sales/mailchimp'
 description: 'Extract lists and members, campaigns, automations and reports from Mailchimp with your data center, username and API key, choosing a configuration template.'
 redirect_from:
@@ -15,10 +15,14 @@ importing data such as list and members, campaigns, automations, reports, report
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-Before you start, have a working [Mailchimp](https://login.mailchimp.com/signup/) account filled with [data](https://us13.admin.mailchimp.com/campaigns/)
-and an API key.
+## Before you start
 
-## Get API Key
+- A working [Mailchimp](https://login.mailchimp.com/signup/) account filled with
+  [data](https://us13.admin.mailchimp.com/campaigns/).
+- Your account username, its data center and an API key. The data center is the last part of the key,
+  `us13` in the example below.
+
+### Get API key
 To gain access to the Mailchimp API, log in to [Mailchimp](https://mailchimp.com/), go to your Account detail, and under Extras find the option to [generate your API Key](https://mailchimp.com/help/about-api-keys/).
 It will look like this: c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13.
 
@@ -34,7 +38,7 @@ To configure what data you want to extract, select the **configuration template*
 
 Available templates:
 
-- List and members -- get lists and their members.
+- Lists and members -- get lists and their members.
 - Campaigns -- get campaign and their feedback.
 - Automations -- get automations and the associated emails.
 - Reports -- get reports and domain performance.
@@ -42,7 +46,10 @@ Available templates:
 - List member activity -- get lists, their members and activity of each individual member. This template may take some hours to complete.
 - All campaigns (all status) -- get campaigns (draft, sent, scheduled, paused).
 
-**Save** the configuration before you run the extraction.
+**Save** the configuration before you run the extraction, then click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has the tables of the template you picked, for example
+`lists` and `members` for **Lists and members**.
 
 You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
 

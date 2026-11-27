@@ -1,6 +1,6 @@
 ---
 title: Geocoding Augmentation
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/other/geocoding-augmentation'
 description: 'Add latitude and longitude to place names or addresses, or find the closest place for coordinates, using Google Maps, OpenStreetMap or another provider.'
 redirect_from:
@@ -12,6 +12,13 @@ redirect_from:
 This data source connector provides detailed data for locations specified by their names, addresses, or coordinates.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A table in Storage with the input: one column with location names or addresses, or two columns with latitude
+  and longitude. The sample files below work for a first test.
+- An API key for the provider, unless you use `openstreetmap`, which needs none. Google Maps for Business
+  needs a client ID and a private key instead. See [Providers](#providers).
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Geocoding Augmentation** connector.
@@ -43,6 +50,11 @@ and select the **reverse** method in the configuration.
 (The names of the input and CSV files are arbitrary, so are the names of the columns.) 
 
 ![Screenshot - Add locations to coordinates](/components/extractors/other/geocoding-augmentation/geocoding-2.png)
+
+Save the configuration and click **Run Component**.
+
+**Check:** the job ends with status **Success** and the table in your output mapping has the results: latitude and
+longitude for the **geocode** method, details of the closest place for the **reverse** method.
 
 ## Providers
 In the component configuration, specify different providers of the location data. Usage limits and the result data may differ between various providers. 

@@ -1,6 +1,6 @@
 ---
 title: TikTok Ads
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/marketing-sales/tiktok-ads'
 description: 'Extract TikTok ad performance reports through the Marketing Reports API, choosing advertiser IDs, report type, data level, dimensions, metrics and date range.'
 ---
@@ -12,6 +12,14 @@ reports on performance of ads. Depending on the data you need to extract,
 there are [four report types](https://ads.tiktok.com/marketing_api/docs?id=1738864835805186): basic reports, audience reports, playable material reports, and catalog reports.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A TikTok For Business login with access to the Ad Account you want to extract. You sign in with it when you
+  authorize the configuration.
+  <!-- VERIFY(nikita): the minimum ad account role (Analyst?) and the Marketing API permission scopes the Keboola TikTok app requests. -->
+- The dimensions and metrics you want, from the documentation of the
+  [report type](https://ads.tiktok.com/marketing_api/docs?id=1738864835805186) you plan to use.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **TikTok Ads** connector.
@@ -45,4 +53,6 @@ Finally, fill in the destination settings in the Destination section below the R
 If incremental load is not selected, full load will be used. It will overwrite the table every run, if such a table already exists in storage.
 
 Once all the settings are configured, click **Save** and run the configuration.
+
+**Check:** the job ends with status **Success** and Storage has a table with the **Storage Table Name** you set.
 

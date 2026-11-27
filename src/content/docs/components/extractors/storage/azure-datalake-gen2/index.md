@@ -1,6 +1,6 @@
 ---
 title: Azure Datalake Gen 2
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/storage/azure-datalake-gen2'
 description: 'Load CSV files from an Azure Datalake Gen2 file system into Keboola tables with an account name and key, and set wildcards and CSV options.'
 redirect_from:
@@ -17,10 +17,15 @@ you save them to Keboola Storage.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
+## Before you start
+
+- The storage account name and an account key of the Azure storage account, and the name of the file system
+  (container) with your CSV files.
+- If the storage account's firewall limits access, allow
+  [Keboola's IP addresses](/components/ip-addresses/).
+
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Azure Datalake Gen 2** connector.
-
-In order to access the files in Azure Datalake Gen2, you need to prepare an account name, account key, and file system.
 
 ### Authentication 
 Fill in the Account name, key and file system you wish to retrieve data from.
@@ -78,6 +83,11 @@ the [Storage bucket](/storage/buckets/) where the table will be saved cannot be 
 incremental load depends on other settings (mainly **Primary Key**).
 - **Primary Key** can be used to specify the primary key in Storage; it can be used with **Incremental Load**
 and **New Files Only** to create a configuration that incrementally loads all new files into a table in Storage.
+
+Save the table and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table with the **Storage Table Name** you set, with
+the rows of the matched files.
 
 ## Processing Settings
 

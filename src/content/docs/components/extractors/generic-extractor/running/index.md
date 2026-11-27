@@ -1,6 +1,6 @@
 ---
 title: Running Generic Extractor
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'components/extractors/generic-extractor/running'
 description: 'Turn on debug mode to see every request Generic Extractor sends, run it locally in Docker with a config.json, and run the documented examples.'
 redirect_from:
@@ -15,6 +15,15 @@ and all you need to do is provide its configuration JSON. No other settings are 
 
 Because creating the configuration JSON can be a non-trivial task, there are some things which can help
 you in developing the configuration.
+
+## Before you start
+
+- A Generic Extractor configuration you are working on.
+- To run it locally, [Docker](https://docs.docker.com/get-docker/), with Docker Compose to build the image
+  from source, and Git to clone the [Generic Extractor repository](https://github.com/keboola/generic-extractor).
+  <!-- VERIFY(nikita): 147946154733.dkr.ecr.us-east-1.amazonaws.com is a private Amazon ECR registry, and ECR pulls need an auth token from AWS credentials, so the docker run commands below likely fail for readers. Confirm, then point readers to building from source. -->
+- A local run can't decrypt values encrypted in Keboola, so have the plain values of any
+  `#` secrets at hand.
 
 ## Debug mode
 Debug mode can be turned on by setting `"debug": true` in the `config` section of the configuration, e.g.:
@@ -155,6 +164,9 @@ To run the examples:
 - Run a single example of your choice, e.g.: `docker compose run -e "KBC_EXAMPLE_NAME=001-simple-job" extractor`.
 - The output will be available in `examples/001-simple-job/out/tables`.
 - Or run all examples by executing `./run-samples.sh`.
+
+**Check:** the run ends with `INFO: Extractor finished successfully.`, and the example's `out/tables` directory
+holds its CSV files.
 
 If you want to create your own example, follow the instructions in the [mock server repository](https://github.com/keboola/ex-generic-mock-server/blob/master/README.md#creating-examples).
 
