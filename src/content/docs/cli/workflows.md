@@ -1,6 +1,6 @@
 ---
 title: kbagent how-to guides
-lastUpdated: 2026-11-23
+lastUpdated: 2026-11-27
 slug: 'cli/workflows'
 sidebar:
   label: How-to Guides
@@ -12,6 +12,19 @@ description: 'Task recipes for the kbagent CLI — onboard an organization, work
 Practical recipes for [kbagent](/cli/). Each is self-contained: a goal, the steps, and what you get. For the ideas behind them see [How kbagent works](/cli/concepts/); for every command and flag see the [reference](/cli/commands/).
 
 <!-- How-to-type page. Source: keboola/cli docs/guide.md + docs/use-cases.md. Flags flagged where not run live. -->
+
+## Before you start
+
+- kbagent, installed and connected to your projects: [Get started with kbagent](/cli/getting-started/).
+- For onboarding a whole organization, a Manage API token of an organization admin (`org setup --org-id` requires one).
+- The admin role in the project for the recipes that create branches or workspaces. A project you connected with a
+  token needs that admin's master token; a browser sign-in (`kbagent auth login`) works as it is. Creating tokens
+  always needs a master [token](/management/project/tokens/).
+  <!-- Checked 2026-11-27 in keboola/cli docs/auth.md, "What works on a session project": branch and workspace work over bearer auth. -->
+- Branches 2.0 (the `branches-merge-requests` feature) in the project, for merge requests.
+- Git, for the GitOps recipes and for linking a git branch to a dev branch.
+- For scheduling an AI agent, the agent's own CLI (`claude`, `codex` or `gemini`) on the machine that runs `kbagent serve` or `kbagent agent run`.
+  <!-- Checked 2026-11-27 in keboola/cli: server/agent_runner.py starts claude, codex or gemini as local subprocesses, and services/agent_service.py uses the same runner for `agent run`. -->
 
 ## Onboard a whole organization
 
@@ -43,7 +56,7 @@ kbagent sync branch-link --project analytics
 
 With no `--branch-id`/`--branch-name`, `branch-link` maps your **current git branch** to a Keboola branch of the same name, creating it if it doesn't exist — check out a git branch and you're on the matching dev branch.
 
-**Result:** your edits live on the branch; production is untouched until you merge. Merge requests need a project with Branches 2.0 (the `branches-merge-requests` feature); without it, `merge-request` commands fail with `FEATURE_NOT_ENABLED` and you merge in the Keboola UI. Once the merge request has the approvals the project requires, `kbagent merge-request merge --project analytics --branch <branch-id> --yes` merges the whole branch into production, deletes it, and resets the active branch to production.
+**Result:** your edits live on the branch; production is untouched until you merge. Without Branches 2.0, `merge-request` commands fail with `FEATURE_NOT_ENABLED` and you merge in the Keboola UI. Once the merge request has the approvals the project requires, `kbagent merge-request merge --project analytics --branch <branch-id> --yes` merges the whole branch into production, deletes it, and resets the active branch to production.
 
 ## Version your configs with GitOps
 
@@ -152,13 +165,15 @@ kbagent encrypt values --project prod \
 **Goal:** allow reads and proposals but block anything destructive.
 
 ```bash
-kbagent --deny-writes config list         # reads only, this session
+kbagent --deny-writes config list         # reads only, this command only
 kbagent init --from-global --read-only    # a read-only local workspace
 ```
 
 `init --from-global` copies project tokens, not a browser sign-in. If you signed in with `kbagent auth login`, the local workspace has no session and its reads fail; use the session flags such as `--deny-writes` instead.
 
 See [Use with AI agents](/cli/for-agents/) for the full sandboxing story.
+
+**Check:** a write command run with `--deny-writes`, or any write command in a workspace set up with `init --read-only`, is refused with exit code 6 (`PERMISSION_DENIED` in `--json` output). `--deny-writes` lasts for one command, so a later command without it is not blocked.
 
 ---
 

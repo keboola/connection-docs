@@ -1,6 +1,6 @@
 ---
 title: Publish Component
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'extend/publish'
 description: 'Request publication of a component in the Developer Portal and meet the review rules for its name, descriptions, icon, configuration schema and error handling.'
 redirect_from:
@@ -25,6 +25,16 @@ navigate you through creating an account in the [Developer Portal](https://compo
 
 <!-- How-to-type page. Source: developers.keboola.com port; classified 2026-10-13. -->
 
+## Before you start
+
+- A component in the [Developer Portal](https://components.keboola.com/), deployed through the
+  [component quick start](/extend/component/tutorial/) and tested in a Keboola project.
+- Membership in the component's vendor, so you can request approval from its component list.
+- An icon and these fields filled in on the component: name, type, repository, short description, long
+  description, license URL and documentation URL. The approval dialog below asks for them.
+  <!-- VERIFY(Nikita): the list comes from the approval dialog screenshot (approve.png, 2017). Check the current Developer Portal dialog for the required fields. -->
+- Every rule in the [checklist](/extend/publish/checklist/) met.
+
 ## Publishing Component
 A non-published component can be used without limitations, but it is not offered in the Keboola UI. It can only be used via
 the [API](https://api.keboola.com/?service=storage#tag--Component-Configurations) or by directly visiting a link with the 
@@ -43,6 +53,9 @@ the [Developer Portal](https://components.keboola.com/). We will review your com
 with required changes.
 
 ![Approval screenshot](/extend/publish/approve.png)
+
+**Check:** once Keboola approves the request, the component is listed in the
+[public component list](https://components.keboola.com/components) and, within 5 minutes, offered in the Keboola UI.
 
 ## Component Review
 The goal of the component review is to maintain reasonable end-user experience and component reliability. Before
@@ -122,10 +135,6 @@ the **Component Limits**.
 - Set up [continuous deployment](/extend/component/deployment/) so that you can keep the component up to date.
 - Use [semantic versioning](http://semver.org/) to mark and deploy versions of your component. Using other tags (e.g.,
 `latest`, `master`) in production is not allowed.
-
-### Checklist
-
-Before requesting to publish a component, please check all rules using [this checklist](/extend/publish/checklist).
 
 ---
 
