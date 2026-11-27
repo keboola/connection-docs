@@ -15,8 +15,10 @@ This data destination connector sends data to a [Microsoft SQL Server](https://w
 
 ## Before you start
 
-- A SQL Server database and a SQL Server login for the connector, with a user in that database and a schema it can
-  write to. The user needs `EXECUTE`, `CREATE TABLE`, and `ALTER`, `SELECT`, `INSERT`, `UPDATE` and `DELETE` on the schema; the SQL
+- A SQL Server database and a SQL Server login for the connector, with a user in that database whose default schema
+  is the schema to write to (`WITH DEFAULT_SCHEMA`, as in the SQL below). The credentials form has no schema field, so
+  table names without a schema land in the user's default schema; to write elsewhere, give the table name as
+  `schema.table`. The user needs `EXECUTE`, `CREATE TABLE`, and `ALTER`, `SELECT`, `INSERT`, `UPDATE` and `DELETE` on the schema; the SQL
   below creates such a login.
 - On Azure SQL, SQL authentication must be enabled, because the connector logs in with a SQL login and password.
 - Network access from Keboola to the database: allow the [Keboola IP addresses](/components/ip-addresses/) of your stack

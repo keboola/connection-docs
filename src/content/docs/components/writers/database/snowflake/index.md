@@ -22,13 +22,18 @@ Decide which of the [two modes](#configuration) you need. For your **own Snowfla
 
 - A Snowflake account, and a database, schema and [warehouse](https://docs.snowflake.com/en/user-guide/warehouses)
   for the data.
-- A user for the connector whose role has `USAGE` on the database and the warehouse and all privileges on the schema.
-  The SQL below shows these grants.
-- A [key pair](https://docs.snowflake.com/en/user-guide/key-pair-auth) for that user. Snowflake now blocks password
-  sign-in for service users and rejects `TYPE = LEGACY_SERVICE`
-  ([Snowflake MFA rollout](https://docs.snowflake.com/en/user-guide/security-mfa-rollout)), so the `CREATE USER`
-  statement in the sample below fails as written: create the user with `TYPE = SERVICE` and `RSA_PUBLIC_KEY` instead.
-  <!-- VERIFY(nikita): update the sample SQL to a TYPE = SERVICE user with RSA_PUBLIC_KEY, and the "private key/password" field list under Own Snowflake Database, after checking with the component owner whether the connector still offers password login (keboola/db-writer-snowflake SnowflakeDbNode accepts #password; the Developer Portal schema lists only #privateKey). -->
+- A user for the connector whose default role has `USAGE` on the database and the warehouse and all privileges on the
+  schema. The connector runs as the user's default role unless the configuration names another one. The SQL below
+  creates such a role and user.
+- A [key pair](https://docs.snowflake.com/en/user-guide/key-pair-auth) for that user: the SQL below registers the
+  public key, and the connector gets the private key. The private key must be unencrypted (generated with
+  `-nocrypt`): the connector has no passphrase setting. Snowflake blocks password sign-in for service users and no
+  longer accepts `TYPE = LEGACY_SERVICE` ([Snowflake MFA rollout](https://docs.snowflake.com/en/user-guide/security-mfa-rollout)).
+- The account parameters
+  [`REQUIRE_STORAGE_INTEGRATION_FOR_STAGE_CREATION`](https://docs.snowflake.com/en/sql-reference/parameters#require-storage-integration-for-stage-creation)
+  and [`REQUIRE_STORAGE_INTEGRATION_FOR_STAGE_OPERATION`](https://docs.snowflake.com/en/sql-reference/parameters#require-storage-integration-for-stage-operation)
+  left at their default, `FALSE`. On every run the connector creates an external stage with temporary credentials for
+  Keboola's staging storage and loads from it, which Snowflake refuses when either parameter is `TRUE`.
 - If your account restricts access with [network policies](https://docs.snowflake.com/en/user-guide/network-policies),
   allow the [Keboola IP addresses](/components/ip-addresses/) of your stack.
 
@@ -41,11 +46,13 @@ GRANT USAGE ON DATABASE WRITER_SAMPLE TO ROLE WRITER_SAMPLE;
 CREATE SCHEMA WRITER_SAMPLE.WRITER_SAMPLE;
 GRANT ALL PRIVILEGES ON SCHEMA WRITER_SAMPLE.WRITER_SAMPLE TO ROLE WRITER_SAMPLE;
 GRANT USAGE ON WAREHOUSE dev TO ROLE WRITER_SAMPLE;
-CREATE USER WRITER_SAMPLE PASSWORD = 'WRITER_SAMPLE'
+-- RSA_PUBLIC_KEY: your public key without the -----BEGIN/END PUBLIC KEY----- lines, joined into one line
+CREATE USER WRITER_SAMPLE
+			TYPE = SERVICE
+			RSA_PUBLIC_KEY = 'MIIBIjANBgkqh...'
 			DEFAULT_ROLE = WRITER_SAMPLE
 			DEFAULT_WAREHOUSE = dev
-			DEFAULT_NAMESPACE = WRITER_SAMPLE.WRITER_SAMPLE
-			TYPE = LEGACY_SERVICE;
+			DEFAULT_NAMESPACE = WRITER_SAMPLE.WRITER_SAMPLE;
 GRANT ROLE WRITER_SAMPLE TO USER WRITER_SAMPLE;
 ```
 
@@ -65,7 +72,8 @@ There are two modes of operation of the connector:
 - **Keboola Snowflake database** — In this mode, the connector will create a new schema in project's database for you and **give you credentials** to it. This option is available **only for projects using own Snowflake backend** ([KBDB](/storage/#keboola-brings-database-kbdb)/[BYODB](/storage/#bring-your-own-database-byodb)).
 
 ### Own Snowflake Database
-You need to provide a *host name* (account name), *user name*, *private key/password*, *database name*, *schema*, and *[warehouse](https://docs.snowflake.com/en/user-guide/warehouses)*.
+You need to provide a *host name* (account name), *user name*, *private key*, *database name*, *schema*, and *[warehouse](https://docs.snowflake.com/en/user-guide/warehouses)*.
+<!-- VERIFY(Nikita): check whether the credentials form still offers a password next to the private key. The connector code accepts both (#password, #privateKey), but Snowflake blocks password sign-in for service users, so the page names only the key. -->
 
 ![Screenshot - Own Credentials](/components/writers/database/snowflake/snowflake-2.png)
 
@@ -163,6 +171,7 @@ To share data between your Keboola project and Tableau, choose the **Keboola Sno
 The connector will create a dedicated database for you and give you credentials. Run the connector and when it is finished, connect the Tableau data sources. Follow the official 
 [instructions for Tableau Desktop](https://help.tableau.com/current/pro/desktop/en-us/examples_snowflake.htm)
 or for [Tableau Online](https://help.tableau.com/current/online/en-us/to_connect_live_sql.htm). Use the username/password authentication method.
+<!-- VERIFY(Nikita): check whether a Keboola-provisioned Snowflake database still hands out password credentials, now that Snowflake blocks password sign-in for service users; if it hands out a key, change this sentence. -->
 
 
 ### Connect to Retool

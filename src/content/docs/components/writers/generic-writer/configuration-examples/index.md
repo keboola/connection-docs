@@ -18,9 +18,12 @@ These sample [Generic Writer](/components/writers/generic-writer/) configuration
   to paste the JSON into.
 - One Storage table in its input mapping, with the columns the example's placeholders and mapping use, for example
   `id` for the iterations example, `user_id` for Customer.io, and `channel` and `text` for Slack.
-- Credentials for the target API, with the secrets in encrypted `#` parameters: a Bloomreach Engagement token and your
-  project ID for the batch events, a Customer.io site ID and API key for the Track API, or a Slack app token with the
-  [`chat:write`](https://docs.slack.dev/reference/methods/chat.postMessage) scope.
+- Credentials for the target API, with the secrets in encrypted `#` parameters:
+    - Bloomreach Engagement: an API key ID and secret joined as `key_id:secret` (the example base64-encodes it for
+      Basic authentication), and your project token for the endpoint path.
+    - Customer.io: a site ID and API key for the Track API.
+    - Slack: a bot token (`xoxb-`) with the [`chat:write`](https://docs.slack.dev/reference/methods/chat.postMessage)
+      scope, and the app added to each target channel (or the `chat:write.public` scope for public channels).
 - If the target API accepts calls only from known addresses, the [Keboola IP addresses](/components/ip-addresses/)
   of your stack on its allow list.
 

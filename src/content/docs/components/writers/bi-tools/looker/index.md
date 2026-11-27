@@ -21,7 +21,9 @@ The connector currently uses Snowflake as its backend.
 - Looker API credentials: the `Client ID` and `Client secret` of a Looker user, which an admin creates in Looker
   administration ([Looker documentation](https://cloud.google.com/looker/docs/api-auth)). The connector creates a
   Looker connection with them, so the user needs a role that can manage connections.
-  <!-- VERIFY(nikita): check which Looker permission the API user needs for the connector to create the connection (for example manage_connections or the Admin role). -->
+  <!-- VERIFY(Nikita): check which Looker permission the API user needs for the connector to create the connection (for example manage_connections or the Admin role). -->
+- If your Looker instance accepts API calls only from known addresses, allow the
+  [Keboola IP addresses](/components/ip-addresses/) of your stack.
 - A Snowflake database for the data: a Keboola-generated workspace or your own Snowflake database (see below).
 - Run the connector in the production branch: its jobs are blocked in [development branches](/components/branches/).
 

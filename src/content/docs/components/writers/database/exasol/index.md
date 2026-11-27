@@ -21,8 +21,9 @@ This data destination connector sends data to a [Exasol](https://www.exasol.com/
     - on Exasol SaaS, a user name and a [personal access token](https://docs.exasol.com/saas/administration/access_mngt/access_token.htm);
     - on a self-hosted Exasol, a user name and password.
 - The schema to write to. It must exist; the connector creates tables in it but not the schema itself.
-- A user that can create, rename, drop and merge into tables in that schema and import data into them.
-  <!-- VERIFY(nikita): kds-team.wr-exasol runs CREATE TABLE, RENAME TABLE, DROP TABLE, MERGE INTO and IMPORT (pyexasol import_from_file); check which Exasol system and object privileges that takes, in particular whether IMPORT needs the IMPORT system privilege. -->
+- A user that owns the schema or can create, rename, drop and merge into tables in it, because the connector loads
+  through staging tables: a full load renames and drops them, an incremental load merges from one and drops it. The user also needs the `IMPORT` and `INSERT` privileges that the
+  [`IMPORT` statement](https://docs.exasol.com/db/latest/sql/import.htm) requires.
 - Network access from Keboola to the database. On Exasol SaaS, add the [Keboola IP addresses](/components/ip-addresses/)
   of your stack to the allow list on the **Security** page of the web console
   ([Exasol docs](https://docs.exasol.com/saas/connect_exasol.htm)); on a self-hosted Exasol, allow them in your firewall.

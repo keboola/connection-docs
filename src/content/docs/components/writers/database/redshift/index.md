@@ -19,9 +19,14 @@ data to [Tableau](https://www.tableau.com/) or [PowerBI](https://powerbi.microso
 
 ## Before you start
 
-Decide which of the [two modes](#configuration) you need. For your **own Redshift database**:
+Both modes need a Keboola project on an AWS stack: the connector loads every table with a Redshift `COPY` from the
+S3 staging files Keboola provides. Decide which of the [two modes](#configuration) you need. For your **own Redshift database**:
 
 - A Redshift cluster and its host name, database and a schema to write to.
+- A route from the cluster to Amazon S3 for `COPY`. With
+  [enhanced VPC routing](https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html) turned on, that
+  takes a VPC endpoint, which works only for S3 buckets in the cluster's region, or a NAT or internet gateway for
+  buckets in another region.
 - A user for the connector that owns the schema. The SQL below creates the schema, the user and a group.
 - Network access from Keboola to the cluster: allow the [Keboola IP addresses](/components/ip-addresses/) of your stack
   in the cluster's [security group](https://docs.aws.amazon.com/redshift/latest/mgmt/rs-security-group-public-private.html),

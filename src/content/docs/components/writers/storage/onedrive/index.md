@@ -27,7 +27,9 @@ The contents of the sheet can be overwritten or new lines can be added at the en
 
 - A Microsoft account with OneDrive that you can [authorize](/components/authorization/): a personal account, or a
   work or school (Office 365) account. To write to a SharePoint site, the account needs access to that site.
-  <!-- VERIFY(nikita): the README of keboola.wr-onedrive lists the scopes offline_access, User.Read, Files.ReadWrite.All and Sites.ReadWrite.All for its development app; check that the production authorization asks for the same, and whether a work or school tenant can require an admin to approve the app first. -->
+  The connector asks for the Microsoft Graph permissions `offline_access`, `User.Read`, `Files.ReadWrite.All` and
+  `Sites.ReadWrite.All`.
+  <!-- VERIFY(Nikita): check whether a work or school tenant can require an admin to approve these permissions before the authorization goes through. -->
 - An Excel workbook (XLSX) to write to, or a path where the connector should [create one](#create-a-new-workbook).
 
 ## Configuration

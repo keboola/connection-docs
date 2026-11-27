@@ -34,5 +34,7 @@ You may specify Storage [tables](/storage/tables/) or [files](/storage/files/) t
 
 The written files will be available in the **Apps/Keboola Connection Writer V2** folder in Dropbox. You can optionally specify 
 an additional subfolder in this folder in the `Destination folder` setting. In the above screenshot, the files would be saved 
-in the folder `Apps/Keboola Connection Writer V2/samples/monthly`. The configuration can write as many tables and files as you wish.**Check:** click **Run Component**. The job ends with **Success**, and the files appear in Dropbox in
+in the folder `Apps/Keboola Connection Writer V2/samples/monthly`. The configuration can write as many tables and files as you wish.
+
+**Check:** click **Run Component**. The job ends with **Success**, and the files appear in Dropbox in
 **Apps/Keboola Connection Writer V2**, or in the destination folder you set inside it.

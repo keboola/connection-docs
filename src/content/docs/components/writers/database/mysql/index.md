@@ -20,6 +20,10 @@ This data destination connector sends data to a [MySQL](https://www.mysql.com/pr
 - A user for the connector with `CREATE`, `DROP`, `CREATE TEMPORARY TABLES`, `SELECT`, `INSERT` and `UPDATE` on that
   database. The SQL below creates the database and the user. Without `ALTER`, the connector can't write Storage
   descriptions as table and column comments; the job logs a warning and still succeeds.
+- The server variable `local_infile` turned on, because the connector loads data with `LOAD DATA LOCAL INFILE` and
+  stops with `local_infile is disabled on server` otherwise. It is
+  [off by default on MySQL 8](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_local_infile)
+  (turn it on with `SET GLOBAL local_infile = 1` or your managed service's parameter) and on by default on MariaDB.
 - Network access from Keboola to the database: allow the [Keboola IP addresses](/components/ip-addresses/) of your stack
   in your firewall, or connect through an [SSH tunnel](/components/extractors/database/#connecting-to-database).
 

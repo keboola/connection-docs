@@ -31,6 +31,8 @@ Getting Started walks through the pattern on a simpler destination first. You ca
 - To create and download TDE files, you need nothing outside Keboola.
 - To upload them, one of: a Tableau Server account (you enter its credentials in the connector), or a Dropbox or
   Google Drive account you can [authorize](/components/authorization/).
+- If your Tableau Server accepts connections only from known addresses, allow the
+  [Keboola IP addresses](/components/ip-addresses/) of your stack.
 - Run the connector in the production branch: its jobs are blocked in [development branches](/components/branches/).
 
 ## Configuration
@@ -92,8 +94,8 @@ For writing to Tableau Server, you need to enter the credentials using the **Set
 To activate the table upload, click the *Enable instant upload* link. Only when **Instant Upload** is enabled, the
 TDE files will be written to the selected destination.
 
+![Screenshot - Authorized](/components/writers/bi-tools/tableau/tableau-9.png)
+
 **Check:** click **Run Component**. The job ends with **Success**, each table's TDE file name turns into a download
 link, and the files are in **Storage** → **Files** with the tags `tde` and `table-export`. With **Instant Upload**
 on, the files also appear in the selected destination.
-
-![Screenshot - Authorized](/components/writers/bi-tools/tableau/tableau-9.png)

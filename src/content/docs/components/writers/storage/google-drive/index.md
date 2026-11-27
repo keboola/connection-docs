@@ -20,7 +20,7 @@ is not bound by [Google Sheets limits](https://spreadsheetpoint.com/google-sheet
 
 - A Google account you can [authorize](/components/authorization/), with edit access to the Google Drive folder you
   want to write to. The authorization grants the connector access to that account's Google Drive.
-  <!-- VERIFY(nikita): the README of keboola.wr-google-drive shows the OAuth scopes drive, userinfo.profile, userinfo.email and spreadsheets.readonly in its development setup; check that the production authorization asks for the same and name the access here. -->
+  <!-- VERIFY(Nikita): the README of keboola.wr-google-drive shows the OAuth scopes drive, userinfo.profile, userinfo.email and spreadsheets.readonly in its development setup; check that the production authorization asks for the same and name the access here. -->
 - For a file converted to Google Sheets, a table within the [Google Sheets limits](https://spreadsheetpoint.com/google-sheets-limitations/).
 
 ## Configuration

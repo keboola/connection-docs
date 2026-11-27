@@ -20,7 +20,7 @@ on the size of the document. If you are getting close to them, use the [Google D
 
 - A Google account you can [authorize](/components/authorization/). To write into an existing spreadsheet, the
   account needs edit access to it.
-  <!-- VERIFY(nikita): the README of keboola.wr-google-sheets shows the OAuth scopes drive, userinfo.profile, userinfo.email and spreadsheets.readonly in its development setup; check that the production authorization asks for the same and name the access here. -->
+  <!-- VERIFY(Nikita): the README of keboola.wr-google-sheets shows the OAuth scopes drive, userinfo.profile, userinfo.email and spreadsheets.readonly in its development setup; check that the production authorization asks for the same and name the access here. -->
 - A table that fits within the [Google Sheets limits](https://spreadsheetpoint.com/google-sheets-limitations/).
 
 ## Configuration

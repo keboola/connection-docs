@@ -18,9 +18,9 @@ This data destination connector allows you to publish events to the [Azure Event
 - An Event Hubs namespace with the event hub to publish to. The connector takes the name of the event hub, not of
   the namespace.
 - A [connection string](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-get-connection-string) from a
-  shared access policy with the **Send** right
-  ([Azure docs](https://learn.microsoft.com/en-us/azure/event-hubs/authorize-access-shared-access-signature)).
-  <!-- VERIFY(nikita): check with a live run that a connection string from a Send-only policy is enough for keboola.wr-azure-event-hub. -->
+  shared access policy ([Azure docs](https://learn.microsoft.com/en-us/azure/event-hubs/authorize-access-shared-access-signature)).
+  The connector reads the event hub's properties and then sends the events.
+  <!-- VERIFY(Nikita): check with a live run which rights the policy needs. Writer.js calls getEventHubProperties before sending, so a Send-only policy may not be enough; name the minimum rights here once confirmed. -->
 - If the namespace accepts traffic only from selected networks, allow the [Keboola IP addresses](/components/ip-addresses/)
   of your stack in its [IP firewall](https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-ip-filtering).
 - A Storage table with the data to send: one message per row.

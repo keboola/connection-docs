@@ -17,8 +17,8 @@ database and is **only available on the Azure [Keboola stacks](/overview/#stacks
 ## Before you start
 
 - A Keboola project on an Azure stack.
-- An Azure Synapse database and a schema in it to write to.
-  <!-- VERIFY(nikita): check whether the connector works only with a dedicated SQL pool (a serverless pool can't hold regular tables) and say so here. -->
+- An Azure Synapse dedicated SQL pool and a schema in it to write to. A serverless pool doesn't work: the connector
+  creates regular tables and loads them with `COPY INTO`.
 - A login and a database user for the connector with `EXECUTE`, `CREATE TABLE`, `ADMINISTER DATABASE BULK OPERATIONS`,
   and `ALTER`, `SELECT`, `INSERT`, `UPDATE` and `DELETE` on the schema. The steps below create them.
 - Network access from Keboola to the database: allow the [Keboola IP addresses](/components/ip-addresses/) of your stack

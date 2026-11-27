@@ -24,8 +24,8 @@ the connector.
 
 - A GoodData user (login and password). The connector logs in to GoodData as this user.
 - A GoodData project to write to, preferably an empty one (see [Project Setup](#project-setup)). Because the connector
-  changes the project's LDM, the user needs the admin role in it.
-  <!-- VERIFY(nikita): the README of keboola.gooddata-writer shows only `user.login`, `user.#password` and `project.pid`; check which GoodData role the user needs, whether the project setup dialog can create a new project (and whether that needs a GoodData authorization token), and whether the connector works with GoodData Cloud or only the GoodData Platform. -->
+  changes the project's LDM, the user needs a role in the project that allows changing the model.
+  <!-- VERIFY(Nikita): the README of keboola.gooddata-writer shows only `user.login`, `user.#password` and `project.pid`; check which GoodData role the user needs, whether the project setup dialog can create a new project (and whether that needs a GoodData authorization token), and whether the connector works with GoodData Cloud or only the GoodData Platform. -->
 - A design of your logical data model: which columns are facts, attributes, connection points, references and dates,
   and which date dimensions you need.
 

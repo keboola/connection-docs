@@ -70,9 +70,6 @@ Click **Add Table Input** to add one table to the [Input Mapping](/transformatio
 
 ![Screenshot - Input mapping](/components/writers/other/yourpass/inputmapping.png)
 
-**Check:** click **Run Component**. The job ends with **Success**, and in YourPass the passes from the table are
-created, updated or deleted, depending on the action.
-
 ### Input file properties
 
 Each action (create/delete/update) on the pass requires different input data in a specific format, with headers of a specific name.
@@ -140,3 +137,9 @@ Will be
 }
 ```
 
+### Run and check the result
+
+**Check:** click **Run Component**. A job that ends with **Success** can still contain rejected passes, so look at the
+tables the connector writes to the configuration's default bucket in Storage. `successful_Pass_<Action>` (for example
+`successful_Pass_Create`) lists the passes YourPass accepted. `unsuccessful_Pass_<Action>` lists the passes YourPass
+rejected, and the job log has a warning for each. Each table appears only when it has at least one pass.
