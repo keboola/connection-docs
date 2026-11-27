@@ -1,6 +1,6 @@
 ---
 title: Google Drive
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/storage/google-drive'
 description: 'Write Keboola tables to Google Drive as CSV or Google Sheets files, updating one file or creating a new file with each run.'
 redirect_from:
@@ -15,6 +15,13 @@ to an existing sheet, use the [Google Sheets data destination connector](/compon
 is not bound by [Google Sheets limits](https://spreadsheetpoint.com/google-sheets-limitations/).
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Google account you can [authorize](/components/authorization/), with edit access to the Google Drive folder you
+  want to write to. The authorization grants the connector access to that account's Google Drive.
+  <!-- VERIFY(nikita): the README of keboola.wr-google-drive shows the OAuth scopes drive, userinfo.profile, userinfo.email and spreadsheets.readonly in its development setup; check that the production authorization asks for the same and name the access here. -->
+- For a file converted to Google Sheets, a table within the [Google Sheets limits](https://spreadsheetpoint.com/google-sheets-limitations/).
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Drive** data destination connector.
@@ -41,3 +48,6 @@ If these are exceeded, the table load will fail.
 
 When done, click the **Save** button to finish the table configuration. 
 Configured tables are stored as [configuration rows](/components/#configuration-rows).
+
+**Check:** click **Run Component**. The job ends with **Success**, and the file appears in the Google Drive folder you
+selected: a CSV file, or a Google Sheets file if you turned on the conversion.

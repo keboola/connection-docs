@@ -1,6 +1,6 @@
 ---
 title: YourPass
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/other/yourpass'
 description: 'Create, update or delete YourPass mobile wallet passes from a Keboola table through the YourPass API, using your account credentials and the required columns.'
 redirect_from:
@@ -15,6 +15,15 @@ The YourPass data destination connector uses the [YourPass API](https://doc.your
 create/delete/update [YourPass](https://www.yourpass.eu/) passes.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A YourPass account with API access: your user name (email), password and client ID, plus the client secret if your
+  account has one.
+- A decision whether to write to the YourPass sandbox or to production.
+- For creating and updating passes, the pass template in YourPass whose ID goes into the `templateId` column. For
+  updates and deletes, also the IDs of the existing passes.
+- A Storage table with the columns the action needs; see [Input file properties](#input-file-properties).
 
 ## Configuration
 
@@ -60,6 +69,9 @@ Once all configurations are set, click **save** to save the configuration.
 Click **Add Table Input** to add one table to the [Input Mapping](/transformations/mappings/).
 
 ![Screenshot - Input mapping](/components/writers/other/yourpass/inputmapping.png)
+
+**Check:** click **Run Component**. The job ends with **Success**, and in YourPass the passes from the table are
+created, updated or deleted, depending on the action.
 
 ### Input file properties
 

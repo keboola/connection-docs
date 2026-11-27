@@ -1,6 +1,6 @@
 ---
 title: Synapse
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/database/synapse'
 description: 'Write Keboola tables to an Azure Synapse database on Azure stacks with a dedicated login, then set column types and full or incremental load.'
 redirect_from:
@@ -14,12 +14,17 @@ database and is **only available on the Azure [Keboola stacks](/overview/#stacks
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Configuration
-[Create a new configuration](/components/configurations/#create-a-configuration) of the **Synapse** data destination connector. Start
-with **setting up database credentials** and provide a *host name*, *port*, *user name*, *password*, *database
-name*, and a *schema*.
+## Before you start
 
-![Screenshot - Save Credentials](/components/writers/database/synapse/synapse-1.png)
+- A Keboola project on an Azure stack.
+- An Azure Synapse database and a schema in it to write to.
+  <!-- VERIFY(nikita): check whether the connector works only with a dedicated SQL pool (a serverless pool can't hold regular tables) and say so here. -->
+- A login and a database user for the connector with `EXECUTE`, `CREATE TABLE`, `ADMINISTER DATABASE BULK OPERATIONS`,
+  and `ALTER`, `SELECT`, `INSERT`, `UPDATE` and `DELETE` on the schema. The steps below create them.
+- Network access from Keboola to the database: allow the [Keboola IP addresses](/components/ip-addresses/) of your stack
+  in the [Synapse workspace firewall](https://learn.microsoft.com/en-us/azure/synapse-analytics/security/synapse-workspace-ip-firewall),
+  or in the [server firewall](https://learn.microsoft.com/en-us/azure/azure-sql/database/firewall-configure) for a
+  dedicated SQL pool outside a workspace.
 
 We highly recommend that you create dedicated credentials for the connector.
 
@@ -50,6 +55,12 @@ GRANT ADMINISTER DATABASE BULK OPERATIONS TO writer_sample_role;
 EXEC sp_addrolemember 'writer_sample_role', 'writer_sample';
 ```
 
+## Configuration
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Synapse** data destination connector. Start
+with **setting up database credentials** and provide a *host name*, *port*, *user name*, *password*, *database
+name*, and a *schema*.
+
+![Screenshot - Save Credentials](/components/writers/database/synapse/synapse-1.png)
 
 ## Table Configuration
 The next step is to configure the tables to write. 
@@ -95,3 +106,6 @@ freeze waiting for the locks to be released.
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
 [incremental processing](/storage/tables/incremental-loading/#incremental-processing).
+
+**Check:** click **Run Component**. The job ends with **Success**, and the table appears in the target schema with the
+rows from the Storage table.

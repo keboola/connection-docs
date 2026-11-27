@@ -1,6 +1,6 @@
 ---
 title: Generic Writer Configuration Examples
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'components/writers/generic-writer/configuration-examples'
 description: 'Copy sample Generic Writer configurations that iterate over rows, send batch events to Exponea, user events to Customer.io and notifications to Slack.'
 redirect_from:
@@ -11,6 +11,20 @@ redirect_from:
 These sample [Generic Writer](/components/writers/generic-writer/) configurations show the JSON for four cases, and two of them also show an input table and the request it produces. [Generic Writer Configuration](/components/writers/generic-writer/configuration/) describes every option they use.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A [configuration](/components/configurations/#create-a-configuration) of the Generic data destination connector
+  to paste the JSON into.
+- One Storage table in its input mapping, with the columns the example's placeholders and mapping use, for example
+  `id` for the iterations example, `user_id` for Customer.io, and `channel` and `text` for Slack.
+- Credentials for the target API, with the secrets in encrypted `#` parameters: a Bloomreach Engagement token and your
+  project ID for the batch events, a Customer.io site ID and API key for the Track API, or a Slack app token with the
+  [`chat:write`](https://docs.slack.dev/reference/methods/chat.postMessage) scope.
+- If the target API accepts calls only from known addresses, the [Keboola IP addresses](/components/ip-addresses/)
+  of your stack on its allow list.
+
+## Examples
 
 ### Configuration Example – Iterations
 
@@ -299,3 +313,8 @@ at [api.slack.com/apps](https://api.slack.com/apps) and retrieve the API token.
 }
 
 ```
+
+**Check:** click **Run Component**. The job ends with **Success**, and the target shows the result: the events in
+Bloomreach Engagement or Customer.io, or the messages in the Slack channels. To see the requests the writer sends, set
+[`debug`](/components/writers/generic-writer/configuration/#debug) to `true` for one run; the job log then includes
+parts of the content, so turn it off again afterwards.

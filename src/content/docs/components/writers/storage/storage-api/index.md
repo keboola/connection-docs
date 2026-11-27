@@ -1,6 +1,6 @@
 ---
 title: Keboola Storage
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/storage/storage-api'
 description: 'Copy tables into one bucket of another Keboola project, even in another organization or region, with a write token and update, replace or recreate mode.'
 redirect_from:
@@ -15,7 +15,13 @@ cannot, e.g., moving data between two different [organizations](/management/orga
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Prepare API Token
+## Before you start
+
+- Access to the *target project*, in any organization or region, and the bucket there to write to.
+- A Storage API token from the target project with **write** access to that one bucket only. The next section shows how
+  to create it.
+
+### Prepare API Token
 The data destination connector requires an [API Token](/management/project/tokens/) with **write** access to a **single bucket** only. 
 This limits the potential risks of token misuse.
 
@@ -64,3 +70,6 @@ Recreate mode creates a brief moments where the target table does not exist. Thi
 reading the table runs very often -- it may fail occasionally.
 
 ![Screenshot - Table detail](/components/writers/storage/storage-api/storage-api-5.png)
+
+**Check:** click **Run Component**. The job ends with **Success**, and in the target project the bucket holds the
+table under its destination name, with the rows from the source table.

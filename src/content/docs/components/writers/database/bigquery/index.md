@@ -1,6 +1,6 @@
 ---
 title: Google BigQuery
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/database/bigquery'
 description: 'Write Keboola tables to a Google BigQuery dataset with a service account JSON key, then set table names, column data types and full or incremental load.'
 redirect_from:
@@ -14,7 +14,16 @@ This data destination connector sends data to a [Google BigQuery](https://cloud.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Create Service Account
+## Before you start
+
+- A Google Cloud project for the BigQuery dataset.
+- A service account in that project with the `BigQuery Data Editor` and `BigQuery Job User` roles, and a JSON key for it.
+  [Create service account](#create-service-account) shows the steps.
+- The name of the dataset to write to. It doesn't have to exist yet: the connector creates it, and the two roles allow that.
+- If the connector creates the dataset, pick its location (`US`, `EU` or a region such as `europe-west3`).
+  <!-- VERIFY(nikita): the configSchema of keboola.wr-google-bigquery-v2 has a `location` enum (US, EU, regions); check that the UI shows it next to the dataset and what it defaults to. -->
+
+### Create service account
 To access and write to your BigQuery dataset, you need to set up a Google Service Account. 
 
 - Go to [**Google Cloud Platform Console > IAM & admin > Service accounts**](https://console.cloud.google.com/iam-admin/serviceaccounts).
@@ -71,3 +80,6 @@ You can rename the destination column in BigQuery and specify the used data type
 The little eye icon on the right will show you a preview of the values so you don't have to guess the data type. 
 
 *Note: You have to define a data type on at least one column for the configuration to work.* 
+
+**Check:** click **Run Component**. The job ends with **Success**, and the table appears in the dataset in the
+[BigQuery console](https://console.cloud.google.com/bigquery) with the rows from the Storage table.

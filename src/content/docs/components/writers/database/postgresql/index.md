@@ -1,6 +1,6 @@
 ---
 title: PostgreSQL
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/database/postgresql'
 description: 'Write Keboola tables to a PostgreSQL database and schema with dedicated credentials or an SSH tunnel, then set column types and full or incremental load.'
 redirect_from:
@@ -14,13 +14,13 @@ This data destination connector sends data to a [PostgreSQL](https://www.postgre
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Configuration
-[Create a new configuration](/components/configurations/#create-a-configuration) of the **PostgreSQL** data destination connector.
+## Before you start
 
-The first step is to **Set Up Database Credentials**.
-You need to provide a *host name*, *user name*, *password*, *database name*, and *schema*.
-
-![Screenshot - Credentials](/components/writers/database/postgresql/postgre-2.png)
+- A PostgreSQL database and a schema in it to write to.
+- A user for the connector that can create, drop and write tables in that schema. The SQL below creates a schema and
+  makes the new user its owner.
+- Network access from Keboola to the database: allow the [Keboola IP addresses](/components/ip-addresses/) of your stack
+  in your firewall, or connect through an [SSH tunnel](/components/extractors/database/#connecting-to-database).
 
 We highly recommend that you create dedicated credentials for the connector in your database. You can use the following SQL code to get started:
 
@@ -32,7 +32,13 @@ ALTER SCHEMA writer_sample OWNER TO writer_sample;
 ALTER USER writer_sample SET search_path TO writer_sample;
 ```
 
-It is also possible to secure the connection using an [SSH tunnel](/components/extractors/database/#connecting-to-database).
+## Configuration
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **PostgreSQL** data destination connector.
+
+The first step is to **Set Up Database Credentials**.
+You need to provide a *host name*, *user name*, *password*, *database name*, and *schema*.
+
+![Screenshot - Credentials](/components/writers/database/postgresql/postgre-2.png)
 
 ## Table Configuration
 The next step is to configure the tables you want to write. Click **Add New Table** and select an existing table from Storage:
@@ -73,3 +79,6 @@ freeze waiting for the locks to be released. This will be recorded in the connec
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
 [incremental processing](/storage/tables/incremental-loading/#incremental-processing).
+
+**Check:** click **Run Component**. The job ends with **Success**, and the table appears in the target schema with the
+rows from the Storage table.

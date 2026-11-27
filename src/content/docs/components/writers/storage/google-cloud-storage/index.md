@@ -1,6 +1,6 @@
 ---
 title: Google Cloud Storage
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/storage/google-cloud-storage'
 description: 'Write Keboola tables and files to a Google Cloud Storage bucket, authorized with a service account key or instant authorization.'
 redirect_from:
@@ -13,13 +13,13 @@ This data destination connector sends tables as CSV or other files to a [Google 
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Configuration
-[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Cloud Storage** data destination connector.
-To authorize the connector, you can either choose to use a Google service account or [instant authorization](/components/authorization/#authorize-with-your-own-account).
+## Before you start
 
-The service account login is the recommended way of authorizing this component. 
-
-![Screenshot - Authorize account](/components/writers/storage/google-cloud-storage/authorization-gcs.png)
+- A Google Cloud Storage bucket to write to.
+- One of:
+    - a Google service account with the `Storage Object Admin` role and a JSON key for it (recommended; see
+      [Setting Up Service Account](#setting-up-service-account)), or
+    - a Google account with access to the bucket, for [instant authorization](/components/authorization/#authorize-with-your-own-account).
 
 ### Setting Up Service Account
 To create a service account, go to your Google Cloud Platform console
@@ -33,6 +33,14 @@ You can keep the section *Grant users access to this service account* blank and 
 Once you see your newly created service account in the service account list, click the three dots in the actions column 
 and select `Manage Keys`. Then click **Add Key** and select `Create New Key`. Select the JSON key and press **Create**; 
 the key should be automatically downloaded to your computer. 
+
+## Configuration
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Cloud Storage** data destination connector.
+To authorize the connector, you can either choose to use a Google service account or [instant authorization](/components/authorization/#authorize-with-your-own-account).
+
+The service account login is the recommended way of authorizing this component. 
+
+![Screenshot - Authorize account](/components/writers/storage/google-cloud-storage/authorization-gcs.png)
 
 Locate the JSON key file, and copy and paste the whole JSON to the Service Account Key field in the Google Cloud Storage
 Service Account login. Then click **Save**. It might take up to ten minutes for the service account scope rights to be 
@@ -54,3 +62,6 @@ want to send the tables and files. Use the checkbox to select whether you would 
 names. Finally, you can apply processors to the files before writing them to the bucket.
 
 ![Screenshot - Row configuration](/components/writers/storage/google-cloud-storage/row-config-gcs.png)
+
+**Check:** click **Run Component**. The job ends with **Success**, and the files appear in the bucket, with a
+timestamp in their names if you turned that on.

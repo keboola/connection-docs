@@ -1,6 +1,6 @@
 ---
 title: Tableau TDE
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/bi-tools/tableau'
 description: 'Write Keboola tables to Tableau TDE files with column types and filters, then download them or upload them to Tableau Server, Dropbox or Google Drive.'
 redirect_from:
@@ -25,6 +25,13 @@ Getting Started walks through the pattern on a simpler destination first. You ca
 [Tableau Integration Demo](https://www.youtube.com/watch?v=FS1nndJ0vyQ) on YouTube.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- To create and download TDE files, you need nothing outside Keboola.
+- To upload them, one of: a Tableau Server account (you enter its credentials in the connector), or a Dropbox or
+  Google Drive account you can [authorize](/components/authorization/).
+- Run the connector in the production branch: its jobs are blocked in [development branches](/components/branches/).
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Tableau** connector.
@@ -84,5 +91,9 @@ For writing to Tableau Server, you need to enter the credentials using the **Set
 
 To activate the table upload, click the *Enable instant upload* link. Only when **Instant Upload** is enabled, the
 TDE files will be written to the selected destination.
+
+**Check:** click **Run Component**. The job ends with **Success**, each table's TDE file name turns into a download
+link, and the files are in **Storage** → **Files** with the tags `tde` and `table-export`. With **Instant Upload**
+on, the files also appear in the selected destination.
 
 ![Screenshot - Authorized](/components/writers/bi-tools/tableau/tableau-9.png)

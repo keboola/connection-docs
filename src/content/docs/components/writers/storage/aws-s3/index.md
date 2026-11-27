@@ -1,6 +1,6 @@
 ---
 title: AWS S3
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/storage/aws-s3'
 description: 'Write Keboola tables as CSV files to an AWS S3 bucket, authenticating with an IAM user access key or an AWS role with s3:PutObject permission.'
 redirect_from:
@@ -15,7 +15,14 @@ The connector supports additional [processor configuration](https://developers.k
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Obtain AWS Credentials
+## Before you start
+
+- An S3 bucket to write to. The connector detects the bucket's region itself.
+- AWS credentials with `s3:PutObject` on the target bucket and paths and `s3:GetBucketLocation` on the bucket, either
+  as an [IAM user's access key](#obtain-aws-credentials) or as an [AWS role](#authentication-with-aws-role) that
+  Keboola assumes. Both are described below.
+
+### Obtain AWS Credentials
 We strongly recommend that you create a dedicated user for the connector. To do so, create a new user in [AWS IAM](https://aws.amazon.com/iam/)
 and enable programmatic access:
 
@@ -49,7 +56,7 @@ Or, if you prefer configuration via JSON:
 
 When you finish creating the user, you'll obtain the **Access key ID** and **Secret access key**. 
 
-## Authentication with AWS role
+### Authentication with AWS role
 
 ![Screenshot - AWS Credentials](/components/writers/storage/aws-s3/aws-s3-3.png)
 
@@ -99,3 +106,6 @@ In the next step, provide the target S3 bucket and [AWS credentials](#obtain-aws
 
 Then you can modify the table destination path, write the table, or go back to the configuration to add additional tables to the connector.
 Configured tables are stored as [configuration rows](/components/#configuration-rows).
+
+**Check:** click **Run Component**. The job ends with **Success**, and the bucket holds a CSV file for each
+configured table at its destination path.
