@@ -1,6 +1,6 @@
 ---
 title: Jobs Tutorial
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'components/extractors/generic-extractor/tutorial/jobs'
 description: 'Generic Extractor tutorial on jobs: extract the sub-resources of MailChimp campaigns with child jobs and placeholders, and add multiple jobs.'
 redirect_from:
@@ -27,6 +27,11 @@ Moreover, each campaign has three **sub-resources**:
 `/campaigns/{campaign_id}/content`, `/campaigns/{campaign_id}/feedback` 
 and `/campaigns/{campaign_id}/send-checklist`. The `{campaign_id}` expression represents a placeholder 
 that a specific campaign ID should replace. To retrieve the sub-resource, use child jobs. 
+
+## Before you start
+
+- The configuration from [Pagination](/components/extractors/generic-extractor/tutorial/pagination/), with
+  at least one campaign in the account.
 
 ## Child jobs
 
@@ -58,7 +63,7 @@ since we want to use the `id` property from the parent response to replace the `
 
 Now, you can test the endpoint as in previous examples. 
 The  `Mapping.Data Selector` (aka `dataField`) property must refer to an array, i.e., `items` or `_links` in our case 
-(see the [documentation](https://mailchimp.com/developer/reference/campaigns/campaign-checklist/)).
+(see the [documentation](https://mailchimp.com/developer/marketing/api/campaign-checklist/)).
 
 When you look at the debug log, you will also see that the connector is making all the parent requests:
 
@@ -88,7 +93,7 @@ The `children` are executed for each element retrieved from the parent endpoint,
 The `placeholders` setting connects the placeholders used in the `endpoint` property with 
 the data in the actual parent response. 
 That means that the `campaign_id` placeholder in the `campaigns/{campaign_id}/send-checklist` endpoint 
-will be replaced by the `id` property of the JSON [response](https://mailchimp.com/developer/reference/campaigns/): 
+will be replaced by the `id` property of the JSON [response](https://mailchimp.com/developer/marketing/api/campaigns/): 
 
 ![Screenshot - Mailchimp docs](/components/extractors/generic-extractor/tutorial/mailchimp-api-docs-2.png)
 
@@ -157,7 +162,7 @@ endpoints in a single configuration. Let's pick the campaign `content` sub-resou
 ![second child](/components/extractors/generic-extractor/tutorial/2_child.png)
 
 The placeholder configuration is the same, however,
-the question is what to put in the `Data Selector` (`dataField`). If you examine the sample [response](https://mailchimp.com/developer/reference/campaigns/campaign-content/)
+the question is what to put in the `Data Selector` (`dataField`). If you examine the sample [response](https://mailchimp.com/developer/marketing/api/campaign-content/)
 after running the test endpoint, it looks like this:
 
 ```json
@@ -233,6 +238,9 @@ represents the `links` property of the `content` resource. The links table conta
 the `links` column of the campaign content table. This is done automatically because once
 you say that the entire response is supposed to be a single table row, the array `_links` 
 property will not fit into a single value of a table.
+
+**Check:** the job ends with status **Success** and Storage has `in.c-ge-tutorial.campaigns__campaign_id__content`
+with the content of your campaigns, next to the `campaigns` table.
 
 ## Summary
 Now that you know how to extract sub-resources using child jobs, as well as resources composed directly of 

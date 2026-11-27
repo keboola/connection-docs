@@ -1,8 +1,8 @@
 ---
 title: Market Vision
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/marketing-sales/market-vision'
-description: 'Extract Market Vision projects with their forms, questions, categories and fieldsets using an API token, loaded incrementally with backfill across runs.'
+description: 'Extract Market Vision projects with their forms, questions, categories and fieldsets using a Market Vision user name and password, loaded incrementally with backfill across runs.'
 redirect_from:
     - /extractors/marketing-sales/market-vision/
 ---
@@ -18,17 +18,22 @@ The data is extracted incrementally, so only data that has been changed since th
 The component has backfill implemented, meaning that if not all data could be fetched in the first run due to large 
 amounts of data, it will be fetched in the following runs.
 
+## Before you start
+
+- The user name and password of a Market Vision user. The connector signs in with them and reads all projects
+  the user can see.
+  <!-- Checked 2026-11-27: kds-team.ex-market-vision configSchema requires username and #password; the code calls client.login(username, password). -->
+
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Market Vision** connector.
-Then fill in the **Access/API Token** to authorize the configuration. The process to get the Access Token is 
-done via an [API request](https://reporting.marketvision-spring.com/api/v1/documentation#Generate_token_18).
+Then fill in your Market Vision **Username** and **Password**.
 
-![Screenshot - Api Version](/components/extractors/marketing-sales/market-vision/auth.png)
-
-
-Once the API Token is filled in, save the configuration and you can run the component. If you have a lot of data in
+Once the credentials are filled in, save the configuration and you can run the component. If you have a lot of data in
 Market Vision, it might take a couple of runs to extract all the data. You can see that the backfill has finished by not seeing
 the message "MAX RUNTIME of component has almost been reached, saving data. Rerun the component to let backfill fetch all of your data"
+
+**Check:** the job ends with status **Success** and Storage has the tables listed under [Data output](#data-output),
+such as `project_form_detail`. If the job log shows the MAX RUNTIME message, run it again until it doesn't.
 
 
 ## Data output

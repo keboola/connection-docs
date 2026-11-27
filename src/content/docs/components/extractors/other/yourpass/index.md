@@ -1,6 +1,6 @@
 ---
 title: YourPass
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/other/yourpass'
 description: 'Import mobile wallet pass data from YourPass with your username, password and client ID, filtered by project or template ID, in sandbox or production mode.'
 redirect_from:
@@ -15,6 +15,13 @@ The YourPass data source connector uses the [YourPass API](https://doc.yourpass.
 to Keboola.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- YourPass API credentials: your YourPass user name (email) and password, your client ID and, if your client
+  has one, the client secret.
+  <!-- VERIFY(Nikita): where a YourPass customer gets the client ID and secret (YourPass support, or a self-service setting?). -->
+- The project or template IDs, if you want only some passes.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **YourPasss** connector.
@@ -54,3 +61,7 @@ You can set the primary keys by clicking the button **Add Primary Key Column** a
 You can delete primary keys by clicking the button **Delete Primary Key Column**. Just make sure to delete the output tale 
 in the storage before deleting primary keys, as the output table always expects the list of primary keys to stay constant.
 
+Save the row and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table with the **Output name** you set, with the
+passes.

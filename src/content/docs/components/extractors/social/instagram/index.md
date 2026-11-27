@@ -1,6 +1,6 @@
 ---
 title: Instagram
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/social/instagram'
 description: 'Extract Instagram Business Account media, comments and insights through a connected Facebook page, with queries that set the endpoint and fields.'
 redirect_from:
@@ -19,10 +19,15 @@ the configuration process is almost identical to configuring the [Facebook](/com
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Configuration
-Before you begin, make sure you have a Facebook page, a role on that page, and an Instagram account. The Facebook 
-page needs to be [connected to the Instagram Business Account](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/get-started/).
+## Before you start
 
+- An Instagram Business Account, and a Facebook Page
+  [connected to it](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/get-started/).
+- A Facebook account with a role on that Page. You sign in with it when you authorize the configuration and
+  grant the `instagram_basic,instagram_manage_insights,pages_show_list` permissions. Alternatively, have a manually
+  generated access token ready for **Direct token insert**.
+
+## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Instagram** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/authorization/) with a Facebook account 
 with access to the Facebook page you have the Instagram Business Account connected to.
@@ -106,6 +111,11 @@ The *Limit* option represents the Facebook Graph API request parameter `limit`; 
 of objects that may be returned in one page of the request. (The default is 25 and the maximum is 100.)
 It is useful when the Facebook Graph API returns an error saying there is too much data requested; in such
 cases, lower the limit and run the query again.
+
+Save the query and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has tables named after the query, for example
+`foo_insights` for a query named `foo`, as described in [Name](#name).
 
 ## Output Data Description
 The output data represent a [tree](https://en.wikipedia.org/wiki/Tree_(graph_theory)) where each node is an

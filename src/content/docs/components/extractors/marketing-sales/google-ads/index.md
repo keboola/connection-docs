@@ -1,6 +1,6 @@
 ---
 title: Google Ads
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/marketing-sales/google-ads'
 description: 'Import Google Ads reports by writing GAQL queries for your customer ID, with optional since and until dates and a primary key for each output table.'
 redirect_from:
@@ -12,9 +12,17 @@ redirect_from:
 
 
 This data source connector allows you to import data from Google Ads.
-If you do not have a Google Ads manager account, follow this [guide](https://support.google.com/google-ads/answer/7459399?hl=en) to set it up.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Google Ads account. If you do not have a Google Ads manager account, follow this
+  [guide](https://support.google.com/google-ads/answer/7459399?hl=en) to set it up.
+- A Google account with access to the Ads accounts you want to read. You sign in with it when you authorize
+  the configuration and grant access to the Google Ads API (scope `https://www.googleapis.com/auth/adwords`).
+  <!-- VERIFY(Nikita): the minimum Google Ads access level (read-only?) the signed-in user needs. -->
+- The [customer ID](https://support.google.com/google-ads/answer/1704344?hl=en) of each account to download.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Ads** connector.
@@ -36,23 +44,27 @@ can be specified
 - **relatively** — e.g. `14 days ago` or `last month`.
 
 In each GAQL query, pick columns to download from allowed report values, and the FROM clause from allowed report types.
-You also need to specify the name of the query and destination table in Storage. 
-
-**Important**: *customers* and *campaigns* are reserved names, thus cannot be used as table names.
+You also need to name the query. Its result always goes to the table `report-<query name>`, next to the
+`customer` and `campaign` tables the connector creates on every run.
 
 Additionally, for each query, specify a list of columns to be used as a primary key. 
 Use *Display Name* of the columns replace dot with upper case first letter
 (for example, for campaign.id use campaignId and for metrics.clicks use metricsClicks).
+
+Save the configuration and click **Run Component**.
+
+**Check:** the job ends with status **Success** and the output bucket has the `customer` and `campaign` tables, plus
+one `report-<query name>` table for each query, as in the [example](#example) below.
 
 ## Example
 To download a campaign report, use the following query `SELECT campaign.id, campaign.name, metrics.clicks, metrics.impressions FROM campaign` configuration:
 
 ![Screenshot - Query configuration](/components/extractors/marketing-sales/google-ads/example-config.png)
 
-This downloads the report into a `campaigns` table. The `campaign.id` column is listed as `campaignId` in the primary columns.
+This downloads the report into a `report-campaign` table. The `campaign.id` column is listed as `campaignId` in the primary columns.
 
 When running the above configuration, you get three tables in the output bucket:
-`campaigns`, `customers` and `report-campaign`. Incremental loading is turned on, so on subsequent runs, new rows are appended.
+`campaign`, `customer` and `report-campaign`. Incremental loading is turned on, so on subsequent runs, new rows are appended.
 
 ### Customers 
 This table is created automatically and contains a list of all associated customers, for instance:

@@ -1,6 +1,6 @@
 ---
 title: Gmail Messages
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/communication/gmail'
 description: 'Fetch Gmail messages, headers and message parts into Keboola with read-only access, a search query, and your own OAuth credentials if Google blocks the app.'
 redirect_from:
@@ -12,6 +12,17 @@ redirect_from:
 Setting it up takes two steps: authorize the Gmail account, then write the queries that pick the messages. The connector stores what it finds in four tables: queries, messages, headers and parts.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Google account with Gmail. You sign in with it when you authorize the configuration. The connector
+  reads the mailbox and never changes it.
+  <!-- VERIFY(Nikita): the exact OAuth scope the connector requests (gmail.readonly?); it is set in the OAuth broker, not in keboola/gmail-extractor. -->
+- A Google Cloud project for custom OAuth credentials, the preferred option. Google treats mail access as
+  sensitive and may refuse the default app. In the project, you enable the Gmail API and create an OAuth
+  client ID, as described in [Custom OAuth credentials](#custom-oauth-credentials).
+- The messages you want, described with Gmail's
+  [search operators](https://support.google.com/mail/answer/7190?hl=en).
 
 ## Authorization
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Gmail Messages** connector.
@@ -63,7 +74,10 @@ Fill in the form to fit your needs.
 For more detailed information about querying, follow Google's [Advanced Search](https://support.google.com/mail/answer/7190?hl=en) help site.
 - **Headers** (optional) -- Headers you want to download. If no headers are specified, all headers will be downloaded.
 
-Don't forget to **Save** the configuration.
+Don't forget to **Save** the configuration, then click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has four new tables: `queries`, `messages`,
+`headers` and `parts`, described below.
 
 ## Produced Tables
 Data are always imported incrementally. The data source connector produces several tables that can be joined together.

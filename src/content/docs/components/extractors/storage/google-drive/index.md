@@ -1,6 +1,6 @@
 ---
 title: Google Drive Sheets
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/storage/google-drive'
 description: 'Import sheets from Google Drive spreadsheets into tables in your project after you authorize your Google account, and rename the destination tables.'
 redirect_from:
@@ -13,6 +13,13 @@ redirect_from:
 Each sheet you select lands as its own table in one bucket of the current project.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Google account that can open the spreadsheets you want to import. You sign in with it when you authorize
+  the configuration. If you are asked to sign in again when you pick a spreadsheet, use the same account. The
+  connector asks for full Google Drive access (`drive`) and read-only access to spreadsheets.
+  <!-- Checked 2026-11-27: keboola/components components/ex-google-drive/README.md lists the scopes drive, spreadsheets.readonly, userinfo.profile and userinfo.email. -->
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Drive** connector.
@@ -41,3 +48,7 @@ Configured tables are stored as [configuration rows](/components/#configuration-
 The list shows the name (and the link) of the imported document and sheet, and also the name of the destination
 table in [Storage](/storage/). You can modify the destination table name by editing the sheet extraction.
 
+Click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has one table per selected sheet, under the destination
+table name shown in the list of extracted sheets.

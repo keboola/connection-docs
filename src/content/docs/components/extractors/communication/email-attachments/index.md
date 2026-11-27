@@ -1,6 +1,6 @@
 ---
 title: Email Attachments
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/communication/email-attachments'
 description: 'Import CSV files sent as email attachments to a generated address into Keboola tables, one attachment per email, on AWS multitenant stacks only.'
 redirect_from:
@@ -19,9 +19,15 @@ Therefore, it is a good idea to set up the data source connector in a [**schedul
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-:::caution
-**Warning:** This component is available only on AWS multitenant stacks [connection.keboola.com](https://connection.keboola.com) and [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com)
-:::
+## Before you start
+
+- The connector runs only on the AWS multitenant stacks,
+  [connection.keboola.com](https://connection.keboola.com) and
+  [connection.eu-central-1.keboola.com](https://connection.eu-central-1.keboola.com).
+- No account or credentials. The connector creates its own mailbox. You get the address after you
+  create the configuration.
+- A system or a person that can email CSV files to that address, one attachment per email,
+  always in the same CSV format.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Email Attachments** data source connector.
@@ -53,8 +59,9 @@ The following conditions must be met:
 
 Click **Run** and confirm.
 
-If the extraction is successful, you will be able to check the processed data in the imported table by clicking on the link.
-There may be a delay between the time the email is sent, received, and picked up by the data source connector.
+**Check:** the job ends with status **Success**, and its detail links to a new table named `data` in Storage.
+Click the link to see the imported rows. There may be a delay between sending the email and the connector
+picking it up, so if the job imports nothing, wait a few minutes and run it again.
 
 ![Screenshot - Job Detail](/components/extractors/communication/email-attachments/email-attachments-2.png)
 

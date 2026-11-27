@@ -1,6 +1,6 @@
 ---
 title: Zoho
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/marketing-sales/zoho'
 description: 'Extract Zoho CRM module records through the Bulk Read API with an authorized account and your user email, choosing fields, sync mode and load mode.'
 ---
@@ -10,6 +10,15 @@ description: 'Extract Zoho CRM module records through the Bulk Read API with an 
 The connector calls the [Zoho Bulk Read APIs](https://www.zoho.com/crm/developer/docs/api/v2/bulk-read/overview.html).
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Zoho CRM user with access to the modules you want to extract. You sign in with it when you authorize the
+  configuration, and you enter its email address afterwards.
+  <!-- VERIFY(Nikita): the OAuth scopes the Keboola Zoho app requests (ZohoCRM.bulk.read plus module read scopes?), and what "the email you used to generate the Self Client" means when the connector authorizes through Keboola's own app. -->
+- Your Zoho [data center](https://help.zoho.com/portal/en/kb/commerce/user-guide/getting-started-with-zoho-commerce/articles/data-centers).
+  You set it in the configuration's account settings, next to the user email.
+- The modules and fields you want. The row form lists their API names for you.
 
 ## Supported Endpoints
 The supported endpoints are:
@@ -24,7 +33,8 @@ If you need additional endpoints, please submit your request to [ideas.keboola.c
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Zoho** data source connector.
 
 Click **Authorize Account** to [authorize the configuration](/components/authorization/) with access to the Zoho CRM data you want to extract. Then, select 
-a [data center](https://help.zoho.com/portal/en/kb/commerce/user-guide/getting-started-with-zoho-commerce/articles/data-centers) of your Zoho instance during the authorization process.
+the [data center](https://help.zoho.com/portal/en/kb/commerce/user-guide/getting-started-with-zoho-commerce/articles/data-centers) of your Zoho instance in the account settings.
+<!-- VERIFY(Nikita): configSchema of ex-zoho requires zoho_datacenter in the account settings; check whether the authorization dialog also asks for it. -->
 
 Once done, you must enter the **account's user email address (`user_email`)** you used to generate the Self Client.
 
@@ -61,6 +71,9 @@ Finally, fill in the **Destination settings** to determine what happens in Keboo
 - **Load mode (`load_mode`)** –  If full load is used, the destination table will be overwritten every run. If incremental load is used, data will be upserted into the destination table *[required]*.
 
 Once everything is configured, click **Save** and run the configuration.
+
+**Check:** the job ends with status **Success** and Storage has a table named after the module, or the output table
+name you set, with an `Id` column as its primary key.
 
 ## Output
 All output tables contain the `Id` column containing the record's unique ID. It is always used as the output table's primary key in Keboola Storage. 

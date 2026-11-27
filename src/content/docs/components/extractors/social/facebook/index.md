@@ -1,6 +1,6 @@
 ---
 title: Facebook Pages
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/social/facebook'
 description: 'Extract your Facebook Pages feed, comments, likes and Insights through the Graph API with queries that set the endpoint, fields and date range.'
 redirect_from:
@@ -15,6 +15,15 @@ The feed, comments and likes come from the Page [feed](https://developers.facebo
 [Insights](https://developers.facebook.com/docs/graph-api/reference/insights).
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Facebook account with access to the Pages you want to extract. You sign in with it when you authorize the
+  configuration, and grant the permissions the consent dialog asks for. Alternatively, have a manually generated access token
+  ready for **Direct token insert**.
+  <!-- VERIFY(Nikita): the permissions the Keboola app requests today; manage_pages was replaced by pages_read_engagement and related permissions in Graph API v7+. Not found in keboola/component-meta. -->
+- Some knowledge of the [Graph API](https://developers.facebook.com/docs/graph-api/using-graph-api): each
+  query is a Graph API request.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Facebook Pages** connector.
@@ -99,6 +108,11 @@ The *Limit* option represents the Facebook Graph API request parameter `limit`; 
 of objects that may be returned in one page of the request. (The default is 25 and the maximum is 100.)
 It is useful when the Facebook Graph API returns an error saying there is too much data requested; in such
 cases, lower the limit and run the query again.
+
+Save the query and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has tables named after the query, for example
+`foo_likes` for a query named `foo`, as described in [Name](#name).
 
 ## Output Data Description
 The output data represent a [tree](https://en.wikipedia.org/wiki/Tree_(graph_theory)) where each node is an

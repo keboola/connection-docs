@@ -1,6 +1,6 @@
 ---
 title: AWS Cost Usage Reports
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/other/aws-cu-reports'
 description: 'Download AWS Cost Usage Reports (CUR) that AWS exports to an S3 bucket as CSV, choosing the report prefix, a date range and whether to load only new files.'
 ---
@@ -11,9 +11,16 @@ AWS describes how it produces these exports in [What are AWS Cost and Usage Repo
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Configuration
+## Before you start
 
-### AWS Setup
+- A Cost and Usage Report export in AWS, delivered to an S3 bucket in CSV format. Set it up as described
+  below.
+- AWS access keys (key ID and secret) for an IAM user that can list the bucket and read the report files
+  (`s3:ListBucket` and `s3:GetObject`).
+  <!-- Checked 2026-11-27: the only S3 calls in keboola/component-aws-cost-and-usage-reports are list_objects_v2, get_object and download_file, plus DuckDB reading named keys; the region comes from the configuration. -->
+- The bucket's region and the report prefix you set in the export.
+
+### AWS setup
 
 First, the CUR report exports need to be set up in the AWS account to be exported to an S3 bucket in the selected 
 granularity and CSV format. Follow this guide to set up the export.
@@ -27,6 +34,8 @@ Export setup:
 - Choose the GZIP compression type.
 
 ![AWS configuration](/components/extractors/other/aws-cur-reports/aws_screen.png)
+
+## Configuration
 
 ### Component Setup
 
@@ -60,6 +69,11 @@ and copy the path of the report folder.
 
 If the [**Incremental Load**](/storage/tables/incremental-loading/#incremental-loading) is set to true, the new data will be appended to the old ones. 
 This way you can import new data, e.g., from today, without deleting the data imported before.
+
+Save the configuration and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table named after the last part of the report
+prefix, for example `my_report` for `some/long/prefix/my_report`.
 
 ## Output Table
 

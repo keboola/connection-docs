@@ -1,6 +1,6 @@
 ---
 title: OneDrive Files
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/storage/onedrive-files'
 description: 'Download files from personal OneDrive, OneDrive for Business or SharePoint into Keboola File Storage with a file path pattern and optional tags.'
 ---
@@ -13,6 +13,16 @@ The Microsoft OneDrive cloud storage integrates with the [Office365](https://www
 This connector lets you access all your files in your personal or business account.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Microsoft account that can open the files: a personal OneDrive, OneDrive for Business, or a SharePoint
+  site. You sign in with it when you authorize the configuration. The connector asks for the delegated Microsoft
+  Graph permission `Files.Read.All`, plus `Sites.Read.All` for OneDrive for Business and SharePoint. If your
+  organization doesn't let users consent to apps, an admin must approve the connector first.
+  <!-- Checked 2026-11-27: scopes by account type in keboola/components components/ex-onedrive-kds/src/client/client.py. -->
+- For OneDrive for Business or SharePoint: your tenant ID from the [Azure Portal](https://portal.azure.com/#home),
+  and for SharePoint also the site URL. See [Account type](#account-type).
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **OneDrive Files** connector.  
@@ -48,3 +58,6 @@ The **File Path** parameter defines the location of the file/s that you will be 
 Click **Save** when you're done and **run** the component.
 
 Downloaded files will be available in your project's storage/files menu.
+
+**Check:** the job ends with status **Success** and the downloaded files are listed in [Storage Files](/storage/files/),
+with your custom tag if you set one.

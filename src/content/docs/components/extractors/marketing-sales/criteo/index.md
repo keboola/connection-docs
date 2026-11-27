@@ -1,6 +1,6 @@
 ---
 title: Criteo
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/marketing-sales/criteo'
 description: 'Extract Criteo ad performance reports with the client ID and secret of your own Criteo developer app, choosing dimensions, metrics, currency and date range.'
 redirect_from:
@@ -13,7 +13,13 @@ This data source connector uses the Criteo Marketing Solutions API to extract da
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Getting Credentials
+## Before you start
+
+- A Criteo developer account and your own developer app with read access to Marketing Solutions. The
+  connector authenticates with that app's client ID and client secret.
+- An administrator of your Criteo account, who must accept the app's consent screen.
+
+### Getting credentials
 
 Criteo OAuth flow requires client IDs and client secrets from a developer app. Since a developer app in Criteo is universal, meaning it 
 can fetch data from all clients who authorize the app using a consent screen, the component requires each client to create their own
@@ -54,5 +60,10 @@ In the configuration parameters, do the following:
 - Click **Save** to save the configuration.
 
 ![Screenshot - Row configuration](/components/extractors/marketing-sales/criteo/row.png)
+
+Click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table with the output name you set in the row.
+
 
 For further details on the Criteo API and troubleshooting steps, please refer to Criteo's official [documentation](https://developers.criteo.com/marketing-solutions/docs/api-troubleshooting-tips).

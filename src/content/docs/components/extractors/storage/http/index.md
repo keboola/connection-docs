@@ -1,6 +1,6 @@
 ---
 title: HTTP
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/storage/http'
 description: 'Download a CSV file or a ZIP or GZ archive from an HTTP or HTTPS base URL into a Keboola table, one file per configuration row.'
 redirect_from:
@@ -12,6 +12,13 @@ redirect_from:
 This data source connector loads a single CSV file from an HTTP/HTTPS URL and stores it in Storage.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- The URL of a CSV file, or of a GZ or ZIP archive with one, that anyone can download. The connector sends no
+  credentials or custom headers. If the server limits access by IP address, allow
+  [Keboola's IP addresses](/components/ip-addresses/).
+  <!-- Checked 2026-11-27: keboola/http-extractor ConfigDefinition.php accepts only baseUrl, path and maxRedirects; the README says "any public URL". -->
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **HTTP** connector.
@@ -65,6 +72,11 @@ The **Read Header** option defaults to *Read the header from the file(s) header*
  - **Generate automatically** — The columns will be named sequentially as `col_1`, `col_2` and so on.
 
 **Primary Key** can be used to specify the primary key in Storage, which can be used with **Incremental Load**. 
+
+Save the row and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table with the **Table name** you set. With the
+sample base URL and `/getting-started/opportunity.csv`, it holds the opportunity rows.
 
 The data source connector also supports [Debug mode](/components/debug-mode/), all supported
 parameters are described in the [GitHub repository](https://github.com/keboola/http-extractor).

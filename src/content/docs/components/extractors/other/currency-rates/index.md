@@ -1,6 +1,6 @@
 ---
 title: ECB Currency Rates
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/other/currency-rates'
 description: 'Download ECB exchange rates from EUR, GBP or USD to 42 currencies for every working day since 4 January 1999, through the Fixer API.'
 redirect_from:
@@ -12,6 +12,10 @@ redirect_from:
 The connector calls the [Fixer API](https://fixer.io/documentation) for the rates the European Central Bank (ECB) publishes.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- Nothing to set up. The connector needs no account or API key. You only pick the source currency.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **ECB Currency Rates** connector.
@@ -28,6 +32,10 @@ There are three major currencies available to choose from:
 
 After you select the source currency, **save** the configuration and **run** it.
 The name of the output table will be automatically generated (in.c-keboola-ex-currency-XXX.rates).
+
+**Check:** the job ends with status **Success** and Storage has a table named after the source currency: `rates`
+for EUR, `rates-usd` for USD, `rates-gbp` for GBP. It has one row per date and destination currency, and `ECB` in
+the `source` column.
 
 ## Output Table
 The output table contains the following columns:

@@ -1,6 +1,6 @@
 ---
 title: Adform DSP Reports
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/marketing-sales/adform-dsp-reports'
 description: 'Extract Adform Buy-Side report data from the Reporting Stats API with client credentials, choosing dimensions, up to ten metrics, a date range and load type.'
 redirect_from:
@@ -20,7 +20,7 @@ Each report is organized as dimensions and metrics. Metrics are the individual m
 such as impressions, clicks, and conversions. Dimensions break down metrics across some common criteria, such as campaign or line item.
 When you build a query, you specify which dimensions and metrics you want in your report data.
 
-## Before You Start
+## Before you start
 
 First you must register a client application using the **Credentials flow** authentication. 
 To register the application, follow the steps described in Adform's [official documentation](https://api.adform.com/help/guides/getting-started/authorization-guide#prerequisites).
@@ -75,3 +75,8 @@ For a full list of available metrics and specs, [see here](/components/extractor
 It can be also retrieved using this [API call](https://api.adform.com/help/guides/how-to-report-on-campaigns/reporting-stats/metrics).
 
 **Note**: Please keep in mind that some combinations of metrics and/or dimensions are not supported. 
+
+Save the configuration and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table with the name you set as the result
+table (`report-data` by default).

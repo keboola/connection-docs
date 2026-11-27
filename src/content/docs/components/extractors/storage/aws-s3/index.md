@@ -1,6 +1,6 @@
 ---
 title: AWS S3
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/storage/aws-s3'
 description: 'Load CSV files from AWS S3 buckets into Keboola tables with an access key or an AWS role, and set wildcards, new files only and CSV header options.'
 redirect_from:
@@ -16,6 +16,16 @@ After creating a new configuration, select the files you want to extract from AW
 you save them to Keboola Storage. You also need to set up proper permissions on AWS.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- The S3 bucket and the CSV files you want to load, and their path or prefix.
+- Read access to the bucket, in one of two ways:
+  - an AWS access key ID and secret access key with `s3:GetObject`, `s3:ListBucket` and `s3:GetBucketLocation`
+    on the bucket; see [Authentication with AWS credentials](#authentication-with-aws-credentials), or
+  - an IAM role that Keboola's AWS account may assume, with the same permissions; see
+    [Authentication with AWS role](#authentication-with-aws-role). Creating it needs rights to create IAM roles in
+    your AWS account.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **AWS S3** connector.
@@ -162,6 +172,11 @@ and **New Files Only** to create a configuration that incrementally loads all ne
  including the relative path to the **Search Key**.
  - **Add Row Number Column**: A new column `s3_row_filename` is added to the table and will contain the row number in each 
  of the downloaded files.
+
+Save the table and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table with the **Storage Table Name** you set, with
+the rows of the matched files.
 
 The data source connector also supports [Debug mode](/components/debug-mode/), all supported
 parameters are described in the [GitHub repository](https://github.com/keboola/aws-s3-extractor).

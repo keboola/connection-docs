@@ -1,6 +1,6 @@
 ---
 title: Google Search Console
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/other/google-search-console'
 description: 'Extract Search Analytics and Sitemaps data for domains linked to your Google account, with dimensions, date ranges, filter groups and incremental load.'
 redirect_from:
@@ -17,6 +17,12 @@ endpoint and the [Sitemaps](https://developers.google.com/webmaster-tools/v1/sit
 endpoint.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Google account with access to the Search Console property (the domain or URL prefix) you want to read. You
+  sign in with it when you authorize the configuration.
+  <!-- VERIFY(Nikita): the OAuth scope the connector requests (webmasters.readonly?) and whether a Restricted user on the property is enough. -->
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Search Console** connector.
@@ -75,3 +81,6 @@ To extract a search analytics report, select the "Sitemaps" endpoint.
 - Fill in the output table name. The name should only contain alphanumeric characters and underscores.  
 
 Click **Save** and run the configuration.
+
+**Check:** the job ends with status **Success** and Storage has a table with the output table name you set in each
+row.

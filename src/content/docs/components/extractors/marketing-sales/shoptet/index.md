@@ -1,6 +1,6 @@
 ---
 title: Shoptet Permalink
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/marketing-sales/shoptet'
 description: 'Download Shoptet orders, products, customers and stock from permanent CSV export links, add other exports, and set the date period, load type and chunks.'
 redirect_from:
@@ -13,6 +13,11 @@ This data source connector allows you to download data from Shoptet permalinks.
 In order to be able to use this connector, you have to create a permanent link to your report in Shoptet administration.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- Access to your Shoptet administration, where you create the exports.
+- A permanent link (permalink) for each export you want to download, set to CSV format. The steps follow.
 
 For example, to create a permanent link for Orders, go to Orders > Export in your Shoptet administration page and at the bottom of the page, you can see the option to create the permanent link. This link is a direct download link to the csv file that you will use in component's configuration. To see how the report looks like, you can visit this link using your browser and it will automatically get downloaded to your computer.
 
@@ -59,4 +64,10 @@ For loading options:
     
 
 ![Screenshot - Config](/components/extractors/marketing-sales/shoptet/loading.png)
+
+Save the configuration and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table for each URL you filled in: `orders`,
+`products`, `customers` and `stocks`, plus one table per additional data item, under the name you gave it. A
+`shoptet` table with the shop's name and base URL is always added.
 

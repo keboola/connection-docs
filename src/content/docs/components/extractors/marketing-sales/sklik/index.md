@@ -1,6 +1,6 @@
 ---
 title: Sklik
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/marketing-sales/sklik'
 description: 'Fetch Sklik reports for all or selected accessible accounts with an API key, setting the resource, restriction filter, display options and columns.'
 redirect_from:
@@ -13,9 +13,11 @@ The Sklik data source connector fetches data from [Sklik](https://www.sklik.cz/)
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-Before you start, have a working [Sklik](https://www.sklik.cz/) account, and get an Sklik 
-API [key](https://napoveda.sklik.cz/pokrocila-prace-s-daty/sklik-api/). Select Settings from the drop-down menu next to your account name
-in the top right corner of the screen. The API key is on the bottom of the Account Settings page. Copy it to your clipboard.
+## Before you start
+
+- A working [Sklik](https://www.sklik.cz/) account.
+- A Sklik API [key](https://napoveda.sklik.cz/pokrocila-prace-s-daty/sklik-api/). Select Settings from the drop-down menu next to your account name
+  in the top right corner of the screen. The API key is on the bottom of the Account Settings page. Copy it to your clipboard.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Sklik** connector.
@@ -51,6 +53,11 @@ Now configure your reports:
 The main account used for access to the API is queried for campaigns and stats too. It is also saved to the table accounts
 but has the columns access, relationName,relationStatus and relationType empty.
 Prices are in halers so you need to divide by 100 to get prices in CZK.*
+
+Save the configuration and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has the table `accounts`, plus two tables per report:
+one named after the report and one with the `-stats` suffix, as described in [Report tables](#report-tables).
 
 ## API Limits
 The current listing limit supported by the Sklik API is 100. A problem appears when `statGranularity` is added to `displayOptions`.

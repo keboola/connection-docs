@@ -1,6 +1,6 @@
 ---
 title: Azure Cost Management
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/other/azure-cost'
 description: Import cost and usage data of an Azure subscription, signed in with your Microsoft account or as a service principal.
 ---
@@ -11,6 +11,14 @@ This data source connector uses the [Azure Cost Management API](https://docs.mic
 to import cost and usage data of an [Azure subscription](https://techcommunity.microsoft.com/t5/azure/understanding-azure-account-subscription-and-directory/m-p/34800).
 
 <!-- How-to-type page. Service principal section added 2026-10-12 from the registry schema of `keboola.ex-azure-cost-management-sp` and the README of keboola/ex-azure-cost-management; the rest is the legacy page. -->
+
+## Before you start
+
+- The Subscription ID of the Azure subscription whose costs you want.
+- Read access to Cost Management for that subscription, for whoever signs in: your Microsoft account with the
+  OAuth connector, or a service principal with the [service principal variant](#service-principal-variant).
+- For the service principal variant, an app registered in your Microsoft Entra tenant, with its tenant ID,
+  application (client) ID and a client secret.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Azure Cost Management OAuth** connector.  
@@ -36,6 +44,11 @@ In the [Configuration Row](/components/#configuration-rows) fill in
 
 If the [**Incremental Load**](/storage/tables/incremental-loading/#incremental-loading) is set to true, the new data will be appended to the old ones. 
 This way you can import new data, e.g., from today, without deleting the data imported before.
+
+Save the row and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table with the **Destination Table** name you
+set, with the columns described in [Output table](#output-table).
 
 ## Service principal variant
 

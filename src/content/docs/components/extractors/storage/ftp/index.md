@@ -1,6 +1,6 @@
 ---
 title: FTP 
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/storage/ftp'
 description: 'Load CSV files from FTP, FTPS or SFTP servers into Keboola tables with a password or private key, and pick files with a path or glob pattern.'
 redirect_from:
@@ -12,6 +12,13 @@ redirect_from:
 Set up the connection once, then add a table for each file or group of files you want to load.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- The host name, port and connection type (FTP, FTPS or SFTP).
+- A user that can read the files, with its password, or a private key for SFTP.
+- If the server accepts connections only from known addresses, allow [Keboola's IP addresses](/components/ip-addresses/).
+- The path or glob pattern of the files you want.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **FTP** connector.
@@ -74,6 +81,11 @@ The data source connector can optionally add audit columns to the table. `ftp_fi
 adds the row number in the source file.
 
 ![Screenshot - FTP extractor audit](/components/extractors/storage/ftp/ftp-6.png)
+
+Save the table and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table with the **Table Name** you set, with the
+rows of the matched files.
 
 The connector also supports [Debug mode](/components/debug-mode/), all supported
 parameters are described in the [GitHub repository](https://github.com/keboola/ex-ftp).

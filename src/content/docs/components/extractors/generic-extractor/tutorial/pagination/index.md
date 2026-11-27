@@ -1,6 +1,6 @@
 ---
 title: Pagination Tutorial
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'components/extractors/generic-extractor/tutorial/pagination'
 description: 'Generic Extractor tutorial on pagination: configure the offset method for the MailChimp API and run the extraction over several pages.'
 redirect_from:
@@ -18,11 +18,17 @@ the MailChimp API](/components/extractors/generic-extractor/tutorial/). If you c
 only one campaign. You should now create some more campaigns (you do not have to configure them anyhow).
 
 If the API has consistent pagination for all resources (which the
-[MailChimp API has](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters)),
+[MailChimp API has](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination)),
 then the pagination is defined in the `Pagination` section of the endpoint configuration (or in the `api` section in the underlying JSON).
 
+## Before you start
+
+- The configuration from [Basic configuration](/components/extractors/generic-extractor/tutorial/basic/),
+  which fetches campaigns.
+- More than one campaign in your MailChimp account, as described above.
+
 ## Preparation
-The MailChimp API uses the [`offset` pagination method](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters),
+The MailChimp API uses the [`offset` pagination method](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination),
 which means that each page has a fixed `limit` (by default 10 items), and you need to use the offset to move 
 that fixed-size page over the next set of results. For the first page, the `offset` is 0, for the second 
 page, the `offset` is 10. This is the same kind of pagination as in SQL.
@@ -30,8 +36,8 @@ page, the `offset` is 10. This is the same kind of pagination as in SQL.
 The offset pagination method is configured with the following basic properties:
 
 - `method` — for MailChimp, set this property to `offset`.
-- `offsetParam` — name of the API parameter which defines the [page offset](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters)
-- `limitParam` -- name of the API parameters which define the [page size (limit)](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#Parameters)
+- `offsetParam` — name of the API parameter which defines the [page offset](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination)
+- `limitParam` -- name of the API parameters which define the [page size (limit)](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination)
 
 So, for MailChimp, configure the pagination this way:
 
@@ -159,6 +165,9 @@ Then, it continued with
 and so on. You should also see a warning that the `dataField 'campaigns' contains no data`. 
 This is expected because Generic Extractor tries bigger offsets until the number of returned items is 
 less than the page size. With the page size set to 1, this means that the last page will contain no data.
+
+**Check:** the events show one request per campaign plus a last, empty page, with `offset` growing by 1, and the `campaigns` table has
+as many rows as you have campaigns.
 
 ## Summary
 In this part of the tutorial, you learned how to set up simple pagination. This is very important

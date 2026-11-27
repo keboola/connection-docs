@@ -1,6 +1,6 @@
 ---
 title: SSH Proxy Configuration
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'components/extractors/generic-extractor/configuration/ssh-proxy'
 description: 'Set up an SSH proxy for Generic Extractor to reach HTTP endpoints in a private network: proxy server, SSH key pair and the sshProxy configuration.'
 redirect_from:
@@ -31,10 +31,16 @@ A sample `config` configuration can look like this:
 }
 ```
 
-## Usage
-Before using an SSH proxy, set up an **SSH proxy server**
-to act as a gateway to your private network where your destination server resides.
+## Before you start
 
+- A Generic Extractor configuration for the API you want to reach. If you don't have one, start with the
+  [tutorial](/components/extractors/generic-extractor/tutorial/).
+- A machine for the SSH proxy server in the private network where your destination server resides. It acts
+  as the gateway, so it must be reachable from the internet over SSH (port 22 by default), ideally only from
+  [Keboola's IP address ranges](/components/ip-addresses/).
+- Rights to add an SSH public key to the `authorized_keys` file of the user the connector signs in as.
+
+## Usage
 Complete the following steps to set up an SSH proxy for Generic Extractor:
 
 ### 1. Set up SSH proxy server
@@ -95,3 +101,8 @@ cat public.key >> ~/.ssh/authorized_keys
 
 See [example [EX131]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/131-ssh-tunnel).
 and [example [EX133]](https://github.com/keboola/generic-extractor/tree/master/doc/examples/133-ssh-tunnel-iterations-params).
+
+Save the configuration and run it.
+
+**Check:** the job ends with status **Success** and the output tables hold data from the endpoint inside your
+private network.

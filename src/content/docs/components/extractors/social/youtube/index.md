@@ -1,6 +1,6 @@
 ---
 title: YouTube Data API
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/social/youtube'
 description: 'Get basic data about your YouTube channels, playlists and videos with the Channels or Videos template, or write your own YouTube Data API jobs.'
 redirect_from:
@@ -17,6 +17,12 @@ The connector calls the [YouTube Data API](https://developers.google.com/youtube
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
+## Before you start
+
+- A Google account that owns or manages the YouTube channel. You sign in with it when you authorize the
+  configuration.
+  <!-- VERIFY(Nikita): the OAuth scope the connector requests (youtube.readonly?); the template in keboola/kbc-ui-templates does not state it. -->
+
 ## Configuration
 To begin, [create a new configuration](/components/configurations/#create-a-configuration) for the **YouTube** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
@@ -29,6 +35,11 @@ Select one of the two available **templates**:
 ![Screenshot - Create configuration](/components/extractors/social/youtube/youtube-1.png)
 
 You can [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode) for more advanced configurations.
+
+Save the configuration and click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a `channels` table. The **Videos** template also
+creates `playlists` and `videos`.
 
 ### Advanced Configuration
 To give a simple example, the configuration for details about your channel looks like this:

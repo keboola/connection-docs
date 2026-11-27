@@ -1,6 +1,6 @@
 ---
 title: Mapping Tutorial
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'components/extractors/generic-extractor/tutorial/mapping'
 description: 'Generic Extractor tutorial on mapping: clean up the MailChimp response, set a primary key and nesting level, and add the parent campaign ID as a column.'
 redirect_from:
@@ -12,6 +12,11 @@ redirect_from:
 
 In the previous part of the tutorial, you [extracted the content of a MailChimp campaign](/components/extractors/generic-extractor/tutorial/jobs/). 
 Now, it's time to clean up the response.
+
+## Before you start
+
+- The configuration from [Jobs](/components/extractors/generic-extractor/tutorial/jobs/), which extracts
+  campaigns and their content.
 
 This is the initial configuration:
 
@@ -317,6 +322,9 @@ then look like this:
     }
 }
 ```
+
+**Check:** the job ends with status **Success** and Storage has the table `in.c-ge-tutorial.content`, with the
+columns your mapping lists, including `campaign_id`, which links each row to its campaign.
 
 ## Review
 Now, let's review what parts are connected and how. Note that the values in blue 

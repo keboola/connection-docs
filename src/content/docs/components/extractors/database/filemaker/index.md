@@ -1,6 +1,6 @@
 ---
 title: FileMaker
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/database/filemaker'
 description: 'Extract layout data and layout metadata from FileMaker databases through the FileMaker Data API with a host URL, username and password.'
 ---
@@ -13,15 +13,21 @@ This component extracts layout data from [FileMaker](https://www.claris.com/file
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
+## Before you start
+
+- A database set up for FileMaker Data API access by
+  [creating specific layouts](https://help.claris.com/en/data-api-guide/content/prepare-databases-for-access.html).
+  The connector reads data through these layouts.
+- The host URL of the FileMaker server, and a user name and password for an
+  account that may use the Data API.
+  <!-- VERIFY(Nikita): that the account needs the fmrest ("Access via FileMaker Data API") extended privilege; Claris docs say so, the component code does not check it. -->
+- The FileMaker server must be reachable over HTTPS from
+  [Keboola's IP addresses](/components/ip-addresses/).
+
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **FileMaker** data source connector.
 
-
-### Prepare the FileMaker Database 
-
-- Configure your database for FileMaker Data API access by [creating specific layouts](https://help.claris.com/en/data-api-guide/content/prepare-databases-for-access.html).
-- Obtain FileMaker Data API credentials, including the host URL, username, and password.
 
 ### Authorization Setup
 
@@ -50,7 +56,7 @@ Define the object type to extract and configure storage syncing options.
 
 Download schemas of selected layouts. Provide a list of Database and Layout names to retrieve metadata. 
 
-***Note:** Leave the list empty to retrieve metadata for all available objects.*
+***Note:** The connector downloads field schemas only for the layouts you list. With an empty list, you get only the list of layouts in the `layouts` table.*
 
 ##### Layout
 
@@ -75,6 +81,11 @@ Download data from a specific layout with a specified query.
 - **Incremental fetching** (`incremental_fetch`) – If `true`, only records with values **>=** to the last incremental field value will be retrieved in consecutive runs.
 - **Incremental fields** (`incremental_fields`) – List of columns used for incremental fetching. If multiple specified, an **AND** relation is applied.
 - **Page size** (`page_size`, optional) – The number of records retrieved per API call. ***Note:** A large page size may impact performance on the destination database.*
+
+Save the row and click **Run Component**.
+
+**Check:** the job ends with status **Success**. A **Metadata** row creates the table `layouts`, plus
+`layout_fields_metadata` when you listed layouts; a **Layout** row creates a table named after the FileMaker table behind the layout.
 
 
 ## Output

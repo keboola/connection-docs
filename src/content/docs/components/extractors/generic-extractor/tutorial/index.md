@@ -1,6 +1,6 @@
 ---
 title: Generic Extractor Tutorial
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'components/extractors/generic-extractor/tutorial'
 description: 'Generic Extractor tutorial: prepare a MailChimp account and API key, then configure the extractor for a new REST API step by step.'
 redirect_from:
@@ -18,8 +18,10 @@ Even though there already is a MailChimp extractor available in Keboola as a
 the [MailChimp](https://mailchimp.com/) API is ideal for this tutorial because it is fairly
 easy to understand and has excellent documentation.
 
-## Prepare
-There are a few things you need to do before you start:
+## Before you start
+
+You need a Keboola project where you can create component configurations, and a MailChimp account with some
+data in it and an API key. Do this first:
 
 1. Read our [quick introduction to REST](/components/extractors/generic-extractor/tutorial/rest/) for a basic understanding of
 **HTTP requests** and **REST API**.
@@ -41,10 +43,10 @@ It will look like this: `c40xxxxxxxxxxxxxxxxxxxxxxxxxxxxx-us13`.
 ## Get started
 Let's take a closer look at the [MailChimp API](https://mailchimp.com/developer/) now.
 There are plenty of documentation guides available. To explore the API and review what information is in
-each resource, use, for example, the [Playground](https://us1.api.mailchimp.com/playground/).
+each resource, use the [API reference](https://mailchimp.com/developer/marketing/api/).
 
 The basic properties of the API are outlined in the
-[Getting Started Guide](https://mailchimp.com/developer/guides/get-started-with-mailchimp-api-3/#resources).
+[API fundamentals](https://mailchimp.com/developer/marketing/docs/fundamentals/).
 The following are the crucial parts for our use-case:
 
 - The root API URL is `https://<dc>.api.mailchimp.com/3.0`, where `<dc>` refers to a data center for your
@@ -54,7 +56,7 @@ account. The data center is the last part of the API key; if the API key is
 username and the API key for password.
 
 Now, go straight to the documentation of the
-[**Campaign** resource](https://mailchimp.com/developer/reference/campaigns/).
+[**Campaign** resource](https://mailchimp.com/developer/marketing/api/campaigns/).
 Because you intend to extract data from MailChimp, the only part you are interested in is the **Read Method**.
 
 ![Screenshot - Read Campaign Documentation](/components/extractors/generic-extractor/tutorial/mailchimp-api-docs-1.png)
@@ -72,6 +74,9 @@ requests and responses. The response body is in [JSON](/components/extractors/ge
       "create_time": "2015-09-15T14:40:36+00:00",
       ...
 ```
+
+**Check:** you have an API key that ends with your data center (for example `-us13`), you know the root API
+URL built from it (`https://us13.api.mailchimp.com/3.0`), and the Campaign resource documentation is open.
 
 ## Next steps
 Now you have everything you need to actually start extracting the data. Continue with your Generic Extractor

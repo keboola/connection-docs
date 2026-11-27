@@ -1,6 +1,6 @@
 ---
 title: OneDrive Excel Sheets
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/storage/onedrive-excel-sheets'
 description: 'Import Excel worksheets from OneDrive, Office 365 or SharePoint into Keboola tables by picking the workbook and worksheet with the file picker.'
 redirect_from:
@@ -20,6 +20,14 @@ and **[SharePoint](https://www.microsoft.com/en-us/microsoft-365/sharepoint/coll
 so with this connector, you have access to all your Excel sheets in your personal account or in your business account.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Microsoft account, personal or work, that can open the Excel workbooks you want. You sign in with it when
+  you authorize the configuration. The connector asks for the delegated Microsoft Graph permissions
+  `Files.Read.All` and `Sites.Read.All`. If your organization doesn't let users consent to apps, an admin must
+  approve the connector first.
+  <!-- Checked 2026-11-27: scopes offline_access User.Read Files.Read.All Sites.Read.All, from keboola/components components/ex-onedrive (RefreshTokenProvider.php, README). -->
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **OneDrive Excel Sheets** connector.  
@@ -68,6 +76,11 @@ You can manually change it to suit your needs. If the table doesn't exist, it wi
 Click **Save** when you're done.
 
 ![Screenshot - Select worksheet](/components/extractors/storage/onedrive-excel-sheets/onedrive-10.png)
+
+Click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a table with the output **table name**, by default
+the worksheet name.
 
 ## Modify Configuration
 When a table is added to the connector, it is displayed in the list of tables. 

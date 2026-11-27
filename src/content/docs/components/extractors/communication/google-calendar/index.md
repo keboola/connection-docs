@@ -1,6 +1,6 @@
 ---
 title: Google Calendar
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/extractors/communication/google-calendar'
 description: 'Download all calendars in your Google account with their events and details, or Google holiday calendars, after you authorize the connector.'
 redirect_from:
@@ -15,6 +15,14 @@ notifications, attachments, description, etc.). It can also be used for download
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
+## Before you start
+
+- A Google account. You sign in with it when you authorize the configuration. The connector downloads
+  the calendars in that account's calendar list, so use an account that has the calendars you need.
+  <!-- VERIFY(Nikita): the OAuth scope the connector requests (calendar read-only?); the template in keboola/kbc-ui-templates does not state it. -->
+- Nothing to set up on the Google side. The connector uses Keboola's own Google app, so you don't need a
+  Google Cloud project.
+
 ## Create New Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Calendar** connector.
 Then click **Authorize Account** to [authorize the configuration](/components/authorization/). 
@@ -26,6 +34,11 @@ There is only one Google Calendar template available so far -- *Get data from Go
 You can also [switch to the JSON editor](/components/extractors/generic-extractor/#template-mode).
 
 ![Google Calendar - Save Configuration](/components/extractors/communication/google-calendar/google-calendar-2.png)
+
+Click **Run Component**.
+
+**Check:** the job ends with status **Success** and Storage has a `calendars` table with one row per calendar
+and an `events` table with their events.
 
 ## API Limits
 The Google Calendar API has a courtesy limit of 1,000,000 queries per day. If you need more, the limit can be [changed](https://developers.google.com/calendar/pricing).
