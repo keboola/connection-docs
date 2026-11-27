@@ -1,6 +1,6 @@
 ---
 title: Redshift
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/database/redshift'
 description: 'Write Keboola tables to your own Amazon Redshift database or one Keboola provisions, then share that database with Looker, Power BI, Qlik or Tableau.'
 redirect_from:
@@ -16,6 +16,37 @@ for sharing your data in form of an SQL database with some service. For example,
 data to [Tableau](https://www.tableau.com/) or [PowerBI](https://powerbi.microsoft.com/en-us/).
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+Both modes need a Keboola project on an AWS stack: the connector loads every table with a Redshift `COPY` from the
+S3 staging files Keboola provides. Decide which of the [two modes](#configuration) you need. For your **own Redshift database**:
+
+- A Redshift cluster and its host name, database and a schema to write to.
+- A route from the cluster to Amazon S3 for `COPY`. With
+  [enhanced VPC routing](https://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html) turned on, that
+  takes a VPC endpoint, which works only for S3 buckets in the cluster's region, or a NAT or internet gateway for
+  buckets in another region.
+- A user for the connector that owns the schema. The SQL below creates the schema, the user and a group.
+- Network access from Keboola to the cluster: allow the [Keboola IP addresses](/components/ip-addresses/) of your stack
+  in the cluster's [security group](https://docs.aws.amazon.com/redshift/latest/mgmt/rs-security-group-public-private.html),
+  or connect through an [SSH tunnel](/components/extractors/database/#connecting-to-database).
+
+We highly recommend that you create dedicated credentials for the connector in your Redshift database. You can use the following SQL code to get started:
+
+```sql
+CREATE GROUP writer_sample;
+CREATE SCHEMA writer_sample;
+GRANT ALL ON SCHEMA writer_sample TO GROUP writer_sample;
+CREATE USER writer_sample WITH PASSWORD 'Writer_sample1';
+ALTER SCHEMA writer_sample OWNER TO writer_sample;
+ALTER USER writer_sample SET search_path TO writer_sample;
+ALTER GROUP writer_sample ADD USER writer_sample;
+```
+
+For a **Keboola Redshift database**, nothing has to exist outside Keboola, but the mode is available only for projects
+with the Redshift [Storage backend](/storage/#storage-data). If you need a provisioned database in non-Redshift
+projects, use the [Snowflake data destination connector](/components/writers/database/snowflake/#keboola-snowflake-database) for the purpose.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Redshift** data destination connector.
@@ -34,20 +65,6 @@ You need to provide a *host name*, *user name*, *password*, *database name*, and
 
 ![Screenshot - Own Credentials](/components/writers/database/redshift/redshift-2.png)
 
-We highly recommend that you create dedicated credentials for the connector in your Redshift database. You can use the following SQL code to get started:
-
-```sql
-CREATE GROUP writer_sample;
-CREATE SCHEMA writer_sample;
-GRANT ALL ON SCHEMA writer_sample TO GROUP writer_sample;
-CREATE USER writer_sample WITH PASSWORD 'Writer_sample1';
-ALTER SCHEMA writer_sample OWNER TO writer_sample;
-ALTER USER writer_sample SET search_path TO writer_sample;
-ALTER GROUP writer_sample ADD USER writer_sample;
-```
-
-It is also possible to secure the connection using an [SSH tunnel](/components/extractors/database/#connecting-to-database).
-
 ### Keboola Redshift Database
 A Keboola Redshift database is created by the connector and the credentials are provisioned for you:
 
@@ -57,9 +74,6 @@ You can share the credentials with services that need to access your data — fo
 Note that the database is provided solely for the purpose of **sharing your existing data** with the outside world. This means that it must not be receiving
 any data (outside those provided by the connector itself, of course). This is a contractual limitation.
 Also note that the number of provisioned Redshift databases is part of [project limits](/management/project/limits/).
-
-*Note: This feature is available only for projects with the Redshift [Storage backend](/storage/#storage-data). If you need a provisioned database in non-Redshift
-projects, use the [Snowflake data destination connector](/components/writers/database/snowflake/#keboola-snowflake-database) for the purpose.*
 
 ## Table Configuration
 The next step is to configure the tables you want to write. Click **Add New Table** and select an existing table from Storage:
@@ -99,6 +113,9 @@ for more details.
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
 [incremental processing](/storage/tables/incremental-loading/#incremental-processing).
+
+**Check:** click **Run Component**. The job ends with **Success**, and the table appears in the target schema with the
+rows from the Storage table.
 
 ## Using Keboola Provisioned Database
 The connector offers the option to create a [Keboola Provisioned database](#keboola-redshift-database) for you. You can

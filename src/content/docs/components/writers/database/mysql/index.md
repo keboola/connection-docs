@@ -1,6 +1,6 @@
 ---
 title: MySQL
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/database/mysql'
 description: 'Write Keboola tables to a MySQL or MariaDB database with dedicated credentials or an SSH tunnel, then set column types and full or incremental load.'
 redirect_from:
@@ -14,13 +14,18 @@ This data destination connector sends data to a [MySQL](https://www.mysql.com/pr
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Configuration
-[Create a new configuration](/components/configurations/#create-a-configuration) of the **MySQL** data destination connector.
+## Before you start
 
-The first step is to **Set Up Database Credentials**.
-You need to provide a *host name*, *user name*, *password*, and a *database name* (MySQL [*schema*](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_schema)).
-
-![Screenshot - Credentials](/components/writers/database/mysql/mysql-2.png)
+- A MySQL or MariaDB database to write to.
+- A user for the connector with `CREATE`, `DROP`, `CREATE TEMPORARY TABLES`, `SELECT`, `INSERT` and `UPDATE` on that
+  database. The SQL below creates the database and the user. Without `ALTER`, the connector can't write Storage
+  descriptions as table and column comments; the job logs a warning and still succeeds.
+- The server variable `local_infile` turned on, because the connector loads data with `LOAD DATA LOCAL INFILE` and
+  stops with `local_infile is disabled on server` otherwise. It is
+  [off by default on MySQL 8](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_local_infile)
+  (turn it on with `SET GLOBAL local_infile = 1` or your managed service's parameter) and on by default on MariaDB.
+- Network access from Keboola to the database: allow the [Keboola IP addresses](/components/ip-addresses/) of your stack
+  in your firewall, or connect through an [SSH tunnel](/components/extractors/database/#connecting-to-database).
 
 We highly recommend that you create dedicated credentials for the connector in your database. You can use the following SQL code to get started:
 
@@ -31,7 +36,13 @@ GRANT CREATE TEMPORARY TABLES, CREATE, DROP, SELECT, INSERT, UPDATE ON writer_sa
     TO writer_sample;
 ```
 
-It is also possible to secure the connection using an [SSH tunnel](/components/extractors/database/#connecting-to-database).
+## Configuration
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **MySQL** data destination connector.
+
+The first step is to **Set Up Database Credentials**.
+You need to provide a *host name*, *user name*, *password*, and a *database name* (MySQL [*schema*](https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_schema)).
+
+![Screenshot - Credentials](/components/writers/database/mysql/mysql-2.png)
 
 ## Table Configuration
 The next step is to configure the tables you want to write. Click **Add New Table** and select an existing table from Storage:
@@ -70,3 +81,6 @@ freeze waiting for the locks to be released.
 
 Additionally, you can specify a **primary key** of the table, a simple column **data filter**, and a filter for
 [incremental processing](/storage/tables/incremental-loading/#incremental-processing).
+
+**Check:** click **Run Component**. The job ends with **Success**, and the table appears in the target database with
+the rows from the Storage table.

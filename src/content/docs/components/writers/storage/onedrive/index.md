@@ -1,6 +1,6 @@
 ---
 title: OneDrive Excel Sheets
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/storage/onedrive'
 description: 'Write Keboola tables to an Excel worksheet in OneDrive, Office 365 or SharePoint, pick or create the workbook and worksheet, and overwrite or append rows.'
 redirect_from:
@@ -22,6 +22,15 @@ The contents of the sheet can be overwritten or new lines can be added at the en
 
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Microsoft account with OneDrive that you can [authorize](/components/authorization/): a personal account, or a
+  work or school (Office 365) account. To write to a SharePoint site, the account needs access to that site.
+  The connector asks for the Microsoft Graph permissions `offline_access`, `User.Read`, `Files.ReadWrite.All` and
+  `Sites.ReadWrite.All`.
+  <!-- VERIFY(Nikita): check whether a work or school tenant can require an admin to approve these permissions before the authorization goes through. -->
+- An Excel workbook (XLSX) to write to, or a path where the connector should [create one](#create-a-new-workbook).
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **OneDrive Excel Sheets** data destination connector.  
@@ -69,6 +78,9 @@ otherwise, the contents of the worksheet will be overwritten.
 Click **Save** when you're done.
 
 ![Screenshot - Select worksheet](/components/writers/storage/onedrive/onedrive-09.png)
+
+**Check:** click **Run Component**. The job ends with **Success**, and the worksheet in OneDrive holds the table's
+rows: in place of the old contents, or below them if you checked **Append**.
 
 ## Modify Configuration
 When a table is added to the connector, it is displayed in the list of tables. 

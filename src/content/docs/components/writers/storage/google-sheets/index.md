@@ -1,6 +1,6 @@
 ---
 title: Google Sheets
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/storage/google-sheets'
 description: 'Write Keboola tables into worksheets of a Google Sheets spreadsheet, overwriting the sheet or appending rows; Google Sheets limits the document size.'
 redirect_from:
@@ -15,6 +15,13 @@ Be aware that Google Sheets have [strict limits](https://spreadsheetpoint.com/go
 on the size of the document. If you are getting close to them, use the [Google Drive data destination connector](/components/writers/storage/google-drive/) to avoid failed writes.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Google account you can [authorize](/components/authorization/). To write into an existing spreadsheet, the
+  account needs edit access to it.
+  <!-- VERIFY(Nikita): the README of keboola.wr-google-sheets shows the OAuth scopes drive, userinfo.profile, userinfo.email and spreadsheets.readonly in its development setup; check that the production authorization asks for the same and name the access here. -->
+- A table that fits within the [Google Sheets limits](https://spreadsheetpoint.com/google-sheets-limitations/).
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Google Sheets** data destination connector.
@@ -35,3 +42,6 @@ worksheet rows. When worksheet rows are appended, the table header is written on
 
 When done, click the **Save Sheet** button to finish the table configuration. 
 Configured tables are stored as [configuration rows](/components/#configuration-rows).
+
+**Check:** click **Run Component**. The job ends with **Success**, and the worksheet holds the table's rows: the
+header and all rows when you overwrite, or the new rows below the existing ones when you append.

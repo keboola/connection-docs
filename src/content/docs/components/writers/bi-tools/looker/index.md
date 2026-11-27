@@ -1,6 +1,6 @@
 ---
 title: Looker
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/bi-tools/looker'
 description: 'Push Keboola tables to Looker as a new LookML project through a Snowflake workspace, with a Looker API client ID and secret and optional foreign keys.'
 redirect_from:
@@ -15,11 +15,19 @@ The connector currently uses Snowflake as its backend.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Configuration
+## Before you start
 
-To connect Keboola to your Looker account, you need API credentials from Looker administration. 
-The exact required steps are described in the [Looker documentation](https://docs.looker.com/reference/api-and-integration/api-auth#authentication_with_a_sdk). 
-You need `Client ID` and `Client secret` to authenticate Keboola with Looker. 
+- A Looker instance and its API host.
+- Looker API credentials: the `Client ID` and `Client secret` of a Looker user, which an admin creates in Looker
+  administration ([Looker documentation](https://cloud.google.com/looker/docs/api-auth)). The connector creates a
+  Looker connection with them, so the user needs a role that can manage connections.
+  <!-- VERIFY(Nikita): check which Looker permission the API user needs for the connector to create the connection (for example manage_connections or the Admin role). -->
+- If your Looker instance accepts API calls only from known addresses, allow the
+  [Keboola IP addresses](/components/ip-addresses/) of your stack.
+- A Snowflake database for the data: a Keboola-generated workspace or your own Snowflake database (see below).
+- Run the connector in the production branch: its jobs are blocked in [development branches](/components/branches/).
+
+## Configuration
 
 Create a [new **Looker data destination connector** configuration](/components/configurations/#create-a-configuration) in your project. 
 
@@ -64,3 +72,6 @@ In Looker, when creating a new LookML project, you select the connection name fr
 ![New configuration](/components/writers/bi-tools/looker/10.png)
 
 You're done. The LookML project with automatically created relations is prepared for you. 
+
+**Check:** the job ends with **Success** and its log names the Looker connection. In Looker, the new LookML project
+generated from that connection has a view for each table you added, with the relations from your foreign keys.

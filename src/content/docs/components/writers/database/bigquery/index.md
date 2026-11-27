@@ -1,6 +1,6 @@
 ---
 title: Google BigQuery
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/database/bigquery'
 description: 'Write Keboola tables to a Google BigQuery dataset with a service account JSON key, then set table names, column data types and full or incremental load.'
 redirect_from:
@@ -14,7 +14,17 @@ This data destination connector sends data to a [Google BigQuery](https://cloud.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Create Service Account
+## Before you start
+
+- A Google Cloud project for the BigQuery dataset.
+- A service account in that project with the `BigQuery Data Editor` and `BigQuery Job User` roles, and a JSON key for it.
+  [Create service account](#create-service-account) shows the steps.
+- The name of the dataset to write to. If the dataset does not exist, the roles assigned to the Google Service Account
+  will allow the connector to create it, in the location set in the configuration or, when none is set, in BigQuery's
+  default location.
+  <!-- VERIFY(Nikita): the configSchema of keboola.wr-google-bigquery-v2 has a `location` enum (US, EU, regions) and app.py passes it to the client (None when unset); check whether the UI shows the field, and if so, tell the reader to pick it here. -->
+
+### Create service account
 To access and write to your BigQuery dataset, you need to set up a Google Service Account. 
 
 - Go to [**Google Cloud Platform Console > IAM & admin > Service accounts**](https://console.cloud.google.com/iam-admin/serviceaccounts).
@@ -49,7 +59,6 @@ There is one more thing left to do before you can start adding tables. Specify t
 ![Screenshot - BigQuery Dataset](/components/writers/database/bigquery/bigquery-2.png)
 
 All tables in this configuration will be written to this dataset. 
-If the dataset does not exist, the roles assigned to the Google Service Account will allow the connector to create it.
 
 ## Add Tables
 To add a new table to the connector, click **Add Table** and select the table. 
@@ -71,3 +80,6 @@ You can rename the destination column in BigQuery and specify the used data type
 The little eye icon on the right will show you a preview of the values so you don't have to guess the data type. 
 
 *Note: You have to define a data type on at least one column for the configuration to work.* 
+
+**Check:** click **Run Component**. The job ends with **Success**, and the table appears in the dataset in the
+[BigQuery console](https://console.cloud.google.com/bigquery) with the rows from the Storage table.

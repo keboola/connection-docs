@@ -1,6 +1,6 @@
 ---
 title: ThoughtSpot
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/bi-tools/thoughtspot'
 description: 'Load Keboola tables into ThoughtSpot with database and SSH credentials, then set column types, the table type, and full or incremental load.'
 redirect_from:
@@ -12,6 +12,17 @@ redirect_from:
 This data destination connector sends data to the [ThoughtSpot](https://www.thoughtspot.com/product) platform.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A ThoughtSpot instance backed by Falcon. For ThoughtSpot Embrace, write to the underlying database with its own
+  connector instead (for example [Snowflake](/components/writers/database/snowflake/) or
+  [BigQuery](/components/writers/database/bigquery/)).
+- A ThoughtSpot database user and password, and the name of the database to write to. The connector creates the
+  database and schema if they don't exist; without a schema name, it uses the default schema.
+- An SSH user and password for the ThoughtSpot server, because the connector runs `tsload` there.
+- Network access from Keboola to the server, both over SSH and to the database port: allow the
+  [Keboola IP addresses](/components/ip-addresses/) of your stack in your firewall.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **ThoughtSpot** data destination connector.
@@ -63,3 +74,6 @@ using the [`DROP`](https://docs.thoughtspot.com/software/latest/tql-cli-commands
 
 Additionally, you can specify a **primary key** for the table, a simple column **data filter**, and a filter for
 [incremental processing](/storage/tables/incremental-loading/#incremental-processing).
+
+**Check:** click **Run Component**. The job ends with **Success**, and the table appears in the ThoughtSpot schema
+with the rows from the Storage table.

@@ -1,6 +1,6 @@
 ---
 title: GoodData
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/bi-tools/gooddata'
 description: 'Write Keboola tables to a GoodData project and let the connector build its logical data model from the column types and date dimensions you set.'
 redirect_from:
@@ -19,6 +19,15 @@ the configuration non-trivial, and you should have the data model designed befor
 the connector.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A GoodData user (login and password). The connector logs in to GoodData as this user.
+- A GoodData project to write to, preferably an empty one (see [Project Setup](#project-setup)). Because the connector
+  changes the project's LDM, the user needs a role in the project that allows changing the model.
+  <!-- VERIFY(Nikita): the README of keboola.gooddata-writer shows only `user.login`, `user.#password` and `project.pid`; check which GoodData role the user needs, whether the project setup dialog can create a new project (and whether that needs a GoodData authorization token), and whether the connector works with GoodData Cloud or only the GoodData Platform. -->
+- A design of your logical data model: which columns are facts, attributes, connection points, references and dates,
+  and which date dimensions you need.
 
 ## Configuration
 
@@ -124,6 +133,9 @@ does not represent a valid object. Adjust the manifest or create the object."`.
 
 Another option is to switch between **Separate load** and **Multiload**. These represent different modes of transferring data into
 GoodData, and depending on the size and nature of your project, either of them may be faster.
+
+**Check:** click **Run Component**. The job ends with **Success**. In the GoodData project (**Go To Project**), the
+logical data model shows a dataset for each table you configured.
 
 ### GoodData Project
 

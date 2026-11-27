@@ -1,6 +1,6 @@
 ---
 title: SQL Server
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/database/mssql'
 description: 'Write Keboola tables to a Microsoft SQL Server database, map columns to SQL Server types, choose full or incremental load, and see how binary values convert.'
 redirect_from:
@@ -13,13 +13,17 @@ This data destination connector sends data to a [Microsoft SQL Server](https://w
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Configuration
-[Create a new configuration](/components/configurations/#create-a-configuration) of the **SQL Server** data destination connector.
+## Before you start
 
-The first step is to **Set Up Database Credentials**.
-You need to provide a *host name*, *user name*, *password*, *database name*, and SQL Server version; optionally, an *instance name* if needed for the connection.
-
-![Screenshot - Save Credentials](/components/writers/database/mssql/mssql-2.png)
+- A SQL Server database and a SQL Server login for the connector, with a user in that database whose default schema
+  is the schema to write to (`WITH DEFAULT_SCHEMA`, as in the SQL below). The credentials form has no schema field, so
+  table names without a schema land in the user's default schema; to write elsewhere, give the table name as
+  `schema.table`. The user needs `EXECUTE`, `CREATE TABLE`, and `ALTER`, `SELECT`, `INSERT`, `UPDATE` and `DELETE` on the schema; the SQL
+  below creates such a login.
+- On Azure SQL, SQL authentication must be enabled, because the connector logs in with a SQL login and password.
+- Network access from Keboola to the database: allow the [Keboola IP addresses](/components/ip-addresses/) of your stack
+  in your firewall (on Azure SQL, a server firewall rule), or connect through an
+  [SSH tunnel](/components/extractors/database/#connecting-to-database).
 
 We highly recommend that you create dedicated credentials for the connector in your database. You can use the following SQL code to get started:
 
@@ -35,7 +39,13 @@ GRANT ALTER, SELECT, INSERT, UPDATE, DELETE ON SCHEMA :: writer_sample_schema TO
 ALTER ROLE writer_sample_role ADD MEMBER writer_sample;
 ```
 
-It is also possible to secure the connection using an [SSH tunnel](/components/extractors/database/#connecting-to-database).
+## Configuration
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **SQL Server** data destination connector.
+
+The first step is to **Set Up Database Credentials**.
+You need to provide a *host name*, *user name*, *password*, *database name*, and SQL Server version; optionally, an *instance name* if needed for the connection.
+
+![Screenshot - Save Credentials](/components/writers/database/mssql/mssql-2.png)
 
 ## Table Configuration
 The next step is to configure the tables to write. Click the **Add new table** button and select an existing table from Storage:
@@ -74,6 +84,9 @@ freeze waiting for the locks to be released.
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
 [incremental processing](/storage/tables/incremental-loading/#incremental-processing).
+
+**Check:** click **Run Component**. The job ends with **Success**, and the table appears in the target schema with the
+rows from the Storage table.
 
 ## Binary types
 

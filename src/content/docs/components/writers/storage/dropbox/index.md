@@ -1,6 +1,6 @@
 ---
 title: Dropbox
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/storage/dropbox'
 description: 'Write Keboola tables and files to an authorized Dropbox account, into the Apps/Keboola Connection Writer V2 folder or a subfolder you set.'
 redirect_from:
@@ -12,6 +12,12 @@ redirect_from:
 This data destination connector sends tables as CSV or other files into a single [Dropbox](https://www.dropbox.com/) account.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- A Dropbox account you can [authorize](/components/authorization/). The connector writes only into its own app
+  folder in that account, **Apps/Keboola Connection Writer V2**.
+- The Storage [tables](/storage/tables/) or [files](/storage/files/) to send. For files, know their tag.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Dropbox** data destination connector.
@@ -29,3 +35,6 @@ You may specify Storage [tables](/storage/tables/) or [files](/storage/files/) t
 The written files will be available in the **Apps/Keboola Connection Writer V2** folder in Dropbox. You can optionally specify 
 an additional subfolder in this folder in the `Destination folder` setting. In the above screenshot, the files would be saved 
 in the folder `Apps/Keboola Connection Writer V2/samples/monthly`. The configuration can write as many tables and files as you wish.
+
+**Check:** click **Run Component**. The job ends with **Success**, and the files appear in Dropbox in
+**Apps/Keboola Connection Writer V2**, or in the destination folder you set inside it.

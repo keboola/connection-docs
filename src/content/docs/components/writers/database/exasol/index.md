@@ -1,6 +1,6 @@
 ---
 title: Exasol
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/database/exasol'
 description: 'Write Keboola tables to Exasol SaaS with a personal access token or to a self-hosted Exasol with a password, then set column types and load mode.'
 redirect_from:
@@ -12,6 +12,21 @@ redirect_from:
 This data destination connector sends data to a [Exasol](https://www.exasol.com/) database.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- An Exasol database: [Exasol SaaS](https://cloud.exasol.com/) or a self-hosted (on-premise) Exasol.
+- The host name and port of the database. The default port is `8563`.
+- A user to log in with:
+    - on Exasol SaaS, a user name and a [personal access token](https://docs.exasol.com/saas/administration/access_mngt/access_token.htm);
+    - on a self-hosted Exasol, a user name and password.
+- The schema to write to. It must exist; the connector creates tables in it but not the schema itself.
+- A user that owns the schema or can create, rename, drop and merge into tables in it, because the connector loads
+  through staging tables: a full load renames and drops them, an incremental load merges from one and drops it. The user also needs the `IMPORT` and `INSERT` privileges that the
+  [`IMPORT` statement](https://docs.exasol.com/db/latest/sql/import.htm) requires.
+- Network access from Keboola to the database. On Exasol SaaS, add the [Keboola IP addresses](/components/ip-addresses/)
+  of your stack to the allow list on the **Security** page of the web console
+  ([Exasol docs](https://docs.exasol.com/saas/connect_exasol.htm)); on a self-hosted Exasol, allow them in your firewall.
 
 ## Configuration
 [Create a new configuration](/components/configurations/#create-a-configuration) of the **Exasol** data destination connector.
@@ -71,4 +86,7 @@ The name of the table in the Exasol database can be set in the Database Table Na
 The Case sensitivity of the table can be set using the drop down selector in the case sensitivity box. Case sensitivity makes table objects and their columns case sensitive, just as if you were to use double quotes in SQL statements.
 
 ![Screenshot - case sensitive](/components/writers/database/exasol/case_sensitive_and_db_name.png)
+
+**Check:** click **Run Component**. The job ends with **Success**, and the table appears in the Exasol schema with the
+rows from the Storage table.
 

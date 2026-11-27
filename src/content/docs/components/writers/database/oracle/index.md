@@ -1,6 +1,6 @@
 ---
 title: Oracle
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 slug: 'components/writers/database/oracle'
 description: 'Write Keboola tables to an Oracle database with a host, user and service name, then set column types and full or incremental load.'
 redirect_from:
@@ -13,13 +13,13 @@ This data destination connector sends data to an [Oracle](https://www.oracle.com
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
 
-## Configuration
-[Create a new configuration](/components/configurations/#create-a-configuration) of the **Oracle** data destination connector.
+## Before you start
 
-The first step is to **Set Up Database Credentials**.
-You need to provide a *host name*, *user name*, *password*, and a *service name*.
-
-![Screenshot - Credentials](/components/writers/database/oracle/oracle-2.png)
+- An Oracle database and its host name, port and service name.
+- A user for the connector with `CREATE SESSION`, `CREATE TABLE` and enough tablespace quota for the data. The SQL
+  below creates one with `UNLIMITED TABLESPACE`.
+- Network access from Keboola to the database: allow the [Keboola IP addresses](/components/ip-addresses/) of your stack
+  in your firewall, or connect through an [SSH tunnel](/components/extractors/database/#connecting-to-database).
 
 We highly recommend that you create dedicated credentials for the connector in your database. You can use the following SQL code to get started:
 
@@ -30,7 +30,13 @@ GRANT CREATE TABLE TO writer_sample;
 GRANT UNLIMITED TABLESPACE TO writer_sample;
 ```
 
-It is also possible to secure the connection using an [SSH tunnel](/components/extractors/database/#connecting-to-database).
+## Configuration
+[Create a new configuration](/components/configurations/#create-a-configuration) of the **Oracle** data destination connector.
+
+The first step is to **Set Up Database Credentials**.
+You need to provide a *host name*, *user name*, *password*, and a *service name*.
+
+![Screenshot - Credentials](/components/writers/database/oracle/oracle-2.png)
 
 ## Table Configuration
 The next step is to configure the tables you want to write. Click **Add New Table** and select an existing table from Storage:
@@ -72,3 +78,6 @@ fail with the following message:
 
 Additionally, you can specify a **Primary key** of the table, a simple column **Data filter**, and a filter for
 [incremental processing](/storage/tables/incremental-loading/#incremental-processing).
+
+**Check:** click **Run Component**. The job ends with **Success**, and the table appears in the Oracle database with the
+rows from the Storage table.
