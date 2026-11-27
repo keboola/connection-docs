@@ -170,7 +170,7 @@ Don't give an agent write access it doesn't need. kbagent's [permission firewall
 # Read-only local workspace for an agent
 kbagent init --from-global --read-only
 
-# Or block writes for a single session
+# Or block writes for a single command
 kbagent --deny-writes config list
 ```
 

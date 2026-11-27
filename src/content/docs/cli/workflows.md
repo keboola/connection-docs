@@ -17,7 +17,10 @@ Practical recipes for [kbagent](/cli/). Each is self-contained: a goal, the step
 
 - kbagent, installed and connected to your projects: [Get started with kbagent](/cli/getting-started/).
 - For onboarding a whole organization, a Manage API token of an organization admin (`org setup --org-id` requires one).
-- An admin (master) [token](/management/project/tokens/) for the recipes that create branches, workspaces or tokens.
+- The admin role in the project for the recipes that create branches or workspaces. A project you connected with a
+  token needs that admin's master token; a browser sign-in (`kbagent auth login`) works as it is. Creating tokens
+  always needs a master [token](/management/project/tokens/).
+  <!-- Checked 2026-11-27 in keboola/cli docs/auth.md, "What works on a session project": branch and workspace work over bearer auth. -->
 - Branches 2.0 (the `branches-merge-requests` feature) in the project, for merge requests.
 - Git, for the GitOps recipes and for linking a git branch to a dev branch.
 - For scheduling an AI agent, the agent's own CLI (`claude`, `codex` or `gemini`) on the machine that runs `kbagent serve` or `kbagent agent run`.
@@ -162,7 +165,7 @@ kbagent encrypt values --project prod \
 **Goal:** allow reads and proposals but block anything destructive.
 
 ```bash
-kbagent --deny-writes config list         # reads only, this session
+kbagent --deny-writes config list         # reads only, this command only
 kbagent init --from-global --read-only    # a read-only local workspace
 ```
 

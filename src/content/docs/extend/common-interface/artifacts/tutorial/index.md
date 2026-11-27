@@ -26,12 +26,13 @@ Artifacts configuration can be created or edited only through the [Storage API](
   component configurations, so give it access to the Python transformation (`keboola.python-transformation-v2`),
   or use a master token.
 - `curl` in a terminal.
-- For example 4, a project where you can create a [Legacy Flow](/flows/flows-legacy/).
-  <!-- VERIFY(nikita): can a new project still create a Legacy Flow (keboola.orchestrator)? If not, example 4 needs a project that already has one, or the Conditional Flows question in step 3 decides it. -->
+- For example 4, a project that already has [Legacy Flows](/flows/flows-legacy/). Projects where Legacy
+  Flows can no longer be created can't run this example until the Conditional Flows question in step 3 is settled.
+  <!-- Checked 2026-11-20 in project 264: the UI says "Legacy Flows can no longer be created in this project" (see components/configurations). -->
 
 ## Examples
 
-1. Obtain a Storage API token from the user interface of your project, see this [Guide](/management/project/tokens).
+1. Have the Storage API token from [Before you start](#before-you-start) ready.
 2. Store the token and url to the environment variable.
 
     ```shell

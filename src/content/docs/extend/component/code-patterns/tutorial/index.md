@@ -19,16 +19,15 @@ highlighting the steps specific to code patterns.
 - Everything in the [component quick start's list](/extend/component/tutorial/#before-you-start), among
   them a Developer Portal account in a vendor, a Keboola project and a GitHub account.
 - A transformation type the pattern will support in that project, for example
-  `keboola.snowflake-transformation`; see [Supported Components](/extend/component/code-patterns/interface#supported-components).
+  `keboola.snowflake-transformation`; see [Supported Components](/extend/component/code-patterns/interface/#supported-components).
 - A [Storage API token](/management/project/tokens/) for the API calls. It needs access to the transformation
   component and to the code pattern component; a master token has access to all components.
-  <!-- VERIFY(nikita): whether the sync action that runs the code pattern checks the token's component access; the sync-actions service is not public. -->
+  <!-- VERIFY(Nikita): whether the sync action that runs the code pattern checks the token's component access; the sync-actions service is not public. -->
 - `curl` or another HTTP client.
 
 ## Creating Component
 First, follow the common steps for [creating a component](/extend/component/tutorial/):
 
-- [Before you start](/extend/component/tutorial/#before-you-start) 
 - [Create a component](/extend/component/tutorial/#creating-component)
 - [Create a deployment account](/extend/component/tutorial/#creating-deployment-account)
 
@@ -36,7 +35,7 @@ Select `Code Pattern` as the type.
 
 ![Screenshot -- Add component](/extend/component/code-patterns/tutorial-1-add-component.png)
 
-Modify the settings described in [Interface - Developer Portal](/extend/component/code-patterns/interface#developer-portal).
+Modify the settings described in [Interface - Developer Portal](/extend/component/code-patterns/interface/#developer-portal).
 
 ## Implementation
 Go on following the [component quick start](/extend/component/tutorial/):
@@ -44,16 +43,16 @@ Go on following the [component quick start](/extend/component/tutorial/):
 - [Initialize a component](/extend/component/tutorial/#initializing-component) 
 - [Build a component](/extend/component/tutorial/#building-component)
 
-Learn how the whole [code generation process](/extend/component/code-patterns/interface#code-generation-process) works.
+Learn how the whole [code generation process](/extend/component/code-patterns/interface/#code-generation-process) works.
 
-**Implement the Generate action** as specified in [Interface - Generate Action](/extend/component/code-patterns/interface#generate-action):
+**Implement the Generate action** as specified in [Interface - Generate Action](/extend/component/code-patterns/interface/#generate-action):
 
-- First, load the [configuration](/extend/component/code-patterns/interface#configuration).
+- First, load the [configuration](/extend/component/code-patterns/interface/#configuration).
 - Validate the configuration, `action = generate` is expected.
 - Do not implement other actions (not even `run`).
 - In case of an error, use the correct [return value](/extend/common-interface/environment/#return-values).
 - Generate code based on the configuration.
-- Write the result in the standard [output format](/extend/component/code-patterns/interface#output-format) to `stdout`.
+- Write the result in the standard [output format](/extend/component/code-patterns/interface/#output-format) to `stdout`.
 - Exit with the `exit code = 0` if successful.
 
 ## Running Component
@@ -63,12 +62,12 @@ and will be **invisible in the user interface until it is [published](#publishin
 However, there are two other ways to try it as a component, as described below.
 
 ### Run via API
-The first option is to call the [generate action](/extend/component/code-patterns/interface#generate-action) via the API:
+The first option is to call the [generate action](/extend/component/code-patterns/interface/#generate-action) via the API:
 
 - You can test that the component returns the desired results based on the specified inputs.
 - Use the [Run Component Action](https://api.keboola.com/?service=sync-actions#post-/actions) API call.
 
-**Check:** the response is the generated code in the [output format](/extend/component/code-patterns/interface#output-format):
+**Check:** the response is the generated code in the [output format](/extend/component/code-patterns/interface/#output-format):
 a `parameters` key with the code `blocks`, plus a `storage` key when the pattern generates the mapping.
 
 ### Modify Transformation via API
@@ -167,7 +166,7 @@ The transformation now uses the code pattern, and you can **test it in the [user
 click it, the generated code appears, read-only.
 
 ## Publishing Component
-Make sure the component is set up according to [Interface - Developer Portal](/extend/component/code-patterns/interface#developer-portal).
+Make sure the component is set up according to [Interface - Developer Portal](/extend/component/code-patterns/interface/#developer-portal).
 Then follow the tutorial [Publish Component](/extend/publish/).
 
 **Check:** once the pattern is published, it appears in the **Use predefined code pattern** select box when you

@@ -32,7 +32,7 @@ navigate you through creating an account in the [Developer Portal](https://compo
 - Membership in the component's vendor, so you can request approval from its component list.
 - An icon and these fields filled in on the component: name, type, repository, short description, long
   description, license URL and documentation URL. The approval dialog below asks for them.
-  <!-- VERIFY(nikita): the list comes from the approval dialog screenshot (approve.png, 2017). Check the current Developer Portal dialog for the required fields. -->
+  <!-- VERIFY(Nikita): the list comes from the approval dialog screenshot (approve.png, 2017). Check the current Developer Portal dialog for the required fields. -->
 - Every rule in the [checklist](/extend/publish/checklist/) met.
 
 ## Publishing Component
@@ -135,10 +135,6 @@ the **Component Limits**.
 - Set up [continuous deployment](/extend/component/deployment/) so that you can keep the component up to date.
 - Use [semantic versioning](http://semver.org/) to mark and deploy versions of your component. Using other tags (e.g.,
 `latest`, `master`) in production is not allowed.
-
-### Checklist
-
-Before requesting to publish a component, please check all rules using [this checklist](/extend/publish/checklist).
 
 ---
 

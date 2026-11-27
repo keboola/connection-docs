@@ -52,6 +52,8 @@ You can see it in our [API request collection](https://documenter.getpostman.com
 In the [API call](https://api.keboola.com/?service=job-queue#post-/jobs), either specify the
 full configuration (using the `configData` node) or refer to an existing configuration
 of the component (using the `config` node). See an [example](https://documenter.getpostman.com/view/3086797/kbc-samples/77h845D?version=latest#9b9f3e7b-de3b-4c90-bad6-a8760e3852eb).
+Add `"mode": "debug"` to the request body; the job modes are `run` (the default), `debug` and `forceRun`.
+<!-- Checked 2026-11-27: keboola/job-queue-internal-api-php-client PlainJobInterface MODE_DEBUG = 'debug'; NewJobDefinition accepts "run", "forceRun" or "debug". -->
 
 The Run Job API call in debug mode will prepare the data folder for the component, put it inside an archive and upload it to Keboola Storage.
 When running the request with valid parameters, you should receive a response similar to this:
@@ -60,7 +62,7 @@ When running the request with valid parameters, you should receive a response si
 {
     "id": "176883685",
     "status": "waiting",
-    "mode": "run",
+    "mode": "debug",
     "tag": "1.2.3",
     "isFinished": false,
     "url": "https://queue.keboola.com/jobs/176883685"
@@ -217,8 +219,6 @@ following API call:
 
 **Check:** in the job detail, under **Parameters & Results**, you'll see that a specific tag was requested. In the job events, you can then
 see that it was indeed used and that the script printed out all files in the `/data/in/tables/` folder.
-
-![Screenshot -- Image Results](/extend/component/tutorial/debug-4.png)
 
 ## Summary
 You can find more information about running components in the corresponding part of the [documentation](/extend/component/running/).

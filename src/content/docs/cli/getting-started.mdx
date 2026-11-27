@@ -17,7 +17,7 @@ This walkthrough takes you from nothing to browsing a real project with [kbagent
 {/* Tutorial-type page. Source: keboola/cli README + docs/TUTORIAL.md. Terminal output verified locally against demo project 264, 2026-07-13. */}
 
 <Prereqs needs={['project']}>
-  <li><strong>A terminal,</strong> with <code>curl</code> on macOS or Linux, or PowerShell on Windows. You don't need Python: the installer sets up uv, which brings its own.</li>
+  <li><strong>A terminal,</strong> with <code>curl</code> on macOS or Linux, or PowerShell on Windows with <code>winget</code> or uv already installed. You don't need Python: the install sets up uv, which brings its own.</li>
   <li><strong>A browser to sign in to Keboola,</strong> or a Storage API token for the project. Step 2 shows where to get one.</li>
   <li><strong>For <a href="#connect-more-projects">Connect more projects</a> only:</strong> a Manage API token. A personal access token covers <code>--project-id</code>; <code>--org-id</code> needs an organization admin's token.</li>
 </Prereqs>
@@ -85,7 +85,7 @@ Pick your operating system:
       & "C:\Program Files\Git\bin\bash.exe" -lc "curl -LsSf https://raw.githubusercontent.com/keboola/cli/main/install.sh | sh"
       ```
 
-    - **No Python on the machine?** Every release ships a self-contained build. Download `keboola-cli2_<version>_windows_amd64.zip` from the [releases page](https://github.com/keboola/cli/releases/latest), unpack it, and put the folder on `PATH`. It carries its own interpreter and needs neither Python nor uv.
+    - **Can't use uv?** Every release ships a self-contained build. Download `keboola-cli2_<version>_windows_amd64.zip` from the [releases page](https://github.com/keboola/cli/releases/latest), unpack it, and put the folder on `PATH`. It carries its own interpreter and needs neither Python nor uv.
 
     :::caution[Not via a package manager]
     There is no WinGet package for kbagent itself, and the Chocolatey package lags far behind the current release. Use one of the three paths above.
@@ -229,7 +229,7 @@ KBC_MANAGE_API_TOKEN=xxx kbagent --allow-env-manage-token \
   org setup --org-id 123 --url https://connection.keboola.com --yes
 ```
 
-{/* Verified vs v0.66.1 (Padak review): --allow-env-manage-token required to read KBC_MANAGE_API_TOKEN (default-deny since 0.29.0); --org-id / --project-id (repeatable) / --yes correct; re-checked against kbagent 1.4.1 on 2026-11-21; --token-expires-in lives on `project refresh`, not org setup. */}
+{/* Verified vs v0.66.1 (Padak review): --allow-env-manage-token required to read KBC_MANAGE_API_TOKEN (default-deny since 0.29.0); --org-id / --project-id (repeatable) / --yes correct; re-checked against kbagent 1.4.1 on 2026-11-21; --token-expires-in is an `org setup` option in the 1.4.1 reference (corrected 2026-11-27; `project refresh` has no such option). */}
 
 Read commands such as `config list`, `job list` and `search` then take `--all-projects` to fan out across every connected project — see [multi-project](/cli/concepts/#multi-project-and-stacks).
 
