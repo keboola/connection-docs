@@ -366,6 +366,20 @@ For example: `https://my-app-12345678.hub.north-europe.azure.keboola.com/_proxy/
 
 `<url-prefix>-<app-id>.hub.<stack-host>` is the whole host shown in the **App URL** block on the app's configuration page: the URL prefix, a hyphen, and the App ID, for example `toy-store-sales-74016144`. An app created without a URL prefix has no hyphenated part, so its callback URL is `https://<app-id>.hub.<stack-host>/_proxy/callback`.
 
+## Callback URLs per host
+
+An app with a [custom domain](/data-apps/custom-domains/) is served on more than one host, and each host has its own callback URL: `https://<host>/_proxy/callback`. The **Callback URL** field under **Authentication** lists all of them, with the custom domain first. You can register the custom domain's callback before its DNS record is live.
+
+People sign in on the host they open. Sessions are tied to one host, so someone who signed in on the Keboola address signs in again on the custom domain.
+
+Register every listed URL with your provider if it accepts several:
+
+- **OIDC providers** (Google, Microsoft Entra ID, Okta, Auth0 and others) accept several redirect URIs. Add all of them.
+- **GitHub** accepts up to 10 callback URLs per OAuth App or GitHub App. Add both URLs.
+- **GitLab and other providers with a single redirect URI** hold only one. Register the callback of the custom domain, and [make the domain the primary URL](/data-apps/custom-domains/#make-a-domain-the-primary-url) so that **Open** and shared links use it. Sign-in on the app's other hosts, including the Keboola address, can then fail. People who open the Keboola address directly can't sign in.
+
+{/* VERIFY(product): the Callback URL field lists custom-domain callbacks only once the UI PR (UI2) ships. */}
+
 ---
 
 **Next:** [Publish and share →](/data-apps/publish-and-share/)

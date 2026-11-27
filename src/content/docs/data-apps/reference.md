@@ -24,7 +24,7 @@ Each app has its own configuration.
 | Backend version | The runtime image (Python version and, for Streamlit, the Streamlit version). See [Backend versions](#backend-versions). |
 | Backend size | The compute allocated to the app (for example XSmall, Small); chosen on deploy. The hourly rate in time credits depends on the size and the framework. See [Apps pricing](/management/project/limits/#apps-pricing) and the [backend sizes](/management/project/limits/#apps-backend-sizes). |
 | Auto-sleep | The inactivity timeout before the app suspends. See [Sleep and resume](#sleep-and-resume). |
-| URL | The address where the app is served. |
+| URL | The address where the app is served. You can add your own domain; see [Custom domains](/data-apps/custom-domains/). |
 | Versioning | Draft vs production versions of the app, on the **Versions** tab. |
 
 ## Environment variables
@@ -39,11 +39,24 @@ Sensitive values — API keys, tokens, passwords — should be stored as **secre
 | `KBC_WORKSPACE_MANIFEST_PATH` | Path to the workspace manifest JSON file (contains `workspaceId`). Recommended source for the workspace ID. Set with Storage Access. |
 | `WORKSPACE_ID` | ID of the provisioned workspace. Also in the manifest — prefer the manifest in new code. Set with Storage Access. |
 | `BRANCH_ID` | Storage API branch ID of the project. |
+| `KBC_APP_PUBLIC_URL` | The app's primary URL. It is the Keboola address until you make a [custom domain](/data-apps/custom-domains/#make-a-domain-the-primary-url) primary. It changes, with one restart, when you make a custom domain primary or reset it. |
 | `QUERY_SERVICE_URL` | URL of the Query Service API (stack-specific). Set with Storage Access. |
 
 ### Secrets
 
 Add secrets as key-value pairs in the app configuration. The `#` prefix marks a value as a secret (encrypted at rest). Keboola makes secrets available as environment variables when your app starts: the `#` prefix is stripped and the **variable name** is uppercased. For example, `#my-custom-var` becomes `MY_CUSTOM_VAR` — the `#` is removed, dashes become underscores, and the name is uppercased. The value itself is passed through unchanged.
+
+### Write an app for several hosts
+
+An app can answer on several hosts at once: its Keboola address and any [custom domain](/data-apps/custom-domains/). Keboola routes every host to the app. `KBC_APP_PUBLIC_URL` holds only the primary URL, so write the app to work on any host:
+
+- Use relative URLs for links, redirects and assets.
+- When you need an absolute URL, build it from the `X-Forwarded-Host` and `X-Forwarded-Proto` request headers. <!-- VERIFY(platform): the design states that `X-Forwarded-Host` carries the real host on the custom-domain path only; confirm it also does on the `.hub` path. -->
+- Don't hard-code a base URL. Use `KBC_APP_PUBLIC_URL` only for values that must name the primary URL, such as an OAuth issuer.
+- Cookies are tied to the host that set them. Don't set a `Domain` attribute.
+- If your framework checks the host or origin of a request, add the custom domain to its allowed list. This covers Django `ALLOWED_HOSTS` and `CSRF_TRUSTED_ORIGINS`, CORS settings and WebSocket origin checks.
+
+When the primary URL changes, so does everything your app builds from `KBC_APP_PUBLIC_URL`: an OAuth issuer or resource URL, or a webhook address. Connectors and integrations set up on the old address must be created again on the new one.
 
 ## Backend versions
 
