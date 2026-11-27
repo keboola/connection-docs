@@ -1,6 +1,6 @@
 ---
 title: Apps
-lastUpdated: 2026-11-03
+lastUpdated: 2026-11-26
 slug: 'data-apps'
 description: 'Build and run Python/JS apps on your governed data in Keboola — what apps are, how to build them with Kai or locally, how to run and share them, and real examples.'
 redirect_from:
@@ -27,6 +27,8 @@ Dashboards and reports, internal tools, data narratives, configurators, and agen
 - **[Build with Kai](/data-apps/getting-started/)**: describe the app in plain language and Kai reads your data, builds a live draft you preview and refine, and publishes when you're ready. No coding needed; the walkthrough takes about 10 minutes. The same **Create app** screen also offers [manual creation](/data-apps/getting-started/#create-an-app-manually) if you'd rather configure the app yourself. **You need:** a Keboola project. Nothing else.
 - **[Build locally](/data-apps/build-locally/)**: build on your own computer, for developers who want full control. [With an AI agent](/data-apps/build-locally/#with-an-ai-agent), you ask Claude Code, Claude Desktop, Cursor, VS Code or the ChatGPT app for the app in one prompt, and with Keboola's `dataapp-developer` plugin and [kbagent](/cli/) it reads your data, writes the code, creates the app and deploys it. [By hand](/data-apps/build-locally/#by-hand), you write the code and create the app from a terminal or connect your own repository. **You need:** for the agent, kbagent connected to your project and one of those clients; by hand, kbagent or a Git account and somewhere to host the repository, and about half an hour the first time.
   <!-- VERIFY(Nikita): the agent route ran end to end in Claude Code and the Codex CLI only. Claude Desktop may take the MCP-only path without kbagent; Cursor, VS Code and the ChatGPT app screens not run yet. -->
+
+To let the visitors of a React app ask Kai about its data, [add a Kai chat](/data-apps/kai-chat/) (public beta).
 
 On both routes, a Python/JS app ends up in a Git repository, either one Keboola manages for the app or one you host. [Two ways to run an app](/data-apps/what-are-apps/#two-ways-to-run-an-app) explains what each gives you, including why the Kai builder appears on one and not the other.
 

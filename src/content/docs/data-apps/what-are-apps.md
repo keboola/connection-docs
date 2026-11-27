@@ -1,6 +1,6 @@
 ---
 title: What are Keboola apps
-lastUpdated: 2026-10-06
+lastUpdated: 2026-11-26
 slug: 'data-apps/what-are-apps'
 description: Understand what Keboola apps are — Python/JS applications that run inside your project on governed data — and how they're hosted.
 ---
@@ -35,6 +35,7 @@ Keboola apps run on **Python/JS** — any Python web framework (Flask, FastAPI, 
 - **Full-stack.** A JavaScript/React frontend with a server-side backend (for example, an Express or FastAPI API) in one app.
 - **Server-side data access.** Your Storage token stays on the server; the browser never sees it.
 - **An API — or an MCP server.** Because there's a real backend, the app can serve other agents and services, not just human visitors.
+- **A Kai chat for visitors.** A React app can give its visitors a ready-made Kai chat that reads the app's data (public beta). See [Add a Kai chat to your app](/data-apps/kai-chat/).
 - **Your Git workflow.** Develop in your own editor and Git account — production-grade, versioned development.
 
 How development actually works — code, configuration, data access, deployment — is covered in [Build locally](/data-apps/build-locally/).

@@ -1,6 +1,6 @@
 ---
 title: Apps reference
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-26
 slug: 'data-apps/reference'
 description: Per-app settings, environment variables, data access, backend versions, and limits for Keboola apps.
 redirect_from:
@@ -26,6 +26,7 @@ Each app has its own configuration.
 | Auto-sleep | The inactivity timeout before the app suspends. See [Sleep and resume](#sleep-and-resume). |
 | URL | The address where the app is served. |
 | Versioning | Draft vs production versions of the app, on the **Versions** tab. |
+| Kai in the app | Gives the app its own read-only Kai token at the next deploy, for a Kai chat in the app. See [Add a Kai chat to your app](/data-apps/kai-chat/). |
 
 ## Environment variables
 
@@ -40,6 +41,8 @@ Sensitive values — API keys, tokens, passwords — should be stored as **secre
 | `WORKSPACE_ID` | ID of the provisioned workspace. Also in the manifest — prefer the manifest in new code. Set with Storage Access. |
 | `BRANCH_ID` | Storage API branch ID of the project. |
 | `QUERY_SERVICE_URL` | URL of the Query Service API (stack-specific). Set with Storage Access. |
+| `KAI_ENABLED` | Set when **Kai in the app** is on. See [Add a Kai chat to your app](/data-apps/kai-chat/). |
+| `KAI_STORAGE_API_TOKEN` | The app's own Kai token, valid for 90 days and renewed at each deploy. Set with **Kai in the app**. Keep it server-side. |
 
 ### Secrets
 

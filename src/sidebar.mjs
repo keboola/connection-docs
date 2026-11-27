@@ -664,6 +664,7 @@ export const sidebar = [
             items: [
               { slug: "data-apps/getting-started" },
               { slug: "data-apps/build-locally" },
+              { slug: "data-apps/kai-chat" },
             ],
           },
           {

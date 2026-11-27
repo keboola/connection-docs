@@ -1,6 +1,6 @@
 ---
 title: Kai Python Client
-lastUpdated: 2026-11-18
+lastUpdated: 2026-11-26
 description: 'Install and use the Kai Python Client, an async library and command-line tool for the Kai API, and integrate Kai into apps or use it with Claude Code.'
 slug: 'kai/python-client'
 ---
@@ -102,15 +102,17 @@ For more usage examples (non-streaming chat, conversations, tool calls, tool app
 
 The Kai Python Client can be embedded into Keboola [Apps](/data-apps/) to provide AI-powered chat interfaces for your end users.
 
-**Important:** Apps are automatically provisioned with a Storage API token, but this built-in token is **not** a master token and is insufficient for the Kai Client. You must pass a [Master Token](/management/project/tokens/#master-tokens) explicitly — for example, via a [secret environment variable](/data-apps/reference/#secrets) in your app configuration.
+**Important:** Use the app's own Kai token, not the app's built-in `KBC_TOKEN`, which Kai refuses. Turn on **Kai in the app** and the platform puts a read-only Kai token in `KAI_STORAGE_API_TOKEN` at each deploy; send the app's `WORKSPACE_ID` as the `x-workspace-id` header with it. A personal token in a [secret](/data-apps/reference/#secrets) gives every visitor of the app that member's access, writes included, so keep it for local development.
+
+Every visitor of an app is the same Kai user. Let visitors decline Kai's actions, never approve them.
 
 #### Python/JS Apps
 
-You can integrate Kai into [Python/JS Apps](/data-apps/getting-started/) today using the Kai Python Client directly. A dedicated plugin with ready-made patterns will be available soon to simplify the setup.
+For a Python/JS app with a React frontend and a Node backend, use the ready-made chat instead of the client: see [Add a Kai chat to your app](/data-apps/kai-chat/). For a Python backend, the app-building skill's [Kai integration reference](https://github.com/keboola/ai-kit/blob/main/plugins/dataapp-developer/skills/dataapp-development/references/kai-integration.md) describes the HTTP API.
 
 #### Streamlit Apps
 
-The [kai-streamlit plugin](https://github.com/keboola/kai-client/tree/main/plugins/kai-streamlit) provides patterns and working code for building [Streamlit Apps](/data-apps/streamlit/) with an integrated Kai chat interface. It handles the async bridge between Streamlit's synchronous model and the KaiClient's async API, streaming responses into Streamlit containers, tool approval flows with interactive Approve/Deny buttons, and session state management across Streamlit reruns.
+The [kai-streamlit plugin](https://github.com/keboola/kai-client/tree/main/plugins/kai-streamlit) provides patterns and working code for building [Streamlit Apps](/data-apps/streamlit/) with an integrated Kai chat interface. It handles the async bridge between Streamlit's synchronous model and the KaiClient's async API, streaming responses into Streamlit containers, tool approval flows, and session state management across Streamlit reruns. In an app, decline tool approvals and Kai's questions rather than showing Approve buttons to visitors.
 
 To get started, install the dependencies:
 
