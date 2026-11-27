@@ -1,6 +1,6 @@
 ---
 title: Storage jobs
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 slug: 'storage/jobs'
 sidebar:
   label: Jobs
@@ -26,6 +26,11 @@ check the Storage Jobs to understand what is happening. You can see how many job
 tables, and then, for example, adjust flow triggers to avoid concurrency issues.
 :::
 
+## Before you start
+
+- **Access to the project.** Even the ReadOnly and Guest [project roles](/management/project/users/#user-roles) can view project data.
+- **A table that has had data loaded into it**, so that the list has a **tableImport** job to open.
+
 ## Open the Storage jobs view
 
 **Goal:** the list of every load into and unload from your tables, and the detail of one job.
@@ -43,6 +48,8 @@ Keboola records all data uploaded into your project.
 
 **Result:** the job detail is open, with the status, times, operation, table and file of the job.
 
+**Check:** the detail of the **tableImport** job shows a **File ID** you can click.
+
 ## Find the file a job loaded
 
 **Goal:** the data file behind a table import, to download it, import it into other tables, or revert to an older table version.
@@ -53,6 +60,8 @@ Keboola records all data uploaded into your project.
    ![Screenshot - Files](/storage/jobs/storage-file-uploads.png)
 
 **Result:** the file is listed in [Files](/storage/files/). You can download the data and import it into other tables, or you can revert to an older table version.
+
+**Check:** the file in the Files list has the ID that the job detail shows as **File ID**.
 
 A comprehensive [video guide](https://www.youtube.com/watch?v=qIkSgzVmJa0) on this subject is available on our YouTube channel.
 

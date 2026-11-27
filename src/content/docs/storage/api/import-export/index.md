@@ -1,6 +1,6 @@
 ---
 title: Manually Importing and Exporting Data
-lastUpdated: 2026-10-14
+lastUpdated: 2026-11-27
 slug: 'storage/api/import-export'
 description: 'Import a table into Keboola Storage and export one by hand with the Storage API, using curl, the AWS CLI and a Python script, including sliced files.'
 redirect_from:
@@ -11,6 +11,14 @@ redirect_from:
 Read this page when you call the Storage API yourself. [Storage API](/storage/api/) covers the rest of the API, and the [API Importer](/storage/api/importer/) uploads a file in one call.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- **A project on an AWS stack.** The S3 steps below use the `uploadParams` the file prepare call returns there. On Azure and Google Cloud [stacks](/overview/#stacks), the call returns `absUploadParams` or `gcsUploadParams` instead. The examples use the AWS US stack, `connection.keboola.com`; on another AWS stack, use its URL.
+- **A Storage API token** with write access to the destination bucket: see [API tokens](/management/project/tokens/#limited-tokens).
+- **The destination bucket**, such as `in.c-main`. For a new table, the table must not exist yet; to load into an existing table, it must.
+- **A CSV file** that follows the [RFC 4180 specification](https://tools.ietf.org/html/rfc4180).
+- **An S3 client**, such as the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html), or Python with the Requests and Boto 3 libraries for the [Python example](#python-example).
 
 ## Working with Data
 Keboola Table Storage (Tables) and Keboola File Storage (File Uploads) are heavily connected together.
@@ -25,7 +33,6 @@ Keboola File Storage. You will be given a destination for the uploaded file on a
 - Initiate an [asynchronous table import](https://api.keboola.com/?service=storage#post-/v2/storage/branch/-branchId-/tables/-id-/import-async)
 from the uploaded file (use it as the `dataFileId` parameter) into the destination table.
 The import is asynchronous, so the request only creates a job and you need to poll for its results.
-The imported files must conform to the [RFC4180 Specification](https://tools.ietf.org/html/rfc4180).
 
 ![Schema of file upload process](/storage/api/async-import-handling.svg)
 
@@ -120,6 +127,8 @@ curl --request POST --header "Content-Type: application/json" --header "X-Storag
 
 This will create an asynchronous job, importing data from the `192726698` file into the `new-table` destination table in the `in.c-main` bucket.
 Then [poll for the job results](/storage/jobs/), or review its status in the UI.
+
+**Check:** the job ends with the status `success`, and the table `in.c-main.new-table` is listed in **Storage** with the rows of your CSV file.
 
 #### Python Example
 The above process is implemented in the following example script in Python. This script uses the
@@ -346,6 +355,9 @@ or on Windows:
 ```bash
 copy 192611594.csv0000_part_00 /B +192611594.csv0001_part_00 /B merged2.csv
 ```
+
+**Check:** the merged file holds the table's rows but no header row: the slices carry no column names. The TableExporter class linked above adds the header from the table's column list.
+<!-- VERIFY(Nikita): TableExporter (keboola/storage-api-php-client) gunzips every slice before it joins them. Check whether slices of a current Snowflake or BigQuery export are gzipped; if so, the plain cat/copy merge above gives a gzip file, and this Check needs a gunzip step. -->
 
 ---
 

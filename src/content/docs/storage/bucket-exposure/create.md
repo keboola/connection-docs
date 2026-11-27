@@ -1,6 +1,6 @@
 ---
 title: Create and manage a bucket exposure for BigQuery
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 slug: 'storage/bucket-exposure/create'
 sidebar:
   label: BigQuery Exposures
@@ -11,7 +11,14 @@ Share a bucket through [Bucket Exposure](/storage/bucket-exposure/) from the buc
 
 <!-- How-to-type page. Source: the "Creating an Exposure" and "Managing Your Exposures" sections of the Bucket Exposure page as it stood on main before the split. Structure checked 2026-11-19, facts not re-verified. -->
 
-Bucket Exposure is in beta and has to be enabled for your project: see the note at the top of the [Bucket Exposure overview](/storage/bucket-exposure/).
+## Before you start
+
+- **Bucket Exposure enabled for the project.** It is in beta; Keboola Support turns it on, as the note at the top of the [Bucket Exposure overview](/storage/bucket-exposure/) says.
+- **A project on BigQuery for the dialog fields below.** A Snowflake bucket opens the same dialog with other fields: see [grant mode](/storage/bucket-exposure/snowflake-grant/) or [share mode](/storage/bucket-exposure/snowflake-share/), which link back here for the shared tasks.
+- **An organization member, or a project admin with the Share role**, the same people who can [share a bucket](/catalog/share-and-link/) inside Keboola, using a token that can manage the bucket (your master token can).
+  <!-- Checked 2026-11-27 in the Storage API spec: POST /v2/storage/buckets/{bucketId}/listing serves BigQuery and Snowflake exposures with one gate (MANAGE privilege on the bucket, and an admin in the bucket's organization or with the share role), also on PATCH and DELETE. -->
+- **The bucket** you want to share, in **Storage**.
+- **The subscribers' Google accounts or Google Groups**, if you want to add them now. You can also add them later.
 
 ## Create an exposure
 
@@ -45,10 +52,8 @@ Bucket Exposure is in beta and has to be enabled for your project: see the note 
 Keboola tracking its progress. Once the job finishes, the bucket is live in BigQuery
 Analytics Hub and your subscribers can start using it.
 
-:::note
-**Who can create an exposure?** Anyone with **manage** access to the bucket — the same
-permission required to share a bucket inside Keboola.
-:::
+**Check:** **Data Catalog → Bucket exposures** lists the exposure with its source bucket, listing ID and number of subscribers.
+<!-- VERIFY(Nikita): the Bucket exposures tab under Data Catalog comes from the listing screenshot; the 2026-11-20 UI check on catalog/share-and-link.md found filter buttons All, Linked and Mine. Confirm where the exposure list lives now. -->
 
 ## Find an exposure
 
@@ -67,6 +72,8 @@ permission required to share a bucket inside Keboola.
 
 **Result:** The detail page lists everyone who has access and gives you **Edit** and **Delete** buttons.
 
+**Check:** the detail page shows the **Source bucket**, the **BigQuery listing ID** and, under **Subscribers**, each subscriber with its type.
+
 ## Edit an exposure
 
 **Goal:** change the exposure name, description, or the list of subscribers.
@@ -82,6 +89,8 @@ permission required to share a bucket inside Keboola.
 **Result:** Adding or removing a subscriber takes effect immediately — new people gain
 access right away, removed people lose access right away.
 
+**Check:** under **Subscribers**, the detail page lists the people and groups you saved, and only those.
+
 ## Delete an exposure
 
 **Goal:** remove the exposure entirely.
@@ -92,6 +101,8 @@ access right away, removed people lose access right away.
 
 If you delete the **bucket itself** in Storage, the exposure is cleaned up automatically —
 you don't need to remove it manually first.
+
+**Check:** the exposure is no longer listed under **Data Catalog → Bucket exposures**.
 
 ---
 

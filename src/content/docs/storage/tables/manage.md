@@ -1,6 +1,6 @@
 ---
 title: Manage tables
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 slug: 'storage/tables/manage'
 sidebar:
   label: Manage Tables
@@ -18,6 +18,14 @@ column data types. What tables, aliases and primary keys are is explained in [Ta
 The first four tasks start the same way: open **Storage → Tables & Buckets**, open the bucket, and select the table. Its
 **table detail** opens at the top of the screen, with a three-dots menu on the right.
 
+## Before you start
+
+- **The table in Storage** you want to change. See [Tables in Storage](/storage/tables/).
+- **A project role that can change data in Storage.** The ReadOnly role can't; see [User roles](/management/project/users/#user-roles).
+- **For the data type tasks that call the Storage API:** a [Storage API token](/management/project/tokens/) with write access to the table's bucket. Your master token has it.
+  <!-- VERIFY(Nikita): that write access to the bucket is enough for the Table Definition, add column, delete column and update column definition endpoints (no canManageBuckets); check the permission checks in keboola/connection or the Storage API OpenAPI spec. -->
+- **For the transformation examples:** a Snowflake SQL transformation. The queries on this page are written for Snowflake.
+
 ## Create an alias table
 
 **Goal:** a read-only view of an existing table, optionally filtered, that does not count toward your project quota.
@@ -32,6 +40,8 @@ The first four tasks start the same way: open **Storage → Tables & Buckets**, 
 
 **Result:** the table detail of the alias contains a reference to the source table and the filters applied. You can
 adjust the alias filters even after the alias table has been created.
+
+**Check:** open the alias table from its bucket. Its table detail names the source table and the filter you set.
 
 ![Screenshot - Simple alias result](/storage/tables/create-simple-alias-result.png)
 
@@ -65,6 +75,8 @@ To remove an existing primary key, click the **bin** icon:
 **Result:** the table has the new primary key, or none. Be aware that creating or removing the primary key can take
 some time on large tables.
 
+**Check:** the table detail shows the primary key columns you selected, or no primary key after you removed it.
+
 ## Truncate a table
 
 **Goal:** an empty table that keeps its schema.
@@ -79,6 +91,8 @@ duplication, or to automate scheduled table resets (e.g., overwriting temporary 
 3. Confirm by clicking the **Truncate table** button.
 
 **Result:** the table has no rows; its columns, primary key and metadata are unchanged.
+
+**Check:** the table's data sample is empty, and its columns are the same as before.
 
 ## Delete rows
 
@@ -97,6 +111,8 @@ synchronizing data with external systems (e.g., deleting stale records).
 4. Click **Delete rows** to confirm.
 
 **Result:** the matching rows are gone from the table.
+
+**Check:** the table's data sample no longer has rows that match your filters.
 
 To delete rows before each incremental load of a transformation instead, use the
 **Delete rows** option of the [transformation output mapping](/transformations/mappings/output/), with Incremental
@@ -123,6 +139,8 @@ Be cautious when dropping and recreating tables. If a job creates a table, it wi
 :::
 
 **Result:** the table keeps the lengths and precisions you defined, as long as the data written to it matches that structure.
+
+**Check:** after the jobs run, the **Schema** tab of the table still shows the lengths and precisions you defined.
 
 ## Change a column type in a typed table
 
@@ -153,6 +171,8 @@ Assume you have a column `date` of type `VARCHAR` in a typed table, and you want
 the `date_timestamp` column of type `TIMESTAMP` holds the data of every row, all configurations use it, and the `date`
 column is removed.
 
+**Check:** on the **Schema** tab, the new full-load table shows the types you defined. For the incremental table, `date_timestamp` is listed as a timestamp column and `date` is gone.
+
 ## Widen a text column
 
 **Goal:** a text column of a typed table holds longer values than it was created for.
@@ -170,6 +190,8 @@ So a `VARCHAR(n)` in a transformation does not set a lasting limit. Storage enfo
 To change the length without running a transformation, call the Storage API's [update column definition endpoint](https://api.keboola.com/?service=storage#put-/v2/storage/branch/-branchId-/tables/-id-/columns/-column-/definition). It can also make a column nullable and drop a default; adding or changing a default works on BigQuery only. [Changing column definitions](/storage/tables/data-types/reference/#changing-column-definitions) lists what each backend allows.
 
 **Result:** the column accepts the longer values, and the rows already in the table are unchanged.
+
+**Check:** the **Schema** tab shows the column with its new length.
 
 ## Create a typed table from a non-typed table
 
@@ -205,6 +227,8 @@ If you have a non-typed table, `non_typed_table`, with undefined data types and 
    <!-- Checked 2026-11-20 in the UI of project 264: a typed table's detail has the tabs Overview / Schema / Events / Data Sample / Snapshots / Usage; Schema lists Column / Data type / Description and has an Add column button. -->
 
 **Result:** `typed_table` is a new typed table. It should now include the appropriate data types.
+
+**Check:** the **Schema** tab of `typed_table` shows a data type for each of its four columns.
 
 ***Note:** [Incremental loading](/storage/tables/incremental-loading/#incremental-loading) cannot be used when creating a typed table in this manner.*
 

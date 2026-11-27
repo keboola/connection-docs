@@ -1,6 +1,6 @@
 ---
 title: Import a Snowflake share (Secure Data Sharing)
-lastUpdated: 2026-11-19
+lastUpdated: 2026-11-27
 sidebar:
   label: Import a Snowflake Share
 description: 'Bring data another Snowflake account shares with you into Keboola: the producer and consumer steps, role requirements, limits, and registering the schema.'
@@ -20,7 +20,14 @@ The producer shares a database and its objects with one or more accounts by crea
 The process involves **two roles**:
 
 - **Producer:** The Snowflake account that owns and shares the data.
-- **Consumer:** The Snowflake account that accesses the shared data. This account must be used in Keboola as [BYODB](/storage/byodb/).
+- **Consumer:** The Snowflake account that accesses the shared data.
+
+## Before you start
+
+- **A Keboola project that runs on your own Snowflake account** ([BYODB](/storage/byodb/)). That account is the consumer. External datasets work only with BYODB.
+- **Access to the producer account**, or someone there who runs the producer steps. Snowflake lists the privileges in [Create and configure shares](https://docs.snowflake.com/en/user-guide/data-sharing-provider).
+- **In the consumer account, the `ACCOUNTADMIN` role, or a role with the `IMPORT SHARE` and `CREATE DATABASE` privileges.** Granting `IMPORTED PRIVILEGES` on the new database also needs its ownership or `MANAGE GRANTS`. See [Enable non-ACCOUNTADMIN roles to perform data sharing tasks](https://docs.snowflake.com/en/user-guide/security-access-privileges-shares).
+- **The objects to share in the producer account:** tables, external tables, views, secure views or secure materialized views.
 
 ## Producer Workflow
 As the producer, your role involves creating the share, adding the necessary database objects, and granting access to consumer accounts. Follow these steps to configure the share:
@@ -68,10 +75,7 @@ SHOW SHARES;
 The share is now ready for consumption by the specified accounts. For detailed guidance, refer to [Create and configure shares](https://docs.snowflake.com/en/user-guide/data-sharing-provider).
 
 ## Consumer Workflow
-To use the shared data, follow these steps to create and configure a database from the provided share. Refer to the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/data-share-consumers) for more information.
-
-### Role Requirements
-To perform these tasks, use the `ACCOUNTADMIN` role or a role with the `IMPORT SHARE` global privilege. For more details, see [Enable non-ACCOUNTADMIN roles to perform data sharing tasks](https://docs.snowflake.com/en/user-guide/security-access-privileges-shares).
+To use the shared data, follow these steps to create and configure a database from the provided share. Refer to the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/data-share-consumers) for more information. Run them with the consumer role named in [Before you start](#before-you-start).
 
 ### Viewing Available Shares
 Use the web interface or SQL to view available shares:
@@ -121,6 +125,8 @@ Imported databases have the following restrictions:
 ## Final Step
 You can now [register the schema](/storage/byodb/external-buckets/register/) in the newly created database as an external dataset in Keboola, enabling seamless data integration. Use `<CONSUMER_DATABASE_NAME>` as the database name and 
 the schema present in this database. When registering, don't forget to check the `Secure Data Share` checkbox.
+
+**Check:** the new bucket is in Storage and lists the tables and views of the shared schema as tables.
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Use CSV files from Storage in Microsoft Excel
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 slug: 'storage/tables/csv-files/excel'
 sidebar:
   label: CSV in Excel
@@ -13,6 +13,12 @@ Two tasks for moving data between Microsoft Excel and Storage. The format Storag
 <!-- How-to-type page. Source: the Excel sections of the former CSV files page on main; text carried over and checked against it 2026-11-19. The Excel and Notepad steps were not re-run. -->
 
 <!-- VERIFY(Nikita): both tasks describe an older Excel on Windows. Current Excel can save as "CSV UTF-8 (Comma delimited)" and imports with Data > From Text/CSV. The old import wizard sets the encoding in a "File origin" field, where this page says "Unicode UTF-8". Check whether the Notepad conversion and the import wizard steps should be replaced. -->
+
+## Before you start
+
+- **Microsoft Excel on Windows.** The export task also uses Windows Notepad.
+- **To load a sheet:** a [bucket](/storage/buckets/) for the new table, and a project role that can change data in Storage (not ReadOnly; see [User roles](/management/project/users/#user-roles)).
+- **To open a table in Excel:** the table exported from Storage with the **CSV** file format (the export dialog defaults to GZIP); see [Export a table as one file](/storage/files/#export-a-table-as-one-file).
 
 ## Export an Excel sheet as a file for Storage
 
@@ -42,6 +48,8 @@ but without using any non-standard Windows tools, the quickest is this:
 
 **Result:** the sheet is in Storage as a table, loaded from a UTF-8 file with the tab as its delimiter.
 
+**Check:** the new table is in the bucket, with the sheet's columns, and its data shows accented and other non-ASCII characters as they were in Excel.
+
 *Note: as long as your data does not contain any non-[ASCII](https://en.wikipedia.org/wiki/ASCII#Character_set) characters, you can simply save them as CSV.*
 
 ## Open a CSV file from Storage in Excel
@@ -64,6 +72,8 @@ The easiest way to import the CSV file exported from Keboola into Microsoft Exce
    ![Screenshot -- Excel Import -- Import Wizard](/storage/tables/excel-import-3.png)
 
 **Result:** the exported table is in the workbook, one CSV column per Excel column.
+
+**Check:** non-ASCII characters in the workbook look as they do in Storage.
 
 However, using this method, Excel is not able to import new lines contained in table cells.
 If you need to do that, you have to use a more [complicated approach](https://stackoverflow.com/questions/2668678/importing-csv-with-line-breaks-in-excel-2007).

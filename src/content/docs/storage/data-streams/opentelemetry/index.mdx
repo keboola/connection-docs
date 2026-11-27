@@ -1,6 +1,6 @@
 ---
 title: Send OpenTelemetry (OTLP) data to Keboola
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 description: 'Send logs, metrics, and traces from your apps to Keboola Storage over OTLP: create the data stream, set up your SDK or collector, and check that data arrives.'
 slug: 'storage/data-streams/opentelemetry'
 sidebar:
@@ -8,10 +8,18 @@ sidebar:
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import Prereqs from '../../../../../components/Prereqs.astro';
 
 Any official OpenTelemetry SDK or collector can export to an OTLP data stream; the tabs below cover Python, Node.js, Go, and the Collector. For why you would keep telemetry next to your business data, see [Data Streams](/storage/data-streams/#opentelemetry-otlp-streams); for the tables and fields a stream produces, see the [OpenTelemetry reference](/storage/data-streams/opentelemetry/reference/).
 
 {/* How-to-type page. Source: this page as it stood before the 2026-11-19 section split. Text moved, steps not re-run in the app. */}
+
+<Prereqs needs={['project']}>
+  <li><strong>The Admin or Share role in the project.</strong> Only the master token of a user with one of those roles may create a data stream; see the <a href="/storage/data-streams/reference/">Data Streams reference</a>.</li>
+  {/* Checked 2026-11-27: keboola-as-code stream service canWrite() accepts the admin and share roles. */}
+  <li><strong>An application that uses an OpenTelemetry SDK, or an OpenTelemetry Collector,</strong> and a place to set its environment variables. The tabs below cover Python, Node.js, Go and the Collector.</li>
+  <li><strong>For the header form of the secret:</strong> <code>curl</code>, a Storage API token of the project (it does not have to be an admin's) and the source ID.</li>
+</Prereqs>
 
 ## Create an OTLP data stream
 
@@ -23,6 +31,8 @@ Any official OpenTelemetry SDK or collector can export to an OTLP data stream; t
 4. Click **Create**.
 
 **Result:** The app sets up a destination table per signal (logs, metrics, traces) with a default column mapping, so there is nothing to map by hand before you start sending data.
+
+**Check:** the source detail page shows the **Endpoint URL** and **Table statistics** for the logs, metrics and traces tables.
 
 ## Configure your application
 
@@ -169,6 +179,8 @@ The endpoint URL is a **base** URL. The SDK appends `/v1/logs`, `/v1/metrics`, o
 
 **Result:** Once these variables are set and the exporter is loaded (by the zero-code agent in Python and Node.js, by your setup code in Go, by the exporters section in the Collector), telemetry is exported to your Keboola project.
 
+**Check:** **Table statistics** on the source detail page shows data waiting for import for the signals your application sends.
+
 ## Keep the secret out of your logs
 
 **Goal:** the source's secret travels in a request header and stays out of URLs.
@@ -206,6 +218,8 @@ For anything beyond a quick test, prefer the header form:
 
 **Result:** Both forms accept exactly the same traffic. Note that an HTTP source's secret cannot be used against the OTLP endpoints, or vice versa — secrets are scoped to the transport.
 
+**Check:** telemetry sent with the secret in the header reaches the destination tables, as it does with the secret in the URL.
+
 ## Verify data ingestion
 
 **Goal:** confirm that telemetry reaches Storage.
@@ -216,5 +230,7 @@ For anything beyond a quick test, prefer the header form:
 {/* Checked 2026-11-20: default import trigger is 1 minute since the file opened (target import config and filerotation conditions in keboola-as-code); slices are uploaded on file rotation, so the 30 s staging step does not add to it. Expect about a minute plus the Storage import job. Live in project 264: three spans sent at 14:31:56 UTC were in the traces table by 14:32:41, under a minute. */}
 
 **Result:** **Table statistics** shows imported data for the destination tables. For the fields each table can hold and for query examples, see the [OpenTelemetry reference](/storage/data-streams/opentelemetry/reference/).
+
+**Check:** the destination tables in Storage have rows for the signals your application sends.
 
 **Next:** [OpenTelemetry reference →](/storage/data-streams/opentelemetry/reference/)

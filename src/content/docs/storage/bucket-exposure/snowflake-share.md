@@ -1,6 +1,6 @@
 ---
 title: Share a bucket with other Snowflake accounts (share mode)
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 slug: 'storage/bucket-exposure/snowflake-share'
 sidebar:
   label: Snowflake Share Mode
@@ -13,12 +13,15 @@ the bucket there, without a writer that copies the data.
 
 <!-- How-to-type page. Source: the "Snowflake Share Mode" section of the Bucket Exposure page as it stood on main before the split. Structure checked 2026-11-19, facts not re-verified. -->
 
-Share mode has the same backend requirement as [grant mode](/storage/bucket-exposure/snowflake-grant/): your own
-Snowflake account ([BYODB](/storage/byodb/)) or an account Keboola runs for your organization
-alone. It also needs its own project feature, because each share makes the bucket readable
-from another account. Contact Keboola support to have it enabled.
+## Before you start
 
-Bucket Exposure is in beta and has to be enabled for your project: see the note at the top of the [Bucket Exposure overview](/storage/bucket-exposure/).
+- **A Snowflake backend that is your own account** ([BYODB](/storage/byodb/)) or an account Keboola runs for your organization alone, the same requirement as [grant mode](/storage/bucket-exposure/snowflake-grant/).
+- **Bucket Exposure enabled for the project.** It is in beta; Keboola Support turns it on, as the note at the top of the [Bucket Exposure overview](/storage/bucket-exposure/) says.
+- **The share-mode project feature.** Share mode needs its own feature, because each share makes the bucket readable from another account. Contact Keboola Support to have it enabled.
+- **An organization member, or a project admin with the Share role**, the same people who can [share a bucket](/catalog/share-and-link/) inside Keboola, using a token that can manage the bucket (your master token can).
+  <!-- Checked 2026-11-27 in the Storage API spec: POST /v2/storage/buckets/{bucketId}/listing serves BigQuery and Snowflake exposures with one gate (MANAGE privilege on the bucket, and an admin in the bucket's organization or with the share role), also on PATCH and DELETE. -->
+- **The consumer accounts' identifiers** in the `<ORGANIZATION>.<ACCOUNT>` form. The accounts must be in the same Snowflake region and cloud as yours: see [Which accounts can consume a share](#which-accounts-can-consume-a-share).
+- **`CREATE SHARE` and `MANAGE SHARE TARGET` with grant option** for the backend's administrative role. An account connected to Keboola before these were part of the setup lacks them: see [Privileges the project's role gets](#privileges-the-projects-role-gets).
 
 ## Create a share-mode exposure
 
@@ -56,6 +59,8 @@ Bucket Exposure is in beta and has to be enabled for your project: see the note 
 `KBC_EU_CENTRAL_1_BUCKET_SHARE_4521`. The share of each account is named exactly
 `<prefix>_` followed by 16 hexadecimal characters. If the job fails with an error that names the
 backend's administrative role, see [Privileges the project's role gets](#privileges-the-projects-role-gets).
+
+**Check:** in your Snowflake account, `SHOW SHARES LIKE '<prefix>%'` lists one outbound share for each consumer account, as shown in [Check shares in Snowflake](#check-shares-in-snowflake).
 
 ## Use the share in the consumer account
 
@@ -106,6 +111,8 @@ account:
 
 **Result:** The database holds the exposed bucket's schema with its tables and views. It is read-only.
 
+**Check:** as a role you granted the database role to, `SHOW TABLES IN DATABASE KEBOOLA_SALES;` lists the bucket's tables. Use your database name in place of `KEBOOLA_SALES`.
+
 ## Add tables and repair a share
 
 **Goal:** get every current table and view of the bucket into the shares after a share sync failed.
@@ -128,6 +135,8 @@ While the list holds an account that Snowflake refuses, every save fails before 
 [Which accounts can consume a share](#which-accounts-can-consume-a-share)); remove that account
 first.
 
+**Check:** in the consumer account, as a role you granted the database role to, `SHOW TABLES IN DATABASE` (or `SHOW VIEWS IN DATABASE` for a persisted alias, which the share holds as a view) on the database created from the share lists the object that was missing.
+
 ## Change consumer accounts
 
 **Goal:** add consumer accounts to an exposure or remove them from it.
@@ -145,6 +154,8 @@ first.
 Adding an account needs share mode enabled for the project. Removing accounts, saving the list
 unchanged and deleting the exposure work without it.
 
+**Check:** `SHOW SHARES LIKE '<prefix>%'` in your account lists one share for each account in the saved list, with the account in the `to` column. `_` in `LIKE` also matches other buckets' shares; see [Check shares in Snowflake](#check-shares-in-snowflake).
+
 ## Delete a share-mode exposure
 
 **Goal:** end the access of every consumer account.
@@ -154,6 +165,8 @@ unchanged and deleting the exposure work without it.
 **Result:** Deleting the exposure, or the bucket, drops the share of every consumer account. Databases the
 consumers created from the shares stop working at once. Data that a consumer already copied
 into its own tables stays with the consumer.
+
+**Check:** `SHOW SHARES LIKE '<prefix>%'` in your account no longer lists any share of the exposure.
 
 ## Check shares in Snowflake
 
@@ -174,6 +187,8 @@ share name prefix, `_` and 16 hexadecimal characters; ignore the others.
 
 **Result:** Each outbound share lists its consumer account in the `to` column, and its `name` is the share
 name the consumer uses. Whether a consumer has created a database from the share is visible only in the consumer's account.
+
+**Check:** the consumer accounts in the `to` column match the accounts you saved on the exposure.
 
 ## Shares, accounts and privileges
 

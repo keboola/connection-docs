@@ -1,6 +1,6 @@
 ---
 title: Component Configurations API
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'storage/api/configurations'
 description: 'Learn how a component configuration is structured, then list, modify, roll back and copy configurations and their rows with the Storage API.'
 redirect_from:
@@ -91,6 +91,13 @@ From here, you can see all available information about a particular component. I
 will use `keboola.ex-aws-s3` --- the AWS S3 extractor.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- **A Storage API token with access to the component.** A master token has access to all components. A limited token has none by default, so add the component to it: see [Limited access to components](/management/project/tokens/#limited-access-to-components).
+- **The `componentId`** of the component, from the index call above or the Developer Portal.
+- **A configuration of that component** and its ID. Create it in the UI first, as [Configuration structure](#configuration-structure) recommends.
+- **An HTTP client** such as `curl` or Postman. The examples use the US stack, `connection.keboola.com`; on another [stack](/overview/#stacks), use its URL.
 
 ## Configuration Structure
 Component configurations are largely dependent on the actual component being configured. This makes creating configurations manually
@@ -526,6 +533,8 @@ It will return the ID of the newly created configuration:
     "id": "364494012"
 }
 ```
+
+**Check:** open the component in the Keboola UI. Its list of configurations shows the copy you created, and the **Versions** tab of your configuration lists the versions your API calls created, the rollback among them.
 
 ---
 
