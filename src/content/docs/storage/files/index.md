@@ -126,7 +126,7 @@ The [Storage overview](/storage/#how-tables-pass-through-file-storage) explains 
 
 **Result:** one merged file with the table data, downloaded in the format you chose.
 
-**Check:** **Storage → Files** also lists the export as a `.csv.gz` file tagged `table-export`.
+**Check:** **Storage → Files** also lists the merged export, tagged `storage-merged-export`, which Keboola keeps for 14 days. The raw export tagged `table-export` expires after a day.
 <!-- Checked 2026-11-20 in the UI of project 264: after Export the header shows Preparing export, then the toast "Table … is ready to download." with Download Now / Dismiss. Storage → Files then lists two .csv.gz files: one tagged table-export (expires in 1 day) and one storage-merged-export (expires in 14 days). Earlier API check: a table export through the Storage API creates a file in Files, sliced on Snowflake even for a 3-row table. -->
 
 ## Limits

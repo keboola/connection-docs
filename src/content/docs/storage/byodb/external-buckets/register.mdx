@@ -20,10 +20,10 @@ These are the tasks around an [external dataset](/storage/byodb/external-buckets
   <li><strong>The production branch.</strong> Registration works in the default branch only, not in a development branch.</li>
   <li><strong>A project role that can change Storage;</strong> ReadOnly cannot. See <a href="/management/project/users/#user-roles">User roles</a>.</li>
   <li><strong>The schema or dataset</strong> in your warehouse, with the tables and views you want to read.</li>
-  <li><strong>Rights in your warehouse to grant Keboola read access:</strong> on Snowflake, a role that can grant <code>USAGE</code> on the database and schema and <code>SELECT</code> on all and future tables and views (future grants need <code>MANAGE GRANTS</code> or ownership of the schema); on BigQuery, access to Analytics Hub in your GCP project.</li>
+  <li><strong>Rights in your warehouse to grant Keboola read access:</strong> on Snowflake, a role that can grant <code>USAGE</code> on the database and schema and <code>SELECT</code> on all and future tables and views (future grants need the <code>MANAGE GRANTS</code> privilege, which <code>SECURITYADMIN</code> and <code>ACCOUNTADMIN</code> have by default; schema ownership is enough only in a managed access schema); on BigQuery, access to Analytics Hub in your GCP project.</li>
 </Prereqs>
 
-{/* VERIFY(nikita): the two feature names come from the Storage API spec (POST /v2/storage/buckets/register). Check whether BYODB projects get them by default or whether Support turns them on. */}
+{/* VERIFY(Nikita): the two feature names come from the Storage API spec (POST /v2/storage/buckets/register). Check whether BYODB projects get them by default or whether Support turns them on. */}
 
 ## Register an external dataset
 

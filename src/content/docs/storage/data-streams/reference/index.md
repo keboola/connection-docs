@@ -25,7 +25,7 @@ Events are received via HTTP. Each source can be associated with `sinks`, which 
 :::note[Admin token required for writes]
 All write operations on the Stream API (creating, updating, deleting, enabling, and disabling
 sources and sinks, and changing settings) require the **master token of a project user with the
-admin role**. Custom Storage API tokens, and master tokens of guest or read-only users, are
+admin or share role**. Custom Storage API tokens, and master tokens of guest or read-only users, are
 rejected with `403 only admin token can do write operations on streams`. Reading and ingesting
 data are not affected — ingest is authenticated by the secret embedded in the source's URL.
 :::

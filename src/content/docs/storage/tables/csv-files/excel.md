@@ -71,7 +71,9 @@ The easiest way to import the CSV file exported from Keboola into Microsoft Exce
 
    ![Screenshot -- Excel Import -- Import Wizard](/storage/tables/excel-import-3.png)
 
-**Check:** the exported table is in the workbook, one CSV column per Excel column, and non-ASCII characters look as they do in Storage.
+**Result:** the exported table is in the workbook, one CSV column per Excel column.
+
+**Check:** non-ASCII characters in the workbook look as they do in Storage.
 
 However, using this method, Excel is not able to import new lines contained in table cells.
 If you need to do that, you have to use a more [complicated approach](https://stackoverflow.com/questions/2668678/importing-csv-with-line-breaks-in-excel-2007).

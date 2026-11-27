@@ -15,8 +15,8 @@ Any official OpenTelemetry SDK or collector can export to an OTLP data stream; t
 {/* How-to-type page. Source: this page as it stood before the 2026-11-19 section split. Text moved, steps not re-run in the app. */}
 
 <Prereqs needs={['project']}>
-  <li><strong>The admin role in the project.</strong> Only an admin's master token may create a data stream; see the <a href="/storage/data-streams/reference/">Data Streams reference</a>.</li>
-  {/* VERIFY(nikita): keboola-as-code stream service canWrite() also accepts the share role; confirm. */}
+  <li><strong>The Admin or Share role in the project.</strong> Only the master token of a user with one of those roles may create a data stream; see the <a href="/storage/data-streams/reference/">Data Streams reference</a>.</li>
+  {/* Checked 2026-11-27: keboola-as-code stream service canWrite() accepts the admin and share roles. */}
   <li><strong>An application that uses an OpenTelemetry SDK, or an OpenTelemetry Collector,</strong> and a place to set its environment variables. The tabs below cover Python, Node.js, Go and the Collector.</li>
   <li><strong>For the header form of the secret:</strong> <code>curl</code>, a Storage API token of the project (it does not have to be an admin's) and the source ID.</li>
 </Prereqs>
@@ -229,6 +229,8 @@ For anything beyond a quick test, prefer the header form:
 
 {/* Checked 2026-11-20: default import trigger is 1 minute since the file opened (target import config and filerotation conditions in keboola-as-code); slices are uploaded on file rotation, so the 30 s staging step does not add to it. Expect about a minute plus the Storage import job. Live in project 264: three spans sent at 14:31:56 UTC were in the traces table by 14:32:41, under a minute. */}
 
-**Check:** **Table statistics** shows imported data for the destination tables. For the fields each table can hold and for query examples, see the [OpenTelemetry reference](/storage/data-streams/opentelemetry/reference/).
+**Result:** **Table statistics** shows imported data for the destination tables. For the fields each table can hold and for query examples, see the [OpenTelemetry reference](/storage/data-streams/opentelemetry/reference/).
+
+**Check:** the destination tables in Storage have rows for the signals your application sends.
 
 **Next:** [OpenTelemetry reference →](/storage/data-streams/opentelemetry/reference/)

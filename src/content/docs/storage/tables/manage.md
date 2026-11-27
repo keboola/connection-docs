@@ -23,7 +23,7 @@ The first four tasks start the same way: open **Storage → Tables & Buckets**, 
 - **The table in Storage** you want to change. See [Tables in Storage](/storage/tables/).
 - **A project role that can change data in Storage.** The ReadOnly role can't; see [User roles](/management/project/users/#user-roles).
 - **For the data type tasks that call the Storage API:** a [Storage API token](/management/project/tokens/) with write access to the table's bucket. Your master token has it.
-  <!-- VERIFY(nikita): that write access to the bucket is enough for the Table Definition, add column, delete column and update column definition endpoints (no canManageBuckets); check the permission checks in keboola/connection or the Storage API OpenAPI spec. -->
+  <!-- VERIFY(Nikita): that write access to the bucket is enough for the Table Definition, add column, delete column and update column definition endpoints (no canManageBuckets); check the permission checks in keboola/connection or the Storage API OpenAPI spec. -->
 - **For the transformation examples:** a Snowflake SQL transformation. The queries on this page are written for Snowflake.
 
 ## Create an alias table

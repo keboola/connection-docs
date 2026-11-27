@@ -534,8 +534,7 @@ It will return the ID of the newly created configuration:
 }
 ```
 
-**Check:** open the component in the Keboola UI. Its list of configurations shows `test-copy`, and the **Versions** tab of the `test` configuration (ID `364479526`) lists the versions your API calls created, the rollback among them.
-<!-- VERIFY(nikita): the UI label for a configuration's version history (a Versions tab or a sidebar link). -->
+**Check:** open the component in the Keboola UI. Its list of configurations shows the copy you created, and the **Versions** tab of your configuration lists the versions your API calls created, the rollback among them.
 
 ---
 

@@ -14,8 +14,9 @@ Share a bucket through [Bucket Exposure](/storage/bucket-exposure/) from the buc
 ## Before you start
 
 - **Bucket Exposure enabled for the project.** It is in beta; Keboola Support turns it on, as the note at the top of the [Bucket Exposure overview](/storage/bucket-exposure/) says.
-- **A project on BigQuery.** For a Snowflake project, use [grant mode](/storage/bucket-exposure/snowflake-grant/) or [share mode](/storage/bucket-exposure/snowflake-share/).
-- **Manage access to the bucket**, the same permission you need to [share a bucket](/catalog/share-and-link/) inside Keboola.
+- **A project on BigQuery for the dialog fields below.** A Snowflake bucket opens the same dialog with other fields: see [grant mode](/storage/bucket-exposure/snowflake-grant/) or [share mode](/storage/bucket-exposure/snowflake-share/), which link back here for the shared tasks.
+- **An organization member, or a project admin with the Share role**, the same people who can [share a bucket](/catalog/share-and-link/) inside Keboola, using a token that can manage the bucket (your master token can).
+  <!-- Checked 2026-11-27 in the Storage API spec: POST /v2/storage/buckets/{bucketId}/listing serves BigQuery and Snowflake exposures with one gate (MANAGE privilege on the bucket, and an admin in the bucket's organization or with the share role), also on PATCH and DELETE. -->
 - **The bucket** you want to share, in **Storage**.
 - **The subscribers' Google accounts or Google Groups**, if you want to add them now. You can also add them later.
 
@@ -52,6 +53,7 @@ Keboola tracking its progress. Once the job finishes, the bucket is live in BigQ
 Analytics Hub and your subscribers can start using it.
 
 **Check:** **Data Catalog → Bucket exposures** lists the exposure with its source bucket, listing ID and number of subscribers.
+<!-- VERIFY(Nikita): the Bucket exposures tab under Data Catalog comes from the listing screenshot; the 2026-11-20 UI check on catalog/share-and-link.md found filter buttons All, Linked and Mine. Confirm where the exposure list lives now. -->
 
 ## Find an exposure
 

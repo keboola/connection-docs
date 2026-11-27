@@ -21,8 +21,8 @@ To share the bucket with other Snowflake accounts instead, use [share mode](/sto
 
 - **A Snowflake backend that is your own account** ([BYODB](/storage/byodb/)), or an account Keboola runs for your organization alone. Grant mode is not available on Keboola's shared Snowflake accounts or in Snowflake Partner Connect projects.
 - **Bucket Exposure enabled for the project.** It is in beta; Keboola Support turns it on, as the note at the top of the [Bucket Exposure overview](/storage/bucket-exposure/) says.
-- **Manage access to the bucket**, the same permission you need to [share a bucket](/catalog/share-and-link/) inside Keboola.
-  <!-- VERIFY(nikita): moved over from the generic create page; confirm the Snowflake modes need the same permission (organization member or the Share role). -->
+- **An organization member, or a project admin with the Share role**, the same people who can [share a bucket](/catalog/share-and-link/) inside Keboola, using a token that can manage the bucket (your master token can).
+  <!-- Checked 2026-11-27 in the Storage API spec: POST /v2/storage/buckets/{bucketId}/listing serves BigQuery and Snowflake exposures with one gate (MANAGE privilege on the bucket, and an admin in the bucket's organization or with the share role), also on PATCH and DELETE. -->
 - **The grantee roles**, already created in your Snowflake account. Keboola does not create roles; the other rules for them are in step 2 below.
 
 ## Create a grant-mode exposure
@@ -133,10 +133,12 @@ SHOW FUTURE GRANTS TO ROLE DATABRICKS_READER;
 
 `DATABRICKS_READER` is an example: replace it with the grantee role you want to check.
 
-**Check:** while the role is a grantee, the first statement lists `USAGE` on the project database and
+**Result:** While the role is a grantee, the first statement lists `USAGE` on the project database and
 on the bucket schema and `SELECT` on each table and view in the bucket; the second lists the
 future `SELECT` grants on tables and views in the schema. After you remove the role, the
 only grant this exposure leaves behind is `USAGE` on the project database.
+
+**Check:** the roles with these grants are the grantee roles you saved on the exposure.
 
 ## Things to keep in mind on Snowflake
 

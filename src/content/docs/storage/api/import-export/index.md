@@ -14,7 +14,7 @@ Read this page when you call the Storage API yourself. [Storage API](/storage/ap
 
 ## Before you start
 
-- **A project on an AWS stack.** The S3 steps below use the `uploadParams` the file prepare call returns there. On Azure and Google Cloud [stacks](/overview/#stacks), the call returns `absUploadParams` or `gcsUploadParams` instead.
+- **A project on an AWS stack.** The S3 steps below use the `uploadParams` the file prepare call returns there. On Azure and Google Cloud [stacks](/overview/#stacks), the call returns `absUploadParams` or `gcsUploadParams` instead. The examples use the AWS US stack, `connection.keboola.com`; on another AWS stack, use its URL.
 - **A Storage API token** with write access to the destination bucket: see [API tokens](/management/project/tokens/#limited-tokens).
 - **The destination bucket**, such as `in.c-main`. For a new table, the table must not exist yet; to load into an existing table, it must.
 - **A CSV file** that follows the [RFC 4180 specification](https://tools.ietf.org/html/rfc4180).
@@ -357,7 +357,7 @@ copy 192611594.csv0000_part_00 /B +192611594.csv0001_part_00 /B merged2.csv
 ```
 
 **Check:** the merged file holds the table's rows but no header row: the slices carry no column names. The TableExporter class linked above adds the header from the table's column list.
-<!-- VERIFY(nikita): TableExporter (keboola/storage-api-php-client) gunzips every slice before it joins them. Check whether slices of a current Snowflake or BigQuery export are gzipped; if so, the plain cat/copy merge above gives a gzip file, and this Check needs a gunzip step. -->
+<!-- VERIFY(Nikita): TableExporter (keboola/storage-api-php-client) gunzips every slice before it joins them. Check whether slices of a current Snowflake or BigQuery export are gzipped; if so, the plain cat/copy merge above gives a gzip file, and this Check needs a gunzip step. -->
 
 ---
 

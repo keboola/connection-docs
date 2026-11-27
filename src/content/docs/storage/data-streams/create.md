@@ -13,8 +13,10 @@ Work through these tasks in order for a new HTTP stream, or jump to the one you 
 
 ## Before you start
 
-- **The admin role in the project.** Creating a stream and changing its settings are write operations, which only an admin's master token may do; see the [reference](/storage/data-streams/reference/) and [User roles](/management/project/users/#user-roles).
-  <!-- VERIFY(nikita): keboola/keboola-as-code internal/pkg/service/stream/api/service/service.go canWrite() also accepts the share role; confirm and update the reference note too. -->
+- **The Admin or Share role in the project.** Creating a stream and changing its settings are write operations, which need the master token of a user with one of those roles; see the [reference](/storage/data-streams/reference/) and [User roles](/management/project/users/#user-roles).
+  <!-- Checked 2026-11-27: keboola/keboola-as-code internal/pkg/service/stream/api/service/service.go canWrite() accepts the admin and share roles. -->
+- **Data Streams available in the project.**
+  <!-- VERIFY(Nikita): in project 264, Storage → Data Streams shows an "Unlock Data Streams" placeholder instead of the create flow (see the comment under the first task). Confirm what unlocking takes and say it here. -->
 - **An application or service that can send HTTP POST requests**, such as a webhook, to deliver the events.
 - **For a delivery guarantee:** `curl` or another HTTP client, your master token, the source ID and your [stack's](/overview/#stacks) Stream API host.
 - **For Kafka:** a Kafka Connect cluster with an HTTP Sink connector installed.
@@ -61,7 +63,9 @@ Work through these tasks in order for a new HTTP stream, or jump to the one you 
 
    ![Screenshot - Data Streams Table Statistics](/storage/data-streams/data-streams-pic1.png)
 
-**Check:** **Table statistics** shows the events you sent as waiting for import, and as imported once the first import condition is met.
+**Result:** **Table statistics** shows the events you sent as waiting for import, and as imported once the first import condition is met.
+
+**Check:** once the import has run, the destination table in Storage has a row for each event you sent.
 
 ## Choose a delivery guarantee
 

@@ -25,8 +25,8 @@ each section is tailored to ensure a smooth and efficient setup.
 - **Admin rights in your Google Cloud organization.** You create a folder and a project in it, grant roles on the folder, and add a principal to the billing account.
 - **A Google Cloud billing account** for the new project.
 - **The region of the Keboola product** you bought through the marketplace. The Cloud Storage bucket must be in the same region, or Keboola rejects the registration.
-- **A Keboola Management API token** with super admin privileges, for the registration at the end. Generate one in **Admin > Account > [Access Tokens](https://connection.keboola.com/admin/account/access-tokens)**.
-  <!-- VERIFY(nikita): the Management API spec (connection.keboola.com/api/manage/doc.json) says of POST /manage/file-storage-gcs "Superuser credentials are not required for storage registration", but files both registration calls under its SUPER tags. Check which token each call needs, and whether a customer can hold a super admin token at all. -->
+- **A Keboola Management API token** for the registration at the end. Generate one in **Admin > Account > [Access Tokens](https://connection.keboola.com/admin/account/access-tokens)**. Registering the file storage works with any admin's personal access token; registering the BigQuery backend needs a super admin.
+  <!-- Checked 2026-11-27 in the Management API spec (connection.keboola.com/api/manage/doc.json): POST /manage/file-storage-gcs 403 "Superuser credentials are not required for registration with a personal access token"; POST /manage/storage-backend/bigquery 403 "Returned when the current admin is not a super admin". VERIFY(Nikita): whether a customer can hold a super admin token at all. -->
 - **An HTTP client** such as `curl`, for the two Management API calls.
 
 ## Create BigQuery and GCP resources
@@ -108,7 +108,7 @@ each section is tailored to ensure a smooth and efficient setup.
 
 **Result:** You have the folder ID, the JSON key file of the service account, and the name and region of the bucket. The registration below uses all of them.
 
-**Check:** in **IAM & Admin > IAM** of the project, the service account has **Owner** and **Storage Object Admin**. On the folder's IAM page it has **Browser** and **Project Creator**, and the bucket's **Lifecycle** tab shows two **Delete object** rules, for `exp-2/` and `exp-15/`.
+**Check:** in **IAM & Admin > IAM** of the project, the service account has **Owner** and **Storage Object Admin**. On the folder's IAM page it has **Browser** and **Project Creator**, on the billing account it has **Billing Account User**, and the bucket's **Lifecycle** tab shows two **Delete object** rules, for `exp-2/` and `exp-15/`.
 
 ***Note:** If you want to see your BigQuery tables directly in the BigQuery console, go to your folder and add a BigQuery Data Viewer or higher role.*
 
@@ -150,7 +150,7 @@ Content-Type: application/json
 
 The `gcsCredentials` object is the full content of the JSON key file downloaded when creating the service account. Set `filesBucket` to the name of the bucket created in the previous step, and `region` to the region where the bucket was created (e.g., `europe-west1`).
 
-A successful response returns HTTP `201` with an object containing the new file storage `id`. Note this `id` — it will be needed by Keboola support in the next step.
+A successful response returns HTTP `200` with an object containing the new file storage `id`. Note this `id`: Keboola Support needs it in the next step.
 
 ### 2. Register BigQuery Backend in Keboola
 
@@ -182,7 +182,7 @@ Content-Type: application/json
 
 The `credentials` object is the full content of the service account JSON key file. Set `folderId` to the ID of the folder created in the first step, prefixed with `folders/` (e.g., `folders/1234567890`).
 
-A successful response returns HTTP `201` with an object containing the new backend `id`. Note this `id` — it will be needed by Keboola support in the next step.
+A successful response returns HTTP `200` with an object containing the new backend `id`. Note this `id`: Keboola Support needs it in the next step.
 
 **Result:** You have a file storage ID and a BigQuery backend ID.
 
