@@ -1,13 +1,12 @@
 ---
 title: Add a Kai chat to your app
-lastUpdated: 2026-11-26
+lastUpdated: 2026-11-27
 slug: 'data-apps/kai-chat'
 description: 'Give the visitors of your Python/JS app a ready-made Kai chat: turn on Kai in the app, mount the server relay, render the chat component, and know what Kai can read.'
 ---
 
 :::caution[Public Beta]
-Kai in apps is in public beta. It works in Python/JS apps with a React frontend and a Node backend.
-<!-- VERIFY(Miro): how a project gets the beta (self-service switch, on for everyone, or on request) is not decided yet. -->
+Kai in apps is in public beta, available in every project where Kai is on. It works in Python/JS apps with a React frontend and a Node backend.
 :::
 
 Turn on **Kai in the app** and your app's visitors can ask Kai about the data behind the page they're looking at. You don't write the chat yourself: the app's backend mounts a relay from `@keboola/api-client`, and the page renders a ready-made chat component. The Kai token stays on the server.
@@ -24,8 +23,9 @@ You need:
 - Kai turned on in the project. See [Kai](/kai/#getting-started).
 - **Storage Access** turned on for the app. Kai works in the app's workspace. See [Storage Access](/data-apps/reference/#storage-access).
 - No row-level or column-level security. Kai isn't available in an app with row or column policies, or in a project with the `row-level-security` feature, yet.
+- The latest version of `@keboola/api-client`. Older versions have no `kbc.kai`.
 
-During the beta, the **Kai in the app** setting appears only in projects where the feature is available.
+<!-- VERIFY(Miro): put the first @keboola/api-client version with kbc.kai here once keboola/ui#10700 is released (expected 61.1.0). -->
 
 The chat spends the project's [Kai credits](/kai/pricing/), like any other Kai conversation.
 
@@ -35,7 +35,7 @@ The chat spends the project's [Kai credits](/kai/pricing/), like any other Kai c
 2. Turn on **Kai in the app**.
 3. Deploy the app again. Turning Kai on or off takes effect at the next deploy.
 
-<!-- Screenshot needed: Advanced Settings with the "Kai in the app" switch on. -->
+![An app's Advanced settings tab: the Storage access switch on and, under it, the Kai in the app switch on with the Set up with Kai button](/data-apps/kai-chat-setting.png)
 
 Each deploy gives the app its own Kai token, valid for 90 days. The platform puts it in the `KAI_STORAGE_API_TOKEN` environment variable and sets `KAI_ENABLED`. The relay in the next step reads both; your code doesn't need to.
 
@@ -69,7 +69,7 @@ What the relay does for you:
 
 - **Picks the token.** It uses `KAI_STORAGE_API_TOKEN` when `KAI_ENABLED` is on, and never `KBC_TOKEN`. It sends the app's workspace with every request.
 - **Keeps the token on the server.** The browser talks only to your app. The token never reaches it.
-- **Rebuilds every chat request.** It passes on one text message (up to 8,000 characters) and the page context, and drops everything else the browser sends, such as a model, project or branch. Kai always runs with read-only tools.
+- **Rebuilds every chat request.** It passes on one text message (up to 8,000 characters), the page context and a flag that hides a message from the chat, such as the "continue" sent on reconnect. It drops everything else the browser sends, such as a model, project or branch. Kai always runs with read-only tools.
 - **Binds chats to the browser.** The relay issues chat IDs and keeps them in a signed cookie (`HttpOnly; Secure; SameSite=None; Partitioned`). A chat opens only in the browser that started it. The cookie keeps the last 5 chats.
 - **Refuses approvals.** A visitor can decline an action Kai proposes, never approve it.
 - **Refuses requests from other sites.** A request from another origin gets 403; a request body over 64 KB gets 413.
@@ -107,7 +107,7 @@ export function App() {
 
 The component opens as a floating button in the corner of the page and streams Kai's answers into a panel. When Kai is off for the app, or the run has no Kai token, it renders nothing.
 
-<!-- Screenshot needed: an app page with the Kai chat panel open and a streamed answer. -->
+![An app's dashboard with the Ask Kai panel open on the right: Kai's answer with a table and a chart, two suggested follow-up questions, and the message box at the bottom](/data-apps/kai-chat-panel.png)
 
 ## Customize the chat
 
@@ -177,6 +177,7 @@ All visitors of one app are one Kai user. Kai doesn't know who is asking, and ev
 - **No answers to Kai's questions.** When Kai asks the visitor a follow-up question, the visitor can't answer it yet.
 - **Chats stay in one browser.** A chat opens only in the browser that started it. A redeploy gives the app a new token, which ends the open chats.
 - **Message size.** One message holds up to 8,000 characters of text. Files can't be attached.
+- **One message rate limit per app.** All visitors of an app share one message rate limit.
 
 ## Use the HTTP API instead
 
@@ -196,7 +197,7 @@ The component renders nothing when Kai is off for the app or the run has no Kai 
 
 ### Deploy fails after turning Kai on
 
-The **Kai in the app** setting says why. "This project doesn't allow Kai in apps, so deploys fail until you turn Kai off." means the project doesn't have the feature. Kai also needs Storage Access, and it isn't available with row or column policies. Turn Kai off to deploy the app without it.
+The **Kai in the app** setting says why. If it says "This project doesn't allow Kai in apps, so deploys fail until you turn Kai off.", contact support. Kai also needs Storage Access, and it isn't available with row or column policies. Turn Kai off to deploy the app without it.
 
 ### 403
 
@@ -207,8 +208,18 @@ The **Kai in the app** setting says why. "This project doesn't allow Kai in apps
 
 The chat ID isn't in this browser's session. It was started in another browser, the cookie was cleared, or the app was deployed again. Start a new chat.
 
+If you build your own UI, create chats one at a time. When two new chats are created at the same moment, the browser keeps only the second, and the first answers 404.
+
 ### 429
 
-Kai's rate limit or a Kai spending limit was reached. When the response has a `Retry-After` header, the chat can send again after that time. For spending limits, see [Kai pricing and limits](/kai/pricing/#setting-limits).
+Kai counts an app as one user. All visitors of one app share its limits. The limits of one app don't affect another app or the author's own Kai.
 
-<!-- VERIFY(Miro): how the rate limit counts for app chats in the beta (shared by all visitors of an app, or per chat). -->
+A 429 means one of these limits was reached:
+
+- **Too many messages in a short time.** Kai limits how fast messages can come. Wait and send again. You can't change this limit.
+- **The per-user Kai spend limit.** It applies to the app as one user.
+- **The project's monthly Kai budget.**
+
+Set the spend limits in **Settings → Kai Agent → Kai spend limits**. See [Kai pricing and limits](/kai/pricing/#setting-limits). When the response has a `Retry-After` header, the chat can send again after that time.
+
+<!-- VERIFY(Miro): the per-chat burst limit (K1) is deployed before the beta; today all visitors of an app share one burst limit. -->
