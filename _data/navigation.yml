@@ -881,6 +881,8 @@ items:
                 title: Authentication
               - url: /data-apps/publish-and-share/
                 title: Publish and share
+              - url: /data-apps/custom-domains/
+                title: Custom domains
               - url: /data-apps/operate/
                 title: Operate and update
               - url: /data-apps/troubleshooting/

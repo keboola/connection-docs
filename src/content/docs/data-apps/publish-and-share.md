@@ -28,6 +28,8 @@ With **Basic (Password)**, share the password too. It's in the same card, in the
 
 ![Part of a deployed app's Overview tab: the Used in and Description cards, then the App access card with Open at the top right, the App URL block (the prefix toy-store-sales, the generated part and a copy button) and Authentication set to Basic (Password), with the hidden password and its Reset, eye and copy controls; on the right, the App Info panel, Last App Runs and Versions](/data-apps/publish-config.png)
 
+To share the app at your own address, such as `app.example.com`, add a [custom domain](/data-apps/custom-domains/).
+
 ## Manage a deployed app
 
 From the app's header you can click **Open** and **Start** or **Redeploy**, depending on its state, and **Edit with Kai** on a Python/JS app with a [Keboola-managed repository](/data-apps/what-are-apps/#two-ways-to-run-an-app) if you can edit the app and Kai can build apps in the project. The **⋮** (More actions) menu holds the rest: **Duplicate with Kai** (**Duplicate** on apps without a Keboola-managed repository), **Automate** (start it on a schedule), **Debug mode** and **Delete app**, plus **Pause app** while the app is running. [Operate and update an app](/data-apps/operate/) walks through each one.
