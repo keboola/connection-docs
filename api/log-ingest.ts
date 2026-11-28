@@ -12,9 +12,16 @@
  * anything but a redirect, for
  *   - pages (a path ending in `/`, without an extension, or `.html`),
  *   - the Markdown twins (`/<slug>/index.md`, see src/integrations/page-markdown.mjs),
- *   - `/llms.txt` and `/llms-full.txt`.
- * Everything else is dropped here: assets (`/_astro/`, `/pagefind/`, images,
- * fonts), `/api/*`, preview deployments, build logs, and 3xx answers (with
+ *   - `/llms.txt` and `/llms-full.txt`,
+ *   - `/robots.txt` (kind `robots`): browsers never fetch it on their own, so a
+ *     visitor that does is a crawler or a script, whatever its user agent says,
+ * plus one record of kind `assets` per visitor (hashed IP and user agent) per
+ * batch that loaded the page bundles under `/_astro/`. Rendering a page loads
+ * them and fetching its HTML or Markdown does not, so it tells a browser from a
+ * client that only wears a browser user agent. One marker per batch rather
+ * than one record per file keeps the volume close to the page count.
+ * Everything else is dropped here: other assets (`/pagefind/`, images, fonts),
+ * `/api/*`, preview deployments, build logs, and 3xx answers (with
  * `trailingSlash: 'always'` every slashless URL is a 308 followed by the real
  * request, which would count the visit twice).
  *
@@ -92,7 +99,7 @@ export interface DrainEntry {
   };
 }
 
-export type RequestKind = 'page' | 'markdown' | 'llms';
+export type RequestKind = 'page' | 'markdown' | 'llms' | 'robots' | 'assets';
 
 export interface TrafficRecord {
   id: string;
@@ -111,6 +118,8 @@ export interface TrafficRecord {
 /** Is this a request we count, and as what? Expects a path without the query. */
 export function classifyPath(path: string): RequestKind | null {
   if (path === '/llms.txt' || path === '/llms-full.txt') return 'llms';
+  if (path === '/robots.txt') return 'robots';
+  if (/^\/_astro\/[^/]+\.(?:js|css)$/.test(path)) return 'assets';
   if (/^\/(?:api|_astro|_vercel|pagefind)(?:\/|$)/.test(path)) return null;
   if (path.endsWith('.md')) return 'markdown';
   const last = path.slice(path.lastIndexOf('/') + 1);
@@ -163,6 +172,28 @@ export function toRecord(entry: DrainEntry, salt = IP_SALT): TrafficRecord | nul
     referrer_host: p.referer ? hostOf(p.referer) : '',
     ip_hash: hashIp(p.clientIp || '', salt, when ?? new Date()),
   };
+}
+
+/**
+ * The records to forward for one batch: every kept request, except that the
+ * page bundles collapse into one `assets` marker per visitor (IP hash and user
+ * agent), the first one seen. Its path is `/_astro/`; the file name says nothing.
+ */
+export function toRecords(entries: DrainEntry[], salt = IP_SALT): TrafficRecord[] {
+  const out: TrafficRecord[] = [];
+  const marked = new Set<string>();
+  for (const e of entries) {
+    const r = toRecord(e, salt);
+    if (!r) continue;
+    if (r.kind === 'assets') {
+      const key = `${r.ip_hash}|${r.user_agent}`;
+      if (marked.has(key)) continue;
+      marked.add(key);
+      r.path = '/_astro/';
+    }
+    out.push(r);
+  }
+  return out;
 }
 
 /**
@@ -255,7 +286,7 @@ export async function handle(request: Request): Promise<Response> {
   }
   if (batch.skipped) console.warn(`[log-ingest] skipped ${batch.skipped} unparsable line(s)`);
 
-  const records = batch.entries.map((e) => toRecord(e)).filter((r): r is TrafficRecord => r !== null);
+  const records = toRecords(batch.entries);
   const summary = { kept: records.length, received: batch.entries.length, skipped: batch.skipped };
   if (records.length === 0) return Response.json(summary);
 

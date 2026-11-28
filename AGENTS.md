@@ -183,10 +183,13 @@ CI runs `npm run check:cli` and `npm run build` on every PR. Run both locally fi
   `[feedback] undelivered comment`. Tests: `npm test`.
 - `api/log-ingest.ts` receives the Vercel log drain (team settings → Drains,
   Logs, project connection-docs only, source `static` only, so the function's
-  own invocation logs don't loop back) and forwards page, `.md` and `llms.txt`
-  requests to a Keboola Data Stream, with hashed IPs and no query strings. It
-  needs `LOG_INGEST_SECRET` (the drain's signature secret), `LOG_INGEST_URL` and
-  `LOG_INGEST_IP_SALT`, and answers 503 while any is missing. Rows carry the
+  own invocation logs don't loop back) and forwards page, `.md`, `llms.txt` and
+  `robots.txt` requests to a Keboola Data Stream, with hashed IPs and no query
+  strings, plus one `assets` record per visitor and batch that loaded the
+  `/_astro/` page bundles (a browser that renders the page, not a client that
+  only fetches it). It needs `LOG_INGEST_SECRET` (the drain's signature
+  secret), `LOG_INGEST_URL` and `LOG_INGEST_IP_SALT`, and answers 503 while any
+  is missing. Rows carry the
   drain entry `id`; a retried batch arrives twice, so keep one row per id.
   Tests: `npm test`.
 
