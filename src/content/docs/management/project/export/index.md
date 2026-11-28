@@ -24,8 +24,8 @@ Takeout data **cannot** be automatically imported into Keboola (recovering a pro
 
 ## Before you start
 
-- **A project role that can run Data Takeout.** Which roles can is not confirmed yet; Guest and ReadOnly can't
-  change project settings.
+- **A project role that can change project settings.** Guest and ReadOnly users can't (see
+  [User roles](/management/project/users/#user-roles)).
   <!-- VERIFY(Nikita): which project roles see the Data Takeout button in Users & Settings → Settings; check keboola/ui or try with a Guest user. -->
 - **Amazon S3 bucket** in any region.
 - **Amazon IAM user's API keys** with proper access to the S3 bucket. [Prepare project](#prepare-project) shows how

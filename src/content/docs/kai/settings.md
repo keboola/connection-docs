@@ -17,11 +17,9 @@ The settings panel has two tabs: **Tool Permissions** and **System Instructions*
 
 - **Kai switched on in the project.** An organization admin can turn it on from the chat screen, and it can also
   be enabled in **Settings → Features** in the project. See [Kai](/kai/#getting-started).
-- **A project role that can edit project-level instructions.** The section below says project admins and managers
-  can; Keboola has no role named "manager", so which other roles qualify is not confirmed yet.
-- **A role that can manage context files and skill files**, which live on the same **Settings → Kai Agent** page.
-  Which roles can is not confirmed yet.
-  <!-- VERIFY(Nikita): which project roles can edit project-level instructions and upload or delete context and skill files in Settings → Kai Agent ("admins and managers" in the text below; no project role is called manager); check keboola/ui. -->
+- **A project role that can edit Settings → Kai Agent.** Project admins and managers can edit
+  [project-level instructions](#project-level-instructions). The same page holds context files and skill files.
+  <!-- VERIFY(Nikita): which project roles can edit project-level instructions and upload or delete context and skill files in Settings → Kai Agent. "Managers" probably means Production Manager (Governed Change Management projects only); no other project role is called manager. Check keboola/ui. -->
 - **A Storage API token with file write permissions**, to manage the files through the API or a sync job.
   For the CLI commands, install [kbagent](/cli/) and connect it to the project (a browser sign-in works too).
 
@@ -78,6 +76,8 @@ Project-level instructions apply to **all users** in the project. They are manag
 3. The instructions auto-save.
 
 **Check:** reopen **Settings → Kai Agent**. Your text is still in the **System instructions** field.
+
+Project-level instructions can be edited by project admins and managers.
 
 Use project-level instructions for team-wide standards such as:
 
