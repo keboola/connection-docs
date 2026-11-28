@@ -1,6 +1,6 @@
 ---
 title: Conditional Flows
-lastUpdated: 2026-11-23
+lastUpdated: 2026-11-27
 slug: 'flows'
 description: 'Build a conditional flow in Keboola with phases, parallel tasks, conditions, retries and notifications, then run it, schedule it and check its run history.'
 redirect_from:
@@ -14,7 +14,13 @@ Flows allow you to build automated data pipelines with conditional logic, branch
 
 *Looking for [Legacy Flows](/flows/flows-legacy/)? To migrate an existing Legacy Flow to a new Conditional Flow, see the [Migration Guide](/flows/flow-migration-guide/).*
 
+<!-- How-to-type page. Typed 2026-11-27 with its prerequisites and check step (T4/T5). -->
 
+## Before you start
+
+- **A project role other than ReadOnly**, which can't create or run flows. The Guest role can build and run a flow but can't change an existing flow's name, schedule or disabled status. In projects with Governed Change Management, Developers and Reviewers change flows only in a development branch, and the Production Manager manages them in production. See [User roles](/management/project/users/#user-roles).
+- **The configurations the flow runs**, such as connectors, transformations and [apps](#start-an-app).
+- **For notifications:** the email addresses or webhook URLs to send them to.
 
 ## Access Flows
 
@@ -231,6 +237,8 @@ What runs:
 - Disabled tasks and tasks with a missing, invalid, or deleted configuration cannot be selected.
 - A failed task does not stop the run — every selected task runs, and the flow's status is the status of its last phase, so check the individual tasks in the run.
 
+**Check:** in **All Runs**, the run shows the tasks you selected with their own status; tasks you did not select did not run.
+
 ### Re-run failed tasks
 
 After a failed run, **Re-run failed tasks** appears in the same **Run flow** button, and on the flow's job detail in **Jobs**. Tasks that already finished successfully are skipped and their results reused; the rest re-run with the current flow configuration.
@@ -252,6 +260,8 @@ intervals (every 15 minutes, every hour, once a day, once a week, end of month) 
 click **Set Up Schedule**. The dialog works in UTC and previews the next runs before you commit.
 
 ![The Create Schedule dialog: schedule type, predefined intervals, a custom interval, and the Set Up Schedule button](/flows/create-schedule.png)
+
+**Check:** the new schedule is listed on the **Schedules** tab.
 
 **Scheduling:** Commonly, flows are set to run at specific times. To avoid busy periods in a shared environment, consider scheduling slightly off-peak for smoother execution.
 
@@ -276,5 +286,7 @@ In this tab, you will find a complete list of all past executions of your flow. 
 You can use this overview to validate whether your conditions behaved as expected - e.g. if the flow correctly skipped a phase on the weekend or retried a failing task.
 
 ![](/flows/conditional-flows-all-runs.png)
+
+**Check:** the run you started is listed in **All Runs**, and its detail shows a status for each task that ran.
 
 

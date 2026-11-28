@@ -1,6 +1,6 @@
 ---
 title: Lock package versions
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'data-apps/streamlit/lock-version'
 description: Lock Streamlit package versions in Keboola for both deployment methods - from code and from a Git repository.
 redirect_from:
@@ -19,6 +19,12 @@ This page applies to [Streamlit](/data-apps/streamlit/) apps only. New apps run 
 This guide explains how to lock package versions in Streamlit applications in Keboola, covering both deployment methods: from code and from a Git repository.
 
 <!-- How-to-type page. Source: keboola/connection-docs history; classified 2026-10-13. -->
+
+## Before you start
+
+- **A Streamlit app** in your project, deployed from code or from a Git repository: [Streamlit](/data-apps/streamlit/#deployment-methods) explains both.
+- **Python with `venv` and `pip`** on your computer, to run `pip freeze`. With code deployment you can also write `requirements.txt` by hand.
+- **For Git repository deployment:** the repository and branch the app deploys from, where `requirements.txt` goes.
 
 ## Why lock package versions?
 
@@ -84,7 +90,7 @@ This action will:
 - Store the frozen dependencies in the app state
 - Use these frozen versions for future redeploys and app wake-ups
 
-Once the app has started with frozen versions, the "Packages" card links to them:
+**Check:** once the app has started with frozen versions, the "Packages" card links to them:
 
 ![The Packages card after the first start with Freeze Version on: the toggle is on, and a Click Here link opens the packages and versions from the app's requirements.txt](/data-apps/streamlit/lock-freeze-version-toggle.png)
 
@@ -105,6 +111,9 @@ When this option is enabled:
 - All package dependencies will be updated to their latest versions (if no version is explicitly defined)
 - The dependencies will be resolved automatically
 - The new package versions will be frozen in the app state
+
+**Check:** after the redeploy, the "Click Here" link in the "Packages" card lists the new versions.
+<!-- VERIFY(Nikita): that the Click Here link shows the versions frozen by the latest redeploy with Update packages dependencies on. Source so far: the lock-freeze-version-toggle.png alt text and the "frozen in the app state" bullet; not run in the product. -->
 
 ## Git repository deployment
 
@@ -145,6 +154,8 @@ pip freeze > requirements.txt
 This file lists all installed packages along with their specific versions. It ensures consistent package versions across environments (development and production) and prevents dependency conflicts.
 
 ***Note:** After updating or installing a new dependency, remember to run `pip freeze` again to update your `requirements.txt` file.*
+
+**Check:** every package in `requirements.txt` is pinned: `name==version`, as in the example below, or `name @ <url>` for a package installed from a URL.
 
 ### Example requirements.txt for a Streamlit app
 Below is an example of the *shape* of a locked `requirements.txt` for a Streamlit app in Keboola. The versions shown are illustrative — pin the current versions your app actually uses (see the [backend versions](/data-apps/streamlit/#backend-versions) for what ships pre-installed):

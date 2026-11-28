@@ -1,6 +1,6 @@
 ---
 title: Operate and update an app
-lastUpdated: 2026-11-23
+lastUpdated: 2026-11-27
 slug: 'data-apps/operate'
 description: "Day-to-day work on a deployed Keboola app: read its state, ship a code change, change settings, stop and start it, start it from a flow, rotate a secret, delete it."
 ---
@@ -8,6 +8,15 @@ description: "Day-to-day work on a deployed Keboola app: read its state, ship a 
 Once an app is deployed, everything you do with it starts on its page under **Apps**. This page walks through the routine tasks; [Apps reference](/data-apps/reference/) has the full list of settings and actions.
 
 Deploying, starting, stopping, deleting and setting secrets also work from a terminal with `kbagent`; kbagent has no draft or app-copy commands. `kbagent data-app deploy --config-version` deploys an older configuration once but doesn't restore it, so a real rollback is UI-only too. The `kbagent` commands below all take `--project <alias>`, the name you gave the project when you [connected it](/cli/concepts/#connections-and-config), and `--app-id`, the numeric **App ID** from the **App Info** panel.
+
+<!-- How-to-type page. Typed 2026-11-27 with its prerequisites and check step (T4/T5). -->
+
+## Before you start
+
+- **A deployed app** under **Apps**. To deploy one, see [Publish and share](/data-apps/publish-and-share/).
+- **A project role that can edit the app.** Which actions the header and the **⋮** menu offer depends on your role; see [App actions](/data-apps/reference/#app-actions).
+- **For Edit with Kai:** a project where [Kai can build apps](/kai/getting-started/#enabling-kai).
+- **For the terminal commands:** [kbagent](/cli/getting-started/), with the project connected.
 
 ## Read the app's state
 
@@ -69,6 +78,9 @@ Add the app to a [flow](/flows/) when it should start after other work, for exam
 1. Open the flow and click **+** where the app should run, then **Component**.
 2. Switch to the **Apps** tab, or search for the app's name, and select the app.
 3. Save the flow.
+
+**Check:** the app is a task in the flow's Builder. When the flow runs, the app's **All Runs** tab lists a new start.
+<!-- VERIFY(Nikita): that a start by the flow's Data App Control task shows in the app's All Runs tab. Source: this page describes All Runs as "every start attempt"; not run from a flow. -->
 
 When the flow runs, the task starts a stopped or sleeping app and restarts a running one. Unlike **Redeploy**, it keeps the configuration the app was last deployed with:
 

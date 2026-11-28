@@ -1,6 +1,6 @@
 ---
 title: Connect to a workspace
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 slug: 'workspace/connect'
 sidebar:
   label: Connect
@@ -8,11 +8,17 @@ description: 'Open a workspace in JupyterLab, the SQL Editor, Snowsight or your 
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import Prereqs from '../../../components/Prereqs.astro';
 
-This page shows how to open a [workspace](/workspace/) once it exists, by workspace type and by tool. If you have
-no workspace yet, [create one](/workspace/create/) first.
+This page shows how to open a [workspace](/workspace/) once it exists, by workspace type and by tool.
 
 {/* How-to-type page. Source: the former single Workspace page on main; split by type, text carried over, checked 2026-11-19. */}
+
+<Prereqs needs={[]}>
+  <li><strong>A workspace,</strong> listed under <strong>Workspaces</strong>. If you have no workspace yet, <a href="/workspace/create/">create one</a> first.</li>
+  <li><strong>For direct access to a Snowflake workspace,</strong> a project with a dedicated Snowflake backend. <a href="/workspace/#snowflake">Workspace types</a> says which projects have one; the others use the SQL Editor.</li>
+  <li><strong>For key-pair authentication,</strong> a Snowflake workspace whose <strong>Workspace Credentials</strong> show <strong>Key Pair</strong>, a client or BI tool that supports Snowflake key pairs, and <a href="https://www.openssl.org/">OpenSSL</a> if you encrypt, convert or create the key yourself.</li>
+</Prereqs>
 
 ## Connect to a workspace
 
@@ -85,8 +91,8 @@ Open the workspace detail, then follow the tab for your workspace type or tool:
   </TabItem>
 </Tabs>
 
-**Result:** you are in the workspace. JupyterLab, the SQL Editor or Snowsight is open in your browser, or your client
-is connected with the credentials from the workspace detail.
+**Check:** JupyterLab, the SQL Editor or Snowsight is open on the workspace in your browser, or your client is
+connected with the credentials from the workspace detail.
 
 ## Use a Snowflake key pair with your own tools
 
@@ -120,7 +126,7 @@ authentication, with the private key in the form the tool needs.
    `.snowflakecomputing.com`. No role is shown, and you do not need to set one.
    {/* Checked 2026-11-20: fields from workspace-connect-snowflake-person.png; account derivation and no-role profile from the kbc CLI dbt generator (keboola-as-code pkg/lib/operation/dbt/generate). */}
 
-**Result:** the tool connects to the workspace with the key pair.
+**Check:** the tool connects with the key pair and lists the schema shown as **Schema** in **Workspace Credentials**.
 
 ### Encrypt the private key
 
@@ -141,6 +147,8 @@ In case you need to store the private key locally and want to protect it from un
 
 3. Set a password when you are prompted for it.
 
+**Check:** the first line of `private_key_encrypted.pem` is `-----BEGIN ENCRYPTED PRIVATE KEY-----`.
+
 ### Bring your own key pair
 
 Some third-party tools (such as SAS CI360) require a passphrase-protected private key. Keboola only needs the public half of the pair, so you can create it yourself and register just the public key.
@@ -160,6 +168,8 @@ The key must be an RSA key of at least 2048 bits, in PEM (`-----BEGIN PUBLIC KEY
 Registering a public key replaces the one currently on the workspace, so the previous key pair stops working immediately.
 :::
 
+**Check:** your tool connects with `private_key_encrypted.pem` once you enter its passphrase.
+
 ### Convert the private key to .p8 format
 
 Some third-party BI tools (such as Metabase) require private keys in `.p8` format instead of the default `.pem` format provided by Keboola. You can convert your private key using OpenSSL.
@@ -177,5 +187,7 @@ Some third-party BI tools (such as Metabase) require private keys in `.p8` forma
    * `-in private_key.pem` → input file
    * `-out private_key.p8` → output file
    * `-nocrypt` → no encryption
+
+**Check:** `openssl pkey -inform DER -in private_key.p8 -noout` prints nothing and exits without an error.
 
 **Next:** [SQL Editor →](/workspace/sql-editor/)

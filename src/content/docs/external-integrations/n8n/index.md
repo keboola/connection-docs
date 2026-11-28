@@ -1,6 +1,6 @@
 ---
 title: n8n Integration
-lastUpdated: 2026-10-13
+lastUpdated: 2026-11-27
 slug: 'external-integrations/n8n'
 description: 'Install the Keboola node in self-hosted n8n, connect it with a Storage API token, and build workflows that read from or write to Keboola tables.'
 ---
@@ -70,6 +70,8 @@ Once your credential is configured, you can start building workflows with the Ke
 7. Execute the workflow to test and validate your integration.
 
 <img src="./03-workflow-overview.png" alt="Workflow example using Keboola Node in n8n" />
+
+**Check:** the Keboola node's output in n8n shows one item per table row for **Data Export**, or a single item with the message `Uploaded <n> rows to <table ID>` for **Data Import**.
 
 ## Available Operations
 

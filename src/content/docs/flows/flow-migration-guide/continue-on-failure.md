@@ -1,6 +1,6 @@
 ---
 title: Continue on Failure in Conditional Flows
-lastUpdated: 2026-07-30
+lastUpdated: 2026-11-27
 slug: 'flows/flow-migration-guide/continue-on-failure'
 description: >-
   Conditional Flows have no per-task Continue on Failure toggle. The Legacy Flow
@@ -9,6 +9,14 @@ description: >-
 ---
 
 In [Legacy Flows](/flows/flows-legacy/), enabling **Continue on Failure** on a task made the task finish with a **warning** status instead of failing the whole Flow. [Conditional Flows](/flows/) have no per-task toggle - the same rule is expressed with a [condition](/flows/#conditions) on the phase.
+
+<!-- How-to-type page. Typed 2026-11-27 with its prerequisites and check step (T4/T5). -->
+
+## Before you start
+
+- **A Conditional Flow** with the phase you want to change, migrated from a Legacy Flow or built in the [Builder](/flows/).
+- **A project role other than ReadOnly**, which can't modify flows. In projects with Governed Change Management, Developers and Reviewers change flows only in a development branch, and the Production Manager manages them in production. See [User roles](/management/project/users/#user-roles).
+- **For the notification example:** the email address or webhook that the **Notification** task sends to.
 
 ## What the migration produces
 
@@ -29,6 +37,8 @@ You can add the same condition to any phase, whether it came from a migration or
 3. In the **All tasks of the phase must succeed, except** selector, pick the tasks that are allowed to fail.
 
 Every other task in the phase must succeed for the branch to be taken. Leave the selector empty to require that the whole phase succeeds.
+
+**Check:** the condition's summary names your phase and the tasks you picked, for example *All tasks in Extract Data succeeded / except My GitHub*.
 
 ## Notify when a task fails
 
@@ -57,6 +67,9 @@ If you also want to be notified, branch on the failing task's status and route t
 6. The resulting Flow branches on the GitHub extractor failure into the **Notification** phase and rejoins **Phase 2**.
 
    ![The resulting Flow: the Notification branch rejoins Phase 2](/flows/flow-migration-guide/continue-on-failure-6.png)
+
+**Check:** run the Flow and open the run in **All Runs**: it shows which branch was taken after **Extract Data**. When
+**My GitHub** fails, the **Notification** task sends its message and **Phase 2** still runs.
 
 :::caution
 A per-task branch like this only covers the task it is attached to. Any other task of the phase - such as the Google Sheets extractor in this example - still fails the whole Flow if it finishes with an error. Use the **Continue on Failure** subject to allow several tasks to fail at once.

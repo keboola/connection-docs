@@ -1,6 +1,6 @@
 ---
 title: DBeaver Installation Guide
-lastUpdated: 2026-11-20
+lastUpdated: 2026-11-27
 sidebar:
   label: Connect DBeaver
 slug: 'workspace/jdbc-driver/dbeaver'
@@ -78,7 +78,7 @@ KEBOOLA HELP;
 SELECT * FROM _keboola.buckets LIMIT 10;
 ```
 
-**Result:** the output confirms the driver is wired up correctly. `KEBOOLA HELP` lists every Keboola-specific command. `_keboola.buckets` is one of five virtual tables exposing platform metadata (`components`, `events`, `jobs`, `tables`, `buckets`).
+**Check:** the output confirms the driver is wired up correctly. `KEBOOLA HELP` lists every Keboola-specific command. `_keboola.buckets` is one of five virtual tables exposing platform metadata (`components`, `events`, `jobs`, `tables`, `buckets`).
 
 ## Troubleshooting
 

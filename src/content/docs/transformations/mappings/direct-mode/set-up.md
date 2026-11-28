@@ -1,6 +1,6 @@
 ---
 title: Set up Direct Mode output mapping
-lastUpdated: 2026-11-12
+lastUpdated: 2026-11-27
 slug: 'transformations/mappings/direct-mode/set-up'
 sidebar:
   label: Set Up Direct Mode
@@ -35,6 +35,8 @@ SQL that stays correct without Keboola's deduplication. What Direct Mode is and 
 The mode cannot be switched on an existing mapping — delete the mapping and create a new one instead.
 
 **Result:** on the next run, your SQL writes to the Storage table, and Keboola refreshes the table metadata afterwards.
+
+**Check:** after the next run, the destination table in Storage shows the rows your SQL wrote and a new last-change time.
 
 Under the hood, Direct Mode is the `unload_strategy` field on the output table in the configuration JSON:
 
@@ -73,6 +75,8 @@ delete it and create a new one.
 **Result:** the write privileges are granted as soon as you save the mapping, so your very next query can write to
 the table.
 
+**Check:** an `INSERT` into the destination table from the workspace succeeds instead of failing on privileges.
+
 ## In the SQL Editor, with a new table
 
 **Goal:** create the destination Storage table on the fly from a working table in the
@@ -86,7 +90,7 @@ Keboola creates the Storage table (creating the bucket first if it does not exis
 Direct Mode output mapping. The source working table itself is not modified or copied — only its column
 structure is used as the template for the new Storage table.
 
-**Result:** the new table appears in the **Writable tables** section of the Storage Explorer with the **DG** badge, and
+**Check:** the new table appears in the **Writable tables** section of the Storage Explorer with the **DG** badge, and
 the workspace can write to it right away. Use the three-dots menu there to remove the mapping (and with it the
 workspace's write access).
 

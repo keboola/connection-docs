@@ -1,6 +1,6 @@
 ---
 title: Data Takeout
-lastUpdated: 2026-11-18
+lastUpdated: 2026-11-27
 description: 'Export your whole project with Data Takeout: prepare the project, run the export, see what data you get, and the security considerations.'
 slug: 'management/project/export'
 redirect_from:
@@ -17,20 +17,26 @@ This can come in handy when
 - doing project POCs and keeping them for reference after they have ended.
 - leaving us.
 
+<!-- How-to-type page. Typed 2026-11-27 with its prerequisites and check step (T4/T5). -->
+
 **Important**: Do not confuse this feature with the project backup.
 Takeout data **cannot** be automatically imported into Keboola (recovering a project must be done by Keboola Support).
 
-Things to have before you start:
+## Before you start
 
-- Amazon S3 bucket in any region
-- Amazon IAM user's API keys with proper access to the S3 bucket
+- **A project role that can change project settings.** Guest and ReadOnly users can't (see
+  [User roles](/management/project/users/#user-roles)).
+  <!-- VERIFY(Nikita): which project roles see the Data Takeout button in Users & Settings → Settings; check keboola/ui or try with a Guest user. -->
+- **Amazon S3 bucket** in any region.
+- **Amazon IAM user's API keys** with proper access to the S3 bucket. [Prepare project](#prepare-project) shows how
+  to create the bucket, the user and its policy.
 
 ## Prepare Project
 We strongly recommend that you create a dedicated user with a dedicated bucket to
 prevent an accidental leak of credentials or your project management.
 
 If you are familiar with AWS Cloud Formation, the application repository offers
-a [CF template](https://github.com/keboola/kbc-project-backup/blob/master/aws-cf-template.json)
+a [CF template](https://github.com/keboola/app-project-backup/blob/master/aws-cf-template.json)
 to create all required resources.
 
 - **Create an S3 Bucket** following the [Amazon documentation](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html).
@@ -100,6 +106,10 @@ When ready, **Run Export**:
 
 To monitor the progress of the data export, click the *Export started* link.
 The data takeout may take a considerable amount of time if your project is large.
+
+**Check:** when the export finishes, the S3 path you set contains `buckets.json`, `tables.json`, `configurations.json`
+and the `configurations/` folder, plus `in/` and `out/` folders for the stages that have tables, unless you exported the structure only
+(see [Exported Data](#exported-data)).
 
 ## Exported Data
 The exported project has the following general structure:
