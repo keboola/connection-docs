@@ -92,7 +92,7 @@ function entry(path: string, over: Record<string, unknown> = {}, proxy: Record<s
 
 const sent = (call: Call) => JSON.parse(call.init.body);
 
-test('classifyPath keeps pages, twins and llms.txt, drops assets and api', async () => {
+test('classifyPath keeps pages, twins, llms.txt, robots.txt and page bundles, drops other assets and api', async () => {
   const { classifyPath } = await load(ENV, 'classify');
   assert.equal(classifyPath('/'), 'page');
   assert.equal(classifyPath('/storage/tables/'), 'page');
@@ -101,7 +101,10 @@ test('classifyPath keeps pages, twins and llms.txt, drops assets and api', async
   assert.equal(classifyPath('/storage/tables/index.md'), 'markdown');
   assert.equal(classifyPath('/llms.txt'), 'llms');
   assert.equal(classifyPath('/llms-full.txt'), 'llms');
-  for (const p of ['/_astro/page.js', '/pagefind/x.pf_meta', '/api/chat', '/api/log-ingest', '/favicon.ico', '/storage/shot.png', '/components/ip-addresses/kbc-public-ip.json']) {
+  assert.equal(classifyPath('/robots.txt'), 'robots');
+  assert.equal(classifyPath('/_astro/page.D1x2.js'), 'assets');
+  assert.equal(classifyPath('/_astro/index.Ab3.css'), 'assets');
+  for (const p of ['/_astro/fonts/inter.woff2', '/_astro/shot.D1.webp', '/pagefind/x.pf_meta', '/api/chat', '/api/log-ingest', '/favicon.ico', '/storage/shot.png', '/components/ip-addresses/kbc-public-ip.json']) {
     assert.equal(classifyPath(p), null, p);
   }
 });
@@ -147,6 +150,25 @@ test('toRecord drops previews, other hosts, non-GET, redirects and build logs', 
   assert.equal(toRecord(entry('/gone/', {}, { statusCode: 404 }))?.status, 404, 'a 404 is still a request');
 });
 
+test('toRecords collapses page bundles into one assets marker per visitor and batch', async () => {
+  const { toRecords } = await load(ENV, 'records');
+  const browser = { userAgent: ['Mozilla/5.0 (Macintosh) Chrome/157.0.0.0 Safari/537.36'] };
+  const other = { ...browser, clientIp: '198.51.100.9' };
+  const rs = toRecords([
+    entry('/a/', {}, browser),
+    entry('/_astro/page.A1.js', {}, browser),
+    entry('/_astro/index.B2.css', {}, browser),
+    entry('/_astro/page.A1.js', {}, other),
+    entry('/_astro/page.A1.js', {}, { userAgent: ['curl/8.7.1'] }),
+    entry('/robots.txt', {}, { userAgent: ['curl/8.7.1'] }),
+    entry('/_astro/fonts/x.woff2', {}, browser),
+  ], 'salt');
+  assert.deepEqual(rs.map((r: any) => [r.kind, r.path]), [
+    ['page', '/a/'], ['assets', '/_astro/'], ['assets', '/_astro/'], ['assets', '/_astro/'], ['robots', '/robots.txt'],
+  ]);
+  assert.equal(new Set(rs.filter((r: any) => r.kind === 'assets').map((r: any) => `${r.ip_hash}|${r.user_agent}`)).size, 3);
+});
+
 test('parseBatch reads a JSON array and NDJSON, skipping bad NDJSON lines', async () => {
   const { parseBatch } = await load(ENV, 'parse');
   const a = JSON.stringify(entry('/a/'));
@@ -166,10 +188,10 @@ test('a signed streamed batch is filtered and forwarded', async () => {
   const r = await fn.fetch(req(body));
 
   assert.equal(r.status, 200);
-  assert.deepEqual(await r.json(), { kept: 2, received: 5, skipped: 0 });
+  assert.deepEqual(await r.json(), { kept: 3, received: 5, skipped: 0 });
   assert.equal(calls.length, 1);
   assert.equal(calls[0].url, ENV.LOG_INGEST_URL);
-  assert.deepEqual(sent(calls[0]).records.map((x: any) => x.kind), ['page', 'markdown']);
+  assert.deepEqual(sent(calls[0]).records.map((x: any) => x.kind), ['page', 'assets', 'markdown']);
   assert.ok(sent(calls[0]).received_at);
 });
 
@@ -214,7 +236,7 @@ test('the bearer token is sent when set', async () => {
 test('nothing to keep: 200 without calling the stream', async () => {
   const { handle } = await load(ENV, 'empty');
   const calls = mockFetch();
-  const r = await handle(req(JSON.stringify([entry('/_astro/x.js')])));
+  const r = await handle(req(JSON.stringify([entry('/_astro/fonts/x.woff2'), entry('/pagefind/x.pf_meta')])));
   assert.equal(r.status, 200);
   assert.equal(calls.length, 0);
 });
